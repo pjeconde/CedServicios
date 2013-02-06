@@ -321,6 +321,9 @@ GO
 SET ANSI_PADDING OFF
 GO
 
+insert Configuracion values ('', '', '', '', 'UltimoIdWF', '0')
+insert Configuracion values ('', '', '', '', 'UltimoAccionNro', '0')
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
