@@ -43,6 +43,16 @@
     <Compile Include="Class1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CedServiciosDB\CedServiciosDB.csproj">
+      <Project>{61732864-74F9-4F70-B0E4-CF753C486796}</Project>
+      <Name>CedServiciosDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedServiciosEntidades\CedServiciosEntidades.csproj">
+      <Project>{CEFF9C55-2310-4C5A-89D3-D652AB5DDA63}</Project>
+      <Name>CedServiciosEntidades</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
