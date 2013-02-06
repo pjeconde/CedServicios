@@ -61,6 +61,16 @@
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CedServiciosEntidades\CedServiciosEntidades.csproj">
+      <Project>{CEFF9C55-2310-4C5A-89D3-D652AB5DDA63}</Project>
+      <Name>CedServiciosEntidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CedServiciosRN\CedServiciosRN.csproj">
+      <Project>{66587393-8FAD-45FF-9C8B-F3F683EB2126}</Project>
+      <Name>CedServiciosRN</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <ProjectExtensions>
