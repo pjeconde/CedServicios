@@ -19,7 +19,7 @@ namespace CedServicios.Entidades
         private DateTime fechaUltimoReenvioMail;
         private string emailSMS;
         private WF wF;
-        private DateTime ultActualiz;
+        private string ultActualiz;
 
         public Usuario()
         {
@@ -147,7 +147,7 @@ namespace CedServicios.Entidades
                 return wF;
             }
         }
-        public DateTime UltActualiz
+        public string UltActualiz
         {
             set
             {
