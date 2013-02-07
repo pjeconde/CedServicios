@@ -11,14 +11,18 @@ namespace CedServicios.Entidades
 		private string cnnStr;
 		private Usuario usuario;
         private Cuit cuit;
-        private UN un;
+        private UN uN;
+        private List<Cuit> cuitsDelUsuario;
+        private List<UN> uNsDelCuit;
 
-		public Sesion()
-		{
-			usuario = new Usuario();
+        public Sesion()
+        {
+            usuario = new Usuario();
             cuit = new Cuit();
-            un = new UN();
-		}
+            uN = new UN();
+            cuitsDelUsuario = new List<Cuit>();
+            uNsDelCuit = new List<UN>();
+        }
 
 		public string CnnStr
 		{
@@ -42,16 +46,49 @@ namespace CedServicios.Entidades
                 usuario = value;
             }
         }
-		public UN Un
-		{
-			get
-			{
-				return un;
-			}
-			set
-			{
-				un = value;
-			}
-		}
+        public Cuit Cuit
+        {
+            get
+            {
+                return cuit;
+            }
+            set
+            {
+                cuit = value;
+            }
+        }
+        public UN UN
+        {
+            get
+            {
+                return uN;
+            }
+            set
+            {
+                uN = value;
+            }
+        }
+        public List<Cuit> CuitsDelUsuario
+        {
+            get
+            {
+                return cuitsDelUsuario;
+            }
+            set
+            {
+                cuitsDelUsuario = value;
+            }
+        }
+        public List<UN> UNsDelCuit
+        {
+            get
+            {
+                return uNsDelCuit;
+            }
+            set
+            {
+                uNsDelCuit = value;
+            }
+        }
     }
 }
