@@ -8,18 +8,18 @@ namespace CedServicios.Entidades
     [Serializable]
     public class WF
     {
-        protected int idWF;
+        protected int id;
         protected string estado;
 
-        public int IdWF
+        public int Id
         {
             set
             {
-                idWF = value;
+                id = value;
             }
             get
             {
-                return idWF;
+                return id;
             }
         }
         public string Estado
