@@ -5,7 +5,8 @@ using System.Text;
 
 namespace CedServicios.Entidades
 {
-    class Log
+    [Serializable]
+    public class Log
     {
     }
 }

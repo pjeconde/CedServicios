@@ -5,7 +5,8 @@ using System.Text;
 
 namespace CedServicios.Entidades
 {
-    class Articulo
+    [Serializable]
+    public class Articulo
     {
     }
 }

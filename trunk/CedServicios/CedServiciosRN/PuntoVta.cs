@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CedServicios.RN
 {
-    class PuntoVta
+    public class PuntoVta
     {
     }
 }

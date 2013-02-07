@@ -5,7 +5,8 @@ using System.Text;
 
 namespace CedServicios.Entidades
 {
-    class Permiso
+    [Serializable]
+    public class Permiso
     {
     }
 }
