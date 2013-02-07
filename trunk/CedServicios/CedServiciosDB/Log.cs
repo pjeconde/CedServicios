@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace CedServiciosDB
+namespace CedServicios.DB
 {
-    public class Class1
+    class Log
     {
     }
 }
