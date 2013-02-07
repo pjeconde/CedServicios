@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CedServicios.DB
 {
-    class Usuario
+    public class Usuario
     {
     }
 }

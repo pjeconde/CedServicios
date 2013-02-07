@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CedServicios.RN
 {
-    class Cliente
+    public class Cliente
     {
     }
 }

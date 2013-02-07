@@ -5,7 +5,7 @@ using System.Text;
 
 namespace CedServicios.RN
 {
-    class Configuracion
+    public class Configuracion
     {
     }
 }
