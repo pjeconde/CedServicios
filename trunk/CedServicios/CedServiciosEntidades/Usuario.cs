@@ -20,10 +20,12 @@ namespace CedServicios.Entidades
         private string emailSMS;
         private WF wF;
         private string ultActualiz;
+        private List<Permiso> permisos;
 
         public Usuario()
         {
             wF = new WF();
+            permisos = new List<Permiso>();
         }
 
         public string Id
@@ -156,6 +158,17 @@ namespace CedServicios.Entidades
             get
             {
                 return ultActualiz;
+            }
+        }
+        public List<Permiso> Permisos
+        {
+            set
+            {
+                permisos = value;
+            }
+            get
+            {
+                return permisos;
             }
         }
     }
