@@ -1,5 +1,7 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CedServicios.master.cs" Inherits="CedServicios.Site.CedServicios" %>
 
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -7,12 +9,71 @@
     <title></title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+    <style type="text/css">
+        .MainMenu
+        {
+            position:relative;
+            vertical-align:middle;
+            text-align:left;
+        }
+        .Fuente
+        {
+        	font-family: Verdana;
+        	font-size: 10px;
+        	color: Navy;
+        }
+    </style>
 </head>
 <body>
-    <form id="form1" runat="server">
-    <div>
-        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
-        
+    <form id="form1" runat="server" visible="true">
+    <div id="DivMenu" style="text-align: center" align="center">
+        <table>
+            <tr>
+                <td style="text-align:left" class="Fuente">
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/CedeiraSF-Logo.gif" />
+                </td>
+                <td style="width: 100%"></td>
+                <td class="Fuente" align="right" valign="bottom" style="padding-bottom: 5px;">Usuario: </td>
+                <td class="Fuente" align="left" valign="bottom">
+                    <asp:TextBox ID="TextBox1" runat="server" CssClass="Fuente" ReadOnly="true" Width="150px" Wrap="true" TextMode="SingleLine" MaxLength="200" Text="Pablo J. E. Conde"></asp:TextBox>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td style="width: 100%"></td>
+                <td class="Fuente">CUIT: </td>
+                <td class="Fuente">
+                    <asp:DropDownList ID="DropDownListCUIT" runat="server">
+                    </asp:DropDownList>
+                </td>
+                <td class="Fuente" style="width: 30px"></td>
+                <td class="Fuente">UN: </td>
+                <td class="Fuente">
+                    <asp:DropDownList ID="DropDownListUN" runat="server" ToolTip="Unidad de Negocio">
+                    </asp:DropDownList>
+                </td>
+            </tr>
+        </table>
+        <table>
+            <tr>
+                <td align="center"  style="text-align: left">
+                    <asp:Menu ID="Menu1" runat="server" BackColor="white" DynamicHorizontalOffset="5" CssClass="MainMenu" 
+                        Font-Names="Verdana" Font-Size="10px" ForeColor="#284E98" StaticSubMenuIndent="30px">
+                        <DynamicHoverStyle BackColor="LightGray" ForeColor="DarkBlue" />
+                        <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
+                        <DynamicMenuStyle BackColor="#B5C7DE" />
+                        <DynamicSelectedStyle BackColor="Gold" />
+                        <StaticHoverStyle BackColor="LightGray" ForeColor="DarkBlue" />
+                        <StaticMenuItemStyle HorizontalPadding="15px" VerticalPadding="2px" />
+                        <StaticSelectedStyle BackColor="Gold" />
+                    </asp:Menu>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="DivContent" style="text-align: center">
+        <asp:ContentPlaceHolder ID="ContentPlaceDefault" runat="server" Visible="true">
         </asp:ContentPlaceHolder>
     </div>
     </form>
