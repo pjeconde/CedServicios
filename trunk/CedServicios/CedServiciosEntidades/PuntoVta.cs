@@ -20,7 +20,7 @@ namespace CedServicios.Entidades
         private MetodoGeneracionNumeracionLote metodoGeneracionNumeracionLote;
         private int ultNroLote;
         private WF wF;
-        private DateTime ultActualiz;
+        private string ultActualiz;
 
         public PuntoVta()
         {
@@ -164,7 +164,7 @@ namespace CedServicios.Entidades
                 return wF;
             }
         }
-        public DateTime UltActualiz
+        public string UltActualiz
         {
             set
             {

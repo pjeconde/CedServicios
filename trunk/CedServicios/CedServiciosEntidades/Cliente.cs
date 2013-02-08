@@ -19,7 +19,7 @@ namespace CedServicios.Entidades
         private string emailAvisoVisualizacion;
         private string passwordAvisoVisualizacion;
         private WF wF;
-        private DateTime ultActualiz;
+        private string ultActualiz;
 
         public Cliente()
         {
@@ -152,7 +152,7 @@ namespace CedServicios.Entidades
                 return wF;
             }
         }
-        public DateTime UltActualiz
+        public string UltActualiz
         {
             set
             {

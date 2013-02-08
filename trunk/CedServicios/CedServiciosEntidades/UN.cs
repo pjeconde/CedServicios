@@ -12,7 +12,7 @@ namespace CedServicios.Entidades
         private string id;
         private string descr;
         private WF wF;
-        private DateTime ultActualiz;
+        private string ultActualiz;
 
         public UN()
         {
@@ -63,7 +63,7 @@ namespace CedServicios.Entidades
                 return wF;
             }
         }
-        public DateTime UltActualiz
+        public string UltActualiz
         {
             set
             {

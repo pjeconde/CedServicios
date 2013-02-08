@@ -16,7 +16,7 @@ namespace CedServicios.Entidades
         private DatosIdentificatorios datosIdentificatorios;
         private Medio medio;
         private WF wF;
-        private DateTime ultActualiz;
+        private string ultActualiz;
 
         public Cuit()
         {
@@ -116,7 +116,7 @@ namespace CedServicios.Entidades
                 return wF;
             }
         }
-        public DateTime UltActualiz
+        public string UltActualiz
         {
             set
             {

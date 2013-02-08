@@ -18,10 +18,13 @@ namespace CedServicios.Site
             try
             {
                 MsgErrorLabel.Text = String.Empty;
+                Entidades.Usuario usuario = new Entidades.Usuario();
+                usuario.Id = UsuarioTextBox.Text;
+                usuario.Password = PasswordTextBox.Text;
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                sesion.Usuario.Id = UsuarioTextBox.Text;
-                sesion.Usuario.Password = PasswordTextBox.Text;
-                RN.Usuario.Login(sesion.Usuario, (Entidades.Sesion)Session["Sesion"]);
+                RN.Usuario.Login(usuario, sesion);
+                sesion.Usuario = usuario;
+                RN.Sesion.LeerDatosUsuario(sesion);
                 Response.Redirect("~/Default.aspx");
             }
             catch (System.Threading.ThreadAbortException)

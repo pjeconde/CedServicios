@@ -9,8 +9,8 @@ namespace CedServicios.RN
     {
         public static void Leer(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
-            CedServicios.DB.Usuario usuario = new  DB.Usuario(Sesion);
-            usuario.Leer(Usuario);
+            CedServicios.DB.Usuario db = new  DB.Usuario(Sesion);
+            db.Leer(Usuario);
         }
         public static void Login(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
