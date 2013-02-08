@@ -19,11 +19,11 @@ namespace CedServicios.DB
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("select Usuario.IdUsuario, Usuario.Nombre, Usuario.Telefono, Usuario.Email, Usuario.Password, Usuario.Pregunta, Usuario.Respuesta, Usuario.CantidadEnviosMail, Usuario.FechaUltimoReenvioMail, Usuario.EmailSMS, Usuario.IdWF, Usuario.Estado, Usuario.UltActualiz ");
             a.Append("from Usuario ");
-            a.Append("where Usuario.IdUsuario='" + Usuario.Id.ToString() + "' ");
+            a.Append("where Usuario.IdUsuario='" + Usuario.Id + "' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count == 0)
             {
-                throw new CedServicios.EX.Validaciones.ElementoInexistente("Usuario " + Usuario.Id.ToString());
+                throw new CedServicios.EX.Validaciones.ElementoInexistente("Usuario " + Usuario.Id);
             }
             else
             {
