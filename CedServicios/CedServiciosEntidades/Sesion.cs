@@ -14,6 +14,7 @@ namespace CedServicios.Entidades
         private UN uN;
         private List<Cuit> cuitsDelUsuario;
         private List<UN> uNsDelCuit;
+        private List<string> opcionesHabilitadas;
 
         public Sesion()
         {
@@ -22,6 +23,7 @@ namespace CedServicios.Entidades
             uN = new UN();
             cuitsDelUsuario = new List<Cuit>();
             uNsDelCuit = new List<UN>();
+            opcionesHabilitadas = new List<string>();
         }
 
 		public string CnnStr
@@ -88,6 +90,17 @@ namespace CedServicios.Entidades
             set
             {
                 uNsDelCuit = value;
+            }
+        }
+        public List<string> OpcionesHabilitadas
+        {
+            get
+            {
+                return opcionesHabilitadas;
+            }
+            set
+            {
+                opcionesHabilitadas = value;
             }
         }
     }
