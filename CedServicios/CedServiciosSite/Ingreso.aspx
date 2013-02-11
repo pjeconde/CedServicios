@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="Ingreso.aspx.cs" Inherits="CedServicios.Site.Ingreso" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
                 <asp:Panel ID="LoginPanel" runat="server" BackColor="cornsilk" BorderColor="peachpuff"
                     BorderStyle="Double" BorderWidth="3px" Width="300px">
                     <table border="0" cellpadding="0" cellspacing="0" style="height: 142px">
