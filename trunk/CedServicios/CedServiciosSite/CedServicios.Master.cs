@@ -88,5 +88,17 @@ namespace CedServicios.Site
             mItemFind.Selectable = false;
 
         }
+
+        protected void Menu1_MenuItemClick(object sender, MenuEventArgs e)
+        {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            switch (Menu1.SelectedValue.ToString())
+            {
+                case "Cerrar sesión":
+                    RN.Sesion.Cerrar(sesion);
+                    Response.Redirect("~/UsuarioLogin.aspx");
+                    break;
+            }
+        }
     }
 }
