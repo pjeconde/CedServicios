@@ -58,8 +58,10 @@
         <table>
             <tr>
                 <td align="center"  style="text-align: left">
-                    <asp:Menu ID="Menu1" runat="server" BackColor="white" DynamicHorizontalOffset="5" CssClass="MainMenu" 
-                        Font-Names="Verdana" Font-Size="10px" ForeColor="#284E98" StaticSubMenuIndent="30px">
+                    <asp:Menu ID="Menu1" runat="server" BackColor="white" 
+                        DynamicHorizontalOffset="5" CssClass="MainMenu" 
+                        Font-Names="Verdana" Font-Size="10px" ForeColor="#284E98" 
+                        StaticSubMenuIndent="30px" onmenuitemclick="Menu1_MenuItemClick">
                         <DynamicHoverStyle BackColor="LightGray" ForeColor="DarkBlue" />
                         <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
                         <DynamicMenuStyle BackColor="#B5C7DE" />

@@ -56,7 +56,7 @@
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="Default.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Ingreso.aspx" />
+    <Content Include="UsuarioLogin.aspx" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -83,12 +83,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Ingreso.aspx.cs">
-      <DependentUpon>Ingreso.aspx</DependentUpon>
+    <Compile Include="UsuarioLogin.aspx.cs">
+      <DependentUpon>UsuarioLogin.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Ingreso.aspx.designer.cs">
-      <DependentUpon>Ingreso.aspx</DependentUpon>
+    <Compile Include="UsuarioLogin.aspx.designer.cs">
+      <DependentUpon>UsuarioLogin.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
