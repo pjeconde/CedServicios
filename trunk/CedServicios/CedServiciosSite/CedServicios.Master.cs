@@ -120,23 +120,29 @@ namespace CedServicios.Site
             //UsuarioTextBox.Text = "";
 
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            if (sesion != null && sesion.CuitsDelUsuario.Count != 0)
+            ContentPlaceHolderMenu.Visible = false;
+            if (sesion != null)
             {
-                CUITDropDownList.DataSource = sesion.CuitsDelUsuario;
-                CUITDropDownList.DataBind();
-                UsuarioTextBox.Text = sesion.Usuario.Nombre;
-                //((TextBox)Master.FindControl("UsuarioTextBox")).Text = sesion.Usuario.Nombre;
-                foreach (string s in sesion.OpcionesHabilitadas)
+                if (sesion.Usuario.Id != null)
                 {
-                    HabilitarOpcionMenu(s);
+                    UsuarioTextBox.Text = sesion.Usuario.Nombre;
+                    Menu1.Items[Menu1.Items.Count - 1].Selectable = true;
+                    if (sesion.CuitsDelUsuario.Count != 0)
+                    {
+                        CUITDropDownList.DataSource = sesion.CuitsDelUsuario;
+                        CUITDropDownList.DataBind();
+                        UNDropDownList.DataSource = sesion.UNsDelCuit;
+                        UNDropDownList.DataBind();
+
+                        //((TextBox)Master.FindControl("UsuarioTextBox")).Text = sesion.Usuario.Nombre;
+                        foreach (string s in sesion.OpcionesHabilitadas)
+                        {
+                            HabilitarOpcionMenu(s);
+                        }
+                        ContentPlaceHolderMenu.Visible = true;
+                    }
                 }
-                ContentPlaceHolderMenu.Visible = true;
             }
-            else
-            {
-                ContentPlaceHolderMenu.Visible = false;
-            }
-            
         }
 
         private void HabilitarOpcionMenu(string itemPathValue)
