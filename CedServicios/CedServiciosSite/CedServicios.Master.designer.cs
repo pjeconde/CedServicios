@@ -40,31 +40,49 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
-        /// Control TextBox1.
+        /// Control UsuarioLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TextBox1;
+        protected global::System.Web.UI.WebControls.Label UsuarioLabel;
         
         /// <summary>
-        /// Control DropDownListCUIT.
+        /// Control UsuarioTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListCUIT;
+        protected global::System.Web.UI.WebControls.TextBox UsuarioTextBox;
         
         /// <summary>
-        /// Control DropDownListUN.
+        /// Control ContentPlaceHolderMenu.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList DropDownListUN;
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceHolderMenu;
+        
+        /// <summary>
+        /// Control CUITDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CUITDropDownList;
+        
+        /// <summary>
+        /// Control UNDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList UNDropDownList;
         
         /// <summary>
         /// Control Menu1.

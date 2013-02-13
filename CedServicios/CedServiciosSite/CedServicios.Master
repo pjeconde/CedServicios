@@ -26,31 +26,37 @@
 </head>
 <body>
     <form id="form1" runat="server" visible="true">
-    <div id="DivMenu" style="text-align: center" align="center">
+    <div id="DivUsuario" style="text-align: center" align="center">
         <table>
             <tr>
                 <td style="text-align:left" class="Fuente">
                     <asp:Image ID="Image1" runat="server" ImageUrl="~/CedeiraSF-Logo.gif" />
                 </td>
                 <td style="width: 100%"></td>
-                <td class="Fuente" align="right" valign="bottom" style="padding-bottom: 5px;">Usuario: </td>
+                <td class="Fuente" align="right" valign="bottom" style="padding-bottom: 5px;">
+                    <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario: "></asp:Label>
+                </td>
                 <td class="Fuente" align="left" valign="bottom">
-                    <asp:TextBox ID="TextBox1" runat="server" CssClass="Fuente" ReadOnly="true" Width="150px" Wrap="true" TextMode="SingleLine" MaxLength="200" Text="Pablo J. E. Conde"></asp:TextBox>
+                    <asp:TextBox ID="UsuarioTextBox" runat="server" CssClass="Fuente" 
+                        ReadOnly="true" Width="150px" Wrap="true" TextMode="SingleLine" MaxLength="200"></asp:TextBox>
                 </td>
             </tr>
         </table>
+    </div>
+    <asp:ContentPlaceHolder ID="ContentPlaceHolderMenu" runat="server" Visible="true">
+    <div id="DivMenu" style="text-align: center" align="center">
         <table>
             <tr>
                 <td style="width: 100%"></td>
                 <td class="Fuente">CUIT: </td>
                 <td class="Fuente">
-                    <asp:DropDownList ID="DropDownListCUIT" runat="server">
+                    <asp:DropDownList ID="CUITDropDownList" runat="server">
                     </asp:DropDownList>
                 </td>
                 <td class="Fuente" style="width: 30px"></td>
                 <td class="Fuente">UN: </td>
                 <td class="Fuente">
-                    <asp:DropDownList ID="DropDownListUN" runat="server" ToolTip="Unidad de Negocio">
+                    <asp:DropDownList ID="UNDropDownList" runat="server" ToolTip="Unidad de Negocio">
                     </asp:DropDownList>
                 </td>
             </tr>
@@ -74,6 +80,13 @@
             </tr>
         </table>
     </div>
+    </asp:ContentPlaceHolder>
+    <table style="width: 100%">
+        <tr>
+            <td style="width: 100%; background-color: Gray; height: 0.1pt">
+            </td>
+        </tr>
+    </table>
     <div id="DivContent" style="text-align: center">
         <asp:ContentPlaceHolder ID="ContentPlaceDefault" runat="server" Visible="true">
         </asp:ContentPlaceHolder>
