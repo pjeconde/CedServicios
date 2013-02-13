@@ -5,11 +5,11 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{66587393-8FAD-45FF-9C8B-F3F683EB2126}</ProjectGuid>
+    <ProjectGuid>{04825782-49A4-45EC-8145-E86F675C4D15}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CedServicios.RN</RootNamespace>
-    <AssemblyName>CedServiciosRN</AssemblyName>
+    <RootNamespace>CedeiraServicios.WebForms</RootNamespace>
+    <AssemblyName>CedeiraServiciosWebForms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -33,6 +33,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,37 +41,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Articulo.cs" />
-    <Compile Include="Cliente.cs" />
-    <Compile Include="Configuracion.cs" />
-    <Compile Include="Cuit.cs" />
-    <Compile Include="Funciones.cs" />
-    <Compile Include="Log.cs" />
-    <Compile Include="LogDetalle.cs" />
-    <Compile Include="Permiso.cs" />
+    <Compile Include="BaseParameterPasser.cs" />
+    <Compile Include="Excepciones.cs" />
+    <Compile Include="PagingGridView.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PuntoVta.cs" />
-    <Compile Include="Sesion.cs" />
-    <Compile Include="UN.cs" />
-    <Compile Include="Usuario.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CaptchaDotNet2\CaptchaDotNet2.csproj">
-      <Project>{40240522-9A53-49AB-BD32-6A0A7116F87F}</Project>
-      <Name>CaptchaDotNet2</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CedServiciosDB\CedServiciosDB.csproj">
-      <Project>{61732864-74F9-4F70-B0E4-CF753C486796}</Project>
-      <Name>CedServiciosDB</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CedServiciosEntidades\CedServiciosEntidades.csproj">
-      <Project>{CEFF9C55-2310-4C5A-89D3-D652AB5DDA63}</Project>
-      <Name>CedServiciosEntidades</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CedServiciosEX\CedServiciosEX.csproj">
-      <Project>{3329DE15-00C6-4917-9FEE-F96DC14D5D3F}</Project>
-      <Name>CedServiciosEX</Name>
-    </ProjectReference>
+    <Compile Include="UrlParameterPasser.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
