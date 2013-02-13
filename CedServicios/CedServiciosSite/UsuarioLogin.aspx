@@ -41,15 +41,15 @@
                         </tr>
                         <tr>
                             <td align="center" colspan="3" style="padding-top: 5px; color: Blue">
-                                <asp:HyperLink ID="CuentaCrearHyperLink" runat="server" NavigateUrl="~/CuentaCrear.aspx"
+                                <asp:HyperLink ID="CuentaCrearHyperLink" runat="server" NavigateUrl="~/UsuarioCrear.aspx"
                                     SkinID="LinkMedianoClaro">Crear una nueva cuenta</asp:HyperLink>
                             </td>
                         </tr>
                         <tr>
                             <td align="center" colspan="3" style="color: Blue">
-                                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/CuentaOlvidoId.aspx"
+                                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/UsuarioOlvidoId.aspx"
                                     SkinID="LinkMedianoClaro">¿Olvidó su Id.Usuario?</asp:HyperLink>
-                                <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/CuentaOlvidoPassword.aspx"
+                                <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/UsuarioOlvidoPassword.aspx"
                                     SkinID="LinkMedianoClaro">¿Olvidó su Contraseña?</asp:HyperLink>
                             </td>
                         </tr>

@@ -1,0 +1,5 @@
+<asp:Label runat="server" Font-Size="14px" ForeColor="black" Font-Bold="True" SkinID="TituloPagina"></asp:Label>
+<asp:Label runat="server" SkinID="IndicadorValidacion" Font-Size="14px" ForeColor="#FF6600" Font-Bold="True" Text="*"></asp:Label>
+<asp:Label runat="server" Font-Size="12px" ForeColor="#FF6600" Font-Bold="True" Width="100%" SkinID="MensajePagina"></asp:Label>
+<asp:ValidationSummary runat="server" Font-Size="12px" ForeColor="#FF6600" Font-Bold="True" SkinID="MensajeValidationSummary" HeaderText="Por favor, ingrese (o corrija) los siguientes campos: " ShowMessageBox="true" ShowSummary="true" DisplayMode="SingleParagraph"/>
+<asp:Label runat="server" SkinID="IndicadorValidacion" Font-Size="14px" ForeColor="#FF6600" Font-Bold="True" Text="*"></asp:Label>
