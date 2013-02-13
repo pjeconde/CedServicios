@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioCrear.aspx.cs" Inherits="CedServicios.Site.UsuarioCrear" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioCrear.aspx.cs" Inherits="CedServicios.Site.UsuarioCrear" Theme="CedServicios" %>
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <table border="0" cellpadding="0" cellspacing="0" style="height: 500px; width: 800px">
