@@ -121,11 +121,14 @@ namespace CedServicios.Site
 
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             ContentPlaceHolderMenu.Visible = false;
+            UsuarioSesionContentPlaceHolder.Visible = false;
             if (sesion != null)
             {
                 if (sesion.Usuario.Id != null)
                 {
-                    UsuarioTextBox.Text = sesion.Usuario.Nombre;
+                    UsuarioHyperLink.Text = sesion.Usuario.Nombre;
+                    FechaActualValorLabel.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+                    FechaInicioValorLabel.Text = sesion.FechaInicio.ToString("dd/MM/yyyy hh:mm:ss");
                     Menu1.Items[Menu1.Items.Count - 1].Selectable = true;
                     if (sesion.CuitsDelUsuario.Count != 0)
                     {
@@ -140,6 +143,7 @@ namespace CedServicios.Site
                             HabilitarOpcionMenu(s);
                         }
                         ContentPlaceHolderMenu.Visible = true;
+                        UsuarioSesionContentPlaceHolder.Visible = true;
                     }
                 }
             }
