@@ -149,23 +149,6 @@ namespace CedServicios.EX
             }
         }
         [Serializable]
-        public class CuentaConfFormatoMsgErroneo : CedServicios.EX.Usuario.BaseApplicationException
-        {
-            static string TextoError = "El mensaje de confirmación (de creación de la cuenta eFact) tiene un formato erróneo.  Por favor, póngase en contacto con Cedeira Software Factory, para solucionar el inconveniente.  Muchas gracias.";
-            public CuentaConfFormatoMsgErroneo()
-                : base(TextoError)
-            {
-            }
-            public CuentaConfFormatoMsgErroneo(Exception inner)
-                : base(TextoError, inner)
-            {
-            }
-            public CuentaConfFormatoMsgErroneo(SerializationInfo info, StreamingContext context)
-                : base(info, context)
-            {
-            }
-        }
-        [Serializable]
         public class ParametrosAccionCompradorErroneo : CedServicios.EX.Usuario.BaseApplicationException
         {
             static string TextoError = "Acción inválida sobre Comprador.  Por favor, póngase en contacto con Cedeira Software Factory, para solucionar el inconveniente.  Muchas gracias.";
@@ -250,6 +233,24 @@ namespace CedServicios.EX
             {
             }
         }
+        [Serializable]
+        public class UsuarioConfFormatoMsgErroneo : CedServicios.EX.Usuario.BaseApplicationException
+        {
+            static string TextoError = "El mensaje de confirmación (de creación de la cuenta eFact) tiene un formato erróneo.  Por favor, póngase en contacto con Cedeira Software Factory, para solucionar el inconveniente.  Muchas gracias.";
+            public UsuarioConfFormatoMsgErroneo()
+                : base(TextoError)
+            {
+            }
+            public UsuarioConfFormatoMsgErroneo(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public UsuarioConfFormatoMsgErroneo(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+
     }
 	namespace db
 	{

@@ -15,6 +15,7 @@ namespace CedServicios.Entidades
         private List<Cuit> cuitsDelUsuario;
         private List<UN> uNsDelCuit;
         private List<string> opcionesHabilitadas;
+        private DateTime fechaInicio;
 
         public Sesion()
         {
@@ -24,6 +25,7 @@ namespace CedServicios.Entidades
             cuitsDelUsuario = new List<Cuit>();
             uNsDelCuit = new List<UN>();
             opcionesHabilitadas = new List<string>();
+            fechaInicio = DateTime.Now;
         }
 
 		public string CnnStr
@@ -101,6 +103,17 @@ namespace CedServicios.Entidades
             set
             {
                 opcionesHabilitadas = value;
+            }
+        }
+        public DateTime FechaInicio
+        {
+            get
+            {
+                return fechaInicio;
+            }
+            set
+            {
+                fechaInicio = value;
             }
         }
     }
