@@ -7,15 +7,9 @@
                 <table border="0" cellpadding="0" cellspacing="0" class="TextoComun" style="width: 100%;
                     padding-top: 10px">
                     <tr>
-                        <td align="left" style="padding-left: 10px" valign="top">
+                        <td align="center" style="padding-left: 10px" valign="top">
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
-                            <table border="0" cellpadding="0" cellspacing="0">
-                                <tr>
-                                    <td style="height: 20px;">
-                                        <asp:Label ID="Label5" runat="server" SkinID="TituloPagina" Text="Creación de cuenta "></asp:Label>
-                                    </td>
-                                </tr>
-                            </table>
+                            <asp:Label ID="Label5" runat="server" SkinID="TituloPagina" Text="Creación de cuenta "></asp:Label>
                             <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@-->
                         </td>
                     </tr>
@@ -81,8 +75,7 @@
                                     <td colspan="2">
                                     </td>
                                     <td colspan="2" style="color: Gray">
-                                        (muy importante: las facturas electrónicas -archivos xml- se enviarán, vía email,
-                                        a esta dirección)
+                                        (muy importante: la confirmaciòn de la Cuenta se hace, vía mail, a esta dirección)
                                     </td>
                                 </tr>
                                 <tr>

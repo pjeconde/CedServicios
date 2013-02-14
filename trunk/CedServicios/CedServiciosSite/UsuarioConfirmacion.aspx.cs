@@ -11,7 +11,42 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            try
+            {
+                string a = HttpContext.Current.Request.Url.Query.ToString();
+                if (a == String.Empty)
+                {
+                    throw new EX.Usuario.UsuarioConfFormatoMsgErroneo();
+                }
+                else
+                {
+                    if (a.Substring(0, 4) == "?Id=")
+                    {
+                        a = a.Substring(4);
+                    }
+                    string idUsuario = a;
+                    Entidades.Usuario usuario = new Entidades.Usuario();
+                    usuario.Id = idUsuario;
+                    RN.Usuario.Confirmar(usuario, (Entidades.Sesion)Session["Sesion"]);
+                    MensajeLabel.Text = "Felicitaciones !!!.  Su nueva cuenta '" + usuario.Id + "' ya está disponible.";
+                }
+            }
+            catch (System.Security.Cryptography.CryptographicException)
+            {
+                MensajeLabel.Text = EX.Funciones.Detalle(new EX.Usuario.UsuarioConfFormatoMsgErroneo());
+            }
+            catch (System.FormatException)
+            {
+                MensajeLabel.Text = EX.Funciones.Detalle(new EX.Usuario.UsuarioConfFormatoMsgErroneo());
+            }
+            catch (EX.Validaciones.ElementoInexistente)
+            {
+                MensajeLabel.Text = EX.Funciones.Detalle(new EX.Usuario.UsuarioConfFormatoMsgErroneo());
+            }
+            catch (Exception ex)
+            {
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
+            }
         }
     }
 }

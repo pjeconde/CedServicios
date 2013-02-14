@@ -49,7 +49,9 @@ namespace CedServicios.DB
         public void Crear(Entidades.Usuario Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("Insert Usuario values (");
+            a.Append("declare @idWF varchar(256) ");
+            a.Append("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
+            a.Append("Insert Usuario (IdUsuario, Nombre, Telefono, Email, Password, Pregunta, Respuesta, CantidadEnviosMail, FechaUltimoReenvioMail, EmailSMS, IdWF, Estado) values (");
             a.Append("'" + Usuario.Id + "', ");
             a.Append("'" + Usuario.Nombre + "', ");
             a.Append("'" + Usuario.Telefono + "', ");
@@ -57,25 +59,27 @@ namespace CedServicios.DB
             a.Append("'" + Usuario.Password + "', ");
             a.Append("'" + Usuario.Pregunta + "', ");
             a.Append("'" + Usuario.Respuesta + "', ");
-            a.Append("'" + Usuario.WF.Estado + "', ");
-            a.Append("getdate(), ");    //FechaAlta
             a.Append("1, ");            //CantidadEnviosMail
             a.Append("getdate(), ");    //FechaUltimoReenvioMail
             a.Append("'', ");           //EmailSMS
-            a.Append("0, ");            //RecibeAvisoAltaCuenta
-            a.Append("0, ");            //CantidadComprobantes
-            a.Append("'20000101', ");   //FechaUltimoComprobante
-            a.Append("'20000101', ");   //Cuenta.FechaVtoPremium
-            a.Append("0 ");            //CantidadActivacionesCPs
+            a.Append("@idWF, ");        //IdWF
+            a.Append("'" + Usuario.WF.Estado + "' ");
             a.Append(")");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
         public void Confirmar(Entidades.Usuario Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("update Cuenta set IdEstadoCuenta='Vigente' where IdCuenta='" + Usuario.Id + "' and IdEstadoCuenta='PteConfig' ");
-            int cantReg = (int)Ejecutar(a.ToString(), TipoRetorno.CantReg, Transaccion.NoAcepta, sesion.CnnStr);
-            if (cantReg != 1)
+            a.Append("declare @idWF varchar(256) ");
+            a.Append("declare @cantFilas int ");
+            a.Append("select @idWF = IdWF from Usuario where IdUsuario='" + Usuario.Id + "' ");
+            a.Append("update Usuario set Estado='Vigente' where IdUsuario='" + Usuario.Id + "' and Estado='PteConfig' ");
+            a.Append("set @cantFilas = @@ROWCOUNT ");
+            a.Append("if @cantFilas = 1 ");
+            a.Append("    insert Log values (@idWF, getdate(), '" + Usuario.Id + "', 'Usuario', 'Confirm', 'Vigente', '') ");
+            a.Append("select @cantFilas as CantFilas ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            if (Convert.ToInt32(dt.Rows[0]["CantFilas"]) != 1)
             {
                 throw new EX.Usuario.ErrorDeConfirmacion();
             }
