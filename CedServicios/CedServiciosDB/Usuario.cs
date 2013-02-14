@@ -15,7 +15,6 @@ namespace CedServicios.DB
 
         public void Leer(Entidades.Usuario Usuario)
         {
-
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("select Usuario.IdUsuario, Usuario.Nombre, Usuario.Telefono, Usuario.Email, Usuario.Password, Usuario.Pregunta, Usuario.Respuesta, Usuario.CantidadEnviosMail, Usuario.FechaUltimoReenvioMail, Usuario.EmailSMS, Usuario.IdWF, Usuario.Estado, Usuario.UltActualiz ");
             a.Append("from Usuario ");
@@ -101,10 +100,9 @@ namespace CedServicios.DB
         public List<Entidades.Usuario> DestinatariosAvisoAltaUsuario()
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Cuenta.IdCuenta, Cuenta.Nombre, Cuenta.Telefono, Cuenta.Email, Cuenta.Password, Cuenta.Pregunta, Cuenta.Respuesta, Cuenta.IdTipoCuenta, TipoCuenta.DescrTipoCuenta, Cuenta.IdEstadoCuenta, EstadoCuenta.DescrEstadoCuenta, Cuenta.UltimoNroLote, Cuenta.FechaAlta, Cuenta.CantidadEnviosMail, Cuenta.FechaUltimoReenvioMail, Cuenta.IdMedio, Medio.DescrMedio, Cuenta.EmailSMS, Cuenta.RecibeAvisoAltaCuenta, Cuenta.CantidadComprobantes, Cuenta.FechaUltimoComprobante, Cuenta.FechaVtoPremium, Cuenta.IdPaginaDefault, Cuenta.NroSerieCertificado, PaginaDefault.DescrPaginaDefault, PaginaDefault.URL, Cuenta.CantidadActivacionesCPs ");
-            a.Append("from Cuenta, TipoCuenta, EstadoCuenta, Medio, PaginaDefault ");
-            a.Append("where RecibeAvisoAltaCuenta=1 and EmailSMS<>'' ");
-            a.Append("and Cuenta.IdTipoCuenta=TipoCuenta.IdTipoCuenta and Cuenta.IdEstadoCuenta=EstadoCuenta.IdEstadoCuenta and Cuenta.IdMedio=Medio.IdMedio and Cuenta.IdPaginaDefault=PaginaDefault.IdPaginaDefault ");
+            a.Append("select Usuario.IdUsuario, Usuario.Nombre, Usuario.Telefono, Usuario.Email, Usuario.Password, Usuario.Pregunta, Usuario.Respuesta, Usuario.CantidadEnviosMail, Usuario.FechaUltimoReenvioMail, Usuario.EmailSMS, Usuario.IdWF, Usuario.Estado, Usuario.UltActualiz ");
+            a.Append("from Usuario, Permiso ");
+            a.Append("where Usuario.IdUsuario=Permiso.IdUsuario and Permiso.IdTipoPermiso='AdminSITE' and Usuario.EmailSMS<>'' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Usuario> lista = new List<Entidades.Usuario>();
             for (int i = 0; i < dt.Rows.Count; i++)
