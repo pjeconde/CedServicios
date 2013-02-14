@@ -27,20 +27,57 @@
 </head>
 <body>
     <form id="form1" runat="server" visible="true">
+    <asp:ScriptManager ID="ScriptManager1" runat="server">
+    </asp:ScriptManager>
     <div id="DivUsuario" style="text-align: center" align="center">
         <table>
             <tr>
                 <td style="text-align:left" class="Fuente">
                     <asp:Image ID="Image1" runat="server" ImageUrl="~/CedeiraSF-Logo.gif" />
                 </td>
-                <td style="width: 100%"></td>
-                <td class="Fuente" align="right" valign="bottom" style="padding-bottom: 5px;">
-                    <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario: "></asp:Label>
+                <td style="width: 100%">
                 </td>
-                <td class="Fuente" align="left" valign="bottom">
-                    <asp:TextBox ID="UsuarioTextBox" runat="server" CssClass="Fuente" 
-                        ReadOnly="true" Width="150px" Wrap="true" TextMode="SingleLine" MaxLength="200"></asp:TextBox>
+                <asp:ContentPlaceHolder ID="UsuarioSesionContentPlaceHolder" runat="server" Visible="true">
+                <td>
+                    <table>
+                        <tr>
+                            <td style="text-align:left" class="Fuente">
+                                <asp:Label ID="FechaActualLabel" runat="server" Visible="true" Text="Fecha Actual: "></asp:Label>
+                            </td>
+                            <td style="text-align:left" class="Fuente">
+                                <asp:UpdatePanel ID="FechaActualUpdatePanel" runat="server" UpdateMode="Always" ViewStateMode="Enabled" RenderMode="Inline">
+                                <ContentTemplate>
+                                    <asp:Label ID="FechaActualValorLabel" runat="server" Text=""></asp:Label>
+                                </ContentTemplate>
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="Timer1" />
+                                </Triggers>
+                                </asp:UpdatePanel>
+                                <asp:Timer ID="Timer1" runat="server" Interval="1000">
+                                </asp:Timer>
+                            </td>
+                            <td style="text-align: left; width:10px" class="Fuente">
+                            </td>
+                            <td style="text-align:left" class="Fuente">
+                                <asp:Label ID="FechaInicioLabel" runat="server" Text="Fecha Inicio: "></asp:Label>
+                            </td>
+                            <td style="text-align: left" class="Fuente">
+                                <asp:Label ID="FechaInicioValorLabel" runat="server" Text=""></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Fuente" align="right" valign="bottom" style="padding-bottom: 0px;" colspan="2">
+                                <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario: "></asp:Label>
+                            </td>
+                            <td style="text-align: left; width: 10px" class="Fuente">
+                            </td>
+                            <td class="Fuente" align="left" valign="bottom"  colspan="2">
+                                <asp:HyperLink ID="UsuarioHyperLink" runat="server" Text="...." NavigateUrl="~/Default.aspx"></asp:HyperLink>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
+                </asp:ContentPlaceHolder>
             </tr>
         </table>
     </div>
