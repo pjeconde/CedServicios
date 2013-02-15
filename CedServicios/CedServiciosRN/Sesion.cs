@@ -32,7 +32,7 @@ namespace CedServicios.RN
                 {
                     return p.TipoPermiso.Id == "AdminSITE" && p.WF.Estado == "Vigente";
                 });
-                if (permisoAdminSITEVigente != null)
+                if (permisoAdminSITEVigente.Count != 0)
                 {
                     opcionesHabilitadas.Add("Administración Site/Explorador de Usuarios");
                     opcionesHabilitadas.Add("Administración Site/Explorador de CUITs");
@@ -51,7 +51,7 @@ namespace CedServicios.RN
                     {
                         return p.TipoPermiso.Id == "AdminCUIT" && p.Cuit == Sesion.Cuit.Nro && p.WF.Estado == "Vigente";
                     });
-                    if (esAdminCUITdeCUITseleccionado != null)
+                    if (esAdminCUITdeCUITseleccionado.Count != 0)
                     {
                         opcionesHabilitadas.Add("CUIT/Modificación datos CUIT");
                         opcionesHabilitadas.Add("Puntos de Venta");
@@ -61,7 +61,7 @@ namespace CedServicios.RN
                 {
                     return (p.TipoPermiso.Id == "AdminCUIT" || p.TipoPermiso.Id == "AdminUN" || p.TipoPermiso.Id == "AdminSITE") && p.WF.Estado == "Vigente";
                 });
-                if (esAutorizador != null)
+                if (esAutorizador.Count != 0)
                 {
                     opcionesHabilitadas.Add("Autorizaciones/Explorador de Autorizaciones");
                     if (RN.Permiso.LeerListaPermisosPteAutoriz(Sesion.Usuario, Sesion).Count != 0)
@@ -75,7 +75,7 @@ namespace CedServicios.RN
                     {
                         return p.TipoPermiso.Id == "AdminUN" && p.IdUN == Sesion.UN.Id && p.Cuit == Sesion.UN.Cuit && p.WF.Estado == "Vigente";
                     });
-                    if (elUsuarioEsAdministradorDeLaUNSeleccionada != null)
+                    if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                     {
                         opcionesHabilitadas.Add("Unidad de Negocio/Modificación datos UN");
                     }
@@ -84,7 +84,7 @@ namespace CedServicios.RN
                         return p.TipoPermiso.Id == "eFact" && p.IdUN == Sesion.UN.Id && p.Cuit == Sesion.UN.Cuit && p.WF.Estado == "Vigente";
                     });
                     //Ojo: no estoy chequeando que la UN siga teniendo el permiso vigente sobre el servicio eFact !!!
-                    if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada != null)
+                    if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada.Count != 0)
                     {
                         opcionesHabilitadas.Add("Facturación");
                         opcionesHabilitadas.Add("Artículos");
