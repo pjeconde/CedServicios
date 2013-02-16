@@ -1,5 +1,8 @@
-<asp:Label runat="server" Font-Size="24px" ForeColor="black" Font-Bold="True" SkinID="TituloPagina"></asp:Label>
-<asp:Label runat="server" SkinID="IndicadorValidacion" Font-Size="14px" ForeColor="#FF6600" Font-Bold="True" Text="*"></asp:Label>
-<asp:Label runat="server" Font-Size="12px" ForeColor="#FF6600" Font-Bold="True" Width="100%" SkinID="MensajePagina"></asp:Label>
-<asp:ValidationSummary runat="server" Font-Size="12px" ForeColor="#FF6600" Font-Bold="True" SkinID="MensajeValidationSummary" HeaderText="Por favor, ingrese (o corrija) los siguientes campos: " ShowMessageBox="true" ShowSummary="true" DisplayMode="SingleParagraph"/>
-<asp:HyperLink runat="server" Font-Size="10px" ForeColor="blue" SkinID="LinkChicoClaro"></asp:HyperLink>
+<asp:Label SkinID="TextoMediano" runat="server" Font-Size="12px" ForeColor="black" Font-Bold="False"></asp:Label>
+<asp:Label SkinID="TituloPagina" runat="server" Font-Size="24px" ForeColor="black" Font-Bold="false"></asp:Label>
+<asp:Label SkinID="TituloMediano" runat="server" Font-Size="12px" ForeColor="black" Font-Bold="True"></asp:Label>
+<asp:Label SkinID="IndicadorValidacion" runat="server" Font-Size="14px" ForeColor="#FF6600" Font-Bold="True" Text="*"></asp:Label>
+<asp:Label SkinID="MensajePagina" runat="server" Font-Size="14px" ForeColor="#FF6600" Font-Bold="True" Width="100%"></asp:Label>
+<asp:ValidationSummary SkinID="MensajeValidationSummary" runat="server" Font-Size="12px" ForeColor="#FF6600" Font-Bold="True" HeaderText="Por favor, ingrese (o corrija) los siguientes campos: " ShowMessageBox="true" ShowSummary="true" DisplayMode="SingleParagraph"/>
+<asp:HyperLink SkinID="LinkChicoClaro" runat="server" Font-Size="10px" ForeColor="blue"></asp:HyperLink>
+<asp:HyperLink SkinID="LinkMedianoClaro" runat="server" Font-Size="12px" ForeColor="blue"></asp:HyperLink>

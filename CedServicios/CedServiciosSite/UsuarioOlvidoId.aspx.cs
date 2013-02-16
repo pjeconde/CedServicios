@@ -11,7 +11,31 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                EmailTextBox.Focus();
+            }
+        }
+        protected void AceptarButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MsgErrorLabel.Text = String.Empty;
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                RN.Usuario.ReportarIdUsuarios(EmailTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
+                EmailTextBox.Enabled = false;
+                AceptarButton.Visible = false;
+                CancelarButton.Visible = false;
+                MsgErrorLabel.Text = "Se ha enviado, por correo electrónico, el Id.Usuario de su(s) cuenta(s).  La recepción del email puede demorar unos minutos.";
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Exception ex)
+            {
+                MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+            }
         }
     }
 }

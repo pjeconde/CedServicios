@@ -8,9 +8,7 @@
                     padding-top: 10px">
                     <tr>
                         <td align="center" style="padding-left: 10px" valign="top">
-                            <!-- @@@ TITULO DE LA PAGINA @@@-->
-                            <asp:Label ID="Label5" runat="server" SkinID="TituloPagina" Text="Creación de cuenta "></asp:Label>
-                            <!-- @@@@@@@@@@@@@@@@@@@@@@@@@@@-->
+                            <asp:Label ID="Label5" runat="server" SkinID="TituloPagina" Text="Creación de cuenta"></asp:Label>
                         </td>
                     </tr>
                     <tr>

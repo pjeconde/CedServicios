@@ -14,6 +14,7 @@ namespace CedServicios.RN
             Sesion.UN = new Entidades.UN();
             Sesion.CuitsDelUsuario = new List<Entidades.Cuit>();
             Sesion.UNsDelCuit = new List<Entidades.UN>();
+            Sesion.ClientesDelCuit = new List<Entidades.Cliente>();
         }
         public static List<string> OpcionesHabilitadas(Entidades.Sesion Sesion)
         {
@@ -106,19 +107,14 @@ namespace CedServicios.RN
                 if (Sesion.CuitsDelUsuario.Count != 0) 
                 { 
                     Sesion.Cuit = Sesion.CuitsDelUsuario[0];
-                    Sesion.UNsDelCuit = RN.UN.LeerListaUNsPorCuit(Sesion);
+                    Sesion.UNsDelCuit = RN.UN.ListaPorCuit(Sesion);
+                    Sesion.ClientesDelCuit = RN.Cliente.ListaPorCuit(Sesion);
                     if (Sesion.UNsDelCuit.Count != 0)
                     {
                         Sesion.UN = Sesion.UNsDelCuit[0];
                     }
                 }
                 Sesion.OpcionesHabilitadas = OpcionesHabilitadas(Sesion);
-            }
-        }
-        public static void ArmarListaDeOpcionesHabilitadas(Entidades.Sesion Sesion)
-        {
-            if (Sesion.Usuario.Id!=String.Empty)
-            {
             }
         }
     }

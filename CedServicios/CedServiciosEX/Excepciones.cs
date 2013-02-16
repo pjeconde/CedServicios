@@ -217,18 +217,18 @@ namespace CedServicios.EX
             }
         }
         [Serializable]
-        public class NoHayCuentasAsociadasAEmail : CedServicios.EX.Usuario.BaseApplicationException
+        public class NoHayUsuariosAsociadasAEmail : CedServicios.EX.Usuario.BaseApplicationException
         {
-            static string TextoError = "No hay cuentas eFact asociadas a la dirección de correo electrónico especificada";
-            public NoHayCuentasAsociadasAEmail()
+            static string TextoError = "No hay cuentas asociadas a la dirección de correo electrónico especificada";
+            public NoHayUsuariosAsociadasAEmail()
                 : base(TextoError)
             {
             }
-            public NoHayCuentasAsociadasAEmail(Exception inner)
+            public NoHayUsuariosAsociadasAEmail(Exception inner)
                 : base(TextoError, inner)
             {
             }
-            public NoHayCuentasAsociadasAEmail(SerializationInfo info, StreamingContext context)
+            public NoHayUsuariosAsociadasAEmail(SerializationInfo info, StreamingContext context)
                 : base(info, context)
             {
             }
@@ -250,7 +250,23 @@ namespace CedServicios.EX
             {
             }
         }
-
+        [Serializable]
+        public class PasswordNoMatch : CedServicios.EX.Usuario.BaseApplicationException
+        {
+            static string TextoError = "Contraseña incorrecta";
+            public PasswordNoMatch()
+                : base(TextoError)
+            {
+            }
+            public PasswordNoMatch(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public PasswordNoMatch(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
     }
 	namespace db
 	{
