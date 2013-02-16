@@ -120,5 +120,34 @@ namespace CedServicios.DB
             dt = (DataTable)Ejecutar(commandText, TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             return Convert.ToInt32(dt.Rows[0][0]);
         }
+        public void CambiarPassword(Entidades.Usuario Usuario, string PasswordNueva)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Usuario set Password='" + PasswordNueva + "' where IdUsuario='" + Usuario.Id + "' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
+        }
+        public List<Entidades.Usuario> Lista(string Email)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select Usuario.IdUsuario, Usuario.Nombre, Usuario.Telefono, Usuario.Email, Usuario.Password, Usuario.Pregunta, Usuario.Respuesta, Usuario.CantidadEnviosMail, Usuario.FechaUltimoReenvioMail, Usuario.EmailSMS, Usuario.IdWF, Usuario.Estado, Usuario.UltActualiz ");
+            a.Append("from Usuario ");
+            a.Append("where Usuario.Email='" + Email + "' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            if (dt.Rows.Count == 0)
+            {
+                throw new EX.Usuario.NoHayUsuariosAsociadasAEmail();
+            }
+            else
+            {
+                List<Entidades.Usuario> lista = new List<Entidades.Usuario>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Usuario elem = new Entidades.Usuario();
+                    Copiar(dt.Rows[i], elem);
+                    lista.Add(elem);
+                }
+                return lista;
+            }
+        }
     }
 }

@@ -1,5 +1,6 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CedServicios.Site.Default" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="CedServicios.Site.Default" Theme="CedServicios" %>
+
 <asp:Content ID="Content2" Visible="true" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <asp:GridView ID="GridView1" runat="server">
+    </asp:GridView>
 </asp:Content>

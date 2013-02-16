@@ -138,7 +138,7 @@ namespace CedServicios.RN
             Usuario.WF.Estado = "PteConfig";
             DB.Usuario usuario = new DB.Usuario(Sesion);
             usuario.Crear(Usuario);
-            EnviarMailConfirmacion("Ahora dispone de una nueva cuenta eFact", Usuario);
+            EnviarMailConfirmacion("Ahora dispone de una nueva cuenta", Usuario);
         }
         public static void Confirmar(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
@@ -179,7 +179,7 @@ namespace CedServicios.RN
             StringBuilder a = new StringBuilder();
             a.Append("Estimado/a " + Usuario.Nombre.Trim() + ":<br />");
             a.Append("<br />");
-            a.Append("Gracias por crear su cuenta eFact.<br />");
+            a.Append("Gracias por crear su cuenta.<br />");
             a.Append("<br />");
             a.Append("Para confirmar el alta, haga clic en el enlace que aparece a continuación:<br />");
             a.Append("<br />");
@@ -189,7 +189,7 @@ namespace CedServicios.RN
             a.Append("<br />");
             a.Append("Si no puede acceder a la página, copie la URL y péguela en una ventana nueva del navegador.<br />");
             a.Append("<br />");
-            a.Append("Si ha recibido este correo electrónico y no ha solicitado la creación de una cuenta eFact, es probable que otro usuario haya introducido su dirección por error al intentar llevar a cabo este proceso. Si no ha solicitado la creación de una cuenta eFact, no es necesario que realice ninguna acción, y puede ignorar este mensaje con total seguridad.<br />");
+            a.Append("Si ha recibido este correo electrónico y no ha solicitado la creación de una cuenta, es probable que otro usuario haya introducido su dirección por error al intentar llevar a cabo este proceso. Si no ha solicitado la creación de una cuenta, no es necesario que realice ninguna acción, y puede ignorar este mensaje con total seguridad.<br />");
             a.Append("<br />");
             a.Append("Saludos.<br />");
             a.Append("<br />");
@@ -222,6 +222,84 @@ namespace CedServicios.RN
         {
             DB.Usuario usuario = new DB.Usuario(Sesion);
             return usuario.CantidadDeFilas();
+        }
+        public static void CambiarPassword(Entidades.Usuario Usuario, string PasswordActual, string PasswordNueva, string ConfirmacionPasswordNueva, Entidades.Sesion Sesion)
+        {
+            if (PasswordActual == String.Empty)
+            {
+                throw new EX.Validaciones.ValorNoInfo("Contraseña actual");
+            }
+            else
+            {
+                if (PasswordNueva == String.Empty)
+                {
+                    throw new EX.Validaciones.ValorNoInfo("Contraseña nueva");
+                }
+                else
+                {
+                    if (ConfirmacionPasswordNueva == String.Empty)
+                    {
+                        throw new EX.Validaciones.ValorNoInfo("Confirmación de Contraseña nueva");
+                    }
+                    else
+                    {
+                        if (Usuario.Password != PasswordActual)
+                        {
+                            throw new EX.Usuario.PasswordNoMatch();
+                        }
+                        else
+                        {
+                            if (PasswordNueva != ConfirmacionPasswordNueva)
+                            {
+                                throw new EX.Usuario.PasswordYConfirmacionNoCoincidente();
+                            }
+                            else
+                            {
+                                if (Usuario.Password == PasswordNueva)
+                                {
+                                    throw new EX.Usuario.PasswordNuevaIgualAActual();
+                                }
+                                else
+                                {
+                                    DB.Usuario usuario = new DB.Usuario(Sesion);
+                                    usuario.CambiarPassword(Usuario, PasswordNueva);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        public static void ReportarIdUsuarios(string Email, Entidades.Sesion Sesion)
+        {
+            DB.Usuario db = new DB.Usuario(Sesion);
+            List<Entidades.Usuario> cuentas = db.Lista(Email);
+
+            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
+            mail.To.Add(new MailAddress(Email));
+            mail.Subject = "Información de cuenta(s)";
+            StringBuilder a = new StringBuilder();
+            a.Append("Estimado/a " + cuentas[0].Nombre.Trim() + ":"); a.AppendLine();
+            a.AppendLine();
+            a.Append("Cumplimos en informarle cuáles son las cuentas vinculadas a este correo electrónico:"); a.AppendLine();
+            a.AppendLine();
+            for (int i = 0; i < cuentas.Count; i++)
+            {
+                a.Append("Cuenta '" + cuentas[i].Nombre + "' (Id.Usuario='" + cuentas[i].Id + "')"); a.AppendLine();
+            }
+            a.AppendLine();
+            a.Append("Si ha recibido este correo electrónico y no ha solicitado información sobre su(s) cuenta(s), es probable que otro usuario haya introducido su dirección por error. Si no ha solicitado esta información, no es necesario que realice ninguna acción, y puede ignorar este mensaje con total seguridad."); a.AppendLine();
+            a.Append("Saludos."); a.AppendLine();
+            a.AppendLine();
+            a.Append("Cedeira Software Factory"); a.AppendLine();
+            a.AppendLine();
+            a.AppendLine();
+            a.AppendLine("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden."); a.AppendLine();
+            mail.Body = a.ToString();
+            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+            smtpClient.Send(mail);
         }
     }
 }

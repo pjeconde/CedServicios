@@ -9,7 +9,7 @@ namespace CedServicios.Entidades
     public class Documento
     {
         private TipoDocumento tipo;
-        private int nro;
+        private long nro;
 
         public Documento()
         {
@@ -27,7 +27,7 @@ namespace CedServicios.Entidades
                 return tipo;
             }
         }
-        public int Nro
+        public long Nro
         {
             set
             {
