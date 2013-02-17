@@ -112,6 +112,7 @@ namespace CedServicios.RN
                     if (Sesion.UNsDelCuit.Count != 0)
                     {
                         Sesion.UN = Sesion.UNsDelCuit[0];
+                        Sesion.PuntosVtaDeLaUN = RN.PuntoVta.ListaPorUN(Sesion);
                     }
                 }
                 Sesion.OpcionesHabilitadas = OpcionesHabilitadas(Sesion);

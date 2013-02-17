@@ -17,8 +17,8 @@ namespace CedServicios.Entidades
             private Contacto contacto;
             private DatosImpositivos datosImpositivos;
             private DatosIdentificatorios datosIdentificatorios;
-        private MetodoGeneracionNumeracionLote metodoGeneracionNumeracionLote;
-        private int ultNroLote;
+        private string idMetodoGeneracionNumeracionLote;
+        private long ultNroLote;
         private WF wF;
         private string ultActualiz;
 
@@ -28,7 +28,6 @@ namespace CedServicios.Entidades
             contacto = new Contacto();
             datosImpositivos = new DatosImpositivos();
             datosIdentificatorios = new DatosIdentificatorios();
-            metodoGeneracionNumeracionLote = new MetodoGeneracionNumeracionLote();
             wF = new WF();
         }
 
@@ -131,18 +130,18 @@ namespace CedServicios.Entidades
                 return datosIdentificatorios;
             }
         }
-        public MetodoGeneracionNumeracionLote MetodoGeneracionNumeracionLote
+        public string IdMetodoGeneracionNumeracionLote
         {
             set
             {
-                metodoGeneracionNumeracionLote = value;
+                idMetodoGeneracionNumeracionLote = value;
             }
             get
             {
-                return metodoGeneracionNumeracionLote;
+                return idMetodoGeneracionNumeracionLote;
             }
         }
-        public int UltNroLote
+        public long UltNroLote
         {
             set
             {
