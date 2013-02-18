@@ -168,6 +168,21 @@ namespace CedServicios.Site
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             switch (Menu1.SelectedValue.ToString())
             {
+                case "Solicitud permiso de administrador de CUIT":
+                    Response.Redirect("~/SolicPermisoAdminCUIT.aspx");
+                    break;
+                case "Solicitud permiso de administrador de UN":
+                    Response.Redirect("~/SolicPermisoAdminUN.aspx");
+                    break;
+                case "Solicitud permiso de operador de servicio de una UN existente":
+                    Response.Redirect("~/SolicPermisoOperServUN.aspx");
+                    break;
+                case "Explorador de Autorizaciones pendientes":
+                    Response.Redirect("~/ExploradorAutorizacion.aspx?pendientes");
+                    break;
+                case "Explorador de Autorizaciones":
+                    Response.Redirect("~/ExploradorAutorizacion.aspx");
+                    break;
                 case "Cerrar sesión":
                     RN.Sesion.Cerrar(sesion);
                     Response.Redirect("~/UsuarioLogin.aspx");

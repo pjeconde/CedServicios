@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioLogin.aspx.cs" Inherits="CedServicios.Site.Ingreso" Theme="CedServicios" %>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <table border="0" cellpadding="0" cellspacing="0">
         <tr>
             <td align="center" colspan="3" style="padding-top: 20px">

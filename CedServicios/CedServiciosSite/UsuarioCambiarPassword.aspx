@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioCambiarPassword.aspx.cs" Inherits="CedServicios.Site.UsuarioCambiarPassword" Theme="CedServicios" %>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <table border="0" cellpadding="0" cellspacing="0" class="TextoComun" style="height: 500px;
         width: 800px; text-align: left;">
         <tr>

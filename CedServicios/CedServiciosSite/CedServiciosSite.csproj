@@ -55,7 +55,11 @@
   <ItemGroup>
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="Default.aspx" />
+    <Content Include="ExploradorAutorizacion.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="SolicPermisoAdminCUIT.aspx" />
+    <Content Include="SolicPermisoAdminUN.aspx" />
+    <Content Include="SolicPermisoOperServUN.aspx" />
     <Content Include="UsuarioCambiarPassword.aspx" />
     <Content Include="UsuarioConfirmacion.aspx" />
     <Content Include="UsuarioCrear.aspx" />
@@ -88,8 +92,36 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ExploradorAutorizacion.aspx.cs">
+      <DependentUpon>ExploradorAutorizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorAutorizacion.aspx.designer.cs">
+      <DependentUpon>ExploradorAutorizacion.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="SolicPermisoAdminCUIT.aspx.cs">
+      <DependentUpon>SolicPermisoAdminCUIT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SolicPermisoAdminCUIT.aspx.designer.cs">
+      <DependentUpon>SolicPermisoAdminCUIT.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SolicPermisoAdminUN.aspx.cs">
+      <DependentUpon>SolicPermisoAdminUN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SolicPermisoAdminUN.aspx.designer.cs">
+      <DependentUpon>SolicPermisoAdminUN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SolicPermisoOperServUN.aspx.cs">
+      <DependentUpon>SolicPermisoOperServUN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SolicPermisoOperServUN.aspx.designer.cs">
+      <DependentUpon>SolicPermisoOperServUN.aspx</DependentUpon>
     </Compile>
     <Compile Include="UsuarioCambiarPassword.aspx.cs">
       <DependentUpon>UsuarioCambiarPassword.aspx</DependentUpon>
