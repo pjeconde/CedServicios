@@ -98,25 +98,34 @@ namespace CedServicios.RN
             }
             return opcionesHabilitadas;
         }
-        public static void LeerDatosUsuario(Entidades.Sesion Sesion)
+        public static void AsignarUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
+            Sesion.Usuario = Usuario;
             if (Sesion.Usuario.Id != String.Empty)
             {
                 Sesion.Usuario.Permisos = RN.Permiso.LeerListaPermisosVigentesPorUsuario(Sesion.Usuario, Sesion);
                 Sesion.CuitsDelUsuario = RN.Cuit.LeerListaCuitsPorUsuario(Sesion);
-                if (Sesion.CuitsDelUsuario.Count != 0) 
-                { 
-                    Sesion.Cuit = Sesion.CuitsDelUsuario[0];
-                    Sesion.UNsDelCuit = RN.UN.ListaPorCuit(Sesion);
-                    Sesion.ClientesDelCuit = RN.Cliente.ListaPorCuit(Sesion);
-                    if (Sesion.UNsDelCuit.Count != 0)
-                    {
-                        Sesion.UN = Sesion.UNsDelCuit[0];
-                        Sesion.PuntosVtaDeLaUN = RN.PuntoVta.ListaPorUN(Sesion);
-                    }
+                if (Sesion.CuitsDelUsuario.Count != 0)
+                {
+                    AsignarCuit(Sesion.CuitsDelUsuario[0], Sesion);
                 }
                 Sesion.OpcionesHabilitadas = OpcionesHabilitadas(Sesion);
             }
+        }
+        public static void AsignarCuit(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
+        {
+            Sesion.Cuit = Cuit;
+            Sesion.UNsDelCuit = RN.UN.ListaPorCuit(Sesion);
+            Sesion.ClientesDelCuit = RN.Cliente.ListaPorCuit(Sesion);
+            if (Sesion.UNsDelCuit.Count != 0)
+            {
+                AsignarUN(Sesion.UNsDelCuit[0], Sesion);
+            }
+        }
+        public static void AsignarUN(Entidades.UN UN, Entidades.Sesion Sesion)
+        {
+            Sesion.UN = UN;
+            Sesion.PuntosVtaDeLaUN = RN.PuntoVta.ListaPorUN(Sesion);
         }
     }
 }

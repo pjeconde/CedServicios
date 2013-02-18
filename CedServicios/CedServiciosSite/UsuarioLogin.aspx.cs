@@ -11,7 +11,7 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            UsuarioTextBox.Focus();
         }
         protected void LoginButton_Click(object sender, EventArgs e)
         {
@@ -23,8 +23,7 @@ namespace CedServicios.Site
                 usuario.Password = PasswordTextBox.Text;
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 RN.Usuario.Login(usuario, sesion);
-                sesion.Usuario = usuario;
-                RN.Sesion.LeerDatosUsuario(sesion);
+                RN.Sesion.AsignarUsuario(usuario, sesion);
                 Response.Redirect("~/Default.aspx");
             }
             catch (System.Threading.ThreadAbortException)
