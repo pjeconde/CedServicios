@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorAutorizacion.aspx.cs" Inherits="CedServicios.Site.ExploradorAutorizacion" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorAutorizacion.aspx.cs" Inherits="CedServicios.Site.ExploradorAutorizacion" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <table border="0" cellpadding="0" cellspacing="0">
