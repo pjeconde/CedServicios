@@ -10,6 +10,7 @@ namespace CedServicios.Site
     public partial class ExploradorAutorizacion : System.Web.UI.Page
     {
         bool pendientes = false;
+        List<Entidades.Permiso> permisos = new List<Entidades.Permiso>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
