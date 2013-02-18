@@ -11,7 +11,7 @@
                             <table border="0" cellpadding="0" cellspacing="0">
                                 <tr>
                                     <td style="height: 20px;">
-                                        <asp:Label ID="TituloLabel" runat="server" SkinID="TituloPagina" Text="Cambio de Contraseña de la cuenta "></asp:Label>
+                                        <asp:Label ID="TituloLabel" runat="server" SkinID="TituloPagina" Text="Cambio de Contraseña de Usuario "></asp:Label>
                                     </td>
                                 </tr>
                             </table>
