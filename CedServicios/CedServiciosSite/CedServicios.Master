@@ -33,7 +33,7 @@
         <table>
             <tr>
                 <td style="text-align:left" class="Fuente">
-                    <asp:Image ID="Image1" runat="server" ImageUrl="~/CedeiraSF-Logo.gif" />
+                    <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/CedeiraSF-Logo.gif" />
                 </td>
                 <td style="width: 100%">
                 </td>
