@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioOlvidoId.aspx.cs" Inherits="CedServicios.Site.UsuarioOlvidoId" Theme="CedServicios" %>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <table border="0" cellpadding="0" cellspacing="0">
         <!-- @@@ TITULO DE LA PAGINA @@@-->
         <tr>
