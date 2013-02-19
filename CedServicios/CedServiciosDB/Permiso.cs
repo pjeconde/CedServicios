@@ -40,6 +40,25 @@ namespace CedServicios.DB
             }
             return lista;
         }
+        public List<Entidades.Permiso> LeerListaPermisosPorUsuario(Entidades.Usuario Usuario)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado, TipoPermiso.DescrTipoPermiso ");
+            a.Append("from Permiso, TipoPermiso ");
+            a.Append("where IdUsuario='" + Usuario.Id + "' and Permiso.IdTipoPermiso=TipoPermiso.IdTipoPermiso ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Permiso> lista = new List<Entidades.Permiso>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Permiso permiso = new Entidades.Permiso();
+                    Copiar(dt.Rows[i], permiso);
+                    lista.Add(permiso);
+                }
+            }
+            return lista;
+        }
         public List<Entidades.Permiso> LeerListaPermisosVigentesPorUsuario(Entidades.Usuario Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);
@@ -72,6 +91,36 @@ namespace CedServicios.DB
             Hasta.Accion.Nro = Convert.ToInt32(Desde["AccionNro"]);
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
-        }    
+        }
+        public void Alta(Entidades.Permiso Permiso)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("declare @idWF varchar(256) ");
+            a.Append("declare @accionNro varchar(256) ");
+            a.Append("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
+            a.Append("update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro' ");
+            a.Append("insert Permiso values ('" + Permiso.IdUsuario + "', '" + Permiso.Cuit + "', '" + Permiso.IdUN + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.IdUsuarioSolicitante + "', '" + Permiso.Accion.Tipo + "', @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
+            a.Append("insert Log values (@IdWF, getdate(), '" + Permiso.IdUsuario + "', 'Permiso', 'Alta', '" + Permiso.WF.Estado + "', '') ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
+        public List<Entidades.Usuario> LeerListaUsuariosAutorizadores(string Cuit)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select IdUsuario from Permiso where Cuit='" + Cuit + "' and IdTipoPermiso='AdminCUIT' and Estado='Vigente' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Usuario> lista = new List<Entidades.Usuario>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Usuario elem = new Entidades.Usuario();
+                    elem.Id = Convert.ToString(dt.Rows[i]["IdUsuario"]);
+                    Usuario db = new Usuario(sesion);
+                    db.Leer(elem);
+                    lista.Add(elem);
+                }
+            }
+            return lista;
+        }
     }
 }

@@ -103,7 +103,7 @@ namespace CedServicios.RN
             Sesion.Usuario = Usuario;
             if (Sesion.Usuario.Id != String.Empty)
             {
-                Sesion.Usuario.Permisos = RN.Permiso.LeerListaPermisosVigentesPorUsuario(Sesion.Usuario, Sesion);
+                Sesion.Usuario.Permisos = RN.Permiso.LeerListaPermisosPorUsuario(Sesion.Usuario, Sesion);
                 Sesion.CuitsDelUsuario = RN.Cuit.LeerListaCuitsPorUsuario(Sesion);
                 if (Sesion.CuitsDelUsuario.Count != 0)
                 {
@@ -115,7 +115,7 @@ namespace CedServicios.RN
         public static void AsignarCuit(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {
             Sesion.Cuit = Cuit;
-            Sesion.UNsDelCuit = RN.UN.ListaPorCuit(Sesion);
+            Sesion.UNsDelCuit = RN.UN.ListaPorCuitParaElUsuarioLogueado(Sesion);
             Sesion.ClientesDelCuit = RN.Cliente.ListaPorCuit(Sesion);
             if (Sesion.UNsDelCuit.Count != 0)
             {

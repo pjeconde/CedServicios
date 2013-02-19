@@ -12,5 +12,10 @@ namespace CedServicios.RN
             CedServicios.DB.Cuit db = new DB.Cuit(Sesion);
             return db.LeerListaCuitsPorUsuario();
         }
+        public static void Leer(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
+        {
+            CedServicios.DB.Cuit db = new DB.Cuit(Sesion);
+            db.Leer(Cuit);
+        }
     }
 }
