@@ -344,6 +344,42 @@ namespace CedServicios.EX
 		}
 
 	}
+    namespace Permiso
+    {
+        [Serializable]
+        public class BaseApplicationException : CedServicios.EX.BaseApplicationException
+        {
+            public BaseApplicationException(string TextoError)
+                : base(TextoError)
+            {
+            }
+            public BaseApplicationException(string TextoError, Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public BaseApplicationException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class Existente : CedServicios.EX.db.BaseApplicationException
+        {
+            static string TextoError = "Este permiso ya ha sido solicitado y está en estado ";
+            public Existente(string estado)
+                : base(TextoError + " '" + estado + "'")
+            {
+            }
+            public Existente(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public Existente(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+    }
     public static class Funciones
     {
         public static string Detalle(Exception ex)

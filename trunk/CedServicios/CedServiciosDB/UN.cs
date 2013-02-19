@@ -12,7 +12,7 @@ namespace CedServicios.DB
         {
         }
 
-        public List<Entidades.UN> LeerListaUNsPorCuit()
+        public List<Entidades.UN> LeerListaUNsPorCuitParaElUsuarioLogueado()
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("/* UNs de AdminUNs */ ");
@@ -31,6 +31,23 @@ namespace CedServicios.DB
                     uN.Id = Convert.ToString(dt.Rows[i]["IdUN"]);
                     Leer(uN);
                     lista.Add(uN);
+                }
+            }
+            return lista;
+        }
+        public List<Entidades.UN> LeerListaUNsVigentesPorCuit(Entidades.Cuit Cuit)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select UN.Cuit, UN.IdUN, UN.DescrUN, UN.IdWF, UN.Estado, UN.UltActualiz from UN where Cuit='" + Cuit.Nro + "' and Estado='Vigente' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.UN> lista = new List<Entidades.UN>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.UN elem = new Entidades.UN();
+                    Copiar(dt.Rows[i], elem); 
+                    lista.Add(elem);
                 }
             }
             return lista;
