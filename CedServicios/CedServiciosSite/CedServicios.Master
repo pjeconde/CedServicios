@@ -53,7 +53,7 @@
                                     <asp:AsyncPostBackTrigger ControlID="Timer1" />
                                 </Triggers>
                                 </asp:UpdatePanel>
-                                <asp:Timer ID="Timer1" runat="server" Interval="1000">
+                                <asp:Timer ID="Timer1" runat="server" Interval="1000" Enabled="false">
                                 </asp:Timer>
                             </td>
                             <td style="text-align: left; width:10px" class="Fuente">
