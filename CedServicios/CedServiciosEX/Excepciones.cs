@@ -380,6 +380,93 @@ namespace CedServicios.EX
             }
         }
     }
+    namespace Lote
+    {
+        [Serializable]
+        public class BaseApplicationException : CedServicios.EX.Validaciones.BaseApplicationException
+        {
+            public BaseApplicationException(string TextoError)
+                : base(TextoError)
+            {
+            }
+            public BaseApplicationException(string TextoError, Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public BaseApplicationException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class Existente : CedServicios.EX.Validaciones.BaseApplicationException
+        {
+            static string TextoError = "Lote existente.";
+            public Existente(string Descr)
+                : base(TextoError + "\r\n\r\n" + Descr)
+            {
+            }
+            public Existente(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public Existente(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class Inexistente : CedServicios.EX.Validaciones.BaseApplicationException
+        {
+            static string TextoError = "Lote inexistente.";
+            public Inexistente(string Descr)
+                : base(TextoError + "\r\n\r\n" + Descr)
+            {
+            }
+            public Inexistente(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public Inexistente(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class ProblemasEnvio : CedServicios.EX.Validaciones.BaseApplicationException
+        {
+            static string TextoError = "Problemas al enviar el lote.";
+            public ProblemasEnvio(string Descr)
+                : base(TextoError + "\r\n\r\n" + Descr)
+            {
+            }
+            public ProblemasEnvio(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public ProblemasEnvio(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class ProblemasConsulta : CedServicios.EX.Validaciones.BaseApplicationException
+        {
+            static string TextoError = "Problemas al consultar el lote.";
+            public ProblemasConsulta(string Descr)
+                : base(TextoError + "\r\n\r\n" + Descr)
+            {
+            }
+            public ProblemasConsulta(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public ProblemasConsulta(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+    }
     public static class Funciones
     {
         public static string Detalle(Exception ex)

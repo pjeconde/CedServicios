@@ -135,7 +135,7 @@ namespace CedServicios.Site
                     if (sesion.Usuario.Id != null)
                     {
                         UsuarioHyperLink.Text = sesion.Usuario.Nombre;
-                        FechaActualValorLabel.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
+                        //FechaActualValorLabel.Text = DateTime.Now.ToString("dd/MM/yyyy hh:mm:ss");
                         FechaInicioValorLabel.Text = sesion.FechaInicio.ToString("dd/MM/yyyy hh:mm:ss");
                         Menu1.Items[Menu1.Items.Count - 1].Selectable = true;
                         if (sesion.CuitsDelUsuario.Count != 0)
@@ -186,6 +186,9 @@ namespace CedServicios.Site
                 case "Cerrar sesión":
                     RN.Sesion.Cerrar(sesion);
                     Response.Redirect("~/UsuarioLogin.aspx");
+                    break;
+                case "Facturación":
+                    Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                     break;
             }
         }
