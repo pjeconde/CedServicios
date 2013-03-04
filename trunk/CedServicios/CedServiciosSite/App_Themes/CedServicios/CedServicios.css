@@ -1,0 +1,312 @@
+﻿html, body, #wrapper 
+{
+	background-color:White;
+	border: none;
+	font-family:Arial;
+	font-size:small;
+	margin: 0px;
+	border: none;
+	text-align: center;
+}
+#wrapper 
+{
+	text-align:left;
+	margin: 0 auto;
+	width:100%;
+	vertical-align:top;
+	table-layout:inherit;
+    overflow:scroll;
+    padding:0;
+}
+.DataWebControlStyle
+{
+    font-size: 80%;
+    text-align: right;
+}
+.HeaderStyle
+{
+    background-color:#FF6600;
+    font-weight: bold;
+    color:White;
+    text-align: center;
+}
+.FooterStyle
+{
+    background-color: #FF6600;
+    color: White;
+}
+.AlternatingRowStyle
+{
+    background-color:#FFF8DC;  
+}
+.RowStyle
+{
+	width:200px;
+	text-align:right;
+	max-width:200px;
+	color: Black;
+}
+.SelectedRowStyle
+{
+    background-color: #FF6600;
+    color:White;
+}
+.PagerStyle
+{
+	background-color:#FF6600;
+	color:White;
+	text-align:left;
+}
+.HeaderStyleGrid
+{
+    background-color:#FF6600;
+    font-weight: bold;
+    color:White;
+    text-align: center;
+}
+.FooterStyleGrid
+{
+    background-color: #FF6600;
+    color: White;
+}
+.AlternatingRowStyleGrid
+{
+    background-color:#E1DED7;  
+}
+.RowStyleGrid
+{
+	width:200px;
+	text-align:right;
+	max-width:200px;
+	color: Black;
+}
+.SelectedRowStyleGrid
+{
+    background-color: #A52A2A;
+    color:White;
+}
+.PagerStyleGrid
+{
+	background-color: #A52A2A;
+	color: White;
+	text-align:left;
+}
+.DataWebControlStyleGrid
+{
+    font-size: 80%;
+    text-align: right;
+}
+A:link {text-decoration: none; font-weight:normal; color: Blue;}
+A:visited {text-decoration: none; font-weight:normal; color: Blue;}
+A:active {text-decoration: none; font-weight:normal; color: Blue;}
+A:hover {text-decoration: none; font-weight:normal; color: Blue;}
+.TextoMensajeTitulo
+{
+	color: black; font-weight: normal; font-size: 20px; font-family: Verdana; font-style: normal;
+}
+.TextoMensajeDetalle
+{
+	color: black; font-weight: normal; font-size: 12px; font-family: Verdana; font-style: normal;
+}
+.TextoResaltado
+{
+	color: black;
+	font-weight: bold; font-size: 12px; font-family: Arial; font-style: normal;
+}
+.TextoComun
+{
+	position: relative; border: 0px; color: black;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+}
+.TextoLabelFEAVendedor
+{
+	position: relative; border: 0px; text-align: right; color: #A52A2A;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	width: 180px; padding-top:5px; padding-right: 5px; 
+}
+.TextoLabelFEAVendedorCh
+{
+	position: relative; border: 0px; text-align: right; color: #A52A2A;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	width: 80px; padding-top:5px;
+}
+.TextoLabelFEAVendedorChCh
+{
+	position: relative; border: 0px; text-align: right; color: #A52A2A;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 60px; padding-top:5px;
+}
+.TextoLabelFEAVendedorDet
+{
+	position: relative; border: 0px; text-align: right; color: #071F70;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 180px; padding-top:5px; padding-right: 5px;
+}
+.TextoLabelFEAVendedorDetCh
+{
+	position: relative; border: 0px; text-align: right; color: #071F70;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 80px; padding-top:5px;
+}
+.TextoLabelFEAVendedorDetChCh
+{
+	position: relative; border: 0px; text-align: right; color: #071F70;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 40px; padding-top:5px;
+}
+.TextoLabelFEADescrLarga
+{
+	position: relative; border: 0px; color: #A52A2A; text-align: right;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 590px;	
+}
+.TextComunSinPosicion
+{
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	color: black;
+}
+.linkBullet
+{
+	color:Red;	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+}
+.linkOpcion1
+{
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	color: blue; 
+}
+.DatePickerFecha
+{
+	color: #071F70;
+	text-align: left;
+}
+.Ajuste1
+{
+	width: 10px;
+}
+.TextoFEASYP_EncaRow1
+{
+	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 12px; font-weight: bold; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
+}
+.TextoFEASYP_EncaRow2
+{
+	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 11px; font-weight: bold; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
+}
+.TextoFEASYP_EncaRow3
+{
+	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 11px; font-weight: 400; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
+}
+.TextoFEASYP_DetCol1
+{
+	width:300px; text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 10px; font-weight: 400; font-style: normal; font-family: Arial; text-align: left; padding: 5px; 
+}
+.TextoFEASYP_DeteFactweb
+{
+	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 10px; font-weight: 400; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
+}
+.TextoFEASYP_DeteFactcp
+{
+	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
+	font-size: 10px; font-weight: 400; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
+}
+.DataWebControlStylePagingGridView
+{
+    font-size: 100%;
+    text-align: right;
+}
+.PagerStylePagingGridView
+{
+	background-color:#FFDAB9;
+	text-align:left;
+	height:10px;
+}
+.PagerStylePagingGridView span
+{
+    background-color:#A52A2A;
+    font-weight: bold;
+    color:White;
+} 
+.PagerStylePagingGridView a
+{
+	color:Blue;
+}
+.AlternatingRowStylePagingGridView
+{
+    background-color:#FFF8DC;  
+}
+.HeaderStylePagingGridView
+{
+    background-color:#FFDAB9;
+    font-weight:normal;
+    text-align:center;
+    color:Black;
+}
+.FooterStylePagingGridView
+{
+    background-color: White;
+}
+.SelectedRowStylePagingGridView
+{
+    background-color:#A52A2A;
+    color:White;
+}
+.LogoBienvenidos
+{
+	background-image: url('/Imagenes/LogoBienvenidos_v1.jpg');
+}
+.FondoIzq
+{
+	background-image: url('/Imagenes/BgL.jpg');
+}
+.FondoDer
+{
+	background-image: url('/Imagenes/BgR.jpg');	
+}
+.FondoEFact
+{
+	background-image: url('/Imagenes/eFact-Fondo.jpg');
+}
+.bgFEAC
+{
+	background-image: url('/Imagenes/bgFEA-C.jpg');
+}
+
+.MyCalendar .ajax__calendar_container {
+    border:1px solid #646464;
+    position:relative;
+    z-index: 1;
+    visibility: visible; display: block;
+    background-color:yellow;
+    color:Black;
+}
+
+#progressBackgroundFilter {
+    position:fixed; 
+    top:0px; 
+    bottom:0px; 
+    left:0px;
+    right:0px;
+    overflow:hidden; 
+    padding:0; 
+    margin:0; 
+    background-color:Black; 
+    filter:alpha(opacity=0.5); 
+    opacity:0.5; 
+    z-index:1000; 
+}
+
+#processMessage { 
+    position:fixed; 
+    top:30%; 
+    left:43%;
+    padding:10px; 
+    width:5%; 
+    z-index:1001; 
+    background-color:#fff;
+    border:solid 1px #000;
+}
+ 

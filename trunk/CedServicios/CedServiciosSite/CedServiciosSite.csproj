@@ -34,7 +34,11 @@
   <ItemGroup>
     <Reference Include="AjaxControlToolkit, Version=4.1.7.123, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\AjaxControlToolkit\AjaxControlToolkit.dll</HintPath>
     </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -53,10 +57,26 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Themes\CedServicios\CedServicios.css" />
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="Default.aspx" />
+    <Content Include="Excepciones\Excepciones.aspx" />
+    <Content Include="Facturacion\Electronica\Descuentos.ascx" />
+    <Content Include="Facturacion\Electronica\Detalle.ascx" />
+    <Content Include="Facturacion\Electronica\Extensiones\Comerciales.ascx" />
+    <Content Include="Facturacion\Electronica\Extensiones\Marketing.ascx" />
+    <Content Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx" />
+    <Content Include="Facturacion\Electronica\Impuestos.ascx" />
+    <Content Include="Facturacion\Electronica\Lote.aspx" />
+    <Content Include="Facturacion\Electronica\Permisos.ascx" />
+    <Content Include="Facturacion\Electronica\Reportes\FacturaWebForm.aspx" />
     <Content Include="ExploradorAutorizacion.aspx" />
     <Content Include="Global.asax" />
+    <Content Include="Imagenes\CajaBrownPeru.ico" />
+    <Content Include="Imagenes\calendar.gif" />
+    <Content Include="Imagenes\Cedeira.ico" />
+    <Content Include="Imagenes\CedeiraSF-icono-animado.gif" />
+    <Content Include="Imagenes\CedeiraSF-Logo.gif" />
     <Content Include="SolicPermisoAdminCUIT.aspx" />
     <Content Include="SolicPermisoAdminUN.aspx" />
     <Content Include="SolicPermisoOperServUN.aspx" />
@@ -66,6 +86,21 @@
     <Content Include="UsuarioLogin.aspx" />
     <Content Include="UsuarioOlvidoId.aspx" />
     <Content Include="UsuarioOlvidoPassword.aspx" />
+    <Content Include="Facturacion\Electronica\FacturaElectronica.Master" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\org.dyndns.cedweb.consulta\ConsultaIBK.wsdl" />
+    <None Include="Web References\org.dyndns.cedweb.consulta\ConsultarResult.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\org.dyndns.cedweb.consulta\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\org.dyndns.cedweb.envio\EnvioIBK.disco" />
+    <None Include="Web References\org.dyndns.cedweb.consulta\ConsultaIBK.disco" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -73,6 +108,11 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <None Include="Web References\org.dyndns.cedweb.envio\EnvioIBK.wsdl" />
+    <None Include="Web References\org.dyndns.cedweb.envio\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Captcha.ashx.cs">
@@ -92,6 +132,110 @@
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Excepciones\Excepciones.aspx.cs">
+      <DependentUpon>Excepciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Excepciones\Excepciones.aspx.designer.cs">
+      <DependentUpon>Excepciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Conversor.cs" />
+    <Compile Include="Facturacion\Electronica\Descuentos.ascx.cs">
+      <DependentUpon>Descuentos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Descuentos.ascx.designer.cs">
+      <DependentUpon>Descuentos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Detalle.ascx.cs">
+      <DependentUpon>Detalle.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Detalle.ascx.designer.cs">
+      <DependentUpon>Detalle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Extensiones\Comerciales.ascx.cs">
+      <DependentUpon>Comerciales.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Extensiones\Comerciales.ascx.designer.cs">
+      <DependentUpon>Comerciales.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Extensiones\Marketing.ascx.cs">
+      <DependentUpon>Marketing.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Extensiones\Marketing.ascx.designer.cs">
+      <DependentUpon>Marketing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaElectronica.Master.cs">
+      <DependentUpon>FacturaElectronica.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaElectronica.Master.designer.cs">
+      <DependentUpon>FacturaElectronica.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx.cs">
+      <DependentUpon>FacturaElectronicaTYC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx.designer.cs">
+      <DependentUpon>FacturaElectronicaTYC.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Impuestos.ascx.cs">
+      <DependentUpon>Impuestos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Impuestos.ascx.designer.cs">
+      <DependentUpon>Impuestos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Lote.aspx.cs">
+      <DependentUpon>Lote.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Lote.aspx.designer.cs">
+      <DependentUpon>Lote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Mails\Body.cs" />
+    <Compile Include="Facturacion\Electronica\Permisos.ascx.cs">
+      <DependentUpon>Permisos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Permisos.ascx.designer.cs">
+      <DependentUpon>Permisos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\Code39.cs" />
+    <Compile Include="Facturacion\Electronica\Reportes\CodigoBarra.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CodigoBarra.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\Factura.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Factura.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\FacturaWebForm.aspx.cs">
+      <DependentUpon>FacturaWebForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\FacturaWebForm.aspx.designer.cs">
+      <DependentUpon>FacturaWebForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\Imagen.cs">
+      <DependentUpon>Imagen.rpt</DependentUpon>
+      <SubType>Component</SubType>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\Imagen.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Imagen.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\NumALet.cs" />
     <Compile Include="ExploradorAutorizacion.aspx.cs">
       <DependentUpon>ExploradorAutorizacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -101,6 +245,11 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="SolicPermisoAdminCUIT.aspx.cs">
       <DependentUpon>SolicPermisoAdminCUIT.aspx</DependentUpon>
@@ -166,6 +315,16 @@
     <Compile Include="UsuarioOlvidoPassword.aspx.designer.cs">
       <DependentUpon>UsuarioOlvidoPassword.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Web References\org.dyndns.cedweb.consulta\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\org.dyndns.cedweb.envio\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CaptchaDotNet2\CaptchaDotNet2.csproj">
@@ -188,6 +347,10 @@
       <Project>{04825782-49A4-45EC-8145-E86F675C4D15}</Project>
       <Name>CedServiciosWebForms</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FeaEntidades\FeaEntidades.csproj">
+      <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
+      <Name>FeaEntidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CedServicios.Master" />
@@ -197,6 +360,71 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\CedServicios\CedServicios.skin" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferences Include="Web References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Facturacion\Electronica\Reportes\CodigoBarra.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CodigoBarra.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturacion\Electronica\Reportes\Factura.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Factura.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Facturacion\Electronica\Reportes\Imagen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>Imagen.cs</LastGenOutput>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
+    <None Include="Facturacion\Electronica\Reportes\Imagen.xsc">
+      <DependentUpon>Imagen.xsd</DependentUpon>
+    </None>
+    <None Include="Facturacion\Electronica\Reportes\Imagen.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>Imagen.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Facturacion\Electronica\Reportes\Imagen.xss">
+      <DependentUpon>Imagen.xsd</DependentUpon>
+    </None>
+    <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
+      <DependentUpon>lote_comprobantes.xsd</DependentUpon>
+    </None>
+    <Content Include="Facturacion\Electronica\Reportes\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:4167/ConsultaIBK.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\org.dyndns.cedweb.consulta\</RelPath>
+      <UpdateFromURL>http://localhost:4167/ConsultaIBK.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_consulta_ConsultaIBK</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:4167/EnvioIBK.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\org.dyndns.cedweb.envio\</RelPath>
+      <UpdateFromURL>http://localhost:4167/EnvioIBK.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_envio_EnvioIBK</CachedSettingsPropName>
+    </WebReferenceUrl>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

@@ -1,0 +1,152 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="FacturaElectronica.master.cs" Inherits="CedServicios.Site.Facturacion.Electronica.FacturaElectronica" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="CedWebHead" runat="server">
+    <title>Cedeira Software Factory</title>
+    <link href="../../Imagenes/Cedeira.ico" rel="shortcut icon" />
+    <link href="../../cal/popcalendar.css" rel="stylesheet" type="text/css" />
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type" />
+    <meta content="K9/glGqlJwjaRgYqa7zUjPt1eBk+u1AUUC8kIJKa2BM=" name="verify-v1" />
+</head>
+<body>
+    <form id="MasterNoAutenticadoForm" runat="server">
+        <table border="0" cellpadding="0px" cellspacing="0px" style="" width="100%">
+            <tr>
+                <td rowspan="5" style="width: 50%; background-image: url('../../Imagenes/BgL.jpg');
+                    background-repeat: repeat-y; background-position: right">
+                </td>
+                <td colspan="3" style="height: 4px; background-color: #c8d2dc">
+                </td>
+                <td rowspan="5" style="width: 50%; background-image: url('../../Imagenes/BgR.jpg');
+                    background-repeat: repeat-y; background-position: left;">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="background-color: #c8d2dc">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td style="width: 200px">
+                    <table border="0" cellpadding="0" cellspacing="0" width="200px">
+                        <tr>
+                            <td style="width: 10px">
+                                <asp:Label ID="LabelEncaL" runat="server" SkinID="LabelGral" Text=""></asp:Label>
+                            </td>
+                            <td style="width: 180px; padding-top: 5px; text-align: left">
+                                <asp:Image ID="CedeiraSFimage" runat="server" AlternateText="Cedeira Logo" Height="66px"
+                                    ImageUrl="~/Imagenes/CedeiraSF_v1.jpg" Visible="true" Width="180px" />
+                            </td>
+                            <td style="width: 10px">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="height: 80px; width: 570px; background-image: url('../../Imagenes/LogoBienvenidos_v1.jpg')">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td style="height: 16px; width: 335px">
+                            </td>
+                            <td align="center" style="height: 16px; width: 210px">
+                                <asp:Label ID="MensajeGeneralLabel" runat="server" Font-Bold="true" ForeColor="white"
+                                    Width="210px"></asp:Label>
+                            </td>
+                            <td style="height: 16px; width: 50px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 16px; width: 335px">
+                            </td>
+                            <td align="center" style="height: 16px; width: 210px">
+                                <asp:Label ID="ServicioPremiumEstadoLabel" runat="server" Font-Bold="true" ForeColor="white"
+                                    Width="210px"></asp:Label>
+                            </td>
+                            <td style="height: 16px; width: 50px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="height: 18px; width: 335px">
+                            </td>
+                            <td align="center" style="height: 18px; width: 210px; padding-bottom: 3px">
+                                <asp:Label ID="ServicioPremiumVtoLabel" runat="server" ForeColor="white" Width="210px"></asp:Label>
+                            </td>
+                            <td style="height: 18px; width: 50px">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="right" colspan="3" style="height: 30px; padding-top: 10px; padding-right: 12px">
+                                <asp:Label ID="NombreCuentaLabel" runat="server" Font-Bold="true" ForeColor="brown"></asp:Label>
+                                <asp:Label ID="Separador1Label" runat="server" Text="|" Visible="false"></asp:Label>
+                                <asp:LinkButton ID="ConfiguracionLinkButton" runat="server" CausesValidation="false"
+                                    ForeColor="Blue" PostBackUrl="~/Configuracion.aspx" Visible="false">Configuración</asp:LinkButton>
+                                <asp:Label ID="Separador2Label" runat="server" Text="|" Visible="false"></asp:Label>
+                                <asp:LinkButton ID="BackupLinkButton" runat="server" CausesValidation="false" ForeColor="Blue"
+                                    PostBackUrl="~/Backup.aspx" Visible="false">Descargas</asp:LinkButton>
+                                <asp:Label ID="Separador3Label" runat="server" Text="|" Visible="false"></asp:Label>
+                                <asp:LinkButton ID="SalirLinkButton" runat="server" CausesValidation="false" ForeColor="Blue"
+                                    OnClick="SalirLinkButton_Click" Visible="false">Salir</asp:LinkButton>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="3" style="background-image: url('../../Imagenes/eFact-Fondo.jpg'); background-repeat: repeat-x;
+                    height: 18px">
+                    <table id="Table3" border="0" cellpadding="0" cellspacing="0" width="100%">
+                        <tr>
+                            <td style="width: 50%">
+                            </td>
+                            <td style="padding-left: 10px; padding-right: 10px">
+                                <asp:LinkButton ID="InicioLinkButton" runat="server" CausesValidation="false" Font-Bold="true"
+                                    ForeColor="white" PostBackUrl="~/Inicio.aspx">Inicio</asp:LinkButton>
+                            </td>
+                            <td style="padding-left: 10px; padding-right: 10px">
+                                <asp:LinkButton ID="FacturaElectronicaLinkButton" runat="server" CausesValidation="false"
+                                    Font-Bold="true" ForeColor="white" PostBackUrl="~/FacturaElectronica.aspx" Width="123px">Factura Electrónica</asp:LinkButton>
+                            </td>
+                            <td style="padding-left: 10px; padding-right: 10px">
+                                <asp:LinkButton ID="SolucionesLinkButton" runat="server" CausesValidation="false"
+                                    Font-Bold="true" ForeColor="white" PostBackUrl="~/soluciones.aspx">Soluciones</asp:LinkButton>
+                            </td>
+                            <td style="padding-left: 10px; padding-right: 10px">
+                                <asp:LinkButton ID="EmpresaLinkButton" runat="server" CausesValidation="false" Font-Bold="true"
+                                    ForeColor="white" PostBackUrl="~/empresa.aspx">Empresa</asp:LinkButton>
+                            </td>
+                            <td style="padding-left: 10px; padding-right: 10px">
+                                <asp:LinkButton ID="ClientesLinkButton" runat="server" CausesValidation="false" Font-Bold="true"
+                                    ForeColor="white" PostBackUrl="~/Clientes.aspx">Clientes</asp:LinkButton>
+                            </td>
+                            <td style="padding-left: 10px; padding-right: 10px">
+                                <asp:LinkButton ID="ContactoLinkButton" runat="server" CausesValidation="false" Font-Bold="true"
+                                    ForeColor="white" PostBackUrl="~/Contacto.aspx">Contacto</asp:LinkButton>
+                            </td>
+                            <td style="padding-left: 10px; padding-right: 10px">
+                                <asp:LinkButton ID="AdministracionLinkButton" runat="server" CausesValidation="false"
+									Font-Bold="true" ForeColor="white" PostBackUrl="~/Admin/Default.aspx" Visible="false">Administración</asp:LinkButton>
+                            </td>
+                            <td style="width: 50%">
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr style="vertical-align: top;">
+                <td colspan="3" style="vertical-align: top;">
+					<asp:ContentPlaceHolder ID="ContentPlaceHolderNoAutenticado" runat="server">
+					</asp:ContentPlaceHolder>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" class="TextoComun" colspan="3" style="background-image: url('../../Imagenes/eFact-Fondo.jpg');
+                    background-repeat: repeat-x; height: 18px; color: White">
+                    <b>© 2009 Cedeira Sofware Factory S.R.L. Todos los derechos reservados.</b>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

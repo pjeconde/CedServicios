@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.cedeira.com.ar/webservices" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="http://lote.schemas.cfe.ib.com.ar/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.cedeira.com.ar/webservices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.cedeira.com.ar/webservices">
+      <s:import namespace="http://lote.schemas.cfe.ib.com.ar/" />
+      <s:element name="Consultar">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cuit_vendedor" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="id_lote" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="punto_de_venta" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="pathCertificado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ConsultarResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:ConsultarResult" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://lote.schemas.cfe.ib.com.ar/">
+      <s:element name="ConsultarResult">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="cabecera_lote">
+              <s:complexType>
+                <s:sequence>
+                  <s:element minOccurs="1" maxOccurs="1" name="id_lote" type="s:long" />
+                  <s:element minOccurs="1" maxOccurs="1" name="cuit_canal" type="s:long" />
+                  <s:element minOccurs="0" maxOccurs="1" name="cod_interno_canal" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" name="cuit_vendedor" type="s:long" />
+                  <s:element minOccurs="1" maxOccurs="1" name="cantidad_reg" type="s:int" />
+                  <s:element minOccurs="0" maxOccurs="1" name="presta_serv" type="s:int" />
+                  <s:element minOccurs="0" maxOccurs="1" name="fecha_envio_lote" type="s:string" />
+                  <s:element minOccurs="1" maxOccurs="1" name="punto_de_venta" type="s:int" />
+                  <s:element minOccurs="0" maxOccurs="1" name="resultado" type="s:string" />
+                  <s:element minOccurs="0" maxOccurs="1" name="motivo" type="s:string" />
+                  <s:element minOccurs="0" maxOccurs="1" name="no_disponible" type="s:string" />
+                  <s:element minOccurs="0" maxOccurs="1" name="gestionar_afip" type="s:string" />
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+            <s:element minOccurs="0" maxOccurs="unbounded" name="comprobante">
+              <s:complexType>
+                <s:sequence>
+                  <s:element minOccurs="0" maxOccurs="1" name="cabecera">
+                    <s:complexType>
+                      <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="informacion_comprobante">
+                          <s:complexType>
+                            <s:sequence>
+                              <s:element minOccurs="1" maxOccurs="1" name="tipo_de_comprobante" type="s:int" />
+                              <s:element minOccurs="1" maxOccurs="1" name="numero_comprobante" type="s:long" />
+                              <s:element minOccurs="1" maxOccurs="1" name="punto_de_venta" type="s:int" />
+                              <s:element minOccurs="0" maxOccurs="1" name="fecha_emision" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="fecha_vencimiento" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="fecha_serv_desde" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="fecha_serv_hasta" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="condicion_de_pago" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="iva_computable" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="codigo_operacion" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="cae" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="fecha_vencimiento_cae" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="fecha_obtencion_cae" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="resultado" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="motivo" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="es_detalle_encriptado" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="unbounded" name="referencias">
+                                <s:complexType>
+                                  <s:sequence>
+                                    <s:element minOccurs="0" maxOccurs="1" name="tipo_comprobante_afip" type="s:string" />
+                                    <s:element minOccurs="1" maxOccurs="1" name="codigo_de_referencia" type="s:int" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="dato_de_referencia" type="s:string" />
+                                  </s:sequence>
+                                </s:complexType>
+                              </s:element>
+                              <s:element minOccurs="0" maxOccurs="1" name="informacion_exportacion">
+                                <s:complexType>
+                                  <s:sequence>
+                                    <s:element minOccurs="1" maxOccurs="1" name="destino_comprobante" type="s:int" />
+                                    <s:element minOccurs="1" maxOccurs="1" name="tipo_exportacion" type="s:int" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="id_impositivo" type="s:string" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="incoterms" type="s:string" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="descripcion_incoterms" type="s:string" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="permiso_existente" type="s:string" />
+                                    <s:element minOccurs="0" maxOccurs="unbounded" name="permisos">
+                                      <s:complexType>
+                                        <s:sequence>
+                                          <s:element minOccurs="0" maxOccurs="1" name="id_permiso" type="s:string" />
+                                          <s:element minOccurs="1" maxOccurs="1" name="destino_mercaderia" type="s:int" />
+                                        </s:sequence>
+                                      </s:complexType>
+                                    </s:element>
+                                  </s:sequence>
+                                </s:complexType>
+                              </s:element>
+                              <s:element minOccurs="0" maxOccurs="1" name="codigo_concepto" type="s:int" />
+                              <s:element minOccurs="0" maxOccurs="unbounded" name="informacion_adicional_comprobante">
+                                <s:complexType>
+                                  <s:sequence>
+                                    <s:element minOccurs="0" maxOccurs="1" name="tipo" type="s:string" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="valor" type="s:string" />
+                                  </s:sequence>
+                                </s:complexType>
+                              </s:element>
+                            </s:sequence>
+                          </s:complexType>
+                        </s:element>
+                        <s:element minOccurs="0" maxOccurs="1" name="informacion_vendedor">
+                          <s:complexType>
+                            <s:sequence>
+                              <s:element minOccurs="0" maxOccurs="1" name="GLN" type="s:long" />
+                              <s:element minOccurs="0" maxOccurs="1" name="codigo_interno" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="razon_social" type="s:string" />
+                              <s:element minOccurs="1" maxOccurs="1" name="cuit" type="s:long" />
+                              <s:element minOccurs="0" maxOccurs="1" name="condicion_IVA" type="s:int" />
+                              <s:element minOccurs="0" maxOccurs="1" name="condicion_ingresos_brutos" type="s:int" />
+                              <s:element minOccurs="0" maxOccurs="1" name="nro_ingresos_brutos" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="inicio_de_actividades" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="contacto" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_calle" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_numero" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_piso" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_depto" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_sector" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_torre" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_manzana" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="localidad" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="provincia" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="cp" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="telefono" type="s:string" />
+                            </s:sequence>
+                          </s:complexType>
+                        </s:element>
+                        <s:element minOccurs="0" maxOccurs="1" name="informacion_comprador">
+                          <s:complexType>
+                            <s:sequence>
+                              <s:element minOccurs="0" maxOccurs="1" name="GLN" type="s:long" />
+                              <s:element minOccurs="0" maxOccurs="1" name="codigo_interno" type="s:string" />
+                              <s:element minOccurs="1" maxOccurs="1" name="codigo_doc_identificatorio" type="s:int" />
+                              <s:element minOccurs="1" maxOccurs="1" name="nro_doc_identificatorio" type="s:long" />
+                              <s:element minOccurs="0" maxOccurs="1" name="denominacion" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="condicion_IVA" type="s:int" />
+                              <s:element minOccurs="0" maxOccurs="1" name="condicion_ingresos_brutos" type="s:int" />
+                              <s:element minOccurs="0" maxOccurs="1" name="nro_ingresos_brutos" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="inicio_de_actividades" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="contacto" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_calle" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_numero" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_piso" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_depto" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_sector" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_torre" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="domicilio_manzana" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="localidad" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="provincia" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="cp" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="telefono" type="s:string" />
+                            </s:sequence>
+                          </s:complexType>
+                        </s:element>
+                      </s:sequence>
+                    </s:complexType>
+                  </s:element>
+                  <s:element minOccurs="0" maxOccurs="1" name="detalle">
+                    <s:complexType>
+                      <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="unbounded" name="linea">
+                          <s:complexType>
+                            <s:sequence>
+                              <s:element minOccurs="0" maxOccurs="1" name="GTIN" type="s:long" />
+                              <s:element minOccurs="0" maxOccurs="1" name="codigo_producto_vendedor" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="codigo_producto_comprador" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="cantidad" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="unidad" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="precio_unitario" type="s:double" />
+                              <s:element minOccurs="1" maxOccurs="1" name="importe_total_articulo" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="alicuota_iva" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_iva" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="indicacion_exento_gravado" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="unbounded" name="descuentos">
+                                <s:complexType>
+                                  <s:sequence>
+                                    <s:element minOccurs="0" maxOccurs="1" name="descripcion_descuento" type="s:string" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="porcentaje_descuento" type="s:double" />
+                                    <s:element minOccurs="1" maxOccurs="1" name="importe_descuento" type="s:double" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="importe_descuento_moneda_origen" type="s:double" />
+                                  </s:sequence>
+                                </s:complexType>
+                              </s:element>
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_total_descuentos" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="unbounded" name="impuestos">
+                                <s:complexType>
+                                  <s:sequence>
+                                    <s:element minOccurs="1" maxOccurs="1" name="codigo_impuesto" type="s:int" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="descripcion_impuesto" type="s:string" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="porcentaje_impuesto" type="s:double" />
+                                    <s:element minOccurs="1" maxOccurs="1" name="importe_impuesto" type="s:double" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="importe_impuesto_moneda_origen" type="s:double" />
+                                  </s:sequence>
+                                </s:complexType>
+                              </s:element>
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_total_impuestos" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="importes_moneda_origen">
+                                <s:complexType>
+                                  <s:sequence>
+                                    <s:element minOccurs="0" maxOccurs="1" name="precio_unitario" type="s:double" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="importe_total_articulo" type="s:double" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="importe_iva" type="s:double" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="importe_total_descuentos" type="s:double" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="importe_total_impuestos" type="s:double" />
+                                  </s:sequence>
+                                </s:complexType>
+                              </s:element>
+                              <s:element minOccurs="0" maxOccurs="unbounded" name="informacion_adicional">
+                                <s:complexType>
+                                  <s:sequence>
+                                    <s:element minOccurs="0" maxOccurs="1" name="tipo" type="s:string" />
+                                    <s:element minOccurs="0" maxOccurs="1" name="valor" type="s:string" />
+                                  </s:sequence>
+                                </s:complexType>
+                              </s:element>
+                            </s:sequence>
+                            <s:attribute name="numeroLinea" type="s:int" use="required" />
+                          </s:complexType>
+                        </s:element>
+                        <s:element minOccurs="0" maxOccurs="1" name="comentarios" type="s:string" />
+                      </s:sequence>
+                    </s:complexType>
+                  </s:element>
+                  <s:element minOccurs="0" maxOccurs="1" name="resumen">
+                    <s:complexType>
+                      <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="unbounded" name="descuentos">
+                          <s:complexType>
+                            <s:sequence>
+                              <s:element minOccurs="0" maxOccurs="1" name="descripcion_descuento" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="porcentaje_descuento" type="s:double" />
+                              <s:element minOccurs="1" maxOccurs="1" name="importe_descuento" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_descuento_moneda_origen" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="alicuota_iva_descuento" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_iva_descuento" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_iva_descuento_moneda_origen" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="indicacion_exento_gravado_descuento" type="s:string" />
+                            </s:sequence>
+                          </s:complexType>
+                        </s:element>
+                        <s:element minOccurs="1" maxOccurs="1" name="importe_total_neto_gravado" type="s:double" />
+                        <s:element minOccurs="1" maxOccurs="1" name="importe_total_concepto_no_gravado" type="s:double" />
+                        <s:element minOccurs="1" maxOccurs="1" name="importe_operaciones_exentas" type="s:double" />
+                        <s:element minOccurs="1" maxOccurs="1" name="impuesto_liq" type="s:double" />
+                        <s:element minOccurs="1" maxOccurs="1" name="impuesto_liq_rni" type="s:double" />
+                        <s:element minOccurs="0" maxOccurs="unbounded" name="impuestos">
+                          <s:complexType>
+                            <s:sequence>
+                              <s:element minOccurs="1" maxOccurs="1" name="codigo_impuesto" type="s:int" />
+                              <s:element minOccurs="0" maxOccurs="1" name="descripcion" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="codigo_jurisdiccion" type="s:int" />
+                              <s:element minOccurs="0" maxOccurs="1" name="jurisdiccion_municipal" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="porcentaje_impuesto" type="s:double" />
+                              <s:element minOccurs="1" maxOccurs="1" name="importe_impuesto" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_impuesto_moneda_origen" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="base_imponible" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="base_imponible_moneda_origen" type="s:double" />
+                            </s:sequence>
+                          </s:complexType>
+                        </s:element>
+                        <s:element minOccurs="0" maxOccurs="1" name="importe_total_impuestos_nacionales" type="s:double" />
+                        <s:element minOccurs="0" maxOccurs="1" name="importe_total_ingresos_brutos" type="s:double" />
+                        <s:element minOccurs="0" maxOccurs="1" name="importe_total_impuestos_municipales" type="s:double" />
+                        <s:element minOccurs="0" maxOccurs="1" name="importe_total_impuestos_internos" type="s:double" />
+                        <s:element minOccurs="1" maxOccurs="1" name="importe_total_factura" type="s:double" />
+                        <s:element minOccurs="1" maxOccurs="1" name="tipo_de_cambio" type="s:double" />
+                        <s:element minOccurs="0" maxOccurs="1" name="codigo_moneda" type="s:string" />
+                        <s:element minOccurs="0" maxOccurs="1" name="observaciones" type="s:string" />
+                        <s:element minOccurs="0" maxOccurs="1" name="cant_alicuotas_iva" type="s:int" />
+                        <s:element minOccurs="0" maxOccurs="1" name="importes_moneda_origen">
+                          <s:complexType>
+                            <s:sequence>
+                              <s:element minOccurs="1" maxOccurs="1" name="importe_total_neto_gravado" type="s:double" />
+                              <s:element minOccurs="1" maxOccurs="1" name="importe_total_concepto_no_gravado" type="s:double" />
+                              <s:element minOccurs="1" maxOccurs="1" name="importe_operaciones_exentas" type="s:double" />
+                              <s:element minOccurs="1" maxOccurs="1" name="impuesto_liq" type="s:double" />
+                              <s:element minOccurs="1" maxOccurs="1" name="impuesto_liq_rni" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_total_impuestos_nacionales" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_total_ingresos_brutos" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_total_impuestos_municipales" type="s:double" />
+                              <s:element minOccurs="0" maxOccurs="1" name="importe_total_impuestos_internos" type="s:double" />
+                              <s:element minOccurs="1" maxOccurs="1" name="importe_total_factura" type="s:double" />
+                            </s:sequence>
+                          </s:complexType>
+                        </s:element>
+                      </s:sequence>
+                    </s:complexType>
+                  </s:element>
+                  <s:element minOccurs="0" maxOccurs="1" name="extensiones">
+                    <s:complexType>
+                      <s:sequence>
+                        <s:element minOccurs="0" maxOccurs="1" name="extensiones_camara_facturas">
+                          <s:complexType>
+                            <s:sequence>
+                              <s:element minOccurs="0" maxOccurs="1" name="clave_de_vinculacion" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="id_template" type="s:string" />
+                              <s:element minOccurs="0" maxOccurs="1" name="id_idioma" type="s:string" />
+                            </s:sequence>
+                          </s:complexType>
+                        </s:element>
+                        <s:element minOccurs="0" maxOccurs="1" name="extensiones_datos_comerciales" type="s:string" />
+                        <s:element minOccurs="0" maxOccurs="1" name="extensiones_datos_marketing" type="s:string" />
+                        <s:element minOccurs="0" maxOccurs="1" name="extensiones_signatures" type="s:string" />
+                        <s:element minOccurs="0" maxOccurs="1" name="extensiones_destinatarios">
+                          <s:complexType>
+                            <s:sequence>
+                              <s:element minOccurs="0" maxOccurs="unbounded" name="destinatario">
+                                <s:complexType>
+                                  <s:sequence>
+                                    <s:element minOccurs="1" maxOccurs="1" name="cuit" type="s:long" />
+                                  </s:sequence>
+                                </s:complexType>
+                              </s:element>
+                              <s:element minOccurs="0" maxOccurs="1" name="email" type="s:string" />
+                            </s:sequence>
+                          </s:complexType>
+                        </s:element>
+                      </s:sequence>
+                    </s:complexType>
+                  </s:element>
+                </s:sequence>
+              </s:complexType>
+            </s:element>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ConsultarSoapIn">
+    <wsdl:part name="parameters" element="tns:Consultar" />
+  </wsdl:message>
+  <wsdl:message name="ConsultarSoapOut">
+    <wsdl:part name="parameters" element="tns:ConsultarResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ConsultaIBKSoap">
+    <wsdl:operation name="Consultar">
+      <wsdl:input message="tns:ConsultarSoapIn" />
+      <wsdl:output message="tns:ConsultarSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ConsultaIBKSoap" type="tns:ConsultaIBKSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Consultar">
+      <soap:operation soapAction="http://www.cedeira.com.ar/webservices/Consultar" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ConsultaIBKSoap12" type="tns:ConsultaIBKSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="Consultar">
+      <soap12:operation soapAction="http://www.cedeira.com.ar/webservices/Consultar" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ConsultaIBK">
+    <wsdl:port name="ConsultaIBKSoap" binding="tns:ConsultaIBKSoap">
+      <soap:address location="http://localhost:4167/ConsultaIBK.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ConsultaIBKSoap12" binding="tns:ConsultaIBKSoap12">
+      <soap12:address location="http://localhost:4167/ConsultaIBK.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

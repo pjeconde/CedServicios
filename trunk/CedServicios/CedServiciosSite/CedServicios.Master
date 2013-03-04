@@ -24,11 +24,26 @@
         	color: Navy;
         }
     </style>
+    <script type="text/javascript">
+        function verifyDate(sender, args) {
+            var d = new Date();
+            d.setDate(d.getDate() - 1);
+            if (sender._selectedDate < d) {
+                alert("Date should be Today or Grater than Today");
+                sender._textbox.set_Value('')
+            }
+        }
+    </script>
+    <script type="text/javascript" language="javascript">
+        function onCalendar1Shown(sender, args) {
+            sender._popupBehavior._element.style.zIndex = 10005;
+        }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server" visible="true">
-    <asp:ScriptManager ID="ScriptManager1" runat="server">
-    </asp:ScriptManager>
+    <asp:ScriptManager ID="MasterScriptManager" runat="server">
+	</asp:ScriptManager>
     <div id="DivUsuario" style="text-align: center" align="center">
         <table>
             <tr>
@@ -45,16 +60,6 @@
                                 <asp:Label ID="FechaActualLabel" runat="server" Visible="true" Text="Fecha Actual: "></asp:Label>
                             </td>
                             <td style="text-align:left" class="Fuente">
-                                <asp:UpdatePanel ID="FechaActualUpdatePanel" runat="server" UpdateMode="Always" ViewStateMode="Enabled" RenderMode="Inline">
-                                <ContentTemplate>
-                                    <asp:Label ID="FechaActualValorLabel" runat="server" Text=""></asp:Label>
-                                </ContentTemplate>
-                                <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="Timer1" />
-                                </Triggers>
-                                </asp:UpdatePanel>
-                                <asp:Timer ID="Timer1" runat="server" Interval="1000" Enabled="false">
-                                </asp:Timer>
                             </td>
                             <td style="text-align: left; width:10px" class="Fuente">
                             </td>
