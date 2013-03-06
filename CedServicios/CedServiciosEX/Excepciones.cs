@@ -78,6 +78,23 @@ namespace CedServicios.EX
 			{
 			}
 		}
+		[Serializable]
+		public class ArchivoInexistente : CedServicios.EX.BaseApplicationException
+		{
+			static string TextoError = "Archivo inexistente";
+			public ArchivoInexistente() : base(TextoError)
+			{
+			}
+			public ArchivoInexistente(string NombreArchivo) : base(TextoError + ": " + NombreArchivo)
+			{
+			}
+			public ArchivoInexistente(Exception inner) : base(TextoError, inner)
+			{
+			}
+			public ArchivoInexistente(SerializationInfo info, StreamingContext context) : base(info, context)
+			{
+			}
+		}
     }
     namespace Usuario
     {
