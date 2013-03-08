@@ -15,6 +15,7 @@ namespace CedServicios.RN
             Sesion.CuitsDelUsuario = new List<Entidades.Cuit>();
             Sesion.UNsDelCuit = new List<Entidades.UN>();
             Sesion.ClientesDelCuit = new List<Entidades.Cliente>();
+            Sesion.OpcionesHabilitadas = OpcionesHabilitadas(Sesion);
         }
         public static List<string> OpcionesHabilitadas(Entidades.Sesion Sesion)
         {
