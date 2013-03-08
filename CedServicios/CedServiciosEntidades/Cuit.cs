@@ -17,6 +17,8 @@ namespace CedServicios.Entidades
         private Medio medio;
         private WF wF;
         private string ultActualiz;
+        private string nroSerieCertifAFIP;
+        private string nroSerieCertifITF;
 
         public Cuit()
         {
@@ -125,6 +127,28 @@ namespace CedServicios.Entidades
             get
             {
                 return ultActualiz;
+            }
+        }
+        public string NroSerieCertifAFIP
+        {
+            set
+            {
+                nroSerieCertifAFIP = value;
+            }
+            get
+            {
+                return nroSerieCertifAFIP;
+            }
+        }
+        public string NroSerieCertifITF
+        {
+            set
+            {
+                nroSerieCertifITF = value;
+            }
+            get
+            {
+                return nroSerieCertifITF;
             }
         }
     }
