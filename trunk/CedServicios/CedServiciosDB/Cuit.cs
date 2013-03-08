@@ -40,9 +40,12 @@ namespace CedServicios.DB
         public void Leer(Entidades.Cuit Cuit)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Cuit.Cuit, Cuit.RazonSocial, Cuit.Calle, Cuit.Nro, Cuit.Piso, Cuit.Depto, Cuit.Sector, Cuit.Torre, Cuit.Manzana, Cuit.Localidad, Cuit.IdProvincia, Cuit.DescrProvincia, Cuit.CodPost, Cuit.NombreContacto, Cuit.EmailContacto, Cuit.TelefonoContacto, Cuit.IdCondIVA, Cuit.DescrCondIVA, Cuit.NroIngBrutos, Cuit.IdCondIngBrutos, Cuit.DescrCondIngBrutos, Cuit.GLN, Cuit.FechaInicioActividades, Cuit.CodigoInterno, Cuit.IdMedio, Cuit.IdWF, Cuit.Estado, Cuit.UltActualiz, Medio.DescrMedio ");
-            a.Append("from Cuit, Medio ");
-            a.Append("where Cuit.Cuit='" + Cuit.Nro + "' and Cuit.IdMedio=Medio.IdMedio ");
+            a.Append("select Cuit.Cuit, Cuit.RazonSocial, Cuit.Calle, Cuit.Nro, Cuit.Piso, Cuit.Depto, Cuit.Sector, Cuit.Torre, Cuit.Manzana, Cuit.Localidad, Cuit.IdProvincia, Cuit.DescrProvincia, Cuit.CodPost, Cuit.NombreContacto, Cuit.EmailContacto, Cuit.TelefonoContacto, Cuit.IdCondIVA, Cuit.DescrCondIVA, Cuit.NroIngBrutos, Cuit.IdCondIngBrutos, Cuit.DescrCondIngBrutos, Cuit.GLN, Cuit.FechaInicioActividades, Cuit.CodigoInterno, Cuit.IdMedio, Cuit.IdWF, Cuit.Estado, Cuit.UltActualiz, Medio.DescrMedio, isnull(CertifAFIP.Valor, '') as NroSerieCertifAFIP, isnull(CertifITF.Valor, '') as NroSerieCertifITF ");
+            a.Append("from Cuit ");
+            a.Append("join Medio on Cuit.IdMedio=Medio.IdMedio ");
+            a.Append("left outer join Configuracion CertifAFIP on Cuit.Cuit=CertifAFIP.Cuit and CertifAFIP.IdItemConfig='NroSerieCertifAFIP' ");
+            a.Append("left outer join Configuracion CertifITF on Cuit.Cuit=CertifITF.Cuit and CertifITF.IdItemConfig='NroSerieCertifITF' ");
+            a.Append("where Cuit.Cuit='" + Cuit.Nro + "' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count == 0)
             {
@@ -84,6 +87,8 @@ namespace CedServicios.DB
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
+            Hasta.NroSerieCertifAFIP = Convert.ToString(Desde["NroSerieCertifAFIP"]);
+            Hasta.NroSerieCertifITF = Convert.ToString(Desde["NroSerieCertifITF"]);
         }
     }
 }
