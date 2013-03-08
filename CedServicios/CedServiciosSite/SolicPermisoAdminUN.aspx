@@ -23,12 +23,12 @@
                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
                     Width="80px"></asp:TextBox>
                 <asp:Button ID="LeerListaUNsButton" runat="server" OnClick="LeerListaUNsButton_Click" TabIndex="3"
-                    Text="Leer datos CUIT" />
+                    Text="Leer unidad(es) de negocio del CUIT" />
             </td>
         </tr>
         <tr>
             <td align="right" style="padding-right:5px; padding-top:10px; height:25px;">
-                <asp:Label ID="Label5" runat="server" Text="Unidad(es) de Negocio"></asp:Label>
+                <asp:Label ID="Label5" runat="server" Text="Unidad de Negocio"></asp:Label>
             </td>
             <td align="left" style="padding-top:10px; height:25px;">
                 <asp:DropDownList ID="IdUNDropDownList" runat="server" TabIndex="2" Width="183px" DataValueField="Id" DataTextField="Descr" >

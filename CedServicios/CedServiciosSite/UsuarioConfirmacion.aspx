@@ -16,12 +16,6 @@
                             <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina"></asp:Label>
                         </td>
                     </tr>
-                    <tr>
-                        <td style="padding-top: 10px; padding-left: 32px">
-                            <asp:Label ID="Label2" runat="server" Font-Bold="true" ForeColor="red" Text="»"></asp:Label>
-                            <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/UsuarioLogin.aspx" SkinID="LinkMedianoClaro">Ir a Inicio</asp:HyperLink>
-                        </td>
-                    </tr>
                 </table>
             </td>
         </tr>

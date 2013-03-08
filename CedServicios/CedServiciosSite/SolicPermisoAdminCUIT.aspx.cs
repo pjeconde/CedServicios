@@ -26,7 +26,7 @@ namespace CedServicios.Site
                 CUITTextBox.Enabled = false;
                 SolicitarButton.Enabled = false;
                 CancelarButton.Enabled = false;
-                MensajeLabel.Text = "El permiso fue enviado para su aprobación.  Autorizador(es): " + referenciaAAprobadores;
+                MensajeLabel.Text = "El permiso fue enviado para su aprobación.<br />Autorizador(es): " + referenciaAAprobadores;
             }
             catch (Exception ex)
             {

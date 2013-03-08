@@ -62,6 +62,7 @@
     </Compile>
     <Compile Include="PuntoVta.cs" />
     <Compile Include="Sesion.cs" />
+    <Compile Include="TipoPermiso.cs" />
     <Compile Include="UN.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Web References\IBK\Reference.cs">
