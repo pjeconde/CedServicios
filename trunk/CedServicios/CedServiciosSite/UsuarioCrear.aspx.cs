@@ -61,7 +61,7 @@ namespace CedServicios.Site
                 ConfirmacionPasswordTextBox.Enabled = false;
                 PreguntaTextBox.Enabled = false;
                 RespuestaTextBox.Enabled = false;
-                MsgErrorLabel.Text = "Gracias por crear su cuenta eFact.  Siga las instrucciones, que se enviaron por email, para confirmar la creación de su cuenta.  La recepción del email puede demorar unos minutos.";
+                MsgErrorLabel.Text = "Gracias por crear su cuenta.  Siga las instrucciones, que se enviaron por email, para confirmar la creación de su cuenta.  La recepción del email puede demorar unos minutos.";
             }
             catch (Exception ex)
             {

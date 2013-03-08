@@ -84,8 +84,47 @@ namespace CedServicios.RN
                 //Enviar carta de aviso
             }
         }
-        public static void Solicitar(Entidades.Cuit Cuit, Entidades.UN UN, Entidades.TipoPermiso TipoPermiso, string ReferenciaAAprobadores, Entidades.Sesion Sesion)
+        public static void Solicitar(Entidades.Cuit Cuit, Entidades.UN UN, Entidades.TipoPermiso TipoPermiso, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
         {
+            List<Entidades.Permiso> yaTieneHabilitadoElServicioParaLaUN = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
+            {
+                return p.TipoPermiso.Id == "AdminUN" && p.Cuit == Cuit.Nro && p.IdUN == UN.Id && p.TipoPermiso.Id == TipoPermiso.Id;
+            });
+            if (yaTieneHabilitadoElServicioParaLaUN.Count != 0)
+            {
+                throw new EX.Permiso.Existente(yaTieneHabilitadoElServicioParaLaUN[0].WF.Estado);
+            }
+            Entidades.Permiso permiso = new Entidades.Permiso();
+            permiso.IdUsuario = Sesion.Usuario.Id;
+            permiso.Cuit = Cuit.Nro;
+            permiso.IdUN = UN.Id;
+            permiso.TipoPermiso = TipoPermiso;
+            permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
+            permiso.IdUsuarioSolicitante = Sesion.Usuario.Id;
+            permiso.Accion.Tipo = "SolicOperServUN";
+            List<Entidades.Permiso> esAdminUNdelaUN = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
+            {
+                return p.TipoPermiso.Id == "AdminUN" && p.Cuit == Cuit.Nro && p.IdUN == UN.Id && p.WF.Estado == "Vigente";
+            });
+            if (esAdminUNdelaUN.Count != 0)
+            {
+                permiso.WF.Estado = "Vigente";
+            }
+            else
+            {
+                permiso.WF.Estado = "PteAutoriz";
+            }
+            CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
+            db.Alta(permiso);
+            List<Entidades.Usuario> usuariosAutorizadores = db.LeerListaUsuariosAutorizadores(permiso.Cuit);
+            ReferenciaAAprobadores = String.Empty;
+            for (int i = 0; i < usuariosAutorizadores.Count; i++)
+            {
+                ReferenciaAAprobadores += usuariosAutorizadores[i].Nombre;
+                if (i + 1 < usuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
+
+                //Enviar carta de aviso
+            }
         }
         private static List<Entidades.Usuario> UsuariosAprobadores(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
         {

@@ -50,6 +50,7 @@
     <Compile Include="Permiso.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PuntoVta.cs" />
+    <Compile Include="TipoPermiso.cs" />
     <Compile Include="UN.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
