@@ -157,9 +157,9 @@ namespace CedServicios.Site
                 }
                 if (sesion.Usuario.Id == null)
                 {
-                    for (int i = Menu1.Items.Count-1; i > 0; i--)
+                    for (int i = Menu1.Items.Count - 1; i > 0; i--)
                     {
-                        for (int j = Menu1.Items[i].ChildItems.Count-1; j >= 0; j--)
+                        for (int j = Menu1.Items[i].ChildItems.Count - 1; j >= 0; j--)
                         {
                             Menu1.Items[i].ChildItems.Remove(Menu1.Items[i].ChildItems[0]);
                         }
@@ -171,7 +171,6 @@ namespace CedServicios.Site
                     Menu1.Items.Remove(Menu1.Items[0]);
                 }
             }
-            //string texto = Request.ServerVariables["HTTP_REFERER"];
         }
 
         private void HabilitarOpcionMenu(string itemPathValue)
