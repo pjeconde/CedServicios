@@ -20,6 +20,24 @@
 						ShowFooter="true" ShowHeader="True" ToolTip="Recuerde que al ingresar importes con decimales el separador a utilizar es el punto"
 						UseAccessibleHeader="true" Width="100%">
 						<Columns>
+                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="GTIN">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px"></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px"></asp:TextBox>
+                                    <cc1:FilteredTextBoxExtender ID="GTINEditFilteredTextBoxExtender" runat="server"
+                                        FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789">
+                                    </cc1:FilteredTextBoxExtender>
+                                </EditItemTemplate>
+                                <FooterTemplate>
+                                    <asp:TextBox ID="txtGTIN" runat="server" Text='' Width="150px"></asp:TextBox>
+                                    <cc1:FilteredTextBoxExtender ID="GTINFooterFilteredTextBoxExtender" runat="server"
+                                        FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789">
+                                    </cc1:FilteredTextBoxExtender>
+                                </FooterTemplate>
+                                <ItemStyle HorizontalAlign="Left" />
+                            </asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Código Producto Vendedor">
 								<ItemTemplate>
 									<asp:Label ID="lblcpvendedor" runat="server" Text='<%# Eval("codigo_producto_vendedor") %>'

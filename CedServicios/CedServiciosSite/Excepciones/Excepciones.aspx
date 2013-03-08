@@ -1,7 +1,5 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Excepciones.aspx.cs" Inherits="CedServicios.Site.Excepciones.Excepciones" MasterPageFile="~/CedServicios.Master" %>
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
 <asp:Content ID="ExContent" runat="Server" ContentPlaceHolderID="ContentPlaceDefault">
     <form id="form1" runat="server">
     <div>

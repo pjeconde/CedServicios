@@ -124,6 +124,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 			{
 				FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
 				RN.Comprobante crn = new RN.Comprobante();
+                if (l.GTINSpecified)
+                {
+                    linea.GTIN = l.GTIN;
+                    linea.GTINSpecified = true;
+                }
 				//Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
 				if (l.descripcion.Substring(0, 1) == "%")
 				{
@@ -193,274 +198,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                     FeaEntidades.InterFacturas.linea l = new FeaEntidades.InterFacturas.linea();
 
-                    string auxDescr = ((TextBox)detalleGridView.FooterRow.FindControl("txtdescripcion")).Text;
-                    if (!auxDescr.Equals(string.Empty))
-                    {
-                        l.descripcion = auxDescr;
-                    }
-                    else
-                    {
-                        throw new Exception("Detalle no agregado porque la descripción no puede estar vacía");
-                    }
-                    string auxTotal = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo")).Text;
-                    if (auxTotal.Equals(string.Empty))
-                    {
-                        throw new Exception("Detalle no agregado porque el importe debe ser informado");
-                    }
-                    if (!auxTotal.Contains(","))
-                    {
-                        try
-                        {
-                            l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
-                        }
-                        catch
-                        {
-                            throw new Exception("Detalle no agregado porque el importe tiene más de un separador de decimales");
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("Detalle no agregado porque el separador de decimales en el importe debe ser el punto");
-                    }
-
-                    string auxNull = ((TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo")).Text;
-                    if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
-                    {
-                        try
-                        {
-                            double auxImporteIVA = Convert.ToDouble(auxNull, cedeiraCultura);
-                            l.importe_ivaSpecified = true;
-                            l.importe_iva = auxImporteIVA;
-                        }
-                        catch
-                        {
-                            throw new Exception("Detalle no agregado porque el importe IVA tiene más de un separador de decimales");
-                        }
-                    }
-                    else
-                    {
-                        l.importe_ivaSpecified = false;
-                        l.importe_iva = 0;
-                    }
-                    double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedValue);
-                    string auxDescAliIVA = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).SelectedItem.Text;
-                    if (!auxDescAliIVA.Equals(string.Empty))
-                    {
-                        l.alicuota_ivaSpecified = true;
-                        l.alicuota_iva = auxAliIVA;
-                    }
-                    else
-                    {
-                        //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-                        //{
-                        if (!puntoDeVenta.Equals(string.Empty))
-                        {
-                            //OJO - Verifico si es BonoFiscal !!!
-                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                            });
-                            if (listaPV.Count != 0)
-                            {
-                                throw new Exception("Detalle no agregado porque la alicuota iva es obligatoria para bono fiscal");
-                            }
-                            else
-                            {
-                                l.alicuota_ivaSpecified = false;
-                                l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-                            }
-                        }
-                        else
-                        {
-                            l.alicuota_ivaSpecified = false;
-                            l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-                        }
-                        //}
-                        //else
-                        //{
-                        //    l.alicuota_ivaSpecified = false;
-                        //    l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-                        //}
-                    }
-
-                    string auxUnidad = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).SelectedItem.Value;
-                    //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-                    //{
-                    if (!puntoDeVenta.Equals(string.Empty))
-                    {
-                        //OJO - Verifico si es BonoFiscal !!!
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
-                        {
-                            return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                        });
-                        if (listaPV.Count != 0)
-                        {
-                            if (auxUnidad.Equals(string.Empty) || auxUnidad.Equals("0"))
-                            {
-                                throw new Exception("Detalle no agregado porque la unidad es obligatoria para bono fiscal");
-                            }
-                            else
-                            {
-                                l.unidad = auxUnidad;
-                            }
-                        }
-                        else
-                        {
-                            l.unidad = auxUnidad;
-                        }
-                    }
-                    else
-                    {
-                        l.unidad = auxUnidad;
-                    }
-                    //}
-                    //else
-                    //{
-                    //    l.unidad = auxUnidad;
-                    //}
-
-                    string auxCantidad = ((TextBox)detalleGridView.FooterRow.FindControl("txtcantidad")).Text;
-                    if (!auxCantidad.Contains(","))
-                    {
-                        if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
-                        {
-                            try
-                            {
-                                l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
-                                l.cantidadSpecified = true;
-                            }
-                            catch
-                            {
-                                throw new Exception("Detalle no agregado porque la cantidad tiene más de un separador de decimales");
-                            }
-                        }
-                        else
-                        {
-                            //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-                            //{
-                            if (!puntoDeVenta.Equals(string.Empty))
-                            {
-                                //OJO - Verifico si es BonoFiscal !!!
-                                System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
-                                {
-                                    return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                                });
-                                if (listaPV.Count != 0)
-                                {
-                                    throw new Exception("Detalle no agregado porque la cantidad es obligatoria para bono fiscal");
-                                }
-                                else
-                                {
-                                    l.cantidadSpecified = false;
-                                    l.cantidad = 0;
-                                }
-                            }
-                            else
-                            {
-                                l.cantidadSpecified = false;
-                                l.cantidad = 0;
-                            }
-                            //}
-                            //else
-                            //{
-                            //    l.cantidadSpecified = false;
-                            //    l.cantidad = 0;
-                            //}
-                        }
-                    }
-                    else
-                    {
-                        throw new Exception("Detalle no agregado porque el separador de decimales debe ser el punto");
-                    }
-
-                    ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador")).Text);
-
-                    string auxcpvendedor = ((TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor")).Text;
-                    l.codigo_producto_vendedor = auxcpvendedor;
-
-                    string auxindicacion_exento_gravado = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).SelectedItem.Value;
-                    //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-                    //{
-                    if (!puntoDeVenta.Equals(string.Empty))
-                    {
-                        //OJO - Verifico si es BonoFiscal !!!
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
-                        {
-                            return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                        });
-                        if (listaPV.Count != 0)
-                        {
-                            if (auxindicacion_exento_gravado.Equals(string.Empty))
-                            {
-                                throw new Exception("Detalle no agregado porque la indicacion exento gravado es obligatoria para bono fiscal");
-                            }
-                            else
-                            {
-                                l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-                            }
-                        }
-                        else
-                        {
-                            l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-                        }
-                        //}
-                        //else
-                        //{
-                        //    l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-                        //}
-                    }
-                    else
-                    {
-                        l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-                    }
-
-                    string auxprecio_unitario = ((TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario")).Text;
-                    if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
-                    {
-                        try
-                        {
-                            double auxPU = Convert.ToDouble(auxprecio_unitario, cedeiraCultura);
-                            l.precio_unitario = auxPU;
-                            l.precio_unitarioSpecified = true;
-                        }
-                        catch
-                        {
-                            throw new Exception("Detalle no agregado porque el precio unitario tiene más de un separador de decimales");
-                        }
-                    }
-                    else
-                    {
-                        //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-                        //{
-                        if (!puntoDeVenta.Equals(string.Empty))
-                        {
-                            //OJO - Verifico si es BonoFiscal !!!
-                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                            });
-                            if (listaPV.Count != 0)
-                            {
-                                throw new Exception("Detalle no agregado porque el precio unitario es obligatorio para bono fiscal");
-                            }
-                            else
-                            {
-                                l.precio_unitario = 0;
-                                l.precio_unitarioSpecified = false;
-                            }
-                        }
-                        else
-                        {
-                            l.precio_unitario = 0;
-                            l.precio_unitarioSpecified = false;
-                        }
-                        //}
-                        //else
-                        //{
-                        //    l.precio_unitario = 0;
-                        //    l.precio_unitarioSpecified = false;
-                        //}
-                    }
+                    ValidarYAsignarPropiedades(l);
 
                     ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
 
@@ -490,81 +228,186 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        protected void detalleGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        private void ValidarYAsignarPropiedades(FeaEntidades.InterFacturas.linea l)
         {
-            try
+            ValidarGTIN(l, (TextBox)detalleGridView.FooterRow.FindControl("txtGTIN"));
+            ValidarDescripcion(l, (TextBox)detalleGridView.FooterRow.FindControl("txtdescripcion"));
+            ValidarImporte(l, (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"));
+            ValidarImporteIVA(l, (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"));
+            ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"));
+            ValidarUnidad(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad"));
+            ValidarCantidad(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcantidad"));
+            ValidarCodigoProductoComprador(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador"));
+            ValidarCodigoProductoVendedor(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor"));
+            ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado"));
+            ValidarPrecioUnitario(l, (TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario"));
+        }
+
+        private void ValidarGTIN(FeaEntidades.InterFacturas.linea l, TextBox txtGTIN)
+        {
+            string auxGTIN = txtGTIN.Text;
+            if (!auxGTIN.Equals(string.Empty) && !auxGTIN.Equals("0"))
             {
-                if (puntoDeVenta.Equals(string.Empty))
+                try
                 {
-                    throw new Exception("Debe definir el punto de venta antes de editar un detalle");
-                }
-
-                cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
-
-                System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
-
-                FeaEntidades.InterFacturas.linea l = lineas[e.RowIndex];
-                string auxDescr = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtdescripcion")).Text;
-                if (!auxDescr.Equals(string.Empty))
-                {
-                    l.descripcion = auxDescr;
-                }
-                else
-                {
-                    throw new Exception("Detalle no actualizado porque la descripción no puede estar vacía");
-                }
-                string auxTotal = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo")).Text;
-                if (auxTotal.Equals(string.Empty))
-                {
-                    throw new Exception("Detalle no actualizado porque el importe debe ser informado");
-                }
-                if (!auxTotal.Contains(","))
-                {
-                    try
-                    {
-                        l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
-                    }
-                    catch
-                    {
-                        throw new Exception("Detalle no actualizado porque el importe tiene más de un separador de decimales");
-                    }
-                }
-                else
-                {
-                    throw new Exception("Detalle no actualizado porque el separador de decimales debe ser el punto");
-                }
-
-                string auxNull = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo")).Text;
-                if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
-                {
-                    try
-                    {
-                        double auxImporteIVA = Convert.ToDouble(auxNull);
-                        l.importe_ivaSpecified = true;
-                        l.importe_iva = auxImporteIVA;
-                    }
-                    catch
-                    {
-                        throw new Exception("Detalle no actualizado porque el importe IVA tiene más de un separador de decimales");
-                    }
-                }
-                else
-                {
-                    l.importe_ivaSpecified = false;
-                    l.importe_iva = 0;
-                }
-
-                double auxAliIVA = Convert.ToDouble(((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit")).SelectedValue);
-                string auxDescAliIVA = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit")).SelectedItem.Text;
-                if (!auxDescAliIVA.Equals(string.Empty))
-                {
-                    l.alicuota_ivaSpecified = true;
-                    l.alicuota_iva = auxAliIVA;
-                }
-                else
-                {
-                    //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
+                    Int64 auxNroGTIN = Convert.ToInt64(auxGTIN, cedeiraCultura);
+                    //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
                     //{
+                        if (!puntoDeVenta.Equals(string.Empty))
+                        {
+                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                            {
+                                return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                            });
+                            if (listaPV.Count != 0)
+                            {
+                                if (auxGTIN.Length > 13)
+                                {
+                                    throw new Exception("La longitud del GTIN debe ser menor o igual a 13 dígitos para RG2904");
+                                }
+                                else
+                                {
+                                    l.GTIN = auxNroGTIN;
+                                    l.GTINSpecified = true;
+                                }
+                            }
+                            else
+                            {
+                                l.GTIN = auxNroGTIN;
+                                l.GTINSpecified = true;
+                            }
+                        }
+                        else
+                        {
+                            l.GTIN = auxNroGTIN;
+                            l.GTINSpecified = true;
+                        }
+                    //}
+                    //else
+                    //{
+
+                    //    l.GTIN = auxNroGTIN;
+                    //    l.GTINSpecified = true;
+                    //}
+                }
+                catch
+                {
+                    throw new Exception("El formato del GTIN no es válido (sólo hasta 13 dígitos)");
+                }
+            }
+            else
+            {
+                //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                //{
+                    if (!puntoDeVenta.Equals(string.Empty))
+                    {
+                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                        });
+                        if (listaPV.Count != 0 && l.unidad != "97")
+                        {
+                            throw new Exception("El GTIN es obligatorio para RG2904 si la unidad de medida es distinta a 'Anticipos/Señas'");
+                        }
+                        else
+                        {
+                            l.GTIN = 0;
+                            l.GTINSpecified = false;
+                        }
+                    }
+                    else
+                    {
+                        l.GTIN = 0;
+                        l.GTINSpecified = false;
+                    }
+                //}
+                //else
+                //{
+                //    l.GTIN = 0;
+                //    l.GTINSpecified = false;
+                //}
+            }
+
+        }
+
+        private void ValidarCodigoProductoVendedor(FeaEntidades.InterFacturas.linea l, TextBox txtcpvendedor)
+        {
+            string auxcpvendedor = txtcpvendedor.Text;
+            l.codigo_producto_vendedor = auxcpvendedor;
+        }
+
+        private void ValidarImporteIVA(FeaEntidades.InterFacturas.linea l, TextBox txtimporte_alicuota_articulo)
+        {
+            string auxNull = txtimporte_alicuota_articulo.Text;
+            if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
+            {
+                try
+                {
+                    double auxImporteIVA = Convert.ToDouble(auxNull, cedeiraCultura);
+                    l.importe_ivaSpecified = true;
+                    l.importe_iva = auxImporteIVA;
+                }
+                catch
+                {
+                    throw new Exception("El importe IVA tiene más de un separador de decimales");
+                }
+            }
+            else
+            {
+                l.importe_ivaSpecified = false;
+                l.importe_iva = 0;
+            }
+        }
+
+        private void ValidarImporte(FeaEntidades.InterFacturas.linea l, TextBox txtimporte_total_articulo)
+        {
+            string auxTotal = txtimporte_total_articulo.Text;
+            if (auxTotal.Equals(string.Empty))
+            {
+                throw new Exception("El importe debe ser informado");
+            }
+            if (!auxTotal.Contains(","))
+            {
+                try
+                {
+                    l.importe_total_articulo = Convert.ToDouble(auxTotal, cedeiraCultura);
+                }
+                catch
+                {
+                    throw new Exception("El importe tiene más de un separador de decimales");
+                }
+            }
+            else
+            {
+                throw new Exception("El separador de decimales en el importe debe ser el punto");
+            }
+        }
+
+        private void ValidarDescripcion(FeaEntidades.InterFacturas.linea l, TextBox txtdescripcion)
+        {
+            string auxDescr = txtdescripcion.Text;
+            if (!auxDescr.Equals(string.Empty))
+            {
+                l.descripcion = auxDescr;
+            }
+            else
+            {
+                throw new Exception("La descripción no puede estar vacía");
+            }
+        }
+
+        private void ValidarAlicuotaIVA(FeaEntidades.InterFacturas.linea l, DropDownList ddl)
+        {
+            double auxAliIVA = Convert.ToDouble(ddl.SelectedValue);
+            string auxDescAliIVA = ddl.SelectedItem.Text; if (!auxDescAliIVA.Equals(string.Empty))
+            {
+                l.alicuota_ivaSpecified = true;
+                l.alicuota_iva = auxAliIVA;
+            }
+            else
+            {
+                //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                //{
                     if (!puntoDeVenta.Equals(string.Empty))
                     {
                         //OJO - Verifico si es BonoFiscal !!!
@@ -574,7 +417,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         });
                         if (listaPV.Count != 0)
                         {
-                            throw new Exception("Detalle no actualizado porque la alicuota iva es obligatoria para bono fiscal");
+                            throw new Exception("La alicuota iva es obligatoria para bono fiscal");
                         }
                         else
                         {
@@ -587,28 +430,32 @@ namespace CedServicios.Site.Facturacion.Electronica
                         l.alicuota_ivaSpecified = false;
                         l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
                     }
-                    //}
-                    //else
-                    //{
-                    //    l.alicuota_ivaSpecified = false;
-                    //    l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-                    //}
-                }
-                string auxUnidad = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit")).SelectedItem.Value;
-                //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
+                //}
+                //else
                 //{
+                //    l.alicuota_ivaSpecified = false;
+                //    l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                //}
+            }
+        }
+
+        private void ValidarUnidad(FeaEntidades.InterFacturas.linea l, DropDownList ddlunidad)
+        {
+            string auxUnidad = ddlunidad.SelectedItem.Value;
+            //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            //{
                 if (!puntoDeVenta.Equals(string.Empty))
                 {
-                    //OJO - Verifico si es BonoFiscal !!!
+                    //OJO - Verifico si es BonoFiscal or RG2904!!!
                     System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
                     {
-                        return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                        return (pv.IdTipoPuntoVta == "BonoFiscal" || pv.IdTipoPuntoVta == "RG2904") && pv.Nro == Convert.ToInt32(puntoDeVenta);
                     });
                     if (listaPV.Count != 0)
                     {
                         if (auxUnidad.Equals(string.Empty) || auxUnidad.Equals("0"))
                         {
-                            throw new Exception("Detalle no actualizado porque la unidad es obligatoria para bono fiscal");
+                            throw new Exception("La unidad es obligatoria para bono fiscal y para RG2904");
                         }
                         else
                         {
@@ -624,31 +471,34 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     l.unidad = auxUnidad;
                 }
-                //}
-                //else
-                //{
-                //    l.unidad = auxUnidad;
-                //}
+            //}
+            //else
+            //{
+            //    l.unidad = auxUnidad;
+            //}
+        }
 
-                string auxCantidad = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcantidad")).Text;
-                if (!auxCantidad.Contains(","))
+        private void ValidarCantidad(FeaEntidades.InterFacturas.linea l, TextBox txtCantidad)
+        {
+            string auxCantidad = txtCantidad.Text;
+            if (!auxCantidad.Contains(","))
+            {
+                if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
                 {
-                    if (!auxCantidad.Equals(string.Empty) && !auxCantidad.Equals("0"))
+                    try
                     {
-                        try
-                        {
-                            l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
-                            l.cantidadSpecified = true;
-                        }
-                        catch
-                        {
-                            throw new Exception("Detalle no actualizado porque la cantidad tiene más de un separador de decimales");
-                        }
+                        l.cantidad = Convert.ToDouble(auxCantidad, cedeiraCultura);
+                        l.cantidadSpecified = true;
                     }
-                    else
+                    catch
                     {
-                        //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-                        //{
+                        throw new Exception("La cantidad tiene más de un separador de decimales");
+                    }
+                }
+                else
+                {
+                    //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                    //{
                         if (!puntoDeVenta.Equals(string.Empty))
                         {
                             //OJO - Verifico si es BonoFiscal !!!
@@ -658,7 +508,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             });
                             if (listaPV.Count != 0)
                             {
-                                throw new Exception("Detalle no actualizado porque la cantidad es obligatoria para bono fiscal");
+                                throw new Exception("La cantidad es obligatoria para bono fiscal");
                             }
                             else
                             {
@@ -671,27 +521,25 @@ namespace CedServicios.Site.Facturacion.Electronica
                             l.cantidadSpecified = false;
                             l.cantidad = 0;
                         }
-                        //}
-                        //else
-                        //{
-                        //    l.cantidadSpecified = false;
-                        //    l.cantidad = 0;
-                        //}
-                    }
+                    //}
+                    //else
+                    //{
+                    //    l.cantidadSpecified = false;
+                    //    l.cantidad = 0;
+                    //}
                 }
-                else
-                {
-                    throw new Exception("Detalle no actualizado porque el separador de decimales debe ser el punto");
-                }
+            }
+            else
+            {
+                throw new Exception("El separador de decimales debe ser el punto");
+            }
+        }
 
-                ValidarCodigoProductoComprador(l, ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador")).Text);
-
-                string auxcodigo_producto_vendedor = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor")).Text;
-                l.codigo_producto_vendedor = auxcodigo_producto_vendedor;
-
-                string auxindicacion_exento_gravado = ((DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit")).SelectedItem.Value;
-                //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-                //{
+        private void ValidarIndicacionExentoGravado(FeaEntidades.InterFacturas.linea l, DropDownList ddlindicacion_exento_gravado)
+        {
+            string auxindicacion_exento_gravado = ddlindicacion_exento_gravado.SelectedItem.Value;
+            //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+            //{
                 if (!puntoDeVenta.Equals(string.Empty))
                 {
                     //OJO - Verifico si es BonoFiscal !!!
@@ -703,7 +551,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         if (auxindicacion_exento_gravado.Equals(string.Empty))
                         {
-                            throw new Exception("Detalle no actualizado porque la indicacion exento gravado es obligatoria para bono fiscal");
+                            throw new Exception("La indicación exento gravado es obligatoria para bono fiscal");
                         }
                         else
                         {
@@ -719,30 +567,33 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     l.indicacion_exento_gravado = auxindicacion_exento_gravado;
                 }
-                //}
-                //else
-                //{
-                //    l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-                //}
+            //}
+            //else
+            //{
+            //    l.indicacion_exento_gravado = auxindicacion_exento_gravado;
+            //}
+        }
 
-                string auxprecio_unitario = ((TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtprecio_unitario")).Text;
-                if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
+        private void ValidarPrecioUnitario(FeaEntidades.InterFacturas.linea l, TextBox txtprecio_unitario)
+        {
+            string auxprecio_unitario = txtprecio_unitario.Text;
+            if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
+            {
+                try
                 {
-                    try
-                    {
-                        double auxPU = Convert.ToDouble(auxprecio_unitario);
-                        l.precio_unitario = auxPU;
-                        l.precio_unitarioSpecified = true;
-                    }
-                    catch
-                    {
-                        throw new Exception("Detalle no actualizado porque el precio unitario tiene más de un separador de decimales");
-                    }
+                    double auxPU = Convert.ToDouble(auxprecio_unitario, cedeiraCultura);
+                    l.precio_unitario = auxPU;
+                    l.precio_unitarioSpecified = true;
                 }
-                else
+                catch
                 {
-                    //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-                    //{
+                    throw new Exception("El precio unitario tiene más de un separador de decimales");
+                }
+            }
+            else
+            {
+                //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
+                //{
                     if (!puntoDeVenta.Equals(string.Empty))
                     {
                         //OJO - Verifico si es BonoFiscal !!!
@@ -752,7 +603,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         });
                         if (listaPV.Count != 0)
                         {
-                            throw new Exception("Detalle no actualizado porque el precio unitario es obligatorio para bono fiscal");
+                            throw new Exception("El precio unitario es obligatorio para bono fiscal");
                         }
                         else
                         {
@@ -765,13 +616,44 @@ namespace CedServicios.Site.Facturacion.Electronica
                         l.precio_unitario = 0;
                         l.precio_unitarioSpecified = false;
                     }
-                    //}
-                    //else
-                    //{
-                    //    l.precio_unitario = 0;
-                    //    l.precio_unitarioSpecified = false;
-                    //}
+                //}
+                //else
+                //{
+                //    l.precio_unitario = 0;
+                //    l.precio_unitarioSpecified = false;
+                //}
+            }
+        }
+
+        protected void detalleGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            try
+            {
+                if (puntoDeVenta.Equals(string.Empty))
+                {
+                    throw new Exception("Debe definir el punto de venta antes de editar un detalle");
                 }
+
+                cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
+
+                System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
+
+                FeaEntidades.InterFacturas.linea l = lineas[e.RowIndex];
+
+                ValidarGTIN(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtGTIN"));
+                ValidarDescripcion(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtdescripcion"));
+                ValidarImporte(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo"));
+                ValidarImporteIVA(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo"));
+
+                ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit"));
+                ValidarUnidad(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit"));
+
+                ValidarCantidad(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcantidad"));
+                ValidarCodigoProductoComprador(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador"));
+                ValidarCodigoProductoVendedor(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor"));
+                ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit"));
+                ValidarPrecioUnitario(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtprecio_unitario"));
+
                 detalleGridView.EditIndex = -1;
                 detalleGridView.DataSource = lineas;
                 detalleGridView.DataBind();
@@ -917,8 +799,9 @@ namespace CedServicios.Site.Facturacion.Electronica
 				e.ExceptionHandled = true;
 			}
 		}
-        private void ValidarCodigoProductoComprador(FeaEntidades.InterFacturas.linea l, string auxcpcomprador)
+        private void ValidarCodigoProductoComprador(FeaEntidades.InterFacturas.linea l, TextBox txtcpcomprador)
         {
+            string auxcpcomprador = txtcpcomprador.Text;
             //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
             //{
             if (!puntoDeVenta.Equals(string.Empty))
@@ -934,6 +817,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         case "Comun":
                         case "Exportacion":
+                        case "RG2904":
                             l.codigo_producto_comprador = auxcpcomprador;
                             break;
                         case "BonoFiscal":
@@ -945,6 +829,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 l.codigo_producto_comprador = auxcpcomprador;
                             }
+                            break;
+                        default:
+                            throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
                             break;
                     }
                 }
@@ -1047,6 +934,15 @@ namespace CedServicios.Site.Facturacion.Electronica
 				}
 				det.linea[i].cantidad = listadelineas[i].cantidad;
 				det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
+                det.linea[i].GTIN = listadelineas[i].GTIN;
+                det.linea[i].GTINSpecified = listadelineas[i].GTINSpecified;
+                if (TipoPtoVta.Equals("RG2904"))
+                {
+                    det.linea[i].informacion_adicional = new FeaEntidades.InterFacturas.lineaInformacion_adicional[1];
+                    det.linea[i].informacion_adicional[0] = new FeaEntidades.InterFacturas.lineaInformacion_adicional();
+                    det.linea[i].informacion_adicional[0].tipo = "UNIDAD_MTX";
+                    det.linea[i].informacion_adicional[0].valor = listadelineas[i].unidad;
+                }
 				det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
 				det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
 
@@ -1175,7 +1071,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			{
 				if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
 				{
-					if (!TipoPtoVta.Equals("Comun"))
+                    if (!(TipoPtoVta.Equals("Comun") || TipoPtoVta.Equals("RG2904")))
 					{
 						det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
 					}
@@ -1204,7 +1100,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
 		private static void GenerarDetallesAlicuotaIVA(string TipoPtoVta, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
 		{
-			if (!TipoPtoVta.Equals("Comun"))
+            if (!(TipoPtoVta.Equals("Comun") || TipoPtoVta.Equals("RG2904")))
 			{
 				det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
 				if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
@@ -1238,8 +1134,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 
 			}
 		}
-
-
 		public void ActualizarTipoDeCambio(string MonedaComprobante)
 		{
 			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
@@ -1276,27 +1170,13 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			try
 			{
-				double preUni = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario"))).Text);
-				double cant = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad"))).Text);
-				if (!preUni.Equals(0) && !cant.Equals(0))
-				{
-					((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"))).Text = Convert.ToString(Math.Round(preUni * cant,2));
-				}
-				DropDownList ddl = ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit"));
-				if (!ddl.SelectedValue.Equals("0") && !ddl.SelectedValue.Equals("99"))
-				{
-					double imptot = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"))).Text);
-					if (!imptot.Equals(0))
-					{
-						double aux = imptot * Convert.ToDouble(ddl.SelectedValue) / 100;
-						((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"))).Text = Convert.ToString(Math.Round(aux, 2));
-					}
-				}
-				if (ddl.SelectedValue.Equals("99"))
-				{
-					((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"))).Text = string.Empty;
-				}
-			}
+                TextBox txtimporte_total_articulo = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo")));
+                TextBox txtimporte_alicuota_articulo = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo")));
+                DropDownList ddl = ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit"));
+                TextBox txtprecio_unitario = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario")));
+                TextBox txtcantidad = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad")));
+                RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (Entidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
+            }
 			catch
 			{
 			}
@@ -1305,26 +1185,12 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			try
 			{
-				double preUni = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario"))).Text);
-				double cant = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad"))).Text);
-				if (!preUni.Equals(0) && !cant.Equals(0))
-				{
-					((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"))).Text = Convert.ToString(Math.Round(preUni * cant, 2));
-				}
-				DropDownList ddl = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articuloEdit"));
-				if (!ddl.SelectedValue.Equals("0") && !ddl.SelectedValue.Equals("99"))
-				{
-					double imptot = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"))).Text);
-					if (!imptot.Equals(0))
-					{
-						double aux = imptot * Convert.ToDouble(ddl.SelectedValue) / 100;
-						((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"))).Text = Convert.ToString(Math.Round(aux, 2));
-					}
-				}
-				if (ddl.SelectedValue.Equals("99"))
-				{
-					((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"))).Text = string.Empty;
-				}
+                TextBox txtprecio_unitario = ((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario")));
+                TextBox txtcantidad = ((TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad")));
+                TextBox txtimporte_total_articulo = (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo");
+                TextBox txtimporte_alicuota_articulo = (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo");
+                DropDownList ddl = ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"));
+                RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (Entidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
 			}
 			catch
 			{
@@ -1334,41 +1200,82 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			try
 			{
-				double imptot = Convert.ToDouble(((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"))).Text);
-				double alic=Convert.ToDouble(((DropDownList)sender).SelectedValue);
-				if (!imptot.Equals(0) && !alic.Equals(99))
-				{
-					double aux = imptot * alic / 100;
-					((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"))).Text = Convert.ToString(Math.Round(aux,2));
-				}
-				if (alic.Equals(99))
-				{
-					((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"))).Text = string.Empty;
-				}
-			}
+                TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"));
+                TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"));
+                DropDownList ddl = (DropDownList)sender;
+                TextBox txtprecio_unitario = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario")));
+                TextBox txtcantidad = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad")));
+                RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (Entidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
+            }
 			catch
 			{
 			}
 		}
-		protected void ddlalicuota_articuloFooter_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			try
-			{
-				double imptot = Convert.ToDouble(((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"))).Text);
-				double alic = Convert.ToDouble(((DropDownList)sender).SelectedValue);
-				if (!imptot.Equals(0) && !alic.Equals(99))
-				{
-					double aux = imptot * alic / 100;
-					((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"))).Text = Convert.ToString(Math.Round(aux, 2));
-				}
-				if (alic.Equals(99))
-				{
-					((TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"))).Text = string.Empty;
-				}
-			}
-			catch
-			{
-			}
-		}
+        protected void ddlalicuota_articuloFooter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                TextBox txtprecio_unitario = ((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario")));
+                TextBox txtcantidad = (TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad"));
+                DropDownList ddl = (DropDownList)sender;
+                TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"));
+                TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"));
+                RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (Entidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
+            }
+            catch
+            {
+            }
+        }
+        protected void RecalcularLinea(TextBox txtimporte_alicuota_articulo, string puntoDeVenta, Entidades.Sesion sesion, TextBox txtimporte_total_articulo, DropDownList ddl, TextBox txtprecio_unitario, TextBox txtcantidad)
+        {
+            double preUni;
+            try
+            {
+                preUni = Convert.ToDouble(txtprecio_unitario.Text);
+            }
+            catch
+            {
+                preUni = 0;
+            }
+            double cant;
+            try
+            {
+                cant = Convert.ToDouble(txtcantidad.Text);
+            }
+            catch
+            {
+                cant = 0;
+            }
+            if (!preUni.Equals(0) && !cant.Equals(0))
+            {
+                txtimporte_total_articulo.Text = Convert.ToString(Math.Round(preUni * cant, 2));
+            }
+            double imptot = Convert.ToDouble(txtimporte_total_articulo.Text);
+            double alic = Convert.ToDouble(ddl.SelectedValue);
+            if (!imptot.Equals(0) && !alic.Equals(99))
+            {
+                double aux = imptot * alic / 100;
+                txtimporte_alicuota_articulo.Text = Convert.ToString(Math.Round(aux, 2));
+            }
+            if (alic.Equals(99))
+            {
+                txtimporte_alicuota_articulo.Text = string.Empty;
+            }
+
+            //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium(sesion))
+            //{
+                if (!puntoDeVenta.Equals(string.Empty))
+                {
+                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                    {
+                        return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                    });
+                    if (listaPV.Count != 0)
+                    {
+                        txtimporte_total_articulo.Text = Convert.ToString(Convert.ToDouble(txtimporte_total_articulo.Text) + Convert.ToDouble(txtimporte_alicuota_articulo.Text));
+                    }
+                }
+            //}
+        }
 	}
 }

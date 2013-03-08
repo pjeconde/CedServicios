@@ -19,6 +19,7 @@ namespace CedServicios.Site
         {
             Entidades.Sesion s = new Entidades.Sesion();
             s.CnnStr = System.Configuration.ConfigurationManager.AppSettings["CnnStr"];
+            s.OpcionesHabilitadas = RN.Sesion.OpcionesHabilitadas(s);
             Session["Sesion"] = s;
             Application.Lock();
             Application["Visitantes"] = (int)Application["Visitantes"] + 1;

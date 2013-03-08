@@ -188,6 +188,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         switch (idtipo)
                         {
                             case "Comun":
+                            case "RG2904":
                                 ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
                                 ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
                                 ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
@@ -202,6 +203,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
                                 ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
                                 break;
+                            default:
+                                throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
                         }
                     }
                     catch
@@ -476,6 +479,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     switch (idtipo)
                     {
                         case "Comun":
+                        case "RG2904":
                             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
                             ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
                             ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
@@ -490,6 +494,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                             ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = true;
                             ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
                             break;
+                        default:
+                            throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
                     }
                 }
                 catch
@@ -1433,6 +1439,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 							switch (idtipo)
 							{
 								case "Comun":
+                                case "RG2904":
 									CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales, total_Operaciones_Exentas);
 									if (CodigoConceptoDropDownList.Visible)
 									{
@@ -1450,6 +1457,8 @@ namespace CedServicios.Site.Facturacion.Electronica
 									total = totalGravado + totalNoGravado + totalIVA;
 									Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
 									break;
+                                default:
+                                    throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
 							}
 						}
 						catch
@@ -1642,12 +1651,18 @@ namespace CedServicios.Site.Facturacion.Electronica
                         case "Comun":
                             listacompradores = AjustarCamposXPtaVentaComun(listacompradores);
                             break;
-                        case "BonoFiscal":
+                        case "RG2904":
+                            listacompradores = AjustarCamposXPtaVentaRG2904(listacompradores);
+                            break;
+                        case "BFiscal":
                             listacompradores = AjustarCamposXPtaVentaBonoFiscal(listacompradores);
                             break;
-                        case "Exportacion":
+                        case "Export":
                             listacompradores = AjustarCamposXPtaVentaExport(listacompradores);
                             break;
+                        default:
+                            throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
+
                     }
                     Tipo_De_ComprobanteDropDownList.DataBind();
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
@@ -1764,11 +1779,21 @@ namespace CedServicios.Site.Facturacion.Electronica
         private System.Collections.Generic.List<Entidades.Cliente> AjustarCamposXPtaVentaComun(System.Collections.Generic.List<Entidades.Cliente> listacompradores)
         {
             Presta_ServCheckBox.Enabled = true;
-            Version0RadioButton.Visible = true;
-            Version0RadioButton.Checked = true;
-            Version1RadioButton.Visible = true;
-            Version1RadioButton.Checked = false;
+            HacerVisiblesV0V1();
+            listacompradores = AjustarCamposXPtaVtaComunYRG2904(listacompradores);
+            return listacompradores;
+        }
 
+
+        private System.Collections.Generic.List<Entidades.Cliente> AjustarCamposXPtaVentaRG2904(System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        {
+            Presta_ServCheckBox.Enabled = true;
+            listacompradores = AjustarCamposXPtaVtaComunYRG2904(listacompradores);
+            return listacompradores;
+        }
+
+        private System.Collections.Generic.List<Entidades.Cliente> AjustarCamposXPtaVtaComunYRG2904(System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        {
             AjustarPrestaServxVersiones();
 
             FechaServDesdeDatePickerWebUserControl.Visible = true;
@@ -1794,6 +1819,14 @@ namespace CedServicios.Site.Facturacion.Electronica
             IncotermsDropDownList.SelectedIndex = -1;
             IncotermsDropDownList.Enabled = false;
             return listacompradores;
+        }
+
+        private void HacerVisiblesV0V1()
+        {
+            Version0RadioButton.Visible = true;
+            Version0RadioButton.Checked = true;
+            Version1RadioButton.Visible = true;
+            Version1RadioButton.Checked = false;
         }
 
         private void AjustarCamposXPtaVentaIndefinido()
@@ -1861,17 +1894,15 @@ namespace CedServicios.Site.Facturacion.Electronica
             //    {
             try
             {
-                Entidades.Cuit cta = ((Entidades.Sesion)Session["Sesion"]).Cuit;
-                //OJOTA !!!
-                //if (cta.Configuracion.NroSerieCertificado.Equals(string.Empty))
-                //{
-                //    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
-                //    return;
-                //}
+                string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                if (NroCertif.Equals(string.Empty))
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
+                    return;
+                }
                 try
                 {
-                    //string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(cta.NroSerieCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                    string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt("0137b72aa415", "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                    string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
 
                     org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
 
@@ -3551,24 +3582,22 @@ namespace CedServicios.Site.Facturacion.Electronica
 						return;
 					}
 
+                    string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                    if (NroCertif.Equals(string.Empty))
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
+                        return;
+                    }
 
-                    //CedWebEntidades.Cuenta cta = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta;
+                    string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
 
-                    //if (cta.NroSerieCertificado.Equals(string.Empty))
-                    //{
-                    //    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
-                    //    return;
-                    //}
+                    //Ir por WS
+                    org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
 
-                    //string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(cta.NroSerieCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                    org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
+                    clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(Cuit_VendedorTextBox.Text), Convert.ToInt64(Id_LoteTextbox.Text), Convert.ToInt32(Punto_VentaTextBox.Text), certificado);
 
-                    ////Ir por WS
-                    //org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
-
-                    //org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
-                    //clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(Cuit_VendedorTextBox.Text), Convert.ToInt64(Id_LoteTextbox.Text), Convert.ToInt32(Punto_VentaTextBox.Text), certificado);
-
-                    //CompletarUI(clcrdyndns, e);
+                    CompletarUI(clcrdyndns, e);
 
 				}
 				catch (System.Web.Services.Protocols.SoapException soapEx)

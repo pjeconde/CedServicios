@@ -11,13 +11,18 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             if (!IsPostBack)
             {
                 Menu1.Items.Clear();
                 Menu1.Orientation = Orientation.Horizontal;
                 Menu1.Enabled = true;
                 Menu1.Visible = true;
-                MenuItem mItem = new MenuItem("CUIT", "CUIT");
+                MenuItem mItem;
+                mItem = new MenuItem("Iniciar sesión", "Iniciar sesión");
+                Menu1.Items.Add(mItem);
+                Menu1.Items[Menu1.Items.Count - 1].Selectable = false;
+                mItem = new MenuItem("CUIT", "CUIT");
                 Menu1.Items.Add(mItem);
                 Menu1.Items[Menu1.Items.Count - 1].Selectable = false;
                 mItem = new MenuItem("Alta de CUIT", "Alta de CUIT");
@@ -121,7 +126,6 @@ namespace CedServicios.Site
                 UNDropDownList.DataSource = new List<Entidades.UN>();
                 //UsuarioTextBox.Text = "";
 
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 ContentPlaceHolderMenu.Visible = false;
                 UsuarioSesionContentPlaceHolder.Visible = false;
                 if (sesion != null)
@@ -151,7 +155,19 @@ namespace CedServicios.Site
                         }
                     }
                 }
+                if (sesion.Usuario.Id == null)
+                {
+                    for (int i = Menu1.Items.Count-1; i > 0; i--)
+                    {
+                        for (int j = Menu1.Items[i].ChildItems.Count-1; j >= 0; j--)
+                        {
+                            Menu1.Items[i].ChildItems.Remove(Menu1.Items[i].ChildItems[0]);
+                        }
+                        Menu1.Items.Remove(Menu1.Items[i]);
+                    }
+                }
             }
+            //string texto = Request.ServerVariables["HTTP_REFERER"];
         }
 
         private void HabilitarOpcionMenu(string itemPathValue)

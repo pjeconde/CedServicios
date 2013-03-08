@@ -11,7 +11,15 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            UsuarioTextBox.Focus();
+            if (!IsPostBack)
+            {
+                UsuarioTextBox.Focus();
+            }
+        }
+        protected void Page_PreRender(object sender, EventArgs e)
+        {
+            Menu menu = ((Menu)Master.FindControl("ContentPlaceHolderMenu").FindControl("Menu1"));
+            menu.Items.Remove(menu.Items[0]);
         }
         protected void LoginButton_Click(object sender, EventArgs e)
         {
