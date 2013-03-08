@@ -166,6 +166,10 @@ namespace CedServicios.Site
                         Menu1.Items.Remove(Menu1.Items[i]);
                     }
                 }
+                if (!Menu1.Items[0].Selectable)
+                {
+                    Menu1.Items.Remove(Menu1.Items[0]);
+                }
             }
             //string texto = Request.ServerVariables["HTTP_REFERER"];
         }
