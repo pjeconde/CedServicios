@@ -27,7 +27,8 @@ namespace CedServicios.RN
                 opcionesHabilitadas.Add("Unidad de Negocio/Alta de UN (sobre un CUIT pre-existente)");
                 opcionesHabilitadas.Add("Unidad de Negocio/Solicitud permiso de operador de servicio de una UN existente");
                 opcionesHabilitadas.Add("Unidad de Negocio/Solicitud permiso de administrador de UN");
-                opcionesHabilitadas.Add("Configuración");
+                opcionesHabilitadas.Add("Configuración/Cambio de Contraseña de Usuario");
+                opcionesHabilitadas.Add("Configuración/Modificación datos de Configuración");
                 opcionesHabilitadas.Add("Cerrar sesión");
 
                 List<Entidades.Permiso> permisoAdminSITEVigente = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)

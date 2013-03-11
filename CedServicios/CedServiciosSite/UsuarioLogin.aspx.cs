@@ -18,11 +18,8 @@ namespace CedServicios.Site
         }
         protected void Page_PreRender(object sender, EventArgs e)
         {
-            Menu menu = ((Menu)Master.FindControl("ContentPlaceHolderMenu").FindControl("Menu1"));
-            if (menu.Items.Count > 0 && menu.Items[0].Value.Equals("Iniciar sesión"))
-            {
-                menu.Items.Remove(menu.Items[0]);
-            }
+            Menu menu = ((Menu)Master.FindControl("MenuContentPlaceHolder").FindControl("Menu"));
+            Funciones.RemoverMenuItem(menu, "Iniciar sesión");
         }
         protected void LoginButton_Click(object sender, EventArgs e)
         {
