@@ -175,8 +175,9 @@ namespace CedServicios.Site
             }
             MenuItem menuItem = menu.FindItem("Iniciar sesión");
             if (menuItem != null && !menuItem.Selectable) RemoverMenuItem(menu, menuItem);
+            MenuItem menuSubItem = menu.FindItem("Administración Site/Explorador de Usuarios");
             menuItem = menu.FindItem("Administración Site");
-            if (menuItem != null && !menuItem.Selectable) RemoverMenuItem(menu, menuItem);
+            if (menuItem != null && menuSubItem != null && !menuSubItem.Selectable) RemoverMenuItem(menu, menuItem);
         }
         public static void RemoverMenuItem(Menu Menu, MenuItem MenuItem)
         {
