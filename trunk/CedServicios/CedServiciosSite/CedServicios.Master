@@ -50,34 +50,33 @@
                 <td style="text-align:left" class="Fuente">
                     <asp:Image ID="Image1" runat="server" ImageUrl="~/Imagenes/CedeiraSF-Logo.gif" />
                 </td>
-                <td style="width: 100%">
+                <td style="width:100%">
                 </td>
-                <asp:ContentPlaceHolder ID="UsuarioSesionContentPlaceHolder" runat="server" Visible="true">
+                <asp:ContentPlaceHolder ID="UsuarioContentPlaceHolder" runat="server" Visible="true">
                 <td>
                     <table>
                         <tr>
-                            <td style="text-align:left" class="Fuente">
-                                <asp:Label ID="FechaActualLabel" runat="server" Visible="true" Text="Fecha Actual: "></asp:Label>
+                            <td class="Fuente" align="right" valign="bottom" style="padding-bottom: 0px;"">
+                                <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario: "></asp:Label>
                             </td>
-                            <td style="text-align:left" class="Fuente">
-                            </td>
-                            <td style="text-align: left; width:10px" class="Fuente">
-                            </td>
-                            <td style="text-align:left" class="Fuente">
-                                <asp:Label ID="FechaInicioLabel" runat="server" Text="Fecha Inicio: "></asp:Label>
-                            </td>
-                            <td style="text-align: left" class="Fuente">
-                                <asp:Label ID="FechaInicioValorLabel" runat="server" Text=""></asp:Label>
+                            <td class="Fuente" align="left" valign="bottom" colspan="3">
+                                <asp:HyperLink ID="UsuarioHyperLink" runat="server" Text="" NavigateUrl="~/Default.aspx"></asp:HyperLink>
                             </td>
                         </tr>
                         <tr>
-                            <td class="Fuente" align="right" valign="bottom" style="padding-bottom: 0px;" colspan="2">
-                                <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario: "></asp:Label>
+                            <td class="Fuente">
+                                CUIT:
                             </td>
-                            <td style="text-align: left; width: 10px" class="Fuente">
+                            <td class="Fuente">
+                                <asp:DropDownList ID="CUITDropDownList" runat="server">
+                                </asp:DropDownList>
                             </td>
-                            <td class="Fuente" align="left" valign="bottom"  colspan="2">
-                                <asp:HyperLink ID="UsuarioHyperLink" runat="server" Text="...." NavigateUrl="~/Default.aspx"></asp:HyperLink>
+                            <td class="Fuente">
+                                UN:
+                            </td>
+                            <td class="Fuente">
+                                <asp:DropDownList ID="UNDropDownList" runat="server" ToolTip="Unidad de Negocio">
+                                </asp:DropDownList>
                             </td>
                         </tr>
                     </table>
@@ -86,31 +85,15 @@
             </tr>
         </table>
     </div>
-    <asp:ContentPlaceHolder ID="ContentPlaceHolderMenu" runat="server" Visible="true">
+    <asp:ContentPlaceHolder ID="MenuContentPlaceHolder" runat="server" Visible="true">
     <div id="DivMenu" style="text-align: center" align="center">
         <table>
             <tr>
-                <td style="width: 100%"></td>
-                <td class="Fuente">CUIT: </td>
-                <td class="Fuente">
-                    <asp:DropDownList ID="CUITDropDownList" runat="server">
-                    </asp:DropDownList>
-                </td>
-                <td class="Fuente" style="width: 30px"></td>
-                <td class="Fuente">UN: </td>
-                <td class="Fuente">
-                    <asp:DropDownList ID="UNDropDownList" runat="server" ToolTip="Unidad de Negocio">
-                    </asp:DropDownList>
-                </td>
-            </tr>
-        </table>
-        <table>
-            <tr>
                 <td align="center"  style="text-align: left">
-                    <asp:Menu ID="Menu1" runat="server" BackColor="white" 
+                    <asp:Menu ID="Menu" runat="server" BackColor="white" 
                         DynamicHorizontalOffset="5" CssClass="MainMenu" 
                         Font-Names="Verdana" Font-Size="10px" ForeColor="#284E98" 
-                        StaticSubMenuIndent="30px" onmenuitemclick="Menu1_MenuItemClick">
+                        StaticSubMenuIndent="30px" onmenuitemclick="Menu_MenuItemClick">
                         <DynamicHoverStyle BackColor="LightGray" ForeColor="DarkBlue" />
                         <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
                         <DynamicMenuStyle BackColor="#B5C7DE" />

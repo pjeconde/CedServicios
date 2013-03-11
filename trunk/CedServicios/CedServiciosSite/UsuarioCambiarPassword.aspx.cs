@@ -51,7 +51,9 @@ namespace CedServicios.Site
                 ConfirmacionPasswordNuevaTextBox.Enabled = false;
                 AceptarButton.Visible = false;
                 CancelarButton.Visible = false;
-                MsgErrorLabel.Text = "La Contraseña fue modificada satisfactoriamente.  Si desea seguir trabajando, deberá volver a identificarse en la página de inicio.";
+                RN.Sesion.Cerrar(sesion);
+                Funciones.PersonalizarControlesMaster(Master, sesion);
+                MsgErrorLabel.Text = "La Contraseña fue cambiada satisfactoriamente.<br />Para seguir trabajando, haga click en 'Iniciar Sesión'.";
             }
             catch (System.Threading.ThreadAbortException)
             {

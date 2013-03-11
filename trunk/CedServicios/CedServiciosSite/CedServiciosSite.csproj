@@ -249,6 +249,7 @@
     <Compile Include="ExploradorAutorizacion.aspx.designer.cs">
       <DependentUpon>ExploradorAutorizacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Funciones.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
