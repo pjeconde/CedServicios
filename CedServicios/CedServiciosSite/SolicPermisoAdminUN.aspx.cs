@@ -28,7 +28,7 @@ namespace CedServicios.Site
                 RN.UN.Leer(un, sesion);
 
                 string referenciaAAprobadores = String.Empty;
-                RN.Permiso.Solicitar(cuit, un, out referenciaAAprobadores, sesion);
+                RN.Permiso.SolicitarPermisoParaUsuario(cuit, un, out referenciaAAprobadores, sesion);
                 CUITTextBox.Enabled = false;
                 SolicitarButton.Enabled = false;
                 CancelarButton.Enabled = false;

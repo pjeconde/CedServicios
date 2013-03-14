@@ -43,7 +43,7 @@ namespace CedServicios.Site
             mItem = new MenuItem("Unidad de Negocio", "Unidad de Negocio");
             menu.Items.Add(mItem);
             menu.Items[menu.Items.Count - 1].Selectable = false;
-            mItem = new MenuItem("Alta de UN (sobre un CUIT pre-existente)", "Alta de UN (sobre un CUIT pre-existente)");
+            mItem = new MenuItem("Alta de Unidad de Negocio", "Alta de Unidad de Negocio");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             mItem = new MenuItem("Solicitud permiso de administrador de UN", "Solicitud permiso de administrador de UN");

@@ -61,7 +61,7 @@ namespace CedServicios.DB
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count == 0)
             {
-                throw new CedServicios.EX.Validaciones.ElementoInexistente("UN " + UN.Id + " del Cuit " + UN.Cuit);
+                throw new CedServicios.EX.Validaciones.ElementoInexistente("Unidad de negocio '" + UN.Id + "' del Cuit " + UN.Cuit);
             }
             else
             {
@@ -76,6 +76,26 @@ namespace CedServicios.DB
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
+        }
+        public void Crear(Entidades.UN UN, string PermisoUsoCUITxUNHandler, string PermisoAdminUNParaUsuarioHandler)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("declare @idWF varchar(256) ");
+            a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
+            a.AppendLine("declare @accionNro varchar(256) ");
+            a.AppendLine("update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro' ");
+            a.Append("Insert UN (Cuit, IdUN, DescrUN, IdWF, Estado) values (");
+            a.Append("'" + UN.Cuit + "', ");
+            a.Append("'" + UN.Id + "', ");
+            a.Append("'" + UN.Descr + "', ");
+            a.Append("@idWF, ");
+            a.Append("'" + UN.WF.Estado + "' ");
+            a.AppendLine(") ");
+            a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'UN', 'Alta', '" + UN.WF.Estado + "', '') ");
+            a.AppendLine();
+            a.Append(PermisoUsoCUITxUNHandler);
+            a.Append(PermisoAdminUNParaUsuarioHandler);
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
     }
 }

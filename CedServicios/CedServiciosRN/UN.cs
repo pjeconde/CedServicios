@@ -22,5 +22,16 @@ namespace CedServicios.RN
             CedServicios.DB.UN db = new DB.UN(Sesion);
             db.Leer(UN);
         }
+        public static void Registrar(Entidades.UN UN, out string ReferenciaAAprobadores , Entidades.Sesion Sesion)
+        {
+            List<Entidades.Usuario> usuariosAutorizadores = new List<Entidades.Usuario>();
+            string permisoUsoCUITxUNHandler = RN.Permiso.PermisoUsoCUITxUNHandler(UN, out usuariosAutorizadores, out ReferenciaAAprobadores, Sesion);
+            string permisoAdminUNParaUsuarioHandler = RN.Permiso.PermisoAdminUNParaUsuarioHandler(UN, Sesion);
+            DB.UN dbUN = new DB.UN(Sesion);
+            UN.WF.Estado = "Vigente";   //la UN siempre queda vigente, lo que, en todo caso, puede quedar PteAutoriz
+                                        //es su relación con el Cuit, que se explicita a través del Permiso UsoCuitXUN
+            dbUN.Crear(UN, permisoUsoCUITxUNHandler, permisoAdminUNParaUsuarioHandler);
+            //EnviarMailSolicitudAutorizacion(usuariosAutorizadores);
+        }
     }
 }

@@ -48,8 +48,8 @@ namespace CedServicios.DB
         public void Crear(Entidades.Usuario Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("declare @idWF varchar(256) ");
-            a.Append("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
+            a.AppendLine("declare @idWF varchar(256) ");
+            a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
             a.Append("Insert Usuario (IdUsuario, Nombre, Telefono, Email, Password, Pregunta, Respuesta, CantidadEnviosMail, FechaUltimoReenvioMail, EmailSMS, IdWF, Estado) values (");
             a.Append("'" + Usuario.Id + "', ");
             a.Append("'" + Usuario.Nombre + "', ");
@@ -63,7 +63,8 @@ namespace CedServicios.DB
             a.Append("'', ");           //EmailSMS
             a.Append("@idWF, ");        //IdWF
             a.Append("'" + Usuario.WF.Estado + "' ");
-            a.Append(")");
+            a.AppendLine(") ");
+            a.Append("insert Log values (@idWF, getdate(), '" + Usuario.Id + "', 'Usuario', 'Alta', 'PteConfig', '') ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
         public void Confirmar(Entidades.Usuario Usuario)

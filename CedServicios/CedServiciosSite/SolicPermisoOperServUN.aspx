@@ -37,14 +37,15 @@
                     Text="Leer servicio(s) disponible(s) para la Unidad de negocio" 
                     onclick="LeerListaTipoPermisosUNButton_Click" />
             </td>
-        </tr>        <tr>
-        <td align="right" style="padding-right:5px; padding-top:10px; height:25px;">
-            <asp:Label ID="Label2" runat="server" Text="Servicio"></asp:Label>
-        </td>
-        <td align="left" style="padding-top:10px; height:25px;">
-            <asp:DropDownList ID="IdTipoPermisoDropDownList" runat="server" TabIndex="2" Width="183px" DataValueField="Id" DataTextField="Descr" >
-            </asp:DropDownList>
-        </td>
+        </tr>        
+        <tr>
+            <td align="right" style="padding-right:5px; padding-top:10px; height:25px;">
+                <asp:Label ID="Label2" runat="server" Text="Servicio"></asp:Label>
+            </td>
+            <td align="left" style="padding-top:10px; height:25px;">
+                <asp:DropDownList ID="IdTipoPermisoDropDownList" runat="server" TabIndex="2" Width="183px" DataValueField="Id" DataTextField="Descr" >
+                </asp:DropDownList>
+            </td>
         </tr>
         <tr>
             <td>
