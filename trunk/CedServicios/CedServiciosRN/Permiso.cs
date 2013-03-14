@@ -22,7 +22,7 @@ namespace CedServicios.RN
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
             return db.LeerListaPermisosPteAutoriz(Usuario);
         }
-        public static void Solicitar(Entidades.Cuit Cuit, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
+        public static void SolicitarPermisoParaUsuario(Entidades.Cuit Cuit, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
         {
             List<Entidades.Permiso> esAdminCUITdeCUITsolicitado = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
             {
@@ -33,12 +33,12 @@ namespace CedServicios.RN
                 throw new EX.Permiso.Existente(esAdminCUITdeCUITsolicitado[0].WF.Estado);
             }
             Entidades.Permiso permiso = new Entidades.Permiso();
-            permiso.IdUsuario = Sesion.Usuario.Id;
+            permiso.Usuario = Sesion.Usuario;
             permiso.Cuit = Cuit.Nro;
             permiso.IdUN = String.Empty;
             permiso.TipoPermiso.Id = "AdminCUIT";
             permiso.FechaFinVigencia=new DateTime(2062, 12, 31);
-            permiso.IdUsuarioSolicitante = Sesion.Usuario.Id;
+            permiso.UsuarioSolicitante = Sesion.Usuario;
             permiso.Accion.Tipo = "SolicAdminCuit";
             permiso.WF.Estado = "PteAutoriz";
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
@@ -53,7 +53,7 @@ namespace CedServicios.RN
                 //Enviar carta de aviso
             }
         }
-        public static void Solicitar(Entidades.Cuit Cuit, Entidades.UN UN, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
+        public static void SolicitarPermisoParaUsuario(Entidades.Cuit Cuit, Entidades.UN UN, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
         {
             List<Entidades.Permiso> esAdminUNdelaUNsolicitada = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
             {
@@ -64,12 +64,12 @@ namespace CedServicios.RN
                 throw new EX.Permiso.Existente(esAdminUNdelaUNsolicitada[0].WF.Estado);
             }
             Entidades.Permiso permiso = new Entidades.Permiso();
-            permiso.IdUsuario = Sesion.Usuario.Id;
+            permiso.Usuario = Sesion.Usuario;
             permiso.Cuit = Cuit.Nro;
             permiso.IdUN = UN.Id;
             permiso.TipoPermiso.Id = "AdminUN";
             permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
-            permiso.IdUsuarioSolicitante = Sesion.Usuario.Id;
+            permiso.UsuarioSolicitante = Sesion.Usuario;
             permiso.Accion.Tipo = "SolicAdminUN";
             permiso.WF.Estado = "PteAutoriz";
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
@@ -84,7 +84,29 @@ namespace CedServicios.RN
                 //Enviar carta de aviso
             }
         }
-        public static void Solicitar(Entidades.Cuit Cuit, Entidades.UN UN, Entidades.TipoPermiso TipoPermiso, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
+        public static string PermisoAdminUNParaUsuarioHandler(Entidades.UN UN, Entidades.Sesion Sesion)
+        {
+            List<Entidades.Permiso> esAdminUNdelaUNsolicitada = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
+            {
+                return p.TipoPermiso.Id == "AdminUN" && p.Cuit == UN.Cuit && p.IdUN == UN.Id;
+            });
+            if (esAdminUNdelaUNsolicitada.Count != 0)
+            {
+                throw new EX.Permiso.Existente(esAdminUNdelaUNsolicitada[0].WF.Estado);
+            }
+            Entidades.Permiso permiso = new Entidades.Permiso();
+            permiso.Usuario = Sesion.Usuario;
+            permiso.Cuit = UN.Cuit;
+            permiso.IdUN = UN.Id;
+            permiso.TipoPermiso.Id = "AdminUN";
+            permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
+            permiso.UsuarioSolicitante = Sesion.Usuario;
+            permiso.Accion.Tipo = "AltaUN";
+            permiso.WF.Estado = "Vigente";
+            CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
+            return db.AltaHandler(permiso, false, false);
+        }
+        public static void SolicitarPermisoParaUsuario(Entidades.Cuit Cuit, Entidades.UN UN, Entidades.TipoPermiso TipoPermiso, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
         {
             List<Entidades.Permiso> yaTieneHabilitadoElServicioParaLaUN = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
             {
@@ -95,12 +117,12 @@ namespace CedServicios.RN
                 throw new EX.Permiso.Existente(yaTieneHabilitadoElServicioParaLaUN[0].WF.Estado);
             }
             Entidades.Permiso permiso = new Entidades.Permiso();
-            permiso.IdUsuario = Sesion.Usuario.Id;
+            permiso.Usuario = Sesion.Usuario;
             permiso.Cuit = Cuit.Nro;
             permiso.IdUN = UN.Id;
             permiso.TipoPermiso = TipoPermiso;
             permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
-            permiso.IdUsuarioSolicitante = Sesion.Usuario.Id;
+            permiso.UsuarioSolicitante = Sesion.Usuario;
             permiso.Accion.Tipo = "SolicOperServUN";
             List<Entidades.Permiso> esAdminUNdelaUN = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
             {
@@ -126,19 +148,39 @@ namespace CedServicios.RN
                 //Enviar carta de aviso
             }
         }
-        private static List<Entidades.Usuario> UsuariosAprobadores(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
+        public static string PermisoUsoCUITxUNHandler(Entidades.UN UN, out List<Entidades.Usuario> UsuariosAutorizadores, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
         {
-            List<Entidades.Usuario> usuariosAprobadores = new List<Entidades.Usuario>();
-            switch (Permiso.TipoPermiso.Id)
+            CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
+            //if (db.Existe(String.Empty, UN.Cuit, UN.Id, "UsoCUITxUN"))
+            Entidades.Permiso permiso = new Entidades.Permiso();
+            permiso.Cuit = UN.Cuit;
+            permiso.IdUN = UN.Id;
+            permiso.TipoPermiso.Id = "UsoCUITxUN";
+            permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
+            permiso.UsuarioSolicitante = Sesion.Usuario;
+            permiso.Accion.Tipo = "AltaUN";
+            List<Entidades.Permiso> usuarioEsAdminCUIT = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
             {
-                case "AdminCUIT":
-                    break;
-                case "AdminUN":
-                    break;
-                case "eFact":
-                    break;
+                return p.TipoPermiso.Id == "AdminCUIT" && p.Cuit == UN.Cuit && p.WF.Estado == "Vigente";
+            });
+            if (usuarioEsAdminCUIT.Count != 0)
+            {
+                permiso.WF.Estado = "Vigente";
+                UsuariosAutorizadores = new List<Entidades.Usuario>();
+                ReferenciaAAprobadores = String.Empty;
             }
-            return usuariosAprobadores;
+            else
+            {
+                permiso.WF.Estado = "PteAutoriz";
+                UsuariosAutorizadores = db.LeerListaUsuariosAutorizadores(permiso.Cuit);
+                ReferenciaAAprobadores = String.Empty;
+                for (int i = 0; i < UsuariosAutorizadores.Count; i++)
+                {
+                    ReferenciaAAprobadores += UsuariosAutorizadores[i].Nombre;
+                    if (i + 1 < UsuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
+                }
+            }
+            return db.AltaHandler(permiso, false, false);
         }
     }
 }

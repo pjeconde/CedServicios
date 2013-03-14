@@ -27,9 +27,19 @@ namespace CedServicios.Site
             {
                 pendientes = Convert.ToBoolean(ViewState["ExploradorAutorizacionPendientes"]);
             }
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             if (pendientes)
             {
                 TituloPaginaLabel.Text = "Explorador de Autorizaciones pendientes";
+                AutorizacionesGridView.DataSource = RN.Permiso.LeerListaPermisosPteAutoriz(sesion.Usuario, sesion);
+                AutorizacionesGridView.DataBind();
+            }
+        }
+        protected void AutorizacionesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("Seleccionar"))
+            {
+                MensajeLabel.Text = "Procesar renglon " + e.CommandArgument.ToString();
             }
         }
     }

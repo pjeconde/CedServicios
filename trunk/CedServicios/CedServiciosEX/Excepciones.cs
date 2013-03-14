@@ -59,26 +59,56 @@ namespace CedServicios.EX
             }
         }
         [Serializable]
-		public class ElementoInexistente : CedServicios.EX.Validaciones.BaseApplicationException
-		{
-			static string TextoError = "Inexistente";
-			public ElementoInexistente(IDescrClase Elemento) : base(Elemento._Descripcion + " " + TextoError)
-			{
-			}
-			public ElementoInexistente(IDescrClase Elemento, string Valor) : base(Elemento._Descripcion + " " + Valor + " " + TextoError)
-			{
-			}
-			public ElementoInexistente(string Descripcion) : base(Descripcion + " " + TextoError)
-			{
-			}
-			public ElementoInexistente(Exception inner) : base(TextoError, inner)
-			{
-			}
-			public ElementoInexistente(SerializationInfo info, StreamingContext context) : base(info, context)
-			{
-			}
-		}
-		[Serializable]
+        public class ElementoInexistente : CedServicios.EX.Validaciones.BaseApplicationException
+        {
+            static string TextoError = "Inexistente";
+            public ElementoInexistente(IDescrClase Elemento)
+                : base(Elemento._Descripcion + " " + TextoError)
+            {
+            }
+            public ElementoInexistente(IDescrClase Elemento, string Valor)
+                : base(Elemento._Descripcion + " " + Valor + " " + TextoError)
+            {
+            }
+            public ElementoInexistente(string Descripcion)
+                : base(Descripcion + " " + TextoError)
+            {
+            }
+            public ElementoInexistente(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public ElementoInexistente(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class ElementoYaInexistente : CedServicios.EX.Validaciones.BaseApplicationException
+        {
+            static string TextoError = "ya existe";
+            public ElementoYaInexistente(IDescrClase Elemento)
+                : base(Elemento._Descripcion + " " + TextoError)
+            {
+            }
+            public ElementoYaInexistente(IDescrClase Elemento, string Valor)
+                : base(Elemento._Descripcion + " " + Valor + " " + TextoError)
+            {
+            }
+            public ElementoYaInexistente(string Descripcion)
+                : base(Descripcion + " " + TextoError)
+            {
+            }
+            public ElementoYaInexistente(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public ElementoYaInexistente(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
 		public class ArchivoInexistente : CedServicios.EX.BaseApplicationException
 		{
 			static string TextoError = "Archivo inexistente";

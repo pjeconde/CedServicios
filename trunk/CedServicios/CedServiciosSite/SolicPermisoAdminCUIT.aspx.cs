@@ -22,7 +22,7 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion=(Entidades.Sesion)Session["Sesion"];
                 RN.Cuit.Leer(cuit, sesion);
                 string referenciaAAprobadores = String.Empty;
-                RN.Permiso.Solicitar(cuit, out referenciaAAprobadores, sesion);
+                RN.Permiso.SolicitarPermisoParaUsuario(cuit, out referenciaAAprobadores, sesion);
                 CUITTextBox.Enabled = false;
                 SolicitarButton.Enabled = false;
                 CancelarButton.Enabled = false;

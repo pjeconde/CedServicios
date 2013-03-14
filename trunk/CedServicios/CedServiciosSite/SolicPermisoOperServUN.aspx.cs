@@ -33,7 +33,7 @@ namespace CedServicios.Site
 
                 string referenciaAAprobadores = String.Empty;
 
-                RN.Permiso.Solicitar(cuit, un, tipoPermiso, out referenciaAAprobadores, sesion);
+                RN.Permiso.SolicitarPermisoParaUsuario(cuit, un, tipoPermiso, out referenciaAAprobadores, sesion);
 
                 CUITTextBox.Enabled = false;
                 SolicitarButton.Enabled = false;

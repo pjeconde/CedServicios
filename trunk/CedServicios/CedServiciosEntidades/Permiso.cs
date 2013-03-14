@@ -8,31 +8,33 @@ namespace CedServicios.Entidades
     [Serializable]
     public class Permiso
     {
-        private string idUsuario;
+        private Usuario usuario;
         private string cuit;
         private string idUN;
         private TipoPermiso tipoPermiso;
         private DateTime fechaFinVigencia;
-        private string idUsuarioSolicitante;
+        private Usuario usuarioSolicitante;
         private Accion accion;
         private WF wF;
 
         public Permiso()
         {
+            usuario = new Usuario();
             tipoPermiso = new TipoPermiso();
+            usuarioSolicitante = new Entidades.Usuario();
             accion = new Accion();
             wF = new WF();
         }
 
-        public string IdUsuario
+        public Usuario Usuario
         {
             set
             {
-                idUsuario = value;
+                usuario = value;
             }
             get
             {
-                return idUsuario;
+                return usuario;
             }
         }
         public string Cuit
@@ -79,15 +81,15 @@ namespace CedServicios.Entidades
                 return fechaFinVigencia;
             }
         }
-        public string IdUsuarioSolicitante
+        public Usuario UsuarioSolicitante
         {
             set
             {
-                idUsuarioSolicitante = value;
+                usuarioSolicitante = value;
             }
             get
             {
-                return idUsuarioSolicitante;
+                return usuarioSolicitante;
             }
         }
         public Accion Accion
@@ -112,5 +114,56 @@ namespace CedServicios.Entidades
                 return wF;
             }
         }
+        #region Propiedades redundantes
+        public string Estado
+        {
+            get
+            {
+                return wF.Estado;
+            }
+        }
+        public string IdTipoPermiso
+        {
+            get
+            {
+                return tipoPermiso.Id;
+            }
+        }
+        public string DescrTipoPermiso
+        {
+            get
+            {
+                return tipoPermiso.Descr;
+            }
+        }
+        public string IdUsuario
+        {
+            get
+            {
+                return usuario.Id;
+            }
+        }
+        public string NombreUsuario
+        {
+            get
+            {
+                return usuario.Nombre;
+            }
+        }
+        public string IdUsuarioSolicitante
+        {
+            get
+            {
+                return usuarioSolicitante.Id;
+            }
+        }
+        public string NombreUsuarioSolicitante
+        {
+            get
+            {
+                return usuarioSolicitante.Nombre;
+            }
+        }
+        #endregion
     }
 }

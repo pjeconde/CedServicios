@@ -24,7 +24,7 @@ namespace CedServicios.RN
             {
                 opcionesHabilitadas.Add("CUIT/Alta de CUIT");
                 opcionesHabilitadas.Add("CUIT/Solicitud permiso de administrador de CUIT");
-                opcionesHabilitadas.Add("Unidad de Negocio/Alta de UN (sobre un CUIT pre-existente)");
+                opcionesHabilitadas.Add("Unidad de Negocio/Alta de Unidad de Negocio");
                 opcionesHabilitadas.Add("Unidad de Negocio/Solicitud permiso de operador de servicio de una UN existente");
                 opcionesHabilitadas.Add("Unidad de Negocio/Solicitud permiso de administrador de UN");
                 opcionesHabilitadas.Add("Configuración/Cambio de Contraseña de Usuario");

@@ -26,8 +26,14 @@ namespace CedServicios.Site
                 case "Iniciar sesión":
                     Response.Redirect("~/UsuarioLogin.aspx");
                     break;
+                case "Alta de CUIT":
+                    Response.Redirect("~/CuitCrear.aspx");
+                    break;
                 case "Solicitud permiso de administrador de CUIT":
                     Response.Redirect("~/SolicPermisoAdminCUIT.aspx");
+                    break;
+                case "Alta de Unidad de Negocio":
+                    Response.Redirect("~/UNCrear.aspx");
                     break;
                 case "Solicitud permiso de administrador de UN":
                     Response.Redirect("~/SolicPermisoAdminUN.aspx");
