@@ -22,7 +22,7 @@ namespace CedServicios.Site
             {
                 MsgErrorLabel.Text = String.Empty;
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                RN.Usuario.ReportarIdUsuarios(EmailTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
+                RN.EnvioCorreo.ReporteIdUsuarios(EmailTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
                 EmailTextBox.Enabled = false;
                 AceptarButton.Visible = false;
                 CancelarButton.Visible = false;

@@ -49,9 +49,8 @@ namespace CedServicios.RN
             {
                 ReferenciaAAprobadores += usuariosAutorizadores[i].Nombre;
                 if (i + 1 < usuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
-
-                //Enviar carta de aviso
             }
+            RN.EnvioCorreo.SolicitudAutorizacion("Administrador del CUIT " + Cuit.Nro, Sesion.Usuario, usuariosAutorizadores);
         }
         public static void SolicitarPermisoParaUsuario(Entidades.Cuit Cuit, Entidades.UN UN, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
         {
@@ -74,15 +73,14 @@ namespace CedServicios.RN
             permiso.WF.Estado = "PteAutoriz";
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
             db.Alta(permiso);
-            List<Entidades.Usuario> usuariosAutorizadores = db.LeerListaUsuariosAutorizadores(permiso.Cuit);
+            List<Entidades.Usuario> usuariosAutorizadores = db.LeerListaUsuariosAutorizadores(permiso.Cuit, permiso.IdUN);
             ReferenciaAAprobadores = String.Empty;
             for (int i = 0; i < usuariosAutorizadores.Count; i++)
             {
                 ReferenciaAAprobadores += usuariosAutorizadores[i].Nombre;
                 if (i + 1 < usuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
-
-                //Enviar carta de aviso
             }
+            RN.EnvioCorreo.SolicitudAutorizacion("Administrador de la Unidad de Negocio '" + UN.Descr + "' del CUIT " + Cuit.Nro, Sesion.Usuario, usuariosAutorizadores);
         }
         public static string PermisoAdminUNParaUsuarioHandler(Entidades.UN UN, Entidades.Sesion Sesion)
         {
@@ -128,6 +126,7 @@ namespace CedServicios.RN
             {
                 return p.TipoPermiso.Id == "AdminUN" && p.Cuit == Cuit.Nro && p.IdUN == UN.Id && p.WF.Estado == "Vigente";
             });
+            ReferenciaAAprobadores = String.Empty;
             if (esAdminUNdelaUN.Count != 0)
             {
                 permiso.WF.Estado = "Vigente";
@@ -135,20 +134,18 @@ namespace CedServicios.RN
             else
             {
                 permiso.WF.Estado = "PteAutoriz";
-            }
-            CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
-            db.Alta(permiso);
-            List<Entidades.Usuario> usuariosAutorizadores = db.LeerListaUsuariosAutorizadores(permiso.Cuit);
-            ReferenciaAAprobadores = String.Empty;
-            for (int i = 0; i < usuariosAutorizadores.Count; i++)
-            {
-                ReferenciaAAprobadores += usuariosAutorizadores[i].Nombre;
-                if (i + 1 < usuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
-
-                //Enviar carta de aviso
+                CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
+                db.Alta(permiso);
+                List<Entidades.Usuario> usuariosAutorizadores = db.LeerListaUsuariosAutorizadores(permiso.Cuit);
+                for (int i = 0; i < usuariosAutorizadores.Count; i++)
+                {
+                    ReferenciaAAprobadores += usuariosAutorizadores[i].Nombre;
+                    if (i + 1 < usuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
+                }
+                RN.EnvioCorreo.SolicitudAutorizacion("Operador del servicio '" + TipoPermiso.Descr + "' de la Unidad de Negocio '" + UN.Descr + "' del CUIT " + Cuit.Nro, Sesion.Usuario, usuariosAutorizadores);
             }
         }
-        public static string PermisoUsoCUITxUNHandler(Entidades.UN UN, out List<Entidades.Usuario> UsuariosAutorizadores, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
+        public static string PermisoUsoCUITxUNHandler(Entidades.UN UN, out List<Entidades.Usuario> UsuariosAutorizadores, out string ReferenciaAAprobadores, out string EstadoPermisoUsoCUITxUN, Entidades.Sesion Sesion)
         {
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
             //if (db.Existe(String.Empty, UN.Cuit, UN.Id, "UsoCUITxUN"))
@@ -180,7 +177,18 @@ namespace CedServicios.RN
                     if (i + 1 < UsuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
                 }
             }
+            EstadoPermisoUsoCUITxUN = permiso.WF.Estado;
             return db.AltaHandler(permiso, false, false);
+        }
+        public static void Autorizar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
+        {
+            DB.Permiso db = new DB.Permiso(Sesion);
+            db.CambioEstado(Permiso, "Vigente");
+        }
+        public static void Rechazar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
+        {
+            DB.Permiso db = new DB.Permiso(Sesion);
+            db.CambioEstado(Permiso, "Rech");
         }
     }
 }

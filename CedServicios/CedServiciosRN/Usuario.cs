@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Net.Mail;
-using System.Net;
 using CaptchaDotNet2.Security.Cryptography;
 
 namespace CedServicios.RN
@@ -138,7 +136,7 @@ namespace CedServicios.RN
             Usuario.WF.Estado = "PteConfig";
             DB.Usuario usuario = new DB.Usuario(Sesion);
             usuario.Crear(Usuario);
-            EnviarMailConfirmacion("Ahora dispone de una nueva cuenta", Usuario);
+            RN.EnvioCorreo.ConfirmacionAltaUsuario(Usuario);
         }
         public static void Confirmar(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
@@ -147,7 +145,7 @@ namespace CedServicios.RN
             DB.Usuario usuario = new DB.Usuario((Entidades.Sesion)Sesion);
             usuario.Confirmar(Usuario);
             Leer(Usuario, (Entidades.Sesion)Sesion);
-            EnviarSMS("Alta cuenta " + CantidadDeFilas((Entidades.Sesion)Sesion).ToString(), Usuario.Nombre, usuario.DestinatariosAvisoAltaUsuario());
+            RN.EnvioSMS.Enviar("Alta cuenta " + CantidadDeFilas((Entidades.Sesion)Sesion).ToString(), Usuario.Nombre, usuario.DestinatariosAvisoAltaUsuario());
         }
         public static bool IdCuentaDisponible(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
@@ -166,56 +164,6 @@ namespace CedServicios.RN
                 {
                     throw ex;
                 }
-            }
-        }
-        private static void EnviarMailConfirmacion(string Asunto, Entidades.Usuario Usuario)
-        {
-            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
-            mail.To.Add(new MailAddress(Usuario.Email));
-            mail.Subject = Asunto;
-            mail.IsBodyHtml = true;
-            StringBuilder a = new StringBuilder();
-            a.Append("Estimado/a " + Usuario.Nombre.Trim() + ":<br />");
-            a.Append("<br />");
-            a.Append("Gracias por crear su cuenta.<br />");
-            a.Append("<br />");
-            a.Append("Para confirmar el alta, haga clic en el enlace que aparece a continuación:<br />");
-            a.Append("<br />");
-            string link = "http://www.cedeira.com.ar/UsuarioConfirmacion.aspx?Id=" + Encryptor.Encrypt(Usuario.Id, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
-            char c = (char)34;
-            a.Append("<a class=" + c + "link" + c + " href=" + c + link + c + ">" + link + "</a><br />");
-            a.Append("<br />");
-            a.Append("Si no puede acceder a la página, copie la URL y péguela en una ventana nueva del navegador.<br />");
-            a.Append("<br />");
-            a.Append("Si ha recibido este correo electrónico y no ha solicitado la creación de una cuenta, es probable que otro usuario haya introducido su dirección por error al intentar llevar a cabo este proceso. Si no ha solicitado la creación de una cuenta, no es necesario que realice ninguna acción, y puede ignorar este mensaje con total seguridad.<br />");
-            a.Append("<br />");
-            a.Append("Saludos.<br />");
-            a.Append("<br />");
-            a.Append("Cedeira Software Factory<br />");
-            a.Append("<br />");
-            a.Append("<br />");
-            a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
-            mail.Body = a.ToString();
-            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
-            smtpClient.Send(mail);
-        }
-        public static void EnviarSMS(string Asunto, string Mensaje, List<Entidades.Usuario> Destinatarios)
-        {
-            if (Destinatarios.Count > 0)
-            {
-                SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
-                for (int i = 0; i < Destinatarios.Count; i++)
-                {
-                    mail.To.Add(new MailAddress(Destinatarios[i].EmailSMS));
-                }
-                mail.Subject = Asunto;
-                mail.Body = Mensaje;
-                smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
-                smtpClient.Send(mail);
             }
         }
         public static int CantidadDeFilas(Entidades.Sesion Sesion)
@@ -269,37 +217,6 @@ namespace CedServicios.RN
                     }
                 }
             }
-        }
-        public static void ReportarIdUsuarios(string Email, Entidades.Sesion Sesion)
-        {
-            DB.Usuario db = new DB.Usuario(Sesion);
-            List<Entidades.Usuario> cuentas = db.Lista(Email);
-
-            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
-            mail.To.Add(new MailAddress(Email));
-            mail.Subject = "Información de cuenta(s)";
-            StringBuilder a = new StringBuilder();
-            a.Append("Estimado/a " + cuentas[0].Nombre.Trim() + ":"); a.AppendLine();
-            a.AppendLine();
-            a.Append("Cumplimos en informarle cuáles son las cuentas vinculadas a este correo electrónico:"); a.AppendLine();
-            a.AppendLine();
-            for (int i = 0; i < cuentas.Count; i++)
-            {
-                a.Append("Cuenta '" + cuentas[i].Nombre + "' (Id.Usuario='" + cuentas[i].Id + "')"); a.AppendLine();
-            }
-            a.AppendLine();
-            a.Append("Si ha recibido este correo electrónico y no ha solicitado información sobre su(s) cuenta(s), es probable que otro usuario haya introducido su dirección por error. Si no ha solicitado esta información, no es necesario que realice ninguna acción, y puede ignorar este mensaje con total seguridad."); a.AppendLine();
-            a.Append("Saludos."); a.AppendLine();
-            a.AppendLine();
-            a.Append("Cedeira Software Factory"); a.AppendLine();
-            a.AppendLine();
-            a.AppendLine();
-            a.AppendLine("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden."); a.AppendLine();
-            mail.Body = a.ToString();
-            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
-            smtpClient.Send(mail);
         }
     }
 }

@@ -274,7 +274,20 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
 {
 	background-image: url('/Imagenes/bgFEA-C.jpg');
 }
-
+.modalBackground
+{
+    background-color:Gray;
+    filter:alpha(opacity=70);
+    opacity:0.7;
+}
+.ModalWindow
+{
+  border: solid1px#c0c0c0;
+  background:#f0f0f0;
+  padding: 0px10px10px10px;
+  position:absolute;
+  top:-1000px;
+}
 .MyCalendar .ajax__calendar_container {
     border:1px solid #646464;
     position:relative;
