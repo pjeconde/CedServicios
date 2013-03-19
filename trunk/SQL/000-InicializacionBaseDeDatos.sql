@@ -257,9 +257,9 @@ insert TipoPermiso values ('AdminCUIT', 'Administrador del CUIT')
 insert TipoPermiso values ('AdminSITE', 'Administrador del site')
 insert TipoPermiso values ('AdminUN', 'Administrador de la UN')
 insert TipoPermiso values ('UsoCUITxUN', 'UN con uso del CUIT permitido')
-insert TipoPermiso values ('eFact', 'Servicio eFact')
-insert TipoPermiso values ('eFactArticulos', 'Servicio eFactArticulos')
-insert TipoPermiso values ('eFactITFonline', 'Servicio eFactITFonline')
+insert TipoPermiso values ('eFact', 'eFact')
+insert TipoPermiso values ('eFactArticulos', 'eFactArticulos')
+insert TipoPermiso values ('eFactITFonline', 'eFactITFonline')
 
 SET ANSI_NULLS ON
 GO
