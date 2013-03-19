@@ -164,6 +164,13 @@ namespace CedServicios.Entidades
                 return usuarioSolicitante.Nombre;
             }
         }
+        public string TipoAccion
+        {
+            get
+            {
+                return accion.Tipo;
+            }
+        }
         #endregion
     }
 }

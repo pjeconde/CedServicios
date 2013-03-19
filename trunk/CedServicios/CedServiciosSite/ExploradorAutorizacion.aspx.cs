@@ -27,20 +27,98 @@ namespace CedServicios.Site
             {
                 pendientes = Convert.ToBoolean(ViewState["ExploradorAutorizacionPendientes"]);
             }
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             if (pendientes)
             {
                 TituloPaginaLabel.Text = "Explorador de Autorizaciones pendientes";
-                AutorizacionesGridView.DataSource = RN.Permiso.LeerListaPermisosPteAutoriz(sesion.Usuario, sesion);
-                AutorizacionesGridView.DataBind();
+            }
+            ActualizarGrilla();
+        }
+        private void ActualizarGrilla()
+        {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            List<Entidades.Permiso> permiso = new List<Entidades.Permiso>();
+            if (pendientes)
+            {
+                permiso = RN.Permiso.LeerListaPermisosPteAutoriz(sesion.Usuario, sesion);
+            }
+            else
+            {
+            }
+            AutorizacionesGridView.DataSource = permiso;
+            AutorizacionesGridView.DataBind();
+            if (permiso.Count == 0)
+            {
+                MensajeLabel.Text = "No hay autorizaciones pendientes";
             }
         }
         protected void AutorizacionesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName.Equals("Seleccionar"))
+            switch (e.CommandName)
             {
-                MensajeLabel.Text = "Procesar renglon " + e.CommandArgument.ToString();
+                case "Autorizar":
+                    Confirmar("Autorización", e);
+                    break;
+                case "Rechazar":
+                    Confirmar("Rechazo", e);
+                    break;
+                default:
+                    break;
             }
+        }
+        private void Confirmar(string Evento, GridViewCommandEventArgs e)
+        {
+            int item = Convert.ToInt32(e.CommandArgument);
+            Entidades.Permiso permiso = ((List<Entidades.Permiso>)((System.Web.UI.WebControls.GridView)e.CommandSource).DataSource)[item];
+            TituloConfirmacionLabel.Text = "Confirmar " + Evento.ToLower();
+            AccionLabel.Text = permiso.Accion.Tipo + " nº " + permiso.Accion.Nro;
+            if (!permiso.Cuit.Equals(String.Empty))
+            {
+                CuitLabel.Text = permiso.Cuit;
+            }
+            else
+            {
+                CuitLabel.Text = "(no aplica)";
+            }
+            DescrTipoPermisoLabel.Text = permiso.TipoPermiso.Descr;
+            EstadoLabel.Text = permiso.WF.Estado;
+            FechaFinVigenciaLabel.Text = permiso.FechaFinVigencia.ToString("dd/MM/yyyy");
+            if (!permiso.IdUN.Equals(String.Empty))
+            {
+                UNLabel.Text = permiso.IdUN;
+            }
+            else
+            {
+                UNLabel.Text = "(no aplica)";
+            }
+            if (permiso.Usuario.Id != String.Empty)
+            {
+                UsuarioLabel.Text = permiso.Usuario.Nombre + " (" + permiso.Usuario.Email + ")";
+            }
+            else
+            {
+                UsuarioLabel.Text = "(no aplica)";
+            }
+            UsuarioSolicitanteLabel.Text = permiso.UsuarioSolicitante.Nombre + " (" + permiso.UsuarioSolicitante.Email + ")";
+            ViewState["Permiso"] = permiso;
+            ViewState["PermisoAccion"] = Evento;
+            ModalPopupExtender1.Show();
+        }
+        protected void ConfirmarButton_Click(object sender, EventArgs e)
+        {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            Entidades.Permiso permiso = (Entidades.Permiso)ViewState["Permiso"];
+            string evento = ViewState["PermisoAccion"].ToString();
+            switch (evento)
+            {
+                case "Autorización":
+                    RN.Permiso.Autorizar(permiso, sesion);
+                    break;
+                case "Rechazo":
+                    RN.Permiso.Rechazar(permiso, sesion);
+                    break;
+            }
+            ActualizarGrilla();
+            Funciones.PersonalizarControlesMaster(Master, sesion);
         }
     }
 }

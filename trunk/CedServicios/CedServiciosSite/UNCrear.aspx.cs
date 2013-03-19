@@ -39,14 +39,15 @@ namespace CedServicios.Site
             {
                 string referenciaAAprobadores = String.Empty;
                 un.Descr = DescrUNTextBox.Text;
-                RN.UN.Registrar(un, out referenciaAAprobadores, sesion);
+                string estadoPermisoUsoCUITxUN = String.Empty;
+                RN.UN.Registrar(un, out referenciaAAprobadores, out estadoPermisoUsoCUITxUN, sesion);
 
                 CUITTextBox.Enabled = false;
                 IdUNTextBox.Enabled = false;
                 DescrUNTextBox.Enabled = false;
                 AceptarButton.Enabled = false;
                 CancelarButton.Enabled = false;
-                if (un.WF.Estado == "Vigente")
+                if (estadoPermisoUsoCUITxUN == "Vigente")
                 {
                     MensajeLabel.Text = "La Unidad de negocio fué creada satisfactoriamente";
                 }
