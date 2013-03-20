@@ -25,7 +25,16 @@ namespace CedServicios.RN
                 wp.Credentials = networkCredential;
                 objIBK.Proxy = wp;
             }
-            X509Store store = new X509Store(StoreLocation.LocalMachine);
+            string storeLocation = System.Configuration.ConfigurationManager.AppSettings["StoreLocation"];
+            X509Store store;
+            if (storeLocation == "CurrentUser")
+            {
+                store = new X509Store(StoreLocation.CurrentUser);
+            }
+            else
+            {
+                store = new X509Store(StoreLocation.LocalMachine);
+            }
             store.Open(OpenFlags.ReadOnly);
             X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
             if (col.Count.Equals(1))
@@ -93,8 +102,16 @@ namespace CedServicios.RN
                 wp.Credentials = networkCredential;
                 objIBK.Proxy = wp;
             }
-
-            X509Store store = new X509Store(StoreLocation.LocalMachine);
+            string storeLocation = System.Configuration.ConfigurationManager.AppSettings["StoreLocation"];
+            X509Store store;
+            if (storeLocation == "CurrentUser")
+            {
+                store = new X509Store(StoreLocation.CurrentUser);
+            }
+            else
+            {
+                store = new X509Store(StoreLocation.LocalMachine);
+            }
             store.Open(OpenFlags.ReadOnly);
             X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
             if (col.Count.Equals(1))
