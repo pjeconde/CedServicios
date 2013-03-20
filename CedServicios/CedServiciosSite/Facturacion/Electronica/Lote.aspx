@@ -202,7 +202,7 @@
 																	</ContentTemplate>
 																</asp:UpdatePanel>
 																<asp:Label ID="MonedaComprobanteExclusivoPremiumLabel" runat="server" Font-Size="X-Small"
-																	ForeColor="brown" Text="(exclusivo SERVICIO PREMIUM)"></asp:Label>
+																	ForeColor="Brown"></asp:Label>
 																<asp:UpdateProgress ID="monedaUpdateProgress" runat="server" AssociatedUpdatePanelID="monedaUpdatePanel"
 																	DisplayAfter="0">
 																	<ProgressTemplate>
