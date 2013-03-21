@@ -30,7 +30,7 @@ namespace CedServicios.DB
             a.AppendLine("from #p ");
             a.AppendLine("left outer join Usuario u on #p.IdUsuario=u.IdUsuario ");
             a.AppendLine("left outer join Usuario us on #p.IdUsuarioSolicitante=us.IdUsuario ");
-            a.AppendLine("order by #p.Cuit, #p.IdUN, NombreUsuario, #p.IdTipoPermiso ");
+            a.AppendLine("order by #p.DescrTipoPermiso, #p.Cuit, #p.IdUN, NombreUsuario ");
             a.AppendLine("drop table #p ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Permiso> lista = new List<Entidades.Permiso>();

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace CedServicios.Site
 {
@@ -17,7 +18,6 @@ namespace CedServicios.Site
                 Funciones.PersonalizarControlesMaster(this, sesion);
             }
         }
-
         protected void Menu_MenuItemClick(object sender, MenuEventArgs e)
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
@@ -58,6 +58,14 @@ namespace CedServicios.Site
                     Response.Redirect("~/UsuarioCambiarPassword.aspx");
                     break;
             }
+        }
+        public Color GetItemColor(MenuItemTemplateContainer container)
+        {
+            MenuItem item = (MenuItem)container.DataItem;
+            if (!(item.Selectable || item.ChildItems.Count>0))
+                return Color.Red;
+            else
+                return Color.DarkBlue;
         }
     }
 }
