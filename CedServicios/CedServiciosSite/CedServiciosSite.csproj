@@ -91,6 +91,7 @@
     <Content Include="UNCrear.aspx" />
     <Content Include="UsuarioCambiarPassword.aspx" />
     <Content Include="UsuarioConfirmacion.aspx" />
+    <Content Include="UsuarioConsulta.aspx" />
     <Content Include="UsuarioCrear.aspx" />
     <Content Include="UsuarioLogin.aspx" />
     <Content Include="UsuarioOlvidoId.aspx" />
@@ -308,6 +309,13 @@
     </Compile>
     <Compile Include="UsuarioConfirmacion.aspx.designer.cs">
       <DependentUpon>UsuarioConfirmacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UsuarioConsulta.aspx.cs">
+      <DependentUpon>UsuarioConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UsuarioConsulta.aspx.designer.cs">
+      <DependentUpon>UsuarioConsulta.aspx</DependentUpon>
     </Compile>
     <Compile Include="UsuarioCrear.aspx.cs">
       <DependentUpon>UsuarioCrear.aspx</DependentUpon>

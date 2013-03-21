@@ -142,7 +142,7 @@ namespace CedServicios.RN
                     ReferenciaAAprobadores += usuariosAutorizadores[i].Nombre;
                     if (i + 1 < usuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
                 }
-                RN.EnvioCorreo.SolicitudAutorizacion("Operador del servicio '" + TipoPermiso.Descr + "' de la Unidad de Negocio '" + UN.Descr + "' del CUIT " + Cuit.Nro, Sesion.Usuario, usuariosAutorizadores);
+                RN.EnvioCorreo.SolicitudAutorizacion("Operador del servicio '" + TipoPermiso.Descr.Replace("Operador servicio ", String.Empty) + "' de la Unidad de Negocio '" + UN.Descr + "' del CUIT " + Cuit.Nro, Sesion.Usuario, usuariosAutorizadores);
             }
         }
         public static string PermisoUsoCUITxUNHandler(Entidades.UN UN, out List<Entidades.Usuario> UsuariosAutorizadores, out string ReferenciaAAprobadores, out string EstadoPermisoUsoCUITxUN, Entidades.Sesion Sesion)
