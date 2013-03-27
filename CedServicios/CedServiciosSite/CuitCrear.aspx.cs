@@ -23,16 +23,16 @@ namespace CedServicios.Site
             {
                 cuit.Nro =CUITTextBox.Text;
                 cuit.RazonSocial = RazonSocialTextBox.Text;
-                cuit.Domicilio.Calle = "";
-                cuit.Domicilio.Nro = "";
-                cuit.Domicilio.Piso = "";
-                cuit.Domicilio.Depto = "";
-                cuit.Domicilio.Manzana = "";
-                cuit.Domicilio.Sector = "";
-                cuit.Domicilio.Torre = "";
-                cuit.Domicilio.Localidad = "";
-                cuit.Domicilio.Provincia.Id = "";
-                cuit.Domicilio.CodPost = "";
+                cuit.Domicilio.Calle = Domicilio.Calle;
+                cuit.Domicilio.Nro = Domicilio.Nro;
+                cuit.Domicilio.Piso = Domicilio.Piso;
+                cuit.Domicilio.Depto = Domicilio.Depto;
+                cuit.Domicilio.Manzana = Domicilio.Manzana;
+                cuit.Domicilio.Sector = Domicilio.Sector;
+                cuit.Domicilio.Torre = Domicilio.Torre;
+                cuit.Domicilio.Localidad = Domicilio.Localidad;
+                cuit.Domicilio.Provincia.Id = Domicilio.Provincia;
+                cuit.Domicilio.CodPost = Domicilio.CodPost;
                 cuit.Contacto.Nombre = "";
                 cuit.Contacto.Email = "";
                 cuit.Contacto.Telefono = "";
