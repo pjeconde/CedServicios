@@ -90,14 +90,14 @@ namespace CedServicios.DB
             Hasta.NroSerieCertifAFIP = Convert.ToString(Desde["NroSerieCertifAFIP"]);
             Hasta.NroSerieCertifITF = Convert.ToString(Desde["NroSerieCertifITF"]);
         }
-        public void Crear(Entidades.Cuit Cuit, string PermisoAdminCUITParaUsuarioHandler, string CrearUNHandler, string PermisoUsoCUITxUNHandler, string PermisoAdminUNParaUsuarioHandler)
+        public void Crear(Entidades.Cuit Cuit, string PermisoAdminCUITParaUsuarioAprobadoHandler, string CrearUNHandler, string PermisoUsoCUITxUNAprobadoHandler, string PermisoAdminUNParaUsuarioAprobadoHandler)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @idWF varchar(256) ");
             a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
             a.AppendLine("declare @accionNro varchar(256) ");
             a.AppendLine("update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro' ");
-            a.Append("Insert UN (Cuit, RazonSocial, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, IdCondIVA, DescrCondIVA, NroIngBrutos, IdCondIngBrutos, DescrCondIngBrutos, FechaInicioActividades, GLN, CodigoInterno, IdMedio, IdWF, Estado) values (");
+            a.Append("Insert Cuit (Cuit, RazonSocial, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, IdCondIVA, DescrCondIVA, NroIngBrutos, IdCondIngBrutos, DescrCondIngBrutos, FechaInicioActividades, GLN, CodigoInterno, IdMedio, IdWF, Estado) values (");
             a.Append("'" + Cuit.Nro + "', ");
             a.Append("'" + Cuit.RazonSocial + "', ");
             a.Append("'" + Cuit.Domicilio.Calle + "', ");
@@ -128,11 +128,10 @@ namespace CedServicios.DB
             a.AppendLine(") ");
             a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'CUIT', 'Alta', '" + Cuit.WF.Estado + "', '') ");
             a.AppendLine();
-            a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
-            a.Append(PermisoAdminCUITParaUsuarioHandler);
+            a.Append(PermisoAdminCUITParaUsuarioAprobadoHandler);
             a.Append(CrearUNHandler);
-            a.Append(PermisoUsoCUITxUNHandler);
-            a.Append(PermisoAdminUNParaUsuarioHandler);
+            a.Append(PermisoUsoCUITxUNAprobadoHandler);
+            a.Append(PermisoAdminUNParaUsuarioAprobadoHandler);
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
     }
