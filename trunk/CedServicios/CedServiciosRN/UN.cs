@@ -26,7 +26,7 @@ namespace CedServicios.RN
         {
             List<Entidades.Usuario> usuariosAutorizadores = new List<Entidades.Usuario>();
             string permisoUsoCUITxUNHandler = RN.Permiso.PermisoUsoCUITxUNHandler(UN, out usuariosAutorizadores, out ReferenciaAAprobadores, out EstadoPermisoUsoCUITxUN, Sesion);
-            string permisoAdminUNParaUsuarioHandler = RN.Permiso.PermisoAdminUNParaUsuarioHandler(UN, Sesion);
+            string permisoAdminUNParaUsuarioHandler = RN.Permiso.PermisoAdminUNParaUsuarioAprobadoHandler(UN, Sesion);
             DB.UN dbUN = new DB.UN(Sesion);
             UN.WF.Estado = "Vigente";   //la UN siempre queda vigente, lo que, en todo caso, puede quedar PteAutoriz
             //es su relación con el Cuit, que se explicita a través del Permiso UsoCuitXUN

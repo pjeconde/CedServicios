@@ -82,7 +82,7 @@ namespace CedServicios.RN
             }
             RN.EnvioCorreo.SolicitudAutorizacion(DescrPermiso(permiso), Sesion.Usuario, usuariosAutorizadores);
         }
-        public static string PermisoAdminUNParaUsuarioHandler(Entidades.UN UN, Entidades.Sesion Sesion)
+        public static string PermisoAdminUNParaUsuarioAprobadoHandler(Entidades.UN UN, Entidades.Sesion Sesion)
         {
             List<Entidades.Permiso> esAdminUNdelaUNsolicitada = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
             {
