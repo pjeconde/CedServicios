@@ -10,7 +10,7 @@ namespace CedServicios.Entidades
     {
         private Usuario usuario;
         private string cuit;
-        private string idUN;
+        private UN uN;
         private TipoPermiso tipoPermiso;
         private DateTime fechaFinVigencia;
         private Usuario usuarioSolicitante;
@@ -20,6 +20,7 @@ namespace CedServicios.Entidades
         public Permiso()
         {
             usuario = new Usuario();
+            uN = new UN();
             tipoPermiso = new TipoPermiso();
             usuarioSolicitante = new Entidades.Usuario();
             accion = new Accion();
@@ -48,15 +49,15 @@ namespace CedServicios.Entidades
                 return cuit;
             }
         }
-        public string IdUN
+        public UN UN
         {
             set
             {
-                idUN = value;
+                uN = value;
             }
             get
             {
-                return idUN;
+                return uN;
             }
         }
         public TipoPermiso TipoPermiso
@@ -169,6 +170,13 @@ namespace CedServicios.Entidades
             get
             {
                 return accion.Tipo;
+            }
+        }
+        public string IdUN
+        {
+            get
+            {
+                return uN.Id;
             }
         }
         #endregion

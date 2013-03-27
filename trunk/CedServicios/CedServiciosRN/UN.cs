@@ -29,11 +29,14 @@ namespace CedServicios.RN
             string permisoAdminUNParaUsuarioHandler = RN.Permiso.PermisoAdminUNParaUsuarioHandler(UN, Sesion);
             DB.UN dbUN = new DB.UN(Sesion);
             UN.WF.Estado = "Vigente";   //la UN siempre queda vigente, lo que, en todo caso, puede quedar PteAutoriz
-                                        //es su relación con el Cuit, que se explicita a través del Permiso UsoCuitXUN
+            //es su relación con el Cuit, que se explicita a través del Permiso UsoCuitXUN
             dbUN.Crear(UN, permisoUsoCUITxUNHandler, permisoAdminUNParaUsuarioHandler);
             if (EstadoPermisoUsoCUITxUN == "PteAutoriz")
             {
-                RN.EnvioCorreo.SolicitudAutorizacion("Relación entre la nueva Unidad de Negocio '" + UN.Descr + "' y el CUIT " + UN.Cuit, Sesion.Usuario, usuariosAutorizadores);
+                Entidades.Permiso permiso = new Entidades.Permiso();
+                permiso.TipoPermiso.Id = "UsoCUITXUN";
+                permiso.UN = UN;
+                RN.EnvioCorreo.SolicitudAutorizacion(RN.Permiso.DescrPermiso(permiso), Sesion.Usuario, usuariosAutorizadores);
             }
         }
     }

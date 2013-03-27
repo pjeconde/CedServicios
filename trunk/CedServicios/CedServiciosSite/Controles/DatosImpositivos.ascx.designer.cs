@@ -7,180 +7,144 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace CedServicios.Site {
+namespace CedServicios.Site.Controles {
     
     
-    public partial class CuitCrear {
+    public partial class DatosImpositivos {
         
         /// <summary>
-        /// Control TituloPaginaLabel.
+        /// Control Label11.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TituloPaginaLabel;
+        protected global::System.Web.UI.WebControls.Label Label11;
         
         /// <summary>
-        /// Control RegularExpressionValidator1.
+        /// Control CondIVADropDownList.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        protected global::System.Web.UI.WebControls.DropDownList CondIVADropDownList;
         
         /// <summary>
-        /// Control Label1.
+        /// Control Label18.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Label Label18;
         
         /// <summary>
-        /// Control RequiredFieldValidator1.
+        /// Control CondIngBrutosDropDownList.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
+        protected global::System.Web.UI.WebControls.DropDownList CondIngBrutosDropDownList;
         
         /// <summary>
-        /// Control Label2.
+        /// Control RegularExpressionValidator15.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator15;
         
         /// <summary>
-        /// Control Label3.
+        /// Control Label47.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
+        protected global::System.Web.UI.WebControls.Label Label47;
         
         /// <summary>
-        /// Control CUITTextBox.
+        /// Control RequiredFieldValidator11.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CUITTextBox;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator11;
         
         /// <summary>
-        /// Control RequiredFieldValidator3.
+        /// Control Label48.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+        protected global::System.Web.UI.WebControls.Label Label48;
         
         /// <summary>
-        /// Control Label8.
+        /// Control Label20.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label8;
+        protected global::System.Web.UI.WebControls.Label Label20;
         
         /// <summary>
-        /// Control Label9.
+        /// Control NroIngBrutosTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
+        protected global::System.Web.UI.WebControls.TextBox NroIngBrutosTextBox;
         
         /// <summary>
-        /// Control RazonSocialTextBox.
+        /// Control FechaInicioActividadesDatePickerRequiredFieldValidator.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox RazonSocialTextBox;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator FechaInicioActividadesDatePickerRequiredFieldValidator;
         
         /// <summary>
-        /// Control Domicilio.
+        /// Control Label22.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.Domicilio Domicilio;
+        protected global::System.Web.UI.WebControls.Label Label22;
         
         /// <summary>
-        /// Control Contacto.
+        /// Control FechaInicioActividadesDatePickerWebUserControl.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.Contacto Contacto;
+        protected global::System.Web.UI.WebControls.TextBox FechaInicioActividadesDatePickerWebUserControl;
         
         /// <summary>
-        /// Control DatosImpositivos.
+        /// Control CalendarExtender1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.DatosImpositivos DatosImpositivos;
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
         
         /// <summary>
-        /// Control DatosIdentificatorios.
+        /// Control ImageCalendarFechaEmision.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.DatosIdentificatorios DatosIdentificatorios;
-        
-        /// <summary>
-        /// Control AceptarButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AceptarButton;
-        
-        /// <summary>
-        /// Control CancelarButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CancelarButton;
-        
-        /// <summary>
-        /// Control MensajeLabel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MensajeLabel;
-        
-        /// <summary>
-        /// Control MensajeValidationSummary.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary MensajeValidationSummary;
+        protected global::System.Web.UI.WebControls.Image ImageCalendarFechaEmision;
     }
 }

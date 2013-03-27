@@ -13,5 +13,53 @@ namespace CedServicios.Site
         {
 
         }
+        protected void AceptarButton_Click(object sender, EventArgs e)
+        {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            Entidades.Cuit cuit = new Entidades.Cuit();
+
+            
+            try
+            {
+                cuit.Nro =CUITTextBox.Text;
+                cuit.RazonSocial = RazonSocialTextBox.Text;
+                cuit.Domicilio.Calle = "";
+                cuit.Domicilio.Nro = "";
+                cuit.Domicilio.Piso = "";
+                cuit.Domicilio.Depto = "";
+                cuit.Domicilio.Manzana = "";
+                cuit.Domicilio.Sector = "";
+                cuit.Domicilio.Torre = "";
+                cuit.Domicilio.Localidad = "";
+                cuit.Domicilio.Provincia.Id = "";
+                cuit.Domicilio.CodPost = "";
+                cuit.Contacto.Nombre = "";
+                cuit.Contacto.Email = "";
+                cuit.Contacto.Telefono = "";
+                cuit.DatosImpositivos.IdCondIVA = 0;
+                cuit.DatosImpositivos.IdCondIngBrutos = 0;
+                cuit.DatosImpositivos.NroIngBrutos = "";
+                cuit.DatosImpositivos.FechaInicioActividades = DateTime.Now;
+                cuit.DatosIdentificatorios.GLN = 0;
+                cuit.DatosIdentificatorios.CodigoInterno = "";
+                cuit.Medio.Id = "";
+                RN.Cuit.Registrar(cuit, sesion);
+                //CUITTextBox.Enabled = false;
+                //IdUNTextBox.Enabled = false;
+                //DescrUNTextBox.Enabled = false;
+                AceptarButton.Enabled = false;
+                CancelarButton.Enabled = false;
+                MensajeLabel.Text = "El CUIT fué creado satisfactoriamente";
+            }
+            catch (Exception ex)
+            {
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                return;
+            }
+        }
+        protected void CancelarButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Default.aspx");
+        }
     }
 }

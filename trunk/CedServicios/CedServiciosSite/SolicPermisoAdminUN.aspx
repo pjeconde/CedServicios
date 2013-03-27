@@ -27,10 +27,10 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top:10px; height:25px;">
+            <td align="right" style="padding-right:5px; padding-top:5px; height:25px;">
                 <asp:Label ID="Label5" runat="server" Text="Unidad de Negocio"></asp:Label>
             </td>
-            <td align="left" style="padding-top:10px; height:25px;">
+            <td align="left" style="padding-top:5px; height:25px;">
                 <asp:DropDownList ID="IdUNDropDownList" runat="server" TabIndex="2" Width="183px" DataValueField="Id" DataTextField="Descr" >
                 </asp:DropDownList>
             </td>

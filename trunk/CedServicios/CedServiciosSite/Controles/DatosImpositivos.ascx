@@ -1,0 +1,62 @@
+﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DatosImpositivos.ascx.cs" Inherits="CedServicios.Site.Controles.DatosImpositivos" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
+
+<!-- CondIVA -->
+<tr>
+	<td align="right" style="padding-right:5px; padding-right: 5px; padding-top:5px">
+		<asp:Label ID="Label11" runat="server" Text="Cond.IVA"></asp:Label>
+	</td>
+	<td align="left" style="padding-top:5px">
+		<asp:DropDownList ID="CondIVADropDownList" runat="server" TabIndex="16" Width="255px">
+		</asp:DropDownList>
+	</td>
+</tr>
+<!-- NroIngBrutos y CondIngBrutos -->
+<tr>
+	<td align="right" style="padding-left: 10px; padding-right: 5px; padding-top:5px">
+		<asp:Label ID="Label18" runat="server" Text="Cond.Ing.Brutos"></asp:Label>
+	</td>
+	<td align="left" style="padding-top:5px">
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td align="left">
+					<asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" TabIndex="18" Width="216px">
+					</asp:DropDownList>
+				</td>
+	            <td align="right" style="padding-right: 5px;">
+		            <asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server"
+			            ControlToValidate="NroIngBrutosTextBox" ErrorMessage="Nro.Ing.Brutos" SetFocusOnError="True"
+			            ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">
+			            <asp:Label ID="Label47" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+		            </asp:RegularExpressionValidator>
+		            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="NroIngBrutosTextBox"
+			            ErrorMessage="Nro.Ing.Brutos" SetFocusOnError="True">
+			            <asp:Label ID="Label48" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+		            </asp:RequiredFieldValidator>
+		            <asp:Label ID="Label20" runat="server" Text="Nro.Ing.Brutos"></asp:Label>
+	            </td>
+				<td>
+					<asp:TextBox ID="NroIngBrutosTextBox" runat="server" MaxLength="13" TabIndex="17"
+						ToolTip="Ingresar con el siguiente formato: 9999999-99" Width="80px"></asp:TextBox>
+				</td>
+			</tr>
+		</table>
+	</td>
+</tr>
+<!-- FechaInicioActividades  -->
+<tr>
+	<td align="right" style="padding-left: 10px; padding-right: 5px; padding-top:5px">
+		<asp:RequiredFieldValidator ID="FechaInicioActividadesDatePickerRequiredFieldValidator" runat="server"
+			ControlToValidate="FechaInicioActividadesDatePickerWebUserControl" ErrorMessage="Fecha de inicio de actividades"
+			SetFocusOnError="True">* </asp:RequiredFieldValidator>
+        <asp:Label ID="Label22" runat="server" Text="Fecha de inicio de actividades"></asp:Label>
+	</td>
+	<td align="left" style="padding-top:5px">
+        <asp:TextBox ID="FechaInicioActividadesDatePickerWebUserControl" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px"></asp:TextBox>
+        <cc1:CalendarExtender ID="CalendarExtender1" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
+            TargetControlID="FechaInicioActividadesDatePickerWebUserControl" Format="yyyyMMdd" PopupButtonID="ImageCalendarFechaEmision" >
+        </cc1:CalendarExtender>
+        <asp:Image runat="server" ID="ImageCalendarFechaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
+    </td>
+</tr>
+

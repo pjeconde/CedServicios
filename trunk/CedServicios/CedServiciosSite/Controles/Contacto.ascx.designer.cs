@@ -7,82 +7,46 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace CedServicios.Site {
+namespace CedServicios.Site.Controles {
     
     
-    public partial class CuitCrear {
+    public partial class Contacto {
         
         /// <summary>
-        /// Control TituloPaginaLabel.
+        /// Control RegularExpressionValidator11.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TituloPaginaLabel;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator11;
         
         /// <summary>
-        /// Control RegularExpressionValidator1.
+        /// Control Label39.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
+        protected global::System.Web.UI.WebControls.Label Label39;
         
         /// <summary>
-        /// Control Label1.
+        /// Control RequiredFieldValidator7.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
         
         /// <summary>
-        /// Control RequiredFieldValidator1.
+        /// Control Label40.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
-        
-        /// <summary>
-        /// Control Label2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
-        /// Control Label3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label3;
-        
-        /// <summary>
-        /// Control CUITTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CUITTextBox;
-        
-        /// <summary>
-        /// Control RequiredFieldValidator3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator3;
+        protected global::System.Web.UI.WebControls.Label Label40;
         
         /// <summary>
         /// Control Label8.
@@ -94,6 +58,51 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label Label8;
         
         /// <summary>
+        /// Control NombreContactoTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NombreContactoTextBox;
+        
+        /// <summary>
+        /// Control RegularExpressionValidator12.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator12;
+        
+        /// <summary>
+        /// Control Label41.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label41;
+        
+        /// <summary>
+        /// Control RequiredFieldValidator8.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+        
+        /// <summary>
+        /// Control Label42.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label42;
+        
+        /// <summary>
         /// Control Label9.
         /// </summary>
         /// <remarks>
@@ -103,84 +112,66 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label Label9;
         
         /// <summary>
-        /// Control RazonSocialTextBox.
+        /// Control EmailContactoTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox RazonSocialTextBox;
+        protected global::System.Web.UI.WebControls.TextBox EmailContactoTextBox;
         
         /// <summary>
-        /// Control Domicilio.
+        /// Control RegularExpressionValidator13.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.Domicilio Domicilio;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator13;
         
         /// <summary>
-        /// Control Contacto.
+        /// Control Label43.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.Contacto Contacto;
+        protected global::System.Web.UI.WebControls.Label Label43;
         
         /// <summary>
-        /// Control DatosImpositivos.
+        /// Control RequiredFieldValidator9.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.DatosImpositivos DatosImpositivos;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
         
         /// <summary>
-        /// Control DatosIdentificatorios.
+        /// Control Label44.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.DatosIdentificatorios DatosIdentificatorios;
+        protected global::System.Web.UI.WebControls.Label Label44;
         
         /// <summary>
-        /// Control AceptarButton.
+        /// Control Label10.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AceptarButton;
+        protected global::System.Web.UI.WebControls.Label Label10;
         
         /// <summary>
-        /// Control CancelarButton.
+        /// Control TelefonoContactoTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CancelarButton;
-        
-        /// <summary>
-        /// Control MensajeLabel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MensajeLabel;
-        
-        /// <summary>
-        /// Control MensajeValidationSummary.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary MensajeValidationSummary;
+        protected global::System.Web.UI.WebControls.TextBox TelefonoContactoTextBox;
     }
 }
