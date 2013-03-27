@@ -36,15 +36,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AjaxControlToolkit\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL">
-      <Private>True</Private>
-    </Reference>
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -65,6 +59,11 @@
   <ItemGroup>
     <Content Include="App_Themes\CedServicios\CedServicios.css" />
     <Content Include="CedeiraSF-Logo.gif" />
+    <Content Include="Controles\Contacto.ascx" />
+    <Content Include="Controles\DatePickerWebUserControl.ascx" />
+    <Content Include="Controles\DatosIdentificatorios.ascx" />
+    <Content Include="Controles\DatosImpositivos.ascx" />
+    <Content Include="Controles\Domicilio.ascx" />
     <Content Include="CuitCrear.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="DescargaTemporarios.aspx" />
@@ -133,6 +132,41 @@
     </Compile>
     <Compile Include="CedServicios.Master.designer.cs">
       <DependentUpon>CedServicios.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Contacto.ascx.cs">
+      <DependentUpon>Contacto.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\Contacto.ascx.designer.cs">
+      <DependentUpon>Contacto.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\DatePickerWebUserControl.ascx.cs">
+      <DependentUpon>DatePickerWebUserControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\DatePickerWebUserControl.ascx.designer.cs">
+      <DependentUpon>DatePickerWebUserControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\DatosIdentificatorios.ascx.cs">
+      <DependentUpon>DatosIdentificatorios.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\DatosIdentificatorios.ascx.designer.cs">
+      <DependentUpon>DatosIdentificatorios.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\DatosImpositivos.ascx.cs">
+      <DependentUpon>DatosImpositivos.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\DatosImpositivos.ascx.designer.cs">
+      <DependentUpon>DatosImpositivos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\Domicilio.ascx.cs">
+      <DependentUpon>Domicilio.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\Domicilio.ascx.designer.cs">
+      <DependentUpon>Domicilio.ascx</DependentUpon>
     </Compile>
     <Compile Include="CuitCrear.aspx.cs">
       <DependentUpon>CuitCrear.aspx</DependentUpon>

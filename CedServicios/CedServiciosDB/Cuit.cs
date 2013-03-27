@@ -90,5 +90,50 @@ namespace CedServicios.DB
             Hasta.NroSerieCertifAFIP = Convert.ToString(Desde["NroSerieCertifAFIP"]);
             Hasta.NroSerieCertifITF = Convert.ToString(Desde["NroSerieCertifITF"]);
         }
+        public void Crear(Entidades.Cuit Cuit, string PermisoAdminCUITParaUsuarioHandler, string CrearUNHandler, string PermisoUsoCUITxUNHandler, string PermisoAdminUNParaUsuarioHandler)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("declare @idWF varchar(256) ");
+            a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
+            a.AppendLine("declare @accionNro varchar(256) ");
+            a.AppendLine("update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro' ");
+            a.Append("Insert UN (Cuit, RazonSocial, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, IdCondIVA, DescrCondIVA, NroIngBrutos, IdCondIngBrutos, DescrCondIngBrutos, FechaInicioActividades, GLN, CodigoInterno, IdMedio, IdWF, Estado) values (");
+            a.Append("'" + Cuit.Nro + "', ");
+            a.Append("'" + Cuit.RazonSocial + "', ");
+            a.Append("'" + Cuit.Domicilio.Calle + "', ");
+            a.Append("'" + Cuit.Domicilio.Nro + "', ");
+            a.Append("'" + Cuit.Domicilio.Piso + "', ");
+            a.Append("'" + Cuit.Domicilio.Depto + "', ");
+            a.Append("'" + Cuit.Domicilio.Sector + "', ");
+            a.Append("'" + Cuit.Domicilio.Torre + "', ");
+            a.Append("'" + Cuit.Domicilio.Manzana + "', ");
+            a.Append("'" + Cuit.Domicilio.Localidad + "', ");
+            a.Append("'" + Cuit.Domicilio.Provincia.Id + "', ");
+            a.Append("'" + Cuit.Domicilio.Provincia.Descr + "', ");
+            a.Append("'" + Cuit.Domicilio.CodPost + "', ");
+            a.Append("'" + Cuit.Contacto.Nombre + "', ");
+            a.Append("'" + Cuit.Contacto.Email + "', ");
+            a.Append("'" + Cuit.Contacto.Telefono + "', ");
+            a.Append("'" + Cuit.DatosImpositivos.IdCondIVA + "', ");
+            a.Append("'" + Cuit.DatosImpositivos.DescrCondIVA + "', ");
+            a.Append("'" + Cuit.DatosImpositivos.NroIngBrutos + "', ");
+            a.Append("'" + Cuit.DatosImpositivos.IdCondIngBrutos + "', ");
+            a.Append("'" + Cuit.DatosImpositivos.DescrCondIngBrutos + "', ");
+            a.Append("'" + Cuit.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd") + "', ");
+            a.Append(Cuit.DatosIdentificatorios.GLN.ToString() + ", ");
+            a.Append("'" + Cuit.DatosIdentificatorios.CodigoInterno + "', ");
+            a.Append("'" + Cuit.Medio.Id + "', ");
+            a.Append("@idWF, ");
+            a.Append("'" + Cuit.WF.Estado + "' ");
+            a.AppendLine(") ");
+            a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'CUIT', 'Alta', '" + Cuit.WF.Estado + "', '') ");
+            a.AppendLine();
+            a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
+            a.Append(PermisoAdminCUITParaUsuarioHandler);
+            a.Append(CrearUNHandler);
+            a.Append(PermisoUsoCUITxUNHandler);
+            a.Append(PermisoAdminUNParaUsuarioHandler);
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
     }
 }

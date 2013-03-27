@@ -8,7 +8,8 @@ namespace CedServicios.DB
 {
     public class Permiso : db
     {
-        public Permiso(Entidades.Sesion Sesion) : base(Sesion)
+        public Permiso(Entidades.Sesion Sesion)
+            : base(Sesion)
         {
         }
 
@@ -26,10 +27,11 @@ namespace CedServicios.DB
             a.AppendLine("insert #p select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado, TipoPermiso.DescrTipoPermiso from Permiso, TipoPermiso where Estado='PteAutoriz' and Permiso.IdTipoPermiso not in ('UsoCUITxUN', 'AdminCUIT', 'AdminUN') and Permiso.IdTipoPermiso=TipoPermiso.IdTipoPermiso and ");
             a.AppendLine("IdUsuario <> '' and (select count(*) from Permiso where IdUsuario='" + Usuario.Id + "' and Permiso.IdTipoPermiso='AdminSITE' and Estado='Vigente')=1 ");
             a.AppendLine("/* RESULTADOS */ ");
-            a.AppendLine("select distinct #p.IdUsuario, #p.Cuit, #p.IdUN, #p.IdTipoPermiso, #p.FechaFinVigencia, #p.IdUsuarioSolicitante, #p.AccionTipo, #p.AccionNro, #p.IdWF, #p.Estado, #p.DescrTipoPermiso, isnull(u.Nombre, '') as NombreUsuario, isnull(u.Email, '') as EmailUsuario, isnull(us.Nombre, '') as NombreUsuarioSolicitante , isnull(us.Email, '') as EmailUsuarioSolicitante ");
+            a.AppendLine("select distinct #p.IdUsuario, #p.Cuit, #p.IdUN, #p.IdTipoPermiso, #p.FechaFinVigencia, #p.IdUsuarioSolicitante, #p.AccionTipo, #p.AccionNro, #p.IdWF, #p.Estado, #p.DescrTipoPermiso, isnull(u.Nombre, '') as NombreUsuario, isnull(u.Email, '') as EmailUsuario, isnull(us.Nombre, '') as NombreUsuarioSolicitante , isnull(us.Email, '') as EmailUsuarioSolicitante, isnull(UN.DescrUN, '') as DescrUN ");
             a.AppendLine("from #p ");
             a.AppendLine("left outer join Usuario u on #p.IdUsuario=u.IdUsuario ");
             a.AppendLine("left outer join Usuario us on #p.IdUsuarioSolicitante=us.IdUsuario ");
+            a.AppendLine("left outer join UN on #p.IdUN=UN.IdUN");
             a.AppendLine("order by #p.DescrTipoPermiso, #p.Cuit, #p.IdUN, NombreUsuario ");
             a.AppendLine("drop table #p ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
@@ -48,9 +50,11 @@ namespace CedServicios.DB
         public List<Entidades.Permiso> LeerListaPermisosPorUsuario(Entidades.Usuario Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado, TipoPermiso.DescrTipoPermiso ");
-            a.AppendLine("from Permiso, TipoPermiso ");
-            a.AppendLine("where IdUsuario='" + Usuario.Id + "' and Permiso.IdTipoPermiso=TipoPermiso.IdTipoPermiso ");
+            a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado, TipoPermiso.DescrTipoPermiso, isnull(UN.DescrUN, '') as DescrUN ");
+            a.AppendLine("from Permiso ");
+            a.AppendLine("join TipoPermiso on Permiso.IdTipoPermiso=TipoPermiso.IdTipoPermiso ");
+            a.AppendLine("left outer join UN on Permiso.IdUN=UN.IdUN ");
+            a.AppendLine("where IdUsuario='" + Usuario.Id + "' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Permiso> lista = new List<Entidades.Permiso>();
             if (dt.Rows.Count != 0)
@@ -87,7 +91,8 @@ namespace CedServicios.DB
         {
             Hasta.Usuario.Id = Convert.ToString(Desde["IdUsuario"]);
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
-            Hasta.IdUN = Convert.ToString(Desde["IdUN"]);
+            Hasta.UN.Id = Convert.ToString(Desde["IdUN"]);
+            Hasta.UN.Descr = Convert.ToString(Desde["DescrUN"]);
             Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
             Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
             Hasta.FechaFinVigencia = Convert.ToDateTime(Desde["FechaFinVigencia"]);
@@ -124,11 +129,11 @@ namespace CedServicios.DB
             }
             if (Permiso.Usuario.Id != null)
             {
-                a.AppendLine("insert Permiso values ('" + Permiso.Usuario.Id + "', '" + Permiso.Cuit + "', '" + Permiso.IdUN + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', '" + Permiso.Accion.Tipo + "', @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
+                a.AppendLine("insert Permiso values ('" + Permiso.Usuario.Id + "', '" + Permiso.Cuit + "', '" + Permiso.UN.Id + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', '" + Permiso.Accion.Tipo + "', @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
             }
             else
             {
-                a.AppendLine("insert Permiso values ('', '" + Permiso.Cuit + "', '" + Permiso.IdUN + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', '" + Permiso.Accion.Tipo + "', @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
+                a.AppendLine("insert Permiso values ('', '" + Permiso.Cuit + "', '" + Permiso.UN.Id + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', '" + Permiso.Accion.Tipo + "', @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
             }
             a.AppendLine("insert Log values (@IdWF, getdate(), '" + Permiso.UsuarioSolicitante.Id + "', 'Permiso', 'Alta', '" + Permiso.WF.Estado + "', '') ");
             return a.ToString();
@@ -162,24 +167,18 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public bool Existe(string IdUsuario, string Cuit, String IdUN, string IdTipoPermiso)
-        {
-            StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("select * from Permiso where IdUsuario='" + IdUsuario + "' and Cuit='" + Cuit + "' and IdUN='" + IdUN + "' and IdTipoPermiso='" + IdTipoPermiso + "' ");
-            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
-            return dt.Rows.Count==1;
-        }
         public void CambioEstado(Entidades.Permiso Permiso, string EstadoHst)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @IdWF int ");
-            a.AppendLine("select @IdWF=IdWF from Permiso where Estado='" + Permiso.WF.Estado + "' and IdUsuario='" + Permiso.Usuario.Id + "' and Cuit='" + Permiso.Cuit + "' and IdUN='" + Permiso.IdUN + "' and IdTipoPermiso='" + Permiso.TipoPermiso.Id + "' and Estado='" + Permiso.WF.Estado + "' ");
+            a.AppendLine("select @IdWF=IdWF from Permiso where Estado='" + Permiso.WF.Estado + "' and IdUsuario='" + Permiso.Usuario.Id + "' and Cuit='" + Permiso.Cuit + "' and IdUN='" + Permiso.UN.Id + "' and IdTipoPermiso='" + Permiso.TipoPermiso.Id + "' and Estado='" + Permiso.WF.Estado + "' ");
             a.AppendLine("if not @IdWF is null ");
             a.AppendLine("begin ");
             a.AppendLine("   update Permiso set Estado='" + EstadoHst + "' where IdWF=@IdWF ");
             a.AppendLine("   insert Log values (@IdWF, getdate(), '" + sesion.Usuario.Id + "', 'Permiso', 'Alta', '" + EstadoHst + "', '') ");
             a.AppendLine("end ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+            Permiso.WF.Estado = EstadoHst;
         }
     }
 }

@@ -25,26 +25,26 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top:10px">
+            <td align="right" style="padding-right:5px; padding-top:5px">
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="IdUNTextBox"
                     ErrorMessage="Id" SetFocusOnError="True">
                     <asp:Label ID="Label5" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="Label6" runat="server" Text="Id."></asp:Label>
             </td>
-            <td align="left" style="padding-top:20px">
+            <td align="left" style="padding-top:5px">
                 <asp:TextBox ID="IdUNTextBox" runat="server" MaxLength="20" TabIndex="2" Width="200px"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top:10px">
+            <td align="right" style="padding-right:5px; padding-top:5px">
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="DescrUNTextBox"
                     ErrorMessage="Descr" SetFocusOnError="True">
                     <asp:Label ID="Label8" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="Label9" runat="server" Text="Descripción"></asp:Label>
             </td>
-            <td align="left" style="padding-top:20px">
+            <td align="left" style="padding-top:5px">
                 <asp:TextBox ID="DescrUNTextBox" runat="server" MaxLength="50" TabIndex="3" Width="300px"></asp:TextBox>
             </td>        
         </tr>

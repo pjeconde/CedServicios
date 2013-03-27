@@ -44,7 +44,7 @@
     <form id="form1" runat="server" visible="true">
     <asp:ScriptManager ID="MasterScriptManager" runat="server">
 	</asp:ScriptManager>
-    <div id="DivUsuario" style="text-align: center" align="center">
+    <div id="DivUsuario" style="text-align:center">
         <table>
             <tr>
                 <td style="text-align:left" class="Fuente">
@@ -86,7 +86,7 @@
         </table>
     </div>
     <asp:ContentPlaceHolder ID="MenuContentPlaceHolder" runat="server" Visible="true">
-    <div id="DivMenu" style="text-align: center" align="center">
+    <div id="DivMenu" style="text-align:center">
         <table>
             <tr>
                 <td align="center"  style="text-align: left">

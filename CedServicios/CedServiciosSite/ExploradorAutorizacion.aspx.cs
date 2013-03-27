@@ -82,9 +82,9 @@ namespace CedServicios.Site
             DescrTipoPermisoLabel.Text = permiso.TipoPermiso.Descr;
             EstadoLabel.Text = permiso.WF.Estado;
             FechaFinVigenciaLabel.Text = permiso.FechaFinVigencia.ToString("dd/MM/yyyy");
-            if (!permiso.IdUN.Equals(String.Empty))
+            if (!permiso.UN.Id.Equals(String.Empty))
             {
-                UNLabel.Text = permiso.IdUN;
+                UNLabel.Text = permiso.UN.Id;
             }
             else
             {

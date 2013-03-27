@@ -13,7 +13,7 @@
             </td>
         </tr>
         <tr>
-            <td style="padding-top:20px; padding-left:10px">
+            <td style="padding-top:5px; padding-left:10px">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                     <asp:GridView ID="PermisosGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowDataBound="gvParent_RowDataBound">

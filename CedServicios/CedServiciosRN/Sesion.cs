@@ -76,7 +76,7 @@ namespace CedServicios.RN
                 {
                     List<Entidades.Permiso> elUsuarioEsAdministradorDeLaUNSeleccionada = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
-                        return p.TipoPermiso.Id == "AdminUN" && p.IdUN == Sesion.UN.Id && p.Cuit == Sesion.UN.Cuit && p.WF.Estado == "Vigente";
+                        return p.TipoPermiso.Id == "AdminUN" && p.UN.Id == Sesion.UN.Id && p.Cuit == Sesion.UN.Cuit && p.WF.Estado == "Vigente";
                     });
                     if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                     {
@@ -84,7 +84,7 @@ namespace CedServicios.RN
                     }
                     List<Entidades.Permiso> elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
-                        return p.TipoPermiso.Id == "eFact" && p.IdUN == Sesion.UN.Id && p.Cuit == Sesion.UN.Cuit && p.WF.Estado == "Vigente";
+                        return p.TipoPermiso.Id == "eFact" && p.UN.Id == Sesion.UN.Id && p.Cuit == Sesion.UN.Cuit && p.WF.Estado == "Vigente";
                     });
                     //Ojo: no estoy chequeando que la UN siga teniendo el permiso vigente sobre el servicio eFact !!!
                     if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada.Count != 0)

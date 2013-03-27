@@ -84,6 +84,15 @@ namespace CedServicios.DB
             a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
             a.AppendLine("declare @accionNro varchar(256) ");
             a.AppendLine("update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro' ");
+            a.Append(CrearHandler(UN));
+            a.AppendLine();
+            a.Append(PermisoUsoCUITxUNHandler);
+            a.Append(PermisoAdminUNParaUsuarioHandler);
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
+        public string CrearHandler(Entidades.UN UN)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
             a.Append("Insert UN (Cuit, IdUN, DescrUN, IdWF, Estado) values (");
             a.Append("'" + UN.Cuit + "', ");
             a.Append("'" + UN.Id + "', ");
@@ -93,9 +102,7 @@ namespace CedServicios.DB
             a.AppendLine(") ");
             a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'UN', 'Alta', '" + UN.WF.Estado + "', '') ");
             a.AppendLine();
-            a.Append(PermisoUsoCUITxUNHandler);
-            a.Append(PermisoAdminUNParaUsuarioHandler);
-            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+            return a.ToString();
         }
     }
 }

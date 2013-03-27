@@ -30,7 +30,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes {
             }
         }
         
-        public override bool NewGenerator {
+        public  bool NewGenerator {
             get {
                 return true;
             }
@@ -39,7 +39,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes {
             }
         }
         
-        public override string FullResourceName {
+        public  string FullResourceName {
             get {
                 return "CedServicios.Site.Facturacion.Electronica.Reportes.CodigoBarra.rpt";
             }
