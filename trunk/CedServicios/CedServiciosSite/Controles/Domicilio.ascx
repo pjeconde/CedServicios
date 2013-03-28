@@ -81,7 +81,7 @@
 				<td style="padding-left: 5px">
 					<asp:TextBox ID="TorreTextBox" runat="server" MaxLength="5" TabIndex="7" Width="55px"></asp:TextBox>
 				</td>
-				<td align="right" style="width: 60px">
+				<td align="right" style="width:70px">
 					<asp:RegularExpressionValidator ID="RegularExpressionValidator8" runat="server" ControlToValidate="ManzanaTextBox"
 						ErrorMessage="Manzana" SetFocusOnError="True" ValidationExpression="[A-Za-z\- ,.0-9]*">
 						<asp:Label ID="Label34" runat="server" SkinID="IndicadorValidacion"></asp:Label>
@@ -121,7 +121,7 @@
 		<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td>
-					<asp:DropDownList ID="ProvinciaDropDownList" runat="server" TabIndex="10" Width="183px">
+					<asp:DropDownList ID="ProvinciaDropDownList" runat="server" TabIndex="10" Width="183px" DataValueField="Codigo" DataTextField="Descr">
 					</asp:DropDownList>
 				</td>
 				<td align="right" style="padding-left: 14px; padding-right: 5px">

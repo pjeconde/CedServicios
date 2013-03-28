@@ -124,16 +124,18 @@ namespace CedServicios.DB
             a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
             if (GeneroAccion)
             {
+                a.AppendLine("declare @accionTipo varchar(15) ");
+                a.AppendLine("set @accionTipo='" + Permiso.Accion.Tipo + "' ");
                 a.AppendLine("declare @accionNro varchar(256) ");
                 a.AppendLine("update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro' ");
             }
             if (Permiso.Usuario.Id != null)
             {
-                a.AppendLine("insert Permiso values ('" + Permiso.Usuario.Id + "', '" + Permiso.Cuit + "', '" + Permiso.UN.Id + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', '" + Permiso.Accion.Tipo + "', @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
+                a.AppendLine("insert Permiso values ('" + Permiso.Usuario.Id + "', '" + Permiso.Cuit + "', '" + Permiso.UN.Id + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', @accionTipo, @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
             }
             else
             {
-                a.AppendLine("insert Permiso values ('', '" + Permiso.Cuit + "', '" + Permiso.UN.Id + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', '" + Permiso.Accion.Tipo + "', @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
+                a.AppendLine("insert Permiso values ('', '" + Permiso.Cuit + "', '" + Permiso.UN.Id + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', @accionTipo, @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
             }
             a.AppendLine("insert Log values (@IdWF, getdate(), '" + Permiso.UsuarioSolicitante.Id + "', 'Permiso', 'Alta', '" + Permiso.WF.Estado + "', '') ");
             return a.ToString();

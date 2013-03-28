@@ -46,6 +46,15 @@
         <uc1:datosImpositivos ID="DatosImpositivos" runat="server" />
         <uc1:datosIdentificatorios ID="DatosIdentificatorios" runat="server" />
         <tr>
+	        <td align="right" style="padding-right:5px; padding-top:5px">
+		        <asp:Label ID="Label18" runat="server" Text="¿ Cómo nos conoció ?"></asp:Label>
+	        </td>
+			<td align="left" style="padding-top:5px">
+				<asp:DropDownList ID="MedioDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Id" DataTextField="Descr">
+				</asp:DropDownList>
+			</td>
+        </tr>
+        <tr>
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">

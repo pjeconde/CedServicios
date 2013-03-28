@@ -13,5 +13,41 @@ namespace CedServicios.Site.Controles
         {
 
         }
+        public string Nombre
+        {
+            get
+            {
+                return NombreContactoTextBox.Text;
+            }
+            set
+            {
+                NombreContactoTextBox.Text = value;
+                NombreContactoTextBox.DataBind();
+            }
+        }
+        public string Email
+        {
+            get
+            {
+                return EmailContactoTextBox.Text;
+            }
+            set
+            {
+                EmailContactoTextBox.Text = value;
+                EmailContactoTextBox.DataBind();
+            }
+        }
+        public string Telefono
+        {
+            get
+            {
+                return TelefonoContactoTextBox.Text;
+            }
+            set
+            {
+                TelefonoContactoTextBox.Text = value;
+                TelefonoContactoTextBox.DataBind();
+            }
+        }
     }
 }
