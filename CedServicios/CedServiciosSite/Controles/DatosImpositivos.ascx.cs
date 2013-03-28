@@ -13,5 +13,81 @@ namespace CedServicios.Site.Controles
         {
 
         }
+        public int IdCondIVA
+        {
+            get
+            {
+                return Convert.ToInt32(CondIVADropDownList.SelectedValue);
+            }
+            set
+            {
+                CondIVADropDownList.SelectedValue = value.ToString();
+                CondIVADropDownList.DataBind();
+            }
+        }
+        public string DescrCondIVA
+        {
+            get
+            {
+                return CondIVADropDownList.SelectedItem.Text;
+            }
+        }
+        public int IdCondIngBrutos
+        {
+            get
+            {
+                return Convert.ToInt32(CondIngBrutosDropDownList.SelectedValue);
+            }
+            set
+            {
+                CondIngBrutosDropDownList.SelectedValue = value.ToString();
+                CondIngBrutosDropDownList.DataBind();
+            }
+        }
+        public string DescrCondIngBrutos
+        {
+            get
+            {
+                return CondIngBrutosDropDownList.SelectedItem.Text;
+            }
+        }
+        public string NroIngBrutos
+        {
+            get
+            {
+                return NroIngBrutosTextBox.Text;
+            }
+            set
+            {
+                NroIngBrutosTextBox.Text = value;
+                NroIngBrutosTextBox.DataBind();
+            }
+        }
+        public DateTime FechaInicioActividades
+        {
+            get
+            {
+                return new DateTime(Convert.ToInt32(FechaInicioActividadesTextBox.Text.Substring(0, 4)), Convert.ToInt32(FechaInicioActividadesTextBox.Text.Substring(4, 2)),Convert.ToInt32(FechaInicioActividadesTextBox.Text.Substring(6, 2)));
+            }
+            set
+            {
+                FechaInicioActividadesTextBox.Text = value.ToString("yyyyMMdd");
+                FechaInicioActividadesTextBox.DataBind();
+            }
+        }
+        public List<FeaEntidades.CondicionesIVA.CondicionIVA> ListaCondIVA
+        {
+            set
+            {
+                CondIVADropDownList.DataSource = value;
+            }
+        }
+        public List<FeaEntidades.CondicionesIB.CondicionIB> ListaCondIngBrutos
+        {
+            set
+            {
+                CondIngBrutosDropDownList.DataSource = value;
+            }
+        }
     }
 }

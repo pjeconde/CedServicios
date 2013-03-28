@@ -99,7 +99,6 @@ namespace CedServicios.RN
             permiso.TipoPermiso.Id = "AdminUN";
             permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
             permiso.UsuarioSolicitante = Sesion.Usuario;
-            permiso.Accion.Tipo = "AltaUN";
             permiso.WF.Estado = "Vigente";
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
             return db.AltaHandler(permiso, false, false);
@@ -154,7 +153,6 @@ namespace CedServicios.RN
             permiso.TipoPermiso.Id = "UsoCUITxUN";
             permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
             permiso.UsuarioSolicitante = Sesion.Usuario;
-            permiso.Accion.Tipo = "AltaUN";
             List<Entidades.Permiso> usuarioEsAdminCUIT = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
             {
                 return p.TipoPermiso.Id == "AdminCUIT" && p.Cuit == UN.Cuit && p.WF.Estado == "Vigente";
@@ -220,7 +218,6 @@ namespace CedServicios.RN
             permiso.TipoPermiso.Id = "AdminCUIT";
             permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
             permiso.UsuarioSolicitante = Sesion.Usuario;
-            permiso.Accion.Tipo = "AltaCUIT";
             permiso.WF.Estado = "Vigente";
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
             return db.AltaHandler(permiso, false, false);
@@ -234,7 +231,6 @@ namespace CedServicios.RN
             permiso.TipoPermiso.Id = "UsoCUITxUN";
             permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
             permiso.UsuarioSolicitante = Sesion.Usuario;
-            permiso.Accion.Tipo = "AltaCUIT";
             permiso.WF.Estado = "Vigente";
             return db.AltaHandler(permiso, false, false);
         }

@@ -11,7 +11,15 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                MedioDropDownList.DataSource = RN.Medio.Lista(sesion);
+                DataBind();
+            }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
@@ -31,18 +39,22 @@ namespace CedServicios.Site
                 cuit.Domicilio.Sector = Domicilio.Sector;
                 cuit.Domicilio.Torre = Domicilio.Torre;
                 cuit.Domicilio.Localidad = Domicilio.Localidad;
-                cuit.Domicilio.Provincia.Id = Domicilio.Provincia;
+                cuit.Domicilio.Provincia.Id = Domicilio.IdProvincia;
+                cuit.Domicilio.Provincia.Descr = Domicilio.DescrProvincia;
                 cuit.Domicilio.CodPost = Domicilio.CodPost;
-                cuit.Contacto.Nombre = "";
-                cuit.Contacto.Email = "";
-                cuit.Contacto.Telefono = "";
-                cuit.DatosImpositivos.IdCondIVA = 0;
-                cuit.DatosImpositivos.IdCondIngBrutos = 0;
-                cuit.DatosImpositivos.NroIngBrutos = "";
-                cuit.DatosImpositivos.FechaInicioActividades = DateTime.Now;
-                cuit.DatosIdentificatorios.GLN = 0;
-                cuit.DatosIdentificatorios.CodigoInterno = "";
-                cuit.Medio.Id = "";
+                cuit.Contacto.Nombre = Contacto.Nombre;
+                cuit.Contacto.Email = Contacto.Email;
+                cuit.Contacto.Telefono = Contacto.Telefono;
+                cuit.DatosImpositivos.IdCondIVA = DatosImpositivos.IdCondIVA;
+                cuit.DatosImpositivos.DescrCondIVA = DatosImpositivos.DescrCondIVA;
+                cuit.DatosImpositivos.IdCondIngBrutos = DatosImpositivos.IdCondIngBrutos;
+                cuit.DatosImpositivos.DescrCondIngBrutos = DatosImpositivos.DescrCondIngBrutos;
+                cuit.DatosImpositivos.NroIngBrutos = DatosImpositivos.NroIngBrutos;
+                cuit.DatosImpositivos.FechaInicioActividades = DatosImpositivos.FechaInicioActividades;
+                cuit.DatosIdentificatorios.GLN = DatosIdentificatorios.GLN;
+                cuit.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
+                cuit.Medio.Id = MedioDropDownList.SelectedValue;
+                cuit.Medio.Descr = MedioDropDownList.Text;
                 RN.Cuit.Registrar(cuit, sesion);
                 //CUITTextBox.Enabled = false;
                 //IdUNTextBox.Enabled = false;

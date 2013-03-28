@@ -13,5 +13,29 @@ namespace CedServicios.Site.Controles
         {
 
         }
+        public long GLN
+        {
+            get
+            {
+                return Convert.ToInt64(GLNTextBox.Text);
+            }
+            set
+            {
+                GLNTextBox.Text = value.ToString();
+                GLNTextBox.DataBind();
+            }
+        }
+        public string CodigoInterno
+        {
+            get
+            {
+                return CodigoInternoTextBox.Text;
+            }
+            set
+            {
+                CodigoInternoTextBox.Text = value;
+                CodigoInternoTextBox.DataBind();
+            }
+        }
     }
 }

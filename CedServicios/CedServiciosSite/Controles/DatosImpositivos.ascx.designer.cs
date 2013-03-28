@@ -103,13 +103,13 @@ namespace CedServicios.Site.Controles {
         protected global::System.Web.UI.WebControls.TextBox NroIngBrutosTextBox;
         
         /// <summary>
-        /// Control FechaInicioActividadesDatePickerRequiredFieldValidator.
+        /// Control FechaInicioActividadesRequiredFieldValidator.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator FechaInicioActividadesDatePickerRequiredFieldValidator;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator FechaInicioActividadesRequiredFieldValidator;
         
         /// <summary>
         /// Control Label22.
@@ -121,13 +121,13 @@ namespace CedServicios.Site.Controles {
         protected global::System.Web.UI.WebControls.Label Label22;
         
         /// <summary>
-        /// Control FechaInicioActividadesDatePickerWebUserControl.
+        /// Control FechaInicioActividadesTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox FechaInicioActividadesDatePickerWebUserControl;
+        protected global::System.Web.UI.WebControls.TextBox FechaInicioActividadesTextBox;
         
         /// <summary>
         /// Control CalendarExtender1.

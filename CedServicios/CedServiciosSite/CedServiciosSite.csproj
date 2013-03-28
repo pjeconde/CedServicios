@@ -60,7 +60,6 @@
     <Content Include="App_Themes\CedServicios\CedServicios.css" />
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="Controles\Contacto.ascx" />
-    <Content Include="Controles\DatePickerWebUserControl.ascx" />
     <Content Include="Controles\DatosIdentificatorios.ascx" />
     <Content Include="Controles\DatosImpositivos.ascx" />
     <Content Include="Controles\Domicilio.ascx" />
@@ -139,13 +138,6 @@
     </Compile>
     <Compile Include="Controles\Contacto.ascx.designer.cs">
       <DependentUpon>Contacto.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="Controles\DatePickerWebUserControl.ascx.cs">
-      <DependentUpon>DatePickerWebUserControl.ascx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Controles\DatePickerWebUserControl.ascx.designer.cs">
-      <DependentUpon>DatePickerWebUserControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controles\DatosIdentificatorios.ascx.cs">
       <DependentUpon>DatosIdentificatorios.ascx</DependentUpon>

@@ -109,16 +109,23 @@ namespace CedServicios.Site.Controles
                 LocalidadTextBox.DataBind();
             }
         }
-        public string Provincia
+        public string IdProvincia
         {
             get
             {
-                return ProvinciaDropDownList.Text;
+                return ProvinciaDropDownList.SelectedValue;
             }
             set
             {
-                ProvinciaDropDownList.Text = value;
+                ProvinciaDropDownList.SelectedValue = value;
                 ProvinciaDropDownList.DataBind();
+            }
+        }
+        public string DescrProvincia
+        {
+            get
+            {
+                return ProvinciaDropDownList.SelectedItem.Text;
             }
         }
         public string CodPost
@@ -131,6 +138,13 @@ namespace CedServicios.Site.Controles
             {
                 CodPostTextBox.Text = value;
                 CodPostTextBox.DataBind();
+            }
+        }
+        public List<FeaEntidades.CodigosProvincia.CodigoProvincia> ListaProvincia
+        {
+            set
+            {
+                ProvinciaDropDownList.DataSource = value;
             }
         }
     }

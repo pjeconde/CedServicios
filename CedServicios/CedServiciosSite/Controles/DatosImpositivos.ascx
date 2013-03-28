@@ -7,7 +7,7 @@
 		<asp:Label ID="Label11" runat="server" Text="Cond.IVA"></asp:Label>
 	</td>
 	<td align="left" style="padding-top:5px">
-		<asp:DropDownList ID="CondIVADropDownList" runat="server" TabIndex="16" Width="255px">
+		<asp:DropDownList ID="CondIVADropDownList" runat="server" TabIndex="16" Width="255px" DataValueField="Codigo" DataTextField="Descr">
 		</asp:DropDownList>
 	</td>
 </tr>
@@ -20,7 +20,7 @@
 		<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="left">
-					<asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" TabIndex="18" Width="216px">
+					<asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Codigo" DataTextField="Descr">
 					</asp:DropDownList>
 				</td>
 	            <td align="right" style="padding-right: 5px;">
@@ -46,15 +46,15 @@
 <!-- FechaInicioActividades  -->
 <tr>
 	<td align="right" style="padding-left: 10px; padding-right: 5px; padding-top:5px">
-		<asp:RequiredFieldValidator ID="FechaInicioActividadesDatePickerRequiredFieldValidator" runat="server"
-			ControlToValidate="FechaInicioActividadesDatePickerWebUserControl" ErrorMessage="Fecha de inicio de actividades"
+		<asp:RequiredFieldValidator ID="FechaInicioActividadesRequiredFieldValidator" runat="server"
+			ControlToValidate="FechaInicioActividadesTextBox" ErrorMessage="Fecha de inicio de actividades"
 			SetFocusOnError="True">* </asp:RequiredFieldValidator>
         <asp:Label ID="Label22" runat="server" Text="Fecha de inicio de actividades"></asp:Label>
 	</td>
 	<td align="left" style="padding-top:5px">
-        <asp:TextBox ID="FechaInicioActividadesDatePickerWebUserControl" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px"></asp:TextBox>
+        <asp:TextBox ID="FechaInicioActividadesTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px"></asp:TextBox>
         <cc1:CalendarExtender ID="CalendarExtender1" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
-            TargetControlID="FechaInicioActividadesDatePickerWebUserControl" Format="yyyyMMdd" PopupButtonID="ImageCalendarFechaEmision" >
+            TargetControlID="FechaInicioActividadesTextBox" Format="yyyyMMdd" PopupButtonID="ImageCalendarExtender1" >
         </cc1:CalendarExtender>
         <asp:Image runat="server" ID="ImageCalendarFechaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
     </td>

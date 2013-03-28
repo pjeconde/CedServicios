@@ -81,7 +81,8 @@ namespace CedServicios.DB
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @idWF varchar(256) ");
-            a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
+            a.AppendLine("declare @accionTipo varchar(15) ");
+            a.AppendLine("set @accionTipo='AltaUN' ");
             a.AppendLine("declare @accionNro varchar(256) ");
             a.AppendLine("update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro' ");
             a.Append(CrearHandler(UN));
@@ -93,6 +94,7 @@ namespace CedServicios.DB
         public string CrearHandler(Entidades.UN UN)
         {
             StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
             a.Append("Insert UN (Cuit, IdUN, DescrUN, IdWF, Estado) values (");
             a.Append("'" + UN.Cuit + "', ");
             a.Append("'" + UN.Id + "', ");

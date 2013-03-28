@@ -148,6 +148,24 @@ namespace CedServicios.Site {
         protected global::CedServicios.Site.Controles.DatosIdentificatorios DatosIdentificatorios;
         
         /// <summary>
+        /// Control Label18.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label18;
+        
+        /// <summary>
+        /// Control MedioDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList MedioDropDownList;
+        
+        /// <summary>
         /// Control AceptarButton.
         /// </summary>
         /// <remarks>
