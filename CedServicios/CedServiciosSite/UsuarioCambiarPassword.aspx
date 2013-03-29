@@ -1,17 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioCambiarPassword.aspx.cs" Inherits="CedServicios.Site.UsuarioCambiarPassword" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" class="TextoComun" style="height: 500px;
-        width: 800px; text-align: left;">
+    <table border="0" cellpadding="0" cellspacing="0" class="TextoComun" style="text-align:left; padding-left:10px;">
         <tr>
-            <td style="height: 20px; padding-top:20px">
+            <td colspan="2" align="center" style="padding-top:20px">
                 <asp:Label ID="TituloLabel" runat="server" SkinID="TituloPagina" Text="Cambio de Contraseña de Usuario"></asp:Label>
             </td>
         </tr>
         <tr>
-            <td style="width: 21px">
-            </td>
-            <td align="left" style="padding-top:10px;">
+            <td colspan="2" align="center" style="padding-top:20px;">
                 <asp:Label ID="Label8" runat="server" SkinID="TextoMediano" Text="Para realizar el cambio de la Contraseña de su cuenta eFact, ingrese los datos que se solicitan a continuación:"></asp:Label>
             </td>
         </tr>
@@ -27,7 +24,7 @@
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="Label15" runat="server" Text="Contraseña actual"></asp:Label>
             </td>
-            <td align="left" colspan="2" style="padding-top:10px">
+            <td align="left" style="padding-top:10px">
                 <asp:TextBox ID="PasswordTextBox" runat="server" OnTextChanged="TextBox_TextChanged"
                     TabIndex="1" TextMode="Password" Width="120px"></asp:TextBox>
             </td>
@@ -44,7 +41,7 @@
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="Label1" runat="server" Text="Contraseña nueva"></asp:Label>
             </td>
-            <td align="left" colspan="2" style="padding-right: 10px; padding-top: 5px">
+            <td align="left" style="padding-right: 10px; padding-top: 5px">
                 <asp:TextBox ID="PasswordNuevaTextBox" runat="server" OnTextChanged="TextBox_TextChanged"
                     TabIndex="2" TextMode="Password" Width="120px"></asp:TextBox>
             </td>
@@ -61,7 +58,7 @@
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="Label2" runat="server" Text="Confirmación de Contraseña nueva"></asp:Label>
             </td>
-            <td align="left" colspan="2" style="padding-right: 10px; padding-top: 5px">
+            <td align="left" style="padding-right:10px; padding-top: 5px">
                 <asp:TextBox ID="ConfirmacionPasswordNuevaTextBox" runat="server" OnTextChanged="TextBox_TextChanged"
                     TabIndex="3" TextMode="Password" Width="120px"></asp:TextBox>
             </td>
@@ -72,14 +69,12 @@
             <td align="left" style="padding-top:20px">
                 <asp:Button ID="AceptarButton" runat="server" OnClick="AceptarButton_Click" TabIndex="4"
                     Text="Aceptar" />
-            </td>
-            <td align="left" style="padding-top:20px; padding-left: 5px">
                 <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" PostBackUrl="~/Default.aspx"
                     TabIndex="5" Text="Cancelar" />
             </td>
         </tr>
         <tr>
-            <td align="center" style="padding-top:20px">
+            <td colspan="2" align="center" style="padding-top:20px">
                 <asp:Label ID="MsgErrorLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                 <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary" />
             </td>

@@ -172,7 +172,7 @@ namespace CedServicios.Entidades
                 return accion.Tipo;
             }
         }
-        public string IdUN
+        public int IdUN
         {
             get
             {

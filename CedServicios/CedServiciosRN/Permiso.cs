@@ -35,7 +35,7 @@ namespace CedServicios.RN
             Entidades.Permiso permiso = new Entidades.Permiso();
             permiso.Usuario = Sesion.Usuario;
             permiso.Cuit = Cuit.Nro;
-            permiso.UN.Id = String.Empty;
+            permiso.UN.Id = 0;
             permiso.TipoPermiso.Id = "AdminCUIT";
             permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
             permiso.UsuarioSolicitante = Sesion.Usuario;
@@ -214,7 +214,7 @@ namespace CedServicios.RN
             Entidades.Permiso permiso = new Entidades.Permiso();
             permiso.Usuario = Sesion.Usuario;
             permiso.Cuit = Cuit.Nro;
-            permiso.UN.Id = String.Empty;
+            permiso.UN.Id = 0;
             permiso.TipoPermiso.Id = "AdminCUIT";
             permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
             permiso.UsuarioSolicitante = Sesion.Usuario;

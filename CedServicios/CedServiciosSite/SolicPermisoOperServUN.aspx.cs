@@ -24,7 +24,7 @@ namespace CedServicios.Site
 
                 Entidades.UN un = new Entidades.UN();
                 un.Cuit = cuit.Nro;
-                un.Id = IdUNDropDownList.SelectedValue.ToString();
+                un.Id = Convert.ToInt32(IdUNDropDownList.SelectedValue);
                 RN.UN.Leer(un, sesion);
 
                 Entidades.TipoPermiso tipoPermiso = new Entidades.TipoPermiso();
@@ -71,7 +71,7 @@ namespace CedServicios.Site
             {
                 Entidades.UN uN = new Entidades.UN();
                 uN.Cuit = CUITTextBox.Text;
-                uN.Id = IdUNDropDownList.SelectedValue;
+                uN.Id = Convert.ToInt32(IdUNDropDownList.SelectedValue);
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 IdTipoPermisoDropDownList.DataSource = RN.TipoPermiso.ListaPorUN(uN, sesion);
                 DataBind();

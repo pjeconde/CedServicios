@@ -9,7 +9,7 @@ namespace CedServicios.Entidades
     public class UN
     {
         private string cuit;
-        private string id;
+        private int id;
         private string descr;
         private WF wF;
         private string ultActualiz;
@@ -30,7 +30,7 @@ namespace CedServicios.Entidades
                 return cuit;
             }
         }
-        public string Id
+        public int Id
         {
             set
             {

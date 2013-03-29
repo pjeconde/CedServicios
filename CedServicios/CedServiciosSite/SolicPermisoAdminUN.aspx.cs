@@ -24,7 +24,7 @@ namespace CedServicios.Site
 
                 Entidades.UN un = new Entidades.UN();
                 un.Cuit = cuit.Nro;
-                un.Id = IdUNDropDownList.SelectedValue.ToString();
+                un.Id = Convert.ToInt32(IdUNDropDownList.SelectedValue);
                 RN.UN.Leer(un, sesion);
 
                 string referenciaAAprobadores = String.Empty;

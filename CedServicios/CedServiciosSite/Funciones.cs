@@ -133,7 +133,7 @@ namespace CedServicios.Site
             cUITDropDownList.DataBind();
 
             uNDropDownList.DataValueField = "Id";
-            uNDropDownList.DataTextField = "Id";
+            uNDropDownList.DataTextField = "Descr";
             uNDropDownList.DataSource = new List<Entidades.UN>();
 
             menuContentPlaceHolder.Visible = false;

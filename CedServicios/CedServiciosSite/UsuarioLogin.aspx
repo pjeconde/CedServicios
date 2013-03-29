@@ -1,14 +1,14 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioLogin.aspx.cs" Inherits="CedServicios.Site.Ingreso" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0">
+    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px;">
         <tr>
             <td align="center" colspan="3" style="padding-top:20px">
                 <asp:Label ID="Label6" runat="server" SkinID="TituloPagina" Text="Iniciar sesión"></asp:Label>
             </td>
         </tr>
         <tr>
-            <td align="right" class="TextoInicioMediano" style="padding-left: 10px; padding-right: 10px; padding-top:20px">
+            <td align="right" class="TextoInicioMediano" style="padding-right: 10px; padding-top:20px">
                 Id.Usuario
             </td>
             <td align="left" style="width: 100px; padding-top:20px">
@@ -21,7 +21,7 @@
             </td>
         </tr>
         <tr>
-            <td align="right" class="TextoInicioMediano" style="padding-left: 10px; padding-right: 10px; padding-top:5px">
+            <td align="right" class="TextoInicioMediano" style="padding-right: 10px; padding-top:5px">
                 Contraseña
             </td>
             <td align="left" style="width: 100px; padding-right: 10px; padding-top:5px">
