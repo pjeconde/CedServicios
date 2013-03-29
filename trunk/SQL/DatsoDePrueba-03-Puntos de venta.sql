@@ -33,7 +33,7 @@ INSERT INTO PuntoVta
      VALUES
            ('30710015062'
            ,1
-           ,'BUE'
+           ,1
            ,'Comun'
            ,0
            ,''
@@ -98,7 +98,7 @@ INSERT INTO PuntoVta
      VALUES
            ('30710015062'
            ,2
-           ,'BUE'
+           ,1
            ,'Comun'
            ,0
            ,''
@@ -163,7 +163,7 @@ INSERT INTO PuntoVta
      VALUES
            ('30710015062'
            ,3
-           ,'MDQ'
+           ,2
            ,'Comun'
            ,0
            ,''
