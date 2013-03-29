@@ -1,15 +1,15 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioOlvidoPassword.aspx.cs" Inherits="CedServicios.Site.UsuarioOlvidoPassword" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0">
+    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px;">
         <!-- @@@ TITULO DE LA PAGINA @@@-->
         <tr>
-            <td colspan="3" style="padding-top: 20px;">
+            <td colspan="3" align="center" style="padding-top: 20px;">
                 <asp:Label ID="TituloLabel" runat="server" SkinID="TituloPagina" Text="¿ Olvidó la Contraseña de su cuenta ?"></asp:Label>
             </td>
         </tr>
         <tr>
-            <td colspan="3" align="left" style="padding-top:10px;">
+            <td colspan="3" align="left" style="padding-top:20px;">
                 <asp:Label ID="Label8" runat="server" SkinID="TextoMediano" Text="Para establecer una nueva Contraseña para su cuenta eFact, siga las siguientes instrucciones:"></asp:Label>
             </td>
         </tr>

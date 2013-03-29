@@ -23,8 +23,8 @@ namespace CedServicios.RN
             DB.UN dbUN= new DB.UN(Sesion);
             Entidades.UN uN = new Entidades.UN();
             uN.Cuit = Cuit.Nro;
-            uN.Id = "";
-            uN.Descr = "";
+            uN.Id = 1;
+            uN.Descr = "Predefinida";
             uN.WF.Estado = "Vigente";
             string crearUNHandler = dbUN.CrearHandler(uN);
             string permisoUsoCUITxUNAprobadoHandler = RN.Permiso.PermisoUsoCUITxUNAprobadoHandler(uN, Sesion);

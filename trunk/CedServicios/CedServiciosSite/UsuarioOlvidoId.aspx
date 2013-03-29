@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioOlvidoId.aspx.cs" Inherits="CedServicios.Site.UsuarioOlvidoId" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0">
+    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px;">
         <!-- @@@ TITULO DE LA PAGINA @@@-->
         <tr>
             <td colspan="3" align="center" style="padding-top:20px";>
@@ -9,8 +9,8 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3" align="left" style="padding-top:10px;">
-                <asp:Label ID="Label8" runat="server" SkinID="TextoMediano" Text="Si no recuerda el Id.Usuario de su cuenta, ingrese el eMail, que registró en el momento de creación de su cuenta."></asp:Label>
+            <td colspan="3" align="left" style="padding-top:20px;">
+                <asp:Label ID="Label8" runat="server" SkinID="TextoMediano" Text="Si no recuerda el Id.Usuario de su cuenta, ingrese el eMail que registró en el momento de creación de su cuenta."></asp:Label>
             </td>
         </tr>
         <tr>
@@ -20,7 +20,7 @@
         </tr>
         <!-- @@@ OBJETOS ESPECIFICOS DE LA PAGINA @@@-->
         <tr>
-            <td align="right" style="padding-top:5px; padding-right: 5px">
+            <td align="right" style="padding-top:20px; padding-right: 5px">
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server" ControlToValidate="EmailTextBox"
                     ErrorMessage="Email" SetFocusOnError="True" ValidationExpression="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
                     <asp:Label ID="Label11" runat="server" SkinID="IndicadorValidacion"></asp:Label>
@@ -31,7 +31,7 @@
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="EmailLabel" runat="server" Text="Email"></asp:Label>
             </td>
-            <td align="left" colspan="2" style="padding-top:5px">
+            <td align="left" colspan="2" style="padding-top:20px">
                 <asp:TextBox ID="EmailTextBox" runat="server" MaxLength="128" TabIndex="3" Width="100%"></asp:TextBox>
             </td>
         </tr>

@@ -28,7 +28,7 @@ namespace CedServicios.DB
                 {
                     Entidades.UN uN = new Entidades.UN();
                     uN.Cuit = sesion.Cuit.Nro;
-                    uN.Id = Convert.ToString(dt.Rows[i]["IdUN"]);
+                    uN.Id = Convert.ToInt32(dt.Rows[i]["IdUN"]);
                     Leer(uN);
                     lista.Add(uN);
                 }
@@ -71,7 +71,7 @@ namespace CedServicios.DB
         private void Copiar(DataRow Desde, Entidades.UN Hasta)
         {
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
-            Hasta.Id = Convert.ToString(Desde["IdUN"]);
+            Hasta.Id = Convert.ToInt32(Desde["IdUN"]);
             Hasta.Descr = Convert.ToString(Desde["DescrUN"]);
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);

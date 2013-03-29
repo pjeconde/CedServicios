@@ -31,7 +31,7 @@ namespace CedServicios.Site
             try
             {
                 un.Cuit = CUITTextBox.Text;
-                un.Id = IdUNTextBox.Text;
+                un.Id = Convert.ToInt32(IdUNTextBox.Text);
                 RN.UN.Leer(un, sesion);
                 throw new EX.Validaciones.ElementoYaInexistente("Unidad de negocio '" + un.Id + "' del Cuit " + un.Cuit);
             }

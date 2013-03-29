@@ -91,7 +91,7 @@ namespace CedServicios.DB
         {
             Hasta.Usuario.Id = Convert.ToString(Desde["IdUsuario"]);
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
-            Hasta.UN.Id = Convert.ToString(Desde["IdUN"]);
+            Hasta.UN.Id = Convert.ToInt32(Desde["IdUN"]);
             Hasta.UN.Descr = Convert.ToString(Desde["DescrUN"]);
             Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
             Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
@@ -146,10 +146,10 @@ namespace CedServicios.DB
             a.AppendLine("select IdUsuario from Permiso where Cuit='" + Cuit + "' and IdTipoPermiso='AdminCUIT' and Estado='Vigente' ");
             return LeerListaUsuarios(a.ToString());
         }
-        public List<Entidades.Usuario> LeerListaUsuariosAutorizadores(string Cuit, string IdUN)
+        public List<Entidades.Usuario> LeerListaUsuariosAutorizadores(string Cuit, int IdUN)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("select IdUsuario from Permiso where Cuit='" + Cuit + "' and IdUN='" + IdUN + "' and IdTipoPermiso='AdminUN' and Estado='Vigente' ");
+            a.AppendLine("select IdUsuario from Permiso where Cuit='" + Cuit + "' and IdUN='" + IdUN.ToString() + "' and IdTipoPermiso='AdminUN' and Estado='Vigente' ");
             return LeerListaUsuarios(a.ToString());
         }
         public List<Entidades.Usuario> LeerListaUsuarios(string SqlScript)

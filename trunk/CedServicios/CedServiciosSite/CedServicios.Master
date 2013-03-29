@@ -56,26 +56,26 @@
                 <td>
                     <table>
                         <tr>
-                            <td class="Fuente" align="right" valign="bottom" style="padding-bottom: 0px;"">
-                                <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario: "></asp:Label>
+                            <td class="Fuente" align="right">
+                                <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario:"></asp:Label>
                             </td>
-                            <td class="Fuente" align="left" valign="bottom" colspan="3">
+                            <td class="Fuente" align="left" colspan="3">
                                 <asp:HyperLink ID="UsuarioHyperLink" runat="server" Text="" NavigateUrl="~/UsuarioConsulta.aspx"></asp:HyperLink>
                             </td>
                         </tr>
                         <tr>
-                            <td class="Fuente">
-                                CUIT:
+                            <td class="Fuente" align="right">
+                                <asp:Label ID="Label2" runat="server" Text="CUIT:" ToolTip="Clave Única de Identificación Tributaria"></asp:Label>
                             </td>
-                            <td class="Fuente">
+                            <td class="Fuente" align="left">
                                 <asp:DropDownList ID="CUITDropDownList" runat="server">
                                 </asp:DropDownList>
                             </td>
-                            <td class="Fuente">
-                                UN:
+                            <td class="Fuente" align="right">
+                                <asp:Label ID="Label1" runat="server" Text="UN:" ToolTip="Unidad de Negocio"></asp:Label>
                             </td>
-                            <td class="Fuente">
-                                <asp:DropDownList ID="UNDropDownList" runat="server" ToolTip="Unidad de Negocio">
+                            <td class="Fuente" align="left">
+                                <asp:DropDownList ID="UNDropDownList" runat="server">
                                 </asp:DropDownList>
                             </td>
                         </tr>
@@ -89,18 +89,17 @@
     <div id="DivMenu" style="text-align:center">
         <table>
             <tr>
-                <td align="center"  style="text-align: left">
-                    <asp:Menu ID="Menu" runat="server" BackColor="white" 
-                        DynamicHorizontalOffset="5" CssClass="MainMenu" 
+                <td align="left" style="text-align: left">
+                    <asp:Menu ID="Menu" runat="server" BackColor="white"  
+                        DynamicHorizontalOffset="0" CssClass="MainMenu" 
                         Font-Names="Verdana" Font-Size="10px" ForeColor="#284E98" 
                         StaticSubMenuIndent="30px" onmenuitemclick="Menu_MenuItemClick">
-                        <DynamicHoverStyle BackColor="LightGray" ForeColor="DarkBlue" />
-                        <DynamicMenuItemStyle HorizontalPadding="5px" VerticalPadding="2px" />
-                        <DynamicMenuStyle BackColor="#B5C7DE" />
-                        <DynamicSelectedStyle BackColor="Gold" />
-                        <StaticHoverStyle BackColor="LightGray" ForeColor="DarkBlue" />
-                        <StaticMenuItemStyle HorizontalPadding="15px" VerticalPadding="2px" />
-                        <StaticSelectedStyle BackColor="Gold" />
+                        <DynamicHoverStyle Font-Underline="true"/>
+                        <DynamicMenuItemStyle BackColor="#ededed" VerticalPadding="2px"/>
+                        <DynamicSelectedStyle Font-Underline="true"/>
+                        <StaticHoverStyle BackColor="#ededed"/>
+                        <StaticMenuItemStyle HorizontalPadding="10px"/>
+                        <StaticSelectedStyle BackColor="#ededed"/>
 	                    <StaticItemTemplate>
 		                    <asp:Panel ID="Panel1" runat="server" ForeColor='<%# GetItemColor(Container) %>'>
 			                    <%# Eval("Text") %>
