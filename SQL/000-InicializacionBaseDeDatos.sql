@@ -109,7 +109,7 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[UN](
 	[Cuit] [varchar](11) NOT NULL,
-	[IdUN] [varchar](20) NOT NULL,
+	[IdUN] [int] NOT NULL,
 	[DescrUN] [varchar](50) NOT NULL,
 	[IdWF] [int] NOT NULL,
 	[Estado] [varchar](15) NOT NULL,
@@ -180,7 +180,7 @@ GO
 CREATE TABLE [dbo].[PuntoVta](
 	[Cuit] [varchar](11) NOT NULL,
 	[NroPuntoVta] [numeric](4) NOT NULL,
-	[IdUN] [varchar](20) NOT NULL,
+	[IdUN] [int] NOT NULL,
 	[IdTipoPuntoVta] [varchar](15) NOT NULL,
 	[UsaSetPropioDeDatosCuit] [bit] NOT NULL,
 	[Calle] [varchar](30) NOT NULL,
@@ -270,7 +270,7 @@ GO
 CREATE TABLE [dbo].[Permiso](
 	[IdUsuario] [varchar](50) NOT NULL,
 	[Cuit] [varchar](11) NOT NULL,
-	[IdUN] [varchar](20) NOT NULL,
+	[IdUN] [int] NOT NULL,
 	[IdTipoPermiso] [varchar](15) NOT NULL,
 	[FechaFinVigencia] [datetime] NOT NULL,
 	[IdUsuarioSolicitante] [varchar](50) NOT NULL,
@@ -304,7 +304,7 @@ GO
 CREATE TABLE [dbo].[Configuracion](
 	[IdUsuario] [varchar](50) NOT NULL,
 	[Cuit] [varchar](11) NOT NULL,
-	[IdUN] [varchar](20) NOT NULL,
+	[IdUN] [int] NOT NULL,
 	[IdTipoPermiso] [varchar](15) NOT NULL,
 	[IdItemConfig] [varchar](50) NOT NULL,
 	[Valor] [varchar](256) NOT NULL,
