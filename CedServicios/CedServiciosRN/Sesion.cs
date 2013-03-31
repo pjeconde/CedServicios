@@ -105,14 +105,18 @@ namespace CedServicios.RN
             Sesion.Usuario = Usuario;
             if (Sesion.Usuario.Id != String.Empty)
             {
-                Sesion.Usuario.Permisos = RN.Permiso.LeerListaPermisosPorUsuario(Sesion.Usuario, Sesion);
-                Sesion.CuitsDelUsuario = RN.Cuit.LeerListaCuitsPorUsuario(Sesion);
-                if (Sesion.CuitsDelUsuario.Count != 0)
-                {
-                    AsignarCuit(Sesion.CuitsDelUsuario[0], Sesion);
-                }
-                Sesion.OpcionesHabilitadas = OpcionesHabilitadas(Sesion);
+                RefrescarDatosUsuario(Usuario, Sesion);
             }
+        }
+        public static void RefrescarDatosUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
+        {
+            Sesion.Usuario.Permisos = RN.Permiso.LeerListaPermisosPorUsuario(Sesion.Usuario, Sesion);
+            Sesion.CuitsDelUsuario = RN.Cuit.LeerListaCuitsPorUsuario(Sesion);
+            if (Sesion.CuitsDelUsuario.Count != 0)
+            {
+                AsignarCuit(Sesion.CuitsDelUsuario[0], Sesion);
+            }
+            Sesion.OpcionesHabilitadas = OpcionesHabilitadas(Sesion);
         }
         public static void AsignarCuit(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {

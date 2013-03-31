@@ -38,6 +38,8 @@ namespace CedServicios.Site
                 CUITTextBox.Enabled = false;
                 SolicitarButton.Enabled = false;
                 CancelarButton.Enabled = false;
+                RN.Sesion.RefrescarDatosUsuario(sesion.Usuario, sesion);
+                Funciones.PersonalizarControlesMaster(Master, sesion);
                 MensajeLabel.Text = "El permiso fue enviado para su aprobación.<br />Autorizador(es): " + referenciaAAprobadores;
             }
             catch (Exception ex)

@@ -68,14 +68,15 @@
                                 <asp:Label ID="Label2" runat="server" Text="CUIT:" ToolTip="Clave Única de Identificación Tributaria"></asp:Label>
                             </td>
                             <td class="Fuente" align="left">
-                                <asp:DropDownList ID="CUITDropDownList" runat="server">
+                                <asp:DropDownList ID="CUITDropDownList" runat="server" AutoPostBack="True" 
+                                    onselectedindexchanged="CUITDropDownList_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </td>
                             <td class="Fuente" align="right">
                                 <asp:Label ID="Label1" runat="server" Text="UN:" ToolTip="Unidad de Negocio"></asp:Label>
                             </td>
                             <td class="Fuente" align="left">
-                                <asp:DropDownList ID="UNDropDownList" runat="server">
+                                <asp:DropDownList ID="UNDropDownList" runat="server" AutoPostBack="True">
                                 </asp:DropDownList>
                             </td>
                         </tr>

@@ -31,7 +31,7 @@ namespace CedServicios.DB
             a.AppendLine("from #p ");
             a.AppendLine("left outer join Usuario u on #p.IdUsuario=u.IdUsuario ");
             a.AppendLine("left outer join Usuario us on #p.IdUsuarioSolicitante=us.IdUsuario ");
-            a.AppendLine("left outer join UN on #p.IdUN=UN.IdUN");
+            a.AppendLine("left outer join UN on #p.IdUN=UN.IdUN and #p.Cuit=UN.Cuit ");
             a.AppendLine("order by #p.DescrTipoPermiso, #p.Cuit, #p.IdUN, NombreUsuario ");
             a.AppendLine("drop table #p ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
@@ -53,7 +53,7 @@ namespace CedServicios.DB
             a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado, TipoPermiso.DescrTipoPermiso, isnull(UN.DescrUN, '') as DescrUN ");
             a.AppendLine("from Permiso ");
             a.AppendLine("join TipoPermiso on Permiso.IdTipoPermiso=TipoPermiso.IdTipoPermiso ");
-            a.AppendLine("left outer join UN on Permiso.IdUN=UN.IdUN ");
+            a.AppendLine("left outer join UN on Permiso.IdUN=UN.IdUN  and Permiso.Cuit=UN.Cuit ");
             a.AppendLine("where IdUsuario='" + Usuario.Id + "' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Permiso> lista = new List<Entidades.Permiso>();

@@ -179,6 +179,13 @@ namespace CedServicios.Entidades
                 return uN.Id;
             }
         }
+        public string DescrUN
+        {
+            get
+            {
+                return uN.Descr;
+            }
+        }
         #endregion
     }
 }
