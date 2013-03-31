@@ -48,7 +48,8 @@ namespace CedServicios.Site
             AutorizacionesGridView.DataBind();
             if (permiso.Count == 0)
             {
-                MensajeLabel.Text = "No hay autorizaciones pendientes";
+                MensajeLabel.Text = "No hay autorizaciones";
+                if (pendientes) MensajeLabel.Text += " pendientes";
             }
         }
         protected void AutorizacionesGridView_RowCommand(object sender, GridViewCommandEventArgs e)

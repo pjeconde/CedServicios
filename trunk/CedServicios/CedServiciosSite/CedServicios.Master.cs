@@ -67,5 +67,16 @@ namespace CedServicios.Site
             else
                 return Color.DarkBlue;
         }
+        protected void CUITDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CUITDropDownList.SelectedItem != null)
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                Entidades.Cuit cuit = new Entidades.Cuit();
+                cuit.Nro = CUITDropDownList.SelectedValue;
+                RN.Sesion.AsignarCuit(cuit, sesion);
+                Funciones.PersonalizarControlesMaster(this, sesion);
+            }
+        }
     }
 }

@@ -27,7 +27,7 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="IdUN" HeaderText="Unid.Neg." SortExpression="IdUN">
+                            <asp:BoundField DataField="DescrUN" HeaderText="Unidad de Negocio" SortExpression="DescrUN">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>

@@ -29,7 +29,7 @@ namespace CedServicios.Site
             
             try
             {
-                cuit.Nro =CUITTextBox.Text;
+                cuit.Nro = CUITTextBox.Text;
                 cuit.RazonSocial = RazonSocialTextBox.Text;
                 cuit.Domicilio.Calle = Domicilio.Calle;
                 cuit.Domicilio.Nro = Domicilio.Nro;
@@ -61,6 +61,8 @@ namespace CedServicios.Site
                 //DescrUNTextBox.Enabled = false;
                 AceptarButton.Enabled = false;
                 CancelarButton.Enabled = false;
+                RN.Sesion.RefrescarDatosUsuario(sesion.Usuario, sesion);
+                Funciones.PersonalizarControlesMaster(Master, sesion);
                 MensajeLabel.Text = "El CUIT fué creado satisfactoriamente";
             }
             catch (Exception ex)
