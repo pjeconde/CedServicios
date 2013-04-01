@@ -30,8 +30,8 @@ namespace CedServicios.DB
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("select Permiso.IdTipoPermiso, TipoPermiso.DescrTipoPermiso ");
             a.Append("from Permiso, TipoPermiso ");
-            a.Append("where Permiso.Cuit='" + UN.Cuit + "' and Permiso.IdUN='" + UN.Id + "' ");
-            a.Append("and Permiso.IdTipoPermiso not in ('AdminSITE', 'AdminCUIT', 'AdminUN') ");
+            a.Append("where Permiso.Cuit='" + UN.Cuit + "' and Permiso.IdUN=" + UN.Id + " ");
+            a.Append("and Permiso.IdTipoPermiso not in ('AdminSITE', 'AdminCUIT', 'AdminUN', 'UsoCUITxUN') ");
             a.Append("and Permiso.Estado='Vigente' and Permiso.IdTipoPermiso=TipoPermiso.IdTipoPermiso ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.TipoPermiso> lista = new List<Entidades.TipoPermiso>();

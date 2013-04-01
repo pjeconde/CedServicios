@@ -71,12 +71,17 @@ namespace CedServicios.Site
         {
             try
             {
+                MensajeLabel.Text = String.Empty;
                 Entidades.UN uN = new Entidades.UN();
                 uN.Cuit = CUITTextBox.Text;
                 uN.Id = Convert.ToInt32(IdUNDropDownList.SelectedValue);
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 IdTipoPermisoDropDownList.DataSource = RN.TipoPermiso.ListaPorUN(uN, sesion);
                 DataBind();
+                if (IdTipoPermisoDropDownList.Items.Count == 0)
+                {
+                    MensajeLabel.Text = "No hay servicios disponibles para esta Unidad de Negocio";
+                }
             }
             catch (Exception ex)
             {
