@@ -72,9 +72,7 @@ namespace CedServicios.Site
             if (CUITDropDownList.SelectedItem != null)
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                Entidades.Cuit cuit = new Entidades.Cuit();
-                cuit.Nro = CUITDropDownList.SelectedValue;
-                RN.Sesion.AsignarCuit(cuit, sesion);
+                RN.Sesion.AsignarCuit(sesion.CuitsDelUsuario[CUITDropDownList.SelectedIndex], sesion);
                 Funciones.PersonalizarControlesMaster(this, sesion);
             }
         }

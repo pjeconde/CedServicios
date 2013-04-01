@@ -15,8 +15,11 @@ namespace CedServicios.Site
             Menu menu = ((Menu)menuContentPlaceHolder.FindControl("Menu"));
 
             ContentPlaceHolder usuarioContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("UsuarioContentPlaceHolder"));
+            Label usuarioLabel = ((Label)usuarioContentPlaceHolder.FindControl("UsuarioLabel"));
             HyperLink usuarioHyperLink = ((HyperLink)usuarioContentPlaceHolder.FindControl("UsuarioHyperLink"));
+            Label cUITLabel = ((Label)usuarioContentPlaceHolder.FindControl("CUITLabel"));
             DropDownList cUITDropDownList = ((DropDownList)usuarioContentPlaceHolder.FindControl("CUITDropDownList"));
+            Label uNLabel = ((Label)usuarioContentPlaceHolder.FindControl("UNLabel"));
             DropDownList uNDropDownList = ((DropDownList)usuarioContentPlaceHolder.FindControl("UNDropDownList"));
             
             menu.Items.Clear();
@@ -138,6 +141,10 @@ namespace CedServicios.Site
 
             menuContentPlaceHolder.Visible = false;
             usuarioContentPlaceHolder.Visible = false;
+            cUITLabel.Visible = false;
+            cUITDropDownList.Visible = false;
+            uNLabel.Visible = false;
+            uNDropDownList.Visible = false;
             if (Sesion != null)
             {
                 foreach (string s in Sesion.OpcionesHabilitadas)
@@ -158,11 +165,17 @@ namespace CedServicios.Site
                     {
                         cUITDropDownList.DataSource = Sesion.CuitsDelUsuario;
                         cUITDropDownList.DataBind();
+                        if (Sesion.Cuit != null) cUITDropDownList.SelectedValue = Sesion.Cuit.Nro;
+                        cUITLabel.Visible = true;
+                        cUITDropDownList.Visible = true;
                     }
                     if (Sesion.UNsDelCuit.Count != 0)
                     {
                         uNDropDownList.DataSource = Sesion.UNsDelCuit;
                         uNDropDownList.DataBind();
+                        if (Sesion.UN != null) uNDropDownList.SelectedValue = Sesion.UN.Id.ToString();
+                        uNLabel.Visible = true;
+                        uNDropDownList.Visible = true;
                     }
                 }
             }
