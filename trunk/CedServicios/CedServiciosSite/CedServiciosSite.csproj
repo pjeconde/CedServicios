@@ -83,6 +83,10 @@
     <Content Include="Imagenes\Cedeira.ico" />
     <Content Include="Imagenes\CedeiraSF-icono-animado.gif" />
     <Content Include="Imagenes\CedeiraSF-Logo.gif" />
+    <Content Include="InstitucionalContacto.aspx" />
+    <Content Include="InstitucionalEmpresa.aspx" />
+    <Content Include="InstitucionalRefeCom.aspx" />
+    <Content Include="InstitucionalSoluciones.aspx" />
     <Content Include="SolicPermisoAdminCUIT.aspx" />
     <Content Include="SolicPermisoAdminUN.aspx" />
     <Content Include="SolicPermisoOperServUN.aspx" />
@@ -288,6 +292,34 @@
     <Compile Include="Funciones.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="InstitucionalContacto.aspx.cs">
+      <DependentUpon>InstitucionalContacto.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InstitucionalContacto.aspx.designer.cs">
+      <DependentUpon>InstitucionalContacto.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InstitucionalEmpresa.aspx.cs">
+      <DependentUpon>InstitucionalEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InstitucionalEmpresa.aspx.designer.cs">
+      <DependentUpon>InstitucionalEmpresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InstitucionalRefeCom.aspx.cs">
+      <DependentUpon>InstitucionalRefeCom.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InstitucionalRefeCom.aspx.designer.cs">
+      <DependentUpon>InstitucionalRefeCom.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InstitucionalSoluciones.aspx.cs">
+      <DependentUpon>InstitucionalSoluciones.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InstitucionalSoluciones.aspx.designer.cs">
+      <DependentUpon>InstitucionalSoluciones.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
