@@ -76,5 +76,9 @@ namespace CedServicios.Site
                 Funciones.PersonalizarControlesMaster(this, sesion);
             }
         }
+        protected void EmpresaImageButton_Click(object sender, ImageClickEventArgs e)
+        {
+            Response.Redirect("~/InstitucionalEmpresa.aspx");
+        }
     }
 }

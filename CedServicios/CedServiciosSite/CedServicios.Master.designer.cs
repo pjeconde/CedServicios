@@ -40,13 +40,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.ScriptManager MasterScriptManager;
         
         /// <summary>
-        /// Control Image1.
+        /// Control EmpresaImageButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.WebControls.ImageButton EmpresaImageButton;
         
         /// <summary>
         /// Control UsuarioContentPlaceHolder.
