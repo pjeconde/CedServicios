@@ -19,7 +19,7 @@ namespace CedServicios.Site
                 NombreTextBox.Focus();
                 try
                 {
-                    GenerarImagenCaptcha();
+                    Funciones.GenerarImagenCaptcha(Session, CaptchaImage, CaptchaTextBox);
                     CondicionesTextBox.Text = RN.Usuario.TerminosYCondiciones().Replace("<br />", Environment.NewLine);
                 }
                 catch (Exception ex)
@@ -71,16 +71,7 @@ namespace CedServicios.Site
         }
         protected void NuevaClaveCaptchaButton_Click(object sender, EventArgs e)
         {
-            GenerarImagenCaptcha();
-        }
-        private void GenerarImagenCaptcha()
-        {
-            string s = RandomText.Generate();
-            string ens = Encryptor.Encrypt(s, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
-            Session["captcha"] = s.ToLower();
-            string color = "#ffffff";
-            CaptchaImage.ImageUrl = "~/Captcha.ashx?w=305&h=92&c=" + ens + "&bc=" + color;
-            CaptchaTextBox.Text = String.Empty;
+            Funciones.GenerarImagenCaptcha(Session, CaptchaImage, CaptchaTextBox);
         }
         protected void ComprobarDisponibilidadButton_Click(object sender, EventArgs e)
         {
