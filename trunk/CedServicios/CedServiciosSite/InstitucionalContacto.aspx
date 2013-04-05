@@ -8,8 +8,8 @@
             </td>
         </tr>
         <tr>
-            <td align="left" colspan="4" style="padding-top:20px">
-                <asp:Label ID="CorreoElectronicoLabel" runat="server" Font-Bold="true" SkinID="TituloMediano" Text="Correo electrónico: "></asp:Label>
+            <td align="right" colspan="4" style="padding-top:20px">
+                <asp:Label ID="CorreoElectronicoLabel" runat="server" Text="Correo electrónico: "></asp:Label>
                 <asp:HyperLink ID="eMailInfoHyperLink" runat="server" NavigateUrl='mailto:info@cedeira.com.ar'>info@cedeira.com.ar</asp:HyperLink>
             </td>
         </tr>
@@ -103,9 +103,9 @@
         </tr>
         <tr>
             <td align="center" colspan="4" style="height: 24px; padding-top: 20px">
-                <asp:Button ID="EmpresaButton" runat="server" TabIndex="1" Text="Empresa" onclick="EmpresaButton_Click" />
-                <asp:Button ID="SolucionesButton" runat="server" CausesValidation="false" TabIndex="2" Text="Soluciones" onclick="SolucionesButton_Click" />
-                <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="3" Text="Referencias Comerciales" onclick="RefeComButton_Click" />
+                <asp:Button ID="EmpresaButton" runat="server" TabIndex="10" Text="Empresa" onclick="EmpresaButton_Click" />
+                <asp:Button ID="SolucionesButton" runat="server" CausesValidation="false" TabIndex="11" Text="Soluciones" onclick="SolucionesButton_Click" />
+                <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="12" Text="Referencias Comerciales" onclick="RefeComButton_Click" />
             </td>
         </tr>
         <tr>
