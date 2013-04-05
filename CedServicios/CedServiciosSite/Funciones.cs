@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
 using System.Web.UI;
+using CaptchaDotNet2.Security.Cryptography;
 
 namespace CedServicios.Site
 {
@@ -204,6 +205,15 @@ namespace CedServicios.Site
         {
             MenuItem menuItem = Menu.FindItem(IdMenuItem);
             if (menuItem != null) RemoverMenuItem(Menu, menuItem);
+        }
+        public static void GenerarImagenCaptcha(System.Web.SessionState.HttpSessionState Session, Image CaptchaImage, TextBox CaptchaTextBox)
+        {
+            string s = RandomText.Generate();
+            string ens = Encryptor.Encrypt(s, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
+            Session["captcha"] = s.ToLower();
+            string color = "#ffffff";
+            CaptchaImage.ImageUrl = "~/Captcha.ashx?w=305&h=92&c=" + ens + "&bc=" + color;
+            CaptchaTextBox.Text = String.Empty;
         }
     }
 }

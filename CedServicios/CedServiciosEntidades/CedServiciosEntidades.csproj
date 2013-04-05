@@ -45,6 +45,7 @@
     <Compile Include="Cliente.cs" />
     <Compile Include="Configuracion.cs" />
     <Compile Include="Contacto.cs" />
+    <Compile Include="ContactoSite.cs" />
     <Compile Include="Cuit.cs" />
     <Compile Include="Documento.cs" />
     <Compile Include="Domicilio.cs" />
