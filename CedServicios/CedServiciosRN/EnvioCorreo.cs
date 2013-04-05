@@ -19,7 +19,7 @@ namespace CedServicios.RN
             mail.Subject = "Ahora dispone de una nueva cuenta";
             mail.IsBodyHtml = true;
             StringBuilder a = new StringBuilder();
-            a.Append("Estimado/a " + Usuario.Nombre.Trim() + ":<br />");
+            a.Append("Estimado/a <b>" + Usuario.Nombre.Trim() + "</b>:<br />");
             a.Append("<br />");
             a.Append("Gracias por crear su cuenta.<br />");
             a.Append("<br />");
@@ -35,7 +35,7 @@ namespace CedServicios.RN
             a.Append("<br />");
             a.Append("Saludos.<br />");
             a.Append("<br />");
-            a.Append("Cedeira Software Factory<br />");
+            a.Append("<b>Cedeira Software Factory</b><br />");
             a.Append("<br />");
             a.Append("<br />");
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
@@ -53,23 +53,24 @@ namespace CedServicios.RN
             mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
             mail.To.Add(new MailAddress(Email));
             mail.Subject = "Información de cuenta(s)";
+            mail.IsBodyHtml = true;
             StringBuilder a = new StringBuilder();
-            a.Append("Estimado/a " + cuentas[0].Nombre.Trim() + ":"); a.AppendLine();
-            a.AppendLine();
-            a.Append("Cumplimos en informarle cuáles son las cuentas vinculadas a este correo electrónico:"); a.AppendLine();
-            a.AppendLine();
+            a.Append("Estimado/a <b>" + cuentas[0].Nombre.Trim() + "</b>:<br />");
+            a.Append("<br />");
+            a.Append("Cumplimos en informarle cuáles son las cuentas vinculadas a este correo electrónico:<br />");
+            a.Append("<br />");
             for (int i = 0; i < cuentas.Count; i++)
             {
-                a.Append("Cuenta '" + cuentas[i].Nombre + "' (Id.Usuario='" + cuentas[i].Id + "')"); a.AppendLine();
+                a.Append("Cuenta '" + cuentas[i].Nombre + "' (Id.Usuario='" + cuentas[i].Id + "')<br />");
             }
-            a.AppendLine();
-            a.Append("Si ha recibido este correo electrónico y no ha solicitado información sobre su(s) cuenta(s), es probable que otro usuario haya introducido su dirección por error. Si no ha solicitado esta información, no es necesario que realice ninguna acción, y puede ignorar este mensaje con total seguridad."); a.AppendLine();
-            a.Append("Saludos."); a.AppendLine();
-            a.AppendLine();
-            a.Append("Cedeira Software Factory"); a.AppendLine();
-            a.AppendLine();
-            a.AppendLine();
-            a.AppendLine("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden."); a.AppendLine();
+            a.Append("<br />");
+            a.Append("Si ha recibido este correo electrónico y no ha solicitado información sobre su(s) cuenta(s), es probable que otro usuario haya introducido su dirección por error. Si no ha solicitado esta información, no es necesario que realice ninguna acción, y puede ignorar este mensaje con total seguridad.<br />");
+            a.Append("Saludos.<br />");
+            a.Append("<br />");
+            a.Append("<b>Cedeira Software Factory</b><br />");
+            a.Append("<br />");
+            a.Append("<br />");
+            a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             mail.Body = a.ToString();
             smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
@@ -101,7 +102,7 @@ namespace CedServicios.RN
             a.Append("<br />");
             a.Append("Saludos.<br />");
             a.Append("<br />");
-            a.Append("Cedeira Software Factory<br />");
+            a.Append("<b>Cedeira Software Factory</b><br />");
             a.Append("<br />");
             a.Append("<br />");
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
@@ -138,7 +139,7 @@ namespace CedServicios.RN
             a.Append("<br />");
             a.Append("Saludos.<br />");
             a.Append("<br />");
-            a.Append("Cedeira Software Factory<br />");
+            a.Append("<b>Cedeira Software Factory</b><br />");
             a.Append("<br />");
             a.Append("<br />");
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
@@ -156,18 +157,19 @@ namespace CedServicios.RN
             mail2Cedeira.From = new MailAddress("contacto@cedeira.com.ar");
             mail2Cedeira.To.Add(new MailAddress(CuentaMailCedeira));
             mail2Cedeira.Subject = "Formulario electrónico (Contacto de cedeira.com.ar)";
+            mail2Cedeira.IsBodyHtml = true;
             a = new StringBuilder();
-            a.Append("Los siguientes son, los datos del nuevo contacto");
+            a.Append("Los siguientes, son los datos del nuevo contacto");
             if (ContactoSite.Motivo == "FactElectronica") a.Append(" (por el tema de FACTURA ELECTRONICA)");
-            a.Append(":"); a.AppendLine();
-            a.AppendLine();
-            a.Append("Nombre: " + ContactoSite.Nombre); a.AppendLine();
-            a.Append("Telefono: " + ContactoSite.Telefono); a.AppendLine();
-            a.Append("Email: " + ContactoSite.Email); a.AppendLine();
-            a.Append("Mensaje: "); a.AppendLine();
-            a.Append("------------------------------------------------"); a.AppendLine();
-            a.Append(ContactoSite.Mensaje); a.AppendLine();
-            a.Append("------------------------------------------------"); a.AppendLine();
+            a.Append(":<br />");
+            a.Append("<br />");
+            a.Append("Nombre: " + ContactoSite.Nombre + "<br />");
+            a.Append("Telefono: " + ContactoSite.Telefono + "<br />");
+            a.Append("Email: " + ContactoSite.Email + "<br />");
+            a.Append("Mensaje:<br />");
+            a.Append("------------------------------------------------<br />");
+            a.Append(ContactoSite.Mensaje + "<br />");
+            a.Append("------------------------------------------------<br />");
             mail2Cedeira.Body = a.ToString();
             smtpClient2Cedeira.Credentials = new NetworkCredential("contacto@cedeira.com.ar", "cedeira123");
             smtpClient2Cedeira.Send(mail2Cedeira);
@@ -178,24 +180,25 @@ namespace CedServicios.RN
             mail2Contacto.From = new MailAddress(CuentaMailCedeira);
             mail2Contacto.To.Add(new MailAddress(ContactoSite.Email));
             mail2Contacto.Subject = "Acuse de recibo de Formulario electrónico";
+            mail2Contacto.IsBodyHtml = true;
             a = new StringBuilder();
-            a.Append("Estimado/a " + ContactoSite.Nombre.Trim() + ":"); a.AppendLine();
-            a.AppendLine();
-            a.Append("Gracias por comunicarse con nosotros."); a.AppendLine();
+            a.Append("Estimado/a <b>" + ContactoSite.Nombre.Trim() + "</b>:<br />");
+            a.Append("<br />");
+            a.Append("Gracias por comunicarse con nosotros.<br />");
             if (ContactoSite.Motivo == "FactElectronica")
             {
-                a.Append("Su consulta, sobre el tema de Factura Electrónica, será respondida a la brevedad."); a.AppendLine();
+                a.Append("Su consulta, sobre el tema de Factura Electrónica, será respondida a la brevedad.<br />");
             }
             else
             {
-                a.Append("Su consulta será respondida a la brevedad."); a.AppendLine();
+                a.Append("Su consulta será respondida a la brevedad.<br />");
             }
-            a.Append("Saludos."); a.AppendLine();
-            a.AppendLine();
-            a.Append("Cedeira Software Factory");
-            a.AppendLine();
-            a.AppendLine();
-            a.AppendLine("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden."); a.AppendLine();
+            a.Append("Saludos.<br />");
+            a.Append("<br />");
+            a.Append("<b>Cedeira Software Factory</b><br />");
+            a.Append("<br />");
+            a.Append("<br />");
+            a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             mail2Contacto.Body = a.ToString();
             smtpClient2Contacto.Credentials = new NetworkCredential("contacto@cedeira.com.ar", "cedeira123");
             smtpClient2Contacto.Send(mail2Contacto);
