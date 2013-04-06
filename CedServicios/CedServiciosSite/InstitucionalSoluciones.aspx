@@ -23,7 +23,7 @@
         </tr>
         <tr>
             <td align="right" style="padding-right:20px; vertical-align:bottom;">
-                <asp:HyperLink ID="CedFCImasInfoHyperLink" runat="server" NavigateUrl="~/CedFCI.aspx" SkinID="LinkMedianoClaro">Ver más información</asp:HyperLink>
+                <asp:HyperLink ID="CedFCImasInfoHyperLink" runat="server" NavigateUrl="~/InstitucionalsolucionesCedFCI.aspx" SkinID="LinkMedianoClaro">Ver más información</asp:HyperLink>
             </td>
         </tr>
         <!---------------------------------------------------------------------------------------------------------------------->
@@ -45,7 +45,7 @@
         </tr>
         <tr>
             <td align="right" style="padding-right:20px; vertical-align: bottom">
-                <asp:HyperLink ID="CedSTmasInfoHyperLink" runat="server" NavigateUrl="~/CedST.aspx" SkinID="LinkMedianoClaro">Ver más información</asp:HyperLink>
+                <asp:HyperLink ID="CedSTmasInfoHyperLink" runat="server" NavigateUrl="~/InstitucionalsolucionesCedST.aspx" SkinID="LinkMedianoClaro">Ver más información</asp:HyperLink>
             </td>
         </tr>
         <!---------------------------------------------------------------------------------------------------------------------->
