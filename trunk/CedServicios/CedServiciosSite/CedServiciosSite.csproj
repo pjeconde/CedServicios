@@ -87,6 +87,8 @@
     <Content Include="InstitucionalEmpresa.aspx" />
     <Content Include="InstitucionalRefeCom.aspx" />
     <Content Include="InstitucionalSoluciones.aspx" />
+    <Content Include="InstitucionalSolucionesCedFCI.aspx" />
+    <Content Include="InstitucionalSolucionesCedST.aspx" />
     <Content Include="SolicPermisoAdminCUIT.aspx" />
     <Content Include="SolicPermisoAdminUN.aspx" />
     <Content Include="SolicPermisoOperServUN.aspx" />
@@ -320,6 +322,20 @@
     </Compile>
     <Compile Include="InstitucionalSoluciones.aspx.designer.cs">
       <DependentUpon>InstitucionalSoluciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InstitucionalSolucionesCedFCI.aspx.cs">
+      <DependentUpon>InstitucionalSolucionesCedFCI.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InstitucionalSolucionesCedFCI.aspx.designer.cs">
+      <DependentUpon>InstitucionalSolucionesCedFCI.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InstitucionalSolucionesCedST.aspx.cs">
+      <DependentUpon>InstitucionalSolucionesCedST.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InstitucionalSolucionesCedST.aspx.designer.cs">
+      <DependentUpon>InstitucionalSolucionesCedST.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
