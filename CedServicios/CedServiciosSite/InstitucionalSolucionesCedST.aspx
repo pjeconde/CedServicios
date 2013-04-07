@@ -1,22 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="InstitucionalSolucionesCedST.aspx.cs" Inherits="CedServicios.Site.InstitucionalSolucionesCedST" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px; width:1000px">
         <tr>
             <td align="center" style="padding-top:20px" colspan="2">
                 <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Sistema de Transferencias ( implementación MEP )"></asp:Label>
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
-            <td align="left" style="padding-top: 10px">
+            <td align="left" style="padding-top:20px">
                 Es un sistema diseñado para <b>centralizar la administración</b> de transferencias.
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
             <td align="left">
                 En línea con el BCRA, concentra el 100% de las operaciones, tanto enviadas como
                 recibidas, en un único repositorio, para realizar un <b>control eficiente</b> y
@@ -24,8 +20,6 @@
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
             <td align="left">
                 Facilita las tareas a través de la <b>automatización de los procesos</b> de: ingreso,
                 envío, recepción, distribución y conciliación, entre otros. Contempla todas las
@@ -34,31 +28,23 @@
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
-            <td align="center" style="padding-top: 20px">
+            <td align="center" style="padding-top:20px">
                 <asp:Image ID="Image2" runat="server" ImageUrl="Imagenes/CedST-EsquemaMEP.jpg" />
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
-            <td style="padding-top: 20px; font-size: 14px; font-weight: bold">
+            <td align="left" style="padding-top:20px; font-size: 14px; font-weight: bold">
                 Beneficios de la solución
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
-            <td style="padding-top: 15px">
+            <td align="left" style="padding-top:10px">
                 Con la puesta en marcha del Sistema de Transferencias, la entidad se beneficia en
                 los siguientes aspectos:
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
-            <td style="padding-top: 5px">
+            <td align="left" style="padding-top: 5px">
                 <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td valign="top">
@@ -176,16 +162,12 @@
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
-            <td style="padding-top: 20px; font-size: 14px; font-weight: bold">
+            <td align="left" style="padding-top: 20px; font-size: 14px; font-weight: bold">
                 Características principales
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
-            <td style="padding-top: 15px">
+            <td align="left" style="padding-top:10px">
                 <table border="0" cellpadding="5px" cellspacing="0" style="border-style: solid; border-width: 1px;
                     border-color: #CD853F">
                     <tr>
@@ -318,15 +300,12 @@
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
-            <td style="padding-top: 10px">
-                <asp:HyperLink ID="CedSTpresentacionHyperLink" runat="server" NavigateUrl="~/Descarga.aspx?archivo=Cedeira-SistTransfMEP.pdf"
-                    SkinID="LinkMedianoClaro">Descargar presentación</asp:HyperLink>
+            <td align="left" style="padding-top: 10px">
+                <asp:HyperLink ID="CedSTpresentacionHyperLink" runat="server" NavigateUrl="~/Descarga.aspx?archivo=Cedeira-SistTransfMEP.pdf" SkinID="LinkMedianoClaro">Descargar presentación</asp:HyperLink>
             </td>
         </tr>
         <tr>
-            <td align="center" colspan="2" style="height: 24px; padding-top: 20px">
+            <td align="center" colspan="2" style="height:24px; padding-top:20px">
                 <asp:Button ID="SolucionesButton" runat="server" TabIndex="1" Text="Soluciones" onclick="SolucionesButton_Click" />
                 <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="1" Text="Referencias Comerciales" onclick="RefeComButton_Click" />
                 <asp:Button ID="EmpresaButton" runat="server" TabIndex="1" Text="Empresa" onclick="EmpresaButton_Click" />

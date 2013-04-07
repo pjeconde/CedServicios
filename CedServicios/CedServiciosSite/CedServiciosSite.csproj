@@ -65,6 +65,7 @@
     <Content Include="Controles\Domicilio.ascx" />
     <Content Include="CuitCrear.aspx" />
     <Content Include="Default.aspx" />
+    <Content Include="Descarga.aspx" />
     <Content Include="DescargaTemporarios.aspx" />
     <Content Include="Excepciones\Excepciones.aspx" />
     <Content Include="Facturacion\Electronica\Descuentos.ascx" />
@@ -89,6 +90,7 @@
     <Content Include="InstitucionalSoluciones.aspx" />
     <Content Include="InstitucionalSolucionesCedFCI.aspx" />
     <Content Include="InstitucionalSolucionesCedST.aspx" />
+    <Content Include="NotificacionDeExcepcion.aspx" />
     <Content Include="SolicPermisoAdminCUIT.aspx" />
     <Content Include="SolicPermisoAdminUN.aspx" />
     <Content Include="SolicPermisoOperServUN.aspx" />
@@ -179,6 +181,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Descarga.aspx.cs">
+      <DependentUpon>Descarga.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Descarga.aspx.designer.cs">
+      <DependentUpon>Descarga.aspx</DependentUpon>
     </Compile>
     <Compile Include="DescargaTemporarios.aspx.cs">
       <DependentUpon>DescargaTemporarios.aspx</DependentUpon>
@@ -336,6 +345,13 @@
     </Compile>
     <Compile Include="InstitucionalSolucionesCedST.aspx.designer.cs">
       <DependentUpon>InstitucionalSolucionesCedST.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="NotificacionDeExcepcion.aspx.cs">
+      <DependentUpon>NotificacionDeExcepcion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NotificacionDeExcepcion.aspx.designer.cs">
+      <DependentUpon>NotificacionDeExcepcion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
