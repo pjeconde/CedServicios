@@ -30,7 +30,7 @@ namespace CedServicios.Site
                 }
                 catch (Exception ex)
                 {
-                    WebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
+                    WebForms.Excepciones.Redireccionar(ex, "~/NotificacionDeExcepcion.aspx");
                 }
             }
         }
