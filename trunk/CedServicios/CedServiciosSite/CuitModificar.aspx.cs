@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace CedServicios.Site
 {
-    public partial class CuitCrear : System.Web.UI.Page
+    public partial class CuitModificar : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -19,6 +19,30 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 MedioDropDownList.DataSource = RN.Medio.Lista(sesion);
                 DataBind();
+
+                CUITTextBox.Text = sesion.Cuit.Nro;
+                CUITTextBox.Enabled = false;
+                RazonSocialTextBox.Text = sesion.Cuit.RazonSocial;
+                Domicilio.Calle = sesion.Cuit.Domicilio.Calle;
+                Domicilio.Nro = sesion.Cuit.Domicilio.Nro;
+                Domicilio.Piso = sesion.Cuit.Domicilio.Piso;
+                Domicilio.Depto = sesion.Cuit.Domicilio.Depto;
+                Domicilio.Manzana = sesion.Cuit.Domicilio.Manzana;
+                Domicilio.Sector = sesion.Cuit.Domicilio.Sector;
+                Domicilio.Torre = sesion.Cuit.Domicilio.Torre;
+                Domicilio.Localidad = sesion.Cuit.Domicilio.Localidad;
+                Domicilio.IdProvincia = sesion.Cuit.Domicilio.Provincia.Id;
+                Domicilio.CodPost = sesion.Cuit.Domicilio.CodPost;
+                Contacto.Nombre = sesion.Cuit.Contacto.Nombre;
+                Contacto.Email = sesion.Cuit.Contacto.Email;
+                Contacto.Telefono = sesion.Cuit.Contacto.Telefono;
+                DatosImpositivos.IdCondIVA = sesion.Cuit.DatosImpositivos.IdCondIVA;
+                DatosImpositivos.IdCondIngBrutos = sesion.Cuit.DatosImpositivos.IdCondIngBrutos;
+                DatosImpositivos.NroIngBrutos = sesion.Cuit.DatosImpositivos.NroIngBrutos;
+                DatosImpositivos.FechaInicioActividades = sesion.Cuit.DatosImpositivos.FechaInicioActividades;
+                DatosIdentificatorios.GLN = sesion.Cuit.DatosIdentificatorios.GLN;
+                DatosIdentificatorios.CodigoInterno = sesion.Cuit.DatosIdentificatorios.CodigoInterno;
+                MedioDropDownList.SelectedValue = sesion.Cuit.Medio.Id;
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
@@ -53,7 +77,7 @@ namespace CedServicios.Site
                 cuit.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
                 cuit.Medio.Id = MedioDropDownList.SelectedValue;
                 cuit.Medio.Descr = MedioDropDownList.Text;
-                RN.Cuit.Crear(cuit, sesion);
+                RN.Cuit.Modificar(cuit, sesion);
 
                 CUITTextBox.Enabled = false;
                 RazonSocialTextBox.Enabled = false;
@@ -67,7 +91,7 @@ namespace CedServicios.Site
 
                 RN.Sesion.RefrescarDatosUsuario(sesion.Usuario, sesion);
                 Funciones.PersonalizarControlesMaster(Master, sesion);
-                MensajeLabel.Text = "El CUIT fué creado satisfactoriamente";
+                MensajeLabel.Text = "El CUIT fué modificado satisfactoriamente";
             }
             catch (Exception ex)
             {

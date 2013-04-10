@@ -32,6 +32,9 @@ namespace CedServicios.Site
                 case "Solicitud permiso de administrador de CUIT":
                     Response.Redirect("~/SolicPermisoAdminCUIT.aspx");
                     break;
+                case "Modificación datos CUIT":
+                    Response.Redirect("~/CuitModificar.aspx");
+                    break;
                 case "Alta de Unidad de Negocio":
                     Response.Redirect("~/UNCrear.aspx");
                     break;

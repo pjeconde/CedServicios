@@ -64,6 +64,7 @@
     <Content Include="Controles\DatosImpositivos.ascx" />
     <Content Include="Controles\Domicilio.ascx" />
     <Content Include="CuitCrear.aspx" />
+    <Content Include="CuitModificar.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Descarga.aspx" />
     <Content Include="DescargaTemporarios.aspx" />
@@ -174,6 +175,13 @@
     </Compile>
     <Compile Include="CuitCrear.aspx.designer.cs">
       <DependentUpon>CuitCrear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuitModificar.aspx.cs">
+      <DependentUpon>CuitModificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CuitModificar.aspx.designer.cs">
+      <DependentUpon>CuitModificar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>

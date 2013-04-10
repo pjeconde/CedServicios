@@ -147,5 +147,22 @@ namespace CedServicios.Site.Controles
                 ProvinciaDropDownList.DataSource = value;
             }
         }
+        public bool Enabled
+        {
+            set
+            {
+                CalleTextBox.Enabled = value;
+                NroTextBox.Enabled = value;
+                PisoTextBox.Enabled = value;
+                DeptoTextBox.Enabled = value;
+                SectorTextBox.Enabled = value;
+                TorreTextBox.Enabled = value;
+                ManzanaTextBox.Enabled = value;
+                LocalidadTextBox.Enabled = value;
+                ProvinciaDropDownList.Enabled = value;
+                CodPostTextBox.Enabled = value;
+            }
+        }
+
     }
 }

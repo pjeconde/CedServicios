@@ -49,5 +49,14 @@ namespace CedServicios.Site.Controles
                 TelefonoContactoTextBox.DataBind();
             }
         }
+        public bool Enabled
+        {
+            set
+            {
+                NombreContactoTextBox.Enabled = value;
+                EmailContactoTextBox.Enabled= value;
+                TelefonoContactoTextBox.Enabled = value;
+            }
+        }
     }
 }

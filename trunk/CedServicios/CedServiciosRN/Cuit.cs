@@ -17,10 +17,10 @@ namespace CedServicios.RN
             CedServicios.DB.Cuit db = new DB.Cuit(Sesion);
             db.Leer(Cuit);
         }
-        public static void Registrar(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
+        public static void Crear(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {
             string permisoAdminCUITParaUsuarioAprobadoHandler = RN.Permiso.PermisoAdminCUITParaUsuarioAprobadoHandler(Cuit, Sesion);
-            DB.UN dbUN= new DB.UN(Sesion);
+            DB.UN dbUN = new DB.UN(Sesion);
             Entidades.UN uN = new Entidades.UN();
             uN.Cuit = Cuit.Nro;
             uN.Id = 1;
@@ -32,6 +32,13 @@ namespace CedServicios.RN
             DB.Cuit db = new DB.Cuit(Sesion);
             Cuit.WF.Estado = "Vigente";
             db.Crear(Cuit, permisoAdminCUITParaUsuarioAprobadoHandler, crearUNHandler, permisoUsoCUITxUNAprobadoHandler, permisoAdminUNParaUsuarioAprobadoHandler);
+        }
+        public static void Modificar(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
+        {
+            DB.Cuit db = new DB.Cuit(Sesion);
+            Cuit.WF.Estado = "Vigente";
+            db.Modificar(Sesion.Cuit, Cuit);
+            Sesion.Cuit = Cuit;
         }
     }
 }

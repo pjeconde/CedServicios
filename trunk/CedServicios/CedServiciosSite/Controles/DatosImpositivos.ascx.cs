@@ -89,5 +89,15 @@ namespace CedServicios.Site.Controles
                 CondIngBrutosDropDownList.DataSource = value;
             }
         }
+        public bool Enabled
+        {
+            set
+            {
+                CondIVADropDownList.Enabled = value;
+                CondIngBrutosDropDownList.Enabled = value;
+                NroIngBrutosTextBox.Enabled = value;
+                FechaInicioActividadesTextBox.Enabled = value;
+            }
+        }
     }
 }
