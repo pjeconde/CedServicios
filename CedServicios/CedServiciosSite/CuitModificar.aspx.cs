@@ -13,10 +13,11 @@ namespace CedServicios.Site
         {
             if (!IsPostBack)
             {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+
                 Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
                 DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                 DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 MedioDropDownList.DataSource = RN.Medio.Lista(sesion);
                 DataBind();
 

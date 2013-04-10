@@ -44,6 +44,9 @@ namespace CedServicios.Site
                 case "Solicitud permiso de operador de servicio de una UN existente":
                     Response.Redirect("~/SolicPermisoOperServUN.aspx");
                     break;
+                case "Modificación datos UN":
+                    Response.Redirect("~/UNModificar.aspx");
+                    break;
                 case "Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx?pendientes");
                     break;

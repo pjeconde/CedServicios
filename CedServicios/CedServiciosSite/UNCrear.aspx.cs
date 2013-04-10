@@ -40,7 +40,7 @@ namespace CedServicios.Site
                 string referenciaAAprobadores = String.Empty;
                 un.Descr = DescrUNTextBox.Text;
                 string estadoPermisoUsoCUITxUN = String.Empty;
-                RN.UN.Registrar(un, out referenciaAAprobadores, out estadoPermisoUsoCUITxUN, sesion);
+                RN.UN.Crear(un, out referenciaAAprobadores, out estadoPermisoUsoCUITxUN, sesion);
 
                 CUITTextBox.Enabled = false;
                 IdUNTextBox.Enabled = false;

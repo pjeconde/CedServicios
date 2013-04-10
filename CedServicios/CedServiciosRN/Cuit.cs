@@ -36,7 +36,6 @@ namespace CedServicios.RN
         public static void Modificar(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {
             DB.Cuit db = new DB.Cuit(Sesion);
-            Cuit.WF.Estado = "Vigente";
             db.Modificar(Sesion.Cuit, Cuit);
             Sesion.Cuit = Cuit;
         }
