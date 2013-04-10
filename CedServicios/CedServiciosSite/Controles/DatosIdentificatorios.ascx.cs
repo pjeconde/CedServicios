@@ -37,5 +37,13 @@ namespace CedServicios.Site.Controles
                 CodigoInternoTextBox.DataBind();
             }
         }
+        public bool Enabled
+        {
+            set
+            {
+                GLNTextBox.Enabled = value;
+                CodigoInternoTextBox.Enabled = value;
+            }
+        }
     }
 }

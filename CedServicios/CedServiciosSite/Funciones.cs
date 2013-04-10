@@ -160,7 +160,7 @@ namespace CedServicios.Site
                 if (Sesion.Usuario.Id != null)
                 {
                     usuarioContentPlaceHolder.Visible = true;
-                    usuarioHyperLink.Text = Sesion.Usuario.Nombre;
+                    usuarioHyperLink.Text = Sesion.Usuario.Nombre.Replace(" ", "&nbsp;");
                     menu.Items[menu.Items.Count - 1].Selectable = true;
                     if (Sesion.CuitsDelUsuario.Count != 0)
                     {
