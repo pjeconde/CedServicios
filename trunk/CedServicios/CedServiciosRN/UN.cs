@@ -22,7 +22,7 @@ namespace CedServicios.RN
             CedServicios.DB.UN db = new DB.UN(Sesion);
             db.Leer(UN);
         }
-        public static void Registrar(Entidades.UN UN, out string ReferenciaAAprobadores, out string EstadoPermisoUsoCUITxUN, Entidades.Sesion Sesion)
+        public static void Crear(Entidades.UN UN, out string ReferenciaAAprobadores, out string EstadoPermisoUsoCUITxUN, Entidades.Sesion Sesion)
         {
             List<Entidades.Usuario> usuariosAutorizadores = new List<Entidades.Usuario>();
             string permisoUsoCUITxUNHandler = RN.Permiso.PermisoUsoCUITxUNHandler(UN, out usuariosAutorizadores, out ReferenciaAAprobadores, out EstadoPermisoUsoCUITxUN, Sesion);
@@ -38,6 +38,12 @@ namespace CedServicios.RN
                 permiso.UN = UN;
                 RN.EnvioCorreo.SolicitudAutorizacion(RN.Permiso.DescrPermiso(permiso), Sesion.Usuario, usuariosAutorizadores);
             }
+        }
+        public static void Modificar(Entidades.UN UN, Entidades.Sesion Sesion)
+        {
+            DB.UN db = new DB.UN(Sesion);
+            db.Modificar(Sesion.UN, UN);
+            Sesion.UN = UN;
         }
     }
 }

@@ -106,5 +106,18 @@ namespace CedServicios.DB
             a.AppendLine();
             return a.ToString();
         }
+        public void Modificar(Entidades.UN Desde, Entidades.UN Hasta)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update UN set ");
+            a.Append("DescrUN='" + Hasta.Descr + "' ");
+            a.AppendLine("where Cuit='" + Hasta.Cuit + "' and IdUN=" + Hasta.Id.ToString() + " ");
+            a.AppendLine("insert Log values (" + Hasta.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'UN', 'Modif', '" + Hasta.WF.Estado + "', '') ");
+            a.AppendLine("declare @idLog int ");
+            a.AppendLine("select @idLog=@@Identity ");
+            a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Desde', '')");
+            a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '')");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
     }
 }

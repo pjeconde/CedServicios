@@ -96,6 +96,7 @@
     <Content Include="SolicPermisoAdminUN.aspx" />
     <Content Include="SolicPermisoOperServUN.aspx" />
     <Content Include="UNCrear.aspx" />
+    <Content Include="UNModificar.aspx" />
     <Content Include="UsuarioCambiarPassword.aspx" />
     <Content Include="UsuarioConfirmacion.aspx" />
     <Content Include="UsuarioConsulta.aspx" />
@@ -393,6 +394,13 @@
     </Compile>
     <Compile Include="UNCrear.aspx.designer.cs">
       <DependentUpon>UNCrear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UNModificar.aspx.cs">
+      <DependentUpon>UNModificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UNModificar.aspx.designer.cs">
+      <DependentUpon>UNModificar.aspx</DependentUpon>
     </Compile>
     <Compile Include="UsuarioCambiarPassword.aspx.cs">
       <DependentUpon>UsuarioCambiarPassword.aspx</DependentUpon>
