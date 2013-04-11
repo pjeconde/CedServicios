@@ -10,8 +10,10 @@ namespace CedServicios.Site
 {
     public static class Funciones
     {
-        public static void PersonalizarControlesMaster(MasterPage Master, Entidades.Sesion Sesion)
+        public static void PersonalizarControlesMaster(MasterPage Master, bool RefrescaDatosUsuario, Entidades.Sesion Sesion)
         {
+            if (RefrescaDatosUsuario) RN.Sesion.RefrescarDatosUsuario(Sesion.Usuario, Sesion);
+
             ContentPlaceHolder menuContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("MenuContentPlaceHolder"));
             Menu menu = ((Menu)menuContentPlaceHolder.FindControl("Menu"));
 

@@ -119,7 +119,7 @@ namespace CedServicios.Site
                     break;
             }
             ActualizarGrilla();
-            Funciones.PersonalizarControlesMaster(Master, sesion);
+            Funciones.PersonalizarControlesMaster(Master, true, sesion);
         }
     }
 }

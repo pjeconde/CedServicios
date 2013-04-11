@@ -52,7 +52,7 @@ namespace CedServicios.Site
                 AceptarButton.Visible = false;
                 CancelarButton.Visible = false;
                 RN.Sesion.Cerrar(sesion);
-                Funciones.PersonalizarControlesMaster(Master, sesion);
+                Funciones.PersonalizarControlesMaster(Master, false, sesion);
                 MsgErrorLabel.Text = "La Contraseña fue cambiada satisfactoriamente.<br />Para seguir trabajando, haga click en 'Iniciar sesión'.";
             }
             catch (System.Threading.ThreadAbortException)
