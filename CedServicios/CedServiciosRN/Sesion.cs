@@ -50,6 +50,8 @@ namespace CedServicios.RN
                 if (Sesion.Cuit.Nro != null)
                 {
                     opcionesHabilitadas.Add("Clientes");
+                    opcionesHabilitadas.Add("CUIT/Consulta de CUIT(s)");
+                    
                     List<Entidades.Permiso> esAdminCUITdeCUITseleccionado = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
                         return p.TipoPermiso.Id == "AdminCUIT" && p.Cuit == Sesion.Cuit.Nro && p.WF.Estado == "Vigente";

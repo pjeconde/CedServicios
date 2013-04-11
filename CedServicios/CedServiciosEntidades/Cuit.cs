@@ -19,6 +19,7 @@ namespace CedServicios.Entidades
         private string ultActualiz;
         private string nroSerieCertifAFIP;
         private string nroSerieCertifITF;
+        private List<UN> uNs;
 
         public Cuit()
         {
@@ -28,6 +29,7 @@ namespace CedServicios.Entidades
             datosIdentificatorios = new DatosIdentificatorios();
             medio = new Medio();
             wF = new WF();
+            uNs = new List<UN>();
         }
 
         public string Nro
@@ -116,6 +118,17 @@ namespace CedServicios.Entidades
             get
             {
                 return wF;
+            }
+        }
+        public List<UN> UNs
+        {
+            set
+            {
+                uNs = value;
+            }
+            get
+            {
+                return uNs;
             }
         }
         public string UltActualiz

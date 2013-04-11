@@ -35,6 +35,9 @@ namespace CedServicios.Site
                 case "Modificación datos CUIT":
                     Response.Redirect("~/CuitModificar.aspx");
                     break;
+                case "Consulta de CUIT(s)":
+                    Response.Redirect("~/CuitTreeView.aspx");
+                    break;
                 case "Alta de Unidad de Negocio":
                     Response.Redirect("~/UNCrear.aspx");
                     break;

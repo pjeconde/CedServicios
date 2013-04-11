@@ -172,5 +172,41 @@ namespace CedServicios.DB
             a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '')");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void CompletarUNsYPuntosVta(List<Entidades.Cuit> Cuits)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select Cuit.Cuit, UN.DescrUN, UN.IdUN, isnull(PuntoVta.NroPuntoVta, convert(numeric(4), 0)) as NroPuntoVta, isnull(PuntoVta.IdTipoPuntoVta, '') as IdTipoPuntoVta from Cuit ");
+            a.Append("left outer join UN on Cuit.Cuit=UN.Cuit ");
+            a.Append("left outer join PuntoVta on UN.Cuit=PuntoVta.Cuit and UN.IdUN=PuntoVta.IdUN ");
+            a.Append("order by Cuit.Cuit, UN.DescrUN, PuntoVta.NroPuntoVta ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            for (int i=0; i<Cuits.Count; i++)
+            {
+                DataRow[] dr = dt.Select("Cuit='" + Cuits[i].Nro + "'");
+                Cuits[i].UNs = new List<Entidades.UN>();
+                int idUNant = 0;
+                for (int j = 0; j < dr.Length; j++)
+                {
+                    int idUN = Convert.ToInt32(dr[j]["IdUN"]);
+                    if (idUN != idUNant)
+                    {
+                        Entidades.UN uN = new Entidades.UN();
+                        uN.Id = idUN;
+                        uN.Descr = Convert.ToString(dr[j]["DescrUN"]);
+                        Cuits[i].UNs.Add(uN);
+                        idUNant = idUN;
+                    }
+                    if (Convert.ToInt32(dr[j]["NroPuntoVta"]) != 0)
+                    {
+                        Entidades.PuntoVta puntoVta = new Entidades.PuntoVta();
+                        puntoVta.Cuit = Convert.ToString(dr[j]["Cuit"]);
+                        puntoVta.IdUN = idUN;
+                        puntoVta.Nro = Convert.ToInt32(dr[j]["NroPuntoVta"]);
+                        puntoVta.IdTipoPuntoVta = Convert.ToString(dr[j]["IdTipoPuntoVta"]);
+                        Cuits[i].UNs[Cuits[i].UNs.Count - 1].PuntosVta.Add(puntoVta);
+                    }
+                }
+            }
+        }
     }
 }

@@ -10,7 +10,7 @@ namespace CedServicios.Entidades
     {
         private string cuit;
         private int nro;
-        private string idUN;
+        private int idUN;
         private string idTipoPuntoVta;
         private bool usaSetPropioDeDatosCuit;
             private Domicilio domicilio;
@@ -53,7 +53,7 @@ namespace CedServicios.Entidades
                 return nro;
             }
         }
-        public string IdUN
+        public int IdUN
         {
             set
             {

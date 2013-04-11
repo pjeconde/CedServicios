@@ -13,10 +13,12 @@ namespace CedServicios.Entidades
         private string descr;
         private WF wF;
         private string ultActualiz;
+        private List<PuntoVta> puntosVta;
 
         public UN()
         {
             wF = new WF();
+            puntosVta = new List<PuntoVta>();
         }
 
         public string Cuit
@@ -72,6 +74,17 @@ namespace CedServicios.Entidades
             get
             {
                 return ultActualiz;
+            }
+        }
+        public List<PuntoVta> PuntosVta
+        {
+            set
+            {
+                puntosVta = value;
+            }
+            get
+            {
+                return puntosVta;
             }
         }
     }
