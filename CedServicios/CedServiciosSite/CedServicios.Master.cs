@@ -15,7 +15,7 @@ namespace CedServicios.Site
             if (!IsPostBack)
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                Funciones.PersonalizarControlesMaster(this, sesion);
+                Funciones.PersonalizarControlesMaster(this, true, sesion);
             }
         }
         protected void Menu_MenuItemClick(object sender, MenuEventArgs e)
@@ -79,7 +79,7 @@ namespace CedServicios.Site
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 RN.Sesion.AsignarCuit(sesion.CuitsDelUsuario[CUITDropDownList.SelectedIndex], sesion);
-                Funciones.PersonalizarControlesMaster(this, sesion);
+                Funciones.PersonalizarControlesMaster(this, true, sesion);
             }
         }
         protected void EmpresaImageButton_Click(object sender, ImageClickEventArgs e)

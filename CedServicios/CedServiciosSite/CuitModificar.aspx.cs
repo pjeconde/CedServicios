@@ -90,8 +90,6 @@ namespace CedServicios.Site
                 AceptarButton.Enabled = false;
                 CancelarButton.Text = "Salir";
 
-                RN.Sesion.RefrescarDatosUsuario(sesion.Usuario, sesion);
-                Funciones.PersonalizarControlesMaster(Master, sesion);
                 MensajeLabel.Text = "El CUIT fué modificado satisfactoriamente";
             }
             catch (Exception ex)

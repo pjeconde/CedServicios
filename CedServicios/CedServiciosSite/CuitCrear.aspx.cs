@@ -65,8 +65,7 @@ namespace CedServicios.Site
                 AceptarButton.Enabled = false;
                 CancelarButton.Text = "Salir";
 
-                RN.Sesion.RefrescarDatosUsuario(sesion.Usuario, sesion);
-                Funciones.PersonalizarControlesMaster(Master, sesion);
+                Funciones.PersonalizarControlesMaster(Master, true, sesion);
                 MensajeLabel.Text = "El CUIT fué creado satisfactoriamente";
             }
             catch (Exception ex)
