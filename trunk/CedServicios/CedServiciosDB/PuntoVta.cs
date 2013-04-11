@@ -39,7 +39,7 @@ namespace CedServicios.DB
         {
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
             Hasta.Nro = Convert.ToInt32(Desde["NroPuntoVta"]);
-            Hasta.IdUN = Convert.ToString(Desde["IdUN"]);
+            Hasta.IdUN = Convert.ToInt32(Desde["IdUN"]);
             Hasta.IdTipoPuntoVta = Convert.ToString(Desde["IdTipoPuntoVta"]);
             Hasta.UsaSetPropioDeDatosCuit = Convert.ToBoolean(Desde["UsaSetPropioDeDatosCuit"]);
             Hasta.Domicilio.Calle = Convert.ToString(Desde["Calle"]);

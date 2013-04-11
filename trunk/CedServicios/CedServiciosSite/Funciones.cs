@@ -45,6 +45,9 @@ namespace CedServicios.Site
             mItem = new MenuItem("Modificación datos CUIT", "Modificación datos CUIT");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Consulta de CUIT(s)", "Consulta de CUIT(s)");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
 
             mItem = new MenuItem("Unidad de Negocio", "Unidad de Negocio");
             menu.Items.Add(mItem);

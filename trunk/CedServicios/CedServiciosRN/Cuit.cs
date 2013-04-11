@@ -17,6 +17,11 @@ namespace CedServicios.RN
             CedServicios.DB.Cuit db = new DB.Cuit(Sesion);
             db.Leer(Cuit);
         }
+        public static void CompletarUNsYPuntosVta(List<Entidades.Cuit> Cuits, Entidades.Sesion Sesion)
+        {
+            CedServicios.DB.Cuit db = new DB.Cuit(Sesion);
+            db.CompletarUNsYPuntosVta(Cuits);
+        }
         public static void Crear(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {
             string permisoAdminCUITParaUsuarioAprobadoHandler = RN.Permiso.PermisoAdminCUITParaUsuarioAprobadoHandler(Cuit, Sesion);
