@@ -17,20 +17,34 @@ namespace CedServicios.Site
                 TituloCuitsTreeView.Nodes.Add(new TreeNode("CUIT"));
                 TituloCuitsTreeView.Nodes[TituloCuitsTreeView.Nodes.Count - 1].ChildNodes.Add(new TreeNode("Unidad de Negocio"));
                 TituloCuitsTreeView.Nodes[TituloCuitsTreeView.Nodes.Count - 1].ChildNodes[TituloCuitsTreeView.Nodes[TituloCuitsTreeView.Nodes.Count - 1].ChildNodes.Count - 1].ChildNodes.Add(new TreeNode("Punto de Venta (Tipo de Punto de Venta)"));
+
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 RN.Cuit.CompletarUNsYPuntosVta(sesion.CuitsDelUsuario, sesion);
                 for (int i = 0; i<sesion.CuitsDelUsuario.Count; i++)
                 {
-                    CuitsTreeView.Nodes.Add(new TreeNode(sesion.CuitsDelUsuario[i].Nro));
+                    TreeNode nodoCuit = new TreeNode(sesion.CuitsDelUsuario[i].Nro);
                     for (int j = 0; j < sesion.CuitsDelUsuario[i].UNs.Count; j++)
                     {
-                        CuitsTreeView.Nodes[CuitsTreeView.Nodes.Count - 1].ChildNodes.Add(new TreeNode(sesion.CuitsDelUsuario[i].UNs[j].Descr));
-                        CuitsTreeView.Nodes[CuitsTreeView.Nodes.Count - 1].ChildNodes[CuitsTreeView.Nodes[CuitsTreeView.Nodes.Count - 1].ChildNodes.Count - 1].Value = sesion.CuitsDelUsuario[i].UNs[j].Id.ToString();
-                        for (int h = 0; h < sesion.CuitsDelUsuario[i].UNs[j].PuntosVta.Count; h++)
+                        TreeNode nodoUN = new TreeNode(sesion.CuitsDelUsuario[i].UNs[j].Descr);
+                        nodoUN.Value = sesion.CuitsDelUsuario[i].UNs[j].Id.ToString();
+                        nodoCuit.ChildNodes.Add(nodoUN);
+                        if (sesion.CuitsDelUsuario[i].UNs[j].PuntosVta.Count > 0)
                         {
-                            CuitsTreeView.Nodes[CuitsTreeView.Nodes.Count - 1].ChildNodes[CuitsTreeView.Nodes[CuitsTreeView.Nodes.Count - 1].ChildNodes.Count - 1].ChildNodes.Add(new TreeNode(sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Nro.ToString("0000") + " (" + sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].IdTipoPuntoVta + ")"));
+                            for (int h = 0; h < sesion.CuitsDelUsuario[i].UNs[j].PuntosVta.Count; h++)
+                            {
+                                TreeNode nodoPuntoVta = new TreeNode(sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Nro.ToString("0000") + " (" + sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].IdTipoPuntoVta + ")");
+                                nodoPuntoVta.Value = sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Nro.ToString();
+                                nodoUN.ChildNodes.Add(nodoPuntoVta);
+                            }
+                        }
+                        else
+                        {
+                            TreeNode nodoPuntoVta = new TreeNode("(no hay Puntos de Venta definidos)");
+                            nodoPuntoVta.Value = String.Empty;
+                            nodoUN.ChildNodes.Add(nodoPuntoVta);
                         }
                     }
+                    CuitsTreeView.Nodes.Add(nodoCuit);
                 }
             }
         }

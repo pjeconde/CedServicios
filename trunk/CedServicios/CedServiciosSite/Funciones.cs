@@ -48,6 +48,7 @@ namespace CedServicios.Site
             mItem = new MenuItem("Consulta de CUIT(s)", "Consulta de CUIT(s)");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "Incluye Unidades de Negocio y Puntos de Venta";
 
             mItem = new MenuItem("Unidad de Negocio", "Unidad de Negocio");
             menu.Items.Add(mItem);
