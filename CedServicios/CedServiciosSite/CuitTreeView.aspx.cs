@@ -53,13 +53,16 @@ namespace CedServicios.Site
             switch (CuitsTreeView.SelectedNode.Depth)
             {
                 case 0:
-                    MensajeLabel.Text = "CUIT " + CuitsTreeView.SelectedNode.Value;
+                    //MensajeLabel.Text = "CUIT " + CuitsTreeView.SelectedNode.Value;
+                    CuitModalPopupExtender.Show();
                     break;
                 case 1:
-                    MensajeLabel.Text = "UN " + CuitsTreeView.SelectedNode.Value;
+                    //MensajeLabel.Text = "UN " + CuitsTreeView.SelectedNode.Value;
+                    UNModalPopupExtender.Show();
                     break;
                 case 2:
-                    MensajeLabel.Text = "PuntoVta " + CuitsTreeView.SelectedNode.Value;
+                    //MensajeLabel.Text = "PuntoVta " + CuitsTreeView.SelectedNode.Value;
+                    PuntoVtaModalPopupExtender.Show();
                     break;
             }
         }
