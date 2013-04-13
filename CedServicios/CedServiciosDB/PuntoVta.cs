@@ -15,7 +15,7 @@ namespace CedServicios.DB
         public List<Entidades.PuntoVta> ListaPorUN()
         {
             List<Entidades.PuntoVta> lista = new List<Entidades.PuntoVta>();
-            if (sesion.UN.Id != null)
+            if (sesion.UN.Id != 0)
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select PuntoVta.Cuit, PuntoVta.NroPuntoVta, PuntoVta.IdUN, PuntoVta.IdTipoPuntoVta, PuntoVta.UsaSetPropioDeDatosCuit, PuntoVta.Calle, PuntoVta.Nro, PuntoVta.Piso, PuntoVta.Depto, PuntoVta.Sector, PuntoVta.Torre, PuntoVta.Manzana, PuntoVta.Localidad, PuntoVta.IdProvincia, PuntoVta.DescrProvincia, PuntoVta.CodPost, PuntoVta.NombreContacto, PuntoVta.EmailContacto, PuntoVta.TelefonoContacto, PuntoVta.IdCondIVA, PuntoVta.DescrCondIVA, PuntoVta.NroIngBrutos, PuntoVta.IdCondIngBrutos, PuntoVta.DescrCondIngBrutos, PuntoVta.GLN, PuntoVta.FechaInicioActividades, PuntoVta.CodigoInterno, PuntoVta.IdMetodoGeneracionNumeracionLote, PuntoVta.UltNroLote, PuntoVta.IdWF, PuntoVta.Estado ");

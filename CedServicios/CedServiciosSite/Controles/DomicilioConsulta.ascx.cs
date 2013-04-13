@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace CedServicios.Site.Controles
 {
-    public partial class Domicilio : System.Web.UI.UserControl
+    public partial class DomicilioConsulta : System.Web.UI.UserControl
     {
         protected void Page_Load(object sender, EventArgs e)
         {

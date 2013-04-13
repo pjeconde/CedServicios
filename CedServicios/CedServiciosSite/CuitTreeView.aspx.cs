@@ -50,21 +50,28 @@ namespace CedServicios.Site
         }
         protected void CuitsTreeView_SelectedNodeChanged(object sender, EventArgs e)
         {
+            //MensajeLabel.Text = CuitsTreeView.SelectedNode.Value;
             switch (CuitsTreeView.SelectedNode.Depth)
             {
                 case 0:
-                    //MensajeLabel.Text = "CUIT " + CuitsTreeView.SelectedNode.Value;
-                    CuitModalPopupExtender.Show();
+                    ModalPopupExtender1.PopupControlID = "CuitPanel";
+                    ModalPopupExtender1.PopupDragHandleControlID = "CuitPanel";
                     break;
                 case 1:
-                    //MensajeLabel.Text = "UN " + CuitsTreeView.SelectedNode.Value;
-                    UNModalPopupExtender.Show();
+                    ModalPopupExtender1.PopupControlID = "UNPanel";
+                    ModalPopupExtender1.PopupDragHandleControlID = "UNPanel";
                     break;
                 case 2:
-                    //MensajeLabel.Text = "PuntoVta " + CuitsTreeView.SelectedNode.Value;
-                    PuntoVtaModalPopupExtender.Show();
+                    ModalPopupExtender1.PopupControlID = "PuntoVtaPanel";
+                    ModalPopupExtender1.PopupDragHandleControlID = "PuntoVtaPanel";
                     break;
             }
+            ModalPopupExtender1.Show();
+        }
+
+        protected void SalirButton_Click(object sender, EventArgs e)
+        {
+            CuitsTreeView.SelectedNode.Selected = false;
         }
     }
 }

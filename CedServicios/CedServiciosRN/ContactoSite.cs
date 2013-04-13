@@ -59,7 +59,6 @@ namespace CedServicios.RN
         }
         public static void Registrar(Entidades.ContactoSite ContactoSite)
         {
-            StringBuilder a;
             string cuentaMailCedeira;
             if (ContactoSite.Motivo == "FactElectronica")
             {

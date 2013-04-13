@@ -60,9 +60,13 @@
     <Content Include="App_Themes\CedServicios\CedServicios.css" />
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="Controles\Contacto.ascx" />
+    <Content Include="Controles\ContactoConsulta.ascx" />
     <Content Include="Controles\DatosIdentificatorios.ascx" />
+    <Content Include="Controles\DatosIdentificatoriosConsulta.ascx" />
     <Content Include="Controles\DatosImpositivos.ascx" />
+    <Content Include="Controles\DatosImpositivosConsulta.ascx" />
     <Content Include="Controles\Domicilio.ascx" />
+    <Content Include="Controles\DomicilioConsulta.ascx" />
     <Content Include="CuitCrear.aspx" />
     <Content Include="CuitModificar.aspx" />
     <Content Include="CuitTreeView.aspx" />
@@ -150,12 +154,26 @@
     <Compile Include="Controles\Contacto.ascx.designer.cs">
       <DependentUpon>Contacto.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controles\ContactoConsulta.ascx.cs">
+      <DependentUpon>ContactoConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\ContactoConsulta.ascx.designer.cs">
+      <DependentUpon>ContactoConsulta.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controles\DatosIdentificatorios.ascx.cs">
       <DependentUpon>DatosIdentificatorios.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controles\DatosIdentificatorios.ascx.designer.cs">
       <DependentUpon>DatosIdentificatorios.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\DatosIdentificatoriosConsulta.ascx.cs">
+      <DependentUpon>DatosIdentificatoriosConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\DatosIdentificatoriosConsulta.ascx.designer.cs">
+      <DependentUpon>DatosIdentificatoriosConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="Controles\DatosImpositivos.ascx.cs">
       <DependentUpon>DatosImpositivos.ascx</DependentUpon>
@@ -164,12 +182,26 @@
     <Compile Include="Controles\DatosImpositivos.ascx.designer.cs">
       <DependentUpon>DatosImpositivos.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Controles\DatosImpositivosConsulta.ascx.cs">
+      <DependentUpon>DatosImpositivosConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\DatosImpositivosConsulta.ascx.designer.cs">
+      <DependentUpon>DatosImpositivosConsulta.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Controles\Domicilio.ascx.cs">
       <DependentUpon>Domicilio.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Controles\Domicilio.ascx.designer.cs">
       <DependentUpon>Domicilio.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\DomicilioConsulta.ascx.cs">
+      <DependentUpon>DomicilioConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\DomicilioConsulta.ascx.designer.cs">
+      <DependentUpon>DomicilioConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="CuitCrear.aspx.cs">
       <DependentUpon>CuitCrear.aspx</DependentUpon>
