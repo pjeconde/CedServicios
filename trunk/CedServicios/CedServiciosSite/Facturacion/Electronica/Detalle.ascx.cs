@@ -832,7 +832,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                             break;
                         default:
                             throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
-                            break;
                     }
                 }
                 catch (System.NullReferenceException)

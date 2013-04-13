@@ -7,91 +7,10 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace CedServicios.Site {
+namespace CedServicios.Site.Controles {
     
     
-    public partial class CuitTreeView {
-        
-        /// <summary>
-        /// Control TituloLabel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TituloLabel;
-        
-        /// <summary>
-        /// Control TargetControlIDdelModalPopupExtender1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TargetControlIDdelModalPopupExtender1;
-        
-        /// <summary>
-        /// Control TituloCuitsTreeView.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView TituloCuitsTreeView;
-        
-        /// <summary>
-        /// Control CuitsTreeView.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TreeView CuitsTreeView;
-        
-        /// <summary>
-        /// Control SalirButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SalirButton;
-        
-        /// <summary>
-        /// Control MensajeLabel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MensajeLabel;
-        
-        /// <summary>
-        /// Control ModalPopupExtender1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
-        
-        /// <summary>
-        /// Control CuitPanel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel CuitPanel;
-        
-        /// <summary>
-        /// Control TituloCuitLabel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TituloCuitLabel;
+    public partial class DomicilioConsulta {
         
         /// <summary>
         /// Control Label3.
@@ -103,147 +22,174 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label Label3;
         
         /// <summary>
-        /// Control CUITTextBox.
+        /// Control CalleTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CUITTextBox;
+        protected global::System.Web.UI.WebControls.TextBox CalleTextBox;
         
         /// <summary>
-        /// Control Label9.
+        /// Control Label12.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label9;
+        protected global::System.Web.UI.WebControls.Label Label12;
         
         /// <summary>
-        /// Control RazonSocialTextBox.
+        /// Control NroTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox RazonSocialTextBox;
+        protected global::System.Web.UI.WebControls.TextBox NroTextBox;
         
         /// <summary>
-        /// Control Domicilio.
+        /// Control Label13.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.DomicilioConsulta Domicilio;
+        protected global::System.Web.UI.WebControls.Label Label13;
         
         /// <summary>
-        /// Control Contacto.
+        /// Control PisoTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.ContactoConsulta Contacto;
+        protected global::System.Web.UI.WebControls.TextBox PisoTextBox;
         
         /// <summary>
-        /// Control DatosImpositivos.
+        /// Control Label14.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.DatosImpositivosConsulta DatosImpositivos;
+        protected global::System.Web.UI.WebControls.Label Label14;
         
         /// <summary>
-        /// Control DatosIdentificatorios.
+        /// Control DeptoTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Controles.DatosIdentificatoriosConsulta DatosIdentificatorios;
+        protected global::System.Web.UI.WebControls.TextBox DeptoTextBox;
         
         /// <summary>
-        /// Control Label18.
+        /// Control Label15.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label18;
+        protected global::System.Web.UI.WebControls.Label Label15;
         
         /// <summary>
-        /// Control MedioDropDownList.
+        /// Control SectorTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList MedioDropDownList;
+        protected global::System.Web.UI.WebControls.TextBox SectorTextBox;
         
         /// <summary>
-        /// Control SalirCuitButton.
+        /// Control Label16.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SalirCuitButton;
+        protected global::System.Web.UI.WebControls.Label Label16;
         
         /// <summary>
-        /// Control UNPanel.
+        /// Control TorreTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel UNPanel;
+        protected global::System.Web.UI.WebControls.TextBox TorreTextBox;
         
         /// <summary>
-        /// Control TituloUNLabel.
+        /// Control Label17.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TituloUNLabel;
+        protected global::System.Web.UI.WebControls.Label Label17;
         
         /// <summary>
-        /// Control SalirUNButton.
+        /// Control ManzanaTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SalirUNButton;
+        protected global::System.Web.UI.WebControls.TextBox ManzanaTextBox;
         
         /// <summary>
-        /// Control PuntoVtaPanel.
+        /// Control Label4.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PuntoVtaPanel;
+        protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
-        /// Control TituloPuntoVtaLabel.
+        /// Control LocalidadTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TituloPuntoVtaLabel;
+        protected global::System.Web.UI.WebControls.TextBox LocalidadTextBox;
         
         /// <summary>
-        /// Control SalirPuntoVtaButton.
+        /// Control Label5.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SalirPuntoVtaButton;
+        protected global::System.Web.UI.WebControls.Label Label5;
+        
+        /// <summary>
+        /// Control ProvinciaDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ProvinciaDropDownList;
+        
+        /// <summary>
+        /// Control Label6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label6;
+        
+        /// <summary>
+        /// Control CodPostTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CodPostTextBox;
     }
 }
