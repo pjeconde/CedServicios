@@ -23,7 +23,7 @@
 					<asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Codigo" DataTextField="Descr">
 					</asp:DropDownList>
 				</td>
-	            <td align="right" style="padding-right: 5px;">
+	            <td align="right" style="padding-left:5px; padding-right:5px;">
 		            <asp:Label ID="Label20" runat="server" Text="Nro.Ing.Brutos"></asp:Label>
 	            </td>
 				<td>

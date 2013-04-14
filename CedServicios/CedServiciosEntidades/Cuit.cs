@@ -164,5 +164,10 @@ namespace CedServicios.Entidades
                 return nroSerieCertifITF;
             }
         }
+
+        public UN TraerUN(int IdUN)
+        {
+            return uNs.Find(delegate(Entidades.UN p) { return p.Id == IdUN; });
+        }
     }
 }

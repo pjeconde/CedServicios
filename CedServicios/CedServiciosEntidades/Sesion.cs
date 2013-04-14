@@ -6,7 +6,7 @@ using System.Text;
 namespace CedServicios.Entidades
 {
     [Serializable]
-    public class Sesion
+    public class Sesion : ICloneable
     {
 		private string cnnStr;
 		private Usuario usuario;
@@ -30,6 +30,11 @@ namespace CedServicios.Entidades
             puntosVtaDeLaUN = new List<PuntoVta>();
             opcionesHabilitadas = new List<string>();
             fechaInicio = DateTime.Now;
+        }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
         }
 
 		public string CnnStr

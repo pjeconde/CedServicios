@@ -191,6 +191,7 @@ namespace CedServicios.DB
                     if (idUN != idUNant)
                     {
                         Entidades.UN uN = new Entidades.UN();
+                        uN.Cuit = Cuits[i].Nro;
                         uN.Id = idUN;
                         uN.Descr = Convert.ToString(dr[j]["DescrUN"]);
                         Cuits[i].UNs.Add(uN);
