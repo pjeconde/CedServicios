@@ -56,7 +56,7 @@
                     <asp:Label ID="Label3" runat="server" Text="CUIT"></asp:Label>
                 </td>
                 <td align="left" style="padding-top:20px">
-                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
+                    <asp:TextBox ID="CuitPanel_CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
                         Width="80px"></asp:TextBox>
                 </td>
             </tr>
@@ -94,11 +94,38 @@
     <asp:Panel ID="UNPanel" runat="server" CssClass="ModalWindow">
         <table width="100%">
             <tr>
-                <td>
+                <td align="center" colspan="2">
                     <asp:Label ID="TituloUNLabel" runat="server" Text="Consulta de Unidad de Negocio" SkinID="TituloPagina"></asp:Label>
                 </td>
             </tr>
             <tr>
+                <td align="right" style="padding-right:5px; padding-top: 20px">
+                    <asp:Label ID="Label1" runat="server" Text="CUIT"></asp:Label>
+                </td>
+                <td align="left" style="padding-top:20px">
+                    <asp:TextBox ID="UNPanel_CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
+                        Width="80px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-right:5px; padding-top:5px">
+                    <asp:Label ID="Label6" runat="server" Text="Id."></asp:Label>
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:TextBox ID="IdUNTextBox" runat="server" MaxLength="20" TabIndex="2" Width="200px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-right:5px; padding-top:5px">
+                    <asp:Label ID="Label2" runat="server" Text="Descripción"></asp:Label>
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:TextBox ID="DescrUNTextBox" runat="server" MaxLength="50" TabIndex="3" Width="300px"></asp:TextBox>
+                </td>        
+            </tr>
+            <tr>
+                <td>
+                </td>
                 <td align="left" style="padding-top:20px">
                     <asp:Button ID="SalirUNButton" runat="server" Text="Salir" 
                         onclick="SalirButton_Click"/>
@@ -109,11 +136,13 @@
     <asp:Panel ID="PuntoVtaPanel" runat="server" CssClass="ModalWindow">
         <table width="100%">
             <tr>
-                <td>
+                <td align="center" colspan="2">
                     <asp:Label ID="TituloPuntoVtaLabel" runat="server" Text="Consulta de Punto de Venta" SkinID="TituloPagina"></asp:Label>
                 </td>
             </tr>
             <tr>
+                <td>
+                </td>
                 <td align="left" style="padding-top:20px">
                     <asp:Button ID="SalirPuntoVtaButton" runat="server" Text="Salir" 
                         onclick="SalirButton_Click"/>

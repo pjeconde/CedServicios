@@ -23,7 +23,7 @@
 					<asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Codigo" DataTextField="Descr">
 					</asp:DropDownList>
 				</td>
-	            <td align="right" style="padding-right: 5px;">
+	            <td align="right" style="padding-left:5px; padding-right:5px;">
 		            <asp:RegularExpressionValidator ID="RegularExpressionValidator15" runat="server"
 			            ControlToValidate="NroIngBrutosTextBox" ErrorMessage="Nro.Ing.Brutos" SetFocusOnError="True"
 			            ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">
