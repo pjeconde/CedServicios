@@ -69,6 +69,12 @@ namespace CedServicios.Site
             mItem = new MenuItem("Puntos de Venta", "Puntos de Venta");
             menu.Items.Add(mItem);
             menu.Items[menu.Items.Count - 1].Selectable = false;
+            mItem = new MenuItem("Alta de Punto de Venta", "Alta de Punto de Venta");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Modificación de Punto de Venta", "Modificación de Punto de Venta");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
 
             mItem = new MenuItem("Clientes", "Clientes");
             menu.Items.Add(mItem);

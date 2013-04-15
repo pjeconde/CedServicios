@@ -59,7 +59,6 @@ namespace CedServicios.RN
                     if (esAdminCUITdeCUITseleccionado.Count != 0)
                     {
                         opcionesHabilitadas.Add("CUIT/Modificación datos CUIT");
-                        opcionesHabilitadas.Add("Puntos de Venta");
                     }
                 }
                 List<Entidades.Permiso> esAutorizador = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
@@ -83,6 +82,8 @@ namespace CedServicios.RN
                     if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                     {
                         opcionesHabilitadas.Add("Unidad de Negocio/Modificación datos UN");
+                        opcionesHabilitadas.Add("Puntos de Venta/Alta de Punto de Venta");
+                        opcionesHabilitadas.Add("Puntos de Venta/Modificación de Punto de Venta");
                     }
                     List<Entidades.Permiso> elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {

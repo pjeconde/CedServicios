@@ -48,10 +48,12 @@
     <Compile Include="Log.cs" />
     <Compile Include="LogDetalle.cs" />
     <Compile Include="Medio.cs" />
+    <Compile Include="MetodoGeneracionNumeracionLote.cs" />
     <Compile Include="Permiso.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PuntoVta.cs" />
     <Compile Include="TipoPermiso.cs" />
+    <Compile Include="TipoPuntoVta.cs" />
     <Compile Include="UN.cs" />
     <Compile Include="Usuario.cs" />
   </ItemGroup>
