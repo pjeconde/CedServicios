@@ -97,6 +97,7 @@
     <Content Include="InstitucionalSolucionesCedFCI.aspx" />
     <Content Include="InstitucionalSolucionesCedST.aspx" />
     <Content Include="NotificacionDeExcepcion.aspx" />
+    <Content Include="PuntoVtaCrear.aspx" />
     <Content Include="SolicPermisoAdminCUIT.aspx" />
     <Content Include="SolicPermisoAdminUN.aspx" />
     <Content Include="SolicPermisoOperServUN.aspx" />
@@ -406,6 +407,13 @@
       <AutoGen>True</AutoGen>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="PuntoVtaCrear.aspx.cs">
+      <DependentUpon>PuntoVtaCrear.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PuntoVtaCrear.aspx.designer.cs">
+      <DependentUpon>PuntoVtaCrear.aspx</DependentUpon>
     </Compile>
     <Compile Include="SolicPermisoAdminCUIT.aspx.cs">
       <DependentUpon>SolicPermisoAdminCUIT.aspx</DependentUpon>

@@ -50,6 +50,9 @@ namespace CedServicios.Site
                 case "Modificación datos UN":
                     Response.Redirect("~/UNModificar.aspx");
                     break;
+                case "Alta de Punto de Venta":
+                    Response.Redirect("~/PuntoVtaCrear.aspx");
+                    break;
                 case "Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx?pendientes");
                     break;
