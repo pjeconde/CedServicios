@@ -65,6 +65,10 @@ namespace CedServicios.Site
             mItem = new MenuItem("Modificación datos UN", "Modificación datos UN");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Consulta de Unidad(es) de Negocio", "Consulta de Unidad(es) de Negocio");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "Incluye CUITs y Puntos de Venta";
 
             mItem = new MenuItem("Puntos de Venta", "Puntos de Venta");
             menu.Items.Add(mItem);
@@ -75,6 +79,10 @@ namespace CedServicios.Site
             mItem = new MenuItem("Modificación de Punto de Venta", "Modificación de Punto de Venta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Consulta de Punto(s) de Venta", "Consulta de Punto(s) de Venta");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "Incluye CUITs y Unidades de Negocio";
 
             mItem = new MenuItem("Clientes", "Clientes");
             menu.Items.Add(mItem);

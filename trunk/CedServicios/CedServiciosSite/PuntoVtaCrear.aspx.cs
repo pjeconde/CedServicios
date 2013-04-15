@@ -24,6 +24,11 @@ namespace CedServicios.Site
                 CUITTextBox.Enabled = false;
                 IdUNDropDownList.SelectedValue = sesion.UN.Id.ToString();
                 IdUNDropDownList.Enabled = false;
+                IdTipoPuntoVtaDropDownList.SelectedValue = "Comun";
+                IdMetodoGeneracionNumeracionLoteDropDownList.SelectedValue = "Autonumerador";
+                UltNroLoteTextBox.Text = "0";
+                UsaDatosCuitCheckBox.Checked = true;
+                UsaDatosCuitCheckBox_CheckedChanged(UsaDatosCuitCheckBox, new EventArgs());
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
@@ -33,12 +38,12 @@ namespace CedServicios.Site
         {
             Response.Redirect("~/Default.aspx");
         }
-        protected void UsaSetPropioDeDatosCuitCheckBox_CheckedChanged(object sender, EventArgs e)
+        protected void UsaDatosCuitCheckBox_CheckedChanged(object sender, EventArgs e)
         {
-            Domicilio.Visible = !UsaSetPropioDeDatosCuitCheckBox.Checked;
-            Contacto.Visible = !UsaSetPropioDeDatosCuitCheckBox.Checked;
-            DatosImpositivos.Visible = !UsaSetPropioDeDatosCuitCheckBox.Checked;
-            DatosIdentificatorios.Visible = !UsaSetPropioDeDatosCuitCheckBox.Checked;
+            Domicilio.Visible = !UsaDatosCuitCheckBox.Checked;
+            Contacto.Visible = !UsaDatosCuitCheckBox.Checked;
+            DatosImpositivos.Visible = !UsaDatosCuitCheckBox.Checked;
+            DatosIdentificatorios.Visible = !UsaDatosCuitCheckBox.Checked;
         }
     }
 }

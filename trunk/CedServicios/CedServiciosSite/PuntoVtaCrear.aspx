@@ -71,16 +71,16 @@
                 <asp:Label ID="Label4" runat="server" Text="Usa datos CUIT"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:CheckBox ID="UsaSetPropioDeDatosCuitCheckBox" runat="server" 
-                    Text="Se refiere a Domicilio, Contacto y Datos Impositivos e Identificatorios." 
+                <asp:CheckBox ID="UsaDatosCuitCheckBox" runat="server" 
                     Checked="true" AutoPostBack="true"
-                    oncheckedchanged="UsaSetPropioDeDatosCuitCheckBox_CheckedChanged" />
+                    oncheckedchanged="UsaDatosCuitCheckBox_CheckedChanged" />
+                <asp:Label ID="Label6" runat="server" Text="( se refiere a Domicilio, Contacto y Datos Impositivos e Identificatorios )"></asp:Label>
             </td>
         </tr>
-            <uc1:domicilio ID="Domicilio" runat="server" Visible="false"/>
-            <uc1:contacto ID="Contacto" runat="server" Visible="false"/>
-            <uc1:datosImpositivos ID="DatosImpositivos" runat="server" Visible="false"/>
-            <uc1:datosIdentificatorios ID="DatosIdentificatorios" runat="server" Visible="false"/>
+        <uc1:domicilio ID="Domicilio" runat="server" />
+        <uc1:contacto ID="Contacto" runat="server" />
+        <uc1:datosImpositivos ID="DatosImpositivos" runat="server" />
+        <uc1:datosIdentificatorios ID="DatosIdentificatorios" runat="server" />
         <tr>
             <td>
             </td>

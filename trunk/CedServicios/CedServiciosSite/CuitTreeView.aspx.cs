@@ -13,6 +13,19 @@ namespace CedServicios.Site
         {
             if (!IsPostBack)
             {
+                string a = HttpContext.Current.Request.Url.Query.ToString();
+                switch (a.Replace("?", String.Empty))
+                {
+                    case "Cuit":
+                        TituloLabel.Text = "Consulta de CUIT(s)";
+                        break;
+                    case "UN":
+                        TituloLabel.Text = "Consulta de Unidad(es) de Negocio";
+                        break;
+                    case "PuntoVta":
+                        TituloLabel.Text = "Consulta de Punto(s) de Venta";
+                        break;
+                }
                 TituloCuitsTreeView.Enabled = false;
                 TituloCuitsTreeView.Nodes.Add(new TreeNode("CUIT"));
                 TituloCuitsTreeView.Nodes[TituloCuitsTreeView.Nodes.Count - 1].ChildNodes.Add(new TreeNode("Unidad de Negocio"));
@@ -51,6 +64,9 @@ namespace CedServicios.Site
                 DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                 DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
                 MedioDropDownList.DataSource = RN.Medio.Lista(sesion);
+                PuntoVtaPanel_IdUNDropDownList.DataSource = RN.UN.ListaVigentesPorCuit(sesion.Cuit, sesion);
+                IdTipoPuntoVtaDropDownList.DataSource = RN.TipoPuntoVta.Lista(sesion);
+                IdMetodoGeneracionNumeracionLoteDropDownList.DataSource = RN.MetodoGeneracionNumeracionLote.Lista(sesion);
                 DataBind();
                 ViewState["Sesion"] = sesion.Clone();
             }
@@ -60,6 +76,7 @@ namespace CedServicios.Site
             Entidades.Sesion sesion = (Entidades.Sesion)ViewState["Sesion"];
             Entidades.Cuit cuit = new Entidades.Cuit();
             Entidades.UN uN = new Entidades.UN();
+            Entidades.PuntoVta puntoVta= new Entidades.PuntoVta();
             int idPuntoVta = 0;
             switch (CuitsTreeView.SelectedNode.Depth)
             {
@@ -83,6 +100,13 @@ namespace CedServicios.Site
                     });
                     uN = cuit.TraerUN(Convert.ToInt32(CuitsTreeView.SelectedNode.Parent.Value));
                     idPuntoVta = Convert.ToInt32(CuitsTreeView.SelectedNode.Value);
+                    if (idPuntoVta != 0)
+                    {
+                        puntoVta = uN.PuntosVta.Find(delegate(Entidades.PuntoVta p)
+                        {
+                            return p.Nro == idPuntoVta;
+                        });
+                    }
                     break;
             }
             switch (CuitsTreeView.SelectedNode.Depth)
@@ -137,14 +161,66 @@ namespace CedServicios.Site
                 case 2:
                     ModalPopupExtender1.PopupControlID = "PuntoVtaPanel";
                     ModalPopupExtender1.PopupDragHandleControlID = "PuntoVtaPanel";
+                    PuntoVtaPanel_CUITTextBox.Text = uN.Cuit;
+                    PuntoVtaPanel_IdUNDropDownList.SelectedValue = uN.Id.ToString();
+                    NroTextBox.Text = puntoVta.Nro.ToString("0000");
+                    IdTipoPuntoVtaDropDownList.SelectedValue = puntoVta.IdTipoPuntoVta;
+                    IdMetodoGeneracionNumeracionLoteDropDownList.SelectedValue = puntoVta.IdMetodoGeneracionNumeracionLote;
+                    UltNroLoteTextBox.Text = puntoVta.UltNroLote.ToString();
+                    UsaDatosCuitCheckBox.Checked = !puntoVta.UsaSetPropioDeDatosCuit;
+                    UsaDatosCuitCheckBox_CheckedChanged(UsaDatosCuitCheckBox, new EventArgs());
+                    if (UsaDatosCuitCheckBox.Checked)
+                    {
+                        PuntoVtaPanel_Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                        PuntoVtaPanel_DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                        PuntoVtaPanel_DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                        DataBind();
+                        PuntoVtaPanel_Domicilio.Calle = cuit.Domicilio.Calle;
+                        PuntoVtaPanel_Domicilio.Nro = cuit.Domicilio.Nro;
+                        PuntoVtaPanel_Domicilio.Piso = cuit.Domicilio.Piso;
+                        PuntoVtaPanel_Domicilio.Depto = cuit.Domicilio.Depto;
+                        PuntoVtaPanel_Domicilio.Manzana = cuit.Domicilio.Manzana;
+                        PuntoVtaPanel_Domicilio.Sector = cuit.Domicilio.Sector;
+                        PuntoVtaPanel_Domicilio.Torre = cuit.Domicilio.Torre;
+                        PuntoVtaPanel_Domicilio.Localidad = cuit.Domicilio.Localidad;
+                        PuntoVtaPanel_Domicilio.IdProvincia = cuit.Domicilio.Provincia.Id;
+                        PuntoVtaPanel_Domicilio.CodPost = cuit.Domicilio.CodPost;
+                        PuntoVtaPanel_Contacto.Nombre = cuit.Contacto.Nombre;
+                        PuntoVtaPanel_Contacto.Email = cuit.Contacto.Email;
+                        PuntoVtaPanel_Contacto.Telefono = cuit.Contacto.Telefono;
+                        PuntoVtaPanel_DatosImpositivos.IdCondIVA = cuit.DatosImpositivos.IdCondIVA;
+                        PuntoVtaPanel_DatosImpositivos.IdCondIngBrutos = cuit.DatosImpositivos.IdCondIngBrutos;
+                        PuntoVtaPanel_DatosImpositivos.NroIngBrutos = cuit.DatosImpositivos.NroIngBrutos;
+                        PuntoVtaPanel_DatosImpositivos.FechaInicioActividades = cuit.DatosImpositivos.FechaInicioActividades;
+                        PuntoVtaPanel_DatosIdentificatorios.GLN = cuit.DatosIdentificatorios.GLN;
+                        PuntoVtaPanel_DatosIdentificatorios.CodigoInterno = cuit.DatosIdentificatorios.CodigoInterno;
+                    }
+
+                    PuntoVtaPanel_CUITTextBox.Enabled = false;
+                    PuntoVtaPanel_IdUNDropDownList.Enabled = false;
+                    NroTextBox.Enabled = false;
+                    IdTipoPuntoVtaDropDownList.Enabled = false;
+                    IdMetodoGeneracionNumeracionLoteDropDownList.Enabled = false;
+                    UltNroLoteTextBox.Enabled = false;
+                    UsaDatosCuitCheckBox.Enabled = false;
+                    PuntoVtaPanel_Domicilio.Enabled = false;
+                    PuntoVtaPanel_Contacto.Enabled = false;
+                    PuntoVtaPanel_DatosImpositivos.Enabled = false;
+                    PuntoVtaPanel_DatosIdentificatorios.Enabled = false;
                     break;
             }
             ModalPopupExtender1.Show();
         }
-
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             CuitsTreeView.SelectedNode.Selected = false;
+        }
+        protected void UsaDatosCuitCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            PuntoVtaPanel_Domicilio.Visible = !UsaDatosCuitCheckBox.Checked;
+            PuntoVtaPanel_Contacto.Visible = !UsaDatosCuitCheckBox.Checked;
+            PuntoVtaPanel_DatosImpositivos.Visible = !UsaDatosCuitCheckBox.Checked;
+            PuntoVtaPanel_DatosIdentificatorios.Visible = !UsaDatosCuitCheckBox.Checked;
         }
     }
 }

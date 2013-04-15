@@ -141,6 +141,76 @@
                 </td>
             </tr>
             <tr>
+                <td align="right" style="padding-right: 5px; padding-top: 20px">
+                    <asp:Label ID="Label19" runat="server" Text="CUIT"></asp:Label>
+                </td>
+                <td align="left" style="padding-top: 20px">
+                    <asp:TextBox ID="PuntoVtaPanel_CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
+                        Width="80px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-right:5px; padding-top:5px; height:25px;">
+                    <asp:Label ID="Label13" runat="server" Text="Unidad de Negocio"></asp:Label>
+                </td>
+                <td align="left" style="padding-top:5px; height:25px;">
+                    <asp:DropDownList ID="PuntoVtaPanel_IdUNDropDownList" runat="server" TabIndex="2" Width="183px" DataValueField="Id" DataTextField="Descr" >
+                    </asp:DropDownList>
+                </td>
+            </tr> 
+            <tr>
+                <td align="right" style="padding-right: 5px; padding-top:5px">
+                    <asp:Label ID="Label4" runat="server" Text="Nro. de Punto de Venta"></asp:Label>
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:TextBox ID="NroTextBox" runat="server" MaxLength="4" TabIndex="3" ToolTip="Debe ingresar sólo números."
+                        Width="40px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+	            <td align="right" style="padding-right:5px; padding-top:5px">
+		            <asp:Label ID="Label14" runat="server" Text="Tipo Punto de Venta"></asp:Label>
+	            </td>
+			    <td align="left" style="padding-top:5px">
+				    <asp:DropDownList ID="IdTipoPuntoVtaDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Id" DataTextField="Descr">
+				    </asp:DropDownList>
+			    </td>
+            </tr>
+            <tr>
+	            <td align="right" style="padding-right:5px; padding-top:5px">
+		            <asp:Label ID="Label7" runat="server" Text="Método de numeración de lotes"></asp:Label>
+	            </td>
+			    <td align="left" style="padding-top:5px">
+				    <asp:DropDownList ID="IdMetodoGeneracionNumeracionLoteDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Id" DataTextField="Descr">
+				    </asp:DropDownList>
+			    </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-right: 5px; padding-top:5px">
+                    <asp:Label ID="Label8" runat="server" Text="Último nro. de lote"></asp:Label>
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:TextBox ID="UltNroLoteTextBox" runat="server" MaxLength="10" TabIndex="3" ToolTip="Debe ingresar sólo números."
+                        Width="40px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-right: 5px; padding-top:5px">
+                    <asp:Label ID="Label10" runat="server" Text="Usa datos CUIT"></asp:Label>
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:CheckBox ID="UsaDatosCuitCheckBox" runat="server" 
+                        Checked="true" AutoPostBack="true"
+                        oncheckedchanged="UsaDatosCuitCheckBox_CheckedChanged" />
+                    <asp:Label ID="Label5" runat="server" Text="( se refiere a Domicilio, Contacto y Datos Impositivos e Identificatorios )"></asp:Label>
+
+                </td>
+            </tr>
+            <uc1:domicilioConsulta ID="PuntoVtaPanel_Domicilio" runat="server" />
+            <uc1:contactoConsulta ID="PuntoVtaPanel_Contacto" runat="server" />
+            <uc1:datosImpositivosConsulta ID="PuntoVtaPanel_DatosImpositivos" runat="server" />
+            <uc1:datosIdentificatoriosConsulta ID="PuntoVtaPanel_DatosIdentificatorios" runat="server" />
+            <tr>
                 <td>
                 </td>
                 <td align="left" style="padding-top:20px">
