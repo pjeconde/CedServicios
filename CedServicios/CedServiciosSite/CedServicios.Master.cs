@@ -36,7 +36,7 @@ namespace CedServicios.Site
                     Response.Redirect("~/CuitModificar.aspx");
                     break;
                 case "Consulta de CUIT(s)":
-                    Response.Redirect("~/CuitTreeView.aspx");
+                    Response.Redirect("~/CuitTreeView.aspx?Cuit");
                     break;
                 case "Alta de Unidad de Negocio":
                     Response.Redirect("~/UNCrear.aspx");
@@ -50,8 +50,14 @@ namespace CedServicios.Site
                 case "Modificación datos UN":
                     Response.Redirect("~/UNModificar.aspx");
                     break;
+                case "Consulta de Unidad(es) de Negocio":
+                    Response.Redirect("~/CuitTreeView.aspx?UN");
+                    break;
                 case "Alta de Punto de Venta":
                     Response.Redirect("~/PuntoVtaCrear.aspx");
+                    break;
+                case "Consulta de Punto(s) de Venta":
+                    Response.Redirect("~/CuitTreeView.aspx?PuntoVta");
                     break;
                 case "Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx?pendientes");

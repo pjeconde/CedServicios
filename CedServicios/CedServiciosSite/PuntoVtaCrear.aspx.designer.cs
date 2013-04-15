@@ -139,13 +139,22 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
-        /// Control UsaSetPropioDeDatosCuitCheckBox.
+        /// Control UsaDatosCuitCheckBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox UsaSetPropioDeDatosCuitCheckBox;
+        protected global::System.Web.UI.WebControls.CheckBox UsaDatosCuitCheckBox;
+        
+        /// <summary>
+        /// Control Label6.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
         /// Control Domicilio.

@@ -51,6 +51,8 @@ namespace CedServicios.RN
                 {
                     opcionesHabilitadas.Add("Clientes");
                     opcionesHabilitadas.Add("CUIT/Consulta de CUIT(s)");
+                    opcionesHabilitadas.Add("Unidad de Negocio/Consulta de Unidad(es) de Negocio");
+                    opcionesHabilitadas.Add("Puntos de Venta/Consulta de Punto(s) de Venta");
                     
                     List<Entidades.Permiso> esAdminCUITdeCUITseleccionado = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
