@@ -98,6 +98,8 @@
     <Content Include="InstitucionalSolucionesCedST.aspx" />
     <Content Include="NotificacionDeExcepcion.aspx" />
     <Content Include="PuntoVtaCrear.aspx" />
+    <Content Include="PuntoVtaModificar.aspx" />
+    <Content Include="PuntoVtaSeleccionar.aspx" />
     <Content Include="SolicPermisoAdminCUIT.aspx" />
     <Content Include="SolicPermisoAdminUN.aspx" />
     <Content Include="SolicPermisoOperServUN.aspx" />
@@ -414,6 +416,20 @@
     </Compile>
     <Compile Include="PuntoVtaCrear.aspx.designer.cs">
       <DependentUpon>PuntoVtaCrear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PuntoVtaModificar.aspx.cs">
+      <DependentUpon>PuntoVtaModificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PuntoVtaModificar.aspx.designer.cs">
+      <DependentUpon>PuntoVtaModificar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PuntoVtaSeleccionar.aspx.cs">
+      <DependentUpon>PuntoVtaSeleccionar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PuntoVtaSeleccionar.aspx.designer.cs">
+      <DependentUpon>PuntoVtaSeleccionar.aspx</DependentUpon>
     </Compile>
     <Compile Include="SolicPermisoAdminCUIT.aspx.cs">
       <DependentUpon>SolicPermisoAdminCUIT.aspx</DependentUpon>

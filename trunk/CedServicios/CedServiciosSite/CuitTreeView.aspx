@@ -39,10 +39,10 @@
     </table>
 
     <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
-    TargetControlID="TargetControlIDdelModalPopupExtender1"
     PopupControlID="CuitPanel"
-    BackgroundCssClass="modalBackground"
     PopupDragHandleControlID="CuitPanel"
+    TargetControlID="TargetControlIDdelModalPopupExtender1"
+    BackgroundCssClass="modalBackground"
     BehaviorID="mdlPopup" />
     <asp:Panel ID="CuitPanel" runat="server" CssClass="ModalWindow">
         <table width="100%">

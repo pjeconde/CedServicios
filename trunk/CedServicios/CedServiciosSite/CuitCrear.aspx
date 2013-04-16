@@ -67,8 +67,7 @@
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
-                <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary">
-                </asp:ValidationSummary>
+                <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary"></asp:ValidationSummary>
             </td>
         </tr>
     </table>

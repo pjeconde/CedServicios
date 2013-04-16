@@ -56,6 +56,9 @@ namespace CedServicios.Site
                 case "Alta de Punto de Venta":
                     Response.Redirect("~/PuntoVtaCrear.aspx");
                     break;
+                case "Modificación de Punto de Venta":
+                    Response.Redirect("~/PuntoVtaSeleccionar.aspx?Modificar");
+                    break;
                 case "Consulta de Punto(s) de Venta":
                     Response.Redirect("~/CuitTreeView.aspx?PuntoVta");
                     break;

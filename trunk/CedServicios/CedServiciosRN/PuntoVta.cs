@@ -12,5 +12,16 @@ namespace CedServicios.RN
             DB.PuntoVta db = new DB.PuntoVta(Sesion);
             return db.ListaPorUN();
         }
+        public static void Crear(Entidades.PuntoVta PuntoVta, Entidades.Sesion Sesion)
+        {
+            DB.PuntoVta db = new DB.PuntoVta(Sesion);
+            PuntoVta.WF.Estado = "Vigente";
+            db.Crear(PuntoVta);
+        }
+        public static void Modificar(Entidades.PuntoVta PuntoVtaDesde, Entidades.PuntoVta PuntoVtaHasta, Entidades.Sesion Sesion)
+        {
+            DB.PuntoVta db = new DB.PuntoVta(Sesion);
+            db.Modificar(PuntoVtaDesde, PuntoVtaHasta);
+        }
     }
 }
