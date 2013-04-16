@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="PuntoVtaCrear.aspx.cs" Inherits="CedServicios.Site.PuntoVtaCrear" Theme="CedServicios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="PuntoVtaModificar.aspx.cs" Inherits="CedServicios.Site.PuntoVtaModificar" Theme="CedServicios" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 <%@ Register TagPrefix="uc1" TagName="domicilio" Src="~/Controles/Domicilio.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="contacto" Src="~/Controles/Contacto.ascx" %>
@@ -9,7 +9,7 @@
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
-                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Alta de Punto de Venta"></asp:Label>
+                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Modificación de Punto de Venta"></asp:Label>
             </td>
         </tr>
         <tr>
@@ -93,8 +93,10 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="4" Text="Aceptar" onclick="AceptarButton_Click" />
-                <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" TabIndex="5" Text="Cancelar" onclick="CancelarButton_Click" />
+                <asp:Button ID="AceptarButton" runat="server" TabIndex="4"
+                    Text="Aceptar" onclick="AceptarButton_Click" />
+                <asp:Button ID="CancelarButton" runat="server" CausesValidation="false"
+                    TabIndex="5" Text="Cancelar" onclick="CancelarButton_Click" />
             </td>
         </tr>
         <tr>

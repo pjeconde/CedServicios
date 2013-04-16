@@ -10,7 +10,7 @@
 namespace CedServicios.Site {
     
     
-    public partial class PuntoVtaCrear {
+    public partial class PuntoVtaModificar {
         
         /// <summary>
         /// Control TituloPaginaLabel.

@@ -53,13 +53,12 @@ namespace CedServicios.Site
                         else
                         {
                             TreeNode nodoPuntoVta = new TreeNode("(no hay Puntos de Venta definidos)");
-                            nodoPuntoVta.Value = String.Empty;
+                            nodoPuntoVta.Value = "0";
                             nodoUN.ChildNodes.Add(nodoPuntoVta);
                         }
                     }
                     CuitsTreeView.Nodes.Add(nodoCuit);
                 }
-
                 Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
                 DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                 DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
@@ -73,6 +72,7 @@ namespace CedServicios.Site
         }
         protected void CuitsTreeView_SelectedNodeChanged(object sender, EventArgs e)
         {
+            MensajeLabel.Text = String.Empty;
             Entidades.Sesion sesion = (Entidades.Sesion)ViewState["Sesion"];
             Entidades.Cuit cuit = new Entidades.Cuit();
             Entidades.UN uN = new Entidades.UN();
@@ -106,6 +106,11 @@ namespace CedServicios.Site
                         {
                             return p.Nro == idPuntoVta;
                         });
+                    }
+                    else
+                    {
+                        MensajeLabel.Text = "Consulta inválida";
+                        return;
                     }
                     break;
             }
