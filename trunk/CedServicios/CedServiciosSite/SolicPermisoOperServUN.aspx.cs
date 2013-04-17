@@ -33,7 +33,8 @@ namespace CedServicios.Site
 
                 string referenciaAAprobadores = String.Empty;
 
-                RN.Permiso.SolicitarPermisoParaUsuario(cuit, un, tipoPermiso, out referenciaAAprobadores, sesion);
+                DateTime fechaFinVigencia = new DateTime(2062, 12, 31);
+                RN.Permiso.SolicitarPermisoParaUsuario(cuit, un, tipoPermiso, fechaFinVigencia, out referenciaAAprobadores, sesion);
 
                 CUITTextBox.Enabled = false;
                 SolicitarButton.Enabled = false;

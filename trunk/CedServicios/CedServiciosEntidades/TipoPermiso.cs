@@ -11,6 +11,15 @@ namespace CedServicios.Entidades
         private string id;
         private string descr;
 
+        public TipoPermiso()
+        {
+        }
+
+        public TipoPermiso(string IdTipoPermiso)
+        {
+            id = IdTipoPermiso;
+        }
+
         public string Id
         {
             set
