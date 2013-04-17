@@ -141,8 +141,8 @@ namespace CedServicios.DB
             a.Append("GLN=" + Hasta.DatosIdentificatorios.GLN.ToString() + ", ");
             a.Append("CodigoInterno='" + Hasta.DatosIdentificatorios.CodigoInterno + "', ");
             a.Append("IdMetodoGeneracionNumeracionLote='" + Hasta.IdMetodoGeneracionNumeracionLote + "', ");
-            a.Append("UltNroLote=" + Hasta.UltNroLote + ", ");
-            a.AppendLine("where Cuit='" + Hasta.Cuit + "' and Nro=" + Hasta.Nro + " ");
+            a.Append("UltNroLote=" + Hasta.UltNroLote + " ");
+            a.AppendLine("where Cuit='" + Hasta.Cuit + "' and NroPuntoVta=" + Hasta.Nro + " ");
             a.AppendLine("insert Log values (" + Hasta.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'PuntoVta', 'Modif', '" + Hasta.WF.Estado + "', '') ");
             a.AppendLine("declare @idLog int ");
             a.AppendLine("select @idLog=@@Identity ");

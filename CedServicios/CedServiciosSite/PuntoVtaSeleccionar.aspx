@@ -4,7 +4,7 @@
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
         <tr>
             <td align="center" colspan="2" style="padding-top: 20px">
-                <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="? de Punto de Venta"></asp:Label>
+                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="? de Punto de Venta"></asp:Label>
             </td>
         </tr>
         <tr>
@@ -29,7 +29,7 @@
                 <asp:Label ID="Label2" runat="server" Text="Punto de Venta"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px; height:25px;">
-                <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" TabIndex="3" Width="183px" DataValueField="Id" DataTextField="Descr" ></asp:DropDownList>
+                <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" TabIndex="3" Width="183px" DataValueField="Nro" DataTextField="Descr" ></asp:DropDownList>
             </td>
         </tr>        
         <tr>

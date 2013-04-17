@@ -45,7 +45,7 @@ namespace CedServicios.Site
                         {
                             for (int h = 0; h < sesion.CuitsDelUsuario[i].UNs[j].PuntosVta.Count; h++)
                             {
-                                TreeNode nodoPuntoVta = new TreeNode(sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Nro.ToString("0000") + " (" + sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].IdTipoPuntoVta + ")");
+                                TreeNode nodoPuntoVta = new TreeNode(sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Descr);
                                 nodoPuntoVta.Value = sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Nro.ToString();
                                 nodoUN.ChildNodes.Add(nodoPuntoVta);
                             }
