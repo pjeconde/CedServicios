@@ -255,7 +255,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     //{
                         if (!puntoDeVenta.Equals(string.Empty))
                         {
-                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                             {
                                 return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
                             });
@@ -301,7 +301,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 //{
                     if (!puntoDeVenta.Equals(string.Empty))
                     {
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
                         });
@@ -411,7 +411,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     if (!puntoDeVenta.Equals(string.Empty))
                     {
                         //OJO - Verifico si es BonoFiscal !!!
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
                         });
@@ -447,7 +447,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 if (!puntoDeVenta.Equals(string.Empty))
                 {
                     //OJO - Verifico si es BonoFiscal or RG2904!!!
-                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                     {
                         return (pv.IdTipoPuntoVta == "BonoFiscal" || pv.IdTipoPuntoVta == "RG2904") && pv.Nro == Convert.ToInt32(puntoDeVenta);
                     });
@@ -502,7 +502,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         if (!puntoDeVenta.Equals(string.Empty))
                         {
                             //OJO - Verifico si es BonoFiscal !!!
-                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                             {
                                 return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
                             });
@@ -543,7 +543,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 if (!puntoDeVenta.Equals(string.Empty))
                 {
                     //OJO - Verifico si es BonoFiscal !!!
-                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
                     });
@@ -597,7 +597,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     if (!puntoDeVenta.Equals(string.Empty))
                     {
                         //OJO - Verifico si es BonoFiscal !!!
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
                         });
@@ -809,7 +809,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 int auxPV = Convert.ToInt32(puntoDeVenta);
                 try
                 {
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -1265,7 +1265,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             //{
                 if (!puntoDeVenta.Equals(string.Empty))
                 {
-                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.FindAll(delegate(Entidades.PuntoVta pv)
+                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
                     });

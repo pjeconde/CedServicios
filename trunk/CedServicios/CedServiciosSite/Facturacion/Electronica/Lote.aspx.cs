@@ -181,7 +181,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     try
                     {
                         auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -472,7 +472,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 try
                 {
                     auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -1316,7 +1316,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 try
                 {
                     int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -1431,7 +1431,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 						try
 						{
 							auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
-							string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
 							{
 								return pv.Nro == auxPV;
 							}).IdTipoPuntoVta;
@@ -1565,11 +1565,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                     int auxViewState = Convert.ToInt32(ViewState["PuntoVenta"]);
                     try
                     {
-                        string idtipoAnterior = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipoAnterior = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxViewState;
                         }).IdTipoPuntoVta;
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -1635,7 +1635,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 try
                 {
                     auxPV = Convert.ToInt32(PuntoDeVenta);
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -1666,7 +1666,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     Tipo_De_ComprobanteDropDownList.DataBind();
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
-                    TipoPtoVentaLabel.Text = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    TipoPtoVentaLabel.Text = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -2012,7 +2012,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             string idtipo;
             try
             {
-                idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
@@ -2059,7 +2059,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
             try
             {
-                idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
@@ -2101,7 +2101,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
             try
             {
-                string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
@@ -2215,7 +2215,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                 try
                 {
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -2283,7 +2283,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                 try
                 {
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -2314,7 +2314,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                 try
                 {
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -2348,7 +2348,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
             try
             {
-                string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
@@ -2409,7 +2409,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                     try
                     {
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -2453,7 +2453,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
             try
             {
-                string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
@@ -2684,7 +2684,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                 try
                 {
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -2721,7 +2721,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                 try
                 {
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -2764,7 +2764,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                 try
                 {
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -2823,7 +2823,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 					try
 					{
-						string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
 						{
 							return pv.Nro == auxPV;
 						}).IdTipoPuntoVta;
@@ -2861,7 +2861,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 					try
 					{
-						string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
 						{
 							return pv.Nro == auxPV;
 						}).IdTipoPuntoVta;
@@ -2899,7 +2899,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                     try
                     {
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -2937,7 +2937,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
                     try
                     {
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -2978,7 +2978,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
             try
             {
-                string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
@@ -3013,7 +3013,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 				try
 				{
-					string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
 					{
 						return pv.Nro == auxPV;
 					}).IdTipoPuntoVta;
@@ -3048,7 +3048,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 				try
 				{
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -3083,7 +3083,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 				try
 				{
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -3118,7 +3118,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 				try
 				{
-					string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
 					{
 						return pv.Nro == auxPV;
 					}).IdTipoPuntoVta;
@@ -3206,7 +3206,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 					try
 					{
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -3243,7 +3243,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 					try
 					{
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -3280,7 +3280,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 					try
 					{
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -3317,7 +3317,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 					int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 					try
 					{
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -3356,7 +3356,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 				try
 				{
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -3388,7 +3388,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 				try
 				{
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -3421,7 +3421,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 				try
 				{
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -3453,7 +3453,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 				try
 				{
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -3485,7 +3485,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(((TextBox)Punto_VentaTextBox).Text);
 				try
 				{
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -3843,7 +3843,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 try
                 {
                     int auxPV = Convert.ToInt32(Punto_VentaTextBox.Text);
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).PuntosVtaDeLaUN.Find(delegate(Entidades.PuntoVta pv)
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;

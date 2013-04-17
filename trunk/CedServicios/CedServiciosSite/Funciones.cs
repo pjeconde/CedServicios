@@ -190,9 +190,9 @@ namespace CedServicios.Site
                         cUITLabel.Visible = true;
                         cUITDropDownList.Visible = true;
                     }
-                    if (Sesion.UNsDelCuit.Count != 0)
+                    if (Sesion.Cuit.UNs.Count != 0)
                     {
-                        uNDropDownList.DataSource = Sesion.UNsDelCuit;
+                        uNDropDownList.DataSource = Sesion.Cuit.UNs;
                         uNDropDownList.DataBind();
                         if (Sesion.UN != null) uNDropDownList.SelectedValue = Sesion.UN.Id.ToString();
                         uNLabel.Visible = true;

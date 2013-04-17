@@ -20,22 +20,47 @@ namespace CedServicios.Site
                 IdMetodoGeneracionNumeracionLoteDropDownList.DataSource = RN.MetodoGeneracionNumeracionLote.Lista(sesion);
                 DataBind();
 
-                CUITTextBox.Text = sesion.Cuit.Nro;
-                CUITTextBox.Enabled = false;
-                IdUNDropDownList.SelectedValue = sesion.UN.Id.ToString();
-                IdUNDropDownList.Enabled = false;
-                IdTipoPuntoVtaDropDownList.SelectedValue = "Comun";
-                IdMetodoGeneracionNumeracionLoteDropDownList.SelectedValue = "Autonumerador";
-                UltNroLoteTextBox.Text = "0";
-                UsaDatosCuitCheckBox.Checked = true;
+                Entidades.PuntoVta puntoVta = (Entidades.PuntoVta) Session["PuntoVta"];
+
+                CUITTextBox.Text = puntoVta.Cuit;
+                NroTextBox.Text = puntoVta.Nro.ToString();
+                IdUNDropDownList.SelectedValue = puntoVta.IdUN.ToString();
+                IdTipoPuntoVtaDropDownList.SelectedValue = puntoVta.IdTipoPuntoVta;
+                UsaDatosCuitCheckBox.Checked = !puntoVta.UsaSetPropioDeDatosCuit;
                 UsaDatosCuitCheckBox_CheckedChanged(UsaDatosCuitCheckBox, new EventArgs());
+                if (puntoVta.UsaSetPropioDeDatosCuit)
+                {
+                    Domicilio.Calle = puntoVta.Domicilio.Calle;
+                    Domicilio.Nro = puntoVta.Domicilio.Nro;
+                    Domicilio.Piso = puntoVta.Domicilio.Piso;
+                    Domicilio.Depto = puntoVta.Domicilio.Depto;
+                    Domicilio.Manzana = puntoVta.Domicilio.Manzana;
+                    Domicilio.Sector = puntoVta.Domicilio.Sector;
+                    Domicilio.Torre = puntoVta.Domicilio.Torre;
+                    Domicilio.Localidad = puntoVta.Domicilio.Localidad;
+                    Domicilio.IdProvincia = puntoVta.Domicilio.Provincia.Id;
+                    puntoVta.Domicilio.CodPost = Domicilio.CodPost;
+                    Contacto.Nombre = puntoVta.Contacto.Nombre;
+                    Contacto.Email = puntoVta.Contacto.Email;
+                    Contacto.Telefono = puntoVta.Contacto.Telefono;
+                    DatosImpositivos.IdCondIVA = puntoVta.DatosImpositivos.IdCondIVA;
+                    DatosImpositivos.IdCondIngBrutos = puntoVta.DatosImpositivos.IdCondIngBrutos;
+                    DatosImpositivos.NroIngBrutos = puntoVta.DatosImpositivos.NroIngBrutos;
+                    DatosImpositivos.FechaInicioActividades = puntoVta.DatosImpositivos.FechaInicioActividades;
+                    DatosIdentificatorios.GLN = puntoVta.DatosIdentificatorios.GLN;
+                    DatosIdentificatorios.CodigoInterno = puntoVta.DatosIdentificatorios.CodigoInterno;
+                }
+                IdMetodoGeneracionNumeracionLoteDropDownList.SelectedValue = puntoVta.IdMetodoGeneracionNumeracionLote;
+                UltNroLoteTextBox.Text = puntoVta.UltNroLote.ToString();
+                CUITTextBox.Enabled = false;
+                NroTextBox.Enabled = false;
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.PuntoVta puntoVtaDesde = new Entidades.PuntoVta();
-            Entidades.PuntoVta puntoVtaHasta = new Entidades.PuntoVta();
+            Entidades.PuntoVta puntoVtaDesde = (Entidades.PuntoVta)Session["PuntoVta"];
+            Entidades.PuntoVta puntoVtaHasta = (Entidades.PuntoVta)puntoVtaDesde.Clone();
             try
             {
                 puntoVtaHasta.Cuit = CUITTextBox.Text;
@@ -111,7 +136,7 @@ namespace CedServicios.Site
                 AceptarButton.Enabled = false;
                 CancelarButton.Text = "Salir";
 
-                MensajeLabel.Text = "El Punto de Venta fué creado satisfactoriamente";
+                MensajeLabel.Text = "El Punto de Venta fué modificado satisfactoriamente";
             }
             catch (Exception ex)
             {

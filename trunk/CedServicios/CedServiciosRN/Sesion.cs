@@ -13,7 +13,6 @@ namespace CedServicios.RN
             Sesion.Cuit = new Entidades.Cuit();
             Sesion.UN = new Entidades.UN();
             Sesion.CuitsDelUsuario = new List<Entidades.Cuit>();
-            Sesion.UNsDelCuit = new List<Entidades.UN>();
             Sesion.ClientesDelCuit = new List<Entidades.Cliente>();
             Sesion.OpcionesHabilitadas = OpcionesHabilitadas(Sesion);
         }
@@ -137,20 +136,20 @@ namespace CedServicios.RN
         public static void AsignarCuit(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {
             Sesion.Cuit = Cuit;
-            Sesion.UNsDelCuit = RN.UN.ListaPorCuitParaElUsuarioLogueado(Sesion);
+            Sesion.Cuit.UNs = RN.UN.ListaPorCuitParaElUsuarioLogueado(Sesion);
             Sesion.ClientesDelCuit = RN.Cliente.ListaPorCuit(Sesion);
-            if (Sesion.UNsDelCuit.Count != 0)
+            if (Sesion.Cuit.UNs.Count != 0)
             {
                 if (Sesion.UN.Id == 0)
                 {
-                    AsignarUN(Sesion.UNsDelCuit[0], Sesion);
+                    AsignarUN(Sesion.Cuit.UNs[0], Sesion);
                 }
                 else
                 {
-                    List<Entidades.UN> estaLaUNEnLaLista = Sesion.UNsDelCuit.FindAll(delegate(Entidades.UN p) { return p.Id == Sesion.UN.Id; });
+                    List<Entidades.UN> estaLaUNEnLaLista = Sesion.Cuit.UNs.FindAll(delegate(Entidades.UN p) { return p.Id == Sesion.UN.Id; });
                     if (estaLaUNEnLaLista.Count != 1)
                     {
-                        AsignarUN(Sesion.UNsDelCuit[0], Sesion);
+                        AsignarUN(Sesion.Cuit.UNs[0], Sesion);
                     }
                 }
             }
@@ -162,19 +161,17 @@ namespace CedServicios.RN
         public static void AsignarUN(Entidades.UN UN, Entidades.Sesion Sesion)
         {
             Sesion.UN = UN;
-            Sesion.PuntosVtaDeLaUN = RN.PuntoVta.ListaPorUN(Sesion);
+            Sesion.UN.PuntosVta = RN.PuntoVta.ListaPorUN(Sesion);
         }
         public static void BorrarCuit(Entidades.Sesion Sesion)
         {
             Sesion.Cuit = new Entidades.Cuit();
-            Sesion.UNsDelCuit = new List<Entidades.UN>();
             Sesion.ClientesDelCuit = new List<Entidades.Cliente>();
             BorrarUN(Sesion);
         }
         public static void BorrarUN(Entidades.Sesion Sesion)
         {
             Sesion.UN = new Entidades.UN();
-            Sesion.PuntosVtaDeLaUN = new List<Entidades.PuntoVta>();
         }
     }
 }
