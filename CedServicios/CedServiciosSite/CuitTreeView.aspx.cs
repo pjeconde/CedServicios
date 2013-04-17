@@ -14,13 +14,16 @@ namespace CedServicios.Site
             if (!IsPostBack)
             {
                 string a = HttpContext.Current.Request.Url.Query.ToString();
+                string nivelAContraer = null;
                 switch (a.Replace("?", String.Empty))
                 {
                     case "Cuit":
                         TituloLabel.Text = "Consulta de CUIT(s)";
+                        nivelAContraer = "0";
                         break;
                     case "UN":
                         TituloLabel.Text = "Consulta de Unidad(es) de Negocio";
+                        nivelAContraer = "1";
                         break;
                     case "PuntoVta":
                         TituloLabel.Text = "Consulta de Punto(s) de Venta";
@@ -67,6 +70,23 @@ namespace CedServicios.Site
                 IdTipoPuntoVtaDropDownList.DataSource = RN.TipoPuntoVta.Lista(sesion);
                 IdMetodoGeneracionNumeracionLoteDropDownList.DataSource = RN.MetodoGeneracionNumeracionLote.Lista(sesion);
                 DataBind();
+                if (nivelAContraer != null)
+                {
+                    for (int i = 0; i < CuitsTreeView.Nodes.Count; i++)
+                    {
+                        if (nivelAContraer == "0")
+                        {
+                            CuitsTreeView.Nodes[i].Collapse();
+                        }
+                        else
+                        {
+                            for (int j = 0; j < CuitsTreeView.Nodes[i].ChildNodes.Count; j++)
+                            {
+                                CuitsTreeView.Nodes[i].ChildNodes[j].Collapse();
+                            }
+                        }
+                    }
+                }
                 ViewState["Sesion"] = sesion.Clone();
             }
         }

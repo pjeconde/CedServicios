@@ -90,7 +90,7 @@ namespace CedServicios.DB
             Hasta.NroSerieCertifAFIP = Convert.ToString(Desde["NroSerieCertifAFIP"]);
             Hasta.NroSerieCertifITF = Convert.ToString(Desde["NroSerieCertifITF"]);
         }
-        public void Crear(Entidades.Cuit Cuit, string PermisoAdminCUITParaUsuarioAprobadoHandler, string CrearUNHandler, string PermisoUsoCUITxUNAprobadoHandler, string PermisoAdminUNParaUsuarioAprobadoHandler)
+        public void Crear(Entidades.Cuit Cuit, string PermisoAdminCUITParaUsuarioAprobadoHandler, string CrearUNHandler, string PermisoUsoCUITxUNAprobadoHandler, string PermisoAdminUNParaUsuarioAprobadoHandler, string PermisoOperServUNParaUsuarioAprobadoHandler)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @idWF varchar(256) ");
@@ -134,6 +134,7 @@ namespace CedServicios.DB
             a.Append(CrearUNHandler);
             a.Append(PermisoUsoCUITxUNAprobadoHandler);
             a.Append(PermisoAdminUNParaUsuarioAprobadoHandler);
+            a.Append(PermisoOperServUNParaUsuarioAprobadoHandler);
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
         public void Modificar(Entidades.Cuit Desde, Entidades.Cuit Hasta)

@@ -35,9 +35,16 @@ namespace CedServicios.Site
         }
         protected void ContinuarButton_Click(object sender, EventArgs e)
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Session["PuntoVta"] = sesion.UN.PuntosVta[PuntoVtaDropDownList.SelectedIndex];
-            Response.Redirect("~/PuntoVtaModificar.aspx");
+            if (PuntoVtaDropDownList.SelectedValue == String.Empty)
+            {
+                MensajeLabel.Text = "No ha seleccionado ningún Punto de Venta";
+            }
+            else
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                Session["PuntoVta"] = sesion.UN.PuntosVta[PuntoVtaDropDownList.SelectedIndex];
+                Response.Redirect("~/PuntoVtaModificar.aspx");
+            }
         }
         protected void CancelarButton_Click(object sender, EventArgs e)
         {

@@ -59,6 +59,8 @@
   <ItemGroup>
     <Content Include="App_Themes\CedServicios\CedServicios.css" />
     <Content Include="CedeiraSF-Logo.gif" />
+    <Content Include="ClienteCrear.aspx" />
+    <Content Include="ClienteModificar.aspx" />
     <Content Include="Controles\Contacto.ascx" />
     <Content Include="Controles\ContactoConsulta.ascx" />
     <Content Include="Controles\DatosIdentificatorios.ascx" />
@@ -149,6 +151,20 @@
     </Compile>
     <Compile Include="CedServicios.Master.designer.cs">
       <DependentUpon>CedServicios.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteCrear.aspx.cs">
+      <DependentUpon>ClienteCrear.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteCrear.aspx.designer.cs">
+      <DependentUpon>ClienteCrear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteModificar.aspx.cs">
+      <DependentUpon>ClienteModificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteModificar.aspx.designer.cs">
+      <DependentUpon>ClienteModificar.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controles\Contacto.ascx.cs">
       <DependentUpon>Contacto.ascx</DependentUpon>

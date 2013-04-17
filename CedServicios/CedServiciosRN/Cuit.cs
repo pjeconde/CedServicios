@@ -34,9 +34,10 @@ namespace CedServicios.RN
             string crearUNHandler = dbUN.CrearHandler(uN);
             string permisoUsoCUITxUNAprobadoHandler = RN.Permiso.PermisoUsoCUITxUNAprobadoHandler(uN, Sesion);
             string permisoAdminUNParaUsuarioAprobadoHandler = RN.Permiso.PermisoAdminUNParaUsuarioAprobadoHandler(uN, Sesion);
+            string permisoOperServUNParaUsuarioAprobadoHandler = RN.Permiso.PermisoOperServUNParaUsuarioAprobadoHandler(uN, new Entidades.TipoPermiso("eFact"), new DateTime(2062, 12, 31), Sesion);
             DB.Cuit db = new DB.Cuit(Sesion);
             Cuit.WF.Estado = "Vigente";
-            db.Crear(Cuit, permisoAdminCUITParaUsuarioAprobadoHandler, crearUNHandler, permisoUsoCUITxUNAprobadoHandler, permisoAdminUNParaUsuarioAprobadoHandler);
+            db.Crear(Cuit, permisoAdminCUITParaUsuarioAprobadoHandler, crearUNHandler, permisoUsoCUITxUNAprobadoHandler, permisoAdminUNParaUsuarioAprobadoHandler, permisoOperServUNParaUsuarioAprobadoHandler);
         }
         public static void Modificar(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {
