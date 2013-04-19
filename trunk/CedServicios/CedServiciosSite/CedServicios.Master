@@ -49,7 +49,7 @@
             <tr>
                 <td style="text-align:left" class="Fuente">
                     <asp:ImageButton ID="EmpresaImageButton" runat="server" 
-                        ImageUrl="~/Imagenes/CedeiraSF-Logo.gif" TabIndex="99" onclick="EmpresaImageButton_Click" />
+                        ImageUrl="~/Imagenes/CedeiraSF-Logo.gif" onclick="EmpresaImageButton_Click" />
                 </td>
                 <td style="width:100%">
                 </td>

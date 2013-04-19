@@ -7,7 +7,7 @@
 		<asp:Label ID="Label11" runat="server" Text="Cond.IVA"></asp:Label>
 	</td>
 	<td align="left" style="padding-top:5px">
-		<asp:DropDownList ID="CondIVADropDownList" runat="server" TabIndex="16" Width="255px" DataValueField="Codigo" DataTextField="Descr">
+		<asp:DropDownList ID="CondIVADropDownList" runat="server" TabIndex="301" Width="255px" DataValueField="Codigo" DataTextField="Descr">
 		</asp:DropDownList>
 	</td>
 </tr>
@@ -20,7 +20,7 @@
 		<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="left">
-					<asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Codigo" DataTextField="Descr">
+					<asp:DropDownList ID="CondIngBrutosDropDownList" runat="server" TabIndex="302" Width="216px" DataValueField="Codigo" DataTextField="Descr">
 					</asp:DropDownList>
 				</td>
 	            <td align="right" style="padding-left:5px; padding-right:5px;">
@@ -36,7 +36,7 @@
 		            <asp:Label ID="Label20" runat="server" Text="Nro.Ing.Brutos"></asp:Label>
 	            </td>
 				<td>
-					<asp:TextBox ID="NroIngBrutosTextBox" runat="server" MaxLength="13" TabIndex="17"
+					<asp:TextBox ID="NroIngBrutosTextBox" runat="server" MaxLength="13" TabIndex="303"
 						ToolTip="Ingresar con el siguiente formato: 9999999-99" Width="80px"></asp:TextBox>
 				</td>
 			</tr>
@@ -52,7 +52,7 @@
         <asp:Label ID="Label22" runat="server" Text="Fecha de inicio de actividades"></asp:Label>
 	</td>
 	<td align="left" style="padding-top:5px">
-        <asp:TextBox ID="FechaInicioActividadesTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px"></asp:TextBox>
+        <asp:TextBox ID="FechaInicioActividadesTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px" TabIndex="304"></asp:TextBox>
         <cc1:CalendarExtender ID="CalendarExtender1" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
             TargetControlID="FechaInicioActividadesTextBox" Format="yyyyMMdd" PopupButtonID="ImageCalendarExtender1" >
         </cc1:CalendarExtender>

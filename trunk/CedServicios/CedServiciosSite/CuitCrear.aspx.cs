@@ -19,6 +19,7 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 MedioDropDownList.DataSource = RN.Medio.Lista(sesion);
                 DataBind();
+                CUITTextBox.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)

@@ -11,6 +11,10 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                CUITTextBox.Focus();
+            }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
