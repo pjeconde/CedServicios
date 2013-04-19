@@ -87,6 +87,15 @@ namespace CedServicios.Site
             mItem = new MenuItem("Clientes", "Clientes");
             menu.Items.Add(mItem);
             menu.Items[menu.Items.Count - 1].Selectable = false;
+            mItem = new MenuItem("Alta de Cliente", "Alta de Cliente");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Modificación de Cliente", "Modificación de Cliente");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Consulta de Clientes", "Consulta de Clientes");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
 
             mItem = new MenuItem("Artículos", "Artículos");
             menu.Items.Add(mItem);

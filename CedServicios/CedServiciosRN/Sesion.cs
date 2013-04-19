@@ -48,7 +48,9 @@ namespace CedServicios.RN
                 }
                 if (Sesion.Cuit.Nro != null)
                 {
-                    opcionesHabilitadas.Add("Clientes");
+                    opcionesHabilitadas.Add("Clientes/Alta de Cliente");
+                    opcionesHabilitadas.Add("Clientes/Modificación de Cliente");
+                    opcionesHabilitadas.Add("Clientes/Consulta de Clientes");
                     opcionesHabilitadas.Add("CUIT/Consulta de CUIT(s)");
                     opcionesHabilitadas.Add("Unidad de Negocio/Consulta de Unidad(es) de Negocio");
                     opcionesHabilitadas.Add("Puntos de Venta/Consulta de Punto(s) de Venta");

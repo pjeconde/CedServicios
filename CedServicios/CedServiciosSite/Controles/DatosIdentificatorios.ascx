@@ -10,7 +10,7 @@
 		<asp:Label ID="Label7" runat="server" Text="GLN"></asp:Label>
 	</td>
     <td align="left" style="padding-top:5px">
-		<asp:TextBox ID="GLNTextBox" runat="server" MaxLength="13" TabIndex="19"
+		<asp:TextBox ID="GLNTextBox" runat="server" MaxLength="13" TabIndex="401"
             ToolTip="(opcional) Código estándar para identificar locaciones o empresas (Global Location Number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres."
 			Width="100px"></asp:TextBox>
     </td>									
@@ -26,7 +26,7 @@
 		<asp:Label ID="Label21" runat="server" Text="Código interno"></asp:Label>
 	</td>
 	<td align="left" style="padding-top:5px">
-		<asp:TextBox ID="CodigoInternoTextBox" runat="server" MaxLength="20" TabIndex="20"
+		<asp:TextBox ID="CodigoInternoTextBox" runat="server" MaxLength="20" TabIndex="402"
 			ToolTip="(opcional) Código utilizado para identificar al vendedor dentro de la empresa / organización. (ej.: código de Cliente, Proveedor, etc.)"
 			Width="100px"></asp:TextBox>
 	</td>								

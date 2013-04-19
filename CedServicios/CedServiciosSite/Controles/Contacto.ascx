@@ -16,7 +16,7 @@
 		<asp:Label ID="Label8" runat="server" Text="Nombre Contacto"></asp:Label>
 	</td>
 	<td align="left" style="padding-top: 3px">
-		<asp:TextBox ID="NombreContactoTextBox" runat="server" MaxLength="25" TabIndex="12"
+		<asp:TextBox ID="NombreContactoTextBox" runat="server" MaxLength="25" TabIndex="201"
 			Width="400px"></asp:TextBox>
 	</td>
 </tr>
@@ -35,7 +35,7 @@
 		<asp:Label ID="Label9" runat="server" Text="Email Contacto"></asp:Label>
 	</td>
 	<td align="left" style="padding-top: 3px">
-		<asp:TextBox ID="EmailContactoTextBox" runat="server" MaxLength="60" TabIndex="13"
+		<asp:TextBox ID="EmailContactoTextBox" runat="server" MaxLength="60" TabIndex="202"
 			ToolTip="Muy importante! Todos los archivos XML serán enviados a esta casilla de correo. Verifique su correcto ingreso."
 			Width="400px"></asp:TextBox>
 	</td>
@@ -55,7 +55,7 @@
 		<asp:Label ID="Label10" runat="server" Text="Teléfono Contacto"></asp:Label>
 	</td>
 	<td align="left" style="padding-top: 3px">
-		<asp:TextBox ID="TelefonoContactoTextBox" runat="server" MaxLength="50" TabIndex="14"
+		<asp:TextBox ID="TelefonoContactoTextBox" runat="server" MaxLength="50" TabIndex="203"
 			Width="400px"></asp:TextBox>
 	</td>
 </tr>

@@ -62,6 +62,15 @@ namespace CedServicios.Site
                 case "Consulta de Punto(s) de Venta":
                     Response.Redirect("~/CuitTreeView.aspx?PuntoVta");
                     break;
+                case "Alta de Cliente":
+                    Response.Redirect("~/ClienteCrear.aspx");
+                    break;
+                case "Modificación de Cliente":
+                    Response.Redirect("~/ClienteSeleccionar.aspx?Modificar");
+                    break;
+                case "Consulta de Clientes":
+                    Response.Redirect("~/ClienteConsulta.aspx");
+                    break;
                 case "Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx?pendientes");
                     break;

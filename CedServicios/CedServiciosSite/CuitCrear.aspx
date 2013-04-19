@@ -38,7 +38,7 @@
                 <asp:Label ID="Label9" runat="server" Text="Razón Social"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="3" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="2" Width="300px"></asp:TextBox>
             </td>        
         </tr>
         <uc1:domicilio ID="Domicilio" runat="server"/>
@@ -50,7 +50,7 @@
 		        <asp:Label ID="Label18" runat="server" Text="¿ Cómo nos conoció ?"></asp:Label>
 	        </td>
 			<td align="left" style="padding-top:5px">
-				<asp:DropDownList ID="MedioDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Id" DataTextField="Descr">
+				<asp:DropDownList ID="MedioDropDownList" runat="server" TabIndex="501" Width="216px" DataValueField="Id" DataTextField="Descr">
 				</asp:DropDownList>
 			</td>
         </tr>
@@ -58,10 +58,10 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="4"
+                <asp:Button ID="AceptarButton" runat="server" TabIndex="502"
                     Text="Aceptar" onclick="AceptarButton_Click" />
                 <asp:Button ID="CancelarButton" runat="server" CausesValidation="false"
-                    TabIndex="5" Text="Cancelar" onclick="CancelarButton_Click" />
+                    TabIndex="503" Text="Cancelar" onclick="CancelarButton_Click" />
             </td>
         </tr>
         <tr>

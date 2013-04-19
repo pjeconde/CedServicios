@@ -29,6 +29,7 @@ namespace CedServicios.Site
                 UltNroLoteTextBox.Text = "0";
                 UsaDatosCuitCheckBox.Checked = true;
                 UsaDatosCuitCheckBox_CheckedChanged(UsaDatosCuitCheckBox, new EventArgs());
+                NroTextBox.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
