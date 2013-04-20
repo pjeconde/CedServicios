@@ -37,5 +37,11 @@ namespace CedServicios.RN
             DB.Cliente comprador = new DB.Cliente(Sesion);
             comprador.Leer(cliente);  
         }
+        public static void Crear(Entidades.Cliente Cliente, Entidades.Sesion Sesion)
+        {
+            DB.Cliente db = new DB.Cliente(Sesion);
+            Cliente.WF.Estado = "Vigente";
+            db.Crear(Cliente);
+        }
     }
 }

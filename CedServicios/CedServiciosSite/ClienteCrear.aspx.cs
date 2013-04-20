@@ -32,6 +32,9 @@ namespace CedServicios.Site
             try
             {
                 cliente.Cuit = CUITTextBox.Text;
+                cliente.Documento.Tipo.Id = TipoDocDropDownList.SelectedValue;
+                cliente.Documento.Tipo.Descr = TipoDocDropDownList.SelectedItem.Text;
+                cliente.Documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
                 cliente.RazonSocial = RazonSocialTextBox.Text;
                 cliente.Domicilio.Calle = Domicilio.Calle;
                 cliente.Domicilio.Nro = Domicilio.Nro;
@@ -55,18 +58,25 @@ namespace CedServicios.Site
                 cliente.DatosImpositivos.FechaInicioActividades = DatosImpositivos.FechaInicioActividades;
                 cliente.DatosIdentificatorios.GLN = DatosIdentificatorios.GLN;
                 cliente.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
-                //RN.Cuit.Crear(cliente, sesion);
+                cliente.IdCliente = IdClienteTextBox.Text;
+                cliente.EmailAvisoVisualizacion = EmailAvisoVisualizacionTextBox.Text;
+                cliente.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
+                RN.Cliente.Crear(cliente, sesion);
 
                 CUITTextBox.Enabled = false;
+                TipoDocDropDownList.Enabled = false;
+                NroDocTextBox.Enabled = false;
                 RazonSocialTextBox.Enabled = false;
                 Domicilio.Enabled = false;
                 Contacto.Enabled = false;
                 DatosImpositivos.Enabled = false;
                 DatosIdentificatorios.Enabled = false;
+                IdClienteTextBox.Enabled = false;
+                EmailAvisoVisualizacionTextBox.Enabled = false;
+                PasswordAvisoVisualizacionTextBox.Enabled = false;
                 AceptarButton.Enabled = false;
                 CancelarButton.Text = "Salir";
 
-                Funciones.PersonalizarControlesMaster(Master, true, sesion);
                 MensajeLabel.Text = "El Cliente fué creado satisfactoriamente";
             }
             catch (Exception ex)

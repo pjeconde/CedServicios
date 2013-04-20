@@ -84,5 +84,86 @@ namespace CedServicios.DB
                 Copiar(dt.Rows[0], cliente);
             }
         }
+        public void Crear(Entidades.Cliente Cliente)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("declare @idWF varchar(256) ");
+            a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
+            a.Append("Insert Cliente (Cuit, IdTipoDoc, NroDoc, IdCliente, RazonSocial, DescrTipoDoc, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, IdCondIVA, DescrCondIVA, NroIngBrutos, IdCondIngBrutos, DescrCondIngBrutos, FechaInicioActividades, GLN, CodigoInterno, EmailAvisoVisualizacion, PasswordAvisoVisualizacion, IdWF, Estado) values (");
+            a.Append("'" + Cliente.Cuit + "', ");
+            a.Append(Cliente.Documento.Tipo.Id + ", ");
+            a.Append(Cliente.Documento.Nro.ToString() + ", ");
+            a.Append("'" + Cliente.IdCliente + "', ");
+            a.Append("'" + Cliente.RazonSocial + "', ");
+            a.Append("'" + Cliente.Documento.Tipo.Descr + "', ");
+            a.Append("'" + Cliente.Domicilio.Calle + "', ");
+            a.Append("'" + Cliente.Domicilio.Nro + "', ");
+            a.Append("'" + Cliente.Domicilio.Piso + "', ");
+            a.Append("'" + Cliente.Domicilio.Depto + "', ");
+            a.Append("'" + Cliente.Domicilio.Sector + "', ");
+            a.Append("'" + Cliente.Domicilio.Torre + "', ");
+            a.Append("'" + Cliente.Domicilio.Manzana + "', ");
+            a.Append("'" + Cliente.Domicilio.Localidad + "', ");
+            a.Append("'" + Cliente.Domicilio.Provincia.Id + "', ");
+            a.Append("'" + Cliente.Domicilio.Provincia.Descr + "', ");
+            a.Append("'" + Cliente.Domicilio.CodPost + "', ");
+            a.Append("'" + Cliente.Contacto.Nombre + "', ");
+            a.Append("'" + Cliente.Contacto.Email + "', ");
+            a.Append("'" + Cliente.Contacto.Telefono + "', ");
+            a.Append("'" + Cliente.DatosImpositivos.IdCondIVA + "', ");
+            a.Append("'" + Cliente.DatosImpositivos.DescrCondIVA + "', ");
+            a.Append("'" + Cliente.DatosImpositivos.NroIngBrutos + "', ");
+            a.Append("'" + Cliente.DatosImpositivos.IdCondIngBrutos + "', ");
+            a.Append("'" + Cliente.DatosImpositivos.DescrCondIngBrutos + "', ");
+            a.Append("'" + Cliente.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd") + "', ");
+            a.Append(Cliente.DatosIdentificatorios.GLN.ToString() + ", ");
+            a.Append("'" + Cliente.DatosIdentificatorios.CodigoInterno + "', ");
+            a.Append("'" + Cliente.EmailAvisoVisualizacion + "', ");
+            a.Append("'" + Cliente.PasswordAvisoVisualizacion + "', ");
+            a.Append("@idWF, ");
+            a.Append("'" + Cliente.WF.Estado + "' ");
+            a.AppendLine(") ");
+            a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'Cliente', 'Alta', '" + Cliente.WF.Estado + "', '') ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
+        public void Modificar(Entidades.Cliente Desde, Entidades.Cliente Hasta)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Cliente set ");
+            a.Append("IdCliente='" + Hasta.IdCliente + "', ");
+            a.Append("RazonSocial='" + Hasta.RazonSocial + "', ");
+            a.Append("DescrTipoDoc='" + Hasta.Documento.Tipo.Descr + "', ");
+            a.Append("Calle='" + Hasta.Domicilio.Calle + "', ");
+            a.Append("Nro='" + Hasta.Domicilio.Nro + "', ");
+            a.Append("Piso='" + Hasta.Domicilio.Piso + "', ");
+            a.Append("Depto='" + Hasta.Domicilio.Depto + "', ");
+            a.Append("Sector='" + Hasta.Domicilio.Sector + "', ");
+            a.Append("Torre='" + Hasta.Domicilio.Torre + "', ");
+            a.Append("Manzana='" + Hasta.Domicilio.Manzana + "', ");
+            a.Append("Localidad='" + Hasta.Domicilio.Localidad + "', ");
+            a.Append("IdProvincia='" + Hasta.Domicilio.Provincia.Id + "', ");
+            a.Append("DescrProvincia='" + Hasta.Domicilio.Provincia.Descr + "', ");
+            a.Append("CodPost='" + Hasta.Domicilio.CodPost + "', ");
+            a.Append("NombreContacto='" + Hasta.Contacto.Nombre + "', ");
+            a.Append("EmailContacto='" + Hasta.Contacto.Email + "', ");
+            a.Append("TelefonoContacto='" + Hasta.Contacto.Telefono + "', ");
+            a.Append("IdCondIVA='" + Hasta.DatosImpositivos.IdCondIVA + "', ");
+            a.Append("DescrCondIVA='" + Hasta.DatosImpositivos.DescrCondIVA + "', ");
+            a.Append("NroIngBrutos='" + Hasta.DatosImpositivos.NroIngBrutos + "', ");
+            a.Append("IdCondIngBrutos='" + Hasta.DatosImpositivos.IdCondIngBrutos + "', ");
+            a.Append("DescrCondIngBrutos='" + Hasta.DatosImpositivos.DescrCondIngBrutos + "', ");
+            a.Append("FechaInicioActividades='" + Hasta.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd") + "', ");
+            a.Append("GLN=" + Hasta.DatosIdentificatorios.GLN.ToString() + ", ");
+            a.Append("CodigoInterno='" + Hasta.DatosIdentificatorios.CodigoInterno + "', ");
+            a.Append("EmailAvisoVisualizacion='" + Hasta.EmailAvisoVisualizacion + "', ");
+            a.Append("PasswordAvisoVisualizacion='" + Hasta.PasswordAvisoVisualizacion + "', ");
+            a.AppendLine("where Cuit='" + Hasta.Cuit + "' and IdTipoDoc=" + Hasta.Documento.Tipo.Id + " and NroDoc=" + Hasta.Documento.Nro.ToString() + " ");
+            a.AppendLine("insert Log values (" + Hasta.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Cliente', 'Modif', '" + Hasta.WF.Estado + "', '') ");
+            a.AppendLine("declare @idLog int ");
+            a.AppendLine("select @idLog=@@Identity ");
+            a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Desde', '')");
+            a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '')");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
     }
 }
