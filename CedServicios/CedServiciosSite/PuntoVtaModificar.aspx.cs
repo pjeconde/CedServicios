@@ -60,7 +60,7 @@ namespace CedServicios.Site
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             Entidades.PuntoVta puntoVtaDesde = (Entidades.PuntoVta)Session["PuntoVta"];
-            Entidades.PuntoVta puntoVtaHasta = (Entidades.PuntoVta)puntoVtaDesde.Clone();
+            Entidades.PuntoVta puntoVtaHasta = RN.PuntoVta.ObternerCopia(puntoVtaDesde);
             try
             {
                 puntoVtaHasta.Cuit = CUITTextBox.Text;

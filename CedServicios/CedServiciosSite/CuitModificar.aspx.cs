@@ -49,7 +49,7 @@ namespace CedServicios.Site
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.Cuit cuit = new Entidades.Cuit();
+            Entidades.Cuit cuit = RN.Cuit.ObtenerCopia((Entidades.Cuit)sesion.Cuit);
             try
             {
                 cuit.Nro = CUITTextBox.Text;
