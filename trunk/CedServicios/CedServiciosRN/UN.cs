@@ -45,5 +45,53 @@ namespace CedServicios.RN
             db.Modificar(Sesion.UN, UN);
             Sesion.UN = UN;
         }
+        public static Entidades.UN ObternerCopia(Entidades.UN Desde)
+        {
+            Entidades.UN hasta = new Entidades.UN();
+            hasta.Cuit = Desde.Cuit;
+            hasta.Descr = Desde.Descr;
+            hasta.Id = Desde.Id;
+            for (int j = 0; j < Desde.PuntosVta.Count; j++)
+            {
+                Entidades.PuntoVta puntoVta = new Entidades.PuntoVta();
+                puntoVta.Contacto.Nombre = Desde.PuntosVta[j].Contacto.Nombre;
+                puntoVta.Contacto.Telefono = Desde.PuntosVta[j].Contacto.Telefono;
+                puntoVta.Contacto.Email = Desde.PuntosVta[j].Contacto.Email;
+                puntoVta.Cuit = Desde.PuntosVta[j].Cuit;
+                puntoVta.DatosIdentificatorios.GLN = Desde.PuntosVta[j].DatosIdentificatorios.GLN;
+                puntoVta.DatosIdentificatorios.CodigoInterno = Desde.PuntosVta[j].DatosIdentificatorios.CodigoInterno;
+                puntoVta.DatosImpositivos.DescrCondIngBrutos = Desde.PuntosVta[j].DatosImpositivos.DescrCondIngBrutos;
+                puntoVta.DatosImpositivos.DescrCondIVA = Desde.PuntosVta[j].DatosImpositivos.DescrCondIVA;
+                puntoVta.DatosImpositivos.FechaInicioActividades = Desde.PuntosVta[j].DatosImpositivos.FechaInicioActividades;
+                puntoVta.DatosImpositivos.IdCondIngBrutos = Desde.PuntosVta[j].DatosImpositivos.IdCondIngBrutos;
+                puntoVta.DatosImpositivos.IdCondIVA = Desde.PuntosVta[j].DatosImpositivos.IdCondIVA;
+                puntoVta.DatosImpositivos.NroIngBrutos = Desde.PuntosVta[j].DatosImpositivos.NroIngBrutos;
+                puntoVta.Domicilio.Calle = Desde.PuntosVta[j].Domicilio.Calle;
+                puntoVta.Domicilio.CodPost = Desde.PuntosVta[j].Domicilio.CodPost;
+                puntoVta.Domicilio.Depto = Desde.PuntosVta[j].Domicilio.Depto;
+                puntoVta.Domicilio.Localidad = Desde.PuntosVta[j].Domicilio.Localidad;
+                puntoVta.Domicilio.Manzana = Desde.PuntosVta[j].Domicilio.Manzana;
+                puntoVta.Domicilio.Nro = Desde.PuntosVta[j].Domicilio.Nro;
+                puntoVta.Domicilio.Piso = Desde.PuntosVta[j].Domicilio.Piso;
+                puntoVta.Domicilio.Provincia.Id = Desde.PuntosVta[j].Domicilio.Provincia.Id;
+                puntoVta.Domicilio.Provincia.Descr = Desde.PuntosVta[j].Domicilio.Provincia.Descr;
+                puntoVta.Domicilio.Sector = Desde.PuntosVta[j].Domicilio.Sector;
+                puntoVta.Domicilio.Torre = Desde.PuntosVta[j].Domicilio.Torre;
+                puntoVta.IdMetodoGeneracionNumeracionLote = Desde.PuntosVta[j].IdMetodoGeneracionNumeracionLote;
+                puntoVta.IdTipoPuntoVta = Desde.PuntosVta[j].IdTipoPuntoVta;
+                puntoVta.IdUN = Desde.PuntosVta[j].IdUN;
+                puntoVta.Nro = Desde.PuntosVta[j].Nro;
+                puntoVta.UltActualiz = Desde.PuntosVta[j].UltActualiz;
+                puntoVta.UltNroLote = Desde.PuntosVta[j].UltNroLote;
+                puntoVta.UsaSetPropioDeDatosCuit = Desde.PuntosVta[j].UsaSetPropioDeDatosCuit;
+                puntoVta.WF.Id = Desde.PuntosVta[j].WF.Id;
+                puntoVta.WF.Estado = Desde.PuntosVta[j].WF.Estado;
+                hasta.PuntosVta.Add(puntoVta);
+            }
+            hasta.UltActualiz = Desde.UltActualiz;
+            hasta.WF.Id = Desde.WF.Id;
+            hasta.WF.Estado = Desde.WF.Estado;
+            return hasta;
+        }
     }
 }

@@ -27,7 +27,7 @@ namespace CedServicios.Site
             try
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                Entidades.UN un = new Entidades.UN();
+                Entidades.UN un = RN.UN.ObternerCopia(sesion.UN);
                 un.Cuit = CUITTextBox.Text;
                 un.Id = Convert.ToInt32(IdUNTextBox.Text);
                 un.Descr = DescrUNTextBox.Text;

@@ -6,7 +6,7 @@ using System.Text;
 namespace CedServicios.Entidades
 {
     [Serializable]
-    public class PuntoVta : ICloneable
+    public class PuntoVta
     {
         private string cuit;
         private int nro;
@@ -29,11 +29,6 @@ namespace CedServicios.Entidades
             datosImpositivos = new DatosImpositivos();
             datosIdentificatorios = new DatosIdentificatorios();
             wF = new WF();
-        }
-
-        public object Clone()
-        {
-            return this.MemberwiseClone();
         }
 
         public string Cuit
