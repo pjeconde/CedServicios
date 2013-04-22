@@ -16,7 +16,12 @@ namespace CedServicios.Site
                 try
                 {
                     string a = HttpContext.Current.Request.Url.Query.ToString().Replace("?", String.Empty);
-                    TituloPaginaLabel.Text = a + " de Punto de Venta";
+                    switch (a)
+                    {
+                        case "Modificar":
+                            TituloPaginaLabel.Text = "Modificación de Punto de Venta";
+                            break;
+                    }
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     IdUNDropDownList.DataSource = sesion.Cuit.UNs;
                     PuntoVtaDropDownList.DataSource = sesion.UN.PuntosVta;
