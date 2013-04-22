@@ -11,7 +11,123 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!IsPostBack)
+            {
+                try
+                {
+                    string a = HttpContext.Current.Request.Url.Query.ToString().Replace("?", String.Empty);
+                    switch (a)
+                    {
+                        case "Modificar":
+                            TituloPaginaLabel.Text = "Modificación de Cliente";
+                            break;
+                    }
+                    TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+                    DataBind();
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    CUITTextBox.Text = sesion.Cuit.Nro;
+                    CUITTextBox.Enabled = false;
+                    TipoDocDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
+                    RazonSocialRadioButton.Checked = true;
+                    TipoBusquedaRadioButton_CheckedChanged(RazonSocialRadioButton, new EventArgs());
+                    RazonSocialTextBox.Focus();
+                }
+                catch (Exception ex)
+                {
+                    MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                }
+            }
+        }
+        protected void BuscarButton_Click(object sender, EventArgs e)
+        {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
+            if (TipoDocRadioButton.Checked)
+            {
+                if (NroDocTextBox.Text.Equals(String.Empty))
+                {
+                    MensajeLabel.Text = TipoDocRadioButton.Text + " no informado";
+                }
+                else
+                {
+                    Entidades.Documento documento = new Entidades.Documento();
+                    documento.Tipo.Id = TipoDocDropDownList.SelectedValue.ToString();
+                    documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                    lista = RN.Cliente.ListaPorCuityTipoyNroDoc(sesion.Cuit.Nro, documento, sesion);
+                }
+            }
+            else if (RazonSocialRadioButton.Checked)
+            {
+                if (RazonSocialTextBox.Text.Equals(String.Empty))
+                {
+                    MensajeLabel.Text = RazonSocialRadioButton.Text + " no informado";
+                }
+                else
+                {
+                    lista = RN.Cliente.ListaPorCuityRazonSocial(sesion.Cuit.Nro, RazonSocialTextBox.Text, sesion);
+                }
+            }
+            else
+            {
+                if (IdClienteTextBox.Text.Equals(String.Empty))
+                {
+                    MensajeLabel.Text =  IdClienteRadioButton.Text + " no informado";
+                }
+                else
+                {
+                    lista = RN.Cliente.ListaPorCuityIdCliente(sesion.Cuit.Nro, IdClienteTextBox.Text, sesion);
+                }
+            }
+            if (lista.Count == 0)
+            {
+                MensajeLabel.Text = "No se ha encontrado el cliente buscado ";
+            }
+            else if (lista.Count == 1)
+            {
+                Session["Cliente"] = lista[0];
+                Response.Redirect("~/ClienteModificar.aspx");
+            }
+            else
+            {
+                //Llenar grilla
+            }
+        }
+        protected void CancelarButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/Default.aspx");
+        }
+        protected void TipoBusquedaRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            if (TipoDocRadioButton.Checked)
+            {
+                RazonSocialTextBox.Text = String.Empty;
+                IdClienteTextBox.Text = String.Empty;
 
+                TipoDocDropDownList.Visible = true;
+                NroDocTextBox.Visible = true;
+                RazonSocialTextBox.Visible = false;
+                IdClienteTextBox.Visible = false;
+            }
+            else if (RazonSocialRadioButton.Checked)
+            {
+                NroDocTextBox.Text = String.Empty;
+                IdClienteTextBox.Text = String.Empty;
+
+                TipoDocDropDownList.Visible = false;
+                NroDocTextBox.Visible = false;
+                RazonSocialTextBox.Visible = true;
+                IdClienteTextBox.Visible = false;
+            }
+            else
+            {
+                RazonSocialTextBox.Text = String.Empty;
+                NroDocTextBox.Text = String.Empty;
+
+                TipoDocDropDownList.Visible = false;
+                NroDocTextBox.Visible = false;
+                RazonSocialTextBox.Visible = false;
+                IdClienteTextBox.Visible = true;
+            }
         }
     }
 }

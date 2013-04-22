@@ -32,6 +32,21 @@ namespace CedServicios.RN
             });
             return lista;
         }
+        public static List<Entidades.Cliente> ListaPorCuityTipoyNroDoc(string Cuit, Entidades.Documento Documento, Entidades.Sesion Sesion)
+        {
+            DB.Cliente db = new DB.Cliente(Sesion);
+            return db.ListaPorCuityTipoyNroDoc(Cuit, Documento);
+        }
+        public static List<Entidades.Cliente> ListaPorCuityRazonSocial(string Cuit, string Razonsocial, Entidades.Sesion Sesion)
+        {
+            DB.Cliente db = new DB.Cliente(Sesion);
+            return db.ListaPorCuityRazonSocial(Cuit, Razonsocial);
+        }
+        public static List<Entidades.Cliente> ListaPorCuityIdCliente(string Cuit, string IdCliente, Entidades.Sesion Sesion)
+        {
+            DB.Cliente db = new DB.Cliente(Sesion);
+            return db.ListaPorCuityIdCliente(Cuit, IdCliente);
+        }
         public static void Leer(Entidades.Cliente cliente, Entidades.Sesion Sesion)
         {
             DB.Cliente comprador = new DB.Cliente(Sesion);
