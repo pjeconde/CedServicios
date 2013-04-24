@@ -206,7 +206,7 @@ CREATE TABLE [dbo].[PuntoVta](
 	[FechaInicioActividades] [datetime] NOT NULL,
 	[CodigoInterno] [varchar](20) NOT NULL,
 	[IdMetodoGeneracionNumeracionLote] [varchar](15) NOT NULL,
-	[UltNroLote] [int] NOT NULL,
+	[UltNroLote] [numeric](14, 0) NOT NULL,
 	[IdWF] [int] NOT NULL,
 	[Estado] [varchar](15) NOT NULL,
 	[UltActualiz] [timestamp] NOT NULL,
@@ -384,6 +384,7 @@ CREATE TABLE [dbo].[Cliente](
 	[IdTipoDoc] [numeric](2, 0) NOT NULL,
 	[NroDoc] [numeric](11, 0) NOT NULL,
 	[IdCliente] [varchar](50) NOT NULL,
+	[DesambiguacionCuitPais] [int] NOT NULL,
 	[RazonSocial] [varchar](50) NOT NULL,
 	[DescrTipoDoc] [varchar](50) NOT NULL,
 	[Calle] [varchar](30) NOT NULL,
@@ -418,7 +419,8 @@ CREATE TABLE [dbo].[Cliente](
 	[Cuit] ASC, 
 	[IdTipoDoc] ASC, 
 	[NroDoc] ASC, 
-	[IdCliente] ASC 
+	[IdCliente] ASC,  
+	[DesambiguacionCuitPais] ASC 
 )WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
