@@ -163,5 +163,28 @@ namespace CedServicios.Entidades
                 return ultActualiz;
             }
         }
+        #region Propiedades redundantes
+        public string DocumentoTipoDescr
+        {
+            get
+            {
+                return documento.Tipo.Descr;
+            }
+        }
+        public long DocumentoNro
+        {
+            get
+            {
+                return documento.Nro;
+            }
+        }
+        public string Estado
+        {
+            get
+            {
+                return wF.Estado;
+            }
+        }
+        #endregion
     }
 }

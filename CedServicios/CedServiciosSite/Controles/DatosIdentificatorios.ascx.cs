@@ -17,11 +17,25 @@ namespace CedServicios.Site.Controles
         {
             get
             {
-                return Convert.ToInt64(GLNTextBox.Text);
+                if (GLNTextBox.Text.Equals(String.Empty))
+                {
+                    return Convert.ToInt64(0);
+                }
+                else
+                {
+                    return Convert.ToInt64(GLNTextBox.Text);
+                }
             }
             set
             {
-                GLNTextBox.Text = value.ToString();
+                if (value == 0)
+                {
+                    GLNTextBox.Text = String.Empty;
+                }
+                else
+                {
+                    GLNTextBox.Text = value.ToString();
+                }
                 GLNTextBox.DataBind();
             }
         }

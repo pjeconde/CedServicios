@@ -156,7 +156,7 @@ namespace CedServicios.DB
             a.Append("GLN=" + Hasta.DatosIdentificatorios.GLN.ToString() + ", ");
             a.Append("CodigoInterno='" + Hasta.DatosIdentificatorios.CodigoInterno + "', ");
             a.Append("EmailAvisoVisualizacion='" + Hasta.EmailAvisoVisualizacion + "', ");
-            a.Append("PasswordAvisoVisualizacion='" + Hasta.PasswordAvisoVisualizacion + "', ");
+            a.Append("PasswordAvisoVisualizacion='" + Hasta.PasswordAvisoVisualizacion + "' ");
             a.AppendLine("where Cuit='" + Hasta.Cuit + "' and IdTipoDoc=" + Hasta.Documento.Tipo.Id + " and NroDoc=" + Hasta.Documento.Nro.ToString() + " ");
             a.AppendLine("insert Log values (" + Hasta.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Cliente', 'Modif', '" + Hasta.WF.Estado + "', '') ");
             a.AppendLine("declare @idLog int ");

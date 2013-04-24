@@ -8,16 +8,18 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
         <tr>
-            <td align="center" colspan="2" style="padding-top:20px">
+            <td align="center" colspan="3" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="? de Cliente"></asp:Label>
             </td>
         </tr>
         <tr>
             <td align="right" style="padding-right:5px; padding-top: 20px">
-                <asp:Label ID="Label3" runat="server" Text="Cliente perteneciente al CUIT"></asp:Label>
+                <asp:Label ID="Label3" runat="server" Text="Cliente(s) perteneciente(s) al CUIT"></asp:Label>
             </td>
             <td align="left" style="padding-top:20px">
                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+            </td>
+            <td style="width:500px">
             </td>
         </tr>
         <tr>
@@ -28,6 +30,8 @@
 				<asp:DropDownList ID="TipoDocDropDownList" runat="server" TabIndex="2" Width="216px" DataValueField="Codigo" DataTextField="Descr"></asp:DropDownList>
                 <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
 			</td>
+            <td>
+            </td>
         </tr>
         <tr>
             <td align="left" style="padding-right:5px; padding-top:5px">
@@ -36,6 +40,8 @@
             <td align="left" style="padding-top:5px">
                 <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="4" Width="300px"></asp:TextBox>
             </td>        
+            <td>
+            </td>
         </tr>
         <tr>
             <td align="left" style="padding-right:5px; padding-top:5px">
@@ -44,6 +50,8 @@
             <td align="left" style="padding-top:5px">
                 <asp:TextBox ID="IdClienteTextBox" runat="server" MaxLength="50" TabIndex="501" Width="300px"></asp:TextBox>
             </td>        
+            <td>
+            </td>
         </tr>
         <tr>
             <td>
@@ -52,9 +60,56 @@
                 <asp:Button ID="BuscarButton" runat="server" TabIndex="504" Text="Buscar" onclick="BuscarButton_Click" />
                 <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" TabIndex="505" Text="Cancelar" onclick="CancelarButton_Click" />
             </td>
+            <td>
+            </td>
         </tr>
         <tr>
-            <td align="center" colspan="2" style="padding-top:20px">
+            <td style="padding-top:20px;" colspan="3">
+                <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
+                    <asp:GridView ID="ClientesGridView" runat="server" 
+                        AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand">
+                        <Columns>
+                            <asp:ButtonField HeaderText="" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Button">
+                            </asp:ButtonField>
+                            <asp:BoundField DataField="Cuit" HeaderText="Cuit" SortExpression="Cuit" Visible="false">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="DocumentoTipoDescr" HeaderText="Tipo Doc." SortExpression="DocumentoTipoDescr">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="DocumentoNro" HeaderText="Nro.Doc." SortExpression="DocumentoNro">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="RazonSocial" HeaderText="Razon Social" SortExpression="RazonSocial">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="IdCliente" HeaderText="Id.Cliente" SortExpression="IdCliente">
+                                <headerstyle horizontalalign="left" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="EmailAvisoVisualizacion" HeaderText="Email Aviso Visualizacion" SortExpression="EmailAvisoVisualizacion">
+                                <headerstyle horizontalalign="left" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="PasswordAvisoVisualizacion" HeaderText="Password Aviso Visualizacion" SortExpression="PasswordAvisoVisualizacion">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                        </Columns>
+                    </asp:GridView>
+                </asp:Panel>
+            </td>
+        </tr>
+        <tr>
+            <td align="center" colspan="3" style="padding-top:20px">
                 <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                 <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary"></asp:ValidationSummary>
             </td>
