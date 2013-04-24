@@ -11,6 +11,7 @@ namespace CedServicios.Entidades
         private string cuit;
         private Documento documento;
         private string idCliente;
+        private int desambiguacionCuitPais;
         private string razonSocial;
         private Domicilio domicilio;
         private Contacto contacto;
@@ -62,6 +63,17 @@ namespace CedServicios.Entidades
             get
             {
                 return idCliente;
+            }
+        }
+        public int DesambiguacionCuitPais
+        {
+            set
+            {
+                desambiguacionCuitPais = value;
+            }
+            get
+            {
+                return desambiguacionCuitPais;
             }
         }
         public string RazonSocial

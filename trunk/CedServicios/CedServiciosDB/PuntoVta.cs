@@ -150,5 +150,26 @@ namespace CedServicios.DB
             a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '" + Funciones.ObjetoSerializadoParaSQL(Hasta) + "')");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void GenerarNuevoNroLote(Entidades.PuntoVta PuntoVta)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("declare @UltNroLote numeric(14) ");
+            switch (PuntoVta.IdMetodoGeneracionNumeracionLote)
+            {
+                case "Autonumerador":
+                    a.Append("update PuntoVta set @UltNroLote=UltNroLote=UltNroLote+1 ");
+                    break;
+                case "TimeStamp":
+                    //se arma de la siguiente manera: "dias transcurridos desde el 31/12/2012" & "HHMMSSMMM"
+                    a.Append("update PuntoVta set @UltNroLote=UltNroLote=convert(numeric(14), convert(varchar, datediff(d, CONVERT(Datetime, '20121231', 112), CONVERT(Datetime, convert(varchar, getdate(), 112), 112))) + replace(convert(varchar, getdate(), 114), ':', '')) ");
+                    break;
+                default:
+                    throw new EX.Validaciones.ValorInvalido("IdMetodoGeneracionNumeracionLote='" + PuntoVta.IdMetodoGeneracionNumeracionLote + "'");
+            }
+            a.Append("where PuntoVta.Cuit='" + PuntoVta.Cuit + "' and PuntoVta.NroPuntoVta='" + PuntoVta.Nro + "' ");
+            a.Append("select @UltNroLote as UltNroLote ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            PuntoVta.UltNroLote = Convert.ToInt64(dt.Rows[0]["UltNroLote"]);
+        }
     }
 }

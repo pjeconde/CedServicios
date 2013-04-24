@@ -9,7 +9,7 @@ namespace FeaEntidades.Documentos.CI
 		public SantiagoDelEstero()
 		{
 			Codigo = 13;
-			Descr = "CI Santiago del Estero";
+			Descr = "CI Sgo.del Estero";
 		}
 	}
 }

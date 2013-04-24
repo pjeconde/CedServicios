@@ -14,6 +14,7 @@ namespace CedServicios.Site
             if (!IsPostBack)
             {
                 TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+                DestinosCuitDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.Lista();
                 Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
                 DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                 DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
@@ -22,6 +23,7 @@ namespace CedServicios.Site
                 CUITTextBox.Text = sesion.Cuit.Nro;
                 CUITTextBox.Enabled = false;
                 TipoDocDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
+                DestinosCuitDropDownList.SelectedValue = new FeaEntidades.DestinosCuit.BrasilPersonaJuridica().Codigo.ToString();
                 NroDocTextBox.Focus();
             }
         }
@@ -34,7 +36,14 @@ namespace CedServicios.Site
                 cliente.Cuit = CUITTextBox.Text;
                 cliente.Documento.Tipo.Id = TipoDocDropDownList.SelectedValue;
                 cliente.Documento.Tipo.Descr = TipoDocDropDownList.SelectedItem.Text;
-                cliente.Documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                if (TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
+                {
+                    cliente.Documento.Nro = Convert.ToInt64(DestinosCuitDropDownList.SelectedItem.Value);
+                }
+                else
+                {
+                    cliente.Documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                }
                 cliente.RazonSocial = RazonSocialTextBox.Text;
                 cliente.Domicilio.Calle = Domicilio.Calle;
                 cliente.Domicilio.Nro = Domicilio.Nro;
@@ -88,6 +97,19 @@ namespace CedServicios.Site
         protected void CancelarButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Default.aspx");
+        }
+        protected void TipoDocDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
+            {
+                NroDocTextBox.Visible = false;
+                DestinosCuitDropDownList.Visible = true;
+            }
+            else
+            {
+                NroDocTextBox.Visible = true;
+                DestinosCuitDropDownList.Visible = false;
+            }
         }
     }
 }

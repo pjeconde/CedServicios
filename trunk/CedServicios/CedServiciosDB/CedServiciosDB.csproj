@@ -67,6 +67,10 @@
       <Project>{3329DE15-00C6-4917-9FEE-F96DC14D5D3F}</Project>
       <Name>CedServiciosEX</Name>
     </ProjectReference>
+    <ProjectReference Include="..\FeaEntidades\FeaEntidades.csproj">
+      <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
+      <Name>FeaEntidades</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
