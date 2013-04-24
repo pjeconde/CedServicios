@@ -41,8 +41,12 @@
 		        <asp:Label ID="Label18" runat="server" Text="Tipo y Nro. de Documento"></asp:Label>
 	        </td>
 			<td align="left" style="padding-top:5px">
-				<asp:DropDownList ID="TipoDocDropDownList" runat="server" TabIndex="2" Width="216px" DataValueField="Codigo" DataTextField="Descr"></asp:DropDownList>
-                <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+				<asp:DropDownList ID="TipoDocDropDownList" runat="server" TabIndex="2" 
+                    Width="100px" DataValueField="Codigo" DataTextField="Descr" 
+                    ToolTip="Para clientes del exterior seleccione 'CUITPais'" AutoPostBack="true"
+                    onselectedindexchanged="TipoDocDropDownList_SelectedIndexChanged" ></asp:DropDownList>
+                <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="80px" ></asp:TextBox>
+                <asp:DropDownList ID="DestinosCuitDropDownList" runat="server" TabIndex="3" Width="306px" DataValueField="Codigo" DataTextField="Descr" Visible="false" ></asp:DropDownList>
 			</td>
         </tr>
         <tr>

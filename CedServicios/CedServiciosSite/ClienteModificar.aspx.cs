@@ -25,7 +25,15 @@ namespace CedServicios.Site
 
                 CUITTextBox.Text = cliente.Cuit;
                 TipoDocDropDownList.SelectedValue = cliente.Documento.Tipo.Id;
-                NroDocTextBox.Text = cliente.Documento.Nro.ToString();
+                TipoDocDropDownList_SelectedIndexChanged(TipoDocDropDownList, new EventArgs());
+                if (TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
+                {
+                    DestinosCuitDropDownList.SelectedValue = cliente.Documento.Nro.ToString();
+                }
+                else
+                {
+                    NroDocTextBox.Text = cliente.Documento.Nro.ToString();
+                }
                 RazonSocialTextBox.Text = cliente.RazonSocial;
                 Domicilio.Calle = cliente.Domicilio.Calle;
                 Domicilio.Nro = cliente.Domicilio.Nro;
@@ -120,6 +128,19 @@ namespace CedServicios.Site
         protected void CancelarButton_Click(object sender, EventArgs e)
         {
             Response.Redirect("~/Default.aspx");
+        }
+        protected void TipoDocDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
+            {
+                NroDocTextBox.Visible = false;
+                DestinosCuitDropDownList.Visible = true;
+            }
+            else
+            {
+                NroDocTextBox.Visible = true;
+                DestinosCuitDropDownList.Visible = false;
+            }
         }
     }
 }

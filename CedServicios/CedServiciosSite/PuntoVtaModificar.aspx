@@ -70,8 +70,8 @@
                 <asp:Label ID="Label3" runat="server" Text="Último nro. de lote"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="UltNroLoteTextBox" runat="server" MaxLength="10" TabIndex="3" ToolTip="Debe ingresar sólo números."
-                    Width="40px"></asp:TextBox>
+                <asp:TextBox ID="UltNroLoteTextBox" runat="server" MaxLength="14" TabIndex="3" ToolTip="Debe ingresar sólo números."
+                    Width="120px"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -97,6 +97,8 @@
                     Text="Aceptar" onclick="AceptarButton_Click" />
                 <asp:Button ID="CancelarButton" runat="server" CausesValidation="false"
                     TabIndex="5" Text="Cancelar" onclick="CancelarButton_Click" />
+                <asp:Button ID="UltNroLoteButton" runat="server" CausesValidation="false"
+                    TabIndex="5" Text="Generar proximo nro.lote" onclick="UltNroLoteButton_Click" />
             </td>
         </tr>
         <tr>

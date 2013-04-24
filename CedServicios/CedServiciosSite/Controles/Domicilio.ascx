@@ -130,10 +130,6 @@
 						ValidationExpression="[A-Za-z\- ,.0-9]*">
 						<asp:Label ID="Label37" runat="server" SkinID="IndicadorValidacion"></asp:Label>
 					</asp:RegularExpressionValidator>
-					<asp:RequiredFieldValidator ID="RequiredFieldValidator6" runat="server" ControlToValidate="CodPostTextBox"
-						ErrorMessage="Codigo Postal" SetFocusOnError="True">
-						<asp:Label ID="Label38" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-					</asp:RequiredFieldValidator>
 					<asp:Label ID="Label6" runat="server" Text="Código Postal"></asp:Label>
 				</td>
 				<td align="left">

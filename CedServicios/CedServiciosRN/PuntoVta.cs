@@ -60,5 +60,10 @@ namespace CedServicios.RN
             hasta.WF.Estado = Desde.WF.Estado;
             return hasta;
         }
+        public static void GenerarNuevoNroLote(Entidades.PuntoVta PuntoVta, Entidades.Sesion Sesion)
+        {
+            DB.PuntoVta db = new DB.PuntoVta(Sesion);
+            db.GenerarNuevoNroLote(PuntoVta);
+        }
     }
 }
