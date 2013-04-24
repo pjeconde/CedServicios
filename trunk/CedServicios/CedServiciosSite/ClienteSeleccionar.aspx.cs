@@ -42,6 +42,7 @@ namespace CedServicios.Site
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
+            MensajeLabel.Text = String.Empty;
             if (TipoDocRadioButton.Checked)
             {
                 if (NroDocTextBox.Text.Equals(String.Empty))
@@ -80,7 +81,9 @@ namespace CedServicios.Site
             }
             if (lista.Count == 0)
             {
-                MensajeLabel.Text = "No se ha encontrado el cliente buscado ";
+                ClientesGridView.DataSource = null;
+                ClientesGridView.DataBind();
+                MensajeLabel.Text = "No se han encontrado clientes que satisfagan la busqueda";
             }
             else if (lista.Count == 1)
             {
@@ -89,7 +92,9 @@ namespace CedServicios.Site
             }
             else
             {
-                //Llenar grilla
+                ClientesGridView.DataSource = lista;
+                ViewState["Clientes"] = lista;
+                ClientesGridView.DataBind();
             }
         }
         protected void CancelarButton_Click(object sender, EventArgs e)
@@ -98,6 +103,9 @@ namespace CedServicios.Site
         }
         protected void TipoBusquedaRadioButton_CheckedChanged(object sender, EventArgs e)
         {
+            ClientesGridView.DataSource = null;
+            ClientesGridView.DataBind();
+            MensajeLabel.Text = String.Empty;
             if (TipoDocRadioButton.Checked)
             {
                 RazonSocialTextBox.Text = String.Empty;
@@ -127,6 +135,19 @@ namespace CedServicios.Site
                 NroDocTextBox.Visible = false;
                 RazonSocialTextBox.Visible = false;
                 IdClienteTextBox.Visible = true;
+            }
+        }
+        protected void ClientesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int item = Convert.ToInt32(e.CommandArgument);
+            List<Entidades.Cliente> lista = (List<Entidades.Cliente>)ViewState["Clientes"];
+            Entidades.Cliente cliente = lista[item];
+            switch (e.CommandName)
+            {
+                case "Seleccionar":
+                    Session["Cliente"] = cliente;
+                    Response.Redirect("~/ClienteModificar.aspx");
+                    break;
             }
         }
     }

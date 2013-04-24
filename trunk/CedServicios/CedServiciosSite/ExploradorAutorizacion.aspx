@@ -10,7 +10,7 @@
             </td>
         </tr>
         <tr>
-            <td style="padding-top:20px; padding-left:10px">
+            <td style="padding-top:20px">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                     <asp:GridView ID="AutorizacionesGridView" runat="server" 
                         AutoGenerateColumns="false" onrowcommand="AutorizacionesGridView_RowCommand">

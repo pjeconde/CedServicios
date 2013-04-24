@@ -36,17 +36,17 @@ namespace CedServicios.Site
         private void ActualizarGrilla()
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            List<Entidades.Permiso> permiso = new List<Entidades.Permiso>();
+            List<Entidades.Permiso> permisos = new List<Entidades.Permiso>();
             if (pendientes)
             {
-                permiso = RN.Permiso.LeerListaPermisosPteAutoriz(sesion.Usuario, sesion);
+                permisos = RN.Permiso.LeerListaPermisosPteAutoriz(sesion.Usuario, sesion);
             }
             else
             {
             }
-            AutorizacionesGridView.DataSource = permiso;
+            AutorizacionesGridView.DataSource = permisos;
             AutorizacionesGridView.DataBind();
-            if (permiso.Count == 0)
+            if (permisos.Count == 0)
             {
                 MensajeLabel.Text = "No hay autorizaciones";
                 if (pendientes) MensajeLabel.Text += " pendientes";
