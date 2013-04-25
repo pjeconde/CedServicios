@@ -18,7 +18,7 @@
 	</td>
 	<td align="left" style="padding-top: 3px">
 		<asp:TextBox ID="EmailContactoTextBox" runat="server" MaxLength="60" TabIndex="13"
-			ToolTip="Muy importante! Todos los archivos XML serán enviados a esta casilla de correo. Verifique su correcto ingreso."
+			ToolTip="Muy importante! Los mails serán enviados a esta casilla de correo. Verifique su correcto ingreso."
 			Width="400px"></asp:TextBox>
 	</td>
 </tr>

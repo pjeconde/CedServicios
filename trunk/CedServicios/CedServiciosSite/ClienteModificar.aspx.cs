@@ -16,6 +16,7 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
 
                 TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+                DestinosCuitDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.Lista();
                 Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
                 DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                 DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
@@ -60,6 +61,7 @@ namespace CedServicios.Site
                 CUITTextBox.Enabled = false;
                 TipoDocDropDownList.Enabled = false;
                 NroDocTextBox.Enabled = false;
+                DestinosCuitDropDownList.Enabled = false;
                 RazonSocialTextBox.Focus();
             }
         }
@@ -70,11 +72,17 @@ namespace CedServicios.Site
             Entidades.Cliente clienteHasta = RN.Cliente.ObternerCopia(clienteDesde);
             try
             {
-
                 clienteHasta.Cuit = CUITTextBox.Text;
                 clienteHasta.Documento.Tipo.Id = TipoDocDropDownList.SelectedValue;
                 clienteHasta.Documento.Tipo.Descr = TipoDocDropDownList.SelectedItem.Text;
-                clienteHasta.Documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                if (TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
+                {
+                    clienteHasta.Documento.Nro = Convert.ToInt64(DestinosCuitDropDownList.SelectedItem.Value);
+                }
+                else
+                {
+                    clienteHasta.Documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                } 
                 clienteHasta.RazonSocial = RazonSocialTextBox.Text;
                 clienteHasta.Domicilio.Calle = Domicilio.Calle;
                 clienteHasta.Domicilio.Nro = Domicilio.Nro;
@@ -106,6 +114,7 @@ namespace CedServicios.Site
                 CUITTextBox.Enabled = false;
                 TipoDocDropDownList.Enabled = false;
                 NroDocTextBox.Enabled = false;
+                DestinosCuitDropDownList.Enabled = false;
                 RazonSocialTextBox.Enabled = false;
                 Domicilio.Enabled = false;
                 Contacto.Enabled = false;

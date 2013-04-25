@@ -27,7 +27,7 @@
 	</td>
 	<td align="left" style="padding-top:5px">
 		<asp:TextBox ID="CodigoInternoTextBox" runat="server" MaxLength="20" TabIndex="402"
-			ToolTip="(opcional) Código utilizado para identificar al vendedor dentro de la empresa / organización. (ej.: código de Cliente, Proveedor, etc.)"
+			ToolTip="(opcional) Código utilizado para identificar a la persona dentro de la empresa / organización. (ej.: código de Cliente, Proveedor, etc.)"
 			Width="100px"></asp:TextBox>
 	</td>								
 </tr>
