@@ -74,20 +74,49 @@
             </td>        
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top:5px">
-                <asp:Label ID="Label11" runat="server" Text="Email Aviso Visualizacion"></asp:Label>
+            <td align="right" style="padding-right:5px; padding-top:3px;">
+                <asp:Label ID="Label38" runat="server" Text="Envío de <b>aviso</b> automático"></asp:Label><br />
+                <asp:Label ID="Label46" runat="server" Text="<b>para visualización</b> del comprobante"></asp:Label>
             </td>
-            <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" MaxLength="128" TabIndex="502" Width="300px"></asp:TextBox>
-            </td>        
-        </tr>
-        <tr>
-            <td align="right" style="padding-right:5px; padding-top:5px">
-                <asp:Label ID="Label13" runat="server" Text="Password Aviso Visualizacion"></asp:Label>
+            <td style="border-style:solid; border-color:Gray; border-width:1px">
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="right" style="padding-right:5px; padding-top:3px">
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator18" runat="server"
+                                ControlToValidate="EmailAvisoVisualizacionTextBox" ErrorMessage="Email aviso automático para visualización" SetFocusOnError="True"
+                                ValidationExpression="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
+                                <asp:Label ID="Label44" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                            </asp:RegularExpressionValidator>
+                            <asp:Label ID="Label45" runat="server" Text="Email"></asp:Label>
+                        </td>
+                        <td align="left" style="padding-top:3px">
+                            <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" MaxLength="60" TabIndex="502"
+                                ToolTip="A esta dirección se enviará un email de aviso para que el destinatario pueda visualizar el comprobante"
+                                Width="315px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-left:5px; padding-right:5px; padding-top:3px">
+                            <asp:RegularExpressionValidator ID="RegularExpressionValidator14" runat="server"
+                                ControlToValidate="PasswordAvisoVisualizacionTextBox" ErrorMessage="Contraseña aviso automático para visualización" SetFocusOnError="True"
+                                ValidationExpression="[A-Za-z\- ,.0-9]*">
+                                <asp:Label ID="Label40" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                            </asp:RegularExpressionValidator>
+                            <asp:Label ID="Label42" runat="server" Text="Contraseña"></asp:Label>
+                        </td>
+                        <td align="left" style="padding-top:3px">
+                            <asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" MaxLength="25" TabIndex="503"
+                                ToolTip="Para poder acceder al contenido del comprobante, se solicitará al destinatario el ingreso de esta contraseña"
+                                Width="100px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="justify" style="padding-left:5px; padding-right:5px; padding-top:5px; font-size:xx-small" colspan="2">
+                            Interfacturas enviará, a última hora del día, un aviso (con un link) para que su destinatario<BR/>pueda visualizar el comprobante electrónico generado.  Esta funcionalidad puede ser usada,<BR/>por ejemplo, cuando, por cuestiones de seguridad, no se quiera enviar facturas por email.
+                        </td>
+                    </tr>
+                </table>
             </td>
-            <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" MaxLength="50" TabIndex="503" Width="300px"></asp:TextBox>
-            </td>        
         </tr>
         <tr>
             <td>

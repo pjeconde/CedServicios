@@ -17,38 +17,38 @@
                 <asp:Label ID="Label3" runat="server" Text="Cliente(s) perteneciente(s) al CUIT"></asp:Label>
             </td>
             <td align="left" style="padding-top:20px">
-                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
             </td>
             <td style="width:500px">
             </td>
         </tr>
         <tr>
 	        <td align="left" style="padding-right:5px; padding-top:20px">
-                <asp:RadioButton ID="TipoDocRadioButton" runat="server" AutoPostBack="true" Text="Tipo y Nro. de Documento" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged"/>
+                <asp:RadioButton ID="TipoDocRadioButton" runat="server" AutoPostBack="true" Text="Tipo y Nro. de Documento" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="1" />
 	        </td>
 			<td align="left" style="padding-top:20px">
-				<asp:DropDownList ID="TipoDocDropDownList" runat="server" TabIndex="2" Width="216px" DataValueField="Codigo" DataTextField="Descr"></asp:DropDownList>
-                <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+				<asp:DropDownList ID="TipoDocDropDownList" runat="server" TabIndex="4" Width="216px" DataValueField="Codigo" DataTextField="Descr"></asp:DropDownList>
+                <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="5" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
 			</td>
             <td>
             </td>
         </tr>
         <tr>
             <td align="left" style="padding-right:5px; padding-top:5px">
-                <asp:RadioButton ID="RazonSocialRadioButton" runat="server" AutoPostBack="true" Text="Razón Social" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged"/>
+                <asp:RadioButton ID="RazonSocialRadioButton" runat="server" AutoPostBack="true" Text="Razón Social" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="2"/>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="4" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="6" Width="300px"></asp:TextBox>
             </td>        
             <td>
             </td>
         </tr>
         <tr>
             <td align="left" style="padding-right:5px; padding-top:5px">
-                <asp:RadioButton ID="IdClienteRadioButton" runat="server" AutoPostBack="true" Text="Id.Cliente" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged"/>
+                <asp:RadioButton ID="IdClienteRadioButton" runat="server" AutoPostBack="true" Text="Id.Cliente" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="3"/>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="IdClienteTextBox" runat="server" MaxLength="50" TabIndex="501" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="IdClienteTextBox" runat="server" MaxLength="50" TabIndex="7" Width="300px"></asp:TextBox>
             </td>        
             <td>
             </td>
@@ -57,8 +57,8 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="BuscarButton" runat="server" TabIndex="504" Text="Buscar" onclick="BuscarButton_Click" />
-                <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" TabIndex="505" Text="Cancelar" onclick="CancelarButton_Click" />
+                <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
+                <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="CancelarButton_Click" />
             </td>
             <td>
             </td>

@@ -90,7 +90,15 @@ namespace CedServicios.DB
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @idWF varchar(256) ");
             a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
-            a.Append("Insert Cliente (Cuit, IdTipoDoc, NroDoc, IdCliente, DesambiguacionCuitPais, RazonSocial, DescrTipoDoc, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, IdCondIVA, DescrCondIVA, NroIngBrutos, IdCondIngBrutos, DescrCondIngBrutos, FechaInicioActividades, GLN, CodigoInterno, EmailAvisoVisualizacion, PasswordAvisoVisualizacion, IdWF, Estado) values (");
+            a.Append("Insert Cliente (Cuit, IdTipoDoc, NroDoc, IdCliente, DesambiguacionCuitPais, RazonSocial, DescrTipoDoc, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, IdCondIVA, DescrCondIVA, NroIngBrutos, IdCondIngBrutos, DescrCondIngBrutos, FechaInicioActividades, GLN, CodigoInterno, EmailAvisoVisualizacion, PasswordAvisoVisualizacion, IdWF, Estado) ");
+            if (Cliente.Documento.Tipo.Id.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
+            {
+                a.Append("select ");
+            }
+            else
+            {
+                a.Append("values (");
+            }
             a.Append("'" + Cliente.Cuit + "', ");
             a.Append(Cliente.Documento.Tipo.Id + ", ");
             a.Append(Cliente.Documento.Nro.ToString() + ", ");
@@ -98,7 +106,7 @@ namespace CedServicios.DB
             if (Cliente.Documento.Tipo.Id.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
             {
                 //Deambiguación de CuitPais
-                a.Append("(select count(*)+1 from Cliente where Cuit='" + Cliente.Cuit + "' and IdTipoDoc=" + Cliente.Documento.Tipo.Id + " and NroDoc=" + Cliente.Documento.Nro.ToString() + "), ");
+                a.Append("count(*)+1, ");
             }
             else
             {
@@ -132,7 +140,14 @@ namespace CedServicios.DB
             a.Append("'" + Cliente.PasswordAvisoVisualizacion + "', ");
             a.Append("@idWF, ");
             a.Append("'" + Cliente.WF.Estado + "' ");
-            a.AppendLine(") ");
+            if (Cliente.Documento.Tipo.Id.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
+            {
+                a.Append("from Cliente where Cuit='" + Cliente.Cuit + "' and IdTipoDoc=" + Cliente.Documento.Tipo.Id + " and NroDoc=" + Cliente.Documento.Nro.ToString() + " ");
+            }
+            else
+            {
+                a.AppendLine(") ");
+            }
             a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'Cliente', 'Alta', '" + Cliente.WF.Estado + "', '') ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
