@@ -50,7 +50,7 @@ namespace CedServicios.Site
                 IdUNTextBox.Enabled = false;
                 DescrUNTextBox.Enabled = false;
                 AceptarButton.Enabled = false;
-                CancelarButton.Enabled = false;
+                SalirButton.Enabled = false;
                 if (estadoPermisoUsoCUITxUN == "Vigente")
                 {
                     MensajeLabel.Text = "La Unidad de negocio fué creada satisfactoriamente";
@@ -65,10 +65,6 @@ namespace CedServicios.Site
                 MensajeLabel.Text = EX.Funciones.Detalle(ex);
                 return;
             }
-        }
-        protected void CancelarButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Default.aspx");
         }
     }
 }

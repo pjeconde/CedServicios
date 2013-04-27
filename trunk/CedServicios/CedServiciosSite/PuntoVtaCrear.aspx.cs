@@ -109,7 +109,7 @@ namespace CedServicios.Site
                 IdMetodoGeneracionNumeracionLoteDropDownList.Enabled = false;
                 UltNroLoteTextBox.Enabled = false;
                 AceptarButton.Enabled = false;
-                CancelarButton.Text = "Salir";
+                SalirButton.Text = "Salir";
 
                 MensajeLabel.Text = "El Punto de Venta fué creado satisfactoriamente";
             }
@@ -118,10 +118,6 @@ namespace CedServicios.Site
                 MensajeLabel.Text = EX.Funciones.Detalle(ex);
                 return;
             }
-        }
-        protected void CancelarButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Default.aspx");
         }
         protected void UsaDatosCuitCheckBox_CheckedChanged(object sender, EventArgs e)
         {

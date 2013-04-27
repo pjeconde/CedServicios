@@ -25,7 +25,7 @@ namespace CedServicios.Site
                 RN.Permiso.SolicitarPermisoParaUsuario(cuit, out referenciaAAprobadores, sesion);
                 CUITTextBox.Enabled = false;
                 SolicitarButton.Enabled = false;
-                CancelarButton.Enabled = false;
+                SalirButton.Enabled = false;
                 Funciones.PersonalizarControlesMaster(Master, true, sesion);
                 MensajeLabel.Text = "El permiso fue enviado para su aprobación.<br />Autorizador(es): " + referenciaAAprobadores;
             }
@@ -33,10 +33,6 @@ namespace CedServicios.Site
             {
                 MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
-        }
-        protected void CancelarButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Default.aspx");
         }
     }
 }

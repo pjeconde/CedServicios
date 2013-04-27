@@ -58,7 +58,7 @@
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
                 <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
-                <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="CancelarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" PostBackUrl="~/Default.aspx" />
             </td>
             <td>
             </td>
@@ -69,7 +69,7 @@
                     <asp:GridView ID="ClientesGridView" runat="server" 
                         AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand">
                         <Columns>
-                            <asp:ButtonField HeaderText="" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Button">
+                            <asp:ButtonField HeaderText="" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link">
                             </asp:ButtonField>
                             <asp:BoundField DataField="Cuit" HeaderText="Cuit" SortExpression="Cuit" Visible="false">
                                 <headerstyle horizontalalign="center" wrap="False" />

@@ -73,6 +73,7 @@
                 <asp:Button ID="SolucionesButton" runat="server" TabIndex="1" Text="Soluciones" onclick="SolucionesButton_Click" />
                 <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="2" Text="Referencias Comerciales" onclick="RefeComButton_Click" />
                 <asp:Button ID="ContactoButton" runat="server" CausesValidation="false" TabIndex="3" Text="Contacto" onclick="ContactoButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="4" Text="Salir" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
         <tr>

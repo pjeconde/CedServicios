@@ -51,9 +51,5 @@ namespace CedServicios.Site
                 Response.Redirect("~/PuntoVtaModificar.aspx");
             }
         }
-        protected void CancelarButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Default.aspx");
-        }
     }
 }

@@ -16,7 +16,7 @@
             </td>
         </tr>
         <tr>
-            <td align="left" style="padding-right:20px" valign="top" width="650px">
+            <td align="left" style="padding-right:20px; width:650px" valign="top">
                 El sistema de Administración de FCIs es una herramienta de administración de las carteras de inversión de los fondos y de cálculo de los valores de cuotaparte.
                 Lleva la contabilidad y facilita el cumplimiento de las normas establecidas por el organismo de fiscalización y de los reglamentos de gestión.
             </td>
@@ -204,7 +204,8 @@
             <td align="center" colspan="2" style="height: 24px; padding-top: 20px">
                 <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="1" Text="Referencias Comerciales" onclick="RefeComButton_Click" />
                 <asp:Button ID="EmpresaButton" runat="server" TabIndex="1" Text="Empresa" onclick="EmpresaButton_Click" />
-                <asp:Button ID="ContactoButton" runat="server" CausesValidation="false" TabIndex="3" Text="Contacto" onclick="ContactoButton_Click"  />
+                <asp:Button ID="ContactoButton" runat="server" CausesValidation="false" TabIndex="3" Text="Contacto" onclick="ContactoButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="4" Text="Salir" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
         <tr>

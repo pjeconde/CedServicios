@@ -88,7 +88,7 @@ namespace CedServicios.Site
                 DatosIdentificatorios.Enabled = false;
                 MedioDropDownList.Enabled = false;
                 AceptarButton.Enabled = false;
-                CancelarButton.Text = "Salir";
+                SalirButton.Text = "Salir";
 
                 MensajeLabel.Text = "El CUIT fué modificado satisfactoriamente";
             }
@@ -97,10 +97,6 @@ namespace CedServicios.Site
                 MensajeLabel.Text = EX.Funciones.Detalle(ex);
                 return;
             }
-        }
-        protected void CancelarButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Default.aspx");
         }
     }
 }

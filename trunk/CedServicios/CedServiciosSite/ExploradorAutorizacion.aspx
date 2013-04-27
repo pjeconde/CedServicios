@@ -15,9 +15,9 @@
                     <asp:GridView ID="AutorizacionesGridView" runat="server" 
                         AutoGenerateColumns="false" onrowcommand="AutorizacionesGridView_RowCommand">
                         <Columns>
-                            <asp:ButtonField HeaderText="" Text="Autorizar" CommandName="Autorizar" ButtonType="Button">
+                            <asp:ButtonField HeaderText="" Text="Autorizar" CommandName="Autorizar" ButtonType="Link">
                             </asp:ButtonField>
-                            <asp:ButtonField HeaderText="" Text="Rechazar" CommandName="Rechazar" ButtonType="Button">
+                            <asp:ButtonField HeaderText="" Text="Rechazar" CommandName="Rechazar" ButtonType="Link">
                             </asp:ButtonField>
                             <asp:BoundField DataField="DescrTipoPermiso" HeaderText="Permiso" SortExpression="DescrTipoPermiso">
                                 <headerstyle horizontalalign="center" wrap="False" />
