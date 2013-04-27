@@ -1879,7 +1879,7 @@
 										Agradeceríamos a los usuarios del sitio que nos informen sobre dudas, posibles omisiones
 										y/o errores y que nos envíen las correcciones o sugerencias por correo electrónico
 										a través de
-										<asp:HyperLink ID="contactoHyperLink" runat="server" NavigateUrl="~/Contacto.aspx">este formulario</asp:HyperLink>.
+										<asp:HyperLink ID="contactoHyperLink" runat="server" NavigateUrl="~/InstitucionalContacto.aspx">este formulario</asp:HyperLink>.
 										Es de suma importancia conocer su opinión. Muchas gracias.
 									</td>
 								</tr>
