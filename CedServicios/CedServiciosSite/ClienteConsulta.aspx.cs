@@ -32,10 +32,6 @@ namespace CedServicios.Site
                 }
             }
         }
-        protected void CancelarButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Default.aspx");
-        }
         protected void ClientesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)

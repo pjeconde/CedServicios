@@ -37,7 +37,7 @@
             </td>
             <td align="left" style="height: 24px; padding-top: 20px">
                 <asp:Button ID="ContinuarButton" runat="server" TabIndex="4" OnClick="ContinuarButton_Click" Text="Continuar" />
-                <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" OnClick="CancelarButton_Click" TabIndex="5" Text="Cancelar" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="5" Text="Cancelar" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
         <tr>

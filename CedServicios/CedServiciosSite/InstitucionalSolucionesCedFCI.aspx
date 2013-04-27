@@ -407,8 +407,9 @@
             <td align="center" style="height: 24px; padding-top: 20px">
                 <asp:Button ID="SolucionesButton" runat="server" TabIndex="1" Text="Soluciones" onclick="SolucionesButton_Click" />
                 <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="1" Text="Referencias Comerciales" onclick="RefeComButton_Click" />
-                <asp:Button ID="EmpresaButton" runat="server" TabIndex="1" Text="Empresa" onclick="EmpresaButton_Click" />
-                <asp:Button ID="ContactoButton" runat="server" CausesValidation="false" TabIndex="3" Text="Contacto" onclick="ContactoButton_Click"  />
+                <asp:Button ID="EmpresaButton" runat="server" TabIndex="2" Text="Empresa" onclick="EmpresaButton_Click" />
+                <asp:Button ID="ContactoButton" runat="server" CausesValidation="false" TabIndex="3" Text="Contacto" onclick="ContactoButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="4" Text="Salir" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
         <tr>

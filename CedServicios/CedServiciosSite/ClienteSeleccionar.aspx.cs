@@ -97,10 +97,6 @@ namespace CedServicios.Site
                 ClientesGridView.DataBind();
             }
         }
-        protected void CancelarButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Default.aspx");
-        }
         protected void TipoBusquedaRadioButton_CheckedChanged(object sender, EventArgs e)
         {
             ClientesGridView.DataSource = null;

@@ -52,10 +52,8 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" OnClick="AceptarButton_Click" TabIndex="4"
-                    Text="Aceptar" />
-                <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" OnClick="CancelarButton_Click"
-                    TabIndex="5" Text="Cancelar" />
+                <asp:Button ID="AceptarButton" runat="server" OnClick="AceptarButton_Click" TabIndex="4" Text="Aceptar" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="5" Text="Cancelar" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
         <tr>

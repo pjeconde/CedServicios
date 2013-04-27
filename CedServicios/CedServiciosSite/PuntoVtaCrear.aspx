@@ -94,7 +94,7 @@
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
                 <asp:Button ID="AceptarButton" runat="server" TabIndex="501" Text="Aceptar" onclick="AceptarButton_Click" />
-                <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" TabIndex="502" Text="Cancelar" onclick="CancelarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="502" Text="Cancelar" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
         <tr>

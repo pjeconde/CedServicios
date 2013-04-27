@@ -84,7 +84,7 @@ namespace CedServicios.Site
                 EmailAvisoVisualizacionTextBox.Enabled = false;
                 PasswordAvisoVisualizacionTextBox.Enabled = false;
                 AceptarButton.Enabled = false;
-                CancelarButton.Text = "Salir";
+                SalirButton.Text = "Salir";
 
                 MensajeLabel.Text = "El Cliente fué creado satisfactoriamente";
             }
@@ -93,10 +93,6 @@ namespace CedServicios.Site
                 MensajeLabel.Text = EX.Funciones.Detalle(ex);
                 return;
             }
-        }
-        protected void CancelarButton_Click(object sender, EventArgs e)
-        {
-            Response.Redirect("~/Default.aspx");
         }
         protected void TipoDocDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
