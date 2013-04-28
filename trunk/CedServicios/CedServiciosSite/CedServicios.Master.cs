@@ -21,71 +21,110 @@ namespace CedServicios.Site
         protected void Menu_MenuItemClick(object sender, MenuEventArgs e)
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            switch (Menu.SelectedValue.ToString())
+            switch (Menu.SelectedItem.ValuePath)
             {
                 case "Iniciar sesión":
                     Response.Redirect("~/UsuarioLogin.aspx");
                     break;
-                case "Alta de CUIT":
+                case "CUIT/Alta":
                     Response.Redirect("~/CuitCrear.aspx");
                     break;
-                case "Solicitud permiso de administrador de CUIT":
+                case "CUIT/Solicitud permiso de administrador de CUIT":
                     Response.Redirect("~/SolicPermisoAdminCUIT.aspx");
                     break;
-                case "Modificación datos CUIT":
+                case "CUIT/Modificación":
                     Response.Redirect("~/CuitModificar.aspx");
                     break;
-                case "Consulta de CUIT(s)":
+                case "CUIT/Consulta":
                     Response.Redirect("~/CuitTreeView.aspx?Cuit");
                     break;
-                case "Alta de Unidad de Negocio":
+                case "Unidad de Negocio/Alta":
                     Response.Redirect("~/UNCrear.aspx");
                     break;
-                case "Solicitud permiso de administrador de UN":
+                case "Unidad de Negocio/Solicitud permiso de administrador de UN":
                     Response.Redirect("~/SolicPermisoAdminUN.aspx");
                     break;
-                case "Solicitud permiso de operador de servicio de una UN existente":
+                case "Unidad de Negocio/Solicitud permiso de operador de servicio de una UN existente":
                     Response.Redirect("~/SolicPermisoOperServUN.aspx");
                     break;
-                case "Modificación datos UN":
+                case "Unidad de Negocio/Modificación":
                     Response.Redirect("~/UNModificar.aspx");
                     break;
-                case "Consulta de Unidad(es) de Negocio":
+                case "Unidad de Negocio/Consulta":
                     Response.Redirect("~/CuitTreeView.aspx?UN");
                     break;
-                case "Alta de Punto de Venta":
+                case "Puntos de Venta/Alta":
                     Response.Redirect("~/PuntoVtaCrear.aspx");
                     break;
-                case "Modificación de Punto de Venta":
+                case "Puntos de Venta/Modificación":
                     Response.Redirect("~/PuntoVtaSeleccionar.aspx?Modificar");
                     break;
-                case "Consulta de Punto(s) de Venta":
+                case "Puntos de Venta/Consulta":
                     Response.Redirect("~/CuitTreeView.aspx?PuntoVta");
                     break;
-                case "Alta de Cliente":
+                case "Clientes/Alta":
                     Response.Redirect("~/ClienteCrear.aspx");
                     break;
-                case "Modificación de Cliente":
+                case "Clientes/Modificación":
                     Response.Redirect("~/ClienteSeleccionar.aspx?Modificar");
                     break;
-                case "Consulta de Clientes":
+                case "Clientes/Consulta":
                     Response.Redirect("~/ClienteConsulta.aspx");
                     break;
-                case "Explorador de Autorizaciones pendientes":
-                    Response.Redirect("~/ExploradorAutorizacion.aspx?pendientes");
+                case "Artículos/Alta":
+                    Response.Redirect("~/ArticuloCrear.aspx");
                     break;
-                case "Explorador de Autorizaciones":
-                    Response.Redirect("~/ExploradorAutorizacion.aspx");
+                case "Artículos/Modificación":
+                    Response.Redirect("~/ArticuloSeleccionar.aspx?Modificar");
                     break;
-                case "Cerrar sesión":
-                    RN.Sesion.Cerrar(sesion);
-                    Response.Redirect("~/UsuarioLogin.aspx");
+                case "Artículos/Consulta":
+                    Response.Redirect("~/ArticuloConsulta.aspx");
                     break;
                 case "Facturación":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                     break;
-                case "Cambio de Contraseña de Usuario":
+                case "Autorizaciones/Explorador de Autorizaciones pendientes":
+                    Response.Redirect("~/ExploradorAutorizacion.aspx?pendientes");
+                    break;
+                case "Autorizaciones/Explorador de Autorizaciones":
+                    Response.Redirect("~/ExploradorAutorizacion.aspx");
+                    break;
+                case "Administración Site/Explorador de Usuarios":
+                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    break;
+                case "Administración Site/Explorador de CUITs":
+                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    break;
+                case "Administración Site/Explorador de UNs":
+                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    break;
+                case "Administración Site/Explorador de Puntos de Venta":
+                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    break;
+                case "Administración Site/Explorador de Clientes":
+                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    break;
+                case "Administración Site/Explorador de Artículos":
+                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    break;
+                case "Administración Site/Explorador de Permisos":
+                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    break;
+                case "Administración Site/Explorador de Configuraciones":
+                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    break;
+                case "Administración Site/Explorador de Logs":
+                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    break;
+                case "Configuración/Cambio de Contraseña de Usuario":
                     Response.Redirect("~/UsuarioCambiarPassword.aspx");
+                    break;
+                case "Configuración/Modificación datos de Configuración":
+                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    break;
+                case "Cerrar sesión":
+                    RN.Sesion.Cerrar(sesion);
+                    Response.Redirect("~/UsuarioLogin.aspx");
                     break;
             }
         }
