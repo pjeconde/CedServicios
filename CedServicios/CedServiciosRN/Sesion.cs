@@ -21,9 +21,9 @@ namespace CedServicios.RN
             List<string> opcionesHabilitadas = new List<string>();
             if (Sesion.Usuario.Id != null)
             {
-                opcionesHabilitadas.Add("CUIT/Alta de CUIT");
+                opcionesHabilitadas.Add("CUIT/Alta");
                 opcionesHabilitadas.Add("CUIT/Solicitud permiso de administrador de CUIT");
-                opcionesHabilitadas.Add("Unidad de Negocio/Alta de Unidad de Negocio");
+                opcionesHabilitadas.Add("Unidad de Negocio/Alta");
                 opcionesHabilitadas.Add("Unidad de Negocio/Solicitud permiso de operador de servicio de una UN existente");
                 opcionesHabilitadas.Add("Unidad de Negocio/Solicitud permiso de administrador de UN");
                 opcionesHabilitadas.Add("Configuración/Cambio de Contraseña de Usuario");
@@ -48,12 +48,16 @@ namespace CedServicios.RN
                 }
                 if (Sesion.Cuit.Nro != null)
                 {
-                    opcionesHabilitadas.Add("Clientes/Alta de Cliente");
-                    opcionesHabilitadas.Add("Clientes/Modificación de Cliente");
-                    opcionesHabilitadas.Add("Clientes/Consulta de Clientes");
-                    opcionesHabilitadas.Add("CUIT/Consulta de CUIT(s)");
-                    opcionesHabilitadas.Add("Unidad de Negocio/Consulta de Unidad(es) de Negocio");
-                    opcionesHabilitadas.Add("Puntos de Venta/Consulta de Punto(s) de Venta");
+                    opcionesHabilitadas.Add("CUIT/Consulta");
+                    opcionesHabilitadas.Add("Unidad de Negocio/Consulta");
+                    opcionesHabilitadas.Add("Puntos de Venta/Consulta");
+                    opcionesHabilitadas.Add("Clientes/Alta");
+                    opcionesHabilitadas.Add("Clientes/Modificación");
+                    opcionesHabilitadas.Add("Clientes/Consulta");
+                    //Ojo: no estoy condicionando el tema de Artículos al servicio eFact !!!
+                    opcionesHabilitadas.Add("Artículos/Alta");
+                    opcionesHabilitadas.Add("Artículos/Modificación");
+                    opcionesHabilitadas.Add("Artículos/Consulta");
                     
                     List<Entidades.Permiso> esAdminCUITdeCUITseleccionado = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
@@ -61,7 +65,7 @@ namespace CedServicios.RN
                     });
                     if (esAdminCUITdeCUITseleccionado.Count != 0)
                     {
-                        opcionesHabilitadas.Add("CUIT/Modificación datos CUIT");
+                        opcionesHabilitadas.Add("CUIT/Modificación");
                     }
                 }
                 List<Entidades.Permiso> esAutorizador = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
@@ -84,9 +88,9 @@ namespace CedServicios.RN
                     });
                     if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                     {
-                        opcionesHabilitadas.Add("Unidad de Negocio/Modificación datos UN");
-                        opcionesHabilitadas.Add("Puntos de Venta/Alta de Punto de Venta");
-                        opcionesHabilitadas.Add("Puntos de Venta/Modificación de Punto de Venta");
+                        opcionesHabilitadas.Add("Unidad de Negocio/Modificación");
+                        opcionesHabilitadas.Add("Puntos de Venta/Alta");
+                        opcionesHabilitadas.Add("Puntos de Venta/Modificación");
                     }
                     List<Entidades.Permiso> elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
@@ -96,7 +100,6 @@ namespace CedServicios.RN
                     if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada.Count != 0)
                     {
                         opcionesHabilitadas.Add("Facturación");
-                        opcionesHabilitadas.Add("Artículos");
                     }
                 }
             }

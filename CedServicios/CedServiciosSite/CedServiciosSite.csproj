@@ -58,6 +58,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\CedServicios\CedServicios.css" />
+    <Content Include="ArticuloConsulta.aspx" />
+    <Content Include="ArticuloCrear.aspx" />
+    <Content Include="ArticuloModificar.aspx" />
+    <Content Include="ArticuloSeleccionar.aspx" />
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="ClienteConsulta.aspx" />
     <Content Include="ClienteCrear.aspx" />
@@ -101,6 +105,7 @@
     <Content Include="InstitucionalSolucionesCedFCI.aspx" />
     <Content Include="InstitucionalSolucionesCedST.aspx" />
     <Content Include="NotificacionDeExcepcion.aspx" />
+    <Content Include="PaginaEnConstruccion.aspx" />
     <Content Include="PuntoVtaCrear.aspx" />
     <Content Include="PuntoVtaModificar.aspx" />
     <Content Include="PuntoVtaSeleccionar.aspx" />
@@ -144,6 +149,34 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticuloConsulta.aspx.cs">
+      <DependentUpon>ArticuloConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArticuloConsulta.aspx.designer.cs">
+      <DependentUpon>ArticuloConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArticuloCrear.aspx.cs">
+      <DependentUpon>ArticuloCrear.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArticuloCrear.aspx.designer.cs">
+      <DependentUpon>ArticuloCrear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArticuloModificar.aspx.cs">
+      <DependentUpon>ArticuloModificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArticuloModificar.aspx.designer.cs">
+      <DependentUpon>ArticuloModificar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArticuloSeleccionar.aspx.cs">
+      <DependentUpon>ArticuloSeleccionar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArticuloSeleccionar.aspx.designer.cs">
+      <DependentUpon>ArticuloSeleccionar.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Captcha.ashx.cs">
       <DependentUpon>Captcha.ashx</DependentUpon>
     </Compile>
@@ -436,6 +469,13 @@
     </Compile>
     <Compile Include="NotificacionDeExcepcion.aspx.designer.cs">
       <DependentUpon>NotificacionDeExcepcion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PaginaEnConstruccion.aspx.cs">
+      <DependentUpon>PaginaEnConstruccion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PaginaEnConstruccion.aspx.designer.cs">
+      <DependentUpon>PaginaEnConstruccion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
