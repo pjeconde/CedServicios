@@ -31,6 +31,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
+        /// Control PruebaPopup.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label PruebaPopup;
+        
+        /// <summary>
         /// Control XMLFileUpload.
         /// </summary>
         /// <remarks>
@@ -139,15 +148,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.UpdatePanel ptoVentaUpdatePanel;
         
         /// <summary>
-        /// Control PtoVentaRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator PtoVentaRegularExpressionValidator;
-        
-        /// <summary>
         /// Control puntoVentaRequiredFieldValidator.
         /// </summary>
         /// <remarks>
@@ -157,22 +157,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator puntoVentaRequiredFieldValidator;
         
         /// <summary>
-        /// Control PtoVentaFilteredTextExtender.
+        /// Control PuntoVtaDropDownList.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.FilteredTextBoxExtender PtoVentaFilteredTextExtender;
-        
-        /// <summary>
-        /// Control Punto_VentaTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Punto_VentaTextBox;
+        protected global::System.Web.UI.WebControls.DropDownList PuntoVtaDropDownList;
         
         /// <summary>
         /// Control TipoPtoVentaLabel.
@@ -182,15 +173,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label TipoPtoVentaLabel;
-        
-        /// <summary>
-        /// Control Version0RadioButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton Version0RadioButton;
         
         /// <summary>
         /// Control Version1RadioButton.
@@ -1676,5 +1658,41 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary RequeridosValidationSummary;
+        
+        /// <summary>
+        /// Control MensajePopup.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel MensajePopup;
+        
+        /// <summary>
+        /// Control MensajePopupLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MensajePopupLabel;
+        
+        /// <summary>
+        /// Control SalirPuntoVtaButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button SalirPuntoVtaButton;
+        
+        /// <summary>
+        /// Control ModalPopupExtender1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
     }
 }
