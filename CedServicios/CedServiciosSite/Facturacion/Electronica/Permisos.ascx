@@ -27,7 +27,7 @@
 			<asp:UpdatePanel ID="permisosUpdatePanel" runat="server" ChildrenAsTriggers="true"
 				UpdateMode="Conditional">
 				<Triggers>
-					<asp:AsyncPostBackTrigger ControlID="Punto_VentaTextBox"></asp:AsyncPostBackTrigger>
+					<asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
 				</Triggers>
 				<ContentTemplate>
 					<asp:GridView ID="permisosGridView" runat="server" AutoGenerateColumns="False" BorderColor="gray"
