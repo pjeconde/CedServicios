@@ -11,7 +11,12 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            //ModalPopupExtender1.Show();
+        }
 
+        protected void SalirButton_Click(object sender, EventArgs e)
+        {
+            //ModalPopupExtender1.Hide();
         }
     }
 }

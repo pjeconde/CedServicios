@@ -1003,6 +1003,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList IVAcomputableDropDownList;
         
         /// <summary>
+        /// Control CodigoOperacionLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label CodigoOperacionLabel;
+        
+        /// <summary>
         /// Control CodigoOperacionDropDownList.
         /// </summary>
         /// <remarks>
