@@ -788,6 +788,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
 				ViewState["PuntoVenta"] = auxPV;
 				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
+                Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
 				AjustarCamposXPtaVentaChanged(PuntoVtaDropDownList.SelectedValue);
 				AjustarCamposXVersion(lc);
 				Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
@@ -1548,7 +1549,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = total_Impuestos_Nacionales.ToString();
 			Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = total_Ingresos_Brutos.ToString();
 			Importe_Total_Impuestos_Internos_ResumenTextBox.Text = total_Impuestos_Internos.ToString();
-			total = totalGravado + totalNoGravado + totalIVA + total_Impuestos_Nacionales + total_Impuestos_Internos + total_Ingresos_Brutos + total_Impuestos_Municipales;
+            total = totalGravado + totalNoGravado + totalIVA + total_Impuestos_Nacionales + total_Impuestos_Internos + total_Ingresos_Brutos + total_Impuestos_Municipales + total_Operaciones_Exentas;
 			Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
 		}
 
@@ -1695,7 +1696,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             listacompradores = AjustarCamposXPtaVentaComun(listacompradores);
                             break;
                         case "RG2904":
-                            listacompradores = AjustarCamposXPtaVentaRG2904(listacompradores);
+                            listacompradores = AjustarCamposXPtaVentaRG2904(listacompradores, Tipo_De_ComprobanteDropDownList.SelectedValue);
                             break;
                         case "BFiscal":
                             listacompradores = AjustarCamposXPtaVentaBonoFiscal(listacompradores);
@@ -1779,6 +1780,8 @@ namespace CedServicios.Site.Facturacion.Electronica
             PaisDestinoExpDropDownList.Enabled = true;
             IdiomaDropDownList.Enabled = true;
             IncotermsDropDownList.Enabled = true;
+            CodigoOperacionDropDownList.Visible = true;
+            CodigoOperacionLabel.Visible = true;
             return listacompradores;
         }
 
@@ -1816,6 +1819,8 @@ namespace CedServicios.Site.Facturacion.Electronica
             IdiomaDropDownList.Enabled = false;
             IncotermsDropDownList.SelectedIndex = -1;
             IncotermsDropDownList.Enabled = false;
+            CodigoOperacionDropDownList.Visible = true;
+            CodigoOperacionLabel.Visible = true;
             return listacompradores;
         }
 
@@ -1828,11 +1833,26 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
 
 
-        private System.Collections.Generic.List<Entidades.Cliente> AjustarCamposXPtaVentaRG2904(System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        private System.Collections.Generic.List<Entidades.Cliente> AjustarCamposXPtaVentaRG2904(System.Collections.Generic.List<Entidades.Cliente> listacompradores, string tipoComprobante)
         {
             Presta_ServCheckBox.Enabled = true;
             listacompradores = AjustarCamposXPtaVtaComunYRG2904(listacompradores);
+            AjustarCodigoOperacionEn2904(tipoComprobante);
             return listacompradores;
+        }
+
+        private void AjustarCodigoOperacionEn2904(string valor)
+        {
+            if (valor.Equals("2") || valor.Equals("3"))
+            {
+                CodigoOperacionDropDownList.Visible = false;
+                CodigoOperacionLabel.Visible = false;
+            }
+            else
+            {
+                CodigoOperacionDropDownList.Visible = true;
+                CodigoOperacionLabel.Visible = true;
+            }
         }
 
         private System.Collections.Generic.List<Entidades.Cliente> AjustarCamposXPtaVtaComunYRG2904(System.Collections.Generic.List<Entidades.Cliente> listacompradores)
@@ -1861,6 +1881,8 @@ namespace CedServicios.Site.Facturacion.Electronica
             IdiomaDropDownList.Enabled = false;
             IncotermsDropDownList.SelectedIndex = -1;
             IncotermsDropDownList.Enabled = false;
+            CodigoOperacionDropDownList.Visible = true;
+            CodigoOperacionLabel.Visible = true;
             return listacompradores;
         }
 
@@ -1919,7 +1941,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             PaisDestinoExpDropDownList.Enabled = true;
             IdiomaDropDownList.Enabled = true;
             IncotermsDropDownList.Enabled = true;
-
+            //CedWebEntidades.Vendedor v = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor;
+            //CompletarDomicilioVendedor(v);
+            CodigoOperacionDropDownList.Visible = true;
+            CodigoOperacionLabel.Visible = true;
         }
 
         protected void EnviarIBKButton_Click(object sender, EventArgs e)
@@ -2388,6 +2413,7 @@ namespace CedServicios.Site.Facturacion.Electronica
         private void GenerarCodigoOperacion(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
         {
             //No se tiene que informar para exportación
+            //El nodo no se debe informar para RG2904 (solo NC A y ND A)
             //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
             //{
             int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
@@ -2404,22 +2430,39 @@ namespace CedServicios.Site.Facturacion.Electronica
                         CodigoOperacionDropDownList.Focus();
                         throw new Exception("El código de operación no se debe informar para exportación");
                     }
+                    else if (idtipo.Equals("RG2904") && (Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("2") || Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("3")))
+                    {
+                        infcomprob.codigo_operacion = string.Empty;
+                        infcomprob.codigo_operacionSpecified = false;
+                    }
                     else
                     {
                         infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                        infcomprob.codigo_operacionSpecified = true;
                     }
                 }
                 else
                 {
                     if (!idtipo.Equals("Export"))
                     {
-                        infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                        if (idtipo.Equals("RG2904") && (Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("2") || Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("3")))
+                        {
+                            infcomprob.codigo_operacion = string.Empty;
+                            infcomprob.codigo_operacionSpecified = false;
+                        }
+                        else
+                        {
+                            infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                            infcomprob.codigo_operacionSpecified = true;
+                        }
+
                     }
                 }
             }
             catch (System.NullReferenceException)
             {
                 infcomprob.codigo_operacion = CodigoOperacionDropDownList.SelectedValue;
+                infcomprob.codigo_operacionSpecified = true;
             }
             //}
             //else
@@ -3980,6 +4023,25 @@ namespace CedServicios.Site.Facturacion.Electronica
             catch
             {
                 ResetearGrillas();
+            }
+        }
+
+        protected void Tipo_De_ComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                {
+                    return pv.Nro == auxPV;
+                }).IdTipoPuntoVta;
+                if (idtipo.Equals("RG2904"))
+                {
+                    AjustarCodigoOperacionEn2904(((DropDownList)sender).SelectedValue);
+                }
+            }
+            catch
+            {
             }
         }
 	}
