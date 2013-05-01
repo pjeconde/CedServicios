@@ -64,6 +64,7 @@
     <Compile Include="TipoPermiso.cs" />
     <Compile Include="TipoPuntoVta.cs" />
     <Compile Include="UN.cs" />
+    <Compile Include="Unidad.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="WF.cs" />
   </ItemGroup>

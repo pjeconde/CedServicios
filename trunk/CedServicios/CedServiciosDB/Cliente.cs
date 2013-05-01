@@ -19,7 +19,7 @@ namespace CedServicios.DB
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
-                a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado ");
+                a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado, Cliente.UltActualiz ");
                 a.Append("from Cliente ");
                 a.Append("where Cliente.Cuit='" + sesion.Cuit.Nro + "' ");
                 a.Append("order by Cliente.RazonSocial ");
@@ -71,12 +71,13 @@ namespace CedServicios.DB
             Hasta.PasswordAvisoVisualizacion = Convert.ToString(Desde["PasswordAvisoVisualizacion"]);
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+            Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
         public void Leer(Entidades.Cliente cliente)
         {
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("select ");
-            a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado ");
+            a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado, Cliente.UltActualiz ");
             a.Append("from Cliente ");
             a.Append("where Cliente.Cuit='" + sesion.Cuit.Nro + "' and Cliente.RazonSocial = '" + cliente.RazonSocial + "'");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
@@ -197,7 +198,7 @@ namespace CedServicios.DB
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
-                a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado ");
+                a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado, Cliente.UltActualiz ");
                 a.Append("from Cliente ");
                 a.Append("where Cliente.Cuit='" + Cuit + "' and Cliente.IdTipoDoc=" + Documento.Tipo.Id + " and Cliente.NroDoc=" + Documento.Nro.ToString() + " ");
                 a.Append("order by Cliente.RazonSocial ");
@@ -221,7 +222,7 @@ namespace CedServicios.DB
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
-                a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado ");
+                a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado, Cliente.UltActualiz ");
                 a.Append("from Cliente ");
                 a.Append("where Cliente.Cuit='" + Cuit + "' and Cliente.RazonSocial like '%" + RazonSocial + "%' ");
                 a.Append("order by Cliente.RazonSocial ");
@@ -245,7 +246,7 @@ namespace CedServicios.DB
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
-                a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado ");
+                a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado, Cliente.UltActualiz ");
                 a.Append("from Cliente ");
                 a.Append("where Cliente.Cuit='" + Cuit + "' and Cliente.IdCliente='" + IdCliente + "'");
                 a.Append("order by Cliente.RazonSocial ");
