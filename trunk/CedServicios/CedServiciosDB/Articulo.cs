@@ -70,5 +70,71 @@ namespace CedServicios.DB
             a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'Articulo', 'Alta', '" + Articulo.WF.Estado + "', '') ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void Modificar(Entidades.Articulo Desde, Entidades.Articulo Hasta)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Articulo set ");
+            a.Append("DescrArticulo='" + Hasta.Descr + "', ");
+            a.Append("GTIN='" + Hasta.GTIN + "', ");
+            a.Append("IdUnidad='" + Hasta.Unidad.Id + "', ");
+            a.Append("DescrUnidad='" + Hasta.Unidad.Descr + "', ");
+            a.Append("IndicacionExentoGravado='" + Hasta.IndicacionExentoGravado + "', ");
+            a.Append("AlicuotaIVA=" + Hasta.AlicuotaIVA.ToString().Replace(",", ".") + " ");
+            a.AppendLine("where Cuit='" + Hasta.Cuit + "' and IdArticulo='" + Hasta.Id + "' ");
+            a.AppendLine("insert Log values (" + Hasta.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Articulo', 'Modif', '" + Hasta.WF.Estado + "', '') ");
+            a.AppendLine("declare @idLog int ");
+            a.AppendLine("select @idLog=@@Identity ");
+            a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Desde', '" + Funciones.ObjetoSerializado(Desde) + "')");
+            a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '" + Funciones.ObjetoSerializado(Hasta) + "')");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
+        public List<Entidades.Articulo> ListaPorCuityId(string Cuit, string IdArticulo)
+        {
+            List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
+            if (sesion.Cuit.Nro != null)
+            {
+                System.Text.StringBuilder a = new StringBuilder();
+                a.Append("select ");
+                a.Append("Cuit, IdArticulo, DescrArticulo, GTIN, IdUnidad, DescrUnidad, IndicacionExentoGravado, AlicuotaIVA, IdWF, Estado, UltActualiz ");
+                a.Append("from Articulo ");
+                a.Append("where Articulo.Cuit='" + Cuit + "' and Articulo.IdArticulo='" + IdArticulo + "'");
+                a.Append("order by Articulo.DescrArticulo ");
+                DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+                if (dt.Rows.Count != 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Entidades.Articulo elem = new Entidades.Articulo();
+                        Copiar(dt.Rows[i], elem);
+                        lista.Add(elem);
+                    }
+                }
+            }
+            return lista;
+        }
+        public List<Entidades.Articulo> ListaPorCuityDescr(string Cuit, string DescrArticulo)
+        {
+            List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
+            if (sesion.Cuit.Nro != null)
+            {
+                System.Text.StringBuilder a = new StringBuilder();
+                a.Append("select ");
+                a.Append("Cuit, IdArticulo, DescrArticulo, GTIN, IdUnidad, DescrUnidad, IndicacionExentoGravado, AlicuotaIVA, IdWF, Estado, UltActualiz ");
+                a.Append("from Articulo ");
+                a.Append("where Articulo.Cuit='" + Cuit + "' and Articulo.DescrArticulo like '%" + DescrArticulo + "%' ");
+                a.Append("order by Articulo.DescrArticulo ");
+                DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+                if (dt.Rows.Count != 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Entidades.Articulo elem = new Entidades.Articulo();
+                        Copiar(dt.Rows[i], elem);
+                        lista.Add(elem);
+                    }
+                }
+            }
+            return lista;
+        }
     }
 }

@@ -48,6 +48,7 @@ namespace CedServicios.Site
                 if (NroDocTextBox.Text.Equals(String.Empty))
                 {
                     MensajeLabel.Text = TipoDocRadioButton.Text + " no informado";
+                    return;
                 }
                 else
                 {
@@ -62,6 +63,7 @@ namespace CedServicios.Site
                 if (RazonSocialTextBox.Text.Equals(String.Empty))
                 {
                     MensajeLabel.Text = RazonSocialRadioButton.Text + " no informado";
+                    return;
                 }
                 else
                 {
@@ -73,6 +75,7 @@ namespace CedServicios.Site
                 if (IdClienteTextBox.Text.Equals(String.Empty))
                 {
                     MensajeLabel.Text =  IdClienteRadioButton.Text + " no informado";
+                    return;
                 }
                 else
                 {
