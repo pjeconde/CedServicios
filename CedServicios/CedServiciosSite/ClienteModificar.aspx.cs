@@ -126,7 +126,7 @@ namespace CedServicios.Site
                 AceptarButton.Enabled = false;
                 SalirButton.Text = "Salir";
 
-                MensajeLabel.Text = "El Cliente de Venta fué modificado satisfactoriamente";
+                MensajeLabel.Text = "El Cliente fué modificado satisfactoriamente";
             }
             catch (Exception ex)
             {
