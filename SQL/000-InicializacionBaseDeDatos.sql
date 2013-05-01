@@ -431,3 +431,36 @@ REFERENCES [dbo].[Cuit] ([Cuit])
 GO
 ALTER TABLE [dbo].[Cliente] CHECK CONSTRAINT [FK_Cliente_Cuit]
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Articulo](
+	[Cuit] [varchar](11) NOT NULL,
+	[IdArticulo] [varchar](20) NOT NULL,
+	[DescrArticulo] [varchar](100) NOT NULL,
+	[GTIN] [varchar](20) NOT NULL,
+	[IdUnidad] [varchar](3) NOT NULL,
+	[DescrUnidad] [varchar](50) NOT NULL,
+	[IndicacionExentoGravado] [varchar](1) NOT NULL,
+	[AlicuotaIVA] [numeric](4, 2) NOT NULL,
+	[IdWF] [int] NOT NULL,
+	[Estado] [varchar](15) NOT NULL,
+	[UltActualiz] [timestamp] NOT NULL,
+ CONSTRAINT [PK_Table_Articulo] PRIMARY KEY CLUSTERED 
+(
+	[Cuit] ASC, 
+	[IdArticulo] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[Articulo]  WITH CHECK ADD  CONSTRAINT [FK_Articulo_Cuit] FOREIGN KEY([Cuit])
+REFERENCES [dbo].[Cuit] ([Cuit])
+GO
+ALTER TABLE [dbo].[Articulo] CHECK CONSTRAINT [FK_Articulo_Cuit]
+GO
