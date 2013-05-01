@@ -10,7 +10,6 @@
         <tr>
             <td align="center" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Clientes"></asp:Label>
-                <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Style="display:none;"></asp:Label>
             </td>
         </tr>
         <tr>

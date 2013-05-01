@@ -112,7 +112,7 @@
                     </tr>
                     <tr>
                         <td align="justify" style="padding-left:5px; padding-right:5px; padding-top:5px; font-size:xx-small" colspan="2">
-                            Interfacturas enviará, a última hora del día, un aviso (con un link) para que su destinatario<BR/>pueda visualizar el comprobante electrónico generado.  Esta funcionalidad puede ser usada,<BR/>por ejemplo, cuando, por cuestiones de seguridad, no se quiera enviar facturas por email.
+                            Interfacturas enviará, a última hora del día, un aviso (con un link) para que su destinatario<br/>pueda visualizar el comprobante electrónico generado.  Esta funcionalidad puede ser usada,<br/>por ejemplo, cuando, por cuestiones de seguridad, no se quiera enviar facturas por email.
                         </td>
                     </tr>
                 </table>
