@@ -20,6 +20,11 @@ namespace CedServicios.Site
                     {
                         case "Modificar":
                             TituloPaginaLabel.Text = "Modificación de Cliente";
+                            ViewState["IrA"] = "~/ClienteModificar.aspx";
+                            break;
+                        case "Baja":
+                            TituloPaginaLabel.Text = "Baja/Anul.baja de Cliente";
+                            ViewState["IrA"] = "~/ClienteBaja.aspx";
                             break;
                     }
                     TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
@@ -91,7 +96,7 @@ namespace CedServicios.Site
             else if (lista.Count == 1)
             {
                 Session["Cliente"] = lista[0];
-                Response.Redirect("~/ClienteModificar.aspx");
+                Response.Redirect(ViewState["IrA"].ToString());
             }
             else
             {
@@ -145,7 +150,7 @@ namespace CedServicios.Site
             {
                 case "Seleccionar":
                     Session["Cliente"] = cliente;
-                    Response.Redirect("~/ClienteModificar.aspx");
+                    Response.Redirect(ViewState["IrA"].ToString());
                     break;
             }
         }

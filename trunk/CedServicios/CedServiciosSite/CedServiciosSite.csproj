@@ -58,11 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Themes\CedServicios\CedServicios.css" />
+    <Content Include="ArticuloBaja.aspx" />
     <Content Include="ArticuloConsulta.aspx" />
     <Content Include="ArticuloCrear.aspx" />
     <Content Include="ArticuloModificar.aspx" />
     <Content Include="ArticuloSeleccionar.aspx" />
     <Content Include="CedeiraSF-Logo.gif" />
+    <Content Include="ClienteBaja.aspx" />
     <Content Include="ClienteConsulta.aspx" />
     <Content Include="ClienteCrear.aspx" />
     <Content Include="ClienteModificar.aspx" />
@@ -75,6 +77,7 @@
     <Content Include="Controles\DatosImpositivosConsulta.ascx" />
     <Content Include="Controles\Domicilio.ascx" />
     <Content Include="Controles\DomicilioConsulta.ascx" />
+    <Content Include="CuitBaja.aspx" />
     <Content Include="CuitCrear.aspx" />
     <Content Include="CuitModificar.aspx" />
     <Content Include="CuitTreeView.aspx" />
@@ -106,12 +109,14 @@
     <Content Include="InstitucionalSolucionesCedST.aspx" />
     <Content Include="NotificacionDeExcepcion.aspx" />
     <Content Include="PaginaEnConstruccion.aspx" />
+    <Content Include="PuntoVtaBaja.aspx" />
     <Content Include="PuntoVtaCrear.aspx" />
     <Content Include="PuntoVtaModificar.aspx" />
     <Content Include="PuntoVtaSeleccionar.aspx" />
     <Content Include="SolicPermisoAdminCUIT.aspx" />
     <Content Include="SolicPermisoAdminUN.aspx" />
     <Content Include="SolicPermisoOperServUN.aspx" />
+    <Content Include="UNBaja.aspx" />
     <Content Include="UNCrear.aspx" />
     <Content Include="UNModificar.aspx" />
     <Content Include="UsuarioCambiarPassword.aspx" />
@@ -149,6 +154,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ArticuloBaja.aspx.cs">
+      <DependentUpon>ArticuloBaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArticuloBaja.aspx.designer.cs">
+      <DependentUpon>ArticuloBaja.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ArticuloConsulta.aspx.cs">
       <DependentUpon>ArticuloConsulta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -186,6 +198,13 @@
     </Compile>
     <Compile Include="CedServicios.Master.designer.cs">
       <DependentUpon>CedServicios.Master</DependentUpon>
+    </Compile>
+    <Compile Include="ClienteBaja.aspx.cs">
+      <DependentUpon>ClienteBaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ClienteBaja.aspx.designer.cs">
+      <DependentUpon>ClienteBaja.aspx</DependentUpon>
     </Compile>
     <Compile Include="ClienteConsulta.aspx.cs">
       <DependentUpon>ClienteConsulta.aspx</DependentUpon>
@@ -270,6 +289,13 @@
     </Compile>
     <Compile Include="Controles\DomicilioConsulta.ascx.designer.cs">
       <DependentUpon>DomicilioConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="CuitBaja.aspx.cs">
+      <DependentUpon>CuitBaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CuitBaja.aspx.designer.cs">
+      <DependentUpon>CuitBaja.aspx</DependentUpon>
     </Compile>
     <Compile Include="CuitCrear.aspx.cs">
       <DependentUpon>CuitCrear.aspx</DependentUpon>
@@ -482,6 +508,13 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
+    <Compile Include="PuntoVtaBaja.aspx.cs">
+      <DependentUpon>PuntoVtaBaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PuntoVtaBaja.aspx.designer.cs">
+      <DependentUpon>PuntoVtaBaja.aspx</DependentUpon>
+    </Compile>
     <Compile Include="PuntoVtaCrear.aspx.cs">
       <DependentUpon>PuntoVtaCrear.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -523,6 +556,13 @@
     </Compile>
     <Compile Include="SolicPermisoOperServUN.aspx.designer.cs">
       <DependentUpon>SolicPermisoOperServUN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="UNBaja.aspx.cs">
+      <DependentUpon>UNBaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UNBaja.aspx.designer.cs">
+      <DependentUpon>UNBaja.aspx</DependentUpon>
     </Compile>
     <Compile Include="UNCrear.aspx.cs">
       <DependentUpon>UNCrear.aspx</DependentUpon>

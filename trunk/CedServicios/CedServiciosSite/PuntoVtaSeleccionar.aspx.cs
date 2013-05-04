@@ -20,6 +20,11 @@ namespace CedServicios.Site
                     {
                         case "Modificar":
                             TituloPaginaLabel.Text = "Modificación de Punto de Venta";
+                            ViewState["IrA"] = "~/PuntoVtaModificar.aspx";
+                            break;
+                        case "Baja":
+                            TituloPaginaLabel.Text = "Baja/Anul.baja de Punto de Venta";
+                            ViewState["IrA"] = "~/PuntoVtaBaja.aspx";
                             break;
                     }
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
@@ -48,7 +53,7 @@ namespace CedServicios.Site
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 Session["PuntoVta"] = sesion.UN.PuntosVta[PuntoVtaDropDownList.SelectedIndex];
-                Response.Redirect("~/PuntoVtaModificar.aspx");
+                Response.Redirect(ViewState["IrA"].ToString());
             }
         }
     }

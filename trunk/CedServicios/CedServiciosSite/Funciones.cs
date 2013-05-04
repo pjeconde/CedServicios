@@ -39,6 +39,9 @@ namespace CedServicios.Site
             mItem = new MenuItem("Alta", "Alta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             mItem = new MenuItem("Modificación", "Modificación");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
@@ -54,6 +57,9 @@ namespace CedServicios.Site
             menu.Items.Add(mItem);
             menu.Items[menu.Items.Count - 1].Selectable = false;
             mItem = new MenuItem("Alta", "Alta");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             mItem = new MenuItem("Modificación", "Modificación");
@@ -76,6 +82,9 @@ namespace CedServicios.Site
             mItem = new MenuItem("Alta", "Alta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             mItem = new MenuItem("Modificación", "Modificación");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
@@ -90,6 +99,9 @@ namespace CedServicios.Site
             mItem = new MenuItem("Alta", "Alta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             mItem = new MenuItem("Modificación", "Modificación");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
@@ -101,6 +113,9 @@ namespace CedServicios.Site
             menu.Items.Add(mItem);
             menu.Items[menu.Items.Count - 1].Selectable = false;
             mItem = new MenuItem("Alta", "Alta");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             mItem = new MenuItem("Modificación", "Modificación");
