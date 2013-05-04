@@ -39,6 +39,9 @@ namespace FeaEntidades.InterFacturas
 
 		private string codigo_operacionField;
 
+        [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
+        private bool codigo_operacionFieldSpecified;
+
 		private string caeField;
 
         [FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
@@ -229,6 +232,20 @@ namespace FeaEntidades.InterFacturas
 				this.codigo_operacionField = value;
 			}
 		}
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool codigo_operacionSpecified
+        {
+            get
+            {
+                return this.codigo_operacionFieldSpecified;
+            }
+            set
+            {
+                this.codigo_operacionFieldSpecified = value;
+            }
+        }
 
 		/// <comentarios/>
 		public string cae
