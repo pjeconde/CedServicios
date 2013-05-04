@@ -94,7 +94,7 @@
                 <td align="left" style="text-align: left">
                     <asp:Menu ID="Menu" runat="server" BackColor="white"  
                         DynamicHorizontalOffset="0" CssClass="MainMenu" 
-                        Font-Names="Verdana" Font-Size="10px" ForeColor="#284E98" 
+                        Font-Names="Verdana" Font-Size="10px" ForeColor="#284E98" PathSeparator="|" 
                         StaticSubMenuIndent="30px" onmenuitemclick="Menu_MenuItemClick">
                         <DynamicHoverStyle Font-Underline="true"/>
                         <DynamicMenuItemStyle BackColor="#ededed" VerticalPadding="2px"/>

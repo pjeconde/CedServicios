@@ -20,6 +20,11 @@ namespace CedServicios.Site
                     {
                         case "Modificar":
                             TituloPaginaLabel.Text = "Modificación de Artículo";
+                            ViewState["IrA"] = "~/ArticuloModificar.aspx";
+                            break;
+                        case "Baja":
+                            TituloPaginaLabel.Text = "Baja/Anul.baja de Artículo";
+                            ViewState["IrA"] = "~/ArticuloBaja.aspx";
                             break;
                     }
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
@@ -73,7 +78,7 @@ namespace CedServicios.Site
             else if (lista.Count == 1)
             {
                 Session["Articulo"] = lista[0];
-                Response.Redirect("~/ArticuloModificar.aspx");
+                Response.Redirect(ViewState["IrA"].ToString());
             }
             else
             {
@@ -111,7 +116,7 @@ namespace CedServicios.Site
             {
                 case "Seleccionar":
                     Session["Articulo"] = articulo;
-                    Response.Redirect("~/ArticuloModificar.aspx");
+                    Response.Redirect(ViewState["IrA"].ToString());
                     break;
             }
         }

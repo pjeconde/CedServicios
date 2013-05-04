@@ -21,13 +21,13 @@ namespace CedServicios.RN
             List<string> opcionesHabilitadas = new List<string>();
             if (Sesion.Usuario.Id != null)
             {
-                opcionesHabilitadas.Add("CUIT/Alta");
-                opcionesHabilitadas.Add("CUIT/Solicitud permiso de administrador de CUIT");
-                opcionesHabilitadas.Add("Unidad de Negocio/Alta");
-                opcionesHabilitadas.Add("Unidad de Negocio/Solicitud permiso de operador de servicio de una UN existente");
-                opcionesHabilitadas.Add("Unidad de Negocio/Solicitud permiso de administrador de UN");
-                opcionesHabilitadas.Add("Configuración/Cambio de Contraseña de Usuario");
-                opcionesHabilitadas.Add("Configuración/Modificación datos de Configuración");
+                opcionesHabilitadas.Add("CUIT|Alta");
+                opcionesHabilitadas.Add("CUIT|Solicitud permiso de administrador de CUIT");
+                opcionesHabilitadas.Add("Unidad de Negocio|Alta");
+                opcionesHabilitadas.Add("Unidad de Negocio|Solicitud permiso de operador de servicio de una UN existente");
+                opcionesHabilitadas.Add("Unidad de Negocio|Solicitud permiso de administrador de UN");
+                opcionesHabilitadas.Add("Configuración|Cambio de Contraseña de Usuario");
+                opcionesHabilitadas.Add("Configuración|Modificación datos de Configuración");
                 opcionesHabilitadas.Add("Cerrar sesión");
 
                 List<Entidades.Permiso> permisoAdminSITEVigente = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
@@ -36,28 +36,30 @@ namespace CedServicios.RN
                 });
                 if (permisoAdminSITEVigente.Count != 0)
                 {
-                    opcionesHabilitadas.Add("Administración Site/Explorador de Usuarios");
-                    opcionesHabilitadas.Add("Administración Site/Explorador de CUITs");
-                    opcionesHabilitadas.Add("Administración Site/Explorador de UNs");
-                    opcionesHabilitadas.Add("Administración Site/Explorador de Puntos de Venta");
-                    opcionesHabilitadas.Add("Administración Site/Explorador de Clientes");
-                    opcionesHabilitadas.Add("Administración Site/Explorador de Artículos");
-                    opcionesHabilitadas.Add("Administración Site/Explorador de Permisos");
-                    opcionesHabilitadas.Add("Administración Site/Explorador de Configuraciones");
-                    opcionesHabilitadas.Add("Administración Site/Explorador de Logs");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de Usuarios");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de CUITs");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de UNs");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de Puntos de Venta");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de Clientes");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de Artículos");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de Permisos");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de Configuraciones");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de Logs");
                 }
                 if (Sesion.Cuit.Nro != null)
                 {
-                    opcionesHabilitadas.Add("CUIT/Consulta");
-                    opcionesHabilitadas.Add("Unidad de Negocio/Consulta");
-                    opcionesHabilitadas.Add("Puntos de Venta/Consulta");
-                    opcionesHabilitadas.Add("Clientes/Alta");
-                    opcionesHabilitadas.Add("Clientes/Modificación");
-                    opcionesHabilitadas.Add("Clientes/Consulta");
+                    opcionesHabilitadas.Add("CUIT|Consulta");
+                    opcionesHabilitadas.Add("Unidad de Negocio|Consulta");
+                    opcionesHabilitadas.Add("Puntos de Venta|Consulta");
+                    opcionesHabilitadas.Add("Clientes|Alta");
+                    opcionesHabilitadas.Add("Clientes|Baja/Anul.baja");
+                    opcionesHabilitadas.Add("Clientes|Modificación");
+                    opcionesHabilitadas.Add("Clientes|Consulta");
                     //Ojo: no estoy condicionando el tema de Artículos al servicio eFact !!!
-                    opcionesHabilitadas.Add("Artículos/Alta");
-                    opcionesHabilitadas.Add("Artículos/Modificación");
-                    opcionesHabilitadas.Add("Artículos/Consulta");
+                    opcionesHabilitadas.Add("Artículos|Alta");
+                    opcionesHabilitadas.Add("Artículos|Baja/Anul.baja");
+                    opcionesHabilitadas.Add("Artículos|Modificación");
+                    opcionesHabilitadas.Add("Artículos|Consulta");
                     
                     List<Entidades.Permiso> esAdminCUITdeCUITseleccionado = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
@@ -65,7 +67,8 @@ namespace CedServicios.RN
                     });
                     if (esAdminCUITdeCUITseleccionado.Count != 0)
                     {
-                        opcionesHabilitadas.Add("CUIT/Modificación");
+                        opcionesHabilitadas.Add("CUIT|Baja/Anul.baja");
+                        opcionesHabilitadas.Add("CUIT|Modificación");
                     }
                 }
                 List<Entidades.Permiso> esAutorizador = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
@@ -74,10 +77,10 @@ namespace CedServicios.RN
                 });
                 if (esAutorizador.Count != 0)
                 {
-                    opcionesHabilitadas.Add("Autorizaciones/Explorador de Autorizaciones");
+                    opcionesHabilitadas.Add("Autorizaciones|Explorador de Autorizaciones");
                     if (RN.Permiso.LeerListaPermisosPteAutoriz(Sesion.Usuario, Sesion).Count != 0)
                     {
-                        opcionesHabilitadas.Add("Autorizaciones/Explorador de Autorizaciones pendientes");
+                        opcionesHabilitadas.Add("Autorizaciones|Explorador de Autorizaciones pendientes");
                     }
                 }
                 if (Sesion.UN.Id != 0)
@@ -88,9 +91,11 @@ namespace CedServicios.RN
                     });
                     if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                     {
-                        opcionesHabilitadas.Add("Unidad de Negocio/Modificación");
-                        opcionesHabilitadas.Add("Puntos de Venta/Alta");
-                        opcionesHabilitadas.Add("Puntos de Venta/Modificación");
+                        opcionesHabilitadas.Add("Unidad de Negocio|Baja/Anul.baja");
+                        opcionesHabilitadas.Add("Unidad de Negocio|Modificación");
+                        opcionesHabilitadas.Add("Puntos de Venta|Alta");
+                        opcionesHabilitadas.Add("Puntos de Venta|Baja/Anul.baja");
+                        opcionesHabilitadas.Add("Puntos de Venta|Modificación");
                     }
                     List<Entidades.Permiso> elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
