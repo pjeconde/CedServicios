@@ -22,7 +22,6 @@ namespace CedServicios.Site
                 DataBind();
 
                 CUITTextBox.Text = sesion.Cuit.Nro;
-                CUITTextBox.Enabled = false;
                 RazonSocialTextBox.Text = sesion.Cuit.RazonSocial;
                 Domicilio.Calle = sesion.Cuit.Domicilio.Calle;
                 Domicilio.Nro = sesion.Cuit.Domicilio.Nro;
@@ -44,6 +43,16 @@ namespace CedServicios.Site
                 DatosIdentificatorios.GLN = sesion.Cuit.DatosIdentificatorios.GLN;
                 DatosIdentificatorios.CodigoInterno = sesion.Cuit.DatosIdentificatorios.CodigoInterno;
                 MedioDropDownList.SelectedValue = sesion.Cuit.Medio.Id;
+
+                CUITTextBox.Enabled = false;
+                RazonSocialTextBox.Enabled = false;
+                Domicilio.Enabled = false;
+                Contacto.Enabled = false;
+                DatosImpositivos.Enabled = false;
+                DatosIdentificatorios.Enabled = false;
+                MedioDropDownList.Enabled = false;
+
+                AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
@@ -80,13 +89,6 @@ namespace CedServicios.Site
                 cuit.Medio.Descr = MedioDropDownList.Text;
                 RN.Cuit.Modificar(cuit, sesion);
 
-                CUITTextBox.Enabled = false;
-                RazonSocialTextBox.Enabled = false;
-                Domicilio.Enabled = false;
-                Contacto.Enabled = false;
-                DatosImpositivos.Enabled = false;
-                DatosIdentificatorios.Enabled = false;
-                MedioDropDownList.Enabled = false;
                 AceptarButton.Enabled = false;
                 SalirButton.Text = "Salir";
 

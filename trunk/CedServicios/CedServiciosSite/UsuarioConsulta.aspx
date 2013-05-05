@@ -16,7 +16,7 @@
             <td style="padding-top:20px">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                     <asp:GridView ID="PermisosGridView" runat="server" 
-                        AutoGenerateColumns="false" OnRowDataBound="gvParent_RowDataBound">
+                        AutoGenerateColumns="false" OnRowDataBound="PermisosGridView_RowDataBound">
                         <Columns>
                             <asp:BoundField DataField="DescrTipoPermiso" HeaderText="Permiso" SortExpression="DescrTipoPermiso">
                                 <headerstyle horizontalalign="center" wrap="False" />

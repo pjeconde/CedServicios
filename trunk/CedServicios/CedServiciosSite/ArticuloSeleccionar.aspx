@@ -52,7 +52,7 @@
                 <td style="padding-top:20px;" colspan="3">
                     <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                         <asp:GridView ID="ArticulosGridView" runat="server" 
-                            AutoGenerateColumns="false" onrowcommand="ArticulosGridView_RowCommand">
+                            AutoGenerateColumns="false" onrowcommand="ArticulosGridView_RowCommand" OnRowDataBound="ArticulosGridView_RowDataBound">
                             <Columns>
                                 <asp:ButtonField HeaderText="" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link">
                                 </asp:ButtonField>

@@ -24,7 +24,7 @@ namespace CedServicios.Site
                 PermisosGridView.DataBind();
             }
         }
-        protected void gvParent_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void PermisosGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {

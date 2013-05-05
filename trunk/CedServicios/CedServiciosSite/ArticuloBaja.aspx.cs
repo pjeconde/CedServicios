@@ -29,8 +29,16 @@ namespace CedServicios.Site
                 UnidadDropDownList.SelectedItem.Text = articulo.Unidad.Descr;
                 IndicacionExentoGravadoDropDownList.SelectedValue = articulo.IndicacionExentoGravado;
                 AlicuotaIVADropDownList.SelectedValue = articulo.AlicuotaIVA.ToString(); 
+
                 CUITTextBox.Enabled = false;
-                DescrTextBox.Focus();
+                IdTextBox.Enabled = false;
+                DescrTextBox.Enabled = false;
+                GTINTextBox.Enabled = false;
+                UnidadDropDownList.Enabled = false;
+                IndicacionExentoGravadoDropDownList.Enabled = false;
+                AlicuotaIVADropDownList.Enabled = false;
+
+                AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
@@ -49,14 +57,6 @@ namespace CedServicios.Site
                 articuloHasta.IndicacionExentoGravado = IndicacionExentoGravadoDropDownList.SelectedValue;
                 articuloHasta.AlicuotaIVA = Convert.ToDouble(AlicuotaIVADropDownList.SelectedValue);
                 RN.Articulo.Modificar(articuloDesde, articuloHasta, sesion);
-
-                CUITTextBox.Enabled = false;
-                IdTextBox.Enabled = false;
-                DescrTextBox.Enabled = false;
-                GTINTextBox.Enabled = false;
-                UnidadDropDownList.Enabled = false;
-                IndicacionExentoGravadoDropDownList.Enabled = false;
-                AlicuotaIVADropDownList.Enabled = false;
 
                 AceptarButton.Enabled = false;
                 SalirButton.Text = "Salir";

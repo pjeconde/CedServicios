@@ -52,8 +52,20 @@ namespace CedServicios.Site
                 }
                 IdMetodoGeneracionNumeracionLoteDropDownList.SelectedValue = puntoVta.IdMetodoGeneracionNumeracionLote;
                 UltNroLoteTextBox.Text = puntoVta.UltNroLote.ToString();
+
                 CUITTextBox.Enabled = false;
                 NroTextBox.Enabled = false;
+                IdUNDropDownList.Enabled = false;
+                IdTipoPuntoVtaDropDownList.Enabled = false;
+                UsaDatosCuitCheckBox.Enabled = false;
+                Domicilio.Enabled = false;
+                Contacto.Enabled = false;
+                DatosImpositivos.Enabled = false;
+                DatosIdentificatorios.Enabled = false;
+                IdMetodoGeneracionNumeracionLoteDropDownList.Enabled = false;
+                UltNroLoteTextBox.Enabled = false;
+
+                AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
@@ -122,17 +134,6 @@ namespace CedServicios.Site
                 puntoVtaHasta.UltNroLote = Convert.ToInt64(UltNroLoteTextBox.Text);
                 RN.PuntoVta.Modificar(puntoVtaDesde, puntoVtaHasta, sesion);
 
-                CUITTextBox.Enabled = false;
-                NroTextBox.Enabled = false;
-                IdUNDropDownList.Enabled = false;
-                IdTipoPuntoVtaDropDownList.Enabled = false;
-                UsaDatosCuitCheckBox.Enabled = false;
-                Domicilio.Enabled = false;
-                Contacto.Enabled = false;
-                DatosImpositivos.Enabled = false;
-                DatosIdentificatorios.Enabled = false;
-                IdMetodoGeneracionNumeracionLoteDropDownList.Enabled = false;
-                UltNroLoteTextBox.Enabled = false;
                 AceptarButton.Enabled = false;
                 SalirButton.Text = "Salir";
 

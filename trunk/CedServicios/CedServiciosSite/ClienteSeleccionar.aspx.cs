@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace CedServicios.Site
 {
@@ -152,6 +153,16 @@ namespace CedServicios.Site
                     Session["Cliente"] = cliente;
                     Response.Redirect(ViewState["IrA"].ToString());
                     break;
+            }
+        }
+        protected void ClientesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells[6].Text != "Vigente")
+                {
+                    e.Row.ForeColor = Color.Red;
+                }
             }
         }
     }
