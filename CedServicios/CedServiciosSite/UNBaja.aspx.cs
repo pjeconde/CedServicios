@@ -16,10 +16,14 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
 
                 CUITTextBox.Text = sesion.Cuit.Nro;
-                CUITTextBox.Enabled = false;
                 IdUNTextBox.Text = sesion.UN.Id.ToString();
-                IdUNTextBox.Enabled = false;
                 DescrUNTextBox.Text = sesion.UN.Descr;
+
+                CUITTextBox.Enabled = false;
+                IdUNTextBox.Enabled = false;
+                DescrUNTextBox.Enabled = false;
+
+                AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
@@ -33,9 +37,6 @@ namespace CedServicios.Site
                 un.Descr = DescrUNTextBox.Text;
                 RN.UN.Modificar(un, sesion);
 
-                CUITTextBox.Enabled = false;
-                IdUNTextBox.Enabled = false;
-                DescrUNTextBox.Enabled = false;
                 AceptarButton.Enabled = false;
                 SalirButton.Enabled = false;
                 MensajeLabel.Text = "La Unidad de negocio fué modificada satisfactoriamente";

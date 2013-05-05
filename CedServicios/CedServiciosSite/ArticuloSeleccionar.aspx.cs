@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace CedServicios.Site
 {
@@ -119,6 +120,17 @@ namespace CedServicios.Site
                     Response.Redirect(ViewState["IrA"].ToString());
                     break;
             }
+        }
+        protected void ArticulosGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells[7].Text != "Vigente")
+                {
+                    e.Row.ForeColor = Color.Red;
+                }
+            }
+
         }
     }
 }

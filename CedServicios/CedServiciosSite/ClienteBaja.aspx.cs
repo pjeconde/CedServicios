@@ -58,11 +58,21 @@ namespace CedServicios.Site
                 IdClienteTextBox.Text = cliente.IdCliente;
                 EmailAvisoVisualizacionTextBox.Text = cliente.EmailAvisoVisualizacion;
                 PasswordAvisoVisualizacionTextBox.Text = cliente.PasswordAvisoVisualizacion;
+
                 CUITTextBox.Enabled = false;
                 TipoDocDropDownList.Enabled = false;
                 NroDocTextBox.Enabled = false;
                 DestinosCuitDropDownList.Enabled = false;
-                RazonSocialTextBox.Focus();
+                RazonSocialTextBox.Enabled = false;
+                Domicilio.Enabled = false;
+                Contacto.Enabled = false;
+                DatosImpositivos.Enabled = false;
+                DatosIdentificatorios.Enabled = false;
+                IdClienteTextBox.Enabled = false;
+                EmailAvisoVisualizacionTextBox.Enabled = false;
+                PasswordAvisoVisualizacionTextBox.Enabled = false;
+
+                AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
@@ -111,18 +121,6 @@ namespace CedServicios.Site
                 clienteHasta.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
                 RN.Cliente.Modificar(clienteDesde, clienteHasta, sesion);
 
-                CUITTextBox.Enabled = false;
-                TipoDocDropDownList.Enabled = false;
-                NroDocTextBox.Enabled = false;
-                DestinosCuitDropDownList.Enabled = false;
-                RazonSocialTextBox.Enabled = false;
-                Domicilio.Enabled = false;
-                Contacto.Enabled = false;
-                DatosImpositivos.Enabled = false;
-                DatosIdentificatorios.Enabled = false;
-                IdClienteTextBox.Enabled = false;
-                EmailAvisoVisualizacionTextBox.Enabled = false;
-                PasswordAvisoVisualizacionTextBox.Enabled = false;
                 AceptarButton.Enabled = false;
                 SalirButton.Text = "Salir";
 
