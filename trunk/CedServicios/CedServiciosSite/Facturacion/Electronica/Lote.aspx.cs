@@ -657,13 +657,17 @@ namespace CedServicios.Site.Facturacion.Electronica
 				else
 				{
                     //MensajePopupLabel.Text = "Debe seleccionar un archivo";
-                    //ModalPopupExtender1.Show();
+                    //PruebaPopupButton_Click(PruebaPopupButton, new EventArgs());
 					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe seleccionar un archivo');</script>");
 				}
-
                 VerificarMetodoNumeracionLote();
             //}
 		}
+
+        protected void PruebaPopupButton_Click(object sender, EventArgs e)
+        {
+            //ModalPopupExtender1.Show();
+        }
 
 		private void LeerFormatoDetalleIBK(EventArgs e, FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
 		{
@@ -1553,8 +1557,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 			Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
 		}
 
-		
-
 		private void CalcularImpuestos(out double total_Impuestos_Nacionales, out double total_Impuestos_Internos, out double total_Ingresos_Brutos, out double total_Impuestos_Municipales)
 		{
 			total_Impuestos_Nacionales = 0;
@@ -1596,59 +1598,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 			}
 		}
 
-        protected void Punto_VentaTextBox_TextChanged(object sender, EventArgs e)
-        {
-            //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-            //{
-            try
-            {
-                AjustarCamposXPtaVentaChanged(((TextBox)sender).Text);
-                int auxPV = Convert.ToInt32(((TextBox)sender).Text);
-                if (ViewState["PuntoVenta"] != null)
-                {
-                    int auxViewState = Convert.ToInt32(ViewState["PuntoVenta"]);
-                    try
-                    {
-                        string idtipoAnterior = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                        {
-                            return pv.Nro == auxViewState;
-                        }).IdTipoPuntoVta;
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                        {
-                            return pv.Nro == auxPV;
-                        }).IdTipoPuntoVta;
-                        if (!idtipo.Equals(idtipoAnterior))
-                        {
-                            ResetearGrillas();
-                        }
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        ResetearGrillas();
-                    }
-                }
-                ViewState["PuntoVenta"] = auxPV;
-                DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
-            }
-            catch
-            {
-                ResetearGrillas();
-            }
-            //}
-            //else
-            //{
-            //    DetalleLinea.PuntoDeVenta = ((TextBox)sender).Text;
-            //    try
-            //    {
-            //        ViewState["PuntoVenta"] = Convert.ToInt32(((TextBox)sender).Text);
-            //    }
-            //    catch
-            //    {
-            //    }
-            //}
-        }
-
-		
 		private void ResetearGrillas()
 		{
 			DetalleLinea.ResetearGrillas();
@@ -1973,6 +1922,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 try
                 {
                     string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                    certificado = "0137b72aa415";
 
                     org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
 
@@ -1980,9 +1930,18 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                     FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
                     lcIBK = Conversor.Entidad2IBK(lcFea);
-                    //CedWebRN.Comprobante cc = new CedWebRN.Comprobante();
-                    //cc.EnviarIBK(lcFea, certificado);
-                    string respuesta = edyndns.EnviarIBK(lcIBK, certificado);
+
+                    string respuesta = "";
+                    
+                    //---CODIGO VIEJO para acceder al WebService del Sitio referenciado en la RN
+                    RN.Comprobante cc = new RN.Comprobante();
+                    respuesta = cc.EnviarIBK(lcFea, certificado);
+                    //-----------------------------------------------------------------------------------
+
+                    //respuesta = edyndns.EnviarIBK(lcIBK, certificado);
+
+                    respuesta = respuesta.Replace("@", "-");
+                    respuesta = respuesta.Replace("/", "-");
 
                     ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>");
                 }
@@ -3681,7 +3640,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                     //Ir por WS
                     org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
-
                     org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
                     clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(Cuit_VendedorTextBox.Text), Convert.ToInt64(Id_LoteTextbox.Text), Convert.ToInt32(PuntoVtaDropDownList.SelectedValue), certificado);
 
@@ -3742,79 +3700,65 @@ namespace CedServicios.Site.Facturacion.Electronica
 
 		protected void PDFButton_Click(object sender, EventArgs e)
 		{
-            //if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-            //{
-            //    if (!MonedaComprobanteDropDownList.Enabled)
-            //    {
-            //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta funcionalidad es exclusiva del SERVICIO PREMIUM.  Contáctese con Cedeira Software Factory para acceder al servicio.');</script>");
-            //    }
-            //    else
-            //    {
-            //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
-            //    }
-            //}
-            //else
-            //{
-				try
+			try
+			{
+				FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
+				if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
 				{
-					FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
-					if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
+					lcFea.comprobante[0].cabecera.informacion_comprobante.cae = " ";
+				}
+				lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+				lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+				RN.Comprobante cDC = new RN.Comprobante();
+				foreach (FeaEntidades.InterFacturas.linea l in lcFea.comprobante[0].detalle.linea)
+				{
+					if (l != null)
 					{
-						lcFea.comprobante[0].cabecera.informacion_comprobante.cae = " ";
-					}
-					lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
-					lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
-					RN.Comprobante cDC = new RN.Comprobante();
-					foreach (FeaEntidades.InterFacturas.linea l in lcFea.comprobante[0].detalle.linea)
-					{
-						if (l != null)
-						{
-							l.descripcion = cDC.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
-						}
-						else
-						{
-							break;
-						}
-					}
-					if (lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
-					{
-						lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = string.Empty;
-					}
-					if (lcFea.cabecera_lote.presta_servSpecified == false)
-					{
-						lcFea.cabecera_lote.presta_serv = 0;
-						lcFea.cabecera_lote.presta_servSpecified = true;
-					}
-					if (lcFea.comprobante[0].extensiones != null && lcFea.comprobante[0].extensiones.extensiones_datos_comerciales != null && !lcFea.comprobante[0].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
-					{
-						string dc = cDC.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
-						lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = dc.Replace("<br>", System.Environment.NewLine);
+						l.descripcion = cDC.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
 					}
 					else
 					{
-						lcFea.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
+						break;
 					}
-					if (lcFea.comprobante[0].resumen.impuestos != null)
+				}
+				if (lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
+				{
+					lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = string.Empty;
+				}
+				if (lcFea.cabecera_lote.presta_servSpecified == false)
+				{
+					lcFea.cabecera_lote.presta_serv = 0;
+					lcFea.cabecera_lote.presta_servSpecified = true;
+				}
+				if (lcFea.comprobante[0].extensiones != null && lcFea.comprobante[0].extensiones.extensiones_datos_comerciales != null && !lcFea.comprobante[0].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
+				{
+					string dc = cDC.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
+					lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = dc.Replace("<br>", System.Environment.NewLine);
+				}
+				else
+				{
+					lcFea.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
+				}
+				if (lcFea.comprobante[0].resumen.impuestos != null)
+				{
+					foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lcFea.comprobante[0].resumen.impuestos)
 					{
-						foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lcFea.comprobante[0].resumen.impuestos)
+						if (imp != null)
 						{
-							if (imp != null)
-							{
-								imp.codigo_jurisdiccionSpecified = true;
-								imp.porcentaje_impuestoSpecified = true;
-								imp.importe_impuesto_moneda_origenSpecified = true;
-							}
+							imp.codigo_jurisdiccionSpecified = true;
+							imp.porcentaje_impuestoSpecified = true;
+							imp.importe_impuesto_moneda_origenSpecified = true;
 						}
 					}
-					Session["lote"] = lcFea;
-					Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
-
 				}
-				catch (Exception ex)
-				{
-					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el pdf.\\n " + ex.Message + "');</script>");
-				}
-            //}
+				Session["lote"] = lcFea;
+				Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
+			}
+			catch (Exception ex)
+			{
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el pdf.\\n " + ex.Message + "');</script>");
+			}
+            
 		}
 		
 		private void RegistrarActividad(FeaEntidades.InterFacturas.lote_comprobantes lote, System.Text.StringBuilder sb, System.Net.Mail.SmtpClient smtpClient, string smtpXAmb, System.IO.MemoryStream m)
@@ -3984,14 +3928,13 @@ namespace CedServicios.Site.Facturacion.Electronica
 
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            ModalPopupExtender1.Hide();
+            //ModalPopupExtender1.Hide();
         }
 
         protected void PuntoVtaDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
             {
-                //MonedaComprobanteDropDownList.SelectedValue
                 AjustarCamposXPtaVentaChanged(((DropDownList)sender).SelectedValue);
                 int auxPV = Convert.ToInt32(((DropDownList)sender).SelectedValue);
                 if (ViewState["PuntoVenta"] != null)
@@ -4023,6 +3966,36 @@ namespace CedServicios.Site.Facturacion.Electronica
             catch
             {
                 ResetearGrillas();
+            }
+            //Obtener si corresponde el número de lote.
+            try
+            {
+                NumeroLote();
+            }
+            catch
+            {
+                Id_LoteTextbox.Text = "";
+                Id_LoteTextbox.Enabled = true;
+            }
+        }
+
+        private void NumeroLote()
+        {
+            int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+            Entidades.PuntoVta puntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+            {
+                return pv.Nro == auxPV;
+            });
+            if (puntoVta.IdMetodoGeneracionNumeracionLote.Equals("Autonumerador") || puntoVta.IdMetodoGeneracionNumeracionLote.Equals("TimeStamp"))
+            {
+                RN.PuntoVta.GenerarNuevoNroLote(puntoVta, (Entidades.Sesion)Session["Sesion"]);
+                Id_LoteTextbox.Text = puntoVta.UltNroLote.ToString();
+                Id_LoteTextbox.Enabled = false;
+            }
+            else
+            {
+                Id_LoteTextbox.Text = "";
+                Id_LoteTextbox.Enabled = true;
             }
         }
 

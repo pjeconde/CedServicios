@@ -39,7 +39,9 @@
                                                 <td valign="middle">
                                                     <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Factura Electrónica">
                                                     </asp:Label>
-                                                    <asp:Label ID="PruebaPopup" runat="server" Text=""></asp:Label>
+                                                    <asp:Label ID="PruebaPopup" runat="server" Text="" Visible="false"></asp:Label>
+                                                    <asp:Button ID="PruebaPopupButton" runat="server" Text="Button" Visible="true" 
+                                                        CausesValidation="false" onclick="PruebaPopupButton_Click"/>
                                                 </td>
                                             </tr>
                                         </table>
@@ -1912,6 +1914,7 @@
             </td>
         </tr>
     </table>
+    <asp:LinkButton runat="server" ID="btnPopup" Text="pop" />
     <asp:Panel ID="MensajePopup" runat="server" CssClass="ModalWindow">
         <table width="100%">
             <tr>
@@ -1921,13 +1924,13 @@
             </tr>
             <tr>
                 <td align="center" style="padding-top: 20px">
-                    <asp:Button ID="SalirPuntoVtaButton" runat="server" Text="Continuar" OnClick="SalirButton_Click" />
+                    <asp:Button ID="SalirPuntoVtaButton" runat="server" Text="Continuar" CausesValidation="false" OnClick="SalirButton_Click" />
                 </td>
             </tr>
         </table>
     </asp:Panel>
-    <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" PopupControlID="MensajePopup"
-        PopupDragHandleControlID="MensajePopup" TargetControlID="PruebaPopup" BackgroundCssClass="modalBackground"
-        BehaviorID="mdlPopup">
+    <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" 
+    PopupControlID="MensajePopup" 
+    TargetControlID="btnPopup" >
     </cc1:ModalPopupExtender>
 </asp:Content>

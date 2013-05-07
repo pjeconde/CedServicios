@@ -660,10 +660,22 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             throw new Exception("El precio unitario es obligatorio para bono fiscal");
                         }
-                        else
+                        else 
                         {
-                            l.precio_unitario = 0;
-                            l.precio_unitarioSpecified = false;
+                            listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                            {
+                                return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                            });
+                             if (listaPV.Count != 0)
+                             {
+                                 l.precio_unitario = 0;
+                                 l.precio_unitarioSpecified = true;
+                             }
+                             else
+                             {
+                                 l.precio_unitario = 0;
+                                 l.precio_unitarioSpecified = false;
+                             }
                         }
                     }
                     else

@@ -40,6 +40,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Label PruebaPopup;
         
         /// <summary>
+        /// Control PruebaPopupButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button PruebaPopupButton;
+        
+        /// <summary>
         /// Control XMLFileUpload.
         /// </summary>
         /// <remarks>
@@ -1667,6 +1676,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary RequeridosValidationSummary;
+        
+        /// <summary>
+        /// Control btnPopup.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnPopup;
         
         /// <summary>
         /// Control MensajePopup.

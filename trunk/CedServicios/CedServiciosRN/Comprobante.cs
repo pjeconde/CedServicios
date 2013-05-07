@@ -90,7 +90,8 @@ namespace CedServicios.RN
 
             IBK.FacturaWebServiceConSchema objIBK;
             objIBK = new IBK.FacturaWebServiceConSchema();
-            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
+            //objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
+            objIBK.Url = "https://wsqacfe.interfacturas.com.ar/ws/FacturaWebServiceConSchema?wsdl";
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
@@ -121,8 +122,11 @@ namespace CedServicios.RN
                 IBK.lote_comprobantes_response lcr = objIBK.receiveFacturasConSchema(lcIBK);
 
                 string resultado = string.Empty;
-
-                if (!((IBK.lote_response)(lcr.Item)).estado.Equals("OK"))
+                if (lcr.Item.GetType() == typeof(IBK.lote_comprobantes_responseErrores_response))
+                {
+                    resultado = ((IBK.lote_comprobantes_responseErrores_response)lcr.Item).error[0].descripcion_error;
+                }
+                else if (!((IBK.lote_response)(lcr.Item)).estado.Equals("OK"))
                 {
                     if (((IBK.lote_response)lcr.Item).errores_lote != null)
                     {
@@ -998,13 +1002,26 @@ namespace CedServicios.RN
                         if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
                         {
                             cIBK.cabecera.informacion_comprobante.referencias[j] = new RN.IBK.informacion_comprobanteReferencias();
-                            if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip.Trim().ToUpper() == "S")
+                            if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip != null)
                             {
-                                cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = RN.IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.S;
+                                if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip.Trim().ToUpper() == "S")
+                                {
+                                    cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = RN.IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.S;
+                                    cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afipSpecified = true;
+                                }
+                                else if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip.Trim().ToUpper() == "N")
+                                {
+                                    cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = RN.IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.N;
+                                    cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afipSpecified = true;
+                                }
+                                else
+                                {
+                                    cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afipSpecified = false;
+                                }
                             }
-                            else if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip.Trim().ToUpper() == "N")
+                            else
                             {
-                                cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = RN.IBK.informacion_comprobanteReferenciasTipo_comprobante_afip.N;
+                                cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afipSpecified = false;
                             }
                             cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
                             cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Trim();
@@ -1019,9 +1036,12 @@ namespace CedServicios.RN
 
                     for (int j = 0; j < lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante.Length; j++)
                     {
-                        cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j] = new IBK.informacion_comprobanteInformacion_adicional_comprobante();
-                        cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j].tipo = lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j].tipo;
-                        cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j].valor = lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j].valor;
+                        if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j] != null)
+                        {
+                            cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j] = new IBK.informacion_comprobanteInformacion_adicional_comprobante();
+                            cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j].tipo = lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j].tipo;
+                            cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j].valor = lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j].valor;
+                        }
                     }
                 }
 
@@ -1128,13 +1148,16 @@ namespace CedServicios.RN
                             d.linea[j].descuentos = new IBK.lineaDescuentos[lc.comprobante[i].detalle.linea[j].lineaDescuentos.Length];
                             for (int k = 0; k < d.linea[j].descuentos.Length; k++)
                             {
-                                d.linea[j].descuentos[k] = new IBK.lineaDescuentos();
-                                d.linea[j].descuentos[k].descripcion_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].descripcion_descuento;
-                                d.linea[j].descuentos[k].importe_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento;
-                                d.linea[j].descuentos[k].importe_descuento_moneda_origen = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento_moneda_origen;
-                                d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento_moneda_origenSpecified;
-                                d.linea[j].descuentos[k].porcentaje_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].porcentaje_descuento;
-                                d.linea[j].descuentos[k].porcentaje_descuentoSpecified = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].porcentaje_descuentoSpecified;
+                                if (lc.comprobante[i].detalle.linea[j].lineaDescuentos[k] != null)
+                                {
+                                    d.linea[j].descuentos[k] = new IBK.lineaDescuentos();
+                                    d.linea[j].descuentos[k].descripcion_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].descripcion_descuento;
+                                    d.linea[j].descuentos[k].importe_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento;
+                                    d.linea[j].descuentos[k].importe_descuento_moneda_origen = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento_moneda_origen;
+                                    d.linea[j].descuentos[k].importe_descuento_moneda_origenSpecified = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].importe_descuento_moneda_origenSpecified;
+                                    d.linea[j].descuentos[k].porcentaje_descuento = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].porcentaje_descuento;
+                                    d.linea[j].descuentos[k].porcentaje_descuentoSpecified = lc.comprobante[i].detalle.linea[j].lineaDescuentos[k].porcentaje_descuentoSpecified;
+                                }
                             }
                         }
                         if (lc.comprobante[i].detalle.linea[j].informacion_adicional != null)
@@ -1142,9 +1165,12 @@ namespace CedServicios.RN
                             d.linea[j].informacion_adicional = new IBK.lineaInformacion_adicional[lc.comprobante[i].detalle.linea[j].informacion_adicional.Length];
                             for (int k = 0; k < d.linea[j].informacion_adicional.Length; k++)
                             {
-                                d.linea[j].informacion_adicional[k] = new IBK.lineaInformacion_adicional();
-                                d.linea[j].informacion_adicional[k].tipo = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].tipo;
-                                d.linea[j].informacion_adicional[k].valor = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].valor;
+                                if (lc.comprobante[i].detalle.linea[j].informacion_adicional[k] != null)
+                                {
+                                    d.linea[j].informacion_adicional[k] = new IBK.lineaInformacion_adicional();
+                                    d.linea[j].informacion_adicional[k].tipo = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].tipo;
+                                    d.linea[j].informacion_adicional[k].valor = lc.comprobante[i].detalle.linea[j].informacion_adicional[k].valor;
+                                }
                             }
                         }
                         d.linea[j].indicacion_exento_gravado = lc.comprobante[i].detalle.linea[j].indicacion_exento_gravado;

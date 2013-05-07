@@ -165,7 +165,7 @@
 										Width="100px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:TextBox ID="txtimporte_total_articulo" runat="server" Text='<%# Eval("importe_total_articulo") %>'
+									<asp:TextBox ID="txtimporte_total_articulo" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnEdicion" Text='<%# Eval("importe_total_articulo") %>'
 										Width="70px"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="ImpTotEditFilteredTextBoxExtender" runat="server"
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_total_articulo"
@@ -173,7 +173,7 @@
 									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtimporte_total_articulo" runat="server" Text='' Width="70px"></asp:TextBox>
+									<asp:TextBox ID="txtimporte_total_articulo" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnFooter" Text='' Width="70px"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="ImpTotFooterFilteredTextBoxExtender" runat="server"
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_total_articulo"
 										ValidChars="0123456789.">
