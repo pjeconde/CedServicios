@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="CedServicios.master.cs" Inherits="CedServicios.Site.CedServicios" %>
 
-<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="asp" %>
+<%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -42,8 +42,8 @@
 </head>
 <body>
     <form id="form1" runat="server" visible="true">
-    <asp:ScriptManager ID="MasterScriptManager" runat="server">
-	</asp:ScriptManager>
+    <cc1:ToolkitScriptManager ID="MasterScriptManager" runat="server">
+    </cc1:ToolkitScriptManager>
     <div id="DivUsuario" style="text-align:center">
         <table>
             <tr>

@@ -37,7 +37,7 @@ namespace CedServicios.Site {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.ScriptManager MasterScriptManager;
+        protected global::AjaxControlToolkit.ToolkitScriptManager MasterScriptManager;
         
         /// <summary>
         /// Control EmpresaImageButton.

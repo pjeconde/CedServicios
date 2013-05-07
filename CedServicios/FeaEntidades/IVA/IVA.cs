@@ -41,5 +41,14 @@ namespace FeaEntidades.IVA
 			lista.Add(new Veintisiete());
 			return lista;
 		}
+
+        public static List<IVA> ListaMinimaSinCero()
+        {
+            List<IVA> lista = new List<IVA>();
+            lista.Add(new DiezYMedio());
+            lista.Add(new Veintiuno());
+            lista.Add(new Veintisiete());
+            return lista;
+        }
 	}
 }

@@ -452,7 +452,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
 		internal void AgregarImpuestosIVA(System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas)
 		{
-			System.Collections.Generic.List<FeaEntidades.IVA.IVA> listaIVA = FeaEntidades.IVA.IVA.ListaMinima();
+            System.Collections.Generic.List<FeaEntidades.IVA.IVA> listaIVA = FeaEntidades.IVA.IVA.ListaMinimaSinCero();
 			double[] impivas = new double[listaIVA.Count];
             bool[] impivasinformados = new bool[listaIVA.Count];
             for (int i = 0; i < listadelineas.Count; i++)
@@ -463,8 +463,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         return e.Codigo == listadelineas[i].alicuota_iva;
                     });
-                    impivas[k] += listadelineas[i].importe_iva;
-                    impivasinformados[k] = true;
+                    if (k >= 0)
+                    {
+                        impivas[k] += listadelineas[i].importe_iva;
+                        impivasinformados[k] = true;
+                    }
                 }
             }
 			for (int j = 0; j<impivas.Length; j++)
@@ -477,7 +480,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     imp.codigo_impuesto = iva.Codigo;
                     imp.importe_impuesto = Math.Round(impivas[j], 2);
                     imp.porcentaje_impuestoSpecified = true;
-                    imp.porcentaje_impuesto = FeaEntidades.IVA.IVA.ListaMinima()[j].Codigo;
+                    imp.porcentaje_impuesto = FeaEntidades.IVA.IVA.ListaMinimaSinCero()[j].Codigo;
                     imp.descripcion = iva.Descr;
                     EliminarFilaAutomatica();
                     impuestos.Add(imp);

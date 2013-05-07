@@ -98,9 +98,19 @@
     <Content Include="Global.asax" />
     <Content Include="Imagenes\CajaBrownPeru.ico" />
     <Content Include="Imagenes\calendar.gif" />
+    <Content Include="Imagenes\CedAPC.jpg" />
+    <Content Include="Imagenes\CedCCT.jpg" />
     <Content Include="Imagenes\Cedeira.ico" />
     <Content Include="Imagenes\CedeiraSF-icono-animado.gif" />
     <Content Include="Imagenes\CedeiraSF-Logo.gif" />
+    <Content Include="Imagenes\CedeiraSF_v1.jpg" />
+    <Content Include="Imagenes\CedFCI-EsquemaProceso.jpg" />
+    <Content Include="Imagenes\CedFCI-Tablero_ch.jpg" />
+    <Content Include="Imagenes\CedJU.jpg" />
+    <Content Include="Imagenes\CedST-EsquemaMEP.jpg" />
+    <Content Include="Imagenes\CedST-Tablero_ch.jpg" />
+    <Content Include="Imagenes\eFact-R-XL.jpg" />
+    <Content Include="Imagenes\eFact-R.jpg" />
     <Content Include="InstitucionalContacto.aspx" />
     <Content Include="InstitucionalEmpresa.aspx" />
     <Content Include="InstitucionalRefeCom.aspx" />
@@ -126,6 +136,9 @@
     <Content Include="UsuarioLogin.aspx" />
     <Content Include="UsuarioOlvidoId.aspx" />
     <Content Include="UsuarioOlvidoPassword.aspx" />
+    <None Include="Descargas\Cedeira-SistAdminFCIs.pdf" />
+    <None Include="Descargas\Cedeira-SistTransfMEP.pdf" />
+    <Content Include="Descargas\eFact-R-XL.zip" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
