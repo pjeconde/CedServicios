@@ -3463,7 +3463,7 @@ namespace CedServicios.RN.IBK {
         
         private extensionesExtensiones_camara_facturas extensiones_camara_facturasField;
         
-        private object extensiones_datos_comercialesField;
+        private string extensiones_datos_comercialesField;
         
         private string extensiones_datos_marketingField;
         
@@ -3484,7 +3484,7 @@ namespace CedServicios.RN.IBK {
         }
         
         /// <comentarios/>
-        public object extensiones_datos_comerciales {
+        public string extensiones_datos_comerciales {
             get {
                 return this.extensiones_datos_comercialesField;
             }

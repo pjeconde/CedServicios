@@ -1265,7 +1265,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             FechaCAEVencimientoDatePickerWebUserControl.Text = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
             ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
             MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
-
+            //MotivoLoteTextBox.Text = lc.cabecera_lote.motivo;
             BindearDropDownLists();
         }
 		
@@ -1898,19 +1898,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 
         protected void EnviarIBKButton_Click(object sender, EventArgs e)
         {
-            //    if (RN.Fun.NoEstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-            //    {
-            //        if (!MonedaComprobanteDropDownList.Enabled)
-            //        {
-            //            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta funcionalidad es exclusiva del SERVICIO PREMIUM.  Contáctese con Cedeira Software Factory para acceder al servicio.');</script>");
-            //        }
-            //        else
-            //        {
-            //            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
-            //        }
-            //    }
-            //    else
-            //    {
             try
             {
                 string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
@@ -1921,27 +1908,28 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 try
                 {
-                    string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                    certificado = "0137b72aa415";
-
-                    org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
-
-                    org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
-
-                    FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
-                    lcIBK = Conversor.Entidad2IBK(lcFea);
-
+                    string certificado = "";
                     string respuesta = "";
                     
-                    //---CODIGO VIEJO para acceder al WebService del Sitio referenciado en la RN
-                    RN.Comprobante cc = new RN.Comprobante();
-                    respuesta = cc.EnviarIBK(lcFea, certificado);
-                    //-----------------------------------------------------------------------------------
-
-                    //respuesta = edyndns.EnviarIBK(lcIBK, certificado);
-
-                    respuesta = respuesta.Replace("@", "-");
-                    respuesta = respuesta.Replace("/", "-");
+                    certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                    org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
+                    string EnvioIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKUtilizarServidorExterno"];
+                    if (EnvioIBKUtilizarServidorExterno == "SI")
+                    {
+                        edyndns.Url = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKurl"];
+                    }
+                    org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
+                    FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
+                    lcIBK = Conversor.Entidad2IBK(lcFea);
+                    respuesta = edyndns.EnviarIBK(lcIBK, certificado);
+   
+                    //VIEJO MODO DE USO
+                    //certificado = NroCertif;
+                    //FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
+                    //RN.Comprobante cc = new RN.Comprobante();
+                    //respuesta = cc.EnviarIBK(lcFea, certificado);
+                    
+                    respuesta = respuesta.Replace("'", "-");
 
                     ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>");
                 }
@@ -1979,7 +1967,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + ex.Message + "');</script>");
             }
-            //}
         }
 
         private FeaEntidades.InterFacturas.lote_comprobantes GenerarLote()
@@ -2239,8 +2226,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-                //{
                 int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
                 try
                 {
@@ -2263,29 +2248,40 @@ namespace CedServicios.Site.Facturacion.Electronica
                     infcomprob.condicion_de_pago = Condicion_De_PagoTextBox.Text;
                     infcomprob.condicion_de_pagoSpecified = false;
                 }
-                //}
-                //else
-                //{
-                //    infcomprob.condicion_de_pago = string.Empty;
-                //    infcomprob.condicion_de_pagoSpecified = false;
-                //}
             }
 
             GenerarCodigoOperacion(infcomprob);
             GenerarCodigoConcepto(infcomprob);
-            infcomprob.cae = CAETextBox.Text;
+
             if (!CAETextBox.Text.Equals(string.Empty))
             {
+                infcomprob.cae = CAETextBox.Text;
                 infcomprob.caeSpecified = true;
             }
-            infcomprob.fecha_obtencion_cae = FechaCAEObtencionDatePickerWebUserControl.Text;
+            else
+            {
+                infcomprob.cae = null;
+                infcomprob.caeSpecified = false;
+            }
             if (!FechaCAEObtencionDatePickerWebUserControl.Text.ToString().Equals(string.Empty))
             {
+                infcomprob.fecha_obtencion_cae = FechaCAEObtencionDatePickerWebUserControl.Text;
                 infcomprob.fecha_obtencion_caeSpecified = true;
             }
-            infcomprob.fecha_vencimiento_cae = FechaCAEVencimientoDatePickerWebUserControl.Text;
+            else
+            {
+                infcomprob.fecha_obtencion_cae = null;
+                infcomprob.fecha_obtencion_caeSpecified = false;
+            }
+
             if (!FechaCAEVencimientoDatePickerWebUserControl.Text.Equals(string.Empty))
             {
+                infcomprob.fecha_vencimiento_cae = FechaCAEVencimientoDatePickerWebUserControl.Text;
+                infcomprob.fecha_vencimiento_caeSpecified = true;
+            }
+            else
+            {
+                infcomprob.fecha_vencimiento_cae = null;
                 infcomprob.fecha_vencimiento_caeSpecified = true;
             }
             if (!ResultadoTextBox.Text.Equals(string.Empty))
@@ -3598,104 +3594,92 @@ namespace CedServicios.Site.Facturacion.Electronica
 					sw.WriteLine("Consulta de:" + Cuit_VendedorTextBox.Text);
 				}
 			}
-            //if (CedWebRN.Fun.NoEstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-            //{
-            //    if (!MonedaComprobanteDropDownList.Enabled)
-            //    {
-            //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta funcionalidad es exclusiva del SERVICIO PREMIUM.  Contáctese con Cedeira Software Factory para acceder al servicio.');</script>");
-            //    }
-            //    else
-            //    {
-            //        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>");
-            //    }
-            //}
-            //else
-            //{
+			try
+			{
+				if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
+				{
+					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>");
+					return;
+				}
+				if (Id_LoteTextbox.Text.Equals(string.Empty))
+				{
+					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>");
+					return;
+				}
+				if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
+				{
+					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>");
+					return;
+				}
+
+                string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                if (NroCertif.Equals(string.Empty))
+                {
+                    ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
+                    return;
+                }
+
+                string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
+                string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
+                if (ConsultaIBKUtilizarServidorExterno == "SI")
+                {
+                    clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
+                }
+                org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
+                clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(Cuit_VendedorTextBox.Text), Convert.ToInt64(Id_LoteTextbox.Text), Convert.ToInt32(PuntoVtaDropDownList.SelectedValue), certificado);
+                CompletarUI(clcrdyndns, e);
+
+			}
+			catch (System.Web.Services.Protocols.SoapException soapEx)
+			{
 				try
 				{
-					if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
-					{
-						ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>");
-						return;
-					}
-					if (Id_LoteTextbox.Text.Equals(string.Empty))
-					{
-						ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>");
-						return;
-					}
-					if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
-					{
-						ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>");
-						return;
-					}
-
-                    string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
-                    if (NroCertif.Equals(string.Empty))
-                    {
-                        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
-                        return;
-                    }
-
-                    string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-
-                    //Ir por WS
-                    org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
-                    org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
-                    clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(Cuit_VendedorTextBox.Text), Convert.ToInt64(Id_LoteTextbox.Text), Convert.ToInt32(PuntoVtaDropDownList.SelectedValue), certificado);
-
-                    CompletarUI(clcrdyndns, e);
-
+					XmlDocument doc = new XmlDocument();
+					doc.LoadXml(soapEx.Detail.OuterXml);
+					XmlNamespaceManager nsManager = new
+						XmlNamespaceManager(doc.NameTable);
+					nsManager.AddNamespace("errorNS",
+						"http://www.cedeira.com.ar/webservices");
+					XmlNode Node =
+						doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
+					string errorNumber =
+						Node.SelectSingleNode("errorNS:ErrorNumber",
+						nsManager).InnerText;
+					string errorMessage =
+						Node.SelectSingleNode("errorNS:ErrorMessage",
+						nsManager).InnerText;
+					string errorSource =
+						Node.SelectSingleNode("errorNS:ErrorSource",
+						nsManager).InnerText;
+					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + " : " + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>");
 				}
-				catch (System.Web.Services.Protocols.SoapException soapEx)
+				catch (Exception)
 				{
-					try
-					{
-						XmlDocument doc = new XmlDocument();
-						doc.LoadXml(soapEx.Detail.OuterXml);
-						XmlNamespaceManager nsManager = new
-							XmlNamespaceManager(doc.NameTable);
-						nsManager.AddNamespace("errorNS",
-							"http://www.cedeira.com.ar/webservices");
-						XmlNode Node =
-							doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
-						string errorNumber =
-							Node.SelectSingleNode("errorNS:ErrorNumber",
-							nsManager).InnerText;
-						string errorMessage =
-							Node.SelectSingleNode("errorNS:ErrorMessage",
-							nsManager).InnerText;
-						string errorSource =
-							Node.SelectSingleNode("errorNS:ErrorSource",
-							nsManager).InnerText;
-						ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + " : " + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>");
-					}
-					catch (Exception)
-					{
-						throw soapEx;
-					}
+					throw soapEx;
 				}
-				catch (System.Security.Cryptography.CryptographicException ex)
+			}
+			catch (System.Security.Cryptography.CryptographicException ex)
+			{
+				using (FileStream fs = File.Open(Server.MapPath("~/ConsultarErrores.txt"), FileMode.Append, FileAccess.Write))
 				{
-					using (FileStream fs = File.Open(Server.MapPath("~/ConsultarErrores.txt"), FileMode.Append, FileAccess.Write))
+					using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
 					{
-						using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+						sw.WriteLine("Consulta de:" + Cuit_VendedorTextBox.Text);
+						sw.WriteLine(ex.Message);
+						sw.WriteLine(ex.StackTrace);
+						if (ex.InnerException != null)
 						{
-							sw.WriteLine("Consulta de:" + Cuit_VendedorTextBox.Text);
-							sw.WriteLine(ex.Message);
-							sw.WriteLine(ex.StackTrace);
-							if (ex.InnerException != null)
-							{
-								sw.WriteLine(ex.InnerException.Message);
-							}
+							sw.WriteLine(ex.InnerException.Message);
 						}
 					}
-					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.Replace("\r", "").Replace("\n", "") + "');</script>");
 				}
-				catch (Exception ex)
-				{
-					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al consultar a Interfacturas.\\n " + ex.Message.Replace("\n", "") + "');</script>");
-				}
-            //}
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.Replace("\r", "").Replace("\n", "") + "');</script>");
+			}
+			catch (Exception ex)
+			{
+				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al consultar a Interfacturas.\\n " + ex.Message.Replace("\n", "") + "');</script>");
+			}
 		}
 
 		protected void PDFButton_Click(object sender, EventArgs e)

@@ -40,7 +40,7 @@
                                                     <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Factura Electrónica">
                                                     </asp:Label>
                                                     <asp:Label ID="PruebaPopup" runat="server" Text="" Visible="false"></asp:Label>
-                                                    <asp:Button ID="PruebaPopupButton" runat="server" Text="Button" Visible="true" 
+                                                    <asp:Button ID="PruebaPopupButton" runat="server" Text="Button" Visible="false" 
                                                         CausesValidation="false" onclick="PruebaPopupButton_Click"/>
                                                 </td>
                                             </tr>
@@ -1914,7 +1914,7 @@
             </td>
         </tr>
     </table>
-    <asp:LinkButton runat="server" ID="btnPopup" Text="pop" />
+    <asp:LinkButton runat="server" ID="btnPopup" Text="" />
     <asp:Panel ID="MensajePopup" runat="server" CssClass="ModalWindow">
         <table width="100%">
             <tr>

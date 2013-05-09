@@ -90,8 +90,7 @@ namespace CedServicios.RN
 
             IBK.FacturaWebServiceConSchema objIBK;
             objIBK = new IBK.FacturaWebServiceConSchema();
-            //objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
-            objIBK.Url = "https://wsqacfe.interfacturas.com.ar/ws/FacturaWebServiceConSchema?wsdl";
+            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturas"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
@@ -140,7 +139,7 @@ namespace CedServicios.RN
                 }
                 else
                 {
-                    resultado = "Comprobante enviado satisfactoriamente a Interfacturas";
+                    resultado = "Comprobante enviado satisfactoriamente a Interfacturas. Presionando el botón Consultar puede obtener los datos del Comprobante, su Estado y el CAE correspondiente.";
                 }
                 return resultado;
             }
@@ -627,11 +626,19 @@ namespace CedServicios.RN
                     }
                     if (lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales != null)
                     {
-                        cIBK.extensiones.extensiones_datos_comerciales = lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString();
+                        if (!lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
+                        {
+                            string aux = HexToString(lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString());
+                            cIBK.extensiones.extensiones_datos_comerciales = aux;
+                        }
                     }
                     if (lcIBK.comprobante[i].extensiones.extensiones_datos_marketing != null)
                     {
-                        cIBK.extensiones.extensiones_datos_marketing = lcIBK.comprobante[i].extensiones.extensiones_datos_marketing;
+                        if (!lcIBK.comprobante[i].extensiones.extensiones_datos_marketing.Equals(string.Empty))
+                        {
+                            string aux = HexToString(lcIBK.comprobante[i].extensiones.extensiones_datos_marketing.ToString());
+                            cIBK.extensiones.extensiones_datos_marketing = aux;
+                        }
                     }
                     if (lcIBK.comprobante[i].extensiones.extensiones_destinatarios != null)
                     {
@@ -740,7 +747,7 @@ namespace CedServicios.RN
             return lcFEA;
         }
 
-        private IBK.lote_comprobantes Fea2Ibk(FeaEntidades.InterFacturas.lote_comprobantes lc)
+        public IBK.lote_comprobantes Fea2Ibk(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
 
@@ -1101,7 +1108,15 @@ namespace CedServicios.RN
                         d.linea[j].cantidadSpecified = lc.comprobante[i].detalle.linea[j].cantidadSpecified;
                         d.linea[j].codigo_producto_comprador = lc.comprobante[i].detalle.linea[j].codigo_producto_comprador;
                         d.linea[j].codigo_producto_vendedor = lc.comprobante[i].detalle.linea[j].codigo_producto_vendedor;
-                        d.linea[j].descripcion = lc.comprobante[i].detalle.linea[j].descripcion;
+                        if (lc.comprobante[i].detalle.linea[j].descripcion != "" && lc.comprobante[i].detalle.linea[j].descripcion.Substring(0, 1) != "%")
+                        {
+                            string aux = ConvertToHex(lc.comprobante[i].detalle.linea[j].descripcion);
+                            d.linea[j].descripcion = aux;
+                        }
+                        else
+                        {
+                            d.linea[j].descripcion = lc.comprobante[i].detalle.linea[j].descripcion;
+                        }
 
                         d.linea[j].GTIN = lc.comprobante[i].detalle.linea[j].GTIN;
                         d.linea[j].GTINSpecified = lc.comprobante[i].detalle.linea[j].GTINSpecified;
@@ -1205,13 +1220,27 @@ namespace CedServicios.RN
                     }
                     if (lc.comprobante[i].extensiones.extensiones_datos_comerciales != null && lc.comprobante[i].extensiones.extensiones_datos_comerciales != "")
                     {
-                        string aux = ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_comerciales.ToString());
-                        cIBK.extensiones.extensiones_datos_comerciales = aux;
+                        if (lc.comprobante[i].extensiones.extensiones_datos_comerciales.Substring(0, 1) != "%")
+                        {
+                            string aux = ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_comerciales.ToString());
+                            cIBK.extensiones.extensiones_datos_comerciales = aux;
+                        }
+                        else
+                        {
+                            cIBK.extensiones.extensiones_datos_comerciales = lc.comprobante[i].extensiones.extensiones_datos_comerciales;
+                        }
                     }
                     if (lc.comprobante[i].extensiones.extensiones_datos_marketing != null && lc.comprobante[i].extensiones.extensiones_datos_marketing != "")
                     {
-                        string aux = ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_marketing.ToString());
-                        cIBK.extensiones.extensiones_datos_marketing = aux;
+                        if (lc.comprobante[i].extensiones.extensiones_datos_marketing.Substring(0, 1) != "%")
+                        {
+                            string aux = ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_marketing.ToString());
+                            cIBK.extensiones.extensiones_datos_marketing = aux;
+                        }
+                        else
+                        {
+                            cIBK.extensiones.extensiones_datos_marketing = lc.comprobante[i].extensiones.extensiones_datos_marketing;
+                        }
                     }
                     if (lc.comprobante[i].extensiones.extensiones_signatures != null && lc.comprobante[i].extensiones.extensiones_signatures != "")
                     {
@@ -1377,19 +1406,15 @@ namespace CedServicios.RN
         }
         public string HexToString(string Hex)
         {
-            byte[] Bytes;
-            int ByteLength;
-            string HexValue = "\x0\x1\x2\x3\x4\x5\x6\x7\x8\x9|||||||\xA\xB\xC\xD\xE\xF";
             Hex = Hex.Replace("%", "");
-            ByteLength = Hex.Length / 2;
-            Bytes = new byte[ByteLength];
-            for (int x = 0, i = 0; i < Hex.Length; i += 2, x += 1)
+            int numberChars = Hex.Length;
+            byte[] bytes = new byte[numberChars / 2];
+            for (int i = 0; i < numberChars; i += 2)
             {
-                Bytes[x] = (byte)(HexValue[Char.ToUpper(Hex[i + 0]) - '0'] << 4);
-                Bytes[x] |= (byte)(HexValue[Char.ToUpper(Hex[i + 1]) - '0']);
+                bytes[i / 2] = Convert.ToByte(Hex.Substring(i, 2), 16);
             }
             System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
-            string str = enc.GetString(Bytes);
+            string str = enc.GetString(bytes);
             str = SacarEntityName(str);
             return str;
         }
