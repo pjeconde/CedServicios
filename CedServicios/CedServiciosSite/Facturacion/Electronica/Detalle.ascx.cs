@@ -234,12 +234,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             ValidarDescripcion(l, (TextBox)detalleGridView.FooterRow.FindControl("txtdescripcion"));
             ValidarImporte(l, (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"));
             ValidarImporteIVA(l, (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"));
+            ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado"));
             ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"));
             ValidarUnidad(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad"));
             ValidarCantidad(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcantidad"));
             ValidarCodigoProductoComprador(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador"));
             ValidarCodigoProductoVendedor(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor"));
-            ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado"));
             ValidarPrecioUnitario(l, (TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario"));
         }
 
