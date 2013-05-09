@@ -1,5 +1,6 @@
 using System;
 using System.Data;
+using System.Text;
 using System.Configuration;
 using System.Web;
 using System.Web.Security;
@@ -99,7 +100,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                 }
 
-
                 cIBK.cabecera.informacion_comprobante.resultado = lc.comprobante[i].cabecera.informacion_comprobante.resultado;
                 cIBK.cabecera.informacion_comprobante.tipo_de_comprobante = lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
 
@@ -128,14 +128,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                 cIBK.cabecera.informacion_vendedor.provincia = lc.comprobante[i].cabecera.informacion_vendedor.provincia;
                 cIBK.cabecera.informacion_vendedor.telefono = lc.comprobante[i].cabecera.informacion_vendedor.telefono;
 
-
-                cIBK.extensiones = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteExtensiones();
-
-
                 org.dyndns.cedweb.envio.lcComprobanteDetalle d = new org.dyndns.cedweb.envio.lcComprobanteDetalle();
-                FeaEntidades.InterFacturas.detalle detalle = lc.comprobante[0].detalle;
-                d.linea = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteDetalleLinea[lc.comprobante[i].detalle.linea.Length];
-
+                FeaEntidades.InterFacturas.detalle detalle = lc.comprobante[i].detalle;
+                d.linea = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteDetalleLinea[detalle.linea.Length];
+                d.comentarios = detalle.comentarios;
                 for (int j = 0; j < detalle.linea.Length; j++)
                 {
                     if (detalle.linea[j] != null)
@@ -222,9 +218,43 @@ namespace CedServicios.Site.Facturacion.Electronica
                         break;
                     }
                 }
-
                 cIBK.detalle = d;
 
+                //Info Extensiones
+                if (lc.comprobante[i].extensiones != null)
+                {
+                    cIBK.extensiones = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteExtensiones();
+                    if (lc.comprobante[i].extensiones.extensiones_camara_facturas != null)
+                    {
+                        cIBK.extensiones.extensiones_camara_facturas = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteExtensionesExtensiones_camara_facturas();
+                        if (lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion != null)
+                        {
+                            cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Trim();
+                        }
+                        cIBK.extensiones.extensiones_camara_facturas.id_idioma = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma.Trim();
+                        if (lc.comprobante[i].extensiones.extensiones_camara_facturas.id_template != null)
+                        {
+                            cIBK.extensiones.extensiones_camara_facturas.id_template = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_template.Trim();
+                        }
+                    }
+                    if (lc.comprobante[i].extensiones.extensiones_datos_comerciales != null && lc.comprobante[i].extensiones.extensiones_datos_comerciales != "")
+                    {
+                        cIBK.extensiones.extensiones_datos_comerciales = lc.comprobante[i].extensiones.extensiones_datos_comerciales;
+                    }
+                    if (lc.comprobante[i].extensiones.extensiones_datos_marketing != null && lc.comprobante[i].extensiones.extensiones_datos_marketing != "")
+                    {
+                        cIBK.extensiones.extensiones_datos_marketing = lc.comprobante[i].extensiones.extensiones_datos_marketing;
+                    }
+                    if (lc.comprobante[i].extensiones.extensiones_signatures != null && lc.comprobante[i].extensiones.extensiones_signatures != "")
+                    {
+                        cIBK.extensiones.extensiones_signatures = lc.comprobante[i].extensiones.extensiones_signatures;
+                    }
+                    if (lc.comprobante[i].extensiones.extensiones_destinatarios != null && lc.comprobante[i].extensiones.extensiones_destinatarios.email != "")
+                    {
+                        cIBK.extensiones.extensiones_destinatarios = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteExtensionesExtensiones_destinatarios();
+                        cIBK.extensiones.extensiones_destinatarios.email = lc.comprobante[i].extensiones.extensiones_destinatarios.email.Trim();
+                    }
+                }
 
                 cIBK.resumen = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteResumen();
                 cIBK.resumen.cant_alicuotas_iva = lc.comprobante[i].resumen.cant_alicuotas_iva;
@@ -322,6 +352,93 @@ namespace CedServicios.Site.Facturacion.Electronica
                 lcWS.comprobante[i] = cIBK;
             }
             return lcWS;
+        }
+
+        private static string ConvertToHex(string asciiString)
+        {
+            asciiString = PonerEntityName(asciiString);
+            byte[] b = Encoding.ASCII.GetBytes(asciiString);
+            string salida = "";
+            for (int i = 0; i < b.Length; i++)
+            {
+                string ascii = b[i].ToString();
+                int n = Convert.ToInt32(ascii);
+                string r = n.ToString("x");
+                salida += "%" + r;
+            }
+            return salida;
+        }
+        private static string PonerEntityName(string texto)
+        {
+            texto = texto.Replace("á", "&aacute;");
+            texto = texto.Replace("é", "&eacute;");
+            texto = texto.Replace("í", "&iacute;");
+            texto = texto.Replace("ó", "&oacute;");
+            texto = texto.Replace("ú", "&uacute;");
+            texto = texto.Replace("º", "&ordm;");
+            texto = texto.Replace("à", "&agrave;");
+            texto = texto.Replace("è", "&egrave;");
+            texto = texto.Replace("ì", "&igrave;");
+            texto = texto.Replace("ò", "&ograve;");
+            texto = texto.Replace("ù", "&ugrave;");
+            texto = texto.Replace("ñ", "&ntilde;");
+            texto = texto.Replace("$", "&#36");
+            //Mayúsculas
+            texto = texto.Replace("Á", "&Aacute;");
+            texto = texto.Replace("É", "&Eacute;");
+            texto = texto.Replace("Í", "&Iacute;");
+            texto = texto.Replace("Ó", "&Oacute;");
+            texto = texto.Replace("Ú", "&Uacute;");
+            texto = texto.Replace("À", "&Agrave;");
+            texto = texto.Replace("È", "&Egrave;");
+            texto = texto.Replace("Ì", "&Igrave;");
+            texto = texto.Replace("Ò", "&Ograve;");
+            texto = texto.Replace("Ù", "&Ugrave;");
+            texto = texto.Replace("Ñ", "&Ntilde;");
+            return texto;
+        }
+        private static string HexToString(string Hex)
+        {
+            Hex = Hex.Replace("%", "");
+            int numberChars = Hex.Length;
+            byte[] bytes = new byte[numberChars / 2];
+            for (int i = 0; i < numberChars; i += 2)
+            {
+                bytes[i / 2] = Convert.ToByte(Hex.Substring(i, 2), 16);
+            }
+            System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
+            string str = enc.GetString(bytes);
+            str = SacarEntityName(str);
+            return str;
+        }
+        private static string SacarEntityName(string texto)
+        {
+            texto = texto.Replace("&aacute;", "á");
+            texto = texto.Replace("&eacute;", "é");
+            texto = texto.Replace("&iacute;", "í");
+            texto = texto.Replace("&oacute;", "ó");
+            texto = texto.Replace("&uacute;", "ú");
+            texto = texto.Replace("&ordm;", "º");
+            texto = texto.Replace("&agrave;", "à");
+            texto = texto.Replace("&egrave;", "è");
+            texto = texto.Replace("&igrave;", "ì");
+            texto = texto.Replace("&ograve;", "ò");
+            texto = texto.Replace("&ugrave;", "ù");
+            texto = texto.Replace("&ntilde;", "ñ");
+            texto = texto.Replace("&#36", "$");
+            //Mayúsculas
+            texto = texto.Replace("&Aacute;", "Á");
+            texto = texto.Replace("&Eacute;", "É");
+            texto = texto.Replace("&Iacute;", "Í");
+            texto = texto.Replace("&Oacute;", "Ó");
+            texto = texto.Replace("&Uacute;", "Ú");
+            texto = texto.Replace("&Agrave;", "À");
+            texto = texto.Replace("&Egrave;", "È");
+            texto = texto.Replace("&Igrave;", "Ì");
+            texto = texto.Replace("&Ograve;", "Ò");
+            texto = texto.Replace("&Ugrave;", "Ù");
+            texto = texto.Replace("&Ntilde;", "Ñ");
+            return texto;
         }
     }
 }
