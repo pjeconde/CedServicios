@@ -88,6 +88,16 @@ namespace CedServicios.DB
             a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '" + Funciones.ObjetoSerializado(Hasta) + "')");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void CambiarEstado(Entidades.Articulo Articulo, string Estado)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Articulo set ");
+            a.Append("Estado='" + Estado + "' ");
+            a.AppendLine("where Cuit='" + Articulo.Cuit + "' and IdArticulo='" + Articulo.Id + "' ");
+            string evento = (Estado == "DeBaja") ? "Baja" : "AnulBaja";
+            a.AppendLine("insert Log values (" + Articulo.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Articulo', '" + evento + "', '" + Estado + "', '') ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
         public List<Entidades.Articulo> ListaPorCuityId(string Cuit, string IdArticulo)
         {
             List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
