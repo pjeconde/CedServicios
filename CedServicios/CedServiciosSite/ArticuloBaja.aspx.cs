@@ -38,30 +38,39 @@ namespace CedServicios.Site
                 IndicacionExentoGravadoDropDownList.Enabled = false;
                 AlicuotaIVADropDownList.Enabled = false;
 
+                if (articulo.Estado=="Vigente")
+                {
+                    TituloPaginaLabel.Text = "Baja de Artículo";
+                    AceptarButton.Text = "Dar de Baja";
+                }
+                else
+                {
+                    TituloPaginaLabel.Text = "Anulación de Baja de Artículo";
+                    AceptarButton.Text = "Anular Baja";
+                }
                 AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.Articulo articuloDesde = (Entidades.Articulo)Session["Articulo"];
-            Entidades.Articulo articuloHasta = RN.Articulo.ObternerCopia(articuloDesde);
+            Entidades.Articulo articulo = (Entidades.Articulo)Session["Articulo"];
             try
             {
-                articuloHasta.Cuit = CUITTextBox.Text;
-                articuloHasta.Id = IdTextBox.Text;
-                articuloHasta.Descr = DescrTextBox.Text;
-                articuloHasta.GTIN = GTINTextBox.Text;
-                articuloHasta.Unidad.Id = UnidadDropDownList.SelectedValue;
-                articuloHasta.Unidad.Descr = UnidadDropDownList.SelectedItem.Text;
-                articuloHasta.IndicacionExentoGravado = IndicacionExentoGravadoDropDownList.SelectedValue;
-                articuloHasta.AlicuotaIVA = Convert.ToDouble(AlicuotaIVADropDownList.SelectedValue);
-                RN.Articulo.Modificar(articuloDesde, articuloHasta, sesion);
+
+                if (AceptarButton.Text == "Dar de Baja")
+                {
+                    RN.Articulo.CambiarEstado(articulo, "DeBaja", sesion);
+                }
+                else
+                {
+                    RN.Articulo.CambiarEstado(articulo, "Vigente", sesion);
+                }
 
                 AceptarButton.Enabled = false;
                 SalirButton.Text = "Salir";
 
-                MensajeLabel.Text = "El Artículo fué modificado satisfactoriamente";
+                MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
             }
             catch (Exception ex)
             {

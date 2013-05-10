@@ -33,6 +33,11 @@ namespace CedServicios.RN
             DB.Articulo db = new DB.Articulo(Sesion);
             db.Modificar(ArticuloDesde, ArticuloHasta);
         }
+        public static void CambiarEstado(Entidades.Articulo Articulo, string Estado, Entidades.Sesion Sesion)
+        {
+            DB.Articulo db = new DB.Articulo(Sesion);
+            db.CambiarEstado(Articulo, Estado);
+        }
         public static Entidades.Articulo ObternerCopia(Entidades.Articulo Desde)
         {
             Entidades.Articulo hasta = new Entidades.Articulo();
