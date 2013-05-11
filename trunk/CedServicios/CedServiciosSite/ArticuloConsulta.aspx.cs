@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace CedServicios.Site
 {
@@ -36,6 +37,10 @@ namespace CedServicios.Site
             {
                 LinkButton verLinkButton = (LinkButton)e.Row.FindControl("VerLinkButton");
                 verLinkButton.CommandArgument = e.Row.RowIndex.ToString();
+                if (e.Row.Cells[6].Text != "Vigente")
+                {
+                    e.Row.ForeColor = Color.Red;
+                }
             }
         }
         protected void ArticulosGridView_RowCommand(object sender, GridViewCommandEventArgs e)

@@ -68,9 +68,9 @@
                 <td style="padding-top:20px;" colspan="3">
                     <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                         <asp:GridView ID="ClientesGridView" runat="server" 
-                            AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand" OnRowDataBound="ClientesGridView_RowDataBound">
+                            AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand" OnRowDataBound="ClientesGridView_RowDataBound" CssClass="tituloGrilla" GridLines="None">
                             <Columns>
-                                <asp:ButtonField HeaderText="" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link">
+                                <asp:ButtonField HeaderText="" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue" ItemStyle-Width="90px">
                                 </asp:ButtonField>
                                 <asp:BoundField DataField="Cuit" HeaderText="Cuit" SortExpression="Cuit" Visible="false">
                                     <headerstyle horizontalalign="center" wrap="False" />
@@ -96,12 +96,8 @@
                                     <headerstyle horizontalalign="center" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="EmailAvisoVisualizacion" HeaderText="Email Aviso Visualizacion" SortExpression="EmailAvisoVisualizacion">
+                                <asp:BoundField DataField="DesambiguacionCuitPais" HeaderText="IdClienteExt" SortExpression="DesambiguacionCuitPais">
                                     <headerstyle horizontalalign="left" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="PasswordAvisoVisualizacion" HeaderText="Password Aviso Visualizacion" SortExpression="PasswordAvisoVisualizacion">
-                                    <headerstyle horizontalalign="center" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>
                             </Columns>

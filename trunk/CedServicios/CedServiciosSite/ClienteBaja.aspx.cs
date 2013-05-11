@@ -72,59 +72,39 @@ namespace CedServicios.Site
                 EmailAvisoVisualizacionTextBox.Enabled = false;
                 PasswordAvisoVisualizacionTextBox.Enabled = false;
 
+                if (cliente.WF.Estado == "Vigente")
+                {
+                    TituloPaginaLabel.Text = "Baja de Cliente";
+                    AceptarButton.Text = "Dar de Baja";
+                }
+                else
+                {
+                    TituloPaginaLabel.Text = "Anulación de Baja de Cliente";
+                    AceptarButton.Text = "Anular Baja";
+                }
                 AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.Cliente clienteDesde = (Entidades.Cliente)Session["Cliente"];
-            Entidades.Cliente clienteHasta = RN.Cliente.ObternerCopia(clienteDesde);
+            Entidades.Cliente cliente = (Entidades.Cliente)Session["Cliente"];
             try
             {
-                clienteHasta.Cuit = CUITTextBox.Text;
-                clienteHasta.Documento.Tipo.Id = TipoDocDropDownList.SelectedValue;
-                clienteHasta.Documento.Tipo.Descr = TipoDocDropDownList.SelectedItem.Text;
-                if (TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
+
+                if (AceptarButton.Text == "Dar de Baja")
                 {
-                    clienteHasta.Documento.Nro = Convert.ToInt64(DestinosCuitDropDownList.SelectedItem.Value);
+                    RN.Cliente.CambiarEstado(cliente, "DeBaja", sesion);
                 }
                 else
                 {
-                    clienteHasta.Documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                    RN.Cliente.CambiarEstado(cliente, "Vigente", sesion);
                 }
-                clienteHasta.RazonSocial = RazonSocialTextBox.Text;
-                clienteHasta.Domicilio.Calle = Domicilio.Calle;
-                clienteHasta.Domicilio.Nro = Domicilio.Nro;
-                clienteHasta.Domicilio.Piso = Domicilio.Piso;
-                clienteHasta.Domicilio.Depto = Domicilio.Depto;
-                clienteHasta.Domicilio.Manzana = Domicilio.Manzana;
-                clienteHasta.Domicilio.Sector = Domicilio.Sector;
-                clienteHasta.Domicilio.Torre = Domicilio.Torre;
-                clienteHasta.Domicilio.Localidad = Domicilio.Localidad;
-                clienteHasta.Domicilio.Provincia.Id = Domicilio.IdProvincia;
-                clienteHasta.Domicilio.Provincia.Descr = Domicilio.DescrProvincia;
-                clienteHasta.Domicilio.CodPost = Domicilio.CodPost;
-                clienteHasta.Contacto.Nombre = Contacto.Nombre;
-                clienteHasta.Contacto.Email = Contacto.Email;
-                clienteHasta.Contacto.Telefono = Contacto.Telefono;
-                clienteHasta.DatosImpositivos.IdCondIVA = DatosImpositivos.IdCondIVA;
-                clienteHasta.DatosImpositivos.DescrCondIVA = DatosImpositivos.DescrCondIVA;
-                clienteHasta.DatosImpositivos.IdCondIngBrutos = DatosImpositivos.IdCondIngBrutos;
-                clienteHasta.DatosImpositivos.DescrCondIngBrutos = DatosImpositivos.DescrCondIngBrutos;
-                clienteHasta.DatosImpositivos.NroIngBrutos = DatosImpositivos.NroIngBrutos;
-                clienteHasta.DatosImpositivos.FechaInicioActividades = DatosImpositivos.FechaInicioActividades;
-                clienteHasta.DatosIdentificatorios.GLN = DatosIdentificatorios.GLN;
-                clienteHasta.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
-                clienteHasta.IdCliente = IdClienteTextBox.Text;
-                clienteHasta.EmailAvisoVisualizacion = EmailAvisoVisualizacionTextBox.Text;
-                clienteHasta.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
-                RN.Cliente.Modificar(clienteDesde, clienteHasta, sesion);
 
                 AceptarButton.Enabled = false;
                 SalirButton.Text = "Salir";
 
-                MensajeLabel.Text = "El Cliente fué modificado satisfactoriamente";
+                MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
             }
             catch (Exception ex)
             {

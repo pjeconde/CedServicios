@@ -63,6 +63,11 @@ namespace CedServicios.RN
             DB.Cliente db = new DB.Cliente(Sesion);
             db.Modificar(ClienteDesde, ClienteHasta);
         }
+        public static void CambiarEstado(Entidades.Cliente Cliente, string Estado, Entidades.Sesion Sesion)
+        {
+            DB.Cliente db = new DB.Cliente(Sesion);
+            db.CambiarEstado(Cliente, Estado);
+        }
         public static Entidades.Cliente ObternerCopia(Entidades.Cliente Desde)
         {
             Entidades.Cliente hasta = new Entidades.Cliente();
@@ -70,6 +75,8 @@ namespace CedServicios.RN
             hasta.Contacto.Telefono = Desde.Contacto.Telefono;
             hasta.Contacto.Email = Desde.Contacto.Email;
             hasta.Cuit = Desde.Cuit;
+            hasta.IdCliente = Desde.IdCliente;
+            hasta.DesambiguacionCuitPais = Desde.DesambiguacionCuitPais;
             hasta.Documento.Tipo.Id = Desde.Documento.Tipo.Id;
             hasta.Documento.Tipo.Descr = Desde.Documento.Tipo.Descr;
             hasta.Documento.Nro = Desde.Documento.Nro;

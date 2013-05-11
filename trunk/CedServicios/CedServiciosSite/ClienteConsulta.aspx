@@ -16,7 +16,7 @@
             <td style="padding-top:20px;">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                     <asp:GridView ID="ClientesGridView" runat="server"
-                        AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand" OnRowDataBound="ClientesGridView_RowDataBound">
+                        AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand" OnRowDataBound="ClientesGridView_RowDataBound" CssClass="tituloGrilla" GridLines="None">
                         <Columns>
                             <asp:TemplateField>
                                 <ItemTemplate>

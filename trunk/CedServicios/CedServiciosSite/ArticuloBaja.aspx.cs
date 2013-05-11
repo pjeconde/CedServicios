@@ -38,7 +38,7 @@ namespace CedServicios.Site
                 IndicacionExentoGravadoDropDownList.Enabled = false;
                 AlicuotaIVADropDownList.Enabled = false;
 
-                if (articulo.Estado=="Vigente")
+                if (articulo.WF.Estado == "Vigente")
                 {
                     TituloPaginaLabel.Text = "Baja de Artículo";
                     AceptarButton.Text = "Dar de Baja";

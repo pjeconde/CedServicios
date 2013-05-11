@@ -23,6 +23,11 @@ namespace CedServicios.RN
             DB.PuntoVta db = new DB.PuntoVta(Sesion);
             db.Modificar(PuntoVtaDesde, PuntoVtaHasta);
         }
+        public static void CambiarEstado(Entidades.PuntoVta PuntoVta, string Estado, Entidades.Sesion Sesion)
+        {
+            DB.PuntoVta db = new DB.PuntoVta(Sesion);
+            db.CambiarEstado(PuntoVta, Estado);
+        }
         public static Entidades.PuntoVta ObternerCopia(Entidades.PuntoVta Desde)
         {
             Entidades.PuntoVta hasta = new Entidades.PuntoVta();
