@@ -95,7 +95,6 @@
             <td align="left" style="height: 24px; padding-top:20px">
                 <asp:Button ID="AceptarButton" runat="server" TabIndex="4" Text="Aceptar" onclick="AceptarButton_Click" />
                 <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="5" Text="Cancelar" PostBackUrl="~/Default.aspx" />
-                <asp:Button ID="UltNroLoteButton" runat="server" CausesValidation="false" TabIndex="5" Text="Generar proximo nro.lote" onclick="UltNroLoteButton_Click" />
             </td>
         </tr>
         <tr>

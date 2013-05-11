@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace CedServicios.Site
 {
@@ -29,7 +30,9 @@ namespace CedServicios.Site
                     }
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     IdUNDropDownList.DataSource = sesion.Cuit.UNs;
-                    PuntoVtaDropDownList.DataSource = sesion.UN.PuntosVta;
+                    //PuntoVtaDropDownList.DataSource = sesion.UN.PuntosVta;
+                    PuntosVtaGridView.DataSource = sesion.UN.PuntosVta;
+                    PuntosVtaGridView.DataBind();
                     DataBind();
 
                     CUITTextBox.Text = sesion.Cuit.Nro;
@@ -43,17 +46,27 @@ namespace CedServicios.Site
                 }
             }
         }
-        protected void ContinuarButton_Click(object sender, EventArgs e)
+        protected void PuntosVtaGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (PuntoVtaDropDownList.SelectedValue == String.Empty)
+            int item = Convert.ToInt32(e.CommandArgument);
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            Entidades.PuntoVta puntoVta = sesion.UN.PuntosVta[item];
+            switch (e.CommandName)
             {
-                MensajeLabel.Text = "No ha seleccionado ningún Punto de Venta";
+                case "Seleccionar":
+                    Session["PuntoVta"] = puntoVta;
+                    Response.Redirect(ViewState["IrA"].ToString());
+                    break;
             }
-            else
+        }
+        protected void PuntosVtaGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                Session["PuntoVta"] = sesion.UN.PuntosVta[PuntoVtaDropDownList.SelectedIndex];
-                Response.Redirect(ViewState["IrA"].ToString());
+                if (e.Row.Cells[3].Text != "Vigente")
+                {
+                    e.Row.ForeColor = Color.Red;
+                }
             }
         }
     }

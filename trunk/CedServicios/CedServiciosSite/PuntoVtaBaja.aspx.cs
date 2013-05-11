@@ -72,7 +72,7 @@ namespace CedServicios.Site
                 }
                 else
                 {
-                    TituloPaginaLabel.Text = "Anulación de Punto de Venta";
+                    TituloPaginaLabel.Text = "Anulación de Baja de Punto de Venta";
                     AceptarButton.Text = "Anular Baja";
                 }
                 AceptarButton.Focus();
@@ -104,13 +104,6 @@ namespace CedServicios.Site
                 MensajeLabel.Text = EX.Funciones.Detalle(ex);
                 return;
             }
-        }
-        protected void UltNroLoteButton_Click(object sender, EventArgs e)
-        {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.PuntoVta puntoVta = (Entidades.PuntoVta)Session["PuntoVta"];
-            RN.PuntoVta.GenerarNuevoNroLote(puntoVta, sesion);
-            MensajeLabel.Text = "Nuevo nro.lote: " + puntoVta.UltNroLote.ToString();
         }
         protected void UsaDatosCuitCheckBox_CheckedChanged(object sender, EventArgs e)
         {
