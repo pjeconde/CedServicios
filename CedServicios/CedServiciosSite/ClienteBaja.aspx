@@ -14,14 +14,6 @@
         </tr>
         <tr>
             <td align="right" style="padding-right:5px; padding-top: 20px">
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
-                    ControlToValidate="CUITTextBox" ErrorMessage="CUIT" SetFocusOnError="True" ValidationExpression="[0-9]{11}">
-                    <asp:Label ID="Label1" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                </asp:RegularExpressionValidator>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="CUITTextBox"
-                    ErrorMessage="CUIT" SetFocusOnError="True">
-                    <asp:Label ID="Label2" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                </asp:RequiredFieldValidator>
                 <asp:Label ID="Label3" runat="server" Text="Cliente perteneciente al CUIT"></asp:Label>
             </td>
             <td align="left" style="padding-top:20px">
@@ -30,14 +22,6 @@
         </tr>
         <tr>
 	        <td align="right" style="padding-right:5px; padding-top:5px">
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"
-                    ControlToValidate="NroDocTextBox" ErrorMessage="Nro. de Documnento" SetFocusOnError="True" ValidationExpression="[0-9]{11}">
-                    <asp:Label ID="Label4" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                </asp:RegularExpressionValidator>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NroDocTextBox"
-                    ErrorMessage="Nro. de Documnento" SetFocusOnError="True">
-                    <asp:Label ID="Label5" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                </asp:RequiredFieldValidator>
 		        <asp:Label ID="Label18" runat="server" Text="Tipo y Nro. de Documento"></asp:Label>
 	        </td>
 			<td align="left" style="padding-top:5px">
@@ -51,10 +35,6 @@
         </tr>
         <tr>
             <td align="right" style="padding-right:5px; padding-top:5px">
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="RazonSocialTextBox"
-                    ErrorMessage="Raz.Soc." SetFocusOnError="True">
-                    <asp:Label ID="Label8" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                </asp:RequiredFieldValidator>
                 <asp:Label ID="Label9" runat="server" Text="Razón Social"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
@@ -82,11 +62,6 @@
                 <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td align="right" style="padding-right:5px; padding-top:3px">
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator18" runat="server"
-                                ControlToValidate="EmailAvisoVisualizacionTextBox" ErrorMessage="Email aviso automático para visualización" SetFocusOnError="True"
-                                ValidationExpression="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
-                                <asp:Label ID="Label44" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                            </asp:RegularExpressionValidator>
                             <asp:Label ID="Label45" runat="server" Text="Email"></asp:Label>
                         </td>
                         <td align="left" style="padding-top:3px">
@@ -97,11 +72,6 @@
                     </tr>
                     <tr>
                         <td align="right" style="padding-left:5px; padding-right:5px; padding-top:3px">
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator14" runat="server"
-                                ControlToValidate="PasswordAvisoVisualizacionTextBox" ErrorMessage="Contraseña aviso automático para visualización" SetFocusOnError="True"
-                                ValidationExpression="[A-Za-z\- ,.0-9]*">
-                                <asp:Label ID="Label40" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                            </asp:RegularExpressionValidator>
                             <asp:Label ID="Label42" runat="server" Text="Contraseña"></asp:Label>
                         </td>
                         <td align="left" style="padding-top:3px">

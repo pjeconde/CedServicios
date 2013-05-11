@@ -183,12 +183,22 @@ namespace CedServicios.DB
             a.Append("CodigoInterno='" + Hasta.DatosIdentificatorios.CodigoInterno + "', ");
             a.Append("EmailAvisoVisualizacion='" + Hasta.EmailAvisoVisualizacion + "', ");
             a.Append("PasswordAvisoVisualizacion='" + Hasta.PasswordAvisoVisualizacion + "' ");
-            a.AppendLine("where Cuit='" + Hasta.Cuit + "' and IdTipoDoc=" + Hasta.Documento.Tipo.Id + " and NroDoc=" + Hasta.Documento.Nro.ToString() + " and IdCliente='" + Hasta.Documento.Nro.ToString() + "' and DesambiguacionCuitPais=" + Hasta.DesambiguacionCuitPais.ToString() + " ");
+            a.AppendLine("where Cuit='" + Hasta.Cuit + "' and IdTipoDoc=" + Hasta.Documento.Tipo.Id + " and NroDoc=" + Hasta.Documento.Nro.ToString() + " and IdCliente='" + Hasta.IdCliente + "' and DesambiguacionCuitPais=" + Hasta.DesambiguacionCuitPais.ToString() + " ");
             a.AppendLine("insert Log values (" + Hasta.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Cliente', 'Modif', '" + Hasta.WF.Estado + "', '') ");
             a.AppendLine("declare @idLog int ");
             a.AppendLine("select @idLog=@@Identity ");
             a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Desde', '" + Funciones.ObjetoSerializado(Desde) + "')");
             a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '" + Funciones.ObjetoSerializado(Hasta) + "')");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
+        public void CambiarEstado(Entidades.Cliente Cliente, string Estado)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Cliente set ");
+            a.Append("Estado='" + Estado + "' ");
+            a.AppendLine("where Cuit='" + Cliente.Cuit + "' and IdTipoDoc=" + Cliente.Documento.Tipo.Id + " and NroDoc=" + Cliente.Documento.Nro.ToString() + " and IdCliente='" + Cliente.IdCliente + "' and DesambiguacionCuitPais=" + Cliente.DesambiguacionCuitPais.ToString() + " ");
+            string evento = (Estado == "DeBaja") ? "Baja" : "AnulBaja";
+            a.AppendLine("insert Log values (" + Cliente.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Cliente', '" + evento + "', '" + Estado + "', '') ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
         public List<Entidades.Cliente> ListaPorCuityTipoyNroDoc(string Cuit, Entidades.Documento Documento)

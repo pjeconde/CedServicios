@@ -130,7 +130,6 @@ namespace CedServicios.Site
                     e.Row.ForeColor = Color.Red;
                 }
             }
-
         }
     }
 }

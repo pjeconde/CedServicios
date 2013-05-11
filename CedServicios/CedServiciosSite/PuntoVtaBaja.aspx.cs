@@ -65,79 +65,39 @@ namespace CedServicios.Site
                 IdMetodoGeneracionNumeracionLoteDropDownList.Enabled = false;
                 UltNroLoteTextBox.Enabled = false;
 
+                if (puntoVta.WF.Estado == "Vigente")
+                {
+                    TituloPaginaLabel.Text = "Baja de Punto de Venta";
+                    AceptarButton.Text = "Dar de Baja";
+                }
+                else
+                {
+                    TituloPaginaLabel.Text = "Anulación de Punto de Venta";
+                    AceptarButton.Text = "Anular Baja";
+                }
                 AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.PuntoVta puntoVtaDesde = (Entidades.PuntoVta)Session["PuntoVta"];
-            Entidades.PuntoVta puntoVtaHasta = RN.PuntoVta.ObternerCopia(puntoVtaDesde);
+            Entidades.PuntoVta puntoVta = (Entidades.PuntoVta)Session["PuntoVta"];
             try
             {
-                puntoVtaHasta.Cuit = CUITTextBox.Text;
-                puntoVtaHasta.Nro = Convert.ToInt32(NroTextBox.Text);
-                puntoVtaHasta.IdUN = Convert.ToInt32(IdUNDropDownList.SelectedValue);
-                puntoVtaHasta.IdTipoPuntoVta = IdTipoPuntoVtaDropDownList.SelectedValue;
-                puntoVtaHasta.UsaSetPropioDeDatosCuit = !UsaDatosCuitCheckBox.Checked;
-                if (puntoVtaHasta.UsaSetPropioDeDatosCuit)
+
+                if (AceptarButton.Text == "Dar de Baja")
                 {
-                    puntoVtaHasta.Domicilio.Calle = Domicilio.Calle;
-                    puntoVtaHasta.Domicilio.Nro = Domicilio.Nro;
-                    puntoVtaHasta.Domicilio.Piso = Domicilio.Piso;
-                    puntoVtaHasta.Domicilio.Depto = Domicilio.Depto;
-                    puntoVtaHasta.Domicilio.Manzana = Domicilio.Manzana;
-                    puntoVtaHasta.Domicilio.Sector = Domicilio.Sector;
-                    puntoVtaHasta.Domicilio.Torre = Domicilio.Torre;
-                    puntoVtaHasta.Domicilio.Localidad = Domicilio.Localidad;
-                    puntoVtaHasta.Domicilio.Provincia.Id = Domicilio.IdProvincia;
-                    puntoVtaHasta.Domicilio.Provincia.Descr = Domicilio.DescrProvincia;
-                    puntoVtaHasta.Domicilio.CodPost = Domicilio.CodPost;
-                    puntoVtaHasta.Contacto.Nombre = Contacto.Nombre;
-                    puntoVtaHasta.Contacto.Email = Contacto.Email;
-                    puntoVtaHasta.Contacto.Telefono = Contacto.Telefono;
-                    puntoVtaHasta.DatosImpositivos.IdCondIVA = DatosImpositivos.IdCondIVA;
-                    puntoVtaHasta.DatosImpositivos.DescrCondIVA = DatosImpositivos.DescrCondIVA;
-                    puntoVtaHasta.DatosImpositivos.IdCondIngBrutos = DatosImpositivos.IdCondIngBrutos;
-                    puntoVtaHasta.DatosImpositivos.DescrCondIngBrutos = DatosImpositivos.DescrCondIngBrutos;
-                    puntoVtaHasta.DatosImpositivos.NroIngBrutos = DatosImpositivos.NroIngBrutos;
-                    puntoVtaHasta.DatosImpositivos.FechaInicioActividades = DatosImpositivos.FechaInicioActividades;
-                    puntoVtaHasta.DatosIdentificatorios.GLN = DatosIdentificatorios.GLN;
-                    puntoVtaHasta.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
+                    RN.PuntoVta.CambiarEstado(puntoVta, "DeBaja", sesion);
                 }
                 else
                 {
-                    puntoVtaHasta.Domicilio.Calle = String.Empty;
-                    puntoVtaHasta.Domicilio.Nro = String.Empty;
-                    puntoVtaHasta.Domicilio.Piso = String.Empty;
-                    puntoVtaHasta.Domicilio.Depto = String.Empty;
-                    puntoVtaHasta.Domicilio.Manzana = String.Empty;
-                    puntoVtaHasta.Domicilio.Sector = String.Empty;
-                    puntoVtaHasta.Domicilio.Torre = String.Empty;
-                    puntoVtaHasta.Domicilio.Localidad = String.Empty;
-                    puntoVtaHasta.Domicilio.Provincia.Id = String.Empty;
-                    puntoVtaHasta.Domicilio.Provincia.Descr = String.Empty;
-                    puntoVtaHasta.Domicilio.CodPost = String.Empty;
-                    puntoVtaHasta.Contacto.Nombre = String.Empty;
-                    puntoVtaHasta.Contacto.Email = String.Empty;
-                    puntoVtaHasta.Contacto.Telefono = String.Empty;
-                    puntoVtaHasta.DatosImpositivos.IdCondIVA = 0;
-                    puntoVtaHasta.DatosImpositivos.DescrCondIVA = String.Empty;
-                    puntoVtaHasta.DatosImpositivos.IdCondIngBrutos = 0;
-                    puntoVtaHasta.DatosImpositivos.DescrCondIngBrutos = String.Empty;
-                    puntoVtaHasta.DatosImpositivos.NroIngBrutos = String.Empty;
-                    puntoVtaHasta.DatosImpositivos.FechaInicioActividades = new DateTime(1900, 1, 1);
-                    puntoVtaHasta.DatosIdentificatorios.GLN = 0;
-                    puntoVtaHasta.DatosIdentificatorios.CodigoInterno = String.Empty;
+                    RN.PuntoVta.CambiarEstado(puntoVta, "Vigente", sesion);
                 }
-                puntoVtaHasta.IdMetodoGeneracionNumeracionLote = IdMetodoGeneracionNumeracionLoteDropDownList.SelectedValue;
-                puntoVtaHasta.UltNroLote = Convert.ToInt64(UltNroLoteTextBox.Text);
-                RN.PuntoVta.Modificar(puntoVtaDesde, puntoVtaHasta, sesion);
 
                 AceptarButton.Enabled = false;
                 SalirButton.Text = "Salir";
 
-                MensajeLabel.Text = "El Punto de Venta fué modificado satisfactoriamente";
+                MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
             }
             catch (Exception ex)
             {

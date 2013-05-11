@@ -150,6 +150,16 @@ namespace CedServicios.DB
             a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '" + Funciones.ObjetoSerializadoParaSQL(Hasta) + "')");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void CambiarEstado(Entidades.PuntoVta PuntoVta, string Estado)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update PuntoVta set ");
+            a.Append("Estado='" + Estado + "' ");
+            a.AppendLine("where Cuit='" + PuntoVta.Cuit + "' and NroPuntoVta=" + PuntoVta.Nro + " ");
+            string evento = (Estado == "DeBaja") ? "Baja" : "AnulBaja";
+            a.AppendLine("insert Log values (" + PuntoVta.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'PuntoVta', '" + evento + "', '" + Estado + "', '') ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
         public void GenerarNuevoNroLote(Entidades.PuntoVta PuntoVta)
         {
             System.Text.StringBuilder a = new StringBuilder();
