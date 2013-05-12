@@ -18,7 +18,7 @@
                     <asp:GridView ID="ClientesGridView" runat="server"
                         AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand" OnRowDataBound="ClientesGridView_RowDataBound" CssClass="tituloGrilla" GridLines="None">
                         <Columns>
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderText="Cliente">
                                 <ItemTemplate>
                                     <asp:Button ID="TargetControlButton" runat="server" style="Display:none;" Text="Button" />
                                     <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" PopupControlID="ClientePanel" TargetControlID="TargetControlButton" BackgroundCssClass="modalBackground" runat="server" />

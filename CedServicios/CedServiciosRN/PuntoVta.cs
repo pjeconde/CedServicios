@@ -27,6 +27,7 @@ namespace CedServicios.RN
         {
             DB.PuntoVta db = new DB.PuntoVta(Sesion);
             db.CambiarEstado(PuntoVta, Estado);
+            PuntoVta.WF.Estado = Estado;
         }
         public static Entidades.PuntoVta ObternerCopia(Entidades.PuntoVta Desde)
         {

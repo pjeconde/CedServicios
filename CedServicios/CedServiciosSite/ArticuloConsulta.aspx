@@ -14,7 +14,7 @@
                     <asp:GridView ID="ArticulosGridView" runat="server"
                         AutoGenerateColumns="false" onrowcommand="ArticulosGridView_RowCommand" OnRowDataBound="ArticulosGridView_RowDataBound" CssClass="tituloGrilla" GridLines="None">
                         <Columns>
-                            <asp:TemplateField>
+                            <asp:TemplateField HeaderText="Artículo">
                                 <ItemTemplate>
                                     <asp:Button ID="TargetControlButton" runat="server" style="Display:none;" Text="Button" />
                                     <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" PopupControlID="ArticuloPanel" TargetControlID="TargetControlButton" BackgroundCssClass="modalBackground" runat="server" />

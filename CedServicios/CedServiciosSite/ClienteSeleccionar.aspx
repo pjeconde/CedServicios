@@ -70,7 +70,7 @@
                         <asp:GridView ID="ClientesGridView" runat="server" 
                             AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand" OnRowDataBound="ClientesGridView_RowDataBound" CssClass="tituloGrilla" GridLines="None">
                             <Columns>
-                                <asp:ButtonField HeaderText="" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue" ItemStyle-Width="90px">
+                                <asp:ButtonField HeaderText="Cliente" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue" ItemStyle-Width="90px">
                                 </asp:ButtonField>
                                 <asp:BoundField DataField="Cuit" HeaderText="Cuit" SortExpression="Cuit" Visible="false">
                                     <headerstyle horizontalalign="center" wrap="False" />
