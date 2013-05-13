@@ -55,7 +55,7 @@ namespace CedServicios.Site
                 }
                 else
                 {
-                    lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdRadioButton.Text, sesion);
+                    lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, sesion);
                 }
             }
             else
