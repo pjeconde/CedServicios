@@ -36,7 +36,7 @@
                 <td style="padding-top:20px;" colspan="2">
                     <asp:Panel ID="Panel2" runat="server" ScrollBars="Auto">
                         <asp:GridView ID="PuntosVtaGridView" runat="server"
-                            AutoGenerateColumns="false" onrowcommand="PuntosVtaGridView_RowCommand" OnRowDataBound="PuntosVtaGridView_RowDataBound" CssClass="tituloGrilla" GridLines="None">
+                            AutoGenerateColumns="false" onrowcommand="PuntosVtaGridView_RowCommand" OnRowDataBound="PuntosVtaGridView_RowDataBound" CssClass="grilla" GridLines="None">
                             <Columns>
                                 <asp:ButtonField HeaderText="Punto Vta." Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue" ItemStyle-Width="90px">
                                 </asp:ButtonField>

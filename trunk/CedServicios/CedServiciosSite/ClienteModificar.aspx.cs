@@ -61,6 +61,7 @@ namespace CedServicios.Site
                 CUITTextBox.Enabled = false;
                 TipoDocDropDownList.Enabled = false;
                 NroDocTextBox.Enabled = false;
+                IdClienteTextBox.Enabled = false;
                 DestinosCuitDropDownList.Enabled = false;
                 RazonSocialTextBox.Focus();
             }

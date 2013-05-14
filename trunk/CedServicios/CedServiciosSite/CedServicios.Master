@@ -77,7 +77,8 @@
                                 <asp:Label ID="UNLabel" runat="server" Text="UN:" ToolTip="Unidad de Negocio"></asp:Label>
                             </td>
                             <td class="Fuente" align="left">
-                                <asp:DropDownList ID="UNDropDownList" runat="server" AutoPostBack="True">
+                                <asp:DropDownList ID="UNDropDownList" runat="server" AutoPostBack="True" 
+                                    onselectedindexchanged="UNDropDownList_SelectedIndexChanged">
                                 </asp:DropDownList>
                             </td>
                         </tr>

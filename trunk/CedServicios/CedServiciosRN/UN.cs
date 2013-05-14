@@ -29,7 +29,7 @@ namespace CedServicios.RN
             string permisoAdminUNParaUsuarioHandler = RN.Permiso.PermisoAdminUNParaUsuarioAprobadoHandler(UN, Sesion);
             DB.UN dbUN = new DB.UN(Sesion);
             UN.WF.Estado = "Vigente";   //la UN siempre queda vigente, lo que, en todo caso, puede quedar PteAutoriz
-            //es su relación con el Cuit, que se explicita a través del Permiso UsoCuitXUN
+                                        //es su relación con el Cuit, que se explicita a través del Permiso UsoCuitXUN
             dbUN.Crear(UN, permisoUsoCUITxUNHandler, permisoAdminUNParaUsuarioHandler);
             if (EstadoPermisoUsoCUITxUN == "PteAutoriz")
             {
@@ -44,6 +44,11 @@ namespace CedServicios.RN
             DB.UN db = new DB.UN(Sesion);
             db.Modificar(Sesion.UN, UN);
             Sesion.UN = UN;
+        }
+        public static void CambiarEstado(Entidades.UN UN, string Estado, Entidades.Sesion Sesion)
+        {
+            DB.UN db = new DB.UN(Sesion);
+            db.CambiarEstado(UN, Estado);
         }
         public static Entidades.UN ObternerCopia(Entidades.UN Desde)
         {

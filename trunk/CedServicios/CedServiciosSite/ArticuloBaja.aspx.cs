@@ -57,7 +57,6 @@ namespace CedServicios.Site
             Entidades.Articulo articulo = (Entidades.Articulo)Session["Articulo"];
             try
             {
-
                 if (AceptarButton.Text == "Dar de Baja")
                 {
                     RN.Articulo.CambiarEstado(articulo, "DeBaja", sesion);
@@ -66,7 +65,6 @@ namespace CedServicios.Site
                 {
                     RN.Articulo.CambiarEstado(articulo, "Vigente", sesion);
                 }
-
                 AceptarButton.Enabled = false;
                 SalirButton.Text = "Salir";
 
