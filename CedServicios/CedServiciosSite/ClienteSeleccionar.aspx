@@ -68,7 +68,7 @@
                 <td style="padding-top:20px;" colspan="3">
                     <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                         <asp:GridView ID="ClientesGridView" runat="server" 
-                            AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand" OnRowDataBound="ClientesGridView_RowDataBound" CssClass="tituloGrilla" GridLines="None">
+                            AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand" OnRowDataBound="ClientesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                             <Columns>
                                 <asp:ButtonField HeaderText="Cliente" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue" ItemStyle-Width="90px">
                                 </asp:ButtonField>
@@ -90,7 +90,7 @@
                                 </asp:BoundField>
                                 <asp:BoundField DataField="IdCliente" HeaderText="Id.Cliente" SortExpression="IdCliente">
                                     <headerstyle horizontalalign="left" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
+                                    <itemstyle horizontalalign="center" wrap="False" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado">
                                     <headerstyle horizontalalign="center" wrap="False" />
@@ -98,7 +98,7 @@
                                 </asp:BoundField>
                                 <asp:BoundField DataField="DesambiguacionCuitPais" HeaderText="IdClienteExt" SortExpression="DesambiguacionCuitPais">
                                     <headerstyle horizontalalign="left" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
+                                    <itemstyle horizontalalign="center" wrap="False" />
                                 </asp:BoundField>
                             </Columns>
                         </asp:GridView>

@@ -119,5 +119,15 @@ namespace CedServicios.DB
             a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '" + Funciones.ObjetoSerializado(Hasta) + "')");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void CambiarEstado(Entidades.UN UN, string Estado)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update UN set ");
+            a.Append("Estado='" + Estado + "' ");
+            a.AppendLine("where Cuit='" + UN.Cuit + "' and IdUN='" + UN.Id + "' ");
+            string evento = (Estado == "DeBaja") ? "Baja" : "AnulBaja";
+            a.AppendLine("insert Log values (" + UN.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'UN', '" + evento + "', '" + Estado + "', '') ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
     }
 }

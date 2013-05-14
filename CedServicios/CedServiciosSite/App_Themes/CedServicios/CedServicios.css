@@ -322,12 +322,17 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
     background-color:#fff;
     border:solid 1px #000;
 }
-.tituloGrilla th /* for the header */
+.grilla th /* for the header */
 {
     BORDER-BOTTOM: 1px solid black;
     BORDER-LEFT: 1px solid black;
     BORDER-RIGHT: 1px solid black;
     BORDER-TOP: 1px solid black;       
+    padding-left: 4px;
+    padding-right: 4px;
+}
+.grilla td /* for the header */
+{
     padding-left: 4px;
     padding-right: 4px;
 }

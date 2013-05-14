@@ -164,5 +164,14 @@ namespace CedServicios.Site
         {
             Response.Redirect("~/InstitucionalEmpresa.aspx");
         }
+        protected void UNDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (UNDropDownList.SelectedItem != null)
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                RN.Sesion.AsignarUN(sesion.Cuit.UNs[UNDropDownList.SelectedIndex], sesion);
+                Funciones.PersonalizarControlesMaster(this, true, sesion);
+            }
+        }
     }
 }

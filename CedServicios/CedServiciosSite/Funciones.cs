@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI.WebControls;
 using System.Web.UI;
 using CaptchaDotNet2.Security.Cryptography;
+using System.Drawing;
 
 namespace CedServicios.Site
 {
@@ -219,7 +220,18 @@ namespace CedServicios.Site
                     {
                         cUITDropDownList.DataSource = Sesion.CuitsDelUsuario;
                         cUITDropDownList.DataBind();
-                        if (Sesion.Cuit != null) cUITDropDownList.SelectedValue = Sesion.Cuit.Nro;
+                        if (Sesion.Cuit != null)
+                        {
+                            cUITDropDownList.SelectedValue = Sesion.Cuit.Nro;
+                            if (Sesion.Cuit.WF.Estado != "Vigente")
+                            {
+                                cUITLabel.ForeColor = Color.Red;
+                            }
+                            else
+                            {
+                                cUITLabel.ForeColor = Color.Black;
+                            }
+                        }
                         cUITLabel.Visible = true;
                         cUITDropDownList.Visible = true;
                     }
@@ -227,7 +239,18 @@ namespace CedServicios.Site
                     {
                         uNDropDownList.DataSource = Sesion.Cuit.UNs;
                         uNDropDownList.DataBind();
-                        if (Sesion.UN != null) uNDropDownList.SelectedValue = Sesion.UN.Id.ToString();
+                        if (Sesion.UN != null)
+                        {
+                            uNDropDownList.SelectedValue = Sesion.UN.Id.ToString();
+                            if (Sesion.UN.WF.Estado != "Vigente")
+                            {
+                                uNLabel.ForeColor = Color.Red;
+                            }
+                            else
+                            {
+                                uNLabel.ForeColor = Color.Black;
+                            }
+                        }
                         uNLabel.Visible = true;
                         uNDropDownList.Visible = true;
                     }
@@ -259,7 +282,7 @@ namespace CedServicios.Site
             MenuItem menuItem = Menu.FindItem(IdMenuItem);
             if (menuItem != null) RemoverMenuItem(Menu, menuItem);
         }
-        public static void GenerarImagenCaptcha(System.Web.SessionState.HttpSessionState Session, Image CaptchaImage, TextBox CaptchaTextBox)
+        public static void GenerarImagenCaptcha(System.Web.SessionState.HttpSessionState Session, System.Web.UI.WebControls.Image CaptchaImage, TextBox CaptchaTextBox)
         {
             string s = RandomText.Generate();
             string ens = Encryptor.Encrypt(s, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));

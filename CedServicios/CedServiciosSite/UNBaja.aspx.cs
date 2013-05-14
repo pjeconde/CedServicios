@@ -23,6 +23,16 @@ namespace CedServicios.Site
                 IdUNTextBox.Enabled = false;
                 DescrUNTextBox.Enabled = false;
 
+                if (sesion.UN.WF.Estado == "Vigente")
+                {
+                    TituloPaginaLabel.Text = "Baja de Unidad de Negocio";
+                    AceptarButton.Text = "Dar de Baja";
+                }
+                else
+                {
+                    TituloPaginaLabel.Text = "Anulación de Baja de Unidad de Negocio";
+                    AceptarButton.Text = "Anular Baja";
+                }
                 AceptarButton.Focus();
             }
         }
@@ -31,15 +41,17 @@ namespace CedServicios.Site
             try
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                Entidades.UN un = RN.UN.ObternerCopia(sesion.UN);
-                un.Cuit = CUITTextBox.Text;
-                un.Id = Convert.ToInt32(IdUNTextBox.Text);
-                un.Descr = DescrUNTextBox.Text;
-                RN.UN.Modificar(un, sesion);
-
+                if (AceptarButton.Text == "Dar de Baja")
+                {
+                    RN.UN.CambiarEstado(sesion.UN, "DeBaja", sesion);
+                }
+                else
+                {
+                    RN.UN.CambiarEstado(sesion.UN, "Vigente", sesion);
+                }
                 AceptarButton.Enabled = false;
                 SalirButton.Enabled = false;
-                MensajeLabel.Text = "La Unidad de negocio fué modificada satisfactoriamente";
+                MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
             }
             catch (Exception ex)
             {
