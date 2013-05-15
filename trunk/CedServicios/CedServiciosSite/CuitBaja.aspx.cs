@@ -52,7 +52,16 @@ namespace CedServicios.Site
                 DatosIdentificatorios.Enabled = false;
                 MedioDropDownList.Enabled = false;
 
-                AceptarButton.Focus();
+                if (sesion.Cuit.WF.Estado == "Vigente")
+                {
+                    TituloPaginaLabel.Text = "Baja de CUIT";
+                    AceptarButton.Text = "Dar de Baja";
+                }
+                else
+                {
+                    TituloPaginaLabel.Text = "Anulación de Baja de CUIT";
+                    AceptarButton.Text = "Anular Baja";
+                } AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
@@ -61,38 +70,20 @@ namespace CedServicios.Site
             Entidades.Cuit cuit = RN.Cuit.ObtenerCopia((Entidades.Cuit)sesion.Cuit);
             try
             {
-                cuit.Nro = CUITTextBox.Text;
-                cuit.RazonSocial = RazonSocialTextBox.Text;
-                cuit.Domicilio.Calle = Domicilio.Calle;
-                cuit.Domicilio.Nro = Domicilio.Nro;
-                cuit.Domicilio.Piso = Domicilio.Piso;
-                cuit.Domicilio.Depto = Domicilio.Depto;
-                cuit.Domicilio.Manzana = Domicilio.Manzana;
-                cuit.Domicilio.Sector = Domicilio.Sector;
-                cuit.Domicilio.Torre = Domicilio.Torre;
-                cuit.Domicilio.Localidad = Domicilio.Localidad;
-                cuit.Domicilio.Provincia.Id = Domicilio.IdProvincia;
-                cuit.Domicilio.Provincia.Descr = Domicilio.DescrProvincia;
-                cuit.Domicilio.CodPost = Domicilio.CodPost;
-                cuit.Contacto.Nombre = Contacto.Nombre;
-                cuit.Contacto.Email = Contacto.Email;
-                cuit.Contacto.Telefono = Contacto.Telefono;
-                cuit.DatosImpositivos.IdCondIVA = DatosImpositivos.IdCondIVA;
-                cuit.DatosImpositivos.DescrCondIVA = DatosImpositivos.DescrCondIVA;
-                cuit.DatosImpositivos.IdCondIngBrutos = DatosImpositivos.IdCondIngBrutos;
-                cuit.DatosImpositivos.DescrCondIngBrutos = DatosImpositivos.DescrCondIngBrutos;
-                cuit.DatosImpositivos.NroIngBrutos = DatosImpositivos.NroIngBrutos;
-                cuit.DatosImpositivos.FechaInicioActividades = DatosImpositivos.FechaInicioActividades;
-                cuit.DatosIdentificatorios.GLN = DatosIdentificatorios.GLN;
-                cuit.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
-                cuit.Medio.Id = MedioDropDownList.SelectedValue;
-                cuit.Medio.Descr = MedioDropDownList.Text;
-                RN.Cuit.Modificar(cuit, sesion);
+
+                if (AceptarButton.Text == "Dar de Baja")
+                {
+                    RN.Cuit.CambiarEstado(cuit, "DeBaja", sesion);
+                }
+                else
+                {
+                    RN.Cuit.CambiarEstado(cuit, "Vigente", sesion);
+                }
 
                 AceptarButton.Enabled = false;
                 SalirButton.Text = "Salir";
 
-                MensajeLabel.Text = "El CUIT fué modificado satisfactoriamente";
+                MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
             }
             catch (Exception ex)
             {

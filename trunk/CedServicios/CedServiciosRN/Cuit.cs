@@ -45,6 +45,12 @@ namespace CedServicios.RN
             db.Modificar(Sesion.Cuit, Cuit);
             Sesion.Cuit = Cuit;
         }
+        public static void CambiarEstado(Entidades.Cuit Cuit, string Estado, Entidades.Sesion Sesion)
+        {
+            DB.Cuit db = new DB.Cuit(Sesion);
+            db.CambiarEstado(Cuit, Estado);
+            Cuit.WF.Estado = Estado;
+        }
         public static Entidades.Cuit ObtenerCopia(Entidades.Cuit Desde)
         {
             Entidades.Cuit hasta = new Entidades.Cuit();
