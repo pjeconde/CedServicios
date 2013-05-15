@@ -102,7 +102,7 @@ namespace CedServicios.RN
                         return p.TipoPermiso.Id == "eFact" && p.UN.Id == Sesion.UN.Id && p.Cuit == Sesion.UN.Cuit && p.WF.Estado == "Vigente";
                     });
                     //Ojo: no estoy chequeando que la UN siga teniendo el permiso vigente sobre el servicio eFact !!!
-                    if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada.Count != 0)
+                    if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada.Count != 0 && Sesion.Cuit.WF.Estado == "Vigente" && Sesion.UN.WF.Estado == "Vigente")
                     {
                         opcionesHabilitadas.Add("Facturación");
                     }
@@ -131,7 +131,11 @@ namespace CedServicios.RN
                 else
                 {
                     List<Entidades.Cuit> estaElCuitEnLaLista = Sesion.CuitsDelUsuario.FindAll(delegate(Entidades.Cuit p) { return p.Nro == Sesion.Cuit.Nro; });
-                    if (estaElCuitEnLaLista.Count != 1)
+                    if (estaElCuitEnLaLista.Count == 1)
+                    {
+                        AsignarCuit(estaElCuitEnLaLista[0], Sesion);
+                    }
+                    else
                     {
                         AsignarCuit(Sesion.CuitsDelUsuario[0], Sesion);
                     }
@@ -157,7 +161,11 @@ namespace CedServicios.RN
                 else
                 {
                     List<Entidades.UN> estaLaUNEnLaLista = Sesion.Cuit.UNs.FindAll(delegate(Entidades.UN p) { return p.Id == Sesion.UN.Id; });
-                    if (estaLaUNEnLaLista.Count != 1)
+                    if (estaLaUNEnLaLista.Count == 1)
+                    {
+                        AsignarUN(estaLaUNEnLaLista[0], Sesion);
+                    }
+                    else
                     {
                         AsignarUN(Sesion.Cuit.UNs[0], Sesion);
                     }
