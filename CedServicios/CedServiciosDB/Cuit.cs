@@ -176,7 +176,7 @@ namespace CedServicios.DB
         public void CompletarUNsYPuntosVta(List<Entidades.Cuit> Cuits)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Cuit.Cuit, UN.DescrUN, UN.IdUN, isnull(PuntoVta.NroPuntoVta, convert(numeric(4), 0)) as NroPuntoVta, isnull(PuntoVta.IdTipoPuntoVta, '') as IdTipoPuntoVta from Cuit ");
+            a.Append("select Cuit.Cuit, UN.DescrUN, UN.IdUN, UN.Estado as EstadoUN, isnull(PuntoVta.NroPuntoVta, convert(numeric(4), 0)) as NroPuntoVta, isnull(PuntoVta.IdTipoPuntoVta, '') as IdTipoPuntoVta, PuntoVta.Estado as EstadoPuntoVta from Cuit ");
             a.Append("left outer join UN on Cuit.Cuit=UN.Cuit ");
             a.Append("left outer join PuntoVta on UN.Cuit=PuntoVta.Cuit and UN.IdUN=PuntoVta.IdUN ");
             a.Append("order by Cuit.Cuit, UN.DescrUN, PuntoVta.NroPuntoVta ");
@@ -195,6 +195,7 @@ namespace CedServicios.DB
                         uN.Cuit = Cuits[i].Nro;
                         uN.Id = idUN;
                         uN.Descr = Convert.ToString(dr[j]["DescrUN"]);
+                        uN.WF.Estado = Convert.ToString(dr[j]["EstadoUN"]);
                         Cuits[i].UNs.Add(uN);
                         idUNant = idUN;
                     }
@@ -205,6 +206,7 @@ namespace CedServicios.DB
                         puntoVta.IdUN = idUN;
                         puntoVta.Nro = Convert.ToInt32(dr[j]["NroPuntoVta"]);
                         puntoVta.IdTipoPuntoVta = Convert.ToString(dr[j]["IdTipoPuntoVta"]);
+                        puntoVta.WF.Estado = Convert.ToString(dr[j]["EstadoPuntoVta"]);
                         Cuits[i].UNs[Cuits[i].UNs.Count - 1].PuntosVta.Add(puntoVta);
                     }
                 }

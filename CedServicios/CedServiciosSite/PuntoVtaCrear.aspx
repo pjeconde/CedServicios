@@ -33,7 +33,7 @@
         <tr>
             <td align="right" style="padding-right: 5px; padding-top:5px">
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
-                    ControlToValidate="NroTextBox" ErrorMessage="Nro. de Punto de Venta" SetFocusOnError="True" ValidationExpression="[0-9]{4}">
+                    ControlToValidate="NroTextBox" ErrorMessage="Nro. de Punto de Venta" SetFocusOnError="True" ValidationExpression="[0-9]{0,4}">
                     <asp:Label ID="Label7" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                 </asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="NroTextBox"

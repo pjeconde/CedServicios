@@ -38,17 +38,44 @@ namespace CedServicios.Site
                 RN.Cuit.CompletarUNsYPuntosVta(sesion.CuitsDelUsuario, sesion);
                 for (int i = 0; i<sesion.CuitsDelUsuario.Count; i++)
                 {
-                    TreeNode nodoCuit = new TreeNode(sesion.CuitsDelUsuario[i].Nro);
+                    string nodoCuitText=String.Empty;
+                    if (sesion.CuitsDelUsuario[i].WF.Estado == "Vigente")
+                    {
+                        nodoCuitText = sesion.CuitsDelUsuario[i].Nro;
+                    }
+                    else
+                    {
+                        nodoCuitText = "<span style='color:red;'>" + sesion.CuitsDelUsuario[i].Nro + "</span";
+                    }
+                    TreeNode nodoCuit = new TreeNode(nodoCuitText);
                     for (int j = 0; j < sesion.CuitsDelUsuario[i].UNs.Count; j++)
                     {
-                        TreeNode nodoUN = new TreeNode(sesion.CuitsDelUsuario[i].UNs[j].Descr);
+                        string nodoUNText = String.Empty;
+                        if (sesion.CuitsDelUsuario[i].UNs[j].WF.Estado == "Vigente")
+                        {
+                            nodoUNText = sesion.CuitsDelUsuario[i].UNs[j].Descr;
+                        }
+                        else
+                        {
+                            nodoUNText = "<span style='color:red;'>" + sesion.CuitsDelUsuario[i].UNs[j].Descr + "</span";
+                        }
+                        TreeNode nodoUN = new TreeNode(nodoUNText);
                         nodoUN.Value = sesion.CuitsDelUsuario[i].UNs[j].Id.ToString();
                         nodoCuit.ChildNodes.Add(nodoUN);
                         if (sesion.CuitsDelUsuario[i].UNs[j].PuntosVta.Count > 0)
                         {
                             for (int h = 0; h < sesion.CuitsDelUsuario[i].UNs[j].PuntosVta.Count; h++)
                             {
-                                TreeNode nodoPuntoVta = new TreeNode(sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Descr);
+                                string nodoPuntoVtaText = String.Empty;
+                                if (sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].WF.Estado == "Vigente")
+                                {
+                                    nodoPuntoVtaText = sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Descr;
+                                }
+                                else
+                                {
+                                    nodoPuntoVtaText = "<span style='color:red;'>" + sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Descr + "</span";
+                                }
+                                TreeNode nodoPuntoVta = new TreeNode(nodoPuntoVtaText);
                                 nodoPuntoVta.Value = sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Nro.ToString();
                                 nodoUN.ChildNodes.Add(nodoPuntoVta);
                             }
