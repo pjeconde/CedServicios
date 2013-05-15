@@ -13,7 +13,7 @@
             <td style="padding-top:20px">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                     <asp:GridView ID="AutorizacionesGridView" runat="server" 
-                        AutoGenerateColumns="false" onrowcommand="AutorizacionesGridView_RowCommand">
+                        AutoGenerateColumns="false" onrowcommand="AutorizacionesGridView_RowCommand" CssClass="grilla" GridLines="None">
                         <Columns>
                             <asp:ButtonField HeaderText="" Text="Autorizar" CommandName="Autorizar" ButtonType="Link">
                             </asp:ButtonField>

@@ -10,7 +10,7 @@ namespace CedServicios.Site
 {
     public partial class CedServicios : System.Web.UI.MasterPage
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Init(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
@@ -146,10 +146,10 @@ namespace CedServicios.Site
         public Color GetItemColor(MenuItemTemplateContainer container)
         {
             MenuItem item = (MenuItem)container.DataItem;
-            if (!(item.Selectable || item.ChildItems.Count>0))
-                return Color.Red;
-            else
+            if (item.Selectable || item.ChildItems.Count>0)
                 return Color.DarkBlue;
+            else
+                return Color.Red;
         }
         protected void CUITDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
