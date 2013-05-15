@@ -173,6 +173,16 @@ namespace CedServicios.DB
             a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '" + Funciones.ObjetoSerializado(Hasta) + "')");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void CambiarEstado(Entidades.Cuit Cuit, string Estado)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Cuit set ");
+            a.Append("Estado='" + Estado + "' ");
+            a.AppendLine("where Cuit='" + Cuit.Nro + "' ");
+            string evento = (Estado == "DeBaja") ? "Baja" : "AnulBaja";
+            a.AppendLine("insert Log values (" + Cuit.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Cuit', '" + evento + "', '" + Estado + "', '') ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
         public void CompletarUNsYPuntosVta(List<Entidades.Cuit> Cuits)
         {
             StringBuilder a = new StringBuilder(string.Empty);
