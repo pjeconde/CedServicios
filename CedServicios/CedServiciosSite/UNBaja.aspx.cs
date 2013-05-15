@@ -49,8 +49,10 @@ namespace CedServicios.Site
                 {
                     RN.UN.CambiarEstado(sesion.UN, "Vigente", sesion);
                 }
+
                 AceptarButton.Enabled = false;
-                SalirButton.Enabled = false;
+                SalirButton.Text = "Salir";
+
                 MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
             }
             catch (Exception ex)
