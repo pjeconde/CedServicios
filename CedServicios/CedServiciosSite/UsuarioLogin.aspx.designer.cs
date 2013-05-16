@@ -31,6 +31,51 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
+        /// Control MultiCuitLinkButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton MultiCuitLinkButton;
+        
+        /// <summary>
+        /// Control MultiUNLinkButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton MultiUNLinkButton;
+        
+        /// <summary>
+        /// Control MultiUsuarioLinkButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton MultiUsuarioLinkButton;
+        
+        /// <summary>
+        /// Control AclaracionTituloLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AclaracionTituloLabel;
+        
+        /// <summary>
+        /// Control AclaracionDetalleLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AclaracionDetalleLabel;
+        
+        /// <summary>
         /// Control Panel1.
         /// </summary>
         /// <remarks>

@@ -13,7 +13,10 @@
                         </tr>
                         <tr>
                             <td align="left" style="padding-top:10px">
-                                Entorno Multi-Cuit, Multi-Unidad de Negocio, Multi-Usuario.<br />
+                                Entorno 
+                                <asp:LinkButton ID="MultiCuitLinkButton" runat="server" TabIndex="4" Text="Multi-CUIT" onclick="MultiCuitLinkButton_Click"  />, 
+                                <asp:LinkButton ID="MultiUNLinkButton" runat="server" TabIndex="5" Text="Multi-Unidad de Negocio" onclick="MultiUNLinkButton_Click"  />, 
+                                <asp:LinkButton ID="MultiUsuarioLinkButton" runat="server" TabIndex="6" Text="Multi-Usuario" onclick="MultiUsuarioLinkButton_Click"  />.<br />
                                 Ingrese su Factura Electrónica y genere el archivo XML para Interfacturas<br />
                                 (la red de facturas electrónicas de Interbanking)<br />
                                 Es gratuito, rápido, fácil y seguro.<br />
@@ -28,6 +31,16 @@
                                 Podemos integrar su sistema de facturación a la red de Interfacturas.<br />
                                 ¿ Usa una planilla Excel como herramienta de facturación ?<br />
                                 La podemos integrar a la red de Interfacturas<br />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="padding-top:20px">
+                                <asp:Label ID="AclaracionTituloLabel" runat="server" Font-Size="24px" Font-Bold="false" Text="" ForeColor="#e8906e"></asp:Label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="left" style="padding-top:10px">
+                                <asp:Label ID="AclaracionDetalleLabel" runat="server"></asp:Label>
                             </td>
                         </tr>
                     </table>
@@ -50,8 +63,7 @@
                                     TabIndex="1" Width="114px"></asp:TextBox>
                             </td>
                             <td align="left" rowspan="2" style="padding-right: 10px; padding-top:20px">
-                                <asp:Button ID="LoginButton" runat="server" OnClick="LoginButton_Click" TabIndex="3"
-                                    Text="Iniciar" />
+                                <asp:Button ID="LoginButton" runat="server" OnClick="LoginButton_Click" TabIndex="3" Text="Iniciar" />
                             </td>
                         </tr>
                         <tr>
