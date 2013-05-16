@@ -119,12 +119,7 @@
         </table>
     </div>
     </asp:ContentPlaceHolder>
-    <table style="width: 100%">
-        <tr>
-            <td style="width: 100%; background-color: Gray; height: 0.1pt">
-            </td>
-        </tr>
-    </table>
+    <hr noshade="noshade" size="1" color="#cccccc" />
     <div id="DivContent" style="text-align: center">
         <asp:ContentPlaceHolder ID="ContentPlaceDefault" runat="server" Visible="true">
         </asp:ContentPlaceHolder>
