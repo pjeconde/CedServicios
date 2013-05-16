@@ -23,10 +23,11 @@
 <asp:TextBox SkinID="TextoBoxChico" runat="server" Style="width: 50px" ForeColor="#071F70" BorderStyle="Solid" BorderWidth="1px" BorderColor=#071F70></asp:TextBox>
 <asp:TextBox SkinID="TextoBoxMediano" runat="server" Style="width: 100px" ForeColor="#071F70" BorderStyle="Solid" BorderWidth="1px" BorderColor=#071F70></asp:TextBox>
 
-<asp:TextBox SkinID="TextoBoxFEAVendedorDet" runat="server" Style="width: 180px" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox SkinID="TextoBoxFEAVendedorDet" runat="server" Style="width: 170px" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
 <asp:TextBox SkinID="TextoBoxFEAVendedorDetCh" runat="server" Style="width: 80px" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
 <asp:TextBox SkinID="TextoBoxFEAVendedorDetChCh" runat="server" Style="width: 40px" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
 <asp:TextBox SkinID="Fecha" runat="server" Style="width: 60px" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox SkinID="FechaFact" runat="server" Style="width: 140px; padding-rigth: 4px;" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
 
 <asp:TextBox SkinID="TextoBoxFEADescrGr" runat="server" Style="width: 570px; resize: none;" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
 
@@ -37,7 +38,8 @@
 
 <asp:CheckBox SkinID="CheckBoxFEALoteDetChCh" runat="server" Width="40px" ForeColor="#071F70"></asp:CheckBox>
 
-<asp:DropDownList SkinID="DropDownListVendedor" runat="server" Style="width: 184px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
-<asp:DropDownList SkinID="DropDownListPremium" runat="server" Style="width: 200px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>
+<asp:DropDownList SkinID="ddln" runat="server" Style="width: 176px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="ddlch" runat="server" Style="width: 60px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="ddlgrc" runat="server" Style="width: 200px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>
 <asp:DropDownList SkinID="DropDownListComprador" runat="server" Style="width: 186px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
 <asp:DropDownList SkinID="DropDownListCompradorGr" runat="server" Style="width: 280px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>

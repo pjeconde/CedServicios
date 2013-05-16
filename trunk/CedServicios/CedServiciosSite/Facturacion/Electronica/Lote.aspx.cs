@@ -3585,15 +3585,26 @@ namespace CedServicios.Site.Facturacion.Electronica
 			r.importe_total_impuestos_nacionalesSpecified = true;
 		}
 
+        private void GrabarLogTexto(string archivo, string mensaje)
+        {
+        try
+            {
+                using (FileStream fs = File.Open(Server.MapPath(archivo), FileMode.Append, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
+                    }
+                }
+            }
+            catch             
+            {
+            }
+        }
+
 		protected void ConsultarLoteIBKButton_Click(object sender, EventArgs e)
 		{
-			using (FileStream fs = File.Open(Server.MapPath("~/Consultar.txt"), FileMode.Append, FileAccess.Write))
-			{
-				using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
-				{
-					sw.WriteLine("Consulta de:" + Cuit_VendedorTextBox.Text);
-				}
-			}
+            GrabarLogTexto("~/Consultar.txt", "Consulta de Lote CUIT: " + Cuit_VendedorTextBox.Text + "  Nro.Lote: " + Id_LoteTextbox.Text);
 			try
 			{
 				if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
@@ -3613,6 +3624,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				}
 
                 string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                GrabarLogTexto("~/Consultar.txt", "NroSerieCertifITF: " + NroCertif);
                 if (NroCertif.Equals(string.Empty))
                 {
                     ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
@@ -3622,9 +3634,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                 string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
                 org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
                 string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
+                GrabarLogTexto("~/Consultar.txt", "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
                 if (ConsultaIBKUtilizarServidorExterno == "SI")
                 {
                     clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
+                    GrabarLogTexto("~/Consultar.txt", "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
                 }
                 org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
                 clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(Cuit_VendedorTextBox.Text), Convert.ToInt64(Id_LoteTextbox.Text), Convert.ToInt32(PuntoVtaDropDownList.SelectedValue), certificado);
@@ -3676,9 +3690,21 @@ namespace CedServicios.Site.Facturacion.Electronica
 				}
 				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.Replace("\r", "").Replace("\n", "") + "');</script>");
 			}
-			catch (Exception ex)
+ 			catch (Exception ex)
 			{
-				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al consultar a Interfacturas.\\n " + ex.Message.Replace("\n", "") + "');</script>");
+                string errormsg = ex.Message.Replace("\n", "");
+                if (ex.InnerException != null)
+                {
+                    try
+                    {
+                        errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                    }
+                    catch
+                    {
+                    }
+                    errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                }
+                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al consultar a Interfacturas.\\n " + errormsg + "');</script>");
 			}
 		}
 
@@ -3687,7 +3713,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			try
 			{
 				FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
-				if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
+                if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae == null || lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
 				{
 					lcFea.comprobante[0].cabecera.informacion_comprobante.cae = " ";
 				}
