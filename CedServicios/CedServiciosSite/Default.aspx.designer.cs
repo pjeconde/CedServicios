@@ -22,6 +22,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label TargetControlIDdelModalPopupExtender1;
         
         /// <summary>
+        /// Control MultiCuitLinkButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton MultiCuitLinkButton;
+        
+        /// <summary>
         /// Control ModalPopupExtender1.
         /// </summary>
         /// <remarks>

@@ -14,9 +14,9 @@
                         <tr>
                             <td align="left" style="padding-top:10px">
                                 Entorno 
-                                <asp:LinkButton ID="MultiCuitLinkButton" runat="server" TabIndex="4" Text="Multi-CUIT" onclick="MultiCuitLinkButton_Click"  />, 
-                                <asp:LinkButton ID="MultiUNLinkButton" runat="server" TabIndex="5" Text="Multi-Unidad de Negocio" onclick="MultiUNLinkButton_Click"  />, 
-                                <asp:LinkButton ID="MultiUsuarioLinkButton" runat="server" TabIndex="6" Text="Multi-Usuario" onclick="MultiUsuarioLinkButton_Click"  />.<br />
+                                <asp:LinkButton ID="MultiCuitLinkButton" runat="server" TabIndex="4" Text="Multi-CUIT" onclick="MultiCuitLinkButton_Click" />, 
+                                <asp:LinkButton ID="MultiUNLinkButton" runat="server" TabIndex="5" Text="Multi-Unidad de Negocio" onclick="MultiUNLinkButton_Click" />, 
+                                <asp:LinkButton ID="MultiUsuarioLinkButton" runat="server" TabIndex="6" Text="Multi-Usuario" onclick="MultiUsuarioLinkButton_Click" />.<br />
                                 Ingrese su Factura Electrónica y genere el archivo XML para Interfacturas<br />
                                 (la red de facturas electrónicas de Interbanking)<br />
                                 Es gratuito, rápido, fácil y seguro.<br />
