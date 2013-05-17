@@ -18,5 +18,10 @@ namespace CedServicios.Site
         {
             //ModalPopupExtender1.Hide();
         }
+        protected void MultiCuitLinkButton_Click(object sender, EventArgs e)
+        {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            RN.Migracion.CopiarCuenta("fcedeira", sesion);
+        }
     }
 }
