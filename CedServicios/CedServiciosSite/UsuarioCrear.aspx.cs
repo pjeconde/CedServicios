@@ -43,7 +43,7 @@ namespace CedServicios.Site
             try
             {
                 RN.Usuario.Validar(usuario, ConfirmacionPasswordTextBox.Text, Session["captcha"].ToString(), CaptchaTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
-                RN.Usuario.Registrar(usuario, (Entidades.Sesion)Session["Sesion"]);
+                RN.Usuario.Registrar(usuario, true, (Entidades.Sesion)Session["Sesion"]);
                 ComprobarDisponibilidadButton.Visible = false;
                 NuevaClaveCaptchaButton.Visible = false;
                 CrearCuentaButton.Visible = false;
