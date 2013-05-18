@@ -131,12 +131,15 @@ namespace CedServicios.RN
                 }
             }
         }
-        public static void Registrar(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
+        public static void Registrar(Entidades.Usuario Usuario, bool EnvioCorreo, Entidades.Sesion Sesion)
         {
             Usuario.WF.Estado = "PteConfig";
             DB.Usuario usuario = new DB.Usuario(Sesion);
             usuario.Crear(Usuario);
-            RN.EnvioCorreo.ConfirmacionAltaUsuario(Usuario);
+            if (EnvioCorreo)
+            {
+                RN.EnvioCorreo.ConfirmacionAltaUsuario(Usuario);
+            }
         }
         public static void Confirmar(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
