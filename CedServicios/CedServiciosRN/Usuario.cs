@@ -131,24 +131,21 @@ namespace CedServicios.RN
                 }
             }
         }
-        public static void Registrar(Entidades.Usuario Usuario, bool EnvioCorreo, Entidades.Sesion Sesion)
+        public static void Registrar(Entidades.Usuario Usuario, bool EnviarCorreo, Entidades.Sesion Sesion)
         {
             Usuario.WF.Estado = "PteConfig";
             DB.Usuario usuario = new DB.Usuario(Sesion);
             usuario.Crear(Usuario);
-            if (EnvioCorreo)
-            {
-                RN.EnvioCorreo.ConfirmacionAltaUsuario(Usuario);
-            }
+            if (EnviarCorreo) RN.EnvioCorreo.ConfirmacionAltaUsuario(Usuario);
         }
-        public static void Confirmar(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
+        public static void Confirmar(Entidades.Usuario Usuario, bool DesencriptarUsuario, bool EnviarCorreo, Entidades.Sesion Sesion)
         {
-            Usuario.Id = Encryptor.Decrypt(Usuario.Id, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
+            if (DesencriptarUsuario) Usuario.Id = Encryptor.Decrypt(Usuario.Id, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
             Leer(Usuario, (Entidades.Sesion)Sesion);
             DB.Usuario usuario = new DB.Usuario((Entidades.Sesion)Sesion);
             usuario.Confirmar(Usuario);
             Leer(Usuario, (Entidades.Sesion)Sesion);
-            RN.EnvioSMS.Enviar("Alta cuenta " + CantidadDeFilas((Entidades.Sesion)Sesion).ToString(), Usuario.Nombre, usuario.DestinatariosAvisoAltaUsuario());
+            if (EnviarCorreo) RN.EnvioSMS.Enviar("Alta cuenta " + CantidadDeFilas((Entidades.Sesion)Sesion).ToString(), Usuario.Nombre, usuario.DestinatariosAvisoAltaUsuario());
         }
         public static bool IdCuentaDisponible(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
@@ -220,6 +217,11 @@ namespace CedServicios.RN
                     }
                 }
             }
+        }
+        public static string ListaIdUsuariosParaSQLscript(Entidades.Sesion Sesion)
+        {
+            DB.Usuario usuario = new DB.Usuario(Sesion);
+            return usuario.ListaIdUsuariosParaSQLscript();
         }
     }
 }

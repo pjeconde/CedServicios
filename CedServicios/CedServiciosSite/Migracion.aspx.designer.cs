@@ -10,51 +10,60 @@
 namespace CedServicios.Site {
     
     
-    public partial class Default {
+    public partial class Migracion {
         
         /// <summary>
-        /// Control TargetControlIDdelModalPopupExtender1.
+        /// Control Panel1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TargetControlIDdelModalPopupExtender1;
+        protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// Control ModalPopupExtender1.
+        /// Control TituloPaginaLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
+        protected global::System.Web.UI.WebControls.Label TituloPaginaLabel;
         
         /// <summary>
-        /// Control MensajePopup.
+        /// Control Panel2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel MensajePopup;
+        protected global::System.Web.UI.WebControls.Panel Panel2;
         
         /// <summary>
-        /// Control MensajePopupLabel.
+        /// Control CuentasGridView.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MensajePopupLabel;
+        protected global::System.Web.UI.WebControls.GridView CuentasGridView;
         
         /// <summary>
-        /// Control SalirPuntoVtaButton.
+        /// Control SalirButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SalirPuntoVtaButton;
+        protected global::System.Web.UI.WebControls.Button SalirButton;
+        
+        /// <summary>
+        /// Control MensajeLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MensajeLabel;
     }
 }
