@@ -149,6 +149,7 @@ GO
 insert TipoPuntoVta values ('BonoFiscal')
 insert TipoPuntoVta values ('Exportacion')
 insert TipoPuntoVta values ('Comun')
+insert TipoPuntoVta values ('RG2904')
 
 SET ANSI_NULLS ON
 GO
