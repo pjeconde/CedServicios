@@ -150,5 +150,16 @@ namespace CedServicios.DB
                 return lista;
             }
         }
+        public string ListaIdUsuariosParaSQLscript()
+        {
+            string a = String.Empty;
+            DataTable dt = (DataTable)Ejecutar("select Usuario.IdUsuario from Usuario ", TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            for (int i=0; i<dt.Rows.Count; i++)
+            {
+                a += "'" + dt.Rows[i]["IdUsuario"] + "'";
+                if (i != dt.Rows.Count - 1) a += ", ";
+            }
+            return a;
+        }
     }
 }

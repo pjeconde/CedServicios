@@ -3,9 +3,6 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content2" Visible="true" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
-    <asp:LinkButton ID="MultiCuitLinkButton" runat="server" TabIndex="4" 
-        Text="Prueba Copia CedWeb.Cuenta --> CedeiraSERVICIOS.Usuario" 
-        onclick="MultiCuitLinkButton_Click" />
     <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
     PopupControlID="MensajePopup"
     PopupDragHandleControlID="MensajePopup" 

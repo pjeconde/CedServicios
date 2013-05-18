@@ -26,7 +26,13 @@ namespace CedServicios.DB
         public DataTable LeerPuntoDeVenta(string IdCuenta)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select CUIT, IdPuntoDeVenta, IdTipoPuntoDeVenta, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost from PuntoDeVenta where CUIT in (select CUIT from Vendedor where IdCuenta='" + IdCuenta + "')");
+            a.Append("select CUIT, IdPuntoDeVenta, IdTipoPuntoDeVenta, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost from PuntoDeVenta where CUIT in (select CUIT from Vendedor where IdCuenta='" + IdCuenta + "') ");
+            return (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+        }
+        public DataTable ListaCuentasNoMigradas(string ListaIdUsuariosYaMigrados)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select IdCuenta, Nombre, Email, FechaAlta, FechaUltimoComprobante, IdEstadoCuenta from Cuenta where IdEstadoCuenta<>'PteConf' and IdCuenta not in (" + ListaIdUsuariosYaMigrados + ") order by IdEstadoCuenta desc, Nombre asc ");
             return (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
         }
     }
