@@ -138,6 +138,24 @@ namespace CedServicios.RN
                 Sesion.Usuario.Id = idUsuarioAux;
             }
         }
+        public static void AnularCopiaCuenta(string IdCuenta, Entidades.Sesion Sesion)
+        {
+            //declare @IdUsuario varchar(15)
+            //declare @Cuit varchar(11)
+            //set @IdUsuario='albipack'
+            //select @Cuit=Cuit from Permiso where IdUsuario=@IdUsuario and IdTipoPermiso='AdminCUIT'
+            //select IdWF into #ElimLog from Usuario where IdUsuario=@IdUsuario
+            //insert #ElimLog select IdWF from Cuit where Cuit=@Cuit
+            //insert #ElimLog select IdWF from UN where Cuit=@Cuit
+            //insert #ElimLog select IdWF from Permiso where Cuit=@Cuit or IdUsuario=@IdUsuario
+            //select * from LogDetalle where IdLog in (select IdLog from Log where IdWF in (select IdWF from #ElimLog))
+            //select * from Log where IdWF in (select IdWF from #ElimLog)
+            //select * from Usuario where IdUsuario=@IdUsuario
+            //select * from Cuit where Cuit=@Cuit
+            //select * from UN where Cuit=@Cuit
+            //select * from Permiso where Cuit=@Cuit or IdUsuario=@IdUsuario
+            //drop table #ElimLog
+        }
         public static DataTable CuentasNoMigradas(Entidades.Sesion Sesion)
         {
             DB.Migracion db = new DB.Migracion(SesionCedWeb());
