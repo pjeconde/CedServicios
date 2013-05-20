@@ -161,5 +161,29 @@ namespace CedServicios.DB
             }
             return a;
         }
+        public void EliminarFISICAMENTEelUsuarioySusCuitsAdministrados(Entidades.Usuario Usuario)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("declare @IdUsuario varchar(15) ");
+            a.AppendLine("declare @Cuit varchar(11) ");
+            a.AppendLine("set @IdUsuario='" + Usuario.Id + "' ");
+            a.AppendLine("select @Cuit=Cuit from Permiso where IdUsuario=@IdUsuario and IdTipoPermiso='AdminCUIT' ");
+            a.AppendLine("select IdWF into #ElimLog from Usuario where IdUsuario=@IdUsuario ");
+            a.AppendLine("insert #ElimLog select IdWF from Cuit where Cuit=@Cuit ");
+            a.AppendLine("insert #ElimLog select IdWF from UN where Cuit=@Cuit ");
+            a.AppendLine("insert #ElimLog select IdWF from PuntoVta where Cuit=@Cuit ");
+            a.AppendLine("insert #ElimLog select IdWF from Cliente where Cuit=@Cuit ");
+            a.AppendLine("insert #ElimLog select IdWF from Permiso where Cuit=@Cuit or IdUsuario=@IdUsuario ");
+            a.AppendLine("delete LogDetalle where IdLog in (select IdLog from Log where IdWF in (select IdWF from #ElimLog)) ");
+            a.AppendLine("delete Log where IdWF in (select IdWF from #ElimLog) ");
+            a.AppendLine("delete Permiso where Cuit=@Cuit or IdUsuario=@IdUsuario ");
+            a.AppendLine("delete UN where Cuit=@Cuit ");
+            a.AppendLine("delete PuntoVta where Cuit=@Cuit ");
+            a.AppendLine("delete Cliente where Cuit=@Cuit ");
+            a.AppendLine("delete Cuit where Cuit=@Cuit ");
+            a.AppendLine("delete Usuario where IdUsuario=@IdUsuario ");
+            a.AppendLine("drop table #ElimLog ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
+        }
     }
 }
