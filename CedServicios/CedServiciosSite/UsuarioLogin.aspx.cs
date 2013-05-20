@@ -51,6 +51,7 @@ namespace CedServicios.Site
             catch (Exception ex)
             {
                 MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+                UsuarioTextBox.Focus();
             }
         }
         protected void UsuarioTextBox_TextChanged(object sender, EventArgs e)

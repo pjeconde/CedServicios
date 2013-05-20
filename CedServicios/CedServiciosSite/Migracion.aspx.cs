@@ -30,24 +30,31 @@ namespace CedServicios.Site
         }
         protected void CuentasGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            int item = Convert.ToInt32(e.CommandArgument);
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            DataRow cuenta = ((DataTable)ViewState["CuentasNoMigradas"]).Rows[item];
-            switch (e.CommandName)
+            try
             {
-                case "Copiar":
-                    RN.Migracion.CopiarCuenta(cuenta["IdCuenta"].ToString(), sesion);
-                    ViewState["CuentasNoMigradas"] = RN.Migracion.CuentasNoMigradas(sesion);
-                    CuentasGridView.DataSource = (DataTable)ViewState["CuentasNoMigradas"];
-                    CuentasGridView.DataBind();
-                   break;
+                int item = Convert.ToInt32(e.CommandArgument);
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                DataRow cuenta = ((DataTable)ViewState["CuentasNoMigradas"]).Rows[item];
+                switch (e.CommandName)
+                {
+                    case "Copiar":
+                        RN.Migracion.CopiarCuenta(cuenta["IdCuenta"].ToString(), sesion);
+                        ViewState["CuentasNoMigradas"] = RN.Migracion.CuentasNoMigradas(sesion);
+                        CuentasGridView.DataSource = (DataTable)ViewState["CuentasNoMigradas"];
+                        CuentasGridView.DataBind();
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
         }
         protected void CuentasGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.Cells[6].Text == "Suspend")
+                if (e.Row.Cells[7].Text == "Suspend")
                 {
                     e.Row.ForeColor = Color.Red;
                 }

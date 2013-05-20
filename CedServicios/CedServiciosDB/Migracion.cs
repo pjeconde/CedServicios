@@ -23,6 +23,12 @@ namespace CedServicios.DB
             a.Append("select IdCuenta, RazonSocial, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, CUIT, IdCondIVA, DescrCondIVA, NroIngBrutos, IdCondIngBrutos, DescrCondIngBrutos, GLN, CodigoInterno, FechaInicioActividades from Vendedor where IdCuenta='" + IdCuenta + "' ");
             return (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
         }
+        public DataTable LeerComprador(string IdCuenta)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select IdCuenta, RazonSocial, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, IdTipoDoc, DescrTipoDoc, NroDoc, IdCondIVA, DescrCondIVA, NroIngBrutos, IdCondIngBrutos, DescrCondIngBrutos, GLN, CodigoInterno, FechaInicioActividades, EmailAvisoVisualizacion, PasswordAvisoVisualizacion from Comprador where IdCuenta='" + IdCuenta + "' ");
+            return (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+        }
         public DataTable LeerPuntoDeVenta(string IdCuenta)
         {
             StringBuilder a = new StringBuilder(string.Empty);
@@ -32,7 +38,7 @@ namespace CedServicios.DB
         public DataTable ListaCuentasNoMigradas(string ListaIdUsuariosYaMigrados)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select IdCuenta, Nombre, Email, FechaAlta, FechaUltimoComprobante, IdEstadoCuenta from Cuenta where IdEstadoCuenta<>'PteConf' and IdCuenta not in (" + ListaIdUsuariosYaMigrados + ") order by IdEstadoCuenta desc, Nombre asc ");
+            a.Append("select IdCuenta, Nombre, Email, FechaAlta, FechaUltimoComprobante, CantidadComprobantes, IdEstadoCuenta from Cuenta where IdEstadoCuenta<>'PteConf' and IdCuenta not in (" + ListaIdUsuariosYaMigrados + ") order by IdEstadoCuenta desc, FechaUltimoComprobante desc ");
             return (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
         }
     }

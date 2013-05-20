@@ -36,6 +36,10 @@
                                     <headerstyle horizontalalign="center" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>
+                                <asp:BoundField DataField="CantidadComprobantes" HeaderText="qComprob" SortExpression="CantidadComprobantes">
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="right" wrap="False" />
+                                </asp:BoundField>
                                 <asp:BoundField DataField="IdEstadoCuenta" HeaderText="Estado" SortExpression="IdEstadoCuenta">
                                     <headerstyle horizontalalign="center" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />

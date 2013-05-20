@@ -11,13 +11,12 @@ namespace CedServicios.RN
         public static void CopiarCuenta(string IdCuenta, Entidades.Sesion Sesion)
         {
             string idUsuarioAux = Sesion.Usuario.Id;
+            Entidades.Usuario usuario = new Entidades.Usuario();
+            usuario.Id = IdCuenta;
             try
             {
                 Entidades.Sesion sesionCedWeb = SesionCedWeb();
-                Entidades.Usuario usuario = new Entidades.Usuario();
                 Entidades.Cuit cuit = new Entidades.Cuit();
-
-                usuario.Id = IdCuenta;
                 sesionCedWeb.Usuario = usuario;
                 Sesion.Usuario.Id = IdCuenta;
                 DB.Migracion dbCedWeb = new DB.Migracion(sesionCedWeb);
@@ -59,6 +58,7 @@ namespace CedServicios.RN
                     cuit.DatosImpositivos.DescrCondIVA = Convert.ToString(dtVendedor.Rows[0]["DescrCondIVA"]);
                     cuit.DatosImpositivos.IdCondIngBrutos = Convert.ToInt32(dtVendedor.Rows[0]["IdCondIngBrutos"]);
                     cuit.DatosImpositivos.DescrCondIngBrutos = Convert.ToString(dtVendedor.Rows[0]["DescrCondIngBrutos"]);
+                    cuit.DatosImpositivos.NroIngBrutos = Convert.ToString(dtVendedor.Rows[0]["NroIngBrutos"]);
                     cuit.DatosImpositivos.FechaInicioActividades = Convert.ToDateTime(dtVendedor.Rows[0]["FechaInicioActividades"]);
                     cuit.DatosIdentificatorios.GLN = Convert.ToInt64(dtVendedor.Rows[0]["GLN"]);
                     cuit.DatosIdentificatorios.CodigoInterno = Convert.ToString(dtVendedor.Rows[0]["CodigoInterno"]);
@@ -87,20 +87,32 @@ namespace CedServicios.RN
                             puntoVta.IdTipoPuntoVta = Convert.ToString(dtPuntoDeVenta.Rows[i]["IdTipoPuntoDeVenta"]);
                             break;
                     }
-                    puntoVta.UsaSetPropioDeDatosCuit = Convert.ToString(dtPuntoDeVenta.Rows[0]["Calle"]) != String.Empty && (Convert.ToString(dtPuntoDeVenta.Rows[0]["Calle"]) != cuit.Domicilio.Calle || Convert.ToString(dtPuntoDeVenta.Rows[0]["Nro"]) != cuit.Domicilio.Nro) && cuit.Nro.IndexOf("/33234434312/30709010480/30592449524/") != 0;
+                    puntoVta.UsaSetPropioDeDatosCuit = Convert.ToString(dtPuntoDeVenta.Rows[i]["Calle"]) != String.Empty && (Convert.ToString(dtPuntoDeVenta.Rows[i]["Calle"]) != cuit.Domicilio.Calle || Convert.ToString(dtPuntoDeVenta.Rows[i]["Nro"]) != cuit.Domicilio.Nro) && cuit.Nro.IndexOf("/33234434312/30709010480/30592449524/") != 0;
                     if (puntoVta.UsaSetPropioDeDatosCuit)
                     {
-                        puntoVta.Domicilio.Calle = Convert.ToString(dtPuntoDeVenta.Rows[0]["Calle"]);
-                        puntoVta.Domicilio.Nro = Convert.ToString(dtPuntoDeVenta.Rows[0]["Nro"]);
-                        puntoVta.Domicilio.Piso = Convert.ToString(dtPuntoDeVenta.Rows[0]["Piso"]);
-                        puntoVta.Domicilio.Depto = Convert.ToString(dtPuntoDeVenta.Rows[0]["Depto"]);
-                        puntoVta.Domicilio.Sector = Convert.ToString(dtPuntoDeVenta.Rows[0]["Sector"]);
-                        puntoVta.Domicilio.Torre = Convert.ToString(dtPuntoDeVenta.Rows[0]["Torre"]);
-                        puntoVta.Domicilio.Manzana = Convert.ToString(dtPuntoDeVenta.Rows[0]["Manzana"]);
-                        puntoVta.Domicilio.Localidad = Convert.ToString(dtPuntoDeVenta.Rows[0]["Localidad"]);
-                        puntoVta.Domicilio.Provincia.Id = Convert.ToString(dtPuntoDeVenta.Rows[0]["IdProvincia"]);
-                        puntoVta.Domicilio.Provincia.Descr = Convert.ToString(dtPuntoDeVenta.Rows[0]["DescrProvincia"]);
-                        puntoVta.Domicilio.CodPost = Convert.ToString(dtPuntoDeVenta.Rows[0]["CodPost"]);
+                        puntoVta.Domicilio.Calle = Convert.ToString(dtPuntoDeVenta.Rows[i]["Calle"]);
+                        puntoVta.Domicilio.Nro = Convert.ToString(dtPuntoDeVenta.Rows[i]["Nro"]);
+                        puntoVta.Domicilio.Piso = Convert.ToString(dtPuntoDeVenta.Rows[i]["Piso"]);
+                        puntoVta.Domicilio.Depto = Convert.ToString(dtPuntoDeVenta.Rows[i]["Depto"]);
+                        puntoVta.Domicilio.Sector = Convert.ToString(dtPuntoDeVenta.Rows[i]["Sector"]);
+                        puntoVta.Domicilio.Torre = Convert.ToString(dtPuntoDeVenta.Rows[i]["Torre"]);
+                        puntoVta.Domicilio.Manzana = Convert.ToString(dtPuntoDeVenta.Rows[i]["Manzana"]);
+                        puntoVta.Domicilio.Localidad = Convert.ToString(dtPuntoDeVenta.Rows[i]["Localidad"]);
+                        puntoVta.Domicilio.Provincia.Id = Convert.ToString(dtPuntoDeVenta.Rows[i]["IdProvincia"]);
+                        puntoVta.Domicilio.Provincia.Descr = Convert.ToString(dtPuntoDeVenta.Rows[i]["DescrProvincia"]);
+                        puntoVta.Domicilio.CodPost = Convert.ToString(dtPuntoDeVenta.Rows[i]["CodPost"]);
+                        //La tabla PuntoDeVenta sólo puede contener los datos de Domicilio
+                        puntoVta.Contacto.Nombre = cuit.Contacto.Nombre;
+                        puntoVta.Contacto.Email = cuit.Contacto.Email;
+                        puntoVta.Contacto.Telefono = cuit.Contacto.Telefono;
+                        puntoVta.DatosImpositivos.IdCondIVA = cuit.DatosImpositivos.IdCondIVA;
+                        puntoVta.DatosImpositivos.DescrCondIVA = cuit.DatosImpositivos.DescrCondIVA;
+                        puntoVta.DatosImpositivos.IdCondIngBrutos = cuit.DatosImpositivos.IdCondIngBrutos;
+                        puntoVta.DatosImpositivos.DescrCondIngBrutos = cuit.DatosImpositivos.DescrCondIngBrutos;
+                        puntoVta.DatosImpositivos.NroIngBrutos = cuit.DatosImpositivos.NroIngBrutos;
+                        puntoVta.DatosImpositivos.FechaInicioActividades = cuit.DatosImpositivos.FechaInicioActividades;
+                        puntoVta.DatosIdentificatorios.GLN = cuit.DatosIdentificatorios.GLN;
+                        puntoVta.DatosIdentificatorios.CodigoInterno = cuit.DatosIdentificatorios.CodigoInterno;
                     }
                     else
                     {
@@ -115,46 +127,74 @@ namespace CedServicios.RN
                         puntoVta.Domicilio.Provincia.Id = String.Empty;
                         puntoVta.Domicilio.Provincia.Descr = String.Empty;
                         puntoVta.Domicilio.CodPost = String.Empty;
+                        puntoVta.Contacto.Nombre = String.Empty;
+                        puntoVta.Contacto.Email = String.Empty;
+                        puntoVta.Contacto.Telefono = String.Empty;
+                        puntoVta.DatosImpositivos.IdCondIVA = 0;
+                        puntoVta.DatosImpositivos.DescrCondIVA = String.Empty;
+                        puntoVta.DatosImpositivos.IdCondIngBrutos = 0;
+                        puntoVta.DatosImpositivos.DescrCondIngBrutos = String.Empty;
+                        puntoVta.DatosImpositivos.NroIngBrutos = String.Empty;
+                        puntoVta.DatosImpositivos.FechaInicioActividades = new DateTime(1900, 1, 1);
+                        puntoVta.DatosIdentificatorios.GLN = 0;
+                        puntoVta.DatosIdentificatorios.CodigoInterno = String.Empty;
                     }
-                    //La tabla PuntoDeVenta sólo puede contener los datos de Domicilio
-                    puntoVta.Contacto.Nombre = String.Empty;
-                    puntoVta.Contacto.Email = String.Empty;
-                    puntoVta.Contacto.Telefono = String.Empty;
-                    puntoVta.DatosImpositivos.IdCondIVA = 0;
-                    puntoVta.DatosImpositivos.DescrCondIVA = String.Empty;
-                    puntoVta.DatosImpositivos.IdCondIngBrutos = 0;
-                    puntoVta.DatosImpositivos.DescrCondIngBrutos = String.Empty;
-                    puntoVta.DatosImpositivos.NroIngBrutos = String.Empty;
-                    puntoVta.DatosImpositivos.FechaInicioActividades = new DateTime(1900, 1, 1);
-                    puntoVta.DatosIdentificatorios.GLN = 0;
-                    puntoVta.DatosIdentificatorios.CodigoInterno = String.Empty;
-                    puntoVta.IdMetodoGeneracionNumeracionLote = "TimeStamp";
+                    puntoVta.IdMetodoGeneracionNumeracionLote = "Ninguno";
                     puntoVta.UltNroLote = 0;
                     RN.PuntoVta.Crear(puntoVta, Sesion);
                 }
+                //Cliente
+                DataTable dtComprador = dbCedWeb.LeerComprador(IdCuenta);
+                for (int j = 0; j < dtComprador.Rows.Count; j++)
+                {
+                    Entidades.Cliente cliente = new Entidades.Cliente();
+                    cliente.Cuit = cuit.Nro;
+                    cliente.Documento.Tipo.Id = Convert.ToString(dtComprador.Rows[j]["IdTipoDoc"]);
+                    cliente.Documento.Tipo.Descr = Convert.ToString(dtComprador.Rows[j]["DescrTipoDoc"]);
+                    cliente.Documento.Nro = Convert.ToInt64(dtComprador.Rows[j]["NroDoc"]);
+                    cliente.DesambiguacionCuitPais = 0;
+                    cliente.RazonSocial = Convert.ToString(dtComprador.Rows[j]["RazonSocial"]);
+                    cliente.Domicilio.Calle = Convert.ToString(dtComprador.Rows[j]["Calle"]);
+                    cliente.Domicilio.Nro = Convert.ToString(dtComprador.Rows[j]["Nro"]);
+                    cliente.Domicilio.Piso = Convert.ToString(dtComprador.Rows[j]["Piso"]);
+                    cliente.Domicilio.Depto = Convert.ToString(dtComprador.Rows[j]["Depto"]);
+                    cliente.Domicilio.Sector = Convert.ToString(dtComprador.Rows[j]["Sector"]);
+                    cliente.Domicilio.Torre = Convert.ToString(dtComprador.Rows[j]["Torre"]);
+                    cliente.Domicilio.Manzana = Convert.ToString(dtComprador.Rows[j]["Manzana"]);
+                    cliente.Domicilio.Localidad = Convert.ToString(dtComprador.Rows[j]["Localidad"]);
+                    cliente.Domicilio.Provincia.Id = Convert.ToString(dtComprador.Rows[j]["IdProvincia"]);
+                    cliente.Domicilio.Provincia.Descr = Convert.ToString(dtComprador.Rows[j]["DescrProvincia"]);
+                    cliente.Domicilio.CodPost = Convert.ToString(dtComprador.Rows[j]["CodPost"]);
+                    cliente.Contacto.Nombre = Convert.ToString(dtComprador.Rows[j]["NombreContacto"]);
+                    cliente.Contacto.Email = Convert.ToString(dtComprador.Rows[j]["EmailContacto"]);
+                    cliente.Contacto.Telefono = Convert.ToString(dtComprador.Rows[j]["TelefonoContacto"]);
+                    cliente.DatosImpositivos.IdCondIVA = Convert.ToInt32(dtComprador.Rows[j]["IdCondIVA"]);
+                    cliente.DatosImpositivos.DescrCondIVA = Convert.ToString(dtComprador.Rows[j]["DescrCondIVA"]);
+                    cliente.DatosImpositivos.IdCondIngBrutos = Convert.ToInt32(dtComprador.Rows[j]["IdCondIngBrutos"]);
+                    cliente.DatosImpositivos.DescrCondIngBrutos = Convert.ToString(dtComprador.Rows[j]["DescrCondIngBrutos"]);
+                    cliente.DatosImpositivos.NroIngBrutos = Convert.ToString(dtComprador.Rows[j]["NroIngBrutos"]);
+                    cliente.DatosImpositivos.FechaInicioActividades = Convert.ToDateTime(dtComprador.Rows[j]["FechaInicioActividades"]);
+                    cliente.DatosIdentificatorios.GLN = Convert.ToInt64(dtComprador.Rows[j]["GLN"]);
+                    cliente.DatosIdentificatorios.CodigoInterno = Convert.ToString(dtComprador.Rows[j]["CodigoInterno"]);
+                    cliente.EmailAvisoVisualizacion = Convert.ToString(dtComprador.Rows[j]["EmailAvisoVisualizacion"]);
+                    cliente.PasswordAvisoVisualizacion = Convert.ToString(dtComprador.Rows[j]["PasswordAvisoVisualizacion"]);
+                    RN.Cliente.Crear(cliente, Sesion);
+                }
+            }
+            catch (Exception ex)
+            {
+                AnularCopiaCuenta(usuario, Sesion);
+                throw ex;
             }
             finally
             {
                 Sesion.Usuario.Id = idUsuarioAux;
             }
         }
-        public static void AnularCopiaCuenta(string IdCuenta, Entidades.Sesion Sesion)
+        private static void AnularCopiaCuenta(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
-            //declare @IdUsuario varchar(15)
-            //declare @Cuit varchar(11)
-            //set @IdUsuario='albipack'
-            //select @Cuit=Cuit from Permiso where IdUsuario=@IdUsuario and IdTipoPermiso='AdminCUIT'
-            //select IdWF into #ElimLog from Usuario where IdUsuario=@IdUsuario
-            //insert #ElimLog select IdWF from Cuit where Cuit=@Cuit
-            //insert #ElimLog select IdWF from UN where Cuit=@Cuit
-            //insert #ElimLog select IdWF from Permiso where Cuit=@Cuit or IdUsuario=@IdUsuario
-            //select * from LogDetalle where IdLog in (select IdLog from Log where IdWF in (select IdWF from #ElimLog))
-            //select * from Log where IdWF in (select IdWF from #ElimLog)
-            //select * from Usuario where IdUsuario=@IdUsuario
-            //select * from Cuit where Cuit=@Cuit
-            //select * from UN where Cuit=@Cuit
-            //select * from Permiso where Cuit=@Cuit or IdUsuario=@IdUsuario
-            //drop table #ElimLog
+            DB.Usuario db = new DB.Usuario(Sesion);
+            db.EliminarFISICAMENTEelUsuarioySusCuitsAdministrados(Usuario);
         }
         public static DataTable CuentasNoMigradas(Entidades.Sesion Sesion)
         {
