@@ -152,6 +152,7 @@ namespace CedServicios.RN
                     cliente.Documento.Tipo.Id = Convert.ToString(dtComprador.Rows[j]["IdTipoDoc"]);
                     cliente.Documento.Tipo.Descr = Convert.ToString(dtComprador.Rows[j]["DescrTipoDoc"]);
                     cliente.Documento.Nro = Convert.ToInt64(dtComprador.Rows[j]["NroDoc"]);
+                    cliente.IdCliente = String.Empty;
                     cliente.DesambiguacionCuitPais = 0;
                     cliente.RazonSocial = Convert.ToString(dtComprador.Rows[j]["RazonSocial"]);
                     cliente.Domicilio.Calle = Convert.ToString(dtComprador.Rows[j]["Calle"]);
@@ -178,7 +179,24 @@ namespace CedServicios.RN
                     cliente.DatosIdentificatorios.CodigoInterno = Convert.ToString(dtComprador.Rows[j]["CodigoInterno"]);
                     cliente.EmailAvisoVisualizacion = Convert.ToString(dtComprador.Rows[j]["EmailAvisoVisualizacion"]);
                     cliente.PasswordAvisoVisualizacion = Convert.ToString(dtComprador.Rows[j]["PasswordAvisoVisualizacion"]);
-                    RN.Cliente.Crear(cliente, Sesion);
+                    try
+                    {
+                        RN.Cliente.Crear(cliente, Sesion);
+                    }
+                    catch (Exception ex)
+                    {
+                        //Desambiguación clientes nacionales
+                        if (ex.InnerException.Message.IndexOf("PRIMARY KEY") != 0)
+                        {
+                            RN.Cliente.DesambiguarClienteNacional(cliente, Sesion);
+                            cliente.IdCliente = cliente.RazonSocial;
+                            RN.Cliente.Crear(cliente, Sesion);
+                        }
+                        else
+                        {
+                            throw ex;
+                        }
+                    }
                 }
             }
             catch (Exception ex)

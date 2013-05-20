@@ -58,6 +58,11 @@ namespace CedServicios.RN
             Cliente.WF.Estado = "Vigente";
             db.Crear(Cliente);
         }
+        public static void DesambiguarClienteNacional(Entidades.Cliente Cliente, Entidades.Sesion Sesion)
+        {
+            DB.Cliente db = new DB.Cliente(Sesion);
+            db.DesambiguarClienteNacional(Cliente);
+        }
         public static void Modificar(Entidades.Cliente ClienteDesde, Entidades.Cliente ClienteHasta, Entidades.Sesion Sesion)
         {
             DB.Cliente db = new DB.Cliente(Sesion);

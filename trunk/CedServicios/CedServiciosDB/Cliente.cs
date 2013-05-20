@@ -152,6 +152,12 @@ namespace CedServicios.DB
             a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'Cliente', 'Alta', '" + Cliente.WF.Estado + "', '') ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void DesambiguarClienteNacional(Entidades.Cliente Cliente)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("update Cliente set IdCliente=Razonsocial where Cuit='" + Cliente.Cuit + "' and IdTipoDoc=" + Cliente.Documento.Tipo.Id + " and NroDoc=" + Cliente.Documento.Nro.ToString() + " and IdCliente='' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
         public void Modificar(Entidades.Cliente Desde, Entidades.Cliente Hasta)
         {
             StringBuilder a = new StringBuilder(string.Empty);
