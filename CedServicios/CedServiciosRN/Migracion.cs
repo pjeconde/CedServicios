@@ -34,6 +34,10 @@ namespace CedServicios.RN
                 usuario.EmailSMS = Convert.ToString(dtCuenta.Rows[0]["EmailSMS"]);
                 RN.Usuario.Registrar(usuario, false, Sesion);
                 RN.Usuario.Confirmar(usuario, false, false, Sesion);
+                if (Convert.ToString(dtCuenta.Rows[0]["IdTipoCuenta"]) == "Admin")
+                {
+                    RN.Permiso.PermisoAdminSITEParaUsuarioAprobado(usuario, Sesion);
+                }
                 //Cuit
                 DataTable dtVendedor = dbCedWeb.LeerVendedor(IdCuenta);
                 if (dtVendedor.Rows.Count > 0)

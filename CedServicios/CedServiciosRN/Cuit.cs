@@ -38,12 +38,59 @@ namespace CedServicios.RN
             DB.Cuit db = new DB.Cuit(Sesion);
             Cuit.WF.Estado = "Vigente";
             db.Crear(Cuit, permisoAdminCUITParaUsuarioAprobadoHandler, crearUNHandler, permisoUsoCUITxUNAprobadoHandler, permisoAdminUNParaUsuarioAprobadoHandler, permisoOperServUNParaUsuarioAprobadoHandler);
+            Entidades.Configuracion configuracion = new Entidades.Configuracion();
+            DB.Configuracion dbConfiguracion = new DB.Configuracion(Sesion);
+            if (Cuit.NroSerieCertifAFIP != String.Empty)
+            {
+                configuracion.IdUsuario = String.Empty;
+                configuracion.Cuit = Cuit.Nro;
+                configuracion.IdUN = String.Empty;
+                configuracion.TipoPermiso.Id = String.Empty;
+                configuracion.IdItemConfig = "NroSerieCertifAFIP";
+                configuracion.Valor = Cuit.NroSerieCertifAFIP;
+                dbConfiguracion.Crear(configuracion);
+
+            }
+            if (Cuit.NroSerieCertifITF != String.Empty)
+            {
+                configuracion.IdUsuario = String.Empty;
+                configuracion.Cuit = Cuit.Nro;
+                configuracion.IdUN = String.Empty;
+                configuracion.TipoPermiso.Id = String.Empty;
+                configuracion.IdItemConfig = "NroSerieCertifITF";
+                configuracion.Valor = Cuit.NroSerieCertifITF;
+                dbConfiguracion.Crear(configuracion);
+            }
         }
         public static void Modificar(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {
             DB.Cuit db = new DB.Cuit(Sesion);
             db.Modificar(Sesion.Cuit, Cuit);
             Sesion.Cuit = Cuit;
+            Entidades.Configuracion configuracion = new Entidades.Configuracion();
+            DB.Configuracion dbConfiguracion = new DB.Configuracion(Sesion);
+            dbConfiguracion.ElimninarNroSerieCertif(Cuit);
+            if (Cuit.NroSerieCertifAFIP != String.Empty)
+            {
+                configuracion.IdUsuario = String.Empty;
+                configuracion.Cuit = Cuit.Nro;
+                configuracion.IdUN = String.Empty;
+                configuracion.TipoPermiso.Id = String.Empty;
+                configuracion.IdItemConfig = "NroSerieCertifAFIP";
+                configuracion.Valor = Cuit.NroSerieCertifAFIP;
+                dbConfiguracion.Crear(configuracion);
+
+            }
+            if (Cuit.NroSerieCertifITF != String.Empty)
+            {
+                configuracion.IdUsuario = String.Empty;
+                configuracion.Cuit = Cuit.Nro;
+                configuracion.IdUN = String.Empty;
+                configuracion.TipoPermiso.Id = String.Empty;
+                configuracion.IdItemConfig = "NroSerieCertifITF";
+                configuracion.Valor = Cuit.NroSerieCertifAFIP;
+                dbConfiguracion.Crear(configuracion);
+            }
         }
         public static void CambiarEstado(Entidades.Cuit Cuit, string Estado, Entidades.Sesion Sesion)
         {

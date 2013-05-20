@@ -209,6 +209,19 @@ namespace CedServicios.RN
             }
             return descripcion;
         }
+        public static void PermisoAdminSITEParaUsuarioAprobado(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
+        {
+            Entidades.Permiso permiso = new Entidades.Permiso();
+            permiso.Usuario = Sesion.Usuario;
+            permiso.Cuit = String.Empty;
+            permiso.UN.Id = 0;
+            permiso.TipoPermiso.Id = "AdminSITE";
+            permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
+            permiso.UsuarioSolicitante = Usuario;
+            permiso.WF.Estado = "Vigente";
+            CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
+            db.Alta(permiso);
+        }
         public static string PermisoAdminCUITParaUsuarioAprobadoHandler(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {
             Entidades.Permiso permiso = new Entidades.Permiso();
