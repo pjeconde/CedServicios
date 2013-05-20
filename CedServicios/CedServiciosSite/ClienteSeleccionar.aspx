@@ -90,7 +90,7 @@
                                 </asp:BoundField>
                                 <asp:BoundField DataField="IdCliente" HeaderText="Id.Cliente" SortExpression="IdCliente">
                                     <headerstyle horizontalalign="left" wrap="False" />
-                                    <itemstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado">
                                     <headerstyle horizontalalign="center" wrap="False" />
