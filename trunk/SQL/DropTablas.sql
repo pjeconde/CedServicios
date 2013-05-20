@@ -1,3 +1,4 @@
+drop table dbo.Articulo
 drop table dbo.PuntoVta
 drop table dbo.MetodoGeneracionNumeracionLote
 drop table dbo.TipoPuntoVta
