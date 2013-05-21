@@ -70,9 +70,9 @@
         </tr>
         <tr>
             <td align="center" style="height: 24px; padding-top: 20px">
-                <asp:Button ID="SolucionesButton" runat="server" TabIndex="1" Text="Soluciones" onclick="SolucionesButton_Click" />
-                <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="2" Text="Referencias Comerciales" onclick="RefeComButton_Click" />
-                <asp:Button ID="ContactoButton" runat="server" CausesValidation="false" TabIndex="3" Text="Contacto" onclick="ContactoButton_Click" />
+                <asp:Button ID="SolucionesButton" runat="server" TabIndex="1" Text="Soluciones" onclick="SolucionesButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="2" Text="Referencias Comerciales" onclick="RefeComButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                <asp:Button ID="ContactoButton" runat="server" CausesValidation="false" TabIndex="3" Text="Contacto" onclick="ContactoButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                 <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="4" Text="Salir" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
@@ -82,4 +82,11 @@
             </td>
         </tr>
     </table>
+    <script type="text/javascript">
+        function BorrarMensaje() {
+            {
+                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
+            }
+        }
+    </script>
 </asp:Content>

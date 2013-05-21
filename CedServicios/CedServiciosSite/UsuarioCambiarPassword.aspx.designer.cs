@@ -220,13 +220,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Button CancelarButton;
         
         /// <summary>
-        /// Control MsgErrorLabel.
+        /// Control MensajeLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MsgErrorLabel;
+        protected global::System.Web.UI.WebControls.Label MensajeLabel;
         
         /// <summary>
         /// Control MensajeValidationSummary.

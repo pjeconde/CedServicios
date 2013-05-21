@@ -138,8 +138,7 @@
             </tr>           
             <tr>
                 <td align="right" style="padding-top:20px">
-                    <asp:Button ID="ConfirmarButton" runat="server" Text="Confirmar" 
-                        onclick="ConfirmarButton_Click"/>
+                    <asp:Button ID="ConfirmarButton" runat="server" Text="Confirmar" onclick="ConfirmarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                 </td>
                 <td align="left" style="padding-top:20px">
                     <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" />
@@ -147,4 +146,11 @@
             </tr>
         </table>
     </asp:Panel>
+    <script type="text/javascript">
+        function BorrarMensaje() {
+            {
+                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
+            }
+        }
+    </script>
 </asp:Content>

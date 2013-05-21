@@ -30,7 +30,7 @@ namespace CedServicios.Site
         }
         protected void CrearCuentaButton_Click(object sender, EventArgs e)
         {
-            MsgErrorLabel.Text = String.Empty;
+            MensajeLabel.Text = String.Empty;
             ResultadoComprobarDisponibilidadLabel.Text = String.Empty;
             Entidades.Usuario usuario = new Entidades.Usuario();
             usuario.Nombre = NombreTextBox.Text;
@@ -61,12 +61,12 @@ namespace CedServicios.Site
                 ConfirmacionPasswordTextBox.Enabled = false;
                 PreguntaTextBox.Enabled = false;
                 RespuestaTextBox.Enabled = false;
-                MsgErrorLabel.Text = "Gracias por crear su cuenta.<br />Siga las instrucciones, que se enviaron por email, para confirmar la creación de su cuenta.<br />La recepción del email puede demorar unos minutos.";
+                MensajeLabel.Text = "Gracias por crear su cuenta.<br />Siga las instrucciones, que se enviaron por email, para confirmar la creación de su cuenta.<br />La recepción del email puede demorar unos minutos.";
             }
             catch (Exception ex)
             {
                 string a = EX.Funciones.Detalle(ex);
-                MsgErrorLabel.Text = a;
+                MensajeLabel.Text = a;
             }
         }
         protected void NuevaClaveCaptchaButton_Click(object sender, EventArgs e)
@@ -75,7 +75,7 @@ namespace CedServicios.Site
         }
         protected void ComprobarDisponibilidadButton_Click(object sender, EventArgs e)
         {
-            MsgErrorLabel.Text = String.Empty;
+            MensajeLabel.Text = String.Empty;
             Entidades.Usuario usuario = new Entidades.Usuario();
             usuario.Id = IdUsuarioTextBox.Text;
             try
@@ -94,14 +94,14 @@ namespace CedServicios.Site
             }
             catch (EX.Validaciones.ValorNoInfo)
             {
-                ResultadoComprobarDisponibilidadLabel.ForeColor = MsgErrorLabel.ForeColor;
+                ResultadoComprobarDisponibilidadLabel.ForeColor = MensajeLabel.ForeColor;
                 ResultadoComprobarDisponibilidadLabel.Text = "IdUsuario no informado";
             }
             catch (Exception ex)
             {
-                ResultadoComprobarDisponibilidadLabel.ForeColor = MsgErrorLabel.ForeColor;
+                ResultadoComprobarDisponibilidadLabel.ForeColor = MensajeLabel.ForeColor;
                 ResultadoComprobarDisponibilidadLabel.Text = "ver detalle al pie de página";
-                MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
         }
     }

@@ -68,7 +68,7 @@
         </tr>
         <tr>
             <td align="center" style="padding-top: 3px" valign="top">
-                <asp:Button ID="NuevaClaveCaptchaButton" runat="server" OnClick="NuevaClaveCaptchaButton_Click" Text="Nueva Clave" />
+                <asp:Button ID="NuevaClaveCaptchaButton" runat="server" OnClick="NuevaClaveCaptchaButton_Click" Text="Nueva Clave" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
             </td>
             <td align="right" style="padding-top: 3px; padding-right: 5px">
                 <asp:Label ID="ClaveLabel" runat="server" Text="Clave"></asp:Label>
@@ -86,26 +86,17 @@
             <td>
             </td>
             <td align="left" style="padding-top: 10px">
-                <asp:Button ID="EnviarButton" runat="server" OnClick="EnviarButton_Click" TabIndex="6" Text="Enviar" Width="80px" />
+                <asp:Button ID="EnviarButton" runat="server" OnClick="EnviarButton_Click" TabIndex="6" Text="Enviar" Width="80px" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
             </td>
             <td align="right" style="padding-top: 10px; padding-right: 2px">
-                <asp:Button ID="BorrarDatosButton" runat="server" OnClick="BorrarDatosButton_Click" Text="Borrar Datos" />
-            </td>
-        </tr>
-        <tr>
-            <td>
-            </td>
-            <td>
-            </td>
-            <td align="center" colspan="2">
-                <asp:Label ID="MsgErrorLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                <asp:Button ID="BorrarDatosButton" runat="server" OnClick="BorrarDatosButton_Click" Text="Borrar Datos" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
             </td>
         </tr>
         <tr>
             <td align="center" colspan="4" style="height: 24px; padding-top: 20px">
-                <asp:Button ID="EmpresaButton" runat="server" TabIndex="10" Text="Empresa" onclick="EmpresaButton_Click" />
-                <asp:Button ID="SolucionesButton" runat="server" CausesValidation="false" TabIndex="11" Text="Soluciones" onclick="SolucionesButton_Click" />
-                <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="12" Text="Referencias Comerciales" onclick="RefeComButton_Click" />
+                <asp:Button ID="EmpresaButton" runat="server" TabIndex="10" Text="Empresa" onclick="EmpresaButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                <asp:Button ID="SolucionesButton" runat="server" CausesValidation="false" TabIndex="11" Text="Soluciones" onclick="SolucionesButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="12" Text="Referencias Comerciales" onclick="RefeComButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                 <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="13" Text="Salir" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
@@ -115,4 +106,11 @@
             </td>
         </tr>
     </table>
+    <script type="text/javascript">
+        function BorrarMensaje() {
+            {
+                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
+            }
+        }
+    </script>
 </asp:Content>

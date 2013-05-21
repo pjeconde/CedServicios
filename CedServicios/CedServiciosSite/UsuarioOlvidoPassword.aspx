@@ -57,7 +57,7 @@
             <td colspan="2" align="left" style="padding-top:5px">
                 <asp:Button ID="SolicitarPreguntaButton" runat="server" CausesValidation="false"
                     OnClick="SolicitarPreguntaButton_Click" TabIndex="3" Text="Solicitar Pregunta de seguridad"
-                    Width="100%" />
+                    Width="100%" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
             </td>
         </tr>
         <tr>
@@ -96,7 +96,7 @@
             <td colspan="2" align="left" style="padding-top:5px">
                 <asp:Button ID="SolicitarNuevaPasswordButton" runat="server" CausesValidation="false"
                     Enabled="false" OnClick="SolicitarNuevaPasswordButton_Click" TabIndex="5" Text="Solicitar nuevo ingreso de Contraseña"
-                    Width="100%" />
+                    Width="100%" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
             </td>
         </tr>
         <tr>
@@ -143,7 +143,7 @@
             </td>
             <td align="left" style="padding-top:20px; width: 160px">
                 <asp:Button ID="AceptarButton" runat="server" Enabled="false" OnClick="AceptarButton_Click"
-                    TabIndex="8" Text="Aceptar" />
+                    TabIndex="8" Text="Aceptar" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
             </td>
             <td align="right" style="padding-top:20px; width: 200px">
                 <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" PostBackUrl="~/UsuarioLogin.aspx"
@@ -152,10 +152,17 @@
         </tr>
         <tr>
             <td colspan="3" align="center" style="padding-top:20px;">
-                <asp:Label ID="MsgErrorLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                 <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary" />
             </td>
         </tr>
         <!-- @@@ @@@-->
     </table>
+    <script type="text/javascript">
+        function BorrarMensaje() {
+            {
+                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
+            }
+        }
+    </script>
 </asp:Content>
