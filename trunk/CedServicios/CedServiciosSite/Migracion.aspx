@@ -10,7 +10,7 @@
             </tr>
             <tr>
                 <td align="center" style="height:24px; padding-top:20px">
-                    <asp:Button ID="CopiarTodosButton" runat="server" OnClick="CopiarTodosButton_Click" TabIndex="1" Text="Copiar todas las cuentas" />
+                    <asp:Button ID="CopiarTodosButton" runat="server" OnClick="CopiarTodosButton_Click" TabIndex="1" Text="Copiar todas las cuentas" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                     <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="2" Text="Salir" PostBackUrl="~/Default.aspx" />
                 </td>
             </tr>
@@ -25,7 +25,7 @@
                         <asp:GridView ID="CuentasGridView" runat="server"
                             AutoGenerateColumns="false" onrowcommand="CuentasGridView_RowCommand" OnRowDataBound="CuentasGridView_RowDataBound" CssClass="grilla" GridLines="None">
                             <Columns>
-                                <asp:ButtonField HeaderText="Cuenta" Text="Copiar" CommandName="Copiar" ButtonType="Link" ItemStyle-ForeColor="Blue">
+                                <asp:ButtonField HeaderText="Cuenta" Text="Copiar" CommandName="Copiar" ButtonType="Link" ItemStyle-ForeColor="Blue" >
                                 </asp:ButtonField>
                                 <asp:BoundField DataField="IdCuenta" HeaderText="Id" SortExpression="IdCuenta">
                                     <headerstyle horizontalalign="center" wrap="False" />
@@ -62,4 +62,11 @@
             </tr>
         </table>
     </asp:Panel>
+    <script type="text/javascript">
+        function BorrarMensaje() {
+            {
+                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
+            }
+        }
+    </script>
 </asp:Content>

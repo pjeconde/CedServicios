@@ -20,13 +20,13 @@ namespace CedServicios.Site
         {
             try
             {
-                MsgErrorLabel.Text = String.Empty;
+                MensajeLabel.Text = String.Empty;
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 RN.EnvioCorreo.ReporteIdUsuarios(EmailTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
                 EmailTextBox.Enabled = false;
                 AceptarButton.Visible = false;
                 CancelarButton.Visible = false;
-                MsgErrorLabel.Text = "Se ha enviado, por correo electrónico, el Id.Usuario de su(s) cuenta(s).  La recepción del email puede demorar unos minutos.";
+                MensajeLabel.Text = "Se ha enviado, por correo electrónico, el Id.Usuario de su(s) cuenta(s).  La recepción del email puede demorar unos minutos.";
             }
             catch (System.Threading.ThreadAbortException)
             {
@@ -34,7 +34,7 @@ namespace CedServicios.Site
             }
             catch (Exception ex)
             {
-                MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
         }
     }

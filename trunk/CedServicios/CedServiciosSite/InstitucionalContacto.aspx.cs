@@ -34,7 +34,7 @@ namespace CedServicios.Site
         }
         protected void EnviarButton_Click(object sender, EventArgs e)
         {
-            MsgErrorLabel.Text = String.Empty;
+            MensajeLabel.Text = String.Empty;
             Entidades.ContactoSite contacto = new Entidades.ContactoSite();
             if (FactElectronicaRadioButton.Checked)
             {
@@ -65,11 +65,11 @@ namespace CedServicios.Site
                 TelefonoTextBox.Enabled = false;
                 EmailTextBox.Enabled = false;
                 MensajeTextBox.Enabled = false;
-                MsgErrorLabel.Text = "Formulario enviado satisfactoriamente";
+                MensajeLabel.Text = "Formulario enviado satisfactoriamente";
             }
             catch (Exception ex)
             {
-                MsgErrorLabel.Text =  EX.Funciones.Detalle(ex);
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
         }
         protected void BorrarDatosButton_Click(object sender, EventArgs e)
@@ -78,7 +78,7 @@ namespace CedServicios.Site
             TelefonoTextBox.Text = String.Empty;
             EmailTextBox.Text = String.Empty;
             MensajeTextBox.Text = String.Empty;
-            MsgErrorLabel.Text = String.Empty;
+            MensajeLabel.Text = String.Empty;
             Funciones.GenerarImagenCaptcha(Session, CaptchaImage, CaptchaTextBox);
         }
     }

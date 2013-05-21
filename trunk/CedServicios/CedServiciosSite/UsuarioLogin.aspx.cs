@@ -25,7 +25,7 @@ namespace CedServicios.Site
         {
             try
             {
-                MsgErrorLabel.Text = String.Empty;
+                MensajeLabel.Text = String.Empty;
                 Entidades.Usuario usuario = new Entidades.Usuario();
                 usuario.Id = UsuarioTextBox.Text;
                 usuario.Password = PasswordTextBox.Text;
@@ -40,27 +40,27 @@ namespace CedServicios.Site
             }
             catch (EX.Validaciones.ElementoInexistente ex)
             {
-                MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
                 UsuarioTextBox.Focus();
             }
             catch (EX.Usuario.LoginRechazadoXPasswordInvalida ex)
             {
-                MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
                 PasswordTextBox.Focus();
             }
             catch (Exception ex)
             {
-                MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
                 UsuarioTextBox.Focus();
             }
         }
         protected void UsuarioTextBox_TextChanged(object sender, EventArgs e)
         {
-            MsgErrorLabel.Text = String.Empty;
+            MensajeLabel.Text = String.Empty;
         }
         protected void PasswordTextBox_TextChanged(object sender, EventArgs e)
         {
-            MsgErrorLabel.Text = String.Empty;
+            MensajeLabel.Text = String.Empty;
         }
         protected void MultiCuitLinkButton_Click(object sender, EventArgs e)
         {

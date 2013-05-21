@@ -93,7 +93,7 @@
                                     <td align="left" colspan="2" style="padding-left: 5px; padding-top:5px; width: 330px">
                                         <asp:Button ID="ComprobarDisponibilidadButton" runat="server" CausesValidation="false"
                                             OnClick="ComprobarDisponibilidadButton_Click" Text="¿Esta disponible?" ToolTip="Comprobar la disponibilidad del Id.Usuario ingresado"
-                                            Width="120px" />
+                                            Width="120px" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                                         <asp:Label ID="ResultadoComprobarDisponibilidadLabel" runat="server" Font-Bold="True"
                                             Font-Size="12px" Text="" Width="200px"></asp:Label>
                                     </td>
@@ -185,7 +185,7 @@
                                 <tr>
                                     <td align="center" style="padding-top:5px" valign="top">
                                         <asp:Button ID="NuevaClaveCaptchaButton" runat="server" CausesValidation="false"
-                                            OnClick="NuevaClaveCaptchaButton_Click" Text="Nueva Clave" />
+                                            OnClick="NuevaClaveCaptchaButton_Click" Text="Nueva Clave" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                                     </td>
                                     <td align="right" style="padding-top:5px; padding-right: 5px; width: 150px">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ControlToValidate="CaptchaTextBox"
@@ -215,7 +215,7 @@
                                     </td>
                                     <td align="left" style="padding-top: 10px">
                                         <asp:Button ID="CrearCuentaButton" runat="server" OnClick="CrearCuentaButton_Click"
-                                            TabIndex="10" Text="Crear cuenta" Width="100px" />
+                                            TabIndex="10" Text="Crear cuenta" Width="100px" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                                     </td>
                                     <td align="right" style="padding-top: 10px">
                                         <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" PostBackUrl="~/UsuarioLogin.aspx"
@@ -226,7 +226,7 @@
                                     <td colspan="2">
                                     </td>
                                     <td align="center" colspan="2" style="padding-bottom:30px; padding-top: 20px">
-                                        <asp:Label ID="MsgErrorLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                                        <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                                         <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary" />
                                     </td>
                                 </tr>
@@ -240,4 +240,11 @@
             </td>
         </tr>
     </table>
+    <script type="text/javascript">
+        function BorrarMensaje() {
+            {
+                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
+            }
+        }
+    </script>
 </asp:Content>

@@ -20,7 +20,7 @@ namespace CedServicios.Site
         }
         protected void TextBox_TextChanged(object sender, EventArgs e)
         {
-            MsgErrorLabel.Text = String.Empty;
+            MensajeLabel.Text = String.Empty;
         }
         protected void SolicitarPreguntaButton_Click(object sender, EventArgs e)
         {
@@ -28,13 +28,13 @@ namespace CedServicios.Site
             {
                 if (IdUsuarioTextBox.Text == String.Empty)
                 {
-                    MsgErrorLabel.Text = "Id.Usuario no informado.";
+                    MensajeLabel.Text = "Id.Usuario no informado.";
                 }
                 else
                 {
                     if (EmailTextBox.Text == String.Empty)
                     {
-                        MsgErrorLabel.Text = "Email no informado.";
+                        MensajeLabel.Text = "Email no informado.";
                     }
                     else
                     {
@@ -43,11 +43,11 @@ namespace CedServicios.Site
                         RN.Usuario.Leer(usuario, (Entidades.Sesion)Session["Sesion"]);
                         if (usuario.Email.ToLower() != EmailTextBox.Text.ToLower())
                         {
-                            MsgErrorLabel.Text = "No hay ninguna cuenta en la que el Id.Usuario y el Email ingresados estén relacionados.";
+                            MensajeLabel.Text = "No hay ninguna cuenta en la que el Id.Usuario y el Email ingresados estén relacionados.";
                         }
                         else
                         {
-                            MsgErrorLabel.Text = "";
+                            MensajeLabel.Text = "";
                             IdUsuarioTextBox.Enabled = false;
                             EmailTextBox.Enabled = false;
                             SolicitarPreguntaButton.Enabled = false;
@@ -66,11 +66,11 @@ namespace CedServicios.Site
             }
             catch (EX.Validaciones.ElementoInexistente)
             {
-                MsgErrorLabel.Text = "No hay ninguna cuenta con el Id.Usuario solicitado.";
+                MensajeLabel.Text = "No hay ninguna cuenta con el Id.Usuario solicitado.";
             }
             catch (Exception ex)
             {
-                MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
         }
         protected void SolicitarNuevaPasswordButton_Click(object sender, EventArgs e)
@@ -79,17 +79,17 @@ namespace CedServicios.Site
             {
                 if (RespuestaTextBox.Text == String.Empty)
                 {
-                    MsgErrorLabel.Text = "Respuesta no informada.";
+                    MensajeLabel.Text = "Respuesta no informada.";
                 }
                 else
                 {
                     if (RespuestaTextBox.Text.ToLower() != ViewState["respuesta"].ToString().ToLower())
                     {
-                        MsgErrorLabel.Text = "Respuesta incorrecta.";
+                        MensajeLabel.Text = "Respuesta incorrecta.";
                     }
                     else
                     {
-                        MsgErrorLabel.Text = "";
+                        MensajeLabel.Text = "";
                         RespuestaTextBox.Enabled = false;
                         SolicitarNuevaPasswordButton.Enabled = false;
                         PasswordNuevaTextBox.Enabled = true;
@@ -105,18 +105,18 @@ namespace CedServicios.Site
             }
             catch (EX.Validaciones.ElementoInexistente)
             {
-                MsgErrorLabel.Text = "No hay ninguna cuenta con el Id.Usuario solicitado.";
+                MensajeLabel.Text = "No hay ninguna cuenta con el Id.Usuario solicitado.";
             }
             catch (Exception ex)
             {
-                MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
             try
             {
-                MsgErrorLabel.Text = String.Empty;
+                MensajeLabel.Text = String.Empty;
                 Entidades.Usuario usuario = new Entidades.Usuario();
                 usuario.Id = IdUsuarioTextBox.Text;
                 RN.Usuario.Leer(usuario, (Entidades.Sesion)Session["Sesion"]);
@@ -126,7 +126,7 @@ namespace CedServicios.Site
                 ConfirmacionPasswordNuevaTextBox.Enabled = false;
                 AceptarButton.Visible = false;
                 CancelarButton.Visible = false;
-                MsgErrorLabel.Text = "La Contraseña fue registrada satisfactoriamente.<br />Para iniciar una sesión de trabajo, deberá identificarse en la página de inicio.";
+                MensajeLabel.Text = "La Contraseña fue registrada satisfactoriamente.<br />Para iniciar una sesión de trabajo, deberá identificarse en la página de inicio.";
             }
             catch (System.Threading.ThreadAbortException)
             {
@@ -134,15 +134,15 @@ namespace CedServicios.Site
             }
             catch (EX.Usuario.PasswordNoMatch)
             {
-                MsgErrorLabel.Text = "Contraseña actual incorrecta";
+                MensajeLabel.Text = "Contraseña actual incorrecta";
             }
             catch (EX.Usuario.PasswordYConfirmacionNoCoincidente)
             {
-                MsgErrorLabel.Text = "La Contraseña nueva no coincide con su Confirmación";
+                MensajeLabel.Text = "La Contraseña nueva no coincide con su Confirmación";
             }
             catch (Exception ex)
             {
-                MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
         }
     }

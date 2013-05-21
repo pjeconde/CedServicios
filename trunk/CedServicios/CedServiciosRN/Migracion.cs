@@ -21,7 +21,7 @@ namespace CedServicios.RN
                 }
                 catch (Exception ex)
                 {
-                    mensajesError.AppendLine(EX.Funciones.Detalle(ex));
+                    mensajesError.AppendLine(EX.Funciones.Detalle(ex) + "\r\n");
                 }
             }
             return mensajesError.ToString();

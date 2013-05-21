@@ -63,7 +63,7 @@
                                     TabIndex="1" Width="114px"></asp:TextBox>
                             </td>
                             <td align="left" rowspan="2" style="padding-right: 10px; padding-top:20px">
-                                <asp:Button ID="LoginButton" runat="server" OnClick="LoginButton_Click" TabIndex="3" Text="Iniciar" />
+                                <asp:Button ID="LoginButton" runat="server" OnClick="LoginButton_Click" TabIndex="3" Text="Iniciar" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                             </td>
                         </tr>
                         <tr>
@@ -77,7 +77,7 @@
                         </tr>
                         <tr>
                             <td align="center" colspan="3" style="padding-top:20px;">
-                                <asp:Label ID="MsgErrorLabel" runat="server" SkinID="MensajePagina" Text="&nbsp;"></asp:Label>
+                                <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text="&nbsp;"></asp:Label>
                             </td>
                         </tr>
                         <tr>
@@ -96,4 +96,11 @@
             </td>
         </tr>
     </table>
+    <script type="text/javascript">
+        function BorrarMensaje() {
+            {
+                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
+            }
+        }
+    </script>
 </asp:Content>

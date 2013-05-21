@@ -36,13 +36,13 @@ namespace CedServicios.Site
         }
         protected void TextBox_TextChanged(object sender, EventArgs e)
         {
-            MsgErrorLabel.Text = String.Empty;
+            MensajeLabel.Text = String.Empty;
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
             try
             {
-                MsgErrorLabel.Text = String.Empty;
+                MensajeLabel.Text = String.Empty;
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 RN.Usuario.CambiarPassword(sesion.Usuario, PasswordTextBox.Text, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
                 RN.Sesion.Cerrar(sesion);
@@ -53,7 +53,7 @@ namespace CedServicios.Site
                 CancelarButton.Visible = false;
                 RN.Sesion.Cerrar(sesion);
                 Funciones.PersonalizarControlesMaster(Master, false, sesion);
-                MsgErrorLabel.Text = "La Contraseña fue cambiada satisfactoriamente.<br />Para seguir trabajando, haga click en 'Iniciar sesión'.";
+                MensajeLabel.Text = "La Contraseña fue cambiada satisfactoriamente.<br />Para seguir trabajando, haga click en 'Iniciar sesión'.";
             }
             catch (System.Threading.ThreadAbortException)
             {
@@ -61,15 +61,15 @@ namespace CedServicios.Site
             }
             catch (EX.Usuario.PasswordNoMatch)
             {
-                MsgErrorLabel.Text = "Contraseña actual incorrecta";
+                MensajeLabel.Text = "Contraseña actual incorrecta";
             }
             catch (EX.Usuario.PasswordYConfirmacionNoCoincidente)
             {
-                MsgErrorLabel.Text = "La Contraseña nueva no coincide con su Confirmación";
+                MensajeLabel.Text = "La Contraseña nueva no coincide con su Confirmación";
             }
             catch (Exception ex)
             {
-                MsgErrorLabel.Text = EX.Funciones.Detalle(ex);
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
         }
 

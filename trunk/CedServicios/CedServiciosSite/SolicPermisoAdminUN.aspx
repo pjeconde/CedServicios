@@ -23,7 +23,7 @@
                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
                     Width="80px"></asp:TextBox>
                 <asp:Button ID="LeerListaUNsButton" runat="server" OnClick="LeerListaUNsButton_Click" TabIndex="3"
-                    Text="Leer unidad(es) de negocio del CUIT" />
+                    Text="Leer unidad(es) de negocio del CUIT" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
             </td>
         </tr>
         <tr>
@@ -39,7 +39,7 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top: 20px">
-                <asp:Button ID="SolicitarButton" runat="server" OnClick="SolicitarButton_Click" TabIndex="3" Text="Solicitar" />
+                <asp:Button ID="SolicitarButton" runat="server" OnClick="SolicitarButton_Click" TabIndex="3" Text="Solicitar" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                 <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="4" Text="Cancelar" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
@@ -51,4 +51,11 @@
             </td>
         </tr>
     </table>
+    <script type="text/javascript">
+        function BorrarMensaje() {
+            {
+                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
+            }
+        }
+    </script>
 </asp:Content>
