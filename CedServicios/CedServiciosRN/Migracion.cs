@@ -8,6 +8,24 @@ namespace CedServicios.RN
 {
     public class Migracion
     {
+        public static string CopiarTodasLasCuentas(Entidades.Sesion Sesion)
+        {
+            DB.Migracion db = new DB.Migracion(SesionCedWeb());
+            DataTable dt = db.ListaCuentasNoMigradas(RN.Usuario.ListaIdUsuariosParaSQLscript(Sesion));
+            StringBuilder mensajesError = new StringBuilder(String.Empty);
+            for (int i = 0; i < dt.Rows.Count; i++)
+            {
+                try
+                {
+                    CopiarCuenta(dt.Rows[i]["IdCuenta"].ToString(), Sesion);
+                }
+                catch (Exception ex)
+                {
+                    mensajesError.AppendLine(EX.Funciones.Detalle(ex));
+                }
+            }
+            return mensajesError.ToString();
+        }
         public static void CopiarCuenta(string IdCuenta, Entidades.Sesion Sesion)
         {
             string idUsuarioAux = Sesion.Usuario.Id;
@@ -34,7 +52,8 @@ namespace CedServicios.RN
                 usuario.EmailSMS = Convert.ToString(dtCuenta.Rows[0]["EmailSMS"]);
                 RN.Usuario.Registrar(usuario, false, Sesion);
                 RN.Usuario.Confirmar(usuario, false, false, Sesion);
-                if (Convert.ToString(dtCuenta.Rows[0]["IdTipoCuenta"]) == "Admin")
+                bool usuarioEsAdminSITE = Convert.ToString(dtCuenta.Rows[0]["IdTipoCuenta"]) == "Admin";
+                if (usuarioEsAdminSITE)
                 {
                     RN.Permiso.PermisoAdminSITEParaUsuarioAprobado(usuario, Sesion);
                 }
@@ -203,10 +222,11 @@ namespace CedServicios.RN
                     }
                 }
             }
-            catch (Exception ex)
+            catch
             {
-                AnularCopiaCuenta(usuario, Sesion);
-                throw ex;
+                //Lo que no se copia, no se copia, pero la cuenta pasa de todas maneras.
+                //AnularCopiaCuenta(usuario, Sesion);
+                throw new Exception("Hubo elementos que no se pudieron copiar en la cuenta " + usuario.Id);
             }
             finally
             {

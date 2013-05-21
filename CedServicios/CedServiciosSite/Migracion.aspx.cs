@@ -17,10 +17,12 @@ namespace CedServicios.Site
             {
                 try
                 {
-                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    ViewState["CuentasNoMigradas"] = RN.Migracion.CuentasNoMigradas(sesion);
-                    CuentasGridView.DataSource = (DataTable)ViewState["CuentasNoMigradas"];
-                    CuentasGridView.DataBind();
+                    RefrescarGrilla();
+                    if (((DataTable)ViewState["CuentasNoMigradas"]).Rows.Count == 0)
+                    {
+                        MensajeLabel.Text = "No hay Cuentas para migrar";
+                        CopiarTodosButton.Visible = false;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -39,9 +41,6 @@ namespace CedServicios.Site
                 {
                     case "Copiar":
                         RN.Migracion.CopiarCuenta(cuenta["IdCuenta"].ToString(), sesion);
-                        ViewState["CuentasNoMigradas"] = RN.Migracion.CuentasNoMigradas(sesion);
-                        CuentasGridView.DataSource = (DataTable)ViewState["CuentasNoMigradas"];
-                        CuentasGridView.DataBind();
                         break;
                 }
             }
@@ -49,6 +48,17 @@ namespace CedServicios.Site
             {
                 MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
+            finally
+            {
+                RefrescarGrilla();
+            }
+        }
+        protected void RefrescarGrilla()
+        {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            ViewState["CuentasNoMigradas"] = RN.Migracion.CuentasNoMigradas(sesion);
+            CuentasGridView.DataSource = (DataTable)ViewState["CuentasNoMigradas"];
+            CuentasGridView.DataBind();
         }
         protected void CuentasGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -58,6 +68,23 @@ namespace CedServicios.Site
                 {
                     e.Row.ForeColor = Color.Red;
                 }
+            }
+        }
+        protected void CopiarTodosButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                MensajeLabel.Text = RN.Migracion.CopiarTodasLasCuentas(sesion);
+                RefrescarGrilla();
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Exception ex)
+            {
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
             }
         }
     }
