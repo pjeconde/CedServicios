@@ -40,13 +40,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.GridView ClientesGridView;
         
         /// <summary>
-        /// Control Button1.
+        /// Control SalirButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button Button1;
+        protected global::System.Web.UI.WebControls.Button SalirButton;
         
         /// <summary>
         /// Control MensajeLabel.
@@ -265,12 +265,12 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox PasswordAvisoVisualizacionTextBox;
         
         /// <summary>
-        /// Control SalirButton.
+        /// Control SalirClientePanelButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SalirButton;
+        protected global::System.Web.UI.WebControls.Button SalirClientePanelButton;
     }
 }
