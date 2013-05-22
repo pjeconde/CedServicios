@@ -10,16 +10,33 @@
 				</Triggers>
 				<ContentTemplate>
 					<asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" BorderColor="Gray"
-						BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
-						EnableViewState="true" Font-Bold="false" ForeColor="#071F70" GridLines="Both"
+						BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70" 
+                        EmptyDataRowStyle-ForeColor="#071F70" Font-Bold="False" ForeColor="#071F70"
 						HeaderStyle-ForeColor="#A52A2A" OnRowCancelingEdit="detalleGridView_RowCancelingEdit"
 						OnRowCommand="detalleGridView_RowCommand" OnRowDeleted="detalleGridView_RowDeleted"
 						OnRowDeleting="detalleGridView_RowDeleting" OnRowEditing="detalleGridView_RowEditing"
 						OnRowUpdated="detalleGridView_RowUpdated" OnRowUpdating="detalleGridView_RowUpdating"
 						PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
-						ShowFooter="true" ShowHeader="True" ToolTip="Recuerde que al ingresar importes con decimales el separador a utilizar es el punto"
-						UseAccessibleHeader="true" Width="100%">
+						ShowFooter="True" 
+                        ToolTip="Recuerde que al ingresar importes con decimales el separador a utilizar es el punto" 
+                        Width="100%">
 						<Columns>
+                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="50px" HeaderText="">
+								<ItemTemplate>
+									<asp:Label ID="lbl_articulosel" runat="server" Text=''
+										Width="50px"></asp:Label>
+								</ItemTemplate>
+								<EditItemTemplate>
+									<asp:DropDownList ID="ddlarticuloselEdit" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlarticuloselEdit_SelectedIndexChanged" Width="50px">
+									</asp:DropDownList>
+								</EditItemTemplate>
+								<FooterTemplate>
+									<asp:DropDownList ID="ddlarticulosel" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlarticuloselFooter_SelectedIndexChanged" Width="50px">
+									</asp:DropDownList>
+								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" Width="50px" />
+								<ItemStyle HorizontalAlign="Right" />
+							</asp:TemplateField>
                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="GTIN">
                                 <ItemTemplate>
                                     <asp:Label ID="lblGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px"></asp:Label>
@@ -36,6 +53,7 @@
                                         FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789">
                                     </cc1:FilteredTextBoxExtender>
                                 </FooterTemplate>
+                                <HeaderStyle Font-Bold="False" Width="150px" />
                                 <ItemStyle HorizontalAlign="Left" />
                             </asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Código Producto Vendedor">
@@ -50,6 +68,7 @@
 								<FooterTemplate>
 									<asp:TextBox ID="txtcpvendedor" runat="server" Text='' Width="150px"></asp:TextBox>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" Width="150px" />
 								<ItemStyle HorizontalAlign="Left" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Código Producto Comprador (Nomenclador)">
@@ -64,6 +83,7 @@
 								<FooterTemplate>
 									<asp:TextBox ID="txtcpcomprador" runat="server" Text='' Width="130px"></asp:TextBox>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" Width="150px" />
 								<ItemStyle HorizontalAlign="Left" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="200px" HeaderText="Descripción del artículo">
@@ -85,6 +105,7 @@
 										FilterMode="InvalidChars" FilterType="Custom" InvalidChars="<>" TargetControlID="txtdescripcion">
 									</cc1:FilteredTextBoxExtender>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" Width="200px" />
 								<ItemStyle HorizontalAlign="left" />
 								<FooterStyle HorizontalAlign="left" />
 							</asp:TemplateField>
@@ -101,6 +122,7 @@
 									<asp:DropDownList ID="ddlindicacion_exento_gravado" runat="server" Width="130px">
 									</asp:DropDownList>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" />
 								<ItemStyle HorizontalAlign="Center" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="100px" HeaderText="Cantidad">
@@ -121,6 +143,7 @@
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtcantidad" ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" Width="100px" />
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Unidad">
@@ -136,6 +159,7 @@
 									<asp:DropDownList ID="ddlunidad" runat="server" Width="220px">
 									</asp:DropDownList>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" />
 								<ItemStyle HorizontalAlign="Left" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Precio unitario">
@@ -157,6 +181,7 @@
 										FilterType="Custom" TargetControlID="txtprecio_unitario" ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" />
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe">
@@ -166,19 +191,20 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtimporte_total_articulo" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnEdicion" Text='<%# Eval("importe_total_articulo") %>'
-										Width="70px"></asp:TextBox>
+										Width="100px"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="ImpTotEditFilteredTextBoxExtender" runat="server"
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_total_articulo"
 										ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtimporte_total_articulo" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnFooter" Text='' Width="70px"></asp:TextBox>
+									<asp:TextBox ID="txtimporte_total_articulo" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnFooter" Text='' Width="100px"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="ImpTotFooterFilteredTextBoxExtender" runat="server"
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_total_articulo"
 										ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" />
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="50px" HeaderText="Alic.IVA %">
@@ -196,6 +222,7 @@
 										Width="50px">
 									</asp:DropDownList>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" Width="50px" />
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe IVA">
@@ -218,11 +245,13 @@
 										ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" />
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
 							<asp:CommandField CancelText="Cancelar" CausesValidation="true" EditText="Editar"
 								HeaderStyle-Font-Bold="false" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
 								HeaderText="Edición" ShowEditButton="True" UpdateText="Actualizar" ValidationGroup="DetalleEditItem">
+								<HeaderStyle Font-Bold="False" HorizontalAlign="Center" Width="150px" />
 								<ItemStyle HorizontalAlign="Center" Width="150px" />
 							</asp:CommandField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="Eliminación / Incorporación">
@@ -234,9 +263,16 @@
 									<asp:LinkButton ID="linkAddDetalle" runat="server" CausesValidation="true" CommandName="AddDetalle"
 										ValidationGroup="DetalleFooter" Width="150px">Agregar</asp:LinkButton>
 								</FooterTemplate>
+								<HeaderStyle Font-Bold="False" Width="150px" />
 								<ItemStyle HorizontalAlign="Center" />
 							</asp:TemplateField>
 						</Columns>
+					    <EditRowStyle ForeColor="#071F70" />
+                        <EmptyDataRowStyle ForeColor="#071F70" />
+                        <HeaderStyle ForeColor="Brown" />
+                        <PagerStyle ForeColor="#071F70" />
+                        <RowStyle ForeColor="#071F70" />
+                        <SelectedRowStyle ForeColor="#071F70" />
 					</asp:GridView>
 				</ContentTemplate>
 			</asp:UpdatePanel>

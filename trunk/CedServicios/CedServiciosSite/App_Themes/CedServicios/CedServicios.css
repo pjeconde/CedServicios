@@ -128,7 +128,7 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
 {
 	position: relative; border: 0px; text-align: right; color: #A52A2A;
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
-	width: 180px; padding-top:5px; padding-right: 5px; 
+	width: 180px; padding-top:5px; 
 }
 .TC01S
 {
@@ -136,25 +136,25 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
 	width: 80px; padding-top:5px;
 }
-."TC02S"
+.TC02S
 {
 	position: relative; border: 0px; text-align: right; color: #A52A2A;
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
 	width: 60px; padding-top:5px;
 }
-.TextoLabelFEAVendedorDet
+.TC03S
+{
+	position: relative; border: 0px; text-align: right; color: #A52A2A;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 47px; padding-top:5px;
+}
+.TC10S
 {
 	position: relative; border: 0px; text-align: right; color: #071F70;
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
 	width: 180px; padding-top:5px; padding-right: 5px;
 }
-.TextoLabelFEAVendedorDetCh
-{
-	position: relative; border: 0px; text-align: right; color: #071F70;
-	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
-	width: 80px; padding-top:5px;
-}
-.TextoLabelFEAVendedorDetChCh
+.TC12S
 {
 	position: relative; border: 0px; text-align: right; color: #071F70;
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 

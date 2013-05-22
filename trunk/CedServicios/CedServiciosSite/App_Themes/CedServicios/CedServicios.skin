@@ -17,6 +17,8 @@
 <asp:Label SkinID="TituloColor1Mediano" runat="server" Font-Size="12px" ForeColor="#A52A2A" Font-Bold="True"></asp:Label>
 <asp:Label SkinID="TituloColor1Chico" runat="server" Font-Size="10px" ForeColor="#A52A2A" Font-Bold="True" Width="100%"></asp:Label>
 
+<asp:Label SkinID="LabelFact" runat="server" Font-Size="10px" ForeColor="#071F70" Font-Bold="True" Width="100%"></asp:Label>
+
 <asp:Label SkinID="IndicadorValidacion" runat="server" Font-Size="14px" ForeColor="#FF6600" Font-Bold="True" Text="*"></asp:Label>
 <asp:Label SkinID="MensajePagina" runat="server" Font-Size="14px" ForeColor="#FF6600" Font-Bold="True" Width="100%"></asp:Label>
 
@@ -41,5 +43,5 @@
 <asp:DropDownList SkinID="ddln" runat="server" Style="width: 176px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
 <asp:DropDownList SkinID="ddlch" runat="server" Style="width: 60px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
 <asp:DropDownList SkinID="ddlgrc" runat="server" Style="width: 200px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>
-<asp:DropDownList SkinID="DropDownListComprador" runat="server" Style="width: 186px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="ddlgr2c" runat="server" Style="width: 300px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>
 <asp:DropDownList SkinID="DropDownListCompradorGr" runat="server" Style="width: 280px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>

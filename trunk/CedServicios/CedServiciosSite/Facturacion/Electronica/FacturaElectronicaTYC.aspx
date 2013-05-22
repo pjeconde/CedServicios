@@ -244,7 +244,7 @@
                                                                     <asp:Button ID="ButtonAceptar" runat="server" OnClick="ButtonAceptar_Click" Text="Confirmar" />
                                                                 </td>
                                                                 <td style="height: 24px">
-                                                                    <asp:Button ID="ButtonRechazar" runat="server" PostBackUrl="~/FacturaElectronica.aspx"
+                                                                    <asp:Button ID="ButtonRechazar" runat="server" PostBackUrl="~/Default.aspx"
                                                                         Text="Rechazar" />
                                                                 </td>
                                                             </tr>
