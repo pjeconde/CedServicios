@@ -169,7 +169,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
 
                     VerificarMetodoNumeracionLote();
-               }
+                 }
 			}
 		}
 
@@ -635,7 +635,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 							System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
 							lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 							CompletarUI(lc, e);
-							ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");
+							ClientScript.RegisterClientScriptBlock(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");
 						}
 						catch (InvalidOperationException)
 						{
