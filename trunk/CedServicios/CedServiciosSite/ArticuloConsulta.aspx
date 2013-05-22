@@ -131,8 +131,10 @@
 			    </td>
             </tr>
             <tr>
-                <td align="center" colspan="3" style="padding-top:20px">
-                    <asp:Button ID="Button1" runat="server" Text="Salir" />
+                <td>
+                </td>
+                <td align="left" colspan="2" style="padding-top:10px">
+                    <asp:Button ID="SalirArticuloPanelButton" runat="server" Text="Salir" />
                 </td>
             </tr>
         </table>
