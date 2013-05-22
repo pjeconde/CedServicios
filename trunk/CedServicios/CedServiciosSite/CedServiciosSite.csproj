@@ -88,6 +88,7 @@
     <Content Include="Descarga.aspx" />
     <Content Include="DescargaTemporarios.aspx" />
     <Content Include="Excepciones\Excepciones.aspx" />
+    <Content Include="ExploradorPermiso.aspx" />
     <Content Include="Facturacion\Electronica\Descuentos.ascx" />
     <Content Include="Facturacion\Electronica\Detalle.ascx" />
     <Content Include="Facturacion\Electronica\Extensiones\Comerciales.ascx" />
@@ -364,6 +365,13 @@
     </Compile>
     <Compile Include="Excepciones\Excepciones.aspx.designer.cs">
       <DependentUpon>Excepciones.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorPermiso.aspx.cs">
+      <DependentUpon>ExploradorPermiso.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorPermiso.aspx.designer.cs">
+      <DependentUpon>ExploradorPermiso.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Conversor.cs" />
     <Compile Include="Facturacion\Electronica\Descuentos.ascx.cs">

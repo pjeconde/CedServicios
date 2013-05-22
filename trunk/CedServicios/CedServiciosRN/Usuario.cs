@@ -126,7 +126,7 @@ namespace CedServicios.RN
         }
         public static void Registrar(Entidades.Usuario Usuario, bool EnviarCorreo, Entidades.Sesion Sesion)
         {
-            Usuario.WF.Estado = "PteConfig";
+            Usuario.WF.Estado = "PteConf";
             DB.Usuario usuario = new DB.Usuario(Sesion);
             usuario.Crear(Usuario);
             if (EnviarCorreo) RN.EnvioCorreo.ConfirmacionAltaUsuario(Usuario);

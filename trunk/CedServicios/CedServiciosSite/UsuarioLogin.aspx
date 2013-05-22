@@ -59,7 +59,7 @@
                                 Id.Usuario
                             </td>
                             <td align="left" style="width: 100px; padding-top:20px">
-                                <asp:TextBox ID="UsuarioTextBox" runat="server" OnTextChanged="UsuarioTextBox_TextChanged"
+                                <asp:TextBox ID="UsuarioTextBox" runat="server" MaxLength="50" OnTextChanged="UsuarioTextBox_TextChanged"
                                     TabIndex="1" Width="114px"></asp:TextBox>
                             </td>
                             <td align="left" rowspan="2" style="padding-right: 10px; padding-top:20px">

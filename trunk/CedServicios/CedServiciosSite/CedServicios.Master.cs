@@ -126,7 +126,7 @@ namespace CedServicios.Site
                     Response.Redirect("~/PaginaEnConstruccion.aspx");
                     break;
                 case "Administración Site|Explorador de Permisos":
-                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    Response.Redirect("~/ExploradorPermiso.aspx");
                     break;
                 case "Administración Site|Explorador de Configuraciones":
                     Response.Redirect("~/PaginaEnConstruccion.aspx");
