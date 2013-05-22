@@ -30,10 +30,14 @@ namespace CedServicios.Site
                     }
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     IdUNDropDownList.DataSource = sesion.Cuit.UNs;
-                    //PuntoVtaDropDownList.DataSource = sesion.UN.PuntosVta;
                     PuntosVtaGridView.DataSource = sesion.UN.PuntosVta;
                     PuntosVtaGridView.DataBind();
                     DataBind();
+
+                    if (sesion.UN.PuntosVta.Count == 0)
+                    {
+                        MensajeLabel.Text = "No hay Puntos de Venta definidos.";
+                    }
 
                     CUITTextBox.Text = sesion.Cuit.Nro;
                     CUITTextBox.Enabled = false;

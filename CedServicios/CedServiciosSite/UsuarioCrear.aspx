@@ -42,10 +42,6 @@
                                             ErrorMessage="Teléfono" SetFocusOnError="True" ValidationExpression="[0-9\-]*">
                                             <asp:Label ID="Label9" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                                         </asp:RegularExpressionValidator>
-                                        <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="TelefonoTextBox"
-                                            ErrorMessage="Teléfono" SetFocusOnError="True">
-                                            <asp:Label ID="Label10" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                                        </asp:RequiredFieldValidator>
                                         <asp:Label ID="TelefonoLabel" runat="server" Text="Teléfono"></asp:Label>
                                     </td>
                                     <td align="left" colspan="2" style="padding-top:5px">
@@ -93,7 +89,7 @@
                                     <td align="left" colspan="2" style="padding-left: 5px; padding-top:5px; width: 330px">
                                         <asp:Button ID="ComprobarDisponibilidadButton" runat="server" CausesValidation="false"
                                             OnClick="ComprobarDisponibilidadButton_Click" Text="¿Esta disponible?" ToolTip="Comprobar la disponibilidad del Id.Usuario ingresado"
-                                            Width="120px" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                                            Width="120px" />
                                         <asp:Label ID="ResultadoComprobarDisponibilidadLabel" runat="server" Font-Bold="True"
                                             Font-Size="12px" Text="" Width="200px"></asp:Label>
                                     </td>
@@ -185,7 +181,7 @@
                                 <tr>
                                     <td align="center" style="padding-top:5px" valign="top">
                                         <asp:Button ID="NuevaClaveCaptchaButton" runat="server" CausesValidation="false"
-                                            OnClick="NuevaClaveCaptchaButton_Click" Text="Nueva Clave" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                                            OnClick="NuevaClaveCaptchaButton_Click" Text="Nueva Clave" />
                                     </td>
                                     <td align="right" style="padding-top:5px; padding-right: 5px; width: 150px">
                                         <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ControlToValidate="CaptchaTextBox"
@@ -215,7 +211,7 @@
                                     </td>
                                     <td align="left" style="padding-top: 10px">
                                         <asp:Button ID="CrearCuentaButton" runat="server" OnClick="CrearCuentaButton_Click"
-                                            TabIndex="10" Text="Crear cuenta" Width="100px" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                                            TabIndex="10" Text="Crear cuenta" Width="100px" />
                                     </td>
                                     <td align="right" style="padding-top: 10px">
                                         <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" PostBackUrl="~/UsuarioLogin.aspx"
@@ -240,11 +236,4 @@
             </td>
         </tr>
     </table>
-    <script type="text/javascript">
-        function BorrarMensaje() {
-            {
-                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
-            }
-        }
-    </script>
 </asp:Content>

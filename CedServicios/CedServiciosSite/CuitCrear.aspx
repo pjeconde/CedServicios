@@ -58,7 +58,7 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="502" Text="Aceptar" onclick="AceptarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                <asp:Button ID="AceptarButton" runat="server" TabIndex="502" Text="Aceptar" onclick="AceptarButton_Click" />
                 <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="503" Text="Cancelar" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
@@ -69,11 +69,4 @@
             </td>
         </tr>
     </table>
-    <script type="text/javascript">
-        function BorrarMensaje() {
-            {
-                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
-            }
-        }
-    </script>
 </asp:Content>

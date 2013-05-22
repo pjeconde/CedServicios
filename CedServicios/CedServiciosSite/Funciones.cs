@@ -43,9 +43,11 @@ namespace CedServicios.Site
             mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere al CUIT seleccionado)";
             mItem = new MenuItem("Modificación", "Modificación");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere al CUIT seleccionado)";
             mItem = new MenuItem("Consulta", "Consulta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
@@ -63,9 +65,11 @@ namespace CedServicios.Site
             mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere a la UN seleccionada)";
             mItem = new MenuItem("Modificación", "Modificación");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere a la UN seleccionada)";
             mItem = new MenuItem("Consulta", "Consulta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
@@ -268,7 +272,7 @@ namespace CedServicios.Site
             }
             MenuItem menuItem = menu.FindItem("Iniciar sesión");
             if (menuItem != null && !menuItem.Selectable) RemoverMenuItem(menu, menuItem);
-            MenuItem menuSubItem = menu.FindItem("Administración Site/Explorador de Usuarios");
+            MenuItem menuSubItem = menu.FindItem("Administración Site|Migración de Cuentas (desde CedWeb)");
             menuItem = menu.FindItem("Administración Site");
             if (menuItem != null && menuSubItem != null && !menuSubItem.Selectable) RemoverMenuItem(menu, menuItem);
         }

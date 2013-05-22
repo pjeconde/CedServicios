@@ -55,70 +55,63 @@ namespace CedServicios.RN
             }
             else
             {
-                if (Usuario.Telefono == String.Empty)
+                if (Usuario.Email == String.Empty)
                 {
-                    throw new EX.Validaciones.ValorNoInfo("Teléfono");
+                    throw new EX.Validaciones.ValorNoInfo("Email");
                 }
                 else
                 {
-                    if (Usuario.Email == String.Empty)
+                    if (!RN.Funciones.EsEmail(Usuario.Email))
                     {
-                        throw new EX.Validaciones.ValorNoInfo("Email");
+                        throw new EX.Validaciones.ValorInvalido("Email");
                     }
                     else
                     {
-                        if (!RN.Funciones.EsEmail(Usuario.Email))
+                        if (Usuario.Id == String.Empty)
                         {
-                            throw new EX.Validaciones.ValorInvalido("Email");
+                            throw new EX.Validaciones.ValorNoInfo("Id.Usuario");
                         }
                         else
                         {
-                            if (Usuario.Id == String.Empty)
+                            if (!IdCuentaDisponible(Usuario, Sesion))
                             {
-                                throw new EX.Validaciones.ValorNoInfo("Id.Usuario");
+                                throw new EX.Usuario.IdUsuarioNoDisponible();
                             }
                             else
                             {
-                                if (!IdCuentaDisponible(Usuario, Sesion))
+                                if (Usuario.Password == String.Empty)
                                 {
-                                    throw new EX.Usuario.IdUsuarioNoDisponible();
+                                    throw new EX.Validaciones.ValorNoInfo("Contraseña");
                                 }
                                 else
                                 {
-                                    if (Usuario.Password == String.Empty)
+                                    if (ConfirmacionPassword == String.Empty)
                                     {
-                                        throw new EX.Validaciones.ValorNoInfo("Contraseña");
+                                        throw new EX.Validaciones.ValorNoInfo("Confirmación de Contraseña");
                                     }
                                     else
                                     {
-                                        if (ConfirmacionPassword == String.Empty)
+                                        if (Usuario.Password != ConfirmacionPassword)
                                         {
-                                            throw new EX.Validaciones.ValorNoInfo("Confirmación de Contraseña");
+                                            throw new EX.Usuario.PasswordYConfirmacionNoCoincidente();
                                         }
                                         else
                                         {
-                                            if (Usuario.Password != ConfirmacionPassword)
+                                            if (Usuario.Pregunta == String.Empty)
                                             {
-                                                throw new EX.Usuario.PasswordYConfirmacionNoCoincidente();
+                                                throw new EX.Validaciones.ValorNoInfo("Pregunta");
                                             }
                                             else
                                             {
-                                                if (Usuario.Pregunta == String.Empty)
+                                                if (Usuario.Respuesta == String.Empty)
                                                 {
-                                                    throw new EX.Validaciones.ValorNoInfo("Pregunta");
+                                                    throw new EX.Validaciones.ValorNoInfo("Respuesta");
                                                 }
                                                 else
                                                 {
-                                                    if (Usuario.Respuesta == String.Empty)
+                                                    if (!ClaveCatpcha.Equals(Clave.ToLower()))
                                                     {
-                                                        throw new EX.Validaciones.ValorNoInfo("Respuesta");
-                                                    }
-                                                    else
-                                                    {
-                                                        if (!ClaveCatpcha.Equals(Clave.ToLower()))
-                                                        {
-                                                            throw new EX.Validaciones.ValorInvalido("Clave");
-                                                        }
+                                                        throw new EX.Validaciones.ValorInvalido("Clave");
                                                     }
                                                 }
                                             }
