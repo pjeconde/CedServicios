@@ -87,14 +87,44 @@ namespace CedServicios.DB
             }
             return lista;
         }
+        public List<Entidades.Permiso> LeerListaPermisosFiltrados(string IdUsuario, string CUIT, string IdTipoPermiso, string Estado)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado ");
+            a.AppendLine("from Permiso where 1=1 ");
+            if (IdUsuario != String.Empty) a.AppendLine("and IdUsuario='" + IdUsuario + "' ");
+            if (CUIT != String.Empty) a.AppendLine("and CUIT='" + CUIT + "' ");
+            if (IdTipoPermiso != String.Empty) a.AppendLine("and IdTipoPermiso='" + IdTipoPermiso + "' ");
+            if (Estado != String.Empty) a.AppendLine("and Estado='" + Estado + "' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Permiso> lista = new List<Entidades.Permiso>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Permiso permiso = new Entidades.Permiso();
+                    Copiar(dt.Rows[i], permiso);
+                    lista.Add(permiso);
+                }
+            }
+            return lista;
+        }
         private void Copiar(DataRow Desde, Entidades.Permiso Hasta)
         {
             Hasta.Usuario.Id = Convert.ToString(Desde["IdUsuario"]);
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
             Hasta.UN.Id = Convert.ToInt32(Desde["IdUN"]);
-            Hasta.UN.Descr = Convert.ToString(Desde["DescrUN"]);
+            try
+            {
+                Hasta.UN.Descr = Convert.ToString(Desde["DescrUN"]);
+            }
+            catch { }
             Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
+            try
+            {
             Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
+            }
+            catch { }
             Hasta.FechaFinVigencia = Convert.ToDateTime(Desde["FechaFinVigencia"]);
             Hasta.UsuarioSolicitante.Id = Convert.ToString(Desde["IdUsuarioSolicitante"]);
             Hasta.Accion.Tipo = Convert.ToString(Desde["AccionTipo"]);

@@ -17,5 +17,15 @@ namespace CedServicios.RN
             CedServicios.DB.TipoPermiso db = new DB.TipoPermiso(Sesion);
             db.Leer(TipoPermiso);
         }
+        public static List<Entidades.TipoPermiso> Lista(bool IncluirOpcionTodos, Entidades.Sesion Sesion)
+        {
+            CedServicios.DB.TipoPermiso db = new DB.TipoPermiso(Sesion);
+            List<Entidades.TipoPermiso> lista = db.LeerLista();
+            Entidades.TipoPermiso elem = new Entidades.TipoPermiso();
+            elem.Id = String.Empty;
+            elem.Descr = "Todos";
+            lista.Add(elem);
+            return lista;
+        }
     }
 }

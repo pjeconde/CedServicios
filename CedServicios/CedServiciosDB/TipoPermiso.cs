@@ -51,5 +51,22 @@ namespace CedServicios.DB
             Hasta.Id = Convert.ToString(Desde["IdTipoPermiso"]);
             Hasta.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
         }
+        public List<Entidades.TipoPermiso> LeerLista()
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select TipoPermiso.IdTipoPermiso, TipoPermiso.DescrTipoPermiso from TipoPermiso ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.TipoPermiso> lista = new List<Entidades.TipoPermiso>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.TipoPermiso elem = new Entidades.TipoPermiso();
+                    Copiar(dt.Rows[i], elem);
+                    lista.Add(elem);
+                }
+            }
+            return lista;
+        }
     }
 }

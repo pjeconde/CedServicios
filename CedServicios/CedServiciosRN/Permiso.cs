@@ -22,6 +22,11 @@ namespace CedServicios.RN
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
             return db.LeerListaPermisosPteAutoriz(Usuario);
         }
+        public static List<Entidades.Permiso> LeerListaPermisosFiltrados(string IdUsuario, string CUIT, string IdTipoPermiso, string Estado, Entidades.Sesion Sesion)
+        {
+            CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
+            return db.LeerListaPermisosFiltrados(IdUsuario, CUIT, IdTipoPermiso, Estado);
+        }
         public static void SolicitarPermisoParaUsuario(Entidades.Cuit Cuit, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
         {
             List<Entidades.Permiso> esAdminCUITdeCUITsolicitado = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
