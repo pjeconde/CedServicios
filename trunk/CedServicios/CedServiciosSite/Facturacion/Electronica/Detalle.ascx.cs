@@ -1394,7 +1394,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit"))).SelectedValue = listaArt[0].IndicacionExentoGravado;
                     ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit"))).SelectedValue = listaArt[0].Unidad.Id;
                     ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit"))).SelectedValue = Convert.ToString(listaArt[0].AlicuotaIVA);
-                    ddl = ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articulo")));
+                    ddl = ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")));
                     TextBox txtprecio_unitario = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario")));
                     TextBox txtcantidad = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad"));
                     TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"));
