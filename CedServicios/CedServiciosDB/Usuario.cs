@@ -64,7 +64,7 @@ namespace CedServicios.DB
             a.Append("@idWF, ");        //IdWF
             a.Append("'" + Usuario.WF.Estado + "' ");
             a.AppendLine(") ");
-            a.Append("insert Log values (@idWF, getdate(), '" + Usuario.Id + "', 'Usuario', 'Alta', 'PteConfig', '') ");
+            a.Append("insert Log values (@idWF, getdate(), '" + Usuario.Id + "', 'Usuario', 'Alta', 'PteConf', '') ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
         }
         public void Confirmar(Entidades.Usuario Usuario)
@@ -73,7 +73,7 @@ namespace CedServicios.DB
             a.Append("declare @idWF varchar(256) ");
             a.Append("declare @cantFilas int ");
             a.Append("select @idWF = IdWF from Usuario where IdUsuario='" + Usuario.Id + "' ");
-            a.Append("update Usuario set Estado='Vigente' where IdUsuario='" + Usuario.Id + "' and Estado='PteConfig' ");
+            a.Append("update Usuario set Estado='Vigente' where IdUsuario='" + Usuario.Id + "' and Estado='PteConf' ");
             a.Append("set @cantFilas = @@ROWCOUNT ");
             a.Append("if @cantFilas = 1 ");
             a.Append("    insert Log values (@idWF, getdate(), '" + Usuario.Id + "', 'Usuario', 'Confirm', 'Vigente', '') ");

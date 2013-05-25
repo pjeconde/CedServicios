@@ -113,15 +113,15 @@
                 </td>
             </tr>
             <tr>
-                <td align="right" style="padding-top:20px">
+                <td align="left" style="padding-top:20px; padding-right:5px; padding-left:5px">
                     Usuario:
                 </td>
-                <td align="left" style="padding-top:20px">
+                <td align="left" style="padding-top:20px; padding-right:5px; padding-left:5px">
                     <asp:Label ID="UsuarioLabel" runat="server"></asp:Label>
                 </td>
             </tr>           
             <tr>
-                <td align="right">
+                <td align="left" style="padding-right:5px; padding-left:5px">
                     CUIT:
                 </td>
                 <td align="left">
@@ -129,7 +129,7 @@
                 </td>
             </tr>           
             <tr>
-                <td align="right">
+                <td align="left" style="padding-right:5px; padding-left:5px">
                     Unidad de Negocio:
                 </td>
                 <td align="left">
@@ -137,7 +137,7 @@
                 </td>
             </tr>           
             <tr>
-                <td align="right">
+                <td align="left" style="padding-right:5px; padding-left:5px">
                     Tipo de Permiso:
                 </td>
                 <td align="left">
@@ -145,7 +145,7 @@
                 </td>
             </tr>           
             <tr>
-                <td align="right">
+                <td align="left" style="padding-right:5px; padding-left:5px">
                     Origen:
                 </td>
                 <td align="left">
@@ -153,7 +153,7 @@
                 </td>
             </tr>           
             <tr>
-                <td align="right">
+                <td align="left" style="padding-right:5px; padding-left:5px">
                     Fecha fin vigencia:
                 </td>
                 <td align="left">
@@ -161,7 +161,7 @@
                 </td>
             </tr>           
             <tr>
-                <td align="right">
+                <td align="left" style="padding-right:5px; padding-left:5px">
                     Usuario solicitante:
                 </td>
                 <td align="left">
@@ -169,7 +169,7 @@
                 </td>
             </tr>           
             <tr>
-                <td align="right">
+                <td align="left" style="padding-right:5px; padding-left:5px">
                     Estado:
                 </td>
                 <td align="left">
@@ -177,7 +177,7 @@
                 </td>
             </tr>           
             <tr>
-                <td align="right" style="padding-top:20px">
+                <td align="left" style="padding-top:20px">
                     <asp:Button ID="CambiarEstadoButton" runat="server" Text="Confirmar" onclick="CambiarEstadoButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                 </td>
                 <td align="left" style="padding-top:20px">
