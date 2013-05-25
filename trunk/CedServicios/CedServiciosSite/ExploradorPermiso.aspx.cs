@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace CedServicios.Site
 {
@@ -44,53 +45,81 @@ namespace CedServicios.Site
         }
         protected void PermisosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int item = Convert.ToInt32(e.CommandArgument);
+            List<Entidades.Permiso> lista = (List<Entidades.Permiso>)ViewState["Permisos"];
+            Entidades.Permiso permiso = lista[item];
             switch (e.CommandName)
             {
-                case "Baja/Anul.baja":
-                    CambiarEstado("Autorización", e);
-                    break;
-                default:
+                case "CambiarEstado":
+                    if (permiso.WF.Estado == "Vigente" || permiso.WF.Estado == "DeBaja")
+                    {
+                        TituloConfirmacionLabel.Text = "Confirmar " + (permiso.WF.Estado == "Vigente" ? "Baja" : "Anulación Baja");
+                        AccionLabel.Text = permiso.Accion.Tipo + " nº " + permiso.Accion.Nro;
+                        CuitLabel.Text = permiso.Cuit;
+                        IdTipoPermisoLabel.Text = permiso.TipoPermiso.Id;
+                        EstadoLabel.Text = permiso.WF.Estado;
+                        FechaFinVigenciaLabel.Text = permiso.FechaFinVigencia.ToString("dd/MM/yyyy");
+                        UNLabel.Text = permiso.IdUN.ToString();
+                        UsuarioLabel.Text = permiso.Usuario.Id;
+                        UsuarioSolicitanteLabel.Text = permiso.UsuarioSolicitante.Id;
+                        ViewState["Permiso"] = permiso;
+                        ModalPopupExtender1.Show();
+                    }
+                    else
+                    {
+                        MensajeLabel.Text = "El cambio de estado sólo puede usarse para Bajas o Anulaciones de bajas.";
+                    }
                     break;
             }
         }
-        private void CambiarEstado(string Evento, GridViewCommandEventArgs e)
+        protected void PermisosGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
-            //int item = Convert.ToInt32(e.CommandArgument);
-            //Entidades.Permiso permiso = ((List<Entidades.Permiso>)((System.Web.UI.WebControls.GridView)e.CommandSource).DataSource)[item];
-            //TituloConfirmacionLabel.Text = "Confirmar " + Evento.ToLower();
-            //AccionLabel.Text = permiso.Accion.Tipo + " nº " + permiso.Accion.Nro;
-            //if (!permiso.Cuit.Equals(String.Empty))
-            //{
-            //    CuitLabel.Text = permiso.Cuit;
-            //}
-            //else
-            //{
-            //    CuitLabel.Text = "(no aplica)";
-            //}
-            //DescrTipoPermisoLabel.Text = permiso.TipoPermiso.Descr;
-            //EstadoLabel.Text = permiso.WF.Estado;
-            //FechaFinVigenciaLabel.Text = permiso.FechaFinVigencia.ToString("dd/MM/yyyy");
-            //if (permiso.UN.Id != 0)
-            //{
-            //    UNLabel.Text = permiso.UN.Descr;
-            //}
-            //else
-            //{
-            //    UNLabel.Text = "(no aplica)";
-            //}
-            //if (permiso.Usuario.Id != String.Empty)
-            //{
-            //    UsuarioLabel.Text = permiso.Usuario.Nombre + " (" + permiso.Usuario.Email + ")";
-            //}
-            //else
-            //{
-            //    UsuarioLabel.Text = "(no aplica)";
-            //}
-            //UsuarioSolicitanteLabel.Text = permiso.UsuarioSolicitante.Nombre + " (" + permiso.UsuarioSolicitante.Email + ")";
-            //ViewState["Permiso"] = permiso;
-            //ViewState["PermisoAccion"] = Evento;
-            //ModalPopupExtender1.Show();
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells[5].Text != "Vigente")
+                {
+                    e.Row.ForeColor = Color.Red;
+                }
+            }
         }
+        //private void CambiarEstado(GridViewCommandEventArgs e)
+        //{
+        //    int item = Convert.ToInt32(e.CommandArgument);
+        //    Entidades.Permiso permiso = ((List<Entidades.Permiso>)((System.Web.UI.WebControls.GridView)e.CommandSource).DataSource)[item];
+                
+        //    AccionLabel.Text = permiso.Accion.Tipo + " nº " + permiso.Accion.Nro;
+        //    if (!permiso.Cuit.Equals(String.Empty))
+        //    {
+        //        CuitLabel.Text = permiso.Cuit;
+        //    }
+        //    else
+        //    {
+        //        CuitLabel.Text = "(no aplica)";
+        //    }
+        //    DescrTipoPermisoLabel.Text = permiso.TipoPermiso.Descr;
+        //    EstadoLabel.Text = permiso.WF.Estado;
+        //    FechaFinVigenciaLabel.Text = permiso.FechaFinVigencia.ToString("dd/MM/yyyy");
+        //    if (permiso.UN.Id != 0)
+        //    {
+        //        UNLabel.Text = permiso.UN.Descr;
+        //    }
+        //    else
+        //    {
+        //        UNLabel.Text = "(no aplica)";
+        //    }
+        //    if (permiso.Usuario.Id != String.Empty)
+        //    {
+        //        UsuarioLabel.Text = permiso.Usuario.Nombre + " (" + permiso.Usuario.Email + ")";
+        //    }
+        //    else
+        //    {
+        //        UsuarioLabel.Text = "(no aplica)";
+        //    }
+        //    UsuarioSolicitanteLabel.Text = permiso.UsuarioSolicitante.Nombre + " (" + permiso.UsuarioSolicitante.Email + ")";
+        //    ViewState["Permiso"] = permiso;
+        //    ViewState["PermisoAccion"] = Evento;
+        //    ModalPopupExtender1.Show();
+        //}
         protected void CambiarEstadoButton_Click(object sender, EventArgs e)
         {
             //Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
