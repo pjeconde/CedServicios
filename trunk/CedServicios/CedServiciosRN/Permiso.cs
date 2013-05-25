@@ -194,6 +194,11 @@ namespace CedServicios.RN
             db.CambioEstado(Permiso, "Rech");
             RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario);
         }
+        public static void CambiarEstado(Entidades.Permiso Permiso, string IdEstado, Entidades.Sesion Sesion)
+        {
+            DB.Permiso db = new DB.Permiso(Sesion);
+            db.CambioEstado(Permiso, IdEstado);
+        }
         public static string DescrPermiso(Entidades.Permiso Permiso)
         {
             string descripcion = String.Empty;

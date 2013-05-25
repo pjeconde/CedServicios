@@ -14,6 +14,7 @@ namespace CedServicios.RN
             lista.Add(new Entidades.Estado("PteAutoriz","Pendiente de autorización"));
             lista.Add(new Entidades.Estado("PteConf", "Pendiente de confirmación"));
             lista.Add(new Entidades.Estado("DeBaja", "De baja"));
+            lista.Add(new Entidades.Estado("Rech", "Rechazado"));
             if (IncluirOpcionTodos) lista.Add(new Entidades.Estado(String.Empty, "Todos"));
             return lista;
         }
