@@ -166,13 +166,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label UNLabel;
         
         /// <summary>
-        /// Control DescrTipoPermisoLabel.
+        /// Control IdTipoPermisoLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label DescrTipoPermisoLabel;
+        protected global::System.Web.UI.WebControls.Label IdTipoPermisoLabel;
         
         /// <summary>
         /// Control AccionLabel.

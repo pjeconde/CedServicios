@@ -55,9 +55,9 @@
             <td colspan="3" style="padding-top:20px">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                     <asp:GridView ID="PermisosGridView" runat="server" 
-                        AutoGenerateColumns="false" onrowcommand="PermisosGridView_RowCommand" CssClass="grilla" GridLines="None">
+                        AutoGenerateColumns="false" OnRowCommand="PermisosGridView_RowCommand" OnRowDataBound="PermisosGridView_RowDataBound" CssClass="grilla" GridLines="None">
                         <Columns>
-                            <asp:ButtonField HeaderText="" Text="Cambiar estado" CommandName="Baja/Anul.baja" ButtonType="Link">
+                            <asp:ButtonField HeaderText="" Text="Cambiar estado" CommandName="CambiarEstado" ButtonType="Link" ItemStyle-ForeColor="Blue">
                             </asp:ButtonField>
                             <asp:BoundField DataField="IdUsuario" HeaderText="IdUsuario" SortExpression="IdUsuario">
                                 <headerstyle horizontalalign="center" wrap="False" />
@@ -113,10 +113,10 @@
                 </td>
             </tr>
             <tr>
-                <td align="right">
+                <td align="right" style="padding-top:20px">
                     Usuario:
                 </td>
-                <td align="left">
+                <td align="left" style="padding-top:20px">
                     <asp:Label ID="UsuarioLabel" runat="server"></asp:Label>
                 </td>
             </tr>           
@@ -137,11 +137,11 @@
                 </td>
             </tr>           
             <tr>
-                <td style="padding-top:20px" align="right">
+                <td align="right">
                     Tipo de Permiso:
                 </td>
-                <td style="padding-top:20px" align="left">
-                    <asp:Label ID="DescrTipoPermisoLabel" runat="server"></asp:Label>
+                <td align="left">
+                    <asp:Label ID="IdTipoPermisoLabel" runat="server"></asp:Label>
                 </td>
             </tr>           
             <tr>
