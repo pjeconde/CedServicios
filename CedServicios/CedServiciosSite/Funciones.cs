@@ -87,12 +87,15 @@ namespace CedServicios.Site
             mItem = new MenuItem("Alta", "Alta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere a puntos de venta del CUIT y UN seleccionados)";
             mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere a puntos de venta del CUIT y UN seleccionados)";
             mItem = new MenuItem("Modificación", "Modificación");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere a puntos de venta del CUIT y UN seleccionados)";
             mItem = new MenuItem("Consulta", "Consulta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
