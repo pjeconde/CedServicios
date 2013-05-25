@@ -87,5 +87,17 @@ namespace CedServicios.Entidades
                 return puntosVta;
             }
         }
+        public List<PuntoVta> PuntosVtaVigentes
+        {
+            get
+            {
+                List<Entidades.PuntoVta> lista = new List<PuntoVta>();
+                for (int i = 0; i < puntosVta.Count; i++)
+                {
+                    if (puntosVta[i].WF.Estado == "Vigente") lista.Add(puntosVta[i]);
+                }
+                return lista;
+            }
+        }
     }
 }
