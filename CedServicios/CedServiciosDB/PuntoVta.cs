@@ -170,9 +170,13 @@ namespace CedServicios.DB
                 case "Autonumerador":
                     a.Append("update PuntoVta set @UltNroLote=UltNroLote=UltNroLote+1 ");
                     break;
-                case "TimeStamp":
-                    //se arma de la siguiente manera: "dias transcurridos desde el 31/12/2012" & "HHMMSSMMM"
-                    a.Append("update PuntoVta set @UltNroLote=UltNroLote=convert(numeric(14), convert(varchar, datediff(d, CONVERT(Datetime, '20121231', 112), CONVERT(Datetime, convert(varchar, getdate(), 112), 112))) + replace(convert(varchar, getdate(), 114), ':', '')) ");
+                case "TimeStamp1":
+                    //se arma de la siguiente manera: "AAAAMMDDHHMMSS"
+                    a.Append("update PuntoVta set @UltNroLote=UltNroLote=left(convert(varchar, getdate(), 112) + replace(convert(varchar, getdate(), 114), ':', ''), 14) ");
+                    break;
+                case "TimeStamp2":
+                    //se arma de la siguiente manera: "dias transcurridos desde el 01/01/2013" & "HHMMSSmmm"
+                    a.Append("update PuntoVta set @UltNroLote=UltNroLote=convert(numeric(14), convert(varchar, datediff(d, CONVERT(Datetime, '20130101', 112), CONVERT(Datetime, convert(varchar, getdate(), 112), 112))) + replace(convert(varchar, getdate(), 114), ':', '')) ");
                     break;
                 default:
                     throw new EX.Validaciones.ValorInvalido("IdMetodoGeneracionNumeracionLote='" + PuntoVta.IdMetodoGeneracionNumeracionLote + "'");
