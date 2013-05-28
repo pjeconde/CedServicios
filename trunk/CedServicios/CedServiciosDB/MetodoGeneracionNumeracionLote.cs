@@ -14,7 +14,7 @@ namespace CedServicios.DB
         public List<Entidades.MetodoGeneracionNumeracionLote> LeerLista()
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select IdMetodoGeneracionNumeracionLote from MetodoGeneracionNumeracionLote ");
+            a.Append("select IdMetodoGeneracionNumeracionLote, DescrMetodoGeneracionNumeracionLote from MetodoGeneracionNumeracionLote ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.MetodoGeneracionNumeracionLote> lista = new List<Entidades.MetodoGeneracionNumeracionLote>();
             if (dt.Rows.Count != 0)
@@ -23,6 +23,7 @@ namespace CedServicios.DB
                 {
                     Entidades.MetodoGeneracionNumeracionLote elem = new Entidades.MetodoGeneracionNumeracionLote();
                     elem.Id = Convert.ToString(dt.Rows[i]["IdMetodoGeneracionNumeracionLote"]);
+                    elem.Descr = Convert.ToString(dt.Rows[i]["DescrMetodoGeneracionNumeracionLote"]);
                     lista.Add(elem);
                 }
             }

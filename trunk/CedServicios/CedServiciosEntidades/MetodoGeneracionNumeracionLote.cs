@@ -9,6 +9,7 @@ namespace CedServicios.Entidades
     public class MetodoGeneracionNumeracionLote
     {
         private string id;
+        private string descr;
 
         public string Id
         {
@@ -25,11 +26,11 @@ namespace CedServicios.Entidades
         {
             set
             {
-                id = value;
+                descr = value;
             }
             get
             {
-                return id;
+                return descr;
             }
         }
     }
