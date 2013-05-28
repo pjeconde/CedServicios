@@ -42,8 +42,8 @@
 </head>
 <body>
     <form id="form1" runat="server" visible="true">
-    <cc1:ToolkitScriptManager ID="MasterScriptManager" runat="server">
-    </cc1:ToolkitScriptManager>
+    <asp:ScriptManager ID="MasterScriptManager" runat="server">
+    </asp:ScriptManager>
     <div id="DivUsuario" style="text-align:center">
         <table>
             <tr>

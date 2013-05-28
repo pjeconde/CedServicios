@@ -616,6 +616,33 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.UpdatePanel LoteUpdatePanel;
         
         /// <summary>
+        /// Control LabelTipoNumeracionLote.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelTipoNumeracionLote;
+        
+        /// <summary>
+        /// Control TipoNumeracionLote.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TipoNumeracionLote;
+        
+        /// <summary>
+        /// Control ButtonGenerarNroLote.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonGenerarNroLote;
+        
+        /// <summary>
         /// Control NroLoteRegularExpressionValidator.
         /// </summary>
         /// <remarks>
@@ -1615,15 +1642,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Observaciones_ResumenTextBox;
         
         /// <summary>
-        /// Control GenerarButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GenerarButton;
-        
-        /// <summary>
         /// Control DescargarButton.
         /// </summary>
         /// <remarks>
@@ -1631,6 +1649,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button DescargarButton;
+        
+        /// <summary>
+        /// Control GenerarButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GenerarButton;
         
         /// <summary>
         /// Control EnviarIBKButton.
@@ -1642,6 +1669,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Button EnviarIBKButton;
         
         /// <summary>
+        /// Control ModalPopupExtender1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
+        
+        /// <summary>
         /// Control ConsultarLoteIBKButton.
         /// </summary>
         /// <remarks>
@@ -1649,6 +1685,24 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarLoteIBKButton;
+        
+        /// <summary>
+        /// Control ModalPopupExtender2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender2;
+        
+        /// <summary>
+        /// Control ButtonPrueba.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonPrueba;
         
         /// <summary>
         /// Control PDFButton.
@@ -1678,48 +1732,57 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ValidationSummary RequeridosValidationSummary;
         
         /// <summary>
-        /// Control btnPopup.
+        /// Control LabelEnvioITF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnPopup;
+        protected global::System.Web.UI.WebControls.Label LabelEnvioITF;
         
         /// <summary>
-        /// Control MensajePopup.
+        /// Control AceptarEnvioITF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel MensajePopup;
+        protected global::System.Web.UI.WebControls.Button AceptarEnvioITF;
         
         /// <summary>
-        /// Control MensajePopupLabel.
+        /// Control CancelarEnvioITF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MensajePopupLabel;
+        protected global::System.Web.UI.WebControls.Button CancelarEnvioITF;
         
         /// <summary>
-        /// Control SalirPuntoVtaButton.
+        /// Control LabelConsultaITF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SalirPuntoVtaButton;
+        protected global::System.Web.UI.WebControls.Label LabelConsultaITF;
         
         /// <summary>
-        /// Control ModalPopupExtender1.
+        /// Control AceptarConsultaITF.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
+        protected global::System.Web.UI.WebControls.Button AceptarConsultaITF;
+        
+        /// <summary>
+        /// Control CancelarConsultaITF.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CancelarConsultaITF;
     }
 }
