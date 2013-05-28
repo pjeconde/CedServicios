@@ -37,6 +37,12 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
         }
         protected void Page_Load(object sender, EventArgs e)
         {
+            var culture = System.Globalization.CultureInfo.CreateSpecificCulture("en-GB");
+            culture.NumberFormat.CurrencySymbol = string.Empty;
+            System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+            System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+            base.InitializeCulture();
+
             if (Session["lote"] == null)
             {
                 Response.Redirect("~/Inicio.aspx");

@@ -1,17 +1,14 @@
-﻿<%@ Page AutoEventWireup="true" Theme="CedServicios" Buffer="true" CodeBehind="Lote.aspx.cs"
+﻿<%@ Page AutoEventWireup="true" Theme="CedServicios" Buffer="true" CodeBehind="Lote.aspx.cs" 
     Culture="en-GB" Inherits="CedServicios.Site.Facturacion.Electronica.Lote" Language="C#"
     MaintainScrollPositionOnPostback="true" MasterPageFile="~/CedServicios.Master"
-    Title="Factura Electrónica Gratis(Interfacturas - AFIP)" UICulture="en-GB" EnableEventValidation="false"
-    ValidateRequest="false" %>
+    Title="Factura Electrónica Gratis(Interfacturas - AFIP)" UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
 
 <%@ Register Src="Detalle.ascx" TagName="Detalle" TagPrefix="uc4" %>
 <%@ Register Src="Extensiones/Comerciales.ascx" TagName="Comerciales" TagPrefix="uc3" %>
 <%@ Register Src="Permisos.ascx" TagName="Permisos" TagPrefix="uc2" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<%@ Register Src="~/Facturacion/Electronica/Impuestos.ascx" TagName="ImpuestosGlobales"
-    TagPrefix="uc8" %>
-<%@ Register Src="~/Facturacion/Electronica/Descuentos.ascx" TagName="DescuentosGlobales"
-    TagPrefix="DescUC" %>
+<%@ Register Src="~/Facturacion/Electronica/Impuestos.ascx" TagName="ImpuestosGlobales" TagPrefix="uc8" %>
+<%@ Register Src="~/Facturacion/Electronica/Descuentos.ascx" TagName="DescuentosGlobales" TagPrefix="DescUC" %>
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceDefault">
     <table border="0" cellpadding="0" cellspacing="0" class="TextComunSinPosicion" style="width: 800px;
         text-align: left;">
@@ -73,7 +70,7 @@
                                                     <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                                         <tr>
                                                             <td style="padding-top: 5px">
-                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" ToolTip="Exclusivo SERVICIO PREMIUM">
+                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" ToolTip="Cargar los datos de un archivo XML.">
                                                                 </asp:FileUpload>
                                                             </td>
                                                         </tr>
@@ -763,6 +760,22 @@
                                                         <td style="text-align: center">
                                                             <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                                                 <tr>
+                                                                    <td class="TC00S" colspan="2">
+                                                                        <asp:Label ID="LabelTipoNumeracionLote" Text="Tipo de numeración:" runat="server"></asp:Label>
+                                                                    </td>
+                                                                    <td class="TC00S">
+                                                                        <asp:TextBox ID="TipoNumeracionLote" runat="server" SkinID="TextoBoxFEAVendedorDet" ReadOnly="true" ToolTip="El tipo de númeración del lote se define a nivel de Punto de Venta. Solamente para el tipo 'Ninguno' estará habilitado el ingreso manual del Número de Lote.">
+                                                                        </asp:TextBox>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="text-align: center; height: 5px;">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        <asp:Button ID="ButtonGenerarNroLote" runat="server" Text="Generar Nro.Lote" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" CausesValidation="false" onclick="ButtonGenerarNroLote_Click" />
+                                                                    </td>
                                                                     <td class="TC00S">
                                                                         <asp:RegularExpressionValidator ID="NroLoteRegularExpressionValidator" runat="server"
                                                                             ControlToValidate="Id_LoteTextbox" ErrorMessage="error de formateo en número de lote"
@@ -772,7 +785,7 @@
                                                                         de lote:
                                                                     </td>
                                                                     <td class="TC00S">
-                                                                        <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Es un número correlativo y consecutivo que debe llevarse manualmente e identifica el número de envío del archivo xml que envía a Interfacturas (Upload). Este número NO SE PUEDE REPETIR.">
+                                                                        <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Este número, que no necesariamente tiene que ser correlativo y consecutivo, siempre debe ser mayor al último número de lote procesado en Interfacturas. Este número NO SE PUEDE REPETIR.">
                                                                         </asp:TextBox>
                                                                     </td>
                                                                     <td class="TC01S">
@@ -1233,7 +1246,7 @@
                                                                     </td>
                                                                     <td class="TC10S">
                                                                         <asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" BorderStyle="NotSet" ForeColor="#071F70"
-                                                                            Style="width: 170px; resize: none; text-align:right" TextMode="MultiLine">
+                                                                            Style="width: 170px; resize: none; text-align:left" TextMode="MultiLine">
                                                                         </asp:TextBox>
                                                                     </td>
                                                                 </tr>
@@ -1536,7 +1549,7 @@
                                                     <asp:Button ID="CalcularTotalesButton" runat="server" BackColor="peachpuff" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
                                                         ForeColor="brown" Height="25px" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales"
-                                                        ToolTip="Exclusivo SERVICIO PREMIUM" Width="184" />
+                                                        ToolTip="" Width="184" />
                                                 </td>
                                             </tr>
                                             <tr>
@@ -1834,39 +1847,53 @@
                                     <td style="text-align: center; width: 100%">
                                         <table border="0" cellpadding="2" cellspacing="2" style="width: 780px">
                                             <tr>
-                                                <td colspan="3" style="width: 100%">
-                                                    <asp:Button ID="GenerarButton" runat="server" BorderColor="Gray" BorderStyle="NotSet"
-                                                        BorderWidth="1px" Height="60px" OnClick="GenerarButton_Click" Text="Enviar archivo XML al e-mail del vendedor"
-                                                        Width="100%" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 34%; padding-right: 3px">
+                                                <td style="width: 50%; padding-right: 3px">
                                                     <asp:Button ID="DescargarButton" runat="server" BackColor="peachpuff" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" Height="60px"
-                                                        OnClick="GenerarButton_Click" Text="Descargar archivo XML" ToolTip="Exclusivo SERVICIO PREMIUM"
+                                                        OnClick="GenerarButton_Click" Text="Descargar archivo XML" ToolTip="Luego de descargar el archivo XML, realizar el (Upload) en Interfacturas."
                                                         Width="100%" />
                                                 </td>
-                                                <td style="width: 33%; padding-right: 3px">
-                                                    <asp:Button ID="EnviarIBKButton" runat="server" BackColor="peachpuff" BorderColor="brown"
-                                                        BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" Height="60px"
-                                                        OnClick="EnviarIBKButton_Click" Text="Enviar lote a Interfacturas" ToolTip="Impactar comprobante en Interfacturas - Exclusivo SERVICIO PREMIUM"
-                                                        Width="100%" />
-                                                </td>
-                                                <td style="width: 33%">
-                                                    <asp:Button ID="ConsultarLoteIBKButton" runat="server" BackColor="peachpuff" BorderColor="brown"
-                                                        BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
-                                                        ForeColor="brown" Height="60px" OnClick="ConsultarLoteIBKButton_Click" Text="Consultar lote a Interfacturas"
-                                                        ToolTip="Ingrese previamente el numero de lote a consultar- Exclusivo SERVICIO PREMIUM"
+                                                <td style="width: 50%">
+                                                    <asp:Button ID="GenerarButton" runat="server" BorderColor="Gray" BorderStyle="NotSet"
+                                                        BorderWidth="1px" Height="60px" OnClick="GenerarButton_Click" Text="Enviar archivo XML al e-mail del vendedor" ToolTip="Luego de descargar el archivo XML del correo, realizar el (Upload) en Interfacturas."
                                                         Width="100%" />
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" style="width: 100%; padding-right: 3px">
-                                                    <asp:Button ID="PDFButton" runat="server" BackColor="peachpuff" BorderColor="brown"
+                                                <td style="width: 50%; padding-right: 3px">
+                                                    <asp:Button ID="EnviarIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
+                                                        BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" Height="60px"
+                                                        OnClick="EnviarIBKButton_Click" Text="Enviar lote a Interfacturas" ToolTip="Impactar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                        Width="100%" />
+                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender1" 
+                                                        PopupControlID="PopupEnvioITF" TargetControlID="EnviarIBKButton" 
+                                                        BackgroundCssClass="modalBackground" runat="server" 
+                                                        onload="ModalPopupExtender1_Load" />
+                                                </td>
+                                                <td style="width: 50%">
+                                                    <asp:Button ID="ConsultarLoteIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
+                                                        BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
+                                                        ForeColor="brown" Height="60px" OnClick="ConsultarLoteIBKButton_Click" Text="Consultar lote a Interfacturas"
+                                                        ToolTip="Cunsultar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                        Width="100%" />
+                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
+                                                        PopupControlID="PopupConsultaITF" TargetControlID="ConsultarLoteIBKButton" 
+                                                        BackgroundCssClass="modalBackground" runat="server" 
+                                                        onload="ModalPopupExtender2_Load" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 50%; padding-right: 3px">
+                                                    <asp:Button ID="ButtonPrueba" runat="server" BackColor="#FFFFCC" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" CausesValidation="true" Font-Bold="true"
-                                                        ForeColor="brown" Height="60px" OnClick="PDFButton_Click" Text="Previsualizar comprobante"
-                                                        ToolTip="Exclusivo SERVICIO PREMIUM" Width="100%" />
+                                                        ForeColor="brown" Height="60px" Text="Prueba" Width="100%" 
+                                                        onclick="ButtonPrueba_Click" />
+                                                </td>
+                                                <td style="width: 50%; padding-right: 3px">
+                                                    <asp:Button ID="PDFButton" runat="server" BackColor="#FFFFCC" BorderColor="brown"
+                                                        BorderStyle="Solid" BorderWidth="1px" CausesValidation="true" Font-Bold="true"
+                                                        ForeColor="brown" Height="60px" OnClick="PDFButton_Click" 
+                                                        Text="Previsualizar comprobante" Width="100%" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -1877,7 +1904,7 @@
                                         Agradeceríamos a los usuarios del sitio que nos informen sobre dudas, posibles omisiones
                                         y/o errores y que nos envíen las correcciones o sugerencias por correo electrónico
                                         a través de
-                                        <asp:HyperLink ID="contactoHyperLink" runat="server" NavigateUrl="~/Contacto.aspx">este formulario</asp:HyperLink>.
+                                        <asp:HyperLink ID="contactoHyperLink" runat="server" NavigateUrl="~/Default.aspx">este formulario</asp:HyperLink>.
                                         Es de suma importancia conocer su opinión. Muchas gracias.
                                     </td>
                                 </tr>
@@ -1896,23 +1923,46 @@
             </td>
         </tr>
     </table>
-    <asp:LinkButton runat="server" ID="btnPopup" Text="" />
-    <asp:Panel ID="MensajePopup" runat="server" CssClass="ModalWindow">
-        <table width="100%">
+    <div id="PopupEnvioITF" class="ModalWindow">
+        <table width="100%" style="padding:20px;">
             <tr>
-                <td align="center">
-                    <asp:Label ID="MensajePopupLabel" runat="server" Text="xxxxxxxxxx" SkinID="TextoMediano"></asp:Label>
+                <td colspan="3" align="center">
+                    <asp:Label ID="LabelEnvioITF" runat="server" 
+                        Text="Desea enviar el comprobante de forma On-Line a Interfacturas ?" 
+                        SkinID="TextoMediano"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td align="center" style="padding-top: 20px">
-                    <asp:Button ID="SalirPuntoVtaButton" runat="server" Text="Continuar" CausesValidation="false" OnClick="SalirButton_Click" />
+                <td align="right" style="padding-top: 20px">
+                    <asp:Button ID="AceptarEnvioITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarEnvioITF.disabled = true;" OnClick="AceptarEnvioITFButton_Click" />
+                </td>
+                <td align="center" style="width: 20px">
+                </td>
+                <td align="left" style="padding-top: 20px">
+                    <asp:Button ID="CancelarEnvioITF" runat="server" Text="Cancelar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$AceptarEnvioITF.disabled = true;" OnClick="CancelarEnvioITFButton_Click" />
                 </td>
             </tr>
         </table>
-    </asp:Panel>
-    <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server" 
-    PopupControlID="MensajePopup" 
-    TargetControlID="btnPopup" >
-    </cc1:ModalPopupExtender>
+    </div>
+    <div id="PopupConsultaITF" class="ModalWindow">
+        <table width="100%" style="padding:20px;">
+            <tr>
+                <td colspan="3" align="center">
+                    <asp:Label ID="LabelConsultaITF" runat="server" 
+                        Text="Desea consultar el comprobante de forma On-Line en Interfacturas ?" 
+                        SkinID="TextoMediano"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-top: 20px">
+                    <asp:Button ID="AceptarConsultaITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarConsultaITF.disabled = true;" OnClick="AceptarConsultaITFButton_Click" />
+                </td>
+                 <td align="center" style="width: 20px">
+                </td>
+                <td align="left" style="padding-top: 20px">
+                    <asp:Button ID="CancelarConsultaITF" runat="server" Text="Cancelar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$AceptarConsultaITF.disabled = true;" OnClick="CancelarConsultaITFButton_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
 </asp:Content>
