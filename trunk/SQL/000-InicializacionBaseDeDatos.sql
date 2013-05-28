@@ -169,8 +169,8 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-insert MetodoGeneracionNumeracionLote values ('Ninguno', 'Autonumerador (se calcula a partir del "Ultimo nro. de lote")')
-insert MetodoGeneracionNumeracionLote values ('Autonumerador', 'Ninguno (el número de lote se ingresa manualmente)')
+insert MetodoGeneracionNumeracionLote values ('Ninguno', 'Ninguno (el número de lote se ingresa manualmente)')
+insert MetodoGeneracionNumeracionLote values ('Autonumerador', 'Autonumerador (se calcula a partir del "Ultimo nro. de lote")')
 insert MetodoGeneracionNumeracionLote values ('TimeStamp1', 'TimeStamp #1 (Año-Mes-Día-Hora-Minutos-Segundos)')
 insert MetodoGeneracionNumeracionLote values ('TimeStamp2', 'TimeStamp #2 (días transcurridos desde el 01/01/2013-Hora-Minutos-Segundos-Milésimas de segundos)')
 
