@@ -186,7 +186,9 @@ namespace CedServicios.DB
         public void CompletarUNsYPuntosVta(List<Entidades.Cuit> Cuits)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Cuit.Cuit, UN.DescrUN, UN.IdUN, UN.Estado as EstadoUN, isnull(PuntoVta.NroPuntoVta, convert(numeric(4), 0)) as NroPuntoVta, isnull(PuntoVta.IdTipoPuntoVta, '') as IdTipoPuntoVta, PuntoVta.Estado as EstadoPuntoVta from Cuit ");
+            a.Append("select Cuit.Cuit, UN.DescrUN, UN.IdUN, UN.Estado as EstadoUN, UN.IdWF as IdWFUN, UN.UltActualiz as UltActualizUN, ");
+            a.Append("isnull(PuntoVta.NroPuntoVta, convert(numeric(4), 0)) as NroPuntoVta, isnull(PuntoVta.IdTipoPuntoVta, convert(varchar(15), '')) as IdTipoPuntoVta, isnull(PuntoVta.UsaSetPropioDeDatosCuit, convert(bit, 0)) as UsaSetPropioDeDatosCuit, isnull(PuntoVta.Calle, convert(varchar(30), '')) as Calle, isnull(PuntoVta.Nro, convert(varchar(6), '')) as Nro, isnull(PuntoVta.Piso, convert(varchar(5), '')) as Piso, isnull(PuntoVta.Depto, convert(varchar(5), '')) as Depto, isnull(PuntoVta.Sector, convert(varchar(5), '')) as Sector, isnull(PuntoVta.Torre, convert(varchar(5), '')) as Torre, isnull(PuntoVta.Manzana, convert(varchar(5), '')) as Manzana, isnull(PuntoVta.Localidad, convert(varchar(25), '')) as Localidad, isnull(PuntoVta.IdProvincia, convert(varchar(2), '')) as IdProvincia, isnull(PuntoVta.DescrProvincia, convert(varchar(50), '')) as DescrProvincia, isnull(PuntoVta.CodPost, convert(varchar(8), '')) as CodPost, isnull(PuntoVta.NombreContacto, convert(varchar(25), '')) as NombreContacto, isnull(PuntoVta.EmailContacto, convert(varchar(60), '')) as EmailContacto, isnull(PuntoVta.TelefonoContacto, convert(varchar(50), '')) as TelefonoContacto,  isnull(PuntoVta.IdCondIVA, convert(numeric(2, 0), 0)) as IdCondIVA, isnull(PuntoVta.DescrCondIVA, convert(varchar(50), '')) as DescrCondIVA, isnull(PuntoVta.NroIngBrutos, convert(varchar(13), '')) as NroIngBrutos, isnull(PuntoVta.IdCondIngBrutos, convert(numeric(2, 0), 0)) as IdCondIngBrutos, isnull(PuntoVta.DescrCondIngBrutos, convert(varchar(50), '')) as DescrCondIngBrutos, isnull(PuntoVta.GLN, convert(numeric(13, 0), 0)) as GLN, isnull(PuntoVta.FechaInicioActividades, convert(datetime, '19000101')) as FechaInicioActividades, isnull(PuntoVta.CodigoInterno, convert(varchar(20), '')) as CodigoInterno, isnull(PuntoVta.IdMetodoGeneracionNumeracionLote, convert(varchar(15), '')) as IdMetodoGeneracionNumeracionLote, isnull(PuntoVta.UltNroLote, convert(numeric(14, 0), 0)) as UltNroLote, isnull(PuntoVta.IdWF, convert(int, 0)) as IdWFPuntoVta,  isnull(PuntoVta.Estado, convert(varchar(15), '')) as EstadoPuntoVta, isnull(PuntoVta.UltActualiz, convert(timestamp, 0)) as UltActualizPuntoVta ");
+            a.Append("from Cuit ");
             a.Append("left outer join UN on Cuit.Cuit=UN.Cuit ");
             a.Append("left outer join PuntoVta on UN.Cuit=PuntoVta.Cuit and UN.IdUN=PuntoVta.IdUN ");
             a.Append("order by Cuit.Cuit, UN.DescrUN, PuntoVta.NroPuntoVta ");
@@ -205,7 +207,9 @@ namespace CedServicios.DB
                         uN.Cuit = Cuits[i].Nro;
                         uN.Id = idUN;
                         uN.Descr = Convert.ToString(dr[j]["DescrUN"]);
+                        uN.WF.Id = Convert.ToInt32(dr[j]["IdWFUN"]);
                         uN.WF.Estado = Convert.ToString(dr[j]["EstadoUN"]);
+                        uN.UltActualiz = ByteArray2TimeStamp((byte[])dr[j]["UltActualizUN"]);
                         Cuits[i].UNs.Add(uN);
                         idUNant = idUN;
                     }
@@ -216,7 +220,34 @@ namespace CedServicios.DB
                         puntoVta.IdUN = idUN;
                         puntoVta.Nro = Convert.ToInt32(dr[j]["NroPuntoVta"]);
                         puntoVta.IdTipoPuntoVta = Convert.ToString(dr[j]["IdTipoPuntoVta"]);
+                        puntoVta.UsaSetPropioDeDatosCuit = Convert.ToBoolean(dr[j]["UsaSetPropioDeDatosCuit"]);
+                        puntoVta.Domicilio.Calle = Convert.ToString(dr[j]["Calle"]);
+                        puntoVta.Domicilio.Nro = Convert.ToString(dr[j]["Nro"]);
+                        puntoVta.Domicilio.Piso = Convert.ToString(dr[j]["Piso"]);
+                        puntoVta.Domicilio.Depto = Convert.ToString(dr[j]["Depto"]);
+                        puntoVta.Domicilio.Sector = Convert.ToString(dr[j]["Sector"]);
+                        puntoVta.Domicilio.Torre = Convert.ToString(dr[j]["Torre"]);
+                        puntoVta.Domicilio.Manzana = Convert.ToString(dr[j]["Manzana"]);
+                        puntoVta.Domicilio.Localidad = Convert.ToString(dr[j]["Localidad"]);
+                        puntoVta.Domicilio.Provincia.Id = Convert.ToString(dr[j]["IdProvincia"]);
+                        puntoVta.Domicilio.Provincia.Descr = Convert.ToString(dr[j]["DescrProvincia"]);
+                        puntoVta.Domicilio.CodPost = Convert.ToString(dr[j]["CodPost"]);
+                        puntoVta.Contacto.Nombre = Convert.ToString(dr[j]["NombreContacto"]);
+                        puntoVta.Contacto.Email = Convert.ToString(dr[j]["EmailContacto"]);
+                        puntoVta.Contacto.Telefono = Convert.ToString(dr[j]["TelefonoContacto"]);
+                        puntoVta.DatosImpositivos.IdCondIVA = Convert.ToInt32(dr[j]["IdCondIVA"]);
+                        puntoVta.DatosImpositivos.DescrCondIVA = Convert.ToString(dr[j]["DescrCondIVA"]);
+                        puntoVta.DatosImpositivos.NroIngBrutos = Convert.ToString(dr[j]["NroIngBrutos"]);
+                        puntoVta.DatosImpositivos.IdCondIngBrutos = Convert.ToInt32(dr[j]["IdCondIngBrutos"]);
+                        puntoVta.DatosImpositivos.DescrCondIngBrutos = Convert.ToString(dr[j]["DescrCondIngBrutos"]);
+                        puntoVta.DatosImpositivos.FechaInicioActividades = Convert.ToDateTime(dr[j]["FechaInicioActividades"]);
+                        puntoVta.DatosIdentificatorios.GLN = Convert.ToInt64(dr[j]["GLN"]);
+                        puntoVta.DatosIdentificatorios.CodigoInterno = Convert.ToString(dr[j]["CodigoInterno"]);
+                        puntoVta.IdMetodoGeneracionNumeracionLote = Convert.ToString(dr[j]["IdMetodoGeneracionNumeracionLote"]);
+                        puntoVta.UltNroLote = Convert.ToInt64(dr[j]["UltNroLote"]);
+                        puntoVta.WF.Id = Convert.ToInt32(dr[j]["IdWFPuntoVta"]);
                         puntoVta.WF.Estado = Convert.ToString(dr[j]["EstadoPuntoVta"]);
+                        puntoVta.UltActualiz = ByteArray2TimeStamp((byte[])dr[j]["UltActualizPuntoVta"]);
                         Cuits[i].UNs[Cuits[i].UNs.Count - 1].PuntosVta.Add(puntoVta);
                     }
                 }

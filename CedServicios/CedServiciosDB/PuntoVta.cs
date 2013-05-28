@@ -68,6 +68,7 @@ namespace CedServicios.DB
             Hasta.UltNroLote = Convert.ToInt64(Desde["UltNroLote"]);
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+            Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
         public void Crear(Entidades.PuntoVta PuntoVta)
         {
