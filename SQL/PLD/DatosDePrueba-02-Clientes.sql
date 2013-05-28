@@ -3,6 +3,7 @@ INSERT INTO [CedeiraSERVICIOS].[dbo].[Cliente]
            ,[IdTipoDoc]
            ,[NroDoc]
            ,[IdCliente]
+           ,[DesambiguacionCuitPais]
            ,[RazonSocial]
            ,[DescrTipoDoc]
            ,[Calle]
@@ -35,6 +36,7 @@ INSERT INTO [CedeiraSERVICIOS].[dbo].[Cliente]
            ('30710015062'
            ,80
            ,'30500014047'
+           ,''
            ,''
            ,'Banco Provincia del Neuquen SA'
            ,'CUIT'
@@ -70,6 +72,7 @@ INSERT INTO [CedeiraSERVICIOS].[dbo].[Cliente]
            ,[IdTipoDoc]
            ,[NroDoc]
            ,[IdCliente]
+           ,[DesambiguacionCuitPais]
            ,[RazonSocial]
            ,[DescrTipoDoc]
            ,[Calle]
@@ -102,6 +105,7 @@ INSERT INTO [CedeiraSERVICIOS].[dbo].[Cliente]
            ('30710015062'
            ,80
            ,'30504536706'
+           ,''
            ,''
            ,'CONTRERAS HERMANOS S.A.'
            ,'CUIT'
