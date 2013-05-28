@@ -181,7 +181,7 @@
 		            <asp:Label ID="Label7" runat="server" Text="Método de numeración de lotes"></asp:Label>
 	            </td>
 			    <td align="left" style="padding-top:5px">
-				    <asp:DropDownList ID="IdMetodoGeneracionNumeracionLoteDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Id" DataTextField="Descr">
+				    <asp:DropDownList ID="IdMetodoGeneracionNumeracionLoteDropDownList" runat="server" TabIndex="18" Width="650px" DataValueField="Id" DataTextField="Descr">
 				    </asp:DropDownList>
 			    </td>
             </tr>
