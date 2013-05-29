@@ -51,7 +51,8 @@
                     <asp:ImageButton ID="EmpresaImageButton" runat="server" 
                         ImageUrl="~/Imagenes/CedeiraSF-Logo.gif" onclick="EmpresaImageButton_Click" ToolTip="Click aqui para acceder a información institucional y de contacto " />
                 </td>
-                <td style="width:100%">
+                <td align="right" style="width:100%">
+                    <asp:ImageButton ID="UsuarioImageButton" runat="server" ImageUrl="~/Imagenes/SiluetaHombre.jpg" onclick="UsuarioImageButton_Click" AlternateText="" Height="35px" Visible="false" />
                 </td>
                 <asp:ContentPlaceHolder ID="UsuarioContentPlaceHolder" runat="server" Visible="true">
                 <td>

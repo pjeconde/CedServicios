@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using System.Web.UI.WebControls;
 using System.Web.UI;
+using System.Web.UI.WebControls;
 using CaptchaDotNet2.Security.Cryptography;
 using System.Drawing;
 
@@ -17,6 +17,8 @@ namespace CedServicios.Site
 
             ContentPlaceHolder menuContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("MenuContentPlaceHolder"));
             Menu menu = ((Menu)menuContentPlaceHolder.FindControl("Menu"));
+
+            ImageButton usuarioImageButton = ((ImageButton)Master.FindControl("UsuarioImageButton"));
 
             ContentPlaceHolder usuarioContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("UsuarioContentPlaceHolder"));
             Label usuarioLabel = ((Label)usuarioContentPlaceHolder.FindControl("UsuarioLabel"));
@@ -229,6 +231,23 @@ namespace CedServicios.Site
                 menuContentPlaceHolder.Visible = true;
                 if (Sesion.Usuario.Id != null)
                 {
+                    //Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    //String path = Server.MapPath("~/ImagenesSubidas/");
+                    //string[] archivos = System.IO.Directory.GetFiles(path, sesion.Usuario.Id + ".*", System.IO.SearchOption.TopDirectoryOnly);
+                    //if (archivos.Length > 0)
+                    //{
+                    //    usuarioImageButton.ImageUrl = "~/ImagenesSubidas/" + archivos[0].Replace(Server.MapPath("~/ImagenesSubidas/"), String.Empty);
+                    //}
+                    try
+                    {
+                        usuarioImageButton.ImageUrl = "~/ImagenesSubidas/" + Sesion.Usuario.Id + ".jpg";
+                        usuarioImageButton.Visible = true;
+                    }
+                    catch
+                    {
+                        usuarioImageButton.ImageUrl = null;
+                        usuarioImageButton.Visible = false;
+                    }
                     usuarioContentPlaceHolder.Visible = true;
                     usuarioHyperLink.Text = Sesion.Usuario.Nombre.Replace(" ", "&nbsp;");
                     menu.Items[menu.Items.Count - 1].Selectable = true;

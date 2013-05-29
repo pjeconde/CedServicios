@@ -49,6 +49,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.ImageButton EmpresaImageButton;
         
         /// <summary>
+        /// Control UsuarioImageButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton UsuarioImageButton;
+        
+        /// <summary>
         /// Control UsuarioContentPlaceHolder.
         /// </summary>
         /// <remarks>
