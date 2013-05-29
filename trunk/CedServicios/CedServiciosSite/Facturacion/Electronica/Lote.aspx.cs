@@ -1854,7 +1854,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             docCompradorRequiredFieldValidator.DataBind();
             listaDocCompradorRequiredFieldValidator.DataBind();
             ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-            System.Collections.Generic.List<Entidades.Cliente> listacompradores = RN.Cliente.ListaPorCuit(((Entidades.Sesion)Session["Sesion"]));
+            System.Collections.Generic.List<Entidades.Cliente> listacompradores = RN.Cliente.ListaPorCuit(true, ((Entidades.Sesion)Session["Sesion"]));
             if (listacompradores.Count > 0)
             {
                 CompradorDropDownList.Visible = true;
@@ -3690,7 +3690,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 catch
                 {
-                    listacompradores = RN.Cliente.ListaPorCuit(((Entidades.Sesion)Session["Sesion"]));
+                    listacompradores = RN.Cliente.ListaPorCuit(true, ((Entidades.Sesion)Session["Sesion"]));
                     Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                     Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
                     Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;

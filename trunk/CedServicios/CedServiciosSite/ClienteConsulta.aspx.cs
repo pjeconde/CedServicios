@@ -23,7 +23,7 @@ namespace CedServicios.Site
 
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
-                lista = RN.Cliente.ListaPorCuit(sesion);
+                lista = RN.Cliente.ListaPorCuit(false, sesion);
                 ClientesGridView.DataSource = lista;
                 ViewState["Clientes"] = lista;
                 ClientesGridView.DataBind();

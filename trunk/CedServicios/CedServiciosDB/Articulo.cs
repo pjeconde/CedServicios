@@ -12,7 +12,7 @@ namespace CedServicios.DB
         {
         }
 
-        public List<Entidades.Articulo> ListaPorCuit()
+        public List<Entidades.Articulo> ListaPorCuit(bool SoloVigentes)
         {
             List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
             if (sesion.Cuit.Nro != null)
@@ -22,6 +22,10 @@ namespace CedServicios.DB
                 a.Append("Cuit, IdArticulo, DescrArticulo, GTIN, IdUnidad, DescrUnidad, IndicacionExentoGravado, AlicuotaIVA, IdWF, Estado, UltActualiz ");
                 a.Append("from Articulo ");
                 a.Append("where Articulo.Cuit='" + sesion.Cuit.Nro + "' ");
+                if (SoloVigentes)
+                {
+                    a.Append("and Articulo.Estado='Vigente' ");
+                }
                 a.Append("order by Articulo.DescrArticulo ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)

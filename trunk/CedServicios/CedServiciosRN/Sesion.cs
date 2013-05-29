@@ -152,7 +152,7 @@ namespace CedServicios.RN
         {
             Sesion.Cuit = Cuit;
             Sesion.Cuit.UNs = RN.UN.ListaPorCuitParaElUsuarioLogueado(Sesion);
-            Sesion.ClientesDelCuit = RN.Cliente.ListaPorCuit(Sesion);
+            Sesion.ClientesDelCuit = RN.Cliente.ListaPorCuit(false, Sesion);
             if (Sesion.Cuit.UNs.Count != 0)
             {
                 if (Sesion.UN.Id == 0)
