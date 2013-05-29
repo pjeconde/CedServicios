@@ -95,8 +95,11 @@ namespace CedServicios.Site
                 case "Artículos|Consulta":
                     Response.Redirect("~/ArticuloConsulta.aspx");
                     break;
-                case "Facturación":
+                case "Facturación|Alta":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
+                    break;
+                case "Facturación|Consulta":
+                    Response.Redirect("~/Facturacion/Electronica/LoteConsulta.aspx");
                     break;
                 case "Autorizaciones|Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx?pendientes");
