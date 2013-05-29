@@ -38,7 +38,7 @@
                 <asp:Label ID="Label9" runat="server" Text="Razón Social"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="3" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="2" Width="300px"></asp:TextBox>
             </td>        
         </tr>
         <uc1:domicilio ID="Domicilio" runat="server"/>
@@ -50,7 +50,7 @@
 		        <asp:Label ID="Label18" runat="server" Text="¿ Cómo nos conoció ?"></asp:Label>
 	        </td>
 			<td align="left" style="padding-top:5px">
-				<asp:DropDownList ID="MedioDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Id" DataTextField="Descr">
+				<asp:DropDownList ID="MedioDropDownList" runat="server" TabIndex="501" Width="216px" DataValueField="Id" DataTextField="Descr">
 				</asp:DropDownList>
 			</td>
         </tr>
@@ -65,19 +65,19 @@
         </tr>
         <tr>
 	        <td align="right" style="padding-right:5px; padding-top:5px">
-                <asp:FileUpload ID="FileUpload1" runat="server" ToolTip="Seleccione la imagen que se usará como logotipo en los comprobantes" />
+                <asp:FileUpload ID="FileUpload1" runat="server" ToolTip="Seleccione la imagen que se usará como logotipo en los comprobantes" TabIndex="502" />
 	        </td>
 			<td align="left" style="padding-top:5px">
-                <asp:Button ID="SubirLogoButton" runat="server" TabIndex="4" Text="Subir imagen seleccionada" onclick="SubirLogoButton_Click" />
-                <asp:Button ID="BorrarLogoButton" runat="server" TabIndex="4" Text="Borrar imagen actual" onclick="BorrarLogoButton_Click" />
+                <asp:Button ID="SubirImagenButton" runat="server" TabIndex="503" Text="Subir imagen seleccionada" onclick="SubirImagenButton_Click" />
+                <asp:Button ID="BorrarImagenButton" runat="server" TabIndex="504" Text="Borrar imagen actual" onclick="BorrarImagenButton_Click" />
 			</td>
         </tr>
         <tr>
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="4" Text="Aceptar" onclick="AceptarButton_Click" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="5" Text="Cancelar" PostBackUrl="~/Default.aspx" />
+                <asp:Button ID="AceptarButton" runat="server" TabIndex="505" Text="Aceptar" onclick="AceptarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="506" Text="Cancelar" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
         <tr>
