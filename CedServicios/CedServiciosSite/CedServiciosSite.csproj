@@ -116,6 +116,7 @@
     <Content Include="Imagenes\eFact-R-XL.jpg" />
     <Content Include="Imagenes\eFact-R.jpg" />
     <Content Include="Imagenes\Interrogacion.jpg" />
+    <Content Include="Imagenes\SiluetaHombre.jpg" />
     <Content Include="InstitucionalContacto.aspx" />
     <Content Include="InstitucionalEmpresa.aspx" />
     <Content Include="InstitucionalRefeCom.aspx" />

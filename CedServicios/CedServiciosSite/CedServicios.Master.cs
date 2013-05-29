@@ -170,6 +170,10 @@ namespace CedServicios.Site
         {
             Response.Redirect("~/InstitucionalEmpresa.aspx");
         }
+        protected void UsuarioImageButton_Click(object sender, ImageClickEventArgs e)
+        {
+            //Response.Redirect("~/UsuarioConsulta.aspx");
+        }
         protected void UNDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (UNDropDownList.SelectedItem != null)
