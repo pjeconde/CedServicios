@@ -184,15 +184,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Image LogotipoImage;
         
         /// <summary>
-        /// Control BorrarLogoButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BorrarLogoButton;
-        
-        /// <summary>
         /// Control FileUpload1.
         /// </summary>
         /// <remarks>
@@ -202,13 +193,22 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
         
         /// <summary>
-        /// Control SubirLogoButton.
+        /// Control SubirImagenButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SubirLogoButton;
+        protected global::System.Web.UI.WebControls.Button SubirImagenButton;
+        
+        /// <summary>
+        /// Control BorrarImagenButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BorrarImagenButton;
         
         /// <summary>
         /// Control AceptarButton.

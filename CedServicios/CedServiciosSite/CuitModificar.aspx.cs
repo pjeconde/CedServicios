@@ -104,7 +104,7 @@ namespace CedServicios.Site
                 return;
             }
         }
-        protected void SubirLogoButton_Click(object sender, EventArgs e)
+        protected void SubirImagenButton_Click(object sender, EventArgs e)
         {
             Boolean fileOK = false;
             String fileExtension = String.Empty;
@@ -125,7 +125,7 @@ namespace CedServicios.Site
             {
                 try
                 {
-                    BorrarLogoButton_Click(BorrarLogoButton, new EventArgs());
+                    BorrarImagenButton_Click(BorrarImagenButton, new EventArgs());
                     FileUpload1.PostedFile.SaveAs(path + CUITTextBox.Text + fileExtension);
                     LogotipoImage.ImageUrl = "ImagenesSubidas/" + CUITTextBox.Text + fileExtension;
                 }
@@ -139,7 +139,7 @@ namespace CedServicios.Site
                 MensajeLabel.Text = "Tipo de archivo erróneo";
             }
         }
-        protected void BorrarLogoButton_Click(object sender, EventArgs e)
+        protected void BorrarImagenButton_Click(object sender, EventArgs e)
         {
             String path = Server.MapPath("~/ImagenesSubidas/");
             string[] archivos = System.IO.Directory.GetFiles(path, CUITTextBox.Text + ".*", System.IO.SearchOption.TopDirectoryOnly);
