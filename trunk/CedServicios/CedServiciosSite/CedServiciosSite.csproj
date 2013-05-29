@@ -39,9 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AjaxControlToolkit\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -115,6 +115,7 @@
     <Content Include="Imagenes\CedST-Tablero_ch.jpg" />
     <Content Include="Imagenes\eFact-R-XL.jpg" />
     <Content Include="Imagenes\eFact-R.jpg" />
+    <Content Include="Imagenes\Interrogacion.jpg" />
     <Content Include="InstitucionalContacto.aspx" />
     <Content Include="InstitucionalEmpresa.aspx" />
     <Content Include="InstitucionalRefeCom.aspx" />
@@ -774,6 +775,7 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="ImagenesSubidas\" />
     <Folder Include="Temp\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
