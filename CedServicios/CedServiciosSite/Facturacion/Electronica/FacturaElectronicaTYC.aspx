@@ -11,9 +11,6 @@
             <td style="padding-left: 10px; width: 700px" valign="top">
                 <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
-                        <td style="width: 21px; height: 20px;">
-                            <asp:Image ID="Image2" runat="server" AlternateText="o" ImageUrl="~/Imagenes/CajaBrownPeru.ico" />
-                        </td>
                         <td style="height: 20px;">
                             <asp:Label ID="LabelTitFacturaElectronica" runat="server" SkinID="TituloPagina" Text="Factura Electrónica"></asp:Label>
                         </td>

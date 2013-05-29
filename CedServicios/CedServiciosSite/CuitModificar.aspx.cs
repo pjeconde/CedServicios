@@ -44,6 +44,12 @@ namespace CedServicios.Site
                 DatosIdentificatorios.GLN = sesion.Cuit.DatosIdentificatorios.GLN;
                 DatosIdentificatorios.CodigoInterno = sesion.Cuit.DatosIdentificatorios.CodigoInterno;
                 MedioDropDownList.SelectedValue = sesion.Cuit.Medio.Id;
+                String path = Server.MapPath("~/ImagenesSubidas/");
+                string[] archivos = System.IO.Directory.GetFiles(path, CUITTextBox.Text + ".*", System.IO.SearchOption.TopDirectoryOnly);
+                if (archivos.Length > 0)
+                {
+                    LogotipoImage.ImageUrl = "~/ImagenesSubidas/" + archivos[0].Replace(Server.MapPath("~/ImagenesSubidas/"), String.Empty);
+                }
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
@@ -96,6 +102,51 @@ namespace CedServicios.Site
             {
                 MensajeLabel.Text = EX.Funciones.Detalle(ex);
                 return;
+            }
+        }
+        protected void SubirLogoButton_Click(object sender, EventArgs e)
+        {
+            Boolean fileOK = false;
+            String fileExtension = String.Empty;
+            String path = Server.MapPath("~/ImagenesSubidas/");
+            if (FileUpload1.HasFile)
+            {
+                fileExtension = System.IO.Path.GetExtension(FileUpload1.FileName).ToLower();
+                String[] allowedExtensions = { ".jpg", ".png", ".jpeg", ".gif" };
+                for (int i = 0; i < allowedExtensions.Length; i++)
+                {
+                    if (fileExtension == allowedExtensions[i])
+                    {
+                        fileOK = true;
+                    }
+                }
+            }
+            if (fileOK)
+            {
+                try
+                {
+                    BorrarLogoButton_Click(BorrarLogoButton, new EventArgs());
+                    FileUpload1.PostedFile.SaveAs(path + CUITTextBox.Text + fileExtension);
+                    LogotipoImage.ImageUrl = "ImagenesSubidas/" + CUITTextBox.Text + fileExtension;
+                }
+                catch (Exception ex)
+                {
+                    MensajeLabel.Text = "No se pudo subir el archivo.<br />" + EX.Funciones.Detalle(ex);
+                }
+            }
+            else
+            {
+                MensajeLabel.Text = "Tipo de archivo erróneo";
+            }
+        }
+        protected void BorrarLogoButton_Click(object sender, EventArgs e)
+        {
+            String path = Server.MapPath("~/ImagenesSubidas/");
+            string[] archivos = System.IO.Directory.GetFiles(path, CUITTextBox.Text + ".*", System.IO.SearchOption.TopDirectoryOnly);
+            for (int i = 0; i < archivos.Length; i++ )
+            {
+                System.IO.File.Delete(archivos[i]);
+                LogotipoImage.ImageUrl = "Imagenes/Interrogacion.jpg";
             }
         }
     }

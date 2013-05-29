@@ -30,10 +30,6 @@
                                         <table>
                                             <tr>
                                                 <td valign="middle">
-                                                    <asp:Image ID="Image1" runat="server" AlternateText="+" ImageUrl="~/Imagenes/CajaBrownPeru.ico">
-                                                    </asp:Image>
-                                                </td>
-                                                <td valign="middle">
                                                     <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Factura Electrónica">
                                                     </asp:Label>
                                                     <asp:Label ID="PruebaPopup" runat="server" Text="" Visible="false"></asp:Label>
