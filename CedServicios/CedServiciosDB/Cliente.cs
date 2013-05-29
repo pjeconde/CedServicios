@@ -12,7 +12,7 @@ namespace CedServicios.DB
         {
         }
 
-        public List<Entidades.Cliente> ListaPorCuit()
+        public List<Entidades.Cliente> ListaPorCuit(bool SoloVigentes)
         {
             List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
             if (sesion.Cuit.Nro != null)
@@ -22,6 +22,10 @@ namespace CedServicios.DB
                 a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado, Cliente.UltActualiz ");
                 a.Append("from Cliente ");
                 a.Append("where Cliente.Cuit='" + sesion.Cuit.Nro + "' ");
+                if (SoloVigentes)
+                {
+                    a.Append("where Cliente.Estado='Vigente' ");
+                }
                 a.Append("order by Cliente.RazonSocial ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)

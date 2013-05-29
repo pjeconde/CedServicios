@@ -22,7 +22,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			if (!this.IsPostBack)
 			{
-                ViewState["articulolista"] = RN.Articulo.ListaPorCuit(((Entidades.Sesion)Session["Sesion"]));
+                ViewState["articulolista"] = RN.Articulo.ListaPorCuit(true, ((Entidades.Sesion)Session["Sesion"]));
 				ResetearGrillas();
 			}
 			else
