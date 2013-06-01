@@ -49,12 +49,12 @@
         </tr>
         <tr>
 	        <td align="left" style="padding-top:5px">
-                <asp:FileUpload ID="FileUpload1" runat="server" ToolTip="Seleccione la imagen del usuario" TabIndex="1" />
+                <asp:FileUpload ID="FileUpload1" runat="server" ToolTip="Seleccione la imagen del usuario" Width="296px" size="31" TabIndex="1" />
 			</td>
         </tr>
         <tr>
 	        <td align="left" style="padding-top:5px">
-                <asp:Button ID="SubirImagenButton" runat="server" TabIndex="2" Text="Subir imagen seleccionada" onclick="SubirImagenButton_Click" />
+                <asp:Button ID="SubirImagenButton" runat="server" TabIndex="2" Text="Subir imagen seleccionada" Width="296px" onclick="SubirImagenButton_Click" />
 			</td>
         </tr>
         <tr>

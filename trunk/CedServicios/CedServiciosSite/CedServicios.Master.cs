@@ -172,7 +172,7 @@ namespace CedServicios.Site
         }
         protected void UsuarioImageButton_Click(object sender, ImageClickEventArgs e)
         {
-            //Response.Redirect("~/UsuarioConsulta.aspx");
+            Response.Redirect("~/UsuarioConsulta.aspx");
         }
         protected void UNDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
