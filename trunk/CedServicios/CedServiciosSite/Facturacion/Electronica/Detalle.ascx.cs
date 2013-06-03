@@ -250,25 +250,17 @@ namespace CedServicios.Site.Facturacion.Electronica
                 try
                 {
                     Int64 auxNroGTIN = Convert.ToInt64(auxGTIN, cedeiraCultura);
-                    //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-                    //{
-                        if (!puntoDeVenta.Equals(string.Empty))
+                    if (!puntoDeVenta.Equals(string.Empty))
+                    {
+                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                         {
-                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                            return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                        });
+                        if (listaPV.Count != 0)
+                        {
+                            if (auxGTIN.Length > 13)
                             {
-                                return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                            });
-                            if (listaPV.Count != 0)
-                            {
-                                if (auxGTIN.Length > 13)
-                                {
-                                    throw new Exception("La longitud del GTIN debe ser menor o igual a 13 dígitos para RG2904");
-                                }
-                                else
-                                {
-                                    l.GTIN = auxNroGTIN;
-                                    l.GTINSpecified = true;
-                                }
+                                throw new Exception("La longitud del GTIN debe ser menor o igual a 13 dígitos para RG2904");
                             }
                             else
                             {
@@ -281,13 +273,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                             l.GTIN = auxNroGTIN;
                             l.GTINSpecified = true;
                         }
-                    //}
-                    //else
-                    //{
-
-                    //    l.GTIN = auxNroGTIN;
-                    //    l.GTINSpecified = true;
-                    //}
+                    }
+                    else
+                    {
+                        l.GTIN = auxNroGTIN;
+                        l.GTINSpecified = true;
+                    }
                 }
                 catch
                 {
@@ -296,35 +287,27 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-                //{
-                    if (!puntoDeVenta.Equals(string.Empty))
+                if (!puntoDeVenta.Equals(string.Empty))
+                {
+                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                     {
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
-                        {
-                            return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                        });
-                        if (listaPV.Count != 0 && l.unidad != "97")
-                        {
-                            throw new Exception("El GTIN es obligatorio para RG2904 si la unidad de medida es distinta a 'Anticipos/Señas'");
-                        }
-                        else
-                        {
-                            l.GTIN = 0;
-                            l.GTINSpecified = false;
-                        }
+                        return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                    });
+                    if (listaPV.Count != 0 && l.unidad != "97")
+                    {
+                        throw new Exception("El GTIN es obligatorio para RG2904 si la unidad de medida es distinta a 'Anticipos/Señas'");
                     }
                     else
                     {
                         l.GTIN = 0;
                         l.GTINSpecified = false;
                     }
-                //}
-                //else
-                //{
-                //    l.GTIN = 0;
-                //    l.GTINSpecified = false;
-                //}
+                }
+                else
+                {
+                    l.GTIN = 0;
+                    l.GTINSpecified = false;
+                }
             }
 
         }
@@ -430,11 +413,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                     });
                     if (listaPV.Count != 0 && !auxAliIVA.Equals(0) && (l.indicacion_exento_gravado.Equals("N") || l.indicacion_exento_gravado.Equals("E")))
                     {
-                    //CedWebEntidades.TiposPuntoDeVenta.TipoPuntoDeVenta tipoPuntoDeVenta = new CedWebEntidades.TiposPuntoDeVenta.RG2904();
-                    //System.Collections.Generic.List<int> listaPV = ((CedWebEntidades.Sesion)Session["Sesion"]).Cuenta.Vendedor.PuntosDeVentaHabilitados(tipoPuntoDeVenta);
-                    //int auxPV = Convert.ToInt32(puntoDeVenta);
-                    //if (listaPV.Contains(auxPV) && !auxAliIVA.Equals(0) && (l.indicacion_exento_gravado.Equals("N") || l.indicacion_exento_gravado.Equals("E")))
-                    //{
                         throw new Exception("La alicuota iva debe ser 0% para RG2904 cuando está exento o no está gravado el artículo");
                     }
                     else
@@ -451,70 +429,55 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-                //{
-                    if (!puntoDeVenta.Equals(string.Empty))
+                if (!puntoDeVenta.Equals(string.Empty))
+                {
+                    //OJO - Verifico si es BonoFiscal !!!
+                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                     {
-                        //OJO - Verifico si es BonoFiscal !!!
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
-                        {
-                            return (pv.IdTipoPuntoVta == "BonoFiscal" || pv.IdTipoPuntoVta == "RG2904") && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                        });
-                        if (listaPV.Count != 0)
-                        {
-                            throw new Exception("La alicuota iva es obligatoria para bono fiscal y RG2904");
-                        }
-                        else
-                        {
-                            l.alicuota_ivaSpecified = false;
-                            l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-                        }
+                        return (pv.IdTipoPuntoVta == "BonoFiscal" || pv.IdTipoPuntoVta == "RG2904") && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                    });
+                    if (listaPV.Count != 0)
+                    {
+                        throw new Exception("La alicuota iva es obligatoria para bono fiscal y RG2904");
                     }
                     else
                     {
                         l.alicuota_ivaSpecified = false;
                         l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
                     }
-                //}
-                //else
-                //{
-                //    l.alicuota_ivaSpecified = false;
-                //    l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-                //}
+                }
+                else
+                {
+                    l.alicuota_ivaSpecified = false;
+                    l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                }
             }
         }
 
         private void ValidarUnidad(FeaEntidades.InterFacturas.linea l, DropDownList ddlunidad)
         {
             string auxUnidad = ddlunidad.SelectedItem.Value;
-            //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-            //{
-                if (!puntoDeVenta.Equals(string.Empty))
+            if (!puntoDeVenta.Equals(string.Empty))
+            {
+                //OJO - Verifico si es RG2904!!!
+                System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                 {
-                    //OJO - Verifico si es RG2904!!!
-                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                    return (pv.IdTipoPuntoVta == "RG2904") && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                });
+                if (listaPV.Count != 0 && auxUnidad.Equals("99"))
+                {
+                    throw new Exception("La unidad BONIFICACIÓN no se admite para RG2904");
+                }
+                //OJO - Verifico si es BonoFiscal or RG2904!!!
+                listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                {
+                    return (pv.IdTipoPuntoVta == "BonoFiscal" || pv.IdTipoPuntoVta == "RG2904") && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                });
+                if (listaPV.Count != 0)
+                {
+                    if (auxUnidad.Equals(string.Empty) || auxUnidad.Equals("0"))
                     {
-                        return (pv.IdTipoPuntoVta == "RG2904") && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                    });
-                    if (listaPV.Count != 0 && auxUnidad.Equals("99"))
-                    {
-                        throw new Exception("La unidad BONIFICACIÓN no se admite para RG2904");
-                    }
-                    //OJO - Verifico si es BonoFiscal or RG2904!!!
-                    listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
-                    {
-                        return (pv.IdTipoPuntoVta == "BonoFiscal" || pv.IdTipoPuntoVta == "RG2904") && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                    });
-                    if (listaPV.Count != 0)
-                    {
-                        if (auxUnidad.Equals(string.Empty) || auxUnidad.Equals("0"))
-                        {
-                            throw new Exception("La unidad es obligatoria para bono fiscal y para RG2904");
-                        }
-                        else
-                        {
-                            l.unidad = auxUnidad;
-                        }
+                        throw new Exception("La unidad es obligatoria para bono fiscal y para RG2904");
                     }
                     else
                     {
@@ -525,11 +488,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     l.unidad = auxUnidad;
                 }
-            //}
-            //else
-            //{
-            //    l.unidad = auxUnidad;
-            //}
+            }
+            else
+            {
+                l.unidad = auxUnidad;
+            }
         }
 
         private void ValidarCantidad(FeaEntidades.InterFacturas.linea l, TextBox txtCantidad)
@@ -551,36 +514,28 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-                    //{
-                        if (!puntoDeVenta.Equals(string.Empty))
+                    if (!puntoDeVenta.Equals(string.Empty))
+                    {
+                        //OJO - Verifico si es BonoFiscal !!!
+                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                         {
-                            //OJO - Verifico si es BonoFiscal !!!
-                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                            });
-                            if (listaPV.Count != 0)
-                            {
-                                throw new Exception("La cantidad es obligatoria para bono fiscal");
-                            }
-                            else
-                            {
-                                l.cantidadSpecified = false;
-                                l.cantidad = 0;
-                            }
+                            return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                        });
+                        if (listaPV.Count != 0)
+                        {
+                            throw new Exception("La cantidad es obligatoria para bono fiscal");
                         }
                         else
                         {
                             l.cantidadSpecified = false;
                             l.cantidad = 0;
                         }
-                    //}
-                    //else
-                    //{
-                    //    l.cantidadSpecified = false;
-                    //    l.cantidad = 0;
-                    //}
+                    }
+                    else
+                    {
+                        l.cantidadSpecified = false;
+                        l.cantidad = 0;
+                    }
                 }
             }
             else
@@ -592,25 +547,18 @@ namespace CedServicios.Site.Facturacion.Electronica
         private void ValidarIndicacionExentoGravado(FeaEntidades.InterFacturas.linea l, DropDownList ddlindicacion_exento_gravado)
         {
             string auxindicacion_exento_gravado = ddlindicacion_exento_gravado.SelectedItem.Value;
-            //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-            //{
-                if (!puntoDeVenta.Equals(string.Empty))
+            if (!puntoDeVenta.Equals(string.Empty))
+            {
+                //OJO - Verifico si es BonoFiscal !!!
+                System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                 {
-                    //OJO - Verifico si es BonoFiscal !!!
-                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                    return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                });
+                if (listaPV.Count != 0)
+                {
+                    if (auxindicacion_exento_gravado.Equals(string.Empty))
                     {
-                        return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                    });
-                    if (listaPV.Count != 0)
-                    {
-                        if (auxindicacion_exento_gravado.Equals(string.Empty))
-                        {
-                            throw new Exception("La indicación exento gravado es obligatoria para bono fiscal");
-                        }
-                        else
-                        {
-                            l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-                        }
+                        throw new Exception("La indicación exento gravado es obligatoria para bono fiscal");
                     }
                     else
                     {
@@ -621,11 +569,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     l.indicacion_exento_gravado = auxindicacion_exento_gravado;
                 }
-            //}
-            //else
-            //{
-            //    l.indicacion_exento_gravado = auxindicacion_exento_gravado;
-            //}
+            }
+            else
+            {
+                l.indicacion_exento_gravado = auxindicacion_exento_gravado;
+            }
         }
 
         private void ValidarPrecioUnitario(FeaEntidades.InterFacturas.linea l, TextBox txtprecio_unitario)
@@ -646,48 +594,40 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium((CedWebEntidades.Sesion)Session["Sesion"]))
-                //{
-                    if (!puntoDeVenta.Equals(string.Empty))
+                if (!puntoDeVenta.Equals(string.Empty))
+                {
+                    //OJO - Verifico si es BonoFiscal !!!
+                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                     {
-                        //OJO - Verifico si es BonoFiscal !!!
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                        return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                    });
+                    if (listaPV.Count != 0)
+                    {
+                        throw new Exception("El precio unitario es obligatorio para bono fiscal");
+                    }
+                    else 
+                    {
+                        listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                         {
-                            return pv.IdTipoPuntoVta == "BonoFiscal" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                            return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
                         });
-                        if (listaPV.Count != 0)
-                        {
-                            throw new Exception("El precio unitario es obligatorio para bono fiscal");
-                        }
-                        else 
-                        {
-                            listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                            if (listaPV.Count != 0)
                             {
-                                return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                            });
-                             if (listaPV.Count != 0)
-                             {
-                                 l.precio_unitario = 0;
-                                 l.precio_unitarioSpecified = true;
-                             }
-                             else
-                             {
-                                 l.precio_unitario = 0;
-                                 l.precio_unitarioSpecified = false;
-                             }
-                        }
+                                l.precio_unitario = 0;
+                                l.precio_unitarioSpecified = true;
+                            }
+                            else
+                            {
+                                l.precio_unitario = 0;
+                                l.precio_unitarioSpecified = false;
+                            }
                     }
-                    else
-                    {
-                        l.precio_unitario = 0;
-                        l.precio_unitarioSpecified = false;
-                    }
-                //}
-                //else
-                //{
-                //    l.precio_unitario = 0;
-                //    l.precio_unitarioSpecified = false;
-                //}
+                }
+                else
+                {
+                    l.precio_unitario = 0;
+                    l.precio_unitarioSpecified = false;
+                }
             }
         }
 
@@ -803,7 +743,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                 articulo.Id = "(Elegir artículo)";
                 articulo.Descr = "(Elegir artículo)";
                 articuloslist.Add(articulo);
-                articuloslist.AddRange(((System.Collections.Generic.List<Entidades.Articulo>)ViewState["articulolista"]));
+                if (ViewState["articulolista"] != null)
+                {
+                    articuloslist.AddRange(((System.Collections.Generic.List<Entidades.Articulo>)ViewState["articulolista"]));
+                }
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel")).DataSource = articuloslist;
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel")).DataBind();
 
@@ -888,8 +831,6 @@ namespace CedServicios.Site.Facturacion.Electronica
         private void ValidarCodigoProductoComprador(FeaEntidades.InterFacturas.linea l, TextBox txtcpcomprador)
         {
             string auxcpcomprador = txtcpcomprador.Text;
-            //if (RN.Fun.EstaLogueadoUnUsuarioPremium((Entidades.Sesion)Session["Sesion"]))
-            //{
             if (!puntoDeVenta.Equals(string.Empty))
             {
                 int auxPV = Convert.ToInt32(puntoDeVenta);
@@ -929,12 +870,8 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 l.codigo_producto_comprador = auxcpcomprador;
             }
-            //}
-            //else
-            //{
-            //    l.codigo_producto_comprador = auxcpcomprador;
-            //}
         }
+
 		protected string GetAlicuotaIVA(double alic)
 		{
 			if (alic != 99)
