@@ -10,7 +10,16 @@
 namespace CedServicios.Site.Facturacion.Electronica {
     
     
-    public partial class Lote {
+    public partial class LoteConsulta {
+        
+        /// <summary>
+        /// Control Image1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image Image1;
         
         /// <summary>
         /// Control Label2.
@@ -20,24 +29,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label2;
-        
-        /// <summary>
-        /// Control PruebaPopup.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label PruebaPopup;
-        
-        /// <summary>
-        /// Control PruebaPopupButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button PruebaPopupButton;
         
         /// <summary>
         /// Control XMLFileUpload.
@@ -56,15 +47,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button FileUploadButton;
-        
-        /// <summary>
-        /// Control ConfigurarVendedorHyperLink.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink ConfigurarVendedorHyperLink;
         
         /// <summary>
         /// Control Tipo_De_ComprobanteUpdatePanel.
@@ -146,15 +128,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel ptoVentaUpdatePanel;
-        
-        /// <summary>
-        /// Control puntoVentaRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator puntoVentaRequiredFieldValidator;
         
         /// <summary>
         /// Control PuntoVtaDropDownList.
@@ -256,15 +229,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Domicilio_Depto_VendedorTextBox;
         
         /// <summary>
-        /// Control FechaEmisionDatePickerRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator FechaEmisionDatePickerRequiredFieldValidator;
-        
-        /// <summary>
         /// Control FechaEmisionDatePickerWebUserControl.
         /// </summary>
         /// <remarks>
@@ -272,15 +236,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FechaEmisionDatePickerWebUserControl;
-        
-        /// <summary>
-        /// Control CalendarExtender1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
         
         /// <summary>
         /// Control ImageCalendarFechaEmision.
@@ -326,15 +281,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Codigo_Interno_VendedorTextBox;
-        
-        /// <summary>
-        /// Control Localidad_VendedorRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Localidad_VendedorRequiredFieldValidator;
         
         /// <summary>
         /// Control Localidad_VendedorTextBox.
@@ -427,15 +373,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList IdiomaDropDownList;
         
         /// <summary>
-        /// Control GLN_VendedorRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator GLN_VendedorRegularExpressionValidator;
-        
-        /// <summary>
         /// Control GLN_VendedorTextBox.
         /// </summary>
         /// <remarks>
@@ -472,24 +409,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Contacto_VendedorTextBox;
         
         /// <summary>
-        /// Control CUITVendedorRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator CUITVendedorRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control CUITVendedorRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator CUITVendedorRequiredFieldValidator;
-        
-        /// <summary>
         /// Control Cuit_VendedorTextBox.
         /// </summary>
         /// <remarks>
@@ -497,24 +416,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Cuit_VendedorTextBox;
-        
-        /// <summary>
-        /// Control Email_VendedorRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Email_VendedorRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Email_VendedorRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Email_VendedorRequiredFieldValidator;
         
         /// <summary>
         /// Control Email_VendedorTextBox.
@@ -544,15 +445,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Telefono_VendedorTextBox;
         
         /// <summary>
-        /// Control NumeroIBVendedorRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator NumeroIBVendedorRegularExpressionValidator;
-        
-        /// <summary>
         /// Control NroIBVendedorTextBox.
         /// </summary>
         /// <remarks>
@@ -578,15 +470,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox InicioDeActividadesVendedorDatePickerWebUserControl;
-        
-        /// <summary>
-        /// Control CalendarExtender2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender2;
         
         /// <summary>
         /// Control ImageCalendarInicioDeActividadesVendedor.
@@ -623,33 +506,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TipoNumeracionLote;
-        
-        /// <summary>
-        /// Control ButtonGenerarNroLote.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonGenerarNroLote;
-        
-        /// <summary>
-        /// Control NroLoteRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator NroLoteRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control loteRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator loteRequiredFieldValidator;
         
         /// <summary>
         /// Control Id_LoteTextbox.
@@ -697,15 +553,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.UpdatePanel compradorUpdatePanel;
         
         /// <summary>
-        /// Control CompradorDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList CompradorDropDownList;
-        
-        /// <summary>
         /// Control compradorUpdateProgress.
         /// </summary>
         /// <remarks>
@@ -713,15 +560,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress compradorUpdateProgress;
-        
-        /// <summary>
-        /// Control GLN_CompradorRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator GLN_CompradorRegularExpressionValidator;
         
         /// <summary>
         /// Control GLN_CompradorTextBox.
@@ -749,33 +587,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Codigo_Doc_Identificatorio_CompradorDropDownList;
-        
-        /// <summary>
-        /// Control docCompradorRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator docCompradorRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control docCompradorRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator docCompradorRequiredFieldValidator;
-        
-        /// <summary>
-        /// Control listaDocCompradorRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator listaDocCompradorRequiredFieldValidator;
         
         /// <summary>
         /// Control Nro_Doc_Identificatorio_CompradorTextBox.
@@ -913,15 +724,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Contacto_CompradorTextBox;
         
         /// <summary>
-        /// Control RegularExpressionValidator2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
-        
-        /// <summary>
         /// Control Email_CompradorTextBox.
         /// </summary>
         /// <remarks>
@@ -947,15 +749,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox InicioDeActividadesCompradorDatePickerWebUserControl;
-        
-        /// <summary>
-        /// Control CalendarExtender3.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender3;
         
         /// <summary>
         /// Control ImageCalendarInicioDeActividadesComprador.
@@ -1001,15 +794,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FechaVencimientoDatePickerWebUserControl;
-        
-        /// <summary>
-        /// Control CalendarExtender4.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender4;
         
         /// <summary>
         /// Control ImageCalendarFechaVencimiento.
@@ -1084,15 +868,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox FechaServDesdeDatePickerWebUserControl;
         
         /// <summary>
-        /// Control CalendarExtender5.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender5;
-        
-        /// <summary>
         /// Control ImageCalendarFechaServDesde.
         /// </summary>
         /// <remarks>
@@ -1118,15 +893,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FechaServHastaDatePickerWebUserControl;
-        
-        /// <summary>
-        /// Control CalendarExtender6.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender6;
         
         /// <summary>
         /// Control ImageCalendarFechaServHasta.
@@ -1174,31 +940,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.UpdateProgress referenciasUpdateProgress;
         
         /// <summary>
-        /// Control ReferenciasEditValidationSummary.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ReferenciasEditValidationSummary;
-        
-        /// <summary>
-        /// Control ReferenciasFooterValidationSummary.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary ReferenciasFooterValidationSummary;
-        
-        /// <summary>
         /// Control PermisosExpo.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Facturacion.Electronica.Permisos PermisosExpo;
+        protected global::CedServicios.Site.Facturacion.Electronica.PermisosConsulta PermisosExpo;
         
         /// <summary>
         /// Control DatosComerciales.
@@ -1225,7 +973,7 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Facturacion.Electronica.Detalle DetalleLinea;
+        protected global::CedServicios.Site.Facturacion.Electronica.DetalleConsulta DetalleLinea;
         
         /// <summary>
         /// Control DescuentosGlobales.
@@ -1234,7 +982,7 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Facturacion.Electronica.Descuentos DescuentosGlobales;
+        protected global::CedServicios.Site.Facturacion.Electronica.DescuentosConsulta DescuentosGlobales;
         
         /// <summary>
         /// Control ImpuestosGlobales.
@@ -1243,16 +991,7 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Facturacion.Electronica.Impuestos ImpuestosGlobales;
-        
-        /// <summary>
-        /// Control CalcularTotalesButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CalcularTotalesButton;
+        protected global::CedServicios.Site.Facturacion.Electronica.ImpuestosConsulta ImpuestosGlobales;
         
         /// <summary>
         /// Control CAETextBox.
@@ -1273,15 +1012,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox FechaCAEVencimientoDatePickerWebUserControl;
         
         /// <summary>
-        /// Control CalendarExtender7.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender7;
-        
-        /// <summary>
         /// Control ImageCalendarFechaCAEVencimiento.
         /// </summary>
         /// <remarks>
@@ -1298,15 +1028,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FechaCAEObtencionDatePickerWebUserControl;
-        
-        /// <summary>
-        /// Control CalendarExtender8.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender8;
         
         /// <summary>
         /// Control ImageCalendarFechaCAEObtencion.
@@ -1345,24 +1066,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.UpdatePanel tipoCambioUpdatePanel;
         
         /// <summary>
-        /// Control ImporteTotalNetoGravadoRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator ImporteTotalNetoGravadoRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Importe_Total_Neto_Gravado_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Importe_Total_Neto_Gravado_ResumenRequiredFieldValidator;
-        
-        /// <summary>
         /// Control Importe_Total_Neto_Gravado_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1370,24 +1073,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Neto_Gravado_ResumenTextBox;
-        
-        /// <summary>
-        /// Control Importe_Total_Concepto_No_gravadoRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_Concepto_No_gravadoRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Importe_Total_Concepto_No_Gravado_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Importe_Total_Concepto_No_Gravado_ResumenRequiredFieldValidator;
         
         /// <summary>
         /// Control Importe_Total_Concepto_No_Gravado_ResumenTextBox.
@@ -1399,24 +1084,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Concepto_No_Gravado_ResumenTextBox;
         
         /// <summary>
-        /// Control Importe_Operaciones_ExentasRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Operaciones_ExentasRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Importe_Operaciones_Exentas_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Importe_Operaciones_Exentas_ResumenRequiredFieldValidator;
-        
-        /// <summary>
         /// Control Importe_Operaciones_Exentas_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1424,24 +1091,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Importe_Operaciones_Exentas_ResumenTextBox;
-        
-        /// <summary>
-        /// Control Impuesto_LiqRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Impuesto_LiqRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Impuesto_Liq_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Impuesto_Liq_ResumenRequiredFieldValidator;
         
         /// <summary>
         /// Control Impuesto_Liq_ResumenTextBox.
@@ -1453,24 +1102,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Impuesto_Liq_ResumenTextBox;
         
         /// <summary>
-        /// Control Impuesto_Liq_RniRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Impuesto_Liq_RniRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Impuesto_Liq_Rni_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Impuesto_Liq_Rni_ResumenRequiredFieldValidator;
-        
-        /// <summary>
         /// Control Impuesto_Liq_Rni_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1478,15 +1109,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Impuesto_Liq_Rni_ResumenTextBox;
-        
-        /// <summary>
-        /// Control Importe_Total_Impuestos_MunicipalesResumenRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_Impuestos_MunicipalesResumenRegularExpressionValidator;
         
         /// <summary>
         /// Control Importe_Total_Impuestos_Municipales_ResumenTextBox.
@@ -1498,15 +1120,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Impuestos_Municipales_ResumenTextBox;
         
         /// <summary>
-        /// Control Importe_Total_Impuestos_Nacionales_ResumenTextBoxResumenRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_Impuestos_Nacionales_ResumenTextBoxResumenRegularExpressionValidator;
-        
-        /// <summary>
         /// Control Importe_Total_Impuestos_Nacionales_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1514,15 +1127,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Impuestos_Nacionales_ResumenTextBox;
-        
-        /// <summary>
-        /// Control Importe_Total_Ingresos_Brutos_ResumenTextBoxResumenRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_Ingresos_Brutos_ResumenTextBoxResumenRegularExpressionValidator;
         
         /// <summary>
         /// Control Importe_Total_Ingresos_Brutos_ResumenTextBox.
@@ -1534,15 +1138,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Ingresos_Brutos_ResumenTextBox;
         
         /// <summary>
-        /// Control Importe_Total_Impuestos_Internos_ResumenTextBoxResumenRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_Impuestos_Internos_ResumenTextBoxResumenRegularExpressionValidator;
-        
-        /// <summary>
         /// Control Importe_Total_Impuestos_Internos_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1552,24 +1147,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Impuestos_Internos_ResumenTextBox;
         
         /// <summary>
-        /// Control Importe_Total_FacturaRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_FacturaRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Importe_Total_Factura_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Importe_Total_Factura_ResumenRequiredFieldValidator;
-        
-        /// <summary>
         /// Control Importe_Total_Factura_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1577,24 +1154,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Factura_ResumenTextBox;
-        
-        /// <summary>
-        /// Control Tipo_de_cambioRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Tipo_de_cambioRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Tipo_de_cambioRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Tipo_de_cambioRequiredFieldValidator;
         
         /// <summary>
         /// Control Tipo_de_cambioLabel.
@@ -1633,24 +1192,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Observaciones_ResumenTextBox;
         
         /// <summary>
-        /// Control DescargarButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DescargarButton;
-        
-        /// <summary>
-        /// Control GenerarButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GenerarButton;
-        
-        /// <summary>
         /// Control PDFButton.
         /// </summary>
         /// <remarks>
@@ -1660,31 +1201,22 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Button PDFButton;
         
         /// <summary>
-        /// Control ButtonPrueba.
+        /// Control ConsultarLoteIBKButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonPrueba;
+        protected global::System.Web.UI.WebControls.Button ConsultarLoteIBKButton;
         
         /// <summary>
-        /// Control EnviarIBKButton.
+        /// Control ModalPopupExtender2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EnviarIBKButton;
-        
-        /// <summary>
-        /// Control ModalPopupExtender1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender2;
         
         /// <summary>
         /// Control contactoHyperLink.
@@ -1694,42 +1226,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink contactoHyperLink;
-        
-        /// <summary>
-        /// Control RequeridosValidationSummary.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary RequeridosValidationSummary;
-        
-        /// <summary>
-        /// Control LabelEnvioITF.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelEnvioITF;
-        
-        /// <summary>
-        /// Control AceptarEnvioITF.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button AceptarEnvioITF;
-        
-        /// <summary>
-        /// Control CancelarEnvioITF.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CancelarEnvioITF;
         
         /// <summary>
         /// Control LabelConsultaITF.

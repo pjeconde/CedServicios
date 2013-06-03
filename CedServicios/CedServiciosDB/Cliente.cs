@@ -24,7 +24,7 @@ namespace CedServicios.DB
                 a.Append("where Cliente.Cuit='" + sesion.Cuit.Nro + "' ");
                 if (SoloVigentes)
                 {
-                    a.Append("where Cliente.Estado='Vigente' ");
+                    a.Append("and Cliente.Estado='Vigente' ");
                 }
                 a.Append("order by Cliente.RazonSocial ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);

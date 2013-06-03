@@ -25,5 +25,16 @@ namespace CedServicios.Site.Facturacion.Electronica.Extensiones
 				DatosComericalesTextBox.DataBind();
 			}
 		}
+        public bool ReadOnly
+        {
+            get
+            {
+                return DatosComericalesTextBox.ReadOnly;
+            }
+            set
+            {
+                DatosComericalesTextBox.ReadOnly = value;
+            }
+        }
 	}
 }

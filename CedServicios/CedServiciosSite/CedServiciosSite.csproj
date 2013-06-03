@@ -39,9 +39,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AjaxControlToolkit\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -90,13 +90,18 @@
     <Content Include="Excepciones\Excepciones.aspx" />
     <Content Include="ExploradorPermiso.aspx" />
     <Content Include="Facturacion\Electronica\Descuentos.ascx" />
+    <Content Include="Facturacion\Electronica\DescuentosConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Detalle.ascx" />
+    <Content Include="Facturacion\Electronica\DetalleConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Extensiones\Comerciales.ascx" />
     <Content Include="Facturacion\Electronica\Extensiones\Marketing.ascx" />
     <Content Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx" />
     <Content Include="Facturacion\Electronica\Impuestos.ascx" />
+    <Content Include="Facturacion\Electronica\ImpuestosConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Lote.aspx" />
+    <Content Include="Facturacion\Electronica\LoteConsulta.aspx" />
     <Content Include="Facturacion\Electronica\Permisos.ascx" />
+    <Content Include="Facturacion\Electronica\PermisosConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Reportes\FacturaWebForm.aspx" />
     <Content Include="ExploradorAutorizacion.aspx" />
     <Content Include="Global.asax" />
@@ -383,12 +388,26 @@
     <Compile Include="Facturacion\Electronica\Descuentos.ascx.designer.cs">
       <DependentUpon>Descuentos.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\Electronica\DescuentosConsulta.ascx.cs">
+      <DependentUpon>DescuentosConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DescuentosConsulta.ascx.designer.cs">
+      <DependentUpon>DescuentosConsulta.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\Electronica\Detalle.ascx.cs">
       <DependentUpon>Detalle.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Facturacion\Electronica\Detalle.ascx.designer.cs">
       <DependentUpon>Detalle.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DetalleConsulta.ascx.cs">
+      <DependentUpon>DetalleConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DetalleConsulta.ascx.designer.cs">
+      <DependentUpon>DetalleConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Extensiones\Comerciales.ascx.cs">
       <DependentUpon>Comerciales.ascx</DependentUpon>
@@ -418,12 +437,26 @@
     <Compile Include="Facturacion\Electronica\Impuestos.ascx.designer.cs">
       <DependentUpon>Impuestos.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\Electronica\ImpuestosConsulta.ascx.cs">
+      <DependentUpon>ImpuestosConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ImpuestosConsulta.ascx.designer.cs">
+      <DependentUpon>ImpuestosConsulta.ascx</DependentUpon>
+    </Compile>
     <Compile Include="Facturacion\Electronica\Lote.aspx.cs">
       <DependentUpon>Lote.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Facturacion\Electronica\Lote.aspx.designer.cs">
       <DependentUpon>Lote.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\LoteConsulta.aspx.cs">
+      <DependentUpon>LoteConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\LoteConsulta.aspx.designer.cs">
+      <DependentUpon>LoteConsulta.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Mails\Body.cs" />
     <Compile Include="Facturacion\Electronica\Permisos.ascx.cs">
@@ -432,6 +465,13 @@
     </Compile>
     <Compile Include="Facturacion\Electronica\Permisos.ascx.designer.cs">
       <DependentUpon>Permisos.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\PermisosConsulta.ascx.cs">
+      <DependentUpon>PermisosConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\PermisosConsulta.ascx.designer.cs">
+      <DependentUpon>PermisosConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\Code39.cs" />
     <Compile Include="Facturacion\Electronica\Reportes\CodigoBarra.cs">
