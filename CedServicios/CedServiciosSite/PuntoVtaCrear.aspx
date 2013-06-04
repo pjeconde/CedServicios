@@ -71,7 +71,7 @@
             </td>
             <td align="left" style="padding-top:5px">
                 <asp:TextBox ID="UltNroLoteTextBox" runat="server" MaxLength="10" TabIndex="6" ToolTip="Debe ingresar sólo números."
-                    Width="40px"></asp:TextBox>
+                    Width="120px"></asp:TextBox>
             </td>
         </tr>
         <tr>
