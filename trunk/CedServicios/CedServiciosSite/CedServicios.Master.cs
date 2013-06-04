@@ -38,6 +38,9 @@ namespace CedServicios.Site
                 case "CUIT|Modificación":
                     Response.Redirect("~/CuitModificar.aspx");
                     break;
+                case "CUIT|Cambio logotipo":
+                    Response.Redirect("~/CuitCambiarLogotipo.aspx");
+                    break;
                 case "CUIT|Consulta":
                     Response.Redirect("~/CuitTreeView.aspx?Cuit");
                     break;
@@ -163,7 +166,8 @@ namespace CedServicios.Site
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 RN.Sesion.AsignarCuit(sesion.CuitsDelUsuario[CUITDropDownList.SelectedIndex], sesion);
-                Funciones.PersonalizarControlesMaster(this, true, sesion);
+                //Funciones.PersonalizarControlesMaster(this, true, sesion);
+                Response.Redirect("~/Default.aspx");
             }
         }
         protected void EmpresaImageButton_Click(object sender, ImageClickEventArgs e)
@@ -180,7 +184,8 @@ namespace CedServicios.Site
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 RN.Sesion.AsignarUN(sesion.Cuit.UNs[UNDropDownList.SelectedIndex], sesion);
-                Funciones.PersonalizarControlesMaster(this, true, sesion);
+                //Funciones.PersonalizarControlesMaster(this, true, sesion);
+                Response.Redirect("~/Default.aspx");
             }
         }
     }
