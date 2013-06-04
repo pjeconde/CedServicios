@@ -81,6 +81,7 @@
     <Content Include="Controles\Domicilio.ascx" />
     <Content Include="Controles\DomicilioConsulta.ascx" />
     <Content Include="CuitBaja.aspx" />
+    <Content Include="CuitCambiarLogotipo.aspx" />
     <Content Include="CuitCrear.aspx" />
     <Content Include="CuitModificar.aspx" />
     <Content Include="CuitTreeView.aspx" />
@@ -323,6 +324,13 @@
     </Compile>
     <Compile Include="CuitBaja.aspx.designer.cs">
       <DependentUpon>CuitBaja.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CuitCambiarLogotipo.aspx.cs">
+      <DependentUpon>CuitCambiarLogotipo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CuitCambiarLogotipo.aspx.designer.cs">
+      <DependentUpon>CuitCambiarLogotipo.aspx</DependentUpon>
     </Compile>
     <Compile Include="CuitCrear.aspx.cs">
       <DependentUpon>CuitCrear.aspx</DependentUpon>

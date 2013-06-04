@@ -70,6 +70,7 @@ namespace CedServicios.RN
                     {
                         opcionesHabilitadas.Add("CUIT|Baja/Anul.baja");
                         opcionesHabilitadas.Add("CUIT|Modificación");
+                        opcionesHabilitadas.Add("CUIT|Cambio logotipo");
                     }
                 }
                 List<Entidades.Permiso> esAutorizador = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)

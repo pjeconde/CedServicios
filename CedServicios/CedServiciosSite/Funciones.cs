@@ -50,6 +50,10 @@ namespace CedServicios.Site
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere al CUIT seleccionado)";
+            mItem = new MenuItem("Cambio logotipo", "Cambio logotipo");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere al logotipo que aparecerá en los comprobantes del CUIT seleccionado)";
             mItem = new MenuItem("Consulta", "Consulta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
