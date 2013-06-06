@@ -37,6 +37,12 @@
         </tr>
         <tr>
             <td align="right" style="padding-right:5px; padding-top:5px">
+                <asp:RegularExpressionValidator ID="revTexbox3" runat="server"
+                    ControlToValidate="DescrTextBox"
+                    ErrorMessage="Descripción" SetFocusOnError="True"
+                    ValidationExpression="^([\S\s]{0,100})$">
+			        <asp:Label ID="Label7" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                </asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator4" runat="server" ControlToValidate="DescrTextBox"
                     ErrorMessage="Descripción" SetFocusOnError="True">
                     <asp:Label ID="Label6" runat="server" SkinID="IndicadorValidacion"></asp:Label>
@@ -44,7 +50,7 @@
                 <asp:Label ID="Label10" runat="server" Text="Descripción"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="100" TabIndex="3" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="DescrTextBox" runat="server" TabIndex="3" Width="300px" TextMode="MultiLine"></asp:TextBox>
             </td>        
         </tr>
         <tr>
