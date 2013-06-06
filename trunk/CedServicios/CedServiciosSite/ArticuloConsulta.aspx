@@ -90,7 +90,7 @@
                     <asp:Label ID="Label10" runat="server" Text="Descripción"></asp:Label>
                 </td>
                 <td align="left" style="padding-top:5px">
-                    <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="100" TabIndex="3" Width="300px"></asp:TextBox>
+                    <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="100" TabIndex="3" Width="300px" TextMode="MultiLine"></asp:TextBox>
                 </td>        
             </tr>
             <tr>

@@ -33,7 +33,7 @@
                     <asp:RadioButton ID="DescrRadioButton" runat="server" AutoPostBack="true" Text="Descripción" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="2"/>
                 </td>
                 <td align="left" style="padding-top:5px">
-                    <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="50" TabIndex="6" Width="300px"></asp:TextBox>
+                    <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="50" TabIndex="6" Width="300px" TextMode="MultiLine"></asp:TextBox>
                 </td>        
                 <td>
                 </td>
