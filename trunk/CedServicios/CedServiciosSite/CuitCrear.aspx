@@ -54,6 +54,24 @@
 				</asp:DropDownList>
 			</td>
         </tr>
+            <tr>
+                <td align="right" style="padding-right: 5px; padding-top:5px">
+                    <asp:Label ID="Label11" runat="server" Text="Nro.serie certif.AFIP"></asp:Label>
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:TextBox ID="NroSerieCertifAFIPTextBox" runat="server" MaxLength="256" TabIndex="501"
+                        Width="120px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-right: 5px; padding-top:5px">
+                    <asp:Label ID="Label12" runat="server" Text="Nro.serie certif.Interfacturas"></asp:Label>
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:TextBox ID="NroSerieCertifITFTextBox" runat="server" MaxLength="256" TabIndex="502"
+                        Width="120px"></asp:TextBox>
+                </td>
+            </tr>
         <tr>
             <td>
             </td>

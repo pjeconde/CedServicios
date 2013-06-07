@@ -188,6 +188,8 @@ namespace CedServicios.Site
                     DatosIdentificatorios.GLN = cuit.DatosIdentificatorios.GLN;
                     DatosIdentificatorios.CodigoInterno = cuit.DatosIdentificatorios.CodigoInterno;
                     MedioDropDownList.SelectedValue = cuit.Medio.Id;
+                    NroSerieCertifAFIPTextBox.Text = cuit.NroSerieCertifAFIP;
+                    NroSerieCertifITFTextBox.Text = cuit.NroSerieCertifITF;
 
                     CuitPanel_CUITTextBox.Enabled = false;
                     RazonSocialTextBox.Enabled = false;
