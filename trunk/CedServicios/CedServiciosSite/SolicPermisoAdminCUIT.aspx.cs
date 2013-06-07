@@ -11,7 +11,10 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                CUITTextBox.Focus();
+            }
         }
         protected void SolicitarButton_Click(object sender, EventArgs e)
         {
@@ -25,7 +28,7 @@ namespace CedServicios.Site
                 RN.Permiso.SolicitarPermisoParaUsuario(cuit, out referenciaAAprobadores, sesion);
                 CUITTextBox.Enabled = false;
                 SolicitarButton.Enabled = false;
-                SalirButton.Enabled = false;
+                SalirButton.Text = "Salir";
                 Funciones.PersonalizarControlesMaster(Master, true, sesion);
                 MensajeLabel.Text = "El permiso fue enviado para su aprobación.<br />Autorizador(es): " + referenciaAAprobadores;
             }
