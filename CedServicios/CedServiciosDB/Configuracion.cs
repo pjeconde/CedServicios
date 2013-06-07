@@ -12,15 +12,19 @@ namespace CedServicios.DB
         }
         public void Crear(Entidades.Configuracion Configuracion)
         {
+            Ejecutar(CrearHandler(Configuracion), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
+        public static string CrearHandler(Entidades.Configuracion Configuracion)
+        {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("insert Configuracion (IdUsuario, Cuit, IdUN, IdTipoPermiso, IdItemConfig, Valor) values ('" + Configuracion.IdUsuario + "', '" + Configuracion.Cuit + "', '" + Configuracion.IdUN + "', '" + Configuracion.TipoPermiso.Id + "', '" + Configuracion.IdItemConfig + "', '" + Configuracion.Valor + "') ");
-            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+            return a.ToString();
         }
-        public void ElimninarNroSerieCertif(Entidades.Cuit Cuit)
+        public static string ElimninarNroSerieCertifHandler(Entidades.Cuit Cuit)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("delete Configuracion where Cuit='" + Cuit.Nro + "' and IdItemConfig like 'NroSerieCertif%' ");
-            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+            return a.ToString();
         }
     }
 }

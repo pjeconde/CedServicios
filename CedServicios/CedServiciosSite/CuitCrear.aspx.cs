@@ -54,6 +54,8 @@ namespace CedServicios.Site
                 cuit.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
                 cuit.Medio.Id = MedioDropDownList.SelectedValue;
                 cuit.Medio.Descr = MedioDropDownList.Text;
+                cuit.NroSerieCertifAFIP = NroSerieCertifAFIPTextBox.Text;
+                cuit.NroSerieCertifITF = NroSerieCertifITFTextBox.Text;
                 RN.Cuit.Crear(cuit, sesion);
 
                 CUITTextBox.Enabled = false;

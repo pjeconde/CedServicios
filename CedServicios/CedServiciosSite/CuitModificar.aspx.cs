@@ -44,6 +44,9 @@ namespace CedServicios.Site
                 DatosIdentificatorios.GLN = sesion.Cuit.DatosIdentificatorios.GLN;
                 DatosIdentificatorios.CodigoInterno = sesion.Cuit.DatosIdentificatorios.CodigoInterno;
                 MedioDropDownList.SelectedValue = sesion.Cuit.Medio.Id;
+                NroSerieCertifAFIPTextBox.Text = sesion.Cuit.NroSerieCertifAFIP;
+                NroSerieCertifITFTextBox.Text = sesion.Cuit.NroSerieCertifITF;
+
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
@@ -78,6 +81,8 @@ namespace CedServicios.Site
                 cuit.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
                 cuit.Medio.Id = MedioDropDownList.SelectedValue;
                 cuit.Medio.Descr = MedioDropDownList.Text;
+                cuit.NroSerieCertifAFIP = NroSerieCertifAFIPTextBox.Text;
+                cuit.NroSerieCertifITF = NroSerieCertifITFTextBox.Text;
                 RN.Cuit.Modificar(cuit, sesion);
 
                 CUITTextBox.Enabled = false;

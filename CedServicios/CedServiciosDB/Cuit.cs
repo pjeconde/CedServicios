@@ -135,6 +135,28 @@ namespace CedServicios.DB
             a.Append(PermisoUsoCUITxUNAprobadoHandler);
             a.Append(PermisoAdminUNParaUsuarioAprobadoHandler);
             a.Append(PermisoOperServUNParaUsuarioAprobadoHandler);
+            Entidades.Configuracion configuracion = new Entidades.Configuracion();
+            if (Cuit.NroSerieCertifAFIP != String.Empty)
+            {
+                configuracion.IdUsuario = String.Empty;
+                configuracion.Cuit = Cuit.Nro;
+                configuracion.IdUN = String.Empty;
+                configuracion.TipoPermiso.Id = String.Empty;
+                configuracion.IdItemConfig = "NroSerieCertifAFIP";
+                configuracion.Valor = Cuit.NroSerieCertifAFIP;
+                a.AppendLine(DB.Configuracion.CrearHandler(configuracion));
+
+            }
+            if (Cuit.NroSerieCertifITF != String.Empty)
+            {
+                configuracion.IdUsuario = String.Empty;
+                configuracion.Cuit = Cuit.Nro;
+                configuracion.IdUN = String.Empty;
+                configuracion.TipoPermiso.Id = String.Empty;
+                configuracion.IdItemConfig = "NroSerieCertifITF";
+                configuracion.Valor = Cuit.NroSerieCertifITF;
+                a.AppendLine(DB.Configuracion.CrearHandler(configuracion));
+            }
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
         public void Modificar(Entidades.Cuit Desde, Entidades.Cuit Hasta)
@@ -171,6 +193,29 @@ namespace CedServicios.DB
             a.AppendLine("select @idLog=@@Identity ");
             a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Desde', '" + Funciones.ObjetoSerializado(Desde) + "')");
             a.AppendLine("insert LogDetalle (IdLog, TipoDetalle, Detalle) values (@idLog, 'Hasta', '" + Funciones.ObjetoSerializado(Hasta) + "')");
+            a.AppendLine(DB.Configuracion.ElimninarNroSerieCertifHandler(Hasta));
+            Entidades.Configuracion configuracion = new Entidades.Configuracion();
+            if (Hasta.NroSerieCertifAFIP != String.Empty)
+            {
+                configuracion.IdUsuario = String.Empty;
+                configuracion.Cuit = Hasta.Nro;
+                configuracion.IdUN = String.Empty;
+                configuracion.TipoPermiso.Id = String.Empty;
+                configuracion.IdItemConfig = "NroSerieCertifAFIP";
+                configuracion.Valor = Hasta.NroSerieCertifAFIP;
+                a.AppendLine(DB.Configuracion.CrearHandler(configuracion));
+
+            }
+            if (Hasta.NroSerieCertifITF != String.Empty)
+            {
+                configuracion.IdUsuario = String.Empty;
+                configuracion.Cuit = Hasta.Nro;
+                configuracion.IdUN = String.Empty;
+                configuracion.TipoPermiso.Id = String.Empty;
+                configuracion.IdItemConfig = "NroSerieCertifITF";
+                configuracion.Valor = Hasta.NroSerieCertifITF;
+                a.AppendLine(DB.Configuracion.CrearHandler(configuracion));
+            }
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
         public void CambiarEstado(Entidades.Cuit Cuit, string Estado)
