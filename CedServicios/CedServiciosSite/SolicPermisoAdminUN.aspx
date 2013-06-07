@@ -22,7 +22,7 @@
             <td align="left" style="padding-top: 20px">
                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
                     Width="80px"></asp:TextBox>
-                <asp:Button ID="LeerListaUNsButton" runat="server" OnClick="LeerListaUNsButton_Click" TabIndex="3"
+                <asp:Button ID="LeerListaUNsButton" runat="server" OnClick="LeerListaUNsButton_Click" TabIndex="2"
                     Text="Leer unidad(es) de negocio del CUIT" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
             </td>
         </tr>
@@ -31,7 +31,7 @@
                 <asp:Label ID="Label5" runat="server" Text="Unidad de Negocio"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px; height:25px;">
-                <asp:DropDownList ID="IdUNDropDownList" runat="server" TabIndex="2" Width="183px" DataValueField="Id" DataTextField="Descr" >
+                <asp:DropDownList ID="IdUNDropDownList" runat="server" TabIndex="3" Width="183px" DataValueField="Id" DataTextField="Descr" >
                 </asp:DropDownList>
             </td>
         </tr>
