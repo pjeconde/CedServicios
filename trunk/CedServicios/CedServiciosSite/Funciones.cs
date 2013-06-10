@@ -302,7 +302,7 @@ namespace CedServicios.Site
             menuItem = menu.FindItem("Administración Site");
             if (menuItem != null && menuSubItem != null && !menuSubItem.Selectable) RemoverMenuItem(menu, menuItem);
         }
-        public static void RemoverMenuItem(Menu Menu, MenuItem MenuItem)
+        private static void RemoverMenuItem(Menu Menu, MenuItem MenuItem)
         {
             for (int j = MenuItem.ChildItems.Count - 1; j >= 0; j--)
             {
