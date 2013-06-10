@@ -92,33 +92,36 @@ namespace CedServicios.Site.Facturacion.Electronica
                     CodigoConceptoDropDownList.DataTextField = "Descr";
                     CodigoConceptoDropDownList.DataSource = FeaEntidades.CodigosConcepto.CodigosConcepto.Lista();
 
+                    System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta;
+                    PuntoVtaDropDownList.DataValueField = "Nro";
+                    PuntoVtaDropDownList.DataTextField = "DescrCombo";
+                    System.Collections.Generic.List<Entidades.PuntoVta> puntoVtalist = new System.Collections.Generic.List<Entidades.PuntoVta>();
+                    Entidades.PuntoVta puntoVta = new Entidades.PuntoVta();
+                    puntoVta.Nro = 0;
+                    puntoVtalist.Add(puntoVta);
+                    if (listaPuntoVta != null)
+                    {
+                        puntoVtalist.AddRange(listaPuntoVta);
+                    }
+                    PuntoVtaDropDownList.DataSource = puntoVtalist;
+                    PuntoVtaDropDownList.DataBind();
+
+                    //Lista de punto de venta para consultar On-Line.
+                    PtoVtaConsultaDropDownList.DataValueField = "Nro";
+                    PtoVtaConsultaDropDownList.DataTextField = "DescrCombo";
+                    PtoVtaConsultaDropDownList.DataSource = puntoVtalist;
+                    PtoVtaConsultaDropDownList.DataBind();
+
                     DataBind();
                     BindearDropDownLists();
 
-                    ResetearVendedor();
+                    CuitConsultaTextBox.Text = ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro;
                     DatosComerciales.ReadOnly = false;
             }
             else
             {
             }
 		}
-
-        private void VerificarMetodoNumeracionLote()
-        {
-            TipoNumeracionLote.Text = "";
-            if (!PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
-            {
-                int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
-                Entidades.PuntoVta pVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                {
-                    return pv.Nro == auxPV;
-                });
-                if (!pVta.IdMetodoGeneracionNumeracionLote.Equals(string.Empty))
-                {
-                    TipoNumeracionLote.Text = pVta.IdMetodoGeneracionNumeracionLote;
-                }
-            }
-        }
 
 		private void BindearDropDownLists()
 		{
@@ -137,6 +140,11 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 try
                 {
+                    ResetearVendedor();
+                    ResetearComprador();
+                    ResetearGrillas();
+                    ResetearOtros();
+
                     FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote();
 
                     System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
@@ -237,6 +245,11 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
+                ResetearVendedor();
+                ResetearComprador();
+                ResetearGrillas();
+                ResetearOtros();
+
 				FeaEntidades.InterFacturas.lote_comprobantes lc=new FeaEntidades.InterFacturas.lote_comprobantes();
 				if (XMLFileUpload.HasFile)
 				{
@@ -249,7 +262,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 						{
 							System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
 							lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-							CompletarUI(lc, e);
+                            if (((Entidades.Sesion)Session["Sesion"]).Cuit.Nro != lc.comprobante[0].cabecera.informacion_vendedor.cuit.ToString())
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('No se puede procesar la información del archivo, ya que pertenece a un CUIT diferente al operativo de la sesión.')</script>", false);
+                            }
+                            CompletarUI(lc, e);
 							ClientScript.RegisterClientScriptBlock(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");
 						}
 						catch (InvalidOperationException)
@@ -273,7 +290,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 				{
   					ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe seleccionar un archivo');</script>");
 				}
-                VerificarMetodoNumeracionLote();
             }
 		}
 
@@ -865,7 +881,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             FechaCAEVencimientoDatePickerWebUserControl.Text = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
             ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
             MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
-            //MotivoLoteTextBox.Text = lc.cabecera_lote.motivo;
+            MotivoTextBox.Text += lc.cabecera_lote.motivo;
             BindearDropDownLists();
         }
 		
@@ -875,42 +891,44 @@ namespace CedServicios.Site.Facturacion.Electronica
 
         private void ResetearVendedor()
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            if (sesion.Cuit.Nro != null && sesion.Cuit.Nro != "")
-            {
-                Entidades.Cuit v = ((Entidades.Sesion)Session["Sesion"]).Cuit;
-                Razon_Social_VendedorTextBox.Text = v.RazonSocial;
-                Domicilio_Calle_VendedorTextBox.Text = v.Domicilio.Calle;
-                Domicilio_Numero_VendedorTextBox.Text = v.Domicilio.Nro;
-                Domicilio_Piso_VendedorTextBox.Text = v.Domicilio.Piso;
-                Domicilio_Depto_VendedorTextBox.Text = v.Domicilio.Depto;
-                Domicilio_Sector_VendedorTextBox.Text = v.Domicilio.Sector;
-                Domicilio_Torre_VendedorTextBox.Text = v.Domicilio.Torre;
-                Domicilio_Manzana_VendedorTextBox.Text = v.Domicilio.Manzana;
-                Localidad_VendedorTextBox.Text = v.Domicilio.Localidad;
-                Provincia_VendedorDropDownList.SelectedValue = v.Domicilio.Provincia.Id;
-                Cp_VendedorTextBox.Text = v.Domicilio.CodPost;
-                Contacto_VendedorTextBox.Text = v.Contacto.Nombre;
-                Email_VendedorTextBox.Text = v.Contacto.Email;
-                Telefono_VendedorTextBox.Text = v.Contacto.Telefono.ToString();
-                Cuit_VendedorTextBox.Text = v.Nro.ToString();
-                Condicion_IVA_VendedorDropDownList.SelectedValue = v.DatosImpositivos.IdCondIVA.ToString();
-                NroIBVendedorTextBox.Text = v.DatosImpositivos.NroIngBrutos.ToString();
-                Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.DatosImpositivos.IdCondIngBrutos.ToString();
-                if (!v.DatosIdentificatorios.GLN.ToString().Equals("0"))
-                {
-                    GLN_VendedorTextBox.Text = v.DatosIdentificatorios.GLN.ToString();
-                }
-                Codigo_Interno_VendedorTextBox.Text = v.DatosIdentificatorios.CodigoInterno;
-                InicioDeActividadesVendedorDatePickerWebUserControl.Text = v.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd");
+            Razon_Social_VendedorTextBox.Text = string.Empty;
+            Domicilio_Calle_VendedorTextBox.Text = string.Empty;
+            Domicilio_Numero_VendedorTextBox.Text = string.Empty;
+            Domicilio_Piso_VendedorTextBox.Text = string.Empty;
+            Domicilio_Depto_VendedorTextBox.Text = string.Empty;
+            Domicilio_Sector_VendedorTextBox.Text = string.Empty;
+            Domicilio_Torre_VendedorTextBox.Text = string.Empty;
+            Domicilio_Manzana_VendedorTextBox.Text = string.Empty;
+            Localidad_VendedorTextBox.Text = "";
+            FechaEmisionDatePickerWebUserControl.Text = "";
+            Numero_ComprobanteTextBox.Text = "";
+            Provincia_VendedorDropDownList.SelectedValue = Convert.ToString(0);
+            Cp_VendedorTextBox.Text = string.Empty;
+            Contacto_VendedorTextBox.Text = string.Empty;
+            Email_VendedorTextBox.Text = string.Empty;
+            Telefono_VendedorTextBox.Text = string.Empty;
+            Cuit_VendedorTextBox.Text = string.Empty;
+            Condicion_IVA_VendedorDropDownList.SelectedValue = Convert.ToString(0);
+            NroIBVendedorTextBox.Text = string.Empty;
+            Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = Convert.ToString(0);
+            GLN_VendedorTextBox.Text = string.Empty;
+            Codigo_Interno_VendedorTextBox.Text = string.Empty;
+            InicioDeActividadesVendedorDatePickerWebUserControl.Text = string.Empty;
 
-                System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta;
-                PuntoVtaDropDownList.DataValueField = "Nro";
-                PuntoVtaDropDownList.DataTextField = "Nro";
-                PuntoVtaDropDownList.DataSource = listaPuntoVta;
-                PuntoVtaDropDownList.DataBind();
-                PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
+            System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta;
+            PuntoVtaDropDownList.DataValueField = "Nro";
+            PuntoVtaDropDownList.DataTextField = "DescrCombo";
+            System.Collections.Generic.List<Entidades.PuntoVta> puntoVtalist = new System.Collections.Generic.List<Entidades.PuntoVta>();
+            Entidades.PuntoVta puntoVta = new Entidades.PuntoVta();
+            puntoVta.Nro = 0;
+            puntoVtalist.Add(puntoVta);
+            if (listaPuntoVta != null)
+            {
+                puntoVtalist.AddRange(listaPuntoVta);
             }
+            PuntoVtaDropDownList.DataSource = puntoVtalist;
+            PuntoVtaDropDownList.DataBind();
+            PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
         }
 		private void ResetearComprador()
 		{
@@ -929,9 +947,10 @@ namespace CedServicios.Site.Facturacion.Electronica
 			Email_CompradorTextBox.Text = string.Empty;
 			Telefono_CompradorTextBox.Text = string.Empty;
 			Condicion_IVA_CompradorDropDownList.SelectedValue = Convert.ToString(0);
+            Nro_Doc_Identificatorio_CompradorTextBox.Text = "";
 			GLN_CompradorTextBox.Text = string.Empty;
 			Codigo_Interno_CompradorTextBox.Text = string.Empty;
-			((TextBox)InicioDeActividadesCompradorDatePickerWebUserControl.FindControl("txt_Date")).Text = string.Empty;
+			InicioDeActividadesCompradorDatePickerWebUserControl.Text = string.Empty;
 			EmailAvisoVisualizacionTextBox.Text = string.Empty;
 			PasswordAvisoVisualizacionTextBox.Text = string.Empty;
 		}
@@ -950,9 +969,50 @@ namespace CedServicios.Site.Facturacion.Electronica
 			BindearDropDownLists();
 			PermisosExpo.ResetearGrillas();
 			DetalleLinea.ResetearGrillas();
-
-			ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado artículos, referencias y permisos de exportación por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
+            ImpuestosGlobales.ResetearGrillas();
+            DatosComerciales.Texto = "";
 		}
+        
+        private void ResetearOtros()
+        {
+            //Información comprobante
+            FechaVencimientoDatePickerWebUserControl.Text = "";
+            IVAcomputableDropDownList.SelectedValue = "";
+            CodigoOperacionDropDownList.SelectedValue = "";
+            CodigoConceptoDropDownList.SelectedValue = "1";
+            FechaServDesdeDatePickerWebUserControl.Text = "";
+            FechaServHastaDatePickerWebUserControl.Text = "";
+            Condicion_De_PagoTextBox.Text = "";
+            
+            //Comentarios
+            ComentariosTextBox.Text = "";
+            
+            //Observaciones
+            Observaciones_ResumenTextBox.Text = "";
+
+            //Datos del Lote
+            Id_LoteTextbox.Text = "";
+
+            //Información CAE
+            CAETextBox.Text = "";
+            FechaCAEVencimientoDatePickerWebUserControl.Text = "";
+            FechaCAEObtencionDatePickerWebUserControl.Text = "";
+            MotivoTextBox.Text = "";
+            ResultadoTextBox.Text = "";
+
+            //Resumen
+            Importe_Total_Neto_Gravado_ResumenTextBox.Text = "";
+            Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = "";
+            Importe_Operaciones_Exentas_ResumenTextBox.Text = "";
+            Impuesto_Liq_ResumenTextBox.Text = "";
+            Impuesto_Liq_Rni_ResumenTextBox.Text = "";
+            Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = "";
+            Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = "";
+            Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = "";
+            Importe_Total_Impuestos_Internos_ResumenTextBox.Text = "";
+            Importe_Total_Factura_ResumenTextBox.Text = "";
+            Tipo_de_cambioTextBox.Text = "";
+        }
 
         private void AjustarCamposXPtaVentaChanged(string PuntoDeVenta)
         {
@@ -1037,10 +1097,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Nro_Doc_Identificatorio_CompradorTextBox.Text));
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
 
-            TipoExpDropDownList.Visible = true;
-            PaisDestinoExpDropDownList.Visible = true;
-            IdiomaDropDownList.Visible = true;
-            IncotermsDropDownList.Visible = true;
             CodigoOperacionDropDownList.Visible = true;
             CodigoOperacionLabel.Visible = true;
         }
@@ -1069,10 +1125,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             PaisDestinoExpDropDownList.SelectedIndex = -1;
             IdiomaDropDownList.SelectedIndex = -1;
             IncotermsDropDownList.SelectedIndex = -1;
-            TipoExpDropDownList.Visible = false;
-            PaisDestinoExpDropDownList.Visible = false;
-            IdiomaDropDownList.Visible = false;
-            IncotermsDropDownList.Visible = false;
             CodigoOperacionDropDownList.Visible = true;
             CodigoOperacionLabel.Visible = true;
          }
@@ -1121,10 +1173,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             PaisDestinoExpDropDownList.SelectedIndex = -1;
             IdiomaDropDownList.SelectedIndex = -1;
             IncotermsDropDownList.SelectedIndex = -1;
-            TipoExpDropDownList.Visible = false;
-            PaisDestinoExpDropDownList.Visible = false;
-            IdiomaDropDownList.Visible = false;
-            IncotermsDropDownList.Visible = false;
             CodigoOperacionDropDownList.Visible = true;
             CodigoOperacionLabel.Visible = true;
         }
@@ -1152,10 +1200,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
             Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-            TipoExpDropDownList.Visible = false;
-            PaisDestinoExpDropDownList.Visible = false;
-            IdiomaDropDownList.Visible = false;
-            IncotermsDropDownList.Visible = false;
             CodigoOperacionDropDownList.Visible = true;
             CodigoOperacionLabel.Visible = true;
         }
@@ -2573,28 +2617,33 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 try
                 {
+                    ResetearVendedor();
+                    ResetearComprador();
+                    ResetearGrillas();
+                    ResetearOtros();
+
                     string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
                     if (NroCertif.Equals(string.Empty))
                     {
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
                         return;
                     }
-                    if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
+                    if (CuitConsultaTextBox.Text.Equals(string.Empty))
                     {
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>");
                         return;
                     }
-                    if (Id_LoteTextbox.Text.Equals(string.Empty))
+                    if (NroLoteConsultaTextBox.Text.Equals(string.Empty))
                     {
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>");
                         return;
                     }
-                    if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
+                    if (PtoVtaConsultaDropDownList.SelectedValue.Equals(string.Empty))
                     {
                         ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>");
                         return;
                     }
-                    GrabarLogTexto("~/Consultar.txt", "Consulta de Lote CUIT: " + Cuit_VendedorTextBox.Text + "  Nro.Lote: " + Id_LoteTextbox.Text);
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Lote CUIT: " + CuitConsultaTextBox.Text + "  Nro.Lote: " + NroLoteConsultaTextBox.Text + "  Nro. Punto de Vta.: " + PtoVtaConsultaDropDownList.SelectedValue );
                     GrabarLogTexto("~/Consultar.txt", "NroSerieCertifITF: " + NroCertif);
                     if (NroCertif.Equals(string.Empty))
                     {
@@ -2612,9 +2661,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                         GrabarLogTexto("~/Consultar.txt", "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
                     }
                     org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
-                    clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(Cuit_VendedorTextBox.Text), Convert.ToInt64(Id_LoteTextbox.Text), Convert.ToInt32(PuntoVtaDropDownList.SelectedValue), certificado);
+                    clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(CuitConsultaTextBox.Text), Convert.ToInt64(NroLoteConsultaTextBox.Text), Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue), certificado);
                     CompletarUI(clcrdyndns, e);
 
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Comprobante consultado satisfactoriamente en Interfacturas.')</script>", false);
                 }
                 catch (System.Web.Services.Protocols.SoapException soapEx)
                 {
@@ -2674,7 +2724,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                        
                     }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al consultar a Interfacturas.\\n " + errormsg + "');</script>", false);
                 }
             }
@@ -2770,20 +2822,10 @@ namespace CedServicios.Site.Facturacion.Electronica
 
 		private void AjustarPrestaServxVersiones()
 		{
-            //if (Version0RadioButton.Checked && Version0RadioButton.Visible)
-            //{
-            //    Presta_ServCheckBox.Visible = true;
-            //    Presta_ServLabel.Visible = true;
-            //    CodigoConceptoLabel.Visible = false;
-            //    CodigoConceptoDropDownList.Visible = false;
-            //}
-            //if (Version1RadioButton.Checked && Version1RadioButton.Visible)
-            //{
-				Presta_ServCheckBox.Visible = false;
-				Presta_ServLabel.Visible = false;
-				CodigoConceptoLabel.Visible = true;
-				CodigoConceptoDropDownList.Visible = true;
-            //}
+			Presta_ServCheckBox.Visible = false;
+			Presta_ServLabel.Visible = false;
+			CodigoConceptoLabel.Visible = true;
+			CodigoConceptoDropDownList.Visible = true;
 		}
 
 		private void AjustarCamposXVersion(org.dyndns.cedweb.consulta.ConsultarResult lc)
@@ -2902,8 +2944,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             //Al cambiar el punto de venta se inicializa el Nro.Lote
             Id_LoteTextbox.Text = "";
-            //Verificar método de numeración del lote.
-            VerificarMetodoNumeracionLote();
         }
 
         protected void Tipo_De_ComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)

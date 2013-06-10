@@ -181,6 +181,18 @@ namespace CedServicios.Entidades
                 return nro.ToString("0000") + " (" + idTipoPuntoVta + ")";
             }
         }
+        public string DescrCombo
+        {
+            get
+            {
+                string resp = "";
+                if (nro != 0)
+                {
+                    resp = nro.ToString();
+                }
+                return resp;
+            }
+        }
         #region Propiedades redundantes
         public string IdFormateado
         {

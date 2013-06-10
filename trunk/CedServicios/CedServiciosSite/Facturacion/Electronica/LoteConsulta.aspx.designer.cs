@@ -49,6 +49,51 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Button FileUploadButton;
         
         /// <summary>
+        /// Control NroLoteConsultaTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NroLoteConsultaTextBox;
+        
+        /// <summary>
+        /// Control PtoVtaConsultaDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PtoVtaConsultaDropDownList;
+        
+        /// <summary>
+        /// Control CuitConsultaTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CuitConsultaTextBox;
+        
+        /// <summary>
+        /// Control ConsultarLoteIBKButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarLoteIBKButton;
+        
+        /// <summary>
+        /// Control ModalPopupExtender2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender2;
+        
+        /// <summary>
         /// Control Tipo_De_ComprobanteUpdatePanel.
         /// </summary>
         /// <remarks>
@@ -101,15 +146,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress monedaUpdateProgress;
-        
-        /// <summary>
-        /// Control RequiredFieldValidator1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator1;
         
         /// <summary>
         /// Control Razon_Social_VendedorTextBox.
@@ -173,24 +209,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Domicilio_Calle_VendedorTextBox;
-        
-        /// <summary>
-        /// Control Numero_comprobanteRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Numero_comprobanteRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Numero_ComprobanteRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Numero_ComprobanteRequiredFieldValidator;
         
         /// <summary>
         /// Control Numero_ComprobanteTextBox.
@@ -488,24 +506,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel LoteUpdatePanel;
-        
-        /// <summary>
-        /// Control LabelTipoNumeracionLote.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelTipoNumeracionLote;
-        
-        /// <summary>
-        /// Control TipoNumeracionLote.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TipoNumeracionLote;
         
         /// <summary>
         /// Control Id_LoteTextbox.
@@ -1199,24 +1199,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button PDFButton;
-        
-        /// <summary>
-        /// Control ConsultarLoteIBKButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConsultarLoteIBKButton;
-        
-        /// <summary>
-        /// Control ModalPopupExtender2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender2;
         
         /// <summary>
         /// Control contactoHyperLink.
