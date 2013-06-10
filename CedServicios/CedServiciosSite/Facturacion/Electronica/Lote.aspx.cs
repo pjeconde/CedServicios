@@ -142,7 +142,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         Codigo_Interno_VendedorTextBox.Text = v.DatosIdentificatorios.CodigoInterno;
                         InicioDeActividadesVendedorDatePickerWebUserControl.Text = v.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd");
-
                     }
                     System.Collections.Generic.List<Entidades.Cliente> listacompradores = ((Entidades.Sesion)Session["Sesion"]).ClientesDelCuit;
                     if (listacompradores.Count > 0)
@@ -165,7 +164,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
 
                     PuntoVtaDropDownList.Enabled = true;
-                    System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta;
+                    System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVtaVigentes;
                     PuntoVtaDropDownList.Visible = true;
                     PuntoVtaDropDownList.DataValueField = "Nro";
                     PuntoVtaDropDownList.DataTextField = "Nro";
@@ -207,7 +206,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     switch (pVta.IdMetodoGeneracionNumeracionLote)
                     {
                         case "Autonumerador":
-                        case "TimeStamp":
+                        case "TimeStamp1":
+                        case "TimeStamp2":
                             Id_LoteTextbox.Enabled = false;
                             ButtonGenerarNroLote.Visible = true;
                             break;
@@ -761,8 +761,8 @@ namespace CedServicios.Site.Facturacion.Electronica
             CAETextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.cae;
             FechaCAEObtencionDatePickerWebUserControl.Text = lc.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae;
             FechaCAEVencimientoDatePickerWebUserControl.Text = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
-            ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
-            MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
+            //ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
+            //MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
 		}
 
         private void CompletarComprobante(FeaEntidades.InterFacturas.lote_comprobantes lc)
@@ -1259,8 +1259,8 @@ namespace CedServicios.Site.Facturacion.Electronica
             CAETextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.cae;
             FechaCAEObtencionDatePickerWebUserControl.Text = lc.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae;
             FechaCAEVencimientoDatePickerWebUserControl.Text = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
-            ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
-            MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
+            //ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
+            //MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
             //MotivoLoteTextBox.Text = lc.cabecera_lote.motivo;
             BindearDropDownLists();
         }
@@ -1342,13 +1342,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                     GLN_CompradorTextBox.Text = string.Empty;
                 }
                 Codigo_Interno_CompradorTextBox.Text = comprador.DatosIdentificatorios.CodigoInterno;
-                if (!comprador.DatosImpositivos.FechaInicioActividades.Equals(new DateTime(9999, 12, 31)))
+                if (comprador.DatosImpositivos.FechaInicioActividades.Equals(new DateTime(9999, 12, 31)) || comprador.DatosImpositivos.FechaInicioActividades.Equals(new DateTime(0001, 01, 01)))
                 {
-                    InicioDeActividadesCompradorDatePickerWebUserControl.Text = comprador.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd");
+                    InicioDeActividadesCompradorDatePickerWebUserControl.Text = string.Empty;
                 }
                 else
                 {
-                    InicioDeActividadesCompradorDatePickerWebUserControl.Text = string.Empty;
+                    InicioDeActividadesCompradorDatePickerWebUserControl.Text = comprador.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd");
                 }
                 EmailAvisoVisualizacionTextBox.Text = comprador.EmailAvisoVisualizacion;
                 PasswordAvisoVisualizacionTextBox.Text = comprador.PasswordAvisoVisualizacion;
@@ -1988,7 +1988,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 return pv.Nro == auxPV;
             });
-            if (puntoVta.IdMetodoGeneracionNumeracionLote.Equals("Autonumerador") || puntoVta.IdMetodoGeneracionNumeracionLote.Equals("TimeStamp"))
+            if (puntoVta.IdMetodoGeneracionNumeracionLote.Equals("Autonumerador") || puntoVta.IdMetodoGeneracionNumeracionLote.Equals("TimeStamp1") || puntoVta.IdMetodoGeneracionNumeracionLote.Equals("TimeStamp2"))
             {
                 RN.PuntoVta.GenerarNuevoNroLote(puntoVta, (Entidades.Sesion)Session["Sesion"]);
                 Id_LoteTextbox.Text = puntoVta.UltNroLote.ToString();
@@ -2210,6 +2210,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             infcomprob.numero_comprobante = Convert.ToInt64(Numero_ComprobanteTextBox.Text);
             infcomprob.punto_de_venta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
             infcomprob.fecha_emision = FechaEmisionDatePickerWebUserControl.Text;
+            if (infcomprob.fecha_emision.Length != 8)
+            {
+                throw new Exception("La fecha de emisión es obligatoria");
+            }
             GenerarInfoFechaVto(infcomprob);
             infcomprob.fecha_serv_desde = FechaServDesdeDatePickerWebUserControl.Text;
             infcomprob.fecha_serv_hasta = FechaServHastaDatePickerWebUserControl.Text;
@@ -2281,14 +2285,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                 infcomprob.fecha_vencimiento_cae = null;
                 infcomprob.fecha_vencimiento_caeSpecified = true;
             }
-            if (!ResultadoTextBox.Text.Equals(string.Empty))
-            {
-                infcomprob.resultado = ResultadoTextBox.Text;
-            }
-            if (!MotivoTextBox.Text.Equals(string.Empty))
-            {
-                infcomprob.motivo = MotivoTextBox.Text;
-            }
+            //if (!ResultadoTextBox.Text.Equals(string.Empty))
+            //{
+            //    infcomprob.resultado = ResultadoTextBox.Text;
+            //}
+            //if (!MotivoTextBox.Text.Equals(string.Empty))
+            //{
+            //    infcomprob.motivo = MotivoTextBox.Text;
+            //}
             return infcomprob;
         }
 

@@ -130,8 +130,6 @@
                                                         <tr>
                                                             <td align="center" class="TextoResaltado" style="width: 240px">
                                                                 INFORMACIÓN VENDEDOR<br />
-                                                                <asp:HyperLink ID="ConfigurarVendedorHyperLink" runat="server" Font-Bold="false"
-                                                                    NavigateUrl="~/Default.aspx" SkinID="LinkMedianoClaro">Configurar</asp:HyperLink>
                                                             </td>
                                                             <td style="width: 300px">
                                                                 <table border="0" cellpadding="0" cellspacing="0" style="width: 300px">
@@ -354,7 +352,7 @@
                                                                                     OnClientShown="onCalendar1Shown" TargetControlID="FechaEmisionDatePickerWebUserControl"
                                                                                     Format="yyyyMMdd" PopupButtonID="ImageCalendarFechaEmision">
                                                                                 </cc1:CalendarExtender>
-                                                                                <asp:Image runat="server" ID="ImageCalendarFechaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                                <asp:Image runat="server" ID="ImageCalendarFechaEmision2" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -695,7 +693,7 @@
                                                                                 OnClientShown="onCalendar1Shown" TargetControlID="InicioDeActividadesVendedorDatePickerWebUserControl"
                                                                                 Format="yyyyMMdd" PopupButtonID="ImageCalendarInicioDeActividadesVendedor">
                                                                             </cc1:CalendarExtender>
-                                                                            <asp:Image runat="server" ID="ImageCalendarInicioDeActividadesVendedor" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                            <asp:Image runat="server" ID="ImageCalendarInicioDeActividadesVendedor2" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -1083,7 +1081,7 @@
                                                                         <cc1:CalendarExtender ID="CalendarExtender3" runat="server" TargetControlID="InicioDeActividadesCompradorDatePickerWebUserControl"
                                                                             Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarInicioDeActividadesComprador">
                                                                         </cc1:CalendarExtender>
-                                                                        <asp:Image runat="server" ID="ImageCalendarInicioDeActividadesComprador" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                        <asp:Image runat="server" ID="ImageCalendarInicioDeActividadesComprador2" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1175,7 +1173,7 @@
                                                                         <cc1:CalendarExtender ID="CalendarExtender4" runat="server" TargetControlID="FechaVencimientoDatePickerWebUserControl"
                                                                             Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaVencimiento">
                                                                         </cc1:CalendarExtender>
-                                                                        <asp:Image runat="server" ID="ImageCalendarFechaVencimiento" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                        <asp:Image runat="server" ID="ImageCalendarFechaVencimiento2" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1220,7 +1218,7 @@
                                                                         <cc1:CalendarExtender ID="CalendarExtender5" runat="server" TargetControlID="FechaServDesdeDatePickerWebUserControl"
                                                                             Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaServDesde">
                                                                         </cc1:CalendarExtender>
-                                                                        <asp:Image runat="server" ID="ImageCalendarFechaServDesde" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                        <asp:Image runat="server" ID="ImageCalendarFechaServDesde2" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1233,7 +1231,7 @@
                                                                         <cc1:CalendarExtender ID="CalendarExtender6" runat="server" TargetControlID="FechaServHastaDatePickerWebUserControl"
                                                                             Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaServHasta">
                                                                         </cc1:CalendarExtender>
-                                                                        <asp:Image runat="server" ID="ImageCalendarFechaServHasta" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                        <asp:Image runat="server" ID="ImageCalendarFechaServHasta2" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1572,7 +1570,7 @@
                                                                 <cc1:CalendarExtender ID="CalendarExtender7" runat="server" TargetControlID="FechaCAEVencimientoDatePickerWebUserControl"
                                                                     Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEVencimiento">
                                                                 </cc1:CalendarExtender>
-                                                                <asp:Image runat="server" ID="ImageCalendarFechaCAEVencimiento" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                <asp:Image runat="server" ID="ImageCalendarFechaCAEVencimiento2" ImageUrl="~/Imagenes/Calendar.gif" />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1582,21 +1580,7 @@
                                                                 <cc1:CalendarExtender ID="CalendarExtender8" runat="server" TargetControlID="FechaCAEObtencionDatePickerWebUserControl"
                                                                     Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEObtencion">
                                                                 </cc1:CalendarExtender>
-                                                                <asp:Image runat="server" ID="ImageCalendarFechaCAEObtencion" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                                Resultado:<asp:TextBox ID="ResultadoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    Width="100px">
-                                                                </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                                Motivo:<asp:TextBox ID="MotivoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    Width="100px">
-                                                                </asp:TextBox>
+                                                                <asp:Image runat="server" ID="ImageCalendarFechaCAEObtencion2" ImageUrl="~/Imagenes/Calendar.gif" />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1845,13 +1829,14 @@
                                             <tr>
                                                 <td style="width: 50%; padding-right: 3px">
                                                     <asp:Button ID="DescargarButton" runat="server" BackColor="peachpuff" BorderColor="brown"
-                                                        BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" Height="60px"
+                                                        BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" Height="25px"
                                                         OnClick="GenerarButton_Click" Text="Descargar archivo XML" ToolTip="Luego de descargar el archivo XML, realizar el (Upload) en Interfacturas."
                                                         Width="100%" />
                                                 </td>
                                                 <td style="width: 50%">
                                                     <asp:Button ID="GenerarButton" runat="server" BorderColor="Gray" BorderStyle="NotSet"
-                                                        BorderWidth="1px" Height="60px" OnClick="GenerarButton_Click" Text="Enviar archivo XML al e-mail del vendedor" ToolTip="Luego de descargar el archivo XML del correo, realizar el (Upload) en Interfacturas."
+                                                        BorderWidth="1px" Height="25px" OnClick="GenerarButton_Click" 
+                                                        Text="Enviar archivo XML al e-mail del vendedor" ToolTip="Luego de descargar el archivo XML del correo, realizar el (Upload) en Interfacturas."
                                                         Width="100%" />
                                                 </td>
                                             </tr>
@@ -1859,7 +1844,7 @@
                                                 <td style="width: 100%; padding-right: 3px" colspan="2">
                                                     <asp:Button ID="PDFButton" runat="server" BackColor="#FFFFCC" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" CausesValidation="true" Font-Bold="true"
-                                                        ForeColor="brown" Height="60px" OnClick="PDFButton_Click" 
+                                                        ForeColor="brown" Height="25px" OnClick="PDFButton_Click" 
                                                         Text="Previsualizar comprobante" Width="100%" />
                                                     <asp:Button ID="ButtonPrueba" runat="server" BackColor="#FFFFCC" BorderColor="brown" 
                                                         BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
@@ -1871,7 +1856,7 @@
                                                 <td style="width: 100%; padding-right: 3px" colspan="2">
                                                     <asp:Button ID="EnviarIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true" 
-                                                        ForeColor="brown" Height="60px" OnClick="EnviarIBKButton_Click" 
+                                                        ForeColor="brown" Height="25px" OnClick="EnviarIBKButton_Click" 
                                                         Text="Enviar lote a Interfacturas" ToolTip="Impactar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
                                                         Width="100%" />
                                                         <cc1:ModalPopupExtender ID="ModalPopupExtender1" 
@@ -1924,27 +1909,6 @@
                 </td>
                 <td align="left" style="padding-top: 20px">
                     <asp:Button ID="CancelarEnvioITF" runat="server" Text="Cancelar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$AceptarEnvioITF.disabled = true;" OnClick="CancelarEnvioITFButton_Click" />
-                </td>
-            </tr>
-        </table>
-    </div>
-    <div id="PopupConsultaITF" class="ModalWindow">
-        <table width="100%" style="padding:20px;">
-            <tr>
-                <td colspan="3" align="center">
-                    <asp:Label ID="LabelConsultaITF" runat="server" 
-                        Text="Desea consultar el comprobante de forma On-Line en Interfacturas ?" 
-                        SkinID="TextoMediano"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="right" style="padding-top: 20px">
-                    <asp:Button ID="AceptarConsultaITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarConsultaITF.disabled = true;" OnClick="AceptarConsultaITFButton_Click" />
-                </td>
-                 <td align="center" style="width: 20px">
-                </td>
-                <td align="left" style="padding-top: 20px">
-                    <asp:Button ID="CancelarConsultaITF" runat="server" Text="Cancelar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$AceptarConsultaITF.disabled = true;" OnClick="CancelarConsultaITFButton_Click" />
                 </td>
             </tr>
         </table>

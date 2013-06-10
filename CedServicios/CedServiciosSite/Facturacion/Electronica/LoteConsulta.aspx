@@ -46,11 +46,11 @@ UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
                                         valign="top">
                                         <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
                                             <tr>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td rowspan="10" style="width: 1px; background-color: Gray;">
                                                 </td>
                                                 <td colspan="1" style="height: 1px; background-color: Gray;">
                                                 </td>
-                                                <td rowspan="6" style="width: 1px; background-color: Gray;">
+                                                <td rowspan="10" style="width: 1px; background-color: Gray;">
                                                 </td>
                                             </tr>
                                             <tr>
@@ -76,6 +76,66 @@ UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
                                                                     BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
                                                                     ForeColor="brown" Height="25px" OnClick="FileUploadButton_Click" 
                                                                     Text="Completar datos automáticamente desde archivo xml seleccionado" />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
+                                                        <tr>
+                                                            <td style="padding-top: 5px">
+                                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                                    <tr>
+                                                                        <td class="TC00S">
+                                                                            Nro. de lote:
+                                                                        </td>
+                                                                        <td class="TC00S">
+                                                                            <asp:TextBox ID="NroLoteConsultaTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="">
+                                                                            </asp:TextBox>
+                                                                        </td>
+                                                                        <td class="TC00S">
+                                                                            Punto de Venta:
+                                                                        </td>
+                                                                        <td class="TC00S">
+                                                                            <asp:DropDownList ID="PtoVtaConsultaDropDownList" runat="server" AutoPostBack="True" SkinID="ddlch" ToolTip="">
+                                                                            </asp:DropDownList>
+                                                                        </td>
+                                                                        <td class="TC00S">
+                                                                            Cuit:
+                                                                        </td>
+                                                                        <td class="TC00S" style="padding-right: 10px">
+                                                                            <asp:TextBox ID="CuitConsultaTextBox" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Cuit del Vendedor.">
+                                                                            </asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="padding-top: 5px; padding-left: 10px; padding-right: 10px;">
+                                                                <asp:Button ID="ConsultarLoteIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
+                                                                    BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
+                                                                    ForeColor="brown" Height="25px" OnClick="ConsultarLoteIBKButton_Click" Text="Consultar lote en Interfacturas"
+                                                                    ToolTip="Consultar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                                    Width="100%" />
+                                                                    <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
+                                                                    PopupControlID="PopupConsultaITF" TargetControlID="ConsultarLoteIBKButton" 
+                                                                    BackgroundCssClass="modalBackground" runat="server" 
+                                                                    onload="ModalPopupExtender2_Load" />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -225,9 +285,7 @@ UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
                                                                         <td class="TC00S">
-                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Razon_Social_VendedorTextBox"
-                                                                                ErrorMessage="razón social" SetFocusOnError="True">* </asp:RequiredFieldValidator>Razón
-                                                                            social:
+                                                                            Razón social:
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="Razon_Social_VendedorTextBox" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDet">
@@ -289,12 +347,7 @@ UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
                                                                         <td class="TC00S">
-                                                                            <asp:RegularExpressionValidator ID="Numero_comprobanteRegularExpressionValidator"
-                                                                                runat="server" ControlToValidate="Numero_ComprobanteTextBox" ErrorMessage="error de formateo en número de comprobante"
-                                                                                SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
-                                                                            <asp:RequiredFieldValidator ID="Numero_ComprobanteRequiredFieldValidator" runat="server"
-                                                                                ControlToValidate="Numero_ComprobanteTextBox" ErrorMessage="número de comprobante"
-                                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>Número de comprobante:
+                                                                            Número de comprobante:
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="Numero_ComprobanteTextBox" Enabled="false" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -723,19 +776,6 @@ UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
                                                     <tr>
                                                         <td style="text-align: center">
                                                             <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
-                                                                <tr>
-                                                                    <td class="TC00S" colspan="2">
-                                                                        <asp:Label ID="LabelTipoNumeracionLote" Text="Tipo de numeración:" runat="server"></asp:Label>
-                                                                    </td>
-                                                                    <td class="TC00S">
-                                                                        <asp:TextBox ID="TipoNumeracionLote" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="El tipo de númeración del lote se define a nivel de Punto de Venta. Solamente para el tipo 'Ninguno' estará habilitado el ingreso manual del Número de Lote.">
-                                                                        </asp:TextBox>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td style="text-align: center; height: 5px;">
-                                                                    </td>
-                                                                </tr>
                                                                 <tr>
                                                                     <td class="TC00S">
                                                                     </td>
@@ -1450,9 +1490,9 @@ UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
                                                         </tr>
                                                         <tr>
                                                             <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                                Motivo:<asp:TextBox ID="MotivoTextBox" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    Width="100px">
-                                                                </asp:TextBox>
+                                                                Motivo:<asp:TextBox 
+                                                                    ID="MotivoTextBox" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                    Width="100px" TextMode="MultiLine" Height="50px"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1641,21 +1681,8 @@ UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
                                                 <td style="width: 100%; padding-right: 3px" colspan="2">
                                                     <asp:Button ID="PDFButton" runat="server" BackColor="#FFFFCC" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" CausesValidation="true" Font-Bold="true"
-                                                        ForeColor="brown" Height="60px" OnClick="PDFButton_Click" 
+                                                        ForeColor="brown" Height="25px" OnClick="PDFButton_Click" 
                                                         Text="Previsualizar comprobante" Width="100%" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 50%">
-                                                    <asp:Button ID="ConsultarLoteIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
-                                                        BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
-                                                        ForeColor="brown" Height="60px" OnClick="ConsultarLoteIBKButton_Click" Text="Consultar lote a Interfacturas"
-                                                        ToolTip="Consultar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
-                                                        Width="100%" />
-                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
-                                                        PopupControlID="PopupConsultaITF" TargetControlID="ConsultarLoteIBKButton" 
-                                                        BackgroundCssClass="modalBackground" runat="server" 
-                                                        onload="ModalPopupExtender2_Load" />
                                                 </td>
                                             </tr>
                                         </table>
