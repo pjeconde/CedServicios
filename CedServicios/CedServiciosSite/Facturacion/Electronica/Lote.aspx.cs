@@ -300,7 +300,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 try
                 {
-                    FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote();
+                    FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
 
                     System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
@@ -1930,7 +1930,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             edyndns.Url = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKurl"];
                         }
                         org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
-                        FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
+                        FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
                         lcIBK = Conversor.Entidad2IBK(lcFea);
                         respuesta = edyndns.EnviarIBK(lcIBK, certificado);
 
@@ -1995,7 +1995,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private FeaEntidades.InterFacturas.lote_comprobantes GenerarLote()
+        private FeaEntidades.InterFacturas.lote_comprobantes GenerarLote(bool EsParaImprimirPDF)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
             FeaEntidades.InterFacturas.comprobante comp = new FeaEntidades.InterFacturas.comprobante();
@@ -2054,7 +2054,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 idtipo = "Comun";
             }
-            FeaEntidades.InterFacturas.detalle det = DetalleLinea.GenerarDetalles(MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text, idtipo, Tipo_De_ComprobanteDropDownList.SelectedValue);
+            FeaEntidades.InterFacturas.detalle det = DetalleLinea.GenerarDetalles(MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text, idtipo, Tipo_De_ComprobanteDropDownList.SelectedValue, EsParaImprimirPDF);
 
             det.comentarios = ComentariosTextBox.Text;
             comp.detalle = det;
@@ -3418,7 +3418,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			try
 			{
-				FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
+				FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(true);
                 if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae == null || lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
 				{
 					lcFea.comprobante[0].cabecera.informacion_comprobante.cae = " ";

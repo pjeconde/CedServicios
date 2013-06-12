@@ -77,7 +77,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     facturaRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
                     facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
 
-                    IncrustarLogo();
+                    IncrustarLogo(lc.cabecera_lote.cuit_vendedor.ToString());
 					string cae = lc.comprobante[0].cabecera.informacion_comprobante.cae;
 					if (cae.Replace(" ",string.Empty).Equals(string.Empty))
 					{
@@ -268,22 +268,32 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
             }
         }
 
-        private void IncrustarLogo()
+        private void IncrustarLogo(string cuit)
         {
             try
             {
-                FileStream FilStr = new FileStream(Server.MapPath("~/Imagenes/Logos/" + ((Entidades.Sesion)Session["Sesion"]).Cuit + ".bmp"), FileMode.Open);
-                CrearTabla();
-                BinaryReader BinRed = new BinaryReader(FilStr);
-                DataRow dr = this.dsImages.Tables["images"].NewRow();
-                dr["path"] = Server.MapPath("~/Imagenes/Logos.bmp");
-                dr["image"] = BinRed.ReadBytes((int)BinRed.BaseStream.Length);
-                this.dsImages.Tables["images"].Rows.Add(dr);
-                FilStr.Close();
-                BinRed.Close();
+                String path = Server.MapPath("~/ImagenesSubidas/");
+                string[] archivos = System.IO.Directory.GetFiles(path, cuit + ".*", System.IO.SearchOption.TopDirectoryOnly);
+                string imagenCUIT = "";
+                if (archivos.Length > 0)
+                {
+                    imagenCUIT = "~/ImagenesSubidas/" + archivos[0].Replace(Server.MapPath("~/ImagenesSubidas/"), String.Empty);
+                }
+                if (imagenCUIT != "")
+                {
+                    FileStream FilStr = new FileStream(Server.MapPath(imagenCUIT), FileMode.Open);
+                    CrearTabla();
+                    BinaryReader BinRed = new BinaryReader(FilStr);
+                    DataRow dr = this.dsImages.Tables["images"].NewRow();
+                    dr["path"] = Server.MapPath(imagenCUIT);
+                    dr["image"] = BinRed.ReadBytes((int)BinRed.BaseStream.Length);
+                    this.dsImages.Tables["images"].Rows.Add(dr);
+                    FilStr.Close();
+                    BinRed.Close();
 
-                imagenRpt = facturaRpt.OpenSubreport("Imagen.rpt");
-                imagenRpt.SetDataSource(this.dsImages);
+                    imagenRpt = facturaRpt.OpenSubreport("Imagen.rpt");
+                    imagenRpt.SetDataSource(this.dsImages);
+                }
             }
             catch
             {

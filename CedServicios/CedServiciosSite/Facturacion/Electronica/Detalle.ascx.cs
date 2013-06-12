@@ -932,7 +932,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			return total;
 		}
 
-		public FeaEntidades.InterFacturas.detalle GenerarDetalles(string MonedaComprobante, string TipoDeCambio, string TipoPtoVta, string TipoCbte)
+        public FeaEntidades.InterFacturas.detalle GenerarDetalles(string MonedaComprobante, string TipoDeCambio, string TipoPtoVta, string TipoCbte, bool EsParaImprimirPDF)
 		{
 			FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
 			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
@@ -958,7 +958,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
                 det.linea[i].GTIN = listadelineas[i].GTIN;
                 det.linea[i].GTINSpecified = listadelineas[i].GTINSpecified;
-                if (TipoPtoVta.Equals("RG2904"))
+                if (TipoPtoVta.Equals("RG2904") && EsParaImprimirPDF != true)
                 {
                     det.linea[i].informacion_adicional = new FeaEntidades.InterFacturas.lineaInformacion_adicional[1];
                     det.linea[i].informacion_adicional[0] = new FeaEntidades.InterFacturas.lineaInformacion_adicional();

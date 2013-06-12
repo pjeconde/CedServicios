@@ -35,13 +35,13 @@
     <Reference Include="Accessibility">
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </Reference>
-    <Reference Include="AjaxControlToolkit, Version=4.1.7.123, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
+    <Reference Include="AjaxControlToolkit, Version=1.0.10618.0, Culture=neutral, PublicKeyToken=28f01b0e84b6d53e, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\AjaxControlToolkit\AjaxControlToolkit.dll</HintPath>
+      <HintPath>..\AjaxControlToolkit.Binary.NET4\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=10.2.3600.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -96,6 +96,7 @@
     <Content Include="Facturacion\Electronica\DetalleConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Extensiones\Comerciales.ascx" />
     <Content Include="Facturacion\Electronica\Extensiones\Marketing.ascx" />
+    <Content Include="Facturacion\Electronica\FacturaElectronicaFecha.ascx" />
     <Content Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx" />
     <Content Include="Facturacion\Electronica\Impuestos.ascx" />
     <Content Include="Facturacion\Electronica\ImpuestosConsulta.ascx" />
@@ -430,6 +431,13 @@
     </Compile>
     <Compile Include="Facturacion\Electronica\Extensiones\Marketing.ascx.designer.cs">
       <DependentUpon>Marketing.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaElectronicaFecha.ascx.cs">
+      <DependentUpon>FacturaElectronicaFecha.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\FacturaElectronicaFecha.ascx.designer.cs">
+      <DependentUpon>FacturaElectronicaFecha.ascx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\FacturaElectronicaTYC.aspx.cs">
       <DependentUpon>FacturaElectronicaTYC.aspx</DependentUpon>
@@ -790,9 +798,11 @@
     </None>
     <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsd">
       <SubType>Designer</SubType>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
       <DependentUpon>lote_comprobantes.xsd</DependentUpon>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <Content Include="Facturacion\Electronica\Reportes\Web.config" />
   </ItemGroup>

@@ -99,7 +99,7 @@ namespace CedServicios.Site
                     Response.Redirect("~/ArticuloConsulta.aspx");
                     break;
                 case "Facturación|Alta":
-                    Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
+                    Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
                     break;
                 case "Facturación|Consulta":
                     Response.Redirect("~/Facturacion/Electronica/LoteConsulta.aspx");
