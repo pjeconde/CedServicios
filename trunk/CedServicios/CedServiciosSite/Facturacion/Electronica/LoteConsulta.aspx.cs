@@ -116,7 +116,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     BindearDropDownLists();
 
                     CuitConsultaTextBox.Text = ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro;
-                    DatosComerciales.ReadOnly = false;
+                    DatosComerciales.ReadOnly = true;
             }
             else
             {
@@ -971,6 +971,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			DetalleLinea.ResetearGrillas();
             ImpuestosGlobales.ResetearGrillas();
             DatosComerciales.Texto = "";
+            DatosComerciales.ReadOnly = true;
 		}
         
         private void ResetearOtros()

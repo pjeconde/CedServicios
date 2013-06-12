@@ -1,7 +1,7 @@
 ﻿<%@ Page AutoEventWireup="true" Theme="CedServicios" Buffer="true" CodeBehind="Lote.aspx.cs" 
-    Culture="en-GB" Inherits="CedServicios.Site.Facturacion.Electronica.Lote" Language="C#" 
+    Culture="en-GB" UICulture="en-GB" Inherits="CedServicios.Site.Facturacion.Electronica.Lote" Language="C#" 
     MaintainScrollPositionOnPostback="true" MasterPageFile="~/CedServicios.Master"
-    Title="Factura Electrónica Gratis(Interfacturas - AFIP)" UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
+    Title="Factura Electrónica Gratis(Interfacturas - AFIP)" EnableEventValidation="false" ValidateRequest="false"%>
 
 <%@ Register Src="Detalle.ascx" TagName="Detalle" TagPrefix="uc4" %>
 <%@ Register Src="Extensiones/Comerciales.ascx" TagName="Comerciales" TagPrefix="uc3" %>
@@ -9,6 +9,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Src="~/Facturacion/Electronica/Impuestos.ascx" TagName="ImpuestosGlobales" TagPrefix="uc8" %>
 <%@ Register Src="~/Facturacion/Electronica/Descuentos.ascx" TagName="DescuentosGlobales" TagPrefix="DescUC" %>
+<%@ Register src="FacturaElectronicaFecha.ascx" tagname="FacturaElectronicaFecha" tagprefix="uc1" %>
+
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceDefault">
     <table border="0" cellpadding="0" cellspacing="0" class="TextComunSinPosicion" style="width: 800px;
         text-align: left;">
@@ -348,11 +350,14 @@
                                                                             </td>
                                                                             <td style="padding-left: 4px; padding-top: 5px;">
                                                                                 <asp:TextBox ID="FechaEmisionDatePickerWebUserControl" runat="server" CausesValidation="true" SkinID="FechaFact"></asp:TextBox>
-                                                                                <cc1:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="MyCalendar"
+                                                                                <cc1:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="MyCalendar" 
                                                                                     OnClientShown="onCalendar1Shown" TargetControlID="FechaEmisionDatePickerWebUserControl"
                                                                                     Format="yyyyMMdd" PopupButtonID="ImageCalendarFechaEmision">
                                                                                 </cc1:CalendarExtender>
                                                                                 <asp:Image runat="server" ID="ImageCalendarFechaEmision2" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                                <br />
+                                                                                <br />
+                                                                                <uc1:FacturaElectronicaFecha ID="FacturaElectronicaFecha1" runat="server" culture="es-AR" />
                                                                             </td>
                                                                         </tr>
                                                                     </table>

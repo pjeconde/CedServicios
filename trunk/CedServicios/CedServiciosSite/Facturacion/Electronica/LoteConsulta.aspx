@@ -1,7 +1,7 @@
 ﻿<%@ Page AutoEventWireup="true" Theme="CedServicios" Buffer="true" CodeBehind="LoteConsulta.aspx.cs" 
-Culture="en-GB" Inherits="CedServicios.Site.Facturacion.Electronica.LoteConsulta" Language="C#"  
+Culture="en-GB" UICulture="en-GB" Inherits="CedServicios.Site.Facturacion.Electronica.LoteConsulta" Language="C#"  
 MaintainScrollPositionOnPostback="true" MasterPageFile="~/CedServicios.Master" Title="Consulta de Factura Electrónica (Interfacturas - AFIP)" 
-UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
+EnableEventValidation="false" ValidateRequest="false"%>
 
 <%@ Register Src="~/Facturacion/Electronica/DetalleConsulta.ascx" TagName="DetalleConsulta" TagPrefix="uc9" %>
 <%@ Register Src="Extensiones/Comerciales.ascx" TagName="Comerciales" TagPrefix="uc3" %>
@@ -1457,7 +1457,7 @@ UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
                                                         border-style: solid" width="180px">
                                                         <tr>
                                                             <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                                Si ya solicitó la CAE a la AFIP, ingrésela aqui:
+                                                                Datos del CAE AFIP:
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1491,8 +1491,9 @@ UICulture="en-GB" EnableEventValidation="false" ValidateRequest="false"%>
                                                         <tr>
                                                             <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
                                                                 Motivo:<asp:TextBox 
-                                                                    ID="MotivoTextBox" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    Width="100px" TextMode="MultiLine" Height="50px"></asp:TextBox>
+                                                                    ID="MotivoTextBox" ReadOnly="true" runat="server"
+                                                                    Width="170px" TextMode="MultiLine" Style="resize: none;" Height="50px" 
+                                                                    ForeColor="#071F70"></asp:TextBox>
                                                             </td>
                                                         </tr>
                                                     </table>

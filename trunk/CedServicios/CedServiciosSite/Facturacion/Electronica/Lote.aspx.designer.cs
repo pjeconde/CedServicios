@@ -283,6 +283,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Image ImageCalendarFechaEmision2;
         
         /// <summary>
+        /// Control FacturaElectronicaFecha1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::CedServicios.Site.Facturacion.Electronica.FacturaElectronicaFecha FacturaElectronicaFecha1;
+        
+        /// <summary>
         /// Control Domicilio_Sector_VendedorTextBox.
         /// </summary>
         /// <remarks>
