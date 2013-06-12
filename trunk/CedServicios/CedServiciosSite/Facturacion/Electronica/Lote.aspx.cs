@@ -1364,7 +1364,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }).IdTipoPuntoVta;
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-                    if (!idtipo.Equals("Export"))
+                    if (!idtipo.Equals("Exportacion"))
                     {
                         Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                         Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
@@ -1630,10 +1630,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                         case "RG2904":
                             listacompradores = AjustarCamposXPtaVentaRG2904(listacompradores, Tipo_De_ComprobanteDropDownList.SelectedValue);
                             break;
-                        case "BFiscal":
+                        case "BonoFiscal":
                             listacompradores = AjustarCamposXPtaVentaBonoFiscal(listacompradores);
                             break;
-                        case "Export":
+                        case "Exportacion":
                             listacompradores = AjustarCamposXPtaVentaExport(listacompradores);
                             break;
                         default:
@@ -2091,7 +2091,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
-                if (idtipo.Equals("Export"))
+                if (idtipo.Equals("Exportacion"))
                 {
                     if (listadeimpuestos[0].importe_impuesto != 0 || listadeimpuestos.Count > 1)
                     {
@@ -2123,7 +2123,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
-                if (idtipo.Equals("Export"))
+                if (idtipo.Equals("Exportacion"))
                 {
                     cab.presta_servSpecified = false;
                 }
@@ -2234,7 +2234,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         throw new Exception("La condición de pago es obligatoria para exportación");
                     }
@@ -2311,7 +2311,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (!idtipo.Equals("Export"))
+                    if (!idtipo.Equals("Exportacion"))
                     {
                         throw new Exception("La fecha de vencimiento es obligatoria");
                     }
@@ -2335,7 +2335,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         IVAcomputableDropDownList.Focus();
                         throw new Exception("El IVA computable no se debe informar para exportación");
@@ -2365,7 +2365,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }).IdTipoPuntoVta;
                 if (!CodigoOperacionDropDownList.SelectedValue.Equals(string.Empty))
                 {
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         CodigoOperacionDropDownList.Focus();
                         throw new Exception("El código de operación no se debe informar para exportación");
@@ -2383,7 +2383,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    if (!idtipo.Equals("Export"))
+                    if (!idtipo.Equals("Exportacion"))
                     {
                         if (idtipo.Equals("RG2904") && (Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("2") || Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("3")))
                         {
@@ -2435,7 +2435,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
                         string tipoComp = Tipo_De_ComprobanteDropDownList.SelectedValue;
-                        if (idtipo.Equals("Export") && tipoComp.Equals("19"))
+                        if (idtipo.Equals("Exportacion") && tipoComp.Equals("19"))
                         {
                             throw new Exception("Las referencias no se deben informar para facturas de exportación(19). Sólo para notas de débito y/o crédito (20 y 21).");
                         }
@@ -2473,7 +2473,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }).IdTipoPuntoVta;
                 string tipoComp = Tipo_De_ComprobanteDropDownList.SelectedValue;
                 string tipoExp = TipoExpDropDownList.SelectedValue;
-                if (idtipo.Equals("Export"))
+                if (idtipo.Equals("Exportacion"))
                 {
                     if (tipoComp.Equals("19"))
                     {
@@ -2699,7 +2699,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         Domicilio_Calle_CompradorTextBox.Focus();
                         throw new Exception("La calle del domicilio del comprador es obligatoria para exportación");
@@ -2729,7 +2729,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         Domicilio_Numero_CompradorTextBox.Focus();
                         throw new Exception("El número de la calle del domicilio del comprador es obligatorio para exportación");
@@ -2765,7 +2765,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         if (!PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
                         {
@@ -2817,7 +2817,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 					{
 						return pv.Nro == auxPV;
 					}).IdTipoPuntoVta;
-					if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
 					{
 						r.importe_total_impuestos_nacionalesSpecified = false;
 						rimo.importe_total_impuestos_nacionalesSpecified = false;
@@ -2848,7 +2848,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 					{
 						return pv.Nro == auxPV;
 					}).IdTipoPuntoVta;
-					if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
 					{
 						r.importe_total_ingresos_brutosSpecified = false;
 						rimo.importe_total_ingresos_brutosSpecified = false;
@@ -2879,7 +2879,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         r.importe_total_impuestos_municipalesSpecified = false;
                         rimo.importe_total_impuestos_municipalesSpecified = false;
@@ -2902,7 +2902,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			//para exportación no se debe informar
             try
             {
-                //double importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                double importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
                 int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
                 try
                 {
@@ -2910,7 +2910,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         r.importe_total_impuestos_internosSpecified = false;
                         rimo.importe_total_impuestos_internosSpecified = false;
@@ -2944,7 +2944,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
-                if (idtipo.Equals("Export") && !Impuesto_Liq_Rni_ResumenTextBox.Text.Equals("0"))
+                if (idtipo.Equals("Exportacion") && !Impuesto_Liq_Rni_ResumenTextBox.Text.Equals("0"))
                 {
                     throw new Exception("El Impuesto liquidado a RNI o percepción a no categorizados debe informarse en 0 para exportación.");
                 }
@@ -3052,7 +3052,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				{
 					return pv.Nro == auxPV;
 				}).IdTipoPuntoVta;
-				if (idtipo.Equals("Export") && !Importe_Total_Neto_Gravado_ResumenTextBox.Text.Equals("0"))
+                if (idtipo.Equals("Exportacion") && !Importe_Total_Neto_Gravado_ResumenTextBox.Text.Equals("0"))
 				{
 					throw new Exception("El importe total neto gravado debe informarse en 0 para exportación.");
 				}
