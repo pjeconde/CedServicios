@@ -14,10 +14,16 @@ namespace CedServicios.DB
         {
             Ejecutar(CrearHandler(Configuracion), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void ElimninarCUITUNpredef(string IdUsuario)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("delete Configuracion where IdItemConfig='CUITUNpredef' and IdUsuario='" + IdUsuario + "' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
         public static string CrearHandler(Entidades.Configuracion Configuracion)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("insert Configuracion (IdUsuario, Cuit, IdUN, IdTipoPermiso, IdItemConfig, Valor) values ('" + Configuracion.IdUsuario + "', '" + Configuracion.Cuit + "', '" + Configuracion.IdUN + "', '" + Configuracion.TipoPermiso.Id + "', '" + Configuracion.IdItemConfig + "', '" + Configuracion.Valor + "') ");
+            a.AppendLine("insert Configuracion (IdUsuario, Cuit, IdUN, IdTipoPermiso, IdItemConfig, Valor) values ('" + Configuracion.IdUsuario + "', '" + Configuracion.Cuit + "', '" + Configuracion.IdUN.ToString() + "', '" + Configuracion.TipoPermiso.Id + "', '" + Configuracion.IdItemConfig + "', '" + Configuracion.Valor + "') ");
             return a.ToString();
         }
         public static string ElimninarNroSerieCertifHandler(Entidades.Cuit Cuit)
