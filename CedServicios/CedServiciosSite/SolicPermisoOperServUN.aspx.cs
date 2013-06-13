@@ -22,32 +22,39 @@ namespace CedServicios.Site
             {
                 Entidades.Cuit cuit = new Entidades.Cuit();
                 cuit.Nro = CUITTextBox.Text;
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                RN.Cuit.Leer(cuit, sesion);
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    RN.Cuit.Leer(cuit, sesion);
 
-                Entidades.UN un = new Entidades.UN();
-                un.Cuit = cuit.Nro;
-                un.Id = Convert.ToInt32(IdUNDropDownList.SelectedValue);
-                RN.UN.Leer(un, sesion);
+                    Entidades.UN un = new Entidades.UN();
+                    un.Cuit = cuit.Nro;
+                    un.Id = Convert.ToInt32(IdUNDropDownList.SelectedValue);
+                    RN.UN.Leer(un, sesion);
 
-                Entidades.TipoPermiso tipoPermiso = new Entidades.TipoPermiso();
-                tipoPermiso.Id = IdTipoPermisoDropDownList.SelectedValue.ToString();
-                RN.TipoPermiso.Leer(tipoPermiso, sesion);
+                    Entidades.TipoPermiso tipoPermiso = new Entidades.TipoPermiso();
+                    tipoPermiso.Id = IdTipoPermisoDropDownList.SelectedValue.ToString();
+                    RN.TipoPermiso.Leer(tipoPermiso, sesion);
 
-                string referenciaAAprobadores = String.Empty;
+                    string referenciaAAprobadores = String.Empty;
 
-                DateTime fechaFinVigencia = new DateTime(2062, 12, 31);
-                RN.Permiso.SolicitarPermisoParaUsuario(cuit, un, tipoPermiso, fechaFinVigencia, out referenciaAAprobadores, sesion);
+                    DateTime fechaFinVigencia = new DateTime(2062, 12, 31);
+                    RN.Permiso.SolicitarPermisoParaUsuario(cuit, un, tipoPermiso, fechaFinVigencia, out referenciaAAprobadores, sesion);
 
-                CUITTextBox.Enabled = false;
-                LeerListaUNsButton.Enabled = false;
-                IdUNDropDownList.Enabled = false;
-                LeerListaTipoPermisosUNButton.Enabled = false;
-                IdTipoPermisoDropDownList.Enabled = false;
-                SolicitarButton.Enabled = false;
-                SalirButton.Text = "Salir";
-                Funciones.PersonalizarControlesMaster(Master, true, sesion);
-                MensajeLabel.Text = "El permiso fue enviado para su aprobación.<br />Autorizador(es): " + referenciaAAprobadores;
+                    CUITTextBox.Enabled = false;
+                    LeerListaUNsButton.Enabled = false;
+                    IdUNDropDownList.Enabled = false;
+                    LeerListaTipoPermisosUNButton.Enabled = false;
+                    IdTipoPermisoDropDownList.Enabled = false;
+                    SolicitarButton.Enabled = false;
+                    SalirButton.Text = "Salir";
+                    Funciones.PersonalizarControlesMaster(Master, true, sesion);
+                    MensajeLabel.Text = "El permiso fue enviado para su aprobación.<br />Autorizador(es): " + referenciaAAprobadores;
+                }
             }
             catch (Exception ex)
             {
@@ -60,10 +67,17 @@ namespace CedServicios.Site
             {
                 Entidades.Cuit cuit = new Entidades.Cuit();
                 cuit.Nro = CUITTextBox.Text;
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                RN.Cuit.Leer(cuit, sesion);
-                IdUNDropDownList.DataSource = RN.UN.ListaVigentesPorCuit(cuit, sesion);
-                DataBind();
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    RN.Cuit.Leer(cuit, sesion);
+                    IdUNDropDownList.DataSource = RN.UN.ListaVigentesPorCuit(cuit, sesion);
+                    DataBind();
+                }
             }
             catch (Exception ex)
             {
@@ -78,12 +92,19 @@ namespace CedServicios.Site
                 Entidades.UN uN = new Entidades.UN();
                 uN.Cuit = CUITTextBox.Text;
                 uN.Id = Convert.ToInt32(IdUNDropDownList.SelectedValue);
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                IdTipoPermisoDropDownList.DataSource = RN.TipoPermiso.ListaPorUN(uN, sesion);
-                DataBind();
-                if (IdTipoPermisoDropDownList.Items.Count == 0)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    MensajeLabel.Text = "No hay servicios disponibles para esta Unidad de Negocio";
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    IdTipoPermisoDropDownList.DataSource = RN.TipoPermiso.ListaPorUN(uN, sesion);
+                    DataBind();
+                    if (IdTipoPermisoDropDownList.Items.Count == 0)
+                    {
+                        MensajeLabel.Text = "No hay servicios disponibles para esta Unidad de Negocio";
+                    }
                 }
             }
             catch (Exception ex)

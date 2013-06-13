@@ -34,87 +34,94 @@ namespace CedServicios.Site
                 TituloCuitsTreeView.Nodes[TituloCuitsTreeView.Nodes.Count - 1].ChildNodes.Add(new TreeNode("Unidad de Negocio"));
                 TituloCuitsTreeView.Nodes[TituloCuitsTreeView.Nodes.Count - 1].ChildNodes[TituloCuitsTreeView.Nodes[TituloCuitsTreeView.Nodes.Count - 1].ChildNodes.Count - 1].ChildNodes.Add(new TreeNode("Punto de Venta (Tipo de Punto de Venta)"));
 
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                RN.Cuit.CompletarUNsYPuntosVta(sesion.CuitsDelUsuario, sesion);
-                for (int i = 0; i<sesion.CuitsDelUsuario.Count; i++)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    string nodoCuitText=String.Empty;
-                    if (sesion.CuitsDelUsuario[i].WF.Estado == "Vigente")
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    RN.Cuit.CompletarUNsYPuntosVta(sesion.CuitsDelUsuario, sesion);
+                    for (int i = 0; i < sesion.CuitsDelUsuario.Count; i++)
                     {
-                        nodoCuitText = sesion.CuitsDelUsuario[i].Nro;
-                    }
-                    else
-                    {
-                        nodoCuitText = "<span style='color:red;'>" + sesion.CuitsDelUsuario[i].Nro + "</span";
-                    }
-                    TreeNode nodoCuit = new TreeNode(nodoCuitText);
-                    for (int j = 0; j < sesion.CuitsDelUsuario[i].UNs.Count; j++)
-                    {
-                        string nodoUNText = String.Empty;
-                        if (sesion.CuitsDelUsuario[i].UNs[j].WF.Estado == "Vigente")
+                        string nodoCuitText = String.Empty;
+                        if (sesion.CuitsDelUsuario[i].WF.Estado == "Vigente")
                         {
-                            nodoUNText = sesion.CuitsDelUsuario[i].UNs[j].Descr;
+                            nodoCuitText = sesion.CuitsDelUsuario[i].Nro;
                         }
                         else
                         {
-                            nodoUNText = "<span style='color:red;'>" + sesion.CuitsDelUsuario[i].UNs[j].Descr + "</span";
+                            nodoCuitText = "<span style='color:red;'>" + sesion.CuitsDelUsuario[i].Nro + "</span";
                         }
-                        TreeNode nodoUN = new TreeNode(nodoUNText);
-                        nodoUN.Value = sesion.CuitsDelUsuario[i].UNs[j].Id.ToString();
-                        nodoCuit.ChildNodes.Add(nodoUN);
-                        if (sesion.CuitsDelUsuario[i].UNs[j].PuntosVta.Count > 0)
+                        TreeNode nodoCuit = new TreeNode(nodoCuitText);
+                        for (int j = 0; j < sesion.CuitsDelUsuario[i].UNs.Count; j++)
                         {
-                            for (int h = 0; h < sesion.CuitsDelUsuario[i].UNs[j].PuntosVta.Count; h++)
+                            string nodoUNText = String.Empty;
+                            if (sesion.CuitsDelUsuario[i].UNs[j].WF.Estado == "Vigente")
                             {
-                                string nodoPuntoVtaText = String.Empty;
-                                if (sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].WF.Estado == "Vigente")
+                                nodoUNText = sesion.CuitsDelUsuario[i].UNs[j].Descr;
+                            }
+                            else
+                            {
+                                nodoUNText = "<span style='color:red;'>" + sesion.CuitsDelUsuario[i].UNs[j].Descr + "</span";
+                            }
+                            TreeNode nodoUN = new TreeNode(nodoUNText);
+                            nodoUN.Value = sesion.CuitsDelUsuario[i].UNs[j].Id.ToString();
+                            nodoCuit.ChildNodes.Add(nodoUN);
+                            if (sesion.CuitsDelUsuario[i].UNs[j].PuntosVta.Count > 0)
+                            {
+                                for (int h = 0; h < sesion.CuitsDelUsuario[i].UNs[j].PuntosVta.Count; h++)
                                 {
-                                    nodoPuntoVtaText = sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Descr;
+                                    string nodoPuntoVtaText = String.Empty;
+                                    if (sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].WF.Estado == "Vigente")
+                                    {
+                                        nodoPuntoVtaText = sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Descr;
+                                    }
+                                    else
+                                    {
+                                        nodoPuntoVtaText = "<span style='color:red;'>" + sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Descr + "</span";
+                                    }
+                                    TreeNode nodoPuntoVta = new TreeNode(nodoPuntoVtaText);
+                                    nodoPuntoVta.Value = sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Nro.ToString();
+                                    nodoUN.ChildNodes.Add(nodoPuntoVta);
                                 }
-                                else
-                                {
-                                    nodoPuntoVtaText = "<span style='color:red;'>" + sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Descr + "</span";
-                                }
-                                TreeNode nodoPuntoVta = new TreeNode(nodoPuntoVtaText);
-                                nodoPuntoVta.Value = sesion.CuitsDelUsuario[i].UNs[j].PuntosVta[h].Nro.ToString();
+                            }
+                            else
+                            {
+                                TreeNode nodoPuntoVta = new TreeNode("(no hay Puntos de Venta definidos)");
+                                nodoPuntoVta.Value = "0";
                                 nodoUN.ChildNodes.Add(nodoPuntoVta);
                             }
                         }
-                        else
-                        {
-                            TreeNode nodoPuntoVta = new TreeNode("(no hay Puntos de Venta definidos)");
-                            nodoPuntoVta.Value = "0";
-                            nodoUN.ChildNodes.Add(nodoPuntoVta);
-                        }
+                        CuitsTreeView.Nodes.Add(nodoCuit);
                     }
-                    CuitsTreeView.Nodes.Add(nodoCuit);
-                }
-                Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
-                DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
-                DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
-                MedioDropDownList.DataSource = RN.Medio.Lista(sesion);
-                PuntoVtaPanel_IdUNDropDownList.DataSource = RN.UN.ListaVigentesPorCuit(sesion.Cuit, sesion);
-                IdTipoPuntoVtaDropDownList.DataSource = RN.TipoPuntoVta.Lista(sesion);
-                IdMetodoGeneracionNumeracionLoteDropDownList.DataSource = RN.MetodoGeneracionNumeracionLote.Lista(sesion);
-                DataBind();
-                if (nivelAContraer != null)
-                {
-                    for (int i = 0; i < CuitsTreeView.Nodes.Count; i++)
+                    Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                    DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                    DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                    MedioDropDownList.DataSource = RN.Medio.Lista(sesion);
+                    PuntoVtaPanel_IdUNDropDownList.DataSource = RN.UN.ListaVigentesPorCuit(sesion.Cuit, sesion);
+                    IdTipoPuntoVtaDropDownList.DataSource = RN.TipoPuntoVta.Lista(sesion);
+                    IdMetodoGeneracionNumeracionLoteDropDownList.DataSource = RN.MetodoGeneracionNumeracionLote.Lista(sesion);
+                    DataBind();
+                    if (nivelAContraer != null)
                     {
-                        if (nivelAContraer == "0")
+                        for (int i = 0; i < CuitsTreeView.Nodes.Count; i++)
                         {
-                            CuitsTreeView.Nodes[i].Collapse();
-                        }
-                        else
-                        {
-                            for (int j = 0; j < CuitsTreeView.Nodes[i].ChildNodes.Count; j++)
+                            if (nivelAContraer == "0")
                             {
-                                CuitsTreeView.Nodes[i].ChildNodes[j].Collapse();
+                                CuitsTreeView.Nodes[i].Collapse();
+                            }
+                            else
+                            {
+                                for (int j = 0; j < CuitsTreeView.Nodes[i].ChildNodes.Count; j++)
+                                {
+                                    CuitsTreeView.Nodes[i].ChildNodes[j].Collapse();
+                                }
                             }
                         }
                     }
+                    ViewState["Sesion"] = sesion.Clone();
                 }
-                ViewState["Sesion"] = sesion.Clone();
             }
         }
         protected void CuitsTreeView_SelectedNodeChanged(object sender, EventArgs e)

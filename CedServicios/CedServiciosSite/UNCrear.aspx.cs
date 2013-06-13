@@ -18,52 +18,59 @@ namespace CedServicios.Site
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.Cuit cuit = new Entidades.Cuit();
-            Entidades.UN un = new Entidades.UN();
-            Entidades.TipoPermiso tipoPermiso = new Entidades.TipoPermiso();
-            try
+            if (Funciones.SessionTimeOut(Session))
             {
-                cuit.Nro = CUITTextBox.Text;
-                RN.Cuit.Leer(cuit, sesion);
+                Response.Redirect("~/SessionTimeout.aspx");
             }
-            catch (Exception ex)
+            else
             {
-                MensajeLabel.Text = EX.Funciones.Detalle(ex);
-                return;
-            }
-            try
-            {
-                un.Cuit = CUITTextBox.Text;
-                un.Id = Convert.ToInt32(IdUNTextBox.Text);
-                RN.UN.Leer(un, sesion);
-                throw new EX.Validaciones.ElementoYaInexistente("Unidad de negocio '" + un.Id + "' del Cuit " + un.Cuit);
-            }
-            catch (EX.Validaciones.ElementoInexistente)
-            {
-                string referenciaAAprobadores = String.Empty;
-                un.Descr = DescrUNTextBox.Text;
-                string estadoPermisoUsoCUITxUN = String.Empty;
-                RN.UN.Crear(un, out referenciaAAprobadores, out estadoPermisoUsoCUITxUN, sesion);
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                Entidades.Cuit cuit = new Entidades.Cuit();
+                Entidades.UN un = new Entidades.UN();
+                Entidades.TipoPermiso tipoPermiso = new Entidades.TipoPermiso();
+                try
+                {
+                    cuit.Nro = CUITTextBox.Text;
+                    RN.Cuit.Leer(cuit, sesion);
+                }
+                catch (Exception ex)
+                {
+                    MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    return;
+                }
+                try
+                {
+                    un.Cuit = CUITTextBox.Text;
+                    un.Id = Convert.ToInt32(IdUNTextBox.Text);
+                    RN.UN.Leer(un, sesion);
+                    throw new EX.Validaciones.ElementoYaInexistente("Unidad de negocio '" + un.Id + "' del Cuit " + un.Cuit);
+                }
+                catch (EX.Validaciones.ElementoInexistente)
+                {
+                    string referenciaAAprobadores = String.Empty;
+                    un.Descr = DescrUNTextBox.Text;
+                    string estadoPermisoUsoCUITxUN = String.Empty;
+                    RN.UN.Crear(un, out referenciaAAprobadores, out estadoPermisoUsoCUITxUN, sesion);
 
-                CUITTextBox.Enabled = false;
-                IdUNTextBox.Enabled = false;
-                DescrUNTextBox.Enabled = false;
-                AceptarButton.Enabled = false;
-                SalirButton.Enabled = false;
-                if (estadoPermisoUsoCUITxUN == "Vigente")
-                {
-                    MensajeLabel.Text = "La Unidad de negocio fué creada satisfactoriamente";
+                    CUITTextBox.Enabled = false;
+                    IdUNTextBox.Enabled = false;
+                    DescrUNTextBox.Enabled = false;
+                    AceptarButton.Enabled = false;
+                    SalirButton.Enabled = false;
+                    if (estadoPermisoUsoCUITxUN == "Vigente")
+                    {
+                        MensajeLabel.Text = "La Unidad de negocio fué creada satisfactoriamente";
+                    }
+                    else
+                    {
+                        MensajeLabel.Text = "La Unidad de negocio fué creada satisfactoriamente.<br />Se ha solicitado la autorización de su vinculación con el CUIT<br />Autorizador(es): " + referenciaAAprobadores;
+                    }
                 }
-                else
+                catch (Exception ex)
                 {
-                    MensajeLabel.Text = "La Unidad de negocio fué creada satisfactoriamente.<br />Se ha solicitado la autorización de su vinculación con el CUIT<br />Autorizador(es): " + referenciaAAprobadores;
+                    MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    return;
                 }
-            }
-            catch (Exception ex)
-            {
-                MensajeLabel.Text = EX.Funciones.Detalle(ex);
-                return;
             }
         }
     }

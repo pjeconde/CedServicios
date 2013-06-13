@@ -13,14 +13,21 @@ namespace CedServicios.Site
         {
             if (!IsPostBack)
             {
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                CUITTextBox.Text = sesion.Cuit.Nro;
-                CUITTextBox.Enabled = false;
-                String path = Server.MapPath("~/ImagenesSubidas/");
-                string[] archivos = System.IO.Directory.GetFiles(path, CUITTextBox.Text + ".*", System.IO.SearchOption.TopDirectoryOnly);
-                if (archivos.Length > 0)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    LogotipoImage.ImageUrl = "~/ImagenesSubidas/" + archivos[0].Replace(Server.MapPath("~/ImagenesSubidas/"), String.Empty);
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    CUITTextBox.Text = sesion.Cuit.Nro;
+                    CUITTextBox.Enabled = false;
+                    String path = Server.MapPath("~/ImagenesSubidas/");
+                    string[] archivos = System.IO.Directory.GetFiles(path, CUITTextBox.Text + ".*", System.IO.SearchOption.TopDirectoryOnly);
+                    if (archivos.Length > 0)
+                    {
+                        LogotipoImage.ImageUrl = "~/ImagenesSubidas/" + archivos[0].Replace(Server.MapPath("~/ImagenesSubidas/"), String.Empty);
+                    }
                 }
             }
         }

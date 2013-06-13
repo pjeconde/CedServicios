@@ -35,13 +35,20 @@ namespace CedServicios.Site
             try
             {
                 int item = Convert.ToInt32(e.CommandArgument);
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                DataRow cuenta = ((DataTable)ViewState["CuentasNoMigradas"]).Rows[item];
-                switch (e.CommandName)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    case "Copiar":
-                        RN.Migracion.CopiarCuenta(cuenta["IdCuenta"].ToString(), sesion);
-                        break;
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    DataRow cuenta = ((DataTable)ViewState["CuentasNoMigradas"]).Rows[item];
+                    switch (e.CommandName)
+                    {
+                        case "Copiar":
+                            RN.Migracion.CopiarCuenta(cuenta["IdCuenta"].ToString(), sesion);
+                            break;
+                    }
                 }
             }
             catch (Exception ex)
@@ -55,10 +62,17 @@ namespace CedServicios.Site
         }
         protected void RefrescarGrilla()
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            ViewState["CuentasNoMigradas"] = RN.Migracion.CuentasNoMigradas(sesion);
-            CuentasGridView.DataSource = (DataTable)ViewState["CuentasNoMigradas"];
-            CuentasGridView.DataBind();
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                ViewState["CuentasNoMigradas"] = RN.Migracion.CuentasNoMigradas(sesion);
+                CuentasGridView.DataSource = (DataTable)ViewState["CuentasNoMigradas"];
+                CuentasGridView.DataBind();
+            }
         }
         protected void CuentasGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -74,9 +88,16 @@ namespace CedServicios.Site
         {
             try
             {
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                MensajeLabel.Text = RN.Migracion.CopiarTodasLasCuentas(sesion);
-                RefrescarGrilla();
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    MensajeLabel.Text = RN.Migracion.CopiarTodasLasCuentas(sesion);
+                    RefrescarGrilla();
+                }
             }
             catch (System.Threading.ThreadAbortException)
             {

@@ -13,82 +13,96 @@ namespace CedServicios.Site
         {
             if (!IsPostBack)
             {
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-
-                Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
-                DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
-                DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
-                MedioDropDownList.DataSource = RN.Medio.Lista(sesion);
-                DataBind();
-
-                CUITTextBox.Text = sesion.Cuit.Nro;
-                RazonSocialTextBox.Text = sesion.Cuit.RazonSocial;
-                Domicilio.Calle = sesion.Cuit.Domicilio.Calle;
-                Domicilio.Nro = sesion.Cuit.Domicilio.Nro;
-                Domicilio.Piso = sesion.Cuit.Domicilio.Piso;
-                Domicilio.Depto = sesion.Cuit.Domicilio.Depto;
-                Domicilio.Manzana = sesion.Cuit.Domicilio.Manzana;
-                Domicilio.Sector = sesion.Cuit.Domicilio.Sector;
-                Domicilio.Torre = sesion.Cuit.Domicilio.Torre;
-                Domicilio.Localidad = sesion.Cuit.Domicilio.Localidad;
-                Domicilio.IdProvincia = sesion.Cuit.Domicilio.Provincia.Id;
-                Domicilio.CodPost = sesion.Cuit.Domicilio.CodPost;
-                Contacto.Nombre = sesion.Cuit.Contacto.Nombre;
-                Contacto.Email = sesion.Cuit.Contacto.Email;
-                Contacto.Telefono = sesion.Cuit.Contacto.Telefono;
-                DatosImpositivos.IdCondIVA = sesion.Cuit.DatosImpositivos.IdCondIVA;
-                DatosImpositivos.IdCondIngBrutos = sesion.Cuit.DatosImpositivos.IdCondIngBrutos;
-                DatosImpositivos.NroIngBrutos = sesion.Cuit.DatosImpositivos.NroIngBrutos;
-                DatosImpositivos.FechaInicioActividades = sesion.Cuit.DatosImpositivos.FechaInicioActividades;
-                DatosIdentificatorios.GLN = sesion.Cuit.DatosIdentificatorios.GLN;
-                DatosIdentificatorios.CodigoInterno = sesion.Cuit.DatosIdentificatorios.CodigoInterno;
-                MedioDropDownList.SelectedValue = sesion.Cuit.Medio.Id;
-
-                CUITTextBox.Enabled = false;
-                RazonSocialTextBox.Enabled = false;
-                Domicilio.Enabled = false;
-                Contacto.Enabled = false;
-                DatosImpositivos.Enabled = false;
-                DatosIdentificatorios.Enabled = false;
-                MedioDropDownList.Enabled = false;
-
-                if (sesion.Cuit.WF.Estado == "Vigente")
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    TituloPaginaLabel.Text = "Baja de CUIT";
-                    AceptarButton.Text = "Dar de Baja";
+                    Response.Redirect("~/SessionTimeout.aspx");
                 }
                 else
                 {
-                    TituloPaginaLabel.Text = "Anulación de Baja de CUIT";
-                    AceptarButton.Text = "Anular Baja";
-                } AceptarButton.Focus();
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+
+                    Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                    DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                    DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                    MedioDropDownList.DataSource = RN.Medio.Lista(sesion);
+                    DataBind();
+
+                    CUITTextBox.Text = sesion.Cuit.Nro;
+                    RazonSocialTextBox.Text = sesion.Cuit.RazonSocial;
+                    Domicilio.Calle = sesion.Cuit.Domicilio.Calle;
+                    Domicilio.Nro = sesion.Cuit.Domicilio.Nro;
+                    Domicilio.Piso = sesion.Cuit.Domicilio.Piso;
+                    Domicilio.Depto = sesion.Cuit.Domicilio.Depto;
+                    Domicilio.Manzana = sesion.Cuit.Domicilio.Manzana;
+                    Domicilio.Sector = sesion.Cuit.Domicilio.Sector;
+                    Domicilio.Torre = sesion.Cuit.Domicilio.Torre;
+                    Domicilio.Localidad = sesion.Cuit.Domicilio.Localidad;
+                    Domicilio.IdProvincia = sesion.Cuit.Domicilio.Provincia.Id;
+                    Domicilio.CodPost = sesion.Cuit.Domicilio.CodPost;
+                    Contacto.Nombre = sesion.Cuit.Contacto.Nombre;
+                    Contacto.Email = sesion.Cuit.Contacto.Email;
+                    Contacto.Telefono = sesion.Cuit.Contacto.Telefono;
+                    DatosImpositivos.IdCondIVA = sesion.Cuit.DatosImpositivos.IdCondIVA;
+                    DatosImpositivos.IdCondIngBrutos = sesion.Cuit.DatosImpositivos.IdCondIngBrutos;
+                    DatosImpositivos.NroIngBrutos = sesion.Cuit.DatosImpositivos.NroIngBrutos;
+                    DatosImpositivos.FechaInicioActividades = sesion.Cuit.DatosImpositivos.FechaInicioActividades;
+                    DatosIdentificatorios.GLN = sesion.Cuit.DatosIdentificatorios.GLN;
+                    DatosIdentificatorios.CodigoInterno = sesion.Cuit.DatosIdentificatorios.CodigoInterno;
+                    MedioDropDownList.SelectedValue = sesion.Cuit.Medio.Id;
+
+                    CUITTextBox.Enabled = false;
+                    RazonSocialTextBox.Enabled = false;
+                    Domicilio.Enabled = false;
+                    Contacto.Enabled = false;
+                    DatosImpositivos.Enabled = false;
+                    DatosIdentificatorios.Enabled = false;
+                    MedioDropDownList.Enabled = false;
+
+                    if (sesion.Cuit.WF.Estado == "Vigente")
+                    {
+                        TituloPaginaLabel.Text = "Baja de CUIT";
+                        AceptarButton.Text = "Dar de Baja";
+                    }
+                    else
+                    {
+                        TituloPaginaLabel.Text = "Anulación de Baja de CUIT";
+                        AceptarButton.Text = "Anular Baja";
+                    } AceptarButton.Focus();
+                }
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.Cuit cuit = RN.Cuit.ObtenerCopia((Entidades.Cuit)sesion.Cuit);
-            try
+            if (Funciones.SessionTimeOut(Session))
             {
-
-                if (AceptarButton.Text == "Dar de Baja")
-                {
-                    RN.Cuit.CambiarEstado(cuit, "DeBaja", sesion);
-                }
-                else
-                {
-                    RN.Cuit.CambiarEstado(cuit, "Vigente", sesion);
-                }
-
-                AceptarButton.Enabled = false;
-                SalirButton.Text = "Salir";
-
-                MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
+                Response.Redirect("~/SessionTimeout.aspx");
             }
-            catch (Exception ex)
+            else
             {
-                MensajeLabel.Text = EX.Funciones.Detalle(ex);
-                return;
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                Entidades.Cuit cuit = RN.Cuit.ObtenerCopia((Entidades.Cuit)sesion.Cuit);
+                try
+                {
+
+                    if (AceptarButton.Text == "Dar de Baja")
+                    {
+                        RN.Cuit.CambiarEstado(cuit, "DeBaja", sesion);
+                    }
+                    else
+                    {
+                        RN.Cuit.CambiarEstado(cuit, "Vigente", sesion);
+                    }
+
+                    AceptarButton.Enabled = false;
+                    SalirButton.Text = "Salir";
+
+                    MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
+                }
+                catch (Exception ex)
+                {
+                    MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    return;
+                }
             }
         }
     }

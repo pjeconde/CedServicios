@@ -164,10 +164,17 @@ namespace CedServicios.Site
         {
             if (CUITDropDownList.SelectedItem != null)
             {
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                RN.Sesion.AsignarCuit(sesion.CuitsDelUsuario[CUITDropDownList.SelectedIndex], sesion);
-                //Funciones.PersonalizarControlesMaster(this, true, sesion);
-                Response.Redirect("~/Default.aspx");
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    RN.Sesion.AsignarCuit(sesion.CuitsDelUsuario[CUITDropDownList.SelectedIndex], sesion);
+                    //Funciones.PersonalizarControlesMaster(this, true, sesion);
+                    Response.Redirect("~/Default.aspx");
+                }
             }
         }
         protected void EmpresaImageButton_Click(object sender, ImageClickEventArgs e)
@@ -182,10 +189,17 @@ namespace CedServicios.Site
         {
             if (UNDropDownList.SelectedItem != null)
             {
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                RN.Sesion.AsignarUN(sesion.Cuit.UNs[UNDropDownList.SelectedIndex], sesion);
-                //Funciones.PersonalizarControlesMaster(this, true, sesion);
-                Response.Redirect("~/Default.aspx");
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    RN.Sesion.AsignarUN(sesion.Cuit.UNs[UNDropDownList.SelectedIndex], sesion);
+                    //Funciones.PersonalizarControlesMaster(this, true, sesion);
+                    Response.Redirect("~/Default.aspx");
+                }
             }
         }
     }

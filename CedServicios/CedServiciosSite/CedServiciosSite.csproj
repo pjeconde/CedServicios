@@ -138,6 +138,7 @@
     <Content Include="PuntoVtaCrear.aspx" />
     <Content Include="PuntoVtaModificar.aspx" />
     <Content Include="PuntoVtaSeleccionar.aspx" />
+    <Content Include="SessionTimeout.aspx" />
     <Content Include="SolicPermisoAdminCUIT.aspx" />
     <Content Include="SolicPermisoAdminUN.aspx" />
     <Content Include="SolicPermisoOperServUN.aspx" />
@@ -635,6 +636,13 @@
     </Compile>
     <Compile Include="PuntoVtaSeleccionar.aspx.designer.cs">
       <DependentUpon>PuntoVtaSeleccionar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SessionTimeout.aspx.cs">
+      <DependentUpon>SessionTimeout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionTimeout.aspx.designer.cs">
+      <DependentUpon>SessionTimeout.aspx</DependentUpon>
     </Compile>
     <Compile Include="SolicPermisoAdminCUIT.aspx.cs">
       <DependentUpon>SolicPermisoAdminCUIT.aspx</DependentUpon>
