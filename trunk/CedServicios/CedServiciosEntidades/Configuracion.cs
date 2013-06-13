@@ -10,7 +10,7 @@ namespace CedServicios.Entidades
     {
         private string idUsuario;
         private string cuit;
-        private string idUN;
+        private int idUN;
         private TipoPermiso tipoPermiso;
         private string idItemConfig;
         private string valor;
@@ -42,7 +42,7 @@ namespace CedServicios.Entidades
                 return cuit;
             }
         }
-        public string IdUN
+        public int IdUN
         {
             set
             {
