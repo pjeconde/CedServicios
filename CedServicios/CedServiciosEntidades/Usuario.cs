@@ -21,6 +21,8 @@ namespace CedServicios.Entidades
         private WF wF;
         private string ultActualiz;
         private List<Permiso> permisos;
+        private string cuitPredef;
+        private int idUNPredef;
 
         public Usuario()
         {
@@ -169,6 +171,28 @@ namespace CedServicios.Entidades
             get
             {
                 return permisos;
+            }
+        }
+        public string CuitPredef
+        {
+            set
+            {
+                cuitPredef = value;
+            }
+            get
+            {
+                return cuitPredef;
+            }
+        }
+        public int IdUNPredef
+        {
+            set
+            {
+                idUNPredef = value;
+            }
+            get
+            {
+                return idUNPredef;
             }
         }
     }
