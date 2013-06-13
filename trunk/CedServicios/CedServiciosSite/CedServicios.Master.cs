@@ -144,7 +144,7 @@ namespace CedServicios.Site
                     Response.Redirect("~/UsuarioCambiarPassword.aspx");
                     break;
                 case "Configuración|Modificación datos de Configuración":
-                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    Response.Redirect("~/ConfiguracionModificar.aspx");
                     break;
                 case "Cerrar sesión":
                     RN.Sesion.Cerrar(sesion);
