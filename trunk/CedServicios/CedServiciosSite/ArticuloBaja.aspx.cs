@@ -18,62 +18,75 @@ namespace CedServicios.Site
                 IndicacionExentoGravadoDropDownList.DataSource = FeaEntidades.Indicacion.Indicacion.Lista();
                 AlicuotaIVADropDownList.DataSource = FeaEntidades.IVA.IVA.Lista();
                 DataBind();
-
-                Entidades.Articulo articulo = (Entidades.Articulo)Session["Articulo"];
-
-                CUITTextBox.Text = articulo.Cuit;
-                IdTextBox.Text = articulo.Id;
-                DescrTextBox.Text = articulo.Descr;
-                GTINTextBox.Text = articulo.GTIN;
-                UnidadDropDownList.SelectedValue = articulo.Unidad.Id;
-                UnidadDropDownList.SelectedItem.Text = articulo.Unidad.Descr;
-                IndicacionExentoGravadoDropDownList.SelectedValue = articulo.IndicacionExentoGravado;
-                AlicuotaIVADropDownList.SelectedValue = articulo.AlicuotaIVA.ToString(); 
-
-                CUITTextBox.Enabled = false;
-                IdTextBox.Enabled = false;
-                DescrTextBox.Enabled = false;
-                GTINTextBox.Enabled = false;
-                UnidadDropDownList.Enabled = false;
-                IndicacionExentoGravadoDropDownList.Enabled = false;
-                AlicuotaIVADropDownList.Enabled = false;
-
-                if (articulo.WF.Estado == "Vigente")
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    TituloPaginaLabel.Text = "Baja de Artículo";
-                    AceptarButton.Text = "Dar de Baja";
+                    Response.Redirect("~/SessionTimeout.aspx");
                 }
                 else
                 {
-                    TituloPaginaLabel.Text = "Anulación de Baja de Artículo";
-                    AceptarButton.Text = "Anular Baja";
+                    Entidades.Articulo articulo = (Entidades.Articulo)Session["Articulo"];
+
+                    CUITTextBox.Text = articulo.Cuit;
+                    IdTextBox.Text = articulo.Id;
+                    DescrTextBox.Text = articulo.Descr;
+                    GTINTextBox.Text = articulo.GTIN;
+                    UnidadDropDownList.SelectedValue = articulo.Unidad.Id;
+                    UnidadDropDownList.SelectedItem.Text = articulo.Unidad.Descr;
+                    IndicacionExentoGravadoDropDownList.SelectedValue = articulo.IndicacionExentoGravado;
+                    AlicuotaIVADropDownList.SelectedValue = articulo.AlicuotaIVA.ToString();
+
+                    CUITTextBox.Enabled = false;
+                    IdTextBox.Enabled = false;
+                    DescrTextBox.Enabled = false;
+                    GTINTextBox.Enabled = false;
+                    UnidadDropDownList.Enabled = false;
+                    IndicacionExentoGravadoDropDownList.Enabled = false;
+                    AlicuotaIVADropDownList.Enabled = false;
+
+                    if (articulo.WF.Estado == "Vigente")
+                    {
+                        TituloPaginaLabel.Text = "Baja de Artículo";
+                        AceptarButton.Text = "Dar de Baja";
+                    }
+                    else
+                    {
+                        TituloPaginaLabel.Text = "Anulación de Baja de Artículo";
+                        AceptarButton.Text = "Anular Baja";
+                    }
+                    AceptarButton.Focus();
                 }
-                AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.Articulo articulo = (Entidades.Articulo)Session["Articulo"];
-            try
+            if (Funciones.SessionTimeOut(Session))
             {
-                if (AceptarButton.Text == "Dar de Baja")
-                {
-                    RN.Articulo.CambiarEstado(articulo, "DeBaja", sesion);
-                }
-                else
-                {
-                    RN.Articulo.CambiarEstado(articulo, "Vigente", sesion);
-                }
-                AceptarButton.Enabled = false;
-                SalirButton.Text = "Salir";
-
-                MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
+                Response.Redirect("~/SessionTimeout.aspx");
             }
-            catch (Exception ex)
+            else
             {
-                MensajeLabel.Text = EX.Funciones.Detalle(ex);
-                return;
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                Entidades.Articulo articulo = (Entidades.Articulo)Session["Articulo"];
+                try
+                {
+                    if (AceptarButton.Text == "Dar de Baja")
+                    {
+                        RN.Articulo.CambiarEstado(articulo, "DeBaja", sesion);
+                    }
+                    else
+                    {
+                        RN.Articulo.CambiarEstado(articulo, "Vigente", sesion);
+                    }
+                    AceptarButton.Enabled = false;
+                    SalirButton.Text = "Salir";
+
+                    MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
+                }
+                catch (Exception ex)
+                {
+                    MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    return;
+                }
             }
         }
     }

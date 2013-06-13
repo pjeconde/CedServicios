@@ -28,21 +28,28 @@ namespace CedServicios.Site
                             ViewState["IrA"] = "~/PuntoVtaBaja.aspx";
                             break;
                     }
-                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    IdUNDropDownList.DataSource = sesion.Cuit.UNs;
-                    PuntosVtaGridView.DataSource = sesion.UN.PuntosVta;
-                    PuntosVtaGridView.DataBind();
-                    DataBind();
-
-                    if (sesion.UN.PuntosVta.Count == 0)
+                    if (Funciones.SessionTimeOut(Session))
                     {
-                        MensajeLabel.Text = "No hay Puntos de Venta definidos.";
+                        Response.Redirect("~/SessionTimeout.aspx");
                     }
+                    else
+                    {
+                        Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                        IdUNDropDownList.DataSource = sesion.Cuit.UNs;
+                        PuntosVtaGridView.DataSource = sesion.UN.PuntosVta;
+                        PuntosVtaGridView.DataBind();
+                        DataBind();
 
-                    CUITTextBox.Text = sesion.Cuit.Nro;
-                    CUITTextBox.Enabled = false;
-                    IdUNDropDownList.SelectedValue = sesion.UN.Id.ToString();
-                    IdUNDropDownList.Enabled = false;
+                        if (sesion.UN.PuntosVta.Count == 0)
+                        {
+                            MensajeLabel.Text = "No hay Puntos de Venta definidos.";
+                        }
+
+                        CUITTextBox.Text = sesion.Cuit.Nro;
+                        CUITTextBox.Enabled = false;
+                        IdUNDropDownList.SelectedValue = sesion.UN.Id.ToString();
+                        IdUNDropDownList.Enabled = false;
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -53,14 +60,21 @@ namespace CedServicios.Site
         protected void PuntosVtaGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int item = Convert.ToInt32(e.CommandArgument);
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.PuntoVta puntoVta = sesion.UN.PuntosVta[item];
-            switch (e.CommandName)
+            if (Funciones.SessionTimeOut(Session))
             {
-                case "Seleccionar":
-                    Session["PuntoVta"] = puntoVta;
-                    Response.Redirect(ViewState["IrA"].ToString());
-                    break;
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                Entidades.PuntoVta puntoVta = sesion.UN.PuntosVta[item];
+                switch (e.CommandName)
+                {
+                    case "Seleccionar":
+                        Session["PuntoVta"] = puntoVta;
+                        Response.Redirect(ViewState["IrA"].ToString());
+                        break;
+                }
             }
         }
         protected void PuntosVtaGridView_RowDataBound(object sender, GridViewRowEventArgs e)

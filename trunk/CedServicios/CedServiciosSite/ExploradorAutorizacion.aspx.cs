@@ -35,21 +35,28 @@ namespace CedServicios.Site
         }
         private void ActualizarGrilla()
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            List<Entidades.Permiso> permisos = new List<Entidades.Permiso>();
-            if (pendientes)
+            if (Funciones.SessionTimeOut(Session))
             {
-                permisos = RN.Permiso.LeerListaPermisosPteAutoriz(sesion.Usuario, sesion);
+                Response.Redirect("~/SessionTimeout.aspx");
             }
             else
             {
-            }
-            AutorizacionesGridView.DataSource = permisos;
-            AutorizacionesGridView.DataBind();
-            if (permisos.Count == 0)
-            {
-                MensajeLabel.Text = "No hay autorizaciones";
-                if (pendientes) MensajeLabel.Text += " pendientes";
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                List<Entidades.Permiso> permisos = new List<Entidades.Permiso>();
+                if (pendientes)
+                {
+                    permisos = RN.Permiso.LeerListaPermisosPteAutoriz(sesion.Usuario, sesion);
+                }
+                else
+                {
+                }
+                AutorizacionesGridView.DataSource = permisos;
+                AutorizacionesGridView.DataBind();
+                if (permisos.Count == 0)
+                {
+                    MensajeLabel.Text = "No hay autorizaciones";
+                    if (pendientes) MensajeLabel.Text += " pendientes";
+                }
             }
         }
         protected void AutorizacionesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
@@ -106,20 +113,27 @@ namespace CedServicios.Site
         }
         protected void ConfirmarButton_Click(object sender, EventArgs e)
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.Permiso permiso = (Entidades.Permiso)ViewState["Permiso"];
-            string evento = ViewState["PermisoAccion"].ToString();
-            switch (evento)
+            if (Funciones.SessionTimeOut(Session))
             {
-                case "Autorización":
-                    RN.Permiso.Autorizar(permiso, sesion);
-                    break;
-                case "Rechazo":
-                    RN.Permiso.Rechazar(permiso, sesion);
-                    break;
+                Response.Redirect("~/SessionTimeout.aspx");
             }
-            ActualizarGrilla();
-            Funciones.PersonalizarControlesMaster(Master, true, sesion);
+            else
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                Entidades.Permiso permiso = (Entidades.Permiso)ViewState["Permiso"];
+                string evento = ViewState["PermisoAccion"].ToString();
+                switch (evento)
+                {
+                    case "Autorización":
+                        RN.Permiso.Autorizar(permiso, sesion);
+                        break;
+                    case "Rechazo":
+                        RN.Permiso.Rechazar(permiso, sesion);
+                        break;
+                }
+                ActualizarGrilla();
+                Funciones.PersonalizarControlesMaster(Master, true, sesion);
+            }
         }
     }
 }

@@ -13,13 +13,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
     public partial class FacturaElectronicaTYC {
         
         /// <summary>
-        /// Control LabelTitFacturaElectronica.
+        /// Control TituloPaginaLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelTitFacturaElectronica;
+        protected global::System.Web.UI.WebControls.Label TituloPaginaLabel;
         
         /// <summary>
         /// Control Label2.
@@ -202,15 +202,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Label Label22;
         
         /// <summary>
-        /// Control PanelAceptaTYC.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PanelAceptaTYC;
-        
-        /// <summary>
         /// Control CheckBoxAceptarTYC.
         /// </summary>
         /// <remarks>
@@ -236,23 +227,5 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ButtonRechazar;
-        
-        /// <summary>
-        /// Control Label19.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label19;
-        
-        /// <summary>
-        /// Control HyperLinkVolverPagAnt.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink HyperLinkVolverPagAnt;
     }
 }

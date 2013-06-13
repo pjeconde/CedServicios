@@ -18,47 +18,61 @@ namespace CedServicios.Site
                 IndicacionExentoGravadoDropDownList.DataSource = FeaEntidades.Indicacion.Indicacion.Lista();
                 AlicuotaIVADropDownList.DataSource = FeaEntidades.IVA.IVA.Lista();
                 DataBind();
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                CUITTextBox.Text = sesion.Cuit.Nro;
-                CUITTextBox.Enabled = false;
-                UnidadDropDownList.SelectedValue = new FeaEntidades.CodigosUnidad.Unidad().Codigo.ToString();
-                IndicacionExentoGravadoDropDownList.SelectedValue = new FeaEntidades.Indicacion.Gravado().Codigo.ToString();
-                AlicuotaIVADropDownList.SelectedValue = new FeaEntidades.IVA.Veintiuno().Codigo.ToString();
-                IdTextBox.Focus();
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    CUITTextBox.Text = sesion.Cuit.Nro;
+                    CUITTextBox.Enabled = false;
+                    UnidadDropDownList.SelectedValue = new FeaEntidades.CodigosUnidad.Unidad().Codigo.ToString();
+                    IndicacionExentoGravadoDropDownList.SelectedValue = new FeaEntidades.Indicacion.Gravado().Codigo.ToString();
+                    AlicuotaIVADropDownList.SelectedValue = new FeaEntidades.IVA.Veintiuno().Codigo.ToString();
+                    IdTextBox.Focus();
+                }
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            Entidades.Articulo articulo = new Entidades.Articulo();
-            try
+            if (Funciones.SessionTimeOut(Session))
             {
-                articulo.Cuit = CUITTextBox.Text;
-                articulo.Id = IdTextBox.Text;
-                articulo.Descr = DescrTextBox.Text;
-                articulo.GTIN = GTINTextBox.Text;
-                articulo.Unidad.Id = UnidadDropDownList.SelectedValue;
-                articulo.Unidad.Descr = UnidadDropDownList.SelectedItem.Text;
-                articulo.IndicacionExentoGravado = IndicacionExentoGravadoDropDownList.SelectedValue;
-                articulo.AlicuotaIVA = Convert.ToDouble(AlicuotaIVADropDownList.SelectedValue);
-                RN.Articulo.Crear(articulo, sesion);
-
-                CUITTextBox.Enabled = false;
-                IdTextBox.Enabled = false;
-                DescrTextBox.Enabled = false;
-                GTINTextBox.Enabled = false;
-                UnidadDropDownList.Enabled = false;
-                IndicacionExentoGravadoDropDownList.Enabled = false;
-                AlicuotaIVADropDownList.Enabled = false;
-                AceptarButton.Enabled = false;
-                SalirButton.Text = "Salir";
-
-                MensajeLabel.Text = "El Artículo fué creado satisfactoriamente";
+                Response.Redirect("~/SessionTimeout.aspx");
             }
-            catch (Exception ex)
+            else
             {
-                MensajeLabel.Text = EX.Funciones.Detalle(ex);
-                return;
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                Entidades.Articulo articulo = new Entidades.Articulo();
+                try
+                {
+                    articulo.Cuit = CUITTextBox.Text;
+                    articulo.Id = IdTextBox.Text;
+                    articulo.Descr = DescrTextBox.Text;
+                    articulo.GTIN = GTINTextBox.Text;
+                    articulo.Unidad.Id = UnidadDropDownList.SelectedValue;
+                    articulo.Unidad.Descr = UnidadDropDownList.SelectedItem.Text;
+                    articulo.IndicacionExentoGravado = IndicacionExentoGravadoDropDownList.SelectedValue;
+                    articulo.AlicuotaIVA = Convert.ToDouble(AlicuotaIVADropDownList.SelectedValue);
+                    RN.Articulo.Crear(articulo, sesion);
+
+                    CUITTextBox.Enabled = false;
+                    IdTextBox.Enabled = false;
+                    DescrTextBox.Enabled = false;
+                    GTINTextBox.Enabled = false;
+                    UnidadDropDownList.Enabled = false;
+                    IndicacionExentoGravadoDropDownList.Enabled = false;
+                    AlicuotaIVADropDownList.Enabled = false;
+                    AceptarButton.Enabled = false;
+                    SalirButton.Text = "Salir";
+
+                    MensajeLabel.Text = "El Artículo fué creado satisfactoriamente";
+                }
+                catch (Exception ex)
+                {
+                    MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    return;
+                }
             }
         }
     }

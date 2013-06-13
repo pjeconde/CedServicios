@@ -21,15 +21,22 @@ namespace CedServicios.Site
                 DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
                 DataBind();
 
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
-                lista = RN.Cliente.ListaPorCuit(false, sesion);
-                ClientesGridView.DataSource = lista;
-                ViewState["Clientes"] = lista;
-                ClientesGridView.DataBind();
-                if (lista.Count == 0)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    MensajeLabel.Text = "No hay clientes asociados a este CUIT";
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
+                    lista = RN.Cliente.ListaPorCuit(false, sesion);
+                    ClientesGridView.DataSource = lista;
+                    ViewState["Clientes"] = lista;
+                    ClientesGridView.DataBind();
+                    if (lista.Count == 0)
+                    {
+                        MensajeLabel.Text = "No hay clientes asociados a este CUIT";
+                    }
                 }
             }
         }

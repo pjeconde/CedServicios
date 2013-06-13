@@ -51,10 +51,17 @@ namespace CedServicios.Site
             {
                 Entidades.Cuit cuit = new Entidades.Cuit();
                 cuit.Nro = CUITTextBox.Text;
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                RN.Cuit.Leer(cuit, sesion);
-                IdUNDropDownList.DataSource = RN.UN.ListaVigentesPorCuit(cuit, sesion);
-                DataBind();
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    RN.Cuit.Leer(cuit, sesion);
+                    IdUNDropDownList.DataSource = RN.UN.ListaVigentesPorCuit(cuit, sesion);
+                    DataBind();
+                }
             }
             catch (Exception ex)
             {

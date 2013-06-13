@@ -28,22 +28,14 @@
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
                             <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                 <tr>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <td valign="middle">
-                                                    <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Factura Electrónica">
-                                                    </asp:Label>
-                                                    <asp:Label ID="PruebaPopup" runat="server" Text="" Visible="false"></asp:Label>
-                                                    <asp:Button ID="PruebaPopupButton" runat="server" Text="Button" Visible="false" 
-                                                        CausesValidation="false" onclick="PruebaPopupButton_Click"/>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <td align="center" valign="middle">
+                                        <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Factura Electrónica"></asp:Label>
+                                        <asp:Label ID="PruebaPopup" runat="server" Text="" Visible="false"></asp:Label>
+                                        <asp:Button ID="PruebaPopupButton" runat="server" Text="Button" Visible="false" CausesValidation="false" onclick="PruebaPopupButton_Click"/>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="center" style="width: 782px; vertical-align: middle; text-align: center;"
+                                    <td align="center" style="width: 782px; vertical-align: middle; text-align: center; padding-top:20px;"
                                         valign="top">
                                         <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
                                             <tr>

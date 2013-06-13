@@ -324,5 +324,9 @@ namespace CedServicios.Site
             CaptchaImage.ImageUrl = "~/Captcha.ashx?w=305&h=92&c=" + ens + "&bc=" + color;
             CaptchaTextBox.Text = String.Empty;
         }
+        public static bool SessionTimeOut(System.Web.SessionState.HttpSessionState Session)
+        {
+            return ((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null;
+        }
     }
 }

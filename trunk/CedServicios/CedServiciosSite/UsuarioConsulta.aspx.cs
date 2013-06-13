@@ -14,19 +14,26 @@ namespace CedServicios.Site
         {
             if (!IsPostBack)
             {
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                TituloPaginaLabel.Text = sesion.Usuario.Nombre;
-                DatosPersonalesLabel.Text = "Id: " + sesion.Usuario.Id;
-                DatosPersonalesLabel.Text += "<br />Email: " + sesion.Usuario.Email;
-                if (!sesion.Usuario.EmailSMS.Equals(String.Empty)) DatosPersonalesLabel.Text += "<br />SMS: " + sesion.Usuario.EmailSMS;
-                if (!sesion.Usuario.Telefono.Equals(String.Empty)) DatosPersonalesLabel.Text += "<br />Telefono: " + sesion.Usuario.Telefono;
-                PermisosGridView.DataSource = sesion.Usuario.Permisos;
-                PermisosGridView.DataBind();
-                String path = Server.MapPath("~/ImagenesSubidas/");
-                string[] archivos = System.IO.Directory.GetFiles(path, sesion.Usuario.Id + ".*", System.IO.SearchOption.TopDirectoryOnly);
-                if (archivos.Length > 0)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    Image1.ImageUrl = "~/ImagenesSubidas/" + archivos[0].Replace(Server.MapPath("~/ImagenesSubidas/"), String.Empty);
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    TituloPaginaLabel.Text = sesion.Usuario.Nombre;
+                    DatosPersonalesLabel.Text = "Id: " + sesion.Usuario.Id;
+                    DatosPersonalesLabel.Text += "<br />Email: " + sesion.Usuario.Email;
+                    if (!sesion.Usuario.EmailSMS.Equals(String.Empty)) DatosPersonalesLabel.Text += "<br />SMS: " + sesion.Usuario.EmailSMS;
+                    if (!sesion.Usuario.Telefono.Equals(String.Empty)) DatosPersonalesLabel.Text += "<br />Telefono: " + sesion.Usuario.Telefono;
+                    PermisosGridView.DataSource = sesion.Usuario.Permisos;
+                    PermisosGridView.DataBind();
+                    String path = Server.MapPath("~/ImagenesSubidas/");
+                    string[] archivos = System.IO.Directory.GetFiles(path, sesion.Usuario.Id + ".*", System.IO.SearchOption.TopDirectoryOnly);
+                    if (archivos.Length > 0)
+                    {
+                        Image1.ImageUrl = "~/ImagenesSubidas/" + archivos[0].Replace(Server.MapPath("~/ImagenesSubidas/"), String.Empty);
+                    }
                 }
             }
         }

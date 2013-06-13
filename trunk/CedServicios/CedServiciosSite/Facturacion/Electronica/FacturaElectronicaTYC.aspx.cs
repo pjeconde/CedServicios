@@ -17,10 +17,6 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             if (!IsPostBack)
             {
-                if (Page.Request.UrlReferrer != null)
-                {
-                    HyperLinkVolverPagAnt.NavigateUrl = Page.Request.UrlReferrer.ToString();
-                }
                 if (CheckBoxAceptarTYC.Checked)
                 {
                     if (Page.Request.QueryString.ToString() == "Link=VerTYC")

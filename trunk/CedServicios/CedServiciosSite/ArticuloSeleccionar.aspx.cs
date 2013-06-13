@@ -28,12 +28,19 @@ namespace CedServicios.Site
                             ViewState["IrA"] = "~/ArticuloBaja.aspx";
                             break;
                     }
-                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    CUITTextBox.Text = sesion.Cuit.Nro;
-                    CUITTextBox.Enabled = false;
-                    DescrRadioButton.Checked = true;
-                    TipoBusquedaRadioButton_CheckedChanged(DescrRadioButton, new EventArgs());
-                    DescrTextBox.Focus();
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                        CUITTextBox.Text = sesion.Cuit.Nro;
+                        CUITTextBox.Enabled = false;
+                        DescrRadioButton.Checked = true;
+                        TipoBusquedaRadioButton_CheckedChanged(DescrRadioButton, new EventArgs());
+                        DescrTextBox.Focus();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -43,49 +50,56 @@ namespace CedServicios.Site
         }
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
-            MensajeLabel.Text = String.Empty;
-            if (IdRadioButton.Checked)
+            if (Funciones.SessionTimeOut(Session))
             {
-                if (IdTextBox.Text.Equals(String.Empty))
-                {
-                    MensajeLabel.Text = IdRadioButton.Text + " no informada";
-                    return;
-                }
-                else
-                {
-                    lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, sesion);
-                }
+                Response.Redirect("~/SessionTimeout.aspx");
             }
             else
             {
-                if (DescrTextBox.Text.Equals(String.Empty))
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
+                MensajeLabel.Text = String.Empty;
+                if (IdRadioButton.Checked)
                 {
-                    MensajeLabel.Text = DescrRadioButton.Text + " no informada";
-                    return;
+                    if (IdTextBox.Text.Equals(String.Empty))
+                    {
+                        MensajeLabel.Text = IdRadioButton.Text + " no informada";
+                        return;
+                    }
+                    else
+                    {
+                        lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, sesion);
+                    }
                 }
                 else
                 {
-                    lista = RN.Articulo.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, sesion);
+                    if (DescrTextBox.Text.Equals(String.Empty))
+                    {
+                        MensajeLabel.Text = DescrRadioButton.Text + " no informada";
+                        return;
+                    }
+                    else
+                    {
+                        lista = RN.Articulo.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, sesion);
+                    }
                 }
-            }
-            if (lista.Count == 0)
-            {
-                ArticulosGridView.DataSource = null;
-                ArticulosGridView.DataBind();
-                MensajeLabel.Text = "No se han encontrado artículos que satisfagan la busqueda";
-            }
-            else if (lista.Count == 1)
-            {
-                Session["Articulo"] = lista[0];
-                Response.Redirect(ViewState["IrA"].ToString());
-            }
-            else
-            {
-                ArticulosGridView.DataSource = lista;
-                ViewState["Articulo"] = lista;
-                ArticulosGridView.DataBind();
+                if (lista.Count == 0)
+                {
+                    ArticulosGridView.DataSource = null;
+                    ArticulosGridView.DataBind();
+                    MensajeLabel.Text = "No se han encontrado artículos que satisfagan la busqueda";
+                }
+                else if (lista.Count == 1)
+                {
+                    Session["Articulo"] = lista[0];
+                    Response.Redirect(ViewState["IrA"].ToString());
+                }
+                else
+                {
+                    ArticulosGridView.DataSource = lista;
+                    ViewState["Articulo"] = lista;
+                    ArticulosGridView.DataBind();
+                }
             }
         }
         protected void TipoBusquedaRadioButton_CheckedChanged(object sender, EventArgs e)

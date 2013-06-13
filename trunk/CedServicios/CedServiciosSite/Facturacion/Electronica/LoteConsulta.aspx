@@ -10,8 +10,7 @@ EnableEventValidation="false" ValidateRequest="false"%>
 <%@ Register Src="~/Facturacion/Electronica/ImpuestosConsulta.ascx" TagName="ImpuestosGlobales" TagPrefix="uc8" %>
 <%@ Register Src="~/Facturacion/Electronica/DescuentosConsulta.ascx" TagName="DescuentosGlobales" TagPrefix="DescUC" %>
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceDefault">
-    <table border="0" cellpadding="0" cellspacing="0" class="TextComunSinPosicion" style="width: 800px;
-        text-align: left;">
+    <table border="0" cellpadding="0" cellspacing="0" class="TextComunSinPosicion" style="width: 800px; text-align: left;">
         <tr>
             <td style="height: 10px;" valign="top">
             </td>
@@ -26,23 +25,12 @@ EnableEventValidation="false" ValidateRequest="false"%>
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
                             <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                 <tr>
-                                    <td>
-                                        <table>
-                                            <tr>
-                                                <td valign="middle">
-                                                    <asp:Image ID="Image1" runat="server" AlternateText="+" ImageUrl="~/Imagenes/CajaBrownPeru.ico">
-                                                    </asp:Image>
-                                                </td>
-                                                <td valign="middle">
-                                                    <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" 
-                                                        Text="Consulta de Factura Electrónica"></asp:Label>
-                                                </td>
-                                            </tr>
-                                        </table>
+                                    <td align="center">
+                                        <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Consulta de Factura Electrónica"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="center" style="width: 782px; vertical-align: middle; text-align: center;"
+                                    <td align="center" style="width:782px; vertical-align:middle; text-align:center; padding-top:20px"
                                         valign="top">
                                         <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
                                             <tr>

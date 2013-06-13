@@ -18,16 +18,22 @@ namespace CedServicios.Site
                 IndicacionExentoGravadoDropDownList.DataSource = FeaEntidades.Indicacion.Indicacion.Lista();
                 AlicuotaIVADropDownList.DataSource = FeaEntidades.IVA.IVA.Lista();
                 DataBind();
-
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
-                lista = RN.Articulo.ListaPorCuit(false, sesion);
-                ArticulosGridView.DataSource = lista;
-                ViewState["Articulos"] = lista;
-                ArticulosGridView.DataBind();
-                if (lista.Count == 0)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    MensajeLabel.Text = "No hay artículos asociados a este CUIT";
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
+                    lista = RN.Articulo.ListaPorCuit(false, sesion);
+                    ArticulosGridView.DataSource = lista;
+                    ViewState["Articulos"] = lista;
+                    ArticulosGridView.DataBind();
+                    if (lista.Count == 0)
+                    {
+                        MensajeLabel.Text = "No hay artículos asociados a este CUIT";
+                    }
                 }
             }
         }

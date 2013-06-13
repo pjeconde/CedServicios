@@ -13,47 +13,61 @@ namespace CedServicios.Site
         {
             if (!IsPostBack)
             {
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-
-                CUITTextBox.Text = sesion.Cuit.Nro;
-                IdUNTextBox.Text = sesion.UN.Id.ToString();
-                DescrUNTextBox.Text = sesion.UN.Descr;
-
-                CUITTextBox.Enabled = false;
-                IdUNTextBox.Enabled = false;
-                DescrUNTextBox.Enabled = false;
-
-                if (sesion.UN.WF.Estado == "Vigente")
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    TituloPaginaLabel.Text = "Baja de Unidad de Negocio";
-                    AceptarButton.Text = "Dar de Baja";
+                    Response.Redirect("~/SessionTimeout.aspx");
                 }
                 else
                 {
-                    TituloPaginaLabel.Text = "Anulación de Baja de Unidad de Negocio";
-                    AceptarButton.Text = "Anular Baja";
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+
+                    CUITTextBox.Text = sesion.Cuit.Nro;
+                    IdUNTextBox.Text = sesion.UN.Id.ToString();
+                    DescrUNTextBox.Text = sesion.UN.Descr;
+
+                    CUITTextBox.Enabled = false;
+                    IdUNTextBox.Enabled = false;
+                    DescrUNTextBox.Enabled = false;
+
+                    if (sesion.UN.WF.Estado == "Vigente")
+                    {
+                        TituloPaginaLabel.Text = "Baja de Unidad de Negocio";
+                        AceptarButton.Text = "Dar de Baja";
+                    }
+                    else
+                    {
+                        TituloPaginaLabel.Text = "Anulación de Baja de Unidad de Negocio";
+                        AceptarButton.Text = "Anular Baja";
+                    }
+                    AceptarButton.Focus();
                 }
-                AceptarButton.Focus();
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
             try
             {
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                if (AceptarButton.Text == "Dar de Baja")
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    RN.UN.CambiarEstado(sesion.UN, "DeBaja", sesion);
+                    Response.Redirect("~/SessionTimeout.aspx");
                 }
                 else
                 {
-                    RN.UN.CambiarEstado(sesion.UN, "Vigente", sesion);
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    if (AceptarButton.Text == "Dar de Baja")
+                    {
+                        RN.UN.CambiarEstado(sesion.UN, "DeBaja", sesion);
+                    }
+                    else
+                    {
+                        RN.UN.CambiarEstado(sesion.UN, "Vigente", sesion);
+                    }
+
+                    AceptarButton.Enabled = false;
+                    SalirButton.Text = "Salir";
+
+                    MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
                 }
-
-                AceptarButton.Enabled = false;
-                SalirButton.Text = "Salir";
-
-                MensajeLabel.Text = "El cambio de estado fué registrado satisfactoriamente";
             }
             catch (Exception ex)
             {

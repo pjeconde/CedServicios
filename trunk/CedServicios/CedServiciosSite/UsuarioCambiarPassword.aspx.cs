@@ -17,21 +17,6 @@ namespace CedServicios.Site
             if (!IsPostBack)
             {
                 PasswordTextBox.Focus();
-                try
-                {
-                    if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == String.Empty)
-                    {
-                        WebForms.Excepciones.Redireccionar("Opcion", TituloLabel.Text, "~/SoloDispPUsuariosRegistrados.aspx");
-                    }
-                }
-                catch (System.Threading.ThreadAbortException)
-                {
-                    Trace.Warn("Thread abortado");
-                }
-                catch (Exception ex)
-                {
-                    WebForms.Excepciones.Redireccionar(ex, "~/NotificacionDeExcepcion.aspx");
-                }
             }
         }
         protected void TextBox_TextChanged(object sender, EventArgs e)
@@ -43,17 +28,24 @@ namespace CedServicios.Site
             try
             {
                 MensajeLabel.Text = String.Empty;
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                RN.Usuario.CambiarPassword(sesion.Usuario, PasswordTextBox.Text, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
-                RN.Sesion.Cerrar(sesion);
-                PasswordTextBox.Enabled = false;
-                PasswordNuevaTextBox.Enabled = false;
-                ConfirmacionPasswordNuevaTextBox.Enabled = false;
-                AceptarButton.Visible = false;
-                CancelarButton.Visible = false;
-                RN.Sesion.Cerrar(sesion);
-                Funciones.PersonalizarControlesMaster(Master, false, sesion);
-                MensajeLabel.Text = "La Contraseña fue cambiada satisfactoriamente.<br />Para seguir trabajando, haga click en 'Iniciar sesión'.";
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    RN.Usuario.CambiarPassword(sesion.Usuario, PasswordTextBox.Text, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
+                    RN.Sesion.Cerrar(sesion);
+                    PasswordTextBox.Enabled = false;
+                    PasswordNuevaTextBox.Enabled = false;
+                    ConfirmacionPasswordNuevaTextBox.Enabled = false;
+                    AceptarButton.Visible = false;
+                    CancelarButton.Visible = false;
+                    RN.Sesion.Cerrar(sesion);
+                    Funciones.PersonalizarControlesMaster(Master, false, sesion);
+                    MensajeLabel.Text = "La Contraseña fue cambiada satisfactoriamente.<br />Para seguir trabajando, haga click en 'Iniciar sesión'.";
+                }
             }
             catch (System.Threading.ThreadAbortException)
             {

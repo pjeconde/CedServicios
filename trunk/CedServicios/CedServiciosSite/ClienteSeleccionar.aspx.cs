@@ -30,13 +30,20 @@ namespace CedServicios.Site
                     }
                     TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
                     DataBind();
-                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    CUITTextBox.Text = sesion.Cuit.Nro;
-                    CUITTextBox.Enabled = false;
-                    TipoDocDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
-                    RazonSocialRadioButton.Checked = true;
-                    TipoBusquedaRadioButton_CheckedChanged(RazonSocialRadioButton, new EventArgs());
-                    RazonSocialTextBox.Focus();
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                        CUITTextBox.Text = sesion.Cuit.Nro;
+                        CUITTextBox.Enabled = false;
+                        TipoDocDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
+                        RazonSocialRadioButton.Checked = true;
+                        TipoBusquedaRadioButton_CheckedChanged(RazonSocialRadioButton, new EventArgs());
+                        RazonSocialTextBox.Focus();
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -46,64 +53,71 @@ namespace CedServicios.Site
         }
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
-            MensajeLabel.Text = String.Empty;
-            if (TipoDocRadioButton.Checked)
+            if (Funciones.SessionTimeOut(Session))
             {
-                if (NroDocTextBox.Text.Equals(String.Empty))
-                {
-                    MensajeLabel.Text = TipoDocRadioButton.Text + " no informado";
-                    return;
-                }
-                else
-                {
-                    Entidades.Documento documento = new Entidades.Documento();
-                    documento.Tipo.Id = TipoDocDropDownList.SelectedValue.ToString();
-                    documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
-                    lista = RN.Cliente.ListaPorCuityTipoyNroDoc(sesion.Cuit.Nro, documento, sesion);
-                }
-            }
-            else if (RazonSocialRadioButton.Checked)
-            {
-                if (RazonSocialTextBox.Text.Equals(String.Empty))
-                {
-                    MensajeLabel.Text = RazonSocialRadioButton.Text + " no informado";
-                    return;
-                }
-                else
-                {
-                    lista = RN.Cliente.ListaPorCuityRazonSocial(sesion.Cuit.Nro, RazonSocialTextBox.Text, sesion);
-                }
+                Response.Redirect("~/SessionTimeout.aspx");
             }
             else
             {
-                if (IdClienteTextBox.Text.Equals(String.Empty))
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
+                MensajeLabel.Text = String.Empty;
+                if (TipoDocRadioButton.Checked)
                 {
-                    MensajeLabel.Text =  IdClienteRadioButton.Text + " no informado";
-                    return;
+                    if (NroDocTextBox.Text.Equals(String.Empty))
+                    {
+                        MensajeLabel.Text = TipoDocRadioButton.Text + " no informado";
+                        return;
+                    }
+                    else
+                    {
+                        Entidades.Documento documento = new Entidades.Documento();
+                        documento.Tipo.Id = TipoDocDropDownList.SelectedValue.ToString();
+                        documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                        lista = RN.Cliente.ListaPorCuityTipoyNroDoc(sesion.Cuit.Nro, documento, sesion);
+                    }
+                }
+                else if (RazonSocialRadioButton.Checked)
+                {
+                    if (RazonSocialTextBox.Text.Equals(String.Empty))
+                    {
+                        MensajeLabel.Text = RazonSocialRadioButton.Text + " no informado";
+                        return;
+                    }
+                    else
+                    {
+                        lista = RN.Cliente.ListaPorCuityRazonSocial(sesion.Cuit.Nro, RazonSocialTextBox.Text, sesion);
+                    }
                 }
                 else
                 {
-                    lista = RN.Cliente.ListaPorCuityIdCliente(sesion.Cuit.Nro, IdClienteTextBox.Text, sesion);
+                    if (IdClienteTextBox.Text.Equals(String.Empty))
+                    {
+                        MensajeLabel.Text = IdClienteRadioButton.Text + " no informado";
+                        return;
+                    }
+                    else
+                    {
+                        lista = RN.Cliente.ListaPorCuityIdCliente(sesion.Cuit.Nro, IdClienteTextBox.Text, sesion);
+                    }
                 }
-            }
-            if (lista.Count == 0)
-            {
-                ClientesGridView.DataSource = null;
-                ClientesGridView.DataBind();
-                MensajeLabel.Text = "No se han encontrado clientes que satisfagan la busqueda";
-            }
-            else if (lista.Count == 1)
-            {
-                Session["Cliente"] = lista[0];
-                Response.Redirect(ViewState["IrA"].ToString());
-            }
-            else
-            {
-                ClientesGridView.DataSource = lista;
-                ViewState["Clientes"] = lista;
-                ClientesGridView.DataBind();
+                if (lista.Count == 0)
+                {
+                    ClientesGridView.DataSource = null;
+                    ClientesGridView.DataBind();
+                    MensajeLabel.Text = "No se han encontrado clientes que satisfagan la busqueda";
+                }
+                else if (lista.Count == 1)
+                {
+                    Session["Cliente"] = lista[0];
+                    Response.Redirect(ViewState["IrA"].ToString());
+                }
+                else
+                {
+                    ClientesGridView.DataSource = lista;
+                    ViewState["Clientes"] = lista;
+                    ClientesGridView.DataBind();
+                }
             }
         }
         protected void TipoBusquedaRadioButton_CheckedChanged(object sender, EventArgs e)

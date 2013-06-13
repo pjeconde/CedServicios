@@ -22,15 +22,22 @@ namespace CedServicios.Site
             {
                 Entidades.Cuit cuit = new Entidades.Cuit();
                 cuit.Nro = CUITTextBox.Text;
-                Entidades.Sesion sesion=(Entidades.Sesion)Session["Sesion"];
-                RN.Cuit.Leer(cuit, sesion);
-                string referenciaAAprobadores = String.Empty;
-                RN.Permiso.SolicitarPermisoParaUsuario(cuit, out referenciaAAprobadores, sesion);
-                CUITTextBox.Enabled = false;
-                SolicitarButton.Enabled = false;
-                SalirButton.Text = "Salir";
-                Funciones.PersonalizarControlesMaster(Master, true, sesion);
-                MensajeLabel.Text = "El permiso fue enviado para su aprobación.<br />Autorizador(es): " + referenciaAAprobadores;
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    RN.Cuit.Leer(cuit, sesion);
+                    string referenciaAAprobadores = String.Empty;
+                    RN.Permiso.SolicitarPermisoParaUsuario(cuit, out referenciaAAprobadores, sesion);
+                    CUITTextBox.Enabled = false;
+                    SolicitarButton.Enabled = false;
+                    SalirButton.Text = "Salir";
+                    Funciones.PersonalizarControlesMaster(Master, true, sesion);
+                    MensajeLabel.Text = "El permiso fue enviado para su aprobación.<br />Autorizador(es): " + referenciaAAprobadores;
+                }
             }
             catch (Exception ex)
             {
