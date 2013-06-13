@@ -140,7 +140,7 @@ namespace CedServicios.DB
             {
                 configuracion.IdUsuario = String.Empty;
                 configuracion.Cuit = Cuit.Nro;
-                configuracion.IdUN = String.Empty;
+                configuracion.IdUN = 0;
                 configuracion.TipoPermiso.Id = String.Empty;
                 configuracion.IdItemConfig = "NroSerieCertifAFIP";
                 configuracion.Valor = Cuit.NroSerieCertifAFIP;
@@ -151,7 +151,7 @@ namespace CedServicios.DB
             {
                 configuracion.IdUsuario = String.Empty;
                 configuracion.Cuit = Cuit.Nro;
-                configuracion.IdUN = String.Empty;
+                configuracion.IdUN = 0;
                 configuracion.TipoPermiso.Id = String.Empty;
                 configuracion.IdItemConfig = "NroSerieCertifITF";
                 configuracion.Valor = Cuit.NroSerieCertifITF;
@@ -199,7 +199,7 @@ namespace CedServicios.DB
             {
                 configuracion.IdUsuario = String.Empty;
                 configuracion.Cuit = Hasta.Nro;
-                configuracion.IdUN = String.Empty;
+                configuracion.IdUN = 0;
                 configuracion.TipoPermiso.Id = String.Empty;
                 configuracion.IdItemConfig = "NroSerieCertifAFIP";
                 configuracion.Valor = Hasta.NroSerieCertifAFIP;
@@ -210,7 +210,7 @@ namespace CedServicios.DB
             {
                 configuracion.IdUsuario = String.Empty;
                 configuracion.Cuit = Hasta.Nro;
-                configuracion.IdUN = String.Empty;
+                configuracion.IdUN = 0;
                 configuracion.TipoPermiso.Id = String.Empty;
                 configuracion.IdItemConfig = "NroSerieCertifITF";
                 configuracion.Valor = Hasta.NroSerieCertifITF;

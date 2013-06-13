@@ -16,8 +16,9 @@ namespace CedServicios.DB
         public void Leer(Entidades.Usuario Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Usuario.IdUsuario, Usuario.Nombre, Usuario.Telefono, Usuario.Email, Usuario.Password, Usuario.Pregunta, Usuario.Respuesta, Usuario.CantidadEnviosMail, Usuario.FechaUltimoReenvioMail, Usuario.EmailSMS, Usuario.IdWF, Usuario.Estado, Usuario.UltActualiz ");
+            a.Append("select Usuario.IdUsuario, Usuario.Nombre, Usuario.Telefono, Usuario.Email, Usuario.Password, Usuario.Pregunta, Usuario.Respuesta, Usuario.CantidadEnviosMail, Usuario.FechaUltimoReenvioMail, Usuario.EmailSMS, Usuario.IdWF, Usuario.Estado, Usuario.UltActualiz, isnull(Configuracion.Cuit, '') as CuitPredef, isnull(Configuracion.IdUN, 0) as IdUNPredef ");
             a.Append("from Usuario ");
+            a.Append("left outer join Configuracion on Usuario.IdUsuario=Configuracion.IdUsuario and Configuracion.IdItemConfig='CUITUNpredef' ");
             a.Append("where Usuario.IdUsuario='" + Usuario.Id + "' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count == 0)
@@ -44,6 +45,12 @@ namespace CedServicios.DB
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
+            try
+            {
+                Hasta.CuitPredef = Convert.ToString(Desde["CuitPredef"]);
+                Hasta.IdUNPredef = Convert.ToInt32(Desde["IdUNPredef"]);
+            }
+            catch { }
         }
         public void Crear(Entidades.Usuario Usuario)
         {

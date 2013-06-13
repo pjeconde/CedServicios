@@ -125,15 +125,35 @@ namespace CedServicios.RN
         {
             Sesion.Usuario.Permisos = RN.Permiso.LeerListaPermisosPorUsuario(Sesion.Usuario, Sesion);
             Sesion.CuitsDelUsuario = RN.Cuit.LeerListaCuitsPorUsuario(Sesion);
+            List<Entidades.Cuit> estaElCuitEnLaLista = new List<Entidades.Cuit>();
             if (Sesion.CuitsDelUsuario.Count != 0)
             {
                 if (Sesion.Cuit.Nro == null)
                 {
-                    AsignarCuit(Sesion.CuitsDelUsuario[0], Sesion);
+                    //Todavía no eligió un Cuit ...
+                    if (Sesion.Usuario.CuitPredef == String.Empty)
+                    {
+                        // ... y no tiene Cuit predefinido
+                        AsignarCuit(Sesion.CuitsDelUsuario[0], Sesion);
+                    }
+                    else
+                    {
+                        // ... y tiene Cuit predefinido
+                        estaElCuitEnLaLista = Sesion.CuitsDelUsuario.FindAll(delegate(Entidades.Cuit p) { return p.Nro == Sesion.Usuario.CuitPredef; });
+                        if (estaElCuitEnLaLista.Count == 1)
+                        {
+                            AsignarCuit(estaElCuitEnLaLista[0], Sesion);
+                        }
+                        else
+                        {
+                            AsignarCuit(Sesion.CuitsDelUsuario[0], Sesion);
+                        }
+                    }
                 }
                 else
                 {
-                    List<Entidades.Cuit> estaElCuitEnLaLista = Sesion.CuitsDelUsuario.FindAll(delegate(Entidades.Cuit p) { return p.Nro == Sesion.Cuit.Nro; });
+                    //Ya eligió el Cuit
+                    estaElCuitEnLaLista = Sesion.CuitsDelUsuario.FindAll(delegate(Entidades.Cuit p) { return p.Nro == Sesion.Cuit.Nro; });
                     if (estaElCuitEnLaLista.Count == 1)
                     {
                         AsignarCuit(estaElCuitEnLaLista[0], Sesion);
@@ -155,15 +175,35 @@ namespace CedServicios.RN
             Sesion.Cuit = Cuit;
             Sesion.Cuit.UNs = RN.UN.ListaPorCuitParaElUsuarioLogueado(Sesion);
             Sesion.ClientesDelCuit = RN.Cliente.ListaPorCuit(false, Sesion);
+            List<Entidades.UN> estaLaUNEnLaLista = new List<Entidades.UN>();
             if (Sesion.Cuit.UNs.Count != 0)
             {
                 if (Sesion.UN.Id == 0)
                 {
-                    AsignarUN(Sesion.Cuit.UNs[0], Sesion);
+                    //Todavía no eligió una UN ...
+                    if (Sesion.Usuario.IdUNPredef == 0)
+                    {
+                        // ... y no tiene UN predefinida
+                        AsignarUN(Sesion.Cuit.UNs[0], Sesion);
+                    }
+                    else
+                    {
+                        // ... y tiene UN predefinida
+                        estaLaUNEnLaLista = Sesion.Cuit.UNs.FindAll(delegate(Entidades.UN p) { return p.Id == Sesion.Usuario.IdUNPredef; });
+                        if (estaLaUNEnLaLista.Count == 1)
+                        {
+                            AsignarUN(estaLaUNEnLaLista[0], Sesion);
+                        }
+                        else
+                        {
+                            AsignarUN(Sesion.Cuit.UNs[0], Sesion);
+                        }
+                    }
                 }
                 else
                 {
-                    List<Entidades.UN> estaLaUNEnLaLista = Sesion.Cuit.UNs.FindAll(delegate(Entidades.UN p) { return p.Id == Sesion.UN.Id; });
+                    //Ya eligió la UN
+                    estaLaUNEnLaLista = Sesion.Cuit.UNs.FindAll(delegate(Entidades.UN p) { return p.Id == Sesion.UN.Id; });
                     if (estaLaUNEnLaLista.Count == 1)
                     {
                         AsignarUN(estaLaUNEnLaLista[0], Sesion);
