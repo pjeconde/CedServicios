@@ -26,8 +26,8 @@
 		        <asp:Label ID="Label4" runat="server" Text="Logotipo<br />para<br />comprobantes<br />(archivos bmp de 106x500 pixels)" ></asp:Label>
 	        </td>
 			<td align="left" style="padding-top:5px">
-                <asp:Image ID="LogotipoImage" runat="server" BorderStyle="Solid" BorderWidth="1px" BorderColor="#cccccc"
-                Width="250px" Height="53px" />  <%--ImageUrl="Imagenes/Interrogacion.jpg"--%>
+                <asp:Image ID="LogotipoImage" runat="server" BorderStyle="Solid" BorderWidth="1px" BorderColor="#cccccc" ImageUrl="Imagenes/Interrogacion106x500.bmp"
+                Width="500px" Height="106px" />
 			</td>
         </tr>
         <tr>
