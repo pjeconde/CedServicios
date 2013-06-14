@@ -477,3 +477,77 @@ insert Log values (@IdWF, getdate(), 'cedeira.migracion', 'Usuario', 'Alta', 'Vi
 update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF'
 insert Permiso values ('cedeira.migracion', '', '', 'AdminSITE', '20621231', '', 'AltaAdminSITEs', @accionNro, @idWF, 'Vigente')
 insert Log values (@IdWF, getdate(), 'cedeira.migracion', 'Permiso', 'Alta', 'Vigente', 'Alta x script')
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[DestinoComprobante](
+	[IdDestinoComprobante] [varchar](15) NOT NULL,
+ CONSTRAINT [PK_DestinoComprobante] PRIMARY KEY CLUSTERED 
+(
+	[IdDestinoComprobante] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+
+insert DestinoComprobante values ('ITF')
+insert DestinoComprobante values ('AFIP')
+insert DestinoComprobante values ('Ninguno')
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Comprobante](
+	[Cuit] [varchar](11) NOT NULL,
+	[IdTipoComprobante] [numeric](2) NOT NULL, 
+	[DescrTipoComprobante] [varchar](30) NOT NULL, 
+	[NroPuntoVta] [numeric](4) NOT NULL,
+	[NroComprobante] [numeric](8) NOT NULL, 
+	[NroLote] [numeric](14) NOT NULL, 
+	[IdTipoDoc] [numeric](2, 0) NOT NULL,
+	[NroDoc] [numeric](11, 0) NOT NULL,
+	[IdCliente] [varchar](50) NOT NULL,
+	[DesambiguacionCuitPais] [int] NOT NULL,
+	[RazonSocial] [varchar](50) NOT NULL,
+	[Detalle] [varchar](256) NOT NULL,
+	[Fecha] [datetime] NOT NULL,
+	[FechaVto] [datetime] NOT NULL,
+	[Moneda] [varchar](3) NOT NULL,
+	[ImporteMoneda] [numeric](15, 2) NOT NULL,
+	[TipoCambio] [numeric](10, 6) NOT NULL,
+	[Importe] [numeric](15, 2) NOT NULL,
+	[Request] [text] NOT NULL,
+	[Response] [text] NOT NULL,
+	[IdDestinoComprobante] [varchar](15) NOT NULL,
+	[IdWF] [int] NOT NULL,
+	[Estado] [varchar](15) NOT NULL,
+	[UltActualiz] [timestamp] NOT NULL,
+ CONSTRAINT [PK_Table_Comprobante] PRIMARY KEY CLUSTERED 
+(
+	[Cuit] ASC, 
+	[IdTipoComprobante] ASC, 
+	[NroPuntoVta] ASC, 
+	[NroComprobante] ASC 
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[Comprobante]  WITH CHECK ADD  CONSTRAINT [FK_Comprobante_Cuit] FOREIGN KEY([Cuit])
+REFERENCES [dbo].[Cuit] ([Cuit])
+GO
+ALTER TABLE [dbo].[Comprobante] CHECK CONSTRAINT [FK_Comprobante_Cuit]
+GO
+ALTER TABLE [dbo].[Comprobante]  WITH CHECK ADD  CONSTRAINT [FK_Comprobante_DestinoComprobante] FOREIGN KEY([IdDestinoComprobante])
+REFERENCES [dbo].[DestinoComprobante] ([IdDestinoComprobante])
+GO
+ALTER TABLE [dbo].[Comprobante] CHECK CONSTRAINT [FK_Comprobante_DestinoComprobante]
+GO
