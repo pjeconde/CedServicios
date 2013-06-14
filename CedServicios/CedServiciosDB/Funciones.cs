@@ -18,5 +18,9 @@ namespace CedServicios.DB
         {
             return ObjetoSerializado(Objeto).Replace(Environment.NewLine, "' + CHAR(13) + CHAR(10) + '");
         }
+        public static DateTime ConvertirFechaStringAAAAMMDDaDatetime(string FechaStringAAAAMMDD)
+        {
+            return new DateTime(Convert.ToInt32(FechaStringAAAAMMDD.Substring(0, 4)), Convert.ToInt32(FechaStringAAAAMMDD.Substring(4, 2)), Convert.ToInt32(FechaStringAAAAMMDD.Substring(6, 2)));
+        }
     }
 }

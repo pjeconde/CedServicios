@@ -97,10 +97,47 @@ namespace CedServicios.DB
             a.AppendLine();
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
-        public void Crear(FeaEntidades.InterFacturas.lote_comprobantes Lote)
+        public void Crear(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdDestinoComprobante)
         {
             Entidades.Comprobante comprobante = new Entidades.Comprobante();
-            //Llenar el objeto "comprobante" a partir del objeto "Lote"
+            comprobante.Cuit = Lote.cabecera_lote.cuit_vendedor.ToString();
+            comprobante.TipoComprobante.Id = Lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+            FeaEntidades.TiposDeComprobantes.TipoComprobante tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
+            if (tipoComprobante != null)
+            {
+                comprobante.TipoComprobante.Descr = tipoComprobante.Descr;
+            }
+            else
+            {
+                comprobante.TipoComprobante.Descr = "Desconocido";
+            }
+            comprobante.NroPuntoVta = Lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+            comprobante.Nro = Lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+            comprobante.NroLote = Lote.cabecera_lote.id_lote;
+            comprobante.Documento.Tipo.Id = Lote.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
+            FeaEntidades.Documentos.Documento tipoDocumento = FeaEntidades.Documentos.Documento.Lista().Find(delegate(FeaEntidades.Documentos.Documento d) {return comprobante.Documento.Tipo.Id == d.Codigo.ToString();});
+            if (tipoDocumento != null)
+            {
+                comprobante.Documento.Tipo.Descr = tipoDocumento.Descr;
+            }
+            else
+            {
+                comprobante.Documento.Tipo.Descr = "Desconocido";
+            }
+            comprobante.Documento.Nro = Lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;
+            //comprobante.IdCliente
+            //comprobante.DesambiguacionCuitPais
+            comprobante.RazonSocial = Lote.comprobante[0].cabecera.informacion_comprador.denominacion;
+            //comprobante.Detalle
+            comprobante.Fecha = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
+            comprobante.FechaVto = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
+            comprobante.Moneda = Lote.comprobante[0].resumen.codigo_moneda;
+            comprobante.ImporteMoneda = Lote.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;
+            comprobante.TipoCambio = Lote.comprobante[0].resumen.tipo_de_cambio;
+            comprobante.Importe = Lote.comprobante[0].resumen.importe_total_factura;
+            comprobante.Request = Funciones.ObjetoSerializado(Lote);
+            comprobante.Response = Funciones.ObjetoSerializado(Response);
+            comprobante.IdDestinoComprobante = IdDestinoComprobante;
             Crear(comprobante);
         }
     }
