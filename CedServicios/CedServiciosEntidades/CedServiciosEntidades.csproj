@@ -43,6 +43,7 @@
     <Compile Include="Accion.cs" />
     <Compile Include="Articulo.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="Comprobante.cs" />
     <Compile Include="Configuracion.cs" />
     <Compile Include="Contacto.cs" />
     <Compile Include="ContactoSite.cs" />
@@ -61,6 +62,7 @@
     <Compile Include="Provincia.cs" />
     <Compile Include="PuntoVta.cs" />
     <Compile Include="Sesion.cs" />
+    <Compile Include="TipoComprobante.cs" />
     <Compile Include="TipoDocumento.cs" />
     <Compile Include="TipoPermiso.cs" />
     <Compile Include="TipoPuntoVta.cs" />

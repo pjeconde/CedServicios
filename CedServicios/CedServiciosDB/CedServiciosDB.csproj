@@ -42,6 +42,7 @@
   <ItemGroup>
     <Compile Include="Articulo.cs" />
     <Compile Include="Cliente.cs" />
+    <Compile Include="Comprobante.cs" />
     <Compile Include="Configuracion.cs" />
     <Compile Include="Cuit.cs" />
     <Compile Include="db.cs" />
