@@ -39,7 +39,7 @@ namespace CedServicios.Site
             if (FileUpload1.HasFile)
             {
                 fileExtension = System.IO.Path.GetExtension(FileUpload1.FileName).ToLower();
-                String[] allowedExtensions = { ".jpg", ".png", ".jpeg", ".gif" };
+                String[] allowedExtensions = { ".bmp" };
                 for (int i = 0; i < allowedExtensions.Length; i++)
                 {
                     if (fileExtension == allowedExtensions[i])

@@ -23,11 +23,11 @@
         </tr>
         <tr>
 	        <td align="right" valign="top" style="padding-right:5px; padding-top:5px">
-		        <asp:Label ID="Label4" runat="server" Text="Logotipo<br />para<br />comprobantes<br />(archivos: jpg, jpeg, png o gif)" ></asp:Label>
+		        <asp:Label ID="Label4" runat="server" Text="Logotipo<br />para<br />comprobantes<br />(archivos bmp de 106x500 pixels)" ></asp:Label>
 	        </td>
 			<td align="left" style="padding-top:5px">
-                <asp:Image ID="LogotipoImage" runat="server" BorderStyle="Solid" BorderWidth="1px" BorderColor="#cccccc" ImageUrl="Imagenes/Interrogacion.jpg"
-                Width="147px" />
+                <asp:Image ID="LogotipoImage" runat="server" BorderStyle="Solid" BorderWidth="1px" BorderColor="#cccccc"
+                Width="250px" Height="53px" />  <%--ImageUrl="Imagenes/Interrogacion.jpg"--%>
 			</td>
         </tr>
         <tr>
