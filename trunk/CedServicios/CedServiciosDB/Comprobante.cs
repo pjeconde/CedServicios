@@ -97,10 +97,10 @@ namespace CedServicios.DB
             a.AppendLine();
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
-        public void Crear(FeaEntidades.Comprobante Comprobante)
+        public void Crear(FeaEntidades.InterFacturas.lote_comprobantes Lote)
         {
             Entidades.Comprobante comprobante = new Entidades.Comprobante();
-            //Llenar el objeto Comprobante a partir del objeto Fea...
+            //Llenar el objeto "comprobante" a partir del objeto "Lote"
             Crear(comprobante);
         }
     }
