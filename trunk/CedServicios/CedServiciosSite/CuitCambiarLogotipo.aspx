@@ -17,40 +17,38 @@
                 <asp:Label ID="Label3" runat="server" Text="CUIT"></asp:Label>
             </td>
             <td align="left" style="padding-top:20px">
-                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
-                    Width="80px"></asp:TextBox>
+                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
             </td>
         </tr>
         <tr>
 	        <td align="right" valign="top" style="padding-right:5px; padding-top:5px">
-		        <asp:Label ID="Label4" runat="server" Text="Logotipo<br />para<br />comprobantes<br />(archivos bmp de 106x500 pixels)" ></asp:Label>
+		        <asp:Label ID="Label4" runat="server" Text="Logotipo<br />para<br />comprobantes<br />(archivos bmp de <br />106x500 pixels)" ></asp:Label>
 	        </td>
-			<td align="left" style="padding-top:5px">
-                <asp:Image ID="LogotipoImage" runat="server" BorderStyle="Solid" BorderWidth="1px" BorderColor="#cccccc" ImageUrl="Imagenes/Interrogacion106x500.bmp"
-                Width="500px" Height="106px" />
+			<td align="left" rowspan="2" style="padding-top:5px">
+                <asp:Image ID="LogotipoImage" runat="server" BorderStyle="Solid" BorderWidth="1px" BorderColor="#cccccc" ImageUrl="Imagenes/Interrogacion106x500.bmp" Width="500px" Height="106px" />
 			</td>
         </tr>
         <tr>
 	        <td align="right" style="padding-right:5px; padding-top:5px">
-                <asp:FileUpload ID="FileUpload1" runat="server" ToolTip="Seleccione la imagen que se usará como logotipo en los comprobantes" TabIndex="502" />
+                <asp:Button ID="BorrarImagenButton" runat="server" TabIndex="2" Text="Borrar imagen actual" onclick="BorrarImagenButton_Click" />
+	        </td>
+        </tr>
+        <tr>
+	        <td>
 	        </td>
 			<td align="left" style="padding-top:5px">
-                <asp:Button ID="SubirImagenButton" runat="server" TabIndex="503" Text="Subir imagen seleccionada" onclick="SubirImagenButton_Click" />
-                <asp:Button ID="BorrarImagenButton" runat="server" TabIndex="504" Text="Borrar imagen actual" onclick="BorrarImagenButton_Click" />
+                <asp:FileUpload ID="FileUpload1" runat="server" ToolTip="Seleccione la imagen que se usará como logotipo en los comprobantes" TabIndex="3" Size="34" />
+                <asp:Button ID="SubirImagenButton" runat="server" TabIndex="4" Text="Subir imagen seleccionada" onclick="SubirImagenButton_Click" />
 			</td>
         </tr>
         <tr>
-            <td>
-            </td>
-            <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="506" Text="Salir" PostBackUrl="~/Default.aspx" />
+            <td align="center" colspan="2" style="height:24px; padding-top:20px">
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="5" Text="Salir" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
-                <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary">
-                </asp:ValidationSummary>
             </td>
         </tr>
     </table>
