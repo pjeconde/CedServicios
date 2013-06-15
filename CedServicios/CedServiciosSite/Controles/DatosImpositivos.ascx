@@ -4,6 +4,9 @@
 <!-- CondIVA -->
 <tr>
 	<td align="right" style="padding-right:5px; padding-right: 5px; padding-top:5px">
+		<asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="CondIVADropDownList" ErrorMessage="Cond.IVA" SetFocusOnError="True" InitialValue="0">
+			<asp:Label ID="Label28" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+		</asp:RequiredFieldValidator>
 		<asp:Label ID="Label11" runat="server" Text="Cond.IVA"></asp:Label>
 	</td>
 	<td align="left" style="padding-top:5px">
@@ -14,6 +17,9 @@
 <!-- NroIngBrutos y CondIngBrutos -->
 <tr>
 	<td align="right" style="padding-left: 10px; padding-right: 5px; padding-top:5px">
+		<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="CondIngBrutosDropDownList" ErrorMessage="Cond.Ing.Brutos" SetFocusOnError="True" InitialValue="0">
+			<asp:Label ID="Label1" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+		</asp:RequiredFieldValidator>
 		<asp:Label ID="Label18" runat="server" Text="Cond.Ing.Brutos"></asp:Label>
 	</td>
 	<td align="left" style="padding-top:5px">

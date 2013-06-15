@@ -58,6 +58,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Image LogotipoImage;
         
         /// <summary>
+        /// Control BorrarImagenButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BorrarImagenButton;
+        
+        /// <summary>
         /// Control FileUpload1.
         /// </summary>
         /// <remarks>
@@ -76,15 +85,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Button SubirImagenButton;
         
         /// <summary>
-        /// Control BorrarImagenButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button BorrarImagenButton;
-        
-        /// <summary>
         /// Control SalirButton.
         /// </summary>
         /// <remarks>
@@ -101,14 +101,5 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label MensajeLabel;
-        
-        /// <summary>
-        /// Control MensajeValidationSummary.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ValidationSummary MensajeValidationSummary;
     }
 }
