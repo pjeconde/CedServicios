@@ -37,12 +37,21 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             if (CheckBoxAceptarTYC.Checked)
             {
-                Session["AceptarTYC"] = true;
-				Response.Redirect("~/Facturacion/Electronica/Lote.aspx", true);
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    RN.Usuario.RegistrarAceptacioneFactTyC(sesion);
+                    sesion.Usuario.FechaOKeFactTyC = DateTime.Now.ToString("yyyyMMdd");
+				    Response.Redirect("~/Facturacion/Electronica/Lote.aspx", true);
+                }
             }
             else
             {
-                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe marcar que acepta los términos y condiciones');</script>");
+                MensajeLabel.Text = "Debe marcar que acepta los términos y condiciones";
             }
         }
     }

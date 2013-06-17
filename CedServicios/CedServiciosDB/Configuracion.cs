@@ -14,6 +14,12 @@ namespace CedServicios.DB
         {
             Ejecutar(CrearHandler(Configuracion), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void CrearFechaOKeFactTyC(Entidades.Usuario Usuario)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("insert Configuracion (IdUsuario, Cuit, IdUN, IdTipoPermiso, IdItemConfig, Valor) values ('" + Usuario.Id + "', '', '', '', 'FechaOKeFactTyC', convert(varchar(8), getdate(), 112)) ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
         public void ElimninarCUITUNpredef(string IdUsuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);
