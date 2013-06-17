@@ -98,7 +98,7 @@ namespace CedServicios.Site
                 case "Artículos|Consulta":
                     Response.Redirect("~/ArticuloConsulta.aspx");
                     break;
-                case "Facturación|Alta":
+                case "Factura Electrónica|Alta":
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {
                         Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
@@ -108,8 +108,11 @@ namespace CedServicios.Site
                         Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
                     }
                     break;
-                case "Facturación|Consulta":
+                case "Factura Electrónica|Consulta":
                     Response.Redirect("~/Facturacion/Electronica/LoteConsulta.aspx");
+                    break;
+                case "Factura Electrónica|Términos y Condiciones":
+                    Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                     break;
                 case "Autorizaciones|Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx?pendientes");

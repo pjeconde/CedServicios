@@ -106,8 +106,9 @@ namespace CedServicios.RN
                     //Ojo: no estoy chequeando que la UN siga teniendo el permiso vigente sobre el servicio eFact !!!
                     if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada.Count != 0 && Sesion.Cuit.WF.Estado == "Vigente" && Sesion.UN.WF.Estado == "Vigente")
                     {
-                        opcionesHabilitadas.Add("Facturación|Alta");
-                        opcionesHabilitadas.Add("Facturación|Consulta");
+                        opcionesHabilitadas.Add("Factura Electrónica|Alta");
+                        opcionesHabilitadas.Add("Factura Electrónica|Consulta");
+                        opcionesHabilitadas.Add("Factura Electrónica|Términos y Condiciones");
                     }
                 }
             }
