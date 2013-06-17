@@ -104,5 +104,10 @@
                 <asp:Button ID="ButtonRechazar" runat="server" PostBackUrl="~/Default.aspx" Text="Rechazar" />
             </td>
         </tr>
+        <tr>
+            <td align="center" colspan="2" style="padding-top:20px">
+                <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+            </td>
+        </tr>
     </table>
 </asp:Content>

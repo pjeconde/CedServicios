@@ -23,6 +23,7 @@ namespace CedServicios.Entidades
         private List<Permiso> permisos;
         private string cuitPredef;
         private int idUNPredef;
+        private string fechaOKeFactTyC;
 
         public Usuario()
         {
@@ -193,6 +194,17 @@ namespace CedServicios.Entidades
             get
             {
                 return idUNPredef;
+            }
+        }
+        public string FechaOKeFactTyC
+        {
+            set
+            {
+                fechaOKeFactTyC = value;
+            }
+            get
+            {
+                return fechaOKeFactTyC;
             }
         }
     }

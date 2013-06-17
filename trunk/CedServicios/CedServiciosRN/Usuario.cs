@@ -216,5 +216,10 @@ namespace CedServicios.RN
             DB.Usuario usuario = new DB.Usuario(Sesion);
             return usuario.ListaIdUsuariosParaSQLscript();
         }
+        public static void RegistrarAceptacioneFactTyC(Entidades.Sesion Sesion)
+        {
+            CedServicios.DB.Configuracion db = new DB.Configuracion(Sesion);
+            db.CrearFechaOKeFactTyC(Sesion.Usuario);
+        }
     }
 }
