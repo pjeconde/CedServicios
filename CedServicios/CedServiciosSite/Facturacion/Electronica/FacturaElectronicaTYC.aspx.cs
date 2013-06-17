@@ -17,18 +17,18 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             if (!IsPostBack)
             {
-                if (CheckBoxAceptarTYC.Checked)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    if (Page.Request.QueryString.ToString() == "Link=VerTYC")
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    if (sesion.Usuario.FechaOKeFactTyC != "00000000")
                     {
-                        //PanelAceptaTYC.Visible = false;
-                    }
-                    else
-                    {
-                        if (Page.Request.UrlReferrer.LocalPath.ToString() == "/CedWeb/FacturaElectronica.aspx" || Page.Request.UrlReferrer.LocalPath.ToString() == "/Cedeira/FacturaElectronica.aspx")
-                        {
-                            Response.Redirect("~/Facturacion/Electronica/Lote.aspx", true);
-                        }
+                        CheckBoxAceptarTYC.Visible = false;
+                        ButtonAceptar.Visible = false;
+                        ButtonRechazar.Text = "Salir";
                     }
                 }
             }
