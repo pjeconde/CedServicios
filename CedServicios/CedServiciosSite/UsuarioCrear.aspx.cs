@@ -43,33 +43,25 @@ namespace CedServicios.Site
             try
             {
                 RN.Usuario.Validar(usuario, ConfirmacionPasswordTextBox.Text, Session["captcha"].ToString(), CaptchaTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
-                if (Funciones.SessionTimeOut(Session))
-                {
-                    Response.Redirect("~/SessionTimeout.aspx");
-                }
-                else
-                {
-
-                    RN.Usuario.Registrar(usuario, true, (Entidades.Sesion)Session["Sesion"]);
-                    ComprobarDisponibilidadButton.Visible = false;
-                    NuevaClaveCaptchaButton.Visible = false;
-                    CrearCuentaButton.Visible = false;
-                    CancelarButton.Visible = false;
-                    CrearCuentaLabel.Visible = false;
-                    CaptchaImage.Visible = false;
-                    ClaveLabel.Visible = false;
-                    CaptchaTextBox.Visible = false;
-                    CaseSensitiveLabel.Visible = false;
-                    NombreTextBox.Enabled = false;
-                    TelefonoTextBox.Enabled = false;
-                    EmailTextBox.Enabled = false;
-                    IdUsuarioTextBox.Enabled = false;
-                    PasswordTextBox.Enabled = false;
-                    ConfirmacionPasswordTextBox.Enabled = false;
-                    PreguntaTextBox.Enabled = false;
-                    RespuestaTextBox.Enabled = false;
-                    MensajeLabel.Text = "Gracias por crear su cuenta.<br />Siga las instrucciones, que se enviaron por email, para confirmar la creación de su cuenta.<br />La recepción del email puede demorar unos minutos.";
-                }
+                RN.Usuario.Registrar(usuario, true, (Entidades.Sesion)Session["Sesion"]);
+                ComprobarDisponibilidadButton.Visible = false;
+                NuevaClaveCaptchaButton.Visible = false;
+                CrearCuentaButton.Visible = false;
+                CancelarButton.Visible = false;
+                CrearCuentaLabel.Visible = false;
+                CaptchaImage.Visible = false;
+                ClaveLabel.Visible = false;
+                CaptchaTextBox.Visible = false;
+                CaseSensitiveLabel.Visible = false;
+                NombreTextBox.Enabled = false;
+                TelefonoTextBox.Enabled = false;
+                EmailTextBox.Enabled = false;
+                IdUsuarioTextBox.Enabled = false;
+                PasswordTextBox.Enabled = false;
+                ConfirmacionPasswordTextBox.Enabled = false;
+                PreguntaTextBox.Enabled = false;
+                RespuestaTextBox.Enabled = false;
+                MensajeLabel.Text = "Gracias por crear su cuenta.<br />Siga las instrucciones, que se enviaron por email, para confirmar la creación de su cuenta.<br />La recepción del email puede demorar unos minutos.";
             }
             catch (Exception ex)
             {
@@ -88,24 +80,17 @@ namespace CedServicios.Site
             usuario.Id = IdUsuarioTextBox.Text;
             try
             {
-                if (Funciones.SessionTimeOut(Session))
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                bool disponible = RN.Usuario.IdCuentaDisponible(usuario, sesion);
+                if (disponible)
                 {
-                    Response.Redirect("~/SessionTimeout.aspx");
+                    ResultadoComprobarDisponibilidadLabel.ForeColor = System.Drawing.Color.Green;
+                    ResultadoComprobarDisponibilidadLabel.Text = "OK";
                 }
                 else
                 {
-                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    bool disponible = RN.Usuario.IdCuentaDisponible(usuario, sesion);
-                    if (disponible)
-                    {
-                        ResultadoComprobarDisponibilidadLabel.ForeColor = System.Drawing.Color.Green;
-                        ResultadoComprobarDisponibilidadLabel.Text = "OK";
-                    }
-                    else
-                    {
-                        ResultadoComprobarDisponibilidadLabel.ForeColor = System.Drawing.Color.Red;
-                        ResultadoComprobarDisponibilidadLabel.Text = "No disponible";
-                    }
+                    ResultadoComprobarDisponibilidadLabel.ForeColor = System.Drawing.Color.Red;
+                    ResultadoComprobarDisponibilidadLabel.Text = "No disponible";
                 }
             }
             catch (EX.Validaciones.ValorNoInfo)
