@@ -320,7 +320,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     try
                     {
+                        //Generar Lote
                         FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
+
+                        //Grabar en base de datos
+                        RN.Comprobante comprobante = new RN.Comprobante();
+                        lote.cabecera_lote.DestinoComprobante = "ITF";
+                        lote.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+                        comprobante.Registrar(lote, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
 
                         System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
                         System.Text.StringBuilder sb = new System.Text.StringBuilder();

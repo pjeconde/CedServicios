@@ -1361,6 +1361,12 @@ namespace CedServicios.RN
             return lcIBK;
         }
 
+        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdDestinoComprobante, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            db.Registrar(Lote, Response, IdDestinoComprobante);
+        }
+
         public string ConvertToHex(string asciiString)
         {
             asciiString = PonerEntityName(asciiString);

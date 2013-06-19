@@ -75,6 +75,10 @@ namespace FeaEntidades.InterFacturas
 
         private string telefonoField;
 
+        private string idCliente;
+
+        private int desambiguacionCuitPais;
+
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string nombre_clase
@@ -411,6 +415,33 @@ namespace FeaEntidades.InterFacturas
                 this.telefonoField = value;
             }
         }
-    }
 
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string IdCliente
+        {
+            get
+            {
+                return this.idCliente;
+            }
+            set
+            {
+                this.idCliente = value;
+            }
+        }
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public int DesambiguacionCuitPais
+        {
+            get
+            {
+                return this.desambiguacionCuitPais;
+            }
+            set
+            {
+                this.desambiguacionCuitPais = value;
+            }
+        }
+    }
 }

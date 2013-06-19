@@ -59,8 +59,8 @@
                                                 <td>
                                                     <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                                         <tr>
-                                                            <td style="padding-top: 5px">
-                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" ToolTip="Cargar los datos de un archivo XML.">
+                                                            <td style="padding-top: 5px;">
+                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" Width="760px" size="100" ToolTip="Cargar los datos de un archivo XML.">
                                                                 </asp:FileUpload>
                                                             </td>
                                                         </tr>
@@ -68,8 +68,7 @@
                                                             <td style="padding-top: 5px">
                                                                 <asp:Button ID="FileUploadButton" runat="server" BackColor="peachpuff" BorderColor="brown"
                                                                     BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
-                                                                    ForeColor="brown" Height="25px" OnClick="FileUploadButton_Click" 
-                                                                    Text="Completar datos automáticamente desde archivo xml seleccionado" />
+                                                                    ForeColor="brown" Height="25px" OnClick="FileUploadButton_Click" Text="Completar datos automáticamente desde archivo xml seleccionado" Width="760px" />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -342,14 +341,25 @@
                                                                             </td>
                                                                             <td style="padding-left: 4px; padding-top: 5px;">
                                                                                 <asp:TextBox ID="FechaEmisionDatePickerWebUserControl" runat="server" CausesValidation="true" SkinID="FechaFact"></asp:TextBox>
-                                                                                <cc1:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="MyCalendar" 
-                                                                                    OnClientShown="onCalendar1Shown" TargetControlID="FechaEmisionDatePickerWebUserControl"
+                                                                                <cc1:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="MyCalendar" BehaviorID="a2"
+                                                                                    TargetControlID="FechaEmisionDatePickerWebUserControl"  
                                                                                     Format="yyyyMMdd" PopupButtonID="ImageCalendarFechaEmision">
                                                                                 </cc1:CalendarExtender>
-                                                                                <asp:Image runat="server" ID="ImageCalendarFechaEmision2" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                                <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                                <script type="text/javascript" language="javascript">
+                                                                                    function showDate(sender,args)
+                                                                                    {
+                                                                                        var a = new Date();
+                                                                                        $find("a2").set_selectedDate(a);
+                                                                                    }
+                                                                                </script>
+                                                                                <script type="text/javascript" language="javascript">
+                                                                                    function showDateSelect(sender, args) 
+                                                                                    {
+                                                                                        document.getElementById('<%=FechaEmisionDatePickerWebUserControl.ClientID%>').value = "12312312";
+                                                                                    }
+                                                                                </script>
                                                                                 <br />
-                                                                                <br />
-                                                                                <uc1:FacturaElectronicaFecha ID="FacturaElectronicaFecha1" runat="server" culture="es-AR" />
                                                                             </td>
                                                                         </tr>
                                                                     </table>
@@ -690,7 +700,7 @@
                                                                                 OnClientShown="onCalendar1Shown" TargetControlID="InicioDeActividadesVendedorDatePickerWebUserControl"
                                                                                 Format="yyyyMMdd" PopupButtonID="ImageCalendarInicioDeActividadesVendedor">
                                                                             </cc1:CalendarExtender>
-                                                                            <asp:Image runat="server" ID="ImageCalendarInicioDeActividadesVendedor2" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                            <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarInicioDeActividadesVendedor" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                         </td>
                                                                     </tr>
                                                                 </table>
