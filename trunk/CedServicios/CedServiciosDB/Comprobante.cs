@@ -81,7 +81,7 @@ namespace CedServicios.DB
                 a.Append(Comprobante.TipoComprobante.Id.ToString() + ", ");
                 a.Append("'" + Comprobante.TipoComprobante.Descr + "', ");
                 a.Append(Comprobante.NroPuntoVta.ToString() + ", ");
-                a.Append(Comprobante.Nro.ToString() + "', ");
+                a.Append(Comprobante.Nro.ToString() + ", ");
                 a.Append(Comprobante.NroLote.ToString() + ", ");
                 a.Append("'" + Comprobante.Documento.Tipo.Id + "', ");
                 a.Append(Comprobante.Documento.Nro.ToString() + ", ");
@@ -126,26 +126,47 @@ namespace CedServicios.DB
             }
             else
             {
-                a.AppendLine("set @IdWF=" + Comprobante.WF.Id.ToString() + " ");
-                    a.Append("update Comprobante set ");
-                    a.Append("Comprobante.DescrTipoComprobante='" + Comprobante.TipoComprobante.Descr + "', ");
-                    a.Append("Comprobante.NroLote=" + Comprobante.NroLote.ToString() + ", ");
-                    a.Append("Comprobante.IdTipoDoc='" + Comprobante.Documento.Tipo.Id + "', ");
-                    a.Append("Comprobante.NroDoc=" + Comprobante.Documento.Nro.ToString() + ", ");
+                a.AppendLine("set @IdWF=" + comprobanteDesde.WF.Id.ToString() + " ");
+                a.Append("update Comprobante set ");
+                a.Append("Comprobante.DescrTipoComprobante='" + Comprobante.TipoComprobante.Descr + "', ");
+                a.Append("Comprobante.NroLote=" + Comprobante.NroLote.ToString() + ", ");
+                a.Append("Comprobante.IdTipoDoc='" + Comprobante.Documento.Tipo.Id + "', ");
+                a.Append("Comprobante.NroDoc=" + Comprobante.Documento.Nro.ToString() + ", ");
+                if (Comprobante.IdCliente == null)
+                {
+                    a.Append("Comprobante.IdCliente='', ");
+                }
+                else
+                {
                     a.Append("Comprobante.IdCliente='" + Comprobante.IdCliente + "', ");
-                    a.Append("Comprobante.DesambiguacionCuitPais=" + Comprobante.DesambiguacionCuitPais.ToString() + ", ");
-                    a.Append("Comprobante.RazonSocial='" + Comprobante.RazonSocial + "', ");
+                }
+                a.Append("Comprobante.DesambiguacionCuitPais=" + Comprobante.DesambiguacionCuitPais.ToString() + ", ");
+                a.Append("Comprobante.RazonSocial='" + Comprobante.RazonSocial + "', ");
+                if (Comprobante.Detalle == null)
+                {
+                    a.Append("Comprobante.Detalle='', ");
+                }
+                else
+                {
                     a.Append("Comprobante.Detalle='" + Comprobante.Detalle + "', ");
-                    a.Append("Comprobante.Fecha='" + Comprobante.Fecha.ToString("yyyyMMdd") + "', ");
-                    a.Append("Comprobante.FechaVto='" + Comprobante.FechaVto.ToString("yyyyMMdd") + "', ");
-                    a.Append("Comprobante.Moneda='" + Comprobante.Moneda + "', ");
-                    a.Append("Comprobante.ImporteMoneda='" + Comprobante.ImporteMoneda.ToString("0000000000000.00") + "', ");
-                    a.Append("Comprobante.TipoCambio='" + Comprobante.TipoCambio.ToString("0000.000000") + "', ");
-                    a.Append("Comprobante.Importe='" + Comprobante.Importe.ToString("0000000000000.00") + "', ");
-                    a.Append("Comprobante.Request='" + Comprobante.Request + "', ");
+                }    
+                a.Append("Comprobante.Fecha='" + Comprobante.Fecha.ToString("yyyyMMdd") + "', ");
+                a.Append("Comprobante.FechaVto='" + Comprobante.FechaVto.ToString("yyyyMMdd") + "', ");
+                a.Append("Comprobante.Moneda='" + Comprobante.Moneda + "', ");
+                a.Append("Comprobante.ImporteMoneda='" + Comprobante.ImporteMoneda.ToString("0000000000000.00") + "', ");
+                a.Append("Comprobante.TipoCambio='" + Comprobante.TipoCambio.ToString("0000.000000") + "', ");
+                a.Append("Comprobante.Importe='" + Comprobante.Importe.ToString("0000000000000.00") + "', ");
+                a.Append("Comprobante.Request='" + Comprobante.Request + "', ");
+                if (Comprobante.Response == null)
+                {
+                    a.Append("Comprobante.Response='', ");
+                }
+                else
+                {
                     a.Append("Comprobante.Response='" + Comprobante.Response + "', ");
-                    a.Append("Comprobante.IdDestinoComprobante='" + Comprobante.IdDestinoComprobante + "', ");
-                    a.Append("Comprobante.Estado='" + Comprobante.WF.Estado + "' ");
+                }    
+                a.Append("Comprobante.IdDestinoComprobante='" + Comprobante.IdDestinoComprobante + "', ");
+                a.Append("Comprobante.Estado='" + Comprobante.WF.Estado + "' ");
                 a.AppendLine("where Cuit='" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante=" + Comprobante.Nro.ToString() + " ");
                 a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'Comprobante', 'Modif', '" + Comprobante.WF.Estado + "', '') ");
                 a.AppendLine("declare @idLog int ");
@@ -202,6 +223,7 @@ namespace CedServicios.DB
                 comprobante.Response = Funciones.ObjetoSerializado(Response);
             }
             comprobante.IdDestinoComprobante = IdDestinoComprobante;
+            comprobante.WF.Estado = "Vigente";
             Registrar(comprobante);
         }
     }

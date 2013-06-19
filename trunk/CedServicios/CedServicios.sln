@@ -21,6 +21,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileHelpers.2005", "FileHel
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CedServiciosWeb", "CedServiciosWeb\CedServiciosWeb.csproj", "{D6941CA1-BDDD-408E-9DE9-36E5870254CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AjaxControlToolkit", "AjaxControlToolkit\AjaxControlToolkit.csproj", "{B3B89160-3224-476E-9076-70B500C816CF}"
+EndProject
 Global
 	GlobalSection(SubversionScc) = preSolution
 		Svn-Managed = True
@@ -71,6 +73,10 @@ Global
 		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D6941CA1-BDDD-408E-9DE9-36E5870254CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3B89160-3224-476E-9076-70B500C816CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3B89160-3224-476E-9076-70B500C816CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3B89160-3224-476E-9076-70B500C816CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3B89160-3224-476E-9076-70B500C816CF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

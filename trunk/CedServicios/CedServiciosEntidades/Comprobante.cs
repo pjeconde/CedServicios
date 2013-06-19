@@ -37,6 +37,7 @@ namespace CedServicios.Entidades
         {
             tipoComprobante = new TipoComprobante();
             documento = new Documento();
+            wF = new WF();
         }
         public string Cuit
         {
