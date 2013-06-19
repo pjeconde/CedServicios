@@ -46,7 +46,19 @@ namespace FeaEntidades.InterFacturas
         private string gestionar_afipField;
 
         private bool gestionar_afipFieldSpecified;
-        
+
+        private string destinoComprobante;
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string nombre_clase
+        {
+            get
+            {
+                return nombre_claseField;
+            }
+        }
+
 		/// <comentarios/>
 		public long id_lote
 		{
@@ -59,16 +71,6 @@ namespace FeaEntidades.InterFacturas
 				this.id_loteField = value;
 			}
 		}
-
-        /// <comentarios/>
-        [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public string nombre_clase
-        {
-            get
-            {
-                return nombre_claseField;
-            }
-        }
 
 		/// <comentarios/>
 		public long cuit_canal
@@ -254,5 +256,20 @@ namespace FeaEntidades.InterFacturas
                 this.gestionar_afipFieldSpecified = value;
             }
         }
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string DestinoComprobante
+        {
+            get
+            {
+                return this.destinoComprobante;
+            }
+            set
+            {
+                this.destinoComprobante = value;
+            }
+        }
+        
 	}
 }

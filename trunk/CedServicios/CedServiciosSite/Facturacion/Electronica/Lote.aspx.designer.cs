@@ -274,22 +274,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender1;
         
         /// <summary>
-        /// Control ImageCalendarFechaEmision2.
+        /// Control ImageCalendarFechaEmision.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageCalendarFechaEmision2;
-        
-        /// <summary>
-        /// Control FacturaElectronicaFecha1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::CedServicios.Site.Facturacion.Electronica.FacturaElectronicaFecha FacturaElectronicaFecha1;
+        protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaEmision;
         
         /// <summary>
         /// Control Domicilio_Sector_VendedorTextBox.
@@ -589,13 +580,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender2;
         
         /// <summary>
-        /// Control ImageCalendarInicioDeActividadesVendedor2.
+        /// Control ImageCalendarInicioDeActividadesVendedor.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageCalendarInicioDeActividadesVendedor2;
+        protected global::System.Web.UI.WebControls.ImageButton ImageCalendarInicioDeActividadesVendedor;
         
         /// <summary>
         /// Control LoteUpdatePanel.

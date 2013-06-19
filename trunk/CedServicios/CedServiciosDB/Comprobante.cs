@@ -73,7 +73,7 @@ namespace CedServicios.DB
             Leer(comprobanteDesde);
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @idWF varchar(256) ");
-            if (comprobanteDesde.Documento.Tipo.Id == String.Empty)
+            if (comprobanteDesde.Documento.Tipo.Id == null)
             {
                 a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
                 a.Append("Insert Comprobante (Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdCliente, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado) values (");
@@ -85,10 +85,24 @@ namespace CedServicios.DB
                 a.Append(Comprobante.NroLote.ToString() + ", ");
                 a.Append("'" + Comprobante.Documento.Tipo.Id + "', ");
                 a.Append(Comprobante.Documento.Nro.ToString() + ", ");
-                a.Append("'" + Comprobante.IdCliente + "', ");
+                if (Comprobante.IdCliente == null)
+                {
+                    a.Append("'', ");
+                }
+                else
+                {
+                    a.Append("'" + Comprobante.IdCliente + "', ");
+                }
                 a.Append(Comprobante.DesambiguacionCuitPais.ToString() + ", ");
                 a.Append("'" + Comprobante.RazonSocial + "', ");
-                a.Append("'" + Comprobante.Detalle + "', ");
+                if (Comprobante.Detalle == null)
+                {
+                    a.Append("'', ");
+                }
+                else
+                {
+                    a.Append("'" + Comprobante.Detalle + "', ");
+                }
                 a.Append("'" + Comprobante.Fecha.ToString("yyyyMMdd") + "', ");
                 a.Append("'" + Comprobante.FechaVto.ToString("yyyyMMdd") + "', ");
                 a.Append("'" + Comprobante.Moneda + "', ");
@@ -96,7 +110,14 @@ namespace CedServicios.DB
                 a.Append("'" + Comprobante.TipoCambio.ToString("0000.000000") + "', ");
                 a.Append("'" + Comprobante.Importe.ToString("0000000000000.00") + "', ");
                 a.Append("'" + Comprobante.Request + "', ");
-                a.Append("'" + Comprobante.Response + "', ");
+                if (Comprobante.Response == null)
+                {
+                    a.Append("'', ");
+                }
+                else
+                {
+                    a.Append("'" + Comprobante.Response + "', ");
+                }
                 a.Append("'" + Comprobante.IdDestinoComprobante + "', ");
                 a.Append("@idWF, ");
                 a.Append("'" + Comprobante.WF.Estado + "' ");
@@ -169,11 +190,17 @@ namespace CedServicios.DB
             comprobante.Fecha = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
             comprobante.FechaVto = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
             comprobante.Moneda = Lote.comprobante[0].resumen.codigo_moneda;
-            comprobante.ImporteMoneda = Lote.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;
+            if (Lote.comprobante[0].resumen.importes_moneda_origen != null)
+            {
+                comprobante.ImporteMoneda = Lote.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;
+            }
             comprobante.TipoCambio = Lote.comprobante[0].resumen.tipo_de_cambio;
             comprobante.Importe = Lote.comprobante[0].resumen.importe_total_factura;
             comprobante.Request = Funciones.ObjetoSerializado(Lote);
-            comprobante.Response = Funciones.ObjetoSerializado(Response);
+            if (Response != null)
+            {
+                comprobante.Response = Funciones.ObjetoSerializado(Response);
+            }
             comprobante.IdDestinoComprobante = IdDestinoComprobante;
             Registrar(comprobante);
         }

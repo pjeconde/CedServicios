@@ -79,6 +79,8 @@ namespace FeaEntidades.InterFacturas
         [FileHelpers.FieldIgnored()]
         private informacion_adicional_comprobante[] informacion_adicional_comprobanteField = new informacion_adicional_comprobante[50];
 
+        private string observacion;
+
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
         public string nombre_clase
@@ -436,5 +438,18 @@ namespace FeaEntidades.InterFacturas
             }
         }
 
-	}
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string Observacion
+        {
+            get
+            {
+                return this.observacion;
+            }
+            set
+            {
+                this.observacion = value;
+            }
+        }
+ 	}
 }
