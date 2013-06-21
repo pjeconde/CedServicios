@@ -21,6 +21,7 @@ namespace CedServicios.Entidades
         private string passwordAvisoVisualizacion;
         private WF wF;
         private string ultActualiz;
+        private int orden;
 
         public Cliente()
         {
@@ -173,6 +174,17 @@ namespace CedServicios.Entidades
             get
             {
                 return ultActualiz;
+            }
+        }
+        public int Orden
+        {
+            set
+            {
+                orden = value;
+            }
+            get
+            {
+                return orden;
             }
         }
         #region Propiedades redundantes

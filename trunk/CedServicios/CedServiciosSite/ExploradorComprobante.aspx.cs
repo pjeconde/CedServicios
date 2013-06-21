@@ -20,13 +20,13 @@ namespace CedServicios.Site
                 }
                 else
                 {
-                    //Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    //IdTipoPermisoDropDownList.DataSource = RN.TipoPermiso.Lista(true, sesion);
-                    //EstadoDropDownList.DataSource = RN.Estado.Lista(true, sesion);
-                    //DataBind();
-                    //IdTipoPermisoDropDownList.SelectedValue = String.Empty;
-                    //EstadoDropDownList.SelectedValue = String.Empty;
-                    BuscarButton_Click(BuscarButton, new EventArgs());
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
+                    FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
+                    ViewState["Clientes"] = RN.Cliente.ListaPorCuit(false, true, sesion);
+                    ClienteDropDownList.DataSource = (List<Entidades.Cliente>)ViewState["Clientes"];
+                    DataBind();
+                    ClienteDropDownList.SelectedValue = "0";
                 }
             }
         }
@@ -95,7 +95,8 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
                 MensajeLabel.Text = String.Empty;
-                lista = RN.Comprobante.ListaFiltrada(true, sesion);
+                Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
+                lista = RN.Comprobante.ListaFiltrada(SoloVigentesCheckBox.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, cliente, sesion);
                 if (lista.Count == 0)
                 {
                     ComprobantesGridView.DataSource = null;

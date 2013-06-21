@@ -6,51 +6,53 @@
         <tr>
             <td align="center" colspan="3" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Comprobantes (Factura electrónica)"></asp:Label>
-                <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
             </td>
         </tr>
-            <tr>
-	            <td align="left" style="padding-right:5px; padding-top:20px">
-                    Id.Usuario:
-	            </td>
-			    <td align="left" style="padding-top:20px">
-				    <asp:TextBox ID="IdUsuarioTextBox" runat="server" MaxLength="50" TabIndex="1" Width="114px"></asp:TextBox>
-			    </td>
-                <td style="width:500px">
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    CUIT:
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="2" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
-                </td>        
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    Tipo de Permiso:
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:DropDownList ID="IdTipoPermisoDropDownList" runat="server" TabIndex="3" Width="200px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" ></asp:DropDownList>
-                </td>        
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    Estado:
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:DropDownList ID="EstadoDropDownList" runat="server" TabIndex="3" Width="200px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" ></asp:DropDownList>
-                </td>        
-            </tr>
-            <tr>
-                <td>
-                </td>
-                <td align="left" style="height: 24px; padding-top:20px">
-                    <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" PostBackUrl="~/Default.aspx" />
-                </td>
-            </tr>
+        <tr>
+	        <td align="left" style="padding-right:5px; padding-top:20px">
+                Período de emisión:
+	        </td>
+			<td align="left" style="padding-top:20px">
+                Desde
+                <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px" TabIndex="304"></asp:TextBox>
+                <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
+                    TargetControlID="FechaDesdeTextBox" Format="yyyyMMdd" PopupButtonID="FechaDesdeImage" >
+                </ajaxToolkit:CalendarExtender>
+                <asp:Image runat="server" ID="FechaDesdeImage" ImageUrl="~/Imagenes/Calendar.gif" />
+                &nbsp;&nbsp;Hasta
+                <asp:TextBox ID="FechaHastaTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px" TabIndex="304"></asp:TextBox>
+                <ajaxToolkit:CalendarExtender ID="FechaHastaCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
+                    TargetControlID="FechaHastaTextBox" Format="yyyyMMdd" PopupButtonID="FechaHastaImage" >
+                </ajaxToolkit:CalendarExtender>
+                <asp:Image runat="server" ID="FechaHastaImage" ImageUrl="~/Imagenes/Calendar.gif" />
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="padding-right:5px; padding-top:5px">
+                Cliente:
+            </td>
+            <td align="left" style="padding-top:5px">
+                <asp:DropDownList ID="ClienteDropDownList" runat="server" TabIndex="3" Width="400px" DataValueField="Orden" DataTextField="RazonSocial" AutoPostBack="true" ></asp:DropDownList>
+            </td>        
+            <td style="width:550px">
+            </td>
+        </tr>
+        <tr>
+            <td align="left" style="padding-right:5px; padding-top:5px">
+                Sólo comprobantes vigentes:
+            </td>
+            <td align="left" style="padding-top:5px">
+                <asp:CheckBox ID="SoloVigentesCheckBox" runat="server" Checked="true" AutoPostBack="true" TextAlign="Left" />
+            </td>        
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td align="left" style="height: 24px; padding-top:5px">
+                <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" PostBackUrl="~/Default.aspx" />
+            </td>
+        </tr>
         <tr>
             <td colspan="3" style="padding-top:20px">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
