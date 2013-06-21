@@ -18,7 +18,7 @@ namespace CedServicios.RN
             List<Entidades.Cliente> lista = comprador.ListaPorCuit(true);
             lista = lista.FindAll(delegate(Entidades.Cliente c)
             {
-                return c.Documento.Tipo.Equals(70) || c.RazonSocial.Equals("Seleccionar cliente");
+                return c.Documento.Tipo.Id.Equals("70") || c.RazonSocial.Equals("Seleccionar cliente");
             });
             return lista;
         }
@@ -28,7 +28,7 @@ namespace CedServicios.RN
             List<Entidades.Cliente> lista = comprador.ListaPorCuit(true);
             lista = lista.FindAll(delegate(Entidades.Cliente c)
             {
-                return !c.Documento.Tipo.Equals(70) || c.RazonSocial.Equals("Seleccionar cliente");
+                return !c.Documento.Tipo.Id.Equals("70") || c.RazonSocial.Equals("Seleccionar cliente");
             });
             return lista;
         }

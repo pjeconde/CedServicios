@@ -270,5 +270,49 @@ namespace CedServicios.Entidades
                 return ultActualiz;
             }
         }
+        #region propiedades redundantes
+        public string DescrTipoComprobante
+        {
+            get
+            {
+                return tipoComprobante.Descr;
+            }
+        }
+        public string DescrTipoDoc
+        {
+            get
+            {
+                return documento.Tipo.Descr;
+            }
+        }
+        public long NroDoc
+        {
+            get
+            {
+                return documento.Nro;
+            }
+        }
+        public string Estado
+        {
+            get
+            {
+                return wF.Estado;
+            }
+        }
+        public string NroPuntoVtaFORMATEADO
+        {
+            get
+            {
+                return nroPuntoVta.ToString("0000");
+            }
+        }
+        public string NroFORMATEADO
+        {
+            get
+            {
+                return nro.ToString("00000000");
+            }
+        }
+        #endregion
     }
 }

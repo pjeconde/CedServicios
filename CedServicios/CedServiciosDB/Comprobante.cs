@@ -11,6 +11,34 @@ namespace CedServicios.DB
         public Comprobante(Entidades.Sesion Sesion) : base(Sesion)
         {
         }
+        public List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes)
+        {
+            List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
+            if (sesion.Cuit.Nro != null)
+            {
+                System.Text.StringBuilder a = new StringBuilder();
+                a.Append("select ");
+                a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdCliente, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz ");
+                a.Append("from Comprobante ");
+                a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' ");
+                if (SoloVigentes)
+                {
+                    a.Append("and Comprobante.Estado='Vigente' ");
+                }
+                a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, Comprobante.NroComprobante desc ");
+                DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+                if (dt.Rows.Count != 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Entidades.Comprobante elem = new Entidades.Comprobante();
+                        Copiar(dt.Rows[i], elem);
+                        lista.Add(elem);
+                    }
+                }
+            }
+            return lista;
+        }
         public void Leer(Entidades.Comprobante Comprobante)
         {
             System.Text.StringBuilder a = new StringBuilder();
@@ -204,10 +232,10 @@ namespace CedServicios.DB
                 comprobante.Documento.Tipo.Descr = "Desconocido";
             }
             comprobante.Documento.Nro = Lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;
-            //comprobante.IdCliente
-            //comprobante.DesambiguacionCuitPais
+            comprobante.IdCliente = Lote.comprobante[0].cabecera.informacion_comprador.IdCliente;
+            comprobante.DesambiguacionCuitPais = Lote.comprobante[0].cabecera.informacion_comprador.DesambiguacionCuitPais;
             comprobante.RazonSocial = Lote.comprobante[0].cabecera.informacion_comprador.denominacion;
-            //comprobante.Detalle
+            comprobante.Detalle = Lote.comprobante[0].cabecera.informacion_comprobante.Observacion;
             comprobante.Fecha = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
             comprobante.FechaVto = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
             comprobante.Moneda = Lote.comprobante[0].resumen.codigo_moneda;
