@@ -1694,16 +1694,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                         switch (idtipo)
                         {
                             case "Comun":
-                                AjustarCamposXPtaVentaComun(listacompradores);
+                                AjustarCamposXPtaVentaComun(out listacompradores);
                                 break;
                             case "RG2904":
-                                AjustarCamposXPtaVentaRG2904(listacompradores, Tipo_De_ComprobanteDropDownList.SelectedValue);
+                                AjustarCamposXPtaVentaRG2904(out listacompradores, Tipo_De_ComprobanteDropDownList.SelectedValue);
                                 break;
                             case "BonoFiscal":
-                                AjustarCamposXPtaVentaBonoFiscal(listacompradores);
+                                AjustarCamposXPtaVentaBonoFiscal(out listacompradores);
                                 break;
                             case "Exportacion":
-                                AjustarCamposXPtaVentaExport(listacompradores);
+                                AjustarCamposXPtaVentaExport(out listacompradores);
                                 break;
                             default:
                                 throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
@@ -1749,7 +1749,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void AjustarCamposXPtaVentaExport(System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        private void AjustarCamposXPtaVentaExport(out System.Collections.Generic.List<Entidades.Cliente> listacompradores)
         {
             Presta_ServCheckBox.Checked = false;
             Presta_ServCheckBox.Enabled = false;
@@ -1783,6 +1783,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
             if (Funciones.SessionTimeOut(Session))
             {
+                listacompradores = new List<Entidades.Cliente>();
                 Response.Redirect("~/SessionTimeout.aspx");
             }
             else
@@ -1797,7 +1798,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void AjustarCamposXPtaVentaBonoFiscal(System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        private void AjustarCamposXPtaVentaBonoFiscal(out System.Collections.Generic.List<Entidades.Cliente> listacompradores)
         {
             Presta_ServCheckBox.Checked = false;
             Presta_ServCheckBox.Enabled = false;
@@ -1824,6 +1825,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
             if (Funciones.SessionTimeOut(Session))
             {
+                listacompradores = new List<Entidades.Cliente>();
                 Response.Redirect("~/SessionTimeout.aspx");
             }
             else
@@ -1842,17 +1844,17 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void AjustarCamposXPtaVentaComun(System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        private void AjustarCamposXPtaVentaComun(out System.Collections.Generic.List<Entidades.Cliente> listacompradores)
         {
             //Presta_ServCheckBox.Enabled = true;
             HacerVisiblesV0V1();
-            AjustarCamposXPtaVtaComunYRG2904(listacompradores);
+            AjustarCamposXPtaVtaComunYRG2904(out listacompradores);
         }
 
-        private void AjustarCamposXPtaVentaRG2904(System.Collections.Generic.List<Entidades.Cliente> listacompradores, string tipoComprobante)
+        private void AjustarCamposXPtaVentaRG2904(out System.Collections.Generic.List<Entidades.Cliente> listacompradores, string tipoComprobante)
         {
             Presta_ServCheckBox.Enabled = true;
-            AjustarCamposXPtaVtaComunYRG2904(listacompradores);
+            AjustarCamposXPtaVtaComunYRG2904(out listacompradores);
             AjustarCodigoOperacionEn2904(tipoComprobante);
         }
 
@@ -1870,7 +1872,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void AjustarCamposXPtaVtaComunYRG2904(System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        private void AjustarCamposXPtaVtaComunYRG2904(out System.Collections.Generic.List<Entidades.Cliente> listacompradores)
         {
             AjustarPrestaServxVersiones();
 
@@ -1889,6 +1891,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
             if (Funciones.SessionTimeOut(Session))
             {
+                listacompradores = new List<Entidades.Cliente>();
                 Response.Redirect("~/SessionTimeout.aspx");
             }
             else

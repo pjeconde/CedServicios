@@ -7,6 +7,17 @@ namespace CedServicios.RN
 {
     public class Comprobante
     {
+        public static List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            return db.ListaFiltrada(SoloVigentes);
+        }
+        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdDestinoComprobante, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            db.Registrar(Lote, Response, IdDestinoComprobante);
+        }
+
         public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -148,7 +159,6 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-
         public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(out IBK.error[] RespErroresLote, out IBK.error[] RespErroresComprobantes, IBK.consulta_lote_comprobantes clc, string certificado)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -331,7 +341,6 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-
         private FeaEntidades.InterFacturas.lote_comprobantes Ibk2Fea(IBK.lote_comprobantes lcIBK)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lcFEA = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -746,7 +755,6 @@ namespace CedServicios.RN
             }
             return lcFEA;
         }
-
         public IBK.lote_comprobantes Fea2Ibk(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
@@ -1360,13 +1368,6 @@ namespace CedServicios.RN
             }
             return lcIBK;
         }
-
-        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdDestinoComprobante, Entidades.Sesion Sesion)
-        {
-            DB.Comprobante db = new DB.Comprobante(Sesion);
-            db.Registrar(Lote, Response, IdDestinoComprobante);
-        }
-
         public string ConvertToHex(string asciiString)
         {
             asciiString = PonerEntityName(asciiString);
