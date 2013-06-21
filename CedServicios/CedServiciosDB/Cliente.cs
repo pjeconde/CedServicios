@@ -14,6 +14,10 @@ namespace CedServicios.DB
 
         public List<Entidades.Cliente> ListaPorCuit(bool SoloVigentes)
         {
+            return ListaPorCuit(SoloVigentes, false);
+        }
+        public List<Entidades.Cliente> ListaPorCuit(bool SoloVigentes, bool ParaCombo)
+        {
             List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
             if (sesion.Cuit.Nro != null)
             {
@@ -30,10 +34,18 @@ namespace CedServicios.DB
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
                 {
+                    if (ParaCombo)
+                    {
+                        Entidades.Cliente todos = new Entidades.Cliente();
+                        todos.Orden = 0;
+                        todos.RazonSocial = "--- Todos los clientes ---";
+                        lista.Add(todos);
+                    }
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         Entidades.Cliente elem = new Entidades.Cliente();
                         Copiar(dt.Rows[i], elem);
+                        if (ParaCombo) elem.Orden = i + 1;
                         lista.Add(elem);
                     }
                 }

@@ -12,6 +12,11 @@ namespace CedServicios.RN
             DB.Cliente db = new DB.Cliente(Sesion);
             return db.ListaPorCuit(SoloVigentes);
         }
+        public static List<Entidades.Cliente> ListaPorCuit(bool SoloVigentes, bool ParaCombo, Entidades.Sesion Sesion)
+        {
+            DB.Cliente db = new DB.Cliente(Sesion);
+            return db.ListaPorCuit(SoloVigentes, ParaCombo);
+        }
         public static List<Entidades.Cliente> ListaExportacion(Entidades.Usuario Cuenta, Entidades.Sesion Sesion, bool ConSeleccionarComprador)
         {
             DB.Cliente comprador = new DB.Cliente(Sesion);

@@ -59,10 +59,10 @@
 	</td>
 	<td align="left" style="padding-top:5px">
         <asp:TextBox ID="FechaInicioActividadesTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px" TabIndex="304"></asp:TextBox>
-        <cc1:CalendarExtender ID="CalendarExtender1" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
-            TargetControlID="FechaInicioActividadesTextBox" Format="yyyyMMdd" PopupButtonID="ImageCalendarExtender1" >
+        <cc1:CalendarExtender ID="FechaInicioActividadesCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
+            TargetControlID="FechaInicioActividadesTextBox" Format="yyyyMMdd" PopupButtonID="FechaInicioActividadesImage" >
         </cc1:CalendarExtender>
-        <asp:Image runat="server" ID="ImageCalendarFechaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
+        <asp:Image runat="server" ID="FechaInicioActividadesImage" ImageUrl="~/Imagenes/Calendar.gif" />
     </td>
 </tr>
 

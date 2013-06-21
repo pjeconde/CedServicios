@@ -11,7 +11,7 @@ namespace CedServicios.DB
         public Comprobante(Entidades.Sesion Sesion) : base(Sesion)
         {
         }
-        public List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes)
+        public List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Cliente Cliente)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)
@@ -24,6 +24,21 @@ namespace CedServicios.DB
                 if (SoloVigentes)
                 {
                     a.Append("and Comprobante.Estado='Vigente' ");
+                }
+                if (FechaDesde != String.Empty)
+                {
+                    a.Append("and Comprobante.Fecha>='" + FechaDesde + "' ");
+                }
+                if (FechaHasta != String.Empty)
+                {
+                    a.Append("and Comprobante.Fecha<='" + FechaHasta + "' ");
+                }
+                if (Cliente.Orden != 0)
+                {
+                    a.Append("and Comprobante.IdTipoDoc=" + Cliente.Documento.Tipo.Id + " ");
+                    a.Append("and Comprobante.NroDoc=" + Cliente.Documento.Nro.ToString() + " ");
+                    a.Append("and Comprobante.IdCliente='" + Cliente.IdCliente + "' ");
+                    a.Append("and Comprobante.DesambiguacionCuitPais=" + Cliente.DesambiguacionCuitPais.ToString() + " ");
                 }
                 a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, Comprobante.NroComprobante desc ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);

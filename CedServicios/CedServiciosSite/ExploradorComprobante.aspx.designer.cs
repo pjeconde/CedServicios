@@ -22,49 +22,76 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label TituloPaginaLabel;
         
         /// <summary>
-        /// Control TargetControlIDdelModalPopupExtender1.
+        /// Control FechaDesdeTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TargetControlIDdelModalPopupExtender1;
+        protected global::System.Web.UI.WebControls.TextBox FechaDesdeTextBox;
         
         /// <summary>
-        /// Control IdUsuarioTextBox.
+        /// Control FechaDesdeCalendarExtender.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox IdUsuarioTextBox;
+        protected global::AjaxControlToolkit.CalendarExtender FechaDesdeCalendarExtender;
         
         /// <summary>
-        /// Control CUITTextBox.
+        /// Control FechaDesdeImage.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CUITTextBox;
+        protected global::System.Web.UI.WebControls.Image FechaDesdeImage;
         
         /// <summary>
-        /// Control IdTipoPermisoDropDownList.
+        /// Control FechaHastaTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList IdTipoPermisoDropDownList;
+        protected global::System.Web.UI.WebControls.TextBox FechaHastaTextBox;
         
         /// <summary>
-        /// Control EstadoDropDownList.
+        /// Control FechaHastaCalendarExtender.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList EstadoDropDownList;
+        protected global::AjaxControlToolkit.CalendarExtender FechaHastaCalendarExtender;
+        
+        /// <summary>
+        /// Control FechaHastaImage.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image FechaHastaImage;
+        
+        /// <summary>
+        /// Control ClienteDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ClienteDropDownList;
+        
+        /// <summary>
+        /// Control SoloVigentesCheckBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox SoloVigentesCheckBox;
         
         /// <summary>
         /// Control BuscarButton.
