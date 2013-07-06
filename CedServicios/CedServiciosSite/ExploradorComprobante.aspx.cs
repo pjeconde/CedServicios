@@ -32,6 +32,8 @@ namespace CedServicios.Site
         }
         protected void ComprobantesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            Response.Write("<script language=javascript>window.open('/ComprobanteConsulta.aspx?Parametro=NADA', '_blank','toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=500,height=300,left=100,top=100');</script> ");
+
             //int item = Convert.ToInt32(e.CommandArgument);
             //List<Entidades.Permiso> lista = (List<Entidades.Permiso>)ViewState["Permisos"];
             //Entidades.Permiso permiso = lista[item];
@@ -58,31 +60,17 @@ namespace CedServicios.Site
             //        }
             //        break;
             //}
+
         }
         protected void ComprobantesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.Cells[12].Text != "Vigente")
+                if (e.Row.Cells[13].Text != "Vigente")
                 {
                     e.Row.ForeColor = Color.Red;
                 }
             }
-        }
-        protected void CambiarEstadoButton_Click(object sender, EventArgs e)
-        {
-            //if (Funciones.SessionTimeOut(Session))
-            //{
-            //    Response.Redirect("~/SessionTimeout.aspx");
-            //}
-            //else
-            //{
-            //    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-            //    Entidades.Permiso permiso = (Entidades.Permiso)ViewState["Permiso"];
-            //    RN.Permiso.CambiarEstado(permiso, (permiso.WF.Estado == "Vigente" ? "DeBaja" : "Vigente"), sesion);
-            //    BuscarButton_Click(BuscarButton, new EventArgs());
-            //    Funciones.PersonalizarControlesMaster(Master, true, sesion);
-            //}
         }
         protected void BuscarButton_Click(object sender, EventArgs e)
         {

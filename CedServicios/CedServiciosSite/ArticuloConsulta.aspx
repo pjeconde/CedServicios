@@ -86,10 +86,15 @@
                 </td>        
             </tr>
             <tr>
-                <td align="right" style="padding-right:5px; padding-top:5px">
+                <td colspan="2">
+                    <hr noshade="noshade" size="1" color="#cccccc" />
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-right:5px; padding-top:2px">
                     <asp:Label ID="Label10" runat="server" Text="Descripción"></asp:Label>
                 </td>
-                <td align="left" style="padding-top:5px">
+                <td align="left" style="padding-top:2px">
                     <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="100" TabIndex="3" Width="300px" TextMode="MultiLine"></asp:TextBox>
                 </td>        
             </tr>

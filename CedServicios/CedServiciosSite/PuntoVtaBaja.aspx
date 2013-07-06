@@ -22,15 +22,6 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top:5px; height:25px;">
-                <asp:Label ID="Label5" runat="server" Text="Unidad de Negocio"></asp:Label>
-            </td>
-            <td align="left" style="padding-top:5px; height:25px;">
-                <asp:DropDownList ID="IdUNDropDownList" runat="server" TabIndex="2" Width="183px" DataValueField="Id" DataTextField="Descr" >
-                </asp:DropDownList>
-            </td>
-        </tr> 
-        <tr>
             <td align="right" style="padding-right: 5px; padding-top:5px">
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
                     ControlToValidate="NroTextBox" ErrorMessage="Nro. de Punto de Venta" SetFocusOnError="True" ValidationExpression="[0-9]{0,4}">
@@ -43,10 +34,24 @@
                 <asp:Label ID="Label2" runat="server" Text="Nro. de Punto de Venta"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="NroTextBox" runat="server" MaxLength="4" TabIndex="3" ToolTip="Debe ingresar sólo números."
+                <asp:TextBox ID="NroTextBox" runat="server" MaxLength="4" TabIndex="2" ToolTip="Debe ingresar sólo números."
                     Width="40px"></asp:TextBox>
             </td>
         </tr>
+        <tr>
+            <td colspan="2">
+                <hr noshade="noshade" size="1" color="#cccccc" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right" style="padding-right:5px; padding-top:2px; height:25px;">
+                <asp:Label ID="Label5" runat="server" Text="Unidad de Negocio"></asp:Label>
+            </td>
+            <td align="left" style="padding-top:2px; height:25px;">
+                <asp:DropDownList ID="IdUNDropDownList" runat="server" TabIndex="3" Width="183px" DataValueField="Id" DataTextField="Descr" >
+                </asp:DropDownList>
+            </td>
+        </tr> 
         <tr>
 	        <td align="right" style="padding-right:5px; padding-top:5px">
 		        <asp:Label ID="Label18" runat="server" Text="Tipo Punto de Venta"></asp:Label>
