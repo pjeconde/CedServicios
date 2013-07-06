@@ -59,8 +59,8 @@
                     <asp:GridView ID="ComprobantesGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                         <Columns>
-                            <%--<asp:ButtonField HeaderText="" Text="Cambiar estado" CommandName="CambiarEstado" ButtonType="Link" ItemStyle-ForeColor="Blue">
-                            </asp:ButtonField>--%>
+                            <asp:ButtonField HeaderText="" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue">
+                            </asp:ButtonField>
                             <asp:BoundField DataField="DescrTipoComprobante" HeaderText="Tipo" SortExpression="DescrTipoComprobante">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />

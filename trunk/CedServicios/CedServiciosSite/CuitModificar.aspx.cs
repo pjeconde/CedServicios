@@ -104,6 +104,8 @@ namespace CedServicios.Site
                     DatosImpositivos.Enabled = false;
                     DatosIdentificatorios.Enabled = false;
                     MedioDropDownList.Enabled = false;
+                    NroSerieCertifAFIPTextBox.Enabled = false;
+                    NroSerieCertifITFTextBox.Enabled = false;
                     AceptarButton.Enabled = false;
                     SalirButton.Text = "Salir";
 

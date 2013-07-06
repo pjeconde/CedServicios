@@ -30,15 +30,20 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top:5px">
+            <td colspan="2">
+                <hr noshade="noshade" size="1" color="#cccccc" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right" style="padding-right:5px; padding-top:2px">
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="RazonSocialTextBox"
                     ErrorMessage="Raz.Soc." SetFocusOnError="True">
                     <asp:Label ID="Label8" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="Label9" runat="server" Text="Razón Social"></asp:Label>
             </td>
-            <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="3" Width="300px"></asp:TextBox>
+            <td align="left" style="padding-top:2px">
+                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="2" Width="300px"></asp:TextBox>
             </td>        
         </tr>
         <uc1:domicilio ID="Domicilio" runat="server"/>
@@ -50,16 +55,34 @@
 		        <asp:Label ID="Label18" runat="server" Text="¿ Cómo nos conoció ?"></asp:Label>
 	        </td>
 			<td align="left" style="padding-top:5px">
-				<asp:DropDownList ID="MedioDropDownList" runat="server" TabIndex="18" Width="216px" DataValueField="Id" DataTextField="Descr">
+				<asp:DropDownList ID="MedioDropDownList" runat="server" TabIndex="501" Width="216px" DataValueField="Id" DataTextField="Descr">
 				</asp:DropDownList>
 			</td>
+        </tr>
+        <tr>
+            <td align="right" style="padding-right: 5px; padding-top:5px">
+                <asp:Label ID="Label11" runat="server" Text="Nro.serie certif.AFIP"></asp:Label>
+            </td>
+            <td align="left" style="padding-top:5px">
+                <asp:TextBox ID="NroSerieCertifAFIPTextBox" runat="server" MaxLength="256" TabIndex="502"
+                    Width="120px"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" style="padding-right: 5px; padding-top:5px">
+                <asp:Label ID="Label12" runat="server" Text="Nro.serie certif.Interfacturas"></asp:Label>
+            </td>
+            <td align="left" style="padding-top:5px">
+                <asp:TextBox ID="NroSerieCertifITFTextBox" runat="server" MaxLength="256" TabIndex="503"
+                    Width="120px"></asp:TextBox>
+            </td>
         </tr>
         <tr>
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="4" Text="Aceptar" onclick="AceptarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="5" Text="Cancelar" PostBackUrl="~/Default.aspx" />
+                <asp:Button ID="AceptarButton" runat="server" TabIndex="504" Text="Aceptar" onclick="AceptarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="505" Text="Cancelar" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
         <tr>

@@ -205,7 +205,8 @@ namespace CedServicios.Site
                     DatosImpositivos.Enabled = false;
                     DatosIdentificatorios.Enabled = false;
                     MedioDropDownList.Enabled = false;
-
+                    NroSerieCertifAFIPTextBox.Enabled = false;
+                    NroSerieCertifITFTextBox.Enabled = false;
                     break;
                 case 1:
                     ModalPopupExtender1.PopupControlID = "UNPanel";

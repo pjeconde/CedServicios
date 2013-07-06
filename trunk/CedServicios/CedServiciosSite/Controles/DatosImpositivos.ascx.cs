@@ -97,6 +97,7 @@ namespace CedServicios.Site.Controles
                 CondIngBrutosDropDownList.Enabled = value;
                 NroIngBrutosTextBox.Enabled = value;
                 FechaInicioActividadesTextBox.Enabled = value;
+                FechaInicioActividadesImage.Visible = value;
             }
         }
     }

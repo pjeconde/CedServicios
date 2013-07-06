@@ -37,14 +37,19 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top:5px">
+            <td colspan="2">
+                <hr noshade="noshade" size="1" color="#cccccc" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right" style="padding-right:5px; padding-top:2px">
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="DescrUNTextBox"
                     ErrorMessage="Descr" SetFocusOnError="True">
                     <asp:Label ID="Label8" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="Label9" runat="server" Text="Descripción"></asp:Label>
             </td>
-            <td align="left" style="padding-top:5px">
+            <td align="left" style="padding-top:2px">
                 <asp:TextBox ID="DescrUNTextBox" runat="server" MaxLength="50" TabIndex="3" Width="300px"></asp:TextBox>
             </td>        
         </tr>

@@ -36,6 +36,7 @@ namespace CedServicios.Site
                     IndicacionExentoGravadoDropDownList.SelectedValue = articulo.IndicacionExentoGravado;
                     AlicuotaIVADropDownList.SelectedValue = articulo.AlicuotaIVA.ToString();
                     CUITTextBox.Enabled = false;
+                    IdTextBox.Enabled = false;
                     DescrTextBox.Focus();
                 }
             }

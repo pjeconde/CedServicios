@@ -35,24 +35,29 @@
         </tr>
         <tr>
             <td align="right" style="padding-right:5px; padding-top:5px">
-                <asp:Label ID="Label9" runat="server" Text="Razón Social"></asp:Label>
+                <asp:Label ID="Label7" runat="server" Text="Id.Cliente"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="4" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="IdClienteTextBox" runat="server" MaxLength="50" TabIndex="4" Width="300px"></asp:TextBox>
+            </td>        
+        </tr>
+        <tr>
+            <td colspan="2">
+                <hr noshade="noshade" size="1" color="#cccccc" />
+            </td>
+        </tr>
+        <tr>
+            <td align="right" style="padding-right:5px; padding-top:2px">
+                <asp:Label ID="Label9" runat="server" Text="Razón Social"></asp:Label>
+            </td>
+            <td align="left" style="padding-top:2px">
+                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="5" Width="300px"></asp:TextBox>
             </td>        
         </tr>
         <uc1:domicilio ID="Domicilio" runat="server"/>
         <uc1:contacto ID="Contacto" runat="server" />
         <uc1:datosImpositivos ID="DatosImpositivos" runat="server" />
         <uc1:datosIdentificatorios ID="DatosIdentificatorios" runat="server" />
-        <tr>
-            <td align="right" style="padding-right:5px; padding-top:5px">
-                <asp:Label ID="Label7" runat="server" Text="Id.Cliente"></asp:Label>
-            </td>
-            <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="IdClienteTextBox" runat="server" MaxLength="50" TabIndex="501" Width="300px"></asp:TextBox>
-            </td>        
-        </tr>
         <tr>
             <td align="right" style="padding-right:5px; padding-top:3px;">
                 <asp:Label ID="Label38" runat="server" Text="Envío de <b>aviso</b> automático"></asp:Label><br />
@@ -65,7 +70,7 @@
                             <asp:Label ID="Label45" runat="server" Text="Email"></asp:Label>
                         </td>
                         <td align="left" style="padding-top:3px">
-                            <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" MaxLength="60" TabIndex="502"
+                            <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" MaxLength="60" TabIndex="501"
                                 ToolTip="A esta dirección se enviará un email de aviso para que el destinatario pueda visualizar el comprobante"
                                 Width="315px"></asp:TextBox>
                         </td>
@@ -75,7 +80,7 @@
                             <asp:Label ID="Label42" runat="server" Text="Contraseña"></asp:Label>
                         </td>
                         <td align="left" style="padding-top:3px">
-                            <asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" MaxLength="25" TabIndex="503"
+                            <asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" MaxLength="25" TabIndex="502"
                                 ToolTip="Para poder acceder al contenido del comprobante, se solicitará al destinatario el ingreso de esta contraseña"
                                 Width="100px"></asp:TextBox>
                         </td>
@@ -92,8 +97,8 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="504" Text="Aceptar" onclick="AceptarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="505" Text="Cancelar" PostBackUrl="~/Default.aspx" />
+                <asp:Button ID="AceptarButton" runat="server" TabIndex="503" Text="Aceptar" onclick="AceptarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="504" Text="Cancelar" PostBackUrl="~/Default.aspx" />
             </td>
         </tr>
         <tr>
@@ -103,11 +108,4 @@
             </td>
         </tr>
     </table>
-    <script type="text/javascript">
-        function BorrarMensaje() {
-            {
-                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
-            }
-        }
-    </script>
 </asp:Content>

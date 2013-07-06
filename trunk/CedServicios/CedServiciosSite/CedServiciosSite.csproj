@@ -68,6 +68,7 @@
     <Content Include="ClienteCrear.aspx" />
     <Content Include="ClienteModificar.aspx" />
     <Content Include="ClienteSeleccionar.aspx" />
+    <Content Include="ComprobanteConsulta.aspx" />
     <Content Include="ExploradorComprobante.aspx" />
     <Content Include="ConfiguracionModificar.aspx" />
     <Content Include="Controles\Contacto.ascx" />
@@ -261,6 +262,13 @@
     </Compile>
     <Compile Include="ClienteSeleccionar.aspx.designer.cs">
       <DependentUpon>ClienteSeleccionar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ComprobanteConsulta.aspx.cs">
+      <DependentUpon>ComprobanteConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComprobanteConsulta.aspx.designer.cs">
+      <DependentUpon>ComprobanteConsulta.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorComprobante.aspx.cs">
       <DependentUpon>ExploradorComprobante.aspx</DependentUpon>

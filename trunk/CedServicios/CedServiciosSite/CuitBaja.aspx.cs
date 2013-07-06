@@ -49,6 +49,8 @@ namespace CedServicios.Site
                     DatosIdentificatorios.GLN = sesion.Cuit.DatosIdentificatorios.GLN;
                     DatosIdentificatorios.CodigoInterno = sesion.Cuit.DatosIdentificatorios.CodigoInterno;
                     MedioDropDownList.SelectedValue = sesion.Cuit.Medio.Id;
+                    NroSerieCertifAFIPTextBox.Text = sesion.Cuit.NroSerieCertifAFIP;
+                    NroSerieCertifITFTextBox.Text = sesion.Cuit.NroSerieCertifITF;
 
                     CUITTextBox.Enabled = false;
                     RazonSocialTextBox.Enabled = false;
@@ -57,6 +59,8 @@ namespace CedServicios.Site
                     DatosImpositivos.Enabled = false;
                     DatosIdentificatorios.Enabled = false;
                     MedioDropDownList.Enabled = false;
+                    NroSerieCertifAFIPTextBox.Enabled = false;
+                    NroSerieCertifITFTextBox.Enabled = false;
 
                     if (sesion.Cuit.WF.Estado == "Vigente")
                     {
