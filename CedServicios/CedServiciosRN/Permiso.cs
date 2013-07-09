@@ -270,5 +270,18 @@ namespace CedServicios.RN
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
             return db.AltaHandler(permiso, false, false);
         }
+        public static string ServxCUITAprobadoHandler(Entidades.Cuit Cuit, Entidades.TipoPermiso TipoPermiso, DateTime FechaFinVigencia, Entidades.Sesion Sesion)
+        {
+            Entidades.Permiso permiso = new Entidades.Permiso();
+            permiso.Usuario.Id = String.Empty;
+            permiso.Cuit = Cuit.Nro;
+            permiso.UN.Id = 0;
+            permiso.TipoPermiso = TipoPermiso;
+            permiso.FechaFinVigencia = FechaFinVigencia;
+            permiso.UsuarioSolicitante = Sesion.Usuario;
+            permiso.WF.Estado = "Vigente";
+            CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
+            return db.AltaHandler(permiso, false, false);
+        }
     }
 }

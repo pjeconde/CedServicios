@@ -14,25 +14,28 @@ namespace CedServicios.DB
 
         public List<Entidades.Cuit> LeerListaCuitsPorUsuario()
         {
-            StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("/* CUITs de AdminCUITs */ ");
-            a.Append("select Cuit from Permiso where IdTipoPermiso='AdminCUIT' and idUsuario='" + sesion.Usuario.Id + "' and Estado='Vigente' ");
-            a.Append("UNION ");
-            a.Append("/* CUITs de AdminUNs */ ");
-            a.Append("select distinct Cuit from Permiso where IdTipoPermiso='AdminUN' and idUsuario='" + sesion.Usuario.Id + "' and Estado='Vigente' ");
-            a.Append("UNION ");
-            a.Append("/* CUITs de operadores de servicios de UNs */ ");
-            a.Append("select distinct Cuit from Permiso where IdTipoPermiso not in ('AdminUN', 'AdminCUIT', 'AdminSITE', 'UsoCUITxUN') and idUsuario='" + sesion.Usuario.Id + "' and Estado='Vigente' and Cuit<>'' ");
-            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Cuit> lista = new List<Entidades.Cuit>();
-            if (dt.Rows.Count != 0)
+            if (sesion.Usuario.Id != null)
             {
-                for (int i = 0; i < dt.Rows.Count; i++)
+                StringBuilder a = new StringBuilder(string.Empty);
+                a.Append("/* CUITs de AdminCUITs */ ");
+                a.Append("select Cuit from Permiso where IdTipoPermiso='AdminCUIT' and idUsuario='" + sesion.Usuario.Id + "' and Estado='Vigente' ");
+                a.Append("UNION ");
+                a.Append("/* CUITs de AdminUNs */ ");
+                a.Append("select distinct Cuit from Permiso where IdTipoPermiso='AdminUN' and idUsuario='" + sesion.Usuario.Id + "' and Estado='Vigente' ");
+                a.Append("UNION ");
+                a.Append("/* CUITs de operadores de servicios de UNs */ ");
+                a.Append("select distinct Cuit from Permiso where IdTipoPermiso not in ('AdminUN', 'AdminCUIT', 'AdminSITE', 'UsoCUITxUN') and idUsuario='" + sesion.Usuario.Id + "' and Estado='Vigente' and Cuit<>'' ");
+                DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+                if (dt.Rows.Count != 0)
                 {
-                    Entidades.Cuit cuit = new Entidades.Cuit();
-                    cuit.Nro = Convert.ToString(dt.Rows[i]["Cuit"]);
-                    Leer(cuit);
-                    lista.Add(cuit);
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Entidades.Cuit cuit = new Entidades.Cuit();
+                        cuit.Nro = Convert.ToString(dt.Rows[i]["Cuit"]);
+                        Leer(cuit);
+                        lista.Add(cuit);
+                    }
                 }
             }
             return lista;
@@ -90,7 +93,7 @@ namespace CedServicios.DB
             Hasta.NroSerieCertifAFIP = Convert.ToString(Desde["NroSerieCertifAFIP"]);
             Hasta.NroSerieCertifITF = Convert.ToString(Desde["NroSerieCertifITF"]);
         }
-        public void Crear(Entidades.Cuit Cuit, string PermisoAdminCUITParaUsuarioAprobadoHandler, string CrearUNHandler, string PermisoUsoCUITxUNAprobadoHandler, string PermisoAdminUNParaUsuarioAprobadoHandler, string PermisoOperServUNParaUsuarioAprobadoHandler)
+        public void Crear(Entidades.Cuit Cuit, string PermisoAdminCUITParaUsuarioAprobadoHandler, string ServxCUITAprobadoHandler, string CrearUNHandler, string PermisoUsoCUITxUNAprobadoHandler, string PermisoAdminUNParaUsuarioAprobadoHandler, string PermisoOperServUNParaUsuarioAprobadoHandler)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @idWF varchar(256) ");
@@ -131,6 +134,7 @@ namespace CedServicios.DB
             a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'CUIT', 'Alta', '" + Cuit.WF.Estado + "', '') ");
             a.AppendLine();
             a.Append(PermisoAdminCUITParaUsuarioAprobadoHandler);
+            a.Append(ServxCUITAprobadoHandler);
             a.Append(CrearUNHandler);
             a.Append(PermisoUsoCUITxUNAprobadoHandler);
             a.Append(PermisoAdminUNParaUsuarioAprobadoHandler);

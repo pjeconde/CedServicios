@@ -7,10 +7,10 @@ namespace CedServicios.RN
 {
     public class TipoPermiso
     {
-        public static List<Entidades.TipoPermiso> ListaPorUN(Entidades.UN UN, Entidades.Sesion Sesion)
+        public static List<Entidades.TipoPermiso> ListaServiciosXCUIT(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
         {
             CedServicios.DB.TipoPermiso db = new DB.TipoPermiso(Sesion);
-            return db.LeerListaPorUN(UN);
+            return db.ListaServiciosXCUIT(Cuit);
         }
         public static void Leer(Entidades.TipoPermiso TipoPermiso, Entidades.Sesion Sesion)
         {
