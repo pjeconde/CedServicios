@@ -25,12 +25,12 @@ namespace CedServicios.DB
                 Copiar(dt.Rows[0], TipoPermiso);
             }
         }
-        public List<Entidades.TipoPermiso> LeerListaPorUN(Entidades.UN UN)
+        public List<Entidades.TipoPermiso> ListaServiciosXCUIT(Entidades.Cuit Cuit)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("select Permiso.IdTipoPermiso, TipoPermiso.DescrTipoPermiso ");
             a.Append("from Permiso, TipoPermiso ");
-            a.Append("where Permiso.Cuit='" + UN.Cuit + "' and Permiso.IdUN=" + UN.Id + " ");
+            a.Append("where Permiso.Cuit='" + Cuit.Nro + "' and Permiso.IdUN=0 and Permiso.IdUsuario='' ");
             a.Append("and Permiso.IdTipoPermiso not in ('AdminSITE', 'AdminCUIT', 'AdminUN', 'UsoCUITxUN') ");
             a.Append("and Permiso.Estado='Vigente' and Permiso.IdTipoPermiso=TipoPermiso.IdTipoPermiso ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);

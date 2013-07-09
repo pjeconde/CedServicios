@@ -23,7 +23,7 @@
                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
                     Width="80px"></asp:TextBox>
                 <asp:Button ID="LeerListaUNsButton" runat="server" OnClick="LeerListaUNsButton_Click" TabIndex="3"
-                    Text="Leer unidad(es) de negocio del CUIT" />
+                    Text="Leer unidad(es) de negocio y servicios habilitados para el CUIT ingresado" />
             </td>
         </tr>
         <tr>
@@ -33,9 +33,6 @@
             <td align="left" style="padding-top:5px; height:25px;">
                 <asp:DropDownList ID="IdUNDropDownList" runat="server" TabIndex="2" Width="183px" DataValueField="Id" DataTextField="Descr" >
                 </asp:DropDownList>
-                <asp:Button ID="LeerListaTipoPermisosUNButton" runat="server" TabIndex="3"
-                    Text="Leer servicio(s) disponible(s) para la Unidad de negocio" 
-                    onclick="LeerListaTipoPermisosUNButton_Click" />
             </td>
         </tr>        
         <tr>

@@ -48,7 +48,6 @@ namespace CedServicios.Site
                     CUITTextBox.Enabled = false;
                     LeerListaUNsButton.Enabled = false;
                     IdUNDropDownList.Enabled = false;
-                    LeerListaTipoPermisosUNButton.Enabled = false;
                     IdTipoPermisoDropDownList.Enabled = false;
                     SolicitarButton.Enabled = false;
                     SalirButton.Text = "Salir";
@@ -76,35 +75,12 @@ namespace CedServicios.Site
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     RN.Cuit.Leer(cuit, sesion);
                     IdUNDropDownList.DataSource = RN.UN.ListaVigentesPorCuit(cuit, sesion);
-                    DataBind();
-                }
-            }
-            catch (Exception ex)
-            {
-                MensajeLabel.Text = EX.Funciones.Detalle(ex);
-            }
-        }
-        protected void LeerListaTipoPermisosUNButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                MensajeLabel.Text = String.Empty;
-                Entidades.UN uN = new Entidades.UN();
-                uN.Cuit = CUITTextBox.Text;
-                uN.Id = Convert.ToInt32(IdUNDropDownList.SelectedValue);
-                if (Funciones.SessionTimeOut(Session))
-                {
-                    Response.Redirect("~/SessionTimeout.aspx");
-                }
-                else
-                {
-                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    IdTipoPermisoDropDownList.DataSource = RN.TipoPermiso.ListaPorUN(uN, sesion);
+                    IdTipoPermisoDropDownList.DataSource = RN.TipoPermiso.ListaServiciosXCUIT(cuit, sesion);
                     DataBind();
                     if (IdTipoPermisoDropDownList.Items.Count == 0)
                     {
-                        MensajeLabel.Text = "No hay servicios disponibles para esta Unidad de Negocio";
-                    }
+                        MensajeLabel.Text = "No hay servicios disponibles para este CUIT";
+                    } 
                 }
             }
             catch (Exception ex)
