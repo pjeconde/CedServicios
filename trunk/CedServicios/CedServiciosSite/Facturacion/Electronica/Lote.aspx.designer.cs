@@ -949,13 +949,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender3;
         
         /// <summary>
-        /// Control ImageCalendarInicioDeActividadesComprador2.
+        /// Control ImageCalendarInicioDeActividadesComprador.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageCalendarInicioDeActividadesComprador2;
+        protected global::System.Web.UI.WebControls.ImageButton ImageCalendarInicioDeActividadesComprador;
         
         /// <summary>
         /// Control Condicion_IVA_CompradorDropDownList.
@@ -1003,13 +1003,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender4;
         
         /// <summary>
-        /// Control ImageCalendarFechaVencimiento2.
+        /// Control ImageCalendarFechaVencimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageCalendarFechaVencimiento2;
+        protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaVencimiento;
         
         /// <summary>
         /// Control IVAcomputableDropDownList.
@@ -1084,13 +1084,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender5;
         
         /// <summary>
-        /// Control ImageCalendarFechaServDesde2.
+        /// Control ImageCalendarFechaServDesde.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageCalendarFechaServDesde2;
+        protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaServDesde;
         
         /// <summary>
         /// Control FechaHstServLabel.
@@ -1120,13 +1120,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender6;
         
         /// <summary>
-        /// Control ImageCalendarFechaServHasta2.
+        /// Control ImageCalendarFechaServHasta.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageCalendarFechaServHasta2;
+        protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaServHasta;
         
         /// <summary>
         /// Control Condicion_De_PagoTextBox.
@@ -1273,13 +1273,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender7;
         
         /// <summary>
-        /// Control ImageCalendarFechaCAEVencimiento2.
+        /// Control ImageCalendarFechaCAEVencimiento.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageCalendarFechaCAEVencimiento2;
+        protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaCAEVencimiento;
         
         /// <summary>
         /// Control FechaCAEObtencionDatePickerWebUserControl.
@@ -1300,13 +1300,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.CalendarExtender CalendarExtender8;
         
         /// <summary>
-        /// Control ImageCalendarFechaCAEObtencion2.
+        /// Control ImageCalendarFechaCAEObtencion.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image ImageCalendarFechaCAEObtencion2;
+        protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaCAEObtencion;
         
         /// <summary>
         /// Control tipoCambioUpdatePanel.

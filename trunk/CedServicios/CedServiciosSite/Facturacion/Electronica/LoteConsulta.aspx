@@ -54,7 +54,7 @@ EnableEventValidation="false" ValidateRequest="false"%>
                                                     <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                                         <tr>
                                                             <td style="padding-top: 5px">
-                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" ToolTip="Cargar los datos de un archivo XML.">
+                                                                <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" Width="760px" size="100" ToolTip="Cargar los datos de un archivo XML.">
                                                                 </asp:FileUpload>
                                                             </td>
                                                         </tr>
@@ -62,7 +62,7 @@ EnableEventValidation="false" ValidateRequest="false"%>
                                                             <td style="padding-top: 5px">
                                                                 <asp:Button ID="FileUploadButton" runat="server" BackColor="peachpuff" BorderColor="brown"
                                                                     BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
-                                                                    ForeColor="brown" Height="25px" OnClick="FileUploadButton_Click" 
+                                                                    ForeColor="brown" Height="25px" OnClick="FileUploadButton_Click"  Width="760px"  
                                                                     Text="Completar datos automáticamente desde archivo xml seleccionado" />
                                                             </td>
                                                         </tr>

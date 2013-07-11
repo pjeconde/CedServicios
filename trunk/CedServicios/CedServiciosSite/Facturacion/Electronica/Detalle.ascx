@@ -27,11 +27,11 @@
 										Width="50px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:DropDownList ID="ddlarticuloselEdit" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlarticuloselEdit_SelectedIndexChanged" Width="50px">
+									<asp:DropDownList ID="ddlarticuloselEdit" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlarticuloselEdit_SelectedIndexChanged" Width="50px" style="color:#071F70">
 									</asp:DropDownList>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:DropDownList ID="ddlarticulosel" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlarticuloselFooter_SelectedIndexChanged" Width="50px">
+									<asp:DropDownList ID="ddlarticulosel" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlarticuloselFooter_SelectedIndexChanged" Width="50px" style="color:#071F70">
 									</asp:DropDownList>
 								</FooterTemplate>
 								<HeaderStyle Font-Bold="False" Width="50px" />
@@ -42,13 +42,13 @@
                                     <asp:Label ID="lblGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px"></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:TextBox ID="txtGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px"></asp:TextBox>
+                                    <asp:TextBox ID="txtGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px" style="color:#071F70"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="GTINEditFilteredTextBoxExtender" runat="server"
                                         FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789">
                                     </cc1:FilteredTextBoxExtender>
                                 </EditItemTemplate>
                                 <FooterTemplate>
-                                    <asp:TextBox ID="txtGTIN" runat="server" Text='' Width="150px"></asp:TextBox>
+                                    <asp:TextBox ID="txtGTIN" runat="server" Text='' Width="150px" style="color:#071F70"></asp:TextBox>
                                     <cc1:FilteredTextBoxExtender ID="GTINFooterFilteredTextBoxExtender" runat="server"
                                         FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789">
                                     </cc1:FilteredTextBoxExtender>
@@ -63,10 +63,10 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtcpvendedor" runat="server" Text='<%# Eval("codigo_producto_vendedor") %>'
-										Width="150px"></asp:TextBox>
+										Width="150px" style="color:#071F70"></asp:TextBox>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtcpvendedor" runat="server" Text='' Width="150px"></asp:TextBox>
+									<asp:TextBox ID="txtcpvendedor" runat="server" Text='' Width="150px" style="color:#071F70"></asp:TextBox>
 								</FooterTemplate>
 								<HeaderStyle Font-Bold="False" Width="150px" />
 								<ItemStyle HorizontalAlign="Left" />
@@ -78,10 +78,10 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtcpcomprador" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
-										Width="130px"></asp:TextBox>
+										Width="130px" style="color:#071F70"></asp:TextBox>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtcpcomprador" runat="server" Text='' Width="130px"></asp:TextBox>
+									<asp:TextBox ID="txtcpcomprador" runat="server" Text='' Width="130px" style="color:#071F70"></asp:TextBox>
 								</FooterTemplate>
 								<HeaderStyle Font-Bold="False" Width="150px" />
 								<ItemStyle HorizontalAlign="Left" />
@@ -89,18 +89,18 @@
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="200px" HeaderText="Descripción del artículo">
 								<ItemTemplate>
 									<asp:TextBox ID="lbldescripcion" runat="server" ReadOnly="true" Text='<%# Eval("descripcion") %>'
-										TextMode="multiLine" Width="200px">
+										TextMode="multiLine" Width="200px" style="color:#071F70">
 									</asp:TextBox>
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtdescripcion" runat="server" Text='<%# Eval("descripcion") %>'
-										TextMode="MultiLine"></asp:TextBox>
+										TextMode="MultiLine" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="DescrEditFilteredTextBoxExtender" runat="server"
 										FilterMode="InvalidChars" FilterType="Custom" InvalidChars="<>" TargetControlID="txtdescripcion">
 									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtdescripcion" runat="server" Text='' TextMode="MultiLine"></asp:TextBox>
+									<asp:TextBox ID="txtdescripcion" runat="server" Text='' TextMode="MultiLine" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="DescrFooterFilteredTextBoxExtender" runat="server"
 										FilterMode="InvalidChars" FilterType="Custom" InvalidChars="<>" TargetControlID="txtdescripcion">
 									</cc1:FilteredTextBoxExtender>
@@ -115,11 +115,11 @@
 										Width="130px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:DropDownList ID="ddlindicacion_exento_gravadoEdit" runat="server" Width="130px">
+									<asp:DropDownList ID="ddlindicacion_exento_gravadoEdit" runat="server" Width="130px" style="color:#071F70">
 									</asp:DropDownList>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:DropDownList ID="ddlindicacion_exento_gravado" runat="server" Width="130px">
+									<asp:DropDownList ID="ddlindicacion_exento_gravado" runat="server" Width="130px" style="color:#071F70">
 									</asp:DropDownList>
 								</FooterTemplate>
 								<HeaderStyle Font-Bold="False" />
@@ -131,14 +131,14 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtcantidad" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnEdicion"
-										Text='<%# Eval("cantidad") %>' Width="70px"></asp:TextBox>
+										Text='<%# Eval("cantidad") %>' Width="70px" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="CantEditFilteredTextBoxExtender" runat="server"
 										FilterMode="ValidChars" FilterType="Custom" ValidChars="0123456789." TargetControlID="txtcantidad">
 									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
 									<asp:TextBox ID="txtcantidad" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnFooter"
-										Text='' Width="70px"></asp:TextBox>
+										Text='' Width="70px" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="CantFooterFilteredTextBoxExtender" runat="server"
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtcantidad" ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
@@ -152,11 +152,11 @@
 										Width="220px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:DropDownList ID="ddlunidadEdit" runat="server" Width="220px">
+									<asp:DropDownList ID="ddlunidadEdit" runat="server" Width="220px" style="color:#071F70">
 									</asp:DropDownList>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:DropDownList ID="ddlunidad" runat="server" Width="220px">
+									<asp:DropDownList ID="ddlunidad" runat="server" Width="220px" style="color:#071F70">
 									</asp:DropDownList>
 								</FooterTemplate>
 								<HeaderStyle Font-Bold="False" />
@@ -169,14 +169,14 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtprecio_unitario" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnEdicion"
-										Text='<%# Eval("precio_unitario") %>' Width="70px"></asp:TextBox>
+										Text='<%# Eval("precio_unitario") %>' Width="70px" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="PUEditFilteredTextBoxExtender" runat="server" FilterMode="ValidChars"
 										FilterType="Custom" TargetControlID="txtprecio_unitario" ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
 									<asp:TextBox ID="txtprecio_unitario" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnFooter"
-										Text='' Width="70px"></asp:TextBox>
+										Text='' Width="70px" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="PUFooterFilteredTextBoxExtender" runat="server" FilterMode="ValidChars"
 										FilterType="Custom" TargetControlID="txtprecio_unitario" ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
@@ -191,14 +191,14 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtimporte_total_articulo" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnEdicion" Text='<%# Eval("importe_total_articulo") %>'
-										Width="100px"></asp:TextBox>
+										Width="100px" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="ImpTotEditFilteredTextBoxExtender" runat="server"
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_total_articulo"
 										ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtimporte_total_articulo" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnFooter" Text='' Width="100px"></asp:TextBox>
+									<asp:TextBox ID="txtimporte_total_articulo" runat="server" AutoPostBack="true" OnTextChanged="CalcularImporteArtEnFooter" Text='' Width="100px" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="ImpTotFooterFilteredTextBoxExtender" runat="server"
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_total_articulo"
 										ValidChars="0123456789.">
@@ -214,12 +214,12 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:DropDownList ID="ddlalicuota_articuloEdit" runat="server" AutoPostBack="true"
-										OnSelectedIndexChanged="ddlalicuota_articuloEdit_SelectedIndexChanged" Width="50px">
+										OnSelectedIndexChanged="ddlalicuota_articuloEdit_SelectedIndexChanged" Width="50px" style="color:#071F70">
 									</asp:DropDownList>
 								</EditItemTemplate>
 								<FooterTemplate>
 									<asp:DropDownList ID="ddlalicuota_articulo" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlalicuota_articuloFooter_SelectedIndexChanged"
-										Width="50px">
+										Width="50px" style="color:#071F70">
 									</asp:DropDownList>
 								</FooterTemplate>
 								<HeaderStyle Font-Bold="False" Width="50px" />
@@ -232,14 +232,14 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtimporte_alicuota_articulo" runat="server" 
-										Text='<%# Eval("importe_iva") %>' Width="70px"></asp:TextBox>
+										Text='<%# Eval("importe_iva") %>' Width="70px" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="ImpTotAlicEditFilteredTextBoxExtender" runat="server"
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_alicuota_articulo"
 										ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtimporte_alicuota_articulo" runat="server" Text='' Width="70px"></asp:TextBox>
+									<asp:TextBox ID="txtimporte_alicuota_articulo" runat="server" Text='' Width="70px" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="ImpTotAlicFooterFilteredTextBoxExtender" runat="server"
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtimporte_alicuota_articulo"
 										ValidChars="0123456789.">
@@ -267,6 +267,8 @@
 								<ItemStyle HorizontalAlign="Center" />
 							</asp:TemplateField>
 						</Columns>
+                        <AlternatingRowStyle ForeColor="#071F70" />
+                        <FooterStyle ForeColor="#071F70" />
 					    <EditRowStyle ForeColor="#071F70" />
                         <EmptyDataRowStyle ForeColor="#071F70" />
                         <HeaderStyle ForeColor="Brown" />
