@@ -47,7 +47,7 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtdato_de_permiso" runat="server" Text='<%# Eval("id_permiso") %>'
-										Width="75%"></asp:TextBox>
+										Width="75%" style="Color:#071F70"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="txtdato_de_permisoEditExpoMaskedEditExtender" runat="server"
 										ClearMaskOnLostFocus="true" Enabled="true" Mask="99999LL??999999L" MaskType="None"
 										PromptCharacter="?" TargetControlID="txtdato_de_permiso">
@@ -57,7 +57,7 @@
 										SetFocusOnError="True" ValidationGroup="PermisosEditItem">*</asp:RequiredFieldValidator>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtdato_de_permiso" runat="server" Text='' Width="75%"></asp:TextBox>
+									<asp:TextBox ID="txtdato_de_permiso" runat="server" Text='' Width="75%" style="Color:#071F70"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="txtdato_de_permisoFooterExpoMaskedEditExtender" runat="server"
 										ClearMaskOnLostFocus="true" Enabled="true" Mask="99999LL??999999L" MaskType="None"
 										PromptCharacter="?" TargetControlID="txtdato_de_permiso">
@@ -75,13 +75,13 @@
 										Width="320px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:DropDownList ID="ddlcodigo_de_permisoEdit" runat="server" Width="300px">
+									<asp:DropDownList ID="ddlcodigo_de_permisoEdit" runat="server" Width="300px" style="Color:#071F70">
 									</asp:DropDownList><asp:RequiredFieldValidator ID="ddlcodigo_de_permisoEditItemRequiredFieldValidator"
 										runat="server" ControlToValidate="ddlcodigo_de_permisoEdit" ErrorMessage="Destino de mercadería en edición no informado"
 										SetFocusOnError="True" ValidationGroup="PermisosEditItem">*</asp:RequiredFieldValidator>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:DropDownList ID="ddlcodigo_de_permiso" runat="server" Width="300px">
+									<asp:DropDownList ID="ddlcodigo_de_permiso" runat="server" Width="300px" style="Color:#071F70">
 									</asp:DropDownList><asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator"
 										runat="server" ControlToValidate="ddlcodigo_de_permiso" ErrorMessage="Destino de mercadería a agregar no informado"
 										SetFocusOnError="True" ValidationGroup="PermisosFooter">*</asp:RequiredFieldValidator>
@@ -108,6 +108,7 @@
 							</asp:TemplateField>
 						</Columns>
 						<EmptyDataRowStyle ForeColor="#071F70" />
+                        <FooterStyle ForeColor="#071F70" />
 						<RowStyle ForeColor="#071F70" />
 						<EditRowStyle ForeColor="#071F70" />
 						<SelectedRowStyle ForeColor="#071F70" />

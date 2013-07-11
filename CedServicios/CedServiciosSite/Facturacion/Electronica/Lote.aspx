@@ -223,8 +223,7 @@
                                                                             social:
                                                                         </td>
                                                                         <td class="TC10S">
-                                                                            <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -274,8 +273,7 @@
                                                                             Calle:
                                                                         </td>
                                                                         <td class="TC10S">
-                                                                            <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -293,8 +291,7 @@
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                                ToolTip="Debe ser correlativo al último ingresado por Punto de Venta y Tipo de Comprobante. No es necesario ingresar ceros a la izquierda. Si su factura es p.ej.0002-00000005, puede ingresar 5.">
-                                                                            </asp:TextBox>
+                                                                                ToolTip="Debe ser correlativo al último ingresado por Punto de Venta y Tipo de Comprobante. No es necesario ingresar ceros a la izquierda. Si su factura es p.ej.0002-00000005, puede ingresar 5."> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -310,22 +307,19 @@
                                                                             Nro.:
                                                                         </td>
                                                                         <td>
-                                                                            <asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                         </td>
                                                                         <td class="TC03S" style="padding-right:5px">
                                                                             Piso:
                                                                         </td>
                                                                         <td>
-                                                                            <asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                         </td>
                                                                         <td class="TC01S" style="padding-right:5px">
                                                                             Depto:
                                                                         </td>
                                                                         <td>
-                                                                            <asp:TextBox ID="Domicilio_Depto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Domicilio_Depto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -376,22 +370,19 @@
                                                                             Sector:
                                                                         </td>
                                                                         <td>
-                                                                            <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                         </td>
                                                                         <td class="TC03S" style="padding-right:5px">
                                                                             Torre:
                                                                         </td>
                                                                         <td>
-                                                                            <asp:TextBox ID="Domicilio_Torre_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Domicilio_Torre_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                         </td>
                                                                         <td class="TC01S" style="padding-right:5px">
                                                                             Manzana:
                                                                         </td>
                                                                         <td>
-                                                                            <asp:TextBox ID="Domicilio_Manzana_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Domicilio_Manzana_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -404,8 +395,7 @@
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                                ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Cod. de cliente, Proveedor, etc.)">
-                                                                            </asp:TextBox>
+                                                                                ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Cod. de cliente, Proveedor, etc.)"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -421,8 +411,7 @@
                                                                                 ControlToValidate="Localidad_VendedorTextBox" ErrorMessage="localidad" SetFocusOnError="True">* </asp:RequiredFieldValidator>Localidad:
                                                                         </td>
                                                                         <td class="TC10S">
-                                                                            <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -502,8 +491,7 @@
                                                                             Código Postal:
                                                                         </td>
                                                                         <td class="TC10S">
-                                                                            <asp:TextBox ID="Cp_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Cp_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -542,8 +530,7 @@
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                                ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
-                                                                            </asp:TextBox>
+                                                                                ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres."> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -579,8 +566,7 @@
                                                                             Nombre contacto:
                                                                         </td>
                                                                         <td class="TC10S">
-                                                                            <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -597,8 +583,7 @@
                                                                             CUIT:
                                                                         </td>
                                                                         <td class="TC10S">
-                                                                            <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -619,8 +604,7 @@
                                                                                 SetFocusOnError="True">* </asp:RequiredFieldValidator>e-mail Contacto:
                                                                         </td>
                                                                         <td class="TC10S">
-                                                                            <asp:TextBox ID="Email_VendedorTextBox" runat="server" AutoCompleteType="Email" SkinID="TextoBoxFEAVendedorDet">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Email_VendedorTextBox" runat="server" AutoCompleteType="Email" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -649,8 +633,7 @@
                                                                             Teléfono contacto:
                                                                         </td>
                                                                         <td class="TC10S">
-                                                                            <asp:TextBox ID="Telefono_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-                                                                            </asp:TextBox>
+                                                                            <asp:TextBox ID="Telefono_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -666,8 +649,7 @@
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                                ToolTip="Formatos válidos: XXXXXXX-XX o XX-XXXXXXXX-X o XXX-XXXXXX-X">
-                                                                            </asp:TextBox>
+                                                                                ToolTip="Formatos válidos: XXXXXXX-XX o XX-XXXXXXXX-X o XXX-XXXXXX-X"> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -1088,7 +1070,7 @@
                                                                         <cc1:CalendarExtender ID="CalendarExtender3" runat="server" TargetControlID="InicioDeActividadesCompradorDatePickerWebUserControl"
                                                                             Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarInicioDeActividadesComprador">
                                                                         </cc1:CalendarExtender>
-                                                                        <asp:Image runat="server" ID="ImageCalendarInicioDeActividadesComprador2" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                        <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarInicioDeActividadesComprador" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1180,7 +1162,7 @@
                                                                         <cc1:CalendarExtender ID="CalendarExtender4" runat="server" TargetControlID="FechaVencimientoDatePickerWebUserControl"
                                                                             Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaVencimiento">
                                                                         </cc1:CalendarExtender>
-                                                                        <asp:Image runat="server" ID="ImageCalendarFechaVencimiento2" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                        <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaVencimiento" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1225,7 +1207,7 @@
                                                                         <cc1:CalendarExtender ID="CalendarExtender5" runat="server" TargetControlID="FechaServDesdeDatePickerWebUserControl"
                                                                             Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaServDesde">
                                                                         </cc1:CalendarExtender>
-                                                                        <asp:Image runat="server" ID="ImageCalendarFechaServDesde2" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                        <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaServDesde" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1238,7 +1220,7 @@
                                                                         <cc1:CalendarExtender ID="CalendarExtender6" runat="server" TargetControlID="FechaServHastaDatePickerWebUserControl"
                                                                             Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaServHasta">
                                                                         </cc1:CalendarExtender>
-                                                                        <asp:Image runat="server" ID="ImageCalendarFechaServHasta2" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                        <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaServHasta" ImageUrl="~/Imagenes/Calendar.gif" />
                                                                     </td>
                                                                 </tr>
                                                                 <tr>
@@ -1315,14 +1297,14 @@
                                                                                 Width="320px"></asp:Label>
                                                                         </ItemTemplate>
                                                                         <EditItemTemplate>
-                                                                            <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="300px">
+                                                                            <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="300px" style="color:#071F70">
                                                                             </asp:DropDownList>
                                                                             <asp:RequiredFieldValidator ID="ddlcodigo_de_referenciaEditItemRequiredFieldValidator"
                                                                                 runat="server" ControlToValidate="ddlcodigo_de_referenciaEdit" ErrorMessage="Codigo de referencia en edición no informado"
                                                                                 SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
                                                                         </EditItemTemplate>
                                                                         <FooterTemplate>
-                                                                            <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="300px">
+                                                                            <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="300px" style="color:#071F70">
                                                                             </asp:DropDownList>
                                                                             <asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator" runat="server"
                                                                                 ControlToValidate="ddlcodigo_de_referencia" ErrorMessage="Codigo de referencia a agregar no informado"
@@ -1338,7 +1320,7 @@
                                                                         </ItemTemplate>
                                                                         <EditItemTemplate>
                                                                             <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='<%# Eval("dato_de_referencia") %>'
-                                                                                Width="75%"></asp:TextBox>
+                                                                                Width="75%" style="color:#071F70"></asp:TextBox>
                                                                             <cc1:MaskedEditExtender ID="txtdato_de_referenciaEditExpoMaskedEditExtender" runat="server"
                                                                                 ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
                                                                                 PromptCharacter="?" TargetControlID="txtdato_de_referencia">
@@ -1351,7 +1333,7 @@
                                                                                 SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
                                                                         </EditItemTemplate>
                                                                         <FooterTemplate>
-                                                                            <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="75%"></asp:TextBox>
+                                                                            <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="75%" style="color:#071F70"></asp:TextBox>
                                                                             <cc1:MaskedEditExtender ID="txtdato_de_referenciaFooterExpoMaskedEditExtender" runat="server"
                                                                                 ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
                                                                                 PromptCharacter="?" TargetControlID="txtdato_de_referencia">
@@ -1385,6 +1367,8 @@
                                                                     </asp:TemplateField>
                                                                 </Columns>
                                                                 <EmptyDataRowStyle ForeColor="#071F70" />
+                                                                <FooterStyle ForeColor="#071F70" />
+                                                                <AlternatingRowStyle ForeColor="#071F70" />
                                                                 <RowStyle ForeColor="#071F70" />
                                                                 <EditRowStyle ForeColor="#071F70" />
                                                                 <SelectedRowStyle ForeColor="#071F70" />
@@ -1485,8 +1469,7 @@
                                                             </td>
                                                             <td class="TextoLabelFEADescrLarga" style="padding: 5px;">
                                                                 <asp:TextBox ID="ComentariosTextBox" runat="server" Height="100px" SkinID="TextoBoxFEADescrGr"
-                                                                    TextMode="MultiLine">
-                                                                </asp:TextBox>
+                                                                    TextMode="MultiLine"> </asp:TextBox>
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1577,7 +1560,7 @@
                                                                 <cc1:CalendarExtender ID="CalendarExtender7" runat="server" TargetControlID="FechaCAEVencimientoDatePickerWebUserControl"
                                                                     Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEVencimiento">
                                                                 </cc1:CalendarExtender>
-                                                                <asp:Image runat="server" ID="ImageCalendarFechaCAEVencimiento2" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaCAEVencimiento" ImageUrl="~/Imagenes/Calendar.gif" />
                                                             </td>
                                                         </tr>
                                                         <tr>
@@ -1587,7 +1570,7 @@
                                                                 <cc1:CalendarExtender ID="CalendarExtender8" runat="server" TargetControlID="FechaCAEObtencionDatePickerWebUserControl"
                                                                     Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEObtencion">
                                                                 </cc1:CalendarExtender>
-                                                                <asp:Image runat="server" ID="ImageCalendarFechaCAEObtencion2" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaCAEObtencion" ImageUrl="~/Imagenes/Calendar.gif" />
                                                             </td>
                                                         </tr>
                                                     </table>
@@ -1815,8 +1798,7 @@
                                                             </td>
                                                             <td class="TextoLabelFEADescrLarga">
                                                                 <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" Height="100px" SkinID="TextoBoxFEADescrGr"
-                                                                    TextMode="MultiLine">
-                                                                </asp:TextBox>
+                                                                    TextMode="MultiLine"> </asp:TextBox>
                                                             </td>
                                                         </tr>
                                                     </table>
