@@ -34,6 +34,15 @@
                             </td>
                         </tr>
                         <tr>
+                            <td align="center" style="padding-top:5px">
+                                <asp:LinkButton ID="ActividadesAlcanzadasLinkButton" runat="server" 
+                                    Font-Size="Smaller" onclick="ActividadesAlcanzadasLinkButton_Click">Actividades alcanzadas por el Régimen de Factura Electrónica</asp:LinkButton>
+                                |
+                                <asp:LinkButton ID="PreguntasFrecuentesLinkButton" runat="server" 
+                                    Font-Size="Smaller" onclick="PreguntasFrecuentesLinkButton_Click">Preguntas frecuentes</asp:LinkButton>
+                            </td>
+                        </tr>
+                        <tr>
                             <td align="left" style="padding-top:20px">
                                 <asp:Label ID="AclaracionTituloLabel" runat="server" Font-Size="24px" Font-Bold="false" Text="" ForeColor="#e8906e"></asp:Label>
                             </td>

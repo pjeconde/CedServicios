@@ -56,6 +56,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ActividadesAlcanzadas.aspx" />
     <Content Include="App_Themes\CedServicios\CedServicios.css" />
     <Content Include="ArticuloBaja.aspx" />
     <Content Include="ArticuloConsulta.aspx" />
@@ -132,6 +133,7 @@
     <Content Include="Migracion.aspx" />
     <Content Include="NotificacionDeExcepcion.aspx" />
     <Content Include="PaginaEnConstruccion.aspx" />
+    <Content Include="PreguntasFrecuentes.aspx" />
     <Content Include="PuntoVtaBaja.aspx" />
     <Content Include="PuntoVtaCrear.aspx" />
     <Content Include="PuntoVtaModificar.aspx" />
@@ -183,6 +185,13 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ActividadesAlcanzadas.aspx.cs">
+      <DependentUpon>ActividadesAlcanzadas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ActividadesAlcanzadas.aspx.designer.cs">
+      <DependentUpon>ActividadesAlcanzadas.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ArticuloBaja.aspx.cs">
       <DependentUpon>ArticuloBaja.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -615,6 +624,13 @@
     </Compile>
     <Compile Include="PaginaEnConstruccion.aspx.designer.cs">
       <DependentUpon>PaginaEnConstruccion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PreguntasFrecuentes.aspx.cs">
+      <DependentUpon>PreguntasFrecuentes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PreguntasFrecuentes.aspx.designer.cs">
+      <DependentUpon>PreguntasFrecuentes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

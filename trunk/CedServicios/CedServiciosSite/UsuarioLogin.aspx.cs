@@ -77,5 +77,15 @@ namespace CedServicios.Site
             AclaracionTituloLabel.Text = "Entorno Multi-Usuario";
             AclaracionDetalleLabel.Text = "Uno o más usuarios pueden compartir su trabajo dentro de su propio grupo.<br />Los usuarios administradores (de CUITs y de Unidades de Negocio), serán<br />los responsables de autorizar el acceso a los usuarios operadores.";
         }
+        protected void ActividadesAlcanzadasLinkButton_Click(object sender, EventArgs e)
+        {
+            string script = "window.open('/ActividadesAlcanzadas.aspx', '');";
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+        }
+        protected void PreguntasFrecuentesLinkButton_Click(object sender, EventArgs e)
+        {
+            string script = "window.open('/PreguntasFrecuentes.aspx', '');";
+            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+        }
     }
 }
