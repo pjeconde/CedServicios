@@ -43,7 +43,6 @@ namespace CedServicios.Site
             ms.Seek(0, System.IO.SeekOrigin.Begin);
             lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
             Cache["ComprobanteAConsultar"] = lote;
-            //Response.Write("<script language=javascript>window.open('/ComprobanteConsulta.aspx', '_blank','toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=500,height=300,left=100,top=100');</script> ");
             string script = "window.open('/ComprobanteConsulta.aspx', '');";
             ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
         }
