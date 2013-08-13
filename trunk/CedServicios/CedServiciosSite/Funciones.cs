@@ -148,7 +148,7 @@ namespace CedServicios.Site
             mItem = new MenuItem("Consulta", "Consulta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            mItem = new MenuItem("Consulta (archivo XML)", "Consulta (archivo XML)");
+            mItem = new MenuItem("Consulta (archivo XML / Interfacturas)", "Consulta (archivo XML / Interfacturas)");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             mItem = new MenuItem("Términos y Condiciones", "Términos y Condiciones");
