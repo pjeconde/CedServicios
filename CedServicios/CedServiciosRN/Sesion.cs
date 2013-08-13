@@ -108,7 +108,7 @@ namespace CedServicios.RN
                     {
                         opcionesHabilitadas.Add("Factura Electrónica|Alta");
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta");
-                        opcionesHabilitadas.Add("Factura Electrónica|Consulta (archivo XML)");
+                        opcionesHabilitadas.Add("Factura Electrónica|Consulta (archivo XML / Interfacturas)");
                         opcionesHabilitadas.Add("Factura Electrónica|Términos y Condiciones");
                     }
                 }

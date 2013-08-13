@@ -111,7 +111,7 @@ namespace CedServicios.Site
                 case "Factura Electrónica|Consulta":
                     Response.Redirect("~/ExploradorComprobante.aspx");
                     break;
-                case "Factura Electrónica|Consulta (archivo XML)":
+                case "Factura Electrónica|Consulta (archivo XML / Interfacturas)":
                     Response.Redirect("~/Facturacion/Electronica/LoteConsulta.aspx");
                     break;
                 case "Factura Electrónica|Términos y Condiciones":
