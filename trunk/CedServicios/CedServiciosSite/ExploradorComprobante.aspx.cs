@@ -32,35 +32,18 @@ namespace CedServicios.Site
         }
         protected void ComprobantesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int item = Convert.ToInt32(e.CommandArgument);
+            List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
+            Entidades.Comprobante comprobante = lista[item];
+            FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+            byte[] bytes = new byte[comprobante.Request.Length * sizeof(char)];
+            System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
+            System.IO.MemoryStream ms = new System.IO.MemoryStream(bytes);
+            ms.Seek(0, System.IO.SeekOrigin.Begin);
+            lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+            Cache["ComprobanteAConsultar"] = lote;
             Response.Write("<script language=javascript>window.open('/ComprobanteConsulta.aspx?Parametro=NADA', '_blank','toolbar=0,scrollbars=1,location=0,statusbar=0,menubar=0,resizable=1,width=500,height=300,left=100,top=100');</script> ");
-
-            //int item = Convert.ToInt32(e.CommandArgument);
-            //List<Entidades.Permiso> lista = (List<Entidades.Permiso>)ViewState["Permisos"];
-            //Entidades.Permiso permiso = lista[item];
-            //switch (e.CommandName)
-            //{
-            //    case "CambiarEstado":
-            //        if (permiso.WF.Estado == "Vigente" || permiso.WF.Estado == "DeBaja")
-            //        {
-            //            TituloConfirmacionLabel.Text = "Confirmar " + (permiso.WF.Estado == "Vigente" ? "Baja" : "Anulación Baja");
-            //            AccionLabel.Text = permiso.Accion.Tipo + " nº " + permiso.Accion.Nro;
-            //            CuitLabel.Text = permiso.Cuit;
-            //            IdTipoPermisoLabel.Text = permiso.TipoPermiso.Id;
-            //            EstadoLabel.Text = permiso.WF.Estado;
-            //            FechaFinVigenciaLabel.Text = permiso.FechaFinVigencia.ToString("dd/MM/yyyy");
-            //            UNLabel.Text = permiso.IdUN.ToString();
-            //            UsuarioLabel.Text = permiso.Usuario.Id;
-            //            UsuarioSolicitanteLabel.Text = permiso.UsuarioSolicitante.Id;
-            //            ViewState["Permiso"] = permiso;
-            //            ModalPopupExtender1.Show();
-            //        }
-            //        else
-            //        {
-            //            MensajeLabel.Text = "El cambio de estado sólo puede usarse para Bajas o Anulaciones de bajas.";
-            //        }
-            //        break;
-            //}
-
         }
         protected void ComprobantesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
