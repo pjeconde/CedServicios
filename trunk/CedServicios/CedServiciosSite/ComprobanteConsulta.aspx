@@ -1572,15 +1572,6 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: center; height: 10px;">
-                                                Agradeceríamos a los usuarios del sitio que nos informen sobre dudas, posibles omisiones
-                                                y/o errores y que nos envíen las correcciones o sugerencias por correo electrónico
-                                                a través de
-                                                <asp:HyperLink ID="contactoHyperLink" runat="server" NavigateUrl="~/Default.aspx">este formulario</asp:HyperLink>.
-                                                Es de suma importancia conocer su opinión. Muchas gracias.
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td align="left" style="text-align: center; width: 780px;">
                                             </td>
                                         </tr>
