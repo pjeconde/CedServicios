@@ -10,5 +10,7 @@ drop table dbo.LogDetalle
 drop table dbo.Log
 drop table dbo.Permiso
 drop table dbo.TipoPermiso
+drop table dbo.Comprobante
+drop table dbo.DestinoComprobante
 drop table dbo.Cuit
 drop table dbo.Medio
