@@ -2000,24 +2000,24 @@ namespace CedServicios.Site.Facturacion.Electronica
                         string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
                         if (NroCertif.Equals(string.Empty))
                         {
-                            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>");
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>", false);
                             return;
                         }
                         try
                         {
                             if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
                             {
-                                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>");
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>", false);
                                 return;
                             }
                             if (Id_LoteTextbox.Text.Equals(string.Empty))
                             {
-                                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>");
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>", false);
                                 return;
                             }
                             if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
                             {
-                                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>");
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>", false);
                                 return;
                             }
 
@@ -2034,6 +2034,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                             org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
                             FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
                             lcIBK = Conversor.Entidad2IBK(lcFea);
+                            
+                            //Grabar en base de datos
+                            RN.Comprobante comprobante = new RN.Comprobante();
+                            lcFea.cabecera_lote.DestinoComprobante = "ITF";
+                            lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+                            comprobante.Registrar(lcFea, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                            
                             respuesta = edyndns.EnviarIBK(lcIBK, certificado);
 
                             //VIEJO MODO DE USO
@@ -2044,7 +2051,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                             respuesta = respuesta.Replace("'", "-");
 
-                            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>");
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>", false);
                         }
                         catch (System.Web.Services.Protocols.SoapException soapEx)
                         {
@@ -2067,7 +2074,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 string errorSource =
                                     Node.SelectSingleNode("errorNS:ErrorSource",
                                     nsManager).InnerText;
-                                ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + " : " + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>");
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + " : " + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>", false);
                             }
                             catch (Exception)
                             {
@@ -2078,7 +2085,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     catch (Exception ex)
                     {
-                        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + ex.Message + "');</script>");
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + ex.Message + "');</script>", false);
                     }
                 }
             }
