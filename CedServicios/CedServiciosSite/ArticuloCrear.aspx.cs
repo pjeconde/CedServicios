@@ -70,8 +70,14 @@ namespace CedServicios.Site
                 }
                 catch (Exception ex)
                 {
-                    MensajeLabel.Text = EX.Funciones.Detalle(ex);
-                    return;
+                    if (ex.Message.IndexOf("PK_Table_Articulo") != 0)
+                    {
+                        MensajeLabel.Text = "Ya existe un Artículo con este 'Id.'";
+                    }
+                    else
+                    {
+                        MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    }
                 }
             }
         }
