@@ -145,9 +145,9 @@ namespace CedServicios.DB
         }
         public void Alta(Entidades.Permiso Permiso)
         {
-            Ejecutar(AltaHandler(Permiso, true, true), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+            Ejecutar(AltaHandler(Permiso, true, true, false), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
-        public string AltaHandler(Entidades.Permiso Permiso, bool GeneroAccion, bool DeclaroIdWF)
+        public string AltaHandler(Entidades.Permiso Permiso, bool GeneroAccion, bool DeclaroIdWF, bool EnAltaDeUN)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             if (DeclaroIdWF)
@@ -162,13 +162,22 @@ namespace CedServicios.DB
                 a.AppendLine("declare @accionNro varchar(256) ");
                 a.AppendLine("update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro' ");
             }
-            if (Permiso.Usuario.Id != null)
+            string idUN = String.Empty;
+            if (EnAltaDeUN)
             {
-                a.AppendLine("insert Permiso values ('" + Permiso.Usuario.Id + "', '" + Permiso.Cuit + "', '" + Permiso.UN.Id + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', @accionTipo, @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
+                idUN = "@IdUN";
             }
             else
             {
-                a.AppendLine("insert Permiso values ('', '" + Permiso.Cuit + "', '" + Permiso.UN.Id + "', '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', @accionTipo, @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
+                idUN = "'" + Permiso.UN.Id + "'";
+            }
+            if (Permiso.Usuario.Id != null)
+            {
+                a.AppendLine("insert Permiso values ('" + Permiso.Usuario.Id + "', '" + Permiso.Cuit + "', " + idUN + ", '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', @accionTipo, @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
+            }
+            else
+            {
+                a.AppendLine("insert Permiso values ('', '" + Permiso.Cuit + "', " + idUN + ", '" + Permiso.TipoPermiso.Id + "', '" + Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '" + Permiso.UsuarioSolicitante.Id + "', @accionTipo, @accionNro, @idWF, '" + Permiso.WF.Estado + "') ");
             }
             a.AppendLine("insert Log values (@IdWF, getdate(), '" + Permiso.UsuarioSolicitante.Id + "', 'Permiso', 'Alta', '" + Permiso.WF.Estado + "', '') ");
             return a.ToString();

@@ -38,25 +38,27 @@ namespace CedServicios.Site
                     MensajeLabel.Text = EX.Funciones.Detalle(ex);
                     return;
                 }
-                try
-                {
-                    un.Cuit = CUITTextBox.Text;
-                    un.Id = Convert.ToInt32(IdUNTextBox.Text);
-                    RN.UN.Leer(un, sesion);
-                    throw new EX.Validaciones.ElementoYaInexistente("Unidad de negocio '" + un.Id + "' del Cuit " + un.Cuit);
-                }
-                catch (EX.Validaciones.ElementoInexistente)
-                {
+                //try
+                //{
+                      un.Cuit = CUITTextBox.Text;
+                //    un.Id = Convert.ToInt32(IdUNTextBox.Text);
+                //    RN.UN.Leer(un, sesion);
+                //    throw new EX.Validaciones.ElementoYaInexistente("Unidad de negocio '" + un.Id + "' del Cuit " + un.Cuit);
+                //}
+                //catch (EX.Validaciones.ElementoInexistente)
+                //{
                     string referenciaAAprobadores = String.Empty;
                     un.Descr = DescrUNTextBox.Text;
                     string estadoPermisoUsoCUITxUN = String.Empty;
                     RN.UN.Crear(un, out referenciaAAprobadores, out estadoPermisoUsoCUITxUN, sesion);
 
+                    IdUNTextBox.Text = un.Id.ToString();
+
                     CUITTextBox.Enabled = false;
                     IdUNTextBox.Enabled = false;
                     DescrUNTextBox.Enabled = false;
                     AceptarButton.Enabled = false;
-                    SalirButton.Enabled = false;
+                    SalirButton.Text = "Salir";
                     if (estadoPermisoUsoCUITxUN == "Vigente")
                     {
                         MensajeLabel.Text = "La Unidad de negocio fué creada satisfactoriamente";
@@ -65,12 +67,12 @@ namespace CedServicios.Site
                     {
                         MensajeLabel.Text = "La Unidad de negocio fué creada satisfactoriamente.<br />Se ha solicitado la autorización de su vinculación con el CUIT<br />Autorizador(es): " + referenciaAAprobadores;
                     }
-                }
-                catch (Exception ex)
-                {
-                    MensajeLabel.Text = EX.Funciones.Detalle(ex);
-                    return;
-                }
+                //}
+                //catch (Exception ex)
+                //{
+                //    MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                //    return;
+                //}
             }
         }
     }

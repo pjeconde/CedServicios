@@ -26,14 +26,10 @@
         </tr>
         <tr>
             <td align="right" style="padding-right:5px; padding-top:5px">
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="IdUNTextBox"
-                    ErrorMessage="Id" SetFocusOnError="True">
-                    <asp:Label ID="Label5" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                </asp:RequiredFieldValidator>
                 <asp:Label ID="Label6" runat="server" Text="Id."></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="IdUNTextBox" runat="server" MaxLength="20" TabIndex="2" Width="200px"></asp:TextBox>
+                <asp:TextBox ID="IdUNTextBox" runat="server" MaxLength="20" TabIndex="2" Width="200px" Enabled="false" BorderStyle="None"></asp:TextBox>
             </td>
         </tr>
         <tr>
