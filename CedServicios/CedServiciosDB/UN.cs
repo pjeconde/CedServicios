@@ -85,20 +85,38 @@ namespace CedServicios.DB
             a.AppendLine("set @accionTipo='AltaUN' ");
             a.AppendLine("declare @accionNro varchar(256) ");
             a.AppendLine("update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro' ");
-            a.Append(CrearHandler(UN));
+            a.Append(CrearHandler(UN, false));
             a.AppendLine();
             a.Append(PermisoUsoCUITxUNHandler);
             a.Append(PermisoAdminUNParaUsuarioHandler);
-            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+            a.Append("select top 1 IdUN from UN  where Cuit='" + UN.Cuit + "' order by IdUN desc ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
+            UN.Id = Convert.ToInt32(dt.Rows[0]["IdUN"]);
         }
-        public string CrearHandler(Entidades.UN UN)
+        public string CrearHandler(Entidades.UN UN, bool EnAltaDeCUIT)
         {
             StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("declare @idUN int ");
+            if (EnAltaDeCUIT)
+            {
+                a.Append("set @idUN=1 ");
+            }
+            else
+            {
+                a.Append("select @idUN=max(IdUN)+1 from UN where Cuit='" + UN.Cuit + "' ");
+            }
             a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
             a.Append("Insert UN (Cuit, IdUN, DescrUN, IdWF, Estado) values (");
             a.Append("'" + UN.Cuit + "', ");
-            a.Append("'" + UN.Id + "', ");
-            a.Append("'" + UN.Descr + "', ");
+            a.Append("@idUN, ");
+            if (EnAltaDeCUIT)
+            {
+                a.Append("'Predefinida', ");
+            }
+            else
+            {
+                a.Append("'" + UN.Descr + "', ");
+            }
             a.Append("@idWF, ");
             a.Append("'" + UN.WF.Estado + "' ");
             a.AppendLine(") ");

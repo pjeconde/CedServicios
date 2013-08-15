@@ -106,13 +106,13 @@ namespace CedServicios.RN
             permiso.UsuarioSolicitante = Sesion.Usuario;
             permiso.WF.Estado = "Vigente";
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
-            return db.AltaHandler(permiso, false, false);
+            return db.AltaHandler(permiso, false, false, true);
         }
         public static void SolicitarPermisoParaUsuario(Entidades.Cuit Cuit, Entidades.UN UN, Entidades.TipoPermiso TipoPermiso, DateTime FechaFinVigencia, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
         {
             List<Entidades.Permiso> yaTieneHabilitadoElServicioParaLaUN = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
             {
-                return p.TipoPermiso.Id == "AdminUN" && p.Cuit == Cuit.Nro && p.UN.Id == UN.Id && p.TipoPermiso.Id == TipoPermiso.Id;
+                return p.Cuit == Cuit.Nro && p.UN.Id == UN.Id && p.TipoPermiso.Id == TipoPermiso.Id;
             });
             if (yaTieneHabilitadoElServicioParaLaUN.Count != 0)
             {
@@ -180,7 +180,7 @@ namespace CedServicios.RN
                 }
             }
             EstadoPermisoUsoCUITxUN = permiso.WF.Estado;
-            return db.AltaHandler(permiso, false, false);
+            return db.AltaHandler(permiso, false, false, true);
         }
         public static void Autorizar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
         {
@@ -243,7 +243,7 @@ namespace CedServicios.RN
             permiso.UsuarioSolicitante = Sesion.Usuario;
             permiso.WF.Estado = "Vigente";
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
-            return db.AltaHandler(permiso, false, false);
+            return db.AltaHandler(permiso, false, false, false);
         }
         public static string PermisoUsoCUITxUNAprobadoHandler(Entidades.UN UN, Entidades.Sesion Sesion)
         {
@@ -255,7 +255,7 @@ namespace CedServicios.RN
             permiso.FechaFinVigencia = new DateTime(2062, 12, 31);
             permiso.UsuarioSolicitante = Sesion.Usuario;
             permiso.WF.Estado = "Vigente";
-            return db.AltaHandler(permiso, false, false);
+            return db.AltaHandler(permiso, false, false, true);
         }
         public static string PermisoOperServUNParaUsuarioAprobadoHandler(Entidades.UN UN, Entidades.TipoPermiso TipoPermiso, DateTime FechaFinVigencia, Entidades.Sesion Sesion)
         {
@@ -268,7 +268,7 @@ namespace CedServicios.RN
             permiso.UsuarioSolicitante = Sesion.Usuario;
             permiso.WF.Estado = "Vigente";
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
-            return db.AltaHandler(permiso, false, false);
+            return db.AltaHandler(permiso, false, false, true);
         }
         public static string ServxCUITAprobadoHandler(Entidades.Cuit Cuit, Entidades.TipoPermiso TipoPermiso, DateTime FechaFinVigencia, Entidades.Sesion Sesion)
         {
@@ -281,7 +281,7 @@ namespace CedServicios.RN
             permiso.UsuarioSolicitante = Sesion.Usuario;
             permiso.WF.Estado = "Vigente";
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
-            return db.AltaHandler(permiso, false, false);
+            return db.AltaHandler(permiso, false, false, false);
         }
     }
 }

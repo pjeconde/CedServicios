@@ -32,7 +32,7 @@ namespace CedServicios.RN
             uN.Id = 1;
             uN.Descr = "Predefinida";
             uN.WF.Estado = "Vigente";
-            string crearUNHandler = dbUN.CrearHandler(uN);
+            string crearUNHandler = dbUN.CrearHandler(uN, true);
             string permisoUsoCUITxUNAprobadoHandler = RN.Permiso.PermisoUsoCUITxUNAprobadoHandler(uN, Sesion);
             string permisoAdminUNParaUsuarioAprobadoHandler = RN.Permiso.PermisoAdminUNParaUsuarioAprobadoHandler(uN, Sesion);
             string permisoOperServUNParaUsuarioAprobadoHandler = RN.Permiso.PermisoOperServUNParaUsuarioAprobadoHandler(uN, new Entidades.TipoPermiso("eFact"), new DateTime(2062, 12, 31), Sesion);
