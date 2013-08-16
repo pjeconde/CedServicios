@@ -80,7 +80,9 @@ namespace CedServicios.Site
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 Entidades.Permiso permiso = (Entidades.Permiso)ViewState["Permiso"];
-                RN.Permiso.CambiarEstado(permiso, (permiso.WF.Estado == "Vigente" ? "DeBaja" : "Vigente"), sesion);
+                string idEstadoHst = (permiso.WF.Estado == "Vigente" ? "DeBaja" : "Vigente");
+                string idEvento = (idEstadoHst == "Vigente" ? "AnulBaja" : "Baja");
+                RN.Permiso.CambiarEstado(permiso, idEvento, idEstadoHst, sesion);
                 BuscarButton_Click(BuscarButton, new EventArgs());
                 Funciones.PersonalizarControlesMaster(Master, true, sesion);
             }

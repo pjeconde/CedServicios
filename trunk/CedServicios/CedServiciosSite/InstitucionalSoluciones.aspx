@@ -12,7 +12,7 @@
                 <asp:Label ID="CedFCItituloLabel" runat="server" SkinID="TituloMediano" Text="Sistema de Administración de Fondos Comunes de Inversión"></asp:Label>
             </td>
             <td rowspan="3" style="padding-top:20px">
-                <asp:Image ID="CedFCIimage" runat="server" ImageAlign="Right" ImageUrl="Imagenes/CedFCI-Tablero_ch.jpg" Width="220px" />
+                <asp:Image ID="CedFCIimage" runat="server" ImageAlign="Left" ImageUrl="Imagenes/CedFCI-Tablero_ch.jpg" Width="220px" />
             </td>
         </tr>
         <tr>
@@ -32,7 +32,7 @@
                 <asp:Label ID="CedSTtituloLabel" runat="server" SkinID="TituloMediano" Text="Sistema de Transferencias ( implementación MEP )"></asp:Label>
             </td>
             <td rowspan="3" style="padding-top:10px">
-                <asp:Image ID="Image1" runat="server" ImageAlign="Right" ImageUrl="Imagenes/CedST-Tablero_ch.jpg" Width="220px" />
+                <asp:Image ID="Image1" runat="server" ImageAlign="Left" ImageUrl="Imagenes/CedST-Tablero_ch.jpg" Width="220px" />
             </td>
         </tr>
         <tr>
@@ -54,7 +54,7 @@
                 <asp:Label ID="Label6" runat="server" SkinID="TituloMediano" Text="Sistema de Carga Centralizada de Tasas"></asp:Label>
             </td>
             <td rowspan="2" style="padding-top:10px">
-                <asp:Image ID="Image11" runat="server" ImageAlign="right" ImageUrl="Imagenes/CedCCT.jpg" Width="220px" />
+                <asp:Image ID="Image11" runat="server" ImageAlign="Left" ImageUrl="Imagenes/CedCCT.jpg" Width="220px" />
             </td>
         </tr>
         <tr>
@@ -77,7 +77,7 @@
                 <asp:Label ID="Label4" runat="server" SkinID="TituloMediano" Text="Sistema de Inversiones y Pagos Judiciales" ></asp:Label>
             </td>
             <td rowspan="2" style="padding-top:10px">
-                <asp:Image ID="Image7" runat="server" ImageAlign="Right" ImageUrl="Imagenes/CedJU.jpg" Width="220px" />
+                <asp:Image ID="Image7" runat="server" ImageAlign="Left" ImageUrl="Imagenes/CedJU.jpg" Width="220px" />
             </td>
         </tr>
         <tr>
@@ -106,7 +106,7 @@
                 <asp:Label ID="Label5" runat="server" SkinID="TituloMediano" Text="Sistema de Administración y Presentación de Contenidos" ></asp:Label>
             </td>
             <td rowspan="2" style="padding-top:10px">
-                <asp:Image ID="Image9" runat="server" ImageAlign="Right" ImageUrl="Imagenes/CedAPC.jpg" Width="220px" />
+                <asp:Image ID="Image9" runat="server" ImageAlign="Left" ImageUrl="Imagenes/CedAPC.jpg" Width="220px" />
             </td>
         </tr>
         <tr>
@@ -137,7 +137,7 @@
                 <asp:Label ID="Label2" runat="server" SkinID="TituloMediano" Text="Factura Electrónica (solución de conectividad)"></asp:Label>
             </td>
             <td rowspan="2" style="padding-top:10px">
-                <asp:Image ID="Image5" runat="server" ImageAlign="Right" ImageUrl="Imagenes/eFact-R.jpg" Width="220px" />
+                <asp:Image ID="Image5" runat="server" ImageAlign="Left" ImageUrl="Imagenes/eFact-R.jpg" Width="220px" />
             </td>
         </tr>
         <tr>
@@ -166,7 +166,7 @@
                 <asp:Label ID="Label8" runat="server" SkinID="TituloMediano" Text="Factura Electrónica (eFact residente versión Excel)" ></asp:Label>
             </td>
             <td rowspan="3" style="padding-top:10px">
-                <asp:Image ID="Image13" runat="server" ImageAlign="Right" ImageUrl="Imagenes/eFact-R-XL.jpg" Width="220px" />
+                <asp:Image ID="Image13" runat="server" ImageAlign="Left" ImageUrl="Imagenes/eFact-R-XL.jpg" Width="220px" />
             </td>
         </tr>
         <tr>

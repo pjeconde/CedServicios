@@ -34,15 +34,6 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" style="padding-top:5px">
-                                <asp:LinkButton ID="ActividadesAlcanzadasLinkButton" runat="server" 
-                                    Font-Size="Smaller" onclick="ActividadesAlcanzadasLinkButton_Click">Actividades alcanzadas por el Régimen de Factura Electrónica</asp:LinkButton>
-                                |
-                                <asp:LinkButton ID="PreguntasFrecuentesLinkButton" runat="server" 
-                                    Font-Size="Smaller" onclick="PreguntasFrecuentesLinkButton_Click">Preguntas frecuentes</asp:LinkButton>
-                            </td>
-                        </tr>
-                        <tr>
                             <td align="left" style="padding-top:20px">
                                 <asp:Label ID="AclaracionTituloLabel" runat="server" Font-Size="24px" Font-Bold="false" Text="" ForeColor="#e8906e"></asp:Label>
                             </td>
@@ -104,6 +95,29 @@
                 </asp:Panel>
             </td>
         </tr>
+        <tr>
+            <td align="center" style="padding-top:5px">
+                <asp:HyperLink ID="HyperLink5" runat="server" 
+                    NavigateUrl="~/ActividadesAlcanzadas.aspx" SkinID="LinkChicoClaro">Actividades alcanzadas por el Régimen de Factura Electrónica</asp:HyperLink>
+                |
+                <asp:HyperLink ID="HyperLink6" runat="server" 
+                    NavigateUrl="~/PreguntasFrecuentes.aspx" SkinID="LinkChicoClaro">Preguntas frecuentes</asp:HyperLink>
+            </td>
+            <td align="center" style="padding-top:5px">
+                <asp:HyperLink ID="EmpresaHyperLink" runat="server" 
+                    NavigateUrl="~/InstitucionalEmpresa.aspx" SkinID="LinkChicoClaro">Empresa</asp:HyperLink>
+                |
+                <asp:HyperLink ID="HyperLink1" runat="server" 
+                    NavigateUrl="~/InstitucionalSoluciones.aspx" SkinID="LinkChicoClaro">Soluciones</asp:HyperLink>
+                |
+                <asp:HyperLink ID="HyperLink3" runat="server" 
+                    NavigateUrl="~/InstitucionalRefeCom.aspx" SkinID="LinkChicoClaro">Referencias Comerciales</asp:HyperLink>
+                |
+                <asp:HyperLink ID="HyperLink4" runat="server" 
+                    NavigateUrl="~/InstitucionalContacto.aspx" SkinID="LinkChicoClaro">Contacto</asp:HyperLink>
+            </td>
+        </tr>
+
     </table>
     <script type="text/javascript">
         function BorrarMensaje() {

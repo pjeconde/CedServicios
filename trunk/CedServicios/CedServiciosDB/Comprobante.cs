@@ -266,7 +266,7 @@ namespace CedServicios.DB
                 comprobante.Response = Funciones.ObjetoSerializado(Response);
             }
             comprobante.IdDestinoComprobante = IdDestinoComprobante;
-            comprobante.WF.Estado = "Vigente";
+            comprobante.WF.Estado = "PteConf";
             Registrar(comprobante);
         }
     }

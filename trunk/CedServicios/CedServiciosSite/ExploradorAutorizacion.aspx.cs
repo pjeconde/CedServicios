@@ -9,27 +9,12 @@ namespace CedServicios.Site
 {
     public partial class ExploradorAutorizacion : System.Web.UI.Page
     {
-        bool pendientes = false;
         List<Entidades.Permiso> permisos = new List<Entidades.Permiso>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
-                string a = HttpContext.Current.Request.Url.Query.ToString();
-                if (a.ToLower() == "?pendientes")
-                {
-                    pendientes = true;
-                }
-                ViewState["ExploradorAutorizacionPendientes"] = pendientes;
-            }
-            else
-            {
-                pendientes = Convert.ToBoolean(ViewState["ExploradorAutorizacionPendientes"]);
-            }
-            if (pendientes)
-            {
-                TituloPaginaLabel.Text = "Explorador de Autorizaciones pendientes";
             }
             ActualizarGrilla();
         }
@@ -43,19 +28,12 @@ namespace CedServicios.Site
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Permiso> permisos = new List<Entidades.Permiso>();
-                if (pendientes)
-                {
-                    permisos = RN.Permiso.LeerListaPermisosPteAutoriz(sesion.Usuario, sesion);
-                }
-                else
-                {
-                }
+                permisos = RN.Permiso.LeerListaPermisosPteAutoriz(sesion.Usuario, sesion);
                 AutorizacionesGridView.DataSource = permisos;
                 AutorizacionesGridView.DataBind();
                 if (permisos.Count == 0)
                 {
-                    MensajeLabel.Text = "No hay autorizaciones";
-                    if (pendientes) MensajeLabel.Text += " pendientes";
+                    MensajeLabel.Text = "No hay autorizaciones pendientes";
                 }
             }
         }

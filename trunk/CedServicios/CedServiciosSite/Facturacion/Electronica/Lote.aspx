@@ -29,7 +29,7 @@
                             <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                 <tr>
                                     <td align="center" valign="middle">
-                                        <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Factura Electrónica"></asp:Label>
+                                        <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Alta de Factura Electrónica"></asp:Label>
                                         <asp:Label ID="PruebaPopup" runat="server" Text="" Visible="false"></asp:Label>
                                         <asp:Button ID="PruebaPopupButton" runat="server" Text="Button" Visible="false" CausesValidation="false" onclick="PruebaPopupButton_Click"/>
                                     </td>

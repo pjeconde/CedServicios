@@ -211,7 +211,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public void CambioEstado(Entidades.Permiso Permiso, string EstadoHst)
+        public void CambioEstado(Entidades.Permiso Permiso, string Evento, string EstadoHst)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @IdWF int ");
@@ -219,7 +219,7 @@ namespace CedServicios.DB
             a.AppendLine("if not @IdWF is null ");
             a.AppendLine("begin ");
             a.AppendLine("   update Permiso set Estado='" + EstadoHst + "' where IdWF=@IdWF ");
-            a.AppendLine("   insert Log values (@IdWF, getdate(), '" + sesion.Usuario.Id + "', 'Permiso', 'Alta', '" + EstadoHst + "', '') ");
+            a.AppendLine("   insert Log values (@IdWF, getdate(), '" + sesion.Usuario.Id + "', 'Permiso', '" + Evento + "', '" + EstadoHst + "', '') ");
             a.AppendLine("end ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
             Permiso.WF.Estado = EstadoHst;

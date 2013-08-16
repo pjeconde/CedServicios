@@ -61,6 +61,7 @@
     <Compile Include="MetodoGeneracionNumeracionLote.cs" />
     <Compile Include="Migracion.cs" />
     <Compile Include="Permiso.cs" />
+    <Compile Include="PermisoLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>

@@ -26,7 +26,7 @@ EnableEventValidation="false" ValidateRequest="false"%>
                             <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                 <tr>
                                     <td align="center">
-                                        <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Consulta de Factura Electrónica (archivo XML / Interfacturas)"></asp:Label>
+                                        <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobante (archivo XML / online Interfacturas)"></asp:Label>
                                     </td>
                                 </tr>
                                 <tr>
