@@ -108,20 +108,20 @@ namespace CedServicios.Site
                         Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
                     }
                     break;
-                case "Factura Electrónica|Consulta":
+                case "Factura Electrónica|Consulta de Comprobantes":
                     Response.Redirect("~/ExploradorComprobante.aspx");
                     break;
-                case "Factura Electrónica|Consulta (archivo XML / Interfacturas)":
+                case "Factura Electrónica|Consulta de Comprobante (archivo XML / online Interfacturas)":
                     Response.Redirect("~/Facturacion/Electronica/LoteConsulta.aspx");
                     break;
                 case "Factura Electrónica|Términos y Condiciones":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                     break;
                 case "Autorizaciones|Explorador de Autorizaciones pendientes":
-                    Response.Redirect("~/ExploradorAutorizacion.aspx?pendientes");
-                    break;
-                case "Autorizaciones|Explorador de Autorizaciones":
                     Response.Redirect("~/ExploradorAutorizacion.aspx");
+                    break;
+                case "Autorizaciones|Explorador de Autorizaciones (histórico)":
+                    Response.Redirect("~/ExploradorAutorizacionLog.aspx");
                     break;
                 case "Administración Site|Migración de Cuentas (desde CedWeb)":
                     Response.Redirect("~/Migracion.aspx");

@@ -185,19 +185,19 @@ namespace CedServicios.RN
         public static void Autorizar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
         {
             DB.Permiso db = new DB.Permiso(Sesion);
-            db.CambioEstado(Permiso, "Vigente");
+            db.CambioEstado(Permiso, "Autoriz", "Vigente");
             RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario);
         }
         public static void Rechazar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
         {
             DB.Permiso db = new DB.Permiso(Sesion);
-            db.CambioEstado(Permiso, "Rech");
+            db.CambioEstado(Permiso, "Rech", "Rech");
             RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario);
         }
-        public static void CambiarEstado(Entidades.Permiso Permiso, string IdEstado, Entidades.Sesion Sesion)
+        public static void CambiarEstado(Entidades.Permiso Permiso, string Evento, string IdEstado, Entidades.Sesion Sesion)
         {
             DB.Permiso db = new DB.Permiso(Sesion);
-            db.CambioEstado(Permiso, IdEstado);
+            db.CambioEstado(Permiso, Evento, IdEstado);
         }
         public static string DescrPermiso(Entidades.Permiso Permiso)
         {

@@ -5,7 +5,7 @@
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
         <tr>
             <td align="center" style="padding-top:20px">
-                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Autorizaciones"></asp:Label>
+                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Autorizaciones Pendientes"></asp:Label>
                 <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
             </td>
         </tr>

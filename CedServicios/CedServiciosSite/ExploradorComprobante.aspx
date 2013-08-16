@@ -5,7 +5,7 @@
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
         <tr>
             <td align="center" colspan="3" style="padding-top:20px">
-                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Comprobantes (Factura electrónica)"></asp:Label>
+                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes"></asp:Label>
             </td>
         </tr>
         <tr>
@@ -42,7 +42,7 @@
                 Sólo comprobantes vigentes:
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:CheckBox ID="SoloVigentesCheckBox" runat="server" Checked="true" AutoPostBack="true" TextAlign="Left" />
+                <asp:CheckBox ID="SoloVigentesCheckBox" runat="server" Checked="false" AutoPostBack="true" TextAlign="Left" />
             </td>        
         </tr>
         <tr>

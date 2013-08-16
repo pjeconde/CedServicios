@@ -70,6 +70,7 @@
     <Content Include="ClienteModificar.aspx" />
     <Content Include="ClienteSeleccionar.aspx" />
     <Content Include="ComprobanteConsulta.aspx" />
+    <Content Include="ExploradorAutorizacionLog.aspx" />
     <Content Include="ExploradorComprobante.aspx" />
     <Content Include="ConfiguracionModificar.aspx" />
     <Content Include="Controles\Contacto.ascx" />
@@ -278,6 +279,13 @@
     </Compile>
     <Compile Include="ComprobanteConsulta.aspx.designer.cs">
       <DependentUpon>ComprobanteConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorAutorizacionLog.aspx.cs">
+      <DependentUpon>ExploradorAutorizacionLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorAutorizacionLog.aspx.designer.cs">
+      <DependentUpon>ExploradorAutorizacionLog.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorComprobante.aspx.cs">
       <DependentUpon>ExploradorComprobante.aspx</DependentUpon>

@@ -79,7 +79,7 @@ namespace CedServicios.RN
                 });
                 if (esAutorizador.Count != 0)
                 {
-                    opcionesHabilitadas.Add("Autorizaciones|Explorador de Autorizaciones");
+                    opcionesHabilitadas.Add("Autorizaciones|Explorador de Autorizaciones (histórico)");
                     if (RN.Permiso.LeerListaPermisosPteAutoriz(Sesion.Usuario, Sesion).Count != 0)
                     {
                         opcionesHabilitadas.Add("Autorizaciones|Explorador de Autorizaciones pendientes");
@@ -107,8 +107,8 @@ namespace CedServicios.RN
                     if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada.Count != 0 && Sesion.Cuit.WF.Estado == "Vigente" && Sesion.UN.WF.Estado == "Vigente")
                     {
                         opcionesHabilitadas.Add("Factura Electrónica|Alta");
-                        opcionesHabilitadas.Add("Factura Electrónica|Consulta");
-                        opcionesHabilitadas.Add("Factura Electrónica|Consulta (archivo XML / Interfacturas)");
+                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobantes");
+                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (archivo XML / online Interfacturas)");
                         opcionesHabilitadas.Add("Factura Electrónica|Términos y Condiciones");
                     }
                 }

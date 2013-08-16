@@ -145,10 +145,10 @@ namespace CedServicios.Site
             mItem = new MenuItem("Alta", "Alta");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            mItem = new MenuItem("Consulta", "Consulta");
+            mItem = new MenuItem("Consulta de Comprobantes", "Consulta de Comprobantes");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            mItem = new MenuItem("Consulta (archivo XML / Interfacturas)", "Consulta (archivo XML / Interfacturas)");
+            mItem = new MenuItem("Consulta de Comprobante (archivo XML / online Interfacturas)", "Consulta de Comprobante (archivo XML / online Interfacturas)");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             mItem = new MenuItem("Términos y Condiciones", "Términos y Condiciones");
@@ -161,7 +161,7 @@ namespace CedServicios.Site
             mItem = new MenuItem("Explorador de Autorizaciones pendientes", "Explorador de Autorizaciones pendientes");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            mItem = new MenuItem("Explorador de Autorizaciones", "Explorador de Autorizaciones");
+            mItem = new MenuItem("Explorador de Autorizaciones (histórico)", "Explorador de Autorizaciones (histórico)");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
 

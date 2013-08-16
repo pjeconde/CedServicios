@@ -8,14 +8,14 @@ namespace CedServicios.Entidades
     [Serializable]
     public class Permiso
     {
-        private Usuario usuario;
-        private string cuit;
-        private UN uN;
-        private TipoPermiso tipoPermiso;
-        private DateTime fechaFinVigencia;
-        private Usuario usuarioSolicitante;
-        private Accion accion;
-        private WF wF;
+        protected Usuario usuario;
+        protected string cuit;
+        protected UN uN;
+        protected TipoPermiso tipoPermiso;
+        protected DateTime fechaFinVigencia;
+        protected Usuario usuarioSolicitante;
+        protected Accion accion;
+        protected WF wF;
 
         public Permiso()
         {
