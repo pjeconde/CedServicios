@@ -123,6 +123,7 @@
     <Content Include="Imagenes\CedST-Tablero_ch.jpg" />
     <Content Include="Imagenes\eFact-R-XL.jpg" />
     <Content Include="Imagenes\eFact-R.jpg" />
+    <Content Include="Imagenes\eFact-vertical.jpg" />
     <Content Include="Imagenes\Interrogacion.jpg" />
     <Content Include="Imagenes\SiluetaHombre.jpg" />
     <Content Include="InstitucionalContacto.aspx" />
