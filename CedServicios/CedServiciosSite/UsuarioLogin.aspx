@@ -94,6 +94,9 @@
                     </table>
                 </asp:Panel>
             </td>
+            <td rowspan="2" valign="top" style="padding-left:20px">
+                <asp:Image ID="Image1" ImageUrl="~/Imagenes/eFact-vertical.jpg" runat="server" Width="250px" />
+            </td>
         </tr>
         <tr>
             <td align="center" style="padding-top:5px">
