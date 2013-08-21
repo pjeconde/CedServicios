@@ -150,7 +150,7 @@ namespace CedServicios.RN
                 }
                 else
                 {
-                    resultado = "Comprobante enviado satisfactoriamente a Interfacturas. Presionando el botón Consultar puede obtener los datos del Comprobante, su Estado y el CAE correspondiente.";
+                    resultado = "Comprobante enviado satisfactoriamente a Interfacturas.";
                 }
                 return resultado;
             }

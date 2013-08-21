@@ -2035,12 +2035,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                             FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
                             lcIBK = Conversor.Entidad2IBK(lcFea);
                             
-                            //Grabar en base de datos
-                            RN.Comprobante comprobante = new RN.Comprobante();
-                            lcFea.cabecera_lote.DestinoComprobante = "ITF";
-                            lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                            comprobante.Registrar(lcFea, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
-                            
                             respuesta = edyndns.EnviarIBK(lcIBK, certificado);
 
                             //VIEJO MODO DE USO
@@ -2052,6 +2046,15 @@ namespace CedServicios.Site.Facturacion.Electronica
                             respuesta = respuesta.Replace("'", "-");
 
                             ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>", false);
+
+                            if (respuesta == "Comprobante enviado satisfactoriamente a Interfacturas.")
+                            {
+                                //Grabar en base de datos
+                                RN.Comprobante comprobante = new RN.Comprobante();
+                                lcFea.cabecera_lote.DestinoComprobante = "ITF";
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+                                comprobante.Registrar(lcFea, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                            }
                         }
                         catch (System.Web.Services.Protocols.SoapException soapEx)
                         {
