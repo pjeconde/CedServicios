@@ -62,7 +62,7 @@
         <cc1:CalendarExtender ID="FechaInicioActividadesCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
             TargetControlID="FechaInicioActividadesTextBox" Format="yyyyMMdd" PopupButtonID="FechaInicioActividadesImage" >
         </cc1:CalendarExtender>
-        <asp:Image runat="server" ID="FechaInicioActividadesImage" ImageUrl="~/Imagenes/Calendar.gif" />
+        <asp:ImageButton runat="server" CausesValidation="false" ID="FechaInicioActividadesImage" ImageUrl="~/Imagenes/Calendar.gif" />
     </td>
 </tr>
 

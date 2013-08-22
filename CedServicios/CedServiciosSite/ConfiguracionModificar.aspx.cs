@@ -19,6 +19,7 @@ namespace CedServicios.Site
                 }
                 else
                 {
+                    MensajeLabel.Text = String.Empty;
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     TituloPaginaLabel.Text = "Modificación datos de Configuración";
                     String path = Server.MapPath("~/ImagenesSubidas/");
@@ -56,6 +57,7 @@ namespace CedServicios.Site
         }
         protected void SubirImagenButton_Click(object sender, EventArgs e)
         {
+            MensajeLabel.Text = String.Empty;
             if (Funciones.SessionTimeOut(Session))
             {
                 Response.Redirect("~/SessionTimeout.aspx");
@@ -99,6 +101,7 @@ namespace CedServicios.Site
         }
         protected void BorrarImagenButton_Click(object sender, EventArgs e)
         {
+            MensajeLabel.Text = String.Empty;
             if (Funciones.SessionTimeOut(Session))
             {
                 Response.Redirect("~/SessionTimeout.aspx");

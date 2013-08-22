@@ -12,25 +12,28 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="left" style="padding-top:10px">
-                                Entorno 
-                                <asp:LinkButton ID="MultiCuitLinkButton" runat="server" TabIndex="4" Text="Multi-CUIT" onclick="MultiCuitLinkButton_Click" />, 
-                                <asp:LinkButton ID="MultiUNLinkButton" runat="server" TabIndex="5" Text="Multi-Unidad de Negocio" onclick="MultiUNLinkButton_Click" />, 
-                                <asp:LinkButton ID="MultiUsuarioLinkButton" runat="server" TabIndex="6" Text="Multi-Usuario" onclick="MultiUsuarioLinkButton_Click" />.<br />
-                                Ingrese su Factura Electrónica y genere el archivo XML para Interfacturas<br />
-                                (la red de facturas electrónicas de Interbanking)<br />
-                                Es gratuito, rápido, fácil y seguro.<br />
+                            <td align="left" style="padding-top:10px; width:400px">
+                                Este sitio le permite generar Facturas Electrónicas propias para gestionar el CAE a través de <b>Inter<font color="#006600"><i>Facturas</i></font></b>.<br />
+                                (la red de facturas electrónicas de <b>Inter<font color="#800000"><i>Banking</i></font></b>)<br />
+                                <br />
+                                Si Ud. ya cuenta con un sistema de facturación, o utiliza una planilla Excel como herramienta de facturación y desea integrarlo al Régimen de Factura Electrónica, podemos ofrecerles diversas soluciones.<br />
+                                <br />
                                 Soporta los siguientes tipos de Factura Electrónica:<br />
                                 <br />
                                 - Común (RG2485 / RG2904), <br />
                                 - Bono Fiscal (Bienes de Capital) y <br />
                                 - Exportación (RG2758/2010).<br />
                                 <br />
-                                Cargue gratis su Factura Electrónica con nuestro Servicio Web<br />
-                                Facilitamos el cumplimiento del régimen normativo de la AFIP<br />
-                                Podemos integrar su sistema de facturación a la red de Interfacturas.<br />
-                                ¿ Usa una planilla Excel como herramienta de facturación ?<br />
-                                La podemos integrar a la red de Interfacturas<br />
+                                Entorno 
+                                <asp:LinkButton ID="MultiCuitLinkButton" runat="server" TabIndex="4" Text="Multi-CUIT" onclick="MultiCuitLinkButton_Click" />, 
+                                <asp:LinkButton ID="MultiUNLinkButton" runat="server" TabIndex="5" Text="Multi-Unidad de Negocio" onclick="MultiUNLinkButton_Click" />, 
+                                <asp:LinkButton ID="MultiUsuarioLinkButton" runat="server" TabIndex="6" Text="Multi-Usuario" onclick="MultiUsuarioLinkButton_Click" />.<br />
+                                Cargue de manera rápida, fácil y segura su Factura Electrónica con nuestro Servicio Web. 
+                                Facilitamos el cumplimiento del régimen normativo de la AFIP.<br />
+                                <br />
+                                Para mas detalles sugerimos que se comuniquen desde <a href="InstitucionalContacto.aspx">Contacto</a> o bien escribiendonos a <a href="mailto:contacto@cedeira.com.ar">contacto@cedeira.com.ar</a>
+                                <br />
+                                <br />
                             </td>
                         </tr>
                         <tr>
@@ -119,8 +122,13 @@
                 <asp:HyperLink ID="HyperLink4" runat="server" 
                     NavigateUrl="~/InstitucionalContacto.aspx" SkinID="LinkChicoClaro">Contacto</asp:HyperLink>
             </td>
+            <td align="center" style="padding-bottom:5px;">
+            </td>
         </tr>
-
+        <tr>
+            <td align="center" style="padding-bottom:10px;">
+            </td>
+        </tr>
     </table>
     <script type="text/javascript">
         function BorrarMensaje() {

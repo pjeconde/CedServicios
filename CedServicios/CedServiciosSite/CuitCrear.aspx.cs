@@ -89,6 +89,10 @@ namespace CedServicios.Site
                 catch (Exception ex)
                 {
                     MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    if (MensajeLabel.Text.IndexOf("PK_Table_Cuit") != 0)
+                    {
+                        MensajeLabel.Text = "Ya existe un Cuit con este 'Nro.'";
+                    }
                     return;
                 }
             }

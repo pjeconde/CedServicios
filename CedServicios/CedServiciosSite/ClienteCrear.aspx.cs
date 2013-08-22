@@ -103,13 +103,10 @@ namespace CedServicios.Site
                 }
                 catch (Exception ex)
                 {
-                    if (ex.Message.IndexOf("PK_Cliente") != 0)
+                    MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    if (MensajeLabel.Text.IndexOf("PK_Cliente") != 0)
                     {
-                        MensajeLabel.Text = "Ya existe un Cliente con este 'Id.Cliente'";
-                    }
-                    else
-                    {
-                        MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                        MensajeLabel.Text = "Ya existe un Cliente con este 'Nro.'";
                     }
                 }
             }

@@ -16,7 +16,7 @@
 	        </td>
 			<td align="left" valign="top" style="padding-top:20px">
                 <asp:Label ID="Label3" runat="server" Text="/ " ></asp:Label>
-                <asp:TextBox ID="DescrUNTextBox" runat="server" Width="100px" Text="ninguno" Enabled="false" ></asp:TextBox>
+                <asp:TextBox ID="DescrUNTextBox" runat="server" Width="200px" Text="ninguno" Enabled="false" ></asp:TextBox>
                 <asp:TextBox ID="IdUNTextBox" runat="server" Visible="false" ></asp:TextBox>
                 <asp:Button ID="PredefinirCUITyUNactualesButton" runat="server" TabIndex="1" Text="Establecer CUIT / UN actuales como predefinidos" onclick="PredefinirCUITyUNactualesButton_Click" />
 			</td>
@@ -34,12 +34,14 @@
         </tr>
         <tr>
 	        <td align="left" style="padding-top:5px">
-                <asp:FileUpload ID="FileUpload1" runat="server" ToolTip="Seleccione la imagen del usuario" Width="296px" size="31" TabIndex="1" />
+                <asp:FileUpload ID="FileUpload1" runat="server" 
+                    ToolTip="Seleccione la imagen del usuario" Width="496px" size="63" TabIndex="1" 
+                    style="margin-bottom: 0px" />
 			</td>
         </tr>
         <tr>
 	        <td align="left" style="padding-top:5px">
-                <asp:Button ID="SubirImagenButton" runat="server" TabIndex="2" Text="Subir imagen seleccionada" Width="296px" onclick="SubirImagenButton_Click" />
+                <asp:Button ID="SubirImagenButton" runat="server" TabIndex="2" Text="Subir imagen seleccionada" Width="496px" onclick="SubirImagenButton_Click" />
 			</td>
         </tr>
         <tr>
@@ -50,8 +52,6 @@
 			</td>
         </tr>
         <tr>
-            <td>
-            </td>
             <td align="center" colspan="3" style="padding-top:20px">
                 <asp:Button ID="SalirButton" runat="server" Text="Salir" TabIndex="4" PostBackUrl="~/Default.aspx"/>
             </td>
