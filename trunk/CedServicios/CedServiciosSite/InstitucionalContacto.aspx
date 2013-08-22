@@ -10,7 +10,7 @@
         <tr>
             <td align="right" colspan="4" style="padding-top:20px">
                 <asp:Label ID="CorreoElectronicoLabel" runat="server" Text="Correo electrónico: "></asp:Label>
-                <asp:HyperLink ID="eMailInfoHyperLink" runat="server" NavigateUrl='mailto:info@cedeira.com.ar'>info@cedeira.com.ar</asp:HyperLink>
+                <asp:HyperLink ID="eMailInfoHyperLink" runat="server" NavigateUrl='mailto:contacto@cedeira.com.ar'>contacto@cedeira.com.ar</asp:HyperLink>
             </td>
         </tr>
         <tr>

@@ -129,6 +129,10 @@ namespace CedServicios.Site
                 catch (Exception ex)
                 {
                     MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    if (MensajeLabel.Text.IndexOf("PK_Table_PuntoVta") != 0)
+                    {
+                        MensajeLabel.Text = "Ya existe un Punto de Venta con este 'Nro'";
+                    }
                     return;
                 }
             }
