@@ -29,83 +29,13 @@ namespace CedServicios.Site
             DropDownList uNDropDownList = ((DropDownList)usuarioContentPlaceHolder.FindControl("UNDropDownList"));
             
             menu.Items.Clear();
+            menu.DynamicMenuItemStyle.HorizontalPadding = 10;
             menu.Orientation = Orientation.Horizontal;
             menu.Enabled = true;
             menu.Visible = true;
             MenuItem mItem;
-            mItem = new MenuItem("Iniciar sesión", "Iniciar sesión");
+            mItem = new MenuItem("Iniciar sesión", "Iniciar sesión"); mItem.Selectable = false;
             menu.Items.Add(mItem);
-            menu.Items[menu.Items.Count - 1].Selectable = false;
-            mItem = new MenuItem("CUIT", "CUIT");
-            menu.Items.Add(mItem);
-            menu.Items[menu.Items.Count - 1].Selectable = false;
-            mItem = new MenuItem("Alta", "Alta");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere al CUIT seleccionado)";
-            mItem = new MenuItem("Modificación", "Modificación");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere al CUIT seleccionado)";
-            mItem = new MenuItem("Cambio logotipo", "Cambio logotipo");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere al logotipo que aparecerá en los comprobantes del CUIT seleccionado)";
-            mItem = new MenuItem("Consulta", "Consulta");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "Incluye Unidades de Negocio y Puntos de Venta";
-            mItem = new MenuItem("Solicitud permiso de administrador de CUIT", "Solicitud permiso de administrador de CUIT");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-
-            mItem = new MenuItem("Unidad de Negocio", "Unidad de Negocio");
-            menu.Items.Add(mItem);
-            menu.Items[menu.Items.Count - 1].Selectable = false;
-            mItem = new MenuItem("Alta", "Alta");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere a la UN seleccionada)";
-            mItem = new MenuItem("Modificación", "Modificación");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere a la UN seleccionada)";
-            mItem = new MenuItem("Consulta", "Consulta");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "Incluye CUITs y Puntos de Venta";
-            mItem = new MenuItem("Solicitud permiso de administrador de UN", "Solicitud permiso de administrador de UN");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            mItem = new MenuItem("Solicitud permiso de operador de servicio de una UN existente", "Solicitud permiso de operador de servicio de una UN existente");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-
-            mItem = new MenuItem("Puntos de Venta", "Puntos de Venta");
-            menu.Items.Add(mItem);
-            menu.Items[menu.Items.Count - 1].Selectable = false;
-            mItem = new MenuItem("Alta", "Alta");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere a puntos de venta del CUIT y UN seleccionados)";
-            mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere a puntos de venta del CUIT y UN seleccionados)";
-            mItem = new MenuItem("Modificación", "Modificación");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "(se refiere a puntos de venta del CUIT y UN seleccionados)";
-            mItem = new MenuItem("Consulta", "Consulta");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ToolTip = "Incluye CUITs y Unidades de Negocio";
 
             mItem = new MenuItem("Clientes", "Clientes");
             menu.Items.Add(mItem);
@@ -155,15 +85,68 @@ namespace CedServicios.Site
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
 
-            mItem = new MenuItem("Autorizaciones", "Autorizaciones");
+            mItem = new MenuItem("Administración", "Administración"); mItem.Selectable = false;
             menu.Items.Add(mItem);
-            menu.Items[menu.Items.Count - 1].Selectable = false;
-            mItem = new MenuItem("Explorador de Autorizaciones pendientes", "Explorador de Autorizaciones pendientes");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            mItem = new MenuItem("Explorador de Autorizaciones (histórico)", "Explorador de Autorizaciones (histórico)");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+
+                mItem = new MenuItem("CUIT", "CUIT"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+
+                    mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Cambio logotipo", "Cambio logotipo"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Solicitud permiso de administrador de CUIT", "Solicitud permiso de administrador de CUIT"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+
+                mItem = new MenuItem("Unidad de Negocio", "Unidad de Negocio"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+
+                    mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Solicitud permiso de administrador de UN", "Solicitud permiso de administrador de UN"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Solicitud permiso de operador de servicio de una UN existente", "Solicitud permiso de operador de servicio de una UN existente"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+
+                mItem = new MenuItem("Puntos de Venta", "Puntos de Venta"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+
+                    mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+
+                mItem = new MenuItem("Autorizaciones", "Autorizaciones"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+
+                    mItem = new MenuItem("Explorador de Autorizaciones pendientes", "Explorador de Autorizaciones pendientes"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Explorador de Autorizaciones (histórico)", "Explorador de Autorizaciones (histórico)"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+
+                mItem = new MenuItem("Usuario", "Usuario"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+
+                    mItem = new MenuItem("Cambio de Contraseña", "Cambio de Contraseña"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Modificación datos de Configuración", "Modificación datos de Configuración"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
 
             mItem = new MenuItem("Administración Site", "Administración Site");
             menu.Items.Add(mItem);
@@ -196,16 +179,6 @@ namespace CedServicios.Site
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             mItem = new MenuItem("Migración de Cuentas (desde CedWeb)", "Migración de Cuentas (desde CedWeb)");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-
-            mItem = new MenuItem("Configuración", "Configuración");
-            menu.Items.Add(mItem);
-            menu.Items[menu.Items.Count - 1].Selectable = false;
-            mItem = new MenuItem("Cambio de Contraseña de Usuario", "Cambio de Contraseña de Usuario");
-            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-            mItem = new MenuItem("Modificación datos de Configuración", "Modificación datos de Configuración");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
 

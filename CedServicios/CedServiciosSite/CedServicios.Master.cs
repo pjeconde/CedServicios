@@ -26,52 +26,52 @@ namespace CedServicios.Site
                 case "Iniciar sesión":
                     Response.Redirect("~/UsuarioLogin.aspx");
                     break;
-                case "CUIT|Alta":
+                case "Administración|CUIT|Alta":
                     Response.Redirect("~/CuitCrear.aspx");
                     break;
-                case "CUIT|Solicitud permiso de administrador de CUIT":
+                case "Administración|CUIT|Solicitud permiso de administrador de CUIT":
                     Response.Redirect("~/SolicPermisoAdminCUIT.aspx");
                     break;
-                case "CUIT|Baja/Anul.baja":
+                case "Administración|CUIT|Baja/Anul.baja":
                     Response.Redirect("~/CuitBaja.aspx");
                     break;
-                case "CUIT|Modificación":
+                case "Administración|CUIT|Modificación":
                     Response.Redirect("~/CuitModificar.aspx");
                     break;
-                case "CUIT|Cambio logotipo":
+                case "Administración|CUIT|Cambio logotipo":
                     Response.Redirect("~/CuitCambiarLogotipo.aspx");
                     break;
-                case "CUIT|Consulta":
+                case "Administración|CUIT|Consulta":
                     Response.Redirect("~/CuitTreeView.aspx?Cuit");
                     break;
-                case "Unidad de Negocio|Alta":
+                case "Administración|Unidad de Negocio|Alta":
                     Response.Redirect("~/UNCrear.aspx");
                     break;
-                case "Unidad de Negocio|Solicitud permiso de administrador de UN":
+                case "Administración|Unidad de Negocio|Solicitud permiso de administrador de UN":
                     Response.Redirect("~/SolicPermisoAdminUN.aspx");
                     break;
-                case "Unidad de Negocio|Solicitud permiso de operador de servicio de una UN existente":
+                case "Administración|Unidad de Negocio|Solicitud permiso de operador de servicio de una UN existente":
                     Response.Redirect("~/SolicPermisoOperServUN.aspx");
                     break;
-                case "Unidad de Negocio|Baja/Anul.baja":
+                case "Administración|Unidad de Negocio|Baja/Anul.baja":
                     Response.Redirect("~/UNBaja.aspx");
                     break;
-                case "Unidad de Negocio|Modificación":
+                case "Administración|Unidad de Negocio|Modificación":
                     Response.Redirect("~/UNModificar.aspx");
                     break;
-                case "Unidad de Negocio|Consulta":
+                case "Administración|Unidad de Negocio|Consulta":
                     Response.Redirect("~/CuitTreeView.aspx?UN");
                     break;
-                case "Puntos de Venta|Alta":
+                case "Administración|Puntos de Venta|Alta":
                     Response.Redirect("~/PuntoVtaCrear.aspx");
                     break;
-                case "Puntos de Venta|Baja/Anul.baja":
+                case "Administración|Puntos de Venta|Baja/Anul.baja":
                     Response.Redirect("~/PuntoVtaSeleccionar.aspx?Baja");
                     break;
-                case "Puntos de Venta|Modificación":
+                case "Administración|Puntos de Venta|Modificación":
                     Response.Redirect("~/PuntoVtaSeleccionar.aspx?Modificar");
                     break;
-                case "Puntos de Venta|Consulta":
+                case "Administración|Puntos de Venta|Consulta":
                     Response.Redirect("~/CuitTreeView.aspx?PuntoVta");
                     break;
                 case "Clientes|Alta":
@@ -117,10 +117,10 @@ namespace CedServicios.Site
                 case "Factura Electrónica|Términos y Condiciones":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                     break;
-                case "Autorizaciones|Explorador de Autorizaciones pendientes":
+                case "Administración|Autorizaciones|Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx");
                     break;
-                case "Autorizaciones|Explorador de Autorizaciones (histórico)":
+                case "Administración|Autorizaciones|Explorador de Autorizaciones (histórico)":
                     Response.Redirect("~/ExploradorAutorizacionLog.aspx");
                     break;
                 case "Administración Site|Migración de Cuentas (desde CedWeb)":
@@ -153,10 +153,10 @@ namespace CedServicios.Site
                 case "Administración Site|Explorador de Logs":
                     Response.Redirect("~/PaginaEnConstruccion.aspx");
                     break;
-                case "Configuración|Cambio de Contraseña de Usuario":
+                case "Administración|Usuario|Cambio de Contraseña":
                     Response.Redirect("~/UsuarioCambiarPassword.aspx");
                     break;
-                case "Configuración|Modificación datos de Configuración":
+                case "Administración|Usuario|Modificación datos de Configuración":
                     Response.Redirect("~/ConfiguracionModificar.aspx");
                     break;
                 case "Cerrar sesión":
