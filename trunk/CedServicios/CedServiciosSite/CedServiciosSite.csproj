@@ -63,6 +63,30 @@
     <Content Include="ArticuloCrear.aspx" />
     <Content Include="ArticuloModificar.aspx" />
     <Content Include="ArticuloSeleccionar.aspx" />
+    <Content Include="Ayuda\ExploradorNovedad.aspx" />
+    <Content Include="Ayuda\Novedades\eFactWebBoletinElectronico20130906.html" />
+    <Content Include="Ayuda\Novedades\images20130906\image00.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image01.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image02.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image03.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image04.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image05.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image06.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image07.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image08.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image09.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image10.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image11.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image12.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image13.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image14.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image15.gif" />
+    <Content Include="Ayuda\Novedades\images20130906\image16.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image17.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image18.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image19.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image20.png" />
+    <Content Include="Ayuda\Novedades\images20130906\image21.png" />
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="ClienteBaja.aspx" />
     <Content Include="ClienteConsulta.aspx" />
@@ -228,6 +252,13 @@
     </Compile>
     <Compile Include="ArticuloSeleccionar.aspx.designer.cs">
       <DependentUpon>ArticuloSeleccionar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\ExploradorNovedad.aspx.cs">
+      <DependentUpon>ExploradorNovedad.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\ExploradorNovedad.aspx.designer.cs">
+      <DependentUpon>ExploradorNovedad.aspx</DependentUpon>
     </Compile>
     <Compile Include="Captcha.ashx.cs">
       <DependentUpon>Captcha.ashx</DependentUpon>

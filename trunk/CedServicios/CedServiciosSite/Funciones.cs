@@ -182,6 +182,19 @@ namespace CedServicios.Site
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
 
+            mItem = new MenuItem("Ayuda", "Ayuda");
+            menu.Items.Add(mItem);
+            menu.Items[menu.Items.Count - 1].Selectable = false;
+            mItem = new MenuItem("Manual", "Manual");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Novedades", "Novedades");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+            mItem = new MenuItem("Documentación técnica", "Documentación técnica");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+
             mItem = new MenuItem("Cerrar sesión", "Cerrar sesión");
             menu.Items.Add(mItem);
             menu.Items[menu.Items.Count - 1].Selectable = false;

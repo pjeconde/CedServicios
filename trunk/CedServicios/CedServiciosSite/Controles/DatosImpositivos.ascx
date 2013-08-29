@@ -17,9 +17,6 @@
 <!-- NroIngBrutos y CondIngBrutos -->
 <tr>
 	<td align="right" style="padding-left: 10px; padding-right: 5px; padding-top:5px">
-		<asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="CondIngBrutosDropDownList" ErrorMessage="Cond.Ing.Brutos" SetFocusOnError="True" InitialValue="0">
-			<asp:Label ID="Label1" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-		</asp:RequiredFieldValidator>
 		<asp:Label ID="Label18" runat="server" Text="Cond.Ing.Brutos"></asp:Label>
 	</td>
 	<td align="left" style="padding-top:5px">
@@ -35,10 +32,6 @@
 			            ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">
 			            <asp:Label ID="Label47" runat="server" SkinID="IndicadorValidacion"></asp:Label>
 		            </asp:RegularExpressionValidator>
-		            <asp:RequiredFieldValidator ID="RequiredFieldValidator11" runat="server" ControlToValidate="NroIngBrutosTextBox"
-			            ErrorMessage="Nro.Ing.Brutos" SetFocusOnError="True">
-			            <asp:Label ID="Label48" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-		            </asp:RequiredFieldValidator>
 		            <asp:Label ID="Label20" runat="server" Text="Nro.Ing.Brutos"></asp:Label>
 	            </td>
 				<td>

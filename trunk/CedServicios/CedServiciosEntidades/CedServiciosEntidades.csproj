@@ -41,6 +41,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Accion.cs" />
+    <Compile Include="Archivo.cs" />
     <Compile Include="Articulo.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Comprobante.cs" />

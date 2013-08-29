@@ -28,6 +28,9 @@ namespace CedServicios.RN
                 opcionesHabilitadas.Add("Administración|Unidad de Negocio|Solicitud permiso de administrador de UN");
                 opcionesHabilitadas.Add("Administración|Usuario|Cambio de Contraseña");
                 opcionesHabilitadas.Add("Administración|Usuario|Modificación datos de Configuración");
+                opcionesHabilitadas.Add("Ayuda|Manual");
+                opcionesHabilitadas.Add("Ayuda|Novedades");
+                opcionesHabilitadas.Add("Ayuda|Documentación técnica");
                 opcionesHabilitadas.Add("Cerrar sesión");
 
                 List<Entidades.Permiso> permisoAdminSITEVigente = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
