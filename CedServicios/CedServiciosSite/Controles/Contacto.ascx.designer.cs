@@ -139,24 +139,6 @@ namespace CedServicios.Site.Controles {
         protected global::System.Web.UI.WebControls.Label Label43;
         
         /// <summary>
-        /// Control RequiredFieldValidator9.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator9;
-        
-        /// <summary>
-        /// Control Label44.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label44;
-        
-        /// <summary>
         /// Control Label10.
         /// </summary>
         /// <remarks>

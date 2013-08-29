@@ -48,10 +48,6 @@
 			SetFocusOnError="True" ValidationExpression="[A-Za-z\- ,.0-9]*">
 			<asp:Label ID="Label43" runat="server" SkinID="IndicadorValidacion"></asp:Label>
 		</asp:RegularExpressionValidator>
-		<asp:RequiredFieldValidator ID="RequiredFieldValidator9" runat="server" ControlToValidate="TelefonoContactoTextBox"
-			ErrorMessage="Teléfono Contacto" SetFocusOnError="True">
-			<asp:Label ID="Label44" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-		</asp:RequiredFieldValidator>
 		<asp:Label ID="Label10" runat="server" Text="Teléfono Contacto"></asp:Label>
 	</td>
 	<td align="left" style="padding-top: 3px">

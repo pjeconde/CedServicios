@@ -159,6 +159,15 @@ namespace CedServicios.Site
                 case "Administración|Usuario|Modificación datos de Configuración":
                     Response.Redirect("~/ConfiguracionModificar.aspx");
                     break;
+                case "Ayuda|Manual":
+                    Response.Redirect("~/default.aspx");
+                    break;
+                case "Ayuda|Novedades":
+                    Response.Redirect("~/Ayuda/ExploradorNovedad.aspx");
+                    break;
+                case "Ayuda|Documentación técnica":
+                    Response.Redirect("~/default.aspx");
+                    break;
                 case "Cerrar sesión":
                     RN.Sesion.Cerrar(sesion);
                     Response.Redirect("~/UsuarioLogin.aspx");
