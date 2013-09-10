@@ -110,8 +110,9 @@ namespace CedServicios.RN
                     if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada.Count != 0 && Sesion.Cuit.WF.Estado == "Vigente" && Sesion.UN.WF.Estado == "Vigente")
                     {
                         opcionesHabilitadas.Add("Factura Electrónica|Alta");
-                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobantes");
-                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (archivo XML / online Interfacturas)");
+                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobantes (base de datos)");
+                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (archivo XML)");
+                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (online Interfacturas)");
                         opcionesHabilitadas.Add("Factura Electrónica|Términos y Condiciones");
                     }
                 }

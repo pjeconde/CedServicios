@@ -94,6 +94,8 @@
     <Content Include="ClienteModificar.aspx" />
     <Content Include="ClienteSeleccionar.aspx" />
     <Content Include="ComprobanteConsulta.aspx" />
+    <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
+    <Content Include="ComprobanteSeleccionOnlineInterfacturas.aspx" />
     <Content Include="ExploradorAutorizacionLog.aspx" />
     <Content Include="ExploradorComprobante.aspx" />
     <Content Include="ConfiguracionModificar.aspx" />
@@ -311,6 +313,20 @@
     </Compile>
     <Compile Include="ComprobanteConsulta.aspx.designer.cs">
       <DependentUpon>ComprobanteConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ComprobanteSeleccionArchivoXML.aspx.cs">
+      <DependentUpon>ComprobanteSeleccionArchivoXML.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComprobanteSeleccionArchivoXML.aspx.designer.cs">
+      <DependentUpon>ComprobanteSeleccionArchivoXML.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ComprobanteSeleccionOnlineInterfacturas.aspx.cs">
+      <DependentUpon>ComprobanteSeleccionOnlineInterfacturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComprobanteSeleccionOnlineInterfacturas.aspx.designer.cs">
+      <DependentUpon>ComprobanteSeleccionOnlineInterfacturas.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorAutorizacionLog.aspx.cs">
       <DependentUpon>ExploradorAutorizacionLog.aspx</DependentUpon>
