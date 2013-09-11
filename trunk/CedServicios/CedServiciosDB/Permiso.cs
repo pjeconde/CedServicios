@@ -112,6 +112,18 @@ namespace CedServicios.DB
             }
             return lista;
         }
+        public Entidades.Permiso LeerPermisoPorCuit(string CUIT, string IdTipoPermiso)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado ");
+            a.AppendLine("from Permiso where IdUsuario='' and IdUN='' ");
+            a.AppendLine("and CUIT='" + CUIT + "' ");
+            a.AppendLine("and IdTipoPermiso='" + IdTipoPermiso + "' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            Entidades.Permiso permiso = new Entidades.Permiso();
+            Copiar(dt.Rows[0], permiso);
+            return permiso;
+        }
         private void Copiar(DataRow Desde, Entidades.Permiso Hasta)
         {
             Hasta.Usuario.Id = Convert.ToString(Desde["IdUsuario"]);
