@@ -188,6 +188,13 @@ namespace CedServicios.Entidades
             }
         }
         #region Propiedades redundantes
+        public string DocumentoIdTipoDoc
+        {
+            get
+            {
+                return documento.Tipo.Id;
+            }
+        }
         public string DocumentoTipoDescr
         {
             get
@@ -207,6 +214,69 @@ namespace CedServicios.Entidades
             get
             {
                 return wF.Estado;
+            }
+        }
+        public string DomicilioCalle
+        {
+            get
+            {
+                return Domicilio.Calle;
+            }
+        }
+        public string DomicilioNro
+        {
+            get
+            {
+                return Domicilio.Nro;
+            }
+        }
+        public string DomicilioPiso
+        {
+            get
+            {
+                return Domicilio.Piso;
+            }
+        }
+        public string DomicilioDepto
+        {
+            get
+            {
+                return Domicilio.Depto;
+            }
+        }
+        public string DomicilioLocalidad
+        {
+            get
+            {
+                return Domicilio.Localidad;
+            }
+        }
+        public string DomicilioCodPost
+        {
+            get
+            {
+                return Domicilio.CodPost;
+            }
+        }
+        public string ContactoNombre
+        {
+            get
+            {
+                return Contacto.Nombre;
+            }
+        }
+        public string ContactoEmail
+        {
+            get
+            {
+                return Contacto.Email;
+            }
+        }
+        public string ContactoTelefono
+        {
+            get
+            {
+                return Contacto.Telefono;
             }
         }
         #endregion

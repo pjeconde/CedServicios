@@ -1356,14 +1356,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-                    if (!comprador.Documento.Tipo.Equals(70))
-                    {
-                        Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-                        Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
-                        Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(comprador.Documento.Nro);
-                        Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaNoExportacion();
-                    }
-                    else
+                    if (comprador.Documento.Tipo.Id != null && comprador.Documento.Tipo.Id == "70")
                     {
                         Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
                         Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
@@ -1373,6 +1366,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                         Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
                         Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(comprador.Documento.Nro)));
                         Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+                    }
+                    else
+                    {
+                        Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+                        Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+                        Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(comprador.Documento.Nro);
+                        Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaNoExportacion();
                     }
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
                     Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = Convert.ToString(comprador.Documento.Tipo.Id);
@@ -1474,7 +1474,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			//CondIngBrutosDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIngBrutos);
 			GLN_CompradorTextBox.Text = string.Empty;
 			Codigo_Interno_CompradorTextBox.Text = string.Empty;
-			((TextBox)InicioDeActividadesCompradorDatePickerWebUserControl.FindControl("txt_Date")).Text = string.Empty;
+			InicioDeActividadesCompradorDatePickerWebUserControl.Text = string.Empty;
 			EmailAvisoVisualizacionTextBox.Text = string.Empty;
 			PasswordAvisoVisualizacionTextBox.Text = string.Empty;
 		}
@@ -2263,7 +2263,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Exportacion"))
+                    if (idtipo.Equals("Exportacion") || idtipo.Equals("RG2904"))
                     {
                         cab.presta_servSpecified = false;
                     }
@@ -3905,8 +3905,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             System.Collections.Generic.List<Entidades.Cliente> listacompradores=new List<Entidades.Cliente>();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-            CompradorDropDownList.DataValueField = "IdCliente";
-            CompradorDropDownList.DataTextField = "RazonSocial";
             if (PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
             {
                 if (Funciones.SessionTimeOut(Session))
@@ -3983,7 +3981,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
                 }
             }
-            CompradorDropDownList.DataSource = listacompradores;
+            CompradorDropDownList.DataValueField = "RazonSocial";
+            CompradorDropDownList.DataTextField = "RazonSocial";
+            Entidades.Cliente cliente = new Entidades.Cliente();
+            System.Collections.Generic.List<Entidades.Cliente> clientelist = new System.Collections.Generic.List<Entidades.Cliente>();
+            cliente.RazonSocial = "";
+            clientelist.Add(cliente);
+            clientelist.AddRange(listacompradores);
+            CompradorDropDownList.DataSource = clientelist;
             CompradorDropDownList.DataBind();
             CompradorDropDownList.SelectedIndex = 0;
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();

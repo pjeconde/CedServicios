@@ -973,17 +973,37 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         throw new Exception("Debe informar al menos un artículo");
                     }
+                    double imptotdiscr = listadelineas[i].importe_total_articulo;
+                    //
+                    int auxPV = Convert.ToInt32(puntoDeVenta);
+                    try
+                    {
+                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                        });
+                        if (listaPV.Count != 0)
+                        {
+                            if (listadelineas[i].importe_ivaSpecified)
+                            {
+                                imptotdiscr -= listadelineas[i].importe_iva;
+                            }
+                        }
+                    }
+                    catch
+                    {
+                    }
                     if (listadelineas[i].importe_iva != 0)
                     {
-                        totalGravado += listadelineas[i].importe_total_articulo;
+                        totalGravado += imptotdiscr;
                     }
                     else if (listadelineas[i].indicacion_exento_gravado.Equals("E"))
                     {
-                        total_Operaciones_Exentas += listadelineas[i].importe_total_articulo;
+                        total_Operaciones_Exentas += imptotdiscr;
                     }
                     else
                     {
-                        totalNoGravado += listadelineas[i].importe_total_articulo;
+                        totalNoGravado += imptotdiscr;
                     }
                 }
                 catch (NullReferenceException)
@@ -1050,17 +1070,17 @@ namespace CedServicios.Site.Facturacion.Electronica
 				if (MonedaComprobante.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
 				{
 
-					GenerarDetalleMonedaLocal(TipoCbte, det, listadelineas, i);
+                    GenerarDetalleMonedaLocal(TipoCbte, det, listadelineas, i, TipoPtoVta);
 				}
 				else
 				{
-					GenerarDetalleMonedaExtranjera(TipoDeCambio, TipoCbte, det, listadelineas, i);
+					GenerarDetalleMonedaExtranjera(TipoDeCambio, TipoCbte, det, listadelineas, i, TipoPtoVta);
 				}
 			}
 			return det;
 		}
 
-		private static void GenerarDetalleMonedaExtranjera(string TipoDeCambio, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
+        private static void GenerarDetalleMonedaExtranjera(string TipoDeCambio, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i, string TipoPtoVta)
 		{
 			det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
 			switch (TipoCbte)
@@ -1118,7 +1138,14 @@ namespace CedServicios.Site.Facturacion.Electronica
 					{
 						limo.precio_unitario = Math.Round(listadelineas[i].precio_unitario, 3);
 					}
-					limo.importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva, 2);
+                    if (TipoPtoVta.Equals("RG2904"))
+                    {
+                        limo.importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo, 2);
+                    }
+                    else
+                    {
+                        limo.importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva, 2);
+                    }
 					break;
 				default:
 					limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
@@ -1130,7 +1157,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			det.linea[i].importes_moneda_origen = limo;
 		}
 
-		private static void GenerarDetalleMonedaLocal(string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
+        private static void GenerarDetalleMonedaLocal(string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i, string TipoPtoVta)
 		{
 			switch (TipoCbte)
 			{
@@ -1150,7 +1177,14 @@ namespace CedServicios.Site.Facturacion.Electronica
 					{
 						det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario, 3);
 					}
-					det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva, 2);
+                    if (TipoPtoVta.Equals("RG2904"))
+                    {
+                        det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo, 2);
+                    }
+                    else
+                    {
+                        det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo + listadelineas[i].importe_iva, 2);
+                    }
 					det.linea[i].importe_ivaSpecified = false;
 					det.linea[i].importe_iva = 0;
 					break;

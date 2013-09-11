@@ -221,5 +221,23 @@ namespace CedServicios.RN
             CedServicios.DB.Configuracion db = new DB.Configuracion(Sesion);
             db.CrearFechaOKeFactTyC(Sesion.Usuario);
         }
+        public static List<Entidades.Usuario> ListaSegunFiltros(string IdUsuario, string Nombre, string Email, string Estado, Entidades.Sesion Sesion)
+        {
+            DB.Usuario usuario = new DB.Usuario(Sesion);
+            return usuario.ListaSegunFiltros(IdUsuario, Nombre, Email, Estado);
+        }
+        public static List<Entidades.Usuario> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string IdUsuario, string Nombre, string Email, string Estado, string SessionID, Entidades.Sesion Sesion)
+        {
+            List<Entidades.Usuario> listaUsuario = new List<Entidades.Usuario>();
+            DB.Usuario db = new DB.Usuario(Sesion);
+            if (OrderBy.Equals(String.Empty))
+            {
+                OrderBy = "IdUsuario desc";
+            }
+            listaUsuario = db.ListaSegunFiltros(IdUsuario, Nombre, Email, Estado);
+            int cantidadFilas = listaUsuario.Count;
+            CantidadFilas = cantidadFilas;
+            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaUsuario);
+        }
     }
 }

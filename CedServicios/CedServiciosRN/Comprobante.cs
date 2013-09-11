@@ -1454,5 +1454,10 @@ namespace CedServicios.RN
             texto = texto.Replace("&Ntilde;", "Ñ");
             return texto;
         }
+        public static List<Entidades.Comprobante> ListaGlobalFiltrada(bool SoloVigentes, bool EsFechaAlta, string FechaDesde, string FechaHasta, Entidades.Cliente Cliente, string CUIT, string CUITRazonSocial, string NroComprobante, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            return db.ListaGlobalFiltrada(SoloVigentes, EsFechaAlta, FechaDesde, FechaHasta, Cliente, CUIT, CUITRazonSocial, NroComprobante);
+        }
     }
 }

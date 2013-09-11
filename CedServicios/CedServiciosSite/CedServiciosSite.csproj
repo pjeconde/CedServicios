@@ -57,6 +57,8 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="ActividadesAlcanzadas.aspx" />
+    <Content Include="Admin\Default.aspx" />
+    <Content Include="App_Offline\App_Offline.htm" />
     <Content Include="App_Themes\CedServicios\CedServicios.css" />
     <Content Include="ArticuloBaja.aspx" />
     <Content Include="ArticuloConsulta.aspx" />
@@ -95,7 +97,10 @@
     <Content Include="ClienteSeleccionar.aspx" />
     <Content Include="ComprobanteConsulta.aspx" />
     <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
+    <Content Include="ExploradorCliente.aspx" />
     <Content Include="ComprobanteSeleccionOnlineInterfacturas.aspx" />
+    <Content Include="ExploradorComprobanteGlobal.aspx" />
+    <Content Include="ExploradorUsuario.aspx" />
     <Content Include="ExploradorAutorizacionLog.aspx" />
     <Content Include="ExploradorComprobante.aspx" />
     <Content Include="ConfiguracionModificar.aspx" />
@@ -167,9 +172,11 @@
     <Content Include="PuntoVtaModificar.aspx" />
     <Content Include="PuntoVtaSeleccionar.aspx" />
     <Content Include="SessionTimeout.aspx" />
+    <Content Include="Admin\SettingsRulesConfiguration.aspx" />
     <Content Include="SolicPermisoAdminCUIT.aspx" />
     <Content Include="SolicPermisoAdminUN.aspx" />
     <Content Include="SolicPermisoOperServUN.aspx" />
+    <Content Include="TemporarilyOfflineMessage.aspx" />
     <Content Include="UNBaja.aspx" />
     <Content Include="UNCrear.aspx" />
     <Content Include="UNModificar.aspx" />
@@ -219,6 +226,13 @@
     </Compile>
     <Compile Include="ActividadesAlcanzadas.aspx.designer.cs">
       <DependentUpon>ActividadesAlcanzadas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Admin\Default.aspx.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\Default.aspx.designer.cs">
+      <DependentUpon>Default.aspx</DependentUpon>
     </Compile>
     <Compile Include="ArticuloBaja.aspx.cs">
       <DependentUpon>ArticuloBaja.aspx</DependentUpon>
@@ -327,6 +341,27 @@
     </Compile>
     <Compile Include="ComprobanteSeleccionOnlineInterfacturas.aspx.designer.cs">
       <DependentUpon>ComprobanteSeleccionOnlineInterfacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorCliente.aspx.cs">
+      <DependentUpon>ExploradorCliente.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorCliente.aspx.designer.cs">
+      <DependentUpon>ExploradorCliente.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorComprobanteGlobal.aspx.cs">
+      <DependentUpon>ExploradorComprobanteGlobal.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorComprobanteGlobal.aspx.designer.cs">
+      <DependentUpon>ExploradorComprobanteGlobal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorUsuario.aspx.cs">
+      <DependentUpon>ExploradorUsuario.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorUsuario.aspx.designer.cs">
+      <DependentUpon>ExploradorUsuario.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorAutorizacionLog.aspx.cs">
       <DependentUpon>ExploradorAutorizacionLog.aspx</DependentUpon>
@@ -728,6 +763,14 @@
     <Compile Include="SessionTimeout.aspx.designer.cs">
       <DependentUpon>SessionTimeout.aspx</DependentUpon>
     </Compile>
+    <Compile Include="SettingsRules.cs" />
+    <Compile Include="Admin\SettingsRulesConfiguration.aspx.cs">
+      <DependentUpon>SettingsRulesConfiguration.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Admin\SettingsRulesConfiguration.aspx.designer.cs">
+      <DependentUpon>SettingsRulesConfiguration.aspx</DependentUpon>
+    </Compile>
     <Compile Include="SolicPermisoAdminCUIT.aspx.cs">
       <DependentUpon>SolicPermisoAdminCUIT.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -748,6 +791,13 @@
     </Compile>
     <Compile Include="SolicPermisoOperServUN.aspx.designer.cs">
       <DependentUpon>SolicPermisoOperServUN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TemporarilyOfflineMessage.aspx.cs">
+      <DependentUpon>TemporarilyOfflineMessage.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TemporarilyOfflineMessage.aspx.designer.cs">
+      <DependentUpon>TemporarilyOfflineMessage.aspx</DependentUpon>
     </Compile>
     <Compile Include="UNBaja.aspx.cs">
       <DependentUpon>UNBaja.aspx</DependentUpon>

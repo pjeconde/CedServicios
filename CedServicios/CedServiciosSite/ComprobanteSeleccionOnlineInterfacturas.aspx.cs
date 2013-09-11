@@ -58,7 +58,7 @@ namespace CedServicios.Site
                         MensajeLabel.Text = "Falta ingresar el nro de lote";
                         return;
                     }
-                    if (PtoVtaConsultaDropDownList.SelectedValue.Equals(string.Empty))
+                    if (PtoVtaConsultaDropDownList.SelectedValue.Equals("0") || PtoVtaConsultaDropDownList.SelectedValue.Equals(string.Empty))
                     {
                         MensajeLabel.Text = "Falta ingresar el punto de venta";
                         return;
