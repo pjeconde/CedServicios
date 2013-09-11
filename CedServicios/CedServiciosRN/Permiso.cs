@@ -10,7 +10,16 @@ namespace CedServicios.RN
         public static List<Entidades.Permiso> LeerListaPermisosPorUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
-            return db.LeerListaPermisosPorUsuario(Usuario);
+            List<Entidades.Permiso> lista = db.LeerListaPermisosPorUsuario(Usuario);
+            for (int i = 0; i < lista.Count; i++)
+            {
+                if (lista[i].TipoPermiso.Id == "eFact")
+                {
+                    Entidades.Permiso permisoCuit = LeerPermisoPorCuit(lista[i].Cuit, lista[i].TipoPermiso.Id, Sesion);
+                    lista[i].WF.Estado = permisoCuit.Estado;
+                }
+            }
+            return lista;
         }
         public static List<Entidades.Permiso> LeerListaPermisosVigentesPorUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
@@ -26,6 +35,11 @@ namespace CedServicios.RN
         {
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
             return db.LeerListaPermisosFiltrados(IdUsuario, CUIT, IdTipoPermiso, Estado);
+        }
+        public static Entidades.Permiso LeerPermisoPorCuit(string CUIT, string IdTipoPermiso, Entidades.Sesion Sesion)
+        {
+            CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
+            return db.LeerPermisoPorCuit(CUIT, IdTipoPermiso);
         }
         public static void SolicitarPermisoParaUsuario(Entidades.Cuit Cuit, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
         {
