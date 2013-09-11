@@ -129,8 +129,11 @@ namespace CedServicios.Site
                 case "Administración Site|Migración de Cuentas (desde CedWeb)":
                     Response.Redirect("~/Migracion.aspx");
                     break;
+                case "Administración Site|Explorador de Comprobantes":
+                    Response.Redirect("~/ExploradorComprobanteGlobal.aspx");
+                    break;
                 case "Administración Site|Explorador de Usuarios":
-                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    Response.Redirect("~/ExploradorUsuario.aspx");
                     break;
                 case "Administración Site|Explorador de CUITs":
                     Response.Redirect("~/PaginaEnConstruccion.aspx");
@@ -142,7 +145,7 @@ namespace CedServicios.Site
                     Response.Redirect("~/PaginaEnConstruccion.aspx");
                     break;
                 case "Administración Site|Explorador de Clientes":
-                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    Response.Redirect("~/ExploradorCliente.aspx");
                     break;
                 case "Administración Site|Explorador de Artículos":
                     Response.Redirect("~/PaginaEnConstruccion.aspx");

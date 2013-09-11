@@ -32,6 +32,9 @@ namespace CedServicios.Entidades
         private string idDestinoComprobante;
         private WF wF;
         private string ultActualiz;
+        //Campos Adicionales Opcionales
+        private string cuitRazonSocial;
+        private DateTime fechaAlta;
 
         public Comprobante()
         {
@@ -270,6 +273,30 @@ namespace CedServicios.Entidades
                 return ultActualiz;
             }
         }
+        #region propiedades adicionales opcionales
+        public string CuitRazonSocial
+        {
+            set
+            {
+                cuitRazonSocial = value;
+            }
+            get
+            {
+                return cuitRazonSocial;
+            }
+        }
+        public DateTime FechaAlta
+        {
+            set
+            {
+                fechaAlta = value;
+            }
+            get
+            {
+                return fechaAlta;
+            }
+        }
+        #endregion
         #region propiedades redundantes
         public string DescrTipoComprobante
         {

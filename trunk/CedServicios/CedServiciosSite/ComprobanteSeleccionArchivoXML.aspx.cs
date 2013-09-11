@@ -35,7 +35,22 @@ namespace CedServicios.Site
                             lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
                             if (((Entidades.Sesion)Session["Sesion"]).Cuit.Nro != lc.comprobante[0].cabecera.informacion_vendedor.cuit.ToString())
                             {
-                                MensajeLabel.Text = "No se puede procesar la información del archivo, ya que pertenece a un CUIT diferente al operativo de la sesión.";
+                                MensajeLabel.Text = "El CUIT del vendedor: " + lc.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + " que figura en el archivo XML, no coincide con el CUIT que usted está operando.";
+                                return;
+                            }
+                            if (((Entidades.Sesion)Session["Sesion"]).Cuit.Nro != lc.cabecera_lote.cuit_vendedor.ToString())
+                            {
+                                MensajeLabel.Text = "El CUIT del lote: " + lc.cabecera_lote.cuit_vendedor.ToString() + " que figura en el archivo XML, no coincide con el CUIT que usted está operando.";
+                                return;
+                            }
+                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                            {
+                                return pv.Nro == lc.cabecera_lote.punto_de_venta;
+                            });
+                            if (listaPV.Count == 0)
+                            {
+                                MensajeLabel.Text = "El Punto de Venta: " + lc.cabecera_lote.punto_de_venta.ToString() + " que figura en el archivo XML, no coincide con los definidos para la UN que usted está operando.";
+                                return;
                             }
                             Cache["ComprobanteAConsultar"] = lc;
                             string script = "window.open('/ComprobanteConsulta.aspx', '');";

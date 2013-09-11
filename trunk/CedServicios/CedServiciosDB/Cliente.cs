@@ -295,5 +295,148 @@ namespace CedServicios.DB
             }
             return lista;
         }
+        public List<Entidades.Cliente> ListaSegunFiltros(string Cuit, string RazSoc, string NroDoc, string Estado)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("Select Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado, Cliente.UltActualiz ");
+            a.AppendLine("from Cliente where 1=1 ");
+            if (Cuit != String.Empty) a.AppendLine("and Cuit like '%" + Cuit + "%' ");
+            if (RazSoc != String.Empty) a.AppendLine("and RazonSocial like '%" + RazSoc + "%' ");
+            if (NroDoc != String.Empty) a.AppendLine("and NroDoc like '%" + NroDoc + "%' ");
+            if (Estado != String.Empty) a.AppendLine("and Estado = '" + Estado + "' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Cliente cliente = new Entidades.Cliente();
+                    Copiar(dt.Rows[i], cliente);
+                    lista.Add(cliente);
+                }
+            }
+            return lista;
+        }
+        public List<Entidades.Cliente> ListaPaging(int IndicePagina, int TamañoPagina, string OrderBy, string SessionID, List<Entidades.Cliente> ClienteLista)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("CREATE TABLE #Cliente" + SessionID + "( ");
+            a.Append("[Cuit] [varchar](11) NOT NULL, ");
+            a.Append("[IdTipoDoc] [numeric](2,0) NOT NULL, ");
+            a.Append("[NroDoc] [numeric](11,0) NOT NULL, ");
+            a.Append("[IdCliente] [varchar](50) NOT NULL, ");
+            a.Append("[DesambiguacionCuitPais] [int] NOT NULL, ");
+            a.Append("[RazonSocial] [varchar](50) NOT NULL, ");
+            a.Append("[DescrTipoDoc] [varchar](50) NOT NULL, ");
+            a.Append("[Calle] [varchar](30) NOT NULL, ");
+            a.Append("[Nro] [varchar](6) NOT NULL, ");
+            a.Append("[Piso] [varchar](5) NOT NULL, ");
+            a.Append("[Depto] [varchar](5) NOT NULL, ");
+            a.Append("[Localidad] [varchar](25) NOT NULL, ");
+            a.Append("[IdProvincia] [varchar](2) NOT NULL, ");
+            a.Append("[DescrProvincia] [varchar](50) NOT NULL, ");
+            a.Append("[CodPost] [varchar](8) NOT NULL, ");
+            a.Append("[NombreContacto] [varchar](25) NOT NULL, ");
+            a.Append("[EmailContacto] [varchar](60) NOT NULL, ");
+            a.Append("[TelefonoContacto] [varchar](50) NOT NULL, ");
+            a.Append("[IdWF] [int] NOT NULL, ");
+            a.Append("[Estado] [varchar](15) NOT NULL, ");
+            a.Append("[UltActualiz] [varchar](18) NOT NULL, ");
+            a.Append("CONSTRAINT [PK_Cliente" + SessionID + "] PRIMARY KEY CLUSTERED ");
+            a.Append("( ");
+            a.Append("[Cuit] ASC, ");
+            a.Append("[IdTipoDoc] ASC, ");
+            a.Append("[NroDoc] ASC, ");
+            a.Append("[IdCliente] ASC, ");
+            a.Append("[DesambiguacionCuitPais] ASC ");
+            a.Append(")WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY] ");
+            a.Append(") ON [PRIMARY] ");
+            foreach (Entidades.Cliente Cliente in ClienteLista)
+            {
+                a.Append("Insert #Cliente" + SessionID + " values ('" + Cliente.Cuit + "', '");
+                a.Append(Cliente.DocumentoIdTipoDoc + "', '");
+                a.Append(Cliente.DocumentoNro + "', '");
+                a.Append(Cliente.IdCliente + "', ");
+                a.Append(Cliente.DesambiguacionCuitPais + ", '");
+                a.Append(Cliente.RazonSocial + "', '");
+                a.Append(Cliente.DocumentoTipoDescr + "', '");
+                a.Append(Cliente.Domicilio.Calle + "', '");
+                a.Append(Cliente.Domicilio.Nro + "', '");
+                a.Append(Cliente.Domicilio.Piso + "', '");
+                a.Append(Cliente.Domicilio.Depto + "', '");
+                a.Append(Cliente.Domicilio.Localidad + "', '");
+                a.Append(Cliente.Domicilio.Provincia.Id + "', '");
+                a.Append(Cliente.Domicilio.Provincia.Descr + "', '");
+                a.Append(Cliente.Domicilio.CodPost + "', '");
+                a.Append(Cliente.Contacto.Nombre + "', '");
+                a.Append(Cliente.Contacto.Email + "', '");
+                a.Append(Cliente.Contacto.Telefono + "', ");
+                a.Append(Cliente.WF.Id + ", '");
+                a.Append(Cliente.Estado + "', ");
+                a.Append(Cliente.UltActualiz + ")");
+            }
+            a.Append("select * ");
+            a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
+            a.Append("Cuit, IdTipoDoc, NroDoc, IdCliente, DesambiguacionCuitPais, RazonSocial, DescrTipoDoc, Calle, Nro, Piso, Depto, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, IdWF, Estado, UltActualiz ");
+            a.Append("from #Cliente" + SessionID + " ");
+            a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
+            a.Append("DROP TABLE #Cliente" + SessionID);
+            if (OrderBy.Trim().ToUpper() == "CUIT" || OrderBy.Trim().ToUpper() == "CUIT DESC" || OrderBy.Trim().ToUpper() == "CUIT ASC")
+            {
+                OrderBy = "#Cliente" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "DOCUMENTOTIPODESCR" || OrderBy.Trim().ToUpper() == "DOCUMENTOTIPODOC DESC" || OrderBy.Trim().ToUpper() == "DOCUMENTOTIPODOC ASC")
+            {
+                OrderBy = "#Cliente" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "DOCUMENTONRO" || OrderBy.Trim().ToUpper() == "DOCUMENTONRODOC DESC" || OrderBy.Trim().ToUpper() == "DOCUMENTONRODOC ASC")
+            {
+                OrderBy = "#Cliente" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "RAZONSOCIAL" || OrderBy.Trim().ToUpper() == "RAZONSOCIAL DESC" || OrderBy.Trim().ToUpper() == "RAZONSOCIAL ASC")
+            {
+                OrderBy = "#Cliente" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "DOMICILIOCALLE" || OrderBy.Trim().ToUpper() == "DOMICILIOCALLE DESC" || OrderBy.Trim().ToUpper() == "DOMICILIOCALLE ASC")
+            {
+                OrderBy = "#Cliente" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
+            {
+                OrderBy = "#Cliente" + SessionID + "." + OrderBy;
+            }
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Cliente cliente = new Entidades.Cliente();
+                    cliente.Cuit = dt.Rows[i]["Cuit"].ToString();
+                    cliente.Documento.Tipo.Id = dt.Rows[i]["IdTipoDoc"].ToString();
+                    cliente.Documento.Nro = Convert.ToInt64(dt.Rows[i]["NroDoc"].ToString());
+                    cliente.IdCliente = dt.Rows[i]["IdCliente"].ToString();
+                    cliente.DesambiguacionCuitPais = Convert.ToInt32(dt.Rows[i]["DesambiguacionCuitPais"].ToString());
+                    cliente.RazonSocial = dt.Rows[i]["RazonSocial"].ToString();
+                    cliente.Documento.Tipo.Descr = dt.Rows[i]["DescrTipoDoc"].ToString();
+                    cliente.Domicilio.Calle = dt.Rows[i]["Calle"].ToString();
+                    cliente.Domicilio.Nro = dt.Rows[i]["Nro"].ToString();
+                    cliente.Domicilio.Piso = dt.Rows[i]["Piso"].ToString();
+                    cliente.Domicilio.Depto = dt.Rows[i]["Depto"].ToString();
+                    cliente.Domicilio.Localidad = dt.Rows[i]["Localidad"].ToString();
+                    cliente.Domicilio.CodPost = dt.Rows[i]["CodPost"].ToString();
+                    cliente.Contacto.Nombre = dt.Rows[i]["NombreContacto"].ToString();
+                    cliente.Contacto.Email = dt.Rows[i]["EmailContacto"].ToString();
+                    cliente.Contacto.Telefono = dt.Rows[i]["TelefonoContacto"].ToString();
+                    cliente.WF.Id = Convert.ToInt32(dt.Rows[i]["IdWF"].ToString());
+                    cliente.WF.Estado = dt.Rows[i]["Estado"].ToString();
+                    cliente.UltActualiz = dt.Rows[i]["UltActualiz"].ToString();
+                    lista.Add(cliente);
+                }
+            }
+            return lista;
+        }
     }
 }

@@ -207,5 +207,14 @@ namespace CedServicios.Entidades
                 return fechaOKeFactTyC;
             }
         }
+        #region Propiedades redundantes
+        public string Estado
+        {
+            get
+            {
+                return wF.Estado;
+            }
+        }
+        #endregion
     }
 }

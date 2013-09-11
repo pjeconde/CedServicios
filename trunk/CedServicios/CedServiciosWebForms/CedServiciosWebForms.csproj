@@ -8,8 +8,8 @@
     <ProjectGuid>{04825782-49A4-45EC-8145-E86F675C4D15}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CedeiraServicios.WebForms</RootNamespace>
-    <AssemblyName>CedeiraServiciosWebForms</AssemblyName>
+    <RootNamespace>CedServicios.WebForms</RootNamespace>
+    <AssemblyName>CedServiciosWebForms</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

@@ -154,6 +154,9 @@ namespace CedServicios.Site
             mItem = new MenuItem("Administración Site", "Administración Site");
             menu.Items.Add(mItem);
             menu.Items[menu.Items.Count - 1].Selectable = false;
+            mItem = new MenuItem("Explorador de Comprobantes", "Explorador de Comprobantes");
+            menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
             mItem = new MenuItem("Explorador de Usuarios", "Explorador de Usuarios");
             menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
             menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;

@@ -117,5 +117,23 @@ namespace CedServicios.RN
             hasta.WF.Estado = Desde.WF.Estado;
             return hasta;
         }
+        public static List<Entidades.Cliente> ListaSegunFiltros(string Cuit, string RazSoc, string NroDoc, string Estado, Entidades.Sesion Sesion)
+        {
+            DB.Cliente cliente = new DB.Cliente(Sesion);
+            return cliente.ListaSegunFiltros(Cuit, RazSoc, NroDoc, Estado);
+        }
+        public static List<Entidades.Cliente> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string Cuit, string NroDoc, string RazSoc, string Estado, string SessionID, Entidades.Sesion Sesion)
+        {
+            List<Entidades.Cliente> listaCliente = new List<Entidades.Cliente>();
+            DB.Cliente db = new DB.Cliente(Sesion);
+            if (OrderBy.Equals(String.Empty))
+            {
+                OrderBy = "Cuit desc, RazonSocial asc ";
+            }
+            listaCliente = db.ListaSegunFiltros(Cuit, NroDoc, RazSoc, Estado);
+            int cantidadFilas = listaCliente.Count;
+            CantidadFilas = cantidadFilas;
+            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaCliente);
+        }
     }
 }

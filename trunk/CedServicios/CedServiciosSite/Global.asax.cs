@@ -25,7 +25,15 @@ namespace CedServicios.Site
         }
         protected void Application_BeginRequest(object sender, EventArgs e)
         {
-
+            if (Convert.ToBoolean(SettingsRules.Instance.readIsOnlineSettings("IsOffline")))
+            {
+                string Virtual = Request.Path.Substring(0, Request.Path.LastIndexOf("/") + 1);
+                if (Virtual.ToLower().IndexOf("/admin/") == -1)
+                {
+                    //We don't makes action, is admin section
+                    Server.Transfer("~/TemporarilyOfflineMessage.aspx");
+                }
+            }
         }
         protected void Application_AuthenticateRequest(object sender, EventArgs e)
         {

@@ -105,6 +105,11 @@ namespace CedServicios.DB
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
+            try { Hasta.CuitRazonSocial = Convert.ToString(Desde["CUITRazonSocial"]); }
+            catch {}
+            try { Hasta.FechaAlta = Convert.ToDateTime(Desde["FechaAlta"]); }
+            catch {}
+            
         }
         public void Registrar(Entidades.Comprobante Comprobante)
         {
@@ -224,7 +229,7 @@ namespace CedServicios.DB
             Entidades.Comprobante comprobante = new Entidades.Comprobante();
             comprobante.Cuit = Lote.cabecera_lote.cuit_vendedor.ToString();
             comprobante.TipoComprobante.Id = Lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
-            FeaEntidades.TiposDeComprobantes.TipoComprobante tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
+            FeaEntidades.TiposDeComprobantes.TipoComprobante tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
             if (tipoComprobante != null)
             {
                 comprobante.TipoComprobante.Descr = tipoComprobante.Descr;
@@ -268,6 +273,76 @@ namespace CedServicios.DB
             comprobante.IdDestinoComprobante = IdDestinoComprobante;
             comprobante.WF.Estado = "PteConf";
             Registrar(comprobante);
+        }
+        public List<Entidades.Comprobante> ListaGlobalFiltrada(bool SoloVigentes, bool EsFechaAlta, string FechaDesde, string FechaHasta, Entidades.Cliente Cliente, string CUIT, string CUITRazonSocial, string NroComprobante)
+        {
+            List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
+            if (sesion.Cuit.Nro != null)
+            {
+                System.Text.StringBuilder a = new StringBuilder();
+                a.Append("select ");
+                a.Append("Comprobante.Cuit, Cuit.RazonSocial as CUITRazonSocial, Log.Fecha as FechaAlta, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdCliente, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz ");
+                a.Append("from Comprobante, Cuit, Log ");
+                a.Append("where Comprobante.Cuit = Cuit.Cuit and Comprobante.IdWF = Log.IdWF and Log.Evento = 'Alta' ");
+                if (SoloVigentes)
+                {
+                    a.Append("and Comprobante.Estado='Vigente' ");
+                }
+                if (EsFechaAlta)
+                {
+                    if (FechaDesde != String.Empty)
+                    {
+                        a.Append("and Log.Fecha >= '" + FechaDesde + "' ");
+                    }
+                    if (FechaHasta != String.Empty)
+                    {
+                        FechaHasta = Convert.ToDateTime(FechaHasta.Substring(6, 2) + "/" + FechaHasta.Substring(4, 2) + "/" + FechaHasta.Substring(0, 4)).AddDays(1).ToString("yyyyMMdd");
+                        a.Append("and Log.Fecha < '" + FechaHasta + "' ");
+                    }
+                }
+                else
+                {
+                    if (FechaDesde != String.Empty)
+                    {
+                        a.Append("and Comprobante.Fecha >= '" + FechaDesde + "' ");
+                    }
+                    if (FechaHasta != String.Empty)
+                    {
+                        a.Append("and Comprobante.Fecha <= '" + FechaHasta + "' ");
+                    }
+                }
+                if (CUIT != String.Empty)
+                {
+                    a.Append("and Comprobante.Cuit like '%" + CUIT + "%' ");
+                }
+                if (CUITRazonSocial != String.Empty)
+                {
+                    a.Append("and Cuit.RazonSocial like '%" + CUITRazonSocial + "%' ");
+                }
+                if (NroComprobante != String.Empty)
+                {
+                    a.Append("and Comprobante.NroComprobante = " + NroComprobante + " ");
+                }
+                //if (Cliente.Orden != 0)
+                //{
+                //    a.Append("and Comprobante.IdTipoDoc=" + Cliente.Documento.Tipo.Id + " ");
+                //    a.Append("and Comprobante.NroDoc=" + Cliente.Documento.Nro.ToString() + " ");
+                //    a.Append("and Comprobante.IdCliente='" + Cliente.IdCliente + "' ");
+                //    a.Append("and Comprobante.DesambiguacionCuitPais=" + Cliente.DesambiguacionCuitPais.ToString() + " ");
+                //}
+                a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, Comprobante.NroComprobante desc ");
+                DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+                if (dt.Rows.Count != 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Entidades.Comprobante elem = new Entidades.Comprobante();
+                        Copiar(dt.Rows[i], elem);
+                        lista.Add(elem);
+                    }
+                }
+            }
+            return lista;
         }
     }
 }
