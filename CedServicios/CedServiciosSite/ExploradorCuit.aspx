@@ -79,7 +79,7 @@
                                     <HeaderStyle HorizontalAlign="Center" Wrap="false" BorderColor="brown" />
                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="DomicilioCalle" HeaderText="Calle" SortExpression="DomicilioCalle" HeaderStyle-Width="250px" ReadOnly="true">
+                                <asp:BoundField DataField="DomicilioCalle" HeaderText="Calle" SortExpression="" HeaderStyle-Width="250px" ReadOnly="true">
                                     <HeaderStyle Wrap="False" BorderColor="brown" />
                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" />
                                 </asp:BoundField>
