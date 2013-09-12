@@ -136,5 +136,23 @@ namespace CedServicios.RN
             hasta.WF.Estado = hasta.WF.Estado;
             return hasta;
         }
+        public static List<Entidades.Cuit> ListaSegunFiltros(string Cuit, string RazonSocial, string Localidad, string Estado, Entidades.Sesion Sesion)
+        {
+            DB.Cuit cuit = new DB.Cuit(Sesion);
+            return cuit.ListaSegunFiltros(Cuit, RazonSocial, Localidad, Estado);
+        }
+        public static List<Entidades.Cuit> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string Cuit, string RazonSocial, string Localidad, string Estado, string SessionID, Entidades.Sesion Sesion)
+        {
+            List<Entidades.Cuit> listaCuit = new List<Entidades.Cuit>();
+            DB.Cuit db = new DB.Cuit(Sesion);
+            if (OrderBy.Equals(String.Empty))
+            {
+                OrderBy = "Cuit asc";
+            }
+            listaCuit = db.ListaSegunFiltros(Cuit, RazonSocial, Localidad, Estado);
+            int cantidadFilas = listaCuit.Count;
+            CantidadFilas = cantidadFilas;
+            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaCuit);
+        }
     }
 }

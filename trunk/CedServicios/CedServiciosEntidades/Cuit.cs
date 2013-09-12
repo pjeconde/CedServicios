@@ -169,5 +169,70 @@ namespace CedServicios.Entidades
         {
             return uNs.Find(delegate(Entidades.UN p) { return p.Id == IdUN; });
         }
+        #region Propiedades redundantes
+        public string Estado
+        {
+            get
+            {
+                return wF.Estado;
+            }
+        }
+        public string DomicilioCalle
+        {
+            get
+            {
+                return domicilio.Calle;
+            }
+        }
+        public string DomicilioNro
+        {
+            get
+            {
+                return domicilio.Nro;
+            }
+        }
+        public string DomicilioPiso
+        {
+            get
+            {
+                return domicilio.Piso;
+            }
+        }
+        public string DomicilioDepto
+        {
+            get
+            {
+                return domicilio.Depto;
+            }
+        }
+        public string DomicilioLocalidad
+        {
+            get
+            {
+                return domicilio.Localidad;
+            }
+        }
+        public string DomicilioDescrProvincia
+        {
+            get
+            {
+                return domicilio.Provincia.Descr;
+            }
+        }
+        public string DatosImpositivosDescrCondIVA
+        {
+            get
+            {
+                return datosImpositivos.DescrCondIVA;
+            }
+        }
+        public string DatosImpositivosDescrCondIngBrutos
+        {
+            get
+            {
+                return datosImpositivos.DescrCondIngBrutos;
+            }
+        }
+        #endregion
     }
 }

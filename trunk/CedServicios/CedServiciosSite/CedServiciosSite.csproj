@@ -97,6 +97,7 @@
     <Content Include="ClienteSeleccionar.aspx" />
     <Content Include="ComprobanteConsulta.aspx" />
     <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
+    <Content Include="ExploradorCuit.aspx" />
     <Content Include="ExploradorCliente.aspx" />
     <Content Include="ComprobanteSeleccionOnlineInterfacturas.aspx" />
     <Content Include="ExploradorComprobanteGlobal.aspx" />
@@ -341,6 +342,13 @@
     </Compile>
     <Compile Include="ComprobanteSeleccionOnlineInterfacturas.aspx.designer.cs">
       <DependentUpon>ComprobanteSeleccionOnlineInterfacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorCuit.aspx.cs">
+      <DependentUpon>ExploradorCuit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorCuit.aspx.designer.cs">
+      <DependentUpon>ExploradorCuit.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorCliente.aspx.cs">
       <DependentUpon>ExploradorCliente.aspx</DependentUpon>
