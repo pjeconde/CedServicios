@@ -98,7 +98,7 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Permiso> lista = new List<Entidades.Permiso>();
                 MensajeLabel.Text = String.Empty;
-                lista = RN.Permiso.LeerListaPermisosFiltrados(IdUsuarioTextBox.Text, CUITTextBox.Text, IdTipoPermisoDropDownList.SelectedValue, EstadoDropDownList.SelectedValue, sesion);
+                lista = RN.Permiso.LeerListaPermisosFiltrados(IdUsuarioTextBox.Text, CUITTextBox.Text, IdTipoPermisoDropDownList.SelectedValue, EstadoDropDownList.SelectedValue, sesion, VerPermisosDeRadioButtonList.SelectedItem.Text);
                 if (lista.Count == 0)
                 {
                     PermisosGridView.DataSource = null;

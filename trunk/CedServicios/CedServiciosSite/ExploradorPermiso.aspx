@@ -4,7 +4,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
         <tr>
-            <td align="center" colspan="3" style="padding-top:20px">
+            <td align="center" colspan="4" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Permisos"></asp:Label>
                 <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
             </td>
@@ -16,8 +16,18 @@
 			    <td align="left" style="padding-top:20px">
 				    <asp:TextBox ID="IdUsuarioTextBox" runat="server" MaxLength="50" TabIndex="1" Width="114px"></asp:TextBox>
 			    </td>
-                <td style="width:500px">
+                <td align="left" style="padding-left:30px; padding-top:20px">
+                    Ver permisos de:
                 </td>
+                <td align="left" valign="top" style="width:300px; padding-left:5px; padding-top:20px" rowspan="4">
+                    <asp:RadioButtonList ID="VerPermisosDeRadioButtonList" runat="server" >
+                        <asp:ListItem Text="Cuits" Selected="True"></asp:ListItem>
+                        <asp:ListItem Text="UNs"></asp:ListItem>
+                        <asp:ListItem Text="Usuarios"></asp:ListItem>
+                        <asp:ListItem Text="Todos"></asp:ListItem>
+                    </asp:RadioButtonList>
+                </td>
+
             </tr>
             <tr>
                 <td align="left" style="padding-right:5px; padding-top:5px">
@@ -52,7 +62,7 @@
                 </td>
             </tr>
         <tr>
-            <td colspan="3" style="padding-top:20px">
+            <td colspan="4" style="padding-top:20px">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                     <asp:GridView ID="PermisosGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowCommand="PermisosGridView_RowCommand" OnRowDataBound="PermisosGridView_RowDataBound" CssClass="grilla" GridLines="None">
@@ -93,7 +103,7 @@
             </td>
         </tr>
         <tr>
-            <td align="center" colspan="3" style="padding-top:20px">
+            <td align="center" colspan="4" style="padding-top:20px">
                 <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
             </td>
         </tr>

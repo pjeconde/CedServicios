@@ -31,10 +31,10 @@ namespace CedServicios.RN
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
             return db.LeerListaPermisosPteAutoriz(Usuario);
         }
-        public static List<Entidades.Permiso> LeerListaPermisosFiltrados(string IdUsuario, string CUIT, string IdTipoPermiso, string Estado, Entidades.Sesion Sesion)
+        public static List<Entidades.Permiso> LeerListaPermisosFiltrados(string IdUsuario, string CUIT, string IdTipoPermiso, string Estado, Entidades.Sesion Sesion, string VerPermisosDe)
         {
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
-            return db.LeerListaPermisosFiltrados(IdUsuario, CUIT, IdTipoPermiso, Estado);
+            return db.LeerListaPermisosFiltrados(IdUsuario, CUIT, IdTipoPermiso, Estado, VerPermisosDe);
         }
         public static Entidades.Permiso LeerPermisoPorCuit(string CUIT, string IdTipoPermiso, Entidades.Sesion Sesion)
         {
