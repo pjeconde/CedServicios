@@ -136,7 +136,7 @@ namespace CedServicios.Site
                     Response.Redirect("~/ExploradorUsuario.aspx");
                     break;
                 case "Administración Site|Explorador de CUITs":
-                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    Response.Redirect("~/ExploradorCuit.aspx");
                     break;
                 case "Administración Site|Explorador de UNs":
                     Response.Redirect("~/PaginaEnConstruccion.aspx");

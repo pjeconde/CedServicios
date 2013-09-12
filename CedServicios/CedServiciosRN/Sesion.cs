@@ -41,7 +41,7 @@ namespace CedServicios.RN
                 {
                     opcionesHabilitadas.Add("Administración Site|Explorador de Comprobantes");
                     opcionesHabilitadas.Add("Administración Site|Explorador de Usuarios");
-                    //opcionesHabilitadas.Add("Administración Site|Explorador de CUITs");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de CUITs");
                     //opcionesHabilitadas.Add("Administración Site|Explorador de UNs");
                     //opcionesHabilitadas.Add("Administración Site|Explorador de Puntos de Venta");
                     opcionesHabilitadas.Add("Administración Site|Explorador de Clientes");

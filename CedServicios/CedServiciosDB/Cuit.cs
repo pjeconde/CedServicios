@@ -93,6 +93,41 @@ namespace CedServicios.DB
             Hasta.NroSerieCertifAFIP = Convert.ToString(Desde["NroSerieCertifAFIP"]);
             Hasta.NroSerieCertifITF = Convert.ToString(Desde["NroSerieCertifITF"]);
         }
+        private void CopiarListaPaging(DataRow Desde, Entidades.Cuit Hasta)
+        {
+            Hasta.Nro = Convert.ToString(Desde["Cuit"]);
+            Hasta.RazonSocial = Convert.ToString(Desde["RazonSocial"]);
+            Hasta.Domicilio.Calle = Convert.ToString(Desde["Calle"]);
+            Hasta.Domicilio.Nro = Convert.ToString(Desde["Nro"]);
+            Hasta.Domicilio.Piso = Convert.ToString(Desde["Piso"]);
+            Hasta.Domicilio.Depto = Convert.ToString(Desde["Depto"]);
+            Hasta.Domicilio.Sector = Convert.ToString(Desde["Sector"]);
+            Hasta.Domicilio.Torre = Convert.ToString(Desde["Torre"]);
+            Hasta.Domicilio.Manzana = Convert.ToString(Desde["Manzana"]);
+            Hasta.Domicilio.Localidad = Convert.ToString(Desde["Localidad"]);
+            Hasta.Domicilio.Provincia.Id = Convert.ToString(Desde["IdProvincia"]);
+            Hasta.Domicilio.Provincia.Descr = Convert.ToString(Desde["DescrProvincia"]);
+            Hasta.Domicilio.CodPost = Convert.ToString(Desde["CodPost"]);
+            Hasta.Contacto.Nombre = Convert.ToString(Desde["NombreContacto"]);
+            Hasta.Contacto.Email = Convert.ToString(Desde["EmailContacto"]);
+            Hasta.Contacto.Telefono = Convert.ToString(Desde["TelefonoContacto"]);
+            Hasta.DatosImpositivos.IdCondIVA = Convert.ToInt32(Desde["IdCondIVA"]);
+            Hasta.DatosImpositivos.DescrCondIVA = Convert.ToString(Desde["DescrCondIVA"]);
+            Hasta.DatosImpositivos.NroIngBrutos = Convert.ToString(Desde["NroIngBrutos"]);
+            Hasta.DatosImpositivos.IdCondIngBrutos = Convert.ToInt32(Desde["IdCondIngBrutos"]);
+            Hasta.DatosImpositivos.DescrCondIngBrutos = Convert.ToString(Desde["DescrCondIngBrutos"]);
+            Hasta.DatosImpositivos.FechaInicioActividades = Convert.ToDateTime(Desde["FechaInicioActividades"]);
+            Hasta.DatosIdentificatorios.GLN = Convert.ToInt64(Desde["GLN"]);
+            Hasta.DatosIdentificatorios.CodigoInterno = Convert.ToString(Desde["CodigoInterno"]);
+            Hasta.Medio.Id = Convert.ToString(Desde["IdMedio"]);
+            Hasta.Medio.Descr = Convert.ToString(Desde["DescrMedio"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+            Hasta.UltActualiz = Convert.ToString(Desde["UltActualiz"]);
+            Hasta.NroSerieCertifAFIP = Convert.ToString(Desde["NroSerieCertifAFIP"]);
+            Hasta.NroSerieCertifITF = Convert.ToString(Desde["NroSerieCertifITF"]);
+        }
+
         public void Crear(Entidades.Cuit Cuit, string PermisoAdminCUITParaUsuarioAprobadoHandler, string ServxCUITAprobadoHandler, string CrearUNHandler, string PermisoUsoCUITxUNAprobadoHandler, string PermisoAdminUNParaUsuarioAprobadoHandler, string PermisoOperServUNParaUsuarioAprobadoHandler)
         {
             StringBuilder a = new StringBuilder(string.Empty);
@@ -301,6 +336,144 @@ namespace CedServicios.DB
                     }
                 }
             }
+        }
+        public List<Entidades.Cuit> ListaSegunFiltros(string Cuit, string RazonSocial, string Localidad, string Estado)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select Cuit.Cuit, Cuit.RazonSocial, Cuit.Calle, Cuit.Nro, Cuit.Piso, Cuit.Depto, Cuit.Sector, Cuit.Torre, Cuit.Manzana, Cuit.Localidad, Cuit.IdProvincia, Cuit.DescrProvincia, Cuit.CodPost, Cuit.NombreContacto, Cuit.EmailContacto, Cuit.TelefonoContacto, Cuit.IdCondIVA, Cuit.DescrCondIVA, Cuit.NroIngBrutos, Cuit.IdCondIngBrutos, Cuit.DescrCondIngBrutos, Cuit.GLN, Cuit.FechaInicioActividades, Cuit.CodigoInterno, Cuit.IdMedio, Cuit.IdWF, Cuit.Estado, Cuit.UltActualiz, Medio.DescrMedio, isnull(CertifAFIP.Valor, '') as NroSerieCertifAFIP, isnull(CertifITF.Valor, '') as NroSerieCertifITF ");
+            a.Append("from Cuit ");
+            a.Append("join Medio on Cuit.IdMedio=Medio.IdMedio ");
+            a.Append("left outer join Configuracion CertifAFIP on Cuit.Cuit=CertifAFIP.Cuit and CertifAFIP.IdItemConfig='NroSerieCertifAFIP' ");
+            a.Append("left outer join Configuracion CertifITF on Cuit.Cuit=CertifITF.Cuit and CertifITF.IdItemConfig='NroSerieCertifITF' ");
+            a.AppendLine("where 1=1 ");
+            if (Cuit != String.Empty) a.AppendLine("and Cuit.Cuit like '%" + Cuit + "%' ");
+            if (RazonSocial != String.Empty) a.AppendLine("and RazonSocial like '%" + RazonSocial + "%' ");
+            if (Localidad != String.Empty) a.AppendLine("and Localidad like '%" + Localidad + "%' ");
+            if (Estado != String.Empty) a.AppendLine("and Estado = '" + Estado + "' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Cuit> lista = new List<Entidades.Cuit>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Cuit cuit = new Entidades.Cuit();
+                    Copiar(dt.Rows[i], cuit);
+                    lista.Add(cuit);
+                }
+            }
+            return lista;
+        }
+        public List<Entidades.Cuit> ListaPaging(int IndicePagina, int TamañoPagina, string OrderBy, string SessionID, List<Entidades.Cuit> CuitLista)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("CREATE TABLE #Cuit" + SessionID + "( ");
+            a.Append("[Cuit] [varchar](11) NOT NULL, ");
+	        a.Append("[RazonSocial] [varchar](50) NOT NULL, ");
+	        a.Append("[Calle] [varchar](30) NOT NULL, ");
+	        a.Append("[Nro] [varchar](6) NOT NULL, ");
+	        a.Append("[Piso] [varchar](5) NOT NULL, ");
+	        a.Append("[Depto] [varchar](5) NOT NULL, ");
+	        a.Append("[Sector] [varchar](5) NOT NULL, ");
+	        a.Append("[Torre] [varchar](5) NOT NULL, ");
+	        a.Append("[Manzana] [varchar](5) NOT NULL, ");
+	        a.Append("[Localidad] [varchar](25) NOT NULL, ");
+	        a.Append("[IdProvincia] [varchar](2) NOT NULL, ");
+	        a.Append("[DescrProvincia] [varchar](50) NOT NULL, ");
+	        a.Append("[CodPost] [varchar](8) NOT NULL, ");
+	        a.Append("[NombreContacto] [varchar](25) NOT NULL, ");
+	        a.Append("[EmailContacto] [varchar](60) NOT NULL, ");
+	        a.Append("[TelefonoContacto] [varchar](50) NOT NULL, ");
+	        a.Append("[IdCondIVA] [numeric](2, 0) NOT NULL, ");
+	        a.Append("[DescrCondIVA] [varchar](50) NOT NULL, ");
+	        a.Append("[NroIngBrutos] [varchar](13) NOT NULL, ");
+	        a.Append("[IdCondIngBrutos] [numeric](2, 0) NOT NULL, ");
+	        a.Append("[DescrCondIngBrutos] [varchar](50) NOT NULL, ");
+	        a.Append("[GLN] [numeric](13, 0) NOT NULL, ");
+	        a.Append("[FechaInicioActividades] [datetime] NOT NULL, ");
+	        a.Append("[CodigoInterno] [varchar](20) NOT NULL, ");
+	        a.Append("[IdMedio] [varchar](15) NOT NULL, ");
+	        a.Append("[IdWF] [int] NOT NULL, ");
+	        a.Append("[Estado] [varchar](15) NOT NULL, ");
+            a.Append("[UltActualiz] [varchar](18) NOT NULL, ");
+            a.Append("[DescrMedio] [varchar](50) NOT NULL, ");
+            a.Append("[NroSerieCertifAFIP] [varchar](50) NOT NULL, ");
+            a.Append("[NroSerieCertifITF] [varchar](50) NOT NULL, ");
+            a.Append("CONSTRAINT [PK_Cuit" + SessionID + "] PRIMARY KEY CLUSTERED ");
+            a.Append("( ");
+            a.Append("[Cuit] ASC ");
+            a.Append(")WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY] ");
+            a.Append(") ON [PRIMARY] ");
+            foreach (Entidades.Cuit Cuit in CuitLista)
+            {
+                a.Append("Insert #Cuit" + SessionID + " values ('" + Cuit.Nro + "', '");
+                a.Append(Cuit.RazonSocial + "', '");
+                a.Append(Cuit.Domicilio.Calle + "', '");
+                a.Append(Cuit.Domicilio.Nro + "', '");
+                a.Append(Cuit.Domicilio.Piso + "', '");
+                a.Append(Cuit.Domicilio.Depto + "', '");
+                a.Append(Cuit.Domicilio.Sector + "', '");
+                a.Append(Cuit.Domicilio.Torre + "', '");
+                a.Append(Cuit.Domicilio.Manzana + "', '");
+                a.Append(Cuit.Domicilio.Localidad + "', '");
+                a.Append(Cuit.Domicilio.Provincia.Id + "', '");
+                a.Append(Cuit.Domicilio.Provincia.Descr + "', '");
+                a.Append(Cuit.Domicilio.CodPost + "', '");
+                a.Append(Cuit.Contacto.Nombre + "', '");
+                a.Append(Cuit.Contacto.Email + "', '");
+                a.Append(Cuit.Contacto.Telefono  + "', '");
+                a.Append(Cuit.DatosImpositivos.IdCondIVA + "', '");
+                a.Append(Cuit.DatosImpositivos.DescrCondIVA + "', '");
+                a.Append(Cuit.DatosImpositivos.NroIngBrutos + "', '");
+                a.Append(Cuit.DatosImpositivos.IdCondIngBrutos + "', '");
+                a.Append(Cuit.DatosImpositivos.DescrCondIngBrutos + "', '");
+                a.Append(Cuit.DatosIdentificatorios.GLN + "', '");
+                a.Append(Cuit.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd") + "', '");
+                a.Append(Cuit.DatosIdentificatorios.CodigoInterno + "', '");
+                a.Append(Cuit.Medio.Id + "', ");
+                a.Append(Cuit.WF.Id + ", '");
+                a.Append(Cuit.Estado + "', ");
+                a.Append(Cuit.UltActualiz + ", '");
+                a.Append(Cuit.Medio.Descr + "', '");
+                a.Append(Cuit.NroSerieCertifAFIP + "', '");
+                a.Append(Cuit.NroSerieCertifITF + "')");
+            }
+            a.Append("select * ");
+            a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
+            a.Append("Cuit, RazonSocial, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, IdCondIVA, DescrCondIVA, NroIngBrutos, IdCondIngBrutos, DescrCondIngBrutos, GLN, FechaInicioActividades, CodigoInterno, IdMedio, ");
+            a.Append("IdWF, Estado, UltActualiz, DescrMedio, NroSerieCertifAFIP, NroSerieCertifITF ");
+            a.Append("from #Cuit" + SessionID + " ");
+            a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
+            a.Append("DROP TABLE #Cuit" + SessionID);
+            if (OrderBy.Trim().ToUpper() == "NRO" || OrderBy.Trim().ToUpper() == "NRO DESC" || OrderBy.Trim().ToUpper() == "NRO ASC")
+            {
+                OrderBy = "#Cuit" + SessionID + "." + OrderBy.Replace("Nro", "Cuit");
+            }
+            if (OrderBy.Trim().ToUpper() == "RAZONSOCIAL" || OrderBy.Trim().ToUpper() == "RAZONSOCIAL DESC" || OrderBy.Trim().ToUpper() == "RAZONSOCIAL ASC")
+            {
+                OrderBy = "#Cuit" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "DOMICILIOLOCALIDAD" || OrderBy.Trim().ToUpper() == "DOMICILIOLOCALIDAD DESC" || OrderBy.Trim().ToUpper() == "DOMICILIOLOCALIDAD ASC")
+            {
+                OrderBy = "#Cuit" + SessionID + "." + OrderBy.Replace("DomicilioLocalidad", "Localidad"); ;
+            }
+            if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
+            {
+                OrderBy = "#Cuit" + SessionID + "." + OrderBy;
+            }
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Cuit> lista = new List<Entidades.Cuit>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Cuit cuit = new Entidades.Cuit();
+                    CopiarListaPaging(dt.Rows[i], cuit);
+                    lista.Add(cuit);
+                }
+            }
+            return lista;
         }
     }
 }
