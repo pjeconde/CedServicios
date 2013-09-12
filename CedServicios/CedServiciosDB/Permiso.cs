@@ -90,7 +90,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Permiso> LeerListaPermisosFiltrados(string IdUsuario, string CUIT, string IdTipoPermiso, string Estado)
+        public List<Entidades.Permiso> LeerListaPermisosFiltrados(string IdUsuario, string CUIT, string IdTipoPermiso, string Estado, string VerPermisosDe)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado ");
@@ -99,6 +99,20 @@ namespace CedServicios.DB
             if (CUIT != String.Empty) a.AppendLine("and CUIT='" + CUIT + "' ");
             if (IdTipoPermiso != String.Empty) a.AppendLine("and IdTipoPermiso='" + IdTipoPermiso + "' ");
             if (Estado != String.Empty) a.AppendLine("and Estado='" + Estado + "' ");
+            switch (VerPermisosDe)
+            {
+                case "Cuits":
+                    a.AppendLine("and Cuit<>'' and IdUN=0 and IdUsuario='' ");
+                    break;
+                case "UNs":
+                    a.AppendLine("and Cuit<>'' and IdUN<>0 and IdUsuario='' ");
+                    break;
+                case "Usuarios":
+                    a.AppendLine("and IdUsuario<>'' ");
+                    break;
+                case "Todos":
+                    break;
+            }
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Permiso> lista = new List<Entidades.Permiso>();
             if (dt.Rows.Count != 0)
