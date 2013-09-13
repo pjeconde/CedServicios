@@ -124,6 +124,13 @@ namespace CedServicios.Entidades
             }
         }
         #region Propiedades redundantes
+        public string UnidadId
+        {
+            get
+            {
+                return unidad.Id;
+            }
+        }
         public string UnidadDescr
         {
             get

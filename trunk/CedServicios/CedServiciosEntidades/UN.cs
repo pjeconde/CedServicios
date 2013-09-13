@@ -99,5 +99,14 @@ namespace CedServicios.Entidades
                 return lista;
             }
         }
+        #region Propiedades redundantes
+        public string Estado
+        {
+            get
+            {
+                return wF.Estado;
+            }
+        }
+        #endregion
     }
 }

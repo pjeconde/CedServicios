@@ -97,6 +97,10 @@
     <Content Include="ClienteSeleccionar.aspx" />
     <Content Include="ComprobanteConsulta.aspx" />
     <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
+    <Content Include="ExploradorConfiguracion.aspx" />
+    <Content Include="ExploradorArticulo.aspx" />
+    <Content Include="ExploradorUN.aspx" />
+    <Content Include="ExploradorPuntoVta.aspx" />
     <Content Include="ExploradorCuit.aspx" />
     <Content Include="ExploradorCliente.aspx" />
     <Content Include="ComprobanteSeleccionOnlineInterfacturas.aspx" />
@@ -342,6 +346,34 @@
     </Compile>
     <Compile Include="ComprobanteSeleccionOnlineInterfacturas.aspx.designer.cs">
       <DependentUpon>ComprobanteSeleccionOnlineInterfacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorConfiguracion.aspx.cs">
+      <DependentUpon>ExploradorConfiguracion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorConfiguracion.aspx.designer.cs">
+      <DependentUpon>ExploradorConfiguracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorArticulo.aspx.cs">
+      <DependentUpon>ExploradorArticulo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorArticulo.aspx.designer.cs">
+      <DependentUpon>ExploradorArticulo.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorUN.aspx.cs">
+      <DependentUpon>ExploradorUN.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorUN.aspx.designer.cs">
+      <DependentUpon>ExploradorUN.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorPuntoVta.aspx.cs">
+      <DependentUpon>ExploradorPuntoVta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorPuntoVta.aspx.designer.cs">
+      <DependentUpon>ExploradorPuntoVta.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorCuit.aspx.cs">
       <DependentUpon>ExploradorCuit.aspx</DependentUpon>

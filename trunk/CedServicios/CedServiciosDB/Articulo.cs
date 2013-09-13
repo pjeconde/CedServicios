@@ -54,6 +54,20 @@ namespace CedServicios.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
+        private void CopiarListaPaging(DataRow Desde, Entidades.Articulo Hasta)
+        {
+            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
+            Hasta.Id = Convert.ToString(Desde["IdArticulo"]);
+            Hasta.Descr = Convert.ToString(Desde["DescrArticulo"]);
+            Hasta.GTIN = Convert.ToString(Desde["GTIN"]);
+            Hasta.Unidad.Id = Convert.ToString(Desde["IdUnidad"]);
+            Hasta.Unidad.Descr = Convert.ToString(Desde["DescrUnidad"]);
+            Hasta.IndicacionExentoGravado = Convert.ToString(Desde["IndicacionExentoGravado"]);
+            Hasta.AlicuotaIVA = Convert.ToDouble(Desde["AlicuotaIVA"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+            Hasta.UltActualiz = Convert.ToString(Desde["UltActualiz"]);
+        }
         public void Crear(Entidades.Articulo Articulo)
         {
             StringBuilder a = new StringBuilder(string.Empty);
@@ -146,6 +160,100 @@ namespace CedServicios.DB
                         Copiar(dt.Rows[i], elem);
                         lista.Add(elem);
                     }
+                }
+            }
+            return lista;
+        }
+        public List<Entidades.Articulo> ListaSegunFiltros(string Cuit, string IdArticulo, string DescrArticulo, string Estado)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("select Cuit, IdArticulo, DescrArticulo, GTIN, IdUnidad, DescrUnidad, IndicacionExentoGravado, AlicuotaIVA, IdWF, Estado, UltActualiz ");
+            a.AppendLine("from Articulo where 1=1 ");
+            if (Cuit != String.Empty) a.AppendLine("and Cuit like '%" + Cuit + "%' ");
+            if (IdArticulo != String.Empty) a.AppendLine("and IdArticulo like '%" + IdArticulo + "%' ");
+            if (DescrArticulo != String.Empty) a.AppendLine("and DescrArticulo like '%" + DescrArticulo + "%' ");
+            if (Estado != String.Empty) a.AppendLine("and Estado = '" + Estado + "' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Articulo Articulo = new Entidades.Articulo();
+                    Copiar(dt.Rows[i], Articulo);
+                    lista.Add(Articulo);
+                }
+            }
+            return lista;
+        }
+        public List<Entidades.Articulo> ListaPaging(int IndicePagina, int TamañoPagina, string OrderBy, string SessionID, List<Entidades.Articulo> ArticuloLista)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("CREATE TABLE #Articulo" + SessionID + "( ");
+            a.Append("[Cuit] [varchar](11) NOT NULL, ");
+            a.Append("[IdArticulo] [varchar](20) NOT NULL, ");
+            a.Append("[DescrArticulo] [varchar](100) NOT NULL, ");
+            a.Append("[GTIN] [varchar](20) NOT NULL, ");
+            a.Append("[IdUnidad] [varchar](3) NOT NULL, ");
+	        a.Append("[DescrUnidad] [varchar](50) NOT NULL, ");
+	        a.Append("[IndicacionExentoGravado] [varchar](1) NOT NULL, ");
+            a.Append("[AlicuotaIVA] [numeric](4, 2) NOT NULL, ");
+            a.Append("[IdWF] [int] NOT NULL, ");
+            a.Append("[Estado] [varchar](15) NOT NULL, ");
+            a.Append("[UltActualiz] [varchar](18) NOT NULL, ");
+            a.Append("CONSTRAINT [PK_Articulo" + SessionID + "] PRIMARY KEY CLUSTERED ");
+            a.Append("( ");
+            a.Append("[Cuit] ASC, ");
+            a.Append("[IdArticulo] ASC ");
+            a.Append(")WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY] ");
+            a.Append(") ON [PRIMARY] ");
+            foreach (Entidades.Articulo Articulo in ArticuloLista)
+            {
+                a.Append("Insert #Articulo" + SessionID + " values ('" + Articulo.Cuit + "', '");
+                a.Append(Articulo.Id + "', '");
+                a.Append(Articulo.Descr + "', '");
+                a.Append(Articulo.GTIN + "', '");
+                a.Append(Articulo.Unidad.Id + "', '");
+                a.Append(Articulo.Unidad.Descr + "', '");
+                a.Append(Articulo.IndicacionExentoGravado + "', ");
+                a.Append(Articulo.AlicuotaIVA + ", ");
+                a.Append(Articulo.WF.Id + ", '");
+                a.Append(Articulo.Estado + "', ");
+                a.Append(Articulo.UltActualiz + ")");
+            }
+            a.Append("select * ");
+            a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
+            a.Append("Cuit, IdArticulo, DescrArticulo, GTIN, IdUnidad, DescrUnidad, IndicacionExentoGravado, AlicuotaIVA, IdWF, Estado, UltActualiz ");
+            a.Append("from #Articulo" + SessionID + " ");
+            a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
+            a.Append("DROP TABLE #Articulo" + SessionID);
+            if (OrderBy.Trim().ToUpper() == "CUIT" || OrderBy.Trim().ToUpper() == "CUIT DESC" || OrderBy.Trim().ToUpper() == "CUIT ASC")
+            {
+                OrderBy = "#Articulo" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "ID" || OrderBy.Trim().ToUpper() == "ID DESC" || OrderBy.Trim().ToUpper() == "ID ASC")
+            {
+                OrderBy = "#Articulo" + SessionID + "." + OrderBy.Replace("Id", "IdArticulo");
+            }
+            if (OrderBy.Trim().ToUpper() == "DESCR" || OrderBy.Trim().ToUpper() == "DESCR DESC" || OrderBy.Trim().ToUpper() == "DESCR ASC")
+            {
+                OrderBy = "#Articulo" + SessionID + "." + OrderBy.Replace("Descr", "DescrArticulo"); ;
+            }
+            if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
+            {
+                OrderBy = "#Articulo" + SessionID + "." + OrderBy;
+            }
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Articulo Articulo = new Entidades.Articulo();
+                    CopiarListaPaging(dt.Rows[i], Articulo);
+                    lista.Add(Articulo);
                 }
             }
             return lista;

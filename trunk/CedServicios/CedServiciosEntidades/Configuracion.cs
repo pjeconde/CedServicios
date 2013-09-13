@@ -86,5 +86,21 @@ namespace CedServicios.Entidades
                 return valor;
             }
         }
+        #region Propiedades redundantes
+        public string TipoPermisoId
+        {
+            get
+            {
+                return tipoPermiso.Id;
+            }
+        }
+        public string TipoPermisoDescr
+        {
+            get
+            {
+                return tipoPermiso.Descr;
+            }
+        }
+        #endregion
     }
 }

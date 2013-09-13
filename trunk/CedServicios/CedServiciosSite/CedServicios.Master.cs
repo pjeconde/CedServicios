@@ -139,22 +139,22 @@ namespace CedServicios.Site
                     Response.Redirect("~/ExploradorCuit.aspx");
                     break;
                 case "Administración Site|Explorador de UNs":
-                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    Response.Redirect("~/ExploradorUN.aspx");
                     break;
                 case "Administración Site|Explorador de Puntos de Venta":
-                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    Response.Redirect("~/ExploradorPuntoVta.aspx");
                     break;
                 case "Administración Site|Explorador de Clientes":
                     Response.Redirect("~/ExploradorCliente.aspx");
                     break;
                 case "Administración Site|Explorador de Artículos":
-                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    Response.Redirect("~/ExploradorArticulo.aspx");
                     break;
                 case "Administración Site|Explorador de Permisos":
                     Response.Redirect("~/ExploradorPermiso.aspx");
                     break;
                 case "Administración Site|Explorador de Configuraciones":
-                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    Response.Redirect("~/ExploradorConfiguracion.aspx");
                     break;
                 case "Administración Site|Explorador de Logs":
                     Response.Redirect("~/PaginaEnConstruccion.aspx");
