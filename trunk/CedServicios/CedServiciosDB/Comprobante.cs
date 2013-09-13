@@ -47,12 +47,51 @@ namespace CedServicios.DB
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         Entidades.Comprobante elem = new Entidades.Comprobante();
-                        Copiar(dt.Rows[i], elem);
+                        Copiar_ListaFiltrada(dt.Rows[i], elem);
                         lista.Add(elem);
                     }
                 }
             }
             return lista;
+        }
+        private void Copiar_ListaFiltrada(DataRow Desde, Entidades.Comprobante Hasta)
+        {
+            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
+            Hasta.TipoComprobante.Id = Convert.ToInt32(Desde["IdTipoComprobante"]);
+            Hasta.TipoComprobante.Descr = Convert.ToString(Desde["DescrTipoComprobante"]);
+            Hasta.NroPuntoVta = Convert.ToInt32(Desde["NroPuntoVta"]);
+            Hasta.Nro = Convert.ToInt64(Desde["NroComprobante"]);
+            Hasta.NroLote = Convert.ToInt64(Desde["NroLote"]);
+            Hasta.Documento.Tipo.Id = Convert.ToString(Desde["IdTipoDoc"]);
+            FeaEntidades.Documentos.Documento tipoDocumento = FeaEntidades.Documentos.Documento.Lista().Find(delegate(FeaEntidades.Documentos.Documento d)
+            {
+                return Hasta.Documento.Tipo.Id == d.Codigo.ToString();
+            });
+            if (tipoDocumento != null)
+            {
+                Hasta.Documento.Tipo.Descr = tipoDocumento.Descr;
+            }
+            else
+            {
+                Hasta.Documento.Tipo.Descr = "Desconocido";
+            }
+            Hasta.Documento.Nro = Convert.ToInt64(Desde["NroDoc"]);
+            Hasta.IdCliente = Convert.ToString(Desde["IdCliente"]);
+            Hasta.DesambiguacionCuitPais = Convert.ToInt32(Desde["DesambiguacionCuitPais"]);
+            Hasta.RazonSocial = Convert.ToString(Desde["RazonSocial"]);
+            Hasta.Detalle = Convert.ToString(Desde["Detalle"]);
+            Hasta.Fecha = Convert.ToDateTime(Desde["Fecha"]);
+            Hasta.FechaVto = Convert.ToDateTime(Desde["FechaVto"]);
+            Hasta.Moneda = Convert.ToString(Desde["Moneda"]);
+            Hasta.ImporteMoneda = Convert.ToDouble(Desde["ImporteMoneda"]);
+            Hasta.TipoCambio = Convert.ToDouble(Desde["TipoCambio"]);
+            Hasta.Importe = Convert.ToDouble(Desde["Importe"]);
+            Hasta.Request = Convert.ToString(Desde["Request"]);
+            Hasta.Response = Convert.ToString(Desde["Response"]);
+            Hasta.IdDestinoComprobante = Convert.ToString(Desde["IdDestinoComprobante"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+            Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
         public void Leer(Entidades.Comprobante Comprobante)
         {
@@ -64,10 +103,10 @@ namespace CedServicios.DB
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count != 0)
             {
-                Copiar(dt.Rows[0], Comprobante);
+                Copiar_Leer(dt.Rows[0], Comprobante);
             }
         }
-        private void Copiar(DataRow Desde, Entidades.Comprobante Hasta)
+        private void Copiar_Leer(DataRow Desde, Entidades.Comprobante Hasta)
         {
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
             Hasta.TipoComprobante.Id = Convert.ToInt32(Desde["IdTipoComprobante"]);
@@ -105,11 +144,6 @@ namespace CedServicios.DB
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
-            try { Hasta.CuitRazonSocial = Convert.ToString(Desde["CUITRazonSocial"]); }
-            catch {}
-            try { Hasta.FechaAlta = Convert.ToDateTime(Desde["FechaAlta"]); }
-            catch {}
-            
         }
         public void Registrar(Entidades.Comprobante Comprobante)
         {
@@ -337,12 +371,53 @@ namespace CedServicios.DB
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         Entidades.Comprobante elem = new Entidades.Comprobante();
-                        Copiar(dt.Rows[i], elem);
+                        Copiar_ListaGlobalFiltrada(dt.Rows[i], elem);
                         lista.Add(elem);
                     }
                 }
             }
             return lista;
+        }
+        private void Copiar_ListaGlobalFiltrada(DataRow Desde, Entidades.Comprobante Hasta)
+        {
+            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
+            Hasta.TipoComprobante.Id = Convert.ToInt32(Desde["IdTipoComprobante"]);
+            Hasta.TipoComprobante.Descr = Convert.ToString(Desde["DescrTipoComprobante"]);
+            Hasta.NroPuntoVta = Convert.ToInt32(Desde["NroPuntoVta"]);
+            Hasta.Nro = Convert.ToInt64(Desde["NroComprobante"]);
+            Hasta.NroLote = Convert.ToInt64(Desde["NroLote"]);
+            Hasta.Documento.Tipo.Id = Convert.ToString(Desde["IdTipoDoc"]);
+            FeaEntidades.Documentos.Documento tipoDocumento = FeaEntidades.Documentos.Documento.Lista().Find(delegate(FeaEntidades.Documentos.Documento d)
+            {
+                return Hasta.Documento.Tipo.Id == d.Codigo.ToString();
+            });
+            if (tipoDocumento != null)
+            {
+                Hasta.Documento.Tipo.Descr = tipoDocumento.Descr;
+            }
+            else
+            {
+                Hasta.Documento.Tipo.Descr = "Desconocido";
+            }
+            Hasta.Documento.Nro = Convert.ToInt64(Desde["NroDoc"]);
+            Hasta.IdCliente = Convert.ToString(Desde["IdCliente"]);
+            Hasta.DesambiguacionCuitPais = Convert.ToInt32(Desde["DesambiguacionCuitPais"]);
+            Hasta.RazonSocial = Convert.ToString(Desde["RazonSocial"]);
+            Hasta.Detalle = Convert.ToString(Desde["Detalle"]);
+            Hasta.Fecha = Convert.ToDateTime(Desde["Fecha"]);
+            Hasta.FechaVto = Convert.ToDateTime(Desde["FechaVto"]);
+            Hasta.Moneda = Convert.ToString(Desde["Moneda"]);
+            Hasta.ImporteMoneda = Convert.ToDouble(Desde["ImporteMoneda"]);
+            Hasta.TipoCambio = Convert.ToDouble(Desde["TipoCambio"]);
+            Hasta.Importe = Convert.ToDouble(Desde["Importe"]);
+            Hasta.Request = Convert.ToString(Desde["Request"]);
+            Hasta.Response = Convert.ToString(Desde["Response"]);
+            Hasta.IdDestinoComprobante = Convert.ToString(Desde["IdDestinoComprobante"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+            Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
+            Hasta.CuitRazonSocial = Convert.ToString(Desde["CUITRazonSocial"]);
+            Hasta.FechaAlta = Convert.ToDateTime(Desde["FechaAlta"]);
         }
     }
 }
