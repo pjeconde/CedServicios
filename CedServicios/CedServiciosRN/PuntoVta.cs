@@ -71,5 +71,23 @@ namespace CedServicios.RN
             DB.PuntoVta db = new DB.PuntoVta(Sesion);
             db.GenerarNuevoNroLote(PuntoVta);
         }
+        public static List<Entidades.PuntoVta> ListaSegunFiltros(string Cuit, string IdUN, string Nro, string Estado, Entidades.Sesion Sesion)
+        {
+            DB.PuntoVta PuntoVta = new DB.PuntoVta(Sesion);
+            return PuntoVta.ListaSegunFiltros(Cuit, IdUN, Nro, Estado);
+        }
+        public static List<Entidades.PuntoVta> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string Cuit, string IdUN, string Nro, string Estado, string SessionID, Entidades.Sesion Sesion)
+        {
+            List<Entidades.PuntoVta> listaPuntoVta = new List<Entidades.PuntoVta>();
+            DB.PuntoVta db = new DB.PuntoVta(Sesion);
+            if (OrderBy.Equals(String.Empty))
+            {
+                OrderBy = "Cuit asc, NroPuntoVta asc ";
+            }
+            listaPuntoVta = db.ListaSegunFiltros(Cuit, IdUN, Nro, Estado);
+            int cantidadFilas = listaPuntoVta.Count;
+            CantidadFilas = cantidadFilas;
+            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaPuntoVta);
+        }
     }
 }

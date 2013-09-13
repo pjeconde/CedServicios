@@ -20,5 +20,23 @@ namespace CedServicios.RN
             configuracion.Valor = String.Empty;
             db.Crear(configuracion);
         }
+        public static List<Entidades.Configuracion> ListaSegunFiltros(string Cuit, string IdUN, string IdUsuario, string IdTipoPermiso, string IdItemConfig, Entidades.Sesion Sesion)
+        {
+            DB.Configuracion Configuracion = new DB.Configuracion(Sesion);
+            return Configuracion.ListaSegunFiltros(Cuit, IdUN, IdUsuario, IdTipoPermiso, IdItemConfig);
+        }
+        public static List<Entidades.Configuracion> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string Cuit, string IdUN, string IdUsuario, string IdTipoPermiso, string IdItemConfig, string SessionID, Entidades.Sesion Sesion)
+        {
+            List<Entidades.Configuracion> listaConfiguracion = new List<Entidades.Configuracion>();
+            DB.Configuracion db = new DB.Configuracion(Sesion);
+            if (OrderBy.Equals(String.Empty))
+            {
+                OrderBy = "IdCuit asc";
+            }
+            listaConfiguracion = db.ListaSegunFiltros(Cuit, IdUN, IdUsuario, IdTipoPermiso, IdItemConfig);
+            int cantidadFilas = listaConfiguracion.Count;
+            CantidadFilas = cantidadFilas;
+            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaConfiguracion);
+        }
     }
 }

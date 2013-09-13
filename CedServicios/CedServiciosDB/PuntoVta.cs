@@ -70,6 +70,42 @@ namespace CedServicios.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
+        private void CopiarListaPaging(DataRow Desde, Entidades.PuntoVta Hasta)
+        {
+            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
+            Hasta.Nro = Convert.ToInt32(Desde["NroPuntoVta"]);
+            Hasta.IdUN = Convert.ToInt32(Desde["IdUN"]);
+            Hasta.IdTipoPuntoVta = Convert.ToString(Desde["IdTipoPuntoVta"]);
+            Hasta.UsaSetPropioDeDatosCuit = Convert.ToBoolean(Desde["UsaSetPropioDeDatosCuit"]);
+            //Hasta.Domicilio.Calle = Convert.ToString(Desde["Calle"]);
+            //Hasta.Domicilio.Nro = Convert.ToString(Desde["Nro"]);
+            //Hasta.Domicilio.Piso = Convert.ToString(Desde["Piso"]);
+            //Hasta.Domicilio.Depto = Convert.ToString(Desde["Depto"]);
+            //Hasta.Domicilio.Sector = Convert.ToString(Desde["Sector"]);
+            //Hasta.Domicilio.Torre = Convert.ToString(Desde["Torre"]);
+            //Hasta.Domicilio.Manzana = Convert.ToString(Desde["Manzana"]);
+            //Hasta.Domicilio.Localidad = Convert.ToString(Desde["Localidad"]);
+            //Hasta.Domicilio.Provincia.Id = Convert.ToString(Desde["IdProvincia"]);
+            //Hasta.Domicilio.Provincia.Descr = Convert.ToString(Desde["DescrProvincia"]);
+            //Hasta.Domicilio.CodPost = Convert.ToString(Desde["CodPost"]);
+            //Hasta.Contacto.Nombre = Convert.ToString(Desde["NombreContacto"]);
+            //Hasta.Contacto.Email = Convert.ToString(Desde["EmailContacto"]);
+            //Hasta.Contacto.Telefono = Convert.ToString(Desde["TelefonoContacto"]);
+            //Hasta.DatosImpositivos.IdCondIVA = Convert.ToInt32(Desde["IdCondIVA"]);
+            //Hasta.DatosImpositivos.DescrCondIVA = Convert.ToString(Desde["DescrCondIVA"]);
+            //Hasta.DatosImpositivos.NroIngBrutos = Convert.ToString(Desde["NroIngBrutos"]);
+            //Hasta.DatosImpositivos.IdCondIngBrutos = Convert.ToInt32(Desde["IdCondIngBrutos"]);
+            //Hasta.DatosImpositivos.DescrCondIngBrutos = Convert.ToString(Desde["DescrCondIngBrutos"]);
+            //Hasta.DatosImpositivos.FechaInicioActividades = Convert.ToDateTime(Desde["FechaInicioActividades"]);
+            //Hasta.DatosIdentificatorios.GLN = Convert.ToInt64(Desde["GLN"]);
+            //Hasta.DatosIdentificatorios.CodigoInterno = Convert.ToString(Desde["CodigoInterno"]);
+            Hasta.IdMetodoGeneracionNumeracionLote = Convert.ToString(Desde["IdMetodoGeneracionNumeracionLote"]);
+            Hasta.UltNroLote = Convert.ToInt64(Desde["UltNroLote"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+            Hasta.UltActualiz = Convert.ToString(Desde["UltActualiz"]);
+        }
+        
         public void Crear(Entidades.PuntoVta PuntoVta)
         {
             StringBuilder a = new StringBuilder(string.Empty);
@@ -185,6 +221,98 @@ namespace CedServicios.DB
             a.Append("select @UltNroLote as UltNroLote ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             PuntoVta.UltNroLote = Convert.ToInt64(dt.Rows[0]["UltNroLote"]);
+        }
+        public List<Entidades.PuntoVta> ListaSegunFiltros(string Cuit, string IdUN, string Nro, string Estado)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select PuntoVta.Cuit, PuntoVta.NroPuntoVta, PuntoVta.IdUN, PuntoVta.IdTipoPuntoVta, PuntoVta.UsaSetPropioDeDatosCuit, PuntoVta.Calle, PuntoVta.Nro, PuntoVta.Piso, PuntoVta.Depto, PuntoVta.Sector, PuntoVta.Torre, PuntoVta.Manzana, PuntoVta.Localidad, PuntoVta.IdProvincia, PuntoVta.DescrProvincia, PuntoVta.CodPost, PuntoVta.NombreContacto, PuntoVta.EmailContacto, PuntoVta.TelefonoContacto, PuntoVta.IdCondIVA, PuntoVta.DescrCondIVA, PuntoVta.NroIngBrutos, PuntoVta.IdCondIngBrutos, PuntoVta.DescrCondIngBrutos, PuntoVta.GLN, PuntoVta.FechaInicioActividades, PuntoVta.CodigoInterno, PuntoVta.IdMetodoGeneracionNumeracionLote, PuntoVta.UltNroLote, PuntoVta.IdWF, PuntoVta.Estado, PuntoVta.UltActualiz ");
+            a.AppendLine("from PuntoVta where 1=1 ");
+            if (Cuit != String.Empty) a.AppendLine("and Cuit like '%" + Cuit + "%' ");
+            if (IdUN != String.Empty) a.AppendLine("and IdUN = '" + IdUN + "' ");
+            if (Nro != String.Empty) a.AppendLine("and NroPuntoVta = '" + Nro + "' ");
+            if (Estado != String.Empty) a.AppendLine("and Estado = '" + Estado + "' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.PuntoVta> lista = new List<Entidades.PuntoVta>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.PuntoVta PuntoVta = new Entidades.PuntoVta();
+                    Copiar(dt.Rows[i], PuntoVta);
+                    lista.Add(PuntoVta);
+                }
+            }
+            return lista;
+        }
+        public List<Entidades.PuntoVta> ListaPaging(int IndicePagina, int TamañoPagina, string OrderBy, string SessionID, List<Entidades.PuntoVta> PuntoVtaLista)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("CREATE TABLE #PuntoVta" + SessionID + "( ");
+            a.Append("[Cuit] [varchar](11) NOT NULL, ");
+            a.Append("[NroPuntoVta] [numeric](4,0) NOT NULL, ");
+            a.Append("[IdUN] [int] NOT NULL, ");
+            a.Append("[IdTipoPuntoVta] [varchar](15) NOT NULL, ");
+            a.Append("[UsaSetPropioDeDatosCuit] [bit] NOT NULL, ");
+            a.Append("[IdMetodoGeneracionNumeracionLote] [varchar](15) NOT NULL, ");
+            a.Append("[UltNroLote] [numeric](14, 0) NOT NULL, ");
+            a.Append("[IdWF] [int] NOT NULL, ");
+            a.Append("[Estado] [varchar](15) NOT NULL, ");
+            a.Append("[UltActualiz] [varchar](18) NOT NULL, ");
+            a.Append("CONSTRAINT [PK_PuntoVta" + SessionID + "] PRIMARY KEY CLUSTERED ");
+            a.Append("( ");
+            a.Append("[Cuit] ASC, ");
+            a.Append("[NroPuntoVta] ASC ");
+            a.Append(")WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY] ");
+            a.Append(") ON [PRIMARY] ");
+            foreach (Entidades.PuntoVta PuntoVta in PuntoVtaLista)
+            {
+                a.Append("Insert #PuntoVta" + SessionID + " values ('" + PuntoVta.Cuit + "', ");
+                a.Append(PuntoVta.Nro + ", ");
+                a.Append(PuntoVta.IdUN + ", '");
+                a.Append(PuntoVta.IdTipoPuntoVta + "', '");
+                a.Append(PuntoVta.UsaSetPropioDeDatosCuit + "', '");
+                a.Append(PuntoVta.IdMetodoGeneracionNumeracionLote + "', ");
+                a.Append(PuntoVta.UltNroLote + ", ");
+                a.Append(PuntoVta.WF.Id + ", '");
+                a.Append(PuntoVta.Estado + "', ");
+                a.Append(PuntoVta.UltActualiz + ")");
+            }
+            a.Append("select * ");
+            a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
+            a.Append("Cuit, NroPuntoVta, IdUN, IdTipoPuntoVta, UsaSetPropioDeDatosCuit, IdMetodoGeneracionNumeracionLote, UltNroLote, IdWF, Estado, UltActualiz ");
+            a.Append("from #PuntoVta" + SessionID + " ");
+            a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
+            a.Append("DROP TABLE #PuntoVta" + SessionID);
+            if (OrderBy.Trim().ToUpper() == "CUIT" || OrderBy.Trim().ToUpper() == "CUIT DESC" || OrderBy.Trim().ToUpper() == "CUIT ASC")
+            {
+                OrderBy = "#PuntoVta" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "IDUN" || OrderBy.Trim().ToUpper() == "IDUN DESC" || OrderBy.Trim().ToUpper() == "IDUN ASC")
+            {
+                OrderBy = "#PuntoVta" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "NRO" || OrderBy.Trim().ToUpper() == "NRO DESC" || OrderBy.Trim().ToUpper() == "NRO ASC")
+            {
+                OrderBy = "#PuntoVta" + SessionID + "." + OrderBy.Replace("Nro", "NroPuntoVta");
+            }
+            if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
+            {
+                OrderBy = "#PuntoVta" + SessionID + "." + OrderBy;
+            }
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.PuntoVta> lista = new List<Entidades.PuntoVta>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.PuntoVta PuntoVta = new Entidades.PuntoVta();
+                    CopiarListaPaging(dt.Rows[i], PuntoVta);
+                    lista.Add(PuntoVta);
+                }
+            }
+            return lista;
         }
     }
 }

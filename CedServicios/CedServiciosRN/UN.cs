@@ -98,5 +98,23 @@ namespace CedServicios.RN
             hasta.WF.Estado = Desde.WF.Estado;
             return hasta;
         }
+        public static List<Entidades.UN> ListaSegunFiltros(string Cuit, string IdUN, string DescrUN, string Estado, Entidades.Sesion Sesion)
+        {
+            DB.UN UN = new DB.UN(Sesion);
+            return UN.ListaSegunFiltros(Cuit, IdUN, DescrUN, Estado);
+        }
+        public static List<Entidades.UN> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string Cuit, string IdUN, string DescrUN, string Estado, string SessionID, Entidades.Sesion Sesion)
+        {
+            List<Entidades.UN> listaUN = new List<Entidades.UN>();
+            DB.UN db = new DB.UN(Sesion);
+            if (OrderBy.Equals(String.Empty))
+            {
+                OrderBy = "IdUN desc";
+            }
+            listaUN = db.ListaSegunFiltros(Cuit, IdUN, DescrUN, Estado);
+            int cantidadFilas = listaUN.Count;
+            CantidadFilas = cantidadFilas;
+            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaUN);
+        }
     }
 }

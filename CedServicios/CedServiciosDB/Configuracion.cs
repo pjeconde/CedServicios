@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Data;
 using System.Text;
 
 namespace CedServicios.DB
@@ -37,6 +38,108 @@ namespace CedServicios.DB
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("delete Configuracion where Cuit='" + Cuit.Nro + "' and IdItemConfig like 'NroSerieCertif%' ");
             return a.ToString();
+        }
+        private void Copiar(DataRow Desde, Entidades.Configuracion Hasta)
+        {
+            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
+            Hasta.IdUN = Convert.ToInt32(Desde["IdUN"]);
+            Hasta.IdUsuario = Convert.ToString(Desde["IdUsuario"]);
+            Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
+            Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
+            Hasta.IdItemConfig = Convert.ToString(Desde["IdItemConfig"]);
+            Hasta.Valor = Convert.ToString(Desde["Estado"]);
+        }
+        public List<Entidades.Configuracion> ListaSegunFiltros(string Cuit, string IdUN, string IdUsuario, string IdTipoPermiso, string IdItemConfig)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("select Configuracion.IdUsuario, Configuracion.Cuit, Configuracion.IdUN, Configuracion.IdTipoPermiso, TipoPermiso.DescrTipoPermiso, Configuracion.IdItemConfig, Configuracion.Valor ");
+            a.AppendLine("from Configuracion, TipoPermiso ");
+            a.AppendLine("left outer join TipoPermiso tp on Configuracion.IdTipoPermiso=tp.IdTipoPermiso ");
+            a.AppendLine("where 1=1 ");
+            if (Cuit != String.Empty) a.AppendLine("and Cuit like '%" + Cuit + "%' ");
+            if (IdUN != String.Empty) a.AppendLine("and IdUN like '%" + IdUN + "%' ");
+            if (IdUsuario != String.Empty) a.AppendLine("and IdUsuario like '%" + IdUsuario + "%' ");
+            if (IdTipoPermiso != String.Empty) a.AppendLine("and Configuracion.IdTipoPermiso = '" + IdTipoPermiso + "' ");
+            if (IdItemConfig != String.Empty) a.AppendLine("and IdItemConfig like '%" + IdItemConfig + "'% ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Configuracion> lista = new List<Entidades.Configuracion>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Configuracion Configuracion = new Entidades.Configuracion();
+                    Copiar(dt.Rows[i], Configuracion);
+                    lista.Add(Configuracion);
+                }
+            }
+            return lista;
+        }
+        public List<Entidades.Configuracion> ListaPaging(int IndicePagina, int TamañoPagina, string OrderBy, string SessionID, List<Entidades.Configuracion> ConfiguracionLista)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("CREATE TABLE #Configuracion" + SessionID + "( ");
+            a.Append("[IdUsuario] [varchar](50) NOT NULL, ");
+            a.Append("[Cuit] [varchar](11) NOT NULL, ");
+            a.Append("[IdUN] [int] NOT NULL, ");
+            a.Append("[IdTipoPermiso] [varchar](15) NOT NULL, ");
+            a.Append("[DescrTipoPermiso] [varchar](50) NOT NULL, ");
+            a.Append("[IdItemConfig] [varchar](50) NOT NULL, ");
+            a.Append("[Valor] [varchar](256) NOT NULL, ");
+            a.Append("CONSTRAINT [PK_Configuracion" + SessionID + "] PRIMARY KEY CLUSTERED ");
+            a.Append("( ");
+            a.Append("[IdUsuario] ASC, ");
+            a.Append("[Cuit] ASC, ");
+            a.Append("[IdUN] ASC, ");
+            a.Append("[IdTipoPermiso], ");
+            a.Append("[IdItemConfig] ");
+            a.Append(")WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY] ");
+            a.Append(") ON [PRIMARY] ");
+            foreach (Entidades.Configuracion Configuracion in ConfiguracionLista)
+            {
+                a.Append("Insert #Configuracion" + SessionID + " values ('" + Configuracion.IdUsuario + "', '");
+                a.Append(Configuracion.Cuit + "', ");
+                a.Append(Configuracion.IdUN + ", '");
+                a.Append(Configuracion.TipoPermisoId + "', '");
+                a.Append(Configuracion.TipoPermisoDescr + "', '");
+                a.Append(Configuracion.IdItemConfig + "', '");
+                a.Append(Configuracion.Valor + "')");
+            }
+            a.Append("select * ");
+            a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
+            a.Append("IdUsuario, Cuit, IdUN, IdTipoPermiso, DescrTipoPermiso, IdItemConfig, Valor ");
+            a.Append("from #Configuracion" + SessionID + " ");
+            a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
+            a.Append("DROP TABLE #Configuracion" + SessionID);
+            if (OrderBy.Trim().ToUpper() == "ID" || OrderBy.Trim().ToUpper() == "ID DESC" || OrderBy.Trim().ToUpper() == "ID ASC")
+            {
+                OrderBy = "#Configuracion" + SessionID + "." + OrderBy.Replace("Id", "IdUN");
+            }
+            if (OrderBy.Trim().ToUpper() == "CUIT" || OrderBy.Trim().ToUpper() == "CUIT DESC" || OrderBy.Trim().ToUpper() == "CUIT ASC")
+            {
+                OrderBy = "#Configuracion" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "DESCR" || OrderBy.Trim().ToUpper() == "DESCR DESC" || OrderBy.Trim().ToUpper() == "DESCR ASC")
+            {
+                OrderBy = "#Configuracion" + SessionID + "." + OrderBy.Replace("Descr", "DescrConfiguracion"); ;
+            }
+            if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
+            {
+                OrderBy = "#Configuracion" + SessionID + "." + OrderBy;
+            }
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Configuracion> lista = new List<Entidades.Configuracion>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Configuracion Configuracion = new Entidades.Configuracion();
+                    Copiar(dt.Rows[i], Configuracion);
+                    lista.Add(Configuracion);
+                }
+            }
+            return lista;
         }
     }
 }
