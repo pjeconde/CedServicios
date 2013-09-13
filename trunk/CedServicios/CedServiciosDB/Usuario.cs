@@ -50,7 +50,7 @@ namespace CedServicios.DB
             Hasta.IdUNPredef = Convert.ToInt32(Desde["IdUNPredef"]);
             Hasta.FechaOKeFactTyC = Convert.ToString(Desde["FechaOKeFactTyC"]);
         }
-        private void CopiarListaSegunFiltros(DataRow Desde, Entidades.Usuario Hasta)
+        private void Copiar_ListaSegunFiltros(DataRow Desde, Entidades.Usuario Hasta)
         {
             Hasta.Id = Convert.ToString(Desde["IdUsuario"]);
             Hasta.Nombre = Convert.ToString(Desde["Nombre"]);
@@ -66,7 +66,7 @@ namespace CedServicios.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
-        private void CopiarListaPaging(DataRow Desde, Entidades.Usuario Hasta)
+        private void Copiar_ListaPaging(DataRow Desde, Entidades.Usuario Hasta)
         {
             Hasta.Id = Convert.ToString(Desde["IdUsuario"]);
             Hasta.Nombre = Convert.ToString(Desde["Nombre"]);
@@ -239,7 +239,7 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.Usuario usuario = new Entidades.Usuario();
-                    CopiarListaSegunFiltros(dt.Rows[i], usuario);
+                    Copiar_ListaSegunFiltros(dt.Rows[i], usuario);
                     lista.Add(usuario);
                 }
             }
@@ -323,7 +323,7 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.Usuario usuario = new Entidades.Usuario();
-                    CopiarListaPaging(dt.Rows[i], usuario);
+                    Copiar_ListaPaging(dt.Rows[i], usuario);
                     lista.Add(usuario);
                 }
             }
