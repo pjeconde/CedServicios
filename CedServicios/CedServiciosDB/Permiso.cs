@@ -41,11 +41,30 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.Permiso permiso = new Entidades.Permiso();
-                    Copiar(dt.Rows[i], permiso);
+                    Copiar_LeerListaPermisosPteAutoriz(dt.Rows[i], permiso);
                     lista.Add(permiso);
                 }
             }
             return lista;
+        }
+        private void Copiar_LeerListaPermisosPteAutoriz(DataRow Desde, Entidades.Permiso Hasta)
+        {
+            Hasta.Usuario.Id = Convert.ToString(Desde["IdUsuario"]);
+            Hasta.Usuario.Nombre = Convert.ToString(Desde["NombreUsuario"]);
+            Hasta.Usuario.Email = Convert.ToString(Desde["EmailUsuario"]);
+            Hasta.UsuarioSolicitante.Nombre = Convert.ToString(Desde["NombreUsuarioSolicitante"]);
+            Hasta.UsuarioSolicitante.Email = Convert.ToString(Desde["EmailUsuarioSolicitante"]);
+            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
+            Hasta.UN.Id = Convert.ToInt32(Desde["IdUN"]);
+            Hasta.UN.Descr = Convert.ToString(Desde["DescrUN"]);
+            Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
+            Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
+            Hasta.FechaFinVigencia = Convert.ToDateTime(Desde["FechaFinVigencia"]);
+            Hasta.UsuarioSolicitante.Id = Convert.ToString(Desde["IdUsuarioSolicitante"]);
+            Hasta.Accion.Tipo = Convert.ToString(Desde["AccionTipo"]);
+            Hasta.Accion.Nro = Convert.ToInt32(Desde["AccionNro"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
         }
         public List<Entidades.Permiso> LeerListaPermisosPorUsuario(Entidades.Usuario Usuario)
         {
@@ -64,31 +83,27 @@ namespace CedServicios.DB
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         Entidades.Permiso permiso = new Entidades.Permiso();
-                        Copiar(dt.Rows[i], permiso);
+                        Copiar_LeerListaPermisosPorUsuario(dt.Rows[i], permiso);
                         lista.Add(permiso);
                     }
                 }
             }
             return lista;
         }
-        public List<Entidades.Permiso> LeerListaPermisosVigentesPorUsuario(Entidades.Usuario Usuario)
+        private void Copiar_LeerListaPermisosPorUsuario(DataRow Desde, Entidades.Permiso Hasta)
         {
-            StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado, TipoPermiso.DescrTipoPermiso ");
-            a.AppendLine("from Permiso, TipoPermiso ");
-            a.AppendLine("where IdUsuario='" + Usuario.Id + "' and Estado='Vigente' and Permiso.IdTipoPermiso=TipoPermiso.IdTipoPermiso ");
-            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
-            List<Entidades.Permiso> lista = new List<Entidades.Permiso>();
-            if (dt.Rows.Count != 0)
-            {
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    Entidades.Permiso permiso = new Entidades.Permiso();
-                    Copiar(dt.Rows[i], permiso);
-                    lista.Add(permiso);
-                }
-            }
-            return lista;
+            Hasta.Usuario.Id = Convert.ToString(Desde["IdUsuario"]);
+            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
+            Hasta.UN.Id = Convert.ToInt32(Desde["IdUN"]);
+            Hasta.UN.Descr = Convert.ToString(Desde["DescrUN"]);
+            Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
+            Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
+            Hasta.FechaFinVigencia = Convert.ToDateTime(Desde["FechaFinVigencia"]);
+            Hasta.UsuarioSolicitante.Id = Convert.ToString(Desde["IdUsuarioSolicitante"]);
+            Hasta.Accion.Tipo = Convert.ToString(Desde["AccionTipo"]);
+            Hasta.Accion.Nro = Convert.ToInt32(Desde["AccionNro"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
         }
         public List<Entidades.Permiso> LeerListaPermisosFiltrados(string IdUsuario, string CUIT, string IdTipoPermiso, string Estado, string VerPermisosDe)
         {
@@ -120,11 +135,24 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.Permiso permiso = new Entidades.Permiso();
-                    Copiar(dt.Rows[i], permiso);
+                    Copiar_LeerListaPermisosFiltrados(dt.Rows[i], permiso);
                     lista.Add(permiso);
                 }
             }
             return lista;
+        }
+        private void Copiar_LeerListaPermisosFiltrados(DataRow Desde, Entidades.Permiso Hasta)
+        {
+            Hasta.Usuario.Id = Convert.ToString(Desde["IdUsuario"]);
+            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
+            Hasta.UN.Id = Convert.ToInt32(Desde["IdUN"]);
+            Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
+            Hasta.FechaFinVigencia = Convert.ToDateTime(Desde["FechaFinVigencia"]);
+            Hasta.UsuarioSolicitante.Id = Convert.ToString(Desde["IdUsuarioSolicitante"]);
+            Hasta.Accion.Tipo = Convert.ToString(Desde["AccionTipo"]);
+            Hasta.Accion.Nro = Convert.ToInt32(Desde["AccionNro"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
         }
         public Entidades.Permiso LeerPermisoPorCuit(string CUIT, string IdTipoPermiso)
         {
@@ -135,39 +163,21 @@ namespace CedServicios.DB
             a.AppendLine("and IdTipoPermiso='" + IdTipoPermiso + "' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             Entidades.Permiso permiso = new Entidades.Permiso();
-            Copiar(dt.Rows[0], permiso);
+            Copiar_LeerPermisoPorCuit(dt.Rows[0], permiso);
             return permiso;
         }
-        private void Copiar(DataRow Desde, Entidades.Permiso Hasta)
+        private void Copiar_LeerPermisoPorCuit(DataRow Desde, Entidades.Permiso Hasta)
         {
             Hasta.Usuario.Id = Convert.ToString(Desde["IdUsuario"]);
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
             Hasta.UN.Id = Convert.ToInt32(Desde["IdUN"]);
-            try
-            {
-                Hasta.UN.Descr = Convert.ToString(Desde["DescrUN"]);
-            }
-            catch { }
             Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
-            try
-            {
-            Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
-            }
-            catch { }
             Hasta.FechaFinVigencia = Convert.ToDateTime(Desde["FechaFinVigencia"]);
             Hasta.UsuarioSolicitante.Id = Convert.ToString(Desde["IdUsuarioSolicitante"]);
             Hasta.Accion.Tipo = Convert.ToString(Desde["AccionTipo"]);
             Hasta.Accion.Nro = Convert.ToInt32(Desde["AccionNro"]);
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
-            try
-            {
-                Hasta.Usuario.Nombre = Convert.ToString(Desde["NombreUsuario"]);
-                Hasta.Usuario.Email = Convert.ToString(Desde["EmailUsuario"]);
-                Hasta.UsuarioSolicitante.Nombre = Convert.ToString(Desde["NombreUsuarioSolicitante"]);
-                Hasta.UsuarioSolicitante.Email = Convert.ToString(Desde["EmailUsuarioSolicitante"]);
-            }
-            catch { }
         }
         public void Alta(Entidades.Permiso Permiso)
         {

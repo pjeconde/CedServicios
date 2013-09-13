@@ -43,31 +43,19 @@ namespace CedServicios.DB
             Hasta.Usuario.Id = Convert.ToString(Desde["IdUsuario"]);
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
             Hasta.UN.Id = Convert.ToInt32(Desde["IdUN"]);
-            try
-            {
-                Hasta.UN.Descr = Convert.ToString(Desde["DescrUN"]);
-            }
-            catch { }
+            Hasta.UN.Descr = Convert.ToString(Desde["DescrUN"]);
             Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
-            try
-            {
-                Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
-            }
-            catch { }
+            Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
             Hasta.FechaFinVigencia = Convert.ToDateTime(Desde["FechaFinVigencia"]);
             Hasta.UsuarioSolicitante.Id = Convert.ToString(Desde["IdUsuarioSolicitante"]);
             Hasta.Accion.Tipo = Convert.ToString(Desde["AccionTipo"]);
             Hasta.Accion.Nro = Convert.ToInt32(Desde["AccionNro"]);
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
-            try
-            {
-                Hasta.Usuario.Nombre = Convert.ToString(Desde["NombreUsuario"]);
-                Hasta.Usuario.Email = Convert.ToString(Desde["EmailUsuario"]);
-                Hasta.UsuarioSolicitante.Nombre = Convert.ToString(Desde["NombreUsuarioSolicitante"]);
-                Hasta.UsuarioSolicitante.Email = Convert.ToString(Desde["EmailUsuarioSolicitante"]);
-            }
-            catch { }
+            Hasta.Usuario.Nombre = Convert.ToString(Desde["NombreUsuario"]);
+            Hasta.Usuario.Email = Convert.ToString(Desde["EmailUsuario"]);
+            Hasta.UsuarioSolicitante.Nombre = Convert.ToString(Desde["NombreUsuarioSolicitante"]);
+            Hasta.UsuarioSolicitante.Email = Convert.ToString(Desde["EmailUsuarioSolicitante"]);
             Hasta.Fecha = Convert.ToDateTime(Desde["Fecha"]);
             Hasta.Evento = Convert.ToString(Desde["Evento"]);
         }
