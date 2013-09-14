@@ -31,7 +31,7 @@ namespace CedServicios.RN
             DB.Configuracion db = new DB.Configuracion(Sesion);
             if (OrderBy.Equals(String.Empty))
             {
-                OrderBy = "IdCuit asc";
+                OrderBy = "IdItemConfig asc";
             }
             listaConfiguracion = db.ListaSegunFiltros(Cuit, IdUN, IdUsuario, IdTipoPermiso, IdItemConfig);
             int cantidadFilas = listaConfiguracion.Count;
