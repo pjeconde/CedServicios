@@ -83,10 +83,10 @@ namespace CedServicios.Site
                 e.Row.Attributes["onmouseout"] = "this.style.textDecoration='none';";
 
                 //Color por estado distinto a Vigente
-                if (e.Row.Cells[9].Text != "Vigente")
-                {
-                    e.Row.ForeColor = Color.Red;
-                }
+                //if (e.Row.Cells[9].Text != "Vigente")
+                //{
+                //    e.Row.ForeColor = Color.Red;
+                //}
                 //DropDownList ddlB = (DropDownList)e.Row.FindControl("ddlB");
                 //if (ddlB != null)
                 //{

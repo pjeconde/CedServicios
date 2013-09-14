@@ -54,7 +54,7 @@
         </tr>
         <tr>
             <td colspan="3" style="padding-top:20px">
-                <asp:Panel ID="Panel1" runat="server" BorderColor="brown" BorderStyle="None"
+                <asp:Panel ID="Panel1" runat="server" BorderStyle="None"
                         BorderWidth="1px" Height="400px" ScrollBars="Auto" BackImageUrl="" BackColor="White">
                         <cc1:PagingGridView ID="PuntoVtaPagingGridView" runat="server" OnPageIndexChanging="PuntoVtaPagingGridView_PageIndexChanging"
                             OnRowDataBound="PuntoVtaPagingGridView_RowDataBound" 
@@ -62,47 +62,47 @@
                             OnSorting="PuntoVtaPagingGridView_Sorting" AllowPaging="True" 
                             AllowSorting="True" 
                             AutoGenerateColumns="false" OnRowCommand="PuntoVtaPagingGridView_RowCommand"
-                            DataKeyNames="">
+                            DataKeyNames="" BorderStyle="None">
                             <Columns>
-                                <asp:TemplateField ItemStyle-VerticalAlign="Top">
-                                    <HeaderStyle Wrap="False" BorderColor="brown" />
+                                <asp:TemplateField ItemStyle-VerticalAlign="Top" ItemStyle-BorderStyle="None">
+                                    <HeaderStyle Wrap="False" />
                                     <ItemTemplate>
                                         <asp:LinkButton ID="Ver" runat="server" CausesValidation="false" CommandName="Detalle" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ToolTip="<%# ((GridViewRow) Container).RowIndex %>" Text="Detalle" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="Cuit" HeaderText="Cuit" SortExpression="Cuit" HeaderStyle-Width="100px" ReadOnly="true">
-                                    <HeaderStyle Wrap="False" BorderColor="brown" />
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" />
+                                    <HeaderStyle Wrap="False" />
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Nro" HeaderText="Nro.PVta" SortExpression="Nro" HeaderStyle-Width="80px" ReadOnly="true">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" BorderColor="brown" />
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" />
+                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" />
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="IdUN" HeaderText="IdUN" SortExpression="IdUN" ReadOnly="true" 
                                     HeaderStyle-Width="80px">
-                                    <HeaderStyle Wrap="False" BorderColor="brown" />
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" />
+                                    <HeaderStyle Wrap="False" />
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="IdTipoPuntoVta" HeaderText="IdTipoPuntoVta" SortExpression="" HeaderStyle-Width="100px" ReadOnly="true">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" BorderColor="brown" />
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" />
+                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" />
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="UsaSetPropioDeDatosCuit" HeaderText="UsaSetPropioDeDatosCuit" SortExpression="" HeaderStyle-Width="100px" ReadOnly="true">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" BorderColor="brown" />
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" />
+                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" />
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="IdMetodoGeneracionNumeracionLote" HeaderText="MetodoNumeracionLote" SortExpression="" HeaderStyle-Width="100px" ReadOnly="true">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" BorderColor="brown" />
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" />
+                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" />
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="UltNroLote" HeaderText="UltNroLote" SortExpression="" HeaderStyle-Width="100px" ReadOnly="true">
-                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" BorderColor="brown" />
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" />
+                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" />
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
                                 </asp:BoundField>
                                 <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" ReadOnly="true" 
                                     HeaderStyle-Width="100px">
-                                    <HeaderStyle Wrap="False" BorderColor="brown" />
-                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" />
+                                    <HeaderStyle Wrap="False" />
+                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
                                 </asp:BoundField>
                             </Columns>
                             <PagerSettings Mode="NumericFirstLast" />

@@ -47,13 +47,13 @@ namespace CedServicios.DB
             Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
             Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
             Hasta.IdItemConfig = Convert.ToString(Desde["IdItemConfig"]);
-            Hasta.Valor = Convert.ToString(Desde["Estado"]);
+            Hasta.Valor = Convert.ToString(Desde["Valor"]);
         }
         public List<Entidades.Configuracion> ListaSegunFiltros(string Cuit, string IdUN, string IdUsuario, string IdTipoPermiso, string IdItemConfig)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("select Configuracion.IdUsuario, Configuracion.Cuit, Configuracion.IdUN, Configuracion.IdTipoPermiso, TipoPermiso.DescrTipoPermiso, Configuracion.IdItemConfig, Configuracion.Valor ");
-            a.AppendLine("from Configuracion, TipoPermiso ");
+            a.AppendLine("select Configuracion.IdUsuario, Configuracion.Cuit, Configuracion.IdUN, Configuracion.IdTipoPermiso, tp.DescrTipoPermiso, Configuracion.IdItemConfig, Configuracion.Valor ");
+            a.AppendLine("from Configuracion ");
             a.AppendLine("left outer join TipoPermiso tp on Configuracion.IdTipoPermiso=tp.IdTipoPermiso ");
             a.AppendLine("where 1=1 ");
             if (Cuit != String.Empty) a.AppendLine("and Cuit like '%" + Cuit + "%' ");
@@ -93,7 +93,7 @@ namespace CedServicios.DB
             a.Append("[IdTipoPermiso], ");
             a.Append("[IdItemConfig] ");
             a.Append(")WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY] ");
-            a.Append(") ON [PRIMARY] ");
+            a.AppendLine(") ON [PRIMARY] ");
             foreach (Entidades.Configuracion Configuracion in ConfiguracionLista)
             {
                 a.Append("Insert #Configuracion" + SessionID + " values ('" + Configuracion.IdUsuario + "', '");
@@ -102,30 +102,30 @@ namespace CedServicios.DB
                 a.Append(Configuracion.TipoPermisoId + "', '");
                 a.Append(Configuracion.TipoPermisoDescr + "', '");
                 a.Append(Configuracion.IdItemConfig + "', '");
-                a.Append(Configuracion.Valor + "')");
+                a.AppendLine(Configuracion.Valor + "')");
             }
             a.Append("select * ");
             a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
             a.Append("IdUsuario, Cuit, IdUN, IdTipoPermiso, DescrTipoPermiso, IdItemConfig, Valor ");
             a.Append("from #Configuracion" + SessionID + " ");
-            a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
-            a.Append("DROP TABLE #Configuracion" + SessionID);
-            if (OrderBy.Trim().ToUpper() == "ID" || OrderBy.Trim().ToUpper() == "ID DESC" || OrderBy.Trim().ToUpper() == "ID ASC")
-            {
-                OrderBy = "#Configuracion" + SessionID + "." + OrderBy.Replace("Id", "IdUN");
-            }
-            if (OrderBy.Trim().ToUpper() == "CUIT" || OrderBy.Trim().ToUpper() == "CUIT DESC" || OrderBy.Trim().ToUpper() == "CUIT ASC")
-            {
+            a.AppendLine("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
+            a.AppendLine("DROP TABLE #Configuracion" + SessionID);
+            //if (OrderBy.Trim().ToUpper() == "ID" || OrderBy.Trim().ToUpper() == "ID DESC" || OrderBy.Trim().ToUpper() == "ID ASC")
+            //{
+            //    OrderBy = "#Configuracion" + SessionID + "." + OrderBy.Replace("Id", "IdUN");
+            //}
+            //if (OrderBy.Trim().ToUpper() == "CUIT" || OrderBy.Trim().ToUpper() == "CUIT DESC" || OrderBy.Trim().ToUpper() == "CUIT ASC")
+            //{
+            //    OrderBy = "#Configuracion" + SessionID + "." + OrderBy;
+            //}
+            //if (OrderBy.Trim().ToUpper() == "DESCR" || OrderBy.Trim().ToUpper() == "DESCR DESC" || OrderBy.Trim().ToUpper() == "DESCR ASC")
+            //{
+            //    OrderBy = "#Configuracion" + SessionID + "." + OrderBy.Replace("Descr", "DescrConfiguracion"); ;
+            //}
+            //if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
+            //{
                 OrderBy = "#Configuracion" + SessionID + "." + OrderBy;
-            }
-            if (OrderBy.Trim().ToUpper() == "DESCR" || OrderBy.Trim().ToUpper() == "DESCR DESC" || OrderBy.Trim().ToUpper() == "DESCR ASC")
-            {
-                OrderBy = "#Configuracion" + SessionID + "." + OrderBy.Replace("Descr", "DescrConfiguracion"); ;
-            }
-            if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
-            {
-                OrderBy = "#Configuracion" + SessionID + "." + OrderBy;
-            }
+            //}
             string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
