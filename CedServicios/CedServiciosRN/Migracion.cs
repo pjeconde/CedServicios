@@ -17,7 +17,7 @@ namespace CedServicios.RN
             {
                 try
                 {
-                    CopiarCuenta(dt.Rows[i]["IdCuenta"].ToString(), Sesion);
+                    Copiar_Cuenta(dt.Rows[i]["IdCuenta"].ToString(), Sesion);
                 }
                 catch (Exception ex)
                 {
@@ -26,7 +26,7 @@ namespace CedServicios.RN
             }
             return mensajesError.ToString();
         }
-        public static void CopiarCuenta(string IdCuenta, Entidades.Sesion Sesion)
+        public static void Copiar_Cuenta(string IdCuenta, Entidades.Sesion Sesion)
         {
             string idUsuarioAux = Sesion.Usuario.Id;
             Entidades.Usuario usuario = new Entidades.Usuario();

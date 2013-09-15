@@ -59,7 +59,7 @@ namespace CedServicios.RN
             DB.Articulo Articulo = new DB.Articulo(Sesion);
             return Articulo.ListaSegunFiltros(Cuit, IdArticulo, DescrArticulo, Estado);
         }
-        public static List<Entidades.Articulo> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string Cuit, string IdArticulo, string DescrArticulo, string Estado, string SessionID, Entidades.Sesion Sesion)
+        public static List<Entidades.Articulo> ListaPaging(out int CantidadFilas, int IndicePagina, string OrderBy, string Cuit, string IdArticulo, string DescrArticulo, string Estado, string SessionID, Entidades.Sesion Sesion)
         {
             List<Entidades.Articulo> listaArticulo = new List<Entidades.Articulo>();
             DB.Articulo db = new DB.Articulo(Sesion);
@@ -70,7 +70,7 @@ namespace CedServicios.RN
             listaArticulo = db.ListaSegunFiltros(Cuit, IdArticulo, DescrArticulo, Estado);
             int cantidadFilas = listaArticulo.Count;
             CantidadFilas = cantidadFilas;
-            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaArticulo);
+            return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaArticulo);
         }
     }
 }

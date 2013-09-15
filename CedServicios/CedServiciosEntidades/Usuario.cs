@@ -24,7 +24,7 @@ namespace CedServicios.Entidades
         private string cuitPredef;
         private int idUNPredef;
         private string fechaOKeFactTyC;
-
+        private int cantidadFilasXPagina = 10;
         public Usuario()
         {
             wF = new WF();
@@ -205,6 +205,17 @@ namespace CedServicios.Entidades
             get
             {
                 return fechaOKeFactTyC;
+            }
+        }
+        public int CantidadFilasXPagina
+        {
+            set
+            {
+                cantidadFilasXPagina = value;
+            }
+            get
+            {
+                return cantidadFilasXPagina;
             }
         }
         #region Propiedades redundantes

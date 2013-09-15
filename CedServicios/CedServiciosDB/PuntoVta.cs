@@ -70,7 +70,7 @@ namespace CedServicios.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
-        private void CopiarListaPaging(DataRow Desde, Entidades.PuntoVta Hasta)
+        private void Copiar_ListaPaging(DataRow Desde, Entidades.PuntoVta Hasta)
         {
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
             Hasta.Nro = Convert.ToInt32(Desde["NroPuntoVta"]);
@@ -244,7 +244,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.PuntoVta> ListaPaging(int IndicePagina, int TamañoPagina, string OrderBy, string SessionID, List<Entidades.PuntoVta> PuntoVtaLista)
+        public List<Entidades.PuntoVta> ListaPaging(int IndicePagina, string OrderBy, string SessionID, List<Entidades.PuntoVta> PuntoVtaLista)
         {
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("CREATE TABLE #PuntoVta" + SessionID + "( ");
@@ -299,7 +299,7 @@ namespace CedServicios.DB
             {
                 OrderBy = "#PuntoVta" + SessionID + "." + OrderBy;
             }
-            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * sesion.Usuario.CantidadFilasXPagina), OrderBy, (IndicePagina * sesion.Usuario.CantidadFilasXPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.PuntoVta> lista = new List<Entidades.PuntoVta>();
@@ -308,7 +308,7 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.PuntoVta PuntoVta = new Entidades.PuntoVta();
-                    CopiarListaPaging(dt.Rows[i], PuntoVta);
+                    Copiar_ListaPaging(dt.Rows[i], PuntoVta);
                     lista.Add(PuntoVta);
                 }
             }

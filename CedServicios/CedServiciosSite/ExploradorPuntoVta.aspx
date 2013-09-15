@@ -55,7 +55,7 @@
         <tr>
             <td colspan="3" style="padding-top:20px">
                 <asp:Panel ID="Panel1" runat="server" BorderStyle="None"
-                        BorderWidth="1px" Height="400px" ScrollBars="Auto" BackImageUrl="" BackColor="White">
+                        BorderWidth="1px" ScrollBars="Auto" BackImageUrl="" BackColor="White">
                         <cc1:PagingGridView ID="PuntoVtaPagingGridView" runat="server" OnPageIndexChanging="PuntoVtaPagingGridView_PageIndexChanging"
                             OnRowDataBound="PuntoVtaPagingGridView_RowDataBound" 
                             FooterStyle-ForeColor="Brown"

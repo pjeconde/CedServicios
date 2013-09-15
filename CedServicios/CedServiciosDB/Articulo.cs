@@ -186,7 +186,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Articulo> ListaPaging(int IndicePagina, int TamañoPagina, string OrderBy, string SessionID, List<Entidades.Articulo> ArticuloLista)
+        public List<Entidades.Articulo> ListaPaging(int IndicePagina, string OrderBy, string SessionID, List<Entidades.Articulo> ArticuloLista)
         {
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("CREATE TABLE #Articulo" + SessionID + "( ");
@@ -243,7 +243,7 @@ namespace CedServicios.DB
             {
                 OrderBy = "#Articulo" + SessionID + "." + OrderBy;
             }
-            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * sesion.Usuario.CantidadFilasXPagina), OrderBy, (IndicePagina * sesion.Usuario.CantidadFilasXPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Articulo> lista = new List<Entidades.Articulo>();

@@ -16,10 +16,12 @@ namespace CedServicios.DB
         public void Leer(Entidades.Usuario Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Usuario.IdUsuario, Usuario.Nombre, Usuario.Telefono, Usuario.Email, Usuario.Password, Usuario.Pregunta, Usuario.Respuesta, Usuario.CantidadEnviosMail, Usuario.FechaUltimoReenvioMail, Usuario.EmailSMS, Usuario.IdWF, Usuario.Estado, Usuario.UltActualiz, isnull(ConfigCUITUNpredef.Cuit, '') as CuitPredef, isnull(ConfigCUITUNpredef.IdUN, 0) as IdUNPredef, isnull(ConfigFechaOKeFactTyC.Valor, '00000000') as FechaOKeFactTyC ");
+            a.Append("select Usuario.IdUsuario, Usuario.Nombre, Usuario.Telefono, Usuario.Email, Usuario.Password, Usuario.Pregunta, Usuario.Respuesta, Usuario.CantidadEnviosMail, Usuario.FechaUltimoReenvioMail, Usuario.EmailSMS, Usuario.IdWF, Usuario.Estado, Usuario.UltActualiz, isnull(ConfigCUITUNpredef.Cuit, '') as CuitPredef, isnull(ConfigCUITUNpredef.IdUN, 0) as IdUNPredef, isnull(ConfigFechaOKeFactTyC.Valor, '00000000') as FechaOKeFactTyC, ");
+            a.Append("isnull(ConfigCantidadFilasXPagina.Valor, '0') as CantidadFilasXPagina ");
             a.Append("from Usuario ");
             a.Append("left outer join Configuracion ConfigCUITUNpredef on Usuario.IdUsuario=ConfigCUITUNpredef.IdUsuario and ConfigCUITUNpredef.IdItemConfig='CUITUNpredef' ");
             a.Append("left outer join Configuracion ConfigFechaOKeFactTyC on Usuario.IdUsuario=ConfigFechaOKeFactTyC.IdUsuario and ConfigFechaOKeFactTyC.IdItemConfig='FechaOKeFactTyC' ");
+            a.Append("left outer join Configuracion ConfigCantidadFilasXPagina on Usuario.IdUsuario=ConfigCantidadFilasXPagina.IdUsuario and ConfigCantidadFilasXPagina.IdItemConfig='CantidadFilasXPagina' ");
             a.Append("where Usuario.IdUsuario='" + Usuario.Id + "' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count == 0)
@@ -28,10 +30,10 @@ namespace CedServicios.DB
             }
             else
             {
-                Copiar(dt.Rows[0], Usuario);
+                Copiar_Leer(dt.Rows[0], Usuario);
             }
         }
-        private void Copiar(DataRow Desde, Entidades.Usuario Hasta)
+        private void Copiar_Leer(DataRow Desde, Entidades.Usuario Hasta)
         {
             Hasta.Id = Convert.ToString(Desde["IdUsuario"]);
             Hasta.Nombre = Convert.ToString(Desde["Nombre"]);
@@ -49,8 +51,12 @@ namespace CedServicios.DB
             Hasta.CuitPredef = Convert.ToString(Desde["CuitPredef"]);
             Hasta.IdUNPredef = Convert.ToInt32(Desde["IdUNPredef"]);
             Hasta.FechaOKeFactTyC = Convert.ToString(Desde["FechaOKeFactTyC"]);
+            if (Convert.ToInt32(Desde["CantidadFilasXPagina"]) != 0)
+            {
+                Hasta.CantidadFilasXPagina = Convert.ToInt32(Desde["CantidadFilasXPagina"]);
+            }
         }
-        private void CopiarListaSegunFiltros(DataRow Desde, Entidades.Usuario Hasta)
+        private void Copiar_ListaSegunFiltros(DataRow Desde, Entidades.Usuario Hasta)
         {
             Hasta.Id = Convert.ToString(Desde["IdUsuario"]);
             Hasta.Nombre = Convert.ToString(Desde["Nombre"]);
@@ -66,7 +72,7 @@ namespace CedServicios.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
-        private void CopiarListaPaging(DataRow Desde, Entidades.Usuario Hasta)
+        private void Copiar_ListaPaging(DataRow Desde, Entidades.Usuario Hasta)
         {
             Hasta.Id = Convert.ToString(Desde["IdUsuario"]);
             Hasta.Nombre = Convert.ToString(Desde["Nombre"]);
@@ -146,10 +152,26 @@ namespace CedServicios.DB
             for (int i = 0; i < dt.Rows.Count; i++)
             {
                 Entidades.Usuario usuario = new Entidades.Usuario();
-                Copiar(dt.Rows[i], usuario);
+                Copiar_DestinatariosAvisoAltaUsuario(dt.Rows[i], usuario);
                 lista.Add(usuario);
             }
             return lista;
+        }
+        private void Copiar_DestinatariosAvisoAltaUsuario(DataRow Desde, Entidades.Usuario Hasta)
+        {
+            Hasta.Id = Convert.ToString(Desde["IdUsuario"]);
+            Hasta.Nombre = Convert.ToString(Desde["Nombre"]);
+            Hasta.Telefono = Convert.ToString(Desde["Telefono"]);
+            Hasta.Email = Convert.ToString(Desde["Email"]);
+            Hasta.Password = Convert.ToString(Desde["Password"]);
+            Hasta.Pregunta = Convert.ToString(Desde["Pregunta"]);
+            Hasta.Respuesta = Convert.ToString(Desde["Respuesta"]);
+            Hasta.CantidadEnviosMail = Convert.ToInt32(Desde["CantidadEnviosMail"]);
+            Hasta.FechaUltimoReenvioMail = Convert.ToDateTime(Desde["FechaUltimoReenvioMail"]);
+            Hasta.EmailSMS = Convert.ToString(Desde["EmailSMS"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+            Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
         public int CantidadDeFilas()
         {
@@ -181,11 +203,27 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.Usuario elem = new Entidades.Usuario();
-                    Copiar(dt.Rows[i], elem);
+                    Copiar_Lista(dt.Rows[i], elem);
                     lista.Add(elem);
                 }
                 return lista;
             }
+        }
+        private void Copiar_Lista(DataRow Desde, Entidades.Usuario Hasta)
+        {
+            Hasta.Id = Convert.ToString(Desde["IdUsuario"]);
+            Hasta.Nombre = Convert.ToString(Desde["Nombre"]);
+            Hasta.Telefono = Convert.ToString(Desde["Telefono"]);
+            Hasta.Email = Convert.ToString(Desde["Email"]);
+            Hasta.Password = Convert.ToString(Desde["Password"]);
+            Hasta.Pregunta = Convert.ToString(Desde["Pregunta"]);
+            Hasta.Respuesta = Convert.ToString(Desde["Respuesta"]);
+            Hasta.CantidadEnviosMail = Convert.ToInt32(Desde["CantidadEnviosMail"]);
+            Hasta.FechaUltimoReenvioMail = Convert.ToDateTime(Desde["FechaUltimoReenvioMail"]);
+            Hasta.EmailSMS = Convert.ToString(Desde["EmailSMS"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+            Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
         public string ListaIdUsuariosParaSQLscript()
         {
@@ -239,13 +277,13 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.Usuario usuario = new Entidades.Usuario();
-                    CopiarListaSegunFiltros(dt.Rows[i], usuario);
+                    Copiar_ListaSegunFiltros(dt.Rows[i], usuario);
                     lista.Add(usuario);
                 }
             }
             return lista;
         }
-        public List<Entidades.Usuario> ListaPaging(int IndicePagina, int TamañoPagina, string OrderBy, string SessionID, List<Entidades.Usuario> UsuarioLista)
+        public List<Entidades.Usuario> ListaPaging(int IndicePagina, string OrderBy, string SessionID, List<Entidades.Usuario> UsuarioLista)
         {
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("CREATE TABLE #Usuario" + SessionID + "( ");
@@ -314,7 +352,7 @@ namespace CedServicios.DB
             {
                 OrderBy = "#Usuario" + SessionID + "." + OrderBy;
             }
-            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * sesion.Usuario.CantidadFilasXPagina), OrderBy, (IndicePagina * sesion.Usuario.CantidadFilasXPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Usuario> lista = new List<Entidades.Usuario>();
@@ -323,7 +361,7 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.Usuario usuario = new Entidades.Usuario();
-                    CopiarListaPaging(dt.Rows[i], usuario);
+                    Copiar_ListaPaging(dt.Rows[i], usuario);
                     lista.Add(usuario);
                 }
             }

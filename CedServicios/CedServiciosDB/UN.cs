@@ -77,7 +77,7 @@ namespace CedServicios.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
         }
-        private void CopiarListaPaging(DataRow Desde, Entidades.UN Hasta)
+        private void Copiar_ListaPaging(DataRow Desde, Entidades.UN Hasta)
         {
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
             Hasta.Id = Convert.ToInt32(Desde["IdUN"]);
@@ -178,7 +178,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.UN> ListaPaging(int IndicePagina, int TamañoPagina, string OrderBy, string SessionID, List<Entidades.UN> UNLista)
+        public List<Entidades.UN> ListaPaging(int IndicePagina, string OrderBy, string SessionID, List<Entidades.UN> UNLista)
         {
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("CREATE TABLE #UN" + SessionID + "( ");
@@ -225,7 +225,7 @@ namespace CedServicios.DB
             {
                 OrderBy = "#UN" + SessionID + "." + OrderBy;
             }
-            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * sesion.Usuario.CantidadFilasXPagina), OrderBy, (IndicePagina * sesion.Usuario.CantidadFilasXPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.UN> lista = new List<Entidades.UN>();
@@ -234,7 +234,7 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.UN UN = new Entidades.UN();
-                    CopiarListaPaging(dt.Rows[i], UN);
+                    Copiar_ListaPaging(dt.Rows[i], UN);
                     lista.Add(UN);
                 }
             }

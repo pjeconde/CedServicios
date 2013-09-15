@@ -52,6 +52,17 @@
 			</td>
         </tr>
         <tr>
+			<td align="left" valign="top" style="padding-right:10px; padding-top:20px">
+                <asp:Label ID="Label5" runat="server" Text="Cantidad de renglones<br />(en grillas con paginación)" ></asp:Label>
+			</td>
+	        <td align="left" valign="top" style="padding-right:5px; padding-top:20px">
+                <asp:TextBox ID="CantidadFilasXPaginaTextBox" runat="server" Width="86px" Enabled="true" ></asp:TextBox>
+	        </td>
+	        <td align="left" valign="top" style="padding-right:5px; padding-top:20px">
+                <asp:Button ID="ConfirmarCantidadFilasXPaginaButton" runat="server" TabIndex="3" Text="Confirmar" onclick="ConfirmarCantidadFilasXPaginaButton_Click" />
+	        </td>
+        </tr>
+        <tr>
             <td align="center" colspan="3" style="padding-top:20px">
                 <asp:Button ID="SalirButton" runat="server" Text="Salir" TabIndex="4" PostBackUrl="~/Default.aspx"/>
             </td>

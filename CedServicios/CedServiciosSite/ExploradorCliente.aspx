@@ -55,13 +55,13 @@
         <tr>
             <td colspan="3" style="padding-top:20px">
                 <asp:Panel ID="Panel1" runat="server" BorderStyle="None"
-                        BorderWidth="1px" Height="400px" ScrollBars="Auto" BackImageUrl="" BackColor="White">
+                        BorderWidth="1px" ScrollBars="Auto" BackImageUrl="" BackColor="White">
                         <cc1:PagingGridView ID="ClientePagingGridView" runat="server" OnPageIndexChanging="ClientePagingGridView_PageIndexChanging"
                             OnRowDataBound="ClientePagingGridView_RowDataBound" 
                             FooterStyle-ForeColor="Brown" OnRowEditing="ClientePagingGridView_RowEditing" OnRowCancelingEdit="ClientePagingGridView_RowCancelingEdit"
                             OnRowUpdating="ClientePagingGridView_RowUpdating" 
                             OnSorting="ClientePagingGridView_Sorting" AllowPaging="True" 
-                            AllowSorting="True" PageSize="10" 
+                            AllowSorting="True" 
                             AutoGenerateColumns="false" OnRowCommand="ClientePagingGridView_RowCommand"
                             OnSelectedIndexChanged="ClientePagingGridView_SelectedIndexChanged" OnSelectedIndexChanging="ClientePagingGridView_SelectedIndexChanging"
                             DataKeyNames="" BorderStyle="None">

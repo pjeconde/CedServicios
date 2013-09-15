@@ -38,8 +38,9 @@ namespace CedServicios.Site
                 UNPagingGridView.PageIndex = e.NewPageIndex;
                 List<Entidades.UN> lista;
                 int CantidadFilas = 0;
-                lista = RN.UN.ListaPaging(out CantidadFilas, UNPagingGridView.PageIndex, UNPagingGridView.PageSize, UNPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, DescrUNTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.UN.ListaPaging(out CantidadFilas, UNPagingGridView.PageIndex, UNPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, DescrUNTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 UNPagingGridView.VirtualItemCount = CantidadFilas;
+                UNPagingGridView.PageSize = ((Entidades.Sesion)Session["Sesion"]).Usuario.CantidadFilasXPagina;
                 ViewState["lista"] = lista;
                 UNPagingGridView.DataSource = lista;
                 UNPagingGridView.DataBind();
@@ -61,7 +62,7 @@ namespace CedServicios.Site
                 DesSeleccionarFilas();
                 List<Entidades.UN> lista = new List<Entidades.UN>();
                 int CantidadFilas = 0;
-                lista = RN.UN.ListaPaging(out CantidadFilas, UNPagingGridView.PageIndex, UNPagingGridView.PageSize, UNPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, DescrUNTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.UN.ListaPaging(out CantidadFilas, UNPagingGridView.PageIndex, UNPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, DescrUNTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ViewState["lista"] = lista;
                 UNPagingGridView.DataSource = (List<Entidades.UN>)ViewState["lista"];
                 UNPagingGridView.DataBind();
@@ -142,8 +143,9 @@ namespace CedServicios.Site
                 List<Entidades.UN> lista = new List<Entidades.UN>();
                 MensajeLabel.Text = String.Empty;
                 int CantidadFilas = 0;
-                lista = RN.UN.ListaPaging(out CantidadFilas, UNPagingGridView.PageIndex, UNPagingGridView.PageSize, UNPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, DescrUNTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.UN.ListaPaging(out CantidadFilas, UNPagingGridView.PageIndex, UNPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, DescrUNTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 UNPagingGridView.VirtualItemCount = CantidadFilas;
+                UNPagingGridView.PageSize = sesion.Usuario.CantidadFilasXPagina;
                 if (lista.Count == 0)
                 {
                     UNPagingGridView.DataSource = null;

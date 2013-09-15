@@ -46,7 +46,7 @@ namespace CedServicios.Site
                     switch (e.CommandName)
                     {
                         case "Copiar":
-                            RN.Migracion.CopiarCuenta(cuenta["IdCuenta"].ToString(), sesion);
+                            RN.Migracion.Copiar_Cuenta(cuenta["IdCuenta"].ToString(), sesion);
                             break;
                     }
                 }
