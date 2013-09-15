@@ -38,8 +38,9 @@ namespace CedServicios.Site
                 ClientePagingGridView.PageIndex = e.NewPageIndex;
                 List<Entidades.Cliente> lista;
                 int CantidadFilas = 0;
-                lista = RN.Cliente.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.PageSize, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.Cliente.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ClientePagingGridView.VirtualItemCount = CantidadFilas;
+                ClientePagingGridView.PageSize = ((Entidades.Sesion)Session["Sesion"]).Usuario.CantidadFilasXPagina;
                 ViewState["lista"] = lista;
                 ClientePagingGridView.DataSource = lista;
                 ClientePagingGridView.DataBind();
@@ -61,7 +62,7 @@ namespace CedServicios.Site
                 DesSeleccionarFilas();
                 List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
                 int CantidadFilas = 0;
-                lista = RN.Cliente.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.PageSize, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.Cliente.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ViewState["lista"] = lista;
                 ClientePagingGridView.DataSource = (List<Entidades.Cliente>)ViewState["lista"];
                 ClientePagingGridView.DataBind();
@@ -181,8 +182,9 @@ namespace CedServicios.Site
                 List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
                 MensajeLabel.Text = String.Empty;
                 int CantidadFilas = 0;
-                lista = RN.Cliente.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.PageSize, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.Cliente.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ClientePagingGridView.VirtualItemCount = CantidadFilas;
+                ClientePagingGridView.PageSize = sesion.Usuario.CantidadFilasXPagina;
                 if (lista.Count == 0)
                 {
                     ClientePagingGridView.DataSource = null;

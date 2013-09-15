@@ -54,7 +54,7 @@
             </tr>
         <tr>
             <td colspan="3" style="padding-top:20px">
-                <asp:Panel ID="Panel1" runat="server" Height="400px" ScrollBars="Auto" BackImageUrl="" BackColor="White">
+                <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto" BackImageUrl="" BackColor="White">
                         <cc1:PagingGridView ID="UsuarioPagingGridView" runat="server" OnPageIndexChanging="UsuarioPagingGridView_PageIndexChanging"
                             OnRowDataBound="UsuarioPagingGridView_RowDataBound" 
                             FooterStyle-ForeColor="Brown"

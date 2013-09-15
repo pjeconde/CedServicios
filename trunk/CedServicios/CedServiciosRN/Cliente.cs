@@ -122,7 +122,7 @@ namespace CedServicios.RN
             DB.Cliente cliente = new DB.Cliente(Sesion);
             return cliente.ListaSegunFiltros(Cuit, RazSoc, NroDoc, Estado);
         }
-        public static List<Entidades.Cliente> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string Cuit, string NroDoc, string RazSoc, string Estado, string SessionID, Entidades.Sesion Sesion)
+        public static List<Entidades.Cliente> ListaPaging(out int CantidadFilas, int IndicePagina, string OrderBy, string Cuit, string NroDoc, string RazSoc, string Estado, string SessionID, Entidades.Sesion Sesion)
         {
             List<Entidades.Cliente> listaCliente = new List<Entidades.Cliente>();
             DB.Cliente db = new DB.Cliente(Sesion);
@@ -133,7 +133,7 @@ namespace CedServicios.RN
             listaCliente = db.ListaSegunFiltros(Cuit, NroDoc, RazSoc, Estado);
             int cantidadFilas = listaCliente.Count;
             CantidadFilas = cantidadFilas;
-            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaCliente);
+            return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaCliente);
         }
     }
 }

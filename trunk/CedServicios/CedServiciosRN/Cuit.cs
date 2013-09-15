@@ -141,7 +141,7 @@ namespace CedServicios.RN
             DB.Cuit cuit = new DB.Cuit(Sesion);
             return cuit.ListaSegunFiltros(Cuit, RazonSocial, Localidad, Estado);
         }
-        public static List<Entidades.Cuit> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string Cuit, string RazonSocial, string Localidad, string Estado, string SessionID, Entidades.Sesion Sesion)
+        public static List<Entidades.Cuit> ListaPaging(out int CantidadFilas, int IndicePagina, string OrderBy, string Cuit, string RazonSocial, string Localidad, string Estado, string SessionID, Entidades.Sesion Sesion)
         {
             List<Entidades.Cuit> listaCuit = new List<Entidades.Cuit>();
             DB.Cuit db = new DB.Cuit(Sesion);
@@ -152,7 +152,7 @@ namespace CedServicios.RN
             listaCuit = db.ListaSegunFiltros(Cuit, RazonSocial, Localidad, Estado);
             int cantidadFilas = listaCuit.Count;
             CantidadFilas = cantidadFilas;
-            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaCuit);
+            return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaCuit);
         }
     }
 }

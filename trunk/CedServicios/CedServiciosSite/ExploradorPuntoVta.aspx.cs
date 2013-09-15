@@ -38,8 +38,9 @@ namespace CedServicios.Site
                 PuntoVtaPagingGridView.PageIndex = e.NewPageIndex;
                 List<Entidades.PuntoVta> lista;
                 int CantidadFilas = 0;
-                lista = RN.PuntoVta.ListaPaging(out CantidadFilas, PuntoVtaPagingGridView.PageIndex, PuntoVtaPagingGridView.PageSize, PuntoVtaPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, NroTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.PuntoVta.ListaPaging(out CantidadFilas, PuntoVtaPagingGridView.PageIndex, PuntoVtaPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, NroTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 PuntoVtaPagingGridView.VirtualItemCount = CantidadFilas;
+                PuntoVtaPagingGridView.PageSize = ((Entidades.Sesion)Session["Sesion"]).Usuario.CantidadFilasXPagina;
                 ViewState["lista"] = lista;
                 PuntoVtaPagingGridView.DataSource = lista;
                 PuntoVtaPagingGridView.DataBind();
@@ -61,7 +62,7 @@ namespace CedServicios.Site
                 DesSeleccionarFilas();
                 List<Entidades.PuntoVta> lista = new List<Entidades.PuntoVta>();
                 int CantidadFilas = 0;
-                lista = RN.PuntoVta.ListaPaging(out CantidadFilas, PuntoVtaPagingGridView.PageIndex, PuntoVtaPagingGridView.PageSize, PuntoVtaPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, NroTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.PuntoVta.ListaPaging(out CantidadFilas, PuntoVtaPagingGridView.PageIndex, PuntoVtaPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, NroTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ViewState["lista"] = lista;
                 PuntoVtaPagingGridView.DataSource = (List<Entidades.PuntoVta>)ViewState["lista"];
                 PuntoVtaPagingGridView.DataBind();
@@ -146,8 +147,9 @@ namespace CedServicios.Site
                 List<Entidades.PuntoVta> lista = new List<Entidades.PuntoVta>();
                 MensajeLabel.Text = String.Empty;
                 int CantidadFilas = 0;
-                lista = RN.PuntoVta.ListaPaging(out CantidadFilas, PuntoVtaPagingGridView.PageIndex, PuntoVtaPagingGridView.PageSize, PuntoVtaPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, NroTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.PuntoVta.ListaPaging(out CantidadFilas, PuntoVtaPagingGridView.PageIndex, PuntoVtaPagingGridView.OrderBy, CuitTextBox.Text, IdUNTextBox.Text, NroTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 PuntoVtaPagingGridView.VirtualItemCount = CantidadFilas;
+                PuntoVtaPagingGridView.PageSize = sesion.Usuario.CantidadFilasXPagina;
                 if (lista.Count == 0)
                 {
                     PuntoVtaPagingGridView.DataSource = null;

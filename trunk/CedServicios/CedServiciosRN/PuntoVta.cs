@@ -76,7 +76,7 @@ namespace CedServicios.RN
             DB.PuntoVta PuntoVta = new DB.PuntoVta(Sesion);
             return PuntoVta.ListaSegunFiltros(Cuit, IdUN, Nro, Estado);
         }
-        public static List<Entidades.PuntoVta> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string Cuit, string IdUN, string Nro, string Estado, string SessionID, Entidades.Sesion Sesion)
+        public static List<Entidades.PuntoVta> ListaPaging(out int CantidadFilas, int IndicePagina, string OrderBy, string Cuit, string IdUN, string Nro, string Estado, string SessionID, Entidades.Sesion Sesion)
         {
             List<Entidades.PuntoVta> listaPuntoVta = new List<Entidades.PuntoVta>();
             DB.PuntoVta db = new DB.PuntoVta(Sesion);
@@ -87,7 +87,7 @@ namespace CedServicios.RN
             listaPuntoVta = db.ListaSegunFiltros(Cuit, IdUN, Nro, Estado);
             int cantidadFilas = listaPuntoVta.Count;
             CantidadFilas = cantidadFilas;
-            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaPuntoVta);
+            return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaPuntoVta);
         }
     }
 }

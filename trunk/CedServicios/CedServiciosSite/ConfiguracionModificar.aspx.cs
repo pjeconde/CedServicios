@@ -52,6 +52,7 @@ namespace CedServicios.Site
                         DescrUNTextBox.Text = "ninguno";
                         IdUNTextBox.Text = String.Empty;
                     }
+                    CantidadFilasXPaginaTextBox.Text = sesion.Usuario.CantidadFilasXPagina.ToString();
                 }
             }
         }
@@ -156,6 +157,20 @@ namespace CedServicios.Site
                 {
                     MensajeLabel.Text = "No hay CUIT/UN seleccionados";
                 }
+            }
+        }
+        protected void ConfirmarCantidadFilasXPaginaButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = String.Empty;
+            int cantidadFilasXPagina;
+            if (!int.TryParse(CantidadFilasXPaginaTextBox.Text, out cantidadFilasXPagina) || cantidadFilasXPagina < 1)
+            {
+                MensajeLabel.Text = "Valor inválido (ingresar un valor numérico, mayor a cero)";
+                CantidadFilasXPaginaTextBox.Focus();
+            }
+            else
+            {
+                RN.Configuracion.EstablecerCantidadFilasXPagina(cantidadFilasXPagina, (Entidades.Sesion)Session["Sesion"]);
             }
         }
     }

@@ -103,7 +103,7 @@ namespace CedServicios.RN
             DB.UN UN = new DB.UN(Sesion);
             return UN.ListaSegunFiltros(Cuit, IdUN, DescrUN, Estado);
         }
-        public static List<Entidades.UN> ListaPaging(out int CantidadFilas, int IndicePagina, int TamañoPagina, string OrderBy, string Cuit, string IdUN, string DescrUN, string Estado, string SessionID, Entidades.Sesion Sesion)
+        public static List<Entidades.UN> ListaPaging(out int CantidadFilas, int IndicePagina, string OrderBy, string Cuit, string IdUN, string DescrUN, string Estado, string SessionID, Entidades.Sesion Sesion)
         {
             List<Entidades.UN> listaUN = new List<Entidades.UN>();
             DB.UN db = new DB.UN(Sesion);
@@ -114,7 +114,7 @@ namespace CedServicios.RN
             listaUN = db.ListaSegunFiltros(Cuit, IdUN, DescrUN, Estado);
             int cantidadFilas = listaUN.Count;
             CantidadFilas = cantidadFilas;
-            return db.ListaPaging(IndicePagina, TamañoPagina, OrderBy, SessionID, listaUN);
+            return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaUN);
         }
     }
 }

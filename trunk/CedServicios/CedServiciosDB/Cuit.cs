@@ -93,7 +93,7 @@ namespace CedServicios.DB
             Hasta.NroSerieCertifAFIP = Convert.ToString(Desde["NroSerieCertifAFIP"]);
             Hasta.NroSerieCertifITF = Convert.ToString(Desde["NroSerieCertifITF"]);
         }
-        private void CopiarListaPaging(DataRow Desde, Entidades.Cuit Hasta)
+        private void Copiar_ListaPaging(DataRow Desde, Entidades.Cuit Hasta)
         {
             Hasta.Nro = Convert.ToString(Desde["Cuit"]);
             Hasta.RazonSocial = Convert.ToString(Desde["RazonSocial"]);
@@ -363,7 +363,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Cuit> ListaPaging(int IndicePagina, int TamañoPagina, string OrderBy, string SessionID, List<Entidades.Cuit> CuitLista)
+        public List<Entidades.Cuit> ListaPaging(int IndicePagina, string OrderBy, string SessionID, List<Entidades.Cuit> CuitLista)
         {
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("CREATE TABLE #Cuit" + SessionID + "( ");
@@ -460,7 +460,7 @@ namespace CedServicios.DB
             {
                 OrderBy = "#Cuit" + SessionID + "." + OrderBy;
             }
-            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * TamañoPagina), OrderBy, (IndicePagina * TamañoPagina));
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * sesion.Usuario.CantidadFilasXPagina), OrderBy, (IndicePagina * sesion.Usuario.CantidadFilasXPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Cuit> lista = new List<Entidades.Cuit>();
@@ -469,7 +469,7 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.Cuit cuit = new Entidades.Cuit();
-                    CopiarListaPaging(dt.Rows[i], cuit);
+                    Copiar_ListaPaging(dt.Rows[i], cuit);
                     lista.Add(cuit);
                 }
             }
