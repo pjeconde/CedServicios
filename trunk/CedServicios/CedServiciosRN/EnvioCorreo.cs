@@ -10,7 +10,7 @@ namespace CedServicios.RN
 {
     public class EnvioCorreo
     {
-        public static void ConfirmacionAltaUsuario(Entidades.Usuario Usuario)
+        public static void ConfirmacionAltaUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
             SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
             MailMessage mail = new MailMessage();
@@ -25,7 +25,7 @@ namespace CedServicios.RN
             a.Append("<br />");
             a.Append("Para confirmar el alta, haga clic en el enlace que aparece a continuación:<br />");
             a.Append("<br />");
-            string link = "http://www.cedeira.com.ar/UsuarioConfirmacion.aspx?Id=" + Encryptor.Encrypt(Usuario.Id, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
+            string link = Sesion.URLsite + "UsuarioConfirmacion.aspx?Id=" + Encryptor.Encrypt(Usuario.Id, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
             char c = (char)34;
             a.Append("<a class=" + c + "link" + c + " href=" + c + link + c + ">" + link + "</a><br />");
             a.Append("<br />");

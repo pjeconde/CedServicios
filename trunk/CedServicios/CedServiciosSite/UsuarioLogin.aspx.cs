@@ -14,6 +14,8 @@ namespace CedServicios.Site
             if (!IsPostBack)
             {
                 UsuarioTextBox.Focus();
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                sesion.URLsite = HttpContext.Current.Request.Url.AbsoluteUri.Replace("UsuarioLogin.aspx", string.Empty);
             }
         }
         protected void Page_PreRender(object sender, EventArgs e)

@@ -16,6 +16,7 @@ namespace CedServicios.Entidades
         private List<Cliente> clientesDelCuit;
         private List<string> opcionesHabilitadas;
         private DateTime fechaInicio;
+        private string uRLsite;
 
         public Sesion()
         {
@@ -119,6 +120,17 @@ namespace CedServicios.Entidades
             set
             {
                 fechaInicio = value;
+            }
+        }
+        public string URLsite
+        {
+            get
+            {
+                return uRLsite;
+            }
+            set
+            {
+                uRLsite = value;
             }
         }
     }
