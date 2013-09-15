@@ -30,6 +30,7 @@ namespace CedServicios.Site
                     CUITTextBox.Enabled = false;
                     TipoDocDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
                     DestinosCuitDropDownList.SelectedValue = new FeaEntidades.DestinosCuit.BrasilPersonaJuridica().Codigo.ToString();
+                    DatosImpositivos.FechaInicioActividades = DateTime.Today;
                     NroDocTextBox.Focus();
                 }
             }
