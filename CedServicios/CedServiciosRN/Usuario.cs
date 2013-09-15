@@ -129,7 +129,7 @@ namespace CedServicios.RN
             Usuario.WF.Estado = "PteConf";
             DB.Usuario usuario = new DB.Usuario(Sesion);
             usuario.Crear(Usuario);
-            if (EnviarCorreo) RN.EnvioCorreo.ConfirmacionAltaUsuario(Usuario);
+            if (EnviarCorreo) RN.EnvioCorreo.ConfirmacionAltaUsuario(Usuario, Sesion);
         }
         public static void Confirmar(Entidades.Usuario Usuario, bool DesencriptarUsuario, bool EnviarCorreo, Entidades.Sesion Sesion)
         {
