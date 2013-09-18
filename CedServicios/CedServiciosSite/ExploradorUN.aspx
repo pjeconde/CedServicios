@@ -118,7 +118,7 @@
                 <td align="left" style="padding-top:20px; padding-right:5px; padding-left:5px">
                     Cuit:
                 </td>
-                <td align="left">
+                <td align="left" style="padding-top:20px;">
                     <asp:Label ID="CuitLabel" runat="server"></asp:Label>
                 </td>
             </tr>  
@@ -126,7 +126,7 @@
                 <td align="left" style="padding-right:5px; padding-left:5px">
                     Id.UN:
                 </td>
-                <td align="left" style="padding-top:20px;">
+                <td align="left" style="padding-top:5px;">
                     <asp:Label ID="IdUNLabel" runat="server"></asp:Label>
                 </td>
             </tr>           

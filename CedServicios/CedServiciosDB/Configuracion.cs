@@ -66,7 +66,7 @@ namespace CedServicios.DB
             if (IdUN != String.Empty) a.AppendLine("and IdUN like '%" + IdUN + "%' ");
             if (IdUsuario != String.Empty) a.AppendLine("and IdUsuario like '%" + IdUsuario + "%' ");
             if (IdTipoPermiso != String.Empty) a.AppendLine("and Configuracion.IdTipoPermiso = '" + IdTipoPermiso + "' ");
-            if (IdItemConfig != String.Empty) a.AppendLine("and IdItemConfig like '%" + IdItemConfig + "'% ");
+            if (IdItemConfig != String.Empty) a.AppendLine("and IdItemConfig like '%" + IdItemConfig + "%' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Configuracion> lista = new List<Entidades.Configuracion>();
             if (dt.Rows.Count != 0)
@@ -116,23 +116,23 @@ namespace CedServicios.DB
             a.Append("from #Configuracion" + SessionID + " ");
             a.AppendLine("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
             a.AppendLine("DROP TABLE #Configuracion" + SessionID);
-            //if (OrderBy.Trim().ToUpper() == "ID" || OrderBy.Trim().ToUpper() == "ID DESC" || OrderBy.Trim().ToUpper() == "ID ASC")
-            //{
-            //    OrderBy = "#Configuracion" + SessionID + "." + OrderBy.Replace("Id", "IdUN");
-            //}
-            //if (OrderBy.Trim().ToUpper() == "CUIT" || OrderBy.Trim().ToUpper() == "CUIT DESC" || OrderBy.Trim().ToUpper() == "CUIT ASC")
-            //{
-            //    OrderBy = "#Configuracion" + SessionID + "." + OrderBy;
-            //}
-            //if (OrderBy.Trim().ToUpper() == "DESCR" || OrderBy.Trim().ToUpper() == "DESCR DESC" || OrderBy.Trim().ToUpper() == "DESCR ASC")
-            //{
-            //    OrderBy = "#Configuracion" + SessionID + "." + OrderBy.Replace("Descr", "DescrConfiguracion"); ;
-            //}
-            //if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
-            //{
+            if (OrderBy.Trim().ToUpper() == "IDUSUARIO" || OrderBy.Trim().ToUpper() == "IDUSUARIO DESC" || OrderBy.Trim().ToUpper() == "IDUSUARIO ASC")
+            {
                 OrderBy = "#Configuracion" + SessionID + "." + OrderBy;
-            //}
-                string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * sesion.Usuario.CantidadFilasXPagina), OrderBy, (IndicePagina * sesion.Usuario.CantidadFilasXPagina));
+            }
+            if (OrderBy.Trim().ToUpper() == "CUIT" || OrderBy.Trim().ToUpper() == "CUIT DESC" || OrderBy.Trim().ToUpper() == "CUIT ASC")
+            {
+                OrderBy = "#Configuracion" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "IDUN" || OrderBy.Trim().ToUpper() == "IDUN DESC" || OrderBy.Trim().ToUpper() == "IDUN ASC")
+            {
+                OrderBy = "#Configuracion" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "TIPOPERMISODESCR" || OrderBy.Trim().ToUpper() == "TIPOPERMISODESCR DESC" || OrderBy.Trim().ToUpper() == "TIPOPERMISODESCR ASC")
+            {
+                OrderBy = "#Configuracion" + SessionID + "." + OrderBy.Replace("TipoPermisoDescr", "DescrTipoPermiso");
+            }
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * sesion.Usuario.CantidadFilasXPagina), OrderBy, (IndicePagina * sesion.Usuario.CantidadFilasXPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Configuracion> lista = new List<Entidades.Configuracion>();

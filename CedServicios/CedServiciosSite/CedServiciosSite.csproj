@@ -97,6 +97,8 @@
     <Content Include="ClienteSeleccionar.aspx" />
     <Content Include="ComprobanteConsulta.aspx" />
     <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
+    <Content Include="ExploradorAdministracion.aspx" />
+    <Content Include="ExploradorLog.aspx" />
     <Content Include="ExploradorConfiguracion.aspx" />
     <Content Include="ExploradorArticulo.aspx" />
     <Content Include="ExploradorUN.aspx" />
@@ -168,6 +170,7 @@
     <Content Include="InstitucionalSoluciones.aspx" />
     <Content Include="InstitucionalSolucionesCedFCI.aspx" />
     <Content Include="InstitucionalSolucionesCedST.aspx" />
+    <Content Include="LogDetalleConsultaXIdLog.aspx" />
     <Content Include="Migracion.aspx" />
     <Content Include="NotificacionDeExcepcion.aspx" />
     <Content Include="PaginaEnConstruccion.aspx" />
@@ -346,6 +349,20 @@
     </Compile>
     <Compile Include="ComprobanteSeleccionOnlineInterfacturas.aspx.designer.cs">
       <DependentUpon>ComprobanteSeleccionOnlineInterfacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorAdministracion.aspx.cs">
+      <DependentUpon>ExploradorAdministracion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorAdministracion.aspx.designer.cs">
+      <DependentUpon>ExploradorAdministracion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorLog.aspx.cs">
+      <DependentUpon>ExploradorLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorLog.aspx.designer.cs">
+      <DependentUpon>ExploradorLog.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorConfiguracion.aspx.cs">
       <DependentUpon>ExploradorConfiguracion.aspx</DependentUpon>
@@ -734,6 +751,13 @@
     </Compile>
     <Compile Include="InstitucionalSolucionesCedST.aspx.designer.cs">
       <DependentUpon>InstitucionalSolucionesCedST.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogDetalleConsultaXIdLog.aspx.cs">
+      <DependentUpon>LogDetalleConsultaXIdLog.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogDetalleConsultaXIdLog.aspx.designer.cs">
+      <DependentUpon>LogDetalleConsultaXIdLog.aspx</DependentUpon>
     </Compile>
     <Compile Include="Migracion.aspx.cs">
       <DependentUpon>Migracion.aspx</DependentUpon>

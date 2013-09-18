@@ -16,6 +16,7 @@ namespace CedServicios.Entidades
         private string evento;
         private string estado;
         private string comentario;
+        private int cantRegLogDetalle;
 
         public int Id
         {
@@ -103,6 +104,17 @@ namespace CedServicios.Entidades
             get
             {
                 return comentario;
+            }
+        }
+        public int CantRegLogDetalle
+        {
+            set
+            {
+                cantRegLogDetalle = value;
+            }
+            get
+            {
+                return cantRegLogDetalle;
             }
         }
     }

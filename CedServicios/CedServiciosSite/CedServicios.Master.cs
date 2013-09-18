@@ -157,7 +157,10 @@ namespace CedServicios.Site
                     Response.Redirect("~/ExploradorConfiguracion.aspx");
                     break;
                 case "Administración Site|Explorador de Logs":
-                    Response.Redirect("~/PaginaEnConstruccion.aspx");
+                    Response.Redirect("~/ExploradorLog.aspx");
+                    break;
+                case "Administración Site|Explorador de Administración":
+                    Response.Redirect("~/ExploradorAdministracion.aspx");
                     break;
                 case "Administración|Usuario|Cambio de Contraseña":
                     Response.Redirect("~/UsuarioCambiarPassword.aspx");

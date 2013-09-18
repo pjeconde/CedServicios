@@ -10,7 +10,7 @@
 namespace CedServicios.Site {
     
     
-    public partial class ExploradorConfiguracion {
+    public partial class ExploradorLog {
         
         /// <summary>
         /// Control TituloPaginaLabel.
@@ -31,22 +31,76 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label TargetControlIDdelModalPopupExtender1;
         
         /// <summary>
-        /// Control CuitTextBox.
+        /// Control FechaDesdeTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox CuitTextBox;
+        protected global::System.Web.UI.WebControls.TextBox FechaDesdeTextBox;
         
         /// <summary>
-        /// Control IdUNTextBox.
+        /// Control FechaDesdeCalendarExtender.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox IdUNTextBox;
+        protected global::AjaxControlToolkit.CalendarExtender FechaDesdeCalendarExtender;
+        
+        /// <summary>
+        /// Control FechaDesdeImage.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image FechaDesdeImage;
+        
+        /// <summary>
+        /// Control FechaHastaTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox FechaHastaTextBox;
+        
+        /// <summary>
+        /// Control FechaHastaCalendarExtender.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender FechaHastaCalendarExtender;
+        
+        /// <summary>
+        /// Control FechaHastaImage.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Image FechaHastaImage;
+        
+        /// <summary>
+        /// Control IdLogTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox IdLogTextBox;
+        
+        /// <summary>
+        /// Control IdWFTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox IdWFTextBox;
         
         /// <summary>
         /// Control IdUsuarioTextBox.
@@ -58,22 +112,31 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox IdUsuarioTextBox;
         
         /// <summary>
-        /// Control IdTipoPermisoDropDownList.
+        /// Control EntidadTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList IdTipoPermisoDropDownList;
+        protected global::System.Web.UI.WebControls.TextBox EntidadTextBox;
         
         /// <summary>
-        /// Control IdItemConfigTextBox.
+        /// Control EventoTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox IdItemConfigTextBox;
+        protected global::System.Web.UI.WebControls.TextBox EventoTextBox;
+        
+        /// <summary>
+        /// Control EstadoDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList EstadoDropDownList;
         
         /// <summary>
         /// Control BuscarButton.
@@ -103,13 +166,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// Control ConfiguracionPagingGridView.
+        /// Control LogPagingGridView.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.WebForms.PagingGridView ConfiguracionPagingGridView;
+        protected global::CedServicios.WebForms.PagingGridView LogPagingGridView;
         
         /// <summary>
         /// Control MensajeLabel.
@@ -148,22 +211,31 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label TituloConfirmacionLabel;
         
         /// <summary>
-        /// Control CuitLabel.
+        /// Control IdLogLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CuitLabel;
+        protected global::System.Web.UI.WebControls.Label IdLogLabel;
         
         /// <summary>
-        /// Control IdUNLabel.
+        /// Control IdWFLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label IdUNLabel;
+        protected global::System.Web.UI.WebControls.Label IdWFLabel;
+        
+        /// <summary>
+        /// Control FechaLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label FechaLabel;
         
         /// <summary>
         /// Control IdUsuarioLabel.
@@ -175,40 +247,40 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label IdUsuarioLabel;
         
         /// <summary>
-        /// Control TipoPermisoIdLabel.
+        /// Control EntidadLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TipoPermisoIdLabel;
+        protected global::System.Web.UI.WebControls.Label EntidadLabel;
         
         /// <summary>
-        /// Control TipoPermisoDescrLabel.
+        /// Control EventoLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label TipoPermisoDescrLabel;
+        protected global::System.Web.UI.WebControls.Label EventoLabel;
         
         /// <summary>
-        /// Control IdItemConfigLabel.
+        /// Control ComentarioLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label IdItemConfigLabel;
+        protected global::System.Web.UI.WebControls.Label ComentarioLabel;
         
         /// <summary>
-        /// Control ValorLabel.
+        /// Control EstadoLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label ValorLabel;
+        protected global::System.Web.UI.WebControls.Label EstadoLabel;
         
         /// <summary>
         /// Control CancelarButton.

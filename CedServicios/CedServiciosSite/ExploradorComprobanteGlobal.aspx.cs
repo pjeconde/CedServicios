@@ -21,8 +21,8 @@ namespace CedServicios.Site
                 else
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
-                    FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
+                    FechaDesdeTextBox.Text = DateTime.Today.ToString("dd/MM/yyyy");
+                    FechaHastaTextBox.Text = DateTime.Today.ToString("dd/MM/yyyy");
                     //ViewState["Clientes"] = RN.Cliente.ListaPorCuit(false, true, sesion);
                     //ClienteDropDownList.DataSource = (List<Entidades.Cliente>)ViewState["Clientes"];
                     DataBind();
