@@ -315,7 +315,7 @@ namespace CedServicios.DB
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
-                a.Append("Comprobante.Cuit, Cuit.RazonSocial as CUITRazonSocial, Log.Fecha as FechaAlta, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdCliente, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz ");
+                a.Append("Comprobante.Cuit, Cuit.RazonSocial as CUITRazonSocial, convert(datetime, Log.Fecha, 120) as FechaAlta, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdCliente, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz ");
                 a.Append("from Comprobante, Cuit, Log ");
                 a.Append("where Comprobante.Cuit = Cuit.Cuit and Comprobante.IdWF = Log.IdWF and Log.Evento = 'Alta' ");
                 if (SoloVigentes)
@@ -326,23 +326,23 @@ namespace CedServicios.DB
                 {
                     if (FechaDesde != String.Empty)
                     {
-                        a.Append("and Log.Fecha >= '" + FechaDesde + "' ");
+                        a.Append("and Log.Fecha >= '" + Convert.ToDateTime(FechaDesde, new System.Globalization.CultureInfo("es-AR")).ToString("yyyyMMdd") + "' ");
                     }
                     if (FechaHasta != String.Empty)
                     {
-                        FechaHasta = Convert.ToDateTime(FechaHasta.Substring(6, 2) + "/" + FechaHasta.Substring(4, 2) + "/" + FechaHasta.Substring(0, 4)).AddDays(1).ToString("yyyyMMdd");
-                        a.Append("and Log.Fecha < '" + FechaHasta + "' ");
+                        string FechaAuxHasta = Convert.ToDateTime(FechaHasta, new System.Globalization.CultureInfo("es-AR")).AddDays(1).ToString("yyyyMMdd");
+                        a.Append("and Log.Fecha < '" + FechaAuxHasta + "' ");
                     }
                 }
                 else
                 {
                     if (FechaDesde != String.Empty)
                     {
-                        a.Append("and Comprobante.Fecha >= '" + FechaDesde + "' ");
+                        a.Append("and Comprobante.Fecha >= '" + Convert.ToDateTime(FechaDesde, new System.Globalization.CultureInfo("es-AR")).ToString("yyyyMMdd") + "' ");
                     }
                     if (FechaHasta != String.Empty)
                     {
-                        a.Append("and Comprobante.Fecha <= '" + FechaHasta + "' ");
+                        a.Append("and Comprobante.Fecha <= '" + Convert.ToDateTime(FechaHasta, new System.Globalization.CultureInfo("es-AR")).ToString("yyyyMMdd") + "' ");
                     }
                 }
                 if (CUIT != String.Empty)

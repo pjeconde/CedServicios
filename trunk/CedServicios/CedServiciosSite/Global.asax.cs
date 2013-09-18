@@ -11,6 +11,8 @@ namespace CedServicios.Site
     {
         protected void Application_Start(object sender, EventArgs e)
         {
+            Application["AplicationStart"] = DateTime.Now;
+            Application["ContadorVisitas"] = 0;
             Application["Visitantes"] = 0;
         }
         protected void Session_Start(object sender, EventArgs e)
@@ -19,7 +21,9 @@ namespace CedServicios.Site
             s.CnnStr = System.Configuration.ConfigurationManager.AppSettings["CnnStr"];
             s.OpcionesHabilitadas = RN.Sesion.OpcionesHabilitadas(s);
             Session["Sesion"] = s;
+            Session["User"] = "User " + DateTime.Now;
             Application.Lock();
+            Application["ContadorVisitas"] = (int)Application["ContadorVisitas"] + 1;
             Application["Visitantes"] = (int)Application["Visitantes"] + 1;
             Application.UnLock();
         }

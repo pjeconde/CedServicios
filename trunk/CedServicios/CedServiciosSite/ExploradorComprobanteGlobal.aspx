@@ -24,15 +24,15 @@
                 Desde
                 <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px" TabIndex="304"></asp:TextBox>
                 <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
-                    TargetControlID="FechaDesdeTextBox" Format="yyyyMMdd" PopupButtonID="FechaDesdeImage" >
+                    TargetControlID="FechaDesdeTextBox" Format="dd/MM/yyyy" PopupButtonID="FechaDesdeImage" >
                 </ajaxToolkit:CalendarExtender>
                 <asp:Image runat="server" ID="FechaDesdeImage" ImageUrl="~/Imagenes/Calendar.gif" />
                 &nbsp;&nbsp;Hasta
                 <asp:TextBox ID="FechaHastaTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px" TabIndex="304"></asp:TextBox>
                 <ajaxToolkit:CalendarExtender ID="FechaHastaCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
-                    TargetControlID="FechaHastaTextBox" Format="yyyyMMdd" PopupButtonID="FechaHastaImage" >
+                    TargetControlID="FechaHastaTextBox" Format="dd/MM/yyyy" PopupButtonID="FechaHastaImage" >
                 </ajaxToolkit:CalendarExtender>
-                <asp:Image runat="server" ID="FechaHastaImage" ImageUrl="~/Imagenes/Calendar.gif" />
+                <asp:Image runat="server" ID="FechaHastaImage" ImageUrl="~/Imagenes/Calendar.gif" />&nbsp;&nbsp;(formato: "DD/MM/YYYY")
             </td>
         </tr>
         <tr>

@@ -82,7 +82,7 @@
                                     <HeaderStyle Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="IdUN" HeaderText="IdUN" SortExpression="Id" ReadOnly="true" 
+                                <asp:BoundField DataField="IdUN" HeaderText="IdUN" SortExpression="IdUN" ReadOnly="true" 
                                     HeaderStyle-Width="80px">
                                     <HeaderStyle Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
@@ -137,15 +137,15 @@
                 <td align="left" style="padding-top:20px; padding-right:5px; padding-left:5px">
                     Cuit:
                 </td>
-                <td align="left">
+                <td align="left" style="padding-top:20px;">
                     <asp:Label ID="CuitLabel" runat="server"></asp:Label>
                 </td>
             </tr>  
             <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
+                <td align="left" style="padding-top:5px; padding-right:5px; padding-left:5px">
                     Id.UN:
                 </td>
-                <td align="left" style="padding-top:20px;">
+                <td align="left" style="padding-top:5px;">
                     <asp:Label ID="IdUNLabel" runat="server"></asp:Label>
                 </td>
             </tr>
@@ -189,14 +189,6 @@
                     <asp:Label ID="ValorLabel" runat="server"></asp:Label>
                 </td>
             </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Estado Actual:
-                </td>
-                <td align="left">
-                    <asp:Label ID="EstadoLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
             <tr>
                 <td align="left" style="padding-top:20px">
                     <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" />

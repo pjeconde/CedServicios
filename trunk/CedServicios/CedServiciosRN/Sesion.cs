@@ -48,7 +48,8 @@ namespace CedServicios.RN
                     opcionesHabilitadas.Add("Administración Site|Explorador de Artículos");
                     opcionesHabilitadas.Add("Administración Site|Explorador de Permisos");
                     opcionesHabilitadas.Add("Administración Site|Explorador de Configuraciones");
-                    //opcionesHabilitadas.Add("Administración Site|Explorador de Logs");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de Logs");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de Administración");
                     opcionesHabilitadas.Add("Administración Site|Migración de Cuentas (desde CedWeb)");
                 }
                 if (Sesion.Cuit.Nro != null)
