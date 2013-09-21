@@ -8,11 +8,43 @@ namespace CedServicios.DB
 {
     public class Permiso : db
     {
-        public Permiso(Entidades.Sesion Sesion)
-            : base(Sesion)
+        public Permiso(Entidades.Sesion Sesion) : base(Sesion)
         {
         }
 
+        public void Leer(Entidades.Permiso Permiso)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado, TipoPermiso.DescrTipoPermiso, isnull(UN.DescrUN, '') as DescrUN ");
+            a.AppendLine("from Permiso ");
+            a.AppendLine("join TipoPermiso on Permiso.IdTipoPermiso=TipoPermiso.IdTipoPermiso ");
+            a.AppendLine("left outer join UN on Permiso.IdUN=UN.IdUN  and Permiso.Cuit=UN.Cuit ");
+            a.AppendLine("where Permiso.IdUsuario='" + Permiso.Usuario.Id + "' ");
+            a.AppendLine("and Permiso.Cuit='" + Permiso.Cuit + "' ");
+            a.AppendLine("and Permiso.IdUN=" + Permiso.UN.Id.ToString() + " ");
+            a.AppendLine("and Permiso.IdTipoPermiso='" + Permiso.TipoPermiso.Id + "' ");
+            a.AppendLine("and Permiso.Estado='PteAutoriz' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            if (dt.Rows.Count != 0)
+            {
+                    Copiar_Leer(dt.Rows[0], Permiso);
+            }
+            else
+            {
+                throw new EX.Validaciones.ElementoInexistente("Permiso");
+            }
+        }
+        private void Copiar_Leer(DataRow Desde, Entidades.Permiso Hasta)
+        {
+            Hasta.UN.Descr = Convert.ToString(Desde["DescrUN"]);
+            Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
+            Hasta.FechaFinVigencia = Convert.ToDateTime(Desde["FechaFinVigencia"]);
+            Hasta.UsuarioSolicitante.Id = Convert.ToString(Desde["IdUsuarioSolicitante"]);
+            Hasta.Accion.Tipo = Convert.ToString(Desde["AccionTipo"]);
+            Hasta.Accion.Nro = Convert.ToInt32(Desde["AccionNro"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+        }
         public List<Entidades.Permiso> LeerListaPermisosPteAutoriz(Entidades.Usuario Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);
@@ -247,18 +279,22 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public void CambioEstado(Entidades.Permiso Permiso, string Evento, string EstadoHst)
+        public bool CambioEstado(Entidades.Permiso Permiso, string Evento, string EstadoHst)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @IdWF int ");
             a.AppendLine("select @IdWF=IdWF from Permiso where Estado='" + Permiso.WF.Estado + "' and IdUsuario='" + Permiso.Usuario.Id + "' and Cuit='" + Permiso.Cuit + "' and IdUN='" + Permiso.UN.Id + "' and IdTipoPermiso='" + Permiso.TipoPermiso.Id + "' and Estado='" + Permiso.WF.Estado + "' ");
             a.AppendLine("if not @IdWF is null ");
-            a.AppendLine("begin ");
-            a.AppendLine("   update Permiso set Estado='" + EstadoHst + "' where IdWF=@IdWF ");
-            a.AppendLine("   insert Log values (@IdWF, getdate(), '" + sesion.Usuario.Id + "', 'Permiso', '" + Evento + "', '" + EstadoHst + "', '') ");
-            a.AppendLine("end ");
-            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+            a.AppendLine("   begin ");
+            a.AppendLine("      update Permiso set Estado='" + EstadoHst + "' where IdWF=@IdWF ");
+            a.AppendLine("      insert Log values (@IdWF, getdate(), '" + sesion.Usuario.Id + "', 'Permiso', '" + Evento + "', '" + EstadoHst + "', '') ");
+            a.AppendLine("      select @@rowcount as CantidadFilas");
+            a.AppendLine("   end ");
+            a.AppendLine("else ");
+            a.AppendLine("   select convert(int, 0) as CantidadFilas ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
             Permiso.WF.Estado = EstadoHst;
+            return Convert.ToInt32(dt.Rows[0]["CantidadFilas"]) == 1;
         }
     }
 }

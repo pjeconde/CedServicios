@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
+using CaptchaDotNet2.Security.Cryptography;
 
 namespace CedServicios.RN
 {
@@ -36,6 +37,14 @@ namespace CedServicios.RN
                 // sb.Append(hashBytes[i].ToString("x2")); 
             }
             return sb.ToString();
+        }
+        public static string Encriptar(string texto)
+        {
+            return Encryptor.Encrypt(texto, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
+        }
+        public static string Desencriptar(string texto)
+        {
+            return Encryptor.Decrypt(texto, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
         }
     }
 }

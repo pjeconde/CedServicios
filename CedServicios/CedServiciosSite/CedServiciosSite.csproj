@@ -65,6 +65,7 @@
     <Content Include="ArticuloCrear.aspx" />
     <Content Include="ArticuloModificar.aspx" />
     <Content Include="ArticuloSeleccionar.aspx" />
+    <Content Include="Autorizacion.aspx" />
     <Content Include="Ayuda\ExploradorNovedad.aspx" />
     <Content Include="Ayuda\Novedades\eFactWebBoletinElectronico20130906.html" />
     <Content Include="Ayuda\Novedades\images20130906\image00.png" />
@@ -276,6 +277,13 @@
     </Compile>
     <Compile Include="ArticuloSeleccionar.aspx.designer.cs">
       <DependentUpon>ArticuloSeleccionar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Autorizacion.aspx.cs">
+      <DependentUpon>Autorizacion.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Autorizacion.aspx.designer.cs">
+      <DependentUpon>Autorizacion.aspx</DependentUpon>
     </Compile>
     <Compile Include="Ayuda\ExploradorNovedad.aspx.cs">
       <DependentUpon>ExploradorNovedad.aspx</DependentUpon>
@@ -1063,7 +1071,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>29164</DevelopmentServerPort>
+          <DevelopmentServerPort>4312</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
