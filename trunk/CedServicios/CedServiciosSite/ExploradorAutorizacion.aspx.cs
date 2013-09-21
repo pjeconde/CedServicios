@@ -103,10 +103,16 @@ namespace CedServicios.Site
                 switch (evento)
                 {
                     case "Autorización":
-                        RN.Permiso.Autorizar(permiso, sesion);
+                        if (RN.Permiso.Autorizar(permiso, sesion))
+                            MensajeLabel.Text = "La autorización fué registrada satisfactoriamente.";
+                        else
+                            MensajeLabel.Text = "Esta solicitud ya no está 'pendiente de autorización'";
                         break;
                     case "Rechazo":
-                        RN.Permiso.Rechazar(permiso, sesion);
+                        if (RN.Permiso.Rechazar(permiso, sesion))
+                            MensajeLabel.Text = "El rechazo fué registrado satisfactoriamente.";
+                        else
+                            MensajeLabel.Text = "Esta solicitud ya no está 'pendiente de autorización'";
                         break;
                 }
                 ActualizarGrilla();

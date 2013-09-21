@@ -36,7 +36,7 @@ namespace CedServicios.RN
                 Entidades.Permiso permiso = new Entidades.Permiso();
                 permiso.TipoPermiso.Id = "UsoCUITXUN";
                 permiso.UN = UN;
-                RN.EnvioCorreo.SolicitudAutorizacion(RN.Permiso.DescrPermiso(permiso), Sesion.Usuario, usuariosAutorizadores);
+                RN.EnvioCorreo.SolicitudAutorizacion(permiso, Sesion.Usuario, usuariosAutorizadores, Sesion);
             }
         }
         public static void Modificar(Entidades.UN UN, Entidades.Sesion Sesion)

@@ -82,7 +82,10 @@ namespace CedServicios.Site
                 Entidades.Permiso permiso = (Entidades.Permiso)ViewState["Permiso"];
                 string idEstadoHst = (permiso.WF.Estado == "Vigente" ? "DeBaja" : "Vigente");
                 string idEvento = (idEstadoHst == "Vigente" ? "AnulBaja" : "Baja");
-                RN.Permiso.CambiarEstado(permiso, idEvento, idEstadoHst, sesion);
+                if (RN.Permiso.CambiarEstado(permiso, idEvento, idEstadoHst, sesion))
+                    MensajeLabel.Text = "El cambio de estado se registró satisfactoriamente.";
+                else
+                    MensajeLabel.Text = "Esta acción no es posible porque la solicitud ya ha cambiado de estado.";
                 BuscarButton_Click(BuscarButton, new EventArgs());
                 Funciones.PersonalizarControlesMaster(Master, true, sesion);
             }

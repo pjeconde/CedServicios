@@ -25,7 +25,7 @@ namespace CedServicios.RN
             a.Append("<br />");
             a.Append("Para confirmar el alta, haga clic en el enlace que aparece a continuación:<br />");
             a.Append("<br />");
-            string link = Sesion.URLsite + "UsuarioConfirmacion.aspx?Id=" + Encryptor.Encrypt(Usuario.Id, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp"));
+            string link = Sesion.URLsite + "UsuarioConfirmacion.aspx?Id=" + RN.Funciones.Encriptar(Usuario.Id);
             char c = (char)34;
             a.Append("<a class=" + c + "link" + c + " href=" + c + link + c + ">" + link + "</a><br />");
             a.Append("<br />");
@@ -75,41 +75,47 @@ namespace CedServicios.RN
             smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
         }
-        public static void SolicitudAutorizacion(string DescrPermiso, Entidades.Usuario UsuarioSolicitante, List<Entidades.Usuario> Autorizadores)
+        public static void SolicitudAutorizacion(Entidades.Permiso Permiso, Entidades.Usuario UsuarioSolicitante, List<Entidades.Usuario> Autorizadores, Entidades.Sesion Sesion)
         {
-            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
-            MailMessage mail = new MailMessage();
-            mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
-            string listaAutorizadores = String.Empty;
             for (int i = 0; i < Autorizadores.Count; i++)
             {
-                listaAutorizadores += Autorizadores[i].Email;
-                if (i != Autorizadores.Count - 1) listaAutorizadores += "; ";
+                SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
+                MailMessage mail = new MailMessage();
+                mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
+                mail.To.Add(new MailAddress(Autorizadores[i].Email));
+                mail.CC.Add(new MailAddress(UsuarioSolicitante.Email));
+                mail.Subject = "Solicitud de autorización";
+                mail.IsBodyHtml = true;
+                StringBuilder a = new StringBuilder();
+                a.Append("Estimado/a usuario/a:<br />");
+                a.Append("<br />");
+                a.Append("Se le está solicitando la siguiente autorización:<br />");
+                a.Append("<br />");
+                a.Append("<hr>");
+                a.Append("Permiso: <b>" + RN.Permiso.DescrPermiso(Permiso) + "</b><br />");
+                a.Append("Usuario solicitante: <b>" + UsuarioSolicitante.Nombre + "</b><br />");
+                a.Append("<hr>");
+                a.Append("<br />");
+                a.Append("Para responder a esta solicitud, haga clic en el enlace que aparece a continuación:<br />");
+                a.Append("<br />");
+                string delim = "<<<>>>";
+                string parametros = UsuarioSolicitante.Id + delim + Permiso.Cuit + delim + Permiso.IdUN + delim + Permiso.TipoPermiso.Id + delim + Autorizadores[i].Id;
+                string link = Sesion.URLsite + "Autorizacion.aspx?" + RN.Funciones.Encriptar(parametros);
+                char c = (char)34;
+                a.Append("<a class=" + c + "link" + c + " href=" + c + link + c + ">" + link + "</a><br />");
+                a.Append("<br />");
+                a.Append("<br />");
+                a.Append("Saludos.<br />");
+                a.Append("<br />");
+                a.Append("<b>Cedeira Software Factory</b><br />");
+                a.Append("<br />");
+                a.Append("<br />");
+                a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
+                a.Append("<br />");
+                mail.Body = a.ToString();
+                smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+                smtpClient.Send(mail);
             }
-            mail.To.Add(listaAutorizadores);
-            mail.CC.Add(new MailAddress(UsuarioSolicitante.Email));
-            mail.Subject = "Solicitud de autorización";
-            mail.IsBodyHtml = true;
-            StringBuilder a = new StringBuilder();
-            a.Append("Estimado/a usuario/a:<br />");
-            a.Append("<br />");
-            a.Append("Se le está solicitando la siguiente autorización:<br />");
-            a.Append("<br />");
-            a.Append("<hr>");
-            a.Append("Permiso: <b>" + DescrPermiso + "</b><br />");
-            a.Append("Usuario solicitante: <b>" + UsuarioSolicitante.Nombre + "</b><br />");
-            a.Append("<hr>");
-            a.Append("<br />");
-            a.Append("Saludos.<br />");
-            a.Append("<br />");
-            a.Append("<b>Cedeira Software Factory</b><br />");
-            a.Append("<br />");
-            a.Append("<br />");
-            a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
-            a.Append("<br />");
-            mail.Body = a.ToString();
-            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
-            smtpClient.Send(mail);
         }
         public static void RespuestaAutorizacion(Entidades.Permiso Permiso, Entidades.Usuario UsuarioAutorizador)
         {

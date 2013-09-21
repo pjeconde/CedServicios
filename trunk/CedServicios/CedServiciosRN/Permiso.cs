@@ -7,6 +7,11 @@ namespace CedServicios.RN
 {
     public class Permiso
     {
+        public static void Leer(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
+        {
+            CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
+            db.Leer(Permiso);
+        }
         public static List<Entidades.Permiso> LeerListaPermisosPorUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
@@ -64,7 +69,7 @@ namespace CedServicios.RN
                 ReferenciaAAprobadores += usuariosAutorizadores[i].Nombre;
                 if (i + 1 < usuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
             }
-            RN.EnvioCorreo.SolicitudAutorizacion(DescrPermiso(permiso), Sesion.Usuario, usuariosAutorizadores);
+            RN.EnvioCorreo.SolicitudAutorizacion(permiso, Sesion.Usuario, usuariosAutorizadores, Sesion);
         }
         public static void SolicitarPermisoParaUsuario(Entidades.Cuit Cuit, Entidades.UN UN, out string ReferenciaAAprobadores, Entidades.Sesion Sesion)
         {
@@ -94,7 +99,7 @@ namespace CedServicios.RN
                 ReferenciaAAprobadores += usuariosAutorizadores[i].Nombre;
                 if (i + 1 < usuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
             }
-            RN.EnvioCorreo.SolicitudAutorizacion(DescrPermiso(permiso), Sesion.Usuario, usuariosAutorizadores);
+            RN.EnvioCorreo.SolicitudAutorizacion(permiso, Sesion.Usuario, usuariosAutorizadores, Sesion);
         }
         public static string PermisoAdminUNParaUsuarioAprobadoHandler(Entidades.UN UN, Entidades.Sesion Sesion)
         {
@@ -155,7 +160,7 @@ namespace CedServicios.RN
                     ReferenciaAAprobadores += usuariosAutorizadores[i].Nombre;
                     if (i + 1 < usuariosAutorizadores.Count) ReferenciaAAprobadores += " / ";
                 }
-                RN.EnvioCorreo.SolicitudAutorizacion(DescrPermiso(permiso), Sesion.Usuario, usuariosAutorizadores);
+                RN.EnvioCorreo.SolicitudAutorizacion(permiso, Sesion.Usuario, usuariosAutorizadores, Sesion);
             }
         }
         public static string PermisoUsoCUITxUNHandler(Entidades.UN UN, out List<Entidades.Usuario> UsuariosAutorizadores, out string ReferenciaAAprobadores, out string EstadoPermisoUsoCUITxUN, Entidades.Sesion Sesion)
@@ -191,22 +196,24 @@ namespace CedServicios.RN
             EstadoPermisoUsoCUITxUN = permiso.WF.Estado;
             return db.AltaHandler(permiso, false, false, true);
         }
-        public static void Autorizar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
+        public static bool Autorizar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
         {
             DB.Permiso db = new DB.Permiso(Sesion);
-            db.CambioEstado(Permiso, "Autoriz", "Vigente");
-            RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario);
+            bool resultado = db.CambioEstado(Permiso, "Autoriz", "Vigente");
+            if (resultado) RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario);
+            return resultado;
         }
-        public static void Rechazar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
+        public static bool Rechazar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
         {
             DB.Permiso db = new DB.Permiso(Sesion);
-            db.CambioEstado(Permiso, "Rech", "Rech");
-            RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario);
+            bool resultado = db.CambioEstado(Permiso, "Rech", "Rech");
+            if (resultado) RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario);
+            return resultado;
         }
-        public static void CambiarEstado(Entidades.Permiso Permiso, string Evento, string IdEstado, Entidades.Sesion Sesion)
+        public static bool CambiarEstado(Entidades.Permiso Permiso, string Evento, string IdEstado, Entidades.Sesion Sesion)
         {
             DB.Permiso db = new DB.Permiso(Sesion);
-            db.CambioEstado(Permiso, Evento, IdEstado);
+            return db.CambioEstado(Permiso, Evento, IdEstado);
         }
         public static string DescrPermiso(Entidades.Permiso Permiso)
         {
