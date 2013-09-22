@@ -87,7 +87,7 @@ namespace CedServicios.RN
                 mail.Subject = "Solicitud de autorización";
                 mail.IsBodyHtml = true;
                 StringBuilder a = new StringBuilder();
-                a.Append("Estimado/a usuario/a:<br />");
+                a.Append("Estimado/a " + Autorizadores[i].Nombre + ":<br />");
                 a.Append("<br />");
                 a.Append("Se le está solicitando la siguiente autorización:<br />");
                 a.Append("<br />");
