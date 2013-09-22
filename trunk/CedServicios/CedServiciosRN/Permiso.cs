@@ -148,6 +148,8 @@ namespace CedServicios.RN
             if (esAdminUNdelaUN.Count != 0)
             {
                 permiso.WF.Estado = "Vigente";
+                CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
+                db.Alta(permiso);
             }
             else
             {
@@ -227,10 +229,10 @@ namespace CedServicios.RN
                     descripcion = "Administrador de la Unidad de Negocio '" + Permiso.UN.Descr + "' del CUIT " + Permiso.Cuit;
                     break;
                 case "UsoCUITXUN":
-                    descripcion = "Relación entre la nueva Unidad de Negocio '" + Permiso.UN.Descr + "' y el CUIT " + Permiso.UN.Cuit;
+                    descripcion = "Relación entre la nueva Unidad de Negocio '" + Permiso.UN.Descr + "' y el CUIT " + Permiso.Cuit;
                     break;
                 default:
-                    descripcion = "Operador del servicio '" + Permiso.TipoPermiso.Descr.Replace("Operador servicio ", String.Empty) + "' de la Unidad de Negocio '" + Permiso.UN.Descr + "' del CUIT " + Permiso.UN.Cuit;
+                    descripcion = "Operador del servicio '" + Permiso.TipoPermiso.Descr.Replace("Operador servicio ", String.Empty) + "' de la Unidad de Negocio '" + Permiso.UN.Descr + "' del CUIT " + Permiso.Cuit;
                     break;
             }
             return descripcion;

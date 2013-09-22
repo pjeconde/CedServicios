@@ -52,7 +52,10 @@ namespace CedServicios.Site
                     SolicitarButton.Enabled = false;
                     SalirButton.Text = "Salir";
                     Funciones.PersonalizarControlesMaster(Master, true, sesion);
-                    MensajeLabel.Text = "El permiso fue enviado para su aprobación.<br />Autorizador(es): " + referenciaAAprobadores;
+                    if (referenciaAAprobadores != String.Empty)
+                        MensajeLabel.Text = "El permiso fue enviado para su aprobación.<br />Autorizador(es): " + referenciaAAprobadores;
+                    else
+                        MensajeLabel.Text = "El permiso fue registrado satisfactoriamente.";
                 }
             }
             catch (Exception ex)
