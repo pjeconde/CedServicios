@@ -672,7 +672,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
                                 lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
                                 CompletarUI(lc, e);
-                                ClientScript.RegisterClientScriptBlock(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>");
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>", false);
                             }
                             catch (InvalidOperationException)
                             {
@@ -688,14 +688,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         catch
                         {
-                            ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>", false);
                         }
                     }
                     else
                     {
                         //MensajePopupLabel.Text = "Debe seleccionar un archivo";
                         //PruebaPopupButton_Click(PruebaPopupButton, new EventArgs());
-                        ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe seleccionar un archivo');</script>");
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe seleccionar un archivo');</script>", false);
                     }
                     VerificarMetodoNumeracionLote();
                 }
@@ -718,7 +718,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			cArray[0] = c;
 			lc.comprobante = cArray;
 			CompletarUI(lc, e);
-			ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml');</script>");
+            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml');</script>", false);
 		}
 
 		private void LeerFormatoLoteIBK(EventArgs e, FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
@@ -736,7 +736,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			}
 			catch
 			{
-				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>");
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>", false);
 			}
 		}
 

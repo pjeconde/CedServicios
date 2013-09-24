@@ -102,6 +102,22 @@ namespace CedServicios.DB
                 Copiar(dt.Rows[0], cliente);
             }
         }
+        public Entidades.Cliente Leer(int IdWF)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("select ");
+            a.Append("Cliente.Cuit, Cliente.IdTipoDoc, Cliente.NroDoc, Cliente.IdCliente, Cliente.DesambiguacionCuitPais, Cliente.RazonSocial, Cliente.DescrTipoDoc, Cliente.Calle, Cliente.Nro, Cliente.Piso, Cliente.Depto, Cliente.Sector, Cliente.Torre, Cliente.Manzana, Cliente.Localidad, Cliente.IdProvincia, Cliente.DescrProvincia, Cliente.CodPost, Cliente.NombreContacto, Cliente.EmailContacto, Cliente.TelefonoContacto, Cliente.IdCondIVA, Cliente.DescrCondIVA, Cliente.NroIngBrutos, Cliente.IdCondIngBrutos, Cliente.DescrCondIngBrutos, Cliente.GLN, Cliente.FechaInicioActividades, Cliente.CodigoInterno, Cliente.EmailAvisoVisualizacion, Cliente.PasswordAvisoVisualizacion, Cliente.IdWF, Cliente.Estado, Cliente.UltActualiz ");
+            a.Append("from Cliente ");
+            a.Append("where Cliente.IdWF = " + IdWF);
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            Entidades.Cliente cliente = new Entidades.Cliente();
+            if (dt.Rows.Count != 0)
+            {
+                Copiar(dt.Rows[0], cliente);
+            }
+            return cliente;
+        }
+
         public void Crear(Entidades.Cliente Cliente)
         {
             StringBuilder a = new StringBuilder(string.Empty);

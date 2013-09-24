@@ -111,6 +111,12 @@
                                         <asp:LinkButton ID="LogDetalle" runat="server" CausesValidation="false" CommandName="LogDetalle" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ToolTip="<%# ((GridViewRow) Container).RowIndex %>" Text="LogDetalle" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:TemplateField ItemStyle-VerticalAlign="Top" ItemStyle-BorderStyle="None">
+                                    <HeaderStyle Wrap="False" />
+                                    <ItemTemplate>
+                                        <asp:LinkButton ID="VerEntidad" runat="server" CausesValidation="false" CommandName="VerEntidad" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ToolTip="<%# ((GridViewRow) Container).RowIndex %>" Text="VerEntidad" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                                 <asp:BoundField DataField="Id" HeaderText="IdLog" SortExpression="Id" HeaderStyle-Width="80px" ReadOnly="true">
                                     <HeaderStyle Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />

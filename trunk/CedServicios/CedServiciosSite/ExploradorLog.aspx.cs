@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Drawing;
+using System.IO;
+using System.Text;
 
 namespace CedServicios.Site
 {
@@ -86,7 +88,7 @@ namespace CedServicios.Site
                 e.Row.Attributes["onmouseout"] = "this.style.textDecoration='none';";
 
                 //Color por estado distinto a Vigente
-                if (e.Row.Cells[8].Text != "Vigente")
+                if (e.Row.Cells[9].Text != "Vigente")
                 {
                     e.Row.ForeColor = Color.Red;
                 }
@@ -138,6 +140,54 @@ namespace CedServicios.Site
                     Session["Log"] = Log;
                     Response.Redirect("~/LogDetalleConsultaXIdLog.aspx", false);
                     break;
+                case "VerEntidad":
+                    switch (Log.Entidad)
+                    {
+                        case "Cliente":
+                            Entidades.Cliente cliente =new Entidades.Cliente();
+                            string xml = RN.Cliente.LeerYSerializar(Log.IdWF, (Entidades.Sesion)Session["Sesion"]);
+                            DescargarXMLEntidad(xml);
+                            break;
+                        default:
+                            MensajeLabel.Text = "Esta entidad no está definida aún para la consulta. (Por ahora solo 'Cliente')";
+                            break;
+                    }
+                    break;
+            }
+        }
+
+        private void DescargarXMLEntidad(string Xml)
+        {
+            string textoXML = Xml;
+            textoXML = textoXML.Replace("&lt;", "<");
+            textoXML = textoXML.Replace("&gt;", ">");
+
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            string filename = sesion.Usuario.Id + ".xml";
+            string dlDir = @"Temp/";
+            string path = Server.MapPath(dlDir + filename);
+            //Crear archivo XML en el temporal
+            using (FileStream fs = File.Create(path))
+            {
+                Encoding enc = Encoding.GetEncoding("utf-16");
+                Byte[] info = enc.GetBytes(textoXML);
+                // Add some information to the file.
+                fs.Write(info, 0, info.Length);
+            }
+            //Leer y mandar al explorador
+            FileInfo toDownload = new FileInfo(path);
+            if (toDownload.Exists)
+            {
+                Response.Clear();
+                Response.AddHeader("Content-Disposition", "attachment; filename=" + toDownload.Name);
+                Response.AddHeader("Content-Length", toDownload.Length.ToString());
+                Response.ContentType = "application/octet-stream";
+                Response.WriteFile(dlDir + filename);
+                Response.End();
+            }
+            else
+            {
+                MensajeLabel.Text = "No se puede obtener la información. ";
             }
         }
 

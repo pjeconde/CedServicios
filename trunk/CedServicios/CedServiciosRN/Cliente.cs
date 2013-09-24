@@ -57,6 +57,19 @@ namespace CedServicios.RN
             DB.Cliente comprador = new DB.Cliente(Sesion);
             comprador.Leer(cliente);
         }
+        //public static Entidades.Cliente Leer(int IdWF, Entidades.Sesion Sesion)
+        //{
+        //    DB.Cliente comprador = new DB.Cliente(Sesion);
+        //    return comprador.Leer(IdWF);
+        //}
+        public static string LeerYSerializar(int IdWF, Entidades.Sesion Sesion)
+        {
+            DB.Cliente comprador = new DB.Cliente(Sesion);
+            Entidades.Cliente cliente = new Entidades.Cliente();
+            cliente = comprador.Leer(IdWF);
+            return DB.Funciones.ObjetoSerializado(cliente);
+        }
+        
         public static void Crear(Entidades.Cliente Cliente, Entidades.Sesion Sesion)
         {
             DB.Cliente db = new DB.Cliente(Sesion);
