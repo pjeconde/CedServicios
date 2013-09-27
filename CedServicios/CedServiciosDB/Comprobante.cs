@@ -291,7 +291,14 @@ namespace CedServicios.DB
             comprobante.RazonSocial = Lote.comprobante[0].cabecera.informacion_comprador.denominacion;
             comprobante.Detalle = Lote.comprobante[0].cabecera.informacion_comprobante.Observacion;
             comprobante.Fecha = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
-            comprobante.FechaVto = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
+            if (Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
+            {
+                comprobante.FechaVto = Convert.ToDateTime("31/12/9999");
+            }
+            else
+            {
+                comprobante.FechaVto = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
+            }
             comprobante.Moneda = Lote.comprobante[0].resumen.codigo_moneda;
             if (Lote.comprobante[0].resumen.importes_moneda_origen != null)
             {
