@@ -17,6 +17,7 @@ namespace CedServicios.Entidades
         private List<string> opcionesHabilitadas;
         private DateTime fechaInicio;
         private string uRLsite;
+        private string administradoresSiteEmail;
 
         public Sesion()
         {
@@ -131,6 +132,17 @@ namespace CedServicios.Entidades
             set
             {
                 uRLsite = value;
+            }
+        }
+        public string AdministradoresSiteEmail
+        {
+            get
+            {
+                return administradoresSiteEmail;
+            }
+            set
+            {
+                administradoresSiteEmail = value;
             }
         }
     }

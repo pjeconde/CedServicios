@@ -13,10 +13,13 @@ namespace CedServicios.Site
         {
             //ModalPopupExtender1.Show();
         }
-
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             //ModalPopupExtender1.Hide();
+        }
+        protected void PruebaButton_Click(object sender, EventArgs e)
+        {
+            RN.EnvioCorreo.ReporteActividad(DateTime.Now, DateTime.Now, (Entidades.Sesion)Session["Sesion"]);
         }
     }
 }
