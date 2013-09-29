@@ -15,6 +15,39 @@ namespace CedServicios.DB
         {
             Ejecutar(CrearHandler(Configuracion), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void Leer(Entidades.Configuracion Configuracion)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("select IdUsuario, Cuit, IdUN, IdTipoPermiso, IdItemConfig, Valor from Configuracion ");
+            a.AppendLine("where IdUsuario='" + Configuracion.IdUsuario + "' ");
+            a.AppendLine("and Cuit='" + Configuracion.Cuit + "' ");
+            a.AppendLine("and IdUN=" + Configuracion.IdUN + " ");
+            a.AppendLine("and IdTipoPermiso='" + Configuracion.TipoPermisoId + "' ");
+            a.AppendLine("and IdItemConfig='" + Configuracion.IdItemConfig + "' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
+            if (dt.Rows.Count != 0) CopiarLeer(dt.Rows[0], Configuracion);
+        }
+        private void CopiarLeer(DataRow Desde, Entidades.Configuracion Hasta)
+        {
+            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
+            Hasta.IdUN = Convert.ToInt32(Desde["IdUN"]);
+            Hasta.IdUsuario = Convert.ToString(Desde["IdUsuario"]);
+            Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
+            Hasta.IdItemConfig = Convert.ToString(Desde["IdItemConfig"]);
+            Hasta.Valor = Convert.ToString(Desde["Valor"]);
+        }
+        public void ModificarValor(Entidades.Configuracion Configuracion)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("update Configuracion ");
+            a.AppendLine("set Valor='" + Configuracion.Valor + "' ");
+            a.AppendLine("where IdUsuario='" + Configuracion.IdUsuario + "' ");
+            a.AppendLine("and Cuit='" + Configuracion.Cuit + "' ");
+            a.AppendLine("and IdUN=" + Configuracion.IdUN + " ");
+            a.AppendLine("and IdTipoPermiso='" + Configuracion.TipoPermisoId + "' ");
+            a.AppendLine("and IdItemConfig='" + Configuracion.IdItemConfig + "' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
         public void CrearFechaOKeFactTyC(Entidades.Usuario Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);

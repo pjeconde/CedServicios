@@ -19,6 +19,11 @@ namespace CedServicios.Entidades
         {
             tipoPermiso = new TipoPermiso();
         }
+        public Configuracion(string IdItemConfig)
+        {
+            tipoPermiso = new TipoPermiso();
+            idItemConfig = IdItemConfig;
+        }
 
         public string IdUsuario
         {

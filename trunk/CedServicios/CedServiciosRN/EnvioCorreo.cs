@@ -209,5 +209,64 @@ namespace CedServicios.RN
             smtpClient2Contacto.Credentials = new NetworkCredential("contacto@cedeira.com.ar", "cedeira123");
             smtpClient2Contacto.Send(mail2Contacto);
         }
+        public static void ReporteActividad(DateTime FechaDsd, DateTime FechaHst, Entidades.Sesion Sesion)
+        {
+            DB.ReporteActividad dbReporteActividad = new DB.ReporteActividad(Sesion);
+            List<Entidades.ReporteActividad> estadistica = dbReporteActividad.Estadistica(FechaDsd, FechaHst);
+
+            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
+            mail.To.Add(new MailAddress(Sesion.AdministradoresSiteEmail));
+            mail.Subject = "Reporte de actividad";
+            mail.IsBodyHtml = true;
+            StringBuilder a = new StringBuilder();
+            a.Append("Periodo: del " + FechaDsd.ToString("dd/MM/yyyy") + " al " + FechaHst.ToString("dd/MM/yyyy") + ".");
+            a.Append("<br />");
+            a.Append("<br />");
+            a.Append("<table border=1 cellspacing=0 cellpadding=2>");
+            a.Append("    <tr style=\"font-weight:bold\" align=\"center\">");
+            a.Append("        <td>");
+            a.Append("            Entidad");
+            a.Append("        </td>");
+            a.Append("        <td>");
+            a.Append("            Evento");
+            a.Append("        </td>");
+            a.Append("        <td>");
+            a.Append("            Estado");
+            a.Append("        </td>");
+            a.Append("        <td>");
+            a.Append("            Cantidad");
+            a.Append("        </td>");
+            a.Append("    </tr>");
+            for (int i = 0; i < estadistica.Count; i++)
+            {
+                a.Append("    <tr>");
+                a.Append("        <td>");
+                a.Append("            ");
+                if (i == 0 || estadistica[i].DescrEntidad != estadistica[i - 1].DescrEntidad)
+                {
+                    a.Append(estadistica[i].DescrEntidad);
+                }
+                a.Append("        </td>");
+                a.Append("        <td>");
+                a.Append("            " + estadistica[i].Evento);
+                a.Append("        </td>");
+                a.Append("        <td>");
+                a.Append("            " + estadistica[i].Estado);
+                a.Append("        </td>");
+                a.Append("        <td align=\"right\">");
+                a.Append("            " + estadistica[i].Cantidad.ToString());
+                a.Append("        </td>");
+                a.Append("    </tr>");
+            }
+            a.Append("</table>");
+            a.Append("<br />");
+            a.Append("<b>Cedeira Software Factory</b><br />");
+            a.Append("<br />");
+            mail.Body = a.ToString();
+            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+            smtpClient.Send(mail);
+        }
     }
 }

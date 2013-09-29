@@ -19,6 +19,7 @@ namespace CedServicios.Site
         {
             Entidades.Sesion s = new Entidades.Sesion();
             s.CnnStr = System.Configuration.ConfigurationManager.AppSettings["CnnStr"];
+            s.AdministradoresSiteEmail = System.Configuration.ConfigurationManager.AppSettings["Mantenedores"];
             s.OpcionesHabilitadas = RN.Sesion.OpcionesHabilitadas(s);
             Session["Sesion"] = s;
             Session["User"] = "User " + DateTime.Now;

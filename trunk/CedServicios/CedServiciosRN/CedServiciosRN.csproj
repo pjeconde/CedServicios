@@ -69,6 +69,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
     <Compile Include="PuntoVta.cs" />
+    <Compile Include="ReporteActividad.cs" />
     <Compile Include="Sesion.cs" />
     <Compile Include="TipoPermiso.cs" />
     <Compile Include="TipoPuntoVta.cs" />
