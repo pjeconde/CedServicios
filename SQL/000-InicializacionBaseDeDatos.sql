@@ -324,8 +324,9 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-insert Configuracion values ('', '', '', '', 'UltimoIdWF', '0')
-insert Configuracion values ('', '', '', '', 'UltimoAccionNro', '0')
+insert Configuracion values ('', '', 0, '', 'UltimoIdWF', '0')
+insert Configuracion values ('', '', 0, '', 'UltimoAccionNro', '0')
+insert Configuracion values ('', '', 0, '', 'UltimoMesReporteActividad', '')
 
 SET ANSI_NULLS ON
 GO
@@ -551,3 +552,38 @@ REFERENCES [dbo].[DestinoComprobante] ([IdDestinoComprobante])
 GO
 ALTER TABLE [dbo].[Comprobante] CHECK CONSTRAINT [FK_Comprobante_DestinoComprobante]
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Entidad](
+	[IdEntidad] [varchar](15) NOT NULL,
+	[DescrEntidad] [varchar](50) NOT NULL,
+	[OrdenReporteActividad] [int] NOT NULL,
+ CONSTRAINT [PK_Table_Entidad] PRIMARY KEY CLUSTERED 
+(
+	[IdEntidad] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+insert Entidad values ('Comprobante', 'Comprobante', 10)
+go
+insert Entidad values ('Usuario', 'Usuario', 20)
+go
+insert Entidad values ('CUIT', 'CUIT', 30)
+go
+insert Entidad values ('UN', 'Unidad de Negocio', 40)
+go
+insert Entidad values ('PuntoVta', 'Punto de Venta', 50)
+go
+insert Entidad values ('Cliente', 'Cliente', 60)
+go
+insert Entidad values ('Articulo', 'Articulo', 70)
+go
+insert Entidad values ('Permiso', 'Permiso', 80)
+go
