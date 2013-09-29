@@ -2,7 +2,7 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content2" Visible="true" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <asp:Button ID="PruebaButton" runat="server" Text="Prueba" onclick="PruebaButton_Click"/>
+    <asp:Button ID="PruebaButton" runat="server" Text="Prueba" onclick="PruebaButton_Click" Visible="false"/>
     <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
     <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
     PopupControlID="MensajePopup"
