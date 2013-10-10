@@ -27,6 +27,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -45,11 +46,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-insert Medio values ('Internet', 'Internet')
-insert Medio values ('Interfacturas', 'Recomendado por Interfacturas')
-insert Medio values ('Conocido', 'Recomendado por un conocido')
-insert Medio values ('Mail', 'Mail')
-insert Medio values ('Merc.Libre', 'Mercado Libre')
 
 SET ANSI_NULLS ON
 GO
@@ -94,12 +90,7 @@ CREATE TABLE [dbo].[Cuit](
 GO
 SET ANSI_PADDING OFF
 GO
-ALTER TABLE [dbo].[Cuit]  WITH CHECK ADD  CONSTRAINT [FK_Cuit_Medio]
-FOREIGN KEY([IdMedio])
-REFERENCES [dbo].[Medio] ([IdMedio])
-GO
-ALTER TABLE [dbo].[Cuit] CHECK CONSTRAINT [FK_Cuit_Medio]
-GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -123,11 +114,7 @@ CREATE TABLE [dbo].[UN](
 GO
 SET ANSI_PADDING OFF
 GO
-ALTER TABLE [dbo].[UN]  WITH CHECK ADD  CONSTRAINT [FK_UN_Cuit] FOREIGN KEY([Cuit])
-REFERENCES [dbo].[Cuit] ([Cuit])
-GO
-ALTER TABLE [dbo].[UN] CHECK CONSTRAINT [FK_UN_Cuit]
-GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -146,10 +133,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-insert TipoPuntoVta values ('BonoFiscal')
-insert TipoPuntoVta values ('Exportacion')
-insert TipoPuntoVta values ('Comun')
-insert TipoPuntoVta values ('RG2904')
 
 SET ANSI_NULLS ON
 GO
@@ -169,10 +152,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-insert MetodoGeneracionNumeracionLote values ('Ninguno', 'Ninguno (el número de lote se ingresa manualmente)')
-insert MetodoGeneracionNumeracionLote values ('Autonumerador', 'Autonumerador (se calcula a partir del "Ultimo nro. de lote")')
-insert MetodoGeneracionNumeracionLote values ('TimeStamp1', 'TimeStamp #1 (Año-Mes-Día-Hora-Minutos-Segundos)')
-insert MetodoGeneracionNumeracionLote values ('TimeStamp2', 'TimeStamp #2 (días transcurridos desde el 01/01/2013-Hora-Minutos-Segundos-Milésimas de segundos)')
 
 SET ANSI_NULLS ON
 GO
@@ -222,21 +201,7 @@ CREATE TABLE [dbo].[PuntoVta](
 GO
 SET ANSI_PADDING OFF
 GO
-ALTER TABLE [dbo].[PuntoVta]  WITH CHECK ADD  CONSTRAINT [FK_PuntoVta_Cuit] FOREIGN KEY([Cuit])
-REFERENCES [dbo].[Cuit] ([Cuit])
-GO
-ALTER TABLE [dbo].[PuntoVta] CHECK CONSTRAINT [FK_PuntoVta_Cuit]
-GO
-ALTER TABLE [dbo].[PuntoVta]  WITH CHECK ADD  CONSTRAINT [FK_PuntoVta_TipoPuntoVta] FOREIGN KEY([IdTipoPuntoVta])
-REFERENCES [dbo].[TipoPuntoVta] ([IdTipoPuntoVta])
-GO
-ALTER TABLE [dbo].[PuntoVta] CHECK CONSTRAINT [FK_PuntoVta_TipoPuntoVta]
-GO
-ALTER TABLE [dbo].[PuntoVta]  WITH CHECK ADD  CONSTRAINT [FK_PuntoVta_MetodoGeneracionNumeracionLote] FOREIGN KEY([IdMetodoGeneracionNumeracionLote])
-REFERENCES [dbo].[MetodoGeneracionNumeracionLote] ([IdMetodoGeneracionNumeracionLote])
-GO
-ALTER TABLE [dbo].[PuntoVta] CHECK CONSTRAINT [FK_PuntoVta_MetodoGeneracionNumeracionLote]
-GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -256,13 +221,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-insert TipoPermiso values ('AdminCUIT', 'Administrador del CUIT')
-insert TipoPermiso values ('AdminSITE', 'Administrador del site')
-insert TipoPermiso values ('AdminUN', 'Administrador de la UN')
-insert TipoPermiso values ('UsoCUITxUN', 'Habilitación relación UN-CUIT')
-insert TipoPermiso values ('eFact', 'Operador servicio eFact')
-insert TipoPermiso values ('eFactArticulos', 'Operador servicio eFactArticulos')
-insert TipoPermiso values ('eFactITFonline', 'Operador servicio eFactITFonline')
 
 SET ANSI_NULLS ON
 GO
@@ -292,11 +250,7 @@ CREATE TABLE [dbo].[Permiso](
 GO
 SET ANSI_PADDING OFF
 GO
-ALTER TABLE [dbo].[Permiso]  WITH CHECK ADD  CONSTRAINT [FK_Permiso_TipoPermiso] FOREIGN KEY([IdTipoPermiso])
-REFERENCES [dbo].[TipoPermiso] ([IdTipoPermiso])
-GO
-ALTER TABLE [dbo].[Permiso] CHECK CONSTRAINT [FK_Permiso_TipoPermiso]
-GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -324,9 +278,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-insert Configuracion values ('', '', 0, '', 'UltimoIdWF', '0')
-insert Configuracion values ('', '', 0, '', 'UltimoAccionNro', '0')
-insert Configuracion values ('', '', 0, '', 'UltimoMesReporteActividad', '')
 
 SET ANSI_NULLS ON
 GO
@@ -352,6 +303,7 @@ GO
 SET ANSI_PADDING OFF
 GO
 
+
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -371,11 +323,7 @@ CREATE TABLE [dbo].[LogDetalle](
 GO
 SET ANSI_PADDING OFF
 GO
-ALTER TABLE [dbo].[LogDetalle]  WITH CHECK ADD  CONSTRAINT [FK_LogDetalle_Log] FOREIGN KEY([IdLog])
-REFERENCES [dbo].[Log] ([IdLog])
-GO
-ALTER TABLE [dbo].[LogDetalle] CHECK CONSTRAINT [FK_LogDetalle_Log]
-GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -430,11 +378,7 @@ CREATE TABLE [dbo].[Cliente](
 GO
 SET ANSI_PADDING OFF
 GO
-ALTER TABLE [dbo].[Cliente]  WITH CHECK ADD  CONSTRAINT [FK_Cliente_Cuit] FOREIGN KEY([Cuit])
-REFERENCES [dbo].[Cuit] ([Cuit])
-GO
-ALTER TABLE [dbo].[Cliente] CHECK CONSTRAINT [FK_Cliente_Cuit]
-GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -463,21 +407,7 @@ CREATE TABLE [dbo].[Articulo](
 GO
 SET ANSI_PADDING OFF
 GO
-ALTER TABLE [dbo].[Articulo]  WITH CHECK ADD  CONSTRAINT [FK_Articulo_Cuit] FOREIGN KEY([Cuit])
-REFERENCES [dbo].[Cuit] ([Cuit])
-GO
-ALTER TABLE [dbo].[Articulo] CHECK CONSTRAINT [FK_Articulo_Cuit]
-GO
 
-declare @idWF varchar(256)
-declare @accionNro varchar(256)
-update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro'
-update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF'
-insert Usuario (IdUsuario, Nombre, Telefono, Email, Password, Pregunta, Respuesta, CantidadEnviosMail, FechaUltimoReenvioMail, EmailSMS, IdWF, Estado) values ('cedeira.migracion', 'Cedeira - Usuario genérico para migración', '', 'claudio.cedeira@gmail.com', 'cedeira123', 'Cual es la sigla de mi escuela secundaria', 'encjm', 0, getdate(), 'claudio.cedeira@gmail.com', @IdWF, 'Vigente')
-insert Log values (@IdWF, getdate(), 'cedeira.migracion', 'Usuario', 'Alta', 'Vigente', 'Alta x script')
-update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF'
-insert Permiso values ('cedeira.migracion', '', '', 'AdminSITE', '20621231', '', 'AltaAdminSITEs', @accionNro, @idWF, 'Vigente')
-insert Log values (@IdWF, getdate(), 'cedeira.migracion', 'Permiso', 'Alta', 'Vigente', 'Alta x script')
 
 SET ANSI_NULLS ON
 GO
@@ -496,9 +426,6 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-insert DestinoComprobante values ('ITF')
-insert DestinoComprobante values ('AFIP')
-insert DestinoComprobante values ('Ninguno')
 
 SET ANSI_NULLS ON
 GO
@@ -542,16 +469,7 @@ CREATE TABLE [dbo].[Comprobante](
 GO
 SET ANSI_PADDING OFF
 GO
-ALTER TABLE [dbo].[Comprobante]  WITH CHECK ADD  CONSTRAINT [FK_Comprobante_Cuit] FOREIGN KEY([Cuit])
-REFERENCES [dbo].[Cuit] ([Cuit])
-GO
-ALTER TABLE [dbo].[Comprobante] CHECK CONSTRAINT [FK_Comprobante_Cuit]
-GO
-ALTER TABLE [dbo].[Comprobante]  WITH CHECK ADD  CONSTRAINT [FK_Comprobante_DestinoComprobante] FOREIGN KEY([IdDestinoComprobante])
-REFERENCES [dbo].[DestinoComprobante] ([IdDestinoComprobante])
-GO
-ALTER TABLE [dbo].[Comprobante] CHECK CONSTRAINT [FK_Comprobante_DestinoComprobante]
-GO
+
 
 SET ANSI_NULLS ON
 GO
@@ -571,19 +489,130 @@ CREATE TABLE [dbo].[Entidad](
 GO
 SET ANSI_PADDING OFF
 GO
+
+
+ALTER TABLE [dbo].[Cuit]  WITH CHECK ADD  CONSTRAINT [FK_Cuit_Medio]
+FOREIGN KEY([IdMedio])
+REFERENCES [dbo].[Medio] ([IdMedio])
+GO
+ALTER TABLE [dbo].[Cuit] CHECK CONSTRAINT [FK_Cuit_Medio]
+GO
+
+ALTER TABLE [dbo].[UN]  WITH CHECK ADD  CONSTRAINT [FK_UN_Cuit] FOREIGN KEY([Cuit])
+REFERENCES [dbo].[Cuit] ([Cuit])
+GO
+ALTER TABLE [dbo].[UN] CHECK CONSTRAINT [FK_UN_Cuit]
+GO
+
+ALTER TABLE [dbo].[PuntoVta]  WITH CHECK ADD  CONSTRAINT [FK_PuntoVta_Cuit] FOREIGN KEY([Cuit])
+REFERENCES [dbo].[Cuit] ([Cuit])
+GO
+ALTER TABLE [dbo].[PuntoVta] CHECK CONSTRAINT [FK_PuntoVta_Cuit]
+GO
+ALTER TABLE [dbo].[PuntoVta]  WITH CHECK ADD  CONSTRAINT [FK_PuntoVta_TipoPuntoVta] FOREIGN KEY([IdTipoPuntoVta])
+REFERENCES [dbo].[TipoPuntoVta] ([IdTipoPuntoVta])
+GO
+ALTER TABLE [dbo].[PuntoVta] CHECK CONSTRAINT [FK_PuntoVta_TipoPuntoVta]
+GO
+ALTER TABLE [dbo].[PuntoVta]  WITH CHECK ADD  CONSTRAINT [FK_PuntoVta_MetodoGeneracionNumeracionLote] FOREIGN KEY([IdMetodoGeneracionNumeracionLote])
+REFERENCES [dbo].[MetodoGeneracionNumeracionLote] ([IdMetodoGeneracionNumeracionLote])
+GO
+ALTER TABLE [dbo].[PuntoVta] CHECK CONSTRAINT [FK_PuntoVta_MetodoGeneracionNumeracionLote]
+GO
+
+ALTER TABLE [dbo].[Permiso]  WITH CHECK ADD  CONSTRAINT [FK_Permiso_TipoPermiso] FOREIGN KEY([IdTipoPermiso])
+REFERENCES [dbo].[TipoPermiso] ([IdTipoPermiso])
+GO
+ALTER TABLE [dbo].[Permiso] CHECK CONSTRAINT [FK_Permiso_TipoPermiso]
+GO
+
+ALTER TABLE [dbo].[LogDetalle]  WITH CHECK ADD  CONSTRAINT [FK_LogDetalle_Log] FOREIGN KEY([IdLog])
+REFERENCES [dbo].[Log] ([IdLog])
+GO
+ALTER TABLE [dbo].[LogDetalle] CHECK CONSTRAINT [FK_LogDetalle_Log]
+GO
+
+ALTER TABLE [dbo].[Cliente]  WITH CHECK ADD  CONSTRAINT [FK_Cliente_Cuit] FOREIGN KEY([Cuit])
+REFERENCES [dbo].[Cuit] ([Cuit])
+GO
+ALTER TABLE [dbo].[Cliente] CHECK CONSTRAINT [FK_Cliente_Cuit]
+GO
+
+ALTER TABLE [dbo].[Articulo]  WITH CHECK ADD  CONSTRAINT [FK_Articulo_Cuit] FOREIGN KEY([Cuit])
+REFERENCES [dbo].[Cuit] ([Cuit])
+GO
+ALTER TABLE [dbo].[Articulo] CHECK CONSTRAINT [FK_Articulo_Cuit]
+GO
+
+ALTER TABLE [dbo].[Comprobante]  WITH CHECK ADD  CONSTRAINT [FK_Comprobante_Cuit] FOREIGN KEY([Cuit])
+REFERENCES [dbo].[Cuit] ([Cuit])
+GO
+ALTER TABLE [dbo].[Comprobante] CHECK CONSTRAINT [FK_Comprobante_Cuit]
+GO
+ALTER TABLE [dbo].[Comprobante]  WITH CHECK ADD  CONSTRAINT [FK_Comprobante_DestinoComprobante] FOREIGN KEY([IdDestinoComprobante])
+REFERENCES [dbo].[DestinoComprobante] ([IdDestinoComprobante])
+GO
+ALTER TABLE [dbo].[Comprobante] CHECK CONSTRAINT [FK_Comprobante_DestinoComprobante]
+GO
+
+insert Medio values ('Internet', 'Internet')
+insert Medio values ('Interfacturas', 'Recomendado por Interfacturas')
+insert Medio values ('Conocido', 'Recomendado por un conocido')
+insert Medio values ('Mail', 'Mail')
+insert Medio values ('Merc.Libre', 'Mercado Libre')
+GO
+
+insert TipoPuntoVta values ('BonoFiscal')
+insert TipoPuntoVta values ('Exportacion')
+insert TipoPuntoVta values ('Comun')
+insert TipoPuntoVta values ('RG2904')
+GO
+
+insert MetodoGeneracionNumeracionLote values ('Ninguno', 'Ninguno (el número de lote se ingresa manualmente)')
+insert MetodoGeneracionNumeracionLote values ('Autonumerador', 'Autonumerador (se calcula a partir del "Ultimo nro. de lote")')
+insert MetodoGeneracionNumeracionLote values ('TimeStamp1', 'TimeStamp #1 (Año-Mes-Día-Hora-Minutos-Segundos)')
+insert MetodoGeneracionNumeracionLote values ('TimeStamp2', 'TimeStamp #2 (días transcurridos desde el 01/01/2013-Hora-Minutos-Segundos-Milésimas de segundos)')
+GO
+
+insert TipoPermiso values ('AdminCUIT', 'Administrador del CUIT')
+insert TipoPermiso values ('AdminSITE', 'Administrador del site')
+insert TipoPermiso values ('AdminUN', 'Administrador de la UN')
+insert TipoPermiso values ('UsoCUITxUN', 'Habilitación relación UN-CUIT')
+insert TipoPermiso values ('eFact', 'Operador servicio eFact')
+insert TipoPermiso values ('eFactArticulos', 'Operador servicio eFactArticulos')
+insert TipoPermiso values ('eFactITFonline', 'Operador servicio eFactITFonline')
+GO
+
+insert Configuracion values ('', '', 0, '', 'UltimoIdWF', '0')
+insert Configuracion values ('', '', 0, '', 'UltimoAccionNro', '0')
+insert Configuracion values ('', '', 0, '', 'UltimoMesReporteActividad', '')
+GO
+
+declare @idWF varchar(256)
+declare @accionNro varchar(256)
+update Configuracion set @accionNro=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoAccionNro'
+update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF'
+insert Usuario (IdUsuario, Nombre, Telefono, Email, Password, Pregunta, Respuesta, CantidadEnviosMail, FechaUltimoReenvioMail, EmailSMS, IdWF, Estado) values ('cedeira.migracion', 'Cedeira - Usuario genérico para migración', '', 'claudio.cedeira@gmail.com', 'cedeira123', 'Cual es la sigla de mi escuela secundaria', 'encjm', 0, getdate(), 'claudio.cedeira@gmail.com', @IdWF, 'Vigente')
+insert Log values (@IdWF, getdate(), 'cedeira.migracion', 'Usuario', 'Alta', 'Vigente', 'Alta x script')
+update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF'
+insert Permiso values ('cedeira.migracion', '', '', 'AdminSITE', '20621231', '', 'AltaAdminSITEs', @accionNro, @idWF, 'Vigente')
+insert Log values (@IdWF, getdate(), 'cedeira.migracion', 'Permiso', 'Alta', 'Vigente', 'Alta x script')
+GO
+
+insert DestinoComprobante values ('ITF')
+insert DestinoComprobante values ('AFIP')
+insert DestinoComprobante values ('Ninguno')
+GO
+
 insert Entidad values ('Comprobante', 'Comprobante', 10)
-go
 insert Entidad values ('Usuario', 'Usuario', 20)
-go
 insert Entidad values ('CUIT', 'CUIT', 30)
-go
 insert Entidad values ('UN', 'Unidad de Negocio', 40)
-go
 insert Entidad values ('PuntoVta', 'Punto de Venta', 50)
-go
 insert Entidad values ('Cliente', 'Cliente', 60)
-go
 insert Entidad values ('Articulo', 'Articulo', 70)
-go
 insert Entidad values ('Permiso', 'Permiso', 80)
-go
+GO
+
+insert Configuracion values ('DEMO', '', 0, '', 'UsuarioDEMO', '')
+GO
