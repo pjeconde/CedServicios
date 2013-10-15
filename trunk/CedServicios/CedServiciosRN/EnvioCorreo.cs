@@ -218,7 +218,14 @@ namespace CedServicios.RN
             MailMessage mail = new MailMessage();
             mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
             mail.To.Add(new MailAddress(Sesion.AdministradoresSiteEmail));
-            mail.Subject = "Reporte de actividad";
+            if (Sesion.Ambiente != "PROD")
+            {
+                mail.Subject = "Reporte de actividad (" + Sesion.Ambiente + ")";
+            }
+            else
+            {
+                mail.Subject = "Reporte de actividad";
+            }
             mail.IsBodyHtml = true;
             StringBuilder a = new StringBuilder();
             a.Append("Periodo: del " + FechaDsd.ToString("dd/MM/yyyy") + " al " + FechaHst.ToString("dd/MM/yyyy") + ".");

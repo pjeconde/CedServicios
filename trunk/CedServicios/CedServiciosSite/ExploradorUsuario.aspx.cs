@@ -136,6 +136,23 @@ namespace CedServicios.Site
                 case "CambiarEstado":
                     TituloConfirmacionLabel.Text = "Confirmar " + (usuario.WF.Estado == "Vigente" ? "Baja" : "Anulación Baja");
                     CambiarEstadoButton.Visible = true;
+                    ReenviarEmailButton.Visible = false;
+                    CancelarButton.Text = "Cancelar";
+
+                    IdUsuarioLabel.Text = usuario.Id;
+                    NombreLabel.Text = usuario.Nombre;
+                    TelefonoLabel.Text = usuario.Telefono;
+                    EmailLabel.Text = usuario.Email;
+                    PreguntaLabel.Text = usuario.Pregunta;
+                    RespuestaLabel.Text = usuario.Respuesta;
+                    EstadoLabel.Text = usuario.Estado;
+                    ViewState["Usuario"] = usuario;
+                    ModalPopupExtender1.Show();
+                    break;
+                case "ReenviarEmail":
+                    TituloConfirmacionLabel.Text = "Confirmar el reenvio de email";
+                    CambiarEstadoButton.Visible = false;
+                    ReenviarEmailButton.Visible = true;
                     CancelarButton.Text = "Cancelar";
 
                     IdUsuarioLabel.Text = usuario.Id;
@@ -198,6 +215,26 @@ namespace CedServicios.Site
 
         protected void UsuarioPagingGridView_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
         {
+        }
+        protected void ReenviarEmailButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = String.Empty;
+            try
+            {
+                Entidades.Usuario usr = (Entidades.Usuario)ViewState["Usuario"];
+                if (usr.Estado != "PteConf")
+                {
+                    MensajeLabel.Text = "Solamente puede reenviar mail a los usuarios que se encuentran pendientes de confirmación.";
+                    return;
+                }
+                RN.Usuario.ReenviarMail(usr, (Entidades.Sesion)Session["Sesion"]);
+                UsuarioPagingGridView.DataBind();
+                DesSeleccionarFilas();
+            }
+            catch (Exception ex)
+            {
+                MensajeLabel.Text = ex.Message;
+            }
         }
 
         protected void CambiarEstadoButton_Click(object sender, EventArgs e)

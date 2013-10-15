@@ -82,6 +82,10 @@ namespace CedServicios.Site
             else
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.UsuarioDemo == true)
+                {
+                    Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                }
                 Entidades.Cliente clienteDesde = (Entidades.Cliente)Session["Cliente"];
                 Entidades.Cliente clienteHasta = RN.Cliente.ObternerCopia(clienteDesde);
                 try

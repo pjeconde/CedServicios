@@ -367,5 +367,11 @@ namespace CedServicios.DB
             }
             return lista;
         }
+        public void RegistrarReenvioMail(Entidades.Usuario Usuario)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Usuario set Usuario.CantidadEnviosMail=Usuario.CantidadEnviosMail+1, FechaUltimoReenvioMail=getdate() where Usuario.IdUsuario='" + Usuario.Id + "' ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.NoAcepta, sesion.CnnStr);
+        }
     }
 }

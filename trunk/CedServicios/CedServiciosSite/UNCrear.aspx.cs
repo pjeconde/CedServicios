@@ -25,6 +25,10 @@ namespace CedServicios.Site
             else
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.UsuarioDemo == true)
+                {
+                    Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                }
                 Entidades.Cuit cuit = new Entidades.Cuit();
                 Entidades.UN un = new Entidades.UN();
                 Entidades.TipoPermiso tipoPermiso = new Entidades.TipoPermiso();

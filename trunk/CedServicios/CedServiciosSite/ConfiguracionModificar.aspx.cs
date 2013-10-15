@@ -66,6 +66,10 @@ namespace CedServicios.Site
             else
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.UsuarioDemo == true)
+                {
+                    Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                }
                 Boolean fileOK = false;
                 String fileExtension = String.Empty;
                 String path = Server.MapPath("~/ImagenesSubidas/");
@@ -110,6 +114,10 @@ namespace CedServicios.Site
             else
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.UsuarioDemo == true)
+                {
+                    Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                }
                 String path = Server.MapPath("~/ImagenesSubidas/");
                 string[] archivos = System.IO.Directory.GetFiles(path, sesion.Usuario.Id + ".*", System.IO.SearchOption.TopDirectoryOnly);
                 for (int i = 0; i < archivos.Length; i++)
@@ -129,6 +137,10 @@ namespace CedServicios.Site
             else
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.UsuarioDemo == true)
+                {
+                    Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                }
                 if (sesion.Cuit.Nro != null)
                 {
                     CUITTextBox.Text = sesion.Cuit.Nro;
@@ -161,6 +173,11 @@ namespace CedServicios.Site
         }
         protected void ConfirmarCantidadFilasXPaginaButton_Click(object sender, EventArgs e)
         {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            if (sesion.UsuarioDemo == true)
+            {
+                Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+            }
             MensajeLabel.Text = String.Empty;
             int cantidadFilasXPagina;
             if (!int.TryParse(CantidadFilasXPaginaTextBox.Text, out cantidadFilasXPagina) || cantidadFilasXPagina < 1)

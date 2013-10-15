@@ -98,6 +98,7 @@
     <Content Include="ClienteSeleccionar.aspx" />
     <Content Include="ComprobanteConsulta.aspx" />
     <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
+    <Content Include="MensajeUsuarioDemo.aspx" />
     <Content Include="ExploradorAdministracion.aspx" />
     <Content Include="ExploradorLog.aspx" />
     <Content Include="ExploradorConfiguracion.aspx" />
@@ -163,6 +164,7 @@
     <Content Include="Imagenes\eFact-R-XL.jpg" />
     <Content Include="Imagenes\eFact-R.jpg" />
     <Content Include="Imagenes\eFact-vertical.jpg" />
+    <Content Include="Imagenes\Factura-UsuarioDemo.png" />
     <Content Include="Imagenes\Interrogacion.jpg" />
     <Content Include="Imagenes\SiluetaHombre.jpg" />
     <Content Include="InstitucionalContacto.aspx" />
@@ -357,6 +359,13 @@
     </Compile>
     <Compile Include="ComprobanteSeleccionOnlineInterfacturas.aspx.designer.cs">
       <DependentUpon>ComprobanteSeleccionOnlineInterfacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MensajeUsuarioDemo.aspx.cs">
+      <DependentUpon>MensajeUsuarioDemo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MensajeUsuarioDemo.aspx.designer.cs">
+      <DependentUpon>MensajeUsuarioDemo.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorAdministracion.aspx.cs">
       <DependentUpon>ExploradorAdministracion.aspx</DependentUpon>

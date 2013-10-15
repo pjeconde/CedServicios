@@ -18,6 +18,8 @@ namespace CedServicios.Entidades
         private DateTime fechaInicio;
         private string uRLsite;
         private string administradoresSiteEmail;
+        private string ambiente;
+        private bool usuarioDemo;
 
         public Sesion()
         {
@@ -28,6 +30,7 @@ namespace CedServicios.Entidades
             clientesDelCuit = new List<Cliente>();
             opcionesHabilitadas = new List<string>();
             fechaInicio = DateTime.Now;
+            usuarioDemo = false;
         }
 
         public object Clone()
@@ -145,5 +148,27 @@ namespace CedServicios.Entidades
                 administradoresSiteEmail = value;
             }
         }
+        public string Ambiente
+        {
+            get
+            {
+                return ambiente;
+            }
+            set
+            {
+                ambiente = value;
+            }
+        }
+        public bool UsuarioDemo
+        {
+            get
+            {
+                return usuarioDemo;
+            }
+            set
+            {
+                usuarioDemo = value;
+            }
+        } 
     }
 }

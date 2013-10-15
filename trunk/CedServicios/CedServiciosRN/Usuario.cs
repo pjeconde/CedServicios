@@ -221,6 +221,12 @@ namespace CedServicios.RN
             CedServicios.DB.Configuracion db = new DB.Configuracion(Sesion);
             db.CrearFechaOKeFactTyC(Sesion.Usuario);
         }
+        public static void ReenviarMail(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
+        {
+            DB.Usuario usuario = new DB.Usuario(Sesion);
+            usuario.RegistrarReenvioMail(Usuario);
+            RN.EnvioCorreo.ConfirmacionAltaUsuario(Usuario, Sesion);
+        }
         public static List<Entidades.Usuario> ListaSegunFiltros(string IdUsuario, string Nombre, string Email, string Estado, Entidades.Sesion Sesion)
         {
             DB.Usuario usuario = new DB.Usuario(Sesion);
