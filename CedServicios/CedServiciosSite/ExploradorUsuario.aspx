@@ -116,6 +116,12 @@
                                     <HeaderStyle Wrap="False" />
                                     <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
                                 </asp:BoundField>
+                                <asp:TemplateField ItemStyle-VerticalAlign="Top" Visible="true" ItemStyle-BorderStyle="None">
+                                    <HeaderStyle Wrap="False" Width="100px" />
+                                    <ItemTemplate>
+                                        <asp:LinkButton Id="ReenviarEmail" runat="server" CausesValidation="false" CommandName="ReenviarEmail"  CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ToolTip="<%# ((GridViewRow) Container).RowIndex %>" Text="Reenviar Email" />
+                                    </ItemTemplate>
+                                </asp:TemplateField>
                             </Columns>
                             <PagerSettings Mode="NumericFirstLast" />
                         </cc1:PagingGridView>
@@ -207,6 +213,9 @@
                 </td>
             </tr>           
             <tr>
+                <td align="left" style="padding-top:20px">
+                    <asp:Button ID="ReenviarEmailButton" runat="server" Text="Confirmar" onclick="ReenviarEmailButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                </td>
                 <td align="left" style="padding-top:20px">
                     <asp:Button ID="CambiarEstadoButton" runat="server" Text="Confirmar" onclick="CambiarEstadoButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                 </td>

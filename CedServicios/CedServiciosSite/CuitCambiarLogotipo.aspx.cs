@@ -33,6 +33,11 @@ namespace CedServicios.Site
         }
         protected void SubirImagenButton_Click(object sender, EventArgs e)
         {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            if (sesion.UsuarioDemo == true)
+            {
+                Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+            }
             Boolean fileOK = false;
             String fileExtension = String.Empty;
             String path = Server.MapPath("~/ImagenesSubidas/");
@@ -68,6 +73,11 @@ namespace CedServicios.Site
         }
         protected void BorrarImagenButton_Click(object sender, EventArgs e)
         {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            if (sesion.UsuarioDemo == true)
+            {
+                Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+            }
             String path = Server.MapPath("~/ImagenesSubidas/");
             string[] archivos = System.IO.Directory.GetFiles(path, CUITTextBox.Text + ".*", System.IO.SearchOption.TopDirectoryOnly);
             for (int i = 0; i < archivos.Length; i++)

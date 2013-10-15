@@ -52,5 +52,16 @@ namespace CedServicios.RN
             CantidadFilas = cantidadFilas;
             return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaConfiguracion);
         }
+        public static Entidades.Configuracion LeerUsuarioDEMO(Entidades.Sesion Sesion)
+        {
+            Entidades.Configuracion usuarioDEMO = new Entidades.Configuracion();
+            DB.Configuracion db = new DB.Configuracion(Sesion);
+            List<Entidades.Configuracion> listaConf = db.ListaSegunFiltros("", "", "", "", "UsuarioDEMO");
+            if (listaConf.Count != 0)
+            {
+                usuarioDEMO = listaConf[0];
+            }
+            return usuarioDEMO;
+        }
     }
 }

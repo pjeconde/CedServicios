@@ -327,8 +327,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                         RN.Comprobante comprobante = new RN.Comprobante();
                         lote.cabecera_lote.DestinoComprobante = "ITF";
                         lote.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                        comprobante.Registrar(lote, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
 
+                        //Registrar comprobante si no es el usuario de DEMO.
+                        Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                        if (sesion.UsuarioDemo != true)
+                        {
+                            comprobante.Registrar(lote, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                        }
+                        
                         System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
                         System.Text.StringBuilder sb = new System.Text.StringBuilder();
                         sb.Append(lote.cabecera_lote.cuit_vendedor);
@@ -1323,6 +1329,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             //comprador.IdCliente = ((Entidades.Sesion)Session["Sesion"]).Usuario.Id;
             //comprador.RazonSocial = Convert.ToString(CompradorDropDownList.SelectedItem.Text);
             comprador.RazonSocial = Convert.ToString(CompradorDropDownList.SelectedValue);
+            int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
             try
             {
                 if (Funciones.SessionTimeOut(Session))
@@ -1354,25 +1361,27 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Email_CompradorTextBox.Text = comprador.Contacto.Email;
                     Telefono_CompradorTextBox.Text = Convert.ToString(comprador.Contacto.Telefono);
 
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                    {
+                        return pv.Nro == auxPV;
+                    }).IdTipoPuntoVta;
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-                    if (comprador.Documento.Tipo.Id != null && comprador.Documento.Tipo.Id == "70")
-                    {
-                        Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
-                        Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
-                        Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
-                        Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-                        Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
-                        Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
-                        Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(comprador.Documento.Nro)));
-                        Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
-                    }
-                    else
+                    if (!idtipo.Equals("Exportacion"))
                     {
                         Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                         Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
                         Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(comprador.Documento.Nro);
                         Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaNoExportacion();
+                    }
+                    else
+                    {
+                        Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
+                        Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
+                        Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
+                        Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
+                        Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(comprador.Documento.Nro)));
+                        Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
                     }
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
                     Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = Convert.ToString(comprador.Documento.Tipo.Id);
@@ -1406,7 +1415,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 try
                 {
-                    int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
                     if (Funciones.SessionTimeOut(Session))
                     {
                         Response.Redirect("~/SessionTimeout.aspx");
@@ -1430,8 +1438,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
                             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
-                            Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
-                            Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+                            //Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+                            //Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
                             Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
                             Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
                             Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;

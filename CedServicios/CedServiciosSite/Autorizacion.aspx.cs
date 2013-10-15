@@ -82,6 +82,11 @@ namespace CedServicios.Site
         {
             try
             {
+                Entidades.Sesion s = (Entidades.Sesion)Session["Sesion"];
+                if (s.UsuarioDemo == true)
+                {
+                    Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                }
                 Entidades.Sesion sesion = ClonarSesion(IdUsuarioAutorizadorDropDownList.SelectedValue);
                 if (RN.Permiso.Autorizar((Entidades.Permiso)ViewState["Permiso"], sesion))
                     MensajeLabel.Text = "La autorización fué registrada satisfactoriamente.";

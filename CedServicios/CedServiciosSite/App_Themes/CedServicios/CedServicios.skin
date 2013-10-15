@@ -7,6 +7,7 @@
 
 <asp:Label SkinID="TituloPagina" runat="server" Font-Size="24px" ForeColor="black" Font-Bold="false"></asp:Label>
 <asp:Label SkinID="TituloMediano" runat="server" Font-Size="12px" ForeColor="black" Font-Bold="True"></asp:Label>
+<asp:Label SkinID="TituloMedianoC" runat="server" Font-Size="12px" ForeColor="maroon" Font-Bold="True"></asp:Label>
 
 <asp:Label SkinID="TituloPaginaClaroGr" runat="server" Font-Size="20px" ForeColor="white" Font-Bold="True" Width="100%"></asp:Label>
 <asp:Label SkinID="TituloPaginaClaro" runat="server" Font-Size="14px" ForeColor="white" Font-Bold="True" Width="100%"></asp:Label>

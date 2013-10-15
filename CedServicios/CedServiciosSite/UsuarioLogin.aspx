@@ -89,9 +89,25 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="center" colspan="3" style="padding-top:5px; padding-bottom:20px">
+                            <td align="center" colspan="3" style="padding-top:5px; padding-bottom:0px">
                                 <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/UsuarioOlvidoId.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Id.Usuario?</asp:HyperLink>
                                 <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/UsuarioOlvidoPassword.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Contraseña?</asp:HyperLink>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="3">
+                                <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; padding-right:20px; padding-top:20px; width: 300px; background-image: url('Imagenes/Factura-UsuarioDemo.png'); background-repeat: no-repeat;"">
+                                    <tr>
+                                        <td align="center" colspan="3" style="padding-top:10px;">
+                                            <asp:Label ID="Label2" Width="200px" runat="server" SkinID="TituloMedianoC" Text="Para ingresar en la modalidad DEMO"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" colspan="3" style="padding-top:10px; padding-bottom:40px">
+                                            <asp:Button ID="LoginUsuarioDEMOButton" runat="server" OnClick="LoginUsuarioDEMOButton_Click" TabIndex="3" Text="Haga Clic Aqui" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                                        </td>
+                                    </tr>
+                                </table>
                             </td>
                         </tr>
                     </table>

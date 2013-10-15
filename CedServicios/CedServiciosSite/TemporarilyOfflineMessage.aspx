@@ -13,7 +13,7 @@
             <tr>
                 <td align="center">
                     <h1>
-                        El Sistema está temporalmente no disponible</h1>
+                        El Sistema está temporalmente no disponible.</h1>
                 </td>
             </tr>
             <tr>
@@ -24,7 +24,7 @@
                         Si tiene alguna consulta urgente, por favor, contacte a soporte técnico de nuestra empresa.
                     </p>
                     <p>
-                        <asp:Label runat="server" ID="OfflineMessage" style="font-weight:bold;"></asp:Label>
+                        <h3><asp:Label runat="server" ID="OfflineMessage" style="font-weight:bold;"></asp:Label></h3>
                     </p>
                 </td>
             </tr>

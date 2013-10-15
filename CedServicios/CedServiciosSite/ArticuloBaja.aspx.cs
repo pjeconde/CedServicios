@@ -66,6 +66,10 @@ namespace CedServicios.Site
             else
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.UsuarioDemo == true)
+                {
+                    Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                }
                 Entidades.Articulo articulo = (Entidades.Articulo)Session["Articulo"];
                 try
                 {

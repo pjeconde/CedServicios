@@ -157,6 +157,24 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.HyperLink HyperLink11;
         
         /// <summary>
+        /// Control Label2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
+        /// Control LoginUsuarioDEMOButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button LoginUsuarioDEMOButton;
+        
+        /// <summary>
         /// Control Image1.
         /// </summary>
         /// <remarks>

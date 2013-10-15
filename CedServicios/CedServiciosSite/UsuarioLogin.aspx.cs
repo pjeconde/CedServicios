@@ -23,6 +23,44 @@ namespace CedServicios.Site
             Menu menu = ((Menu)Master.FindControl("MenuContentPlaceHolder").FindControl("Menu"));
             Funciones.RemoverMenuItem(menu, "Iniciar sesión");
         }
+        protected void LoginUsuarioDEMOButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                MensajeLabel.Text = String.Empty;
+                Entidades.Usuario usuarioAux = new Entidades.Usuario();
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                //Leer para obtener el usuario de DEMO de la tabla Configuracion.
+                Entidades.Configuracion confUsuarioDEMO = RN.Configuracion.LeerUsuarioDEMO(sesion);
+                usuarioAux.Id = confUsuarioDEMO.IdUsuario;
+                //Leer para obtener la password actual.
+                RN.Usuario.Leer(usuarioAux, sesion);
+                
+                //Hacer el login, agregando la marca de modalidad DEMO.
+                Entidades.Usuario usuario = new Entidades.Usuario();
+                usuario.Id = usuarioAux.Id;
+                usuario.Password = usuarioAux.Password;
+                sesion.UsuarioDemo = true;
+                RN.Usuario.Login(usuario, sesion);
+                RN.Sesion.AsignarUsuario(usuario, sesion);
+                RN.ReporteActividad.EnviarSiCorresponde(sesion);
+                Response.Redirect("~/Default.aspx");
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (EX.Validaciones.ElementoInexistente ex)
+            {
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                UsuarioTextBox.Focus();
+            }
+            catch (Exception ex)
+            {
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                UsuarioTextBox.Focus();
+            }
+        }
         protected void LoginButton_Click(object sender, EventArgs e)
         {
             try
