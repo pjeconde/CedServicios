@@ -35,6 +35,10 @@ namespace CedServicios.Site
                 else
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    if (sesion.UsuarioDemo == true)
+                    {
+                        Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                    }
                     RN.Usuario.CambiarPassword(sesion.Usuario, PasswordTextBox.Text, PasswordNuevaTextBox.Text, ConfirmacionPasswordNuevaTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
                     RN.Sesion.Cerrar(sesion);
                     PasswordTextBox.Enabled = false;
