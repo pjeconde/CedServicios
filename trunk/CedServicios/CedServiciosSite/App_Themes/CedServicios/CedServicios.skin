@@ -39,6 +39,9 @@
 <asp:HyperLink SkinID="LinkChicoClaro" runat="server" Font-Size="10px" ForeColor="blue"></asp:HyperLink>
 <asp:HyperLink SkinID="LinkMedianoClaro" runat="server" Font-Size="12px" ForeColor="blue"></asp:HyperLink>
 
+<asp:LinkButton SkinID="LinkButtonAyuda" runat="server" Font-Size="14px" ForeColor="#284E98"></asp:LinkButton>
+<asp:Label SkinID="LabelAyuda" runat="server" Font-Size="14px" ></asp:Label>
+
 <asp:CheckBox SkinID="CheckBoxFEALoteDetChCh" runat="server" Width="40px" ForeColor="#071F70"></asp:CheckBox>
 
 <asp:DropDownList SkinID="ddln" runat="server" Style="width: 176px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>

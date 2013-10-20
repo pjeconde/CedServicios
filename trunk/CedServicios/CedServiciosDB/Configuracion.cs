@@ -48,6 +48,32 @@ namespace CedServicios.DB
             a.AppendLine("and IdItemConfig='" + Configuracion.IdItemConfig + "' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
+        public void SetearValor(Entidades.Configuracion Configuracion)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("if exists(select * from Configuracion ");
+            a.Append("where IdUsuario='" + Configuracion.IdUsuario + "' ");
+            a.Append("and Cuit='" + Configuracion.Cuit + "' ");
+            a.Append("and IdUN=" + Configuracion.IdUN + " ");
+            a.Append("and IdTipoPermiso='" + Configuracion.TipoPermisoId + "' ");
+            a.AppendLine("and IdItemConfig='" + Configuracion.IdItemConfig + "') ");
+            a.Append("update Configuracion ");
+            a.Append("set Valor='" + Configuracion.Valor + "' ");
+            a.Append("where IdUsuario='" + Configuracion.IdUsuario + "' ");
+            a.Append("and Cuit='" + Configuracion.Cuit + "' ");
+            a.Append("and IdUN=" + Configuracion.IdUN + " ");
+            a.Append("and IdTipoPermiso='" + Configuracion.TipoPermisoId + "' ");
+            a.AppendLine("and IdItemConfig='" + Configuracion.IdItemConfig + "' ");
+            a.AppendLine("else ");
+            a.Append("insert  Configuracion (IdUsuario, Cuit, IdUN, IdTipoPermiso, IdItemConfig, Valor) values (");
+            a.Append("'" + Configuracion.IdUsuario + "', ");
+            a.Append("'" + Configuracion.Cuit + "', ");
+            a.Append(Configuracion.IdUN + ", ");
+            a.Append("'" + Configuracion.TipoPermisoId + "', ");
+            a.Append("'" + Configuracion.IdItemConfig + "', ");
+            a.AppendLine("'" + Configuracion.Valor + "') ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
         public void CrearFechaOKeFactTyC(Entidades.Usuario Usuario)
         {
             StringBuilder a = new StringBuilder(string.Empty);

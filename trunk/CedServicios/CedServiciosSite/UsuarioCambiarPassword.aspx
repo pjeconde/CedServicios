@@ -70,8 +70,7 @@
                 <td align="left" style="padding-top:20px">
                     <asp:Button ID="AceptarButton" runat="server" OnClick="AceptarButton_Click" TabIndex="4"
                         Text="Aceptar" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                    <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" PostBackUrl="~/Default.aspx"
-                        TabIndex="5" Text="Cancelar" />
+                    <asp:Button ID="CancelarButton" runat="server" CausesValidation="false" onclick="SalirButton_Click" TabIndex="5" Text="Cancelar" />
                 </td>
             </tr>
             <tr>

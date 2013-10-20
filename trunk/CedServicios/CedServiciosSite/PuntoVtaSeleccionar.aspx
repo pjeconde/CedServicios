@@ -29,7 +29,7 @@
                 <td>
                 </td>
                 <td align="left" style="height: 24px; padding-top: 20px">
-                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="5" Text="Cancelar" PostBackUrl="~/Default.aspx" />
+                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="5" Text="Cancelar" onclick="SalirButton_Click" />
                 </td>
             </tr>
             <tr>

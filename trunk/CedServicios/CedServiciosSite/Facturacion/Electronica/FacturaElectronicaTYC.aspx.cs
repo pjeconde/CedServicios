@@ -54,5 +54,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                 MensajeLabel.Text = "Debe marcar que acepta los términos y condiciones";
             }
         }
+        protected void ButtonRechazar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
     }
 }

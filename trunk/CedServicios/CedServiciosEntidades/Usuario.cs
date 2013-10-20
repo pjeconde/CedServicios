@@ -25,6 +25,7 @@ namespace CedServicios.Entidades
         private int idUNPredef;
         private string fechaOKeFactTyC;
         private int cantidadFilasXPagina = 10;
+        private bool mostrarAyudaComoPaginaDefault;
         public Usuario()
         {
             wF = new WF();
@@ -217,6 +218,25 @@ namespace CedServicios.Entidades
             {
                 return cantidadFilasXPagina;
             }
+        }
+        public bool MostrarAyudaComoPaginaDefault
+        {
+            set
+            {
+                mostrarAyudaComoPaginaDefault = value;
+            }
+            get
+            {
+                return mostrarAyudaComoPaginaDefault;
+            }
+        }
+        public string PaginaDefault (Entidades.Sesion Sesion)
+        {
+            Sesion.EstoyEnAyuda = false;
+            if (!mostrarAyudaComoPaginaDefault)
+                return "~/Default.aspx";
+            else
+                return "~/Ayuda/Instructivas/OperarFacturaElectronica001.aspx";
         }
         #region Propiedades redundantes
         public string Estado

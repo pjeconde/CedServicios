@@ -44,7 +44,8 @@
         </tr>
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
-                <asp:Button ID="SalirButton" runat="server" Text="Salir" TabIndex="4" PostBackUrl="~/Default.aspx"/>
+                <asp:Button ID="ConfiguracionModificarButton" runat="server" Text="Modificación datos de Configuración" TabIndex="1" PostBackUrl="~/ConfiguracionModificar.aspx"/>
+                <asp:Button ID="SalirButton" runat="server" Text="Salir" TabIndex="2" onclick="SalirButton_Click"/>
             </td>
         </tr>
         <tr>

@@ -20,9 +20,9 @@
                                 <br />
                                 Soporta los siguientes tipos de Factura Electrónica:<br />
                                 <br />
-                                - Común (RG2485 / RG2904), <br />
-                                - Bono Fiscal (Bienes de Capital) y <br />
-                                - Exportación (RG2758/2010).<br />
+                                &#8226; Común (RG2485 / RG2904), <br />
+                                &#8226; Bono Fiscal (Bienes de Capital) y <br />
+                                &#8226; Exportación (RG2758/2010).<br />
                                 <br />
                                 Entorno 
                                 <asp:LinkButton ID="MultiCuitLinkButton" runat="server" TabIndex="4" Text="Multi-CUIT" onclick="MultiCuitLinkButton_Click" />, 

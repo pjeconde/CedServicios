@@ -60,7 +60,7 @@
         </tr>
         <tr>
             <td align="center" style="height: 24px; padding-top:20px">
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="505" Text="Salir" PostBackUrl="~/Default.aspx" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="505" Text="Salir" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

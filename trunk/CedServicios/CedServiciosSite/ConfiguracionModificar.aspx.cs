@@ -53,6 +53,7 @@ namespace CedServicios.Site
                         IdUNTextBox.Text = String.Empty;
                     }
                     CantidadFilasXPaginaTextBox.Text = sesion.Usuario.CantidadFilasXPagina.ToString();
+                    MostrarAyudaComoPaginaDefaultCheckBox.Checked = sesion.Usuario.MostrarAyudaComoPaginaDefault;
                 }
             }
         }
@@ -189,6 +190,14 @@ namespace CedServicios.Site
             {
                 RN.Configuracion.EstablecerCantidadFilasXPagina(cantidadFilasXPagina, (Entidades.Sesion)Session["Sesion"]);
             }
+        }
+        protected void SalirButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        protected void MostrarAyudaComoPaginaDefaultCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            RN.Usuario.SetearMostrarAyudaComoPaginaDefault((Entidades.Sesion)Session["Sesion"], MostrarAyudaComoPaginaDefaultCheckBox.Checked);
         }
     }
 }

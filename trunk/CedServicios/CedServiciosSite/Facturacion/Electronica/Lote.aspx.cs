@@ -173,21 +173,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                     PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
                 }
             }
-            else
-            {
-                //Controlar si cambio el CUIT o la UN de trabajo (Master)
-                //ContentPlaceHolder contentPlaceHolder;
-                //DropDownList CUITDropDownList;
-                //contentPlaceHolder = (ContentPlaceHolder)Master.FindControl("UsuarioContentPlaceHolder");
-                //if (contentPlaceHolder != null)
-                //{
-                //    CUITDropDownList = (DropDownList)contentPlaceHolder.FindControl("CUITDropDownList");
-                //    if (CUITDropDownList.SelectedValue != Cuit_VendedorTextBox.Text)
-                //    {
-                //        Response.Redirect("~/Default.aspx");
-                //    }
-                //}
-            }
         }
 
         private void VerificarMetodoNumeracionLote()

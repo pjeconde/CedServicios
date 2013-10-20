@@ -28,7 +28,7 @@ namespace CedServicios.RN
                 opcionesHabilitadas.Add("Administración|Unidad de Negocio|Solicitud permiso de administrador de UN");
                 opcionesHabilitadas.Add("Administración|Usuario|Cambio de Contraseña");
                 opcionesHabilitadas.Add("Administración|Usuario|Modificación datos de Configuración");
-                opcionesHabilitadas.Add("Ayuda|Manual");
+                opcionesHabilitadas.Add("Ayuda|Manual|¿ Cómo empiezo a operar con facturas electrónicas ?");
                 opcionesHabilitadas.Add("Ayuda|Novedades");
                 opcionesHabilitadas.Add("Ayuda|Documentación técnica");
                 opcionesHabilitadas.Add("Cerrar sesión");

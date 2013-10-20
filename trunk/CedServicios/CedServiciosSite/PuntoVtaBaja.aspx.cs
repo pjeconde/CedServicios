@@ -126,5 +126,9 @@ namespace CedServicios.Site
             DatosImpositivos.Visible = !UsaDatosCuitCheckBox.Checked;
             DatosIdentificatorios.Visible = !UsaDatosCuitCheckBox.Checked;
         }
+        protected void SalirButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
     }
 }

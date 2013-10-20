@@ -18,6 +18,7 @@ namespace CedServicios.Entidades
         private DateTime fechaInicio;
         private string uRLsite;
         private string administradoresSiteEmail;
+        private bool estoyEnAyuda = false;
         private string ambiente;
         private bool usuarioDemo;
 
@@ -146,6 +147,17 @@ namespace CedServicios.Entidades
             set
             {
                 administradoresSiteEmail = value;
+            }
+        }
+        public bool EstoyEnAyuda
+        {
+            get
+            {
+                return estoyEnAyuda;
+            }
+            set
+            {
+                estoyEnAyuda = value;
             }
         }
         public string Ambiente

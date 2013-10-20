@@ -11,7 +11,7 @@
             <tr>
                 <td align="center" style="height:24px; padding-top:20px">
                     <asp:Button ID="CopiarTodosButton" runat="server" OnClick="CopiarTodosButton_Click" TabIndex="1" Text="Copiar todas las cuentas" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="2" Text="Salir" PostBackUrl="~/Default.aspx" />
+                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="2" Text="Salir" onclick="SalirButton_Click" />
                 </td>
             </tr>
             <tr>

@@ -66,7 +66,18 @@
     <Content Include="ArticuloModificar.aspx" />
     <Content Include="ArticuloSeleccionar.aspx" />
     <Content Include="Autorizacion.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica001.aspx" />
     <Content Include="Ayuda\ExploradorNovedad.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica002.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica004.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica005.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica006.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica007.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica008.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica009.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica010.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica011.aspx" />
+    <Content Include="Ayuda\Instructivas\OperarFacturaElectronica012.aspx" />
     <Content Include="Ayuda\Novedades\eFactWebBoletinElectronico20130906.html" />
     <Content Include="Ayuda\Novedades\images20130906\image00.png" />
     <Content Include="Ayuda\Novedades\images20130906\image01.png" />
@@ -198,6 +209,7 @@
     <Content Include="UsuarioLogin.aspx" />
     <Content Include="UsuarioOlvidoId.aspx" />
     <Content Include="UsuarioOlvidoPassword.aspx" />
+    <Content Include="CedServiciosAyuda.master" />
     <None Include="Descargas\Cedeira-SistAdminFCIs.pdf" />
     <None Include="Descargas\Cedeira-SistTransfMEP.pdf" />
     <Content Include="Descargas\eFact-R-XL.zip" />
@@ -287,12 +299,89 @@
     <Compile Include="Autorizacion.aspx.designer.cs">
       <DependentUpon>Autorizacion.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica001.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica001.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica001.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica001.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Ayuda\ExploradorNovedad.aspx.cs">
       <DependentUpon>ExploradorNovedad.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Ayuda\ExploradorNovedad.aspx.designer.cs">
       <DependentUpon>ExploradorNovedad.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica002.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica002.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica002.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica002.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica004.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica004.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica004.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica004.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica005.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica005.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica005.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica005.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica006.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica006.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica006.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica006.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica007.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica007.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica007.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica007.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica008.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica008.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica008.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica008.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica009.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica009.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica009.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica009.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica010.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica010.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica010.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica010.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica011.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica011.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica011.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica011.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica012.aspx.cs">
+      <DependentUpon>OperarFacturaElectronica012.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica012.aspx.designer.cs">
+      <DependentUpon>OperarFacturaElectronica012.aspx</DependentUpon>
     </Compile>
     <Compile Include="Captcha.ashx.cs">
       <DependentUpon>Captcha.ashx</DependentUpon>
@@ -303,6 +392,13 @@
     </Compile>
     <Compile Include="CedServicios.Master.designer.cs">
       <DependentUpon>CedServicios.Master</DependentUpon>
+    </Compile>
+    <Compile Include="CedServiciosAyuda.master.cs">
+      <DependentUpon>CedServiciosAyuda.master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="CedServiciosAyuda.master.designer.cs">
+      <DependentUpon>CedServiciosAyuda.master</DependentUpon>
     </Compile>
     <Compile Include="ClienteBaja.aspx.cs">
       <DependentUpon>ClienteBaja.aspx</DependentUpon>

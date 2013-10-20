@@ -145,5 +145,9 @@ namespace CedServicios.Site
                 }
             }
         }
+        protected void SalirButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
     }
 }
