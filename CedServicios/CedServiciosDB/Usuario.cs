@@ -17,11 +17,13 @@ namespace CedServicios.DB
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("select Usuario.IdUsuario, Usuario.Nombre, Usuario.Telefono, Usuario.Email, Usuario.Password, Usuario.Pregunta, Usuario.Respuesta, Usuario.CantidadEnviosMail, Usuario.FechaUltimoReenvioMail, Usuario.EmailSMS, Usuario.IdWF, Usuario.Estado, Usuario.UltActualiz, isnull(ConfigCUITUNpredef.Cuit, '') as CuitPredef, isnull(ConfigCUITUNpredef.IdUN, 0) as IdUNPredef, isnull(ConfigFechaOKeFactTyC.Valor, '00000000') as FechaOKeFactTyC, ");
-            a.Append("isnull(ConfigCantidadFilasXPagina.Valor, '0') as CantidadFilasXPagina ");
+            a.Append("isnull(ConfigCantidadFilasXPagina.Valor, '0') as CantidadFilasXPagina, ");
+            a.Append("isnull(ConfigMostrarAyudaComoPaginaDefault.Valor, 'SI') as MostrarAyudaComoPaginaDefault ");
             a.Append("from Usuario ");
             a.Append("left outer join Configuracion ConfigCUITUNpredef on Usuario.IdUsuario=ConfigCUITUNpredef.IdUsuario and ConfigCUITUNpredef.IdItemConfig='CUITUNpredef' ");
             a.Append("left outer join Configuracion ConfigFechaOKeFactTyC on Usuario.IdUsuario=ConfigFechaOKeFactTyC.IdUsuario and ConfigFechaOKeFactTyC.IdItemConfig='FechaOKeFactTyC' ");
             a.Append("left outer join Configuracion ConfigCantidadFilasXPagina on Usuario.IdUsuario=ConfigCantidadFilasXPagina.IdUsuario and ConfigCantidadFilasXPagina.IdItemConfig='CantidadFilasXPagina' ");
+            a.Append("left outer join Configuracion ConfigMostrarAyudaComoPaginaDefault on Usuario.IdUsuario=ConfigMostrarAyudaComoPaginaDefault.IdUsuario and ConfigMostrarAyudaComoPaginaDefault.IdItemConfig='MostrarAyudaComoPaginaDefault' ");
             a.Append("where Usuario.IdUsuario='" + Usuario.Id + "' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count == 0)
@@ -55,6 +57,7 @@ namespace CedServicios.DB
             {
                 Hasta.CantidadFilasXPagina = Convert.ToInt32(Desde["CantidadFilasXPagina"]);
             }
+            Hasta.MostrarAyudaComoPaginaDefault = Convert.ToString(Desde["MostrarAyudaComoPaginaDefault"])=="SI";
         }
         private void Copiar_ListaSegunFiltros(DataRow Desde, Entidades.Usuario Hasta)
         {

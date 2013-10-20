@@ -63,8 +63,16 @@
 	        </td>
         </tr>
         <tr>
+			<td align="left" valign="top" style="padding-right:10px; padding-top:5px">
+                <asp:Label ID="Label6" runat="server" Text="Mostrar Ayuda" ></asp:Label>
+			</td>
+	        <td align="left" colspan="2" valign="top" style="padding-right:5px; padding-top:5px">
+                <asp:CheckBox ID="MostrarAyudaComoPaginaDefaultCheckBox" runat="server" Text=" (como página predeterminada)" AutoPostBack="true" oncheckedchanged="MostrarAyudaComoPaginaDefaultCheckBox_CheckedChanged" />
+	        </td>
+        </tr>
+        <tr>
             <td align="center" colspan="3" style="padding-top:20px">
-                <asp:Button ID="SalirButton" runat="server" Text="Salir" TabIndex="4" PostBackUrl="~/Default.aspx"/>
+                <asp:Button ID="SalirButton" runat="server" Text="Salir" TabIndex="4" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

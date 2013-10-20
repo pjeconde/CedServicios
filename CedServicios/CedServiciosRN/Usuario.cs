@@ -138,7 +138,7 @@ namespace CedServicios.RN
             DB.Usuario usuario = new DB.Usuario((Entidades.Sesion)Sesion);
             usuario.Confirmar(Usuario);
             Leer(Usuario, (Entidades.Sesion)Sesion);
-            if (EnviarCorreo) RN.EnvioSMS.Enviar("Alta cuenta " + CantidadDeFilas((Entidades.Sesion)Sesion).ToString(), Usuario.Nombre + " (" + Usuario.Email + ")", usuario.DestinatariosAvisoAltaUsuario());
+            if (EnviarCorreo) RN.EnvioSMS.Enviar("Alta cuenta " + CantidadDeFilas((Entidades.Sesion)Sesion).ToString(), Usuario.Nombre + " (" + Usuario.Email + ") - IdUsuario: " + Usuario.Id, usuario.DestinatariosAvisoAltaUsuario());
         }
         public static bool IdCuentaDisponible(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
@@ -244,6 +244,22 @@ namespace CedServicios.RN
             int cantidadFilas = listaUsuario.Count;
             CantidadFilas = cantidadFilas;
             return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaUsuario);
+        }
+        public static void SetearMostrarAyudaComoPaginaDefault(Entidades.Sesion Sesion, bool Valor)
+        {
+            CedServicios.DB.Configuracion db = new DB.Configuracion(Sesion);
+            Entidades.Configuracion configuracion = new Entidades.Configuracion();
+            configuracion.IdUsuario = Sesion.Usuario.Id;
+            configuracion.Cuit = String.Empty;
+            configuracion.IdUN = 0;
+            configuracion.TipoPermiso.Id = String.Empty;
+            configuracion.IdItemConfig = "MostrarAyudaComoPaginaDefault";
+            if (Valor)
+                configuracion.Valor = "SI";
+            else
+                configuracion.Valor = "NO";
+            db.SetearValor(configuracion);
+            Sesion.Usuario.MostrarAyudaComoPaginaDefault = configuracion.Valor == "SI";
         }
     }
 }

@@ -168,8 +168,9 @@ namespace CedServicios.Site
                 case "Administración|Usuario|Modificación datos de Configuración":
                     Response.Redirect("~/ConfiguracionModificar.aspx");
                     break;
-                case "Ayuda|Manual":
-                    Response.Redirect("~/default.aspx");
+                case "Ayuda|Manual|¿ Cómo empiezo a operar con facturas electrónicas ?":
+                    sesion.EstoyEnAyuda = true;
+                    Response.Redirect("~/Ayuda/Instructivas/OperarFacturaElectronica001.aspx");
                     break;
                 case "Ayuda|Novedades":
                     Response.Redirect("~/Ayuda/ExploradorNovedad.aspx");
@@ -204,7 +205,7 @@ namespace CedServicios.Site
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     RN.Sesion.AsignarCuit(sesion.CuitsDelUsuario[CUITDropDownList.SelectedIndex], sesion);
                     //Funciones.PersonalizarControlesMaster(this, true, sesion);
-                    Response.Redirect("~/Default.aspx");
+                    Response.Redirect(sesion.Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
                 }
             }
         }
@@ -229,7 +230,7 @@ namespace CedServicios.Site
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     RN.Sesion.AsignarUN(sesion.Cuit.UNs[UNDropDownList.SelectedIndex], sesion);
                     //Funciones.PersonalizarControlesMaster(this, true, sesion);
-                    Response.Redirect("~/Default.aspx");
+                    Response.Redirect(sesion.Usuario.PaginaDefault(sesion));
                 }
             }
         }

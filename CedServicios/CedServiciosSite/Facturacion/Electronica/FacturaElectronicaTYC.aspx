@@ -101,7 +101,7 @@
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Button ID="ButtonAceptar" runat="server" OnClick="ButtonAceptar_Click" Text="Confirmar" />
-                <asp:Button ID="ButtonRechazar" runat="server" PostBackUrl="~/Default.aspx" Text="Rechazar" />
+                <asp:Button ID="ButtonRechazar" runat="server" onclick="ButtonRechazar_Click" Text="Rechazar" />
             </td>
         </tr>
         <tr>

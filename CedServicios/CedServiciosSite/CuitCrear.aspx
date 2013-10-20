@@ -82,7 +82,7 @@
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
                 <asp:Button ID="AceptarButton" runat="server" TabIndex="502" Text="Aceptar" onclick="AceptarButton_Click" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="503" Text="Cancelar" PostBackUrl="~/Default.aspx" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="503" Text="Cancelar" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

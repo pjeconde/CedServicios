@@ -28,7 +28,7 @@
         </tr>
         <tr>
             <td align="center" style="padding-top:20px">
-                <asp:Button ID="SalirButton" runat="server" Text="Salir" PostBackUrl="~/Default.aspx"/>
+                <asp:Button ID="SalirButton" runat="server" Text="Salir" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>
@@ -108,8 +108,7 @@
                 <td>
                 </td>
                 <td align="left" style="padding-top:20px">
-                    <asp:Button ID="SalirCuitButton" runat="server" Text="Salir" 
-                        onclick="SalirButton_Click"/>
+                    <asp:Button ID="SalirCuitButton" runat="server" Text="Salir" onclick="SalirCuitButton_Click"/>
                 </td>
             </tr>
         </table>
@@ -155,8 +154,7 @@
                 <td>
                 </td>
                 <td align="left" style="padding-top:20px">
-                    <asp:Button ID="SalirUNButton" runat="server" Text="Salir" 
-                        onclick="SalirButton_Click"/>
+                    <asp:Button ID="SalirUNButton" runat="server" Text="Salir" onclick="SalirUNButton_Click"/>
                 </td>
             </tr>
         </table>
@@ -247,8 +245,7 @@
                 <td>
                 </td>
                 <td align="left" style="padding-top:20px">
-                    <asp:Button ID="SalirPuntoVtaButton" runat="server" Text="Salir" 
-                        onclick="SalirButton_Click"/>
+                    <asp:Button ID="SalirPuntoVtaButton" runat="server" Text="Salir" onclick="SalirPuntoVtaButton_Click"/>
                 </td>
             </tr>
         </table>

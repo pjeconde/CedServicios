@@ -273,16 +273,28 @@ namespace CedServicios.Site
             }
             ModalPopupExtender1.Show();
         }
-        protected void SalirButton_Click(object sender, EventArgs e)
-        {
-            CuitsTreeView.SelectedNode.Selected = false;
-        }
         protected void UsaDatosCuitCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             PuntoVtaPanel_Domicilio.Visible = !UsaDatosCuitCheckBox.Checked;
             PuntoVtaPanel_Contacto.Visible = !UsaDatosCuitCheckBox.Checked;
             PuntoVtaPanel_DatosImpositivos.Visible = !UsaDatosCuitCheckBox.Checked;
             PuntoVtaPanel_DatosIdentificatorios.Visible = !UsaDatosCuitCheckBox.Checked;
+        }
+        protected void SalirButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        protected void SalirCuitButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        protected void SalirUNButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        protected void SalirPuntoVtaButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
         }
     }
 }
