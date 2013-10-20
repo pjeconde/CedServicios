@@ -1,0 +1,17 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="CedServiciosAyuda.master.cs" Inherits="CedServicios.Site.CedServiciosAyuda" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tr>
+            <td style="width:100%; padding-right:10px; padding-top:5px; height:20px" align="right">
+                <asp:CheckBox ID="NoMostrarAyudaComoPaginaDefaultCheckBox" runat="server" AutoPostBack="true" Text="Ocultar Ayuda" oncheckedchanged="NoMostrarAyudaComoPaginaDefaultCheckBox_CheckedChanged" />
+            </td>
+        </tr>
+        <tr>
+            <td style="padding-left:10px">
+                <asp:ContentPlaceHolder ID="ContentPlaceAyuda" runat="server" Visible="true">
+                </asp:ContentPlaceHolder>
+            </td>
+        </tr>
+    </table>
+</asp:Content>
