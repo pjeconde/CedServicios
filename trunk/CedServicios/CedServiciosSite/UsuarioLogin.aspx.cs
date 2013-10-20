@@ -44,7 +44,7 @@ namespace CedServicios.Site
                 RN.Usuario.Login(usuario, sesion);
                 RN.Sesion.AsignarUsuario(usuario, sesion);
                 RN.ReporteActividad.EnviarSiCorresponde(sesion);
-                Response.Redirect("~/Default.aspx");
+                Response.Redirect(usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
             }
             catch (System.Threading.ThreadAbortException)
             {
