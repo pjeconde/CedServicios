@@ -10,6 +10,9 @@
         <tr>
             <td align="center" style="padding-top:20px">
                 <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text="Este usuario no puede agregar, modificar o eliminar datos.<br/>Solo sirve para simular la carga de un comprobante electrónico."></asp:Label>
+                <br />
+                <br />
+                <input type="button" value="Continuar" name="Volver" onclick="history.back()" />
             </td>
         </tr>
     </table>

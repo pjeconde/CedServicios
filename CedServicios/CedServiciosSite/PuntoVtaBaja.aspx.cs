@@ -20,7 +20,6 @@ namespace CedServicios.Site
                 else
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-
                     IdUNDropDownList.DataSource = RN.UN.ListaVigentesPorCuit(sesion.Cuit, sesion);
                     IdTipoPuntoVtaDropDownList.DataSource = RN.TipoPuntoVta.Lista(sesion);
                     IdMetodoGeneracionNumeracionLoteDropDownList.DataSource = RN.MetodoGeneracionNumeracionLote.Lista(sesion);
@@ -94,6 +93,10 @@ namespace CedServicios.Site
             else
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.UsuarioDemo == true)
+                {
+                    Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                }
                 Entidades.PuntoVta puntoVta = (Entidades.PuntoVta)Session["PuntoVta"];
                 try
                 {
