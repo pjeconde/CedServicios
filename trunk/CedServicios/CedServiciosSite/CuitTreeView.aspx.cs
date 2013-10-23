@@ -231,12 +231,12 @@ namespace CedServicios.Site
                     UltNroLoteTextBox.Text = puntoVta.UltNroLote.ToString();
                     UsaDatosCuitCheckBox.Checked = !puntoVta.UsaSetPropioDeDatosCuit;
                     UsaDatosCuitCheckBox_CheckedChanged(UsaDatosCuitCheckBox, new EventArgs());
+                    PuntoVtaPanel_Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                    PuntoVtaPanel_DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                    PuntoVtaPanel_DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                    DataBind();
                     if (UsaDatosCuitCheckBox.Checked)
                     {
-                        PuntoVtaPanel_Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
-                        PuntoVtaPanel_DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
-                        PuntoVtaPanel_DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
-                        DataBind();
                         PuntoVtaPanel_Domicilio.Calle = cuit.Domicilio.Calle;
                         PuntoVtaPanel_Domicilio.Nro = cuit.Domicilio.Nro;
                         PuntoVtaPanel_Domicilio.Piso = cuit.Domicilio.Piso;
@@ -256,6 +256,28 @@ namespace CedServicios.Site
                         PuntoVtaPanel_DatosImpositivos.FechaInicioActividades = cuit.DatosImpositivos.FechaInicioActividades;
                         PuntoVtaPanel_DatosIdentificatorios.GLN = cuit.DatosIdentificatorios.GLN;
                         PuntoVtaPanel_DatosIdentificatorios.CodigoInterno = cuit.DatosIdentificatorios.CodigoInterno;
+                    }
+                    else
+                    {
+                        PuntoVtaPanel_Domicilio.Calle = puntoVta.Domicilio.Calle;
+                        PuntoVtaPanel_Domicilio.Nro = puntoVta.Domicilio.Nro;
+                        PuntoVtaPanel_Domicilio.Piso = puntoVta.Domicilio.Piso;
+                        PuntoVtaPanel_Domicilio.Depto = puntoVta.Domicilio.Depto;
+                        PuntoVtaPanel_Domicilio.Manzana = puntoVta.Domicilio.Manzana;
+                        PuntoVtaPanel_Domicilio.Sector = puntoVta.Domicilio.Sector;
+                        PuntoVtaPanel_Domicilio.Torre = puntoVta.Domicilio.Torre;
+                        PuntoVtaPanel_Domicilio.Localidad = puntoVta.Domicilio.Localidad;
+                        PuntoVtaPanel_Domicilio.IdProvincia = puntoVta.Domicilio.Provincia.Id;
+                        PuntoVtaPanel_Domicilio.CodPost = puntoVta.Domicilio.CodPost;
+                        PuntoVtaPanel_Contacto.Nombre = puntoVta.Contacto.Nombre;
+                        PuntoVtaPanel_Contacto.Email = puntoVta.Contacto.Email;
+                        PuntoVtaPanel_Contacto.Telefono = puntoVta.Contacto.Telefono;
+                        PuntoVtaPanel_DatosImpositivos.IdCondIVA = puntoVta.DatosImpositivos.IdCondIVA;
+                        PuntoVtaPanel_DatosImpositivos.IdCondIngBrutos = puntoVta.DatosImpositivos.IdCondIngBrutos;
+                        PuntoVtaPanel_DatosImpositivos.NroIngBrutos = puntoVta.DatosImpositivos.NroIngBrutos;
+                        PuntoVtaPanel_DatosImpositivos.FechaInicioActividades = puntoVta.DatosImpositivos.FechaInicioActividades;
+                        PuntoVtaPanel_DatosIdentificatorios.GLN = puntoVta.DatosIdentificatorios.GLN;
+                        PuntoVtaPanel_DatosIdentificatorios.CodigoInterno = puntoVta.DatosIdentificatorios.CodigoInterno;
                     }
 
                     PuntoVtaPanel_CUITTextBox.Enabled = false;

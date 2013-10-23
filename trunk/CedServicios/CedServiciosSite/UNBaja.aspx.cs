@@ -54,6 +54,10 @@ namespace CedServicios.Site
                 else
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    if (sesion.UsuarioDemo == true)
+                    {
+                        Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                    }
                     if (AceptarButton.Text == "Dar de Baja")
                     {
                         RN.UN.CambiarEstado(sesion.UN, "DeBaja", sesion);
