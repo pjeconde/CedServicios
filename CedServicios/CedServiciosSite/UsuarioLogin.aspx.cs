@@ -66,10 +66,11 @@ namespace CedServicios.Site
             try
             {
                 MensajeLabel.Text = String.Empty;
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 Entidades.Usuario usuario = new Entidades.Usuario();
                 usuario.Id = UsuarioTextBox.Text;
                 usuario.Password = PasswordTextBox.Text;
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                sesion.UsuarioDemo = false;
                 RN.Usuario.Login(usuario, sesion);
                 RN.Sesion.AsignarUsuario(usuario, sesion);
                 RN.ReporteActividad.EnviarSiCorresponde(sesion);

@@ -197,6 +197,11 @@ namespace CedServicios.Site
         }
         protected void MostrarAyudaComoPaginaDefaultCheckBox_CheckedChanged(object sender, EventArgs e)
         {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            if (sesion.UsuarioDemo == true)
+            {
+                Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+            }
             RN.Usuario.SetearMostrarAyudaComoPaginaDefault((Entidades.Sesion)Session["Sesion"], MostrarAyudaComoPaginaDefaultCheckBox.Checked);
         }
     }
