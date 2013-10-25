@@ -200,7 +200,7 @@ namespace CedServicios.Site
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             if (sesion.UsuarioDemo == true)
             {
-                Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                Response.Redirect("~/MensajeUsuarioDEMO.aspx?ConfiguracionModificar");
             }
             RN.Usuario.SetearMostrarAyudaComoPaginaDefault((Entidades.Sesion)Session["Sesion"], MostrarAyudaComoPaginaDefaultCheckBox.Checked);
         }
