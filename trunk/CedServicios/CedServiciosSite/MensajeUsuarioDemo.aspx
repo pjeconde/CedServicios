@@ -12,7 +12,8 @@
                 <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text="Este usuario no puede agregar, modificar o eliminar datos.<br/>Solo sirve para simular la carga de un comprobante electrónico."></asp:Label>
                 <br />
                 <br />
-                <input type="button" value="Continuar" name="Volver" onclick="history.back()" />
+                <asp:Button ID="BotonContinuarBack" runat="server" Text="Continuar.." OnClientClick="JavaScript: window.history.back(1); return false;" />
+                <asp:Button ID="BotonContinuar" runat="server" Text="Continuar" OnClick="BotonContinuar_Click" />
             </td>
         </tr>
     </table>

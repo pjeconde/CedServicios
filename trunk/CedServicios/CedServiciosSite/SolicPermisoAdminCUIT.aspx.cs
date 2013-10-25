@@ -29,6 +29,10 @@ namespace CedServicios.Site
                 else
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    if (sesion.UsuarioDemo == true)
+                    {
+                        Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                    }
                     RN.Cuit.Leer(cuit, sesion);
                     string referenciaAAprobadores = String.Empty;
                     RN.Permiso.SolicitarPermisoParaUsuario(cuit, out referenciaAAprobadores, sesion);

@@ -15,14 +15,17 @@ namespace CedServicios.Site
             {
                 try
                 {
+                    BotonContinuar.Visible = false;
+                    BotonContinuarBack.Visible = true;
                     string a = HttpContext.Current.Request.Url.Query.ToString().Replace("?", String.Empty);
                     switch (a)
                     {
                         case "Alta":
                             //MensajeLabel.Text = "";
                             break;
-                        case "Modificar":
-                            //MensajeLabel.Text = "";
+                        case "ConfiguracionModificar":
+                            BotonContinuar.Visible = true;
+                            BotonContinuarBack.Visible = false;
                             break;
                         case "Baja":
                             //MensajeLabel.Text = "";
@@ -38,6 +41,11 @@ namespace CedServicios.Site
                     MensajeLabel.Text = EX.Funciones.Detalle(ex);
                 }
             }
+        }
+
+        protected void BotonContinuar_Click(object sender, EventArgs e)
+        {
+            Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
         }
     }
 }

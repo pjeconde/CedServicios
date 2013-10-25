@@ -20,9 +20,13 @@ namespace CedServicios.Site
         {
             try
             {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.UsuarioDemo == true)
+                {
+                    Response.Redirect("~/MensajeUsuarioDEMO.aspx");
+                }
                 Entidades.Cuit cuit = new Entidades.Cuit();
                 cuit.Nro = CUITTextBox.Text;
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 RN.Cuit.Leer(cuit, sesion);
 
                 Entidades.UN un = new Entidades.UN();
