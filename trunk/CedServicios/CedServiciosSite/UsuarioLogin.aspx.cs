@@ -42,7 +42,7 @@ namespace CedServicios.Site
                 usuario.Password = usuarioAux.Password;
                 sesion.UsuarioDemo = true;
                 RN.Usuario.Login(usuario, sesion);
-                RN.Sesion.AsignarUsuario(usuario, sesion);
+                RN.Sesion.AsignarUsuario(usuario, sesion, Request.UserHostAddress);
                 RN.ReporteActividad.EnviarSiCorresponde(sesion);
                 Response.Redirect(usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
             }
@@ -72,7 +72,7 @@ namespace CedServicios.Site
                 usuario.Password = PasswordTextBox.Text;
                 sesion.UsuarioDemo = false;
                 RN.Usuario.Login(usuario, sesion);
-                RN.Sesion.AsignarUsuario(usuario, sesion);
+                RN.Sesion.AsignarUsuario(usuario, sesion, Request.UserHostAddress);
                 RN.ReporteActividad.EnviarSiCorresponde(sesion);
                 Response.Redirect(usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
             }

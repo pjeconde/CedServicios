@@ -47,6 +47,7 @@
     <Compile Include="Cuit.cs" />
     <Compile Include="db.cs" />
     <Compile Include="Funciones.cs" />
+    <Compile Include="InicioSesion.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="LogDetalle.cs" />
     <Compile Include="Medio.cs" />
