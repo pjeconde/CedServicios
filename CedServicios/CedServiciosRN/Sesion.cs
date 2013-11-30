@@ -124,9 +124,19 @@ namespace CedServicios.RN
             }
             return opcionesHabilitadas;
         }
-        public static void AsignarUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
+        public static void AsignarUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion, string IP)
         {
             Sesion.Usuario = Usuario;
+            Entidades.Configuracion registrarIPs = new Entidades.Configuracion("RegistrarInicioSesion");
+            DB.Configuracion db = new DB.Configuracion(Sesion);
+            db.Leer(registrarIPs);
+            if (registrarIPs.Valor == "SI")
+            {
+                Entidades.InicioSesion inicioSesion = new Entidades.InicioSesion();
+                inicioSesion.IdUsuario = Usuario.Id;
+                inicioSesion.IP = IP;
+                CedServicios.RN.InicioSesion.Registrar(inicioSesion, Sesion);
+            }
         }
         public static void RefrescarDatosUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {

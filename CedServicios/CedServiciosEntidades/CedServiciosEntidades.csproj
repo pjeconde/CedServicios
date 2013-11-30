@@ -54,6 +54,7 @@
     <Compile Include="DatosIdentificatorios.cs" />
     <Compile Include="DatosImpositivos.cs" />
     <Compile Include="Estado.cs" />
+    <Compile Include="InicioSesion.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="LogDetalle.cs" />
     <Compile Include="Medio.cs" />
