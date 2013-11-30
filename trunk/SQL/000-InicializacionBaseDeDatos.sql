@@ -586,6 +586,7 @@ GO
 insert Configuracion values ('', '', 0, '', 'UltimoIdWF', '0')
 insert Configuracion values ('', '', 0, '', 'UltimoAccionNro', '0')
 insert Configuracion values ('', '', 0, '', 'UltimoMesReporteActividad', '')
+insert Configuracion values ('', '', 0, '', 'RegistrarInicioSesion', 'SI')
 GO
 
 declare @idWF varchar(256)
@@ -616,3 +617,23 @@ GO
 
 insert Configuracion values ('DEMO', '', 0, '', 'UsuarioDEMO', '')
 GO
+
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[InicioSesion](
+	[Fecha] [datetime] NOT NULL,
+	[IdUsuario] [varchar](50) NOT NULL,
+	[IP] [varchar](15) NOT NULL,
+ CONSTRAINT [PK_Table_InicioSesion] PRIMARY KEY CLUSTERED 
+(
+	[Fecha] ASC
+)WITH (PAD_INDEX  = OFF, STATISTICS_NORECOMPUTE  = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS  = ON, ALLOW_PAGE_LOCKS  = ON) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+SET ANSI_PADDING OFF
+GO
+
