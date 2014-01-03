@@ -618,8 +618,8 @@ namespace CedServicios.Site
                 GLN_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.GLN);
             }
             Codigo_Interno_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_interno);
-            Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Codigo_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Codigo_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio)));
-            Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
+            //Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Codigo_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Codigo_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio)));
+            //Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
             Denominacion_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.denominacion);
             Domicilio_Calle_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle);
             Domicilio_Numero_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_numero);
@@ -635,6 +635,32 @@ namespace CedServicios.Site
             Telefono_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.telefono);
             InicioDeActividadesCompradorDatePickerWebUserControl.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.inicio_de_actividades);
             Provincia_CompradorDropDownList.SelectedIndex = Provincia_CompradorDropDownList.Items.IndexOf(Provincia_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.provincia)));
+
+            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+            {
+                return pv.Nro == auxPV;
+            }).IdTipoPuntoVta;
+            Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+            Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+            if (!idtipo.Equals("Exportacion") || (lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio != null && lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio != 70) || PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
+            {
+                Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
+                Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
+                Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
+                Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaNoExportacion();
+            }
+            else
+            {
+                Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
+                Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
+                Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
+                Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
+                Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio)));
+                Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+            }
+            Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
+            Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio);
+            
             Condicion_IVA_CompradorDropDownList.SelectedIndex = Condicion_IVA_CompradorDropDownList.Items.IndexOf(Condicion_IVA_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.condicion_IVA)));
             //Vendedor
             if (lc.comprobante[0].cabecera.informacion_vendedor.razon_social != null)
@@ -887,7 +913,7 @@ namespace CedServicios.Site
                         case "BFiscal":
                             AjustarCamposXPtaVentaBonoFiscal();
                             break;
-                        case "Export":
+                        case "Exportacion":
                             AjustarCamposXPtaVentaExport();
                             break;
                         default:
@@ -1138,7 +1164,7 @@ namespace CedServicios.Site
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
-                if (idtipo.Equals("Export"))
+                if (idtipo.Equals("Exportacion"))
                 {
                     if (listadeimpuestos[0].importe_impuesto != 0 || listadeimpuestos.Count > 1)
                     {
@@ -1170,7 +1196,7 @@ namespace CedServicios.Site
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
-                if (idtipo.Equals("Export"))
+                if (idtipo.Equals("Exportacion"))
                 {
                     cab.presta_servSpecified = false;
                 }
@@ -1269,7 +1295,7 @@ namespace CedServicios.Site
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         throw new Exception("La condición de pago es obligatoria para exportación");
                     }
@@ -1346,7 +1372,7 @@ namespace CedServicios.Site
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (!idtipo.Equals("Export"))
+                    if (!idtipo.Equals("Exportacion"))
                     {
                         throw new Exception("La fecha de vencimiento es obligatoria");
                     }
@@ -1370,7 +1396,7 @@ namespace CedServicios.Site
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         IVAcomputableDropDownList.Focus();
                         throw new Exception("El IVA computable no se debe informar para exportación");
@@ -1400,7 +1426,7 @@ namespace CedServicios.Site
                 }).IdTipoPuntoVta;
                 if (!CodigoOperacionDropDownList.SelectedValue.Equals(string.Empty))
                 {
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         CodigoOperacionDropDownList.Focus();
                         throw new Exception("El código de operación no se debe informar para exportación");
@@ -1418,7 +1444,7 @@ namespace CedServicios.Site
                 }
                 else
                 {
-                    if (!idtipo.Equals("Export"))
+                    if (!idtipo.Equals("Exportacion"))
                     {
                         if (idtipo.Equals("RG2904") && (Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("2") || Tipo_De_ComprobanteDropDownList.SelectedValue.Equals("3")))
                         {
@@ -1470,7 +1496,7 @@ namespace CedServicios.Site
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
                         string tipoComp = Tipo_De_ComprobanteDropDownList.SelectedValue;
-                        if (idtipo.Equals("Export") && tipoComp.Equals("19"))
+                        if (idtipo.Equals("Exportacion") && tipoComp.Equals("19"))
                         {
                             throw new Exception("Las referencias no se deben informar para facturas de exportación(19). Sólo para notas de débito y/o crédito (20 y 21).");
                         }

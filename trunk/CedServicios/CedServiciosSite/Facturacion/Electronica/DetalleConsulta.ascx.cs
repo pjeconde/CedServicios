@@ -56,7 +56,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
                 //Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
                 RN.Comprobante crn = new RN.Comprobante();
-                if (l.descripcion.Substring(0, 1) == "%")
+                if (l.descripcion != "" && l.descripcion.Substring(0, 1) == "%")
                 {
                     linea.descripcion = crn.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
                 }
