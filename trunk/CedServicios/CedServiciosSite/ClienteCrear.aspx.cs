@@ -109,7 +109,7 @@ namespace CedServicios.Site
                 catch (Exception ex)
                 {
                     MensajeLabel.Text = EX.Funciones.Detalle(ex);
-                    if (MensajeLabel.Text.IndexOf("PK_Cliente") != 0)
+                    if (MensajeLabel.Text.IndexOf("PK_Cliente") != -1)
                     {
                         MensajeLabel.Text = "Ya existe un Cliente con este 'Nro.'";
                     }

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s0:definitions xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://ar/com/ib/cfe/ejb/services" xmlns="" name="ReporteFacturaWebServiceDefinitions" targetNamespace="http://ar/com/ib/cfe/ejb/services" xmlns:s0="http://schemas.xmlsoap.org/wsdl/">
+  <s0:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ar/com/ib/cfe/ejb/services" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="getComprobantesListado">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="getComprobantesListadoInput" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getComprobantesListadoResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="getComprobantesListadoOutput" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getComprobanteDetalle">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="getComprobanteDetalleInput" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getComprobanteDetalleResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="getComprobanteDetalleOutput" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </s0:types>
+  <s0:message name="getComprobantesListado">
+    <s0:part name="parameters" element="s1:getComprobantesListado" />
+  </s0:message>
+  <s0:message name="getComprobantesListadoResponse">
+    <s0:part name="parameters" element="s1:getComprobantesListadoResponse" />
+  </s0:message>
+  <s0:message name="getComprobanteDetalle">
+    <s0:part name="parameters" element="s1:getComprobanteDetalle" />
+  </s0:message>
+  <s0:message name="getComprobanteDetalleResponse">
+    <s0:part name="parameters" element="s1:getComprobanteDetalleResponse" />
+  </s0:message>
+  <s0:portType name="ReporteFacturaWebServicePortTypeImpl">
+    <s0:operation name="getComprobantesListado" parameterOrder="parameters">
+      <s0:input message="s1:getComprobantesListado" />
+      <s0:output message="s1:getComprobantesListadoResponse" />
+    </s0:operation>
+    <s0:operation name="getComprobanteDetalle" parameterOrder="parameters">
+      <s0:input message="s1:getComprobanteDetalle" />
+      <s0:output message="s1:getComprobanteDetalleResponse" />
+    </s0:operation>
+  </s0:portType>
+  <s0:binding name="ReporteFacturaWebServiceSoapBinding" type="s1:ReporteFacturaWebServicePortTypeImpl">
+    <s2:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <s0:operation name="getComprobantesListado">
+      <s2:operation soapAction="http://ar/com/ib/cfe/ejb/services/getComprobantesListado" style="document" />
+      <s0:input>
+        <s2:body use="literal" parts="parameters" />
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal" parts="parameters" />
+      </s0:output>
+    </s0:operation>
+    <s0:operation name="getComprobanteDetalle">
+      <s2:operation soapAction="http://ar/com/ib/cfe/ejb/services/getComprobanteDetalle" style="document" />
+      <s0:input>
+        <s2:body use="literal" parts="parameters" />
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal" parts="parameters" />
+      </s0:output>
+    </s0:operation>
+  </s0:binding>
+  <s0:service name="ReporteFacturaWebService">
+    <s0:port name="ReporteFacturaWebServicePort" binding="s1:ReporteFacturaWebServiceSoapBinding">
+      <s2:address location="https://ibsibqa01:10001/ws/ReporteFacturaWebService" />
+    </s0:port>
+  </s0:service>
+</s0:definitions>

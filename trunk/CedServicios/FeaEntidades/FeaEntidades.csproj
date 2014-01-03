@@ -1358,7 +1358,13 @@
     <Compile Include="InterFacturas\comprobante_listado.cs" />
     <Compile Include="InterFacturas\comprobante_response.cs" />
     <Compile Include="InterFacturas\consulta_lote_comprobantes.cs" />
+    <Compile Include="InterFacturas\Listado\emisor_comprobante_response.cs" />
+    <Compile Include="InterFacturas\Listado\emisor_comprobante_listado.cs" />
+    <Compile Include="InterFacturas\Listado\consulta_emisor_comprobante_listado.cs" />
     <Compile Include="InterFacturas\informacion_adicional_comprobante.cs" />
+    <Compile Include="InterFacturas\Listado\consulta_emisor_comprobante_listado_response.cs" />
+    <Compile Include="InterFacturas\Listado\consulta_emisor_listado_response.cs" />
+    <Compile Include="InterFacturas\Listado\errores_response.cs" />
     <Compile Include="InterFacturas\observaciones_respuesta_afipObservacion_afip.cs" />
     <Compile Include="InterFacturas\detalle.cs" />
     <Compile Include="InterFacturas\error.cs" />
@@ -1387,6 +1393,9 @@
     <Compile Include="InterFacturas\resumenDescuentos.cs" />
     <Compile Include="InterFacturas\resumenImportes_moneda_origen.cs" />
     <Compile Include="InterFacturas\resumenImpuestos.cs" />
+    <Compile Include="InterFacturas\Validar\comprobante_response.cs" />
+    <Compile Include="InterFacturas\Validar\error.cs" />
+    <Compile Include="InterFacturas\Validar\lote_response.cs" />
     <Compile Include="InterFacturas\XML\Consulta_Lote_Comprobantes_Response.cs" />
     <Compile Include="InterFacturas\XML\Consulta_Lote_Response.cs" />
     <Compile Include="IVA\Cero.cs" />

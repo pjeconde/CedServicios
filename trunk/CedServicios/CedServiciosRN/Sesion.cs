@@ -112,6 +112,7 @@ namespace CedServicios.RN
                     {
                         opcionesHabilitadas.Add("Factura Electrónica|Alta");
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobantes (base de datos)");
+                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobantes (online Interfacturas)");
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (archivo XML)");
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (online Interfacturas)");
                         opcionesHabilitadas.Add("Factura Electrónica|Términos y Condiciones");

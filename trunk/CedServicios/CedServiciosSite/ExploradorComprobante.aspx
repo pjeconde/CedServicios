@@ -14,13 +14,13 @@
 	        </td>
 			<td align="left" style="padding-top:20px">
                 Desde
-                <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px" TabIndex="304"></asp:TextBox>
+                <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
                 <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
                     TargetControlID="FechaDesdeTextBox" Format="yyyyMMdd" PopupButtonID="FechaDesdeImage" >
                 </ajaxToolkit:CalendarExtender>
                 <asp:Image runat="server" ID="FechaDesdeImage" ImageUrl="~/Imagenes/Calendar.gif" />
                 &nbsp;&nbsp;Hasta
-                <asp:TextBox ID="FechaHastaTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="70px" TabIndex="304"></asp:TextBox>
+                <asp:TextBox ID="FechaHastaTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
                 <ajaxToolkit:CalendarExtender ID="FechaHastaCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
                     TargetControlID="FechaHastaTextBox" Format="yyyyMMdd" PopupButtonID="FechaHastaImage" >
                 </ajaxToolkit:CalendarExtender>
@@ -121,6 +121,10 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="right" wrap="False" />
                             </asp:BoundField>
+                            <asp:ButtonField HeaderText="" Text="Consulta On-Line" CommandName="ConsultaOnLine" ButtonType="Link" ItemStyle-ForeColor="Blue" ControlStyle-Width="100">
+                            </asp:ButtonField>
+                            <asp:ButtonField HeaderText="" Text="Actualizar On-Line" CommandName="ActualizarOnLine" ButtonType="Link" ItemStyle-ForeColor="Blue" ControlStyle-Width="110">
+                            </asp:ButtonField>
                         </Columns>
                     </asp:GridView>
                 </asp:Panel>

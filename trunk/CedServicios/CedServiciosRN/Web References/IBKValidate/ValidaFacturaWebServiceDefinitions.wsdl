@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<s0:definitions xmlns:s2="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:s1="http://ar/com/ib/cfe/ejb/services" xmlns="" name="ValidaFacturaWebServiceDefinitions" targetNamespace="http://ar/com/ib/cfe/ejb/services" xmlns:s0="http://schemas.xmlsoap.org/wsdl/">
+  <s0:types>
+    <xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://ar/com/ib/cfe/ejb/services" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:element name="validateFacturas">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="validateFacturasInput" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="validateFacturasResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="validateFacturasOutput" type="xs:string" />
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </s0:types>
+  <s0:message name="validateFacturas">
+    <s0:part name="parameters" element="s1:validateFacturas" />
+  </s0:message>
+  <s0:message name="validateFacturasResponse">
+    <s0:part name="parameters" element="s1:validateFacturasResponse" />
+  </s0:message>
+  <s0:portType name="ValidaFacturaWebServicePortTypeImpl">
+    <s0:operation name="validateFacturas" parameterOrder="parameters">
+      <s0:input message="s1:validateFacturas" />
+      <s0:output message="s1:validateFacturasResponse" />
+    </s0:operation>
+  </s0:portType>
+  <s0:binding name="ValidaFacturaWebServiceSoapBinding" type="s1:ValidaFacturaWebServicePortTypeImpl">
+    <s2:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <s0:operation name="validateFacturas">
+      <s2:operation soapAction="http://ar/com/ib/cfe/ejb/services/validateFacturas" style="document" />
+      <s0:input>
+        <s2:body use="literal" parts="parameters" />
+      </s0:input>
+      <s0:output>
+        <s2:body use="literal" parts="parameters" />
+      </s0:output>
+    </s0:operation>
+  </s0:binding>
+  <s0:service name="ValidaFacturaWebService">
+    <s0:port name="ValidaFacturaWebServicePort" binding="s1:ValidaFacturaWebServiceSoapBinding">
+      <s2:address location="https://ibsibqa01:10001/ws/ValidaFacturaWebService" />
+    </s0:port>
+  </s0:service>
+</s0:definitions>

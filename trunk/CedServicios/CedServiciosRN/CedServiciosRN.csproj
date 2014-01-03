@@ -76,6 +76,16 @@
     <Compile Include="TipoPuntoVta.cs" />
     <Compile Include="UN.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="Web References\IBKComprobantesListado\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\IBKValidate\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\IBK\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -110,6 +120,16 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web References\IBKComprobantesListado\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\IBKComprobantesListado\ReporteFacturaWebServiceDefinitions.wsdl" />
+    <None Include="Web References\IBKValidate\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\IBKValidate\ValidaFacturaWebServiceDefinitions.wsdl" />
     <None Include="Web References\IBK\consulta_lote_comprobantes_response.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -141,6 +161,31 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CedServiciosRN_IBK_FacturaWebServiceConSchema</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\SVNCedServicios\CedServicios\CedServiciosRN\WSDL\ReporteFacturaWebService.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\IBKComprobantesListado\</RelPath>
+      <UpdateFromURL>C:\SVNCedServicios\CedServicios\CedServiciosRN\WSDL\ReporteFacturaWebService.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosRN_IBKComprobantesListado_ReporteFacturaWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\SVNCedServicios\CedServicios\CedServiciosRN\WSDL\ValidaFacturaWebService.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\IBKValidate\</RelPath>
+      <UpdateFromURL>C:\SVNCedServicios\CedServicios\CedServiciosRN\WSDL\ValidaFacturaWebService.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosRN_IBKValidate_ValidaFacturaWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

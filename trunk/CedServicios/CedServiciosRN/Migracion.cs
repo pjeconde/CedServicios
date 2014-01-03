@@ -103,14 +103,14 @@ namespace CedServicios.RN
                         case "BFiscal":
                             puntoVta.IdTipoPuntoVta = "BonoFiscal";
                             break;
-                        case "Export":
+                        case "Exportacion":
                             puntoVta.IdTipoPuntoVta = "Exportacion";
                             break;
                         default:
                             puntoVta.IdTipoPuntoVta = Convert.ToString(dtPuntoDeVenta.Rows[i]["IdTipoPuntoDeVenta"]);
                             break;
                     }
-                    puntoVta.UsaSetPropioDeDatosCuit = Convert.ToString(dtPuntoDeVenta.Rows[i]["Calle"]) != String.Empty && (Convert.ToString(dtPuntoDeVenta.Rows[i]["Calle"]) != cuit.Domicilio.Calle || Convert.ToString(dtPuntoDeVenta.Rows[i]["Nro"]) != cuit.Domicilio.Nro) && cuit.Nro.IndexOf("/33234434312/30709010480/30592449524/") != 0;
+                    puntoVta.UsaSetPropioDeDatosCuit = Convert.ToString(dtPuntoDeVenta.Rows[i]["Calle"]) != String.Empty && (Convert.ToString(dtPuntoDeVenta.Rows[i]["Calle"]) != cuit.Domicilio.Calle || Convert.ToString(dtPuntoDeVenta.Rows[i]["Nro"]) != cuit.Domicilio.Nro) && cuit.Nro.IndexOf("/33234434312/30709010480/30592449524/") != -1;
                     if (puntoVta.UsaSetPropioDeDatosCuit)
                     {
                         puntoVta.Domicilio.Calle = Convert.ToString(dtPuntoDeVenta.Rows[i]["Calle"]);
@@ -209,7 +209,7 @@ namespace CedServicios.RN
                     catch (Exception ex)
                     {
                         //Desambiguación clientes nacionales
-                        if (ex.InnerException.Message.IndexOf("PRIMARY KEY") != 0)
+                        if (ex.InnerException.Message.IndexOf("PRIMARY KEY") != -1)
                         {
                             RN.Cliente.DesambiguarClienteNacional(cliente, Sesion);
                             cliente.IdCliente = cliente.RazonSocial;

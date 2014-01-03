@@ -375,10 +375,10 @@
   </wsdl:binding>
   <wsdl:service name="EnvioIBK">
     <wsdl:port name="EnvioIBKSoap" binding="tns:EnvioIBKSoap">
-      <soap:address location="http://localhost:4167/EnvioIBK.asmx" />
+      <soap:address location="http://localhost:20587/EnvioIBK.asmx" />
     </wsdl:port>
     <wsdl:port name="EnvioIBKSoap12" binding="tns:EnvioIBKSoap12">
-      <soap12:address location="http://localhost:4167/EnvioIBK.asmx" />
+      <soap12:address location="http://localhost:20587/EnvioIBK.asmx" />
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

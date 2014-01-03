@@ -29,6 +29,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             lcWS.cabecera_lote.presta_servSpecified = lc.cabecera_lote.presta_servSpecified;
             lcWS.cabecera_lote.punto_de_venta = lc.cabecera_lote.punto_de_venta;
             lcWS.cabecera_lote.resultado = lc.cabecera_lote.resultado;
+            lcWS.cabecera_lote.gestionar_afip = lc.cabecera_lote.gestionar_afip;
 
             lcWS.comprobante = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobante[lc.comprobante.Length];
 
@@ -127,6 +128,47 @@ namespace CedServicios.Site.Facturacion.Electronica
                 cIBK.cabecera.informacion_vendedor.nro_ingresos_brutos = lc.comprobante[i].cabecera.informacion_vendedor.nro_ingresos_brutos;
                 cIBK.cabecera.informacion_vendedor.provincia = lc.comprobante[i].cabecera.informacion_vendedor.provincia;
                 cIBK.cabecera.informacion_vendedor.telefono = lc.comprobante[i].cabecera.informacion_vendedor.telefono;
+
+                //Info Exportación
+                if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion != null)
+                {
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobanteInformacion_exportacion();
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion;
+                    cIBK.cabecera.informacion_comprobante.informacion_exportacion.id_impositivo = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.id_impositivo;
+                    if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms != null && lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms != "")
+                    {
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.incoterms = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.incoterms;
+                    }
+                    if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms != null && lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms != "")
+                    {
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.descripcion_incoterms;
+                    }
+                    if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != null)
+                    {
+                        if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente != "")
+                        {
+                            cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permiso_existente.Trim();
+                        }
+                        else
+                        {
+                            cIBK.cabecera.informacion_comprobante.informacion_exportacion.permiso_existente = null;
+                        }
+                    }
+                    if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos != null)
+                    {
+                        cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobanteInformacion_exportacionPermisos[lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos.Length];
+                        for (int j = 0; j < lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos.Length; j++)
+                        {
+                            if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j] != null)
+                            {
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j] = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobanteInformacion_exportacionPermisos();
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j].id_permiso = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j].id_permiso;
+                                cIBK.cabecera.informacion_comprobante.informacion_exportacion.permisos[j].destino_mercaderia = lc.comprobante[i].cabecera.informacion_comprobante.informacion_exportacion.permisos[j].destino_mercaderia;
+                            }
+                        }
+                    }
+                }
 
                 org.dyndns.cedweb.envio.lcComprobanteDetalle d = new org.dyndns.cedweb.envio.lcComprobanteDetalle();
                 FeaEntidades.InterFacturas.detalle detalle = lc.comprobante[i].detalle;

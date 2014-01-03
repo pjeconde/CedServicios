@@ -1352,7 +1352,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }).IdTipoPuntoVta;
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-                    if (!idtipo.Equals("Exportacion"))
+                    if (!idtipo.Equals("Exportacion") || (comprador.DocumentoIdTipoDoc != null && comprador.DocumentoIdTipoDoc != "70") || PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
                     {
                         Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                         Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
@@ -1974,6 +1974,111 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
+        protected void ValidarIBKButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>", false);
+                }
+                else
+                {
+                    try
+                    {
+                        string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                        if (NroCertif.Equals(string.Empty))
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>", false);
+                            return;
+                        }
+                        try
+                        {
+                            if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>", false);
+                                return;
+                            }
+                            if (Id_LoteTextbox.Text.Equals(string.Empty))
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>", false);
+                                return;
+                            }
+                            if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>", false);
+                                return;
+                            }
+                            string certificado = "";
+                            string respuesta = "";
+
+                            certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                            org.dyndns.cedweb.valido.ValidoIBK edyndns = new org.dyndns.cedweb.valido.ValidoIBK();
+                            string ValidarIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ValidarIBKUtilizarServidorExterno"];
+                            if (ValidarIBKUtilizarServidorExterno == "SI")
+                            {
+                                edyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ValidarIBKurl"];
+                            }
+                            FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
+
+                            string xmlTexto = "";
+                            RN.Comprobante.SerializarLc(out xmlTexto, lcFea);
+                            
+                            //lcIBK = Conversor.Entidad2IBK(lcFea);
+                            respuesta = edyndns.ValidarIBK(xmlTexto, certificado);
+
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>", false);
+
+                            if (respuesta == "Comprobante enviado satisfactoriamente a Interfacturas.")
+                            {
+                                //Grabar en base de datos
+                                RN.Comprobante comprobante = new RN.Comprobante();
+                                lcFea.cabecera_lote.DestinoComprobante = "ITF";
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+                                comprobante.Registrar(lcFea, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                            }
+                        }
+                        catch (System.Web.Services.Protocols.SoapException soapEx)
+                        {
+                            try
+                            {
+                                XmlDocument doc = new XmlDocument();
+                                doc.LoadXml(soapEx.Detail.OuterXml);
+                                XmlNamespaceManager nsManager = new
+                                    XmlNamespaceManager(doc.NameTable);
+                                nsManager.AddNamespace("errorNS",
+                                    "http://www.cedeira.com.ar/webservices");
+                                XmlNode Node =
+                                    doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
+                                string errorNumber =
+                                    Node.SelectSingleNode("errorNS:ErrorNumber",
+                                    nsManager).InnerText;
+                                string errorMessage =
+                                    Node.SelectSingleNode("errorNS:ErrorMessage",
+                                    nsManager).InnerText;
+                                string errorSource =
+                                    Node.SelectSingleNode("errorNS:ErrorSource",
+                                    nsManager).InnerText;
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + "\\n" + errorMessage.Replace("\r", "").Replace("\n", "").Replace("'", " ") + "');</script>", false);
+                            }
+                            catch (Exception)
+                            {
+                                throw soapEx;
+                            }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + ex.Message + "');</script>", false);
+                    }
+                }
+            }
+        }
         protected void EnviarIBKButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
@@ -2070,7 +2175,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 string errorSource =
                                     Node.SelectSingleNode("errorNS:ErrorSource",
                                     nsManager).InnerText;
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + " : " + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + "\\n" + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>", false);
                             }
                             catch (Exception)
                             {
@@ -4098,6 +4203,15 @@ namespace CedServicios.Site.Facturacion.Electronica
 
         }
 
+        protected void AceptarValidarITFButton_Click(object sender, EventArgs e)
+        {
+            ValidarIBKButton_Click(EnviarIBKButton, new EventArgs());
+        }
+
+        protected void CancelarValidarITFButton_Click(object sender, EventArgs e)
+        {
+
+        }
         protected void ButtonPrueba_Click(object sender, EventArgs e)
         {
 

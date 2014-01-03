@@ -109,7 +109,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 }
                 catch (Exception ex)
                 {
-                    WebForms.Excepciones.Redireccionar(ex, "~/Excepciones/Excepcion.aspx");
+                    WebForms.Excepciones.Redireccionar(ex, "~/Excepciones/Excepciones.aspx");
                 }
             }
         }

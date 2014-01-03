@@ -5,5 +5,11 @@
     <Setting Name="CedServiciosRN_IBK_FacturaWebServiceConSchema" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://bcfealsb02-qa:10001/ws/FacturaWebServiceConSchema</Value>
     </Setting>
+    <Setting Name="CedServiciosRN_IBKValidate_ValidaFacturaWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ibsibqa01:10001/ws/ValidaFacturaWebService</Value>
+    </Setting>
+    <Setting Name="CedServiciosRN_IBKComprobantesListado_ReporteFacturaWebService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://ibsibqa01:10001/ws/ReporteFacturaWebService</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

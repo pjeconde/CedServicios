@@ -426,5 +426,12 @@ namespace CedServicios.DB
             Hasta.CuitRazonSocial = Convert.ToString(Desde["CUITRazonSocial"]);
             Hasta.FechaAlta = Convert.ToDateTime(Desde["FechaAlta"]);
         }
+        public void Actualizar(Entidades.Comprobante Comprobante)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("update Comprobante set Response = '" + Comprobante.Response + "', Estado = '" + Comprobante.Estado + "' ");
+            a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + "and Comprobante.NroComprobante=" + Comprobante.Nro.ToString() + " ");
+            int Cantidad = (int)Ejecutar(a.ToString(), TipoRetorno.CantReg, Transaccion.NoAcepta, sesion.CnnStr);
+        }
     }
 }
