@@ -53,7 +53,7 @@
         </tr>
         <tr>
 			<td align="left" valign="top" style="padding-right:10px; padding-top:20px">
-                <asp:Label ID="Label5" runat="server" Text="Cantidad de renglones<br />(en grillas con paginación)" ></asp:Label>
+                <asp:Label ID="Label5" runat="server" Text="Cantidad de renglones<br/>(en grillas con paginación)" ></asp:Label>
 			</td>
 	        <td align="left" valign="top" style="padding-right:5px; padding-top:20px">
                 <asp:TextBox ID="CantidadFilasXPaginaTextBox" runat="server" Width="86px" Enabled="true" ></asp:TextBox>

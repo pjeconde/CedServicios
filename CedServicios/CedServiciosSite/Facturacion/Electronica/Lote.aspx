@@ -1843,6 +1843,19 @@
                                             </tr>
                                             <tr>
                                                 <td style="width: 100%; padding-right: 3px" colspan="2">
+                                                    <asp:Button ID="ValidarIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
+                                                        BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true" 
+                                                        ForeColor="brown" Height="25px" OnClick="ValidarIBKButton_Click" 
+                                                        Text="Validar lote en Interfacturas" ToolTip="Validar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                        Width="100%" />
+                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
+                                                        PopupControlID="PopupValidarITF" TargetControlID="ValidarIBKButton" 
+                                                        BackgroundCssClass="modalBackground" runat="server" 
+                                                        onload="ModalPopupExtender1_Load" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 100%; padding-right: 3px" colspan="2">
                                                     <asp:Button ID="EnviarIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true" 
                                                         ForeColor="brown" Height="25px" OnClick="EnviarIBKButton_Click" 
@@ -1898,6 +1911,27 @@
                 </td>
                 <td align="left" style="padding-top: 20px">
                     <asp:Button ID="CancelarEnvioITF" runat="server" Text="Cancelar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$AceptarEnvioITF.disabled = true;" OnClick="CancelarEnvioITFButton_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="PopupValidarITF" class="ModalWindow">
+        <table width="100%" style="padding:20px;">
+            <tr>
+                <td colspan="3" align="center">
+                    <asp:Label ID="Label1" runat="server" 
+                        Text="Desea validar el comprobante de forma On-Line en Interfacturas ?" 
+                        SkinID="TextoMediano"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-top: 20px">
+                    <asp:Button ID="AceptarValidarITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarValidarITF.disabled = true;" OnClick="AceptarValidarITFButton_Click" />
+                </td>
+                <td align="center" style="width: 20px">
+                </td>
+                <td align="left" style="padding-top: 20px">
+                    <asp:Button ID="CancelarValidarITF" runat="server" Text="Cancelar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$AceptarValidarITF.disabled = true;" OnClick="CancelarValidarITFButton_Click" />
                 </td>
             </tr>
         </table>

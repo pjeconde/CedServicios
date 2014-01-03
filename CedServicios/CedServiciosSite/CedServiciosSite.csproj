@@ -109,6 +109,7 @@
     <Content Include="ClienteSeleccionar.aspx" />
     <Content Include="ComprobanteConsulta.aspx" />
     <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
+    <Content Include="ExploradorComprobanteOnLineInterfacturas.aspx" />
     <Content Include="MensajeUsuarioDemo.aspx" />
     <Content Include="ExploradorAdministracion.aspx" />
     <Content Include="ExploradorLog.aspx" />
@@ -225,8 +226,18 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\org.dyndns.cedweb.envio\EnvioIBK.disco" />
     <None Include="Web References\org.dyndns.cedweb.consulta\ConsultaIBK.disco" />
+    <None Include="Web References\org.dyndns.cedweb.envio\EnvioIBK.wsdl" />
+    <None Include="Web References\org.dyndns.cedweb.envio\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\org.dyndns.cedweb.valido\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\org.dyndns.cedweb.valido\ValidoIBK.disco" />
+    <None Include="Web References\org.dyndns.cedweb.envio\EnvioIBK.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -236,11 +247,7 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
-    <None Include="Web References\org.dyndns.cedweb.envio\EnvioIBK.wsdl" />
-    <None Include="Web References\org.dyndns.cedweb.envio\Reference.map">
-      <Generator>MSDiscoCodeGenerator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
+    <None Include="Web References\org.dyndns.cedweb.valido\ValidoIBK.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ActividadesAlcanzadas.aspx.cs">
@@ -455,6 +462,13 @@
     </Compile>
     <Compile Include="ComprobanteSeleccionOnlineInterfacturas.aspx.designer.cs">
       <DependentUpon>ComprobanteSeleccionOnlineInterfacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorComprobanteOnLineInterfacturas.aspx.cs">
+      <DependentUpon>ExploradorComprobanteOnLineInterfacturas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorComprobanteOnLineInterfacturas.aspx.designer.cs">
+      <DependentUpon>ExploradorComprobanteOnLineInterfacturas.aspx</DependentUpon>
     </Compile>
     <Compile Include="MensajeUsuarioDemo.aspx.cs">
       <DependentUpon>MensajeUsuarioDemo.aspx</DependentUpon>
@@ -1057,6 +1071,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\org.dyndns.cedweb.valido\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\AjaxControlToolkit\AjaxControlToolkit.csproj">
@@ -1141,6 +1160,28 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:20587/EnvioIBK.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\org.dyndns.cedweb.envio\</RelPath>
+      <UpdateFromURL>http://localhost:20587/EnvioIBK.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_envio_EnvioIBK</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:20587/ValidoIBK.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\org.dyndns.cedweb.valido\</RelPath>
+      <UpdateFromURL>http://localhost:20587/ValidoIBK.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_valido_ValidoIBK</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost:4167/ConsultaIBK.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\org.dyndns.cedweb.consulta\</RelPath>
@@ -1151,17 +1192,6 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_consulta_ConsultaIBK</CachedSettingsPropName>
-    </WebReferenceUrl>
-    <WebReferenceUrl Include="http://localhost:4167/EnvioIBK.asmx">
-      <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\org.dyndns.cedweb.envio\</RelPath>
-      <UpdateFromURL>http://localhost:4167/EnvioIBK.asmx</UpdateFromURL>
-      <ServiceLocationURL>
-      </ServiceLocationURL>
-      <CachedDynamicPropName>
-      </CachedDynamicPropName>
-      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
-      <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_envio_EnvioIBK</CachedSettingsPropName>
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>

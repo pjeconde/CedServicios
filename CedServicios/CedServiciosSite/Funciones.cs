@@ -78,6 +78,9 @@ namespace CedServicios.Site
                 mItem = new MenuItem("Consulta de Comprobantes (base de datos)", "Consulta de Comprobantes (base de datos)");
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+                mItem = new MenuItem("Consulta de Comprobantes (online Interfacturas)", "Consulta de Comprobantes (online Interfacturas)");
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
                 mItem = new MenuItem("Consulta de Comprobante (archivo XML)", "Consulta de Comprobante (archivo XML)");
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;

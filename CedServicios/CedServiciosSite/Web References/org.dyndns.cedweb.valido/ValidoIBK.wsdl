@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.cedeira.com.ar/webservices" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.cedeira.com.ar/webservices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.cedeira.com.ar/webservices">
+      <s:element name="ValidarIBK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="lc" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="pathCertificado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ValidarIBKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ValidarIBKResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ValidarIBKSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidarIBK" />
+  </wsdl:message>
+  <wsdl:message name="ValidarIBKSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidarIBKResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ValidoIBKSoap">
+    <wsdl:operation name="ValidarIBK">
+      <wsdl:input message="tns:ValidarIBKSoapIn" />
+      <wsdl:output message="tns:ValidarIBKSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ValidoIBKSoap" type="tns:ValidoIBKSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidarIBK">
+      <soap:operation soapAction="http://www.cedeira.com.ar/webservices/ValidarIBK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ValidoIBKSoap12" type="tns:ValidoIBKSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ValidarIBK">
+      <soap12:operation soapAction="http://www.cedeira.com.ar/webservices/ValidarIBK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ValidoIBK">
+    <wsdl:port name="ValidoIBKSoap" binding="tns:ValidoIBKSoap">
+      <soap:address location="http://localhost:20587/ValidoIBK.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ValidoIBKSoap12" binding="tns:ValidoIBKSoap12">
+      <soap12:address location="http://localhost:20587/ValidoIBK.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

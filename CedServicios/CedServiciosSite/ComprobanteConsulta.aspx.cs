@@ -113,9 +113,16 @@ namespace CedServicios.Site
 
                 DatosComerciales.ReadOnly = true;
 
-                FeaEntidades.InterFacturas.lote_comprobantes lote = (FeaEntidades.InterFacturas.lote_comprobantes)Cache["ComprobanteAConsultar"];
-                CompletarUI(lote, new EventArgs());
-            
+                try
+                {
+                    FeaEntidades.InterFacturas.lote_comprobantes lote = (FeaEntidades.InterFacturas.lote_comprobantes)Cache["ComprobanteAConsultar"];
+                    CompletarUI(lote, new EventArgs());
+                }
+                catch
+                {
+                    org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = (org.dyndns.cedweb.consulta.ConsultarResult)Cache["ComprobanteAConsultar"];
+                    CompletarUI(clcrdyndns, new EventArgs());
+                }
             }
         }
 
@@ -611,6 +618,7 @@ namespace CedServicios.Site
                 GLN_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.GLN);
             }
             Codigo_Interno_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_interno);
+            Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Codigo_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Codigo_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio)));
             Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
             Denominacion_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.denominacion);
             Domicilio_Calle_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle);
@@ -1500,7 +1508,7 @@ namespace CedServicios.Site
                 }).IdTipoPuntoVta;
                 string tipoComp = Tipo_De_ComprobanteDropDownList.SelectedValue;
                 string tipoExp = TipoExpDropDownList.SelectedValue;
-                if (idtipo.Equals("Export"))
+                if (idtipo.Equals("Exportacion"))
                 {
                     if (tipoComp.Equals("19"))
                     {
@@ -1726,7 +1734,7 @@ namespace CedServicios.Site
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         Domicilio_Calle_CompradorTextBox.Focus();
                         throw new Exception("La calle del domicilio del comprador es obligatoria para exportación");
@@ -1756,7 +1764,7 @@ namespace CedServicios.Site
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         Domicilio_Numero_CompradorTextBox.Focus();
                         throw new Exception("El número de la calle del domicilio del comprador es obligatorio para exportación");
@@ -1792,7 +1800,7 @@ namespace CedServicios.Site
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         if (!PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
                         {
@@ -1844,7 +1852,7 @@ namespace CedServicios.Site
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         r.importe_total_impuestos_nacionalesSpecified = false;
                         rimo.importe_total_impuestos_nacionalesSpecified = false;
@@ -1875,7 +1883,7 @@ namespace CedServicios.Site
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         r.importe_total_ingresos_brutosSpecified = false;
                         rimo.importe_total_ingresos_brutosSpecified = false;
@@ -1906,7 +1914,7 @@ namespace CedServicios.Site
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         r.importe_total_impuestos_municipalesSpecified = false;
                         rimo.importe_total_impuestos_municipalesSpecified = false;
@@ -1937,7 +1945,7 @@ namespace CedServicios.Site
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
-                    if (idtipo.Equals("Export"))
+                    if (idtipo.Equals("Exportacion"))
                     {
                         r.importe_total_impuestos_internosSpecified = false;
                         rimo.importe_total_impuestos_internosSpecified = false;
@@ -1971,7 +1979,7 @@ namespace CedServicios.Site
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
-                if (idtipo.Equals("Export") && !Impuesto_Liq_Rni_ResumenTextBox.Text.Equals("0"))
+                if (idtipo.Equals("Exportacion") && !Impuesto_Liq_Rni_ResumenTextBox.Text.Equals("0"))
                 {
                     throw new Exception("El Impuesto liquidado a RNI o percepción a no categorizados debe informarse en 0 para exportación.");
                 }
@@ -2079,7 +2087,7 @@ namespace CedServicios.Site
                 {
                     return pv.Nro == auxPV;
                 }).IdTipoPuntoVta;
-                if (idtipo.Equals("Export") && !Importe_Total_Neto_Gravado_ResumenTextBox.Text.Equals("0"))
+                if (idtipo.Equals("Exportacion") && !Importe_Total_Neto_Gravado_ResumenTextBox.Text.Equals("0"))
                 {
                     throw new Exception("El importe total neto gravado debe informarse en 0 para exportación.");
                 }

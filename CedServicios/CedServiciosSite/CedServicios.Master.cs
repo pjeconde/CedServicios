@@ -111,6 +111,9 @@ namespace CedServicios.Site
                 case "Factura Electrónica|Consulta de Comprobantes (base de datos)":
                     Response.Redirect("~/ExploradorComprobante.aspx");
                     break;
+                case "Factura Electrónica|Consulta de Comprobantes (online Interfacturas)":
+                    Response.Redirect("~/ExploradorComprobanteOnLineInterfacturas.aspx");
+                    break;
                 case "Factura Electrónica|Consulta de Comprobante (archivo XML)":
                     Response.Redirect("~/ComprobanteSeleccionArchivoXML.aspx");
                     break;

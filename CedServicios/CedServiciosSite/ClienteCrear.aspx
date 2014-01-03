@@ -64,6 +64,10 @@
         </tr>
         <tr>
             <td align="right" style="padding-right:5px; padding-top:2px">
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator3" runat="server"
+                    ControlToValidate="RazonSocialTextBox" ErrorMessage="Razón Social" SetFocusOnError="True" ValidationExpression="[^']*$">
+                    <asp:Label ID="Label6" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                </asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="RazonSocialTextBox"
                     ErrorMessage="Raz.Soc." SetFocusOnError="True">
                     <asp:Label ID="Label8" runat="server" SkinID="IndicadorValidacion"></asp:Label>
