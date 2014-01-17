@@ -38,6 +38,9 @@
     <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="Ionic.Zip">
+      <HintPath>..\..\..\DocsU\Utilitarios\.NET 2010\DotNetZipLib-DevKit-v1.9\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
@@ -110,6 +113,11 @@
     <Content Include="ComprobanteConsulta.aspx" />
     <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
     <Content Include="ExploradorComprobanteOnLineInterfacturas.aspx" />
+    <Content Include="Imagenes\Iconos\ActualizarOnLine.png" />
+    <Content Include="Imagenes\Iconos\Afip.png" />
+    <Content Include="Imagenes\Iconos\Consultar.png" />
+    <Content Include="Imagenes\Iconos\ConsultarOnLine.png" />
+    <Content Include="Imagenes\Iconos\Pdf.png" />
     <Content Include="MensajeUsuarioDemo.aspx" />
     <Content Include="ExploradorAdministracion.aspx" />
     <Content Include="ExploradorLog.aspx" />

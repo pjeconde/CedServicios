@@ -1358,6 +1358,7 @@
     <Compile Include="InterFacturas\comprobante_listado.cs" />
     <Compile Include="InterFacturas\comprobante_response.cs" />
     <Compile Include="InterFacturas\consulta_lote_comprobantes.cs" />
+    <Compile Include="InterFacturas\Detalle\consulta_emisor_comprobante_detalle.cs" />
     <Compile Include="InterFacturas\Listado\emisor_comprobante_response.cs" />
     <Compile Include="InterFacturas\Listado\emisor_comprobante_listado.cs" />
     <Compile Include="InterFacturas\Listado\consulta_emisor_comprobante_listado.cs" />
