@@ -1676,6 +1676,114 @@ namespace CedServicios.RN
             }
         }
 
+        public static string ComprobanteDetalleIBK(string CuitVendedor, string PuntoVta, string TipoComp, long NroComp, long IdLote, string certificado)
+        {
+            RN.IBKComprobantesListado.ReporteFacturaWebService objIBK = new RN.IBKComprobantesListado.ReporteFacturaWebService();
+            //string ValidarIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ValidarIBKUtilizarServidorExterno"];
+            //objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasListado"];
+            objIBK.Url = "https://wsqacfe.interfacturas.com.ar/ws/ReporteFacturaWebService?WSDL";
+            if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
+            {
+                System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
+                string usuarioProxy = System.Configuration.ConfigurationManager.AppSettings["UsuarioProxy"];
+                string claveProxy = System.Configuration.ConfigurationManager.AppSettings["ClaveProxy"];
+                string dominioProxy = System.Configuration.ConfigurationManager.AppSettings["DominioProxy"];
+
+                System.Net.NetworkCredential networkCredential = new System.Net.NetworkCredential(usuarioProxy, claveProxy, dominioProxy);
+                wp.Credentials = networkCredential;
+                objIBK.Proxy = wp;
+            }
+            string storeLocation = System.Configuration.ConfigurationManager.AppSettings["StoreLocation"];
+            X509Store store;
+
+            if (storeLocation == "CurrentUser")
+            {
+                store = new X509Store(StoreLocation.CurrentUser);
+            }
+            else
+            {
+                store = new X509Store(StoreLocation.LocalMachine);
+            }
+            store.Open(OpenFlags.ReadOnly);
+            FeaEntidades.InterFacturas.Detalle.consulta_emisor_comprobante_detalle cecd = new FeaEntidades.InterFacturas.Detalle.consulta_emisor_comprobante_detalle();
+            cecd.cuit_canal = Convert.ToInt64("30690783521");
+            cecd.cuit_vendedor = Convert.ToInt64(CuitVendedor);
+            cecd.punto_de_venta = Convert.ToInt32(PuntoVta);
+            cecd.tipo_de_comprobante = Convert.ToInt32(TipoComp);
+            cecd.numero_comprobante = NroComp;
+            cecd.id_Lote = IdLote;
+            cecd.id_LoteSpecified = false;
+            cecd.estado = "";
+            cecd.id_LoteSpecified = false;
+
+            //Serializar ( pasar de FeaEntidades.InterFacturas.consulta_emisor_comprobante_listado a String XML )
+            MemoryStream ms = new MemoryStream();
+            XmlTextWriter writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(cecd.GetType());
+            x.Serialize(writer, cecd);
+            ms = (MemoryStream)writer.BaseStream;
+            string InputTexto = ByteArrayToString(ms.ToArray());
+            ms.Close();
+            ms = null;
+
+            X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
+            if (col.Count.Equals(1))
+            {
+                objIBK.ClientCertificates.Add(col[0]);
+                System.Threading.Thread.Sleep(1000);
+                string resultado = string.Empty;
+                resultado = objIBK.getComprobanteDetalle(InputTexto);
+
+                //XmlTextWriter writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+                resultado = "<?xml version=\"1.0\" encoding=\"utf-16\"?>" + resultado;
+                resultado = resultado.Replace("\n", "");
+                resultado = resultado.Replace("<consulta_emisor_comprobante_detalle_response xmlns=\"http://lote.schemas.cfe.ib.com.ar/\">", "");
+                resultado = resultado.Replace("</consulta_emisor_comprobante_detalle_response>", "");
+                resultado = resultado.Replace("<consulta_emisor_detalle_response>", "");
+                resultado = resultado.Replace("</consulta_emisor_detalle_response>", "");
+
+                resultado = resultado.Replace("<comprobante>", "<comprobante xmlns=\"http://lote.schemas.cfe.ib.com.ar/\">");
+                resultado = resultado.Replace(" xsi:nil=\"true\"", "");
+
+                ////Deserializar
+                //FeaEntidades.InterFacturas.Listado.consulta_emisor_listado_response lr = new FeaEntidades.InterFacturas.Listado.consulta_emisor_listado_response();
+                //string xml = resultado;
+                //var serializer = new System.Xml.Serialization.XmlSerializer(typeof(FeaEntidades.InterFacturas.Listado.consulta_emisor_listado_response));
+                //using (TextReader reader = new StringReader(xml))
+                //{
+                //    lr = (FeaEntidades.InterFacturas.Listado.consulta_emisor_listado_response)serializer.Deserialize(reader);
+                //}
+
+
+                //if (lcr.Item.GetType() == typeof(IBK.lote_comprobantes_responseErrores_response))
+                //{
+                //    resultado = ((IBK.lote_comprobantes_responseErrores_response)lcr.Item).error[0].descripcion_error;
+                //}
+                //else if (!((IBK.lote_response)(lcr.Item)).estado.Equals("OK"))
+                //{
+                //    if (((IBK.lote_response)lcr.Item).errores_lote != null)
+                //    {
+                //        resultado = ((IBK.lote_response)lcr.Item).errores_lote[0].descripcion_error;
+                //    }
+                //    else
+                //    {
+                //        resultado = ((IBK.lote_response)lcr.Item).comprobante_response[0].errores_comprobante[0].descripcion_error;
+                //    }
+                //    throw new Exception(resultado);
+                //}
+                //else
+                //{
+                //    resultado = "Comprobante enviado satisfactoriamente a Interfacturas.";
+                //}
+                return resultado;
+            }
+            else
+            {
+                throw new Exception("Su certificado no está disponible en nuestro repositorio");
+            }
+        }
+
+
         public static string ByteArrayToString(byte[] characters)
         {
             System.Text.Encoding e = System.Text.Encoding.GetEncoding("ISO-8859-1");
@@ -1690,6 +1798,19 @@ namespace CedServicios.RN
         }
 
         public static void SerializarLc(out string LoteXML, FeaEntidades.InterFacturas.lote_comprobantes Lc)
+        {
+            //Serializar ( pasar de FeaEntidades.InterFacturas.lote_comprobantes a string XML )
+            MemoryStream ms = new MemoryStream();
+            XmlTextWriter writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(Lc.GetType());
+            x.Serialize(writer, Lc);
+            ms = (MemoryStream)writer.BaseStream;
+            LoteXML = ByteArrayToString(ms.ToArray());
+            ms.Close();
+            ms = null;
+        }
+
+        public static void SerializarC(out string LoteXML, FeaEntidades.InterFacturas.comprobante Lc)
         {
             //Serializar ( pasar de FeaEntidades.InterFacturas.lote_comprobantes a string XML )
             MemoryStream ms = new MemoryStream();

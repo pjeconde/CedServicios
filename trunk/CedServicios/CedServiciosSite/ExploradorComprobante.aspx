@@ -59,8 +59,11 @@
                     <asp:GridView ID="ComprobantesGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                         <Columns>
-                            <asp:ButtonField HeaderText="" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue">
-                            </asp:ButtonField>
+                            <asp:TemplateField ControlStyle-Width="40">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="ConsultarButton" runat="server" ToolTip="Consulta Local" CommandName="Seleccionar" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Consultar.png" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:BoundField DataField="DescrTipoComprobante" HeaderText="Tipo" SortExpression="DescrTipoComprobante">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
@@ -121,10 +124,26 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="right" wrap="False" />
                             </asp:BoundField>
-                            <asp:ButtonField HeaderText="" Text="Consulta On-Line" CommandName="ConsultaOnLine" ButtonType="Link" ItemStyle-ForeColor="Blue" ControlStyle-Width="100">
-                            </asp:ButtonField>
-                            <asp:ButtonField HeaderText="" Text="Actualizar On-Line" CommandName="ActualizarOnLine" ButtonType="Link" ItemStyle-ForeColor="Blue" ControlStyle-Width="110">
-                            </asp:ButtonField>
+                            <asp:TemplateField ControlStyle-Width="40">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="ConsultarOnLineButton" runat="server" ToolTip="Consultar On-Line" CommandName="ConsultarOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/ConsultarOnLine.png" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ControlStyle-Width="40">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="ActualizarOnlineButton" runat="server" ToolTip="Actualizar el Estado On-Line" CommandName="ActualizarOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/ActualizarOnLine.png" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ControlStyle-Width="40">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="ExportarButton" runat="server" ToolTip="Exportar Interface RG.2485" CommandName="ExportarRG2485" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Afip.png" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ControlStyle-Width="40">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="PDFButton" runat="server" ToolTip="Exportar PDF" CommandName="PDF" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Pdf.png" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </asp:Panel>

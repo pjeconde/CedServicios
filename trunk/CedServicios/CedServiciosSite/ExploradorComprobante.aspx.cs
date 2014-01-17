@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Drawing;
 using System.Xml;
 using System.IO;
+using Ionic.Zip;
+using System.Diagnostics;
 
 namespace CedServicios.Site
 {
@@ -72,7 +74,7 @@ namespace CedServicios.Site
                 string script = "window.open('/ComprobanteConsulta.aspx', '');";
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
             }
-            else if (e.CommandName == "ConsultaOnLine")
+            else if (e.CommandName == "ConsultarOnLine")
             {
                 int item = Convert.ToInt32(e.CommandArgument);
                 List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
@@ -85,8 +87,8 @@ namespace CedServicios.Site
                         MensajeLabel.Text = "Aún no disponemos de su certificado digital";
                         return;
                     }
-                    GrabarLogTexto("~/Consultar.txt", "Consulta de Lote CUIT: " + comprobante.Cuit + "  Nro.Lote: " + comprobante.NroLote + "  Nro. Punto de Vta.: " + comprobante.NroPuntoVta);
-                    GrabarLogTexto("~/Consultar.txt", "NroSerieCertifITF: " + NroCertif);
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Consulta de Lote CUIT: " + comprobante.Cuit + "  Nro.Lote: " + comprobante.NroLote + "  Nro. Punto de Vta.: " + comprobante.NroPuntoVta);
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "NroSerieCertifITF: " + NroCertif);
                     if (NroCertif.Equals(string.Empty))
                     {
                         MensajeLabel.Text = "Aún no disponemos de su certificado digital";
@@ -96,11 +98,11 @@ namespace CedServicios.Site
                     string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
                     org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
                     string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
-                    GrabarLogTexto("~/Consultar.txt", "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
                     if (ConsultaIBKUtilizarServidorExterno == "SI")
                     {
                         clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
-                        GrabarLogTexto("~/Consultar.txt", "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
                     }
                     org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
                     clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(comprobante.Cuit), comprobante.NroLote, comprobante.NroPuntoVta, certificado);
@@ -155,8 +157,8 @@ namespace CedServicios.Site
                         MensajeLabel.Text = "Aún no disponemos de su certificado digital";
                         return;
                     }
-                    GrabarLogTexto("~/Consultar.txt", "Consulta de Lote CUIT: " + comprobante.Cuit + "  Nro.Lote: " + comprobante.NroLote + "  Nro. Punto de Vta.: " + comprobante.NroPuntoVta);
-                    GrabarLogTexto("~/Consultar.txt", "NroSerieCertifITF: " + NroCertif);
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Consulta de Lote CUIT: " + comprobante.Cuit + "  Nro.Lote: " + comprobante.NroLote + "  Nro. Punto de Vta.: " + comprobante.NroPuntoVta);
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "NroSerieCertifITF: " + NroCertif);
                     if (NroCertif.Equals(string.Empty))
                     {
                         MensajeLabel.Text = "Aún no disponemos de su certificado digital";
@@ -166,11 +168,11 @@ namespace CedServicios.Site
                     string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
                     org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
                     string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
-                    GrabarLogTexto("~/Consultar.txt", "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
                     if (ConsultaIBKUtilizarServidorExterno == "SI")
                     {
                         clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
-                        GrabarLogTexto("~/Consultar.txt", "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
                     }
                     org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
                     clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(comprobante.Cuit), comprobante.NroLote, comprobante.NroPuntoVta, certificado);
@@ -182,21 +184,40 @@ namespace CedServicios.Site
                     comprobante.Response = XML;
                     if (lc.cabecera_lote.resultado == "A")
                     {
+                        //Controlar que sea el mismo comprobante (local vs on-line)
+                        if (comprobante.Nro != lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante)
+                        {
+                            MensajeLabel.Text = "(Campo: Nro. de Comprobante). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
+                            return;
+                        }
+                        if (comprobante.TipoComprobante.Id != lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)
+                        {
+                            MensajeLabel.Text = "(Campo: Tipo de Comprobante). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
+                            return;
+                        }
+                        if (comprobante.Importe != lc.comprobante[0].resumen.importe_total_factura)
+                        {
+                            MensajeLabel.Text = "(Campo: Importe Total). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
+                            return;
+                        }
                         comprobante.WF.Estado = "Vigente";
                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
                         string script = "window.open('/ComprobanteConsulta.aspx', '');";
+                        BuscarButton_Click(sender, new EventArgs());
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     }
                     else if (lc.cabecera_lote.resultado == "R")
                     {
                         comprobante.WF.Estado = "Rechazado";
                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                        string script = "<SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF / AFIP.\\n" + "XXXXXXXXXXXXXXXXXXXX" + "');</script>";
+                        string script = "<SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF / AFIP.\\n" + "Resultado: " + lc.cabecera_lote.resultado + "  Motivo: " + lc.cabecera_lote.motivo + "');</script>";
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "Message", script, true);
                     }
                     else
                     {
-                        MensajeLabel.Text = "No se puede realizar la actualización, cuando el comprobante se encuentra en el siguiente estadoo en Interfacturas ( Estado: " + clcrdyndns.comprobante[0].cabecera.informacion_comprobante.resultado + ").";
+                        MensajeLabel.Text = "No se puede realizar la actualización, cuando el comprobante se encuentra en el siguiente estado en Interfacturas ( Estado: " + clcrdyndns.comprobante[0].cabecera.informacion_comprobante.resultado + ").";
                         return;
                     }
                 }
@@ -229,23 +250,373 @@ namespace CedServicios.Site
                     }
                 }
             }
-        }
-        private void GrabarLogTexto(string archivo, string mensaje)
-        {
-            try
+            else if (e.CommandName == "ExportarRG2485")
             {
-                using (FileStream fs = File.Open(Server.MapPath(archivo), FileMode.Append, FileAccess.Write))
+                int item = Convert.ToInt32(e.CommandArgument);
+                List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
+                Entidades.Comprobante comprobante = lista[item];
+                FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                byte[] bytes;
+                System.IO.MemoryStream ms;
+                try
                 {
-                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
+                    bytes = new byte[comprobante.Response.Length * sizeof(char)];
+                    System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                    ms = new System.IO.MemoryStream(bytes);
+                    ms.Seek(0, System.IO.SeekOrigin.Begin);
+                    lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+
+                    //Crear nombre de archivo default sin extensión
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(lote.cabecera_lote.cuit_vendedor);
+                    sb.Append("-");
+                    sb.Append(lote.cabecera_lote.punto_de_venta.ToString("0000"));
+                    sb.Append("-");
+                    sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
+                    sb.Append("-");
+                    sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
+                    
+                    //Crear nombre de archivo ZIP
+                    System.Text.StringBuilder sbZIP = new System.Text.StringBuilder();
+                    sbZIP.Append(sb.ToString() + ".zip");
+
+                    //Crear archivo CABECERA EMISOR
+                    System.Text.StringBuilder sbCabeceraE = new System.Text.StringBuilder();
+                    sbCabeceraE.Append(sb.ToString() + "-CABECERA_EMISOR.txt");
+                    System.IO.MemoryStream m = new System.IO.MemoryStream();
+                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sbCabeceraE.ToString()), System.IO.FileMode.Create);
+                    m.WriteTo(fs);
+                    fs.Close();
+                    //Guardar info en archivo CABECERA EMISOR
+                    System.Text.StringBuilder sbDataCabeceraE = new System.Text.StringBuilder();
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    string Campo2 = String.Format("{0,11}", sesion.Cuit.Nro);
+                    string Campo3 = String.Format("{0,-30}", Truncate(sesion.Cuit.RazonSocial, 30));
+                    string Campo4 = String.Format("{0,-30}", sesion.Cuit.DatosImpositivos.NroIngBrutos);
+                    string Campo5 = sesion.Cuit.DatosImpositivos.IdCondIVA.ToString("00");
+                    string Campo6 = String.Format("{0,-30}", ""); 
+                    try
                     {
-                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
+                        string RespAux6 = FeaEntidades.CondicionesIVA.CondicionIVA.Lista().Find(delegate(FeaEntidades.CondicionesIVA.CondicionIVA ci)
+                        {
+                            return (ci.Codigo == sesion.Cuit.DatosImpositivos.IdCondIVA);
+                        }).Descr;
+                        Campo6 = String.Format("{0,-27}", Truncate(RespAux6, 27));
                     }
+                    catch 
+                    {
+                    }
+                    string Campo7 = String.Format("{0,-8}", sesion.Cuit.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd"));
+                    string Campo8 = String.Format("{0,-30}", sesion.Cuit.Domicilio.Calle);
+                    string Campo9 = String.Format("{0,-6}", sesion.Cuit.Domicilio.Nro);
+                    string Campo10 = String.Format("{0,-5}", sesion.Cuit.Domicilio.Piso);
+                    string Campo11 = String.Format("{0,-5}", sesion.Cuit.Domicilio.Depto);
+                    string Campo12 = String.Format("{0,-5}", sesion.Cuit.Domicilio.Sector);
+                    string Campo13 = String.Format("{0,-5}", sesion.Cuit.Domicilio.Torre);
+                    string Campo14 = String.Format("{0,-5}", sesion.Cuit.Domicilio.Manzana);
+                    string Campo15 = Convert.ToInt32(sesion.Cuit.Domicilio.Provincia.Id).ToString("00");
+                    string Campo16 = String.Format("{0,-8}", sesion.Cuit.Domicilio.CodPost);
+                    string Campo17 = String.Format("{0,-25}", Truncate(sesion.Cuit.Domicilio.Localidad, 25));
+                    sbDataCabeceraE.AppendLine("1" + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11 + Campo12 + Campo13 + Campo14 + Campo15 + Campo16 + Campo17);
+                    using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/Temp/" + sbCabeceraE.ToString())))
+                    {
+                        outfile.Write(sbDataCabeceraE.ToString());
+                    }
+
+                    //Crear archivo CABECERA COMPROBANTE 
+                    System.Text.StringBuilder sbCabeceraC = new System.Text.StringBuilder();
+                    sbCabeceraC.Append(sb.ToString() + "-CABECERA_COMPROBANTE.txt");
+                    m = new System.IO.MemoryStream();
+                    fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sbCabeceraC.ToString()), System.IO.FileMode.Create);
+                    m.WriteTo(fs);
+                    fs.Close();
+                    //Guardar info en archivo CABECERA COMPROBANTE
+                    System.Text.StringBuilder sbDataCabeceraC = new System.Text.StringBuilder();
+                    Campo2 = "ORIGINAL";
+                    Campo3 = String.Format("{0,-8}", lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
+                    Campo4 = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00");
+                    if (Campo4 == "01" || Campo4 == "02" || Campo4 == "03" || Campo4 == "04" || Campo4 == "05" || Campo4 == "39" || Campo4 == "60" || Campo4 == "63")
+                    {
+                        Campo5 = "A";
+                    }
+                    else if (Campo4 == "06" || Campo4 == "07" || Campo4 == "08" || Campo4 == "09" || Campo4 == "10" || Campo4 == "40" || Campo4 == "61" || Campo4 == "64")
+                    {
+                        Campo5 = "B";
+                    }
+                    else
+                    {
+                        Campo5 = " ";
+                    }
+                    Campo6 = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000");
+                    Campo7 = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000");
+                    Campo8 = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000");
+                    Campo9 = lote.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString("00");
+                    Campo10 = lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString("00000000000");
+                    Campo11 = String.Format("{0,-30}", lote.comprobante[0].cabecera.informacion_comprador.denominacion);
+                    Campo12 = lote.comprobante[0].cabecera.informacion_comprador.condicion_IVA.ToString("00");
+                    Campo13 = String.Format("{0,-30}", Truncate(lote.comprobante[0].cabecera.informacion_comprador.domicilio_calle, 30));
+                    Campo14 = String.Format("{0,-6}", lote.comprobante[0].cabecera.informacion_comprador.domicilio_numero);
+                    Campo15 = String.Format("{0,-5}", lote.comprobante[0].cabecera.informacion_comprador.domicilio_piso);
+                    Campo16 = String.Format("{0,-5}", lote.comprobante[0].cabecera.informacion_comprador.domicilio_depto);
+                    Campo17 = String.Format("{0,-5}", lote.comprobante[0].cabecera.informacion_comprador.domicilio_sector);
+                    string Campo18 = String.Format("{0,-5}", lote.comprobante[0].cabecera.informacion_comprador.domicilio_torre);
+                    string Campo19 = String.Format("{0,-5}", lote.comprobante[0].cabecera.informacion_comprador.domicilio_manzana);
+                    string Campo20 = String.Format("{0,2}", lote.comprobante[0].cabecera.informacion_comprador.provincia);
+                    string Campo21 = String.Format("{0,-8}", lote.comprobante[0].cabecera.informacion_comprador.cp);
+                    string Campo22 = String.Format("{0,-25}", Truncate(lote.comprobante[0].cabecera.informacion_comprador.localidad, 25));
+                    string Campo23 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_factura.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_factura.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo24 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_concepto_no_gravado.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_concepto_no_gravado.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo25 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_neto_gravado.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_neto_gravado.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo26 = String.Format("{0,18}", lote.comprobante[0].resumen.impuesto_liq.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.impuesto_liq.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo27 = String.Format("{0,18}", lote.comprobante[0].resumen.impuesto_liq_rni.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.impuesto_liq_rni.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo28 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_operaciones_exentas.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_operaciones_exentas.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo29 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_nacionales.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_nacionales.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo30 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_ingresos_brutos.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_ingresos_brutos.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo31 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_municipales.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_municipales.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo32 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_internos.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_internos.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo33 = String.Format("{0,-3}", lote.comprobante[0].resumen.codigo_moneda);
+                    string Campo34 = String.Format("{0,13}", lote.comprobante[0].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 10) + ".00")).Substring(0, 10) + String.Format("{0,13}", lote.comprobante[0].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 10) + ".00")).Substring(11, 2);
+                    string Campo35 = String.Format("{0,1}", lote.comprobante[0].resumen.cant_alicuotas_iva);
+                    string Campo36 = String.Format("{0,1}", lote.comprobante[0].cabecera.informacion_comprobante.codigo_operacion);
+                    string Campo37 = String.Format("{0,-14}", lote.comprobante[0].cabecera.informacion_comprobante.cae);
+                    string Campo38 = String.Format("{0,-8}", lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae);
+                    string Campo39 = String.Format("{0,8}", "        ");
+
+                    sbDataCabeceraC.AppendLine("1" + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11 + Campo12 + Campo13 + Campo14 + Campo15 + Campo16 + Campo17 + Campo18 + Campo19 + Campo20 + Campo21 + Campo22 + Campo23 + Campo24 + Campo26 + Campo26 + Campo27 + Campo28 + Campo29 + Campo30 + Campo31 + Campo32 + Campo33 + Campo34 + Campo35 + Campo36 + Campo37 + Campo38 + Campo39); 
+                    using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/Temp/" + sbCabeceraC.ToString())))
+                    {
+                        outfile.Write(sbDataCabeceraC.ToString());
+                    }
+
+                    //Crear archivo DETALLE
+                    System.Text.StringBuilder sbDetalle = new System.Text.StringBuilder();
+                    sbDetalle.Append(sb.ToString() + "-DETALLE.txt");
+                    m = new System.IO.MemoryStream();
+                    fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sbDetalle.ToString()), System.IO.FileMode.Create);
+                    m.WriteTo(fs);
+                    fs.Close();
+                    //Guardar info en archivo DETALLE
+                    System.Text.StringBuilder sbDataDetalle = new System.Text.StringBuilder();
+                    for (int i = 0; i < lote.comprobante[0].detalle.linea.Length; i++)
+                    {
+                        string descr = lote.comprobante[0].detalle.linea[i].descripcion;
+                        if (descr.Length > 0 && descr.Substring(0, 1) == "%")
+                        {
+                            descr = HexToString(descr);
+                        }
+                        Campo2 = String.Format("{0,-100}", Truncate(descr, 100));
+                        Campo3 = lote.comprobante[0].detalle.linea[i].cantidad.ToString(new string(Convert.ToChar("0"), 12));
+                        //ojo format
+                        Campo4 = Convert.ToInt32(lote.comprobante[0].detalle.linea[i].unidad).ToString("00");
+                        Campo5 = String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].precio_unitario.ToString(new string(Convert.ToChar("0"), 16) +".00")).Substring(0, 16) + String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].precio_unitario.ToString(new string(Convert.ToChar("0"), 16) + ".00")).Substring(17, 2);
+                        Campo6 = String.Format("{0,18}", lote.comprobante[0].detalle.linea[i].importe_total_descuentos.ToString(new string(Convert.ToChar("0"), 15) +".00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].detalle.linea[i].importe_total_descuentos.ToString(new string(Convert.ToChar("0"), 15) + ".00")).Substring(16, 2);
+                        //importe ajuste
+                        Campo7 = String.Format("{0,19}", new string(Convert.ToChar("0"), 18));
+                        Campo8 = String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].importe_total_articulo.ToString(new string(Convert.ToChar("0"), 16) +".00")).Substring(0, 16) + String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].importe_total_articulo.ToString(new string(Convert.ToChar("0"), 16) + ".00")).Substring(17, 2);
+                        Campo9 = String.Format("{0,5}", lote.comprobante[0].detalle.linea[i].alicuota_iva.ToString("00.00")).Substring(0, 2) + String.Format("{0,5}", lote.comprobante[0].detalle.linea[i].alicuota_iva.ToString("00.00")).Substring(3, 2);
+                        Campo10 = String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].importe_iva.ToString(new string(Convert.ToChar("0"), 16) +".00")).Substring(0, 16) + String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].importe_iva.ToString(new string(Convert.ToChar("0"), 16) + ".00")).Substring(17, 2);
+                        Campo11 = String.Format("{0,1}", lote.comprobante[0].detalle.linea[i].indicacion_exento_gravado);
+                        sbDataDetalle.AppendLine("3" + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11);
+                    }
+                    using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/Temp/" + sbDetalle.ToString())))
+                    {
+                        outfile.Write(sbDataDetalle.ToString());
+                    }
+
+                    //Descargar ZIP ( Cabecera Emisor, Cabecera Comprobante y Detalle )
+                    string filename = sbZIP.ToString();
+                    String dlDir = @"~/Temp/";
+                    String path = Server.MapPath(dlDir + filename);
+                    System.IO.FileInfo toDownload = new System.IO.FileInfo(path);
+                    System.IO.FileInfo toCabeceraE = new System.IO.FileInfo(Server.MapPath(dlDir + sbCabeceraE.ToString()));
+                    System.IO.FileInfo toCabeceraC = new System.IO.FileInfo(Server.MapPath(dlDir + sbCabeceraC.ToString()));
+                    System.IO.FileInfo toDetalle = new System.IO.FileInfo(Server.MapPath(dlDir + sbDetalle.ToString()));
+
+                    using (ZipFile zip = new ZipFile())
+                    {
+                        zip.AddFile(Server.MapPath(dlDir + sbCabeceraE.ToString()), "");
+                        zip.AddFile(Server.MapPath(dlDir + sbCabeceraC.ToString()), "");
+                        zip.AddFile(Server.MapPath(dlDir + sbDetalle.ToString()), "");
+                        zip.Save(Server.MapPath(dlDir + filename));
+                    }
+                    if (toDownload.Exists)
+                    {
+                        Response.Clear();
+                        Response.AddHeader("Content-Disposition", "attachment; filename=" + toDownload.Name);
+                        Response.AddHeader("Content-Length", toDownload.Length.ToString());
+                        Response.ContentType = "application/octet-stream";
+                        Response.WriteFile(dlDir + filename);
+                        Response.Flush();
+                        Response.Close();
+                        //Response.End();
+
+                        toDownload.Delete();
+                        toCabeceraE.Delete();
+                        toCabeceraC.Delete();
+                        toDetalle.Delete();
+                    }
+                    else
+                    {
+                        WebForms.Excepciones.Redireccionar(new EX.Validaciones.ArchivoInexistente(filename), "~/NotificacionDeExcepcion.aspx");
+                    }
+                    //Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + sb.ToString(), false);
+                }
+                catch (Exception ex)
+                {
+                    string script = "Problemas para generar la interfaz.\\n" + ex.Message;
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                    MensajeLabel.Text = script;
                 }
             }
-            catch
+            else if (e.CommandName == "PDF-InfoLocal")
             {
+                int item = Convert.ToInt32(e.CommandArgument);
+                List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
+                Entidades.Comprobante comprobante = lista[item];
+                FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                byte[] bytes;
+                System.IO.MemoryStream ms;
+                try
+                {
+                    comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
+                    bytes = new byte[comprobante.Response.Length * sizeof(char)];
+                    System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                    ms = new System.IO.MemoryStream(bytes);
+                    ms.Seek(0, System.IO.SeekOrigin.Begin);
+                    lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+                    
+                    string comprobanteXML = "";
+                    RN.Comprobante.SerializarC(out comprobanteXML, lote.comprobante[0]);
+                    System.Text.StringBuilder sbXMLData = new System.Text.StringBuilder();
+                    sbXMLData.AppendLine(comprobanteXML);
+
+                    //Crear nombre de archivo default sin extensión
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(lote.cabecera_lote.cuit_vendedor);
+                    sb.Append("-");
+                    sb.Append(lote.cabecera_lote.punto_de_venta.ToString("0000"));
+                    sb.Append("-");
+                    sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
+                    sb.Append("-");
+                    sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
+
+                    //Crear nombre de archivo ZIP
+                    System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
+                    sbXML.Append(sb.ToString() + ".xml");
+                    System.Text.StringBuilder sbPDF = new System.Text.StringBuilder();
+                    sbPDF.Append(sb.ToString() + ".pdf");
+
+                    //Crear archivo comprobante XML
+                    System.IO.MemoryStream m = new System.IO.MemoryStream();
+                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sbXML.ToString()), System.IO.FileMode.Create);
+                    m.WriteTo(fs);
+                    fs.Close();
+
+                    //Grabar información comprobante XML
+                    using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/Temp/" + sbXML.ToString())))
+                    {
+                        outfile.Write(sbXMLData.ToString());
+                    }
+
+                    ExecuteCommand(sbXML.ToString(), sbPDF.ToString());
+                }
+                catch (Exception ex)
+                {
+                    string script = "Problemas para generar el PDF.\\n" + ex.Message;
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                    MensajeLabel.Text = script;
+                }
+            }
+            else if (e.CommandName == "PDF")
+            {
+                int item = Convert.ToInt32(e.CommandArgument);
+                List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
+                Entidades.Comprobante comprobante = lista[item];
+
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> listaR = new List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>();
+                MensajeLabel.Text = String.Empty;
+                Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
+                string resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
+                try
+                {
+                    string comprobanteXML = resp;
+                    System.Text.StringBuilder sbXMLData = new System.Text.StringBuilder();
+                    sbXMLData.AppendLine(comprobanteXML);
+
+                    //Crear nombre de archivo default sin extensión
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(comprobante.Cuit);
+                    sb.Append("-");
+                    sb.Append(comprobante.NroPuntoVta.ToString("0000"));
+                    sb.Append("-");
+                    sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
+                    sb.Append("-");
+                    sb.Append(comprobante.Nro.ToString("00000000"));
+
+                    //Crear nombre de archivo ZIP
+                    System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
+                    sbXML.Append(sb.ToString() + ".xml");
+                    System.Text.StringBuilder sbPDF = new System.Text.StringBuilder();
+                    sbPDF.Append(sb.ToString() + ".pdf");
+
+                    //Crear archivo comprobante XML
+                    System.IO.MemoryStream m = new System.IO.MemoryStream();
+                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sbXML.ToString()), System.IO.FileMode.Create);
+                    m.WriteTo(fs);
+                    fs.Close();
+
+                    //Grabar información comprobante XML
+                    using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/Temp/" + sbXML.ToString())))
+                    {
+                        outfile.Write(sbXMLData.ToString());
+                    }
+
+                    ExecuteCommand(sbXML.ToString(), sbPDF.ToString());
+                }
+                catch
+                {
+                }
             }
         }
+
+        public void ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF)
+        {
+            int exitcode;
+            ProcessStartInfo ProcessInfo;
+            Process process;
+            ProcessInfo = new
+            ProcessStartInfo("java.exe", @"-cp " + Server.MapPath("~/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/Temp/" + NombreArchivosbXML) + " " + Server.MapPath("~/Temp/" + NombreArchivosbPDF) + " ORIGINAL");
+            ProcessInfo.CreateNoWindow = true;
+            ProcessInfo.UseShellExecute = false;
+            // redirecting standard output and error
+            ProcessInfo.RedirectStandardError = true;
+            ProcessInfo.RedirectStandardOutput = true;
+
+            process = Process.Start(ProcessInfo);
+  
+            process.WaitForExit();
+
+           //Reading output and error
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+
+            exitcode = process.ExitCode;
+            MensajeLabel.Text = output + " ";
+            MensajeLabel.Text += "Error:" + error + " ";
+            //Exit code '0' denotes success and '1' denotes failure
+            MensajeLabel.Text += "Exit Code:" + exitcode;
+            process.Close();
+        }
+
+        public string Truncate(string value, int maxLength)
+        {
+            return value.Length <= maxLength ? value : value.Substring(0, maxLength);
+        }
+
         protected void ComprobantesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -584,7 +955,12 @@ namespace CedServicios.Site
                     {
                         if (!lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
                         {
-                            string aux = HexToString(lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString());
+
+                            string aux = lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString();
+                            if (aux.Length > 0 && aux.Substring(0, 1) == "%")
+                            {
+                                aux = HexToString(aux);
+                            }
                             cIBK.extensiones.extensiones_datos_comerciales = aux;
                         }
                     }
@@ -592,7 +968,11 @@ namespace CedServicios.Site
                     {
                         if (!lcIBK.comprobante[i].extensiones.extensiones_datos_marketing.Equals(string.Empty))
                         {
-                            string aux = HexToString(lcIBK.comprobante[i].extensiones.extensiones_datos_marketing.ToString());
+                            string aux = lcIBK.comprobante[i].extensiones.extensiones_datos_marketing.ToString();
+                            if (aux.Length > 0 && aux.Substring(0, 1) == "%")
+                            {
+                                aux = HexToString(aux);
+                            }
                             cIBK.extensiones.extensiones_datos_marketing = aux;
                         }
                     }
