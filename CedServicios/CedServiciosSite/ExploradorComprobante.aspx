@@ -141,6 +141,11 @@
                             </asp:TemplateField>
                             <asp:TemplateField ControlStyle-Width="40">
                                 <ItemTemplate>
+                                    <asp:ImageButton ID="XMLOnLineButton" runat="server" ToolTip="Exportar XML On-Line" CommandName="XMLOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/XmlOnLine.png" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ControlStyle-Width="40">
+                                <ItemTemplate>
                                     <asp:ImageButton ID="PDFButton" runat="server" ToolTip="Exportar PDF" CommandName="PDF" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Pdf.png" />
                                 </ItemTemplate>
                             </asp:TemplateField>

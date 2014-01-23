@@ -366,25 +366,40 @@ namespace CedServicios.Site
                     string Campo20 = String.Format("{0,2}", lote.comprobante[0].cabecera.informacion_comprador.provincia);
                     string Campo21 = String.Format("{0,-8}", lote.comprobante[0].cabecera.informacion_comprador.cp);
                     string Campo22 = String.Format("{0,-25}", Truncate(lote.comprobante[0].cabecera.informacion_comprador.localidad, 25));
-                    string Campo23 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_factura.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_factura.ToString("000000000000000.00")).Substring(16, 2);
-                    string Campo24 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_concepto_no_gravado.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_concepto_no_gravado.ToString("000000000000000.00")).Substring(16, 2);
-                    string Campo25 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_neto_gravado.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_neto_gravado.ToString("000000000000000.00")).Substring(16, 2);
-                    string Campo26 = String.Format("{0,18}", lote.comprobante[0].resumen.impuesto_liq.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.impuesto_liq.ToString("000000000000000.00")).Substring(16, 2);
-                    string Campo27 = String.Format("{0,18}", lote.comprobante[0].resumen.impuesto_liq_rni.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.impuesto_liq_rni.ToString("000000000000000.00")).Substring(16, 2);
-                    string Campo28 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_operaciones_exentas.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_operaciones_exentas.ToString("000000000000000.00")).Substring(16, 2);
-                    string Campo29 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_nacionales.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_nacionales.ToString("000000000000000.00")).Substring(16, 2);
-                    string Campo30 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_ingresos_brutos.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_ingresos_brutos.ToString("000000000000000.00")).Substring(16, 2);
-                    string Campo31 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_municipales.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_municipales.ToString("000000000000000.00")).Substring(16, 2);
-                    string Campo32 = String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_internos.ToString("000000000000000.00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].resumen.importe_total_impuestos_internos.ToString("000000000000000.00")).Substring(16, 2);
+                    string Campo23 = String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_factura.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_factura.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                    string Campo24 = String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_concepto_no_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_concepto_no_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                    string Campo25 = String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_neto_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_neto_gravado.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                    string Campo26 = String.Format("{0,16}", lote.comprobante[0].resumen.impuesto_liq.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].resumen.impuesto_liq.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                    string Campo27 = String.Format("{0,16}", lote.comprobante[0].resumen.impuesto_liq_rni.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].resumen.impuesto_liq_rni.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                    string Campo28 = String.Format("{0,16}", lote.comprobante[0].resumen.importe_operaciones_exentas.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].resumen.importe_operaciones_exentas.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                    string Campo29 = String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_impuestos_nacionales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_impuestos_nacionales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                    string Campo30 = String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_ingresos_brutos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_ingresos_brutos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                    string Campo31 = String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_impuestos_municipales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_impuestos_municipales.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
+                    string Campo32 = String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_impuestos_internos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].resumen.importe_total_impuestos_internos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                     string Campo33 = String.Format("{0,-3}", lote.comprobante[0].resumen.codigo_moneda);
-                    string Campo34 = String.Format("{0,13}", lote.comprobante[0].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 10) + ".00")).Substring(0, 10) + String.Format("{0,13}", lote.comprobante[0].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 10) + ".00")).Substring(11, 2);
-                    string Campo35 = String.Format("{0,1}", lote.comprobante[0].resumen.cant_alicuotas_iva);
+                    string Campo34 = String.Format("{0,11}", lote.comprobante[0].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 8) + ".00")).Substring(0, 8) + String.Format("{0,11}", lote.comprobante[0].resumen.tipo_de_cambio.ToString(new string(Convert.ToChar("0"), 8) + ".00")).Substring(9, 2);
+                    int CantAlicuotas = 0;
+                    if (lote.comprobante[0].resumen.cant_alicuotas_iva == 0)
+                    {
+                        for (int z = 0; z < lote.comprobante[0].resumen.impuestos.Length; z++)
+                        {
+                            if (lote.comprobante[0].resumen.impuestos[z].codigo_impuesto == 1)
+                            {
+                                CantAlicuotas += 1;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        CantAlicuotas = lote.comprobante[0].resumen.cant_alicuotas_iva;
+                    }
+                    string Campo35 = String.Format("{0,1}", CantAlicuotas);
                     string Campo36 = String.Format("{0,1}", lote.comprobante[0].cabecera.informacion_comprobante.codigo_operacion);
                     string Campo37 = String.Format("{0,-14}", lote.comprobante[0].cabecera.informacion_comprobante.cae);
                     string Campo38 = String.Format("{0,-8}", lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae);
                     string Campo39 = String.Format("{0,8}", "        ");
 
-                    sbDataCabeceraC.AppendLine("1" + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11 + Campo12 + Campo13 + Campo14 + Campo15 + Campo16 + Campo17 + Campo18 + Campo19 + Campo20 + Campo21 + Campo22 + Campo23 + Campo24 + Campo26 + Campo26 + Campo27 + Campo28 + Campo29 + Campo30 + Campo31 + Campo32 + Campo33 + Campo34 + Campo35 + Campo36 + Campo37 + Campo38 + Campo39); 
+                    sbDataCabeceraC.AppendLine("1" + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11 + Campo12 + Campo13 + Campo14 + Campo15 + Campo16 + Campo17 + Campo18 + Campo19 + Campo20 + Campo21 + Campo22 + Campo23 + Campo24 + Campo25 + Campo26 + Campo27 + Campo28 + Campo29 + Campo30 + Campo31 + Campo32 + Campo33 + Campo34 + Campo35 + Campo36 + Campo37 + Campo38 + Campo39); 
                     using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/Temp/" + sbCabeceraC.ToString())))
                     {
                         outfile.Write(sbDataCabeceraC.ToString());
@@ -407,16 +422,17 @@ namespace CedServicios.Site
                             descr = HexToString(descr);
                         }
                         Campo2 = String.Format("{0,-100}", Truncate(descr, 100));
-                        Campo3 = lote.comprobante[0].detalle.linea[i].cantidad.ToString(new string(Convert.ToChar("0"), 12));
+                        //cantidad de 12 (7 + 5)
+                        Campo3 = String.Format("{0,13}", lote.comprobante[0].detalle.linea[i].cantidad.ToString(new string(Convert.ToChar("0"), 7) + ".00000")).Substring(0, 7) + String.Format("{0,13}", lote.comprobante[0].detalle.linea[i].cantidad.ToString(new string(Convert.ToChar("0"), 7) + ".00000")).Substring(8, 5);
                         //ojo format
                         Campo4 = Convert.ToInt32(lote.comprobante[0].detalle.linea[i].unidad).ToString("00");
-                        Campo5 = String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].precio_unitario.ToString(new string(Convert.ToChar("0"), 16) +".00")).Substring(0, 16) + String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].precio_unitario.ToString(new string(Convert.ToChar("0"), 16) + ".00")).Substring(17, 2);
-                        Campo6 = String.Format("{0,18}", lote.comprobante[0].detalle.linea[i].importe_total_descuentos.ToString(new string(Convert.ToChar("0"), 15) +".00")).Substring(0, 15) + String.Format("{0,18}", lote.comprobante[0].detalle.linea[i].importe_total_descuentos.ToString(new string(Convert.ToChar("0"), 15) + ".00")).Substring(16, 2);
+                        Campo5 = String.Format("{0,17}", lote.comprobante[0].detalle.linea[i].precio_unitario.ToString(new string(Convert.ToChar("0"), 13) +".000")).Substring(0, 13) + String.Format("{0,17}", lote.comprobante[0].detalle.linea[i].precio_unitario.ToString(new string(Convert.ToChar("0"), 13) + ".000")).Substring(14, 3);
+                        Campo6 = String.Format("{0,16}", lote.comprobante[0].detalle.linea[i].importe_total_descuentos.ToString(new string(Convert.ToChar("0"), 13) +".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[0].detalle.linea[i].importe_total_descuentos.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2);
                         //importe ajuste
-                        Campo7 = String.Format("{0,19}", new string(Convert.ToChar("0"), 18));
-                        Campo8 = String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].importe_total_articulo.ToString(new string(Convert.ToChar("0"), 16) +".00")).Substring(0, 16) + String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].importe_total_articulo.ToString(new string(Convert.ToChar("0"), 16) + ".00")).Substring(17, 2);
+                        Campo7 = String.Format("{0,16}", new string(Convert.ToChar("0"), 16));
+                        Campo8 = String.Format("{0,17}", lote.comprobante[0].detalle.linea[i].importe_total_articulo.ToString(new string(Convert.ToChar("0"), 13) +".000")).Substring(0, 13) + String.Format("{0,17}", lote.comprobante[0].detalle.linea[i].importe_total_articulo.ToString(new string(Convert.ToChar("0"), 13) + ".000")).Substring(14, 3);
                         Campo9 = String.Format("{0,5}", lote.comprobante[0].detalle.linea[i].alicuota_iva.ToString("00.00")).Substring(0, 2) + String.Format("{0,5}", lote.comprobante[0].detalle.linea[i].alicuota_iva.ToString("00.00")).Substring(3, 2);
-                        Campo10 = String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].importe_iva.ToString(new string(Convert.ToChar("0"), 16) +".00")).Substring(0, 16) + String.Format("{0,19}", lote.comprobante[0].detalle.linea[i].importe_iva.ToString(new string(Convert.ToChar("0"), 16) + ".00")).Substring(17, 2);
+                        Campo10 = String.Format("{0,17}", lote.comprobante[0].detalle.linea[i].importe_iva.ToString(new string(Convert.ToChar("0"), 14) + ".00")).Substring(0, 14) + String.Format("{0,17}", lote.comprobante[0].detalle.linea[i].importe_iva.ToString(new string(Convert.ToChar("0"), 14) + ".00")).Substring(15, 2);
                         Campo11 = String.Format("{0,1}", lote.comprobante[0].detalle.linea[i].indicacion_exento_gravado);
                         sbDataDetalle.AppendLine("3" + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11);
                     }
@@ -557,7 +573,9 @@ namespace CedServicios.Site
                     sb.Append("-");
                     sb.Append(comprobante.Nro.ToString("00000000"));
 
-                    //Crear nombre de archivo ZIP
+                    //Crear nombre de archivo ZIP / PDF / XML
+                    System.Text.StringBuilder sbZIP = new System.Text.StringBuilder();
+                    sbZIP.Append(sb.ToString() + ".zip");
                     System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
                     sbXML.Append(sb.ToString() + ".xml");
                     System.Text.StringBuilder sbPDF = new System.Text.StringBuilder();
@@ -576,9 +594,135 @@ namespace CedServicios.Site
                     }
 
                     ExecuteCommand(sbXML.ToString(), sbPDF.ToString());
+
+                    //Descargar ZIP ( Cabecera Emisor, Cabecera Comprobante y Detalle )
+                    string filename = sbZIP.ToString();
+                    String dlDir = @"~/Temp/";
+                    String path = Server.MapPath(dlDir + filename);
+                    System.IO.FileInfo toDownload = new System.IO.FileInfo(path);
+                    System.IO.FileInfo toXML = new System.IO.FileInfo(Server.MapPath(dlDir + sbXML.ToString()));
+                    System.IO.FileInfo toPDF = new System.IO.FileInfo(Server.MapPath(dlDir + sbPDF.ToString()));
+
+                    using (ZipFile zip = new ZipFile())
+                    {
+                        zip.AddFile(Server.MapPath(dlDir + sbXML.ToString()), "");
+                        zip.AddFile(Server.MapPath(dlDir + sbPDF.ToString()), "");
+                        zip.Save(Server.MapPath(dlDir + filename));
+                    }
+                    if (toDownload.Exists)
+                    {
+                        Response.Clear();
+                        Response.AddHeader("Content-Disposition", "attachment; filename=" + toDownload.Name);
+                        Response.AddHeader("Content-Length", toDownload.Length.ToString());
+                        Response.ContentType = "application/octet-stream";
+                        Response.WriteFile(dlDir + filename);
+                        Response.Flush();
+                        Response.Close();
+                        //Response.End();
+
+                        //toDownload.Delete();
+                        //toXML.Delete();
+                        //toPDF.Delete();
+                    }
                 }
-                catch
+                catch (Exception ex)
                 {
+                    string script = "Problemas para generar el PDF.\\n" + ex.Message;
+                    script += ex.StackTrace;
+                    if (ex.InnerException != null)
+                    {
+                        script = ex.InnerException.Message;
+                    }
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                    MensajeLabel.Text = script;
+                }
+            }
+            else if (e.CommandName == "XMLOnLine")
+            {
+                int item = Convert.ToInt32(e.CommandArgument);
+                List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
+                Entidades.Comprobante comprobante = lista[item];
+
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> listaR = new List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>();
+                MensajeLabel.Text = String.Empty;
+                Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
+                string resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
+                try
+                {
+                    string comprobanteXML = resp;
+                    System.Text.StringBuilder sbXMLData = new System.Text.StringBuilder();
+                    sbXMLData.AppendLine(comprobanteXML);
+
+                    //Crear nombre de archivo default sin extensión
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(comprobante.Cuit);
+                    sb.Append("-");
+                    sb.Append(comprobante.NroPuntoVta.ToString("0000"));
+                    sb.Append("-");
+                    sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
+                    sb.Append("-");
+                    sb.Append(comprobante.Nro.ToString("00000000"));
+
+                    //Crear nombre de archivo ZIP / PDF / XML
+                    //System.Text.StringBuilder sbZIP = new System.Text.StringBuilder();
+                    //sbZIP.Append(sb.ToString() + ".zip");
+                    System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
+                    sbXML.Append(sb.ToString() + ".xml");
+
+                    //Crear archivo comprobante XML
+                    System.IO.MemoryStream m = new System.IO.MemoryStream();
+                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sbXML.ToString()), System.IO.FileMode.Create);
+                    m.WriteTo(fs);
+                    fs.Close();
+
+                    //Grabar información comprobante XML
+                    using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/Temp/" + sbXML.ToString())))
+                    {
+                        outfile.Write(sbXMLData.ToString());
+                    }
+
+                    //Descargar ZIP ( XML On-Line )
+                    //string filename = sbZIP.ToString();
+                    //String dlDir = @"~/Temp/";
+                    //String path = Server.MapPath(dlDir + filename);
+                    //System.IO.FileInfo toDownload = new System.IO.FileInfo(path);
+                    //System.IO.FileInfo toXML = new System.IO.FileInfo(Server.MapPath(dlDir + sbXML.ToString()));
+
+                    //using (ZipFile zip = new ZipFile())
+                    //{
+                    //    zip.AddFile(Server.MapPath(dlDir + sbXML.ToString()), "");
+                    //    zip.Save(Server.MapPath(dlDir + filename));
+                    //}
+
+                    string filename = sbXML.ToString();
+                    String dlDir = @"~/Temp/";
+                    System.IO.FileInfo toDownload = new System.IO.FileInfo(Server.MapPath(dlDir + filename));
+                    if (toDownload.Exists)
+                    {
+                        Response.Clear();
+                        Response.AddHeader("Content-Disposition", "attachment; filename=" + toDownload.Name);
+                        Response.AddHeader("Content-Length", toDownload.Length.ToString());
+                        Response.ContentType = "application/octet-stream";
+                        Response.WriteFile(dlDir + filename);
+                        Response.Flush();
+                        Response.Close();
+                        //Response.End();
+
+                        toDownload.Delete();
+                        //toXML.Delete();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    string script = "Problemas para generar el XML.\\n" + ex.Message;
+                    script += ex.StackTrace;
+                    if (ex.InnerException != null)
+                    {
+                        script = ex.InnerException.Message;
+                    }
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                    MensajeLabel.Text = script;
                 }
             }
         }
@@ -588,10 +732,12 @@ namespace CedServicios.Site
             int exitcode;
             ProcessStartInfo ProcessInfo;
             Process process;
-            ProcessInfo = new
-            ProcessStartInfo("java.exe", @"-cp " + Server.MapPath("~/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/Temp/" + NombreArchivosbXML) + " " + Server.MapPath("~/Temp/" + NombreArchivosbPDF) + " ORIGINAL");
+            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "java.exe");
+            ProcessInfo = new ProcessStartInfo("java.exe");
+            ProcessInfo.Arguments = @"-cp " + Server.MapPath("~/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/Temp/" + NombreArchivosbXML) + " " + Server.MapPath("~/Temp/" + NombreArchivosbPDF) + " ORIGINAL";
+            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Argumentos: " + "-cp " + Server.MapPath("~/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/Temp/" + NombreArchivosbXML) + " " + Server.MapPath("~/Temp/" + NombreArchivosbPDF) + " ORIGINAL");
             ProcessInfo.CreateNoWindow = true;
-            ProcessInfo.UseShellExecute = false;
+            ProcessInfo.UseShellExecute = true;
             // redirecting standard output and error
             ProcessInfo.RedirectStandardError = true;
             ProcessInfo.RedirectStandardOutput = true;
@@ -605,10 +751,20 @@ namespace CedServicios.Site
             string error = process.StandardError.ReadToEnd();
 
             exitcode = process.ExitCode;
-            MensajeLabel.Text = output + " ";
-            MensajeLabel.Text += "Error:" + error + " ";
+            MensajeLabel.Text = "";
             //Exit code '0' denotes success and '1' denotes failure
-            MensajeLabel.Text += "Exit Code:" + exitcode;
+            if (exitcode != 0)
+            {
+                MensajeLabel.Text += "Exit Code:" + exitcode + "  ";
+            }
+            if (error != "")
+            {
+                MensajeLabel.Text += "Error:" + error + "  ";
+            }
+            if (output != "")
+            {
+                MensajeLabel.Text += output + " ";
+            }
             process.Close();
         }
 
