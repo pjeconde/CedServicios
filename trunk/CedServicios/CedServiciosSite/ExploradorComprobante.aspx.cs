@@ -197,9 +197,56 @@ namespace CedServicios.Site
                         }
                         if (comprobante.Importe != lc.comprobante[0].resumen.importe_total_factura)
                         {
-                            MensajeLabel.Text = "(Campo: Importe Total). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
-                            return;
+                            MensajeLabel.Text += "(Campo: Importe). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                            comprobante.Importe = lc.comprobante[0].resumen.importe_total_factura;
                         }
+                        if (comprobante.Moneda != lc.comprobante[0].resumen.codigo_moneda)
+                        {
+                            MensajeLabel.Text += "(Campo: Moneda). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                            comprobante.Moneda = lc.comprobante[0].resumen.codigo_moneda;
+                        }
+                        if (lc.comprobante[0].resumen.importes_moneda_origen != null)
+                        {
+                            if (comprobante.ImporteMoneda != lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura)
+                            {
+                                MensajeLabel.Text += "(Campo: Importe Moneda). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                                comprobante.ImporteMoneda = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;
+                            }
+                        }
+                        else
+                        {
+                            if (comprobante.ImporteMoneda != 0)
+                            {
+                                MensajeLabel.Text += "(Campo: Importe Moneda). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                                comprobante.ImporteMoneda = 0;
+                            }
+                        }
+                        if (comprobante.TipoCambio != lc.comprobante[0].resumen.tipo_de_cambio)
+                        {
+                            MensajeLabel.Text += "(Campo: Tipo de cambio). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                            comprobante.TipoCambio = lc.comprobante[0].resumen.tipo_de_cambio;
+                        }
+                        //if (comprobante.Fecha != lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision)
+                        //{
+                        //    MensajeLabel.Text += "(Campo: Tipo de cambio). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                        //    comprobante.Fecha = lc.comprobante[0].resumen.fecha_emision;
+                        //}
+                        //if (comprobante.Fecha != lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento)
+                        //{
+                        //    MensajeLabel.Text += "(Campo: Tipo de cambio). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                        //    comprobante.FechaVto = lc.comprobante[0].resumen.fecha_vencimiento;
+                        //}
+                        if (comprobante.Documento.Tipo.Id != lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString())
+                        {
+                            MensajeLabel.Text += "(Campo: Cod.Doc). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                            comprobante.Documento.Tipo.Id = lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
+                        }
+                        if (comprobante.Documento.Nro != lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio)
+                        {
+                            MensajeLabel.Text += "(Campo: Nro.Doc). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                            comprobante.Documento.Nro = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;
+                        }
+
                         comprobante.WF.Estado = "Vigente";
                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
                         string script = "window.open('/ComprobanteConsulta.aspx', '');";
@@ -252,6 +299,7 @@ namespace CedServicios.Site
             }
             else if (e.CommandName == "ExportarRG2485")
             {
+                MensajeLabel.Text = "";
                 int item = Convert.ToInt32(e.CommandArgument);
                 List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
                 Entidades.Comprobante comprobante = lista[item];
@@ -259,6 +307,11 @@ namespace CedServicios.Site
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
                 byte[] bytes;
                 System.IO.MemoryStream ms;
+                if (comprobante.Estado != "Vigente")
+                {
+                    MensajeLabel.Text = "El comprobante no está vigente.";
+                    return;
+                }
                 try
                 {
                     comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
@@ -381,11 +434,14 @@ namespace CedServicios.Site
                     int CantAlicuotas = 0;
                     if (lote.comprobante[0].resumen.cant_alicuotas_iva == 0)
                     {
-                        for (int z = 0; z < lote.comprobante[0].resumen.impuestos.Length; z++)
+                        if (lote.comprobante[0].resumen.impuestos != null)
                         {
-                            if (lote.comprobante[0].resumen.impuestos[z].codigo_impuesto == 1)
+                            for (int z = 0; z < lote.comprobante[0].resumen.impuestos.Length; z++)
                             {
-                                CantAlicuotas += 1;
+                                if (lote.comprobante[0].resumen.impuestos[z].codigo_impuesto == 1)
+                                {
+                                    CantAlicuotas += 1;
+                                }
                             }
                         }
                     }
@@ -464,9 +520,7 @@ namespace CedServicios.Site
                         Response.AddHeader("Content-Length", toDownload.Length.ToString());
                         Response.ContentType = "application/octet-stream";
                         Response.WriteFile(dlDir + filename);
-                        Response.Flush();
-                        Response.Close();
-                        //Response.End();
+                        Response.End();
 
                         toDownload.Delete();
                         toCabeceraE.Delete();
@@ -481,13 +535,14 @@ namespace CedServicios.Site
                 }
                 catch (Exception ex)
                 {
-                    string script = "Problemas para generar la interfaz.\\n" + ex.Message;
+                    string script = "Problemas para generar la interfaz.\\n" + ex.Message + "\\n" + ex.StackTrace;
                     RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
                     MensajeLabel.Text = script;
                 }
             }
             else if (e.CommandName == "PDF-InfoLocal")
             {
+                MensajeLabel.Text = "";
                 int item = Convert.ToInt32(e.CommandArgument);
                 List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
                 Entidades.Comprobante comprobante = lista[item];
@@ -495,6 +550,11 @@ namespace CedServicios.Site
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
                 byte[] bytes;
                 System.IO.MemoryStream ms;
+                if (comprobante.Estado != "Vigente")
+                {
+                    MensajeLabel.Text = "El comprobante no está vigente.";
+                    return;
+                }
                 try
                 {
                     comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
@@ -548,15 +608,57 @@ namespace CedServicios.Site
             }
             else if (e.CommandName == "PDF")
             {
+                MensajeLabel.Text = "";
                 int item = Convert.ToInt32(e.CommandArgument);
                 List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
                 Entidades.Comprobante comprobante = lista[item];
+                if (comprobante.Estado != "Vigente")
+                {
+                    MensajeLabel.Text = "El comprobante no está vigente.";
+                    return;
+                }
 
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> listaR = new List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>();
                 MensajeLabel.Text = String.Empty;
                 Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
-                string resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
+                //string resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
+
+                org.dyndns.cedweb.detalle.cecd cecd = new org.dyndns.cedweb.detalle.cecd();
+                cecd.cuit_canal = Convert.ToInt64("30690783521");
+                cecd.cuit_vendedor = Convert.ToInt64(comprobante.Cuit);
+                cecd.punto_de_venta = Convert.ToInt32(comprobante.NroPuntoVta);
+                cecd.tipo_de_comprobante = Convert.ToInt32(comprobante.TipoComprobante.Id);
+                cecd.numero_comprobante = comprobante.Nro;
+                cecd.id_Lote = 0;
+                cecd.id_LoteSpecified = false;
+                cecd.estado = "PR";
+
+                string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                if (NroCertif.Equals(string.Empty))
+                {
+                    MensajeLabel.Text = "Aún no disponemos de su certificado digital";
+                    return;
+                }
+                GrabarLogTexto("~/Detallar.txt", "Consulta de Lote CUIT: " + sesion.Cuit.Nro + "  Fecha Desde: " + FechaDesdeTextBox.Text + "  Fecha Hasta: " + FechaHastaTextBox.Text);
+                GrabarLogTexto("~/Detallar.txt", "NroSerieCertifITF: " + NroCertif);
+                if (NroCertif.Equals(string.Empty))
+                {
+                    MensajeLabel.Text = "Aún no disponemos de su certificado digital";
+                    return;
+                }
+
+                string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                org.dyndns.cedweb.detalle.DetalleIBK clcdyndns = new org.dyndns.cedweb.detalle.DetalleIBK();
+                string DetalleIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKUtilizarServidorExterno"];
+                GrabarLogTexto("~/Detallar.txt", "Parametro DetalleIBKUtilizarServidorExterno: " + DetalleIBKUtilizarServidorExterno);
+                if (DetalleIBKUtilizarServidorExterno == "SI")
+                {
+                    clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"];
+                    GrabarLogTexto("~/Detallar.txt", "Parametro DetalleIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
+                }
+                string resp = clcdyndns.DetallarIBK(cecd, certificado);
+
                 try
                 {
                     string comprobanteXML = resp;
@@ -583,21 +685,23 @@ namespace CedServicios.Site
 
                     //Crear archivo comprobante XML
                     System.IO.MemoryStream m = new System.IO.MemoryStream();
-                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sbXML.ToString()), System.IO.FileMode.Create);
+                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/TempRender/" + sbXML.ToString()), System.IO.FileMode.Create);
                     m.WriteTo(fs);
                     fs.Close();
 
                     //Grabar información comprobante XML
-                    using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/Temp/" + sbXML.ToString())))
+                    using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/TempRender/" + sbXML.ToString())))
                     {
                         outfile.Write(sbXMLData.ToString());
                     }
 
+                    GrabarLogTexto("~/Detallar.txt", "Inicia ExecuteCommand");
                     ExecuteCommand(sbXML.ToString(), sbPDF.ToString());
+                    GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
 
                     //Descargar ZIP ( Cabecera Emisor, Cabecera Comprobante y Detalle )
                     string filename = sbZIP.ToString();
-                    String dlDir = @"~/Temp/";
+                    String dlDir = @"~/TempRender/";
                     String path = Server.MapPath(dlDir + filename);
                     System.IO.FileInfo toDownload = new System.IO.FileInfo(path);
                     System.IO.FileInfo toXML = new System.IO.FileInfo(Server.MapPath(dlDir + sbXML.ToString()));
@@ -616,9 +720,7 @@ namespace CedServicios.Site
                         Response.AddHeader("Content-Length", toDownload.Length.ToString());
                         Response.ContentType = "application/octet-stream";
                         Response.WriteFile(dlDir + filename);
-                        Response.Flush();
-                        Response.Close();
-                        //Response.End();
+                        Response.End();
 
                         //toDownload.Delete();
                         //toXML.Delete();
@@ -633,21 +735,63 @@ namespace CedServicios.Site
                     {
                         script = ex.InnerException.Message;
                     }
-                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), script);
                     MensajeLabel.Text = script;
                 }
             }
             else if (e.CommandName == "XMLOnLine")
             {
+                MensajeLabel.Text = "";
                 int item = Convert.ToInt32(e.CommandArgument);
                 List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
                 Entidades.Comprobante comprobante = lista[item];
+                if (comprobante.Estado != "Vigente")
+                {
+                    MensajeLabel.Text = "El comprobante no está vigente.";
+                    return;
+                }
 
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> listaR = new List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>();
                 MensajeLabel.Text = String.Empty;
                 Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
-                string resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
+                //string resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
+
+                org.dyndns.cedweb.detalle.cecd cecd = new org.dyndns.cedweb.detalle.cecd();
+                cecd.cuit_canal = Convert.ToInt64("30690783521");
+                cecd.cuit_vendedor = Convert.ToInt64(comprobante.Cuit);
+                cecd.punto_de_venta = Convert.ToInt32(comprobante.NroPuntoVta);
+                cecd.tipo_de_comprobante = Convert.ToInt32(comprobante.TipoComprobante.Id);
+                cecd.numero_comprobante = comprobante.Nro;
+                cecd.id_Lote = 0;
+                cecd.id_LoteSpecified = false;
+                cecd.estado = "PR";
+
+                string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                if (NroCertif.Equals(string.Empty))
+                {
+                    MensajeLabel.Text = "Aún no disponemos de su certificado digital";
+                    return;
+                }
+                GrabarLogTexto("~/Detallar.txt", "Consulta de Lote CUIT: " + sesion.Cuit.Nro + "  Fecha Desde: " + FechaDesdeTextBox.Text + "  Fecha Hasta: " + FechaHastaTextBox.Text);
+                GrabarLogTexto("~/Detallar.txt", "NroSerieCertifITF: " + NroCertif);
+                if (NroCertif.Equals(string.Empty))
+                {
+                    MensajeLabel.Text = "Aún no disponemos de su certificado digital";
+                    return;
+                }
+
+                string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                org.dyndns.cedweb.detalle.DetalleIBK clcdyndns = new org.dyndns.cedweb.detalle.DetalleIBK();
+                string DetalleIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKUtilizarServidorExterno"];
+                GrabarLogTexto("~/Detallar.txt", "Parametro DetalleIBKUtilizarServidorExterno: " + DetalleIBKUtilizarServidorExterno);
+                if (DetalleIBKUtilizarServidorExterno == "SI")
+                {
+                    clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"];
+                    GrabarLogTexto("~/Detallar.txt", "Parametro DetalleIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
+                }
+                string resp = clcdyndns.DetallarIBK(cecd, certificado);
+
                 try
                 {
                     string comprobanteXML = resp;
@@ -664,9 +808,7 @@ namespace CedServicios.Site
                     sb.Append("-");
                     sb.Append(comprobante.Nro.ToString("00000000"));
 
-                    //Crear nombre de archivo ZIP / PDF / XML
-                    //System.Text.StringBuilder sbZIP = new System.Text.StringBuilder();
-                    //sbZIP.Append(sb.ToString() + ".zip");
+                    //Crear nombre de archivo XML
                     System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
                     sbXML.Append(sb.ToString() + ".xml");
 
@@ -682,19 +824,6 @@ namespace CedServicios.Site
                         outfile.Write(sbXMLData.ToString());
                     }
 
-                    //Descargar ZIP ( XML On-Line )
-                    //string filename = sbZIP.ToString();
-                    //String dlDir = @"~/Temp/";
-                    //String path = Server.MapPath(dlDir + filename);
-                    //System.IO.FileInfo toDownload = new System.IO.FileInfo(path);
-                    //System.IO.FileInfo toXML = new System.IO.FileInfo(Server.MapPath(dlDir + sbXML.ToString()));
-
-                    //using (ZipFile zip = new ZipFile())
-                    //{
-                    //    zip.AddFile(Server.MapPath(dlDir + sbXML.ToString()), "");
-                    //    zip.Save(Server.MapPath(dlDir + filename));
-                    //}
-
                     string filename = sbXML.ToString();
                     String dlDir = @"~/Temp/";
                     System.IO.FileInfo toDownload = new System.IO.FileInfo(Server.MapPath(dlDir + filename));
@@ -705,12 +834,9 @@ namespace CedServicios.Site
                         Response.AddHeader("Content-Length", toDownload.Length.ToString());
                         Response.ContentType = "application/octet-stream";
                         Response.WriteFile(dlDir + filename);
-                        Response.Flush();
-                        Response.Close();
-                        //Response.End();
+                        Response.End();
 
                         toDownload.Delete();
-                        //toXML.Delete();
                     }
                 }
                 catch (Exception ex)
@@ -721,32 +847,63 @@ namespace CedServicios.Site
                     {
                         script = ex.InnerException.Message;
                     }
-                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
-                    MensajeLabel.Text = script;
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), script);
+                    MensajeLabel.Text += script;
                 }
             }
         }
-
+        private void GrabarLogTexto(string archivo, string mensaje)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(Server.MapPath(archivo), FileMode.Append, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
         public void ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF)
         {
             int exitcode;
-            ProcessStartInfo ProcessInfo;
-            Process process;
-            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "java.exe");
-            ProcessInfo = new ProcessStartInfo("java.exe");
-            ProcessInfo.Arguments = @"-cp " + Server.MapPath("~/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/Temp/" + NombreArchivosbXML) + " " + Server.MapPath("~/Temp/" + NombreArchivosbPDF) + " ORIGINAL";
-            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Argumentos: " + "-cp " + Server.MapPath("~/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/Temp/" + NombreArchivosbXML) + " " + Server.MapPath("~/Temp/" + NombreArchivosbPDF) + " ORIGINAL");
-            ProcessInfo.CreateNoWindow = true;
-            ProcessInfo.UseShellExecute = true;
-            // redirecting standard output and error
-            ProcessInfo.RedirectStandardError = true;
-            ProcessInfo.RedirectStandardOutput = true;
+            //ProcessStartInfo ProcessInfo;
+            //Process process;
+            //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "java.exe");
+            ////ProcessInfo = new ProcessStartInfo(@"C:\SVNCedServicios\CedServicios\CedServiciosSite\TempRender\GenerarPDF.bat");
+            //ProcessInfo = new ProcessStartInfo(@"C:\inetpub\wwwroot\CedeiraServicios\TempRender\GenerarPDF.bat");
+            ////ProcessInfo = new ProcessStartInfo("java.exe");
+            ////ProcessInfo.Arguments = @"-cp " + Server.MapPath("~/TempRender/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/TempRender/" + NombreArchivosbXML) + " " + Server.MapPath("~/TempRender/" + NombreArchivosbPDF) + " ORIGINAL";
+            //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "Argumentos: " + "-cp " + Server.MapPath("~/TempRender/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/TempRender/" + NombreArchivosbXML) + " " + Server.MapPath("~/TempRender/" + NombreArchivosbPDF) + " ORIGINAL");
+            //ProcessInfo.WorkingDirectory = @"C:\inetpub\wwwroot\CedeiraServicios\TempRender\";
+            //ProcessInfo.CreateNoWindow = false;
+            //ProcessInfo.UseShellExecute = false;
+            //// redirecting standard output and error
+            //ProcessInfo.RedirectStandardError = true;
+            //ProcessInfo.RedirectStandardOutput = true;
+            //process = Process.Start(ProcessInfo);
+            //process.WaitForExit();
 
-            process = Process.Start(ProcessInfo);
-  
+            string command = string.Format("GenerarPDF.bat {0} {1} {2}", Server.MapPath("~/TempRender/" + "cfe-factura-render-2.57-ejecutable.jar"), Server.MapPath("~/TempRender/" + NombreArchivosbXML), Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
+            //string command = "GenerarPDF.bat";
+            ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
+            //procStartInfo.WorkingDirectory = @"C:\inetpub\wwwroot\CedeiraServicios\TempRender\";
+            procStartInfo.WorkingDirectory = Server.MapPath("~/TempRender/");
+            procStartInfo.RedirectStandardError = true;
+            procStartInfo.RedirectStandardOutput = true;
+            procStartInfo.UseShellExecute = false;
+            procStartInfo.CreateNoWindow = true;
+            // Now we create a process, assign its ProcessStartInfo and start it
+            Process process = new Process();
+            process.StartInfo = procStartInfo;
+            process.Start();
             process.WaitForExit();
 
-           //Reading output and error
+            //Reading output and error
             string output = process.StandardOutput.ReadToEnd();
             string error = process.StandardError.ReadToEnd();
 
@@ -765,14 +922,13 @@ namespace CedServicios.Site
             {
                 MensajeLabel.Text += output + " ";
             }
+            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "Process Info: " + MensajeLabel.Text);
             process.Close();
         }
-
         public string Truncate(string value, int maxLength)
         {
             return value.Length <= maxLength ? value : value.Substring(0, maxLength);
         }
-
         protected void ComprobantesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -794,7 +950,15 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
                 MensajeLabel.Text = String.Empty;
-                Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
+                Entidades.Cliente cliente;
+                if (ClienteDropDownList.SelectedIndex >= 0)
+                {
+                    cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
+                }
+                else
+                {
+                    cliente = new Entidades.Cliente();
+                }
                 lista = RN.Comprobante.ListaFiltrada(SoloVigentesCheckBox.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, cliente, sesion);
                 if (lista.Count == 0)
                 {
@@ -814,7 +978,6 @@ namespace CedServicios.Site
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
         }
-
         private FeaEntidades.InterFacturas.lote_comprobantes Ws2Fea(org.dyndns.cedweb.consulta.ConsultarResult lcIBK)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lcFEA = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -1238,7 +1401,6 @@ namespace CedServicios.Site
             }
             return lcFEA;
         }
-
         public string HexToString(string Hex)
         {
             Hex = Hex.Replace("%", "");
@@ -1253,7 +1415,6 @@ namespace CedServicios.Site
             str = SacarEntityName(str);
             return str;
         }
-
         private string SacarEntityName(string texto)
         {
             texto = texto.Replace("&aacute;", "á");

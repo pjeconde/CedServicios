@@ -119,6 +119,7 @@
     <Content Include="Imagenes\Iconos\ConsultarOnLine.png" />
     <Content Include="Imagenes\Iconos\Pdf.png" />
     <Content Include="Imagenes\Iconos\Xml.png" />
+    <Content Include="Imagenes\Iconos\XmlOnLine.png" />
     <Content Include="MensajeUsuarioDemo.aspx" />
     <Content Include="ExploradorAdministracion.aspx" />
     <Content Include="ExploradorLog.aspx" />
@@ -236,8 +237,18 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\org.dyndns.cedweb.consulta\ConsultaIBK.disco" />
+    <None Include="Web References\org.dyndns.cedweb.detalle\DetalleIBK.wsdl" />
+    <None Include="Web References\org.dyndns.cedweb.detalle\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\org.dyndns.cedweb.envio\EnvioIBK.wsdl" />
     <None Include="Web References\org.dyndns.cedweb.envio\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\org.dyndns.cedweb.listado\ListadoIBK.wsdl" />
+    <None Include="Web References\org.dyndns.cedweb.listado\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
@@ -247,6 +258,8 @@
     </None>
     <None Include="Web References\org.dyndns.cedweb.valido\ValidoIBK.disco" />
     <None Include="Web References\org.dyndns.cedweb.envio\EnvioIBK.disco" />
+    <None Include="Web References\org.dyndns.cedweb.listado\ListadoIBK.disco" />
+    <None Include="Web References\org.dyndns.cedweb.detalle\DetalleIBK.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1075,7 +1088,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\org.dyndns.cedweb.detalle\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\org.dyndns.cedweb.envio\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\org.dyndns.cedweb.listado\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -1169,6 +1192,17 @@
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="http://localhost:20587/DetalleIBK.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\org.dyndns.cedweb.detalle\</RelPath>
+      <UpdateFromURL>http://localhost:20587/DetalleIBK.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_detalle_DetalleIBK</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost:20587/EnvioIBK.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\org.dyndns.cedweb.envio\</RelPath>
@@ -1179,6 +1213,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_envio_EnvioIBK</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:20587/ListadoIBK.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\org.dyndns.cedweb.listado\</RelPath>
+      <UpdateFromURL>http://localhost:20587/ListadoIBK.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_listado_ListadoIBK</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost:20587/ValidoIBK.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
@@ -1205,6 +1250,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ImagenesSubidas\" />
+    <Folder Include="TempRender\" />
     <Folder Include="Temp\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

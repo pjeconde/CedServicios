@@ -852,6 +852,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 IncotermsDropDownList.SelectedIndex = -1;
                 TipoExpDropDownList.SelectedIndex = -1;
             }
+            PaisDestinoExpDropDownList_SelectedIndexChanged(PaisDestinoExpDropDownList, new EventArgs());
             if (lc.comprobante[0].extensiones != null)
             {
                 if (lc.comprobante[0].extensiones.extensiones_camara_facturas != null)
@@ -960,7 +961,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 GLN_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.GLN);
             }
             Codigo_Interno_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_interno);
-            if (!lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.Equals(70))
+            if (!lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.Equals(70) || PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
             {
                 Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                 Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
@@ -3996,11 +3997,16 @@ namespace CedServicios.Site.Facturacion.Electronica
 
         protected void PaisDestinoExpDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (!CompradorDropDownList.Visible)
+            int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+            {
+                return pv.Nro == auxPV;
+            }).IdTipoPuntoVta;
+            if (!idtipo.Equals("Exportacion"))
             {
                 return;
             }
-            System.Collections.Generic.List<Entidades.Cliente> listacompradores=new List<Entidades.Cliente>();
+            System.Collections.Generic.List<Entidades.Cliente> listacompradores = new List<Entidades.Cliente>();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
             if (PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
@@ -4022,17 +4028,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 try
                 {
-                    int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
                     if (Funciones.SessionTimeOut(Session))
                     {
                         Response.Redirect("~/SessionTimeout.aspx");
                     }
                     else
                     {
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                        {
-                            return pv.Nro == auxPV;
-                        }).IdTipoPuntoVta;
                         listacompradores = RN.Cliente.ListaExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
                         Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
                         Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
@@ -4089,6 +4090,14 @@ namespace CedServicios.Site.Facturacion.Electronica
             CompradorDropDownList.DataSource = clientelist;
             CompradorDropDownList.DataBind();
             CompradorDropDownList.SelectedIndex = 0;
+            if (CompradorDropDownList.Items.Count > 1)
+            {
+                CompradorDropDownList.Visible = true;
+            }
+            else
+            {
+                CompradorDropDownList.Visible = false;
+            }
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
             ResetearComprador();

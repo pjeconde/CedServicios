@@ -124,22 +124,7 @@ namespace CedServicios.Site
                 }
             }
         }
-        private void GrabarLogTexto(string archivo, string mensaje)
-        {
-            try
-            {
-                using (FileStream fs = File.Open(Server.MapPath(archivo), FileMode.Append, FileAccess.Write))
-                {
-                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
-                    {
-                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
-                    }
-                }
-            }
-            catch
-            {
-            }
-        }
+
         protected void ComprobantesGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
@@ -150,6 +135,7 @@ namespace CedServicios.Site
                 }
             }
         }
+        
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
@@ -162,7 +148,52 @@ namespace CedServicios.Site
                 List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> lista = new List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>();
                 MensajeLabel.Text = String.Empty;
                 Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
-                string resp = RN.Comprobante.ComprobantesListadoIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, cliente.DocumentoIdTipoDoc, cliente.DocumentoNro, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
+                //string resp = RN.Comprobante.ComprobantesListadoIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, cliente.DocumentoIdTipoDoc, cliente.DocumentoNro, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
+
+                org.dyndns.cedweb.listado.cecl cecl = new org.dyndns.cedweb.listado.cecl();
+                cecl.cuit_canal = Convert.ToInt64("30690783521");
+                cecl.cuit_vendedor = Convert.ToInt64(sesion.Cuit.Nro);
+                cecl.fecha_emision_desde = FechaDesdeTextBox.Text;
+                cecl.fecha_emision_hasta = FechaHastaTextBox.Text;
+                if (cliente.DocumentoIdTipoDoc != null && cliente.DocumentoIdTipoDoc != "")
+                {
+                    cecl.tipo_doc_comprador = Convert.ToInt32(cliente.DocumentoIdTipoDoc);
+                    cecl.tipo_doc_compradorSpecified = true;
+                    cecl.doc_comprador = cliente.DocumentoNro;
+                    cecl.doc_compradorSpecified = true;
+                }
+                else
+                {
+                    cecl.tipo_doc_compradorSpecified = false;
+                    cecl.doc_compradorSpecified = false;
+                }
+                cecl.limite = "SCHEMA";
+
+                string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                if (NroCertif.Equals(string.Empty))
+                {
+                    MensajeLabel.Text = "Aún no disponemos de su certificado digital";
+                    return;
+                }
+                GrabarLogTexto("~/Listar.txt", "Consulta de Lote CUIT: " + sesion.Cuit.Nro + "  Fecha Desde: " + FechaDesdeTextBox.Text + "  Fecha Hasta: " + FechaHastaTextBox.Text);
+                GrabarLogTexto("~/Listar.txt", "NroSerieCertifITF: " + NroCertif);
+                if (NroCertif.Equals(string.Empty))
+                {
+                    MensajeLabel.Text = "Aún no disponemos de su certificado digital";
+                    return;
+                }
+
+                string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                org.dyndns.cedweb.listado.ListadoIBK clcdyndns = new org.dyndns.cedweb.listado.ListadoIBK();
+                string ListadoIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ListadoIBKUtilizarServidorExterno"];
+                GrabarLogTexto("~/Listar.txt", "Parametro ListadoIBKUtilizarServidorExterno: " + ListadoIBKUtilizarServidorExterno);
+                if (ListadoIBKUtilizarServidorExterno == "SI")
+                {
+                    clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ListadoIBKurl"];
+                    GrabarLogTexto("~/Listar.txt", "Parametro ListadoIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ListadoIBKurl"]);
+                }
+                string resp = clcdyndns.ListarIBK(cecl, certificado);
+
                 try
                 {
                     //Deserializar
@@ -198,6 +229,23 @@ namespace CedServicios.Site
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+
+        private void GrabarLogTexto(string archivo, string mensaje)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(Server.MapPath(archivo), FileMode.Append, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
+                    }
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }
