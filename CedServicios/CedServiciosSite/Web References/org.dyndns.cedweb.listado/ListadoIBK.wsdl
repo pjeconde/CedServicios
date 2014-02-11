@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.cedeira.com.ar/webservices" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="http://lote.schemas.cfe.ib.com.ar/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.cedeira.com.ar/webservices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.cedeira.com.ar/webservices">
+      <s:import namespace="http://lote.schemas.cfe.ib.com.ar/" />
+      <s:element name="ListarIBK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:cecl" />
+            <s:element minOccurs="0" maxOccurs="1" name="pathCertificado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ListarIBKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ListarIBKResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://lote.schemas.cfe.ib.com.ar/">
+      <s:element name="cecl">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cuit_canal" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="cod_interno_canal" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cuit_vendedor" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="tipo_doc_comprador" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="doc_comprador" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="denominacio_comprador" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fecha_emision_desde" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="fecha_emision_hasta" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="punto_de_venta" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="tipo_de_comprobante" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="numero_comprobante_desde" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="numero_comprobante_hasta" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="limite" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="ListarIBKSoapIn">
+    <wsdl:part name="parameters" element="tns:ListarIBK" />
+  </wsdl:message>
+  <wsdl:message name="ListarIBKSoapOut">
+    <wsdl:part name="parameters" element="tns:ListarIBKResponse" />
+  </wsdl:message>
+  <wsdl:portType name="ListadoIBKSoap">
+    <wsdl:operation name="ListarIBK">
+      <wsdl:input message="tns:ListarIBKSoapIn" />
+      <wsdl:output message="tns:ListarIBKSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ListadoIBKSoap" type="tns:ListadoIBKSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListarIBK">
+      <soap:operation soapAction="http://www.cedeira.com.ar/webservices/ListarIBK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ListadoIBKSoap12" type="tns:ListadoIBKSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ListarIBK">
+      <soap12:operation soapAction="http://www.cedeira.com.ar/webservices/ListarIBK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ListadoIBK">
+    <wsdl:port name="ListadoIBKSoap" binding="tns:ListadoIBKSoap">
+      <soap:address location="http://localhost:20587/ListadoIBK.asmx" />
+    </wsdl:port>
+    <wsdl:port name="ListadoIBKSoap12" binding="tns:ListadoIBKSoap12">
+      <soap12:address location="http://localhost:20587/ListadoIBK.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

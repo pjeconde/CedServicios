@@ -1474,11 +1474,9 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaGlobalFiltrada(SoloVigentes, EsFechaAlta, FechaDesde, FechaHasta, Cliente, CUIT, CUITRazonSocial, NroComprobante);
         }
-
         public string ValidarIBK(string lc, string certificado)
         {
             RN.IBKValidate.ValidaFacturaWebService objIBK = new RN.IBKValidate.ValidaFacturaWebService();
-            string ValidarIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ValidarIBKUtilizarServidorExterno"];
             objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasValidate"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
@@ -1567,13 +1565,11 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-
-        public static string ComprobantesListadoIBK(string CuitVendedor, string FechaDsd, string FechaHst, string TipoDoc, long NroDoc, string certificado)
+        public string ComprobantesListadoIBK(FeaEntidades.InterFacturas.Listado.consulta_emisor_comprobante_listado cecl, string certificado)
         {
+            GrabarLogTexto("Listar.txt", "Paso1");
             RN.IBKComprobantesListado.ReporteFacturaWebService objIBK = new RN.IBKComprobantesListado.ReporteFacturaWebService();
-            //string ValidarIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ValidarIBKUtilizarServidorExterno"];
-            //objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasListado"];
-            objIBK.Url = "https://wsqacfe.interfacturas.com.ar/ws/ReporteFacturaWebService?WSDL";
+            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasListado"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
@@ -1597,25 +1593,8 @@ namespace CedServicios.RN
                 store = new X509Store(StoreLocation.LocalMachine);
             }
             store.Open(OpenFlags.ReadOnly);
-            FeaEntidades.InterFacturas.Listado.consulta_emisor_comprobante_listado cecl = new FeaEntidades.InterFacturas.Listado.consulta_emisor_comprobante_listado();
-            cecl.cuit_canal = Convert.ToInt64("30690783521");
-            cecl.cuit_vendedor = Convert.ToInt64(CuitVendedor);
-            cecl.fecha_emision_desde = FechaDsd;
-            cecl.fecha_emision_hasta = FechaHst;
-            if (TipoDoc != null && TipoDoc != "")
-            {
-                cecl.tipo_doc_comprador = Convert.ToInt32(TipoDoc);
-                cecl.tipo_doc_compradorSpecified = true;
-                cecl.doc_comprador = NroDoc;
-                cecl.doc_compradorSpecified = true;
-            }
-            else
-            {
-                cecl.tipo_doc_compradorSpecified = false;
-                cecl.doc_compradorSpecified = false;
-            }
-            cecl.limite = "SCHEMA";
 
+            GrabarLogTexto("Listar.txt", "Paso2");
             //Serializar ( pasar de FeaEntidades.InterFacturas.consulta_emisor_comprobante_listado a String XML )
             MemoryStream ms = new MemoryStream();
             XmlTextWriter writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
@@ -1626,6 +1605,7 @@ namespace CedServicios.RN
             ms.Close();
             ms = null;
 
+            GrabarLogTexto("Listar.txt", "Paso3");
             X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
             if (col.Count.Equals(1))
             {
@@ -1633,7 +1613,8 @@ namespace CedServicios.RN
                 System.Threading.Thread.Sleep(1000);
                 string resultado = string.Empty;
                 resultado = objIBK.getComprobantesListado(InputTexto);
-
+                
+                GrabarLogTexto("Listar.txt", "Paso4");
                 resultado = resultado.Replace("\n", "");
                 resultado = resultado.Replace("<consulta_emisor_comprobante_listado_response xmlns=\"http://lote.schemas.cfe.ib.com.ar/\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\">", "");
                 resultado = resultado.Replace("</consulta_emisor_comprobante_listado_response>", "");
@@ -1675,13 +1656,10 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-
-        public static string ComprobanteDetalleIBK(string CuitVendedor, string PuntoVta, string TipoComp, long NroComp, long IdLote, string certificado)
+        public string ComprobanteDetalleIBK(FeaEntidades.InterFacturas.Detalle.consulta_emisor_comprobante_detalle cecd, string certificado)
         {
             RN.IBKComprobantesListado.ReporteFacturaWebService objIBK = new RN.IBKComprobantesListado.ReporteFacturaWebService();
-            //string ValidarIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ValidarIBKUtilizarServidorExterno"];
-            //objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasListado"];
-            objIBK.Url = "https://wsqacfe.interfacturas.com.ar/ws/ReporteFacturaWebService?WSDL";
+            objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasListado"];
             if (System.Configuration.ConfigurationManager.AppSettings["Proxy"] != null && System.Configuration.ConfigurationManager.AppSettings["Proxy"] != "")
             {
                 System.Net.WebProxy wp = new System.Net.WebProxy(System.Configuration.ConfigurationManager.AppSettings["Proxy"], false);
@@ -1705,16 +1683,6 @@ namespace CedServicios.RN
                 store = new X509Store(StoreLocation.LocalMachine);
             }
             store.Open(OpenFlags.ReadOnly);
-            FeaEntidades.InterFacturas.Detalle.consulta_emisor_comprobante_detalle cecd = new FeaEntidades.InterFacturas.Detalle.consulta_emisor_comprobante_detalle();
-            cecd.cuit_canal = Convert.ToInt64("30690783521");
-            cecd.cuit_vendedor = Convert.ToInt64(CuitVendedor);
-            cecd.punto_de_venta = Convert.ToInt32(PuntoVta);
-            cecd.tipo_de_comprobante = Convert.ToInt32(TipoComp);
-            cecd.numero_comprobante = NroComp;
-            cecd.id_Lote = IdLote;
-            cecd.id_LoteSpecified = false;
-            cecd.estado = "";
-            cecd.id_LoteSpecified = false;
 
             //Serializar ( pasar de FeaEntidades.InterFacturas.consulta_emisor_comprobante_listado a String XML )
             MemoryStream ms = new MemoryStream();
@@ -1734,9 +1702,10 @@ namespace CedServicios.RN
                 string resultado = string.Empty;
                 resultado = objIBK.getComprobanteDetalle(InputTexto);
 
+                
                 //XmlTextWriter writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
-                resultado = "<?xml version=\"1.0\" encoding=\"utf-16\"?>" + resultado;
-                resultado = resultado.Replace("\n", "");
+                resultado = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + resultado;
+                //resultado = resultado.Replace("\n", "");
                 resultado = resultado.Replace("<consulta_emisor_comprobante_detalle_response xmlns=\"http://lote.schemas.cfe.ib.com.ar/\">", "");
                 resultado = resultado.Replace("</consulta_emisor_comprobante_detalle_response>", "");
                 resultado = resultado.Replace("<consulta_emisor_detalle_response>", "");
@@ -1744,7 +1713,8 @@ namespace CedServicios.RN
 
                 resultado = resultado.Replace("<comprobante>", "<comprobante xmlns=\"http://lote.schemas.cfe.ib.com.ar/\">");
                 resultado = resultado.Replace(" xsi:nil=\"true\"", "");
-
+                resultado = resultado.Replace("https://qacfe.interbanking.com.ar/cfeWeb/LogoService?idlogo=", "https://srv1.interfacturas.com.ar/cfeWeb/LogoService?idlogo=");
+                
                 ////Deserializar
                 //FeaEntidades.InterFacturas.Listado.consulta_emisor_listado_response lr = new FeaEntidades.InterFacturas.Listado.consulta_emisor_listado_response();
                 //string xml = resultado;
@@ -1782,21 +1752,33 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-
-
+        private void GrabarLogTexto(string archivo, string mensaje)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(System.Web.HttpContext.Current.Server.MapPath(@"~\" + archivo), FileMode.Append, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
         public static string ByteArrayToString(byte[] characters)
         {
             System.Text.Encoding e = System.Text.Encoding.GetEncoding("ISO-8859-1");
             String constructedString = e.GetString(characters);
             return (constructedString);
         }
-
         public static void Actualizar(CedServicios.Entidades.Comprobante Comprobante, Entidades.Sesion sesion)
         {
             DB.Comprobante db = new DB.Comprobante(sesion);
             db.Actualizar(Comprobante);
         }
-
         public static void SerializarLc(out string LoteXML, FeaEntidades.InterFacturas.lote_comprobantes Lc)
         {
             //Serializar ( pasar de FeaEntidades.InterFacturas.lote_comprobantes a string XML )
@@ -1809,7 +1791,6 @@ namespace CedServicios.RN
             ms.Close();
             ms = null;
         }
-
         public static void SerializarC(out string LoteXML, FeaEntidades.InterFacturas.comprobante Lc)
         {
             //Serializar ( pasar de FeaEntidades.InterFacturas.lote_comprobantes a string XML )

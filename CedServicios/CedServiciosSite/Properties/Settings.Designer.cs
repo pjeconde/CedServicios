@@ -26,16 +26,6 @@ namespace CedServicios.Site.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:4167/ConsultaIBK.asmx")]
-        public string CedServiciosSite_org_dyndns_cedweb_consulta_ConsultaIBK {
-            get {
-                return ((string)(this["CedServiciosSite_org_dyndns_cedweb_consulta_ConsultaIBK"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
         [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:20587/ValidoIBK.asmx")]
         public string CedServiciosSite_org_dyndns_cedweb_valido_ValidoIBK {
             get {
@@ -50,6 +40,36 @@ namespace CedServicios.Site.Properties {
         public string CedServiciosSite_org_dyndns_cedweb_envio_EnvioIBK {
             get {
                 return ((string)(this["CedServiciosSite_org_dyndns_cedweb_envio_EnvioIBK"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:20587/ConsultaIBK.asmx")]
+        public string CedServiciosSite_org_dyndns_cedweb_consulta_ConsultaIBK {
+            get {
+                return ((string)(this["CedServiciosSite_org_dyndns_cedweb_consulta_ConsultaIBK"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:20587/ListadoIBK.asmx")]
+        public string CedServiciosSite_org_dyndns_cedweb_listado_ListadoIBK {
+            get {
+                return ((string)(this["CedServiciosSite_org_dyndns_cedweb_listado_ListadoIBK"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:20587/DetalleIBK.asmx")]
+        public string CedServiciosSite_org_dyndns_cedweb_detalle_DetalleIBK {
+            get {
+                return ((string)(this["CedServiciosSite_org_dyndns_cedweb_detalle_DetalleIBK"]));
             }
         }
     }

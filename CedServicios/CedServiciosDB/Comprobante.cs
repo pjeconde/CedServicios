@@ -429,7 +429,15 @@ namespace CedServicios.DB
         public void Actualizar(Entidades.Comprobante Comprobante)
         {
             System.Text.StringBuilder a = new StringBuilder();
-            a.Append("update Comprobante set Response = '" + Comprobante.Response + "', Estado = '" + Comprobante.Estado + "' ");
+            a.Append("update Comprobante set Response = '" + Comprobante.Response + "', Estado = '" + Comprobante.Estado + "', ");
+            a.Append("Comprobante.IdTipoDoc='" + Comprobante.Documento.Tipo.Id + "', ");
+            a.Append("Comprobante.NroDoc=" + Comprobante.Documento.Nro.ToString() + ", ");
+            //a.Append("Comprobante.Fecha='" + Comprobante.Fecha.ToString("yyyyMMdd") + "', ");
+            //a.Append("Comprobante.FechaVto='" + Comprobante.FechaVto.ToString("yyyyMMdd") + "', ");
+            a.Append("Comprobante.Moneda='" + Comprobante.Moneda + "', ");
+            a.Append("Comprobante.ImporteMoneda='" + Comprobante.ImporteMoneda.ToString("0000000000000.00").Replace(",",".") + "', ");
+            a.Append("Comprobante.TipoCambio='" + Comprobante.TipoCambio.ToString("0000.000000").Replace(",", ".") + "', ");
+            a.Append("Comprobante.Importe='" + Comprobante.Importe.ToString("0000000000000.00").Replace(",", ".") + "' ");
             a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + "and Comprobante.NroComprobante=" + Comprobante.Nro.ToString() + " ");
             int Cantidad = (int)Ejecutar(a.ToString(), TipoRetorno.CantReg, Transaccion.NoAcepta, sesion.CnnStr);
         }

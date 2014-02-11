@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.cedeira.com.ar/webservices" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s1="http://lote.schemas.cfe.ib.com.ar/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.cedeira.com.ar/webservices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.cedeira.com.ar/webservices">
+      <s:import namespace="http://lote.schemas.cfe.ib.com.ar/" />
+      <s:element name="DetallarIBK">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" ref="s1:cecd" />
+            <s:element minOccurs="0" maxOccurs="1" name="pathCertificado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="DetallarIBKResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="DetallarIBKResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://lote.schemas.cfe.ib.com.ar/">
+      <s:element name="cecd">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="cuit_canal" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="cod_interno_canal" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="cuit_vendedor" type="s:long" />
+            <s:element minOccurs="1" maxOccurs="1" name="punto_de_venta" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="tipo_de_comprobante" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="numero_comprobante" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="id_Lote" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="estado" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="DetallarIBKSoapIn">
+    <wsdl:part name="parameters" element="tns:DetallarIBK" />
+  </wsdl:message>
+  <wsdl:message name="DetallarIBKSoapOut">
+    <wsdl:part name="parameters" element="tns:DetallarIBKResponse" />
+  </wsdl:message>
+  <wsdl:portType name="DetalleIBKSoap">
+    <wsdl:operation name="DetallarIBK">
+      <wsdl:input message="tns:DetallarIBKSoapIn" />
+      <wsdl:output message="tns:DetallarIBKSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="DetalleIBKSoap" type="tns:DetalleIBKSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DetallarIBK">
+      <soap:operation soapAction="http://www.cedeira.com.ar/webservices/DetallarIBK" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="DetalleIBKSoap12" type="tns:DetalleIBKSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DetallarIBK">
+      <soap12:operation soapAction="http://www.cedeira.com.ar/webservices/DetallarIBK" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="DetalleIBK">
+    <wsdl:port name="DetalleIBKSoap" binding="tns:DetalleIBKSoap">
+      <soap:address location="http://localhost:20587/DetalleIBK.asmx" />
+    </wsdl:port>
+    <wsdl:port name="DetalleIBKSoap12" binding="tns:DetalleIBKSoap12">
+      <soap12:address location="http://localhost:20587/DetalleIBK.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
