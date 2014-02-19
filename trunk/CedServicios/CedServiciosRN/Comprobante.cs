@@ -4,6 +4,8 @@ using System.Text;
 using System.Security.Cryptography.X509Certificates;
 using System.Xml;
 using System.IO;
+using Ionic.Zip;
+using System.Diagnostics;
 
 namespace CedServicios.RN
 {
@@ -1802,6 +1804,118 @@ namespace CedServicios.RN
             LoteXML = ByteArrayToString(ms.ToArray());
             ms.Close();
             ms = null;
+        }
+        public string GenerarPDF(string CuitVendedor, int NroPuntoVta, int TipoComprobante, long NroComprobante, string ArchivoXML)
+        {
+            try           
+            {
+                string comprobanteXML = ArchivoXML;
+                System.Text.StringBuilder sbXMLData = new System.Text.StringBuilder();
+                sbXMLData.AppendLine(comprobanteXML);
+
+                //Crear nombre de archivo default sin extensión
+                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                sb.Append(CuitVendedor);
+                sb.Append("-");
+                sb.Append(NroPuntoVta.ToString("0000"));
+                sb.Append("-");
+                sb.Append(TipoComprobante.ToString("00"));
+                sb.Append("-");
+                sb.Append(NroComprobante.ToString("00000000"));
+
+                //Crear nombre de archivo PDF
+                System.Text.StringBuilder sbPDF = new System.Text.StringBuilder();
+                sbPDF.Append(sb.ToString() + ".pdf");
+                System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
+                sbXML.Append(sb.ToString() + ".xml");
+
+                //Crear archivo comprobante XML
+                System.IO.MemoryStream m = new System.IO.MemoryStream();
+                System.IO.FileStream fs = new System.IO.FileStream(System.Web.HttpContext.Current.Server.MapPath(@"~/TempRender/" + sbXML.ToString()), System.IO.FileMode.Create);
+                m.WriteTo(fs);
+                fs.Close();
+
+                //Grabar información comprobante XML
+                using (StreamWriter outfile = new StreamWriter(System.Web.HttpContext.Current.Server.MapPath(@"~/TempRender/" + sbXML.ToString())))
+                {
+                    outfile.Write(sbXMLData.ToString());
+                }
+
+                RN.Sesion.GrabarLogTexto(System.Web.HttpContext.Current.Server.MapPath(@"~/Detallar.txt"), "Inicia ExecuteCommand");
+                string Mensaje = ExecuteCommand(sbXML.ToString(), sbPDF.ToString());
+                RN.Sesion.GrabarLogTexto(System.Web.HttpContext.Current.Server.MapPath(@"~/Detallar.txt"), "Finaliza ExecuteCommand");
+
+                return System.Configuration.ConfigurationManager.AppSettings["URLGenerarPDF"] + sbPDF.ToString();
+            }
+            catch (Exception ex)
+            {
+                string script = "Problemas para generar el PDF.\\n" + ex.Message;
+                script += ex.StackTrace;
+                if (ex.InnerException != null)
+                {
+                    script = ex.InnerException.Message;
+                }
+                RN.Sesion.GrabarLogTexto(System.Web.HttpContext.Current.Server.MapPath(@"~/Detallar.txt"), script);
+                return script;
+            }
+        }
+        public string ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF)
+        {
+            int exitcode;
+            //ProcessStartInfo ProcessInfo;
+            //Process process;
+            //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "java.exe");
+            ////ProcessInfo = new ProcessStartInfo(@"C:\SVNCedServicios\CedServicios\CedServiciosSite\TempRender\GenerarPDF.bat");
+            //ProcessInfo = new ProcessStartInfo(@"C:\inetpub\wwwroot\CedeiraServicios\TempRender\GenerarPDF.bat");
+            ////ProcessInfo = new ProcessStartInfo("java.exe");
+            ////ProcessInfo.Arguments = @"-cp " + Server.MapPath("~/TempRender/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/TempRender/" + NombreArchivosbXML) + " " + Server.MapPath("~/TempRender/" + NombreArchivosbPDF) + " ORIGINAL";
+            //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "Argumentos: " + "-cp " + Server.MapPath("~/TempRender/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/TempRender/" + NombreArchivosbXML) + " " + Server.MapPath("~/TempRender/" + NombreArchivosbPDF) + " ORIGINAL");
+            //ProcessInfo.WorkingDirectory = @"C:\inetpub\wwwroot\CedeiraServicios\TempRender\";
+            //ProcessInfo.CreateNoWindow = false;
+            //ProcessInfo.UseShellExecute = false;
+            //// redirecting standard output and error
+            //ProcessInfo.RedirectStandardError = true;
+            //ProcessInfo.RedirectStandardOutput = true;
+            //process = Process.Start(ProcessInfo);
+            //process.WaitForExit();
+
+            string command = string.Format("GenerarPDF.bat {0} {1} {2}", System.Web.HttpContext.Current.Server.MapPath("~/TempRender/" + "cfe-factura-render-2.57-ejecutable.jar"), System.Web.HttpContext.Current.Server.MapPath("~/TempRender/" + NombreArchivosbXML), System.Web.HttpContext.Current.Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
+            //string command = "GenerarPDF.bat";
+            ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
+            //procStartInfo.WorkingDirectory = @"C:\inetpub\wwwroot\CedeiraServicios\TempRender\";
+            procStartInfo.WorkingDirectory = System.Web.HttpContext.Current.Server.MapPath("~/TempRender/");
+            procStartInfo.RedirectStandardError = true;
+            procStartInfo.RedirectStandardOutput = true;
+            procStartInfo.UseShellExecute = false;
+            procStartInfo.CreateNoWindow = true;
+            // Now we create a process, assign its ProcessStartInfo and start it
+            Process process = new Process();
+            process.StartInfo = procStartInfo;
+            process.Start();
+            process.WaitForExit();
+
+            //Reading output and error
+            string output = process.StandardOutput.ReadToEnd();
+            string error = process.StandardError.ReadToEnd();
+
+            exitcode = process.ExitCode;
+            string Mensaje = "";
+            //Exit code '0' denotes success and '1' denotes failure
+            if (exitcode != 0)
+            {
+                Mensaje+= "Exit Code:" + exitcode + "  ";
+            }
+            if (error != "")
+            {
+                Mensaje += "Error:" + error + "  ";
+            }
+            if (output != "")
+            {
+                Mensaje += output + " ";
+            }
+            RN.Sesion.GrabarLogTexto(System.Web.HttpContext.Current.Server.MapPath("~/Detallar.txt"), "Process Info: " + Mensaje);
+            process.Close();
+            return Mensaje;
         }
     }
 }
