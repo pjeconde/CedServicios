@@ -80,7 +80,8 @@ namespace CedServicios.RN
             hasta.Medio.Id = Desde.Medio.Id;
             hasta.Medio.Descr = Desde.Medio.Descr;
             hasta.Nro = Desde.Nro;
-            hasta.NroSerieCertifAFIP = Desde.NroSerieCertifAFIP;
+            hasta.DestinoComprobanteAFIP = Desde.DestinoComprobanteAFIP;
+            hasta.DestinoComprobanteITF = Desde.DestinoComprobanteITF;
             hasta.NroSerieCertifITF = Desde.NroSerieCertifITF;
             hasta.RazonSocial = Desde.RazonSocial;
             hasta.UltActualiz = Desde.UltActualiz;

@@ -137,20 +137,20 @@ namespace CedServicios.Site
                 case 0:
                     cuit = sesion.CuitsDelUsuario.Find(delegate(Entidades.Cuit p)
                     {
-                        return p.Nro == CuitsTreeView.SelectedNode.Value;
+                        return p.Nro == SoloNroCuit(CuitsTreeView.SelectedNode.Value);
                     });
                     break;
                 case 1:
                     cuit = sesion.CuitsDelUsuario.Find(delegate(Entidades.Cuit p)
                     {
-                        return p.Nro == CuitsTreeView.SelectedNode.Parent.Value;
+                        return p.Nro == SoloNroCuit(CuitsTreeView.SelectedNode.Parent.Value);
                     });
                     uN = cuit.TraerUN(Convert.ToInt32(CuitsTreeView.SelectedNode.Value));
                     break;
                 case 2:
                     cuit = sesion.CuitsDelUsuario.Find(delegate(Entidades.Cuit p)
                     {
-                        return p.Nro == CuitsTreeView.SelectedNode.Parent.Parent.Value;
+                        return p.Nro == SoloNroCuit(CuitsTreeView.SelectedNode.Parent.Parent.Value);
                     });
                     uN = cuit.TraerUN(Convert.ToInt32(CuitsTreeView.SelectedNode.Parent.Value));
                     idPuntoVta = Convert.ToInt32(CuitsTreeView.SelectedNode.Value);
@@ -195,7 +195,8 @@ namespace CedServicios.Site
                     DatosIdentificatorios.GLN = cuit.DatosIdentificatorios.GLN;
                     DatosIdentificatorios.CodigoInterno = cuit.DatosIdentificatorios.CodigoInterno;
                     MedioDropDownList.SelectedValue = cuit.Medio.Id;
-                    NroSerieCertifAFIPTextBox.Text = cuit.NroSerieCertifAFIP;
+                    DestinoComprobanteAFIPCheckBox.Checked = cuit.DestinoComprobanteAFIP;
+                    DestinoComprobanteITFCheckBox.Checked = cuit.DestinoComprobanteITF;
                     NroSerieCertifITFTextBox.Text = cuit.NroSerieCertifITF;
 
                     CuitPanel_CUITTextBox.Enabled = false;
@@ -205,7 +206,8 @@ namespace CedServicios.Site
                     DatosImpositivos.Enabled = false;
                     DatosIdentificatorios.Enabled = false;
                     MedioDropDownList.Enabled = false;
-                    NroSerieCertifAFIPTextBox.Enabled = false;
+                    DestinoComprobanteAFIPCheckBox.Enabled = false;
+                    DestinoComprobanteITFCheckBox.Enabled = false;
                     NroSerieCertifITFTextBox.Enabled = false;
                     break;
                 case 1:
@@ -294,6 +296,10 @@ namespace CedServicios.Site
                     break;
             }
             ModalPopupExtender1.Show();
+        }
+        protected string SoloNroCuit(string a)
+        {
+            return a.Replace("<span style='color:red;'>", String.Empty).Replace("</span", String.Empty);
         }
         protected void UsaDatosCuitCheckBox_CheckedChanged(object sender, EventArgs e)
         {

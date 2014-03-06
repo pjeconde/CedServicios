@@ -60,21 +60,28 @@
 			</td>
         </tr>
         <tr>
-            <td align="right" style="padding-right: 5px; padding-top:5px">
-                <asp:Label ID="Label11" runat="server" Text="Nro.serie certif.AFIP"></asp:Label>
+            <td align="right" style="padding-right: 5px; padding-top:5px" valign="top">
+                <asp:Label ID="Label11" runat="server" Text="Destinos de comprobantes"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="NroSerieCertifAFIPTextBox" runat="server" MaxLength="256" TabIndex="502"
-                    Width="120px"></asp:TextBox>
-            </td>
-        </tr>
-        <tr>
-            <td align="right" style="padding-right: 5px; padding-top:5px">
-                <asp:Label ID="Label12" runat="server" Text="Nro.serie certif.Interfacturas"></asp:Label>
-            </td>
-            <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="NroSerieCertifITFTextBox" runat="server" MaxLength="256" TabIndex="503"
-                    Width="120px"></asp:TextBox>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="left" valign="top">
+                            <asp:CheckBox ID="DestinoComprobanteITFCheckBox" runat="server" AutoPostBack="true" Text="Interbanking (Interfacturas)" Checked="true" TabIndex="501"/>
+                        </td>
+                        <td align="left" valign="middle" style="padding-left:5px">
+                            <asp:Label ID="Label12" runat="server" Text="--> Nro.serie certif.:"></asp:Label>
+                        </td>
+                        <td align="left" valign="top" style="padding-left:5px">
+                            <asp:TextBox ID="NroSerieCertifITFTextBox" runat="server" MaxLength="256" TabIndex="502" Width="120px"></asp:TextBox>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="left" valign="top">
+                            <asp:CheckBox ID="DestinoComprobanteAFIPCheckBox" runat="server" AutoPostBack="true" Text="A.F.I.P." Checked="true" TabIndex="503" />
+                        </td>
+                    </tr>
+                </table>
             </td>
         </tr>
         <tr>
