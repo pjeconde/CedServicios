@@ -96,7 +96,7 @@
                         </tr>
                         <tr>
                             <td colspan="3">
-                                <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; padding-right:20px; padding-top:20px; width: 300px; background-image: url('Imagenes/Factura-UsuarioDemo.png'); background-repeat: no-repeat;"">
+                                <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; padding-right:20px; padding-top:20px; width: 300px;"> <%--; background-image: url('Imagenes/Factura-UsuarioDemo.png'); background-repeat: no-repeat--%>
                                     <tr>
                                         <td align="center" colspan="3" style="padding-top:10px;">
                                             <asp:Label ID="Label2" Width="200px" runat="server" SkinID="TituloMedianoC" Text="Para ingresar en la modalidad DEMO"></asp:Label>

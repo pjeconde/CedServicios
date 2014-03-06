@@ -49,7 +49,8 @@ namespace CedServicios.Site
                     DatosIdentificatorios.GLN = sesion.Cuit.DatosIdentificatorios.GLN;
                     DatosIdentificatorios.CodigoInterno = sesion.Cuit.DatosIdentificatorios.CodigoInterno;
                     MedioDropDownList.SelectedValue = sesion.Cuit.Medio.Id;
-                    NroSerieCertifAFIPTextBox.Text = sesion.Cuit.NroSerieCertifAFIP;
+                    DestinoComprobanteAFIPCheckBox.Checked = sesion.Cuit.DestinoComprobanteAFIP;
+                    DestinoComprobanteITFCheckBox.Checked = sesion.Cuit.DestinoComprobanteITF;
                     NroSerieCertifITFTextBox.Text = sesion.Cuit.NroSerieCertifITF;
 
                     CUITTextBox.Enabled = false;
@@ -59,7 +60,8 @@ namespace CedServicios.Site
                     DatosImpositivos.Enabled = false;
                     DatosIdentificatorios.Enabled = false;
                     MedioDropDownList.Enabled = false;
-                    NroSerieCertifAFIPTextBox.Enabled = false;
+                    DestinoComprobanteAFIPCheckBox.Enabled = false;
+                    DestinoComprobanteITFCheckBox.Enabled = false;
                     NroSerieCertifITFTextBox.Enabled = false;
 
                     if (sesion.Cuit.WF.Estado == "Vigente")

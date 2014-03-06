@@ -17,7 +17,8 @@ namespace CedServicios.Entidades
         private Medio medio;
         private WF wF;
         private string ultActualiz;
-        private string nroSerieCertifAFIP;
+        private bool destinoComprobanteAFIP;
+        private bool destinoComprobanteITF;
         private string nroSerieCertifITF;
         private List<UN> uNs;
 
@@ -142,15 +143,26 @@ namespace CedServicios.Entidades
                 return ultActualiz;
             }
         }
-        public string NroSerieCertifAFIP
+        public bool DestinoComprobanteAFIP
         {
             set
             {
-                nroSerieCertifAFIP = value;
+                destinoComprobanteAFIP = value;
             }
             get
             {
-                return nroSerieCertifAFIP;
+                return destinoComprobanteAFIP;
+            }
+        }
+        public bool DestinoComprobanteITF
+        {
+            set
+            {
+                destinoComprobanteITF = value;
+            }
+            get
+            {
+                return destinoComprobanteITF;
             }
         }
         public string NroSerieCertifITF
@@ -168,6 +180,19 @@ namespace CedServicios.Entidades
         public UN TraerUN(int IdUN)
         {
             return uNs.Find(delegate(Entidades.UN p) { return p.Id == IdUN; });
+        }
+        public List<Entidades.DestinoComprobante> DestinosComprobante()
+        {
+            List<Entidades.DestinoComprobante> destinosComprobante = new List<DestinoComprobante>();
+            if (destinoComprobanteAFIP)
+            {
+                destinosComprobante.Add(new DestinoComprobante("AFIP", "AFIP"));
+            }
+            if (destinoComprobanteITF)
+            {
+                destinosComprobante.Add(new DestinoComprobante("ITF", "Interbanking (Interfacturas)"));
+            }
+            return destinosComprobante;
         }
         #region Propiedades redundantes
         public string Estado

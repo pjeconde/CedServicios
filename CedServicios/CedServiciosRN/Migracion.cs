@@ -86,7 +86,8 @@ namespace CedServicios.RN
                     cuit.DatosIdentificatorios.GLN = Convert.ToInt64(dtVendedor.Rows[0]["GLN"]);
                     cuit.DatosIdentificatorios.CodigoInterno = Convert.ToString(dtVendedor.Rows[0]["CodigoInterno"]);
                     cuit.Medio.Id = Convert.ToString(dtCuenta.Rows[0]["IdMedio"]);
-                    cuit.NroSerieCertifAFIP = String.Empty;
+                    cuit.DestinoComprobanteAFIP = true;
+                    cuit.DestinoComprobanteITF = true;
                     cuit.NroSerieCertifITF = Convert.ToString(dtCuenta.Rows[0]["NroSerieCertificado"]);
                     RN.Cuit.Crear(cuit, Sesion);
                 }

@@ -98,10 +98,10 @@ namespace CedServicios.DB
             a.AppendLine("insert Configuracion (IdUsuario, Cuit, IdUN, IdTipoPermiso, IdItemConfig, Valor) values ('" + Configuracion.IdUsuario + "', '" + Configuracion.Cuit + "', '" + Configuracion.IdUN.ToString() + "', '" + Configuracion.TipoPermiso.Id + "', '" + Configuracion.IdItemConfig + "', '" + Configuracion.Valor + "') ");
             return a.ToString();
         }
-        public static string ElimninarNroSerieCertifHandler(Entidades.Cuit Cuit)
+        public static string ElimninarDestinosComprobanteyNroSerieCertifITFHandler(Entidades.Cuit Cuit)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("delete Configuracion where Cuit='" + Cuit.Nro + "' and IdItemConfig like 'NroSerieCertif%' ");
+            a.AppendLine("delete Configuracion where Cuit='" + Cuit.Nro + "' and IdItemConfig in ('DestinoComprobanteAFIP', 'DestinoComprobanteITF', 'NroSerieCertifITF') ");
             return a.ToString();
         }
         private void Copiar(DataRow Desde, Entidades.Configuracion Hasta)

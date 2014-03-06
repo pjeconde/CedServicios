@@ -71,7 +71,8 @@ namespace CedServicios.Site
                     cuit.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
                     cuit.Medio.Id = MedioDropDownList.SelectedValue;
                     cuit.Medio.Descr = MedioDropDownList.Text;
-                    cuit.NroSerieCertifAFIP = NroSerieCertifAFIPTextBox.Text;
+                    cuit.DestinoComprobanteAFIP = DestinoComprobanteAFIPCheckBox.Checked;
+                    cuit.DestinoComprobanteITF = DestinoComprobanteITFCheckBox.Checked;
                     cuit.NroSerieCertifITF = NroSerieCertifITFTextBox.Text;
                     RN.Cuit.Crear(cuit, sesion);
 
@@ -82,7 +83,8 @@ namespace CedServicios.Site
                     DatosImpositivos.Enabled = false;
                     DatosIdentificatorios.Enabled = false;
                     MedioDropDownList.Enabled = false;
-                    NroSerieCertifAFIPTextBox.Enabled = false;
+                    DestinoComprobanteAFIPCheckBox.Enabled = false;
+                    DestinoComprobanteITFCheckBox.Enabled = false;
                     NroSerieCertifITFTextBox.Enabled = false;
                     AceptarButton.Enabled = false;
                     SalirButton.Text = "Salir";

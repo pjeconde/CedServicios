@@ -175,13 +175,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label Label11;
         
         /// <summary>
-        /// Control NroSerieCertifAFIPTextBox.
+        /// Control DestinoComprobanteITFCheckBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NroSerieCertifAFIPTextBox;
+        protected global::System.Web.UI.WebControls.CheckBox DestinoComprobanteITFCheckBox;
         
         /// <summary>
         /// Control Label12.
@@ -200,6 +200,15 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NroSerieCertifITFTextBox;
+        
+        /// <summary>
+        /// Control DestinoComprobanteAFIPCheckBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox DestinoComprobanteAFIPCheckBox;
         
         /// <summary>
         /// Control AceptarButton.
