@@ -72,6 +72,7 @@ namespace CedServicios.Site
                     cuit.Medio.Id = MedioDropDownList.SelectedValue;
                     cuit.Medio.Descr = MedioDropDownList.Text;
                     cuit.DestinoComprobanteAFIP = DestinoComprobanteAFIPCheckBox.Checked;
+                    cuit.UsaCertificadoAFIPPropio = UsaCertificadoAFIPPropioCheckBox.Checked;
                     cuit.DestinoComprobanteITF = DestinoComprobanteITFCheckBox.Checked;
                     cuit.NroSerieCertifITF = NroSerieCertifITFTextBox.Text;
                     RN.Cuit.Crear(cuit, sesion);

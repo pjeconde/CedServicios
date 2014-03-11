@@ -43,10 +43,11 @@ namespace CedServicios.DB
         public void Leer(Entidades.Cuit Cuit)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Cuit.Cuit, Cuit.RazonSocial, Cuit.Calle, Cuit.Nro, Cuit.Piso, Cuit.Depto, Cuit.Sector, Cuit.Torre, Cuit.Manzana, Cuit.Localidad, Cuit.IdProvincia, Cuit.DescrProvincia, Cuit.CodPost, Cuit.NombreContacto, Cuit.EmailContacto, Cuit.TelefonoContacto, Cuit.IdCondIVA, Cuit.DescrCondIVA, Cuit.NroIngBrutos, Cuit.IdCondIngBrutos, Cuit.DescrCondIngBrutos, Cuit.GLN, Cuit.FechaInicioActividades, Cuit.CodigoInterno, Cuit.IdMedio, Cuit.IdWF, Cuit.Estado, Cuit.UltActualiz, Medio.DescrMedio, CASE DestinoComprobanteAFIP.Valor WHEN 'SI' THEN 1 ELSE 0 END as DestinoComprobanteAFIP, CASE DestinoComprobanteITF.Valor WHEN 'SI' THEN 1 ELSE 0 END as DestinoComprobanteITF, isnull(CertifITF.Valor, '') as NroSerieCertifITF ");
+            a.Append("select Cuit.Cuit, Cuit.RazonSocial, Cuit.Calle, Cuit.Nro, Cuit.Piso, Cuit.Depto, Cuit.Sector, Cuit.Torre, Cuit.Manzana, Cuit.Localidad, Cuit.IdProvincia, Cuit.DescrProvincia, Cuit.CodPost, Cuit.NombreContacto, Cuit.EmailContacto, Cuit.TelefonoContacto, Cuit.IdCondIVA, Cuit.DescrCondIVA, Cuit.NroIngBrutos, Cuit.IdCondIngBrutos, Cuit.DescrCondIngBrutos, Cuit.GLN, Cuit.FechaInicioActividades, Cuit.CodigoInterno, Cuit.IdMedio, Cuit.IdWF, Cuit.Estado, Cuit.UltActualiz, Medio.DescrMedio, CASE DestinoComprobanteAFIP.Valor WHEN 'SI' THEN 1 ELSE 0 END as DestinoComprobanteAFIP, CASE UsaCertificadoAFIPPropio.Valor WHEN 'SI' THEN 1 ELSE 0 END as UsaCertificadoAFIPPropio, CASE DestinoComprobanteITF.Valor WHEN 'SI' THEN 1 ELSE 0 END as DestinoComprobanteITF, isnull(CertifITF.Valor, '') as NroSerieCertifITF ");
             a.Append("from Cuit ");
             a.Append("join Medio on Cuit.IdMedio=Medio.IdMedio ");
             a.Append("left outer join Configuracion DestinoComprobanteAFIP on Cuit.Cuit=DestinoComprobanteAFIP.Cuit and DestinoComprobanteAFIP.IdItemConfig='DestinoComprobanteAFIP' ");
+            a.Append("left outer join Configuracion UsaCertificadoAFIPPropio on Cuit.Cuit=UsaCertificadoAFIPPropio.Cuit and UsaCertificadoAFIPPropio.IdItemConfig='UsaCertificadoAFIPPropio' ");
             a.Append("left outer join Configuracion DestinoComprobanteITF on Cuit.Cuit=DestinoComprobanteITF.Cuit and DestinoComprobanteITF.IdItemConfig='DestinoComprobanteITF' ");
             a.Append("left outer join Configuracion CertifITF on Cuit.Cuit=CertifITF.Cuit and CertifITF.IdItemConfig='NroSerieCertifITF' ");
             a.Append("where Cuit.Cuit='" + Cuit.Nro + "' ");
@@ -92,6 +93,7 @@ namespace CedServicios.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
             Hasta.DestinoComprobanteAFIP = Convert.ToBoolean(Desde["DestinoComprobanteAFIP"]);
+            Hasta.UsaCertificadoAFIPPropio = Convert.ToBoolean(Desde["UsaCertificadoAFIPPropio"]);
             Hasta.DestinoComprobanteITF = Convert.ToBoolean(Desde["DestinoComprobanteITF"]);
             Hasta.NroSerieCertifITF = Convert.ToString(Desde["NroSerieCertifITF"]);
         }
@@ -127,6 +129,7 @@ namespace CedServicios.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = Convert.ToString(Desde["UltActualiz"]);
             Hasta.DestinoComprobanteAFIP = Convert.ToBoolean(Desde["DestinoComprobanteAFIP"]);
+            Hasta.UsaCertificadoAFIPPropio = Convert.ToBoolean(Desde["UsaCertificadoAFIPPropio"]);
             Hasta.DestinoComprobanteITF = Convert.ToBoolean(Desde["DestinoComprobanteITF"]);
             Hasta.NroSerieCertifITF = Convert.ToString(Desde["NroSerieCertifITF"]);
         }
@@ -185,6 +188,14 @@ namespace CedServicios.DB
             configuracion.TipoPermiso.Id = String.Empty;
             configuracion.IdItemConfig = "DestinoComprobanteAFIP";
             configuracion.Valor = Cuit.DestinoComprobanteAFIP ? "SI" : "NO";
+            a.AppendLine(DB.Configuracion.CrearHandler(configuracion));
+
+            configuracion.IdUsuario = String.Empty;
+            configuracion.Cuit = Cuit.Nro;
+            configuracion.IdUN = 0;
+            configuracion.TipoPermiso.Id = String.Empty;
+            configuracion.IdItemConfig = "UsaCertificadoAFIPPropio";
+            configuracion.Valor = Cuit.UsaCertificadoAFIPPropio ? "SI" : "NO";
             a.AppendLine(DB.Configuracion.CrearHandler(configuracion));
 
             configuracion.IdUsuario = String.Empty;
@@ -250,6 +261,14 @@ namespace CedServicios.DB
             configuracion.TipoPermiso.Id = String.Empty;
             configuracion.IdItemConfig = "DestinoComprobanteAFIP";
             configuracion.Valor = Hasta.DestinoComprobanteAFIP ? "SI" : "NO";
+            a.AppendLine(DB.Configuracion.CrearHandler(configuracion));
+
+            configuracion.IdUsuario = String.Empty;
+            configuracion.Cuit = Hasta.Nro;
+            configuracion.IdUN = 0;
+            configuracion.TipoPermiso.Id = String.Empty;
+            configuracion.IdItemConfig = "UsaCertificadoAFIPPropio";
+            configuracion.Valor = Hasta.UsaCertificadoAFIPPropio ? "SI" : "NO";
             a.AppendLine(DB.Configuracion.CrearHandler(configuracion));
 
             configuracion.IdUsuario = String.Empty;
@@ -355,10 +374,11 @@ namespace CedServicios.DB
         public List<Entidades.Cuit> ListaSegunFiltros(string Cuit, string RazonSocial, string Localidad, string Estado)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.Append("select Cuit.Cuit, Cuit.RazonSocial, Cuit.Calle, Cuit.Nro, Cuit.Piso, Cuit.Depto, Cuit.Sector, Cuit.Torre, Cuit.Manzana, Cuit.Localidad, Cuit.IdProvincia, Cuit.DescrProvincia, Cuit.CodPost, Cuit.NombreContacto, Cuit.EmailContacto, Cuit.TelefonoContacto, Cuit.IdCondIVA, Cuit.DescrCondIVA, Cuit.NroIngBrutos, Cuit.IdCondIngBrutos, Cuit.DescrCondIngBrutos, Cuit.GLN, Cuit.FechaInicioActividades, Cuit.CodigoInterno, Cuit.IdMedio, Cuit.IdWF, Cuit.Estado, Cuit.UltActualiz, Medio.DescrMedio, CASE DestinoComprobanteAFIP.Valor WHEN 'SI' THEN 1 ELSE 0 END as DestinoComprobanteAFIP, CASE DestinoComprobanteITF.Valor WHEN 'SI' THEN 1 ELSE 0 END as DestinoComprobanteITF, isnull(CertifITF.Valor, '') as NroSerieCertifITF ");
+            a.Append("select Cuit.Cuit, Cuit.RazonSocial, Cuit.Calle, Cuit.Nro, Cuit.Piso, Cuit.Depto, Cuit.Sector, Cuit.Torre, Cuit.Manzana, Cuit.Localidad, Cuit.IdProvincia, Cuit.DescrProvincia, Cuit.CodPost, Cuit.NombreContacto, Cuit.EmailContacto, Cuit.TelefonoContacto, Cuit.IdCondIVA, Cuit.DescrCondIVA, Cuit.NroIngBrutos, Cuit.IdCondIngBrutos, Cuit.DescrCondIngBrutos, Cuit.GLN, Cuit.FechaInicioActividades, Cuit.CodigoInterno, Cuit.IdMedio, Cuit.IdWF, Cuit.Estado, Cuit.UltActualiz, Medio.DescrMedio, CASE DestinoComprobanteAFIP.Valor WHEN 'SI' THEN 1 ELSE 0 END as DestinoComprobanteAFIP, CASE UsaCertificadoAFIPPropio.Valor WHEN 'SI' THEN 1 ELSE 0 END as UsaCertificadoAFIPPropio, CASE DestinoComprobanteITF.Valor WHEN 'SI' THEN 1 ELSE 0 END as DestinoComprobanteITF, isnull(CertifITF.Valor, '') as NroSerieCertifITF ");
             a.Append("from Cuit ");
             a.Append("join Medio on Cuit.IdMedio=Medio.IdMedio ");
             a.Append("left outer join Configuracion DestinoComprobanteAFIP on Cuit.Cuit=DestinoComprobanteAFIP.Cuit and DestinoComprobanteAFIP.IdItemConfig='DestinoComprobanteAFIP' ");
+            a.Append("left outer join Configuracion UsaCertificadoAFIPPropio on Cuit.Cuit=UsaCertificadoAFIPPropio.Cuit and UsaCertificadoAFIPPropio.IdItemConfig='UsaCertificadoAFIPPropio' ");
             a.Append("left outer join Configuracion DestinoComprobanteITF on Cuit.Cuit=DestinoComprobanteITF.Cuit and DestinoComprobanteITF.IdItemConfig='DestinoComprobanteITF' ");
             a.Append("left outer join Configuracion CertifITF on Cuit.Cuit=CertifITF.Cuit and CertifITF.IdItemConfig='NroSerieCertifITF' ");
             a.AppendLine("where 1=1 ");
@@ -413,6 +433,7 @@ namespace CedServicios.DB
             a.Append("[UltActualiz] [varchar](18) NOT NULL, ");
             a.Append("[DescrMedio] [varchar](50) NOT NULL, ");
             a.Append("[DestinoComprobanteAFIP] [bit] NOT NULL, ");
+            a.Append("[UsaCertificadoAFIPPropio] [bit] NOT NULL, ");
             a.Append("[DestinoComprobanteITF] [bit] NOT NULL, ");
             a.Append("[NroSerieCertifITF] [varchar](50) NOT NULL, ");
             a.Append("CONSTRAINT [PK_Cuit" + SessionID + "] PRIMARY KEY CLUSTERED ");
@@ -452,6 +473,7 @@ namespace CedServicios.DB
                 a.Append(Cuit.UltActualiz + ", '");
                 a.Append(Cuit.Medio.Descr + "', '");
                 a.Append(Cuit.DestinoComprobanteAFIP + "', '");
+                a.Append(Cuit.UsaCertificadoAFIPPropio + "', '");
                 a.Append(Cuit.DestinoComprobanteITF + "', '");
                 a.Append(Cuit.NroSerieCertifITF + "')");
             }

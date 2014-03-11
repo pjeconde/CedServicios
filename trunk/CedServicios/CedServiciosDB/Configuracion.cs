@@ -101,7 +101,7 @@ namespace CedServicios.DB
         public static string ElimninarDestinosComprobanteyNroSerieCertifITFHandler(Entidades.Cuit Cuit)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("delete Configuracion where Cuit='" + Cuit.Nro + "' and IdItemConfig in ('DestinoComprobanteAFIP', 'DestinoComprobanteITF', 'NroSerieCertifITF') ");
+            a.AppendLine("delete Configuracion where Cuit='" + Cuit.Nro + "' and IdItemConfig in ('DestinoComprobanteAFIP', 'UsaCertificadoAFIPPropio', 'DestinoComprobanteITF', 'NroSerieCertifITF') ");
             return a.ToString();
         }
         private void Copiar(DataRow Desde, Entidades.Configuracion Hasta)

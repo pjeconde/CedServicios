@@ -80,6 +80,10 @@
                         <td align="left" valign="top">
                             <asp:CheckBox ID="DestinoComprobanteAFIPCheckBox" runat="server" AutoPostBack="true" Text="A.F.I.P." Checked="true" TabIndex="503" />
                         </td>
+                        <td align="left" valign="middle" style="padding-left:5px" colspan="2">
+                            <asp:Label ID="Label4" runat="server" Text="-->"></asp:Label>
+                            <asp:CheckBox ID="UsaCertificadoAFIPPropioCheckBox" runat="server" AutoPostBack="true" TextAlign="Left" Text="Usa certificado propio" Checked="false" TabIndex="504" />
+                        </td>
                     </tr>
                 </table>
             </td>
@@ -94,8 +98,8 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="502" Text="Aceptar" onclick="AceptarButton_Click" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="503" Text="Cancelar" onclick="SalirButton_Click" />
+                <asp:Button ID="AceptarButton" runat="server" TabIndex="505" Text="Aceptar" onclick="AceptarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="506" Text="Cancelar" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>
