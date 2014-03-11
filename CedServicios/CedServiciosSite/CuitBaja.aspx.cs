@@ -50,6 +50,7 @@ namespace CedServicios.Site
                     DatosIdentificatorios.CodigoInterno = sesion.Cuit.DatosIdentificatorios.CodigoInterno;
                     MedioDropDownList.SelectedValue = sesion.Cuit.Medio.Id;
                     DestinoComprobanteAFIPCheckBox.Checked = sesion.Cuit.DestinoComprobanteAFIP;
+                    UsaCertificadoAFIPPropioCheckBox.Checked = sesion.Cuit.UsaCertificadoAFIPPropio;
                     DestinoComprobanteITFCheckBox.Checked = sesion.Cuit.DestinoComprobanteITF;
                     NroSerieCertifITFTextBox.Text = sesion.Cuit.NroSerieCertifITF;
 
@@ -61,6 +62,7 @@ namespace CedServicios.Site
                     DatosIdentificatorios.Enabled = false;
                     MedioDropDownList.Enabled = false;
                     DestinoComprobanteAFIPCheckBox.Enabled = false;
+                    UsaCertificadoAFIPPropioCheckBox.Enabled = false;
                     DestinoComprobanteITFCheckBox.Enabled = false;
                     NroSerieCertifITFTextBox.Enabled = false;
 

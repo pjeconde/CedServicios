@@ -18,6 +18,7 @@ namespace CedServicios.Entidades
         private WF wF;
         private string ultActualiz;
         private bool destinoComprobanteAFIP;
+        private bool usaCertificadoAFIPPropio;
         private bool destinoComprobanteITF;
         private string nroSerieCertifITF;
         private List<UN> uNs;
@@ -152,6 +153,17 @@ namespace CedServicios.Entidades
             get
             {
                 return destinoComprobanteAFIP;
+            }
+        }
+        public bool UsaCertificadoAFIPPropio
+        {
+            set
+            {
+                usaCertificadoAFIPPropio = value;
+            }
+            get
+            {
+                return usaCertificadoAFIPPropio;
             }
         }
         public bool DestinoComprobanteITF

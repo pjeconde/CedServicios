@@ -107,6 +107,10 @@
                             <td align="left" valign="top">
                                 <asp:CheckBox ID="DestinoComprobanteAFIPCheckBox" runat="server" AutoPostBack="true" Text="A.F.I.P." Checked="true" TabIndex="503" />
                             </td>
+                            <td align="left" valign="middle" style="padding-left:5px" colspan="2">
+                                <asp:Label ID="Label15" runat="server" Text="-->"></asp:Label>
+                                <asp:CheckBox ID="UsaCertificadoAFIPPropioCheckBox" runat="server" AutoPostBack="true" TextAlign="Left" Text="Usa certificado propio" Checked="false" TabIndex="504" />
+                            </td>
                         </tr>
                     </table>
                 </td>
