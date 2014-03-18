@@ -129,9 +129,6 @@ namespace CedServicios.Site
                 case "Administración|Autorizaciones|Explorador de Autorizaciones (histórico)":
                     Response.Redirect("~/ExploradorAutorizacionLog.aspx");
                     break;
-                case "Administración Site|Migración de Cuentas (desde CedWeb)":
-                    Response.Redirect("~/Migracion.aspx");
-                    break;
                 case "Administración Site|Explorador de Comprobantes":
                     Response.Redirect("~/ExploradorComprobanteGlobal.aspx");
                     break;

@@ -190,9 +190,6 @@ namespace CedServicios.Site
                 mItem = new MenuItem("Explorador de Administración", "Explorador de Administración");
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-                mItem = new MenuItem("Migración de Cuentas (desde CedWeb)", "Migración de Cuentas (desde CedWeb)");
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
 
             mItem = new MenuItem("Ayuda", "Ayuda");
             menu.Items.Add(mItem);
