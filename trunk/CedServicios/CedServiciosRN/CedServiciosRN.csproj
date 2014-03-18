@@ -64,7 +64,6 @@
     <Compile Include="LogDetalle.cs" />
     <Compile Include="Medio.cs" />
     <Compile Include="MetodoGeneracionNumeracionLote.cs" />
-    <Compile Include="Migracion.cs" />
     <Compile Include="Permiso.cs" />
     <Compile Include="PermisoLog.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

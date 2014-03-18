@@ -196,7 +196,6 @@
     <Content Include="InstitucionalSolucionesCedFCI.aspx" />
     <Content Include="InstitucionalSolucionesCedST.aspx" />
     <Content Include="LogDetalleConsultaXIdLog.aspx" />
-    <Content Include="Migracion.aspx" />
     <Content Include="NotificacionDeExcepcion.aspx" />
     <Content Include="PaginaEnConstruccion.aspx" />
     <Content Include="PreguntasFrecuentes.aspx" />
@@ -907,13 +906,6 @@
     </Compile>
     <Compile Include="LogDetalleConsultaXIdLog.aspx.designer.cs">
       <DependentUpon>LogDetalleConsultaXIdLog.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Migracion.aspx.cs">
-      <DependentUpon>Migracion.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Migracion.aspx.designer.cs">
-      <DependentUpon>Migracion.aspx</DependentUpon>
     </Compile>
     <Compile Include="NotificacionDeExcepcion.aspx.cs">
       <DependentUpon>NotificacionDeExcepcion.aspx</DependentUpon>
