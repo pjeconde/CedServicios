@@ -52,7 +52,7 @@
         <uc1:datosIdentificatorios ID="DatosIdentificatorios" runat="server" />
         <tr>
 	        <td align="right" style="padding-right:5px; padding-top:5px">
-		        <asp:Label ID="Label18" runat="server" Text="¿ Cómo nos conoció ?"></asp:Label>
+		        <asp:Label ID="Label18" runat="server" Text="¿Cómo nos conoció?"></asp:Label>
 	        </td>
 			<td align="left" style="padding-top:5px">
 				<asp:DropDownList ID="MedioDropDownList" runat="server" TabIndex="501" Width="216px" DataValueField="Id" DataTextField="Descr">
@@ -60,29 +60,38 @@
 			</td>
         </tr>
         <tr>
+	        <td align="right" style="padding-right:5px; padding-top:5px">
+		        <asp:Label ID="Label5" runat="server" Text="Servicios"></asp:Label>
+	        </td>
+			<td align="left" style="padding-top:5px">
+                <asp:CheckBox ID="eFactCheckBox" runat="server" AutoPostBack="true" Text="Factura electrónica" Checked="true" TabIndex="502" />
+                <asp:CheckBox ID="resTurCheckBox" runat="server" AutoPostBack="true" Text="Reservas turísticas" Checked="false" TabIndex="503" Visible="false"/>
+			</td>
+        </tr>
+        <tr>
             <td align="right" style="padding-right: 5px; padding-top:5px" valign="top">
-                <asp:Label ID="Label11" runat="server" Text="Destinos de comprobantes"></asp:Label>
+                <asp:Label ID="Label11" runat="server" Text="Destinos de comprobantes<br>(para servicio de<br>factura electrónica)"></asp:Label>
             </td>
             <td align="left" style="padding-top:5px">
                 <table border="0" cellpadding="0" cellspacing="0">
                     <tr>
                         <td align="left" valign="top">
-                            <asp:CheckBox ID="DestinoComprobanteITFCheckBox" runat="server" AutoPostBack="true" Text="Interbanking (Interfacturas)" Checked="true" TabIndex="501"/>
+                            <asp:CheckBox ID="DestinoComprobanteITFCheckBox" runat="server" AutoPostBack="true" Text="Interbanking (Interfacturas)" Checked="true" TabIndex="504"/>
                         </td>
                         <td align="left" valign="middle" style="padding-left:5px">
                             <asp:Label ID="Label12" runat="server" Text="--> Nro.serie certif.:"></asp:Label>
                         </td>
                         <td align="left" valign="top" style="padding-left:5px">
-                            <asp:TextBox ID="NroSerieCertifITFTextBox" runat="server" MaxLength="256" TabIndex="502" Width="120px"></asp:TextBox>
+                            <asp:TextBox ID="NroSerieCertifITFTextBox" runat="server" MaxLength="256" TabIndex="505" Width="120px"></asp:TextBox>
                         </td>
                     </tr>
                     <tr>
                         <td align="left" valign="top">
-                            <asp:CheckBox ID="DestinoComprobanteAFIPCheckBox" runat="server" AutoPostBack="true" Text="A.F.I.P." Checked="true" TabIndex="503" />
+                            <asp:CheckBox ID="DestinoComprobanteAFIPCheckBox" runat="server" AutoPostBack="true" Text="A.F.I.P." Checked="true" TabIndex="506" />
                         </td>
                         <td align="left" valign="middle" style="padding-left:5px" colspan="2">
                             <asp:Label ID="Label4" runat="server" Text="-->"></asp:Label>
-                            <asp:CheckBox ID="UsaCertificadoAFIPPropioCheckBox" runat="server" AutoPostBack="true" TextAlign="Left" Text="Usa certificado propio" Checked="false" TabIndex="504" />
+                            <asp:CheckBox ID="UsaCertificadoAFIPPropioCheckBox" runat="server" AutoPostBack="true" TextAlign="Left" Text="Usa certificado propio" Checked="false" TabIndex="507" />
                         </td>
                     </tr>
                 </table>
@@ -98,8 +107,8 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="505" Text="Aceptar" onclick="AceptarButton_Click" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="506" Text="Cancelar" onclick="SalirButton_Click" />
+                <asp:Button ID="AceptarButton" runat="server" TabIndex="508" Text="Aceptar" onclick="AceptarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="509" Text="Cancelar" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

@@ -4,7 +4,7 @@
     <table border="0" cellpadding="0" cellspacing="0">
         <tr>
             <td align="center">
-                <asp:Label ID="Label3" runat="server" SkinID="TituloPagina" Text="¿ Cómo empiezo a operar con facturas electrónicas ?"></asp:Label>
+                <asp:Label ID="Label3" runat="server" SkinID="TituloPagina" Text="¿Cómo empiezo a operar con facturas electrónicas?"></asp:Label>
             </td>
         </tr>
         <tr>

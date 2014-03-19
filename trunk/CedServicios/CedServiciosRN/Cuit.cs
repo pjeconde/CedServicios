@@ -22,10 +22,22 @@ namespace CedServicios.RN
             CedServicios.DB.Cuit db = new DB.Cuit(Sesion);
             db.CompletarUNsYPuntosVta(Cuits);
         }
-        public static void Crear(Entidades.Cuit Cuit, Entidades.Sesion Sesion)
+        public static void Crear(Entidades.Cuit Cuit, List<string> Servicios, Entidades.Sesion Sesion)
         {
+            //Validar
+            if (Servicios.Count == 0) throw new CedServicios.EX.Cuit.NingunServicioSeleccionado();
+            string servicio = Servicios.Find(delegate(string s) {return s == "eFact";});
+            if (servicio != null && !Cuit.DestinoComprobanteAFIP && !Cuit.DestinoComprobanteITF)
+            {
+                throw new CedServicios.EX.Cuit.NingunDestinoComprobanteSeleccionado();
+            }
+            //Crear
             string permisoAdminCUITParaUsuarioAprobadoHandler = RN.Permiso.PermisoAdminCUITParaUsuarioAprobadoHandler(Cuit, Sesion);
-            string servxCUITAprobadoHandler = RN.Permiso.ServxCUITAprobadoHandler(Cuit, new Entidades.TipoPermiso("eFact"), new DateTime(2062, 12, 31), Sesion);
+            string servxCUITAprobadoHandler = String.Empty;
+            for (int i = 0; i < Servicios.Count; i++)
+            {
+                servxCUITAprobadoHandler += RN.Permiso.ServxCUITAprobadoHandler(Cuit, new Entidades.TipoPermiso(Servicios[i]), new DateTime(2062, 12, 31), Sesion);
+            }
             DB.UN dbUN = new DB.UN(Sesion);
             Entidades.UN uN = new Entidades.UN();
             uN.Cuit = Cuit.Nro;
@@ -35,7 +47,11 @@ namespace CedServicios.RN
             string crearUNHandler = dbUN.CrearHandler(uN, true);
             string permisoUsoCUITxUNAprobadoHandler = RN.Permiso.PermisoUsoCUITxUNAprobadoHandler(uN, Sesion);
             string permisoAdminUNParaUsuarioAprobadoHandler = RN.Permiso.PermisoAdminUNParaUsuarioAprobadoHandler(uN, Sesion);
-            string permisoOperServUNParaUsuarioAprobadoHandler = RN.Permiso.PermisoOperServUNParaUsuarioAprobadoHandler(uN, new Entidades.TipoPermiso("eFact"), new DateTime(2062, 12, 31), Sesion);
+            string permisoOperServUNParaUsuarioAprobadoHandler = String.Empty;
+            for (int i = 0; i < Servicios.Count; i++)
+            {
+                permisoOperServUNParaUsuarioAprobadoHandler += RN.Permiso.PermisoOperServUNParaUsuarioAprobadoHandler(uN, new Entidades.TipoPermiso(Servicios[i]), new DateTime(2062, 12, 31), Sesion);
+            }
             DB.Cuit db = new DB.Cuit(Sesion);
             Cuit.WF.Estado = "Vigente";
             db.Crear(Cuit, permisoAdminCUITParaUsuarioAprobadoHandler, servxCUITAprobadoHandler, crearUNHandler, permisoUsoCUITxUNAprobadoHandler, permisoAdminUNParaUsuarioAprobadoHandler, permisoOperServUNParaUsuarioAprobadoHandler);

@@ -47,7 +47,7 @@
         <tr>
             <td align="left" style="padding-top:20px">
                 <asp:LinkButton ID="LinkButton2" runat="server" SkinID="LinkButtonAyuda" PostBackUrl="~/Ayuda/Instructivas/OperarFacturaElectronica007.aspx">
-                    ¿ Cómo ingreso comprobantes ?
+                    ¿Cómo ingreso comprobantes?
                 </asp:LinkButton>
             </td>
         </tr>

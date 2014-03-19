@@ -4,7 +4,7 @@
     <table border="0" cellpadding="0" cellspacing="0">
         <tr>
             <td align="center">
-                <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="¿ Cómo ingreso comprobantes ?"></asp:Label>
+                <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="¿Cómo ingreso comprobantes?"></asp:Label>
             </td>
         </tr>
         <tr>
