@@ -29,7 +29,7 @@ namespace CedServicios.RN
                 opcionesHabilitadas.Add("Administración|Unidad de Negocio|Solicitud permiso de administrador de UN");
                 opcionesHabilitadas.Add("Administración|Usuario|Cambio de Contraseña");
                 opcionesHabilitadas.Add("Administración|Usuario|Modificación datos de Configuración");
-                opcionesHabilitadas.Add("Ayuda|Manual|¿ Cómo empiezo a operar con facturas electrónicas ?");
+                opcionesHabilitadas.Add("Ayuda|Manual|¿Cómo empiezo a operar con facturas electrónicas?");
                 opcionesHabilitadas.Add("Ayuda|Novedades");
                 opcionesHabilitadas.Add("Ayuda|Documentación técnica");
                 opcionesHabilitadas.Add("Cerrar sesión");
@@ -57,16 +57,10 @@ namespace CedServicios.RN
                 {
                     opcionesHabilitadas.Add("Administración|CUIT|Consulta");
                     opcionesHabilitadas.Add("Administración|Unidad de Negocio|Consulta");
-                    opcionesHabilitadas.Add("Administración|Puntos de Venta|Consulta");
                     opcionesHabilitadas.Add("Clientes|Alta");
                     opcionesHabilitadas.Add("Clientes|Baja/Anul.baja");
                     opcionesHabilitadas.Add("Clientes|Modificación");
                     opcionesHabilitadas.Add("Clientes|Consulta");
-                    //Ojo: no estoy condicionando el tema de Artículos al servicio eFact !!!
-                    opcionesHabilitadas.Add("Artículos|Alta");
-                    opcionesHabilitadas.Add("Artículos|Baja/Anul.baja");
-                    opcionesHabilitadas.Add("Artículos|Modificación");
-                    opcionesHabilitadas.Add("Artículos|Consulta");
                     
                     List<Entidades.Permiso> esAdminCUITdeCUITseleccionado = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
@@ -101,9 +95,6 @@ namespace CedServicios.RN
                     {
                         opcionesHabilitadas.Add("Administración|Unidad de Negocio|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Administración|Unidad de Negocio|Modificación");
-                        opcionesHabilitadas.Add("Administración|Puntos de Venta|Alta");
-                        opcionesHabilitadas.Add("Administración|Puntos de Venta|Baja/Anul.baja");
-                        opcionesHabilitadas.Add("Administración|Puntos de Venta|Modificación");
                     }
                     List<Entidades.Permiso> elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
@@ -111,12 +102,23 @@ namespace CedServicios.RN
                     });
                     if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada.Count != 0 && Sesion.Cuit.WF.Estado == "Vigente" && Sesion.UN.WF.Estado == "Vigente")
                     {
+                        opcionesHabilitadas.Add("Artículos|Alta");
+                        opcionesHabilitadas.Add("Artículos|Baja/Anul.baja");
+                        opcionesHabilitadas.Add("Artículos|Modificación");
+                        opcionesHabilitadas.Add("Artículos|Consulta");
                         opcionesHabilitadas.Add("Factura Electrónica|Alta");
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobantes (base de datos)");
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobantes (online Interfacturas)");
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (archivo XML)");
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (online Interfacturas)");
                         opcionesHabilitadas.Add("Factura Electrónica|Términos y Condiciones");
+                        if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
+                        {
+                            opcionesHabilitadas.Add("Administración|Puntos de Venta|Alta");
+                            opcionesHabilitadas.Add("Administración|Puntos de Venta|Baja/Anul.baja");
+                            opcionesHabilitadas.Add("Administración|Puntos de Venta|Modificación");
+                        }
+                        opcionesHabilitadas.Add("Administración|Puntos de Venta|Consulta");
                     }
                 }
             }

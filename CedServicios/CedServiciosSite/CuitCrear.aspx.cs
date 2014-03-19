@@ -45,6 +45,9 @@ namespace CedServicios.Site
                 Entidades.Cuit cuit = new Entidades.Cuit();
                 try
                 {
+                    List<string> servicios = new List<string>();
+                    if (eFactCheckBox.Checked) servicios.Add("eFact");
+                    if (resTurCheckBox.Checked) servicios.Add("resTur");
                     cuit.Nro = CUITTextBox.Text;
                     cuit.RazonSocial = RazonSocialTextBox.Text;
                     cuit.Domicilio.Calle = Domicilio.Calle;
@@ -75,7 +78,7 @@ namespace CedServicios.Site
                     cuit.UsaCertificadoAFIPPropio = UsaCertificadoAFIPPropioCheckBox.Checked;
                     cuit.DestinoComprobanteITF = DestinoComprobanteITFCheckBox.Checked;
                     cuit.NroSerieCertifITF = NroSerieCertifITFTextBox.Text;
-                    RN.Cuit.Crear(cuit, sesion);
+                    RN.Cuit.Crear(cuit, servicios, sesion);
 
                     CUITTextBox.Enabled = false;
                     RazonSocialTextBox.Enabled = false;

@@ -5,7 +5,7 @@
         <!-- @@@ TITULO DE LA PAGINA @@@-->
         <tr>
             <td colspan="3" align="center" style="padding-top:20px">
-                <asp:Label ID="TituloLabel" runat="server" SkinID="TituloPagina" Text="¿ Olvidó el Id.Usuario de su cuenta ?"></asp:Label>
+                <asp:Label ID="TituloLabel" runat="server" SkinID="TituloPagina" Text="¿Olvidó el Id.Usuario de su cuenta?"></asp:Label>
             </td>
         </tr>
         <tr>

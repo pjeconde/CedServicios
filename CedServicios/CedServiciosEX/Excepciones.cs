@@ -410,7 +410,7 @@ namespace CedServicios.EX
             }
         }
         [Serializable]
-        public class Existente : CedServicios.EX.db.BaseApplicationException
+        public class Existente : CedServicios.EX.Permiso.BaseApplicationException
         {
             static string TextoError = "Este permiso ya ha sido solicitado y está en estado ";
             public Existente(string estado)
@@ -427,10 +427,10 @@ namespace CedServicios.EX
             }
         }
     }
-    namespace Lote
+    namespace Cuit
     {
         [Serializable]
-        public class BaseApplicationException : CedServicios.EX.Validaciones.BaseApplicationException
+        public class BaseApplicationException : CedServicios.EX.BaseApplicationException
         {
             public BaseApplicationException(string TextoError)
                 : base(TextoError)
@@ -446,7 +446,60 @@ namespace CedServicios.EX
             }
         }
         [Serializable]
-        public class Existente : CedServicios.EX.Validaciones.BaseApplicationException
+        public class NingunServicioSeleccionado : CedServicios.EX.Cuit.BaseApplicationException
+        {
+            static string TextoError = "Servicio no informado (debe elegir al menos uno)";
+            public NingunServicioSeleccionado()
+                : base(TextoError)
+            {
+            }
+            public NingunServicioSeleccionado(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public NingunServicioSeleccionado(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class NingunDestinoComprobanteSeleccionado : CedServicios.EX.Cuit.BaseApplicationException
+        {
+            static string TextoError = "Destino de Comprobante no informado (debe elegir al menos uno)";
+            public NingunDestinoComprobanteSeleccionado()
+                : base(TextoError)
+            {
+            }
+            public NingunDestinoComprobanteSeleccionado(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public NingunDestinoComprobanteSeleccionado(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+    }
+    namespace Lote
+    {
+        [Serializable]
+        public class BaseApplicationException : CedServicios.EX.BaseApplicationException
+        {
+            public BaseApplicationException(string TextoError)
+                : base(TextoError)
+            {
+            }
+            public BaseApplicationException(string TextoError, Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public BaseApplicationException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class Existente : CedServicios.EX.Lote.BaseApplicationException
         {
             static string TextoError = "Lote existente.";
             public Existente(string Descr)
@@ -463,7 +516,7 @@ namespace CedServicios.EX
             }
         }
         [Serializable]
-        public class Inexistente : CedServicios.EX.Validaciones.BaseApplicationException
+        public class Inexistente : CedServicios.EX.Lote.BaseApplicationException
         {
             static string TextoError = "Lote inexistente.";
             public Inexistente(string Descr)
@@ -480,7 +533,7 @@ namespace CedServicios.EX
             }
         }
         [Serializable]
-        public class ProblemasEnvio : CedServicios.EX.Validaciones.BaseApplicationException
+        public class ProblemasEnvio : CedServicios.EX.Lote.BaseApplicationException
         {
             static string TextoError = "Problemas al enviar el lote.";
             public ProblemasEnvio(string Descr)
@@ -497,7 +550,7 @@ namespace CedServicios.EX
             }
         }
         [Serializable]
-        public class ProblemasConsulta : CedServicios.EX.Validaciones.BaseApplicationException
+        public class ProblemasConsulta : CedServicios.EX.Lote.BaseApplicationException
         {
             static string TextoError = "Problemas al consultar el lote.";
             public ProblemasConsulta(string Descr)

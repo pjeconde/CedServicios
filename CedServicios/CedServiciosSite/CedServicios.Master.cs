@@ -168,7 +168,7 @@ namespace CedServicios.Site
                 case "Administración|Usuario|Modificación datos de Configuración":
                     Response.Redirect("~/ConfiguracionModificar.aspx");
                     break;
-                case "Ayuda|Manual|¿ Cómo empiezo a operar con facturas electrónicas ?":
+                case "Ayuda|Manual|¿Cómo empiezo a operar con facturas electrónicas?":
                     sesion.EstoyEnAyuda = true;
                     Response.Redirect("~/Ayuda/Instructivas/OperarFacturaElectronica001.aspx");
                     break;

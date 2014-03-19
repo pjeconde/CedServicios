@@ -9,7 +9,7 @@
         </tr>
         <tr>
             <td align="left" style="padding-top:20px">
-                <asp:Label ID="Label7" runat="server" SkinID="LabelAyuda" Text="¿ De qué manera me sumo al grupo que ya está operando en el sitio ?" ></asp:Label>
+                <asp:Label ID="Label7" runat="server" SkinID="LabelAyuda" Text="¿De qué manera me sumo al grupo que ya está operando en el sitio?" ></asp:Label>
             </td>
         </tr>
         <tr>

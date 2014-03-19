@@ -154,7 +154,7 @@ namespace CedServicios.Site
                     mItem = new MenuItem("Modificación datos de Configuración", "Modificación datos de Configuración"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
 
-            mItem = new MenuItem("Administración Site", "Administración Site");
+            mItem = new MenuItem("Administración Site", "Administración Site"); mItem.Selectable = false;
             menu.Items.Add(mItem);
             menu.Items[menu.Items.Count - 1].Selectable = false;
                 mItem = new MenuItem("Explorador de Comprobantes", "Explorador de Comprobantes");
@@ -197,7 +197,7 @@ namespace CedServicios.Site
                 mItem = new MenuItem("Manual", "Manual");
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-                mItem = new MenuItem("¿ Cómo empiezo a operar con facturas electrónicas ?", "¿ Cómo empiezo a operar con facturas electrónicas ?"); mItem.Selectable = false;
+                mItem = new MenuItem("¿Cómo empiezo a operar con facturas electrónicas?", "¿Cómo empiezo a operar con facturas electrónicas?"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Novedades", "Novedades");
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
@@ -301,9 +301,10 @@ namespace CedServicios.Site
             }
             MenuItem menuItem = menu.FindItem("Iniciar sesión");
             if (menuItem != null && !menuItem.Selectable) RemoverMenuItem(menu, menuItem);
-            MenuItem menuSubItem = menu.FindItem("Administración Site|Migración de Cuentas (desde CedWeb)");
+            MenuItem menuItemRef = menu.FindItem("Administración Site|Explorador de Comprobantes");
             menuItem = menu.FindItem("Administración Site");
-            if (menuItem != null && menuSubItem != null && !menuSubItem.Selectable) RemoverMenuItem(menu, menuItem);
+            if (menuItem != null && !menuItemRef.Selectable) RemoverMenuItem(menu, menuItem);
+            Master.DataBind();
         }
         private static void RemoverMenuItem(Menu Menu, MenuItem MenuItem)
         {
