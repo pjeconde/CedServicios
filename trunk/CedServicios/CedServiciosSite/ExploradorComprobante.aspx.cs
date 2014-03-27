@@ -151,121 +151,163 @@ namespace CedServicios.Site
                         MensajeLabel.Text = "El comprobante ya está vigente. No es posible actualizar su estado.";
                         return;
                     }
-                    string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
-                    if (NroCertif.Equals(string.Empty))
+                    string NroCertif = "";
+                    if (comprobante.IdDestinoComprobante != "AFIP")
                     {
-                        MensajeLabel.Text = "Aún no disponemos de su certificado digital";
-                        return;
-                    }
-                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Consulta de Lote CUIT: " + comprobante.Cuit + "  Nro.Lote: " + comprobante.NroLote + "  Nro. Punto de Vta.: " + comprobante.NroPuntoVta);
-                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "NroSerieCertifITF: " + NroCertif);
-                    if (NroCertif.Equals(string.Empty))
-                    {
-                        MensajeLabel.Text = "Aún no disponemos de su certificado digital";
-                        return;
-                    }
+                        NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                        if (NroCertif.Equals(string.Empty))
+                        {
+                            MensajeLabel.Text = "Aún no disponemos de su certificado digital";
+                            return;
+                        }
 
-                    string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                    org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
-                    string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
-                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
-                    if (ConsultaIBKUtilizarServidorExterno == "SI")
-                    {
-                        clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
-                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
-                    }
-                    org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
-                    clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(comprobante.Cuit), comprobante.NroLote, comprobante.NroPuntoVta, certificado);
-                    FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                    lc = Ws2Fea(clcrdyndns);
-                    Cache["ComprobanteAConsultar"] = lc;
-                    string XML = "";
-                    RN.Comprobante.SerializarLc(out XML, lc);
-                    comprobante.Response = XML;
-                    if (lc.cabecera_lote.resultado == "A")
-                    {
-                        //Controlar que sea el mismo comprobante (local vs on-line)
-                        if (comprobante.Nro != lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante)
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Consulta de Lote CUIT: " + comprobante.Cuit + "  Nro.Lote: " + comprobante.NroLote + "  Nro. Punto de Vta.: " + comprobante.NroPuntoVta);
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "NroSerieCertifITF: " + NroCertif);
+
+                        string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                        org.dyndns.cedweb.consulta.ConsultaIBK clcdyndns = new org.dyndns.cedweb.consulta.ConsultaIBK();
+                        string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
+                        if (ConsultaIBKUtilizarServidorExterno == "SI")
                         {
-                            MensajeLabel.Text = "(Campo: Nro. de Comprobante). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
-                            return;
+                            clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
+                            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
                         }
-                        if (comprobante.TipoComprobante.Id != lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)
+                        org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
+                        clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(comprobante.Cuit), comprobante.NroLote, comprobante.NroPuntoVta, certificado);
+                        FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                        lc = Ws2Fea(clcrdyndns);
+                        Cache["ComprobanteAConsultar"] = lc;
+                        string XML = "";
+                        RN.Comprobante.SerializarLc(out XML, lc);
+                        comprobante.Response = XML;
+                        if (lc.cabecera_lote.resultado == "A")
                         {
-                            MensajeLabel.Text = "(Campo: Tipo de Comprobante). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
-                            return;
-                        }
-                        if (comprobante.Importe != lc.comprobante[0].resumen.importe_total_factura)
-                        {
-                            MensajeLabel.Text += "(Campo: Importe). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
-                            comprobante.Importe = lc.comprobante[0].resumen.importe_total_factura;
-                        }
-                        if (comprobante.Moneda != lc.comprobante[0].resumen.codigo_moneda)
-                        {
-                            MensajeLabel.Text += "(Campo: Moneda). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
-                            comprobante.Moneda = lc.comprobante[0].resumen.codigo_moneda;
-                        }
-                        if (lc.comprobante[0].resumen.importes_moneda_origen != null)
-                        {
-                            if (comprobante.ImporteMoneda != lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura)
+                            //Controlar que sea el mismo comprobante (local vs on-line)
+                            if (comprobante.Nro != lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante)
                             {
-                                MensajeLabel.Text += "(Campo: Importe Moneda). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
-                                comprobante.ImporteMoneda = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;
+                                MensajeLabel.Text = "(Campo: Nro. de Comprobante). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
+                                return;
                             }
+                            if (comprobante.TipoComprobante.Id != lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)
+                            {
+                                MensajeLabel.Text = "(Campo: Tipo de Comprobante). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
+                                return;
+                            }
+                            if (comprobante.Importe != lc.comprobante[0].resumen.importe_total_factura)
+                            {
+                                MensajeLabel.Text += "(Campo: Importe). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                                comprobante.Importe = lc.comprobante[0].resumen.importe_total_factura;
+                            }
+                            if (comprobante.Moneda != lc.comprobante[0].resumen.codigo_moneda)
+                            {
+                                MensajeLabel.Text += "(Campo: Moneda). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                                comprobante.Moneda = lc.comprobante[0].resumen.codigo_moneda;
+                            }
+                            if (lc.comprobante[0].resumen.importes_moneda_origen != null)
+                            {
+                                if (comprobante.ImporteMoneda != lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura)
+                                {
+                                    MensajeLabel.Text += "(Campo: Importe Moneda). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                                    comprobante.ImporteMoneda = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;
+                                }
+                            }
+                            else
+                            {
+                                if (comprobante.ImporteMoneda != 0)
+                                {
+                                    MensajeLabel.Text += "(Campo: Importe Moneda). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                                    comprobante.ImporteMoneda = 0;
+                                }
+                            }
+                            if (comprobante.TipoCambio != lc.comprobante[0].resumen.tipo_de_cambio)
+                            {
+                                MensajeLabel.Text += "(Campo: Tipo de cambio). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                                comprobante.TipoCambio = lc.comprobante[0].resumen.tipo_de_cambio;
+                            }
+                            //if (comprobante.Fecha != lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision)
+                            //{
+                            //    MensajeLabel.Text += "(Campo: Tipo de cambio). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                            //    comprobante.Fecha = lc.comprobante[0].resumen.fecha_emision;
+                            //}
+                            //if (comprobante.Fecha != lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento)
+                            //{
+                            //    MensajeLabel.Text += "(Campo: Tipo de cambio). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                            //    comprobante.FechaVto = lc.comprobante[0].resumen.fecha_vencimiento;
+                            //}
+                            if (comprobante.Documento.Tipo.Id != lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString())
+                            {
+                                MensajeLabel.Text += "(Campo: Cod.Doc). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                                comprobante.Documento.Tipo.Id = lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
+                            }
+                            if (comprobante.Documento.Nro != lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio)
+                            {
+                                MensajeLabel.Text += "(Campo: Nro.Doc). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
+                                comprobante.Documento.Nro = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;
+                            }
+
+                            comprobante.WF.Estado = "Vigente";
+                            RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                            string script = "window.open('/ComprobanteConsulta.aspx', '');";
+                            BuscarButton_Click(sender, new EventArgs());
+                            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                        }
+                        else if (lc.cabecera_lote.resultado == "R")
+                        {
+                            comprobante.WF.Estado = "Rechazado";
+                            RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                            string script = "<SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF / AFIP.\\n" + "Resultado: " + lc.cabecera_lote.resultado + "  Motivo: " + lc.cabecera_lote.motivo + "');</script>";
+                            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "Message", script, true);
                         }
                         else
                         {
-                            if (comprobante.ImporteMoneda != 0)
-                            {
-                                MensajeLabel.Text += "(Campo: Importe Moneda). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
-                                comprobante.ImporteMoneda = 0;
-                            }
+                            MensajeLabel.Text = "No se puede realizar la actualización, cuando el comprobante se encuentra en el siguiente estado en Interfacturas ( Estado: " + clcrdyndns.comprobante[0].cabecera.informacion_comprobante.resultado + ").";
+                            return;
                         }
-                        if (comprobante.TipoCambio != lc.comprobante[0].resumen.tipo_de_cambio)
-                        {
-                            MensajeLabel.Text += "(Campo: Tipo de cambio). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
-                            comprobante.TipoCambio = lc.comprobante[0].resumen.tipo_de_cambio;
-                        }
-                        //if (comprobante.Fecha != lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision)
-                        //{
-                        //    MensajeLabel.Text += "(Campo: Tipo de cambio). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
-                        //    comprobante.Fecha = lc.comprobante[0].resumen.fecha_emision;
-                        //}
-                        //if (comprobante.Fecha != lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento)
-                        //{
-                        //    MensajeLabel.Text += "(Campo: Tipo de cambio). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
-                        //    comprobante.FechaVto = lc.comprobante[0].resumen.fecha_vencimiento;
-                        //}
-                        if (comprobante.Documento.Tipo.Id != lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString())
-                        {
-                            MensajeLabel.Text += "(Campo: Cod.Doc). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
-                            comprobante.Documento.Tipo.Id = lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
-                        }
-                        if (comprobante.Documento.Nro != lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio)
-                        {
-                            MensajeLabel.Text += "(Campo: Nro.Doc). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
-                            comprobante.Documento.Nro = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;
-                        }
-
-                        comprobante.WF.Estado = "Vigente";
-                        RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                        string script = "window.open('/ComprobanteConsulta.aspx', '');";
-                        BuscarButton_Click(sender, new EventArgs());
-                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
-                    }
-                    else if (lc.cabecera_lote.resultado == "R")
-                    {
-                        comprobante.WF.Estado = "Rechazado";
-                        RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                        string script = "<SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF / AFIP.\\n" + "Resultado: " + lc.cabecera_lote.resultado + "  Motivo: " + lc.cabecera_lote.motivo + "');</script>";
-                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
-                        ScriptManager.RegisterStartupScript(this, typeof(Page), "Message", script, true);
                     }
                     else
                     {
-                        MensajeLabel.Text = "No se puede realizar la actualización, cuando el comprobante se encuentra en el siguiente estado en Interfacturas ( Estado: " + clcrdyndns.comprobante[0].cabecera.informacion_comprobante.resultado + ").";
-                        return;
+                        string respuesta = "";
+                         //Deserializar
+                        FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
+                        string xml = comprobante.Request;
+                        var serializer = new System.Xml.Serialization.XmlSerializer(typeof(FeaEntidades.InterFacturas.lote_comprobantes));
+                        using (TextReader reader = new StringReader(xml))
+                        {
+                            lcFea = (FeaEntidades.InterFacturas.lote_comprobantes)serializer.Deserialize(reader);
+                        }
+                        string caeNro;
+                        string caeFecVto;
+                        string caeFecPro;
+                        respuesta = RN.ComprobanteAFIP.ConsultarAFIP(out caeNro, out caeFecVto, out caeFecPro, lcFea, (Entidades.Sesion)Session["Sesion"]);
+                        Cache["ComprobanteAConsultar"] = lcFea;
+                        if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
+                        {
+                            comprobante.WF.Estado = "Vigente";
+                            if (caeNro != "")
+                            {
+                                lcFea.cabecera_lote.resultado = "A";
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.resultado = "A";
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.cae = caeNro;
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = caeFecVto;
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae = caeFecPro;
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
+                            }
+                            Cache["ComprobanteAConsultar"] = lcFea;
+                            string XML = "";
+                            RN.Comprobante.SerializarLc(out XML, lcFea);
+                            comprobante.Response = XML;
+
+                            RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                            string script = "window.open('/ComprobanteConsulta.aspx', '');";
+                            BuscarButton_Click(sender, new EventArgs());
+                            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                        }
                     }
                 }
                 catch (System.Web.Services.Protocols.SoapException soapEx)
@@ -621,7 +663,7 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> listaR = new List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>();
                 MensajeLabel.Text = String.Empty;
-                Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
+                //Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
                 //string resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
 
                 org.dyndns.cedweb.detalle.cecd cecd = new org.dyndns.cedweb.detalle.cecd();
@@ -662,70 +704,36 @@ namespace CedServicios.Site
                 try
                 {
                     string comprobanteXML = resp;
-                    System.Text.StringBuilder sbXMLData = new System.Text.StringBuilder();
-                    sbXMLData.AppendLine(comprobanteXML);
-
-                    //Crear nombre de archivo default sin extensión
-                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                    sb.Append(comprobante.Cuit);
-                    sb.Append("-");
-                    sb.Append(comprobante.NroPuntoVta.ToString("0000"));
-                    sb.Append("-");
-                    sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
-                    sb.Append("-");
-                    sb.Append(comprobante.Nro.ToString("00000000"));
-
-                    //Crear nombre de archivo ZIP / PDF / XML
-                    System.Text.StringBuilder sbZIP = new System.Text.StringBuilder();
-                    sbZIP.Append(sb.ToString() + ".zip");
-                    System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
-                    sbXML.Append(sb.ToString() + ".xml");
-                    System.Text.StringBuilder sbPDF = new System.Text.StringBuilder();
-                    sbPDF.Append(sb.ToString() + ".pdf");
-
-                    //Crear archivo comprobante XML
-                    System.IO.MemoryStream m = new System.IO.MemoryStream();
-                    System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/TempRender/" + sbXML.ToString()), System.IO.FileMode.Create);
-                    m.WriteTo(fs);
-                    fs.Close();
-
-                    //Grabar información comprobante XML
-                    using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/TempRender/" + sbXML.ToString())))
-                    {
-                        outfile.Write(sbXMLData.ToString());
-                    }
 
                     GrabarLogTexto("~/Detallar.txt", "Inicia ExecuteCommand");
-                    ExecuteCommand(sbXML.ToString(), sbPDF.ToString());
+                    org.dyndns.cedweb.generoPDF.GeneroPDF pdfdyndns = new org.dyndns.cedweb.generoPDF.GeneroPDF();
+
+                    string GenerarPDFUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFUtilizarServidorExterno"];
+                    GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFUtilizarServidorExterno: " + GenerarPDFUtilizarServidorExterno);
+                    if (GenerarPDFUtilizarServidorExterno == "SI")
+                    {
+                        pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
+                        GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
+                    }
+                    string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobanteXML);
                     GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
 
-                    //Descargar ZIP ( Cabecera Emisor, Cabecera Comprobante y Detalle )
-                    string filename = sbZIP.ToString();
-                    String dlDir = @"~/TempRender/";
-                    String path = Server.MapPath(dlDir + filename);
-                    System.IO.FileInfo toDownload = new System.IO.FileInfo(path);
-                    System.IO.FileInfo toXML = new System.IO.FileInfo(Server.MapPath(dlDir + sbXML.ToString()));
-                    System.IO.FileInfo toPDF = new System.IO.FileInfo(Server.MapPath(dlDir + sbPDF.ToString()));
+                    //Response.Redirect(RespPDF);
 
-                    using (ZipFile zip = new ZipFile())
-                    {
-                        zip.AddFile(Server.MapPath(dlDir + sbXML.ToString()), "");
-                        zip.AddFile(Server.MapPath(dlDir + sbPDF.ToString()), "");
-                        zip.Save(Server.MapPath(dlDir + filename));
-                    }
-                    if (toDownload.Exists)
-                    {
-                        Response.Clear();
-                        Response.AddHeader("Content-Disposition", "attachment; filename=" + toDownload.Name);
-                        Response.AddHeader("Content-Length", toDownload.Length.ToString());
-                        Response.ContentType = "application/octet-stream";
-                        Response.WriteFile(dlDir + filename);
-                        Response.End();
-
-                        //toDownload.Delete();
-                        //toXML.Delete();
-                        //toPDF.Delete();
-                    }
+                    Response.Write("<script>window.open('" + RespPDF + "','_blank');</script>");
+                    
+                    //string nombreArch = "";
+                    //if (RespPDF.Length > 4 && RespPDF.Substring(0, 4).ToUpper() == "HTTP")
+                    //{
+                    //    string[] x = RespPDF.Split(Convert.ToChar("/"));
+                    //    nombreArch = x[x.Length - 1];
+                    //}
+                    //Response.Clear();
+                    //Response.AddHeader("Content-Disposition", "attachment; filename=" + nombreArch);
+                    ////Response.AddHeader("Content-Length", toDownload.Length.ToString());
+                    //Response.ContentType = "application/pdf";
+                    //Response.WriteFile(RespPDF);
+                    //Response.End();
                 }
                 catch (Exception ex)
                 {
@@ -933,7 +941,7 @@ namespace CedServicios.Site
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.Cells[13].Text != "Vigente")
+                if (e.Row.Cells[12].Text != "Vigente")
                 {
                     e.Row.ForeColor = Color.Red;
                 }

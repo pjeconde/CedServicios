@@ -336,9 +336,11 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
     BORDER-TOP: 1px solid black;       
     padding-left: 4px;
     padding-right: 4px;
+    font-size: 10px; font-style: normal; font-family: Arial;
 }
 .grilla td /* for the header */
 {
     padding-left: 4px;
     padding-right: 4px;
+    font-size: 10px; font-style: normal; font-family: Arial;
 }

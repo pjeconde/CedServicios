@@ -1842,7 +1842,7 @@
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="width: 100%; padding-right: 3px" colspan="2">
+                                                <td style="width: 50%; padding-right: 3px">
                                                     <asp:Button ID="ValidarIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true" 
                                                         ForeColor="brown" Height="25px" OnClick="ValidarIBKButton_Click" 
@@ -1853,9 +1853,7 @@
                                                         BackgroundCssClass="modalBackground" runat="server" 
                                                         onload="ModalPopupExtender1_Load" />
                                                 </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="width: 100%; padding-right: 3px" colspan="2">
+                                                <td style="width: 50%;">
                                                     <asp:Button ID="EnviarIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
                                                         BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true" 
                                                         ForeColor="brown" Height="25px" OnClick="EnviarIBKButton_Click" 
@@ -1865,6 +1863,19 @@
                                                         PopupControlID="PopupEnvioITF" TargetControlID="EnviarIBKButton" 
                                                         BackgroundCssClass="modalBackground" runat="server" 
                                                         onload="ModalPopupExtender1_Load" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 100%; padding-right: 3px" colspan="2">
+                                                    <asp:Button ID="EnviarAFIPButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
+                                                        BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true" 
+                                                        ForeColor="brown" Height="25px" OnClick="EnviarAFIPButton_Click" 
+                                                        Text="Enviar lote a AFIP" ToolTip="Impactar el comprobante en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                        Width="100%" />
+                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender3" 
+                                                        PopupControlID="PopupEnviarAFIP" TargetControlID="EnviarAFIPButton" 
+                                                        BackgroundCssClass="modalBackground" runat="server" 
+                                                        onload="ModalPopupExtender3_Load" />
                                                 </td>
                                             </tr>
                                         </table>
@@ -1932,6 +1943,27 @@
                 </td>
                 <td align="left" style="padding-top: 20px">
                     <asp:Button ID="CancelarValidarITF" runat="server" Text="Cancelar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$AceptarValidarITF.disabled = true;" OnClick="CancelarValidarITFButton_Click" />
+                </td>
+            </tr>
+        </table>
+    </div>
+        <div id="PopupEnviarAFIP" class="ModalWindow">
+        <table width="100%" style="padding:20px;">
+            <tr>
+                <td colspan="3" align="center">
+                    <asp:Label ID="Label3" runat="server" 
+                        Text="Desea enviar el comprobante de forma On-Line a la AFIP ?"
+                        SkinID="TextoMediano"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-top: 20px">
+                    <asp:Button ID="AceptarEnviarAFIP" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarEnviarAFIP.disabled = true;" OnClick="AceptarEnviarAFIPButton_Click" />
+                </td>
+                <td align="center" style="width: 20px">
+                </td>
+                <td align="left" style="padding-top: 20px">
+                    <asp:Button ID="CancelarEnviarAFIP" runat="server" Text="Cancelar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$AceptarEnviarAFIP.disabled = true;" OnClick="CancelarEnviarAFIPButton_Click" />
                 </td>
             </tr>
         </table>

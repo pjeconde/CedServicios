@@ -1678,6 +1678,24 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
         
         /// <summary>
+        /// Control EnviarAFIPButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button EnviarAFIPButton;
+        
+        /// <summary>
+        /// Control ModalPopupExtender3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender3;
+        
+        /// <summary>
         /// Control contactoHyperLink.
         /// </summary>
         /// <remarks>
@@ -1748,5 +1766,32 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button CancelarValidarITF;
+        
+        /// <summary>
+        /// Control Label3.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label3;
+        
+        /// <summary>
+        /// Control AceptarEnviarAFIP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button AceptarEnviarAFIP;
+        
+        /// <summary>
+        /// Control CancelarEnviarAFIP.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button CancelarEnviarAFIP;
     }
 }

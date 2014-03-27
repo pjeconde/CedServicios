@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.cedeira.com.ar/webservices" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.cedeira.com.ar/webservices" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://www.cedeira.com.ar/webservices">
+      <s:element name="GenerarPDF">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="CuitVendedor" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="NroPuntoVta" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="TipoComprobante" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="NroComprobante" type="s:long" />
+            <s:element minOccurs="0" maxOccurs="1" name="ArchivoXML" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GenerarPDFResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerarPDFResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GenerarPDFSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerarPDF" />
+  </wsdl:message>
+  <wsdl:message name="GenerarPDFSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerarPDFResponse" />
+  </wsdl:message>
+  <wsdl:portType name="GeneroPDFSoap">
+    <wsdl:operation name="GenerarPDF">
+      <wsdl:input message="tns:GenerarPDFSoapIn" />
+      <wsdl:output message="tns:GenerarPDFSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="GeneroPDFSoap" type="tns:GeneroPDFSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GenerarPDF">
+      <soap:operation soapAction="http://www.cedeira.com.ar/webservices/GenerarPDF" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="GeneroPDFSoap12" type="tns:GeneroPDFSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GenerarPDF">
+      <soap12:operation soapAction="http://www.cedeira.com.ar/webservices/GenerarPDF" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="GeneroPDF">
+    <wsdl:port name="GeneroPDFSoap" binding="tns:GeneroPDFSoap">
+      <soap:address location="http://localhost:20587/GeneroPDF.asmx" />
+    </wsdl:port>
+    <wsdl:port name="GeneroPDFSoap12" binding="tns:GeneroPDFSoap12">
+      <soap12:address location="http://localhost:20587/GeneroPDF.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

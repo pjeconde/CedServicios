@@ -59,7 +59,7 @@
                     <asp:GridView ID="ComprobantesGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                         <Columns>
-                            <asp:TemplateField ControlStyle-Width="40">
+                            <asp:TemplateField ControlStyle-Width="35">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="ConsultarButton" runat="server" ToolTip="Consulta Local" CommandName="Seleccionar" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Consultar.png" />
                                 </ItemTemplate>
@@ -76,7 +76,7 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="center" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="DescrTipoDoc" HeaderText="Tipo Doc" SortExpression="DescrTipoDoc">
+                            <asp:BoundField DataField="DescrTipoDoc" HeaderText="T.Doc" SortExpression="DescrTipoDoc">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
@@ -88,15 +88,11 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Detalle" HeaderText="Detalle" SortExpression="Detalle">
-                                <headerstyle horizontalalign="center" wrap="False" />
-                                <itemstyle horizontalalign="left" wrap="False" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="Fecha" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha" SortExpression="Fecha">
+                            <asp:BoundField DataField="Fecha" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha" SortExpression="Fecha">
                                 <headerstyle horizontalalign="left" wrap="False" />
                                 <itemstyle horizontalalign="center" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Importe" HeaderText="Importe" SortExpression="Importe">
+                            <asp:BoundField DataField="Importe" HeaderText="Importe" DataFormatString="{0:0.00}" SortExpression="Importe">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="right" wrap="False" />
                             </asp:BoundField>
@@ -104,11 +100,11 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="ImporteMoneda" HeaderText="Importe Mon" SortExpression="ImporteMoneda">
+                            <asp:BoundField DataField="ImporteMoneda" HeaderText="Imp.Mon" DataFormatString="{0:0.00}" SortExpression="ImporteMoneda">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="right" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="TipoCambio" HeaderText="T.Cambio" SortExpression="TipoCambio">
+                            <asp:BoundField DataField="TipoCambio" HeaderText="Cambio" DataFormatString="{0:0.0000}" SortExpression="TipoCambio">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="right" wrap="False" />
                             </asp:BoundField>
@@ -116,7 +112,11 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="FechaVto" DataFormatString="{0:dd/MM/yyyy}" HeaderText="Fecha Vto" SortExpression="FechaVto">
+                            <asp:BoundField DataField="IdDestinoComprobante" HeaderText="Canal" SortExpression="IdDestinoComprobante">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="FechaVto" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha Vto" SortExpression="FechaVto">
                                 <headerstyle horizontalalign="left" wrap="False" />
                                 <itemstyle horizontalalign="center" wrap="False" />
                             </asp:BoundField>
@@ -124,27 +124,27 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="right" wrap="False" />
                             </asp:BoundField>
-                            <asp:TemplateField ControlStyle-Width="40">
+                            <asp:TemplateField ControlStyle-Width="35">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="ConsultarOnLineButton" runat="server" ToolTip="Consultar On-Line" CommandName="ConsultarOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/ConsultarOnLine.png" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField ControlStyle-Width="40">
+                            <asp:TemplateField ControlStyle-Width="35">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="ActualizarOnlineButton" runat="server" ToolTip="Actualizar el Estado On-Line" CommandName="ActualizarOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/ActualizarOnLine.png" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField ControlStyle-Width="40">
+                            <asp:TemplateField ControlStyle-Width="35">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="ExportarButton" runat="server" ToolTip="Exportar Interface RG.2485" CommandName="ExportarRG2485" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Afip.png" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField ControlStyle-Width="40">
+                            <asp:TemplateField ControlStyle-Width="35">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="XMLOnLineButton" runat="server" ToolTip="Exportar XML On-Line" CommandName="XMLOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/XmlOnLine.png" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField ControlStyle-Width="40">
+                            <asp:TemplateField ControlStyle-Width="35">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="PDFButton" runat="server" ToolTip="Exportar PDF" CommandName="PDF" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Pdf.png" />
                                 </ItemTemplate>

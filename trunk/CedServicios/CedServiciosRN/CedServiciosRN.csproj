@@ -32,13 +32,15 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Ionic.Zip">
-      <HintPath>..\Ionic.Zip\Ionic.Zip.dll</HintPath>
+      <HintPath>..\CedServiciosSite\bin\Ionic.Zip.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Services" />
@@ -52,6 +54,7 @@
     <Compile Include="Articulo.cs" />
     <Compile Include="Cliente.cs" />
     <Compile Include="Comprobante.cs" />
+    <Compile Include="ComprobanteAFIP.cs" />
     <Compile Include="Configuracion.cs" />
     <Compile Include="ContactoSite.cs" />
     <Compile Include="Cuit.cs" />
@@ -62,6 +65,7 @@
     <Compile Include="InicioSesion.cs" />
     <Compile Include="Log.cs" />
     <Compile Include="LogDetalle.cs" />
+    <Compile Include="LoginTicket.cs" />
     <Compile Include="Medio.cs" />
     <Compile Include="MetodoGeneracionNumeracionLote.cs" />
     <Compile Include="Permiso.cs" />
@@ -79,6 +83,21 @@
     <Compile Include="TipoPuntoVta.cs" />
     <Compile Include="UN.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="Web References\ar.gov.afip.wsaa\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ar.gov.afip.wsfev1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ar.gov.afip.wsw\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\IBKComprobantesListado\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -123,6 +142,96 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web References\ar.gov.afip.wsaa\LoginCms.wsdl" />
+    <None Include="Web References\ar.gov.afip.wsaa\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\CbteTipoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\ConceptoTipoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\DocTipoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\DummyResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FECAEAGetResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FECAEAResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FECAEASinMovConsResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FECAEASinMovResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FECAEResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FECompConsultaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FECotizacionResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FEPaisResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FEPtoVentaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FERecuperaLastCbteResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FERegXReqResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\FETributoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\IvaTipoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\MonedaResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\OpcionalTipoResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfev1\service.wsdl" />
+    <None Include="Web References\ar.gov.afip.wsw\DummyResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsw\FEConsultaCAEResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsw\FERecuperaLastCMPResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsw\FERecuperaQTYResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsw\FEResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsw\FEUltNroResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsw\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsw\wsw.wsdl" />
     <None Include="Web References\IBKComprobantesListado\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
@@ -153,6 +262,28 @@
     <WebReferences Include="Web References\" />
   </ItemGroup>
   <ItemGroup>
+    <WebReferenceUrl Include="C:\FEA\WSDL\LoginCms.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ar.gov.afip.wsaa\</RelPath>
+      <UpdateFromURL>C:\FEA\WSDL\LoginCms.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosRN_ar_gov_afip_wsaa_LoginCMSService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="C:\FEA\WSDL\wsw.wsdl">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ar.gov.afip.wsw\</RelPath>
+      <UpdateFromURL>C:\FEA\WSDL\wsw.wsdl</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosRN_ar_gov_afip_wsw_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="C:\SVNCedServicios\CedServicios\CedServiciosRN\WSDL\FacturaWebServiceConSchema.wsdl">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\IBK\</RelPath>
@@ -186,9 +317,40 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CedServiciosRN_IBKValidate_ValidaFacturaWebService</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="https://wswhomo.afip.gov.ar/wsfev1/service.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ar.gov.afip.wsfev1\</RelPath>
+      <UpdateFromURL>https://wswhomo.afip.gov.ar/wsfev1/service.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosRN_ar_gov_afip_wsfev1_Service</CachedSettingsPropName>
+    </WebReferenceUrl>
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Windows.Installer.3.1">
+      <Visible>False</Visible>
+      <ProductName>Windows Installer 3.1</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Web References\ar.gov.afip.wsfev1\service.disco" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
