@@ -246,6 +246,11 @@
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
+    <None Include="Web References\org.dyndns.cedweb.generoPDF\GeneroPDF.wsdl" />
+    <None Include="Web References\org.dyndns.cedweb.generoPDF\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\org.dyndns.cedweb.listado\ListadoIBK.wsdl" />
     <None Include="Web References\org.dyndns.cedweb.listado\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -259,6 +264,7 @@
     <None Include="Web References\org.dyndns.cedweb.envio\EnvioIBK.disco" />
     <None Include="Web References\org.dyndns.cedweb.listado\ListadoIBK.disco" />
     <None Include="Web References\org.dyndns.cedweb.detalle\DetalleIBK.disco" />
+    <None Include="Web References\org.dyndns.cedweb.generoPDF\GeneroPDF.disco" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -1090,6 +1096,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\org.dyndns.cedweb.generoPDF\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\org.dyndns.cedweb.listado\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1206,6 +1217,17 @@
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_envio_EnvioIBK</CachedSettingsPropName>
     </WebReferenceUrl>
+    <WebReferenceUrl Include="http://localhost:20587/GeneroPDF.asmx">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\org.dyndns.cedweb.generoPDF\</RelPath>
+      <UpdateFromURL>http://localhost:20587/GeneroPDF.asmx</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosSite_org_dyndns_cedweb_generoPDF_GeneroPDF</CachedSettingsPropName>
+    </WebReferenceUrl>
     <WebReferenceUrl Include="http://localhost:20587/ListadoIBK.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>
       <RelPath>Web References\org.dyndns.cedweb.listado\</RelPath>
@@ -1241,6 +1263,7 @@
     </WebReferenceUrl>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="CertificadosAFIP\" />
     <Folder Include="ImagenesSubidas\" />
     <Folder Include="TempRender\" />
     <Folder Include="Temp\" />

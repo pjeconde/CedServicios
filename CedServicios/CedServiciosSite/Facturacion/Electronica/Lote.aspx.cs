@@ -171,6 +171,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     PuntoVtaDropDownList.DataSource = listaPuntoVta;
                     PuntoVtaDropDownList.DataBind();
                     PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
+
+                    //sesion.Cuit.DestinosComprobante();
                 }
             }
         }
@@ -2080,6 +2082,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
             }
         }
+
         protected void EnviarIBKButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
@@ -2096,7 +2099,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     try
                     {
-                        string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                        string NroCertif = "";
+                        NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
                         if (NroCertif.Equals(string.Empty))
                         {
                             ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>", false);
@@ -2122,7 +2126,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                             string certificado = "";
                             string respuesta = "";
-
                             certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
                             org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
                             string EnvioIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKUtilizarServidorExterno"];
@@ -2153,6 +2156,96 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 lcFea.cabecera_lote.DestinoComprobante = "ITF";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
                                 comprobante.Registrar(lcFea, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                            }
+                        }
+                        catch (System.Web.Services.Protocols.SoapException soapEx)
+                        {
+                            try
+                            {
+                                XmlDocument doc = new XmlDocument();
+                                doc.LoadXml(soapEx.Detail.OuterXml);
+                                XmlNamespaceManager nsManager = new
+                                    XmlNamespaceManager(doc.NameTable);
+                                nsManager.AddNamespace("errorNS",
+                                    "http://www.cedeira.com.ar/webservices");
+                                XmlNode Node =
+                                    doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
+                                string errorNumber =
+                                    Node.SelectSingleNode("errorNS:ErrorNumber",
+                                    nsManager).InnerText;
+                                string errorMessage =
+                                    Node.SelectSingleNode("errorNS:ErrorMessage",
+                                    nsManager).InnerText;
+                                string errorSource =
+                                    Node.SelectSingleNode("errorNS:ErrorSource",
+                                    nsManager).InnerText;
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + "\\n" + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>", false);
+                            }
+                            catch (Exception)
+                            {
+                                throw soapEx;
+                            }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + ex.Message + "');</script>", false);
+                    }
+                }
+            }
+        }
+
+        protected void EnviarAFIPButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>", false);
+                }
+                else
+                {
+                    try
+                    {
+                        try
+                        {
+                            if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>", false);
+                                return;
+                            }
+                            if (Id_LoteTextbox.Text.Equals(string.Empty))
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>", false);
+                                return;
+                            }
+                            if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>", false);
+                                return;
+                            }
+
+                            string respuesta = "";
+                            FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
+
+                            respuesta = RN.ComprobanteAFIP.EnviarAFIP(lcFea, (Entidades.Sesion)Session["Sesion"]);
+
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>", false);
+
+                            if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
+                            {
+                                //Grabar en base de datos
+                                RN.Comprobante comprobante = new RN.Comprobante();
+                                lcFea.cabecera_lote.DestinoComprobante = "AFIP";
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+                                comprobante.Registrar(lcFea, null, "AFIP", ((Entidades.Sesion)Session["Sesion"]));
+
+                                //Actualizar estado on-line.
                             }
                         }
                         catch (System.Web.Services.Protocols.SoapException soapEx)
@@ -4202,6 +4295,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 
         }
 
+        protected void ModalPopupExtender3_Load(object sender, EventArgs e)
+        {
+
+        }
+
         protected void AceptarEnvioITFButton_Click(object sender, EventArgs e)
         {
             EnviarIBKButton_Click(EnviarIBKButton, new EventArgs());
@@ -4222,6 +4320,16 @@ namespace CedServicios.Site.Facturacion.Electronica
 
         }
         protected void ButtonPrueba_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void AceptarEnviarAFIPButton_Click(object sender, EventArgs e)
+        {
+            EnviarAFIPButton_Click(EnviarIBKButton, new EventArgs());
+        }
+
+        protected void CancelarEnviarAFIPButton_Click(object sender, EventArgs e)
         {
 
         }

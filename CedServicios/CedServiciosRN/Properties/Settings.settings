@@ -11,5 +11,14 @@
     <Setting Name="CedServiciosRN_IBKComprobantesListado_ReporteFacturaWebService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://ibsibqa01:10001/ws/ReporteFacturaWebService</Value>
     </Setting>
+    <Setting Name="CedServiciosRN_ar_gov_afip_wsaa_LoginCMSService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://wsaahomo.afip.gov.ar/ws/services/LoginCms</Value>
+    </Setting>
+    <Setting Name="CedServiciosRN_ar_gov_afip_wsfev1_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://wswhomo.afip.gov.ar/wsfev1/service.asmx</Value>
+    </Setting>
+    <Setting Name="CedServiciosRN_ar_gov_afip_wsw_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://wswhomo.afip.gov.ar/wsfe/service.asmx</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
