@@ -2235,6 +2235,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                             respuesta = RN.ComprobanteAFIP.EnviarAFIP(lcFea, (Entidades.Sesion)Session["Sesion"]);
 
+                            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), respuesta);
                             ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>", false);
 
                             if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
@@ -2269,7 +2270,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 string errorSource =
                                     Node.SelectSingleNode("errorNS:ErrorSource",
                                     nsManager).InnerText;
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + "\\n" + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + "\\n" + errorMessage.Replace("\r", "").Replace("\\n", "") + "');</script>", false);
                             }
                             catch (Exception)
                             {
@@ -2280,7 +2281,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     catch (Exception ex)
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + ex.Message + "');</script>", false);
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), ex.Message);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a AFIP.\\n " + ex.Message + "');</script>", false);
                     }
                 }
             }
@@ -3918,23 +3920,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 			r.importe_total_impuestos_nacionales = importe_total_impuestos_nacionales;
 			r.importe_total_impuestos_nacionalesSpecified = true;
 		}
-
-        private void GrabarLogTexto(string archivo, string mensaje)
-        {
-        try
-            {
-                using (FileStream fs = File.Open(Server.MapPath(archivo), FileMode.Append, FileAccess.Write))
-                {
-                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
-                    {
-                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
-                    }
-                }
-            }
-            catch             
-            {
-            }
-        }
 
 		protected void PDFButton_Click(object sender, EventArgs e)
 		{

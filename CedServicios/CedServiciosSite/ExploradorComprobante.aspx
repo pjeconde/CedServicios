@@ -149,6 +149,11 @@
                                     <asp:ImageButton ID="PDFButton" runat="server" ToolTip="Exportar PDF" CommandName="PDF" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Pdf.png" />
                                 </ItemTemplate>
                             </asp:TemplateField>
+                            <asp:TemplateField ControlStyle-Width="35">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="PDFButtonViewer" runat="server" ToolTip="Viewer PDF" CommandName="PDF-Viewer" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/PdfLupa.png" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </asp:Panel>

@@ -118,6 +118,7 @@
     <Content Include="Imagenes\Iconos\Consultar.png" />
     <Content Include="Imagenes\Iconos\ConsultarOnLine.png" />
     <Content Include="Imagenes\Iconos\Pdf.png" />
+    <Content Include="Imagenes\Iconos\PdfLupa.png" />
     <Content Include="Imagenes\Iconos\Xml.png" />
     <Content Include="Imagenes\Iconos\XmlOnLine.png" />
     <Content Include="MensajeUsuarioDemo.aspx" />

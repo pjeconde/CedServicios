@@ -106,7 +106,21 @@ namespace CedServicios.Site
                     }
                     org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
                     clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(comprobante.Cuit), comprobante.NroLote, comprobante.NroPuntoVta, certificado);
-                    Cache["ComprobanteAConsultar"] = clcrdyndns;
+                    //Cache["ComprobanteAConsultar"] = clcrdyndns;
+                    FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                    lc = Ws2Fea(clcrdyndns);
+                    Cache["ComprobanteAConsultar"] = lc;
+                    //Controlar que sea el mismo comprobante (local vs on-line)
+                    if (comprobante.Nro != lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante)
+                    {
+                        MensajeLabel.Text = "(Campo: Nro. de Comprobante). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
+                        return;
+                    }
+                    if (comprobante.TipoComprobante.Id != lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)
+                    {
+                        MensajeLabel.Text = "(Campo: Tipo de Comprobante). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
+                        return;
+                    }
                     string script = "window.open('/ComprobanteConsulta.aspx', '');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                 }
@@ -718,22 +732,126 @@ namespace CedServicios.Site
                     string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobanteXML);
                     GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
 
-                    //Response.Redirect(RespPDF);
+                    //Crear nombre de archivo default sin extensión
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(comprobante.Cuit);
+                    sb.Append("-");
+                    sb.Append(comprobante.NroPuntoVta.ToString("0000"));
+                    sb.Append("-");
+                    sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
+                    sb.Append("-");
+                    sb.Append(comprobante.Nro.ToString("00000000"));
+                    sb.Append(".pdf");
 
-                    Response.Write("<script>window.open('" + RespPDF + "','_blank');</script>");
+                    string url = RespPDF;
+                    //string fileName = Server.MapPath("~/TempRender/a.pdf");
+                    string filename = sb.ToString();
+                    String dlDir = @"~/TempRender/";
+                    new System.Net.WebClient().DownloadFile(url, Server.MapPath(dlDir + filename));
+
+                    System.IO.FileInfo toDownload = new System.IO.FileInfo(Server.MapPath(dlDir + filename));
+                    if (toDownload.Exists)
+                    {
+                        Response.Clear();
+                        Response.AddHeader("Content-Disposition", "attachment; filename=" + toDownload.Name);
+                        Response.AddHeader("Content-Length", toDownload.Length.ToString());
+                        Response.ContentType = "application/octet-stream";
+                        Response.WriteFile(dlDir + filename);
+                        Response.End();
+
+                        toDownload.Delete();
+                    }
+
+                    //string script = "window.open('" + RespPDF + "', '');";
+                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     
-                    //string nombreArch = "";
-                    //if (RespPDF.Length > 4 && RespPDF.Substring(0, 4).ToUpper() == "HTTP")
-                    //{
-                    //    string[] x = RespPDF.Split(Convert.ToChar("/"));
-                    //    nombreArch = x[x.Length - 1];
-                    //}
-                    //Response.Clear();
-                    //Response.AddHeader("Content-Disposition", "attachment; filename=" + nombreArch);
-                    ////Response.AddHeader("Content-Length", toDownload.Length.ToString());
-                    //Response.ContentType = "application/pdf";
-                    //Response.WriteFile(RespPDF);
-                    //Response.End();
+                    //Response.Write("<script>window.open('" + RespPDF + "','_blank');</script>");
+                    //Response.Flush();
+                }
+                catch (Exception ex)
+                {
+                    string script = "Problemas para generar el PDF.\\n" + ex.Message;
+                    script += ex.StackTrace;
+                    if (ex.InnerException != null)
+                    {
+                        script = ex.InnerException.Message;
+                    }
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), script);
+                    MensajeLabel.Text = script;
+                }
+            }
+            else if (e.CommandName == "PDF-Viewer")
+            {
+                MensajeLabel.Text = "";
+                int item = Convert.ToInt32(e.CommandArgument);
+                List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
+                Entidades.Comprobante comprobante = lista[item];
+                if (comprobante.Estado != "Vigente")
+                {
+                    MensajeLabel.Text = "El comprobante no está vigente.";
+                    return;
+                }
+
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> listaR = new List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>();
+                MensajeLabel.Text = String.Empty;
+                //Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
+                //string resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
+
+                org.dyndns.cedweb.detalle.cecd cecd = new org.dyndns.cedweb.detalle.cecd();
+                cecd.cuit_canal = Convert.ToInt64("30690783521");
+                cecd.cuit_vendedor = Convert.ToInt64(comprobante.Cuit);
+                cecd.punto_de_venta = Convert.ToInt32(comprobante.NroPuntoVta);
+                cecd.tipo_de_comprobante = Convert.ToInt32(comprobante.TipoComprobante.Id);
+                cecd.numero_comprobante = comprobante.Nro;
+                cecd.id_Lote = 0;
+                cecd.id_LoteSpecified = false;
+                cecd.estado = "PR";
+
+                string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                if (NroCertif.Equals(string.Empty))
+                {
+                    MensajeLabel.Text = "Aún no disponemos de su certificado digital";
+                    return;
+                }
+                GrabarLogTexto("~/Detallar.txt", "Consulta de Lote CUIT: " + sesion.Cuit.Nro + "  Fecha Desde: " + FechaDesdeTextBox.Text + "  Fecha Hasta: " + FechaHastaTextBox.Text);
+                GrabarLogTexto("~/Detallar.txt", "NroSerieCertifITF: " + NroCertif);
+                if (NroCertif.Equals(string.Empty))
+                {
+                    MensajeLabel.Text = "Aún no disponemos de su certificado digital";
+                    return;
+                }
+
+                string certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                org.dyndns.cedweb.detalle.DetalleIBK clcdyndns = new org.dyndns.cedweb.detalle.DetalleIBK();
+                string DetalleIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKUtilizarServidorExterno"];
+                GrabarLogTexto("~/Detallar.txt", "Parametro DetalleIBKUtilizarServidorExterno: " + DetalleIBKUtilizarServidorExterno);
+                if (DetalleIBKUtilizarServidorExterno == "SI")
+                {
+                    clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"];
+                    GrabarLogTexto("~/Detallar.txt", "Parametro DetalleIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
+                }
+                string resp = clcdyndns.DetallarIBK(cecd, certificado);
+
+                try
+                {
+                    string comprobanteXML = resp;
+
+                    GrabarLogTexto("~/Detallar.txt", "Inicia ExecuteCommand");
+                    org.dyndns.cedweb.generoPDF.GeneroPDF pdfdyndns = new org.dyndns.cedweb.generoPDF.GeneroPDF();
+
+                    string GenerarPDFUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFUtilizarServidorExterno"];
+                    GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFUtilizarServidorExterno: " + GenerarPDFUtilizarServidorExterno);
+                    if (GenerarPDFUtilizarServidorExterno == "SI")
+                    {
+                        pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
+                        GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
+                    }
+                    string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobanteXML);
+                    GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
+
+                    string script = "window.open('" + RespPDF + "', '');";
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                 }
                 catch (Exception ex)
                 {
