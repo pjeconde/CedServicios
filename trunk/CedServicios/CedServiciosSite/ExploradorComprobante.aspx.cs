@@ -46,6 +46,7 @@ namespace CedServicios.Site
         {
             if (e.CommandName == "Seleccionar")
             {
+                MensajeLabel.Text = "";
                 int item = Convert.ToInt32(e.CommandArgument);
                 List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
                 Entidades.Comprobante comprobante = lista[item];
@@ -76,6 +77,7 @@ namespace CedServicios.Site
             }
             else if (e.CommandName == "ConsultarOnLine")
             {
+                MensajeLabel.Text = "";
                 int item = Convert.ToInt32(e.CommandArgument);
                 List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
                 Entidades.Comprobante comprobante = lista[item];
@@ -155,6 +157,7 @@ namespace CedServicios.Site
             }
             else if (e.CommandName == "ActualizarOnLine")
             {
+                MensajeLabel.Text = "";
                 int item = Convert.ToInt32(e.CommandArgument);
                 List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
                 Entidades.Comprobante comprobante = lista[item];

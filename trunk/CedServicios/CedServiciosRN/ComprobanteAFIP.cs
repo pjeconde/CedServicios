@@ -280,5 +280,36 @@ namespace CedServicios.RN
                 throw new Exception(ex.Message);
             }
         }
+        public static string ConsultarAFIPSerializer(FeaEntidades.InterFacturas.lote_comprobantes lc, Entidades.Sesion Sesion)
+        {
+            try
+            {
+                string respuesta = "";
+                sesion = Sesion;
+                CrearTicket();
+                ar.gov.afip.wsfev1.FECompConsultaReq objFECompConsultaReq = new ar.gov.afip.wsfev1.FECompConsultaReq();
+                objFECompConsultaReq.CbteTipo = lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                objFECompConsultaReq.CbteNro = lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                objFECompConsultaReq.PtoVta = lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                ar.gov.afip.wsfev1.FECompConsultaResponse objFECompConsultaResponse = new ar.gov.afip.wsfev1.FECompConsultaResponse();
+                objFECompConsultaResponse = objWSFEV1.FECompConsultar(ticket.ObjAutorizacionfev1, objFECompConsultaReq);
+                System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                if (objFECompConsultaResponse.Errors != null)
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(objFECompConsultaResponse.Errors);
+                }
+                else
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(objFECompConsultaResponse.ResultGet);
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        
     }
 }
