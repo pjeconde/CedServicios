@@ -303,19 +303,40 @@ namespace CedServicios.RN
 		/// <remarks></remarks> 
 		public static X509Certificate2 ObtieneCertificadoDesdeArchivo(string argArchivo)
 		{
-			X509Certificate2 objCert = new X509Certificate2();
+            byte[] ba;
+            try
+            {
+                ba = FileToByteArray(argArchivo);
+            }
+            catch (Exception excepcionAlImportarCertificado)
+            {
+                throw new Exception("***Error al obtener certificado: (FileToByteArray) ObtieneCertificadoDesdeArchivo(" + argArchivo + "): " + excepcionAlImportarCertificado.Message + " " + excepcionAlImportarCertificado.StackTrace);
 
+            }
+			X509Certificate2 objCert = new X509Certificate2();
 			try
 			{
-				objCert.Import(Microsoft.VisualBasic.FileIO.FileSystem.ReadAllBytes(argArchivo));
-				return objCert;
+                objCert.Import(ba, string.Empty, X509KeyStorageFlags.MachineKeySet);
+				return objCert; 
 			}
 			catch (Exception excepcionAlImportarCertificado)
 			{
-				throw new Exception("***Error al obtener certificado: ObtieneCertificadoDesdeArchivo(" + argArchivo + "): " + excepcionAlImportarCertificado.Message + " " + excepcionAlImportarCertificado.StackTrace);
+                throw new Exception("***Error al obtener certificado: (Import MachineKeySet) ObtieneCertificadoDesdeArchivo(" + argArchivo + "): " + excepcionAlImportarCertificado.Message + " " + excepcionAlImportarCertificado.StackTrace);
 
 			}
 		}
+
+        public static byte[] FileToByteArray(string fileName)
+        {
+            byte[] buff = null;
+            FileStream fs = new FileStream(fileName,
+                                           FileMode.Open,
+                                           FileAccess.Read);
+            BinaryReader br = new BinaryReader(fs);
+            long numBytes = new FileInfo(fileName).Length;
+            buff = br.ReadBytes((int)numBytes);
+            return buff;
+        }
 
 	}
 }

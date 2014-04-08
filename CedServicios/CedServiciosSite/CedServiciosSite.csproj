@@ -112,6 +112,7 @@
     <Content Include="ClienteSeleccionar.aspx" />
     <Content Include="ComprobanteConsulta.aspx" />
     <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
+    <Content Include="ComprobanteSeleccionOnlineAFIP.aspx" />
     <Content Include="ExploradorComprobanteOnLineInterfacturas.aspx" />
     <Content Include="Imagenes\Iconos\ActualizarOnLine.png" />
     <Content Include="Imagenes\Iconos\Afip.png" />
@@ -490,6 +491,13 @@
     </Compile>
     <Compile Include="ComprobanteSeleccionOnlineInterfacturas.aspx.designer.cs">
       <DependentUpon>ComprobanteSeleccionOnlineInterfacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ComprobanteSeleccionOnlineAFIP.aspx.cs">
+      <DependentUpon>ComprobanteSeleccionOnlineAFIP.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComprobanteSeleccionOnlineAFIP.aspx.designer.cs">
+      <DependentUpon>ComprobanteSeleccionOnlineAFIP.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorComprobanteOnLineInterfacturas.aspx.cs">
       <DependentUpon>ExploradorComprobanteOnLineInterfacturas.aspx</DependentUpon>

@@ -115,6 +115,7 @@ namespace CedServicios.Site
                     DestinoComprobanteAFIPCheckBox.Enabled = false;
                     DestinoComprobanteITFCheckBox.Enabled = false;
                     NroSerieCertifITFTextBox.Enabled = false;
+                    UsaCertificadoAFIPPropioCheckBox.Enabled = false;
                     AceptarButton.Enabled = false;
                     SalirButton.Text = "Salir";
 

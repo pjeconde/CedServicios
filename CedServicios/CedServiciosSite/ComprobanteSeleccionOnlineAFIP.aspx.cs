@@ -1,0 +1,127 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
+using System.Xml;
+using System.IO;
+
+namespace CedServicios.Site
+{
+    public partial class ComprobanteSeleccionOnlineAFIP : System.Web.UI.Page
+    {
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            if (!this.IsPostBack)
+            {
+                System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta;
+                System.Collections.Generic.List<Entidades.PuntoVta> puntoVtalist = new System.Collections.Generic.List<Entidades.PuntoVta>();
+                Entidades.PuntoVta puntoVta = new Entidades.PuntoVta();
+                puntoVta.Nro = 0;
+                puntoVtalist.Add(puntoVta);
+                if (listaPuntoVta != null)
+                {
+                    puntoVtalist.AddRange(listaPuntoVta);
+                }
+                PtoVtaConsultaDropDownList.DataValueField = "Nro";
+                PtoVtaConsultaDropDownList.DataTextField = "DescrCombo";
+                PtoVtaConsultaDropDownList.DataSource = puntoVtalist;
+                PtoVtaConsultaDropDownList.DataBind();
+
+                TipoComprobanteDropDownList.DataValueField = "Codigo";
+                TipoComprobanteDropDownList.DataTextField = "Descr";
+                TipoComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
+
+                DataBind();
+                CuitConsultaTextBox.Text = ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro;
+            }
+        }
+        protected void ConsultarLoteAFIPButton_Click(object sender, EventArgs e)
+        {
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    if (CuitConsultaTextBox.Text.Equals(string.Empty))
+                    {
+                        MensajeLabel.Text = "Falta ingresar el CUIT del vendedor";
+                        return;
+                    }
+                    if (TipoComprobanteDropDownList.SelectedValue.Equals("0") || TipoComprobanteDropDownList.SelectedValue.Equals(string.Empty))
+                    {
+                        MensajeLabel.Text = "Falta ingresar el tipo de comprobante";
+                        return;
+                    }
+                    if (NroComprobanteTextBox.Text.Equals(string.Empty))
+                    {
+                        MensajeLabel.Text = "Falta ingresar el nro de comprobante";
+                        return;
+                    }
+                    if (PtoVtaConsultaDropDownList.SelectedValue.Equals("0") || PtoVtaConsultaDropDownList.SelectedValue.Equals(string.Empty))
+                    {
+                        MensajeLabel.Text = "Falta ingresar el punto de venta";
+                        return;
+                    }
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Lote CUIT: " + CuitConsultaTextBox.Text + "  Tipo.Comprobante: " + TipoComprobanteDropDownList.SelectedValue + "  Nro.Comprobante: " + NroComprobanteTextBox.Text + "  Nro. Punto de Vta.: " + PtoVtaConsultaDropDownList.SelectedValue);
+
+                    FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
+                    lcFea.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
+                    lcFea.cabecera_lote.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
+                    lcFea.cabecera_lote.cuit_vendedor = Convert.ToInt64(CuitConsultaTextBox.Text);
+                    lcFea.comprobante[0] = new FeaEntidades.InterFacturas.comprobante();
+                    lcFea.comprobante[0].cabecera = new FeaEntidades.InterFacturas.cabecera();
+                    lcFea.comprobante[0].cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante = Convert.ToInt32(TipoComprobanteDropDownList.SelectedValue);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante = Convert.ToInt32(NroComprobanteTextBox.Text);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPSerializer(lcFea, (Entidades.Sesion)Session["Sesion"]);
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace(@" xmlns=""http://ar.gov.afip.dif.FEV1/", "");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                }
+            }
+        }
+        private void GrabarLogTexto(string archivo, string mensaje)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(Server.MapPath(archivo), FileMode.Append, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
+                    }
+                }
+            }
+            catch
+            {
+            }
+        }
+    }
+}
