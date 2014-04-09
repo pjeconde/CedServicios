@@ -311,7 +311,6 @@ namespace CedServicios.RN
             catch (Exception excepcionAlImportarCertificado)
             {
                 throw new Exception("***Error al obtener certificado: (FileToByteArray) ObtieneCertificadoDesdeArchivo(" + argArchivo + "): " + excepcionAlImportarCertificado.Message + " " + excepcionAlImportarCertificado.StackTrace);
-
             }
 			X509Certificate2 objCert = new X509Certificate2();
 			try
@@ -322,7 +321,6 @@ namespace CedServicios.RN
 			catch (Exception excepcionAlImportarCertificado)
 			{
                 throw new Exception("***Error al obtener certificado: (Import MachineKeySet) ObtieneCertificadoDesdeArchivo(" + argArchivo + "): " + excepcionAlImportarCertificado.Message + " " + excepcionAlImportarCertificado.StackTrace);
-
 			}
 		}
 
