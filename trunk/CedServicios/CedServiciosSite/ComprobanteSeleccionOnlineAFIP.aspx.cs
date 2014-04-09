@@ -34,7 +34,6 @@ namespace CedServicios.Site
                 TipoComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
 
                 DataBind();
-                CuitConsultaTextBox.Text = ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro;
             }
         }
         protected void ConsultarLoteAFIPButton_Click(object sender, EventArgs e)
@@ -47,11 +46,6 @@ namespace CedServicios.Site
             {
                 try
                 {
-                    if (CuitConsultaTextBox.Text.Equals(string.Empty))
-                    {
-                        MensajeLabel.Text = "Falta ingresar el CUIT del vendedor";
-                        return;
-                    }
                     if (TipoComprobanteDropDownList.SelectedValue.Equals("0") || TipoComprobanteDropDownList.SelectedValue.Equals(string.Empty))
                     {
                         MensajeLabel.Text = "Falta ingresar el tipo de comprobante";
@@ -67,12 +61,11 @@ namespace CedServicios.Site
                         MensajeLabel.Text = "Falta ingresar el punto de venta";
                         return;
                     }
-                    GrabarLogTexto("~/Consultar.txt", "Consulta de Lote CUIT: " + CuitConsultaTextBox.Text + "  Tipo.Comprobante: " + TipoComprobanteDropDownList.SelectedValue + "  Nro.Comprobante: " + NroComprobanteTextBox.Text + "  Nro. Punto de Vta.: " + PtoVtaConsultaDropDownList.SelectedValue);
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Lote CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro + "  Tipo.Comprobante: " + TipoComprobanteDropDownList.SelectedValue + "  Nro.Comprobante: " + NroComprobanteTextBox.Text + "  Nro. Punto de Vta.: " + PtoVtaConsultaDropDownList.SelectedValue);
 
                     FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
                     lcFea.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
                     lcFea.cabecera_lote.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
-                    lcFea.cabecera_lote.cuit_vendedor = Convert.ToInt64(CuitConsultaTextBox.Text);
                     lcFea.comprobante[0] = new FeaEntidades.InterFacturas.comprobante();
                     lcFea.comprobante[0].cabecera = new FeaEntidades.InterFacturas.cabecera();
                     lcFea.comprobante[0].cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
@@ -84,7 +77,7 @@ namespace CedServicios.Site
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPSerializer(lcFea, (Entidades.Sesion)Session["Sesion"]);
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
-                    respuesta = respuesta.Replace(@" xmlns=""http://ar.gov.afip.dif.FEV1/", "");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
                 }
                 catch (Exception ex)
@@ -107,6 +100,144 @@ namespace CedServicios.Site
                 }
             }
         }
+
+        protected void ConsultarUltNroLoteAFIPButton_Click(object sender, EventArgs e)
+        {
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Ult. Nro. Lote CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro + "  Tipo.Comprobante: " + TipoComprobanteDropDownList.SelectedValue + "  Nro.Comprobante: " + NroComprobanteTextBox.Text + "  Nro. Punto de Vta.: " + PtoVtaConsultaDropDownList.SelectedValue);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPUltNroLote((Entidades.Sesion)Session["Sesion"]);
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                }
+            }
+        }
+
+        protected void ConsultarUltNroComprobanteAFIPButton_Click(object sender, EventArgs e)
+        {
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    if (TipoComprobanteDropDownList.SelectedValue.Equals("0") || TipoComprobanteDropDownList.SelectedValue.Equals(string.Empty))
+                    {
+                        MensajeLabel.Text = "Falta ingresar el tipo de comprobante";
+                        return;
+                    }
+                    if (PtoVtaConsultaDropDownList.SelectedValue.Equals("0") || PtoVtaConsultaDropDownList.SelectedValue.Equals(string.Empty))
+                    {
+                        MensajeLabel.Text = "Falta ingresar el punto de venta";
+                        return;
+                    }
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Ult. Nro. Comprobante CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro + "  Tipo.Comprobante: " + TipoComprobanteDropDownList.SelectedValue + "  Nro.Comprobante: " + NroComprobanteTextBox.Text + "  Nro. Punto de Vta.: " + PtoVtaConsultaDropDownList.SelectedValue);
+
+                    FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
+                    lcFea.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
+                    lcFea.cabecera_lote.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
+                    lcFea.comprobante[0] = new FeaEntidades.InterFacturas.comprobante();
+                    lcFea.comprobante[0].cabecera = new FeaEntidades.InterFacturas.cabecera();
+                    lcFea.comprobante[0].cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante = Convert.ToInt32(TipoComprobanteDropDownList.SelectedValue);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPUltNroComprobante(lcFea, (Entidades.Sesion)Session["Sesion"]);
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                }
+            }
+        }
+
+        protected void ConsultarTipoComprobantesAFIPButton_Click(object sender, EventArgs e)
+        {
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de Comprobante CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposComprobantes((Entidades.Sesion)Session["Sesion"]);
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/", "");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                }
+            }
+        }
+        
         private void GrabarLogTexto(string archivo, string mensaje)
         {
             try

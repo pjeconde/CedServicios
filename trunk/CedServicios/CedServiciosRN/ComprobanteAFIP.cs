@@ -310,6 +310,86 @@ namespace CedServicios.RN
                 throw new Exception(ex.Message);
             }
         }
-        
+        public static string ConsultarAFIPUltNroLote(Entidades.Sesion Sesion)
+        {
+            try
+            {
+                string respuesta = "";
+                sesion = Sesion;
+                CrearTicket();
+                ar.gov.afip.wsw.FEUltNroResponse FEUltNroResponse = new ar.gov.afip.wsw.FEUltNroResponse();
+                FEUltNroResponse = objWS.FEUltNroRequest(ticket.ObjAutorizacion);
+                System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                if (FEUltNroResponse.RError != null && FEUltNroResponse.RError.perrmsg != "OK")
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(FEUltNroResponse.RError);
+                }
+                else
+                {
+                    respuesta += "Nro Ult. Lote: " + FEUltNroResponse.nro.value.ToString();
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static string ConsultarAFIPUltNroComprobante(FeaEntidades.InterFacturas.lote_comprobantes lc, Entidades.Sesion Sesion)
+        {
+            try
+            {
+                string respuesta = "";
+                sesion = Sesion;
+                CrearTicket();
+                ar.gov.afip.wsw.FELastCMPtype FELastCMPtype = new ar.gov.afip.wsw.FELastCMPtype();
+                FELastCMPtype.TipoCbte = lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                FELastCMPtype.PtoVta = lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                ar.gov.afip.wsw.FERecuperaLastCMPResponse FERecuperaLastCMPResponse = new ar.gov.afip.wsw.FERecuperaLastCMPResponse();
+                FERecuperaLastCMPResponse = objWS.FERecuperaLastCMPRequest(ticket.ObjAutorizacion, FELastCMPtype);
+                System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                if (FERecuperaLastCMPResponse.RError != null && FERecuperaLastCMPResponse.RError.perrmsg != "OK")
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(FERecuperaLastCMPResponse.RError);
+                }
+                else
+                {
+                    respuesta += "Nro Ult. Comprobante: " + FERecuperaLastCMPResponse.cbte_nro.ToString();
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+        public static string ConsultarAFIPTiposComprobantes(Entidades.Sesion Sesion)
+        {
+            try
+            {
+                string respuesta = "";
+                sesion = Sesion;
+                CrearTicket();
+                ar.gov.afip.wsfev1.CbteTipoResponse CbteTipoResponse = new ar.gov.afip.wsfev1.CbteTipoResponse();
+                CbteTipoResponse = objWSFEV1.FEParamGetTiposCbte(ticket.ObjAutorizacionfev1);
+                System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                if (CbteTipoResponse.Errors != null)
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(CbteTipoResponse.Errors);
+                }
+                else
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(CbteTipoResponse.ResultGet);
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }
