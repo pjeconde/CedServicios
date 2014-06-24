@@ -172,6 +172,24 @@ namespace CedServicios.Site.Facturacion.Electronica
                     PuntoVtaDropDownList.DataBind();
                     PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
 
+                    try
+                    {
+                        FeaEntidades.InterFacturas.lote_comprobantes lote = (FeaEntidades.InterFacturas.lote_comprobantes)Cache["ComprobanteAClonar"];
+                        CompletarUI(lote, new EventArgs());
+                        Numero_ComprobanteTextBox.Text = string.Empty;
+                        FechaEmisionDatePickerWebUserControl.Text = string.Empty;
+                        FechaServDesdeDatePickerWebUserControl.Text = string.Empty;
+                        FechaServHastaDatePickerWebUserControl.Text = string.Empty;
+                        FechaVencimientoDatePickerWebUserControl.Text = string.Empty;
+                        Id_LoteTextbox.Text = string.Empty;
+                        CAETextBox.Text = string.Empty;
+                        FechaCAEObtencionDatePickerWebUserControl.Text = string.Empty;
+                        FechaCAEVencimientoDatePickerWebUserControl.Text = string.Empty;
+                        Cache.Remove("ComprobanteAClonar");
+                    }
+                    catch
+                    {
+                    }
                     //sesion.Cuit.DestinosComprobante();
                 }
             }

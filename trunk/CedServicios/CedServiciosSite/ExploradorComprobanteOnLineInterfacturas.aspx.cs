@@ -192,8 +192,15 @@ namespace CedServicios.Site
                     clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ListadoIBKurl"];
                     GrabarLogTexto("~/Listar.txt", "Parametro ListadoIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ListadoIBKurl"]);
                 }
-                string resp = clcdyndns.ListarIBK(cecl, certificado);
-
+                string resp = "";
+                try
+                {
+                    resp = clcdyndns.ListarIBK(cecl, certificado);
+                }
+                catch (Exception ex)
+                {
+                    MensajeLabel.Text = ex.Message;
+                }
                 try
                 {
                     //Deserializar
@@ -216,7 +223,11 @@ namespace CedServicios.Site
                 {
                     ComprobantesGridView.DataSource = null;
                     ComprobantesGridView.DataBind();
-                    MensajeLabel.Text = "No se han encontrado Comprobantes que satisfagan la busqueda";
+                    if (MensajeLabel.Text != "")
+                    {
+                        MensajeLabel.Text += "<br />";
+                    }
+                    MensajeLabel.Text += "No se han encontrado Comprobantes que satisfagan la busqueda";
                 }
                 else
                 {

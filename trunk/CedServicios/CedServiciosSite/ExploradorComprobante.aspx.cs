@@ -980,6 +980,37 @@ namespace CedServicios.Site
                     MensajeLabel.Text += script;
                 }
             }
+            else if (e.CommandName == "XML-ClonarAlta")
+            {
+                MensajeLabel.Text = "";
+                int item = Convert.ToInt32(e.CommandArgument);
+                List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
+                Entidades.Comprobante comprobante = lista[item];
+                FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                byte[] bytes;
+                System.IO.MemoryStream ms;
+                try
+                {
+                    comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
+                    bytes = new byte[comprobante.Response.Length * sizeof(char)];
+                    System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                    ms = new System.IO.MemoryStream(bytes);
+                    ms.Seek(0, System.IO.SeekOrigin.Begin);
+                    lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+                }
+                catch
+                {
+                    bytes = new byte[comprobante.Request.Length * sizeof(char)];
+                    System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
+                    ms = new System.IO.MemoryStream(bytes);
+                    ms.Seek(0, System.IO.SeekOrigin.Begin);
+                    lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+                }
+                Cache["ComprobanteAClonar"] = lote;
+                string script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+            }
         }
         private void GrabarLogTexto(string archivo, string mensaje)
         {
