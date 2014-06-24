@@ -54,7 +54,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="3" style="padding-top:20px">
+            <td colspan="3" style="padding-top:35px">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                     <asp:GridView ID="ComprobantesGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
@@ -152,6 +152,11 @@
                             <asp:TemplateField ControlStyle-Width="35">
                                 <ItemTemplate>
                                     <asp:ImageButton ID="PDFButtonViewer" runat="server" ToolTip="Viewer PDF" CommandName="PDF-Viewer" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/PdfLupa.png" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField ControlStyle-Width="20">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="XMLCopiarEnAltaPDFButton" runat="server" ToolTip="Clonar Comprobante" CommandName="XML-ClonarAlta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/ClonarAlta.png" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                         </Columns>

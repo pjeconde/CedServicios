@@ -116,6 +116,7 @@
     <Content Include="ExploradorComprobanteOnLineInterfacturas.aspx" />
     <Content Include="Imagenes\Iconos\ActualizarOnLine.png" />
     <Content Include="Imagenes\Iconos\Afip.png" />
+    <Content Include="Imagenes\Iconos\ClonarAlta.png" />
     <Content Include="Imagenes\Iconos\Consultar.png" />
     <Content Include="Imagenes\Iconos\ConsultarOnLine.png" />
     <Content Include="Imagenes\Iconos\Pdf.png" />

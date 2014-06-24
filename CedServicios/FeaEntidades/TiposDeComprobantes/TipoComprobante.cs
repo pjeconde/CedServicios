@@ -117,6 +117,14 @@ namespace FeaEntidades.TiposDeComprobantes
             return lista;
         }
 
-
+        public static List<TipoComprobante> ListaMonotributo()
+        {
+            List<TipoComprobante> lista = new List<TipoComprobante>();
+            lista.Add(new Facturas.C());
+            lista.Add(new NotasDebito.C());
+            lista.Add(new NotasCredito.C());
+            lista.Add(new Recibos.C());
+            return lista;
+        }
 	}
 }
