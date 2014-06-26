@@ -29,7 +29,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                 else
                 {
                     ViewState["articulolista"] = RN.Articulo.ListaPorCuit(true, ((Entidades.Sesion)Session["Sesion"]));
-                    ResetearGrillas();
+                    Object o = Cache.Get("ComprobanteAClonar");
+                    if (o == null)
+                    {
+                        ResetearGrillas();
+                    }
                 }
 			}
 			else

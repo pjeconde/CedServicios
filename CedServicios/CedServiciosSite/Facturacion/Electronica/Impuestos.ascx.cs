@@ -18,7 +18,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			if (!this.IsPostBack)
 			{
-				ResetearGrillas();
+                Object o = Cache.Get("ComprobanteAClonar");
+                if (o == null)
+                {
+                    ResetearGrillas();
+                }
 			}
 		}
 		public void BindearDropDownLists()
