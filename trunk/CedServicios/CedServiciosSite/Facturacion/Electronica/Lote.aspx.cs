@@ -22,7 +22,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 		string gvUniqueID = String.Empty;
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> referencias;
 		#endregion
-
+        protected void Page_LoadComplete(object sender, EventArgs e)
+        {
+            Cache.Remove("ComprobanteAClonar");
+        }
+        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.IsPostBack)
@@ -185,7 +189,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                         CAETextBox.Text = string.Empty;
                         FechaCAEObtencionDatePickerWebUserControl.Text = string.Empty;
                         FechaCAEVencimientoDatePickerWebUserControl.Text = string.Empty;
-                        Cache.Remove("ComprobanteAClonar");
                     }
                     catch
                     {
