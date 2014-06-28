@@ -96,11 +96,11 @@
                         DynamicHorizontalOffset="0" CssClass="MainMenu" 
                         Font-Names="Verdana" Font-Size="10px" ForeColor="#284E98" PathSeparator="|" 
                         StaticSubMenuIndent="30px" onmenuitemclick="Menu_MenuItemClick" 
-                        Orientation="Horizontal">
-                        <DynamicHoverStyle Font-Underline="true"/>
+                        Orientation="Horizontal" StaticEnableDefaultPopOutImage="false" DynamicEnableDefaultPopOutImage="false">
+                        <DynamicHoverStyle Font-Underline="true" BackColor="Cornsilk"/>
                         <DynamicMenuItemStyle BackColor="#ededed" VerticalPadding="2px"/>
                         <DynamicSelectedStyle Font-Underline="true"/>
-                        <StaticHoverStyle BackColor="#ededed"/>
+                        <StaticHoverStyle Font-Underline="true" BackColor="Cornsilk"/>
                         <StaticMenuItemStyle HorizontalPadding="10px"/>
                         <StaticSelectedStyle BackColor="#ededed"/>
 	                    <StaticItemTemplate>
