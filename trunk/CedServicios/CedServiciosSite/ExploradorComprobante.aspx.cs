@@ -38,7 +38,10 @@ namespace CedServicios.Site
                     ViewState["Clientes"] = RN.Cliente.ListaPorCuit(false, true, sesion);
                     ClienteDropDownList.DataSource = (List<Entidades.Cliente>)ViewState["Clientes"];
                     DataBind();
-                    ClienteDropDownList.SelectedValue = "0";
+                    if (ClienteDropDownList.Items.Count > 0)
+                    {
+                        ClienteDropDownList.SelectedValue = "0";
+                    }
                 }
             }
         }
