@@ -18,9 +18,8 @@ namespace CedServicios.Site
             ContentPlaceHolder menuContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("MenuContentPlaceHolder"));
             Menu menu = ((Menu)menuContentPlaceHolder.FindControl("Menu"));
 
-            ImageButton usuarioImageButton = ((ImageButton)Master.FindControl("UsuarioImageButton"));
-
             ContentPlaceHolder usuarioContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("UsuarioContentPlaceHolder"));
+            ImageButton usuarioImageButton = ((ImageButton)usuarioContentPlaceHolder.FindControl("UsuarioImageButton"));
             Label usuarioLabel = ((Label)usuarioContentPlaceHolder.FindControl("UsuarioLabel"));
             HyperLink usuarioHyperLink = ((HyperLink)usuarioContentPlaceHolder.FindControl("UsuarioHyperLink"));
             Label cUITLabel = ((Label)usuarioContentPlaceHolder.FindControl("CUITLabel"));
@@ -236,10 +235,12 @@ namespace CedServicios.Site
                     }
                 }
                 menuContentPlaceHolder.Visible = true;
+                usuarioContentPlaceHolder.Visible = true;
                 if (Sesion.Usuario.Id != null)
                 {
                     String path = Master.Server.MapPath("~/ImagenesSubidas/");
                     string[] archivos = System.IO.Directory.GetFiles(path, Sesion.Usuario.Id + ".*", System.IO.SearchOption.TopDirectoryOnly);
+                    usuarioImageButton.Visible = true;
                     if (archivos.Length > 0)
                     {
                         usuarioImageButton.ImageUrl = "~/ImagenesSubidas/" + archivos[0].Replace(Master.Server.MapPath("~/ImagenesSubidas/"), String.Empty);
@@ -248,8 +249,6 @@ namespace CedServicios.Site
                     {
                         usuarioImageButton.ImageUrl = "~/Imagenes/SiluetaHombre.jpg";
                     }
-                    usuarioImageButton.Visible = true;
-                    usuarioContentPlaceHolder.Visible = true;
                     usuarioHyperLink.Text = Sesion.Usuario.Nombre.Replace(" ", "&nbsp;");
                     menu.Items[menu.Items.Count - 1].Selectable = true;
                     if (Sesion.CuitsDelUsuario.Count != 0)

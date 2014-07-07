@@ -15,7 +15,15 @@ namespace CedServicios.Site
             if (!IsPostBack)
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                Funciones.PersonalizarControlesMaster(this, true, sesion);
+                Object o = Cache.Get("ComprobanteAClonar");
+                if (o == null)
+                {
+                    Funciones.PersonalizarControlesMaster(this, true, sesion);
+                }
+                else
+                {
+                    UsuarioContentPlaceHolder.Visible = false;
+                }
             }
         }
         protected void Menu_MenuItemClick(object sender, MenuEventArgs e)
