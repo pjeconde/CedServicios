@@ -22,7 +22,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 CalleTextBox.Text = value;
-                CalleTextBox.DataBind();
             }
         }
         public string Nro
@@ -34,7 +33,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 NroTextBox.Text = value;
-                NroTextBox.DataBind();
             }
         }
         public string Piso
@@ -46,7 +44,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 PisoTextBox.Text = value;
-                PisoTextBox.DataBind();
             }
         }
         public string Depto
@@ -58,7 +55,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 DeptoTextBox.Text = value;
-                DeptoTextBox.DataBind();
             }
         }
         public string Sector
@@ -70,7 +66,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 SectorTextBox.Text = value;
-                SectorTextBox.DataBind();
             }
         }
         public string Torre
@@ -82,7 +77,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 TorreTextBox.Text = value;
-                TorreTextBox.DataBind();
             }
         }
         public string Manzana
@@ -94,7 +88,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 ManzanaTextBox.Text = value;
-                ManzanaTextBox.DataBind();
             }
         }
         public string Localidad
@@ -106,7 +99,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 LocalidadTextBox.Text = value;
-                LocalidadTextBox.DataBind();
             }
         }
         public string IdProvincia
@@ -118,7 +110,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 ProvinciaDropDownList.SelectedValue = value;
-                ProvinciaDropDownList.DataBind();
             }
         }
         public string DescrProvincia
@@ -137,7 +128,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 CodPostTextBox.Text = value;
-                CodPostTextBox.DataBind();
             }
         }
         public List<FeaEntidades.CodigosProvincia.CodigoProvincia> ListaProvincia

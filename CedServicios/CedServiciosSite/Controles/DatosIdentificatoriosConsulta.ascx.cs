@@ -22,7 +22,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 GLNTextBox.Text = value.ToString();
-                GLNTextBox.DataBind();
             }
         }
         public string CodigoInterno
@@ -34,7 +33,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 CodigoInternoTextBox.Text = value;
-                CodigoInternoTextBox.DataBind();
             }
         }
         public bool Enabled

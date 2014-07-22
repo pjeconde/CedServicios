@@ -22,7 +22,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 NombreContactoTextBox.Text = value;
-                NombreContactoTextBox.DataBind();
             }
         }
         public string Email
@@ -34,7 +33,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 EmailContactoTextBox.Text = value;
-                EmailContactoTextBox.DataBind();
             }
         }
         public string Telefono
@@ -46,7 +44,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 TelefonoContactoTextBox.Text = value;
-                TelefonoContactoTextBox.DataBind();
             }
         }
         public bool Enabled
