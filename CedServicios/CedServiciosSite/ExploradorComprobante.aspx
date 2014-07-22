@@ -13,13 +13,13 @@
                 Período de emisión:
 	        </td>
 			<td align="left" style="padding-top:20px">
-                Desde
+                desde&nbsp;
                 <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
                 <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
                     TargetControlID="FechaDesdeTextBox" Format="yyyyMMdd" PopupButtonID="FechaDesdeImage" >
                 </ajaxToolkit:CalendarExtender>
                 <asp:Image runat="server" ID="FechaDesdeImage" ImageUrl="~/Imagenes/Calendar.gif" />
-                &nbsp;&nbsp;Hasta
+                &nbsp;&nbsp;hasta&nbsp;
                 <asp:TextBox ID="FechaHastaTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
                 <ajaxToolkit:CalendarExtender ID="FechaHastaCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
                     TargetControlID="FechaHastaTextBox" Format="yyyyMMdd" PopupButtonID="FechaHastaImage" >
@@ -61,7 +61,7 @@
                         <Columns>
                             <asp:TemplateField ControlStyle-Width="35">
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="ConsultarButton" runat="server" ToolTip="Consulta Local" CommandName="Seleccionar" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Consultar.png" />
+                                    <asp:ImageButton ID="ConsultarButton" runat="server" ToolTip="Consulta Local" CommandName="ConsultaLocal" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Consultar.png" />
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DescrTipoComprobante" HeaderText="Tipo" SortExpression="DescrTipoComprobante">
@@ -129,37 +129,20 @@
                                     <asp:ImageButton ID="ConsultarOnLineButton" runat="server" ToolTip="Consultar On-Line" CommandName="ConsultarOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/ConsultarOnLine.png" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField ControlStyle-Width="35">
+                            <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="ActualizarOnlineButton" runat="server" ToolTip="Actualizar el Estado On-Line" CommandName="ActualizarOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/ActualizarOnLine.png" />
+		                            <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged">
+			                            <asp:ListItem Value="" Text="--- elegir acción ---"></asp:ListItem>
+			                            <asp:ListItem Value="ActualizarOnLine" Text="Actualizar estado (InterFacturas)"></asp:ListItem>
+			                            <asp:ListItem Value="ExportarRG2485" Text="Exportar Interface RG.2485"></asp:ListItem>
+			                            <asp:ListItem Value="XMLOnLine" Text="Exportar XML On-Line"></asp:ListItem>
+			                            <asp:ListItem Value="PDF" Text="Exportar PDF"></asp:ListItem>
+			                            <asp:ListItem Value="PDF-Viewer" Text="Viewer PDF"></asp:ListItem>
+			                            <asp:ListItem Value="XML-ClonarAlta" Text="Clonar Comprobante"></asp:ListItem>
+		                            </asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField ControlStyle-Width="35">
-                                <ItemTemplate>
-                                    <asp:ImageButton ID="ExportarButton" runat="server" ToolTip="Exportar Interface RG.2485" CommandName="ExportarRG2485" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Afip.png" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ControlStyle-Width="35">
-                                <ItemTemplate>
-                                    <asp:ImageButton ID="XMLOnLineButton" runat="server" ToolTip="Exportar XML On-Line" CommandName="XMLOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/XmlOnLine.png" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ControlStyle-Width="35">
-                                <ItemTemplate>
-                                    <asp:ImageButton ID="PDFButton" runat="server" ToolTip="Exportar PDF" CommandName="PDF" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Pdf.png" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ControlStyle-Width="35">
-                                <ItemTemplate>
-                                    <asp:ImageButton ID="PDFButtonViewer" runat="server" ToolTip="Viewer PDF" CommandName="PDF-Viewer" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/PdfLupa.png" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField ControlStyle-Width="20">
-                                <ItemTemplate>
-                                    <asp:ImageButton ID="XMLCopiarEnAltaPDFButton" runat="server" ToolTip="Clonar Comprobante" CommandName="XML-ClonarAlta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/ClonarAlta.png" />
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                        </Columns>
+                            </Columns>
                     </asp:GridView>
                 </asp:Panel>
             </td>
