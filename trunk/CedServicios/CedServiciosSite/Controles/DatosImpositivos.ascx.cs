@@ -22,7 +22,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 CondIVADropDownList.SelectedValue = value.ToString();
-                CondIVADropDownList.DataBind();
             }
         }
         public string DescrCondIVA
@@ -41,7 +40,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 CondIngBrutosDropDownList.SelectedValue = value.ToString();
-                CondIngBrutosDropDownList.DataBind();
             }
         }
         public string DescrCondIngBrutos
@@ -60,7 +58,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 NroIngBrutosTextBox.Text = value;
-                NroIngBrutosTextBox.DataBind();
             }
         }
         public DateTime FechaInicioActividades
@@ -72,7 +69,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 FechaInicioActividadesTextBox.Text = value.ToString("yyyyMMdd");
-                FechaInicioActividadesTextBox.DataBind();
             }
         }
         public List<FeaEntidades.CondicionesIVA.CondicionIVA> ListaCondIVA
@@ -80,6 +76,7 @@ namespace CedServicios.Site.Controles
             set
             {
                 CondIVADropDownList.DataSource = value;
+                CondIVADropDownList.DataBind();
             }
         }
         public List<FeaEntidades.CondicionesIB.CondicionIB> ListaCondIngBrutos
@@ -87,6 +84,7 @@ namespace CedServicios.Site.Controles
             set
             {
                 CondIngBrutosDropDownList.DataSource = value;
+                CondIngBrutosDropDownList.DataBind();
             }
         }
         public bool Enabled
