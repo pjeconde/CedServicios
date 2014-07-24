@@ -654,7 +654,7 @@ namespace CedServicios.RN
                     {
                         if (!lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
                         {
-                            string aux = HexToString(lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString());
+                            string aux = RN.Funciones.HexToString(lcIBK.comprobante[i].extensiones.extensiones_datos_comerciales.ToString());
                             cIBK.extensiones.extensiones_datos_comerciales = aux;
                         }
                     }
@@ -662,7 +662,7 @@ namespace CedServicios.RN
                     {
                         if (!lcIBK.comprobante[i].extensiones.extensiones_datos_marketing.Equals(string.Empty))
                         {
-                            string aux = HexToString(lcIBK.comprobante[i].extensiones.extensiones_datos_marketing.ToString());
+                            string aux = RN.Funciones.HexToString(lcIBK.comprobante[i].extensiones.extensiones_datos_marketing.ToString());
                             cIBK.extensiones.extensiones_datos_marketing = aux;
                         }
                     }
@@ -1135,7 +1135,7 @@ namespace CedServicios.RN
                         d.linea[j].codigo_producto_vendedor = lc.comprobante[i].detalle.linea[j].codigo_producto_vendedor;
                         if (lc.comprobante[i].detalle.linea[j].descripcion != "" && lc.comprobante[i].detalle.linea[j].descripcion.Substring(0, 1) != "%")
                         {
-                            string aux = ConvertToHex(lc.comprobante[i].detalle.linea[j].descripcion);
+                            string aux = RN.Funciones.ConvertToHex(lc.comprobante[i].detalle.linea[j].descripcion);
                             d.linea[j].descripcion = aux;
                         }
                         else
@@ -1247,7 +1247,7 @@ namespace CedServicios.RN
                     {
                         if (lc.comprobante[i].extensiones.extensiones_datos_comerciales.Substring(0, 1) != "%")
                         {
-                            string aux = ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_comerciales.ToString());
+                            string aux = RN.Funciones.ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_comerciales.ToString());
                             cIBK.extensiones.extensiones_datos_comerciales = aux;
                         }
                         else
@@ -1259,7 +1259,7 @@ namespace CedServicios.RN
                     {
                         if (lc.comprobante[i].extensiones.extensiones_datos_marketing.Substring(0, 1) != "%")
                         {
-                            string aux = ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_marketing.ToString());
+                            string aux = RN.Funciones.ConvertToHex(lc.comprobante[i].extensiones.extensiones_datos_marketing.ToString());
                             cIBK.extensiones.extensiones_datos_marketing = aux;
                         }
                         else
@@ -1384,92 +1384,6 @@ namespace CedServicios.RN
                 lcIBK.comprobante[i] = cIBK;
             }
             return lcIBK;
-        }
-        public string ConvertToHex(string asciiString)
-        {
-            asciiString = PonerEntityName(asciiString);
-            byte[] b = Encoding.ASCII.GetBytes(asciiString);
-            string salida = "";
-            for (int i = 0; i < b.Length; i++)
-            {
-                string ascii = b[i].ToString();
-                int n = Convert.ToInt32(ascii);
-                string r = n.ToString("x");
-                salida += "%" + r;
-            }
-            return salida;
-        }
-        private string PonerEntityName(string texto)
-        {
-            texto = texto.Replace("á", "&aacute;");
-            texto = texto.Replace("é", "&eacute;");
-            texto = texto.Replace("í", "&iacute;");
-            texto = texto.Replace("ó", "&oacute;");
-            texto = texto.Replace("ú", "&uacute;");
-            texto = texto.Replace("º", "&ordm;");
-			texto = texto.Replace("à", "&agrave;");
-			texto = texto.Replace("è", "&egrave;");
-			texto = texto.Replace("ì", "&igrave;");
-			texto = texto.Replace("ò", "&ograve;");
-			texto = texto.Replace("ù", "&ugrave;");
-            texto = texto.Replace("ñ", "&ntilde;");
-            texto = texto.Replace("$", "&#36");
-			//Mayúsculas
-			texto = texto.Replace("Á", "&Aacute;");
-			texto = texto.Replace("É", "&Eacute;");
-			texto = texto.Replace("Í", "&Iacute;");
-			texto = texto.Replace("Ó", "&Oacute;");
-			texto = texto.Replace("Ú", "&Uacute;");
-			texto = texto.Replace("À", "&Agrave;");
-			texto = texto.Replace("È", "&Egrave;");
-			texto = texto.Replace("Ì", "&Igrave;");
-			texto = texto.Replace("Ò", "&Ograve;");
-			texto = texto.Replace("Ù", "&Ugrave;");
-            texto = texto.Replace("Ñ", "&Ntilde;");
-			return texto;
-        }
-        public string HexToString(string Hex)
-        {
-            Hex = Hex.Replace("%", "");
-            int numberChars = Hex.Length;
-            byte[] bytes = new byte[numberChars / 2];
-            for (int i = 0; i < numberChars; i += 2)
-            {
-                bytes[i / 2] = Convert.ToByte(Hex.Substring(i, 2), 16);
-            }
-            System.Text.ASCIIEncoding enc = new System.Text.ASCIIEncoding();
-            string str = enc.GetString(bytes);
-            str = SacarEntityName(str);
-            return str;
-        }
-        private string SacarEntityName(string texto)
-        {
-            texto = texto.Replace("&aacute;", "á");
-            texto = texto.Replace("&eacute;", "é");
-            texto = texto.Replace("&iacute;", "í");
-            texto = texto.Replace("&oacute;", "ó");
-            texto = texto.Replace("&uacute;", "ú");
-            texto = texto.Replace("&ordm;", "º");
-			texto = texto.Replace("&agrave;", "à");
-			texto = texto.Replace("&egrave;", "è");
-			texto = texto.Replace("&igrave;", "ì");
-			texto = texto.Replace("&ograve;", "ò");
-			texto = texto.Replace("&ugrave;", "ù");
-            texto = texto.Replace("&ntilde;", "ñ");
-            texto = texto.Replace("&#36", "$");
-			//Mayúsculas
-			texto = texto.Replace("&Aacute;", "Á");
-			texto = texto.Replace("&Eacute;", "É");
-			texto = texto.Replace("&Iacute;", "Í");
-			texto = texto.Replace("&Oacute;", "Ó");
-			texto = texto.Replace("&Uacute;", "Ú");
-			texto = texto.Replace("&Agrave;", "À");
-			texto = texto.Replace("&Egrave;", "È");
-			texto = texto.Replace("&Igrave;", "Ì");
-			texto = texto.Replace("&Ograve;", "Ò");
-			texto = texto.Replace("&Ugrave;", "Ù");
-            texto = texto.Replace("&Ntilde;", "Ñ");
-            return texto;
         }
         public static List<Entidades.Comprobante> ListaGlobalFiltrada(bool SoloVigentes, bool EsFechaAlta, string FechaDesde, string FechaHasta, Entidades.Cliente Cliente, string CUIT, string CUITRazonSocial, string NroComprobante, Entidades.Sesion Sesion)
         {
