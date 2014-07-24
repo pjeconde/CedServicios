@@ -73,10 +73,9 @@ namespace CedServicios.Site.Facturacion.Electronica
 			{
 				FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
 				//Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
-				RN.Comprobante crn = new RN.Comprobante();
 				if (l.descripcion.Substring(0, 1) == "%")
 				{
-					linea.descripcion = crn.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+					linea.descripcion = RN.Funciones.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
 				}
 				else
 				{
@@ -133,7 +132,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 			foreach (FeaEntidades.InterFacturas.linea l in lc.comprobante[0].detalle.linea)
 			{
 				FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
-				RN.Comprobante crn = new RN.Comprobante();
                 if (l.GTINSpecified)
                 {
                     linea.GTIN = l.GTIN;
@@ -142,7 +140,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				//Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
 				if (l.descripcion.Substring(0, 1) == "%")
 				{
-					linea.descripcion = crn.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+					linea.descripcion = RN.Funciones.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
 				}
 				else
 				{
@@ -1045,9 +1043,8 @@ namespace CedServicios.Site.Facturacion.Electronica
 				{
 					throw new Exception("Debe informar al menos un artículo");
 				}
-				RN.Comprobante c = new RN.Comprobante();
 				string textoSinSaltoDeLinea = listadelineas[i].descripcion.Replace("\n", "<br>").Replace("\r",string.Empty);
-				det.linea[i].descripcion = c.ConvertToHex(textoSinSaltoDeLinea);
+				det.linea[i].descripcion = RN.Funciones.ConvertToHex(textoSinSaltoDeLinea);
 
 				GenerarDetallesAlicuotaIVA(TipoPtoVta, TipoCbte, det, listadelineas, i);
 

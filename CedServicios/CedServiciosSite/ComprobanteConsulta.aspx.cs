@@ -298,8 +298,7 @@ namespace CedServicios.Site
                     //Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
                     if (lc.comprobante[0].extensiones.extensiones_datos_comerciales.Substring(0, 1) == "%")
                     {
-                        RN.Comprobante cDC = new RN.Comprobante();
-                        DatosComerciales.Texto = cDC.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
+                        DatosComerciales.Texto = RN.Funciones.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
                     }
                     else
                     {
@@ -567,8 +566,7 @@ namespace CedServicios.Site
                     //Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
                     if (lc.comprobante[0].extensiones.extensiones_datos_comerciales.Substring(0, 1) == "%")
                     {
-                        RN.Comprobante cDC = new RN.Comprobante();
-                        DatosComerciales.Texto = cDC.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
+                        DatosComerciales.Texto = RN.Funciones.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
                     }
                     else
                     {
@@ -1244,9 +1242,8 @@ namespace CedServicios.Site
                 {
                     comp.extensiones = new FeaEntidades.InterFacturas.extensiones();
                 }
-                RN.Comprobante c = new RN.Comprobante();
                 string textoSinSaltoDeLinea = DatosComerciales.Texto.Replace(System.Environment.NewLine, "<br>");
-                comp.extensiones.extensiones_datos_comerciales = c.ConvertToHex(textoSinSaltoDeLinea);
+                comp.extensiones.extensiones_datos_comerciales = RN.Funciones.ConvertToHex(textoSinSaltoDeLinea);
             }
         }
 
@@ -2486,12 +2483,11 @@ namespace CedServicios.Site
                 }
                 lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
                 lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
-                RN.Comprobante cDC = new RN.Comprobante();
                 foreach (FeaEntidades.InterFacturas.linea l in lcFea.comprobante[0].detalle.linea)
                 {
                     if (l != null)
                     {
-                        l.descripcion = cDC.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+                        l.descripcion = RN.Funciones.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
                     }
                     else
                     {
@@ -2509,7 +2505,7 @@ namespace CedServicios.Site
                 }
                 if (lcFea.comprobante[0].extensiones != null && lcFea.comprobante[0].extensiones.extensiones_datos_comerciales != null && !lcFea.comprobante[0].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
                 {
-                    string dc = cDC.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
+                    string dc = RN.Funciones.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
                     lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = dc.Replace("<br>", System.Environment.NewLine);
                 }
                 else

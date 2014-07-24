@@ -131,14 +131,15 @@
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <ItemTemplate>
-		                            <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged">
+		                            <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" 
+                                        OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged">
 			                            <asp:ListItem Value="" Text="--- elegir acción ---"></asp:ListItem>
-			                            <asp:ListItem Value="ActualizarOnLine" Text="Actualizar estado (InterFacturas)"></asp:ListItem>
-			                            <asp:ListItem Value="ExportarRG2485" Text="Exportar Interface RG.2485"></asp:ListItem>
-			                            <asp:ListItem Value="XMLOnLine" Text="Exportar XML On-Line"></asp:ListItem>
-			                            <asp:ListItem Value="PDF" Text="Exportar PDF"></asp:ListItem>
-			                            <asp:ListItem Value="PDF-Viewer" Text="Viewer PDF"></asp:ListItem>
-			                            <asp:ListItem Value="XML-ClonarAlta" Text="Clonar Comprobante"></asp:ListItem>
+			                            <asp:ListItem Value="ActualizarOnLine" Text="Actualizar estado"></asp:ListItem>
+			                            <asp:ListItem Value="PDF" Text="Descargar PDF"></asp:ListItem>
+			                            <asp:ListItem Value="XML-ClonarAlta" Text="Clonar comprobante"></asp:ListItem>
+			                            <asp:ListItem Value="ExportarRG2485" Text="Descargar interface RG2485"></asp:ListItem>
+			                            <asp:ListItem Value="XMLOnLine" Text="Descargar XML (InterFacturas)"></asp:ListItem>
+			                            <asp:ListItem Value="PDF-Viewer" Text="Viewer PDF (InterFacturas)"></asp:ListItem>
 		                            </asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
