@@ -180,6 +180,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         FeaEntidades.InterFacturas.lote_comprobantes lote = (FeaEntidades.InterFacturas.lote_comprobantes)Cache["ComprobanteAClonar"];
                         CompletarUI(lote, new EventArgs());
+                        VerificarMetodoNumeracionLote();
                         Numero_ComprobanteTextBox.Text = string.Empty;
                         FechaEmisionDatePickerWebUserControl.Text = string.Empty;
                         FechaServDesdeDatePickerWebUserControl.Text = string.Empty;
