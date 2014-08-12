@@ -131,19 +131,30 @@
                             </asp:TemplateField>
                             <asp:TemplateField>
                                 <ItemTemplate>
-		                            <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" 
-                                        OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged">
+		                            <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged" EnableViewState="false">
 			                            <asp:ListItem Value="" Text="--- elegir acción ---"></asp:ListItem>
 			                            <asp:ListItem Value="ActualizarOnLine" Text="Actualizar estado"></asp:ListItem>
-			                            <asp:ListItem Value="PDF" Text="Descargar PDF"></asp:ListItem>
 			                            <asp:ListItem Value="XML-ClonarAlta" Text="Clonar comprobante"></asp:ListItem>
-			                            <asp:ListItem Value="ExportarRG2485" Text="Descargar interface RG2485"></asp:ListItem>
-			                            <asp:ListItem Value="XMLOnLine" Text="Descargar XML (InterFacturas)"></asp:ListItem>
 			                            <asp:ListItem Value="PDF-Viewer" Text="Viewer PDF (InterFacturas)"></asp:ListItem>
 		                            </asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            </Columns>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="PDFLinkButton" runat="server" Text="PDF" ToolTip="Descargar PDF" CommandName="PDF" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"></asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="ExportarRG2485LinkButton" runat="server" Text="ITF" ToolTip="Descargar interface RG2485" CommandName="ExportarRG2485" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"></asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="XMLOnLineLinkButton" runat="server" Text="XML" ToolTip="Descargar XML (InterFacturas)" CommandName="XMLOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"></asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
                     </asp:GridView>
                 </asp:Panel>
             </td>
