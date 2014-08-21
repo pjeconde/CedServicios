@@ -32,10 +32,12 @@ namespace CedServicios.RN
             objWSFEV1.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_wsfev1_Service"];
             objWSFEV1.Proxy = ticket.Wp;
         }
-        public static string EnviarAFIP(FeaEntidades.InterFacturas.lote_comprobantes lc, Entidades.Sesion Sesion)
+        public static string EnviarAFIP(out string Cae, out string CaeFecVto, FeaEntidades.InterFacturas.lote_comprobantes lc, Entidades.Sesion Sesion)
         {
             try
             {
+                Cae = "";
+                CaeFecVto = "";
                 sesion = Sesion;
                 CrearTicket();
                 ar.gov.afip.wsfev1.FECAERequest objFERequest = new ar.gov.afip.wsfev1.FECAERequest();
@@ -98,80 +100,83 @@ namespace CedServicios.RN
 
                 if (lc.comprobante[0].resumen.impuestos.Length > 0)
                 {
-                    ar.gov.afip.wsfev1.AlicIva[] ivas = new ar.gov.afip.wsfev1.AlicIva[lc.comprobante[0].resumen.impuestos.Length];
-                    for (int j = 0; j < lc.comprobante[0].resumen.impuestos.Length; j++)
+                    if (lc.comprobante[0].resumen.impuestos[0] != null)
                     {
-                        if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 1)
+                        ar.gov.afip.wsfev1.AlicIva[] ivas = new ar.gov.afip.wsfev1.AlicIva[lc.comprobante[0].resumen.impuestos.Length];
+                        for (int j = 0; j < lc.comprobante[0].resumen.impuestos.Length; j++)
                         {
-                            double baseImponible = 0;
-                            ivas[j] = new ar.gov.afip.wsfev1.AlicIva();
-                            ivas[j].BaseImp = lc.comprobante[0].resumen.impuestos[j].base_imponible;
-                            if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 10.5)
+                            if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 1)
                             {
-                                if (ivas[j].BaseImp == 0)
+                                double baseImponible = 0;
+                                ivas[j] = new ar.gov.afip.wsfev1.AlicIva();
+                                ivas[j].BaseImp = lc.comprobante[0].resumen.impuestos[j].base_imponible;
+                                if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 10.5)
                                 {
-                                    for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
+                                    if (ivas[j].BaseImp == 0)
                                     {
-                                        if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                        if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 10.5)
+                                        for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
                                         {
-                                            baseImponible +=  Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2); 
-                                        }
-                                        if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
-                                        {
-                                            baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                            if (lc.comprobante[0].detalle.linea[k] == null) { break; }
+                                            if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 10.5)
+                                            {
+                                                baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
+                                            }
+                                            if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
+                                            {
+                                                baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                            }
                                         }
                                     }
+                                    ivas[j].BaseImp = baseImponible;
+                                    ivas[j].Id = 4;
                                 }
-                                ivas[j].BaseImp = baseImponible;
-                                ivas[j].Id = 4;
-                            }
-                            else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 21)
-                            {
-                                if (ivas[j].BaseImp == 0)
+                                else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 21)
                                 {
-                                    for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
+                                    if (ivas[j].BaseImp == 0)
                                     {
-                                        if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                        if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 21)
+                                        for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
                                         {
-                                            baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
-                                        }
-                                        if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
-                                        {
-                                            baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                            if (lc.comprobante[0].detalle.linea[k] == null) { break; }
+                                            if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 21)
+                                            {
+                                                baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
+                                            }
+                                            if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
+                                            {
+                                                baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                            }
                                         }
                                     }
+                                    ivas[j].BaseImp = baseImponible;
+                                    ivas[j].Id = 5;
                                 }
-                                ivas[j].BaseImp = baseImponible;
-                                ivas[j].Id = 5;
-                            }
-                            else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 27)
-                            {
-                                if (ivas[j].BaseImp == 0)
+                                else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 27)
                                 {
-                                    for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
+                                    if (ivas[j].BaseImp == 0)
                                     {
-                                        if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                        if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 27)
+                                        for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
                                         {
-                                            baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
-                                        }
-                                        if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
-                                        {
-                                            baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                            if (lc.comprobante[0].detalle.linea[k] == null) { break; }
+                                            if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 27)
+                                            {
+                                                baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
+                                            }
+                                            if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
+                                            {
+                                                baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                            }
                                         }
                                     }
+                                    ivas[j].BaseImp = baseImponible;
+                                    ivas[j].Id = 6;
                                 }
-                                ivas[j].BaseImp = baseImponible;
-                                ivas[j].Id = 6;
+                                ivas[j].Importe = lc.comprobante[0].resumen.impuestos[j].importe_impuesto;
                             }
-                            ivas[j].Importe = lc.comprobante[0].resumen.impuestos[j].importe_impuesto;
                         }
-                    }
-                    if (ivas != null && ivas.Length > 0)
-                    {
-                        objFEDetalleRequest.Iva = ivas;
+                        if (ivas != null && ivas.Length > 0)
+                        {
+                            objFEDetalleRequest.Iva = ivas;
+                        }
                     }
                 }
 
@@ -191,43 +196,39 @@ namespace CedServicios.RN
                 string respuesta = "";
                 if (objFEResponse.Errors == null)
                 {
-                    if (objFEResponse.FeCabResp.Resultado == "A")
+                    //if (objFEResponse.FeCabResp.Resultado == "A")
+                    //{
+                    for (int i = 0; i < objFEResponse.FeDetResp.Length; i++)
                     {
-                        for (int i = 0; i < objFEResponse.FeDetResp.Length; i++)
+                        respuesta += "Resultado: " + objFEResponse.FeDetResp[i].Resultado + "\\n";
+                        if (objFEResponse.FeDetResp[i].Observaciones != null)
                         {
-                            respuesta += "Resultado: " + objFEResponse.FeDetResp[i].Resultado + "\\n";
-                            if (objFEResponse.FeDetResp[i].Observaciones != null)
-                            {
-                                for (int j = 0; j < objFEResponse.FeDetResp[i].Observaciones.Length; j++)
-                                {
-                                    respuesta += objFEResponse.FeDetResp[i].Observaciones[j].Code.ToString() + "-" + objFEResponse.FeDetResp[i].Observaciones[j].Msg + "\\n";
-                                }
-                            }
-                            respuesta += "CAE: " + objFEResponse.FeDetResp[i].CAE;
-                        }
-                    }
-                    else if (objFEResponse.FeCabResp.Resultado == "R")
-                    {
-                        for (int i = 0; i < objFEResponse.FeDetResp.Length; i++)
-                        {
-                            respuesta += "Resultado: " + objFEResponse.FeDetResp[i].Resultado + "\\n";
                             for (int j = 0; j < objFEResponse.FeDetResp[i].Observaciones.Length; j++)
                             {
                                 respuesta += objFEResponse.FeDetResp[i].Observaciones[j].Code.ToString() + "-" + objFEResponse.FeDetResp[i].Observaciones[j].Msg + "\\n";
                             }
-                            respuesta += "CAE: " + objFEResponse.FeDetResp[i].CAE;
                         }
+                        respuesta += "CAE: " + objFEResponse.FeDetResp[i].CAE;
+                        Cae = objFEResponse.FeDetResp[i].CAE;
+                        CaeFecVto = objFEResponse.FeDetResp[i].CAEFchVto;
                     }
-                    else
-                    {
-                        respuesta += "No se pudo obtener el mensaje de respuesta del método (FECAESolicitar).";
-                    }
+                    //}
                 }
                 else
                 {
                     for (int i = 0; i < objFEResponse.Errors.Length; i++)
                     {
-                        respuesta += objFEResponse.Errors[i].Code + "-" + objFEResponse.Errors[i].Msg + ". ";
+                        respuesta += objFEResponse.Errors[i].Code + "-" + objFEResponse.Errors[i].Msg + ".\\n ";
+                        if (objFEResponse.Errors[i].Code == 10016)
+                        {
+                            try
+                            {
+                                respuesta += "Ultimo nro. de comprobante enviado: " + UltNro.CbteNro + ".\\n";
+                            }
+                            catch
+                            {
+                            }
+                        }
                     }
                 }
                 return respuesta;

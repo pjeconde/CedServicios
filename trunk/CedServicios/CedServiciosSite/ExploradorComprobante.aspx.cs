@@ -752,7 +752,7 @@ namespace CedServicios.Site
             }
             if (output != "")
             {
-                MensajeLabel.Text += output + " ";
+                //MensajeLabel.Text += output + " ";
             }
             RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "Process Info: " + MensajeLabel.Text);
             process.Close();
@@ -1207,29 +1207,12 @@ namespace CedServicios.Site
                             sb.Append(".pdf");
 
                             string url = RespPDF;
-                            //string fileName = Server.MapPath("~/TempRender/a.pdf");
                             string filename = sb.ToString();
                             String dlDir = @"~/TempRender/";
                             new System.Net.WebClient().DownloadFile(url, Server.MapPath(dlDir + filename));
 
-                            System.IO.FileInfo toDownload = new System.IO.FileInfo(Server.MapPath(dlDir + filename));
-                            if (toDownload.Exists)
-                            {
-                                Response.Clear();
-                                Response.AddHeader("Content-Disposition", "attachment; filename=" + toDownload.Name);
-                                Response.AddHeader("Content-Length", toDownload.Length.ToString());
-                                Response.ContentType = "application/octet-stream";
-                                Response.WriteFile(dlDir + filename);
-                                Response.End();
-
-                                toDownload.Delete();
-                            }
-
-                            //script = "window.open('" + RespPDF + "', '');";
-                            //ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
-
-                            //Response.Write("<script>window.open('" + RespPDF + "','_blank');</script>");
-                            //Response.Flush();
+                            script = "window.open('DescargaTemporarios.aspx?archivo=" + sb.ToString() + "&path=" + @"~/TempRender/" + "', '');";
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                         }
                         catch (Exception ex)
                         {
@@ -1287,17 +1270,20 @@ namespace CedServicios.Site
 
                             //Crear archivo comprobante XML
                             System.IO.MemoryStream m = new System.IO.MemoryStream();
-                            System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sbXML.ToString()), System.IO.FileMode.Create);
+                            System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/TempRender/" + sbXML.ToString()), System.IO.FileMode.Create);
                             m.WriteTo(fs);
                             fs.Close();
 
                             //Grabar información comprobante XML
-                            using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/Temp/" + sbXML.ToString())))
+                            using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/TempRender/" + sbXML.ToString())))
                             {
                                 outfile.Write(sbXMLData.ToString());
                             }
 
                             ExecuteCommand(sbXML.ToString(), sbPDF.ToString());
+
+                            script = "window.open('DescargaTemporarios.aspx?archivo=" + sbPDF.ToString() + "&path=" + @"~/TempRender/" + "', '');";
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                         }
                         catch (Exception ex)
                         {
@@ -1381,21 +1367,8 @@ namespace CedServicios.Site
                         {
                             outfile.Write(sbXMLData.ToString());
                         }
-
-                        string filename = sbXML.ToString();
-                        String dlDir = @"~/Temp/";
-                        System.IO.FileInfo toDownload = new System.IO.FileInfo(Server.MapPath(dlDir + filename));
-                        if (toDownload.Exists)
-                        {
-                            Response.Clear();
-                            Response.AddHeader("Content-Disposition", "attachment; filename=" + toDownload.Name);
-                            Response.AddHeader("Content-Length", toDownload.Length.ToString());
-                            Response.ContentType = "application/octet-stream";
-                            Response.WriteFile(dlDir + filename);
-                            Response.End();
-
-                            toDownload.Delete();
-                        }
+                        script = "window.open('DescargaTemporarios.aspx?archivo=" + sbXML.ToString() + "', '');";
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     }
                     catch (Exception ex)
                     {
@@ -1618,26 +1591,20 @@ namespace CedServicios.Site
                             zip.AddFile(Server.MapPath(dlDir + sbCabeceraC.ToString()), "");
                             zip.AddFile(Server.MapPath(dlDir + sbDetalle.ToString()), "");
                             zip.Save(Server.MapPath(dlDir + filename));
-                        }
-                        if (toDownload.Exists)
-                        {
-                            Response.Clear();
-                            Response.AddHeader("Content-Disposition", "attachment; filename=" + toDownload.Name);
-                            Response.AddHeader("Content-Length", toDownload.Length.ToString());
-                            Response.ContentType = "application/octet-stream";
-                            Response.WriteFile(dlDir + filename);
-                            Response.End();
-
-                            toDownload.Delete();
                             toCabeceraE.Delete();
                             toCabeceraC.Delete();
                             toDetalle.Delete();
+                        }
+                        if (toDownload.Exists)
+                        {
+                            script = "window.open('DescargaTemporarios.aspx?archivo=" + sbZIP.ToString() + "', '');";
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+
                         }
                         else
                         {
                             WebForms.Excepciones.Redireccionar(new EX.Validaciones.ArchivoInexistente(filename), "~/NotificacionDeExcepcion.aspx");
                         }
-                        //Server.Transfer("~/DescargaTemporarios.aspx?archivo=" + sb.ToString(), false);
                     }
                     catch (Exception ex)
                     {
