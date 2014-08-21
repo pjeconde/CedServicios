@@ -16,9 +16,14 @@ namespace CedServicios.Site
         protected void Page_Load(object sender, EventArgs e)
         {
             string filename = Request.QueryString.Get("archivo");
+            string pathname = Request.QueryString.Get("path");
             if (!String.IsNullOrEmpty(filename))
             {
-                String dlDir = @"~/Temp/";
+                String dlDir = pathname;
+                if (pathname == null)
+                {
+                    dlDir = @"~/Temp/";
+                }
                 String path = Server.MapPath(dlDir + filename);
                 System.IO.FileInfo toDownload = new System.IO.FileInfo(path);
                 if (toDownload.Exists)

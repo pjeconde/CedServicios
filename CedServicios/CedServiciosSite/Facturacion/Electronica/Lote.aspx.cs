@@ -1620,6 +1620,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 			Importe_Total_Impuestos_Internos_ResumenTextBox.Text = total_Impuestos_Internos.ToString();
             total = totalGravado + totalNoGravado + totalIVA + total_Impuestos_Nacionales + total_Impuestos_Internos + total_Ingresos_Brutos + total_Impuestos_Municipales + total_Operaciones_Exentas;
 			Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
+            if (Condicion_IVA_VendedorDropDownList.SelectedValue == "6")
+            {
+                Importe_Total_Neto_Gravado_ResumenTextBox.Text = totalNoGravado.ToString(); 
+                Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = "0";
+            }
 		}
 
 		private void CalcularImpuestos(out double total_Impuestos_Nacionales, out double total_Impuestos_Internos, out double total_Ingresos_Brutos, out double total_Impuestos_Municipales)
@@ -1897,6 +1902,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             FechaHstServLabel.Visible = true;
             FechaServHastaDatePickerWebUserControl.Visible = true;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+            if (Condicion_IVA_VendedorDropDownList.SelectedValue == "6")
+            {
+                Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaMonotributo();
+            }
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
             Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
@@ -2097,7 +2106,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     catch (Exception ex)
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + ex.Message + "');</script>", false);
+                        string a = ex.Message.Replace("'", " ");
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + a + "');</script>", false);
                     }
                 }
             }
@@ -2172,10 +2182,45 @@ namespace CedServicios.Site.Facturacion.Electronica
                             if (respuesta == "Comprobante enviado satisfactoriamente a Interfacturas.")
                             {
                                 //Grabar en base de datos
-                                RN.Comprobante comprobante = new RN.Comprobante();
+                                RN.Comprobante c= new RN.Comprobante();
                                 lcFea.cabecera_lote.DestinoComprobante = "ITF";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                comprobante.Registrar(lcFea, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                                c.Registrar(lcFea, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+
+
+                                //Consultar y Actualizar estado on-line.                              
+                                org.dyndns.cedweb.consulta.ConsultaIBK clcdyndnsConsultaIBK = new org.dyndns.cedweb.consulta.ConsultaIBK();
+                                string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
+                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
+                                if (ConsultaIBKUtilizarServidorExterno == "SI")
+                                {
+                                    clcdyndnsConsultaIBK.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
+                                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
+                                }
+                                org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
+                                clcrdyndns = clcdyndnsConsultaIBK.Consultar(Convert.ToInt64(lcFea.comprobante[0].cabecera.informacion_vendedor.cuit), lcFea.cabecera_lote.id_lote, lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta, certificado);
+                                FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                                lc = Funciones.Ws2Fea(clcrdyndns);
+                                Cache["ComprobanteAConsultar"] = lc;
+                                string XML = "";
+                                RN.Comprobante.SerializarLc(out XML, lc);
+                                Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                                comprobante.Cuit = lcFea.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                                comprobante.TipoComprobante.Id = lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                                comprobante.NroPuntoVta = lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                                comprobante.Nro = lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                                c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                comprobante.Response = XML;
+                                if (lc.cabecera_lote.resultado == "A")
+                                {
+                                    comprobante.WF.Estado = "Vigente";
+                                    RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                                }
+                                else if (lc.cabecera_lote.resultado == "R")
+                                {
+                                    comprobante.WF.Estado = "Rechazado";
+                                    RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                                }
                             }
                         }
                         catch (System.Web.Services.Protocols.SoapException soapEx)
@@ -2210,7 +2255,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     catch (Exception ex)
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + ex.Message + "');</script>", false);
+                        string a = ex.Message.Replace("'", " ");
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + a + "');</script>", false);
                     }
                 }
             }
@@ -2253,7 +2299,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                             string respuesta = "";
                             FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
 
-                            respuesta = RN.ComprobanteAFIP.EnviarAFIP(lcFea, (Entidades.Sesion)Session["Sesion"]);
+                            string caeNro = "";
+                            string caeFecVto = "";
+                            respuesta = RN.ComprobanteAFIP.EnviarAFIP(out caeNro, out caeFecVto, lcFea, (Entidades.Sesion)Session["Sesion"]);
 
                             RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), respuesta);
                             ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>", false);
@@ -2261,12 +2309,34 @@ namespace CedServicios.Site.Facturacion.Electronica
                             if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
                             {
                                 //Grabar en base de datos
-                                RN.Comprobante comprobante = new RN.Comprobante();
+                                RN.Comprobante c = new RN.Comprobante();
                                 lcFea.cabecera_lote.DestinoComprobante = "AFIP";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                comprobante.Registrar(lcFea, null, "AFIP", ((Entidades.Sesion)Session["Sesion"]));
+                                c.Registrar(lcFea, null, "AFIP", ((Entidades.Sesion)Session["Sesion"]));
 
                                 //Actualizar estado on-line.
+                                if (caeNro != "")
+                                {
+                                    lcFea.cabecera_lote.resultado = "A";
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante.resultado = "A";
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante.cae = caeNro;
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = caeFecVto;
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae = DateTime.Now.ToString("yyyyMMdd");
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
+                                }
+                                string XML = "";
+                                RN.Comprobante.SerializarLc(out XML, lcFea);
+                                Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                                comprobante.Cuit = lcFea.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                                comprobante.TipoComprobante.Id = lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                                comprobante.NroPuntoVta = lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                                comprobante.Nro = lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                                c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                comprobante.Response = XML;
+                                comprobante.WF.Estado = "Vigente";
+                                RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
                             }
                         }
                         catch (System.Web.Services.Protocols.SoapException soapEx)
@@ -2302,7 +2372,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     catch (Exception ex)
                     {
                         RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), ex.Message);
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a AFIP.\\n " + ex.Message + "');</script>", false);
+                        string a = ex.Message.Replace("'", " ");
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a AFIP.\\n " + a + "');</script>", false);
                     }
                 }
             }
