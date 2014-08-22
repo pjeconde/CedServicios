@@ -142,21 +142,6 @@
 		                            </asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="PDFLinkButton" runat="server" Text="PDF" ToolTip="Descargar PDF" CommandName="PDF" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"></asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="ExportarRG2485LinkButton" runat="server" Text="ITF" ToolTip="Descargar interface RG2485" CommandName="ExportarRG2485" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"></asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="XMLOnLineLinkButton" runat="server" Text="XML" ToolTip="Descargar XML (InterFacturas)" CommandName="XMLOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>"></asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </asp:Panel>
