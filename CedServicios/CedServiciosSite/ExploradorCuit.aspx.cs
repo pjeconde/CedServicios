@@ -133,6 +133,10 @@ namespace CedServicios.Site
                     DatosImpositivosDescrCondIVALabel.Text = cuit.DatosImpositivos.DescrCondIVA;
                     DatosImpositivosDescrCondIngBrutosLabel.Text = cuit.DatosImpositivos.DescrCondIngBrutos;
                     EstadoLabel.Text = cuit.Estado;
+                    DestinoComprobanteAFIPLabel.Text = cuit.DestinoComprobanteAFIP.ToString();
+                    UsaCertificadoPropioAFIPLabel.Text = cuit.UsaCertificadoAFIPPropio.ToString();
+                    DestinoComprobanteITFLabel.Text = cuit.DestinoComprobanteITF.ToString();
+                    NroSerieCertifITFLabel.Text = cuit.NroSerieCertifITF;
                     ModalPopupExtender1.Show();
                     break;
             }
