@@ -236,7 +236,40 @@
                 <td align="left">
                     <asp:Label ID="EstadoLabel" runat="server"></asp:Label>
                 </td>
-            </tr>           
+            </tr>   
+            <tr>
+                <td align="left" style="padding-right:5px; padding-left:5px">
+                    Destino Comprobante AFIP:
+                </td>
+                <td align="left">
+                    <asp:Label ID="DestinoComprobanteAFIPLabel" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="padding-right:5px; padding-left:5px">
+                    Usa Certificado Propio AFIP:
+                </td>
+                <td align="left">
+                    <asp:Label ID="UsaCertificadoPropioAFIPLabel" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="padding-right:5px; padding-left:5px">
+                    Destino Comprobante ITF:
+                </td>
+                <td align="left">
+                    <asp:Label ID="DestinoComprobanteITFLabel" runat="server"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="padding-right:5px; padding-left:5px">
+                    Nro.Serie Certif. ITF:
+                </td>
+                <td align="left">
+                    <asp:Label ID="NroSerieCertifITFLabel" runat="server"></asp:Label>
+                </td>
+            </tr>
+
             <tr>
                 <td align="left" style="padding-top:20px">
                     <asp:Button ID="CancelarButton" runat="server" Text="Salir" />

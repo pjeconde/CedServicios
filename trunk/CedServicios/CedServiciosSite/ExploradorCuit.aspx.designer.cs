@@ -238,6 +238,42 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label EstadoLabel;
         
         /// <summary>
+        /// Control DestinoComprobanteAFIPLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DestinoComprobanteAFIPLabel;
+        
+        /// <summary>
+        /// Control UsaCertificadoPropioAFIPLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label UsaCertificadoPropioAFIPLabel;
+        
+        /// <summary>
+        /// Control DestinoComprobanteITFLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label DestinoComprobanteITFLabel;
+        
+        /// <summary>
+        /// Control NroSerieCertifITFLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NroSerieCertifITFLabel;
+        
+        /// <summary>
         /// Control CancelarButton.
         /// </summary>
         /// <remarks>
