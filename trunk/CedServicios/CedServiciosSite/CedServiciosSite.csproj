@@ -123,6 +123,7 @@
     <Content Include="Imagenes\Iconos\PdfLupa.png" />
     <Content Include="Imagenes\Iconos\Xml.png" />
     <Content Include="Imagenes\Iconos\XmlOnLine.png" />
+    <Content Include="LogoService.aspx" />
     <Content Include="MensajeUsuarioDemo.aspx" />
     <Content Include="ExploradorAdministracion.aspx" />
     <Content Include="ExploradorLog.aspx" />
@@ -506,6 +507,13 @@
     </Compile>
     <Compile Include="ExploradorComprobanteOnLineInterfacturas.aspx.designer.cs">
       <DependentUpon>ExploradorComprobanteOnLineInterfacturas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="LogoService.aspx.cs">
+      <DependentUpon>LogoService.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="LogoService.aspx.designer.cs">
+      <DependentUpon>LogoService.aspx</DependentUpon>
     </Compile>
     <Compile Include="MensajeUsuarioDemo.aspx.cs">
       <DependentUpon>MensajeUsuarioDemo.aspx</DependentUpon>
