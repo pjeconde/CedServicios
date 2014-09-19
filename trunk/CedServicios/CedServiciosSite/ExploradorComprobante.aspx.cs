@@ -206,7 +206,7 @@ namespace CedServicios.Site
             //process = Process.Start(ProcessInfo);
             //process.WaitForExit();
 
-            string command = string.Format("GenerarPDF.bat {0} {1} {2}", Server.MapPath("~/TempRender/" + "cfe-factura-render-2.57-ejecutable.jar"), Server.MapPath("~/TempRender/" + NombreArchivosbXML), Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
+            string command = string.Format("GenerarPDF.bat \"{0}\" \"{1}\" \"{2}\" ", Server.MapPath("~/TempRender/" + "cfe-factura-render-2.57-ejecutable.jar"), Server.MapPath("~/TempRender/" + NombreArchivosbXML), Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
             //string command = "GenerarPDF.bat";
             ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
             //procStartInfo.WorkingDirectory = @"C:\inetpub\wwwroot\CedeiraServicios\TempRender\";
@@ -734,6 +734,23 @@ namespace CedServicios.Site
                             lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
                             string comprobanteXML = "";
+                            if (lote.comprobante[0].extensiones == null)
+                            {
+                                lote.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
+                            }
+                            if (lote.comprobante[0].extensiones.extensiones_camara_facturas == null)
+                            {
+                                lote.comprobante[0].extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
+                            }
+                            if (System.Configuration.ConfigurationManager.AppSettings["Ambiente"] == "DESA")
+                            {
+                                lote.comprobante[0].extensiones.extensiones_camara_facturas.id_logo = "http://cedeiraweb.no-ip.org:8080/ImagenesSubidas/LogoService?idlogo=" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                            }
+                            else
+                            {
+                                lote.comprobante[0].extensiones.extensiones_camara_facturas.id_logo = "http://www.cedeira.com.ar/ImagenesSubidas/LogoService?idlogo=" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                            }
+
                             RN.Comprobante.SerializarC(out comprobanteXML, lote.comprobante[0]);
                             System.Text.StringBuilder sbXMLData = new System.Text.StringBuilder();
                             sbXMLData.AppendLine(comprobanteXML);
