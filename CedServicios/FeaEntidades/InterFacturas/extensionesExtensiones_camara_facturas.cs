@@ -20,6 +20,8 @@ namespace FeaEntidades.InterFacturas
 
         private string id_templateField;
 
+        private string id_logoField;
+
         private string id_idiomaField;
 
         /// <comentarios/>
@@ -55,6 +57,19 @@ namespace FeaEntidades.InterFacturas
             set
             {
                 this.id_templateField = value;
+            }
+        }
+
+        /// <comentarios/>
+        public string id_logo
+        {
+            get
+            {
+                return this.id_logoField;
+            }
+            set
+            {
+                this.id_logoField = value;
             }
         }
 
