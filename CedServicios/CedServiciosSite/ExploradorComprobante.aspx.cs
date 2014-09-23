@@ -189,23 +189,6 @@ namespace CedServicios.Site
         public void ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF)
         {
             int exitcode;
-            //ProcessStartInfo ProcessInfo;
-            //Process process;
-            //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "java.exe");
-            ////ProcessInfo = new ProcessStartInfo(@"C:\SVNCedServicios\CedServicios\CedServiciosSite\TempRender\GenerarPDF.bat");
-            //ProcessInfo = new ProcessStartInfo(@"C:\inetpub\wwwroot\CedeiraServicios\TempRender\GenerarPDF.bat");
-            ////ProcessInfo = new ProcessStartInfo("java.exe");
-            ////ProcessInfo.Arguments = @"-cp " + Server.MapPath("~/TempRender/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/TempRender/" + NombreArchivosbXML) + " " + Server.MapPath("~/TempRender/" + NombreArchivosbPDF) + " ORIGINAL";
-            //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "Argumentos: " + "-cp " + Server.MapPath("~/TempRender/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/TempRender/" + NombreArchivosbXML) + " " + Server.MapPath("~/TempRender/" + NombreArchivosbPDF) + " ORIGINAL");
-            //ProcessInfo.WorkingDirectory = @"C:\inetpub\wwwroot\CedeiraServicios\TempRender\";
-            //ProcessInfo.CreateNoWindow = false;
-            //ProcessInfo.UseShellExecute = false;
-            //// redirecting standard output and error
-            //ProcessInfo.RedirectStandardError = true;
-            //ProcessInfo.RedirectStandardOutput = true;
-            //process = Process.Start(ProcessInfo);
-            //process.WaitForExit();
-
             string command = string.Format("GenerarPDF.bat \"{0}\" \"{1}\" \"{2}\" ", Server.MapPath("~/TempRender/" + "cfe-factura-render-2.57-ejecutable.jar"), Server.MapPath("~/TempRender/" + NombreArchivosbXML), Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
             //string command = "GenerarPDF.bat";
             ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd.exe", "/c " + command);

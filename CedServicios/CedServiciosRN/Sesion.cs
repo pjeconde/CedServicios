@@ -111,6 +111,7 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobantes (online Interfacturas)");
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (archivo XML)");
                         opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (online Interfacturas)");
+                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (online AFIP)");
                         opcionesHabilitadas.Add("Factura Electrónica|Términos y Condiciones");
                         if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                         {
