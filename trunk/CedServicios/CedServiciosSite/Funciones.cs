@@ -86,6 +86,9 @@ namespace CedServicios.Site
                 mItem = new MenuItem("Consulta de Comprobante (online Interfacturas)", "Consulta de Comprobante (online Interfacturas)");
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
+                mItem = new MenuItem("Consulta de Comprobante (online AFIP)", "Consulta de Comprobante (online AFIP)");
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
                 mItem = new MenuItem("Términos y Condiciones", "Términos y Condiciones");
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;

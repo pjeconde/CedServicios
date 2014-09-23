@@ -15,15 +15,19 @@ namespace CedServicios.RN
         
         private static void CrearTicket()
         {
-            ticket = new LoginTicket();
-            string RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + sesion.Cuit.Nro + ".p12");
-            if (sesion.Cuit.UsaCertificadoAFIPPropio)
+            string RutaCertificado = "";
+            if (ticket == null || Convert.ToInt32(ticket.ExpirationTime.ToString("hhmmss")) <= Convert.ToInt32(DateTime.Now.ToString("hhmmss")))
             {
-                ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(sesion.Cuit.Nro));
-            }
-            else
-            {
-                ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64("30710015062"));
+                ticket = new LoginTicket();
+                RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + sesion.Cuit.Nro + ".p12");
+                if (sesion.Cuit.UsaCertificadoAFIPPropio)
+                {
+                    ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(sesion.Cuit.Nro));
+                }
+                else
+                {
+                    ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64("30710015062"));
+                }
             }
             objWS = new ar.gov.afip.wsw.Service();
             objWS.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_wsw_Service"];

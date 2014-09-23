@@ -1283,6 +1283,7 @@
   <ItemGroup>
     <Folder Include="CertificadosAFIP\" />
     <Folder Include="ImagenesSubidas\" />
+    <Folder Include="TempRenderAFIP\" />
     <Folder Include="TempRender\" />
     <Folder Include="Temp\" />
   </ItemGroup>

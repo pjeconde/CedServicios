@@ -36,7 +36,8 @@ namespace CedServicios.RN
 		public string XmlStrLoginTicketRequestTemplate = "<loginTicketRequest><header><uniqueId></uniqueId><generationTime></generationTime><expirationTime></expirationTime></header><service></service></loginTicketRequest>";
 
 		private bool _verboseMode = true;
-        
+        private string fechaUtc;
+
 		// OJO! NO ES THREAD-SAFE 
 		private static UInt32 _globalUniqueID = 0;
 
@@ -142,8 +143,9 @@ namespace CedServicios.RN
 				xmlNodoService = XmlLoginTicketRequest.SelectSingleNode("//service");
 
 				// Las horas son UTC formato yyyy-MM-ddTHH:mm:ssZ
-				xmlNodoGenerationTime.InnerText = DateTime.UtcNow.AddMinutes(-10).ToString("s") + "Z";
-				xmlNodoExpirationTime.InnerText = DateTime.UtcNow.AddMinutes(+10).ToString("s") + "Z";
+                fechaUtc = DateTime.UtcNow.ToString();
+				xmlNodoGenerationTime.InnerText = DateTime.UtcNow.AddMinutes(-100).ToString("s") + "Z";
+				xmlNodoExpirationTime.InnerText = DateTime.UtcNow.AddMinutes(+100).ToString("s") + "Z";
 				xmlNodoUniqueId.InnerText = Convert.ToString(_globalUniqueID);
 				xmlNodoService.InnerText = argServicio;
 				this.Service = argServicio;
@@ -220,7 +222,7 @@ namespace CedServicios.RN
 
 			catch (Exception excepcionAlInvocarWsaa)
 			{
-				throw new Exception("***Error invocando al servicio WSAA: ObtenerLoginTicketResponse: " + excepcionAlInvocarWsaa.Message);
+                throw new Exception("***Error invocando al servicio WSAA: ObtenerLoginTicketResponse: " + excepcionAlInvocarWsaa.Message + "\\n FechaUTC = " + fechaUtc);
 			}
 
 			// PASO 4: Analizo el Login Ticket Response recibido del WSAA 

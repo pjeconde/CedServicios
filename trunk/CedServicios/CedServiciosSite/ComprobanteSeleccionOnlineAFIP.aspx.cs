@@ -38,6 +38,7 @@ namespace CedServicios.Site
         }
         protected void ConsultarLoteAFIPButton_Click(object sender, EventArgs e)
         {
+            MensajeLabel.Text = "";
             if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
             {
                 MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
@@ -103,6 +104,7 @@ namespace CedServicios.Site
 
         protected void ConsultarUltNroLoteAFIPButton_Click(object sender, EventArgs e)
         {
+            MensajeLabel.Text = "";
             if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
             {
                 MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
@@ -142,6 +144,7 @@ namespace CedServicios.Site
 
         protected void ConsultarUltNroComprobanteAFIPButton_Click(object sender, EventArgs e)
         {
+            MensajeLabel.Text = "";
             if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
             {
                 MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
@@ -200,6 +203,7 @@ namespace CedServicios.Site
 
         protected void ConsultarTipoComprobantesAFIPButton_Click(object sender, EventArgs e)
         {
+            MensajeLabel.Text = "";
             if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
             {
                 MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";

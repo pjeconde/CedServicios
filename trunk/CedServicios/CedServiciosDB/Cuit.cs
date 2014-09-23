@@ -480,7 +480,7 @@ namespace CedServicios.DB
             a.Append("select * ");
             a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
             a.Append("Cuit, RazonSocial, Calle, Nro, Piso, Depto, Sector, Torre, Manzana, Localidad, IdProvincia, DescrProvincia, CodPost, NombreContacto, EmailContacto, TelefonoContacto, IdCondIVA, DescrCondIVA, NroIngBrutos, IdCondIngBrutos, DescrCondIngBrutos, GLN, FechaInicioActividades, CodigoInterno, IdMedio, ");
-            a.Append("IdWF, Estado, UltActualiz, DescrMedio, NroSerieCertifAFIP, NroSerieCertifITF ");
+            a.Append("IdWF, Estado, UltActualiz, DescrMedio, DestinoComprobanteAFIP, UsaCertificadoAFIPPropio, DestinoComprobanteITF, NroSerieCertifITF ");
             a.Append("from #Cuit" + SessionID + " ");
             a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
             a.Append("DROP TABLE #Cuit" + SessionID);

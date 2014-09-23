@@ -128,6 +128,9 @@ namespace CedServicios.Site
                 case "Factura Electrónica|Consulta de Comprobante (online Interfacturas)":
                     Response.Redirect("~/ComprobanteSeleccionOnlineInterfacturas.aspx");
                     break;
+                case "Factura Electrónica|Consulta de Comprobante (online AFIP)":
+                    Response.Redirect("~/ComprobanteSeleccionOnlineAFIP.aspx");
+                    break;
                 case "Factura Electrónica|Términos y Condiciones":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                     break;
