@@ -9,6 +9,7 @@ using System.Xml;
 using System.IO;
 using Ionic.Zip;
 using System.Diagnostics;
+using System.Net;
 
 namespace CedServicios.Site
 {
@@ -186,10 +187,19 @@ namespace CedServicios.Site
             {
             }
         }
-        public void ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF)
+        public void ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF, string DestinoComprobante)
         {
             int exitcode;
-            string command = string.Format("GenerarPDF.bat \"{0}\" \"{1}\" \"{2}\" ", Server.MapPath("~/TempRender/" + "cfe-factura-render-2.57-ejecutable.jar"), Server.MapPath("~/TempRender/" + NombreArchivosbXML), Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
+            string command;
+            if (DestinoComprobante != "ITF")
+            {
+                command = string.Format("GenerarPDF.bat \"{0}\" \"{1}\" \"{2}\" ", Server.MapPath("~/TempRender/" + "cfe-factura-render-AFIP.jar"), Server.MapPath("~/TempRender/" + NombreArchivosbXML), Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
+            }
+            else
+            {
+                command = string.Format("GenerarPDF.bat \"{0}\" \"{1}\" \"{2}\" ", Server.MapPath("~/TempRender/" + "cfe-factura-render-2.57-ejecutable.jar"), Server.MapPath("~/TempRender/" + NombreArchivosbXML), Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
+            }
+
             //string command = "GenerarPDF.bat";
             ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
             //procStartInfo.WorkingDirectory = @"C:\inetpub\wwwroot\CedeiraServicios\TempRender\";
@@ -717,22 +727,32 @@ namespace CedServicios.Site
                             lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
                             string comprobanteXML = "";
-                            if (lote.comprobante[0].extensiones == null)
-                            {
-                                lote.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
-                            }
-                            if (lote.comprobante[0].extensiones.extensiones_camara_facturas == null)
-                            {
-                                lote.comprobante[0].extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
-                            }
+
+                            #region TRATAMIENTO DE LOGOTIPO
+                            string uRLfile = String.Empty;
                             if (System.Configuration.ConfigurationManager.AppSettings["Ambiente"] == "DESA")
                             {
-                                lote.comprobante[0].extensiones.extensiones_camara_facturas.id_logo = "http://cedeiraweb.no-ip.org:8080/ImagenesSubidas/LogoService?idlogo=" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                                uRLfile = "http://cedeiraweb.no-ip.org:8080/ImagenesSubidas/" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + ".gif";
                             }
                             else
                             {
-                                lote.comprobante[0].extensiones.extensiones_camara_facturas.id_logo = "http://www.cedeira.com.ar/ImagenesSubidas/LogoService?idlogo=" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                                uRLfile = "http://www.cedeira.com.ar/ImagenesSubidas/" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + ".gif";
                             }
+                            if (Existe(uRLfile))
+                            {
+                                if (lote.comprobante[0].extensiones == null)
+                                {
+                                    lote.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
+                                    lote.comprobante[0].extensionesSpecified = true;
+                                }
+                                if (lote.comprobante[0].extensiones.extensiones_camara_facturas == null)
+                                {
+                                    lote.comprobante[0].extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
+                                    lote.comprobante[0].extensiones.extensiones_camara_facturasSpecified = true;
+                                }
+                                lote.comprobante[0].extensiones.extensiones_camara_facturas.id_logo = uRLfile;
+                            }
+                            #endregion
 
                             RN.Comprobante.SerializarC(out comprobanteXML, lote.comprobante[0]);
                             System.Text.StringBuilder sbXMLData = new System.Text.StringBuilder();
@@ -766,7 +786,7 @@ namespace CedServicios.Site
                                 outfile.Write(sbXMLData.ToString());
                             }
 
-                            ExecuteCommand(sbXML.ToString(), sbPDF.ToString());
+                            ExecuteCommand(sbXML.ToString(), sbPDF.ToString(), comprobante.IdDestinoComprobante);
 
                             script = "window.open('DescargaTemporarios.aspx?archivo=" + sbPDF.ToString() + "&path=" + @"~/TempRender/" + "', '');";
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
@@ -1101,6 +1121,29 @@ namespace CedServicios.Site
                     #endregion
                     break;
             }
+        }
+        private bool Existe(string URLfile)
+        {
+            HttpWebResponse response = null;
+            var request = (HttpWebRequest)WebRequest.Create(URLfile);
+            bool existe = true;
+            request.Method = "HEAD";
+            try
+            {
+                response = (HttpWebResponse)request.GetResponse();
+            }
+            catch (WebException ex)
+            {
+                existe = false;
+            }
+            finally
+            {
+                if (response != null)
+                {
+                    response.Close();
+                }
+            }
+            return existe;
         }
     }
 }
