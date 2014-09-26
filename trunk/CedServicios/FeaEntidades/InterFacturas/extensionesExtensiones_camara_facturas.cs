@@ -10,6 +10,7 @@ namespace FeaEntidades.InterFacturas
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.ComponentModel.DesignerCategoryAttribute("code")]
     [System.Xml.Serialization.XmlTypeAttribute(AnonymousType = true, Namespace = "http://lote.schemas.cfe.ib.com.ar/")]
+    [System.Xml.Serialization.XmlRootAttribute(Namespace = "http://lote.schemas.cfe.ib.com.ar/", IsNullable = false)]
     [FileHelpers.DelimitedRecord("|")]
     public partial class extensionesExtensiones_camara_facturas
     {
