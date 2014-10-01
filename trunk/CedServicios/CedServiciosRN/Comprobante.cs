@@ -1723,7 +1723,7 @@ namespace CedServicios.RN
             ms.Close();
             ms = null;
         }
-        public string GenerarPDF(string CuitVendedor, int NroPuntoVta, int TipoComprobante, long NroComprobante, string ArchivoXML)
+        public string GenerarPDF(string CuitVendedor, int NroPuntoVta, int TipoComprobante, long NroComprobante, string IdDestinoComprobante, string ArchivoXML)
         {
             try           
             {
@@ -1747,23 +1747,43 @@ namespace CedServicios.RN
                 System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
                 sbXML.Append(sb.ToString() + ".xml");
 
+
+                string dirTemp = "";
+                if (IdDestinoComprobante == "ITF")
+                {
+                    dirTemp = @"~/TempRender/";
+                }
+                else
+                {
+                    dirTemp = @"~/TempRenderAFIP/";
+                }
+
                 //Crear archivo comprobante XML
                 System.IO.MemoryStream m = new System.IO.MemoryStream();
-                System.IO.FileStream fs = new System.IO.FileStream(System.Web.HttpContext.Current.Server.MapPath(@"~/TempRender/" + sbXML.ToString()), System.IO.FileMode.Create);
+                System.IO.FileStream fs = new System.IO.FileStream(System.Web.HttpContext.Current.Server.MapPath(dirTemp + sbXML.ToString()), System.IO.FileMode.Create);
                 m.WriteTo(fs);
                 fs.Close();
 
                 //Grabar información comprobante XML
-                using (StreamWriter outfile = new StreamWriter(System.Web.HttpContext.Current.Server.MapPath(@"~/TempRender/" + sbXML.ToString())))
+                using (StreamWriter outfile = new StreamWriter(System.Web.HttpContext.Current.Server.MapPath(dirTemp + sbXML.ToString())))
                 {
                     outfile.Write(sbXMLData.ToString());
                 }
 
                 RN.Sesion.GrabarLogTexto(System.Web.HttpContext.Current.Server.MapPath(@"~/Detallar.txt"), "Inicia ExecuteCommand");
-                string Mensaje = ExecuteCommand(sbXML.ToString(), sbPDF.ToString());
+                string Mensaje = ExecuteCommand(sbXML.ToString(), sbPDF.ToString(), IdDestinoComprobante);
                 RN.Sesion.GrabarLogTexto(System.Web.HttpContext.Current.Server.MapPath(@"~/Detallar.txt"), "Finaliza ExecuteCommand");
 
-                return System.Configuration.ConfigurationManager.AppSettings["URLGenerarPDF"] + sbPDF.ToString();
+                string url = "";
+                if (IdDestinoComprobante == "ITF")
+                {
+                    url = System.Configuration.ConfigurationManager.AppSettings["URLGenerarPDF"]; 
+                }
+                else
+                {
+                    url = System.Configuration.ConfigurationManager.AppSettings["URLGenerarPDFAFIP"]; 
+                }
+                return url + sbPDF.ToString();
             }
             catch (Exception ex)
             {
@@ -1777,31 +1797,24 @@ namespace CedServicios.RN
                 return script;
             }
         }
-        public string ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF)
+        public string ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF, string IdDestinoComprobante)
         {
             int exitcode;
-            //ProcessStartInfo ProcessInfo;
-            //Process process;
-            //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "java.exe");
-            ////ProcessInfo = new ProcessStartInfo(@"C:\SVNCedServicios\CedServicios\CedServiciosSite\TempRender\GenerarPDF.bat");
-            //ProcessInfo = new ProcessStartInfo(@"C:\inetpub\wwwroot\CedeiraServicios\TempRender\GenerarPDF.bat");
-            ////ProcessInfo = new ProcessStartInfo("java.exe");
-            ////ProcessInfo.Arguments = @"-cp " + Server.MapPath("~/TempRender/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/TempRender/" + NombreArchivosbXML) + " " + Server.MapPath("~/TempRender/" + NombreArchivosbPDF) + " ORIGINAL";
-            //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "Argumentos: " + "-cp " + Server.MapPath("~/TempRender/cfe-factura-render-2.57-ejecutable.jar") + " ar.com.ib.cfe.render.GenerarPDF " + Server.MapPath("~/TempRender/" + NombreArchivosbXML) + " " + Server.MapPath("~/TempRender/" + NombreArchivosbPDF) + " ORIGINAL");
-            //ProcessInfo.WorkingDirectory = @"C:\inetpub\wwwroot\CedeiraServicios\TempRender\";
-            //ProcessInfo.CreateNoWindow = false;
-            //ProcessInfo.UseShellExecute = false;
-            //// redirecting standard output and error
-            //ProcessInfo.RedirectStandardError = true;
-            //ProcessInfo.RedirectStandardOutput = true;
-            //process = Process.Start(ProcessInfo);
-            //process.WaitForExit();
 
-            string command = string.Format("GenerarPDF.bat {0} {1} {2}", System.Web.HttpContext.Current.Server.MapPath("~/TempRender/" + "cfe-factura-render-2.57-ejecutable.jar"), System.Web.HttpContext.Current.Server.MapPath("~/TempRender/" + NombreArchivosbXML), System.Web.HttpContext.Current.Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
-            //string command = "GenerarPDF.bat";
-            ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
-            //procStartInfo.WorkingDirectory = @"C:\inetpub\wwwroot\CedeiraServicios\TempRender\";
-            procStartInfo.WorkingDirectory = System.Web.HttpContext.Current.Server.MapPath("~/TempRender/");
+            string command = "";
+            ProcessStartInfo procStartInfo;
+            if (IdDestinoComprobante == "ITF")
+            {
+                command = string.Format("GenerarPDF.bat {0} {1} {2}", System.Web.HttpContext.Current.Server.MapPath("~/TempRender/" + "cfe-factura-render-2.57-ejecutable.jar"), System.Web.HttpContext.Current.Server.MapPath("~/TempRender/" + NombreArchivosbXML), System.Web.HttpContext.Current.Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
+                procStartInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
+                procStartInfo.WorkingDirectory = System.Web.HttpContext.Current.Server.MapPath("~/TempRender/");
+            }
+            else
+            {
+                command = string.Format("GenerarPDF2.bat {0} {1} {2}", System.Web.HttpContext.Current.Server.MapPath("~/TempRenderAFIP/" + "cfe-factura-render-AFIP.jar"), System.Web.HttpContext.Current.Server.MapPath("~/TempRenderAFIP/" + NombreArchivosbXML), System.Web.HttpContext.Current.Server.MapPath("~/TempRenderAFIP/" + NombreArchivosbPDF));
+                procStartInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
+                procStartInfo.WorkingDirectory = System.Web.HttpContext.Current.Server.MapPath("~/TempRenderAFIP/");
+            }
             procStartInfo.RedirectStandardError = true;
             procStartInfo.RedirectStandardOutput = true;
             procStartInfo.UseShellExecute = false;

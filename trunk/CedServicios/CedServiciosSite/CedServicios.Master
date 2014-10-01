@@ -46,43 +46,52 @@
         <table>
             <tr>
                 <td style="text-align:left" class="Fuente">
-                    <asp:ImageButton ID="EmpresaImageButton" runat="server" 
-                        ImageUrl="~/Imagenes/CedeiraSF-Logo.gif" onclick="EmpresaImageButton_Click" ToolTip="Click aqui para acceder a información institucional y de contacto " />
-                </td>
-                <asp:ContentPlaceHolder ID="UsuarioContentPlaceHolder" runat="server" Visible="true">
-                <td align="right" style="width:100%">
-                    <asp:ImageButton ID="UsuarioImageButton" runat="server" ImageUrl="~/Imagenes/SiluetaHombre.jpg" onclick="UsuarioImageButton_Click" AlternateText="" Height="35px" Visible="false" />
-                </td>
-                <td>
                     <table>
                         <tr>
                             <td class="Fuente" align="right">
-                                <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario:"></asp:Label>
+                                <asp:ImageButton ID="EmpresaImageButton" runat="server" 
+                                ImageUrl="~/Imagenes/CedeiraSF-Logo.gif" onclick="EmpresaImageButton_Click" ToolTip="Click aqui para acceder a información institucional y de contacto " />
                             </td>
-                            <td class="Fuente" align="left" colspan="3">
-                                <asp:HyperLink ID="UsuarioHyperLink" runat="server" Text="" NavigateUrl="~/UsuarioConsulta.aspx"></asp:HyperLink>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="Fuente" align="right">
-                                <asp:Label ID="CUITLabel" runat="server" Text="CUIT:" ToolTip="Clave Única de Identificación Tributaria"></asp:Label>
-                            </td>
-                            <td class="Fuente" align="left">
-                                <asp:DropDownList ID="CUITDropDownList" runat="server" AutoPostBack="true"
-                                    onselectedindexchanged="CUITDropDownList_SelectedIndexChanged">
-                                </asp:DropDownList>
-                            </td>
-                            <td class="Fuente" align="right">
-                                <asp:Label ID="UNLabel" runat="server" Text="UN:" ToolTip="Unidad de Negocio"></asp:Label>
-                            </td>
-                            <td class="Fuente" align="left">
-                                <asp:DropDownList ID="UNDropDownList" runat="server" AutoPostBack="true" 
-                                    onselectedindexchanged="UNDropDownList_SelectedIndexChanged">
-                                </asp:DropDownList>
-                            </td>
+                            <td class="Fuente" align="right" valign="top" style="margin-left:10px">
+                                <asp:label ID="Label1" runat="server" ForeColor="LightGray" Text=" ver.140923"></asp:label>
+                             </td>
                         </tr>
                     </table>
                 </td>
+                <asp:ContentPlaceHolder ID="UsuarioContentPlaceHolder" runat="server" Visible="true">
+                    <td align="right" style="width:100%">
+                        <asp:ImageButton ID="UsuarioImageButton" runat="server" ImageUrl="~/Imagenes/SiluetaHombre.jpg" onclick="UsuarioImageButton_Click" AlternateText="" Height="35px" Visible="false" />
+                    </td>
+                    <td>
+                        <table>
+                            <tr>
+                                <td class="Fuente" align="right">
+                                    <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario:"></asp:Label>
+                                </td>
+                                <td class="Fuente" align="left" colspan="3">
+                                    <asp:HyperLink ID="UsuarioHyperLink" runat="server" Text="" NavigateUrl="~/UsuarioConsulta.aspx"></asp:HyperLink>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="Fuente" align="right">
+                                    <asp:Label ID="CUITLabel" runat="server" Text="CUIT:" ToolTip="Clave Única de Identificación Tributaria"></asp:Label>
+                                </td>
+                                <td class="Fuente" align="left">
+                                    <asp:DropDownList ID="CUITDropDownList" runat="server" AutoPostBack="true"
+                                        onselectedindexchanged="CUITDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </td>
+                                <td class="Fuente" align="right">
+                                    <asp:Label ID="UNLabel" runat="server" Text="UN:" ToolTip="Unidad de Negocio"></asp:Label>
+                                </td>
+                                <td class="Fuente" align="left">
+                                    <asp:DropDownList ID="UNDropDownList" runat="server" AutoPostBack="true" 
+                                        onselectedindexchanged="UNDropDownList_SelectedIndexChanged">
+                                    </asp:DropDownList>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
                 </asp:ContentPlaceHolder>
             </tr>
         </table>

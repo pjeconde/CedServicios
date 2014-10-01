@@ -24,7 +24,16 @@ namespace CedServicios.Site
                 {
                     dlDir = @"~/Temp/";
                 }
-                String path = Server.MapPath(dlDir + filename);
+                String path = "";
+                if (Session["urlDescargaTemporarios"] == null)
+                {
+                    path = Server.MapPath(dlDir + filename);
+                }
+                else
+                {
+                    object url = Session["urlDescargaTemporarios"];
+                    path = url.ToString() + filename;
+                }
                 System.IO.FileInfo toDownload = new System.IO.FileInfo(path);
                 if (toDownload.Exists)
                 {

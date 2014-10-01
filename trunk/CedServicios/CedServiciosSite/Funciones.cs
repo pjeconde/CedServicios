@@ -212,6 +212,7 @@ namespace CedServicios.Site
             menu.Items.Add(mItem);
             menu.Items[menu.Items.Count - 1].Selectable = false;
 
+            usuarioLabel.Visible = false;
             cUITDropDownList.DataValueField = "Nro";
             cUITDropDownList.DataTextField = "Nro";
             cUITDropDownList.DataSource = new List<Entidades.Cuit>();
@@ -241,6 +242,7 @@ namespace CedServicios.Site
                 usuarioContentPlaceHolder.Visible = true;
                 if (Sesion.Usuario.Id != null)
                 {
+                    usuarioLabel.Visible = true;
                     String path = Master.Server.MapPath("~/ImagenesSubidas/");
                     string[] archivos = System.IO.Directory.GetFiles(path, Sesion.Usuario.Id + ".*", System.IO.SearchOption.TopDirectoryOnly);
                     usuarioImageButton.Visible = true;
