@@ -16,7 +16,7 @@ namespace CedServiciosWeb
     {
 
         [WebMethod]
-        public string GenerarPDF(string CuitVendedor, int NroPuntoVta, int TipoComprobante, long NroComprobante, string ArchivoXML)
+        public string GenerarPDF(string CuitVendedor, int NroPuntoVta, int TipoComprobante, long NroComprobante, string IdDestinoComprobante, string ArchivoXML)
         {
             string resultado = string.Empty;
             try
@@ -33,7 +33,7 @@ namespace CedServiciosWeb
                         sw.WriteLine("NroComprobante:" + NroComprobante.ToString());
                     }
                 }
-                resultado = c.GenerarPDF(CuitVendedor, NroPuntoVta, TipoComprobante, NroComprobante, ArchivoXML);
+                resultado = c.GenerarPDF(CuitVendedor, NroPuntoVta, TipoComprobante, NroComprobante, IdDestinoComprobante, ArchivoXML);
             }
             catch (Exception ex)
             {

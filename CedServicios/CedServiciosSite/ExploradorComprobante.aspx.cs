@@ -63,7 +63,6 @@ namespace CedServicios.Site
             System.Xml.Serialization.XmlSerializer x;
             byte[] bytes;
             System.IO.MemoryStream ms;
-            string resp;
 
             switch (e.CommandName)
             {
@@ -186,55 +185,6 @@ namespace CedServicios.Site
             catch
             {
             }
-        }
-        public void ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF, string DestinoComprobante)
-        {
-            int exitcode;
-            string command;
-            if (DestinoComprobante != "ITF")
-            {
-                command = string.Format("GenerarPDF.bat \"{0}\" \"{1}\" \"{2}\" ", Server.MapPath("~/TempRender/" + "cfe-factura-render-AFIP.jar"), Server.MapPath("~/TempRender/" + NombreArchivosbXML), Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
-            }
-            else
-            {
-                command = string.Format("GenerarPDF.bat \"{0}\" \"{1}\" \"{2}\" ", Server.MapPath("~/TempRender/" + "cfe-factura-render-2.57-ejecutable.jar"), Server.MapPath("~/TempRender/" + NombreArchivosbXML), Server.MapPath("~/TempRender/" + NombreArchivosbPDF));
-            }
-
-            //string command = "GenerarPDF.bat";
-            ProcessStartInfo procStartInfo = new ProcessStartInfo("cmd.exe", "/c " + command);
-            //procStartInfo.WorkingDirectory = @"C:\inetpub\wwwroot\CedeiraServicios\TempRender\";
-            procStartInfo.WorkingDirectory = Server.MapPath("~/TempRender/");
-            procStartInfo.RedirectStandardError = true;
-            procStartInfo.RedirectStandardOutput = true;
-            procStartInfo.UseShellExecute = false;
-            procStartInfo.CreateNoWindow = true;
-            // Now we create a process, assign its ProcessStartInfo and start it
-            Process process = new Process();
-            process.StartInfo = procStartInfo;
-            process.Start();
-            process.WaitForExit();
-
-            //Reading output and error
-            string output = process.StandardOutput.ReadToEnd();
-            string error = process.StandardError.ReadToEnd();
-
-            exitcode = process.ExitCode;
-            MensajeLabel.Text = "";
-            //Exit code '0' denotes success and '1' denotes failure
-            if (exitcode != 0)
-            {
-                MensajeLabel.Text += "Exit Code:" + exitcode + "  ";
-            }
-            if (error != "")
-            {
-                MensajeLabel.Text += "Error:" + error + "  ";
-            }
-            if (output != "")
-            {
-                //MensajeLabel.Text += output + " ";
-            }
-            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "Process Info: " + MensajeLabel.Text);
-            process.Close();
         }
         public string Truncate(string value, int maxLength)
         {
@@ -567,7 +517,7 @@ namespace CedServicios.Site
                             pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
                             GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
                         }
-                        string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobanteXML);
+                        string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobante.IdDestinoComprobante, comprobanteXML);
                         GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
 
                         script = "window.open('" + RespPDF + "', '');";
@@ -623,9 +573,13 @@ namespace CedServicios.Site
                             return;
                         }
                         MensajeLabel.Text = String.Empty;
-                        //Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
-                        //resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
+                        //<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><lote_comprobantes  xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns=\"http://lote.schemas.cfe.ib.com.ar/\"><cabecera_lote><id_lote>20140804151246</id_lote><cuit_canal>30690783521</cuit_canal><cuit_vendedor>30710015062</cuit_vendedor><cantidad_reg>1</cantidad_reg><punto_de_venta>35</punto_de_venta><resultado>A</resultado></cabecera_lote><comprobante><cabecera><informacion_comprobante><tipo_de_comprobante>1</tipo_de_comprobante><numero_comprobante>57</numero_comprobante><punto_de_venta>35</punto_de_venta><fecha_emision>20140804</fecha_emision><fecha_vencimiento>20140831</fecha_vencimiento><fecha_serv_desde /><fecha_serv_hasta /><condicion_de_pago>30 
+                        //Off-Line
+                        //resp = comprobante.Response.Replace("iso-8859-1", "utf-8");
+                        //resp = resp.Replace("xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
+                        //Fin Off-Line
 
+                        //On-Line
                         cecd.cuit_canal = Convert.ToInt64("30690783521");
                         cecd.cuit_vendedor = Convert.ToInt64(comprobante.Cuit);
                         cecd.punto_de_venta = Convert.ToInt32(comprobante.NroPuntoVta);
@@ -656,6 +610,9 @@ namespace CedServicios.Site
                             GrabarLogTexto("~/Detallar.txt", "Parametro DetalleIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
                         }
                         resp = clcdyndns.DetallarIBK(cecd, certificado);
+                        resp = resp.Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
+                        resp = resp.Replace(" xmlns:xsi=\"http://lote.schemas.cfe.ib.com.ar/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", " xmlns=\"http://lote.schemas.cfe.ib.com.ar/\"");
+                        //Fin On-Line
 
                         try
                         {
@@ -671,7 +628,7 @@ namespace CedServicios.Site
                                 pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
                                 GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
                             }
-                            string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobanteXML);
+                            string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobante.IdDestinoComprobante, comprobanteXML);
                             GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
 
                             //Crear nombre de archivo default sin extensión
@@ -708,7 +665,7 @@ namespace CedServicios.Site
                     }
                     else
                     {
-                        #region PDF (local)
+                        #region PDF (AFIP)
                         //GENERACIÓN DE PDF A PARTIR DE DATOS LOCALES
                         lote = new FeaEntidades.InterFacturas.lote_comprobantes();
                         x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
@@ -755,41 +712,52 @@ namespace CedServicios.Site
                             #endregion
 
                             RN.Comprobante.SerializarC(out comprobanteXML, lote.comprobante[0]);
-                            System.Text.StringBuilder sbXMLData = new System.Text.StringBuilder();
-                            sbXMLData.AppendLine(comprobanteXML);
-
-                            //Crear nombre de archivo default sin extensión
-                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                            sb.Append(lote.cabecera_lote.cuit_vendedor);
-                            sb.Append("-");
-                            sb.Append(lote.cabecera_lote.punto_de_venta.ToString("0000"));
-                            sb.Append("-");
-                            sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
-                            sb.Append("-");
-                            sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
-
-                            //Crear nombre de archivo ZIP
-                            System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
-                            sbXML.Append(sb.ToString() + ".xml");
-                            System.Text.StringBuilder sbPDF = new System.Text.StringBuilder();
-                            sbPDF.Append(sb.ToString() + ".pdf");
-
-                            //Crear archivo comprobante XML
-                            System.IO.MemoryStream m = new System.IO.MemoryStream();
-                            System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/TempRender/" + sbXML.ToString()), System.IO.FileMode.Create);
-                            m.WriteTo(fs);
-                            fs.Close();
-
-                            //Grabar información comprobante XML
-                            using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/TempRender/" + sbXML.ToString())))
+                            
+                            try
                             {
-                                outfile.Write(sbXMLData.ToString());
+                                GrabarLogTexto("~/Detallar.txt", "Inicia ExecuteCommand");
+                                org.dyndns.cedweb.generoPDF.GeneroPDF pdfdyndns = new org.dyndns.cedweb.generoPDF.GeneroPDF();
+
+                                string GenerarPDFUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFUtilizarServidorExterno"];
+                                GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFUtilizarServidorExterno: " + GenerarPDFUtilizarServidorExterno);
+                                if (GenerarPDFUtilizarServidorExterno == "SI")
+                                {
+                                    pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
+                                    GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
+                                }
+                                string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobante.IdDestinoComprobante, comprobanteXML);
+                                GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
+
+                                //Crear nombre de archivo default sin extensión
+                                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                                sb.Append(comprobante.Cuit);
+                                sb.Append("-");
+                                sb.Append(comprobante.NroPuntoVta.ToString("0000"));
+                                sb.Append("-");
+                                sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
+                                sb.Append("-");
+                                sb.Append(comprobante.Nro.ToString("00000000"));
+                                sb.Append(".pdf");
+
+                                string url = RespPDF;
+                                string filename = sb.ToString();
+                                String dlDir = @"~/TempRenderAFIP/";
+                                new System.Net.WebClient().DownloadFile(url, Server.MapPath(dlDir + filename));
+
+                                script = "window.open('DescargaTemporarios.aspx?archivo=" + sb.ToString() + "&path=" + @"~/TempRenderAFIP/" + "', '');";
+                                ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                             }
-
-                            ExecuteCommand(sbXML.ToString(), sbPDF.ToString(), comprobante.IdDestinoComprobante);
-
-                            script = "window.open('DescargaTemporarios.aspx?archivo=" + sbPDF.ToString() + "&path=" + @"~/TempRender/" + "', '');";
-                            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                            catch (Exception ex)
+                            {
+                                script = "Problemas para generar el PDF.\\n" + ex.Message;
+                                script += ex.StackTrace;
+                                if (ex.InnerException != null)
+                                {
+                                    script = ex.InnerException.Message;
+                                }
+                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), script);
+                                MensajeLabel.Text = script;
+                            }
                         }
                         catch (Exception ex)
                         {
