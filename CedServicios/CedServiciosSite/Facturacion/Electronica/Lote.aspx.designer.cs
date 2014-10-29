@@ -1714,6 +1714,33 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ValidationSummary RequeridosValidationSummary;
         
         /// <summary>
+        /// Control DescargarPDFButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button DescargarPDFButton;
+        
+        /// <summary>
+        /// Control ActualizarEstadoButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ActualizarEstadoButton;
+        
+        /// <summary>
+        /// Control MensajeLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MensajeLabel;
+        
+        /// <summary>
         /// Control LabelEnvioITF.
         /// </summary>
         /// <remarks>

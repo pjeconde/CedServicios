@@ -263,7 +263,7 @@ namespace CedServicios.DB
             Entidades.Comprobante comprobante = new Entidades.Comprobante();
             comprobante.Cuit = Lote.cabecera_lote.cuit_vendedor.ToString();
             comprobante.TipoComprobante.Id = Lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
-            FeaEntidades.TiposDeComprobantes.TipoComprobante tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
+            FeaEntidades.TiposDeComprobantes.TipoComprobante tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
             if (tipoComprobante != null)
             {
                 comprobante.TipoComprobante.Descr = tipoComprobante.Descr;

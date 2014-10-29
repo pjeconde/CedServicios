@@ -1897,6 +1897,31 @@
                                             ShowMessageBox="True"></asp:ValidationSummary>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td align="left" style="text-align: center; width: 780px; padding: 5px;">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
+                                            <tr>
+                                                <td style="width: 100%;">
+                                                    <asp:Button ID="DescargarPDFButton" runat="server" Text="Descargar PDF" Width="100%"
+                                                        CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
+                                                        OnClick="DescargarPDFButton_Click" Visible="False" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 100%;">
+                                                    <asp:Button ID="ActualizarEstadoButton" runat="server" Text="Actualizar Estado" Width="100%"
+                                                        CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
+                                                        OnClick="ActualizarEstadoButton_Click" Visible="False" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width: 100%; padding-right: 3px">
+                                                    <asp:Label ID="MensajeLabel" runat="server" Text=""></asp:Label>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
                             </table>
                             <br />
                         </td>
