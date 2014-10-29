@@ -50,7 +50,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                     Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
                     Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
+                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
 
                     CodigoOperacionDropDownList.DataValueField = "Codigo";
                     CodigoOperacionDropDownList.DataTextField = "Descr";

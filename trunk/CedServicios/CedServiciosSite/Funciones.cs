@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using CaptchaDotNet2.Security.Cryptography;
 using System.Drawing;
+using System.IO;
 
 namespace CedServicios.Site
 {
@@ -758,6 +759,22 @@ namespace CedServicios.Site
                 lcFEA.comprobante[i] = cIBK;
             }
             return lcFEA;
+        }
+        public static void GrabarLogTexto(string archivo, string mensaje)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(HttpContext.Current.Server.MapPath(archivo), FileMode.Append, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
+                    }
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

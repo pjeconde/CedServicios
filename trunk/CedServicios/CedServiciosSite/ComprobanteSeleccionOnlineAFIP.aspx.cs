@@ -31,7 +31,7 @@ namespace CedServicios.Site
 
                 TipoComprobanteDropDownList.DataValueField = "Codigo";
                 TipoComprobanteDropDownList.DataTextField = "Descr";
-                TipoComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
+                TipoComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
 
                 DataBind();
             }

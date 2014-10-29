@@ -96,6 +96,11 @@ namespace CedServicios.Site
                     #region ConsultarOnLine
                     try
                     {
+                        if (comprobante.IdDestinoComprobante != "ITF")
+                        {
+                            MensajeLabel.Text = "Está opción está disponible solo para comprobantes vigentes en Interfacturas.";
+                            return;
+                        }
                         string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
                         if (NroCertif.Equals(string.Empty))
                         {
