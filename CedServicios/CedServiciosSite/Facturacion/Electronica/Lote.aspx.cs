@@ -346,7 +346,21 @@ namespace CedServicios.Site.Facturacion.Electronica
                         Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                         if (sesion.UsuarioDemo != true)
                         {
-                            comprobante.Registrar(lote, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                            Entidades.Comprobante cAux = new Entidades.Comprobante();
+                            cAux.Cuit = lote.cabecera_lote.cuit_vendedor.ToString();
+                            cAux.TipoComprobante.Id = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                            cAux.NroPuntoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                            cAux.Nro = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                            comprobante.Leer(cAux, sesion);
+                            if (cAux.Estado == null || cAux.Estado != "Vigente")
+                            {
+                                comprobante.Registrar(lote, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('No se registro el comprobante en la base de datos ya que el comprobante está vigente.\\n');</script>", false);
+                                return;
+                            }
                         }
                         
                         System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());

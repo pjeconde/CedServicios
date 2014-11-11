@@ -8,6 +8,10 @@
                     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; padding-right:20px;">
                         <tr>
                             <td align="left">
+                                <img alt="RG 3685" src="Imagenes/Diapositiva1.GIF" width="400px" height="387px" />
+                                <br />
+                                <br />
+                                <br />
                                 <asp:Label ID="Label1" runat="server" Font-Size="24px" Font-Bold="false" Text="Factura electrónica" ForeColor="#e8906e"></asp:Label>
                             </td>
                         </tr>
@@ -154,3 +158,13 @@
         }
     </script>
 </asp:Content>
+<asp:Content ID="Content2" runat="server" contentplaceholderid="head">
+    <style type="text/css">
+        .style1
+        {
+            width: 302px;
+            height: 468px;
+        }
+    </style>
+</asp:Content>
+
