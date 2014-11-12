@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorCliente.aspx.cs" Inherits="CedServicios.Site.ExploradorCliente" Theme="CedServicios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorPersona.aspx.cs" Inherits="CedServicios.Site.ExploradorPersona" Theme="CedServicios" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <%@ Register Assembly="CedServiciosWebForms" Namespace="CedServicios.WebForms" TagPrefix="cc1" %>
 
@@ -6,7 +6,7 @@
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
         <tr>
             <td align="center" colspan="3" style="padding-top:20px">
-                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Clientes"></asp:Label>
+                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Personas"></asp:Label>
                 <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
             </td>
         </tr>
@@ -22,7 +22,7 @@
             </tr>
             <tr>
                 <td align="left" style="padding-right:5px; padding-top:5px">
-                    Razon Social Cliente:
+                    Razon Social:
                 </td>
                 <td align="left" style="padding-top:5px">
                     <asp:TextBox ID="RazSocTextBox" runat="server" MaxLength="50" TabIndex="2" ToolTip="" Width="480px"></asp:TextBox>
@@ -30,7 +30,7 @@
             </tr>
             <tr>
                 <td align="left" style="padding-right:5px; padding-top:5px">
-                    Nro. Doc. Cliente:
+                    Nro. Doc.:
                 </td>
                 <td align="left" style="padding-top:5px">
                     <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="2" ToolTip="" Width="114px"></asp:TextBox>

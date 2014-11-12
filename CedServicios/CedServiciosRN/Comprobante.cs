@@ -11,10 +11,10 @@ namespace CedServicios.RN
 {
     public class Comprobante
     {
-        public static List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Cliente Cliente, Entidades.Sesion Sesion)
+        public static List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            return db.ListaFiltrada(SoloVigentes, FechaDesde, FechaHasta, Cliente);
+            return db.ListaFiltrada(SoloVigentes, FechaDesde, FechaHasta, Persona);
         }
         public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdDestinoComprobante, Entidades.Sesion Sesion)
         {
@@ -1389,10 +1389,10 @@ namespace CedServicios.RN
             }
             return lcIBK;
         }
-        public static List<Entidades.Comprobante> ListaGlobalFiltrada(bool SoloVigentes, bool EsFechaAlta, string FechaDesde, string FechaHasta, Entidades.Cliente Cliente, string CUIT, string CUITRazonSocial, string NroComprobante, Entidades.Sesion Sesion)
+        public static List<Entidades.Comprobante> ListaGlobalFiltrada(bool SoloVigentes, bool EsFechaAlta, string FechaDesde, string FechaHasta, Entidades.Persona Persona, string CUIT, string CUITRazonSocial, string NroComprobante, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            return db.ListaGlobalFiltrada(SoloVigentes, EsFechaAlta, FechaDesde, FechaHasta, Cliente, CUIT, CUITRazonSocial, NroComprobante);
+            return db.ListaGlobalFiltrada(SoloVigentes, EsFechaAlta, FechaDesde, FechaHasta, Persona, CUIT, CUITRazonSocial, NroComprobante);
         }
         public string ValidarIBK(string lc, string certificado)
         {

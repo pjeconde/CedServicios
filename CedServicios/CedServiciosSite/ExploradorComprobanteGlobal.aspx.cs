@@ -23,10 +23,7 @@ namespace CedServicios.Site
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     FechaDesdeTextBox.Text = DateTime.Today.ToString("dd/MM/yyyy");
                     FechaHastaTextBox.Text = DateTime.Today.ToString("dd/MM/yyyy");
-                    //ViewState["Clientes"] = RN.Cliente.ListaPorCuit(false, true, sesion);
-                    //ClienteDropDownList.DataSource = (List<Entidades.Cliente>)ViewState["Clientes"];
                     DataBind();
-                    //ClienteDropDownList.SelectedValue = "0";
                     CUITTextBox.Text = "";
                     CUITRazonSocialTextBox.Text = "";
                     NroComprobanteTextBox.Text = "";
@@ -117,9 +114,8 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
                 MensajeLabel.Text = String.Empty;
-                //Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
-                Entidades.Cliente cliente = new Entidades.Cliente();
-                lista = RN.Comprobante.ListaGlobalFiltrada(SoloVigentesCheckBox.Checked, FechaAltaRadioButton.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, cliente, CUITTextBox.Text, CUITRazonSocialTextBox.Text, NroComprobanteTextBox.Text, sesion);
+                Entidades.Persona persona = new Entidades.Persona();
+                lista = RN.Comprobante.ListaGlobalFiltrada(SoloVigentesCheckBox.Checked, FechaAltaRadioButton.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, CUITTextBox.Text, CUITRazonSocialTextBox.Text, NroComprobanteTextBox.Text, sesion);
                 if (lista.Count == 0)
                 {
                     ComprobantesGridView.DataSource = null;

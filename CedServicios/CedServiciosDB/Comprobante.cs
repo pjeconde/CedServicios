@@ -11,7 +11,7 @@ namespace CedServicios.DB
         public Comprobante(Entidades.Sesion Sesion) : base(Sesion)
         {
         }
-        public List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Cliente Cliente)
+        public List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Persona Persona)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)
@@ -33,12 +33,12 @@ namespace CedServicios.DB
                 {
                     a.Append("and Comprobante.Fecha<='" + FechaHasta + "' ");
                 }
-                if (Cliente.Orden != 0)
+                if (Persona.Orden != 0)
                 {
-                    a.Append("and Comprobante.IdTipoDoc=" + Cliente.Documento.Tipo.Id + " ");
-                    a.Append("and Comprobante.NroDoc=" + Cliente.Documento.Nro.ToString() + " ");
-                    a.Append("and Comprobante.IdCliente='" + Cliente.IdCliente + "' ");
-                    a.Append("and Comprobante.DesambiguacionCuitPais=" + Cliente.DesambiguacionCuitPais.ToString() + " ");
+                    a.Append("and Comprobante.IdTipoDoc=" + Persona.Documento.Tipo.Id + " ");
+                    a.Append("and Comprobante.NroDoc=" + Persona.Documento.Nro.ToString() + " ");
+                    a.Append("and Comprobante.IdCliente='" + Persona.IdPersona + "' ");
+                    a.Append("and Comprobante.DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
                 }
                 a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, Comprobante.NroComprobante desc ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
@@ -315,7 +315,7 @@ namespace CedServicios.DB
             comprobante.WF.Estado = "PteConf";
             Registrar(comprobante);
         }
-        public List<Entidades.Comprobante> ListaGlobalFiltrada(bool SoloVigentes, bool EsFechaAlta, string FechaDesde, string FechaHasta, Entidades.Cliente Cliente, string CUIT, string CUITRazonSocial, string NroComprobante)
+        public List<Entidades.Comprobante> ListaGlobalFiltrada(bool SoloVigentes, bool EsFechaAlta, string FechaDesde, string FechaHasta, Entidades.Persona Persona, string CUIT, string CUITRazonSocial, string NroComprobante)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)

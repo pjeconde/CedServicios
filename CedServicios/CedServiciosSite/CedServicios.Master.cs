@@ -82,17 +82,17 @@ namespace CedServicios.Site
                 case "Administración|Puntos de Venta|Consulta":
                     Response.Redirect("~/CuitTreeView.aspx?PuntoVta");
                     break;
-                case "Clientes|Alta":
-                    Response.Redirect("~/ClienteCrear.aspx");
+                case "Personas(clientes/proveedores)|Alta":
+                    Response.Redirect("~/PersonaCrear.aspx");
                     break;
-                case "Clientes|Baja/Anul.baja":
-                    Response.Redirect("~/ClienteSeleccionar.aspx?Baja");
+                case "Personas(clientes/proveedores)|Baja/Anul.baja":
+                    Response.Redirect("~/PersonaSeleccionar.aspx?Baja");
                     break;
-                case "Clientes|Modificación":
-                    Response.Redirect("~/ClienteSeleccionar.aspx?Modificar");
+                case "Personas(clientes/proveedores)|Modificación":
+                    Response.Redirect("~/PersonaSeleccionar.aspx?Modificar");
                     break;
-                case "Clientes|Consulta":
-                    Response.Redirect("~/ClienteConsulta.aspx");
+                case "Personas(clientes/proveedores)|Consulta":
+                    Response.Redirect("~/PersonaConsulta.aspx");
                     break;
                 case "Artículos|Alta":
                     Response.Redirect("~/ArticuloCrear.aspx");
@@ -155,8 +155,8 @@ namespace CedServicios.Site
                 case "Administración Site|Explorador de Puntos de Venta":
                     Response.Redirect("~/ExploradorPuntoVta.aspx");
                     break;
-                case "Administración Site|Explorador de Clientes":
-                    Response.Redirect("~/ExploradorCliente.aspx");
+                case "Administración Site|Explorador de Personas":
+                    Response.Redirect("~/ExploradorPersona.aspx");
                     break;
                 case "Administración Site|Explorador de Artículos":
                     Response.Redirect("~/ExploradorArticulo.aspx");

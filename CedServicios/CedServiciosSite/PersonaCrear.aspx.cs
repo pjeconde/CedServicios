@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace CedServicios.Site
 {
-    public partial class ClienteCrear : System.Web.UI.Page
+    public partial class PersonaCrear : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -48,47 +48,60 @@ namespace CedServicios.Site
                 {
                     Response.Redirect("~/MensajeUsuarioDEMO.aspx");
                 }
-                Entidades.Cliente cliente = new Entidades.Cliente();
+                Entidades.Persona persona = new Entidades.Persona();
                 try
                 {
-                    cliente.Cuit = CUITTextBox.Text;
-                    cliente.Documento.Tipo.Id = TipoDocDropDownList.SelectedValue;
-                    cliente.Documento.Tipo.Descr = TipoDocDropDownList.SelectedItem.Text;
-                    if (TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
+                    persona.Cuit = CUITTextBox.Text;
+                    if (AmbosRadioButton.Checked)
                     {
-                        cliente.Documento.Nro = Convert.ToInt64(DestinosCuitDropDownList.SelectedItem.Value);
+                        persona.EsCliente = true;
+                        persona.EsProveedor = true;
+                    }
+                    else if (ClienteRadioButton.Checked)
+                    {
+                        persona.EsCliente = true;
                     }
                     else
                     {
-                        cliente.Documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                        persona.EsProveedor = true;
                     }
-                    cliente.RazonSocial = RazonSocialTextBox.Text;
-                    cliente.Domicilio.Calle = Domicilio.Calle;
-                    cliente.Domicilio.Nro = Domicilio.Nro;
-                    cliente.Domicilio.Piso = Domicilio.Piso;
-                    cliente.Domicilio.Depto = Domicilio.Depto;
-                    cliente.Domicilio.Manzana = Domicilio.Manzana;
-                    cliente.Domicilio.Sector = Domicilio.Sector;
-                    cliente.Domicilio.Torre = Domicilio.Torre;
-                    cliente.Domicilio.Localidad = Domicilio.Localidad;
-                    cliente.Domicilio.Provincia.Id = Domicilio.IdProvincia;
-                    cliente.Domicilio.Provincia.Descr = Domicilio.DescrProvincia;
-                    cliente.Domicilio.CodPost = Domicilio.CodPost;
-                    cliente.Contacto.Nombre = Contacto.Nombre;
-                    cliente.Contacto.Email = Contacto.Email;
-                    cliente.Contacto.Telefono = Contacto.Telefono;
-                    cliente.DatosImpositivos.IdCondIVA = DatosImpositivos.IdCondIVA;
-                    cliente.DatosImpositivos.DescrCondIVA = DatosImpositivos.DescrCondIVA;
-                    cliente.DatosImpositivos.IdCondIngBrutos = DatosImpositivos.IdCondIngBrutos;
-                    cliente.DatosImpositivos.DescrCondIngBrutos = DatosImpositivos.DescrCondIngBrutos;
-                    cliente.DatosImpositivos.NroIngBrutos = DatosImpositivos.NroIngBrutos;
-                    cliente.DatosImpositivos.FechaInicioActividades = DatosImpositivos.FechaInicioActividades;
-                    cliente.DatosIdentificatorios.GLN = DatosIdentificatorios.GLN;
-                    cliente.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
-                    cliente.IdCliente = IdClienteTextBox.Text;
-                    cliente.EmailAvisoVisualizacion = EmailAvisoVisualizacionTextBox.Text;
-                    cliente.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
-                    RN.Cliente.Crear(cliente, sesion);
+                    persona.Documento.Tipo.Id = TipoDocDropDownList.SelectedValue;
+                    persona.Documento.Tipo.Descr = TipoDocDropDownList.SelectedItem.Text;
+                    if (TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
+                    {
+                        persona.Documento.Nro = Convert.ToInt64(DestinosCuitDropDownList.SelectedItem.Value);
+                    }
+                    else
+                    {
+                        persona.Documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                    }
+                    persona.RazonSocial = RazonSocialTextBox.Text;
+                    persona.Domicilio.Calle = Domicilio.Calle;
+                    persona.Domicilio.Nro = Domicilio.Nro;
+                    persona.Domicilio.Piso = Domicilio.Piso;
+                    persona.Domicilio.Depto = Domicilio.Depto;
+                    persona.Domicilio.Manzana = Domicilio.Manzana;
+                    persona.Domicilio.Sector = Domicilio.Sector;
+                    persona.Domicilio.Torre = Domicilio.Torre;
+                    persona.Domicilio.Localidad = Domicilio.Localidad;
+                    persona.Domicilio.Provincia.Id = Domicilio.IdProvincia;
+                    persona.Domicilio.Provincia.Descr = Domicilio.DescrProvincia;
+                    persona.Domicilio.CodPost = Domicilio.CodPost;
+                    persona.Contacto.Nombre = Contacto.Nombre;
+                    persona.Contacto.Email = Contacto.Email;
+                    persona.Contacto.Telefono = Contacto.Telefono;
+                    persona.DatosImpositivos.IdCondIVA = DatosImpositivos.IdCondIVA;
+                    persona.DatosImpositivos.DescrCondIVA = DatosImpositivos.DescrCondIVA;
+                    persona.DatosImpositivos.IdCondIngBrutos = DatosImpositivos.IdCondIngBrutos;
+                    persona.DatosImpositivos.DescrCondIngBrutos = DatosImpositivos.DescrCondIngBrutos;
+                    persona.DatosImpositivos.NroIngBrutos = DatosImpositivos.NroIngBrutos;
+                    persona.DatosImpositivos.FechaInicioActividades = DatosImpositivos.FechaInicioActividades;
+                    persona.DatosIdentificatorios.GLN = DatosIdentificatorios.GLN;
+                    persona.DatosIdentificatorios.CodigoInterno = DatosIdentificatorios.CodigoInterno;
+                    persona.IdPersona = IdPersonaTextBox.Text;
+                    persona.EmailAvisoVisualizacion = EmailAvisoVisualizacionTextBox.Text;
+                    persona.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
+                    RN.Persona.Crear(persona, sesion);
 
                     CUITTextBox.Enabled = false;
                     TipoDocDropDownList.Enabled = false;
@@ -98,20 +111,20 @@ namespace CedServicios.Site
                     Contacto.Enabled = false;
                     DatosImpositivos.Enabled = false;
                     DatosIdentificatorios.Enabled = false;
-                    IdClienteTextBox.Enabled = false;
+                    IdPersonaTextBox.Enabled = false;
                     EmailAvisoVisualizacionTextBox.Enabled = false;
                     PasswordAvisoVisualizacionTextBox.Enabled = false;
                     AceptarButton.Enabled = false;
                     SalirButton.Text = "Salir";
 
-                    MensajeLabel.Text = "El Cliente fué creado satisfactoriamente";
+                    MensajeLabel.Text = "La Persona fué creada satisfactoriamente";
                 }
                 catch (Exception ex)
                 {
                     MensajeLabel.Text = EX.Funciones.Detalle(ex);
                     if (MensajeLabel.Text.IndexOf("PK_Cliente") != -1)
                     {
-                        MensajeLabel.Text = "Ya existe un Cliente con este 'Nro.'";
+                        MensajeLabel.Text = "Ya existe una Persona con este 'Nro.'";
                     }
                 }
             }

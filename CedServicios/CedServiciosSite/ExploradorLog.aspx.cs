@@ -143,13 +143,13 @@ namespace CedServicios.Site
                 case "VerEntidad":
                     switch (Log.Entidad)
                     {
-                        case "Cliente":
-                            Entidades.Cliente cliente =new Entidades.Cliente();
-                            string xml = RN.Cliente.LeerYSerializar(Log.IdWF, (Entidades.Sesion)Session["Sesion"]);
+                        case "Persona":
+                            Entidades.Persona persona =new Entidades.Persona();
+                            string xml = RN.Persona.LeerYSerializar(Log.IdWF, (Entidades.Sesion)Session["Sesion"]);
                             DescargarXMLEntidad(xml);
                             break;
                         default:
-                            MensajeLabel.Text = "Esta entidad no está definida aún para la consulta. (Por ahora solo 'Cliente')";
+                            MensajeLabel.Text = "Esta entidad no está definida aún para la consulta. (Por ahora solo 'Persona')";
                             break;
                     }
                     break;

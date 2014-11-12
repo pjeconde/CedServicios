@@ -10,7 +10,7 @@
 namespace CedServicios.Site {
     
     
-    public partial class ClienteSeleccionar {
+    public partial class PersonaSeleccionar {
         
         /// <summary>
         /// Control Panel2.
@@ -103,13 +103,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.RadioButton IdClienteRadioButton;
         
         /// <summary>
-        /// Control IdClienteTextBox.
+        /// Control IdPersonaTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox IdClienteTextBox;
+        protected global::System.Web.UI.WebControls.TextBox IdPersonaTextBox;
         
         /// <summary>
         /// Control BuscarButton.

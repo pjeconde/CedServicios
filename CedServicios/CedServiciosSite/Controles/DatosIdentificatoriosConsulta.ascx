@@ -13,7 +13,7 @@
         &nbsp;
 		<asp:Label ID="Label21" runat="server" Text="Código interno"></asp:Label>
 		<asp:TextBox ID="CodigoInternoTextBox" runat="server" MaxLength="20" TabIndex="20"
-			ToolTip="(opcional) Código utilizado para identificar al vendedor dentro de la empresa / organización. (ej.: código de Cliente, Proveedor, etc.)"
+			ToolTip="(opcional) Código utilizado para identificar al vendedor dentro de la empresa / organización. (ej.: Código de Cliente, Proveedor, etc.)"
 			Width="100px"></asp:TextBox>
     </td>									
 </tr>
