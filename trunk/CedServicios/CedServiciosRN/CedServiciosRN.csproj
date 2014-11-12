@@ -52,7 +52,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Articulo.cs" />
-    <Compile Include="Cliente.cs" />
+    <Compile Include="Persona.cs" />
     <Compile Include="Comprobante.cs" />
     <Compile Include="ComprobanteAFIP.cs" />
     <Compile Include="Configuracion.cs" />

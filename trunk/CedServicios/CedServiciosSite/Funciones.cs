@@ -37,7 +37,7 @@ namespace CedServicios.Site
             mItem = new MenuItem("Iniciar sesión", "Iniciar sesión"); mItem.Selectable = false;
             menu.Items.Add(mItem);
 
-            mItem = new MenuItem("Clientes", "Clientes");
+            mItem = new MenuItem("Personas(clientes/proveedores)", "Personas(clientes/proveedores)");
             menu.Items.Add(mItem);
             menu.Items[menu.Items.Count - 1].Selectable = false;
                 mItem = new MenuItem("Alta", "Alta");
@@ -175,7 +175,7 @@ namespace CedServicios.Site
                 mItem = new MenuItem("Explorador de Puntos de Venta", "Explorador de Puntos de Venta");
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
-                mItem = new MenuItem("Explorador de Clientes", "Explorador de Clientes");
+                mItem = new MenuItem("Explorador de Personas", "Explorador de Personas");
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].Selectable = false;
                 mItem = new MenuItem("Explorador de Articulos", "Explorador de Artículos");

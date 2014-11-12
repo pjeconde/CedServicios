@@ -8,7 +8,7 @@ using System.Drawing;
 
 namespace CedServicios.Site
 {
-    public partial class ClienteSeleccionar : System.Web.UI.Page
+    public partial class PersonaSeleccionar : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -20,12 +20,12 @@ namespace CedServicios.Site
                     switch (a)
                     {
                         case "Modificar":
-                            TituloPaginaLabel.Text = "Modificación de Cliente";
-                            ViewState["IrA"] = "~/ClienteModificar.aspx";
+                            TituloPaginaLabel.Text = "Modificación de Persona";
+                            ViewState["IrA"] = "~/PersonaModificar.aspx";
                             break;
                         case "Baja":
-                            TituloPaginaLabel.Text = "Baja/Anul.baja de Cliente";
-                            ViewState["IrA"] = "~/ClienteBaja.aspx";
+                            TituloPaginaLabel.Text = "Baja/Anul.baja de Persona";
+                            ViewState["IrA"] = "~/PersonaBaja.aspx";
                             break;
                     }
                     TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
@@ -60,7 +60,7 @@ namespace CedServicios.Site
             else
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
+                List<Entidades.Persona> lista = new List<Entidades.Persona>();
                 MensajeLabel.Text = String.Empty;
                 if (TipoDocRadioButton.Checked)
                 {
@@ -74,7 +74,7 @@ namespace CedServicios.Site
                         Entidades.Documento documento = new Entidades.Documento();
                         documento.Tipo.Id = TipoDocDropDownList.SelectedValue.ToString();
                         documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
-                        lista = RN.Cliente.ListaPorCuityTipoyNroDoc(sesion.Cuit.Nro, documento, sesion);
+                        lista = RN.Persona.ListaPorCuityTipoyNroDoc(sesion.Cuit.Nro, documento, sesion);
                     }
                 }
                 else if (RazonSocialRadioButton.Checked)
@@ -86,36 +86,36 @@ namespace CedServicios.Site
                     }
                     else
                     {
-                        lista = RN.Cliente.ListaPorCuityRazonSocial(sesion.Cuit.Nro, RazonSocialTextBox.Text, sesion);
+                        lista = RN.Persona.ListaPorCuityRazonSocial(sesion.Cuit.Nro, RazonSocialTextBox.Text, sesion);
                     }
                 }
                 else
                 {
-                    if (IdClienteTextBox.Text.Equals(String.Empty))
+                    if (IdPersonaTextBox.Text.Equals(String.Empty))
                     {
                         MensajeLabel.Text = IdClienteRadioButton.Text + " no informado";
                         return;
                     }
                     else
                     {
-                        lista = RN.Cliente.ListaPorCuityIdCliente(sesion.Cuit.Nro, IdClienteTextBox.Text, sesion);
+                        lista = RN.Persona.ListaPorCuityIdPersona(sesion.Cuit.Nro, IdPersonaTextBox.Text, sesion);
                     }
                 }
                 if (lista.Count == 0)
                 {
                     ClientesGridView.DataSource = null;
                     ClientesGridView.DataBind();
-                    MensajeLabel.Text = "No se han encontrado clientes que satisfagan la busqueda";
+                    MensajeLabel.Text = "No se han encontrado Personas que satisfagan la busqueda";
                 }
                 else if (lista.Count == 1)
                 {
-                    Session["Cliente"] = lista[0];
+                    Session["Persona"] = lista[0];
                     Response.Redirect(ViewState["IrA"].ToString());
                 }
                 else
                 {
                     ClientesGridView.DataSource = lista;
-                    ViewState["Clientes"] = lista;
+                    ViewState["Personas"] = lista;
                     ClientesGridView.DataBind();
                 }
             }
@@ -128,22 +128,22 @@ namespace CedServicios.Site
             if (TipoDocRadioButton.Checked)
             {
                 RazonSocialTextBox.Text = String.Empty;
-                IdClienteTextBox.Text = String.Empty;
+                IdPersonaTextBox.Text = String.Empty;
 
                 TipoDocDropDownList.Visible = true;
                 NroDocTextBox.Visible = true;
                 RazonSocialTextBox.Visible = false;
-                IdClienteTextBox.Visible = false;
+                IdPersonaTextBox.Visible = false;
             }
             else if (RazonSocialRadioButton.Checked)
             {
                 NroDocTextBox.Text = String.Empty;
-                IdClienteTextBox.Text = String.Empty;
+                IdPersonaTextBox.Text = String.Empty;
 
                 TipoDocDropDownList.Visible = false;
                 NroDocTextBox.Visible = false;
                 RazonSocialTextBox.Visible = true;
-                IdClienteTextBox.Visible = false;
+                IdPersonaTextBox.Visible = false;
             }
             else
             {
@@ -153,18 +153,18 @@ namespace CedServicios.Site
                 TipoDocDropDownList.Visible = false;
                 NroDocTextBox.Visible = false;
                 RazonSocialTextBox.Visible = false;
-                IdClienteTextBox.Visible = true;
+                IdPersonaTextBox.Visible = true;
             }
         }
         protected void ClientesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             int item = Convert.ToInt32(e.CommandArgument);
-            List<Entidades.Cliente> lista = (List<Entidades.Cliente>)ViewState["Clientes"];
-            Entidades.Cliente cliente = lista[item];
+            List<Entidades.Persona> lista = (List<Entidades.Persona>)ViewState["Personas"];
+            Entidades.Persona persona = lista[item];
             switch (e.CommandName)
             {
                 case "Seleccionar":
-                    Session["Cliente"] = cliente;
+                    Session["Persona"] = persona;
                     Response.Redirect(ViewState["IrA"].ToString());
                     break;
             }

@@ -899,7 +899,7 @@ namespace CedServicios.Site
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
                     Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
                     Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-                    System.Collections.Generic.List<Entidades.Cliente> listacompradores = new System.Collections.Generic.List<Entidades.Cliente>();
+                    System.Collections.Generic.List<Entidades.Persona> listacompradores = new System.Collections.Generic.List<Entidades.Persona>();
                     switch (idtipo)
                     {
                         case "Comun":
@@ -2579,12 +2579,12 @@ namespace CedServicios.Site
 
         protected void PaisDestinoExpDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            System.Collections.Generic.List<Entidades.Cliente> listacompradores;
+            System.Collections.Generic.List<Entidades.Persona> listacompradores;
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
             if (PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
             {
-                listacompradores = RN.Cliente.ListaSinExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
+                listacompradores = RN.Persona.ListaSinExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
                 Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                 Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
                 Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;

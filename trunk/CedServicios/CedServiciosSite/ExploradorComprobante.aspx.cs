@@ -36,8 +36,8 @@ namespace CedServicios.Site
                         FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                         FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                     }
-                    ViewState["Clientes"] = RN.Cliente.ListaPorCuit(false, true, sesion);
-                    ClienteDropDownList.DataSource = (List<Entidades.Cliente>)ViewState["Clientes"];
+                    ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, sesion);
+                    ClienteDropDownList.DataSource = (List<Entidades.Persona>)ViewState["Personas"];
                     DataBind();
                     if (ClienteDropDownList.Items.Count > 0)
                     {
@@ -216,16 +216,16 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
                 MensajeLabel.Text = String.Empty;
-                Entidades.Cliente cliente;
+                Entidades.Persona persona;
                 if (ClienteDropDownList.SelectedIndex >= 0)
                 {
-                    cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
+                    persona = ((List<Entidades.Persona>)ViewState["Personas"])[ClienteDropDownList.SelectedIndex];
                 }
                 else
                 {
-                    cliente = new Entidades.Cliente();
+                    persona = new Entidades.Persona();
                 }
-                lista = RN.Comprobante.ListaFiltrada(SoloVigentesCheckBox.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, cliente, sesion);
+                lista = RN.Comprobante.ListaFiltrada(SoloVigentesCheckBox.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, sesion);
                 if (lista.Count == 0)
                 {
                     ComprobantesGridView.DataSource = null;
@@ -474,9 +474,6 @@ namespace CedServicios.Site
                         return;
                     }
                     MensajeLabel.Text = String.Empty;
-                    //Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
-                    //resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
-
                     cecd.cuit_canal = Convert.ToInt64("30690783521");
                     cecd.cuit_vendedor = Convert.ToInt64(comprobante.Cuit);
                     cecd.punto_de_venta = Convert.ToInt32(comprobante.NroPuntoVta);
@@ -781,7 +778,7 @@ namespace CedServicios.Site
                         return;
                     }
                     MensajeLabel.Text = String.Empty;
-                    Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
+                    Entidades.Persona persona = ((List<Entidades.Persona>)ViewState["Personas"])[ClienteDropDownList.SelectedIndex];
                     //resp = RN.Comprobante.ComprobanteDetalleIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, comprobante.NroPuntoVta.ToString(), comprobante.TipoComprobante.Id.ToString(), comprobante.Nro, 0, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
 
                     cecd.cuit_canal = Convert.ToInt64("30690783521");

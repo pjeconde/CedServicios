@@ -8,9 +8,9 @@ using System.Drawing;
 
 namespace CedServicios.Site
 {
-    public partial class ExploradorCliente : System.Web.UI.Page
+    public partial class ExploradorPersona : System.Web.UI.Page
     {
-        List<Entidades.Cliente> cliente = new List<Entidades.Cliente>();
+        List<Entidades.Persona> persona = new List<Entidades.Persona>();
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -36,9 +36,9 @@ namespace CedServicios.Site
             {
                 DesSeleccionarFilas();
                 ClientePagingGridView.PageIndex = e.NewPageIndex;
-                List<Entidades.Cliente> lista;
+                List<Entidades.Persona> lista;
                 int CantidadFilas = 0;
-                lista = RN.Cliente.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.Persona.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ClientePagingGridView.VirtualItemCount = CantidadFilas;
                 ClientePagingGridView.PageSize = ((Entidades.Sesion)Session["Sesion"]).Usuario.CantidadFilasXPagina;
                 ViewState["lista"] = lista;
@@ -60,11 +60,11 @@ namespace CedServicios.Site
             try
             {
                 DesSeleccionarFilas();
-                List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
+                List<Entidades.Persona> lista = new List<Entidades.Persona>();
                 int CantidadFilas = 0;
-                lista = RN.Cliente.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.Persona.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ViewState["lista"] = lista;
-                ClientePagingGridView.DataSource = (List<Entidades.Cliente>)ViewState["lista"];
+                ClientePagingGridView.DataSource = (List<Entidades.Persona>)ViewState["lista"];
                 ClientePagingGridView.DataBind();
             }
             catch (System.Threading.ThreadAbortException)
@@ -104,12 +104,12 @@ namespace CedServicios.Site
 
         protected void ClientePagingGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            Entidades.Cliente cliente = new Entidades.Cliente();
+            Entidades.Persona persona = new Entidades.Persona();
             try
             {
                 int item = Convert.ToInt32(e.CommandArgument);
-                List<Entidades.Cliente> lista = (List<Entidades.Cliente>)ViewState["lista"];
-                cliente = lista[item];
+                List<Entidades.Persona> lista = (List<Entidades.Persona>)ViewState["lista"];
+                persona = lista[item];
             }
             catch
             {
@@ -118,21 +118,19 @@ namespace CedServicios.Site
             switch (e.CommandName)
             {
                 case "Detalle":
-                    //Session["Cliente"] = uliente;
-                    //Response.Redirect("~/UsuarioConsultaDetallada.aspx");
                     TituloConfirmacionLabel.Text = "Consulta detallada";
                     CancelarButton.Text = "Salir";
-                    CUITLabel.Text = cliente.Cuit;
-                    TipoDocLabel.Text = cliente.DocumentoIdTipoDoc;
-                    NroDocLabel.Text = cliente.DocumentoNro.ToString();
-                    RazSocLabel.Text = cliente.RazonSocial;
-                    CalleLabel.Text = cliente.Domicilio.Calle;
-                    NroLabel.Text = cliente.Domicilio.Nro;
-                    PisoLabel.Text = cliente.Domicilio.Piso;
-                    DeptoLabel.Text = cliente.Domicilio.Depto;
-                    LocalidadLabel.Text = cliente.Domicilio.Localidad;
-                    CodPostLabel.Text = cliente.Domicilio.CodPost;
-                    EstadoLabel.Text = cliente.Estado;
+                    CUITLabel.Text = persona.Cuit;
+                    TipoDocLabel.Text = persona.DocumentoIdTipoDoc;
+                    NroDocLabel.Text = persona.DocumentoNro.ToString();
+                    RazSocLabel.Text = persona.RazonSocial;
+                    CalleLabel.Text = persona.Domicilio.Calle;
+                    NroLabel.Text = persona.Domicilio.Nro;
+                    PisoLabel.Text = persona.Domicilio.Piso;
+                    DeptoLabel.Text = persona.Domicilio.Depto;
+                    LocalidadLabel.Text = persona.Domicilio.Localidad;
+                    CodPostLabel.Text = persona.Domicilio.CodPost;
+                    EstadoLabel.Text = persona.Estado;
                     ModalPopupExtender1.Show();
                     break;
             }
@@ -179,17 +177,17 @@ namespace CedServicios.Site
             else
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                List<Entidades.Cliente> lista = new List<Entidades.Cliente>();
+                List<Entidades.Persona> lista = new List<Entidades.Persona>();
                 MensajeLabel.Text = String.Empty;
                 int CantidadFilas = 0;
-                lista = RN.Cliente.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.Persona.ListaPaging(out CantidadFilas, ClientePagingGridView.PageIndex, ClientePagingGridView.OrderBy, CUITTextBox.Text, RazSocTextBox.Text, NroDocTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ClientePagingGridView.VirtualItemCount = CantidadFilas;
                 ClientePagingGridView.PageSize = sesion.Usuario.CantidadFilasXPagina;
                 if (lista.Count == 0)
                 {
                     ClientePagingGridView.DataSource = null;
                     ClientePagingGridView.DataBind();
-                    MensajeLabel.Text = "No se han encontrado Clientes que satisfagan la busqueda";
+                    MensajeLabel.Text = "No se han encontrado Personas que satisfagan la busqueda";
                 }
                 else
                 {

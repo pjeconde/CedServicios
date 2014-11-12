@@ -105,11 +105,11 @@
     <Content Include="Ayuda\Novedades\images20130906\image20.png" />
     <Content Include="Ayuda\Novedades\images20130906\image21.png" />
     <Content Include="CedeiraSF-Logo.gif" />
-    <Content Include="ClienteBaja.aspx" />
-    <Content Include="ClienteConsulta.aspx" />
-    <Content Include="ClienteCrear.aspx" />
-    <Content Include="ClienteModificar.aspx" />
-    <Content Include="ClienteSeleccionar.aspx" />
+    <Content Include="PersonaBaja.aspx" />
+    <Content Include="PersonaConsulta.aspx" />
+    <Content Include="PersonaCrear.aspx" />
+    <Content Include="PersonaModificar.aspx" />
+    <Content Include="PersonaSeleccionar.aspx" />
     <Content Include="ComprobanteConsulta.aspx" />
     <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
     <Content Include="ComprobanteSeleccionOnlineAFIP.aspx" />
@@ -133,7 +133,7 @@
     <Content Include="ExploradorUN.aspx" />
     <Content Include="ExploradorPuntoVta.aspx" />
     <Content Include="ExploradorCuit.aspx" />
-    <Content Include="ExploradorCliente.aspx" />
+    <Content Include="ExploradorPersona.aspx" />
     <Content Include="ComprobanteSeleccionOnlineInterfacturas.aspx" />
     <Content Include="ExploradorComprobanteGlobal.aspx" />
     <Content Include="ExploradorUsuario.aspx" />
@@ -439,40 +439,40 @@
     <Compile Include="CedServiciosAyuda.master.designer.cs">
       <DependentUpon>CedServiciosAyuda.master</DependentUpon>
     </Compile>
-    <Compile Include="ClienteBaja.aspx.cs">
-      <DependentUpon>ClienteBaja.aspx</DependentUpon>
+    <Compile Include="PersonaBaja.aspx.cs">
+      <DependentUpon>PersonaBaja.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClienteBaja.aspx.designer.cs">
-      <DependentUpon>ClienteBaja.aspx</DependentUpon>
+    <Compile Include="PersonaBaja.aspx.designer.cs">
+      <DependentUpon>PersonaBaja.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClienteConsulta.aspx.cs">
-      <DependentUpon>ClienteConsulta.aspx</DependentUpon>
+    <Compile Include="PersonaConsulta.aspx.cs">
+      <DependentUpon>PersonaConsulta.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClienteConsulta.aspx.designer.cs">
-      <DependentUpon>ClienteConsulta.aspx</DependentUpon>
+    <Compile Include="PersonaConsulta.aspx.designer.cs">
+      <DependentUpon>PersonaConsulta.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClienteCrear.aspx.cs">
-      <DependentUpon>ClienteCrear.aspx</DependentUpon>
+    <Compile Include="PersonaCrear.aspx.cs">
+      <DependentUpon>PersonaCrear.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClienteCrear.aspx.designer.cs">
-      <DependentUpon>ClienteCrear.aspx</DependentUpon>
+    <Compile Include="PersonaCrear.aspx.designer.cs">
+      <DependentUpon>PersonaCrear.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClienteModificar.aspx.cs">
-      <DependentUpon>ClienteModificar.aspx</DependentUpon>
+    <Compile Include="PersonaModificar.aspx.cs">
+      <DependentUpon>PersonaModificar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClienteModificar.aspx.designer.cs">
-      <DependentUpon>ClienteModificar.aspx</DependentUpon>
+    <Compile Include="PersonaModificar.aspx.designer.cs">
+      <DependentUpon>PersonaModificar.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ClienteSeleccionar.aspx.cs">
-      <DependentUpon>ClienteSeleccionar.aspx</DependentUpon>
+    <Compile Include="PersonaSeleccionar.aspx.cs">
+      <DependentUpon>PersonaSeleccionar.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ClienteSeleccionar.aspx.designer.cs">
-      <DependentUpon>ClienteSeleccionar.aspx</DependentUpon>
+    <Compile Include="PersonaSeleccionar.aspx.designer.cs">
+      <DependentUpon>PersonaSeleccionar.aspx</DependentUpon>
     </Compile>
     <Compile Include="ComprobanteConsulta.aspx.cs">
       <DependentUpon>ComprobanteConsulta.aspx</DependentUpon>
@@ -572,12 +572,12 @@
     <Compile Include="ExploradorCuit.aspx.designer.cs">
       <DependentUpon>ExploradorCuit.aspx</DependentUpon>
     </Compile>
-    <Compile Include="ExploradorCliente.aspx.cs">
-      <DependentUpon>ExploradorCliente.aspx</DependentUpon>
+    <Compile Include="ExploradorPersona.aspx.cs">
+      <DependentUpon>ExploradorPersona.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="ExploradorCliente.aspx.designer.cs">
-      <DependentUpon>ExploradorCliente.aspx</DependentUpon>
+    <Compile Include="ExploradorPersona.aspx.designer.cs">
+      <DependentUpon>ExploradorPersona.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorComprobanteGlobal.aspx.cs">
       <DependentUpon>ExploradorComprobanteGlobal.aspx</DependentUpon>

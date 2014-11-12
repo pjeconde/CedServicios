@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ClienteSeleccionar.aspx.cs" Inherits="CedServicios.Site.ClienteSeleccionar" Theme="CedServicios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="PersonaSeleccionar.aspx.cs" Inherits="CedServicios.Site.PersonaSeleccionar" Theme="CedServicios" %>
 <%@ Register assembly="AjaxControlToolkit" namespace="AjaxControlToolkit" tagprefix="cc1" %>
 <%@ Register TagPrefix="uc1" TagName="domicilio" Src="~/Controles/Domicilio.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="contacto" Src="~/Controles/Contacto.ascx" %>
@@ -10,12 +10,12 @@
         <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
             <tr>
                 <td align="center" colspan="3" style="padding-top:20px">
-                    <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="? de Cliente"></asp:Label>
+                    <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="? de Persona"></asp:Label>
                 </td>
             </tr>
             <tr>
                 <td align="right" style="padding-right:5px; padding-top: 20px">
-                    <asp:Label ID="Label3" runat="server" Text="Cliente(s) perteneciente(s) al CUIT"></asp:Label>
+                    <asp:Label ID="Label3" runat="server" Text="Persona(s) perteneciente(s) al CUIT"></asp:Label>
                 </td>
                 <td align="left" style="padding-top:20px">
                     <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
@@ -46,10 +46,10 @@
             </tr>
             <tr>
                 <td align="left" style="padding-right:5px; padding-top:5px">
-                    <asp:RadioButton ID="IdClienteRadioButton" runat="server" AutoPostBack="true" Text="Id.Cliente" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="3"/>
+                    <asp:RadioButton ID="IdClienteRadioButton" runat="server" AutoPostBack="true" Text="Id.Persona" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="3"/>
                 </td>
                 <td align="left" style="padding-top:5px">
-                    <asp:TextBox ID="IdClienteTextBox" runat="server" MaxLength="50" TabIndex="7" Width="300px"></asp:TextBox>
+                    <asp:TextBox ID="IdPersonaTextBox" runat="server" MaxLength="50" TabIndex="7" Width="300px"></asp:TextBox>
                 </td>        
                 <td>
                 </td>
@@ -70,7 +70,7 @@
                         <asp:GridView ID="ClientesGridView" runat="server" 
                             AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand" OnRowDataBound="ClientesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                             <Columns>
-                                <asp:ButtonField HeaderText="Cliente" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue" ItemStyle-Width="90px">
+                                <asp:ButtonField HeaderText="Persona" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue" ItemStyle-Width="90px">
                                 </asp:ButtonField>
                                 <asp:BoundField DataField="Cuit" HeaderText="Cuit" SortExpression="Cuit" Visible="false">
                                     <headerstyle horizontalalign="center" wrap="False" />
@@ -88,7 +88,7 @@
                                     <headerstyle horizontalalign="center" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="IdCliente" HeaderText="Id.Cliente" SortExpression="IdCliente">
+                                <asp:BoundField DataField="IdCliente" HeaderText="Id.Persona" SortExpression="IdPersona">
                                     <headerstyle horizontalalign="left" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>

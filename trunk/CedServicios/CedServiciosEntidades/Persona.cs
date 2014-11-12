@@ -6,11 +6,11 @@ using System.Text;
 namespace CedServicios.Entidades
 {
     [Serializable]
-    public class Cliente
+    public class Persona
     {
         private string cuit;
         private Documento documento;
-        private string idCliente;
+        private string idPersona;
         private int desambiguacionCuitPais;
         private string razonSocial;
         private Domicilio domicilio;
@@ -22,8 +22,10 @@ namespace CedServicios.Entidades
         private WF wF;
         private string ultActualiz;
         private int orden;
+        private bool esCliente;
+        private bool esProveedor;
 
-        public Cliente()
+        public Persona()
         {
             documento = new Documento();
             domicilio = new Domicilio();
@@ -55,15 +57,15 @@ namespace CedServicios.Entidades
                 return documento;
             }
         }
-        public string IdCliente
+        public string IdPersona
         {
             set
             {
-                idCliente = value;
+                idPersona = value;
             }
             get
             {
-                return idCliente;
+                return idPersona;
             }
         }
         public int DesambiguacionCuitPais
@@ -187,6 +189,28 @@ namespace CedServicios.Entidades
                 return orden;
             }
         }
+        public bool EsCliente
+        {
+            set
+            {
+                esCliente = value;
+            }
+            get
+            {
+                return esCliente;
+            }
+        }
+        public bool EsProveedor
+        {
+            set
+            {
+                esProveedor = value;
+            }
+            get
+            {
+                return esProveedor;
+            }
+        }
         #region Propiedades redundantes
         public string DocumentoIdTipoDoc
         {
@@ -277,6 +301,14 @@ namespace CedServicios.Entidades
             get
             {
                 return Contacto.Telefono;
+            }
+        }
+        public string DescrTipoPersona
+        {
+            get
+            {
+                if (esCliente && esProveedor) return "Cliente y proveedor";
+                else if (esCliente) return "Cliente"; else return "Proveedor";
             }
         }
         #endregion

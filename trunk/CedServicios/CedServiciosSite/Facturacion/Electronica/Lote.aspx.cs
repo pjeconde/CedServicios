@@ -148,18 +148,18 @@ namespace CedServicios.Site.Facturacion.Electronica
                         Codigo_Interno_VendedorTextBox.Text = v.DatosIdentificatorios.CodigoInterno;
                         InicioDeActividadesVendedorDatePickerWebUserControl.Text = v.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd");
                     }
-                    System.Collections.Generic.List<Entidades.Cliente> listacompradores = ((Entidades.Sesion)Session["Sesion"]).ClientesDelCuit;
+                    System.Collections.Generic.List<Entidades.Persona> listacompradores = ((Entidades.Sesion)Session["Sesion"]).ClientesDelCuit;
                     if (listacompradores.Count > 0)
                     {
                         CompradorDropDownList.Visible = true;
                         CompradorDropDownList.DataValueField = "RazonSocial";
                         CompradorDropDownList.DataTextField = "RazonSocial";
-                        Entidades.Cliente cliente = new Entidades.Cliente();
-                        System.Collections.Generic.List<Entidades.Cliente> clientelist = new System.Collections.Generic.List<Entidades.Cliente>();
-                        cliente.RazonSocial = "";
-                        clientelist.Add(cliente);
-                        clientelist.AddRange(listacompradores);
-                        CompradorDropDownList.DataSource = clientelist;
+                        Entidades.Persona persona = new Entidades.Persona();
+                        System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
+                        persona.RazonSocial = "";
+                        personalist.Add(persona);
+                        personalist.AddRange(listacompradores);
+                        CompradorDropDownList.DataSource = personalist;
                         CompradorDropDownList.DataBind();
                     }
                     else
@@ -1356,7 +1356,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
         private void AjustarComprador()
         {
-            Entidades.Cliente comprador = new Entidades.Cliente();
+            Entidades.Persona comprador = new Entidades.Persona();
             //comprador.IdCliente = ((Entidades.Sesion)Session["Sesion"]).Usuario.Id;
             //comprador.RazonSocial = Convert.ToString(CompradorDropDownList.SelectedItem.Text);
             comprador.RazonSocial = Convert.ToString(CompradorDropDownList.SelectedValue);
@@ -1369,7 +1369,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    RN.Cliente.Leer(comprador, (Entidades.Sesion)Session["Sesion"]);
+                    RN.Persona.Leer(comprador, (Entidades.Sesion)Session["Sesion"]);
                     Denominacion_CompradorTextBox.Text = comprador.RazonSocial;
                     Domicilio_Calle_CompradorTextBox.Text = comprador.Domicilio.Calle;
                     Domicilio_Numero_CompradorTextBox.Text = comprador.Domicilio.Nro;
@@ -1734,7 +1734,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
                         Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
                         Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-                        System.Collections.Generic.List<Entidades.Cliente> listacompradores = new System.Collections.Generic.List<Entidades.Cliente>();
+                        System.Collections.Generic.List<Entidades.Persona> listacompradores = new System.Collections.Generic.List<Entidades.Persona>();
                         switch (idtipo)
                         {
                             case "Comun":
@@ -1764,12 +1764,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                             CompradorDropDownList.Visible = true;
                             CompradorDropDownList.DataValueField = "RazonSocial";
                             CompradorDropDownList.DataTextField = "RazonSocial";
-                            Entidades.Cliente cliente = new Entidades.Cliente();
-                            System.Collections.Generic.List<Entidades.Cliente> clientelist = new System.Collections.Generic.List<Entidades.Cliente>();
-                            cliente.RazonSocial = "";
-                            clientelist.Add(cliente);
-                            clientelist.AddRange(listacompradores);
-                            CompradorDropDownList.DataSource = clientelist;
+                            Entidades.Persona persona = new Entidades.Persona();
+                            System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
+                            persona.RazonSocial = "";
+                            personalist.Add(persona);
+                            personalist.AddRange(listacompradores);
+                            CompradorDropDownList.DataSource = personalist;
                             CompradorDropDownList.DataBind();
                             CompradorDropDownList.SelectedIndex = 0;
                             AjustarComprador();
@@ -1793,7 +1793,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void AjustarCamposXPtaVentaExport(out System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        private void AjustarCamposXPtaVentaExport(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
         {
             Presta_ServCheckBox.Checked = false;
             Presta_ServCheckBox.Enabled = false;
@@ -1827,12 +1827,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
             if (Funciones.SessionTimeOut(Session))
             {
-                listacompradores = new List<Entidades.Cliente>();
+                listacompradores = new List<Entidades.Persona>();
                 Response.Redirect("~/SessionTimeout.aspx");
             }
             else
             {
-                listacompradores = RN.Cliente.ListaExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
+                listacompradores = RN.Persona.ListaExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
                 TipoExpDropDownList.Enabled = true;
                 PaisDestinoExpDropDownList.Enabled = true;
                 IdiomaDropDownList.Enabled = true;
@@ -1842,7 +1842,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void AjustarCamposXPtaVentaBonoFiscal(out System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        private void AjustarCamposXPtaVentaBonoFiscal(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
         {
             Presta_ServCheckBox.Checked = false;
             Presta_ServCheckBox.Enabled = false;
@@ -1869,12 +1869,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
             if (Funciones.SessionTimeOut(Session))
             {
-                listacompradores = new List<Entidades.Cliente>();
+                listacompradores = new List<Entidades.Persona>();
                 Response.Redirect("~/SessionTimeout.aspx");
             }
             else
             {
-                listacompradores = RN.Cliente.ListaSinExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
+                listacompradores = RN.Persona.ListaSinExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
                 TipoExpDropDownList.SelectedIndex = -1;
                 TipoExpDropDownList.Enabled = false;
                 PaisDestinoExpDropDownList.SelectedIndex = -1;
@@ -1888,14 +1888,14 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void AjustarCamposXPtaVentaComun(out System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        private void AjustarCamposXPtaVentaComun(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
         {
             //Presta_ServCheckBox.Enabled = true;
             HacerVisiblesV0V1();
             AjustarCamposXPtaVtaComunYRG2904(out listacompradores);
         }
 
-        private void AjustarCamposXPtaVentaRG2904(out System.Collections.Generic.List<Entidades.Cliente> listacompradores, string tipoComprobante)
+        private void AjustarCamposXPtaVentaRG2904(out System.Collections.Generic.List<Entidades.Persona> listacompradores, string tipoComprobante)
         {
             Presta_ServCheckBox.Enabled = true;
             AjustarCamposXPtaVtaComunYRG2904(out listacompradores);
@@ -1916,7 +1916,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void AjustarCamposXPtaVtaComunYRG2904(out System.Collections.Generic.List<Entidades.Cliente> listacompradores)
+        private void AjustarCamposXPtaVtaComunYRG2904(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
         {
             AjustarPrestaServxVersiones();
 
@@ -1940,12 +1940,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
             if (Funciones.SessionTimeOut(Session))
             {
-                listacompradores = new List<Entidades.Cliente>();
+                listacompradores = new List<Entidades.Persona>();
                 Response.Redirect("~/SessionTimeout.aspx");
             }
             else
             {
-                listacompradores = RN.Cliente.ListaSinExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
+                listacompradores = RN.Persona.ListaSinExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
                 TipoExpDropDownList.SelectedIndex = -1;
                 TipoExpDropDownList.Enabled = false;
                 PaisDestinoExpDropDownList.SelectedIndex = -1;
@@ -2000,18 +2000,18 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                System.Collections.Generic.List<Entidades.Cliente> listacompradores = RN.Cliente.ListaPorCuit(true, ((Entidades.Sesion)Session["Sesion"]));
+                System.Collections.Generic.List<Entidades.Persona> listacompradores = RN.Persona.ListaPorCuit(true, ((Entidades.Sesion)Session["Sesion"]));
                 if (listacompradores.Count > 0)
                 {
                     CompradorDropDownList.Visible = true;
                     CompradorDropDownList.DataValueField = "RazonSocial";
                     CompradorDropDownList.DataTextField = "RazonSocial";
-                    Entidades.Cliente cliente = new Entidades.Cliente();
-                    System.Collections.Generic.List<Entidades.Cliente> clientelist = new System.Collections.Generic.List<Entidades.Cliente>();
-                    cliente.RazonSocial = "";
-                    clientelist.Add(cliente);
-                    clientelist.AddRange(listacompradores);
-                    CompradorDropDownList.DataSource = clientelist;
+                    Entidades.Persona persona = new Entidades.Persona();
+                    System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
+                    persona.RazonSocial = "";
+                    personalist.Add(persona);
+                    personalist.AddRange(listacompradores);
+                    CompradorDropDownList.DataSource = personalist;
                     CompradorDropDownList.DataBind();
                     CompradorDropDownList.SelectedIndex = 0;
                     AjustarComprador();
@@ -4550,7 +4550,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 return;
             }
-            System.Collections.Generic.List<Entidades.Cliente> listacompradores = new List<Entidades.Cliente>();
+            System.Collections.Generic.List<Entidades.Persona> listacompradores = new List<Entidades.Persona>();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
             if (PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
@@ -4561,7 +4561,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    listacompradores = RN.Cliente.ListaSinExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
+                    listacompradores = RN.Persona.ListaSinExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
                     Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                     Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
                     Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;
@@ -4578,7 +4578,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     else
                     {
-                        listacompradores = RN.Cliente.ListaExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
+                        listacompradores = RN.Persona.ListaExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
                         Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
                         Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
                         Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
@@ -4597,7 +4597,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     else
                     {
-                        listacompradores = RN.Cliente.ListaPorCuit(true, ((Entidades.Sesion)Session["Sesion"]));
+                        listacompradores = RN.Persona.ListaPorCuit(true, ((Entidades.Sesion)Session["Sesion"]));
                         Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                         Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
                         Nro_Doc_Identificatorio_CompradorTextBox.Text = string.Empty;
@@ -4613,7 +4613,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    listacompradores = RN.Cliente.ListaExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
+                    listacompradores = RN.Persona.ListaExportacion(((Entidades.Sesion)Session["Sesion"]).Usuario, ((Entidades.Sesion)Session["Sesion"]), true);
                     Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
                     Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
                     Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
@@ -4626,12 +4626,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             CompradorDropDownList.DataValueField = "RazonSocial";
             CompradorDropDownList.DataTextField = "RazonSocial";
-            Entidades.Cliente cliente = new Entidades.Cliente();
-            System.Collections.Generic.List<Entidades.Cliente> clientelist = new System.Collections.Generic.List<Entidades.Cliente>();
-            cliente.RazonSocial = "";
-            clientelist.Add(cliente);
-            clientelist.AddRange(listacompradores);
-            CompradorDropDownList.DataSource = clientelist;
+            Entidades.Persona persona = new Entidades.Persona();
+            System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
+            persona.RazonSocial = "";
+            personalist.Add(persona);
+            personalist.AddRange(listacompradores);
+            CompradorDropDownList.DataSource = personalist;
             CompradorDropDownList.DataBind();
             CompradorDropDownList.SelectedIndex = 0;
             if (CompradorDropDownList.Items.Count > 1)

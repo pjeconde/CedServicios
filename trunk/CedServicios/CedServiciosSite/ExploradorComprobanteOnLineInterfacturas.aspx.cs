@@ -33,8 +33,8 @@ namespace CedServicios.Site
                         FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                         FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                     }
-                    ViewState["Clientes"] = RN.Cliente.ListaPorCuit(false, true, sesion);
-                    ClienteDropDownList.DataSource = (List<Entidades.Cliente>)ViewState["Clientes"];
+                    ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, sesion);
+                    ClienteDropDownList.DataSource = (List<Entidades.Persona>)ViewState["Personas"];
                     DataBind();
                     ClienteDropDownList.SelectedValue = "0";
                 }
@@ -147,19 +147,17 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> lista = new List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>();
                 MensajeLabel.Text = String.Empty;
-                Entidades.Cliente cliente = ((List<Entidades.Cliente>)ViewState["Clientes"])[ClienteDropDownList.SelectedIndex];
-                //string resp = RN.Comprobante.ComprobantesListadoIBK(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, cliente.DocumentoIdTipoDoc, cliente.DocumentoNro, ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF);
-
+                Entidades.Persona persona = ((List<Entidades.Persona>)ViewState["Personas"])[ClienteDropDownList.SelectedIndex];
                 org.dyndns.cedweb.listado.cecl cecl = new org.dyndns.cedweb.listado.cecl();
                 cecl.cuit_canal = Convert.ToInt64("30690783521");
                 cecl.cuit_vendedor = Convert.ToInt64(sesion.Cuit.Nro);
                 cecl.fecha_emision_desde = FechaDesdeTextBox.Text;
                 cecl.fecha_emision_hasta = FechaHastaTextBox.Text;
-                if (cliente.DocumentoIdTipoDoc != null && cliente.DocumentoIdTipoDoc != "")
+                if (persona.DocumentoIdTipoDoc != null && persona.DocumentoIdTipoDoc != "")
                 {
-                    cecl.tipo_doc_comprador = Convert.ToInt32(cliente.DocumentoIdTipoDoc);
+                    cecl.tipo_doc_comprador = Convert.ToInt32(persona.DocumentoIdTipoDoc);
                     cecl.tipo_doc_compradorSpecified = true;
-                    cecl.doc_comprador = cliente.DocumentoNro;
+                    cecl.doc_comprador = persona.DocumentoNro;
                     cecl.doc_compradorSpecified = true;
                 }
                 else

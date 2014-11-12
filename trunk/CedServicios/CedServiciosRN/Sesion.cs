@@ -14,7 +14,8 @@ namespace CedServicios.RN
             Sesion.Cuit = new Entidades.Cuit();
             Sesion.UN = new Entidades.UN();
             Sesion.CuitsDelUsuario = new List<Entidades.Cuit>();
-            Sesion.ClientesDelCuit = new List<Entidades.Cliente>();
+            Sesion.ClientesDelCuit = new List<Entidades.Persona>();
+            Sesion.ProveedoresDelCuit = new List<Entidades.Persona>();
             Sesion.OpcionesHabilitadas = OpcionesHabilitadas(Sesion);
         }
         public static List<string> OpcionesHabilitadas(Entidades.Sesion Sesion)
@@ -45,7 +46,7 @@ namespace CedServicios.RN
                     opcionesHabilitadas.Add("Administración Site|Explorador de CUITs");
                     opcionesHabilitadas.Add("Administración Site|Explorador de UNs");
                     opcionesHabilitadas.Add("Administración Site|Explorador de Puntos de Venta");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de Clientes");
+                    opcionesHabilitadas.Add("Administración Site|Explorador de Personas");
                     opcionesHabilitadas.Add("Administración Site|Explorador de Artículos");
                     opcionesHabilitadas.Add("Administración Site|Explorador de Permisos");
                     opcionesHabilitadas.Add("Administración Site|Explorador de Configuraciones");
@@ -57,10 +58,10 @@ namespace CedServicios.RN
                 {
                     opcionesHabilitadas.Add("Administración|CUIT|Consulta");
                     opcionesHabilitadas.Add("Administración|Unidad de Negocio|Consulta");
-                    opcionesHabilitadas.Add("Clientes|Alta");
-                    opcionesHabilitadas.Add("Clientes|Baja/Anul.baja");
-                    opcionesHabilitadas.Add("Clientes|Modificación");
-                    opcionesHabilitadas.Add("Clientes|Consulta");
+                    opcionesHabilitadas.Add("Personas(clientes/proveedores)|Alta");
+                    opcionesHabilitadas.Add("Personas(clientes/proveedores)|Baja/Anul.baja");
+                    opcionesHabilitadas.Add("Personas(clientes/proveedores)|Modificación");
+                    opcionesHabilitadas.Add("Personas(clientes/proveedores)|Consulta");
                     
                     List<Entidades.Permiso> esAdminCUITdeCUITseleccionado = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
@@ -196,7 +197,7 @@ namespace CedServicios.RN
         {
             Sesion.Cuit = Cuit;
             Sesion.Cuit.UNs = RN.UN.ListaPorCuitParaElUsuarioLogueado(Sesion);
-            Sesion.ClientesDelCuit = RN.Cliente.ListaPorCuit(false, Sesion);
+            Sesion.ClientesDelCuit = RN.Persona.ListaPorCuit(false, Sesion);
             List<Entidades.UN> estaLaUNEnLaLista = new List<Entidades.UN>();
             if (Sesion.Cuit.UNs.Count != 0)
             {
@@ -249,7 +250,8 @@ namespace CedServicios.RN
         public static void BorrarCuit(Entidades.Sesion Sesion)
         {
             Sesion.Cuit = new Entidades.Cuit();
-            Sesion.ClientesDelCuit = new List<Entidades.Cliente>();
+            Sesion.ClientesDelCuit = new List<Entidades.Persona>();
+            Sesion.ProveedoresDelCuit = new List<Entidades.Persona>();
             BorrarUN(Sesion);
         }
         public static void BorrarUN(Entidades.Sesion Sesion)

@@ -326,7 +326,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                                 </td>
                                                                                 <td class="TC10S">
                                                                                     <asp:TextBox ID="Codigo_Interno_VendedorTextBox" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                                        ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Cod. de cliente, Proveedor, etc.)">
+                                                                                        ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Código de Cliente, Proveedor, etc.)">
                                                                                     </asp:TextBox>
                                                                                 </td>
                                                                             </tr>
@@ -772,7 +772,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                             </td>
                                                                             <td class="TC10S">
                                                                                 <asp:TextBox ID="Codigo_Interno_CompradorTextBox" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                                    ToolTip="<Opcional> Código utilizado para identificar al comprador dentro de una empresa/organización. (Ej. Cod. de cliente, Proveedor, etc.)">
+                                                                                    ToolTip="<Opcional> Código utilizado para identificar al comprador dentro de una empresa/organización. (Ej. Código de Cliente, Proveedor, etc.)">
                                                                                 </asp:TextBox>
                                                                             </td>
                                                                         </tr>
