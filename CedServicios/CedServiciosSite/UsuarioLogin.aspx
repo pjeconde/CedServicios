@@ -54,68 +54,89 @@
                 </asp:Panel>
             </td>
             <td valign="top">
-                <asp:Panel ID="Panel1" runat="server" DefaultButton="LoginButton" BorderStyle="Solid" BorderWidth="1" BorderColor="#cccccc">
-                    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; padding-right:20px;">
-                        <tr>
-                            <td align="center" colspan="3" style="padding-top:20px">
-                                <asp:Label ID="Label6" runat="server" SkinID="TituloPagina" Text="Iniciar sesión"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right" class="TextoInicioMediano" style="padding-right: 10px; padding-top:20px">
-                                Id.Usuario
-                            </td>
-                            <td align="left" style="width: 100px; padding-top:20px">
-                                <asp:TextBox ID="UsuarioTextBox" runat="server" MaxLength="50" OnTextChanged="UsuarioTextBox_TextChanged"
-                                    TabIndex="1" Width="114px"></asp:TextBox>
-                            </td>
-                            <td align="left" rowspan="2" style="padding-right: 10px; padding-top:20px">
-                                <asp:Button ID="LoginButton" runat="server" OnClick="LoginButton_Click" TabIndex="3" Text="Iniciar" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right" class="TextoInicioMediano" style="padding-right: 10px; padding-top:5px">
-                                Contraseña
-                            </td>
-                            <td align="left" style="width: 100px; padding-right: 10px; padding-top:5px">
-                                <asp:TextBox ID="PasswordTextBox" runat="server" OnTextChanged="PasswordTextBox_TextChanged"
-                                    TabIndex="2" TextMode="Password" Width="114px"></asp:TextBox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="3" style="padding-top:20px;">
-                                <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text="&nbsp;"></asp:Label>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="3" style="padding-top:20px">
-                                <asp:HyperLink ID="CuentaCrearHyperLink" runat="server" NavigateUrl="~/UsuarioCrear.aspx" SkinID="LinkMedianoClaro">Crear una nueva cuenta</asp:HyperLink>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="3" style="padding-top:5px; padding-bottom:0px">
-                                <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/UsuarioOlvidoId.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Id.Usuario?</asp:HyperLink>
-                                <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/UsuarioOlvidoPassword.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Contraseña?</asp:HyperLink>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3">
-                                <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; padding-right:20px; padding-top:20px; width: 300px;"> <%--; background-image: url('Imagenes/Factura-UsuarioDemo.png'); background-repeat: no-repeat--%>
+                <table border="0" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td>
+                            <asp:Panel ID="Panel1" runat="server" DefaultButton="LoginButton" BorderStyle="Solid" BorderWidth="1" BorderColor="#cccccc">
+                                <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; padding-right:20px;">
                                     <tr>
-                                        <td align="center" colspan="3" style="padding-top:10px;">
-                                            <asp:Label ID="Label2" Width="200px" runat="server" SkinID="TituloMedianoC" Text="Para ingresar en la modalidad DEMO"></asp:Label>
+                                        <td align="center" colspan="3" style="padding-top:20px">
+                                            <asp:Label ID="Label6" runat="server" SkinID="TituloPagina" Text="Iniciar sesión"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td align="center" colspan="3" style="padding-top:10px; padding-bottom:40px">
-                                            <asp:Button ID="LoginUsuarioDEMOButton" runat="server" OnClick="LoginUsuarioDEMOButton_Click" TabIndex="3" Text="Haga Clic Aqui" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                                        <td align="right" class="TextoInicioMediano" style="padding-right: 10px; padding-top:20px">
+                                            Id.Usuario
+                                        </td>
+                                        <td align="left" style="width: 100px; padding-top:20px">
+                                            <asp:TextBox ID="UsuarioTextBox" runat="server" MaxLength="50" OnTextChanged="UsuarioTextBox_TextChanged"
+                                                TabIndex="1" Width="114px"></asp:TextBox>
+                                        </td>
+                                        <td align="left" rowspan="2" style="padding-right: 10px; padding-top:20px">
+                                            <asp:Button ID="LoginButton" runat="server" OnClick="LoginButton_Click" TabIndex="3" Text="Iniciar" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="right" class="TextoInicioMediano" style="padding-right: 10px; padding-top:5px">
+                                            Contraseña
+                                        </td>
+                                        <td align="left" style="width: 100px; padding-right: 10px; padding-top:5px">
+                                            <asp:TextBox ID="PasswordTextBox" runat="server" OnTextChanged="PasswordTextBox_TextChanged"
+                                                TabIndex="2" TextMode="Password" Width="114px"></asp:TextBox>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" colspan="3" style="padding-top:20px;">
+                                            <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text="&nbsp;"></asp:Label>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" colspan="3" style="padding-top:20px">
+                                            <asp:HyperLink ID="CuentaCrearHyperLink" runat="server" NavigateUrl="~/UsuarioCrear.aspx" SkinID="LinkMedianoClaro">Crear una nueva cuenta</asp:HyperLink>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td align="center" colspan="3" style="padding-top:5px; padding-bottom:0px">
+                                            <asp:HyperLink ID="HyperLink2" runat="server" NavigateUrl="~/UsuarioOlvidoId.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Id.Usuario?</asp:HyperLink>
+                                            <asp:HyperLink ID="HyperLink11" runat="server" NavigateUrl="~/UsuarioOlvidoPassword.aspx" SkinID="LinkMedianoClaro">¿Olvidó su Contraseña?</asp:HyperLink>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">
+                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; padding-right:20px; padding-top:20px; width: 300px;"> <%--; background-image: url('Imagenes/Factura-UsuarioDemo.png'); background-repeat: no-repeat--%>
+                                                <tr>
+                                                    <td align="center" colspan="3" style="padding-top:10px;">
+                                                        <asp:Label ID="Label2" Width="200px" runat="server" SkinID="TituloMedianoC" Text="Para ingresar en la modalidad DEMO"></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" colspan="3" style="padding-top:10px; padding-bottom:40px">
+                                                        <asp:Button ID="LoginUsuarioDEMOButton" runat="server" OnClick="LoginUsuarioDEMOButton_Click" TabIndex="3" Text="Haga Clic Aqui" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                                                    </td>
+                                                </tr>
+                                            </table>
                                         </td>
                                     </tr>
                                 </table>
-                            </td>
-                        </tr>
-                    </table>
-                </asp:Panel>
+                            </asp:Panel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding-top:20px">
+                            <asp:HyperLink ID="EmpresaHyperLink" runat="server" 
+                                NavigateUrl="~/InstitucionalEmpresa.aspx" SkinID="LinkChicoClaro">Empresa</asp:HyperLink>
+                            |
+                            <asp:HyperLink ID="HyperLink1" runat="server" 
+                                NavigateUrl="~/InstitucionalSoluciones.aspx" SkinID="LinkChicoClaro">Soluciones</asp:HyperLink>
+                            |
+                            <asp:HyperLink ID="HyperLink3" runat="server" 
+                                NavigateUrl="~/InstitucionalRefeCom.aspx" SkinID="LinkChicoClaro">Referencias Comerciales</asp:HyperLink>
+                            |
+                            <asp:HyperLink ID="HyperLink4" runat="server" 
+                                NavigateUrl="~/InstitucionalContacto.aspx" SkinID="LinkChicoClaro">Contacto</asp:HyperLink>
+                        </td>
+                    </tr>
+                </table>
             </td>
             <td rowspan="2" valign="top" style="padding-left:20px">
                 <asp:Image ID="Image1" ImageUrl="~/Imagenes/eFact-vertical.jpg" runat="server" Width="250px" />
@@ -128,21 +149,6 @@
                 |
                 <asp:HyperLink ID="HyperLink6" runat="server" 
                     NavigateUrl="~/PreguntasFrecuentes.aspx" SkinID="LinkChicoClaro">Preguntas frecuentes</asp:HyperLink>
-            </td>
-            <td align="center" style="padding-top:5px">
-                <asp:HyperLink ID="EmpresaHyperLink" runat="server" 
-                    NavigateUrl="~/InstitucionalEmpresa.aspx" SkinID="LinkChicoClaro">Empresa</asp:HyperLink>
-                |
-                <asp:HyperLink ID="HyperLink1" runat="server" 
-                    NavigateUrl="~/InstitucionalSoluciones.aspx" SkinID="LinkChicoClaro">Soluciones</asp:HyperLink>
-                |
-                <asp:HyperLink ID="HyperLink3" runat="server" 
-                    NavigateUrl="~/InstitucionalRefeCom.aspx" SkinID="LinkChicoClaro">Referencias Comerciales</asp:HyperLink>
-                |
-                <asp:HyperLink ID="HyperLink4" runat="server" 
-                    NavigateUrl="~/InstitucionalContacto.aspx" SkinID="LinkChicoClaro">Contacto</asp:HyperLink>
-            </td>
-            <td align="center" style="padding-bottom:5px;">
             </td>
         </tr>
         <tr>
