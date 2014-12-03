@@ -107,6 +107,7 @@ namespace CedServicios.Site
                     Response.Redirect("~/ArticuloConsulta.aspx");
                     break;
                 case "Factura Electrónica|Alta":
+                    Session["IdNaturalezaComprobante"] = "Venta";
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {
                         Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");

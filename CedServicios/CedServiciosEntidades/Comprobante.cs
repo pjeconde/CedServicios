@@ -16,7 +16,7 @@ namespace CedServicios.Entidades
         private long nroLote;
         //identificación cliente
         private Documento documento;
-        private string idCliente;
+        private string idPersona;
         private int desambiguacionCuitPais;
         private string razonSocial;
         //datos comprobante
@@ -32,6 +32,7 @@ namespace CedServicios.Entidades
         private string idDestinoComprobante;
         private WF wF;
         private string ultActualiz;
+        private NaturalezaComprobante naturalezaComprobante;
         //Campos Adicionales Opcionales
         private string cuitRazonSocial;
         private DateTime fechaAlta;
@@ -41,6 +42,7 @@ namespace CedServicios.Entidades
             tipoComprobante = new TipoComprobante();
             documento = new Documento();
             wF = new WF();
+            naturalezaComprobante = new NaturalezaComprobante();
         }
         public string Cuit
         {
@@ -108,15 +110,15 @@ namespace CedServicios.Entidades
                 return documento;
             }
         }
-        public string IdCliente
+        public string IdPersona
         {
             set
             {
-                idCliente = value;
+                idPersona = value;
             }
             get
             {
-                return idCliente;
+                return idPersona;
             }
         }
         public int DesambiguacionCuitPais
@@ -271,6 +273,17 @@ namespace CedServicios.Entidades
             get
             {
                 return ultActualiz;
+            }
+        }
+        public NaturalezaComprobante NaturalezaComprobante
+        {
+            set
+            {
+                naturalezaComprobante = value;
+            }
+            get
+            {
+                return naturalezaComprobante;
             }
         }
         #region propiedades adicionales opcionales
