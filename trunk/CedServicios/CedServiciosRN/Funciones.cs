@@ -132,5 +132,20 @@ namespace CedServicios.RN
             texto = texto.Replace("Ñ", "&Ntilde;");
             return texto;
         }
+        public static bool IsValidEmail(string strMailAddress)
+        {
+            // Return true if strIn is in valid e-mail format.
+            return Regex.IsMatch(strMailAddress, @"^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))" + @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$");
+        }
+        public static bool IsValidNroIB(string strNroIB)
+        {
+            // Return true if strIn is in valid e-mail format.
+            return Regex.IsMatch(strNroIB, @"[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}");
+        }
+        public static bool IsValidNumeric(string strNroIB)
+        {
+            // Return true if strIn is in valid e-mail format.
+            return Regex.IsMatch(strNroIB, @"[0-9]+");
+        }
     }
 }

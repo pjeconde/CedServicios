@@ -53,7 +53,7 @@
                                 ImageUrl="~/Imagenes/CedeiraSF-Logo.gif" onclick="EmpresaImageButton_Click" ToolTip="Click aqui para acceder a información institucional y de contacto " />
                             </td>
                             <td class="Fuente" align="right" valign="top" style="margin-left:10px">
-                                <asp:label ID="Label1" runat="server" ForeColor="LightGray" Text=" ver.140923"></asp:label>
+                                <asp:label ID="Label1" runat="server" ForeColor="LightGray" Text=" ver.141119"></asp:label>
                              </td>
                         </tr>
                     </table>
