@@ -47,10 +47,10 @@ namespace CedServicios.RN
             DB.Persona db = new DB.Persona(Sesion);
             return db.ListaPorCuityRazonSocial(Cuit, Razonsocial);
         }
-        public static List<Entidades.Persona> ListaPorCuityIdPersona(string Cuit, string IdCliente, Entidades.Sesion Sesion)
+        public static List<Entidades.Persona> ListaPorCuityIdPersona(string Cuit, string IdPersona, Entidades.Sesion Sesion)
         {
             DB.Persona db = new DB.Persona(Sesion);
-            return db.ListaPorCuityIdPersona(Cuit, IdCliente);
+            return db.ListaPorCuityIdPersona(Cuit, IdPersona);
         }
         public static void Leer(Entidades.Persona persona, Entidades.Sesion Sesion)
         {

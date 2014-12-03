@@ -354,7 +354,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             comprobante.Leer(cAux, sesion);
                             if (cAux.Estado == null || cAux.Estado != "Vigente")
                             {
-                                comprobante.Registrar(lote, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                                comprobante.Registrar(lote, null, "Venta", "ITF", ((Entidades.Sesion)Session["Sesion"]));
                             }
                             else
                             {
@@ -2099,7 +2099,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 RN.Comprobante comprobante = new RN.Comprobante();
                                 lcFea.cabecera_lote.DestinoComprobante = "ITF";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                comprobante.Registrar(lcFea, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                                comprobante.Registrar(lcFea, null, "Venta", "ITF", ((Entidades.Sesion)Session["Sesion"]));
                             }
                         }
                         catch (System.Web.Services.Protocols.SoapException soapEx)
@@ -2217,7 +2217,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 RN.Comprobante c= new RN.Comprobante();
                                 lcFea.cabecera_lote.DestinoComprobante = "ITF";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                c.Registrar(lcFea, null, "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                                c.Registrar(lcFea, null, "Venta", "ITF", ((Entidades.Sesion)Session["Sesion"]));
 
 
                                 //Consultar y Actualizar estado on-line.                              
@@ -2427,7 +2427,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 RN.Comprobante c = new RN.Comprobante();
                                 lcFea.cabecera_lote.DestinoComprobante = "AFIP";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                c.Registrar(lcFea, null, "AFIP", ((Entidades.Sesion)Session["Sesion"]));
+                                c.Registrar(lcFea, null, "Venta", "AFIP", ((Entidades.Sesion)Session["Sesion"]));
 
                                 //Actualizar estado on-line.
                                 if (caeNro != "")
