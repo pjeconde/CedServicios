@@ -218,9 +218,7 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
                                                                         <td class="TC00S">
-                                                                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="Razon_Social_VendedorTextBox"
-                                                                                ErrorMessage="razón social" SetFocusOnError="True">* </asp:RequiredFieldValidator>Razón
-                                                                            social:
+                                                                            Razón Social:
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
@@ -235,8 +233,6 @@
                                                                         <table border="0" cellpadding="0" cellspacing="0">
                                                                             <tr>
                                                                                 <td class="TC00S">
-                                                                                    <asp:RequiredFieldValidator ID="puntoVentaRequiredFieldValidator" runat="server" 
-                                                                                    ControlToValidate="PuntoVtaDropDownList" ErrorMessage="punto de venta" SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                                     Punto de venta:
                                                                                 </td>
                                                                                 <td style="padding-left:5px">
@@ -285,9 +281,7 @@
                                                                             <asp:RegularExpressionValidator ID="Numero_comprobanteRegularExpressionValidator"
                                                                                 runat="server" ControlToValidate="Numero_ComprobanteTextBox" ErrorMessage="error de formateo en número de comprobante"
                                                                                 SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
-                                                                            <asp:RequiredFieldValidator ID="Numero_ComprobanteRequiredFieldValidator" runat="server"
-                                                                                ControlToValidate="Numero_ComprobanteTextBox" ErrorMessage="número de comprobante"
-                                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>Número de comprobante:
+                                                                            Número de comprobante:
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -329,9 +323,7 @@
                                                                     <table border="0" cellpadding="0" cellspacing="0">
                                                                         <tr>
                                                                             <td class="TC00S">
-                                                                                <asp:RequiredFieldValidator ID="FechaEmisionDatePickerRequiredFieldValidator" runat="server"
-                                                                                    ControlToValidate="FechaEmisionDatePickerWebUserControl" ErrorMessage="fecha de emisión"
-                                                                                    SetFocusOnError="True">* </asp:RequiredFieldValidator>Fecha de emisión:
+                                                                                Fecha de emisión:
                                                                             </td>
                                                                             <td style="padding-left: 4px; padding-top: 5px;">
                                                                                 <asp:TextBox ID="FechaEmisionDatePickerWebUserControl" runat="server" CausesValidation="true" SkinID="FechaFact"></asp:TextBox>
@@ -407,8 +399,7 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
                                                                         <td class="TC00S">
-                                                                            <asp:RequiredFieldValidator ID="Localidad_VendedorRequiredFieldValidator" runat="server"
-                                                                                ControlToValidate="Localidad_VendedorTextBox" ErrorMessage="localidad" SetFocusOnError="True">* </asp:RequiredFieldValidator>Localidad:
+                                                                            Localidad:
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
@@ -524,9 +515,7 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
                                                                         <td class="TC00S">
-                                                                            <asp:RegularExpressionValidator ID="GLN_VendedorRegularExpressionValidator" runat="server"
-                                                                                ControlToValidate="GLN_VendedorTextBox" ErrorMessage="error de formateo en GLN del vendedor"
-                                                                                SetFocusOnError="True" ValidationExpression="[0-9]{13}">* </asp:RegularExpressionValidator>GLN:
+                                                                            GLN:
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -575,11 +564,6 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
                                                                         <td class="TC00S">
-                                                                            <asp:RegularExpressionValidator ID="CUITVendedorRegularExpressionValidator" runat="server"
-                                                                                ControlToValidate="Cuit_VendedorTextBox" ErrorMessage="error de formateo en CUIT del vendedor"
-                                                                                SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
-                                                                            <asp:RequiredFieldValidator ID="CUITVendedorRequiredFieldValidator" runat="server"
-                                                                                ControlToValidate="Cuit_VendedorTextBox" ErrorMessage="CUIT del vendedor" SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                             CUIT:
                                                                         </td>
                                                                         <td class="TC10S">
@@ -595,13 +579,7 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
                                                                         <td class="TC00S">
-                                                                            <asp:RegularExpressionValidator ID="Email_VendedorRegularExpressionValidator" runat="server"
-                                                                                ControlToValidate="Email_VendedorTextBox" ErrorMessage="error de formateo en e-mail contacto vendedor"
-                                                                                SetFocusOnError="True" ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$"
-                                                                                Width="11px">* </asp:RegularExpressionValidator>
-                                                                            <asp:RequiredFieldValidator ID="Email_VendedorRequiredFieldValidator" runat="server"
-                                                                                ControlToValidate="Email_VendedorTextBox" ErrorMessage="e-mail contacto del vendedor"
-                                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>e-mail Contacto:
+                                                                            e-mail Contacto:
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="Email_VendedorTextBox" runat="server" AutoCompleteType="Email" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
@@ -642,9 +620,6 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
                                                                         <td class="TC00S">
-                                                                            <asp:RegularExpressionValidator ID="NumeroIBVendedorRegularExpressionValidator" runat="server"
-                                                                                ControlToValidate="NroIBVendedorTextBox" ErrorMessage="error de formateo en nro IB del vendedor"
-                                                                                SetFocusOnError="True" ValidationExpression="[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}">* </asp:RegularExpressionValidator>Número
                                                                             IB:
                                                                         </td>
                                                                         <td class="TC10S">
@@ -760,12 +735,7 @@
                                                                         <asp:Button ID="ButtonGenerarNroLote" runat="server" Text="Generar Nro.Lote" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" CausesValidation="false" onclick="ButtonGenerarNroLote_Click" />
                                                                     </td>
                                                                     <td class="TC00S">
-                                                                        <asp:RegularExpressionValidator ID="NroLoteRegularExpressionValidator" runat="server"
-                                                                            ControlToValidate="Id_LoteTextbox" ErrorMessage="error de formateo en número de lote"
-                                                                            SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
-                                                                        <asp:RequiredFieldValidator ID="loteRequiredFieldValidator" runat="server" ControlToValidate="Id_LoteTextbox"
-                                                                            Display="Static" ErrorMessage="número de lote" SetFocusOnError="True">* </asp:RequiredFieldValidator>Nro.
-                                                                        de lote:
+                                                                        Nro. de lote:
                                                                     </td>
                                                                     <td class="TC00S">
                                                                         <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Este número, que no necesariamente tiene que ser correlativo y consecutivo, siempre debe ser mayor al último número de lote procesado en Interfacturas. Este número NO SE PUEDE REPETIR.">
@@ -1747,8 +1717,6 @@
                                                                         <asp:RegularExpressionValidator ID="Tipo_de_cambioRegularExpressionValidator" runat="server"
                                                                             ControlToValidate="Tipo_de_cambioTextBox" ErrorMessage="error de formateo en tipo de cambio"
                                                                             SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
-                                                                        <asp:RequiredFieldValidator ID="Tipo_de_cambioRequiredFieldValidator" runat="server"
-                                                                            ControlToValidate="Tipo_de_cambioTextBox" ErrorMessage="tipo de cambio" SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                         <asp:Label ID="Tipo_de_cambioLabel" runat="server" Text="Tipo de cambio:" Visible="true">
                                                                         </asp:Label>
                                                                     </td>
@@ -1850,7 +1818,7 @@
                                                         Width="100%" />
                                                         <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
                                                         PopupControlID="PopupValidarITF" TargetControlID="ValidarIBKButton" 
-                                                        BackgroundCssClass="modalBackground" runat="server" 
+                                                        BackgroundCssClass="modalBackground" runat="server" ValidateRequestMode="Enabled" 
                                                         onload="ModalPopupExtender1_Load" />
                                                 </td>
                                                 <td style="width: 50%;">
@@ -1962,7 +1930,7 @@
             </tr>
             <tr>
                 <td align="right" style="padding-top: 20px">
-                    <asp:Button ID="AceptarValidarITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarValidarITF.disabled = true;" OnClick="AceptarValidarITFButton_Click" />
+                    <asp:Button ID="AceptarValidarITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarValidarITF.disabled = true;" OnClick="AceptarValidarITFButton_Click" ValidationGroup="RequeridosValidationSummary" />
                 </td>
                 <td align="center" style="width: 20px">
                 </td>

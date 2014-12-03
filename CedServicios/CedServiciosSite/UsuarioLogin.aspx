@@ -8,7 +8,7 @@
                     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:20px; padding-right:20px;">
                         <tr>
                             <td align="left">
-                                <img alt="RG 3685" src="Imagenes/Diapositiva1.GIF" width="400px" height="387px" />
+                                <img alt="RG 3685" src="Imagenes/DiapositivaAll.GIF" width="400px" height="387px" />
                                 <br />
                                 <br />
                                 <br />

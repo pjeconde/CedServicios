@@ -116,7 +116,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     if (sesion.Usuario.Id != null)
                     {
-                        Email_VendedorRequiredFieldValidator.Enabled = false;
+                        //Email_VendedorRequiredFieldValidator.Enabled = false;
                         GenerarButton.Text = "Enviar archivo XML al e-mail (" + ((Entidades.Sesion)Session["Sesion"]).Usuario.Email + ")";
                         CompradorDropDownList.Enabled = true;
                     }
@@ -334,6 +334,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     try
                     {
+                        ValidarCamposObligatorios();
+
                         //Generar Lote
                         FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
 
@@ -819,7 +821,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			{
 				Tipo_de_cambioLabel.Visible = true;
 				Tipo_de_cambioTextBox.Visible = true;
-				Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+				//Tipo_de_cambioRequiredFieldValidator.Enabled = true;
 				Tipo_de_cambioRegularExpressionValidator.Enabled = true;
 			}
 			else
@@ -827,7 +829,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				Tipo_de_cambioLabel.Visible = false;
 				Tipo_de_cambioTextBox.Visible = false;
 				Tipo_de_cambioTextBox.Text = null;
-				Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+				//Tipo_de_cambioRequiredFieldValidator.Enabled = false;
 				Tipo_de_cambioRegularExpressionValidator.Enabled = false;
 			}
 			//CAE
@@ -1323,7 +1325,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 Tipo_de_cambioLabel.Visible = true;
                 Tipo_de_cambioTextBox.Visible = true;
-                Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+                //Tipo_de_cambioRequiredFieldValidator.Enabled = true;
                 Tipo_de_cambioRegularExpressionValidator.Enabled = true;
             }
             else
@@ -1331,7 +1333,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 Tipo_de_cambioLabel.Visible = false;
                 Tipo_de_cambioTextBox.Visible = false;
                 Tipo_de_cambioTextBox.Text = null;
-                Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+                //Tipo_de_cambioRequiredFieldValidator.Enabled = false;
                 Tipo_de_cambioRegularExpressionValidator.Enabled = false;
             }
             //CAE
@@ -2030,6 +2032,65 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
+        protected void ValidarCamposObligatorios()
+        {
+            if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>", false);
+                return;
+            }
+            if (Id_LoteTextbox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>", false);
+                return;
+            }
+            if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>", false);
+                return;
+            }
+            if (FechaEmisionDatePickerWebUserControl.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar la Fecha de Emisión del comprobante');</script>", false);
+                return;
+            }
+            if (Razon_Social_VendedorTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar la Razon Social del vendedor');</script>", false);
+                return;
+            }
+            if (Localidad_VendedorTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar la Localidad del vendedor');</script>", false);
+                return;
+            }
+            if (Email_VendedorTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar la Localidad del vendedor');</script>", false);
+                return;
+            }
+            if (Tipo_de_cambioTextBox.Visible == true && Tipo_de_cambioTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Tipo de Cambio');</script>", false);
+                return;
+            }
+            //Control de validación formatos
+            if (!Id_LoteTextbox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumeric(Id_LoteTextbox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un dato numérico en el número de lote');</script>", false);
+                return;
+            }
+            if (!Email_VendedorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_VendedorTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un email válido para el vendedor');</script>", false);
+                return;
+            }
+            if (!NroIBVendedorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNroIB(NroIBVendedorTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un Nro. de IB válido para el vendedor');</script>", false);
+                return;
+            }
+        }
         protected void ValidarIBKButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
@@ -2058,21 +2119,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         try
                         {
-                            if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
-                            {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>", false);
-                                return;
-                            }
-                            if (Id_LoteTextbox.Text.Equals(string.Empty))
-                            {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>", false);
-                                return;
-                            }
-                            if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
-                            {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>", false);
-                                return;
-                            }
+                            ValidarCamposObligatorios();
+
                             string certificado = "";
                             string respuesta = "";
 
@@ -2170,21 +2218,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         try
                         {
-                            if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
-                            {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>", false);
-                                return;
-                            }
-                            if (Id_LoteTextbox.Text.Equals(string.Empty))
-                            {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>", false);
-                                return;
-                            }
-                            if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
-                            {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>", false);
-                                return;
-                            }
+                            ValidarCamposObligatorios();
 
                             string certificado = "";
                             string respuesta = "";
@@ -2395,21 +2429,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         try
                         {
-                            if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
-                            {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>", false);
-                                return;
-                            }
-                            if (Id_LoteTextbox.Text.Equals(string.Empty))
-                            {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>", false);
-                                return;
-                            }
-                            if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
-                            {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>", false);
-                                return;
-                            }
+                            ValidarCamposObligatorios();
 
                             string respuesta = "";
                             FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
@@ -2800,7 +2820,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 Tipo_de_cambioLabel.Visible = true;
                 Tipo_de_cambioTextBox.Visible = true;
-                Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+                //Tipo_de_cambioRequiredFieldValidator.Enabled = true;
                 Tipo_de_cambioRegularExpressionValidator.Enabled = true;
             }
             else
@@ -2808,7 +2828,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 Tipo_de_cambioLabel.Visible = false;
                 Tipo_de_cambioTextBox.Visible = false;
                 Tipo_de_cambioTextBox.Text = null;
-                Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+                //Tipo_de_cambioRequiredFieldValidator.Enabled = false;
                 Tipo_de_cambioRegularExpressionValidator.Enabled = false;
             }
 
@@ -4474,7 +4494,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			{
 				Tipo_de_cambioLabel.Visible = true;
 				Tipo_de_cambioTextBox.Visible = true;
-				Tipo_de_cambioRequiredFieldValidator.Enabled = true;
+				//Tipo_de_cambioRequiredFieldValidator.Enabled = true;
 				Tipo_de_cambioRegularExpressionValidator.Enabled = true;
 			}
 			else
@@ -4482,7 +4502,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				Tipo_de_cambioLabel.Visible = false;
 				Tipo_de_cambioTextBox.Visible = false;
 				Tipo_de_cambioTextBox.Text = null;
-				Tipo_de_cambioRequiredFieldValidator.Enabled = false;
+				//Tipo_de_cambioRequiredFieldValidator.Enabled = false;
 				Tipo_de_cambioRegularExpressionValidator.Enabled = false;
 			}
 		}

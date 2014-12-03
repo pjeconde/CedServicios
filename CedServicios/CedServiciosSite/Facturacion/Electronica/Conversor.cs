@@ -73,6 +73,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                 cIBK.cabecera.informacion_comprobante = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobante();
                 cIBK.cabecera.informacion_comprobante.cae = lc.comprobante[i].cabecera.informacion_comprobante.cae;
                 cIBK.cabecera.informacion_comprobante.codigo_operacion = lc.comprobante[i].cabecera.informacion_comprobante.codigo_operacion;
+                cIBK.cabecera.informacion_comprobante.codigo_concepto = lc.comprobante[i].cabecera.informacion_comprobante.codigo_concepto;
+                cIBK.cabecera.informacion_comprobante.codigo_conceptoSpecified = true;
                 cIBK.cabecera.informacion_comprobante.condicion_de_pago = lc.comprobante[i].cabecera.informacion_comprobante.condicion_de_pago;
                 cIBK.cabecera.informacion_comprobante.es_detalle_encriptado = lc.comprobante[i].cabecera.informacion_comprobante.es_detalle_encriptado;
                 cIBK.cabecera.informacion_comprobante.fecha_emision = lc.comprobante[i].cabecera.informacion_comprobante.fecha_emision;

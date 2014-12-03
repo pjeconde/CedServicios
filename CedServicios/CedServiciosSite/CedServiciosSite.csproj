@@ -115,6 +115,7 @@
     <Content Include="ComprobanteSeleccionOnlineAFIP.aspx" />
     <Content Include="ExploradorComprobanteOnLineInterfacturas.aspx" />
     <Content Include="Imagenes\Diapositiva1.GIF" />
+    <Content Include="Imagenes\DiapositivaAll.gif" />
     <Content Include="Imagenes\Iconos\ActualizarOnLine.png" />
     <Content Include="Imagenes\Iconos\Afip.png" />
     <Content Include="Imagenes\Iconos\ClonarAlta.png" />
