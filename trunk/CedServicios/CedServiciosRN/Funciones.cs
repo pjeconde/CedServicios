@@ -139,13 +139,19 @@ namespace CedServicios.RN
         }
         public static bool IsValidNroIB(string strNroIB)
         {
-            // Return true if strIn is in valid e-mail format.
             return Regex.IsMatch(strNroIB, @"[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}");
         }
-        public static bool IsValidNumeric(string strNroIB)
+        public static bool IsValidNumeric(string strNro)
         {
-            // Return true if strIn is in valid e-mail format.
-            return Regex.IsMatch(strNroIB, @"[0-9]+");
+            return Regex.IsMatch(strNro, @"[0-9]+");
+        }
+        public static bool IsValidNumericDecimals(string strNro)
+        {
+            return Regex.IsMatch(strNro, @"[0-9]+(\.[0-9]+)?");
+        }
+        public static bool IsValidNumericFijo(string strNro, string strCantidad)
+        {
+            return Regex.IsMatch(strNro, @"[0-9]{" + strCantidad + "}");
         }
     }
 }
