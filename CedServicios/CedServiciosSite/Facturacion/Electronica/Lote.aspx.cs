@@ -821,16 +821,12 @@ namespace CedServicios.Site.Facturacion.Electronica
 			{
 				Tipo_de_cambioLabel.Visible = true;
 				Tipo_de_cambioTextBox.Visible = true;
-				//Tipo_de_cambioRequiredFieldValidator.Enabled = true;
-				Tipo_de_cambioRegularExpressionValidator.Enabled = true;
 			}
 			else
 			{
 				Tipo_de_cambioLabel.Visible = false;
 				Tipo_de_cambioTextBox.Visible = false;
 				Tipo_de_cambioTextBox.Text = null;
-				//Tipo_de_cambioRequiredFieldValidator.Enabled = false;
-				Tipo_de_cambioRegularExpressionValidator.Enabled = false;
 			}
 			//CAE
 			CompletarCAE(lc);
@@ -1325,16 +1321,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 Tipo_de_cambioLabel.Visible = true;
                 Tipo_de_cambioTextBox.Visible = true;
-                //Tipo_de_cambioRequiredFieldValidator.Enabled = true;
-                Tipo_de_cambioRegularExpressionValidator.Enabled = true;
             }
             else
             {
                 Tipo_de_cambioLabel.Visible = false;
                 Tipo_de_cambioTextBox.Visible = false;
                 Tipo_de_cambioTextBox.Text = null;
-                //Tipo_de_cambioRequiredFieldValidator.Enabled = false;
-                Tipo_de_cambioRegularExpressionValidator.Enabled = false;
             }
             //CAE
             CAETextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.cae;
@@ -2044,6 +2036,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>", false);
                 return;
             }
+            if (Numero_ComprobanteTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el número de comprobante');</script>", false);
+                return;
+            }
+            if (!Numero_ComprobanteTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumeric(Numero_ComprobanteTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un dato numérico en el número de comprobante');</script>", false);
+                return;
+            }
             if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>", false);
@@ -2069,12 +2071,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar la Localidad del vendedor');</script>", false);
                 return;
             }
-            if (Tipo_de_cambioTextBox.Visible == true && Tipo_de_cambioTextBox.Text.Equals(string.Empty))
-            {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Tipo de Cambio');</script>", false);
-                return;
-            }
-            //Control de validación formatos
             if (!Id_LoteTextbox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumeric(Id_LoteTextbox.Text))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un dato numérico en el número de lote');</script>", false);
@@ -2088,6 +2084,130 @@ namespace CedServicios.Site.Facturacion.Electronica
             if (!NroIBVendedorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNroIB(NroIBVendedorTextBox.Text))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un Nro. de IB válido para el vendedor');</script>", false);
+                return;
+            }
+            if (!Email_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_CompradorTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un email válido para el comprador');</script>", false);
+                return;
+            }
+
+            if (!GLN_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericFijo(GLN_CompradorTextBox.Text, "13"))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un dato numérico de 13 digitos en el GLN del comprador');</script>", false);
+                return;
+            }
+
+            //if (Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue.Equals(string.Empty))
+            //{
+            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Tipo de Documento del Comprador');</script>", false);
+            //    return;
+            //}
+            //if (Nro_Doc_Identificatorio_CompradorTextBox.Text.Equals(string.Empty))
+            //{
+            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Nro. Doc. Comprador');</script>", false);
+            //    return;
+            //}
+            //if (!Nro_Doc_Identificatorio_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Nro_Doc_Identificatorio_CompradorTextBox.Text))
+            //{
+            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Nro. Doc. Comprador');</script>", false);
+            //    return;
+            //}
+
+            //TIPO DE CAMBIO
+            if (!MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+            {
+                if (Tipo_de_cambioTextBox.Text.Equals(string.Empty))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Tipo de Cambio');</script>", false);
+                    return;
+                }
+                if (!Tipo_de_cambioTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Tipo_de_cambioTextBox.Text))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Tipo de Cambio en el Resumen');</script>", false);
+                    return;
+                }
+            }
+
+            //RESUMEN            
+            if (Importe_Total_Neto_Gravado_ResumenTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Importe Total Neto Gravado del Resumen');</script>", false);
+                return;
+            }
+            if (!Importe_Total_Neto_Gravado_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Neto_Gravado_ResumenTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Neto Gravado en el Resumen');</script>", false);
+                return;
+            }
+            if (Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Importe Total Concepto No Gravado del Resumen');</script>", false);
+                return;
+            }
+            if (!Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Concepto No Gravado en el Resumen');</script>", false);
+                return;
+            }
+            if (Importe_Operaciones_Exentas_ResumenTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Importe Operaciones Exentas del Resumen');</script>", false);
+                return;
+            }
+            if (!Importe_Operaciones_Exentas_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Operaciones_Exentas_ResumenTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Operaciones Exentas en el Resumen');</script>", false);
+                return;
+            }
+            if (Impuesto_Liq_ResumenTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el IVA del Resumen');</script>", false);
+                return;
+            }
+            if (!Impuesto_Liq_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Impuesto_Liq_ResumenTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del IVA en el Resumen');</script>", false);
+                return;
+            }
+            if (Impuesto_Liq_Rni_ResumenTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el IVA RNI del Resumen');</script>", false);
+                return;
+            }
+            if (!Impuesto_Liq_Rni_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Impuesto_Liq_Rni_ResumenTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del IVA RNI en el Resumen');</script>", false);
+                return;
+            }
+            if (!Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Impuestos Municipales en el Resumen');</script>", false);
+                return;
+            }
+            if (!Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Impuestos Nacionales en el Resumen');</script>", false);
+                return;
+            }
+            if (!Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Ingresos Brutos en el Resumen');</script>", false);
+                return;
+            }
+            if (!Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Impuestos_Internos_ResumenTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Impuestos Internos en el Resumen');</script>", false);
+                return;
+            }
+            if (Importe_Total_Factura_ResumenTextBox.Text.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Importe Total Factura del Resumen');</script>", false);
+                return;
+            }
+            if (!Importe_Total_Factura_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Factura_ResumenTextBox.Text))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Factura en el Resumen');</script>", false);
                 return;
             }
         }
@@ -2820,16 +2940,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 Tipo_de_cambioLabel.Visible = true;
                 Tipo_de_cambioTextBox.Visible = true;
-                //Tipo_de_cambioRequiredFieldValidator.Enabled = true;
-                Tipo_de_cambioRegularExpressionValidator.Enabled = true;
             }
             else
             {
                 Tipo_de_cambioLabel.Visible = false;
                 Tipo_de_cambioTextBox.Visible = false;
                 Tipo_de_cambioTextBox.Text = null;
-                //Tipo_de_cambioRequiredFieldValidator.Enabled = false;
-                Tipo_de_cambioRegularExpressionValidator.Enabled = false;
             }
 
             GenerarInfoComprador(compcab, infcompra);
@@ -4494,16 +4610,12 @@ namespace CedServicios.Site.Facturacion.Electronica
 			{
 				Tipo_de_cambioLabel.Visible = true;
 				Tipo_de_cambioTextBox.Visible = true;
-				//Tipo_de_cambioRequiredFieldValidator.Enabled = true;
-				Tipo_de_cambioRegularExpressionValidator.Enabled = true;
 			}
 			else
 			{
 				Tipo_de_cambioLabel.Visible = false;
 				Tipo_de_cambioTextBox.Visible = false;
 				Tipo_de_cambioTextBox.Text = null;
-				//Tipo_de_cambioRequiredFieldValidator.Enabled = false;
-				Tipo_de_cambioRegularExpressionValidator.Enabled = false;
 			}
 		}
 

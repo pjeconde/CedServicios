@@ -278,9 +278,6 @@
                                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                                     <tr>
                                                                         <td class="TC00S">
-                                                                            <asp:RegularExpressionValidator ID="Numero_comprobanteRegularExpressionValidator"
-                                                                                runat="server" ControlToValidate="Numero_ComprobanteTextBox" ErrorMessage="error de formateo en número de comprobante"
-                                                                                SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
                                                                             Número de comprobante:
                                                                         </td>
                                                                         <td class="TC10S">
@@ -332,19 +329,6 @@
                                                                                     Format="yyyyMMdd" PopupButtonID="ImageCalendarFechaEmision">
                                                                                 </cc1:CalendarExtender>
                                                                                 <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                                                <script type="text/javascript" language="javascript">
-                                                                                    function showDate(sender,args)
-                                                                                    {
-                                                                                        var a = new Date();
-                                                                                        $find("a2").set_selectedDate(a);
-                                                                                    }
-                                                                                </script>
-                                                                                <script type="text/javascript" language="javascript">
-                                                                                    function showDateSelect(sender, args) 
-                                                                                    {
-                                                                                        document.getElementById('<%=FechaEmisionDatePickerWebUserControl.ClientID%>').value = "12312312";
-                                                                                    }
-                                                                                </script>
                                                                                 <br />
                                                                             </td>
                                                                         </tr>
@@ -834,9 +818,7 @@
                                                             <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
                                                                 <tr>
                                                                     <td class="TC00S">
-                                                                        <asp:RegularExpressionValidator ID="GLN_CompradorRegularExpressionValidator" runat="server"
-                                                                            ControlToValidate="GLN_CompradorTextBox" ErrorMessage="error de formateo en GLN del comprador"
-                                                                            SetFocusOnError="True" ValidationExpression="[0-9]{13}">* </asp:RegularExpressionValidator>GLN:
+                                                                        GLN:
                                                                     </td>
                                                                     <td class="TC10S">
                                                                         <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
@@ -1011,10 +993,7 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S">
-                                                                        <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server" ControlToValidate="Email_CompradorTextBox"
-                                                                            ErrorMessage="error de formateo en e-mail contacto comprador" SetFocusOnError="True"
-                                                                            ValidationExpression="^([0-9a-zA-Z]([-.\w]*[0-9a-zA-Z])*@([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,9})$">* </asp:RegularExpressionValidator>e-mail
-                                                                        Contacto:
+                                                                        e-mail Contacto:
                                                                     </td>
                                                                     <td class="TC10S">
                                                                         <asp:TextBox ID="Email_CompradorTextBox" runat="server" AutoCompleteType="Email"
@@ -1558,13 +1537,6 @@
                                                             <table border="0" cellpadding="0" cellspacing="0">
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="ImporteTotalNetoGravadoRegularExpressionValidator"
-                                                                            runat="server" ControlToValidate="Importe_Total_Neto_Gravado_ResumenTextBox"
-                                                                            ErrorMessage="error de formateo en importe total neto gravado" SetFocusOnError="True"
-                                                                            ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
-                                                                        <asp:RequiredFieldValidator ID="Importe_Total_Neto_Gravado_ResumenRequiredFieldValidator"
-                                                                            runat="server" ControlToValidate="Importe_Total_Neto_Gravado_ResumenTextBox"
-                                                                            ErrorMessage="importe total neto gravado" SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                         Importe total neto gravado:
                                                                     </td>
                                                                     <td class="TC10S">
@@ -1575,14 +1547,6 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="Importe_Total_Concepto_No_gravadoRegularExpressionValidator"
-                                                                            runat="server" ControlToValidate="Importe_Total_Concepto_No_Gravado_ResumenTextBox"
-                                                                            ErrorMessage="error de formateo en importe total de conceptos que no integren el precio neto gravado"
-                                                                            SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
-                                                                        <asp:RequiredFieldValidator ID="Importe_Total_Concepto_No_Gravado_ResumenRequiredFieldValidator"
-                                                                            runat="server" ControlToValidate="Importe_Total_Concepto_No_Gravado_ResumenTextBox"
-                                                                            ErrorMessage="importe total de conceptos que no integren el precio neto gravado"
-                                                                            SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                         Importe total de conceptos que no integren el precio neto gravado:
                                                                     </td>
                                                                     <td class="TC10S">
@@ -1593,13 +1557,6 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="Importe_Operaciones_ExentasRegularExpressionValidator"
-                                                                            runat="server" ControlToValidate="Importe_Operaciones_Exentas_ResumenTextBox"
-                                                                            ErrorMessage="error de formateo en importe de operaciones exentas" SetFocusOnError="True"
-                                                                            ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
-                                                                        <asp:RequiredFieldValidator ID="Importe_Operaciones_Exentas_ResumenRequiredFieldValidator"
-                                                                            runat="server" ControlToValidate="Importe_Operaciones_Exentas_ResumenTextBox"
-                                                                            ErrorMessage="importe de operaciones exentas" SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                         Importe de operaciones exentas:
                                                                     </td>
                                                                     <td class="TC10S">
@@ -1610,12 +1567,6 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="Impuesto_LiqRegularExpressionValidator" runat="server"
-                                                                            ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="error de formateo en importe IVA Responsable inscripto"
-                                                                            SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
-                                                                        <asp:RequiredFieldValidator ID="Impuesto_Liq_ResumenRequiredFieldValidator" runat="server"
-                                                                            ControlToValidate="Impuesto_Liq_ResumenTextBox" ErrorMessage="importe de IVA Responsable inscripto"
-                                                                            SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                         IVA Responsable inscripto:
                                                                     </td>
                                                                     <td class="TC10S">
@@ -1626,12 +1577,6 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="Impuesto_Liq_RniRegularExpressionValidator" runat="server"
-                                                                            ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="error de formateo en impuesto liquidado a RNI o percepción a no categorizados(IVA R.G. 2126)"
-                                                                            SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
-                                                                        <asp:RequiredFieldValidator ID="Impuesto_Liq_Rni_ResumenRequiredFieldValidator" runat="server"
-                                                                            ControlToValidate="Impuesto_Liq_Rni_ResumenTextBox" ErrorMessage="impuesto liquidado a RNI o percepción a no categorizados(IVA R.G. 2126)"
-                                                                            SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                         Impuesto liquidado a RNI o percepción a no categorizados<br />
                                                                         (IVA R.G. 2126):
                                                                     </td>
@@ -1643,10 +1588,6 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_MunicipalesResumenRegularExpressionValidator"
-                                                                            runat="server" ControlToValidate="Importe_Total_Impuestos_Municipales_ResumenTextBox"
-                                                                            ErrorMessage="error de formateo en importe total impuestos municipales" SetFocusOnError="True"
-                                                                            ValidationExpression="[0-9]+(\.[0-9]+)?">*</asp:RegularExpressionValidator>
                                                                         Importe total impuestos municipales:
                                                                     </td>
                                                                     <td class="TC10S">
@@ -1657,10 +1598,6 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_Nacionales_ResumenTextBoxResumenRegularExpressionValidator"
-                                                                            runat="server" ControlToValidate="Importe_Total_Impuestos_Nacionales_ResumenTextBox"
-                                                                            ErrorMessage="error de formateo en importe total impuestos nacionales" SetFocusOnError="True"
-                                                                            ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
                                                                         Importe total impuestos nacionales:
                                                                     </td>
                                                                     <td class="TC10S">
@@ -1671,10 +1608,6 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="Importe_Total_Ingresos_Brutos_ResumenTextBoxResumenRegularExpressionValidator"
-                                                                            runat="server" ControlToValidate="Importe_Total_Ingresos_Brutos_ResumenTextBox"
-                                                                            ErrorMessage="error de formateo en importe total ingresos brutos" SetFocusOnError="True"
-                                                                            ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
                                                                         Importe total ingresos brutos:
                                                                     </td>
                                                                     <td class="TC10S">
@@ -1685,10 +1618,6 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="Importe_Total_Impuestos_Internos_ResumenTextBoxResumenRegularExpressionValidator"
-                                                                            runat="server" ControlToValidate="Importe_Total_Impuestos_Internos_ResumenTextBox"
-                                                                            ErrorMessage="error de formateo en importe total impuestos internos" SetFocusOnError="True"
-                                                                            ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
                                                                         Importe total impuestos internos:
                                                                     </td>
                                                                     <td class="TC10S">
@@ -1699,11 +1628,6 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="Importe_Total_FacturaRegularExpressionValidator"
-                                                                            runat="server" ControlToValidate="Importe_Total_Factura_ResumenTextBox" ErrorMessage="error de formateo en importe total"
-                                                                            SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator><asp:RequiredFieldValidator
-                                                                                ID="Importe_Total_Factura_ResumenRequiredFieldValidator" runat="server" ControlToValidate="Importe_Total_Factura_ResumenTextBox"
-                                                                                ErrorMessage="importe total" SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                         Importe total:
                                                                     </td>
                                                                     <td class="TC10S">
@@ -1714,9 +1638,6 @@
                                                                 </tr>
                                                                 <tr>
                                                                     <td class="TC00S" style="width: 390px">
-                                                                        <asp:RegularExpressionValidator ID="Tipo_de_cambioRegularExpressionValidator" runat="server"
-                                                                            ControlToValidate="Tipo_de_cambioTextBox" ErrorMessage="error de formateo en tipo de cambio"
-                                                                            SetFocusOnError="True" ValidationExpression="[0-9]+(\.[0-9]+)?">* </asp:RegularExpressionValidator>
                                                                         <asp:Label ID="Tipo_de_cambioLabel" runat="server" Text="Tipo de cambio:" Visible="true">
                                                                         </asp:Label>
                                                                     </td>

@@ -175,15 +175,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Domicilio_Calle_VendedorTextBox;
         
         /// <summary>
-        /// Control Numero_comprobanteRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Numero_comprobanteRegularExpressionValidator;
-        
-        /// <summary>
         /// Control Numero_ComprobanteTextBox.
         /// </summary>
         /// <remarks>
@@ -589,15 +580,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.UpdateProgress compradorUpdateProgress;
         
         /// <summary>
-        /// Control GLN_CompradorRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator GLN_CompradorRegularExpressionValidator;
-        
-        /// <summary>
         /// Control GLN_CompradorTextBox.
         /// </summary>
         /// <remarks>
@@ -785,15 +767,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Contacto_CompradorTextBox;
-        
-        /// <summary>
-        /// Control RegularExpressionValidator2.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator2;
         
         /// <summary>
         /// Control Email_CompradorTextBox.
@@ -1201,24 +1174,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.UpdatePanel tipoCambioUpdatePanel;
         
         /// <summary>
-        /// Control ImporteTotalNetoGravadoRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator ImporteTotalNetoGravadoRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Importe_Total_Neto_Gravado_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Importe_Total_Neto_Gravado_ResumenRequiredFieldValidator;
-        
-        /// <summary>
         /// Control Importe_Total_Neto_Gravado_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1226,24 +1181,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Neto_Gravado_ResumenTextBox;
-        
-        /// <summary>
-        /// Control Importe_Total_Concepto_No_gravadoRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_Concepto_No_gravadoRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Importe_Total_Concepto_No_Gravado_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Importe_Total_Concepto_No_Gravado_ResumenRequiredFieldValidator;
         
         /// <summary>
         /// Control Importe_Total_Concepto_No_Gravado_ResumenTextBox.
@@ -1255,24 +1192,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Concepto_No_Gravado_ResumenTextBox;
         
         /// <summary>
-        /// Control Importe_Operaciones_ExentasRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Operaciones_ExentasRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Importe_Operaciones_Exentas_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Importe_Operaciones_Exentas_ResumenRequiredFieldValidator;
-        
-        /// <summary>
         /// Control Importe_Operaciones_Exentas_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1280,24 +1199,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Importe_Operaciones_Exentas_ResumenTextBox;
-        
-        /// <summary>
-        /// Control Impuesto_LiqRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Impuesto_LiqRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Impuesto_Liq_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Impuesto_Liq_ResumenRequiredFieldValidator;
         
         /// <summary>
         /// Control Impuesto_Liq_ResumenTextBox.
@@ -1309,24 +1210,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Impuesto_Liq_ResumenTextBox;
         
         /// <summary>
-        /// Control Impuesto_Liq_RniRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Impuesto_Liq_RniRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Impuesto_Liq_Rni_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Impuesto_Liq_Rni_ResumenRequiredFieldValidator;
-        
-        /// <summary>
         /// Control Impuesto_Liq_Rni_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1334,15 +1217,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Impuesto_Liq_Rni_ResumenTextBox;
-        
-        /// <summary>
-        /// Control Importe_Total_Impuestos_MunicipalesResumenRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_Impuestos_MunicipalesResumenRegularExpressionValidator;
         
         /// <summary>
         /// Control Importe_Total_Impuestos_Municipales_ResumenTextBox.
@@ -1354,15 +1228,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Impuestos_Municipales_ResumenTextBox;
         
         /// <summary>
-        /// Control Importe_Total_Impuestos_Nacionales_ResumenTextBoxResumenRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_Impuestos_Nacionales_ResumenTextBoxResumenRegularExpressionValidator;
-        
-        /// <summary>
         /// Control Importe_Total_Impuestos_Nacionales_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1370,15 +1235,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Impuestos_Nacionales_ResumenTextBox;
-        
-        /// <summary>
-        /// Control Importe_Total_Ingresos_Brutos_ResumenTextBoxResumenRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_Ingresos_Brutos_ResumenTextBoxResumenRegularExpressionValidator;
         
         /// <summary>
         /// Control Importe_Total_Ingresos_Brutos_ResumenTextBox.
@@ -1390,15 +1246,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Ingresos_Brutos_ResumenTextBox;
         
         /// <summary>
-        /// Control Importe_Total_Impuestos_Internos_ResumenTextBoxResumenRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_Impuestos_Internos_ResumenTextBoxResumenRegularExpressionValidator;
-        
-        /// <summary>
         /// Control Importe_Total_Impuestos_Internos_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1408,24 +1255,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Impuestos_Internos_ResumenTextBox;
         
         /// <summary>
-        /// Control Importe_Total_FacturaRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Importe_Total_FacturaRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control Importe_Total_Factura_ResumenRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator Importe_Total_Factura_ResumenRequiredFieldValidator;
-        
-        /// <summary>
         /// Control Importe_Total_Factura_ResumenTextBox.
         /// </summary>
         /// <remarks>
@@ -1433,15 +1262,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Factura_ResumenTextBox;
-        
-        /// <summary>
-        /// Control Tipo_de_cambioRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator Tipo_de_cambioRegularExpressionValidator;
         
         /// <summary>
         /// Control Tipo_de_cambioLabel.
