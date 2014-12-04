@@ -12,11 +12,11 @@ namespace CedServicios.DB
         {
         }
 
-        public List<Entidades.Persona> ListaPorCuit(bool SoloVigentes)
+        public List<Entidades.Persona> ListaPorCuit(bool SoloVigentes, CedServicios.Entidades.Enum.TipoPersona TipoPersona)
         {
-            return ListaPorCuit(SoloVigentes, false);
+            return ListaPorCuit(SoloVigentes, false, TipoPersona);
         }
-        public List<Entidades.Persona> ListaPorCuit(bool SoloVigentes, bool ParaCombo)
+        public List<Entidades.Persona> ListaPorCuit(bool SoloVigentes, bool ParaCombo, CedServicios.Entidades.Enum.TipoPersona TipoPersona)
         {
             List<Entidades.Persona> lista = new List<Entidades.Persona>();
             if (sesion.Cuit.Nro != null)
@@ -29,6 +29,17 @@ namespace CedServicios.DB
                 if (SoloVigentes)
                 {
                     a.Append("and Persona.Estado='Vigente' ");
+                }
+                switch (TipoPersona.ToString())
+                {
+                    case "Cliente":
+                        a.Append("and Persona.EsCliente=1 ");
+                        break;
+                    case "Proveedor":
+                        a.Append("and Persona.EsProveedor=1 ");
+                        break;
+                    case "Ambos":
+                        break;
                 }
                 a.Append("order by Persona.RazonSocial ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
@@ -249,7 +260,7 @@ namespace CedServicios.DB
             a.AppendLine("insert Log values (" + Persona.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Persona', '" + evento + "', '" + Estado + "', '') ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
-        public List<Entidades.Persona> ListaPorCuityTipoyNroDoc(string Cuit, Entidades.Documento Documento)
+        public List<Entidades.Persona> ListaPorCuityTipoyNroDoc(string Cuit, Entidades.Documento Documento, CedServicios.Entidades.Enum.TipoPersona TipoPersona)
         {
             List<Entidades.Persona> lista = new List<Entidades.Persona>();
             if (sesion.Cuit.Nro != null)
@@ -259,6 +270,17 @@ namespace CedServicios.DB
                 a.Append("Persona.Cuit, Persona.IdTipoDoc, Persona.NroDoc, Persona.IdPersona, Persona.DesambiguacionCuitPais, Persona.RazonSocial, Persona.DescrTipoDoc, Persona.Calle, Persona.Nro, Persona.Piso, Persona.Depto, Persona.Sector, Persona.Torre, Persona.Manzana, Persona.Localidad, Persona.IdProvincia, Persona.DescrProvincia, Persona.CodPost, Persona.NombreContacto, Persona.EmailContacto, Persona.TelefonoContacto, Persona.IdCondIVA, Persona.DescrCondIVA, Persona.NroIngBrutos, Persona.IdCondIngBrutos, Persona.DescrCondIngBrutos, Persona.GLN, Persona.FechaInicioActividades, Persona.CodigoInterno, Persona.EmailAvisoVisualizacion, Persona.PasswordAvisoVisualizacion, Persona.IdWF, Persona.Estado, Persona.UltActualiz, Persona.EsCliente, Persona.EsProveedor ");
                 a.Append("from Persona ");
                 a.Append("where Persona.Cuit='" + Cuit + "' and Persona.IdTipoDoc=" + Documento.Tipo.Id + " and Persona.NroDoc=" + Documento.Nro.ToString() + " ");
+                switch (TipoPersona.ToString())
+                {
+                    case "Cliente":
+                        a.Append("and Persona.EsCliente=1 ");
+                        break;
+                    case "Proveedor":
+                        a.Append("and Persona.EsProveedor=1 ");
+                        break;
+                    case "Ambos":
+                        break;
+                }
                 a.Append("order by Persona.RazonSocial ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
@@ -273,7 +295,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Persona> ListaPorCuityRazonSocial(string Cuit, string RazonSocial)
+        public List<Entidades.Persona> ListaPorCuityRazonSocial(string Cuit, string RazonSocial, CedServicios.Entidades.Enum.TipoPersona TipoPersona)
         {
             List<Entidades.Persona> lista = new List<Entidades.Persona>();
             if (sesion.Cuit.Nro != null)
@@ -283,6 +305,17 @@ namespace CedServicios.DB
                 a.Append("Persona.Cuit, Persona.IdTipoDoc, Persona.NroDoc, Persona.IdPersona, Persona.DesambiguacionCuitPais, Persona.RazonSocial, Persona.DescrTipoDoc, Persona.Calle, Persona.Nro, Persona.Piso, Persona.Depto, Persona.Sector, Persona.Torre, Persona.Manzana, Persona.Localidad, Persona.IdProvincia, Persona.DescrProvincia, Persona.CodPost, Persona.NombreContacto, Persona.EmailContacto, Persona.TelefonoContacto, Persona.IdCondIVA, Persona.DescrCondIVA, Persona.NroIngBrutos, Persona.IdCondIngBrutos, Persona.DescrCondIngBrutos, Persona.GLN, Persona.FechaInicioActividades, Persona.CodigoInterno, Persona.EmailAvisoVisualizacion, Persona.PasswordAvisoVisualizacion, Persona.IdWF, Persona.Estado, Persona.UltActualiz, Persona.EsCliente, Persona.EsProveedor ");
                 a.Append("from Persona ");
                 a.Append("where Persona.Cuit='" + Cuit + "' and Persona.RazonSocial like '%" + RazonSocial + "%' ");
+                switch (TipoPersona.ToString())
+                {
+                    case "Cliente":
+                        a.Append("and Persona.EsCliente=1 ");
+                        break;
+                    case "Proveedor":
+                        a.Append("and Persona.EsProveedor=1 ");
+                        break;
+                    case "Ambos":
+                        break;
+                }
                 a.Append("order by Persona.RazonSocial ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
@@ -297,7 +330,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Persona> ListaPorCuityIdPersona(string Cuit, string IdPersona)
+        public List<Entidades.Persona> ListaPorCuityIdPersona(string Cuit, string IdPersona, CedServicios.Entidades.Enum.TipoPersona TipoPersona)
         {
             List<Entidades.Persona> lista = new List<Entidades.Persona>();
             if (sesion.Cuit.Nro != null)
@@ -307,6 +340,17 @@ namespace CedServicios.DB
                 a.Append("Persona.Cuit, Persona.IdTipoDoc, Persona.NroDoc, Persona.IdPersona, Persona.DesambiguacionCuitPais, Persona.RazonSocial, Persona.DescrTipoDoc, Persona.Calle, Persona.Nro, Persona.Piso, Persona.Depto, Persona.Sector, Persona.Torre, Persona.Manzana, Persona.Localidad, Persona.IdProvincia, Persona.DescrProvincia, Persona.CodPost, Persona.NombreContacto, Persona.EmailContacto, Persona.TelefonoContacto, Persona.IdCondIVA, Persona.DescrCondIVA, Persona.NroIngBrutos, Persona.IdCondIngBrutos, Persona.DescrCondIngBrutos, Persona.GLN, Persona.FechaInicioActividades, Persona.CodigoInterno, Persona.EmailAvisoVisualizacion, Persona.PasswordAvisoVisualizacion, Persona.IdWF, Persona.Estado, Persona.UltActualiz, Persona.EsCliente, Persona.EsProveedor ");
                 a.Append("from Persona ");
                 a.Append("where Persona.Cuit='" + Cuit + "' and Persona.IdPersona='" + IdPersona + "'");
+                switch (TipoPersona.ToString())
+                {
+                    case "Cliente":
+                        a.Append("and Persona.EsCliente=1 ");
+                        break;
+                    case "Proveedor":
+                        a.Append("and Persona.EsProveedor=1 ");
+                        break;
+                    case "Ambos":
+                        break;
+                }
                 a.Append("order by Persona.RazonSocial ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
@@ -321,7 +365,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Persona> ListaSegunFiltros(string Cuit, string RazSoc, string NroDoc, string Estado)
+        public List<Entidades.Persona> ListaSegunFiltros(string Cuit, string RazSoc, string NroDoc, string Estado, CedServicios.Entidades.Enum.TipoPersona TipoPersona)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("Select Persona.Cuit, Persona.IdTipoDoc, Persona.NroDoc, Persona.IdPersona, Persona.DesambiguacionCuitPais, Persona.RazonSocial, Persona.DescrTipoDoc, Persona.Calle, Persona.Nro, Persona.Piso, Persona.Depto, Persona.Sector, Persona.Torre, Persona.Manzana, Persona.Localidad, Persona.IdProvincia, Persona.DescrProvincia, Persona.CodPost, Persona.NombreContacto, Persona.EmailContacto, Persona.TelefonoContacto, Persona.IdCondIVA, Persona.DescrCondIVA, Persona.NroIngBrutos, Persona.IdCondIngBrutos, Persona.DescrCondIngBrutos, Persona.GLN, Persona.FechaInicioActividades, Persona.CodigoInterno, Persona.EmailAvisoVisualizacion, Persona.PasswordAvisoVisualizacion, Persona.IdWF, Persona.Estado, Persona.UltActualiz, Persona.EsCliente, Persona.EsProveedor ");
@@ -330,6 +374,17 @@ namespace CedServicios.DB
             if (RazSoc != String.Empty) a.AppendLine("and RazonSocial like '%" + RazSoc + "%' ");
             if (NroDoc != String.Empty) a.AppendLine("and NroDoc like '%" + NroDoc + "%' ");
             if (Estado != String.Empty) a.AppendLine("and Estado = '" + Estado + "' ");
+            switch (TipoPersona.ToString())
+            {
+                case "Cliente":
+                    a.Append("and Persona.EsCliente=1 ");
+                    break;
+                case "Proveedor":
+                    a.Append("and Persona.EsProveedor=1 ");
+                    break;
+                case "Ambos":
+                    break;
+            }
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.Persona> lista = new List<Entidades.Persona>();
             if (dt.Rows.Count != 0)

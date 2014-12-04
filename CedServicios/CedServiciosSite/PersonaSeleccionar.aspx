@@ -19,6 +19,11 @@
                 </td>
                 <td align="left" style="padding-top:20px">
                     <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <asp:Label ID="Label10" runat="server" Text="Tipo de Persona:"></asp:Label>
+                    <asp:RadioButton ID="ClienteRadioButton" Text="Cliente" GroupName="TipoPersona" runat="server" />
+                    <asp:RadioButton ID="ProveedorRadioButton" Text="Proveedor" GroupName="TipoPersona" runat="server" />
+                    <asp:RadioButton ID="AmbosRadioButton" Text="Ambos" GroupName="TipoPersona" Checked="true" runat="server" />
                 </td>
                 <td style="width:500px">
                 </td>
@@ -88,7 +93,7 @@
                                     <headerstyle horizontalalign="center" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>
-                                <asp:BoundField DataField="IdCliente" HeaderText="Id.Persona" SortExpression="IdPersona">
+                                <asp:BoundField DataField="IdPersona" HeaderText="Id.Persona" SortExpression="IdPersona">
                                     <headerstyle horizontalalign="left" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>
@@ -99,6 +104,10 @@
                                 <asp:BoundField DataField="DesambiguacionCuitPais" HeaderText="IdClienteExt" SortExpression="DesambiguacionCuitPais">
                                     <headerstyle horizontalalign="left" wrap="False" />
                                     <itemstyle horizontalalign="center" wrap="False" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="DescrTipoPersona" HeaderText="Tipo de Persona" SortExpression="DescrTipoPersona" >
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>
                             </Columns>
                         </asp:GridView>

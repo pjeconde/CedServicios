@@ -33,7 +33,7 @@ namespace CedServicios.Site
                         FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                         FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                     }
-                    ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, sesion);
+                    ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Cliente, sesion);
                     ClienteDropDownList.DataSource = (List<Entidades.Persona>)ViewState["Personas"];
                     DataBind();
                     ClienteDropDownList.SelectedValue = "0";

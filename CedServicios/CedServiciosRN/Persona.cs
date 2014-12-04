@@ -7,20 +7,20 @@ namespace CedServicios.RN
 {
     public class Persona
     {
-        public static List<Entidades.Persona> ListaPorCuit(bool SoloVigentes, Entidades.Sesion Sesion)
+        public static List<Entidades.Persona> ListaPorCuit(bool SoloVigentes, CedServicios.Entidades.Enum.TipoPersona TipoPersona, Entidades.Sesion Sesion)
         {
             DB.Persona db = new DB.Persona(Sesion);
-            return db.ListaPorCuit(SoloVigentes);
+            return db.ListaPorCuit(SoloVigentes, TipoPersona);
         }
-        public static List<Entidades.Persona> ListaPorCuit(bool SoloVigentes, bool ParaCombo, Entidades.Sesion Sesion)
+        public static List<Entidades.Persona> ListaPorCuit(bool SoloVigentes, bool ParaCombo, CedServicios.Entidades.Enum.TipoPersona TipoPersona, Entidades.Sesion Sesion)
         {
             DB.Persona db = new DB.Persona(Sesion);
-            return db.ListaPorCuit(SoloVigentes, ParaCombo);
+            return db.ListaPorCuit(SoloVigentes, ParaCombo, TipoPersona);
         }
         public static List<Entidades.Persona> ListaExportacion(Entidades.Usuario Cuenta, Entidades.Sesion Sesion, bool ConSeleccionarComprador)
         {
             DB.Persona comprador = new DB.Persona(Sesion);
-            List<Entidades.Persona> lista = comprador.ListaPorCuit(true);
+            List<Entidades.Persona> lista = comprador.ListaPorCuit(true, CedServicios.Entidades.Enum.TipoPersona.Cliente);
             lista = lista.FindAll(delegate(Entidades.Persona c)
             {
                 return c.Documento.Tipo.Id.Equals("70") || c.RazonSocial.Equals("Seleccionar cliente");
@@ -30,27 +30,27 @@ namespace CedServicios.RN
         public static List<Entidades.Persona> ListaSinExportacion(Entidades.Usuario Cuenta, Entidades.Sesion Sesion, bool ConSeleccionarComprador)
         {
             DB.Persona comprador = new DB.Persona(Sesion);
-            List<Entidades.Persona> lista = comprador.ListaPorCuit(true);
+            List<Entidades.Persona> lista = comprador.ListaPorCuit(true, CedServicios.Entidades.Enum.TipoPersona.Cliente);
             lista = lista.FindAll(delegate(Entidades.Persona c)
             {
                 return !c.Documento.Tipo.Id.Equals("70") || c.RazonSocial.Equals("Seleccionar cliente");
             });
             return lista;
         }
-        public static List<Entidades.Persona> ListaPorCuityTipoyNroDoc(string Cuit, Entidades.Documento Documento, Entidades.Sesion Sesion)
+        public static List<Entidades.Persona> ListaPorCuityTipoyNroDoc(string Cuit, Entidades.Documento Documento, CedServicios.Entidades.Enum.TipoPersona TipoPersona, Entidades.Sesion Sesion)
         {
             DB.Persona db = new DB.Persona(Sesion);
-            return db.ListaPorCuityTipoyNroDoc(Cuit, Documento);
+            return db.ListaPorCuityTipoyNroDoc(Cuit, Documento, TipoPersona);
         }
-        public static List<Entidades.Persona> ListaPorCuityRazonSocial(string Cuit, string Razonsocial, Entidades.Sesion Sesion)
+        public static List<Entidades.Persona> ListaPorCuityRazonSocial(string Cuit, string Razonsocial, CedServicios.Entidades.Enum.TipoPersona TipoPersona, Entidades.Sesion Sesion)
         {
             DB.Persona db = new DB.Persona(Sesion);
-            return db.ListaPorCuityRazonSocial(Cuit, Razonsocial);
+            return db.ListaPorCuityRazonSocial(Cuit, Razonsocial, TipoPersona);
         }
-        public static List<Entidades.Persona> ListaPorCuityIdPersona(string Cuit, string IdPersona, Entidades.Sesion Sesion)
+        public static List<Entidades.Persona> ListaPorCuityIdPersona(string Cuit, string IdPersona, CedServicios.Entidades.Enum.TipoPersona TipoPersona, Entidades.Sesion Sesion)
         {
             DB.Persona db = new DB.Persona(Sesion);
-            return db.ListaPorCuityIdPersona(Cuit, IdPersona);
+            return db.ListaPorCuityIdPersona(Cuit, IdPersona, TipoPersona);
         }
         public static void Leer(Entidades.Persona persona, Entidades.Sesion Sesion)
         {
@@ -125,10 +125,10 @@ namespace CedServicios.RN
             hasta.WF.Estado = Desde.WF.Estado;
             return hasta;
         }
-        public static List<Entidades.Persona> ListaSegunFiltros(string Cuit, string RazSoc, string NroDoc, string Estado, Entidades.Sesion Sesion)
+        public static List<Entidades.Persona> ListaSegunFiltros(string Cuit, string RazSoc, string NroDoc, string Estado, CedServicios.Entidades.Enum.TipoPersona TipoPersona, Entidades.Sesion Sesion)
         {
             DB.Persona cliente = new DB.Persona(Sesion);
-            return cliente.ListaSegunFiltros(Cuit, RazSoc, NroDoc, Estado);
+            return cliente.ListaSegunFiltros(Cuit, RazSoc, NroDoc, Estado, TipoPersona);
         }
         public static List<Entidades.Persona> ListaPaging(out int CantidadFilas, int IndicePagina, string OrderBy, string Cuit, string NroDoc, string RazSoc, string Estado, string SessionID, Entidades.Sesion Sesion)
         {
@@ -138,7 +138,7 @@ namespace CedServicios.RN
             {
                 OrderBy = "Cuit desc, RazonSocial asc ";
             }
-            listaPersona = db.ListaSegunFiltros(Cuit, NroDoc, RazSoc, Estado);
+            listaPersona = db.ListaSegunFiltros(Cuit, NroDoc, RazSoc, Estado, Entidades.Enum.TipoPersona.Ambos);
             int cantidadFilas = listaPersona.Count;
             CantidadFilas = cantidadFilas;
             return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaPersona);

@@ -197,7 +197,8 @@ namespace CedServicios.RN
         {
             Sesion.Cuit = Cuit;
             Sesion.Cuit.UNs = RN.UN.ListaPorCuitParaElUsuarioLogueado(Sesion);
-            Sesion.ClientesDelCuit = RN.Persona.ListaPorCuit(false, Sesion);
+            Sesion.ClientesDelCuit = RN.Persona.ListaPorCuit(false, CedServicios.Entidades.Enum.TipoPersona.Cliente, Sesion);
+            Sesion.ProveedoresDelCuit = RN.Persona.ListaPorCuit(false, CedServicios.Entidades.Enum.TipoPersona.Proveedor, Sesion);
             List<Entidades.UN> estaLaUNEnLaLista = new List<Entidades.UN>();
             if (Sesion.Cuit.UNs.Count != 0)
             {

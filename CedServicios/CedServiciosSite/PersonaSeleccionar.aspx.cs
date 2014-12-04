@@ -62,6 +62,10 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Persona> lista = new List<Entidades.Persona>();
                 MensajeLabel.Text = String.Empty;
+
+                Entidades.Enum.TipoPersona tipoPersona = new Entidades.Enum.TipoPersona();
+                if (ClienteRadioButton.Checked) tipoPersona = Entidades.Enum.TipoPersona.Cliente; else if (ProveedorRadioButton.Checked) tipoPersona = Entidades.Enum.TipoPersona.Proveedor; else tipoPersona = Entidades.Enum.TipoPersona.Ambos;
+
                 if (TipoDocRadioButton.Checked)
                 {
                     if (NroDocTextBox.Text.Equals(String.Empty))
@@ -74,7 +78,7 @@ namespace CedServicios.Site
                         Entidades.Documento documento = new Entidades.Documento();
                         documento.Tipo.Id = TipoDocDropDownList.SelectedValue.ToString();
                         documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
-                        lista = RN.Persona.ListaPorCuityTipoyNroDoc(sesion.Cuit.Nro, documento, sesion);
+                        lista = RN.Persona.ListaPorCuityTipoyNroDoc(sesion.Cuit.Nro, documento, tipoPersona, sesion);
                     }
                 }
                 else if (RazonSocialRadioButton.Checked)
@@ -86,7 +90,7 @@ namespace CedServicios.Site
                     }
                     else
                     {
-                        lista = RN.Persona.ListaPorCuityRazonSocial(sesion.Cuit.Nro, RazonSocialTextBox.Text, sesion);
+                        lista = RN.Persona.ListaPorCuityRazonSocial(sesion.Cuit.Nro, RazonSocialTextBox.Text, tipoPersona, sesion);
                     }
                 }
                 else
@@ -98,7 +102,7 @@ namespace CedServicios.Site
                     }
                     else
                     {
-                        lista = RN.Persona.ListaPorCuityIdPersona(sesion.Cuit.Nro, IdPersonaTextBox.Text, sesion);
+                        lista = RN.Persona.ListaPorCuityIdPersona(sesion.Cuit.Nro, IdPersonaTextBox.Text, tipoPersona, sesion);
                     }
                 }
                 if (lista.Count == 0)
