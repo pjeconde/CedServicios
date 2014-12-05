@@ -95,137 +95,117 @@
                         <td align="center" style="width: 782px; vertical-align: middle; text-align: center;"
                             valign="top">
                             <table border="0" cellpadding="0" cellspacing="0">
+                                <!-- DATOS DEL COMPROBANTE -->
                                 <tr>
                                     <td>
-                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
-                                            <tr>
-                                                <td rowspan="3" style="width: 1px; background-color: Gray;">
-                                                </td>
-                                                <td colspan="1" style="height: 1px; background-color: Gray;">
-                                                </td>
-                                                <td rowspan="3" style="width: 1px; background-color: Gray;">
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td align="left" valign="top">
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td style="width: 370px">
-                                                            </td>
-                                                            <td class="bgFEAC" style="width: 40px; height: 10px;">
-                                                            </td>
-                                                            <td style="width: 370px">
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <!-- TIPO DE COMPROBANTE -->
-                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
-                                                        <tr>
-                                                            <td align="center" class="TextoResaltado" style="width: 240px">
-                                                                INFORMACIÓN VENDEDOR<br />
-                                                            </td>
-                                                            <td style="width: 300px">
-                                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 300px">
-                                                                    <tr>
-                                                                        <td rowspan="2" style="width: 1px; background-color: Gray;">
-                                                                        </td>
-                                                                        <td colspan="3" style="height: 1px; background-color: Gray;">
-                                                                        </td>
-                                                                        <td rowspan="2" style="width: 1px; background-color: Gray;">
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td style="width: 9px;">
-                                                                        </td>
-                                                                        <td style="width: 280px">
-                                                                            <table border="0" cellpadding="0" cellspacing="0" style="background-color: White;">
-                                                                                <tr>
-                                                                                    <td class="TC00S" style="text-align: center; width: 280px">
-                                                                                        Tipo de comprobante
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td style="width: 280px">
-                                                                                        <asp:UpdatePanel ID="Tipo_De_ComprobanteUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                                                            UpdateMode="Conditional">
-                                                                                            <Triggers>
-                                                                                                <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                                                            </Triggers>
-                                                                                            <ContentTemplate>
-                                                                                                <asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListCompradorGr" OnSelectedIndexChanged="Tipo_De_ComprobanteDropDownList_SelectedIndexChanged" AutoPostBack="true">
-                                                                                                </asp:DropDownList>
-                                                                                            </ContentTemplate>
-                                                                                        </asp:UpdatePanel>
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td style="height: 5px">
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </table>
-                                                                        </td>
-                                                                        <td style="width: 9px;">
-                                                                        </td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td colspan="5" style="height: 1px; background-color: Gray;">
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                            <td align="center" style="width: 240px; color: #A52A2A" valign="middle">
-                                                                Comprobante electrónico en
-                                                                <asp:UpdatePanel ID="monedaUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                                    UpdateMode="Conditional">
-                                                                    <ContentTemplate>
-                                                                        <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" AutoPostBack="True"
-                                                                            Enabled="false" OnSelectedIndexChanged="MonedaComprobanteDropDownList_SelectedIndexChanged"
-                                                                            SkinID="ddlgrc">
-                                                                        </asp:DropDownList>
-                                                                    </ContentTemplate>
-                                                                </asp:UpdatePanel>
-                                                                <asp:Label ID="MonedaComprobanteExclusivoPremiumLabel" runat="server" Font-Size="X-Small"
-                                                                    ForeColor="Brown"></asp:Label>
-                                                                <asp:UpdateProgress ID="monedaUpdateProgress" runat="server" AssociatedUpdatePanelID="monedaUpdatePanel"
-                                                                    DisplayAfter="0">
-                                                                    <ProgressTemplate>
-                                                                        <asp:Image ID="monedaImage" runat="server" Height="25px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
-                                                                        </asp:Image>
-                                                                    </ProgressTemplate>
-                                                                </asp:UpdateProgress>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                    <!-- DATOS DEL VENDEDOR -->
-                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
-                                                        <tr>
-                                                            <td style="width: 370px;">
-                                                            </td>
-                                                            <td class="bgFEAC" rowspan="15" style="width: 40px; background-repeat: repeat-y;">
-                                                            </td>
-                                                            <td style="width: 370px;">
-                                                            </td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td colspan="3" style="height: 10px;">
-                                                            </td>
-                                                            <td colspan="3">
-                                                            </td>
-                                                        </tr>
-                                                        <!-- Datos del Vendedor: Razon Social / Comprobante -->
-                                                        <tr>
-                                                            <td>
-                                                                <table border="0" cellpadding="0" cellspacing="0">
-                                                                    <tr>
-                                                                        <td class="TC00S">
-                                                                            Razón Social:
-                                                                        </td>
-                                                                        <td class="TC10S">
-                                                                            <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
+                                        <asp:UpdatePanel ID="InfoComproUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                            UpdateMode="Conditional">
+                                            <Triggers>
+                                                <asp:AsyncPostBackTrigger ControlID="Version1RadioButton" EventName="CheckedChanged">
+                                                </asp:AsyncPostBackTrigger>
+                                                <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList" EventName="TextChanged">
+                                                </asp:AsyncPostBackTrigger>
+                                                <asp:PostBackTrigger ControlID="FileUploadButton"></asp:PostBackTrigger>
+                                                <asp:AsyncPostBackTrigger ControlID="Tipo_De_ComprobanteDropDownList" EventName="SelectedIndexChanged"/>
+                                            </Triggers>
+                                            <ContentTemplate>
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 982px">
+                                                    <tr>
+                                                        <td rowspan="17" style="width: 1px; background-color: Gray;">
+                                                        </td>
+                                                        <td colspan="3" style="height: 1px; background-color: Gray;">
+                                                        </td>
+                                                        <td rowspan="17" style="width: 1px; background-color: Gray;">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="3" style="text-align: center; height: 10px;">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="TextoResaltado" colspan="3" style="text-align: center;">
+                                                            INFORMACIÓN COMPROBANTE
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="TextoResaltado" colspan="3" style="text-align: center; height: 10px;">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="width: 300px">
+                                                            <table border="0" cellpadding="0" cellspacing="0" style="width: 300px">
+                                                                <tr>
+                                                                    <td rowspan="2" style="width: 1px; background-color: Gray;">
+                                                                    </td>
+                                                                    <td colspan="3" style="height: 1px; background-color: Gray;">
+                                                                    </td>
+                                                                    <td rowspan="2" style="width: 1px; background-color: Gray;">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td style="width: 9px;">
+                                                                    </td>
+                                                                    <td style="width: 280px">
+                                                                        <table border="0" cellpadding="0" cellspacing="0" style="background-color: White;">
+                                                                            <tr>
+                                                                                <td class="TC00S" style="text-align: center; width: 280px">
+                                                                                    Tipo de comprobante
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="width: 280px">
+                                                                                    <asp:UpdatePanel ID="Tipo_De_ComprobanteUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                                                        UpdateMode="Conditional">
+                                                                                        <Triggers>
+                                                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                                                        </Triggers>
+                                                                                        <ContentTemplate>
+                                                                                            <asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListCompradorGr" OnSelectedIndexChanged="Tipo_De_ComprobanteDropDownList_SelectedIndexChanged" AutoPostBack="true">
+                                                                                            </asp:DropDownList>
+                                                                                        </ContentTemplate>
+                                                                                    </asp:UpdatePanel>
+                                                                                </td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td style="height: 5px">
+                                                                                </td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </td>
+                                                                    <td style="width: 9px;">
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td colspan="5" style="height: 1px; background-color: Gray;">
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td align="center" style="width: 240px; color: #A52A2A" valign="middle">
+                                                            Comprobante electrónico en
+                                                            <asp:UpdatePanel ID="monedaUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                                UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" AutoPostBack="True"
+                                                                        Enabled="false" OnSelectedIndexChanged="MonedaComprobanteDropDownList_SelectedIndexChanged"
+                                                                        SkinID="ddlgrc">
+                                                                    </asp:DropDownList>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                            <asp:Label ID="MonedaComprobanteExclusivoPremiumLabel" runat="server" Font-Size="X-Small"
+                                                                ForeColor="Brown"></asp:Label>
+                                                            <asp:UpdateProgress ID="monedaUpdateProgress" runat="server" AssociatedUpdatePanelID="monedaUpdatePanel"
+                                                                DisplayAfter="0">
+                                                                <ProgressTemplate>
+                                                                    <asp:Image ID="monedaImage" runat="server" Height="25px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+                                                                    </asp:Image>
+                                                                </ProgressTemplate>
+                                                            </asp:UpdateProgress>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
                                                             <td>
                                                                 <asp:UpdatePanel ID="ptoVentaUpdatePanel" runat="server" UpdateMode="Conditional"
                                                                     ChildrenAsTriggers="true">
@@ -259,6 +239,231 @@
                                                                     </ContentTemplate>
                                                                 </asp:UpdatePanel>
                                                             </td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                                    <tr>
+                                                                        <td class="TC00S">
+                                                                            Número de comprobante:
+                                                                        </td>
+                                                                        <td class="TC10S">
+                                                                            <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                                ToolTip="Debe ser correlativo al último ingresado por Punto de Venta y Tipo de Comprobante. No es necesario ingresar ceros a la izquierda. Si su factura es p.ej.0002-00000005, puede ingresar 5."> </asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                    </tr>
+                                                    <tr>
+                                                            <td>
+                                                                <div>
+                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                        <tr>
+                                                                            <td class="TC00S">
+                                                                                Fecha de emisión:
+                                                                            </td>
+                                                                            <td style="padding-left: 4px; padding-top: 5px;">
+                                                                                <asp:TextBox ID="FechaEmisionDatePickerWebUserControl" runat="server" CausesValidation="true" SkinID="FechaFact"></asp:TextBox>
+                                                                                <cc1:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="MyCalendar" BehaviorID="a2"
+                                                                                    TargetControlID="FechaEmisionDatePickerWebUserControl"  
+                                                                                    Format="yyyyMMdd" PopupButtonID="ImageCalendarFechaEmision">
+                                                                                </cc1:CalendarExtender>
+                                                                                <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                                <br />
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </td>
+                                                    </tr>
+
+
+
+                                                    <tr>
+                                                    
+                                                        <td align="left" valign="top">
+                                                            <table border="0" cellpadding="0" cellspacing="0" style="width: 360px">
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        Fecha de vencimiento:
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:TextBox ID="FechaVencimientoDatePickerWebUserControl" runat="server" 
+                                                                            SkinID="FechaFact"></asp:TextBox>
+                                                                        <cc1:CalendarExtender ID="CalendarExtender4" runat="server" 
+                                                                            CssClass="MyCalendar" Format="yyyyMMdd" 
+                                                                            PopupButtonID="ImageCalendarFechaVencimiento" 
+                                                                            TargetControlID="FechaVencimientoDatePickerWebUserControl">
+                                                                        </cc1:CalendarExtender>
+                                                                        <asp:ImageButton ID="ImageCalendarFechaVencimiento" runat="server" 
+                                                                            CausesValidation="false" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        IVA computable:
+                                                                    </td>
+                                                                    <td style="text-align:left; padding-left:5px; padding-top:5px">
+                                                                        <asp:DropDownList ID="IVAcomputableDropDownList" runat="server" SkinID="ddlch">
+                                                                        </asp:DropDownList>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        <asp:Label ID="CodigoOperacionLabel" runat="server" Text="Código de operación:" 
+                                                                            Visible="true"></asp:Label>
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:DropDownList ID="CodigoOperacionDropDownList" runat="server" SkinID="ddln">
+                                                                        </asp:DropDownList>
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        <asp:Label ID="CodigoConceptoLabel" runat="server" Text="Código de concepto:" 
+                                                                            Visible="false"></asp:Label>
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:DropDownList ID="CodigoConceptoDropDownList" runat="server" SkinID="ddln" 
+                                                                            Visible="false">
+                                                                        </asp:DropDownList>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                        <td class="bgFEAC" rowspan="3" 
+                                                            style="width: 40px; background-repeat: repeat-y;">
+                                                        </td>
+                                                        <td align="left" valign="top">
+                                                            <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        <asp:Label ID="FechaInicioServLabel" runat="server" 
+                                                                            Text="Fecha inicio servicio:"></asp:Label>
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:TextBox ID="FechaServDesdeDatePickerWebUserControl" runat="server" 
+                                                                            SkinID="FechaFact"></asp:TextBox>
+                                                                        <cc1:CalendarExtender ID="CalendarExtender5" runat="server" 
+                                                                            CssClass="MyCalendar" Format="yyyyMMdd" 
+                                                                            PopupButtonID="ImageCalendarFechaServDesde" 
+                                                                            TargetControlID="FechaServDesdeDatePickerWebUserControl">
+                                                                        </cc1:CalendarExtender>
+                                                                        <asp:ImageButton ID="ImageCalendarFechaServDesde" runat="server" 
+                                                                            CausesValidation="false" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        <asp:Label ID="FechaHstServLabel" runat="server" 
+                                                                            Text="Fecha finalización servicio:">
+                                                                        </asp:Label>
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:TextBox ID="FechaServHastaDatePickerWebUserControl" runat="server" 
+                                                                            SkinID="FechaFact"></asp:TextBox>
+                                                                        <cc1:CalendarExtender ID="CalendarExtender6" runat="server" 
+                                                                            CssClass="MyCalendar" Format="yyyyMMdd" 
+                                                                            PopupButtonID="ImageCalendarFechaServHasta" 
+                                                                            TargetControlID="FechaServHastaDatePickerWebUserControl">
+                                                                        </cc1:CalendarExtender>
+                                                                        <asp:ImageButton ID="ImageCalendarFechaServHasta" runat="server" 
+                                                                            CausesValidation="false" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                    </td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        Condición de pago:
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" BorderStyle="NotSet" 
+                                                                            ForeColor="#071F70" Style="width: 170px; resize: none; text-align:left" 
+                                                                            TextMode="MultiLine">
+                                                                        </asp:TextBox>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="TextoResaltado" colspan="3" style="text-align: center; height: 10px;">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="5" style="height: 1px; background-color: Gray;">
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                                <br />
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </td>
+                                </tr>
+                                <!-- DATOS DEL VENDEDOR -->
+                                <tr>
+                                    <td>
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                                            <tr>
+                                                <td rowspan="3" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="3" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td align="left" valign="top">
+                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                        <tr>
+                                                            <td style="width: 370px">
+                                                            </td>
+                                                            <td class="bgFEAC" style="width: 40px; height: 10px;">
+                                                            </td>
+                                                            <td style="width: 370px">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <!-- TIPO DE COMPROBANTE -->
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
+                                                        <tr>
+                                                            <td align="center" class="TextoResaltado" style="width: 240px">
+                                                                INFORMACIÓN VENDEDOR<br />
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                    <!-- DATOS DEL VENDEDOR -->
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
+                                                        <tr>
+                                                            <td style="width: 370px;">
+                                                            </td>
+                                                            <td class="bgFEAC" rowspan="15" style="width: 40px; background-repeat: repeat-y;">
+                                                            </td>
+                                                            <td style="width: 370px;">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td colspan="3" style="height: 10px;">
+                                                            </td>
+                                                            <td colspan="3">
+                                                            </td>
+                                                        </tr>
+                                                        <!-- Datos del Vendedor: Razon Social / Comprobante -->
+                                                        <tr>
+                                                            <td>
+                                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                                    <tr>
+                                                                        <td class="TC00S">
+                                                                            Razón Social:
+                                                                        </td>
+                                                                        <td class="TC10S">
+                                                                            <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            
                                                         </tr>
                                                         <!-- Datos del Vendedor: Calle -->
                                                         <tr>
@@ -270,19 +475,6 @@
                                                                         </td>
                                                                         <td class="TC10S">
                                                                             <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                            <td>
-                                                                <table border="0" cellpadding="0" cellspacing="0">
-                                                                    <tr>
-                                                                        <td class="TC00S">
-                                                                            Número de comprobante:
-                                                                        </td>
-                                                                        <td class="TC10S">
-                                                                            <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                                ToolTip="Debe ser correlativo al último ingresado por Punto de Venta y Tipo de Comprobante. No es necesario ingresar ceros a la izquierda. Si su factura es p.ej.0002-00000005, puede ingresar 5."> </asp:TextBox>
                                                                         </td>
                                                                     </tr>
                                                                 </table>
@@ -314,26 +506,6 @@
                                                                         </td>
                                                                     </tr>
                                                                 </table>
-                                                            </td>
-                                                            <td>
-                                                                <div>
-                                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                                        <tr>
-                                                                            <td class="TC00S">
-                                                                                Fecha de emisión:
-                                                                            </td>
-                                                                            <td style="padding-left: 4px; padding-top: 5px;">
-                                                                                <asp:TextBox ID="FechaEmisionDatePickerWebUserControl" runat="server" CausesValidation="true" SkinID="FechaFact"></asp:TextBox>
-                                                                                <cc1:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="MyCalendar" BehaviorID="a2"
-                                                                                    TargetControlID="FechaEmisionDatePickerWebUserControl"  
-                                                                                    Format="yyyyMMdd" PopupButtonID="ImageCalendarFechaEmision">
-                                                                                </cc1:CalendarExtender>
-                                                                                <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                                                <br />
-                                                                            </td>
-                                                                        </tr>
-                                                                    </table>
-                                                                </div>
                                                             </td>
                                                         </tr>
                                                         <!-- Datos del Vendedor: Sector, Torre y Manzana -->
@@ -391,27 +563,7 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td>
-                                                                <asp:UpdatePanel ID="TipoExpoUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                                    UpdateMode="Conditional">
-                                                                    <Triggers>
-                                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                                    </Triggers>
-                                                                    <ContentTemplate>
-                                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                                            <tr>
-                                                                                <td class="TC00S">
-                                                                                    Tipo Exportación:
-                                                                                </td>
-                                                                                <td class="TC10S">
-                                                                                    <asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="ddln">
-                                                                                    </asp:DropDownList>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </ContentTemplate>
-                                                                </asp:UpdatePanel>
-                                                            </td>
+                                                            
                                                         </tr>
                                                         <!-- Datos del Vendedor: Provincia -->
                                                         <tr>
@@ -428,34 +580,7 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td>
-                                                                <asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" UpdateMode="Conditional">
-                                                                    <ContentTemplate>
-                                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                                            <tr>
-                                                                                <td class="TC00S">
-                                                                                    País Destino Comprobante:
-                                                                                </td>
-                                                                                <td class="TC10S">
-                                                                                    <asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" OnSelectedIndexChanged="PaisDestinoExpDropDownList_SelectedIndexChanged"
-                                                                                        SkinID="ddln" AutoPostBack="true">
-                                                                                    </asp:DropDownList>
-                                                                                    <asp:UpdateProgress ID="PaisDestinoUpdateProgress" runat="server" AssociatedUpdatePanelID="PaisDestinoExpUpdatePanel"
-                                                                                        DisplayAfter="0">
-                                                                                        <ProgressTemplate>
-                                                                                            <asp:Image ID="PaisDestinoImage" runat="server" Height="18px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
-                                                                                            </asp:Image>
-                                                                                        </ProgressTemplate>
-                                                                                    </asp:UpdateProgress>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </ContentTemplate>
-                                                                    <Triggers>
-                                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                                    </Triggers>
-                                                                </asp:UpdatePanel>
-                                                            </td>
+                                                            
                                                         </tr>
                                                         <!-- Datos del Vendedor: Código Postal -->
                                                         <tr>
@@ -471,27 +596,7 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td>
-                                                                <asp:UpdatePanel ID="IdiomaUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                                    UpdateMode="Conditional">
-                                                                    <Triggers>
-                                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                                    </Triggers>
-                                                                    <ContentTemplate>
-                                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                                            <tr>
-                                                                                <td class="TC00S">
-                                                                                    Idioma para exportación:
-                                                                                </td>
-                                                                                <td class="TC10S">
-                                                                                    <asp:DropDownList ID="IdiomaDropDownList" runat="server" SkinID="ddln">
-                                                                                    </asp:DropDownList>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </ContentTemplate>
-                                                                </asp:UpdatePanel>
-                                                            </td>
+
                                                         </tr>
                                                         <!-- Datos del Vendedor: GLN -->
                                                         <tr>
@@ -508,27 +613,7 @@
                                                                     </tr>
                                                                 </table>
                                                             </td>
-                                                            <td>
-                                                                <asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                                    UpdateMode="Conditional">
-                                                                    <Triggers>
-                                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                                    </Triggers>
-                                                                    <ContentTemplate>
-                                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                                            <tr>
-                                                                                <td class="TC00S">
-                                                                                    Incoterms para exportación:
-                                                                                </td>
-                                                                                <td class="TC10S">
-                                                                                    <asp:DropDownList ID="IncotermsDropDownList" runat="server" SkinID="ddln">
-                                                                                    </asp:DropDownList>
-                                                                                </td>
-                                                                            </tr>
-                                                                        </table>
-                                                                    </ContentTemplate>
-                                                                </asp:UpdatePanel>
-                                                            </td>
+                                                            
                                                         </tr>
                                                         <!-- Datos del Vendedor: Nombre contacto -->
                                                         <tr>
@@ -1063,142 +1148,6 @@
                                         <br />
                                     </td>
                                 </tr>
-                                <!-- DATOS DEL COMPROBANTE -->
-                                <tr>
-                                    <td>
-                                        <asp:UpdatePanel ID="InfoComproUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                            UpdateMode="Conditional">
-                                            <Triggers>
-                                                <asp:AsyncPostBackTrigger ControlID="Version1RadioButton" EventName="CheckedChanged">
-                                                </asp:AsyncPostBackTrigger>
-                                                <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList" EventName="TextChanged">
-                                                </asp:AsyncPostBackTrigger>
-                                                <asp:PostBackTrigger ControlID="FileUploadButton"></asp:PostBackTrigger>
-                                                <asp:AsyncPostBackTrigger ControlID="Tipo_De_ComprobanteDropDownList" EventName="SelectedIndexChanged"/>
-                                            </Triggers>
-                                            <ContentTemplate>
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
-                                                    <tr>
-                                                        <td rowspan="6" style="width: 1px; background-color: Gray;">
-                                                        </td>
-                                                        <td colspan="3" style="height: 1px; background-color: Gray;">
-                                                        </td>
-                                                        <td rowspan="6" style="width: 1px; background-color: Gray;">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="3" style="text-align: center; height: 10px;">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TextoResaltado" colspan="3" style="text-align: center;">
-                                                            INFORMACIÓN COMPROBANTE
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TextoResaltado" colspan="3" style="text-align: center; height: 10px;">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td align="left" valign="top">
-                                                            <table border="0" cellpadding="0" cellspacing="0" style="width: 360px">
-                                                                <tr>
-                                                                    <td class="TC00S">
-                                                                        Fecha de vencimiento:
-                                                                    </td>
-                                                                    <td class="TC10S">
-                                                                        <asp:TextBox ID="FechaVencimientoDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
-                                                                        <cc1:CalendarExtender ID="CalendarExtender4" runat="server" TargetControlID="FechaVencimientoDatePickerWebUserControl"
-                                                                            Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaVencimiento">
-                                                                        </cc1:CalendarExtender>
-                                                                        <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaVencimiento" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="TC00S">
-                                                                        IVA computable:
-                                                                    </td>
-                                                                    <td style="text-align:left; padding-left:5px; padding-top:5px">
-                                                                        <asp:DropDownList ID="IVAcomputableDropDownList" runat="server" SkinID="ddlch">
-                                                                        </asp:DropDownList>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="TC00S">
-                                                                        <asp:Label ID="CodigoOperacionLabel" runat="server" Text="Código de operación:" Visible="true"></asp:Label>
-                                                                    </td>
-                                                                    <td class="TC10S">
-                                                                        <asp:DropDownList ID="CodigoOperacionDropDownList" runat="server" SkinID="ddln">
-                                                                        </asp:DropDownList>
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="TC00S">
-                                                                        <asp:Label ID="CodigoConceptoLabel" runat="server" Text="Código de concepto:" Visible="false"></asp:Label>
-                                                                    </td>
-                                                                    <td class="TC10S">
-                                                                        <asp:DropDownList ID="CodigoConceptoDropDownList" runat="server" Visible="false" SkinID="ddln">
-                                                                        </asp:DropDownList>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                        <td class="bgFEAC" rowspan="5" style="width: 40px; background-repeat: repeat-y;">
-                                                        </td>
-                                                        <td align="left" valign="top">
-                                                            <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
-                                                                <tr>
-                                                                    <td class="TC00S">
-                                                                        <asp:Label ID="FechaInicioServLabel" runat="server" Text="Fecha inicio servicio:"></asp:Label>
-                                                                    </td>
-                                                                    <td class="TC10S">
-                                                                        <asp:TextBox ID="FechaServDesdeDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
-                                                                        <cc1:CalendarExtender ID="CalendarExtender5" runat="server" TargetControlID="FechaServDesdeDatePickerWebUserControl"
-                                                                            Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaServDesde">
-                                                                        </cc1:CalendarExtender>
-                                                                        <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaServDesde" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="TC00S">
-                                                                        <asp:Label ID="FechaHstServLabel" runat="server" Text="Fecha finalización servicio:">
-                                                                        </asp:Label>
-                                                                    </td>
-                                                                    <td class="TC10S">
-                                                                        <asp:TextBox ID="FechaServHastaDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
-                                                                        <cc1:CalendarExtender ID="CalendarExtender6" runat="server" TargetControlID="FechaServHastaDatePickerWebUserControl"
-                                                                            Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaServHasta">
-                                                                        </cc1:CalendarExtender>
-                                                                        <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaServHasta" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                                    </td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <td class="TC00S">
-                                                                        Condición de pago:
-                                                                    </td>
-                                                                    <td class="TC10S">
-                                                                        <asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" BorderStyle="NotSet" ForeColor="#071F70"
-                                                                            Style="width: 170px; resize: none; text-align:left" TextMode="MultiLine">
-                                                                        </asp:TextBox>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TextoResaltado" colspan="3" style="text-align: center; height: 10px;">
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="5" style="height: 1px; background-color: Gray;">
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                                <br />
-                                            </ContentTemplate>
-                                        </asp:UpdatePanel>
-                                    </td>
-                                </tr>
                                 <!-- CODIGOS DE REFERENCIAS -->
                                 <tr>
                                     <td class="TextoResaltado" style="text-align: center">
@@ -1366,6 +1315,145 @@
                                             </tr>
                                         </table>
                                         <br />
+                                    </td>
+                                </tr>
+                                <!-- INFORMACION EXPO-->
+                                <tr>
+                                    <td class="TextoResaltado" style="text-align: center">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                                            <tr>
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TextoResaltado" style="text-align: center;">
+                                                    INFORMACION EXPO
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:UpdatePanel ID="TipoExpoUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                        UpdateMode="Conditional">
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                        </Triggers>
+                                                        <ContentTemplate>
+                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        Tipo Exportación:
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="ddln">
+                                                                        </asp:DropDownList>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        País Destino Comprobante:
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" OnSelectedIndexChanged="PaisDestinoExpDropDownList_SelectedIndexChanged"
+                                                                            SkinID="ddln" AutoPostBack="true">
+                                                                        </asp:DropDownList>
+                                                                        <asp:UpdateProgress ID="PaisDestinoUpdateProgress" runat="server" AssociatedUpdatePanelID="PaisDestinoExpUpdatePanel"
+                                                                            DisplayAfter="0">
+                                                                            <ProgressTemplate>
+                                                                                <asp:Image ID="PaisDestinoImage" runat="server" Height="18px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+                                                                                </asp:Image>
+                                                                            </ProgressTemplate>
+                                                                        </asp:UpdateProgress>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:UpdatePanel ID="IdiomaUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                        UpdateMode="Conditional">
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                        </Triggers>
+                                                        <ContentTemplate>
+                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        Idioma para exportación:
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:DropDownList ID="IdiomaDropDownList" runat="server" SkinID="ddln">
+                                                                        </asp:DropDownList>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                        UpdateMode="Conditional">
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                        </Triggers>
+                                                        <ContentTemplate>
+                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        Incoterms para exportación:
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:DropDownList ID="IncotermsDropDownList" runat="server" SkinID="ddln">
+                                                                        </asp:DropDownList>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                                <td colspan="1" style="height: 1px; background-color: Gray;">
+                                                </td>
+                                                <td rowspan="8" style="width: 1px; background-color: Gray;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: center; height: 10px;">
                                     </td>
                                 </tr>
                                 <!-- PERMISOS EXPO-->
