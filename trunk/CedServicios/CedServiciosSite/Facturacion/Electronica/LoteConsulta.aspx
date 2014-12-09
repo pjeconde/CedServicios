@@ -774,12 +774,6 @@ EnableEventValidation="false" ValidateRequest="false"%>
                                                                         <asp:TextBox ID="Id_LoteTextbox" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Este número, que no necesariamente tiene que ser correlativo y consecutivo, siempre debe ser mayor al último número de lote procesado en Interfacturas. Este número NO SE PUEDE REPETIR.">
                                                                         </asp:TextBox>
                                                                     </td>
-                                                                    <td class="TC01S">
-                                                                        Cuit canal:
-                                                                    </td>
-                                                                    <td class="TC01S" style="padding-left: 5px">
-                                                                        <asp:TextBox ID="Cuit_CanalTextBox" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDetCh">30690783521</asp:TextBox>
-                                                                    </td>
                                                                     <td class="TC00S">
                                                                         <asp:Label ID="Presta_ServLabel" Text="Presta servicios:" runat="server"></asp:Label>
                                                                     </td>

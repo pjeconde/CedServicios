@@ -2923,7 +2923,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             FeaEntidades.InterFacturas.comprobante comp = new FeaEntidades.InterFacturas.comprobante();
             FeaEntidades.InterFacturas.cabecera_lote cab = new FeaEntidades.InterFacturas.cabecera_lote();
             cab.cantidad_reg = 1;
-            cab.cuit_canal = Convert.ToInt64(Cuit_CanalTextBox.Text);
+            cab.cuit_canal = Convert.ToInt64(Entidades.Const.CuitInterfacturas);
             cab.cuit_vendedor = Convert.ToInt64(Cuit_VendedorTextBox.Text);
             cab.id_lote = Convert.ToInt64(Id_LoteTextbox.Text);
 
