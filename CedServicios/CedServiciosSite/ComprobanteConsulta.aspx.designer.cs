@@ -472,15 +472,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox Id_LoteTextbox;
         
         /// <summary>
-        /// Control Cuit_CanalTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Cuit_CanalTextBox;
-        
-        /// <summary>
         /// Control Presta_ServLabel.
         /// </summary>
         /// <remarks>

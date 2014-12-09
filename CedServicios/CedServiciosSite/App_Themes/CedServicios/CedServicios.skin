@@ -49,3 +49,4 @@
 <asp:DropDownList SkinID="ddlgrc" runat="server" Style="width: 200px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>
 <asp:DropDownList SkinID="ddlgr2c" runat="server" Style="width: 300px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>
 <asp:DropDownList SkinID="DropDownListCompradorGr" runat="server" Style="width: 280px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="DropDownListTipoComprobante" runat="server" Style="width:400px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
