@@ -31,7 +31,7 @@
 									</asp:DropDownList>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:DropDownList ID="ddlarticulosel" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlarticuloselFooter_SelectedIndexChanged" Width="50px" style="color:#071F70">
+									<asp:DropDownList ID="ddlarticulosel" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlarticuloselFooter_SelectedIndexChanged" Width="50px" style="color:#071F70" tooltip="Elegir artículo">
 									</asp:DropDownList>
 								</FooterTemplate>
 								<HeaderStyle Font-Bold="False" Width="50px" />
@@ -94,13 +94,13 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtdescripcion" runat="server" Text='<%# Eval("descripcion") %>'
-										TextMode="MultiLine" style="color:#071F70"></asp:TextBox>
+										TextMode="MultiLine" Width="200px" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="DescrEditFilteredTextBoxExtender" runat="server"
 										FilterMode="InvalidChars" FilterType="Custom" InvalidChars="<>" TargetControlID="txtdescripcion">
 									</cc1:FilteredTextBoxExtender>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtdescripcion" runat="server" Text='' TextMode="MultiLine" style="color:#071F70"></asp:TextBox>
+									<asp:TextBox ID="txtdescripcion" runat="server" Text='' TextMode="MultiLine" Width="200px" style="color:#071F70"></asp:TextBox>
 									<cc1:FilteredTextBoxExtender ID="DescrFooterFilteredTextBoxExtender" runat="server"
 										FilterMode="InvalidChars" FilterType="Custom" InvalidChars="<>" TargetControlID="txtdescripcion">
 									</cc1:FilteredTextBoxExtender>

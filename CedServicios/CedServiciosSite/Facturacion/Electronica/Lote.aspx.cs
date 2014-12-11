@@ -117,7 +117,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     if (sesion.Usuario.Id != null)
                     {
                         //Email_VendedorRequiredFieldValidator.Enabled = false;
-                        GenerarButton.Text = "Enviar archivo XML al e-mail (" + ((Entidades.Sesion)Session["Sesion"]).Usuario.Email + ")";
+                        GenerarButton.ToolTip = "se enviará, al vendedor, a " + ((Entidades.Sesion)Session["Sesion"]).Usuario.Email;
                         CompradorDropDownList.Enabled = true;
                     }
                     if (sesion.Cuit.Nro != null && sesion.Cuit.Nro != "")
