@@ -1,25 +1,25 @@
 <%@ Control Language="C#" AutoEventWireup="true" Codebehind="Permisos.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Permisos" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
-	<tr>
+<table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+<%--	<tr>
 		<td rowspan="8" style="width: 1px; background-color: Gray;">
 		</td>
 		<td colspan="1" style="height: 1px; background-color: Gray;">
 		</td>
 		<td rowspan="8" style="width: 1px; background-color: Gray;">
 		</td>
-	</tr>
+	</tr>--%>
 	<tr>
-		<td style="text-align: center; height: 10px;">
+		<td style="height:10px;">
 		</td>
 	</tr>
 	<tr>
 		<td class="TextoResaltado" style="text-align: center;">
-			PERMISOS DE EXPORTACIÓN
+			Permisos
 		</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; height: 10px;">
+		<td style="height:10px;">
 		</td>
 	</tr>
 	<tr>
@@ -31,13 +31,12 @@
 				</Triggers>
 				<ContentTemplate>
 					<asp:GridView ID="permisosGridView" runat="server" AutoGenerateColumns="False" BorderColor="gray"
-						BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
-						EnableViewState="true" Font-Bold="false" ForeColor="#071F70" GridLines="Both"
-						HeaderStyle-ForeColor="#A52A2A" OnRowCancelingEdit="permisosGridView_RowCancelingEdit"
+						BorderStyle="Solid" BorderWidth="1px"
+						EnableViewState="true" Font-Bold="false" GridLines="Both"
+						OnRowCancelingEdit="permisosGridView_RowCancelingEdit"
 						OnRowCommand="permisosGridView_RowCommand" OnRowDeleted="permisosGridView_RowDeleted"
 						OnRowDeleting="permisosGridView_RowDeleting" OnRowEditing="permisosGridView_RowEditing"
 						OnRowUpdated="permisosGridView_RowUpdated" OnRowUpdating="permisosGridView_RowUpdating"
-						PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
 						ShowFooter="true" ShowHeader="True" ToolTip="El número de permiso debe ser un número entero"
 						Width="100%">
 						<Columns>
@@ -47,7 +46,7 @@
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:TextBox ID="txtdato_de_permiso" runat="server" Text='<%# Eval("id_permiso") %>'
-										Width="75%" style="Color:#071F70"></asp:TextBox>
+										Width="75%"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="txtdato_de_permisoEditExpoMaskedEditExtender" runat="server"
 										ClearMaskOnLostFocus="true" Enabled="true" Mask="99999LL??999999L" MaskType="None"
 										PromptCharacter="?" TargetControlID="txtdato_de_permiso">
@@ -57,7 +56,7 @@
 										SetFocusOnError="True" ValidationGroup="PermisosEditItem">*</asp:RequiredFieldValidator>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:TextBox ID="txtdato_de_permiso" runat="server" Text='' Width="75%" style="Color:#071F70"></asp:TextBox>
+									<asp:TextBox ID="txtdato_de_permiso" runat="server" Text='' Width="75%"></asp:TextBox>
 									<cc1:MaskedEditExtender ID="txtdato_de_permisoFooterExpoMaskedEditExtender" runat="server"
 										ClearMaskOnLostFocus="true" Enabled="true" Mask="99999LL??999999L" MaskType="None"
 										PromptCharacter="?" TargetControlID="txtdato_de_permiso">
@@ -67,7 +66,6 @@
 										SetFocusOnError="True" ValidationGroup="PermisosFooter">*</asp:RequiredFieldValidator>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Right" />
-								<HeaderStyle Font-Bold="False" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderText="Destino mercadería">
 								<ItemTemplate>
@@ -75,25 +73,23 @@
 										Width="320px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:DropDownList ID="ddlcodigo_de_permisoEdit" runat="server" Width="300px" style="Color:#071F70">
+									<asp:DropDownList ID="ddlcodigo_de_permisoEdit" runat="server" Width="300px">
 									</asp:DropDownList><asp:RequiredFieldValidator ID="ddlcodigo_de_permisoEditItemRequiredFieldValidator"
 										runat="server" ControlToValidate="ddlcodigo_de_permisoEdit" ErrorMessage="Destino de mercadería en edición no informado"
 										SetFocusOnError="True" ValidationGroup="PermisosEditItem">*</asp:RequiredFieldValidator>
 								</EditItemTemplate>
 								<FooterTemplate>
-									<asp:DropDownList ID="ddlcodigo_de_permiso" runat="server" Width="300px" style="Color:#071F70">
+									<asp:DropDownList ID="ddlcodigo_de_permiso" runat="server" Width="300px">
 									</asp:DropDownList><asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator"
 										runat="server" ControlToValidate="ddlcodigo_de_permiso" ErrorMessage="Destino de mercadería a agregar no informado"
 										SetFocusOnError="True" ValidationGroup="PermisosFooter">*</asp:RequiredFieldValidator>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Left" Width="320px" />
 								<FooterStyle HorizontalAlign="Left" Width="320px" />
-								<HeaderStyle Font-Bold="False" />
 							</asp:TemplateField>
 							<asp:CommandField CancelText="Cancelar" EditText="Editar" HeaderText="Edici&#243;n"
 								ShowEditButton="True" UpdateText="Actualizar" ValidationGroup="PermisosEditItem">
 								<ItemStyle HorizontalAlign="Center" />
-								<HeaderStyle Font-Bold="False" />
 							</asp:CommandField>
 							<asp:TemplateField HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
 								<ItemTemplate>
@@ -104,16 +100,9 @@
 										ValidationGroup="PermisosFooter">Agregar</asp:LinkButton>
 								</FooterTemplate>
 								<ItemStyle HorizontalAlign="Center" />
-								<HeaderStyle Font-Bold="False" />
 							</asp:TemplateField>
 						</Columns>
-						<EmptyDataRowStyle ForeColor="#071F70" />
-                        <FooterStyle ForeColor="#071F70" />
-						<RowStyle ForeColor="#071F70" />
-						<EditRowStyle ForeColor="#071F70" />
-						<SelectedRowStyle ForeColor="#071F70" />
-						<PagerStyle ForeColor="#071F70" />
-						<HeaderStyle ForeColor="Brown" />
+						<HeaderStyle Font-Bold="True" />
 					</asp:GridView>
 				</ContentTemplate>
 			</asp:UpdatePanel>
@@ -144,13 +133,12 @@
 				ShowMessageBox="True" ValidationGroup="PermisosFooter"></asp:ValidationSummary>
 		</td>
 	</tr>
-	<tr>
+<%--	<tr>
 		<td rowspan="8" style="width: 1px; background-color: Gray;">
 		</td>
 		<td colspan="1" style="height: 1px; background-color: Gray;">
 		</td>
 		<td rowspan="8" style="width: 1px; background-color: Gray;">
 		</td>
-	</tr>
+	</tr>--%>
 </table>
-<br />

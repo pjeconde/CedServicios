@@ -1145,7 +1145,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                     <asp:GridView ID="referenciasGridView" runat="server" AutoGenerateColumns="False"
                                                                         BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70"
                                                                         EmptyDataRowStyle-ForeColor="#071F70" EnableViewState="true" Font-Bold="false"
-                                                                        ForeColor="#071F70" GridLines="Both" HeaderStyle-ForeColor="#A52A2A" 
+                                                                        ForeColor="#071F70" GridLines="Both" 
                                                                         PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
                                                                         ShowFooter="true" ShowHeader="True" ToolTip="El dato de referencia debe ser un número entero"
                                                                         Width="100%">

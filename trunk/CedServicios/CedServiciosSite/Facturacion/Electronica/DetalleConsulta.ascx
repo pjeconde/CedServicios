@@ -12,7 +12,7 @@
 					<asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" BorderColor="Gray"
 						BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70" 
                         EmptyDataRowStyle-ForeColor="#071F70" Font-Bold="False" ForeColor="#071F70"
-						HeaderStyle-ForeColor="#A52A2A"	PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70" 
+						PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70" 
 						ShowFooter="True" ToolTip="Recuerde que al ingresar importes con decimales el separador a utilizar es el punto" 
                         Width="100%">
 						<Columns>
