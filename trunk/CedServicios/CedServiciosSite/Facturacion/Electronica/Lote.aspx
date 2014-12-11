@@ -56,16 +56,14 @@
                                             </tr>
                                             <tr>
                                                 <td style="padding-top: 5px">
-                                                    <asp:Button ID="FileUploadButton" runat="server" BackColor="peachpuff" BorderColor="brown"
-                                                        BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
-                                                        ForeColor="brown" Height="25px" OnClick="FileUploadButton_Click" Text="Completar datos automáticamente desde archivo xml seleccionado" Width="760px" />
+                                                    <asp:Button ID="FileUploadButton" runat="server" CausesValidation="false" OnClick="FileUploadButton_Click" Text="Completar datos automáticamente desde archivo xml seleccionado" Width="760px" />
                                                 </td>
                                             </tr>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center; height: 10px;">
+                                    <td style="height:10px;">
                                     </td>
                                 </tr>
                                 <tr>
@@ -90,7 +88,7 @@
                                     <asp:AsyncPostBackTrigger ControlID="Tipo_De_ComprobanteDropDownList" EventName="SelectedIndexChanged"/>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:Cornsilk">
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
                                         <tr>
                                             <td rowspan="13" style="width:1px; background-color:Gray;">
                                             </td>
@@ -307,7 +305,7 @@
                                     <asp:PostBackTrigger ControlID="FileUploadButton"></asp:PostBackTrigger>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:Cornsilk">
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
                                         <tr>
                                             <td rowspan="7" style="width: 1px; background-color: Gray;">
                                             </td>
@@ -379,86 +377,50 @@
                     <!-- DATOS DEL VENDEDOR -->
                     <tr>
                         <td>
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:Cornsilk">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
                                 <tr>
-                                    <td rowspan="3" style="width:1px; background-color:Gray;">
+                                    <td rowspan="7" style="width:1px; background-color:Gray;">
                                     </td>
-                                    <td colspan="1" style="height:1px; background-color:Gray;">
+                                    <td colspan="3" style="height:1px; background-color:Gray;">
                                     </td>
-                                    <td rowspan="3" style="width:1px; background-color:Gray;">
+                                    <td rowspan="7" style="width:1px; background-color:Gray;">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="left" valign="top">
-                                        <table border="0" cellpadding="0" cellspacing="0">
+                                    <td style="height:10px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="center" colspan="3" class="TextoResaltado" style="width: 240px">
+                                        INFORMACIÓN VENDEDOR<br />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height:10px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="right" valign="top">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
                                             <tr>
-                                                <td style="width: 370px">
+                                                <td class="TC00S">
+                                                    Razón Social:
                                                 </td>
-                                                <td class="bgFEAC" style="width: 40px; height: 10px;">
-                                                </td>
-                                                <td style="width: 370px">
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <!-- TIPO DE COMPROBANTE -->
-                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
-                                            <tr>
-                                                <td align="center" class="TextoResaltado" style="width: 240px">
-                                                    INFORMACIÓN VENDEDOR<br />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                        <!-- DATOS DEL VENDEDOR -->
-                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
-                                            <tr>
-                                                <td style="width: 370px;">
-                                                </td>
-                                                <td class="bgFEAC" rowspan="15" style="width: 40px; background-repeat: repeat-y;">
-                                                </td>
-                                                <td style="width: 370px;">
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="3" style="height: 10px;">
+                                                <td class="TC00S">
+                                                    Calle:
                                                 </td>
-                                                <td colspan="3">
-                                                </td>
-                                            </tr>
-                                            <!-- Datos del Vendedor: Razon Social / Comprobante -->
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Razón Social:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                            
-                                            </tr>
-                                            <!-- Datos del Vendedor: Calle -->
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Calle:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                 </td>
                                             </tr>
-                                            <!-- Datos del Vendedor: Nro.Calle, Piso y Dpto  / Fecha Emision -->
                                             <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                <td colspan="2">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 5px; text-align: right;">
                                                         <tr>
                                                             <!--80 + 40 + 60 + 40 + 80 + 40 padding = 370px -->
                                                             <td class="TC01S" style="padding-right:5px">
@@ -483,10 +445,9 @@
                                                     </table>
                                                 </td>
                                             </tr>
-                                            <!-- Datos del Vendedor: Sector, Torre y Manzana -->
                                             <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                <td colspan="2">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 5px; text-align: right;">
                                                         <tr>
                                                             <!-- 80 + 40 + 60 + 40 + 80 + 40 padding = 370px -->
                                                             <td class="TC01S" style="padding-right:5px">
@@ -510,212 +471,138 @@
                                                         </tr>
                                                     </table>
                                                 </td>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Código interno:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Código de Cliente, Proveedor, etc.)"> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
                                             </tr>
-                                            <!-- Datos del Vendedor: Localidad -->
                                             <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Localidad:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                <td class="TC00S">
+                                                    Localidad:
                                                 </td>
-                                                            
-                                            </tr>
-                                            <!-- Datos del Vendedor: Provincia -->
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Provincia:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:DropDownList ID="Provincia_VendedorDropDownList" runat="server" SkinID="ddln">
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                            
-                                            </tr>
-                                            <!-- Datos del Vendedor: Código Postal -->
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Código Postal:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="Cp_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-
-                                            </tr>
-                                            <!-- Datos del Vendedor: GLN -->
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                GLN:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres."> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                            
-                                            </tr>
-                                            <!-- Datos del Vendedor: Nombre contacto -->
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Nombre contacto:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                CUIT:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <!-- Datos del Vendedor: Mail Contacto / CUIT -->
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                e-mail Contacto:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="Email_VendedorTextBox" runat="server" AutoCompleteType="Email" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Condición IB:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server"
-                                                                    SkinID="ddln">
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <!-- Datos del Vendedor: Teléfono contacto -->
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Teléfono contacto:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="Telefono_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                IB:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                    ToolTip="Formatos válidos: XXXXXXX-XX o XX-XXXXXXXX-X o XXX-XXXXXX-X"> </asp:TextBox>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                            </tr>
-                                            <!-- Datos del Vendedor: IVA / Inicio de actividades -->
-                                            <tr>
-                                                <td>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                IVA:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:DropDownList ID="Condicion_IVA_VendedorDropDownList" runat="server" SkinID="ddln">
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </td>
-                                                <td align="left" valign="top">
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Inicio de actividades:
-                                                            </td>
-                                                            <td align="left" style="padding-left: 4px; padding-top: 5px;" valign="top">
-                                                                <asp:TextBox ID="InicioDeActividadesVendedorDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
-                                                                <cc1:CalendarExtender ID="CalendarExtender2" runat="server" CssClass="MyCalendar"
-                                                                    OnClientShown="onCalendar1Shown" TargetControlID="InicioDeActividadesVendedorDatePickerWebUserControl"
-                                                                    Format="yyyyMMdd" PopupButtonID="ImageCalendarInicioDeActividadesVendedor">
-                                                                </cc1:CalendarExtender>
-                                                                <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarInicioDeActividadesVendedor" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                            </td>
-                                                        </tr>
-                                                    </table>
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td style="height: 10px;">
+                                                <td class="TC00S">
+                                                    Provincia:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:DropDownList ID="Provincia_VendedorDropDownList" runat="server" SkinID="ddln">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TC00S">
+                                                    Código Postal:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="Cp_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TC00S">
+                                                    Nombre contacto:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TC00S">
+                                                    Teléfono contacto:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="Telefono_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    <td class="bgFEAC" style="width: 40px; background-repeat: repeat-y;">
+                                    </td>
+                                    <td align="left" valign="top">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                            <tr>
+                                                <td class="TC00S">
+                                                    CUIT:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TC00S">
+                                                    Inicio de actividades:
+                                                </td>
+                                                <td align="left" style="padding-left: 4px; padding-top: 5px;" valign="top">
+                                                    <asp:TextBox ID="InicioDeActividadesVendedorDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
+                                                    <cc1:CalendarExtender ID="CalendarExtender2" runat="server" CssClass="MyCalendar"
+                                                        OnClientShown="onCalendar1Shown" TargetControlID="InicioDeActividadesVendedorDatePickerWebUserControl"
+                                                        Format="yyyyMMdd" PopupButtonID="ImageCalendarInicioDeActividadesVendedor">
+                                                    </cc1:CalendarExtender>
+                                                    <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarInicioDeActividadesVendedor" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TC00S">
+                                                    Condición IB:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server"
+                                                        SkinID="ddln">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TC00S">
+                                                    IB:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                        ToolTip="Formatos válidos: XXXXXXX-XX o XX-XXXXXXXX-X o XXX-XXXXXX-X"> </asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TC00S">
+                                                    IVA:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:DropDownList ID="Condicion_IVA_VendedorDropDownList" runat="server" SkinID="ddln">
+                                                    </asp:DropDownList>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TC00S">
+                                                    GLN:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                        ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres."> </asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TC00S">
+                                                    Código interno:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                        ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Código de Cliente, Proveedor, etc.)"> </asp:TextBox>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TC00S">
+                                                    e-mail Contacto:
+                                                </td>
+                                                <td class="TC10S">
+                                                    <asp:TextBox ID="Email_VendedorTextBox" runat="server" AutoCompleteType="Email" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                 </td>
                                             </tr>
                                         </table>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="5" style="height: 1px; background-color: Gray;">
+                                    <td style="height:10px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3" style="height: 1px; background-color: Gray;">
                                     </td>
                                 </tr>
                             </table>
@@ -735,17 +622,17 @@
                                     <asp:AsyncPostBackTrigger ControlID="PaisDestinoExpDropDownList"></asp:AsyncPostBackTrigger>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:Cornsilk">
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
                                         <tr>
-                                            <td rowspan="8" style="width: 1px; background-color: Gray;">
+                                            <td rowspan="9" style="width: 1px; background-color: Gray;">
                                             </td>
                                             <td colspan="3" style="height: 1px; background-color: Gray;">
                                             </td>
-                                            <td rowspan="8" style="width: 1px; background-color: Gray;">
+                                            <td rowspan="9" style="width: 1px; background-color: Gray;">
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" style="text-align: center; height: 10px;">
+                                            <td style="height:10px;">
                                             </td>
                                         </tr>
                                         <tr>
@@ -754,16 +641,19 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" style="text-align: center; height: 10px;">
+                                            <td style="height:10px;">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td colspan="3">
                                                 <table border="0" cellpadding="0" cellspacing="0" width="100%">
                                                     <tr>
-                                                        <td style="text-align:center;">
+                                                        <td class="TC00S">
+                                                            Elegir comprador:
+                                                        </td>
+                                                        <td class="TC10S">
                                                             <asp:DropDownList ID="CompradorDropDownList" runat="server" AutoPostBack="True" Enabled="false"
-                                                                OnSelectedIndexChanged="CompradorDropDownList_SelectedIndexChanged" SkinID="ddlgr2c" Visible="false">
+                                                                OnSelectedIndexChanged="CompradorDropDownList_SelectedIndexChanged" SkinID="DropDownListComprador" Visible="false">
                                                             </asp:DropDownList>
                                                             <asp:UpdateProgress ID="compradorUpdateProgress" runat="server" AssociatedUpdatePanelID="compradorUpdatePanel"
                                                                 DisplayAfter="0">
@@ -778,56 +668,12 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td style="height:10px;">
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td align="right" valign="top">
                                                 <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            GLN:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
-                                                            </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Código interno:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Codigo_Interno_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                ToolTip="<Opcional> Código utilizado para identificar al comprador dentro de una empresa/organización. (Ej. Código de Cliente, Proveedor, etc.)">
-                                                            </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Tipo de documento:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:DropDownList ID="Codigo_Doc_Identificatorio_CompradorDropDownList" runat="server" SkinID="ddln">
-                                                            </asp:DropDownList>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            <asp:RegularExpressionValidator ID="docCompradorRegularExpressionValidator" runat="server"
-                                                                ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="error de formateo en documento del comprador"
-                                                                SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
-                                                            <asp:RequiredFieldValidator ID="docCompradorRequiredFieldValidator" runat="server"
-                                                                ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="documento del comprador"
-                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>
-                                                            <asp:RequiredFieldValidator ID="listaDocCompradorRequiredFieldValidator" runat="server"
-                                                                ControlToValidate="Nro_Doc_Identificatorio_CompradorDropDownList" ErrorMessage="documento del comprador para exportación"
-                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>
-                                                            Nro. de documento:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Nro_Doc_Identificatorio_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
-                                                            </asp:TextBox>
-                                                            <asp:DropDownList ID="Nro_Doc_Identificatorio_CompradorDropDownList" runat="server" SkinID="ddln" Visible="false" CausesValidation="false">
-                                                            </asp:DropDownList>
-                                                        </td>
-                                                    </tr>
                                                     <tr>
                                                         <td class="TC00S">
                                                             Denominación:
@@ -873,10 +719,12 @@
                                                                         </asp:TextBox>
                                                                     </td>
                                                                 </tr>
-                                                                <tr>
-                                                                    <td colspan="6" style="height: 5px">
-                                                                    </td>
-                                                                </tr>
+                                                            </table>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 5px; text-align: right;">
                                                                 <tr>
                                                                     <td class="TC01S" style="padding-right: 5px">
                                                                         Sector:
@@ -903,22 +751,6 @@
                                                             </table>
                                                         </td>
                                                     </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            e-mail para aviso:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                ToolTip="A esta dirección se enviará un email de aviso para que el destinatario pueda visualizar el comprobante">
-                                                            </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                            <td class="bgFEAC" rowspan="2" style="width: 40px; background-repeat: repeat-y;">
-                                            </td>
-                                            <td align="left" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             Localidad:
@@ -948,30 +780,56 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="TC00S">
-                                                            Contacto:
+                                                            e-mail para aviso:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Contacto_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                            <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                ToolTip="A esta dirección se enviará un email de aviso para que el destinatario pueda visualizar el comprobante">
                                                             </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="TC00S">
-                                                            e-mail Contacto:
+                                                            Contraseña para aviso:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Email_CompradorTextBox" runat="server" AutoCompleteType="Email"
-                                                                SkinID="TextoBoxFEAVendedorDet">
+                                                            <asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                ToolTip="Para poder acceder al contenido del comprobante, se solicitará al destinatario el ingreso de esta contraseña">
                                                             </asp:TextBox>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                            <td class="bgFEAC" style="width: 40px; background-repeat: repeat-y;">
+                                            </td>
+                                            <td align="left" valign="top">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Tipo de documento:
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:DropDownList ID="Codigo_Doc_Identificatorio_CompradorDropDownList" runat="server" SkinID="ddln">
+                                                            </asp:DropDownList>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="TC00S">
-                                                            Teléfono contacto:
+                                                            <asp:RegularExpressionValidator ID="docCompradorRegularExpressionValidator" runat="server"
+                                                                ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="error de formateo en documento del comprador"
+                                                                SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
+                                                            <asp:RequiredFieldValidator ID="docCompradorRequiredFieldValidator" runat="server"
+                                                                ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="documento del comprador"
+                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                            <asp:RequiredFieldValidator ID="listaDocCompradorRequiredFieldValidator" runat="server"
+                                                                ControlToValidate="Nro_Doc_Identificatorio_CompradorDropDownList" ErrorMessage="documento del comprador para exportación"
+                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>
+                                                            Nro. de documento:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Telefono_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                            <asp:TextBox ID="Nro_Doc_Identificatorio_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
                                                             </asp:TextBox>
+                                                            <asp:DropDownList ID="Nro_Doc_Identificatorio_CompradorDropDownList" runat="server" SkinID="ddln" Visible="false" CausesValidation="false">
+                                                            </asp:DropDownList>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -997,18 +855,56 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="TC00S">
-                                                            Contraseña para aviso:
+                                                            GLN:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                ToolTip="Para poder acceder al contenido del comprobante, se solicitará al destinatario el ingreso de esta contraseña">
+                                                            <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
                                                             </asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Código interno:
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:TextBox ID="Codigo_Interno_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                ToolTip="<Opcional> Código utilizado para identificar al comprador dentro de una empresa/organización. (Ej. Código de Cliente, Proveedor, etc.)">
+                                                            </asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Nombre contacto:
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:TextBox ID="Contacto_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                            </asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            e-mail Contacto:
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:TextBox ID="Email_CompradorTextBox" runat="server" AutoCompleteType="Email"
+                                                                SkinID="TextoBoxFEAVendedorDet">
+                                                            </asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Teléfono contacto:
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:TextBox ID="Telefono_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                            </asp:TextBox>
+                                                        </td>
                                                     </tr>
                                                 </table>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3" style="height:10px;">
+                                            <td style="height:10px;">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1024,7 +920,7 @@
                     <!-- CODIGOS DE REFERENCIAS -->
                     <tr>
                         <td class="TextoResaltado" style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:Cornsilk">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
                                 <tr>
                                     <td rowspan="9" style="width: 1px; background-color: Gray;">
                                     </td>
@@ -1189,7 +1085,7 @@
                     <!-- INFORMACIÓN EXPORTACIÓN-->
                     <tr>
                         <td class="TextoResaltado" style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width: 782px; background-color:Cornsilk">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 782px; background-color:#fff8dc">
                                 <tr>
                                     <td rowspan="8" style="width:1px; background-color:Gray;">
                                     </td>
@@ -1340,7 +1236,7 @@
                     <!-- DATOS DEL DETALLE -->
                     <tr>
                         <td class="TextoResaltado" style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:Cornsilk">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
                                 <tr>
                                     <td rowspan="7" style="width: 1px; background-color: Gray;">
                                     </td>
@@ -1407,7 +1303,7 @@
                     <!-- DATOS DE RESUMEN FINAL -->
                     <tr>
                         <td style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:Cornsilk">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
                                 <tr>
                                     <td rowspan="6" style="width:1px; background-color:Gray;">
                                     </td>
@@ -1428,11 +1324,9 @@
                                 <tr>
                                     <td class="TextoResaltado" colspan="2" style="text-align: right;">
                                     </td>
-                                    <td align="right" class="TextoResaltado" style="padding-right: 15px">
-                                        <asp:Button ID="CalcularTotalesButton" runat="server" BackColor="peachpuff" BorderColor="brown"
-                                            BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
-                                            ForeColor="brown" Height="25px" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales"
-                                            ToolTip="" Width="184" />
+                                    <td align="right" style="padding-right:20px">
+                                        <asp:Button ID="CalcularTotalesButton" runat="server" CausesValidation="false" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales"
+                                            ToolTip="" Width="174" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -1630,7 +1524,7 @@
                     <!-- OBSERVACIONES -->
                     <tr>
                         <td style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:Cornsilk">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
                                 <tr>
                                     <td rowspan="7" style="width:1px; background-color:Gray;">
                                     </td>
@@ -1672,76 +1566,117 @@
                         <td style="height: 10px;">
                         </td>
                     </tr>
-                    <!-- BOTONES -->
+                    <!-- ACCIONES -->
                     <tr>
-                        <td style="text-align: center; width: 100%">
-                            <table border="0" cellpadding="2" cellspacing="2" style="width: 780px">
+                        <td style="text-align: center">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                 <tr>
-                                    <td style="width: 50%; padding-right: 3px">
-                                        <asp:Button ID="DescargarButton" runat="server" BackColor="peachpuff" BorderColor="brown"
-                                            BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" Height="25px"
-                                            OnClick="GenerarButton_Click" Text="Descargar archivo XML" ToolTip="Luego de descargar el archivo XML, realizar el (Upload) en Interfacturas."
-                                            Width="100%" />
+                                    <td rowspan="7" style="width:1px; background-color:Gray;">
                                     </td>
-                                    <td style="width: 50%">
-                                        <asp:Button ID="GenerarButton" runat="server" BorderColor="Gray" BorderStyle="NotSet"
-                                            BorderWidth="1px" Height="25px" OnClick="GenerarButton_Click" 
-                                            Text="Enviar archivo XML al e-mail del vendedor" ToolTip="Luego de descargar el archivo XML del correo, realizar el (Upload) en Interfacturas."
-                                            Width="100%" />
+                                    <td style="height:1px; background-color:Gray;">
+                                    </td>
+                                    <td rowspan="7" style="width:1px; background-color:Gray;">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 100%; padding-right: 3px" colspan="2">
-                                        <asp:Button ID="PDFButton" runat="server" BackColor="#FFFFCC" BorderColor="brown"
-                                            BorderStyle="Solid" BorderWidth="1px" CausesValidation="true" Font-Bold="true"
-                                            ForeColor="brown" Height="25px" OnClick="PDFButton_Click" 
-                                            Text="Previsualizar comprobante" Width="100%" />
-                                        <asp:Button ID="ButtonPrueba" runat="server" BackColor="#FFFFCC" BorderColor="brown" 
-                                            BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true"
-                                            ForeColor="brown" Height="60px" Text="Prueba" Width="0%" style="display:none" 
-                                            onclick="ButtonPrueba_Click" />
+                                    <td style="height: 10px;">
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 50%; padding-right: 3px">
-                                        <asp:Button ID="ValidarIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
-                                            BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true" 
-                                            ForeColor="brown" Height="25px" OnClick="ValidarIBKButton_Click" 
-                                            Text="Validar lote en Interfacturas" ToolTip="Validar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
-                                            Width="100%" />
-                                            <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
-                                            PopupControlID="PopupValidarITF" TargetControlID="ValidarIBKButton" 
-                                            BackgroundCssClass="modalBackground" runat="server" ValidateRequestMode="Enabled" 
-                                            onload="ModalPopupExtender1_Load" />
-                                    </td>
-                                    <td style="width: 50%;">
-                                        <asp:Button ID="EnviarIBKButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
-                                            BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true" 
-                                            ForeColor="brown" Height="25px" OnClick="EnviarIBKButton_Click" 
-                                            Text="Enviar lote a Interfacturas" ToolTip="Impactar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
-                                            Width="100%" />
-                                            <cc1:ModalPopupExtender ID="ModalPopupExtender1" 
-                                            PopupControlID="PopupEnvioITF" TargetControlID="EnviarIBKButton" 
-                                            BackgroundCssClass="modalBackground" runat="server" 
-                                            onload="ModalPopupExtender1_Load" />
+                                    <td class="TextoResaltado" style="text-align:center">
+                                        ACCIONES
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="width: 100%; padding-right: 3px" colspan="2">
-                                        <asp:Button ID="EnviarAFIPButton" runat="server" BackColor="#B4E4E4" BorderColor="brown"
-                                            BorderStyle="Solid" BorderWidth="1px" CausesValidation="false" Font-Bold="true" 
-                                            ForeColor="brown" Height="25px" OnClick="EnviarAFIPButton_Click" 
-                                            Text="Enviar lote a AFIP" ToolTip="Impactar el comprobante en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
-                                            Width="100%" />
-                                            <cc1:ModalPopupExtender ID="ModalPopupExtender3" 
-                                            PopupControlID="PopupEnviarAFIP" TargetControlID="EnviarAFIPButton" 
-                                            BackgroundCssClass="modalBackground" runat="server" 
-                                            onload="ModalPopupExtender3_Load" />
+                                    <td style="height: 10px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:10px">
+                                        <asp:Panel ID="AFIPpanel" runat="server">
+                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                <tr>
+                                                    <td class="TC00S">
+                                                        AFIP: 
+                                                    </td>
+                                                    <td align="left" style="padding-left:5px">
+                                                        <asp:Button ID="EnviarAFIPButton" runat="server" CausesValidation="false" OnClick="EnviarAFIPButton_Click" 
+                                                            Text="Enviar" ToolTip="Impactar el comprobante en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
+                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender3" 
+                                                            PopupControlID="PopupEnviarAFIP" TargetControlID="EnviarAFIPButton" 
+                                                            BackgroundCssClass="modalBackground" runat="server" 
+                                                            onload="ModalPopupExtender3_Load" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                        <asp:Panel ID="InterfacturasOnLinePanel" runat="server">
+                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                <tr>
+                                                    <td class="TC00S">
+                                                        Interfacturas (on line): 
+                                                    </td>
+                                                    <td align="left" style="padding-left:5px">
+                                                        <asp:Button ID="ValidarIBKButton" runat="server" CausesValidation="false" OnClick="ValidarIBKButton_Click" 
+                                                            Text="Validar" ToolTip="Validar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
+                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
+                                                            PopupControlID="PopupValidarITF" TargetControlID="ValidarIBKButton" 
+                                                            BackgroundCssClass="modalBackground" runat="server" ValidateRequestMode="Enabled" 
+                                                            onload="ModalPopupExtender1_Load" />
+                                                        <asp:Button ID="EnviarIBKButton" runat="server" CausesValidation="false" OnClick="EnviarIBKButton_Click" 
+                                                            Text="Enviar" ToolTip="Impactar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
+                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender1" 
+                                                            PopupControlID="PopupEnvioITF" TargetControlID="EnviarIBKButton" 
+                                                            BackgroundCssClass="modalBackground" runat="server" 
+                                                            onload="ModalPopupExtender1_Load" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                        <asp:Panel ID="InterfacturasArchivoXMLpanel" runat="server">
+                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                <tr>
+                                                    <td class="TC00S">
+                                                        Interfacturas (archivo XML): 
+                                                    </td>
+                                                    <td align="left" style="padding-left:5px">
+                                                        <asp:Button ID="DescargarButton" runat="server" OnClick="GenerarButton_Click" Text="Descargar" ToolTip="Luego de descargar el archivo XML, realizar el (Upload) en Interfacturas." />
+                                                        <asp:Button ID="GenerarButton" runat="server" OnClick="GenerarButton_Click" 
+                                                            Text="Enviar por e-mail" ToolTip="Luego de descargar el archivo XML del correo, realizar el (Upload) en Interfacturas." />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                        <asp:Panel ID="PrevisualizacionComprobantePanel" runat="server">
+                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td class="TC00S">
+                                                        Previsualización comprobante: 
+                                                    </td>
+                                                    <td align="left" style="padding-left:5px">
+                                                        <asp:Button ID="PDFButton" runat="server" CausesValidation="true" OnClick="PDFButton_Click" 
+                                                            Text="Obtener" />
+                                                        <asp:Button ID="ButtonPrueba" runat="server" CausesValidation="false" Text="Prueba" Width="0%" style="display:none" 
+                                                            onclick="ButtonPrueba_Click" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height: 10px;">
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="height:1px; background-color:Gray;">
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
+
+                    <!-- OTROS -->
                     <tr>
                         <td style="text-align: center; height: 10px;">
                             Agradeceríamos a los usuarios del sitio que nos informen sobre dudas, posibles omisiones

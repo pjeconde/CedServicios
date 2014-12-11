@@ -490,15 +490,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Domicilio_Manzana_VendedorTextBox;
         
         /// <summary>
-        /// Control Codigo_Interno_VendedorTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Codigo_Interno_VendedorTextBox;
-        
-        /// <summary>
         /// Control Localidad_VendedorTextBox.
         /// </summary>
         /// <remarks>
@@ -526,15 +517,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Cp_VendedorTextBox;
         
         /// <summary>
-        /// Control GLN_VendedorTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox GLN_VendedorTextBox;
-        
-        /// <summary>
         /// Control Contacto_VendedorTextBox.
         /// </summary>
         /// <remarks>
@@ -542,33 +524,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Contacto_VendedorTextBox;
-        
-        /// <summary>
-        /// Control Cuit_VendedorTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Cuit_VendedorTextBox;
-        
-        /// <summary>
-        /// Control Email_VendedorTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Email_VendedorTextBox;
-        
-        /// <summary>
-        /// Control Condicion_Ingresos_Brutos_VendedorDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Condicion_Ingresos_Brutos_VendedorDropDownList;
         
         /// <summary>
         /// Control Telefono_VendedorTextBox.
@@ -580,22 +535,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Telefono_VendedorTextBox;
         
         /// <summary>
-        /// Control NroIBVendedorTextBox.
+        /// Control Cuit_VendedorTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NroIBVendedorTextBox;
-        
-        /// <summary>
-        /// Control Condicion_IVA_VendedorDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Condicion_IVA_VendedorDropDownList;
+        protected global::System.Web.UI.WebControls.TextBox Cuit_VendedorTextBox;
         
         /// <summary>
         /// Control InicioDeActividadesVendedorDatePickerWebUserControl.
@@ -625,6 +571,60 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ImageButton ImageCalendarInicioDeActividadesVendedor;
         
         /// <summary>
+        /// Control Condicion_Ingresos_Brutos_VendedorDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Condicion_Ingresos_Brutos_VendedorDropDownList;
+        
+        /// <summary>
+        /// Control NroIBVendedorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NroIBVendedorTextBox;
+        
+        /// <summary>
+        /// Control Condicion_IVA_VendedorDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Condicion_IVA_VendedorDropDownList;
+        
+        /// <summary>
+        /// Control GLN_VendedorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox GLN_VendedorTextBox;
+        
+        /// <summary>
+        /// Control Codigo_Interno_VendedorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Codigo_Interno_VendedorTextBox;
+        
+        /// <summary>
+        /// Control Email_VendedorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Email_VendedorTextBox;
+        
+        /// <summary>
         /// Control compradorUpdatePanel.
         /// </summary>
         /// <remarks>
@@ -650,78 +650,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress compradorUpdateProgress;
-        
-        /// <summary>
-        /// Control GLN_CompradorTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox GLN_CompradorTextBox;
-        
-        /// <summary>
-        /// Control Codigo_Interno_CompradorTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Codigo_Interno_CompradorTextBox;
-        
-        /// <summary>
-        /// Control Codigo_Doc_Identificatorio_CompradorDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Codigo_Doc_Identificatorio_CompradorDropDownList;
-        
-        /// <summary>
-        /// Control docCompradorRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator docCompradorRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control docCompradorRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator docCompradorRequiredFieldValidator;
-        
-        /// <summary>
-        /// Control listaDocCompradorRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator listaDocCompradorRequiredFieldValidator;
-        
-        /// <summary>
-        /// Control Nro_Doc_Identificatorio_CompradorTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Nro_Doc_Identificatorio_CompradorTextBox;
-        
-        /// <summary>
-        /// Control Nro_Doc_Identificatorio_CompradorDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Nro_Doc_Identificatorio_CompradorDropDownList;
         
         /// <summary>
         /// Control Denominacion_CompradorTextBox.
@@ -796,15 +724,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Domicilio_Manzana_CompradorTextBox;
         
         /// <summary>
-        /// Control EmailAvisoVisualizacionTextBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox EmailAvisoVisualizacionTextBox;
-        
-        /// <summary>
         /// Control Localidad_CompradorTextBox.
         /// </summary>
         /// <remarks>
@@ -832,31 +751,76 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Cp_CompradorTextBox;
         
         /// <summary>
-        /// Control Contacto_CompradorTextBox.
+        /// Control EmailAvisoVisualizacionTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Contacto_CompradorTextBox;
+        protected global::System.Web.UI.WebControls.TextBox EmailAvisoVisualizacionTextBox;
         
         /// <summary>
-        /// Control Email_CompradorTextBox.
+        /// Control PasswordAvisoVisualizacionTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Email_CompradorTextBox;
+        protected global::System.Web.UI.WebControls.TextBox PasswordAvisoVisualizacionTextBox;
         
         /// <summary>
-        /// Control Telefono_CompradorTextBox.
+        /// Control Codigo_Doc_Identificatorio_CompradorDropDownList.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Telefono_CompradorTextBox;
+        protected global::System.Web.UI.WebControls.DropDownList Codigo_Doc_Identificatorio_CompradorDropDownList;
+        
+        /// <summary>
+        /// Control docCompradorRegularExpressionValidator.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator docCompradorRegularExpressionValidator;
+        
+        /// <summary>
+        /// Control docCompradorRequiredFieldValidator.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator docCompradorRequiredFieldValidator;
+        
+        /// <summary>
+        /// Control listaDocCompradorRequiredFieldValidator.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator listaDocCompradorRequiredFieldValidator;
+        
+        /// <summary>
+        /// Control Nro_Doc_Identificatorio_CompradorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Nro_Doc_Identificatorio_CompradorTextBox;
+        
+        /// <summary>
+        /// Control Nro_Doc_Identificatorio_CompradorDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Nro_Doc_Identificatorio_CompradorDropDownList;
         
         /// <summary>
         /// Control InicioDeActividadesCompradorDatePickerWebUserControl.
@@ -895,13 +859,49 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList Condicion_IVA_CompradorDropDownList;
         
         /// <summary>
-        /// Control PasswordAvisoVisualizacionTextBox.
+        /// Control GLN_CompradorTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PasswordAvisoVisualizacionTextBox;
+        protected global::System.Web.UI.WebControls.TextBox GLN_CompradorTextBox;
+        
+        /// <summary>
+        /// Control Codigo_Interno_CompradorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Codigo_Interno_CompradorTextBox;
+        
+        /// <summary>
+        /// Control Contacto_CompradorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Contacto_CompradorTextBox;
+        
+        /// <summary>
+        /// Control Email_CompradorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Email_CompradorTextBox;
+        
+        /// <summary>
+        /// Control Telefono_CompradorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Telefono_CompradorTextBox;
         
         /// <summary>
         /// Control referenciasUpdatePanel.
@@ -1291,40 +1291,40 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Observaciones_ResumenTextBox;
         
         /// <summary>
-        /// Control DescargarButton.
+        /// Control AFIPpanel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DescargarButton;
+        protected global::System.Web.UI.WebControls.Panel AFIPpanel;
         
         /// <summary>
-        /// Control GenerarButton.
+        /// Control EnviarAFIPButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GenerarButton;
+        protected global::System.Web.UI.WebControls.Button EnviarAFIPButton;
         
         /// <summary>
-        /// Control PDFButton.
+        /// Control ModalPopupExtender3.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button PDFButton;
+        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender3;
         
         /// <summary>
-        /// Control ButtonPrueba.
+        /// Control InterfacturasOnLinePanel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonPrueba;
+        protected global::System.Web.UI.WebControls.Panel InterfacturasOnLinePanel;
         
         /// <summary>
         /// Control ValidarIBKButton.
@@ -1363,22 +1363,58 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
         
         /// <summary>
-        /// Control EnviarAFIPButton.
+        /// Control InterfacturasArchivoXMLpanel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EnviarAFIPButton;
+        protected global::System.Web.UI.WebControls.Panel InterfacturasArchivoXMLpanel;
         
         /// <summary>
-        /// Control ModalPopupExtender3.
+        /// Control DescargarButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender3;
+        protected global::System.Web.UI.WebControls.Button DescargarButton;
+        
+        /// <summary>
+        /// Control GenerarButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GenerarButton;
+        
+        /// <summary>
+        /// Control PrevisualizacionComprobantePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PrevisualizacionComprobantePanel;
+        
+        /// <summary>
+        /// Control PDFButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button PDFButton;
+        
+        /// <summary>
+        /// Control ButtonPrueba.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ButtonPrueba;
         
         /// <summary>
         /// Control contactoHyperLink.

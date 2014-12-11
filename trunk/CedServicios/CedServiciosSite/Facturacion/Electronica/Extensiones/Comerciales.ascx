@@ -1,6 +1,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Comerciales.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Extensiones.Comerciales" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+<table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
 	<tr>
 		<td rowspan="7" style="width: 1px; background-color: Gray;">
 		</td>
