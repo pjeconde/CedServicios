@@ -275,7 +275,7 @@
                                             </td>
                                             <td class="TC10S" colspan="3">
                                                 <asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" BorderStyle="NotSet" 
-                                                    ForeColor="#071F70" Style="width:569px; text-align:left">
+                                                    ForeColor="#071F70" Style="width:563px; text-align:left">
                                                 </asp:TextBox>
                                             </td>
                                         </tr>
@@ -1523,7 +1523,7 @@
                     </tr>
                     <!-- OBSERVACIONES -->
                     <tr>
-                        <td style="text-align: center">
+                        <td style="text-align:center">
                             <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
                                 <tr>
                                     <td rowspan="7" style="width:1px; background-color:Gray;">
@@ -1534,7 +1534,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 10px;">
+                                    <td style="height:10px;">
                                     </td>
                                 </tr>
                                 <tr>
@@ -1543,7 +1543,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 10px;">
+                                    <td style="height:10px;">
                                     </td>
                                 </tr>
                                 <tr>
@@ -1552,7 +1552,7 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="height: 10px;">
+                                    <td style="height:10px;">
                                     </td>
                                 </tr>
                                 <tr>
@@ -1640,7 +1640,8 @@
                                                         Interfacturas (archivo XML): 
                                                     </td>
                                                     <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="DescargarButton" runat="server" OnClick="GenerarButton_Click" Text="Descargar" ToolTip="Luego de descargar el archivo XML, realizar el (Upload) en Interfacturas." />
+                                                        <asp:Button ID="DescargarButton" runat="server" OnClick="GenerarButton_Click" 
+                                                            Text="Descargar" ToolTip="Luego de descargar el archivo XML, realizar el (Upload) en Interfacturas." />
                                                         <asp:Button ID="GenerarButton" runat="server" OnClick="GenerarButton_Click" 
                                                             Text="Enviar por e-mail" ToolTip="Luego de descargar el archivo XML del correo, realizar el (Upload) en Interfacturas." />
                                                     </td>
@@ -1648,7 +1649,7 @@
                                             </table>
                                         </asp:Panel>
                                         <asp:Panel ID="PrevisualizacionComprobantePanel" runat="server">
-                                            <table border="0" cellpadding="0" cellspacing="0">
+                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
                                                 <tr>
                                                     <td class="TC00S">
                                                         Previsualización comprobante: 
@@ -1658,6 +1659,19 @@
                                                             Text="Obtener" />
                                                         <asp:Button ID="ButtonPrueba" runat="server" CausesValidation="false" Text="Prueba" Width="0%" style="display:none" 
                                                             onclick="ButtonPrueba_Click" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                        <asp:Panel ID="PComprobantePanel" runat="server">
+                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                <tr>
+                                                    <td class="TC00S">
+                                                        Comprobante: 
+                                                    </td>
+                                                    <td align="left" style="padding-left:5px">
+                                                        <asp:Button ID="GuardarComprobanteButton" runat="server" CausesValidation="true" OnClick="GuardarComprobanteButton_Click" 
+                                                            Text="Guardar" />
                                                     </td>
                                                 </tr>
                                             </table>
