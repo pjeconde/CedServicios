@@ -1417,6 +1417,24 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Button ButtonPrueba;
         
         /// <summary>
+        /// Control PComprobantePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel PComprobantePanel;
+        
+        /// <summary>
+        /// Control GuardarComprobanteButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GuardarComprobanteButton;
+        
+        /// <summary>
         /// Control contactoHyperLink.
         /// </summary>
         /// <remarks>

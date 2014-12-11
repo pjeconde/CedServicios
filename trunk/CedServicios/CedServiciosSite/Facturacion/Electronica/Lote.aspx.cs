@@ -2580,6 +2580,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
                                     lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae = DateTime.Now.ToString("yyyyMMdd");
                                     lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
+                                    //Actualizar front-end
+                                    CAETextBox.Text = lcFea.comprobante[0].cabecera.informacion_comprobante.cae;
+                                    FechaCAEVencimientoDatePickerWebUserControl.Text = lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
+                                    FechaCAEObtencionDatePickerWebUserControl.Text = lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae;
                                 }
                                 string XML = "";
                                 RN.Comprobante.SerializarLc(out XML, lcFea);
@@ -2870,6 +2874,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                 }
             }
+        }
+
+        protected void GuardarComprobanteButton_Click(object sender, EventArgs e)
+        {
         }
 
         private bool Existe(string URLfile)
