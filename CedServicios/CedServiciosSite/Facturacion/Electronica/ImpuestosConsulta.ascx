@@ -30,7 +30,7 @@
 							<asp:GridView ID="impuestosGridView" runat="server" AutoGenerateColumns="False" BorderColor="gray"
 								BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
 								EnableViewState="true" Font-Bold="false" ForeColor="#071F70" GridLines="Both"
-								HeaderStyle-ForeColor="#A52A2A" PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
+								PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
 								ShowFooter="true" ShowHeader="True" ToolTip="El separador de decimales a utilizar es el punto"
 								Width="100%">
 								<Columns>

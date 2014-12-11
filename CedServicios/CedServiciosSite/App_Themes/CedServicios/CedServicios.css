@@ -120,56 +120,49 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
 }
 .TC50B
 {
-	position: relative; border: 0px; text-align: right; color: #A52A2A;
-	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	position: relative; border: 0px; text-align: right;
 	padding-left:5px; padding-right: 5px; 
 }
 .TC00S
 {
-	position: relative; border: 0px; text-align: right; color: #A52A2A;
-	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	position: relative; border: 0px; text-align: right; 
 	width: 180px; padding-top:5px; 
 }
 .TC00SL
 {
-	position: relative; border: 0px; text-align: left; color: #A52A2A;
-	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	position: relative; border: 0px; text-align: left;
 	width: 180px; padding-top:5px; 
 }
 .TC01S
 {
-	position: relative; border: 0px; text-align: right; color: #A52A2A;
-	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
+	position: relative; border: 0px; text-align: right;
 	width: 80px; padding-top:5px;
 }
 .TC02S
 {
-	position: relative; border: 0px; text-align: right; color: #A52A2A;
-	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	position: relative; border: 0px; text-align: right;
 	width: 60px; padding-top:5px;
 }
 .TC03S
 {
-	position: relative; border: 0px; text-align: right; color: #A52A2A;
-	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	position: relative; border: 0px; text-align: right;
 	width: 47px; padding-top:5px;
 }
 .TC10S
 {
-	position: relative; border: 0px; text-align: right; color: #071F70;
+	position: relative; border: 0px; text-align: right; 
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
 	width: 180px; padding-top:5px; padding-left: 5px; text-align:left;
 }
 .TC12S
 {
-	position: relative; border: 0px; text-align: right; color: #071F70;
+	position: relative; border: 0px; text-align: right;
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
 	width: 40px; padding-top:5px;
 }
 .TextoLabelFEADescrLarga
 {
-	position: relative; border: 0px; color: #A52A2A; text-align: right;
-	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	position: relative; border: 0px; text-align: right;
 	width: 590px;	
 }
 .TextComunSinPosicion
@@ -188,7 +181,6 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
 }
 .DatePickerFecha
 {
-	color: #071F70;
 	text-align: left;
 }
 .Ajuste1
@@ -238,7 +230,6 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
 }
 .PagerStylePagingGridView span
 {
-    background-color:#A52A2A;
     font-weight: bold;
     color:White;
 } 

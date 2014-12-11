@@ -12,7 +12,7 @@
 <%@ Register src="FacturaElectronicaFecha.ascx" tagname="FacturaElectronicaFecha" tagprefix="uc1" %>
 
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceDefault">
-    <table border="0" cellpadding="0" cellspacing="0" class="TextComunSinPosicion" style="width: 800px; text-align:left; padding-left:10px">
+    <table border="0" cellpadding="0" cellspacing="0" style="width: 800px; text-align:left; padding-left:10px">
         <tr>
             <td align="center" valign="top" style="padding-top:20px; width:782px; vertical-align:middle; text-align:center;">
                 <table border="0" cellpadding="0" cellspacing="0">
@@ -71,7 +71,6 @@
                                     </td>
                                 </tr>
                             </table>
-                            <br />
                         </td>
                     </tr>
                     <!-- INFORMACIÓN COMPROBANTE -->
@@ -88,22 +87,14 @@
                                     <asp:AsyncPostBackTrigger ControlID="Tipo_De_ComprobanteDropDownList" EventName="SelectedIndexChanged"/>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
-                                        <tr>
-                                            <td rowspan="13" style="width:1px; background-color:Gray;">
-                                            </td>
-                                            <td colspan="4" style="height:1px; background-color:Gray;">
-                                            </td>
-                                            <td rowspan="13" style="width:1px; background-color:Gray;">
-                                            </td>
-                                        </tr>
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                         <tr>
                                             <td colspan="4" style="height:10px">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="TextoResaltado" colspan="4" style="text-align: center;">
-                                                INFORMACIÓN COMPROBANTE
+                                                COMPROBANTE
                                             </td>
                                         </tr>
                                         <tr>
@@ -274,23 +265,18 @@
                                                 Condición de pago:
                                             </td>
                                             <td class="TC10S" colspan="3">
-                                                <asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" BorderStyle="NotSet" 
-                                                    ForeColor="#071F70" Style="width:563px; text-align:left">
+                                                <asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" BorderStyle="NotSet" Style="width:563px; text-align:left">
                                                 </asp:TextBox>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td style="height:10px">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4" style="height:1px; background-color:Gray;">
-                                            </td>
-                                        </tr>
                                     </table>
-                                    <br />
                                 </ContentTemplate>
                             </asp:UpdatePanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- DATOS DEL LOTE -->
@@ -305,15 +291,7 @@
                                     <asp:PostBackTrigger ControlID="FileUploadButton"></asp:PostBackTrigger>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
-                                        <tr>
-                                            <td rowspan="7" style="width: 1px; background-color: Gray;">
-                                            </td>
-                                            <td style="height: 1px; background-color: Gray;">
-                                            </td>
-                                            <td rowspan="7" style="width: 1px; background-color: Gray;">
-                                            </td>
-                                        </tr>
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                         <tr>
                                             <td colspan="2" style="text-align: center; height: 10px;">
                                             </td>
@@ -332,7 +310,7 @@
                                                 <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                                     <tr>
                                                         <td class="TC00S">
-                                                            <asp:Button ID="ButtonGenerarNroLote" runat="server" Text="Generar" BackColor="peachpuff" BorderColor="brown" BorderStyle="Solid" BorderWidth="1px" Font-Bold="true" ForeColor="brown" CausesValidation="false" onclick="ButtonGenerarNroLote_Click" />
+                                                            <asp:Button ID="ButtonGenerarNroLote" runat="server" Text="Generar" CausesValidation="false" onclick="ButtonGenerarNroLote_Click" />
                                                         </td>
                                                         <td class="TC00S">
                                                             Nº lote:
@@ -360,39 +338,27 @@
                                                 </table>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td style="height: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height: 1px; background-color: Gray;">
-                                            </td>
-                                        </tr>
                                     </table>
-                                    <br />
                                 </ContentTemplate>
                             </asp:UpdatePanel>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- DATOS DEL VENDEDOR -->
                     <tr>
                         <td>
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
-                                <tr>
-                                    <td rowspan="7" style="width:1px; background-color:Gray;">
-                                    </td>
-                                    <td colspan="3" style="height:1px; background-color:Gray;">
-                                    </td>
-                                    <td rowspan="7" style="width:1px; background-color:Gray;">
-                                    </td>
-                                </tr>
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                 <tr>
                                     <td style="height:10px;">
                                     </td>
                                 </tr>
                                 <tr>
                                     <td align="center" colspan="3" class="TextoResaltado" style="width: 240px">
-                                        INFORMACIÓN VENDEDOR<br />
+                                        VENDEDOR
                                     </td>
                                 </tr>
                                 <tr>
@@ -597,19 +563,12 @@
                                         </table>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="height:10px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3" style="height: 1px; background-color: Gray;">
-                                    </td>
-                                </tr>
                             </table>
                         </td>
                     </tr>
                     <tr>
-                        <td style="height:10px;">
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- DATOS DEL COMPRADOR -->
@@ -622,22 +581,14 @@
                                     <asp:AsyncPostBackTrigger ControlID="PaisDestinoExpDropDownList"></asp:AsyncPostBackTrigger>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
-                                        <tr>
-                                            <td rowspan="9" style="width: 1px; background-color: Gray;">
-                                            </td>
-                                            <td colspan="3" style="height: 1px; background-color: Gray;">
-                                            </td>
-                                            <td rowspan="9" style="width: 1px; background-color: Gray;">
-                                            </td>
-                                        </tr>
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                         <tr>
                                             <td style="height:10px;">
                                             </td>
                                         </tr>
                                         <tr>
                                             <td class="TextoResaltado" colspan="3" style="text-align: center">
-                                                INFORMACIÓN COMPRADOR
+                                                COMPRADOR
                                             </td>
                                         </tr>
                                         <tr>
@@ -903,32 +854,20 @@
                                                 </table>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td style="height:10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="3" style="height:1px; background-color:Gray;">
-                                            </td>
-                                        </tr>
                                     </table>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- CODIGOS DE REFERENCIAS -->
                     <tr>
-                        <td class="TextoResaltado" style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
-                                <tr>
-                                    <td rowspan="9" style="width: 1px; background-color: Gray;">
-                                    </td>
-                                    <td colspan="1" style="height: 1px; background-color: Gray;">
-                                    </td>
-                                    <td rowspan="9" style="width: 1px; background-color: Gray;">
-                                    </td>
-                                </tr>
+                        <td style="text-align: center">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                 <tr>
                                     <td style="text-align: center; height: 10px;">
                                     </td>
@@ -948,13 +887,12 @@
                                             UpdateMode="Conditional">
                                             <ContentTemplate>
                                                 <asp:GridView ID="referenciasGridView" runat="server" AutoGenerateColumns="False"
-                                                    BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70"
-                                                    EmptyDataRowStyle-ForeColor="#071F70" EnableViewState="true" Font-Bold="false"
-                                                    ForeColor="#071F70" GridLines="Both" HeaderStyle-ForeColor="#A52A2A" OnRowCancelingEdit="referenciasGridView_RowCancelingEdit"
+                                                    BorderColor="gray" BorderStyle="Solid" BorderWidth="1px"
+                                                    EnableViewState="true" Font-Bold="false"
+                                                    GridLines="Both" OnRowCancelingEdit="referenciasGridView_RowCancelingEdit"
                                                     OnRowCommand="referenciasGridView_RowCommand" OnRowDeleted="referenciasGridView_RowDeleted"
                                                     OnRowDeleting="referenciasGridView_RowDeleting" OnRowEditing="referenciasGridView_RowEditing"
                                                     OnRowUpdated="referenciasGridView_RowUpdated" OnRowUpdating="referenciasGridView_RowUpdating"
-                                                    PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
                                                     ShowFooter="true" ShowHeader="True" ToolTip="El dato de referencia debe ser un número entero"
                                                     Width="100%">
                                                     <Columns>
@@ -964,14 +902,14 @@
                                                                     Width="320px"></asp:Label>
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
-                                                                <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="300px" style="color:#071F70">
+                                                                <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="300px">
                                                                 </asp:DropDownList>
                                                                 <asp:RequiredFieldValidator ID="ddlcodigo_de_referenciaEditItemRequiredFieldValidator"
                                                                     runat="server" ControlToValidate="ddlcodigo_de_referenciaEdit" ErrorMessage="Codigo de referencia en edición no informado"
                                                                     SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
                                                             </EditItemTemplate>
                                                             <FooterTemplate>
-                                                                <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="300px" style="color:#071F70">
+                                                                <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="300px">
                                                                 </asp:DropDownList>
                                                                 <asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator" runat="server"
                                                                     ControlToValidate="ddlcodigo_de_referencia" ErrorMessage="Codigo de referencia a agregar no informado"
@@ -979,7 +917,6 @@
                                                             </FooterTemplate>
                                                             <ItemStyle HorizontalAlign="Left" Width="320px" />
                                                             <FooterStyle HorizontalAlign="Left" Width="320px" />
-                                                            <HeaderStyle Font-Bold="False" />
                                                         </asp:TemplateField>
                                                         <asp:TemplateField HeaderText="Número de referencia">
                                                             <ItemTemplate>
@@ -987,7 +924,7 @@
                                                             </ItemTemplate>
                                                             <EditItemTemplate>
                                                                 <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='<%# Eval("dato_de_referencia") %>'
-                                                                    Width="75%" style="color:#071F70"></asp:TextBox>
+                                                                    Width="75%"></asp:TextBox>
                                                                 <cc1:MaskedEditExtender ID="txtdato_de_referenciaEditExpoMaskedEditExtender" runat="server"
                                                                     ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
                                                                     PromptCharacter="?" TargetControlID="txtdato_de_referencia">
@@ -1000,7 +937,7 @@
                                                                     SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
                                                             </EditItemTemplate>
                                                             <FooterTemplate>
-                                                                <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="75%" style="color:#071F70"></asp:TextBox>
+                                                                <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="75%"></asp:TextBox>
                                                                 <cc1:MaskedEditExtender ID="txtdato_de_referenciaFooterExpoMaskedEditExtender" runat="server"
                                                                     ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
                                                                     PromptCharacter="?" TargetControlID="txtdato_de_referencia">
@@ -1013,12 +950,10 @@
                                                                     SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
                                                             </FooterTemplate>
                                                             <ItemStyle HorizontalAlign="Right" />
-                                                            <HeaderStyle Font-Bold="False" />
                                                         </asp:TemplateField>
                                                         <asp:CommandField CancelText="Cancelar" EditText="Editar" HeaderText="Edici&#243;n"
                                                             ShowEditButton="True" UpdateText="Actualizar" ValidationGroup="ReferenciasEditItem">
                                                             <ItemStyle HorizontalAlign="Center" />
-                                                            <HeaderStyle Font-Bold="False" />
                                                         </asp:CommandField>
                                                         <asp:TemplateField HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
                                                             <ItemTemplate>
@@ -1030,17 +965,9 @@
                                                                     ValidationGroup="ReferenciasFooter">Agregar</asp:LinkButton>
                                                             </FooterTemplate>
                                                             <ItemStyle HorizontalAlign="Center" />
-                                                            <HeaderStyle Font-Bold="False" />
                                                         </asp:TemplateField>
                                                     </Columns>
-                                                    <EmptyDataRowStyle ForeColor="#071F70" />
-                                                    <FooterStyle ForeColor="#071F70" />
-                                                    <AlternatingRowStyle ForeColor="#071F70" />
-                                                    <RowStyle ForeColor="#071F70" />
-                                                    <EditRowStyle ForeColor="#071F70" />
-                                                    <SelectedRowStyle ForeColor="#071F70" />
-                                                    <PagerStyle ForeColor="#071F70" />
-                                                    <HeaderStyle ForeColor="Brown" />
+                                                    <HeaderStyle Font-Bold="true" />
                                                 </asp:GridView>
                                             </ContentTemplate>
                                             <Triggers>
@@ -1074,26 +1001,18 @@
                                             ShowMessageBox="True" ValidationGroup="ReferenciasFooter"></asp:ValidationSummary>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td colspan="1" style="height: 1px; background-color: Gray;">
-                                    </td>
-                                </tr>
                             </table>
-                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- INFORMACIÓN EXPORTACIÓN-->
                     <tr>
-                        <td class="TextoResaltado" style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width: 782px; background-color:#fff8dc">
-                                <tr>
-                                    <td rowspan="8" style="width:1px; background-color:Gray;">
-                                    </td>
-                                    <td colspan="2" style="height:1px; background-color:Gray;">
-                                    </td>
-                                    <td rowspan="8" style="width:1px; background-color:Gray;">
-                                    </td>
-                                </tr>
+                        <td style="text-align: center">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
                                 <tr>
                                     <td style="height:10px;">
                                     </td>
@@ -1202,49 +1121,35 @@
                                         </asp:UpdatePanel>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="height:10px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2" style="height: 1px; background-color: Gray;">
-                                    </td>
-                                </tr>
                             </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td style="height:10px;">
                         </td>
                     </tr>
                     <!-- PERMISOS EXPO-->
                     <tr>
-                        <td class="TextoResaltado" style="height:19px; text-align:center">
+                        <td style="height:19px; text-align:center">
                             <uc2:Permisos ID="PermisosExpo" runat="server"></uc2:Permisos>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- DATOS COMERCIALES-->
                     <tr>
-                        <td class="TextoResaltado" style="height:19px; text-align:center">
+                        <td style="height:19px; text-align:center">
                             <uc3:Comerciales ID="DatosComerciales" runat="server"></uc3:Comerciales>
                         </td>
                     </tr>
                     <tr>
-                        <td style="height:10px;">
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- DATOS DEL DETALLE -->
                     <tr>
-                        <td class="TextoResaltado" style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
-                                <tr>
-                                    <td rowspan="7" style="width: 1px; background-color: Gray;">
-                                    </td>
-                                    <td colspan="1" style="height: 1px; background-color: Gray;">
-                                    </td>
-                                    <td rowspan="7" style="width: 1px; background-color: Gray;">
-                                    </td>
-                                </tr>
+                        <td style="text-align: center">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                 <tr>
                                     <td style="text-align: center; height: 10px;">
                                     </td>
@@ -1264,54 +1169,47 @@
                                         <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                             <tr>
                                                 <td class="TextoLabelFEADescrLarga" style="padding: 5px;">
-                                                    <asp:TextBox ID="ComentariosTextBox" runat="server" Style="width:760px; resize:none; color:#071F70" TextMode="MultiLine"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td style="height: 10px;">
+                                                    <asp:TextBox ID="ComentariosTextBox" runat="server" Style="width:760px; resize:none" TextMode="MultiLine"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <uc4:Detalle ID="DetalleLinea" runat="server"></uc4:Detalle>
                                         </table>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="text-align: center; height: 10px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="8" style="height: 1px; background-color: Gray;">
-                                    </td>
-                                </tr>
                             </table>
-                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- DATOS DE DESCUENTOS GLOBALES -->
                     <tr>
-                        <td class="TextoResaltado" style="text-align:center">
+                        <td style="text-align:center">
                             <DescUC:DescuentosGlobales ID="DescuentosGlobales" runat="server"></DescUC:DescuentosGlobales>
-                            <br />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- DATOS DE IMPUESTOS GLOBALES -->
                     <tr>
-                        <td class="TextoResaltado" style="text-align:center">
+                        <td style="text-align:center">
                             <uc8:ImpuestosGlobales ID="ImpuestosGlobales" runat="server"></uc8:ImpuestosGlobales>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- DATOS DE RESUMEN FINAL -->
                     <tr>
                         <td style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
-                                <tr>
-                                    <td rowspan="6" style="width:1px; background-color:Gray;">
-                                    </td>
-                                    <td colspan="3" style="height:1px; background-color:Gray;">
-                                    </td>
-                                    <td rowspan="6" style="width:1px; background-color:Gray;">
-                                    </td>
-                                </tr>
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                 <tr>
                                     <td style="height: 10px;">
                                     </td>
@@ -1322,11 +1220,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="TextoResaltado" colspan="2" style="text-align: right;">
+                                    <td colspan="2">
                                     </td>
-                                    <td align="right" style="padding-right:20px">
-                                        <asp:Button ID="CalcularTotalesButton" runat="server" CausesValidation="false" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales"
-                                            ToolTip="" Width="174" />
+                                    <td align="right" style="padding-right:22px">
+                                        <asp:Button ID="CalcularTotalesButton" runat="server" CausesValidation="false" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales" Width="174" />
                                     </td>
                                 </tr>
                                 <tr>
@@ -1500,7 +1397,6 @@
                                                     </tr>
                                                     <tr>
                                                         <td style="height: 46px">
-                                                            <br />
                                                         </td>
                                                         <td style="height: 46px">
                                                         </td>
@@ -1510,29 +1406,18 @@
                                         </asp:UpdatePanel>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td colspan="5" style="height:1px; background-color:Gray;">
-                                    </td>
-                                </tr>
                             </table>
                         </td>
                     </tr>
                     <tr>
-                        <td style="height: 10px;">
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- OBSERVACIONES -->
                     <tr>
                         <td style="text-align:center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
-                                <tr>
-                                    <td rowspan="7" style="width:1px; background-color:Gray;">
-                                    </td>
-                                    <td style="height:1px; background-color:Gray;">
-                                    </td>
-                                    <td rowspan="7" style="width:1px; background-color:Gray;">
-                                    </td>
-                                </tr>
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px;">
                                 <tr>
                                     <td style="height:10px;">
                                     </td>
@@ -1548,36 +1433,21 @@
                                 </tr>
                                 <tr>
                                     <td class="TextoLabelFEADescrLarga" style="text-align:center">
-                                        <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" Style="width:760px; resize:none; color:#071F70" TextMode="MultiLine"></asp:TextBox>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="height:10px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="height:1px; background-color:Gray;">
+                                        <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" Style="width:760px" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                 </tr>
                             </table>
                         </td>
                     </tr>
                     <tr>
-                        <td style="height: 10px;">
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- ACCIONES -->
                     <tr>
                         <td style="text-align: center">
                             <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
-                                <tr>
-                                    <td rowspan="7" style="width:1px; background-color:Gray;">
-                                    </td>
-                                    <td style="height:1px; background-color:Gray;">
-                                    </td>
-                                    <td rowspan="7" style="width:1px; background-color:Gray;">
-                                    </td>
-                                </tr>
                                 <tr>
                                     <td style="height: 10px;">
                                     </td>
@@ -1682,14 +1552,14 @@
                                     <td style="height: 10px;">
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td style="height:1px; background-color:Gray;">
-                                    </td>
-                                </tr>
                             </table>
                         </td>
                     </tr>
-
+                    <tr>
+                        <td>
+                            <hr noshade="noshade" size="1" color="#cccccc" />
+                        </td>
+                    </tr>
                     <!-- OTROS -->
                     <tr>
                         <td style="text-align: center; height: 10px;">

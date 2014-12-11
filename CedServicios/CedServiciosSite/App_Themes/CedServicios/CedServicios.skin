@@ -18,21 +18,21 @@
 <asp:Label SkinID="TituloColor1Mediano" runat="server" Font-Size="12px" ForeColor="#A52A2A" Font-Bold="True"></asp:Label>
 <asp:Label SkinID="TituloColor1Chico" runat="server" Font-Size="10px" ForeColor="#A52A2A" Font-Bold="True" Width="100%"></asp:Label>
 
-<asp:Label SkinID="LabelFact" runat="server" Font-Size="10px" ForeColor="#071F70" Font-Bold="True" Width="100%"></asp:Label>
+<asp:Label SkinID="LabelFact" runat="server" Font-Size="10px" Font-Bold="True" Width="100%"></asp:Label>
 
 <asp:Label SkinID="IndicadorValidacion" runat="server" Font-Size="14px" ForeColor="#FF6600" Font-Bold="True" Text="*"></asp:Label>
 <asp:Label SkinID="MensajePagina" runat="server" Font-Size="14px" ForeColor="#FF6600" Font-Bold="True" Width="100%"></asp:Label>
 
-<asp:TextBox SkinID="TextoBoxChico" runat="server" Style="width: 50px" ForeColor="#071F70" BorderStyle="Solid" BorderWidth="1px" BorderColor=#071F70></asp:TextBox>
-<asp:TextBox SkinID="TextoBoxMediano" runat="server" Style="width: 100px" ForeColor="#071F70" BorderStyle="Solid" BorderWidth="1px" BorderColor=#071F70></asp:TextBox>
+<asp:TextBox SkinID="TextoBoxChico" runat="server" Style="width: 50px" BorderStyle="Solid" BorderWidth="1px" BorderColor=#071F70></asp:TextBox>
+<asp:TextBox SkinID="TextoBoxMediano" runat="server" Style="width: 100px" BorderStyle="Solid" BorderWidth="1px" BorderColor=#071F70></asp:TextBox>
 
-<asp:TextBox SkinID="TextoBoxFEAVendedorDet" runat="server" Style="width: 170px" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
-<asp:TextBox SkinID="TextoBoxFEAVendedorDetCh" runat="server" Style="width: 80px" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
-<asp:TextBox SkinID="TextoBoxFEAVendedorDetChCh" runat="server" Style="width: 40px" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
-<asp:TextBox SkinID="Fecha" runat="server" Style="width: 60px" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
-<asp:TextBox SkinID="FechaFact" runat="server" Style="width: 140px; padding-rigth: 4px;" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox SkinID="TextoBoxFEAVendedorDet" runat="server" Style="width: 170px" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox SkinID="TextoBoxFEAVendedorDetCh" runat="server" Style="width: 80px" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox SkinID="TextoBoxFEAVendedorDetChCh" runat="server" Style="width: 40px" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox SkinID="Fecha" runat="server" Style="width: 60px" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox SkinID="FechaFact" runat="server" Style="width: 140px; padding-rigth: 4px;" BorderStyle="NotSet"></asp:TextBox>
 
-<asp:TextBox SkinID="TextoBoxFEADescrGr" runat="server" Style="width: 570px; resize: none;" ForeColor="#071F70" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox SkinID="TextoBoxFEADescrGr" runat="server" Style="width: 570px; resize: none;" BorderStyle="NotSet"></asp:TextBox>
 
 <asp:ValidationSummary SkinID="MensajeValidationSummary" runat="server" Font-Size="12px" ForeColor="#FF6600" Font-Bold="True" HeaderText="Por favor, ingrese (o corrija) los siguientes campos: " ShowMessageBox="true" ShowSummary="true" DisplayMode="SingleParagraph"/>
 
@@ -42,12 +42,12 @@
 <asp:LinkButton SkinID="LinkButtonAyuda" runat="server" Font-Size="14px" ForeColor="#284E98"></asp:LinkButton>
 <asp:Label SkinID="LabelAyuda" runat="server" Font-Size="14px" ></asp:Label>
 
-<asp:CheckBox SkinID="CheckBoxFEALoteDetChCh" runat="server" Width="40px" ForeColor="#071F70"></asp:CheckBox>
+<asp:CheckBox SkinID="CheckBoxFEALoteDetChCh" runat="server" Width="40px"></asp:CheckBox>
 
-<asp:DropDownList SkinID="ddln" runat="server" Style="width: 176px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
-<asp:DropDownList SkinID="ddlch" runat="server" Style="width: 60px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="ddln" runat="server" Style="width: 176px" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="ddlch" runat="server" Style="width: 60px" BorderStyle="NotSet"></asp:DropDownList>
 <asp:DropDownList SkinID="ddlgrc" runat="server" Style="width: 200px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>
 <asp:DropDownList SkinID="ddlgr2c" runat="server" Style="width: 300px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>
-<asp:DropDownList SkinID="DropDownListCompradorGr" runat="server" Style="width: 280px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
-<asp:DropDownList SkinID="DropDownListTipoComprobante" runat="server" Style="width:400px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
-<asp:DropDownList SkinID="DropDownListComprador" runat="server" Style="width:400px" ForeColor="#071F70" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="DropDownListCompradorGr" runat="server" Style="width: 280px" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="DropDownListTipoComprobante" runat="server" Style="width:400px" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="DropDownListComprador" runat="server" Style="width:400px" BorderStyle="NotSet"></asp:DropDownList>

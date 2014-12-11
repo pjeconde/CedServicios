@@ -1,14 +1,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Impuestos.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Impuestos" %>
 
-		<table border="0" cellpadding="0" cellspacing="0" style="width:782px; background-color:#fff8dc">
-			<tr>
-				<td rowspan="8" style="width: 1px; background-color: Gray;">
-				</td>
-				<td colspan="1" style="height: 1px; background-color: Gray;">
-				</td>
-				<td rowspan="8" style="width: 1px; background-color: Gray;">
-				</td>
-			</tr>
+		<table border="0" cellpadding="0" cellspacing="0" style="width:782px">
 			<tr>
 				<td style="text-align: center; height: 10px;">
 				</td>
@@ -31,13 +23,12 @@
 						</Triggers>
 						<ContentTemplate>
 							<asp:GridView ID="impuestosGridView" runat="server" AutoGenerateColumns="False" BorderColor="gray"
-								BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70" EmptyDataRowStyle-ForeColor="#071F70"
-								EnableViewState="true" Font-Bold="false" ForeColor="#071F70" GridLines="Both"
-								HeaderStyle-ForeColor="#A52A2A" OnRowCancelingEdit="impuestosGridView_RowCancelingEdit"
+								BorderStyle="Solid" BorderWidth="1px"
+								EnableViewState="true" Font-Bold="false" GridLines="Both"
+								OnRowCancelingEdit="impuestosGridView_RowCancelingEdit"
 								OnRowCommand="impuestosGridView_RowCommand" OnRowDeleted="impuestosGridView_RowDeleted"
 								OnRowDeleting="impuestosGridView_RowDeleting" OnRowEditing="impuestosGridView_RowEditing"
 								OnRowUpdated="impuestosGridView_RowUpdated" OnRowUpdating="impuestosGridView_RowUpdating"
-								PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
 								ShowFooter="true" ShowHeader="True" ToolTip="El separador de decimales a utilizar es el punto"
 								Width="100%">
 								<Columns>
@@ -56,7 +47,6 @@
 										</FooterTemplate>
 										<ItemStyle HorizontalAlign="Left" Width="250px" />
 										<FooterStyle HorizontalAlign="Left" Width="250px" />
-										<HeaderStyle Font-Bold="False" />
 									</asp:TemplateField>
 									<asp:TemplateField HeaderText="Importe total">
 										<ItemTemplate>
@@ -82,7 +72,7 @@
 												SetFocusOnError="True" ValidationGroup="ImpuestosGlobalesFooter">*</asp:RequiredFieldValidator>
 										</FooterTemplate>
 										<ItemStyle HorizontalAlign="Right" Width="60px" />
-										<HeaderStyle Font-Bold="False" HorizontalAlign="Center" />
+										<HeaderStyle HorizontalAlign="Center" />
 									</asp:TemplateField>
 									<asp:TemplateField HeaderText="Jurisdicción">
 										<ItemTemplate>
@@ -99,7 +89,6 @@
 										</FooterTemplate>
 										<ItemStyle HorizontalAlign="Left" Width="160px" />
 										<FooterStyle HorizontalAlign="Left" Width="160px" />
-										<HeaderStyle Font-Bold="False" />
 									</asp:TemplateField>
 									<asp:TemplateField HeaderText="Alícuota %">
 										<ItemTemplate>
@@ -119,12 +108,12 @@
 												SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ImpuestosGlobalesFooter">*</asp:RegularExpressionValidator>
 										</FooterTemplate>
 										<ItemStyle HorizontalAlign="Right"  Width="50px"/>
-										<HeaderStyle Font-Bold="False" Width="50px" />
+										<HeaderStyle Width="50px" />
 									</asp:TemplateField>
 									<asp:CommandField CancelText="Cancelar" EditText="Editar" HeaderText="Edici&#243;n"
 										ShowEditButton="True" UpdateText="Actualizar" ValidationGroup="ImpuestosGlobalesEditItem">
 										<ItemStyle HorizontalAlign="Center" Width="80px" />
-										<HeaderStyle Font-Bold="False" Width="80px" />
+										<HeaderStyle Width="80px" />
 									</asp:CommandField>
 									<asp:TemplateField HeaderText="Eliminaci&#243;n / Incorporaci&#243;n">
 										<ItemTemplate>
@@ -135,15 +124,10 @@
 												ValidationGroup="ImpuestosGlobalesFooter" Width="100px">Agregar</asp:LinkButton>
 										</FooterTemplate>
 										<ItemStyle HorizontalAlign="Center" Width="100px" />
-										<HeaderStyle Font-Bold="False" Width="100px" />
+										<HeaderStyle Width="100px" />
 									</asp:TemplateField>
 								</Columns>
-								<EmptyDataRowStyle ForeColor="#071F70" />
-								<RowStyle ForeColor="#071F70" />
-								<EditRowStyle ForeColor="#071F70" />
-								<SelectedRowStyle ForeColor="#071F70" />
-								<PagerStyle ForeColor="#071F70" />
-								<HeaderStyle ForeColor="Brown" />
+								<HeaderStyle Font-Bold="False" />
 							</asp:GridView>
 						</ContentTemplate>
 					</asp:UpdatePanel>
@@ -174,14 +158,4 @@
 						ShowMessageBox="True" ValidationGroup="ImpuestosGlobalesFooter"></asp:ValidationSummary>
 				</td>
 			</tr>
-			<tr>
-				<td rowspan="8" style="width: 1px; background-color: Gray;">
-				</td>
-				<td colspan="1" style="height: 1px; background-color: Gray;">
-				</td>
-				<td rowspan="8" style="width: 1px; background-color: Gray;">
-				</td>
-			</tr>
 		</table>
-		<br />
-
