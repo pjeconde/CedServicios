@@ -25,7 +25,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
                             <tr>
                                 <td align="center" valign="middle">
-                                    <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Alta de Factura Electrónica"></asp:Label>
+                                    <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobante"></asp:Label>
                                 </td>
                             </tr>
                             <!-- INFORMACIÓN COMPROBANTE -->
