@@ -111,7 +111,7 @@ namespace CedServicios.Site
                 DataBind();
                 BindearDropDownLists();
 
-                DatosComerciales.ReadOnly = true;
+                DeshabilitarControles();
 
                 try
                 {
@@ -124,6 +124,100 @@ namespace CedServicios.Site
                     CompletarUI(clcrdyndns, new EventArgs());
                 }
             }
+        }
+
+        private void DeshabilitarControles()
+        {
+            Tipo_De_ComprobanteDropDownList.Enabled = false;
+            IVAcomputableDropDownList.Enabled = false;
+            CodigoOperacionDropDownList.Enabled = false;
+            CodigoConceptoDropDownList.Enabled = false;
+            Condicion_De_PagoTextBox.ReadOnly = true;
+            Numero_ComprobanteTextBox.ReadOnly = true;
+            FechaEmisionDatePickerWebUserControl.ReadOnly = true; ImageCalendarFechaEmision.Enabled = false;
+            FechaVencimientoDatePickerWebUserControl.ReadOnly = true; ImageCalendarFechaVencimiento.Enabled = false;
+            FechaServDesdeDatePickerWebUserControl.ReadOnly = true; ImageCalendarFechaServDesde.Enabled = false;
+            FechaServHastaDatePickerWebUserControl.ReadOnly = true; ImageCalendarFechaServHasta.Enabled = false;
+
+            Id_LoteTextbox.ReadOnly = true;
+            LabelTipoNumeracionLote.Visible = false;
+            TipoNumeracionLote.Visible = false;
+
+            Razon_Social_VendedorTextBox.ReadOnly = true;
+            Domicilio_Calle_VendedorTextBox.ReadOnly = true;
+            Domicilio_Numero_VendedorTextBox.ReadOnly = true;
+            Domicilio_Piso_VendedorTextBox.ReadOnly = true;
+            Domicilio_Depto_VendedorTextBox.ReadOnly = true;
+            Domicilio_Sector_VendedorTextBox.ReadOnly = true;
+            Domicilio_Torre_VendedorTextBox.ReadOnly = true;
+            Domicilio_Manzana_VendedorTextBox.ReadOnly = true;
+            Localidad_VendedorTextBox.ReadOnly = true;
+            Provincia_VendedorDropDownList.Enabled = false;
+            Cp_VendedorTextBox.ReadOnly = true;
+            Contacto_VendedorTextBox.ReadOnly = true;
+            Telefono_VendedorTextBox.ReadOnly = true;
+            Cuit_VendedorTextBox.ReadOnly = true;
+            InicioDeActividadesVendedorDatePickerWebUserControl.ReadOnly = true; ImageCalendarInicioDeActividadesVendedor.Enabled = false;
+            Condicion_Ingresos_Brutos_VendedorDropDownList.Enabled = false;
+            NroIBVendedorTextBox.ReadOnly = true;
+            Condicion_IVA_VendedorDropDownList.Enabled = false;
+            GLN_VendedorTextBox.ReadOnly = true;
+            Codigo_Interno_VendedorTextBox.ReadOnly = true;
+            Email_VendedorTextBox.ReadOnly = true;
+
+            Denominacion_CompradorTextBox.ReadOnly = true;
+            Domicilio_Calle_CompradorTextBox.ReadOnly = true;
+            Domicilio_Numero_CompradorTextBox.ReadOnly = true;
+            Domicilio_Piso_CompradorTextBox.ReadOnly = true;
+            Domicilio_Depto_CompradorTextBox.ReadOnly = true;
+            Domicilio_Sector_CompradorTextBox.ReadOnly = true;
+            Domicilio_Torre_CompradorTextBox.ReadOnly = true;
+            Domicilio_Manzana_CompradorTextBox.ReadOnly = true;
+            Localidad_CompradorTextBox.ReadOnly = true;
+            Provincia_CompradorDropDownList.Enabled = false;
+            Cp_CompradorTextBox.ReadOnly = true;
+            EmailAvisoVisualizacionTextBox.ReadOnly = true;
+            PasswordAvisoVisualizacionTextBox.ReadOnly = true;
+            Codigo_Doc_Identificatorio_CompradorDropDownList.Enabled = false;
+            Nro_Doc_Identificatorio_CompradorTextBox.ReadOnly = true;
+            InicioDeActividadesCompradorDatePickerWebUserControl.ReadOnly = true; ImageCalendarInicioDeActividadesComprador.Enabled = false;
+            Condicion_IVA_CompradorDropDownList.Enabled = false;
+            GLN_CompradorTextBox.ReadOnly = true;
+            Codigo_Interno_CompradorTextBox.ReadOnly = true;
+            Contacto_CompradorTextBox.ReadOnly = true;
+            Email_CompradorTextBox.ReadOnly = true;
+            Telefono_CompradorTextBox.ReadOnly = true;
+
+            referenciasGridView.Enabled = false;
+
+            TipoExpDropDownList.Enabled = false;
+            PaisDestinoExpDropDownList.Enabled = false;
+            IdiomaDropDownList.Enabled = false;
+            IncotermsDropDownList.Enabled = false;
+
+            DatosComerciales.ReadOnly = true;
+
+            ComentariosTextBox.ReadOnly = true;
+
+            CAETextBox.ReadOnly = true;
+            FechaCAEVencimientoDatePickerWebUserControl.ReadOnly = true; ImageCalendarFechaCAEVencimiento.Enabled = false;
+            FechaCAEObtencionDatePickerWebUserControl.ReadOnly = true; ImageCalendarFechaCAEObtencion.Enabled = false;
+            ResultadoTextBox.ReadOnly = true;
+            MotivoTextBox.ReadOnly = true;
+
+            Importe_Total_Neto_Gravado_ResumenTextBox.ReadOnly = true;
+            Importe_Total_Concepto_No_Gravado_ResumenTextBox.ReadOnly = true;
+            Importe_Operaciones_Exentas_ResumenTextBox.ReadOnly = true;
+            Impuesto_Liq_ResumenTextBox.ReadOnly = true;
+            Impuesto_Liq_Rni_ResumenTextBox.ReadOnly = true;
+            Importe_Total_Impuestos_Municipales_ResumenTextBox.ReadOnly = true;
+            Importe_Total_Impuestos_Nacionales_ResumenTextBox.ReadOnly = true;
+            Importe_Total_Ingresos_Brutos_ResumenTextBox.ReadOnly = true;
+            Importe_Total_Impuestos_Internos_ResumenTextBox.ReadOnly = true;
+            Importe_Total_Factura_ResumenTextBox.ReadOnly = true;
+            Tipo_de_cambioTextBox.ReadOnly = true;
+
+            Observaciones_ResumenTextBox.ReadOnly = true;
         }
 
         private void BindearDropDownLists()
