@@ -1163,17 +1163,18 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                     </tr>
                                                     <tr>
                                                         <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                            Resultado:<asp:TextBox ID="ResultadoTextBox" ReadOnly="true" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                            Resultado:<asp:TextBox ID="ResultadoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
                                                                 Width="100px">
                                                             </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                            Motivo:<asp:TextBox 
-                                                                ID="MotivoTextBox" ReadOnly="true" runat="server"
-                                                                Width="170px" TextMode="MultiLine" Style="resize: none;" Height="50px" 
-                                                                ForeColor="#071F70"></asp:TextBox>
+                                                            Motivo:
+                                                            <asp:TextBox 
+                                                                ID="MotivoTextBox" runat="server"
+                                                                Width="170px" TextMode="MultiLine" Style="resize: none;" Height="50px">
+                                                            </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                 </table>
