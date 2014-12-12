@@ -35,55 +35,6 @@
 								<HeaderStyle Width="50px" />
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
-                            <asp:TemplateField HeaderStyle-Width="150px" HeaderText="GTIN">
-                                <ItemTemplate>
-                                    <asp:Label ID="lblGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px"></asp:Label>
-                                </ItemTemplate>
-                                <EditItemTemplate>
-                                    <asp:TextBox ID="txtGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px"></asp:TextBox>
-                                    <cc1:FilteredTextBoxExtender ID="GTINEditFilteredTextBoxExtender" runat="server"
-                                        FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789">
-                                    </cc1:FilteredTextBoxExtender>
-                                </EditItemTemplate>
-                                <FooterTemplate>
-                                    <asp:TextBox ID="txtGTIN" runat="server" Text='' Width="150px"></asp:TextBox>
-                                    <cc1:FilteredTextBoxExtender ID="GTINFooterFilteredTextBoxExtender" runat="server"
-                                        FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789">
-                                    </cc1:FilteredTextBoxExtender>
-                                </FooterTemplate>
-                                <HeaderStyle Width="150px" />
-                                <ItemStyle HorizontalAlign="Left" />
-                            </asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Width="150px" HeaderText="Código Producto Vendedor">
-								<ItemTemplate>
-									<asp:Label ID="lblcpvendedor" runat="server" Text='<%# Eval("codigo_producto_vendedor") %>'
-										Width="150px"></asp:Label>
-								</ItemTemplate>
-								<EditItemTemplate>
-									<asp:TextBox ID="txtcpvendedor" runat="server" Text='<%# Eval("codigo_producto_vendedor") %>'
-										Width="150px"></asp:TextBox>
-								</EditItemTemplate>
-								<FooterTemplate>
-									<asp:TextBox ID="txtcpvendedor" runat="server" Text='' Width="150px"></asp:TextBox>
-								</FooterTemplate>
-								<HeaderStyle Width="150px" />
-								<ItemStyle HorizontalAlign="Left" />
-							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Width="150px" HeaderText="Código Producto Comprador (Nomenclador)">
-								<ItemTemplate>
-									<asp:Label ID="lblcpcomprador" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
-										Width="150px"></asp:Label>
-								</ItemTemplate>
-								<EditItemTemplate>
-									<asp:TextBox ID="txtcpcomprador" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
-										Width="130px"></asp:TextBox>
-								</EditItemTemplate>
-								<FooterTemplate>
-									<asp:TextBox ID="txtcpcomprador" runat="server" Text='' Width="130px"></asp:TextBox>
-								</FooterTemplate>
-								<HeaderStyle Width="150px" />
-								<ItemStyle HorizontalAlign="Left" />
-							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Width="200px" HeaderText="Descripción del artículo">
 								<ItemTemplate>
 									<asp:TextBox ID="lbldescripcion" runat="server" ReadOnly="true" Text='<%# Eval("descripcion") %>'
@@ -142,21 +93,6 @@
 								</FooterTemplate>
 								<HeaderStyle Width="100px" />
 								<ItemStyle HorizontalAlign="Right" />
-							</asp:TemplateField>
-							<asp:TemplateField HeaderText="Unidad">
-								<ItemTemplate>
-									<asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidadDescripcion") %>'
-										Width="220px"></asp:Label>
-								</ItemTemplate>
-								<EditItemTemplate>
-									<asp:DropDownList ID="ddlunidadEdit" runat="server" Width="220px">
-									</asp:DropDownList>
-								</EditItemTemplate>
-								<FooterTemplate>
-									<asp:DropDownList ID="ddlunidad" runat="server" Width="220px">
-									</asp:DropDownList>
-								</FooterTemplate>
-								<ItemStyle HorizontalAlign="Left" />
 							</asp:TemplateField>
 							<asp:TemplateField HeaderText="Precio unitario">
 								<ItemTemplate>
@@ -258,6 +194,70 @@
 								</FooterTemplate>
 								<HeaderStyle Width="150px" />
 								<ItemStyle HorizontalAlign="Center" />
+							</asp:TemplateField>
+							<asp:TemplateField HeaderText="Unidad">
+								<ItemTemplate>
+									<asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidadDescripcion") %>'
+										Width="220px"></asp:Label>
+								</ItemTemplate>
+								<EditItemTemplate>
+									<asp:DropDownList ID="ddlunidadEdit" runat="server" Width="220px">
+									</asp:DropDownList>
+								</EditItemTemplate>
+								<FooterTemplate>
+									<asp:DropDownList ID="ddlunidad" runat="server" Width="220px">
+									</asp:DropDownList>
+								</FooterTemplate>
+								<ItemStyle HorizontalAlign="Left" />
+							</asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Width="150px" HeaderText="GTIN">
+                                <ItemTemplate>
+                                    <asp:Label ID="lblGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px"></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:TextBox ID="txtGTIN" runat="server" Text='<%# Eval("GTIN") %>' Width="150px"></asp:TextBox>
+                                    <cc1:FilteredTextBoxExtender ID="GTINEditFilteredTextBoxExtender" runat="server"
+                                        FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789">
+                                    </cc1:FilteredTextBoxExtender>
+                                </EditItemTemplate>
+                                <FooterTemplate>
+                                    <asp:TextBox ID="txtGTIN" runat="server" Text='' Width="150px"></asp:TextBox>
+                                    <cc1:FilteredTextBoxExtender ID="GTINFooterFilteredTextBoxExtender" runat="server"
+                                        FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtGTIN" ValidChars="0123456789">
+                                    </cc1:FilteredTextBoxExtender>
+                                </FooterTemplate>
+                                <HeaderStyle Width="150px" />
+                                <ItemStyle HorizontalAlign="Left" />
+                            </asp:TemplateField>
+							<asp:TemplateField HeaderStyle-Width="150px" HeaderText="Código Producto Vendedor">
+								<ItemTemplate>
+									<asp:Label ID="lblcpvendedor" runat="server" Text='<%# Eval("codigo_producto_vendedor") %>'
+										Width="150px"></asp:Label>
+								</ItemTemplate>
+								<EditItemTemplate>
+									<asp:TextBox ID="txtcpvendedor" runat="server" Text='<%# Eval("codigo_producto_vendedor") %>'
+										Width="150px"></asp:TextBox>
+								</EditItemTemplate>
+								<FooterTemplate>
+									<asp:TextBox ID="txtcpvendedor" runat="server" Text='' Width="150px"></asp:TextBox>
+								</FooterTemplate>
+								<HeaderStyle Width="150px" />
+								<ItemStyle HorizontalAlign="Left" />
+							</asp:TemplateField>
+							<asp:TemplateField HeaderStyle-Width="150px" HeaderText="Código Producto Comprador (Nomenclador)">
+								<ItemTemplate>
+									<asp:Label ID="lblcpcomprador" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
+										Width="150px"></asp:Label>
+								</ItemTemplate>
+								<EditItemTemplate>
+									<asp:TextBox ID="txtcpcomprador" runat="server" Text='<%# Eval("codigo_producto_comprador") %>'
+										Width="130px"></asp:TextBox>
+								</EditItemTemplate>
+								<FooterTemplate>
+									<asp:TextBox ID="txtcpcomprador" runat="server" Text='' Width="130px"></asp:TextBox>
+								</FooterTemplate>
+								<HeaderStyle Width="150px" />
+								<ItemStyle HorizontalAlign="Left" />
 							</asp:TemplateField>
 						</Columns>
                         <HeaderStyle Font-Bold="True" />

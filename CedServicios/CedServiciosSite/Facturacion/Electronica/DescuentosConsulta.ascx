@@ -3,15 +3,7 @@
 
 <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
 	<tr>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
-		</td>
-		<td colspan="1" style="height: 1px; background-color: Gray;">
-		</td>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
-		</td>
-	</tr>
-	<tr>
-		<td style="text-align: center; height: 10px;">
+		<td style="height:10px">
 		</td>
 	</tr>
 	<tr>
@@ -20,7 +12,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; height: 10px;">
+		<td style="height:10px">
 		</td>
 	</tr>
 	<tr>
@@ -29,10 +21,8 @@
 				UpdateMode="Conditional">
 				<ContentTemplate>
 					<asp:GridView ID="descuentosGridView" runat="server" AutoGenerateColumns="False"
-						BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" EditRowStyle-ForeColor="#071F70"
-						EmptyDataRowStyle-ForeColor="#071F70" EnableViewState="true" Font-Bold="false"
-						ForeColor="#071F70" GridLines="Both" 
-						PagerStyle-ForeColor="#071F70" RowStyle-ForeColor="#071F70" SelectedRowStyle-ForeColor="#071F70"
+						BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" EnableViewState="true" Font-Bold="false"
+						GridLines="Both" 
 						ShowFooter="true" ShowHeader="True" ToolTip="El separador de decimales a utilizar es el punto"
 						Width="100%">
 						<Columns>
@@ -87,6 +77,7 @@
 								<HeaderStyle Width="80px" />
 							</asp:TemplateField>
 						</Columns>
+						<HeaderStyle Font-Bold="True" />
 					</asp:GridView>
 				</ContentTemplate>
 			</asp:UpdatePanel>
@@ -101,22 +92,6 @@
 					</asp:Image>
 				</ProgressTemplate>
 			</asp:UpdateProgress>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-		</td>
-	</tr>
-	<tr>
-		<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-		</td>
-	</tr>
-	<tr>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
-		</td>
-		<td colspan="1" style="height: 1px; background-color: Gray;">
-		</td>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
 		</td>
 	</tr>
 </table>

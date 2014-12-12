@@ -1,16 +1,8 @@
 <%@ Control Language="C#" AutoEventWireup="true" Codebehind="Permisos.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Permisos" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
-<%--	<tr>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
-		</td>
-		<td colspan="1" style="height: 1px; background-color: Gray;">
-		</td>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
-		</td>
-	</tr>--%>
 	<tr>
-		<td style="height:10px;">
+		<td style="height:10px">
 		</td>
 	</tr>
 	<tr>
@@ -19,7 +11,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td style="height:10px;">
+		<td style="height:10px">
 		</td>
 	</tr>
 	<tr>
@@ -133,12 +125,4 @@
 				ShowMessageBox="True" ValidationGroup="PermisosFooter"></asp:ValidationSummary>
 		</td>
 	</tr>
-<%--	<tr>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
-		</td>
-		<td colspan="1" style="height: 1px; background-color: Gray;">
-		</td>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
-		</td>
-	</tr>--%>
 </table>
