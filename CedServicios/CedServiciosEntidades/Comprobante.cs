@@ -353,6 +353,13 @@ namespace CedServicios.Entidades
                 return nro.ToString("00000000");
             }
         }
+        public string DescrNaturalezaComprobante
+        {
+            get
+            {
+                return naturalezaComprobante.Descr;
+            }
+        }
         #endregion
     }
 }

@@ -36,12 +36,18 @@ namespace CedServicios.Site
                         FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                         FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                     }
-                    ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Cliente, sesion);
+                    ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
                     ClienteDropDownList.DataSource = (List<Entidades.Persona>)ViewState["Personas"];
+                    ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(true, sesion);
+                    NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
                     DataBind();
                     if (ClienteDropDownList.Items.Count > 0)
                     {
                         ClienteDropDownList.SelectedValue = "0";
+                    }
+                    if (NaturalezaComprobanteDropDownList.Items.Count > 0)
+                    {
+                        NaturalezaComprobanteDropDownList.SelectedValue = String.Empty;
                     }
                 }
             }
@@ -225,7 +231,16 @@ namespace CedServicios.Site
                 {
                     persona = new Entidades.Persona();
                 }
-                lista = RN.Comprobante.ListaFiltrada(SoloVigentesCheckBox.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, sesion);
+                Entidades.NaturalezaComprobante naturalezaComprobante;
+                if (NaturalezaComprobanteDropDownList.SelectedIndex >= 0)
+                {
+                    naturalezaComprobante = ((List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"])[NaturalezaComprobanteDropDownList.SelectedIndex];
+                }
+                else
+                {
+                    naturalezaComprobante = new Entidades.NaturalezaComprobante();
+                }
+                lista = RN.Comprobante.ListaFiltrada(SoloVigentesCheckBox.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, sesion);
                 if (lista.Count == 0)
                 {
                     ComprobantesGridView.DataSource = null;

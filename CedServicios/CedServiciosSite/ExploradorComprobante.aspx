@@ -30,10 +30,20 @@
             </tr>
             <tr>
                 <td align="left" style="padding-right:5px; padding-top:5px">
-                    Cliente:
+                    Persona (cliente/proveedor):
                 </td>
                 <td align="left" style="padding-top:5px">
-                    <asp:DropDownList ID="ClienteDropDownList" runat="server" TabIndex="3" Width="400px" DataValueField="Orden" DataTextField="RazonSocial" AutoPostBack="true" ></asp:DropDownList>
+                    <asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
+                </td>        
+                <td style="width:550px">
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="padding-right:5px; padding-top:5px">
+                    Naturaleza del comprobante:
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" Width="400px" DataValueField="Id" DataTextField="Descr"></asp:DropDownList>
                 </td>        
                 <td style="width:550px">
                 </td>
@@ -65,6 +75,10 @@
                                         <asp:ImageButton ID="ConsultarButton" runat="server" ToolTip="Consulta Local" CommandName="ConsultaLocal" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Consultar.png" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
+                                <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="left" wrap="False" />
+                                </asp:BoundField>
                                 <asp:BoundField DataField="DescrTipoComprobante" HeaderText="Tipo" SortExpression="DescrTipoComprobante">
                                     <headerstyle horizontalalign="center" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />

@@ -10,11 +10,7 @@ namespace CedServicios.RN
         public static List<Entidades.NaturalezaComprobante> Lista(bool IncluirOpcionTodos, Entidades.Sesion Sesion)
         {
             CedServicios.DB.NaturalezaComprobante db = new DB.NaturalezaComprobante(Sesion);
-            List<Entidades.NaturalezaComprobante> lista = db.LeerLista();
-            Entidades.NaturalezaComprobante elem = new Entidades.NaturalezaComprobante();
-            elem.Id = String.Empty;
-            elem.Descr = "Todos";
-            lista.Add(elem);
+            List<Entidades.NaturalezaComprobante> lista = db.LeerLista(IncluirOpcionTodos);
             return lista;
         }
     }
