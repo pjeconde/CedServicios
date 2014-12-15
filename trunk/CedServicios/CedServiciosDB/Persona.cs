@@ -49,7 +49,7 @@ namespace CedServicios.DB
                     {
                         Entidades.Persona todos = new Entidades.Persona();
                         todos.Orden = 0;
-                        todos.RazonSocial = "--- Todas las Personas ---";
+                        todos.RazonSocial = "--- Todas ---";
                         lista.Add(todos);
                     }
                     for (int i = 0; i < dt.Rows.Count; i++)

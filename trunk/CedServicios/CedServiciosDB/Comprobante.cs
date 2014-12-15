@@ -11,16 +11,17 @@ namespace CedServicios.DB
         public Comprobante(Entidades.Sesion Sesion) : base(Sesion)
         {
         }
-        public List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Persona Persona)
+        public List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
-                a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante ");
-                a.Append("from Comprobante ");
+                a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante ");
+                a.Append("from Comprobante, NaturalezaComprobante ");
                 a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' ");
+                a.Append("and Comprobante.IdNaturalezaComprobante=NaturalezaComprobante.IdNaturalezaComprobante ");
                 if (SoloVigentes)
                 {
                     a.Append("and Comprobante.Estado='Vigente' ");
@@ -39,6 +40,10 @@ namespace CedServicios.DB
                     a.Append("and Comprobante.NroDoc=" + Persona.Documento.Nro.ToString() + " ");
                     a.Append("and Comprobante.IdPersona='" + Persona.IdPersona + "' ");
                     a.Append("and Comprobante.DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
+                }
+                if (NaturalezaComprobante.Id != String.Empty)
+                {
+                    a.Append("and Comprobante.IdNaturalezaComprobante='" + NaturalezaComprobante.Id + "' ");
                 }
                 a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, Comprobante.NroComprobante desc ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
@@ -93,6 +98,7 @@ namespace CedServicios.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
             Hasta.NaturalezaComprobante.Id = Convert.ToString(Desde["IdNaturalezaComprobante"]);
+            Hasta.NaturalezaComprobante.Descr = Convert.ToString(Desde["DescrNaturalezaComprobante"]);
         }
         public void Leer(Entidades.Comprobante Comprobante)
         {
