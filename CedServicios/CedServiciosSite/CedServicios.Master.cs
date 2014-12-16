@@ -106,7 +106,7 @@ namespace CedServicios.Site
                 case "Artículos|Consulta":
                     Response.Redirect("~/ArticuloConsulta.aspx");
                     break;
-                case "Factura Electrónica|Alta":
+                case "Comprobantes|Alta|Venta|Electrónica":
                     Session["IdNaturalezaComprobante"] = "Venta";
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {
@@ -117,22 +117,44 @@ namespace CedServicios.Site
                         Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
                     }
                     break;
-                case "Factura Electrónica|Consulta de Comprobantes (base de datos)":
+                case "Comprobantes|Alta|Venta|Manual":
+                    Session["IdNaturalezaComprobante"] = "VentaOO";
+                    if (sesion.Usuario.FechaOKeFactTyC == "00000000")
+                    {
+                        Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
+                    }
+                    break;
+                case "Comprobantes|Alta|Compra":
+                    Session["IdNaturalezaComprobante"] = "Compra";
+                    if (sesion.Usuario.FechaOKeFactTyC == "00000000")
+                    {
+                        Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
+                    }
+                    break;
+                case "Comprobantes|Consulta":
                     Response.Redirect("~/ExploradorComprobante.aspx");
                     break;
-                case "Factura Electrónica|Consulta de Comprobantes (online Interfacturas)":
+                case "Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes":
                     Response.Redirect("~/ExploradorComprobanteOnLineInterfacturas.aspx");
                     break;
-                case "Factura Electrónica|Consulta de Comprobante (archivo XML)":
-                    Response.Redirect("~/ComprobanteSeleccionArchivoXML.aspx");
-                    break;
-                case "Factura Electrónica|Consulta de Comprobante (online Interfacturas)":
+                case "Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante":
                     Response.Redirect("~/ComprobanteSeleccionOnlineInterfacturas.aspx");
                     break;
-                case "Factura Electrónica|Consulta de Comprobante (online AFIP)":
+                case "Comprobantes|Otras Consultas|Online AFIP":
                     Response.Redirect("~/ComprobanteSeleccionOnlineAFIP.aspx");
                     break;
-                case "Factura Electrónica|Términos y Condiciones":
+                case "Comprobantes|Otras Consultas|Archivo XML":
+                    Response.Redirect("~/ComprobanteSeleccionArchivoXML.aspx");
+                    break;
+                case "Comprobantes|TyC":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                     break;
                 case "Administración|Autorizaciones|Explorador de Autorizaciones pendientes":
@@ -141,37 +163,37 @@ namespace CedServicios.Site
                 case "Administración|Autorizaciones|Explorador de Autorizaciones (histórico)":
                     Response.Redirect("~/ExploradorAutorizacionLog.aspx");
                     break;
-                case "Administración Site|Explorador de Comprobantes":
+                case "Administración Site|Comprobantes":
                     Response.Redirect("~/ExploradorComprobanteGlobal.aspx");
                     break;
-                case "Administración Site|Explorador de Usuarios":
+                case "Administración Site|Usuarios":
                     Response.Redirect("~/ExploradorUsuario.aspx");
                     break;
-                case "Administración Site|Explorador de CUITs":
+                case "Administración Site|CUITs":
                     Response.Redirect("~/ExploradorCuit.aspx");
                     break;
-                case "Administración Site|Explorador de UNs":
+                case "Administración Site|UNs":
                     Response.Redirect("~/ExploradorUN.aspx");
                     break;
-                case "Administración Site|Explorador de Puntos de Venta":
+                case "Administración Site|Puntos de Venta":
                     Response.Redirect("~/ExploradorPuntoVta.aspx");
                     break;
-                case "Administración Site|Explorador de Personas":
+                case "Administración Site|Personas":
                     Response.Redirect("~/ExploradorPersona.aspx");
                     break;
-                case "Administración Site|Explorador de Artículos":
+                case "Administración Site|Artículos":
                     Response.Redirect("~/ExploradorArticulo.aspx");
                     break;
-                case "Administración Site|Explorador de Permisos":
+                case "Administración Site|Permisos":
                     Response.Redirect("~/ExploradorPermiso.aspx");
                     break;
-                case "Administración Site|Explorador de Configuraciones":
+                case "Administración Site|Configuraciones":
                     Response.Redirect("~/ExploradorConfiguracion.aspx");
                     break;
-                case "Administración Site|Explorador de Logs":
+                case "Administración Site|Logs":
                     Response.Redirect("~/ExploradorLog.aspx");
                     break;
-                case "Administración Site|Explorador de Administración":
+                case "Administración Site|Administración":
                     Response.Redirect("~/ExploradorAdministracion.aspx");
                     break;
                 case "Administración|Usuario|Cambio de Contraseña":

@@ -32,6 +32,24 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             if (!this.IsPostBack)
             {
+                string idNaturalezaComprobante = Session["IdNaturalezaComprobante"].ToString();
+                switch (idNaturalezaComprobante)
+                {
+                    case "Venta":
+                        NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
+                        break;
+                    case "VentaOO":
+                        NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (manual)";
+                        break;
+                    case "Compra":
+                        NaturalezaComprobanteLabel.Text = "COMPROBANTE DE COMPRA";
+                        break;
+                    default:
+                        NaturalezaComprobanteLabel.Text = "<<< NATURALEZA DESCONOCIDA >>>";
+                        break;
+                }
+
+
                 referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
                 FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
                 referencias.Add(referencia);

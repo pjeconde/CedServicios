@@ -5,7 +5,7 @@
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
         <tr>
             <td align="center" colspan="3" style="padding-top:20px">
-                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes On-Line"></asp:Label>
+                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes (online Interfacturas)"></asp:Label>
             </td>
         </tr>
         <tr>
