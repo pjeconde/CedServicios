@@ -89,7 +89,8 @@
                                 <ContentTemplate>
                                     <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                         <tr>
-                                            <td colspan="4" style="height:10px">
+                                            <td colspan="4" align="right" style="padding-top:5px">
+                                                <asp:Label ID="NaturalezaComprobanteLabel" runat="server" Text="NATURALEZA COMPROBANTE"></asp:Label>
                                             </td>
                                         </tr>
                                         <tr>

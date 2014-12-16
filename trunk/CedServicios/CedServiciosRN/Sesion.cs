@@ -41,17 +41,17 @@ namespace CedServicios.RN
                 });
                 if (permisoAdminSITEVigente.Count != 0)
                 {
-                    opcionesHabilitadas.Add("Administración Site|Explorador de Comprobantes");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de Usuarios");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de CUITs");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de UNs");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de Puntos de Venta");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de Personas");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de Artículos");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de Permisos");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de Configuraciones");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de Logs");
-                    opcionesHabilitadas.Add("Administración Site|Explorador de Administración");
+                    opcionesHabilitadas.Add("Administración Site|Comprobantes");
+                    opcionesHabilitadas.Add("Administración Site|Usuarios");
+                    opcionesHabilitadas.Add("Administración Site|CUITs");
+                    opcionesHabilitadas.Add("Administración Site|UNs");
+                    opcionesHabilitadas.Add("Administración Site|Puntos de Venta");
+                    opcionesHabilitadas.Add("Administración Site|Personas");
+                    opcionesHabilitadas.Add("Administración Site|Artículos");
+                    opcionesHabilitadas.Add("Administración Site|Permisos");
+                    opcionesHabilitadas.Add("Administración Site|Configuraciones");
+                    opcionesHabilitadas.Add("Administración Site|Logs");
+                    opcionesHabilitadas.Add("Administración Site|Administración");
                     opcionesHabilitadas.Add("Administración Site|Migración de Cuentas (desde CedWeb)");
                 }
                 if (Sesion.Cuit.Nro != null)
@@ -107,13 +107,15 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Artículos|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Artículos|Modificación");
                         opcionesHabilitadas.Add("Artículos|Consulta");
-                        opcionesHabilitadas.Add("Factura Electrónica|Alta");
-                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobantes (base de datos)");
-                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobantes (online Interfacturas)");
-                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (archivo XML)");
-                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (online Interfacturas)");
-                        opcionesHabilitadas.Add("Factura Electrónica|Consulta de Comprobante (online AFIP)");
-                        opcionesHabilitadas.Add("Factura Electrónica|Términos y Condiciones");
+                        opcionesHabilitadas.Add("Comprobantes|Alta|Venta|Electrónica");
+                        opcionesHabilitadas.Add("Comprobantes|Alta|Venta|Manual");
+                        opcionesHabilitadas.Add("Comprobantes|Alta|Compra");
+                        opcionesHabilitadas.Add("Comprobantes|Consulta");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online AFIP");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Archivo XML");
+                        opcionesHabilitadas.Add("Comprobantes|TyC");
                         if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                         {
                             opcionesHabilitadas.Add("Administración|Puntos de Venta|Alta");
