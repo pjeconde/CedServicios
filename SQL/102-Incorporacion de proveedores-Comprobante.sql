@@ -18,9 +18,9 @@ GO
 SET ANSI_PADDING OFF
 GO
 
-insert NaturalezaComprobante values ('Venta', 'Venta (eFact)')
+insert NaturalezaComprobante values ('Venta', 'Venta (electrónica)')
 go
-insert NaturalezaComprobante values ('VentaOO', 'Venta (otros orígenes)')
+insert NaturalezaComprobante values ('VentaM', 'Venta (manual)')
 go
 insert NaturalezaComprobante values ('Compra', 'Compra')
 go
