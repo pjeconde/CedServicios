@@ -12,7 +12,7 @@
                 Tipo Comprobante:
             </td>
             <td align="left" style="padding-top:20px; padding-left:5px">
-                <asp:DropDownList ID="TipoComprobanteDropDownList" runat="server" AutoPostBack="True" SkinID="ddlgrc" ToolTip="">
+                <asp:DropDownList ID="TipoComprobanteDropDownList" runat="server" AutoPostBack="True" SkinID="DropDownListTipoComprobante" ToolTip="">
                 </asp:DropDownList>
             </td>
         </tr>

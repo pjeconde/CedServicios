@@ -38,7 +38,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     case "Venta":
                         NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
                         break;
-                    case "VentaOO":
+                    case "VentaM":
                         NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (manual)";
                         break;
                     case "Compra":
@@ -48,7 +48,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                         NaturalezaComprobanteLabel.Text = "<<< NATURALEZA DESCONOCIDA >>>";
                         break;
                 }
-
 
                 referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
                 FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();

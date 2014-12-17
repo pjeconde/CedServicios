@@ -29,7 +29,7 @@
         </tr>
         <tr>
             <td align="left" style="padding-right:5px; padding-top:5px">
-                Cliente:
+                Persona (cliente/proveedor):
             </td>
             <td align="left" style="padding-top:5px">
                 <asp:DropDownList ID="ClienteDropDownList" runat="server" TabIndex="3" Width="400px" DataValueField="Orden" DataTextField="RazonSocial" AutoPostBack="true" ></asp:DropDownList>

@@ -93,6 +93,7 @@ namespace CedServicios.Site
                         ms.Seek(0, System.IO.SeekOrigin.Begin);
                         lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
                     }
+                    lote.comprobante[0].IdNaturalezaComprobante = comprobante.NaturalezaComprobante.Id;
                     Cache["ComprobanteAConsultar"] = lote;
                     script = "window.open('/ComprobanteConsulta.aspx', '');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
@@ -134,6 +135,7 @@ namespace CedServicios.Site
                         //Cache["ComprobanteAConsultar"] = clcrdyndns;
                         FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                         lc = Funciones.Ws2Fea(clcrdyndns);
+                        lc.comprobante[0].IdNaturalezaComprobante = "Venta";
                         Cache["ComprobanteAConsultar"] = lc;
                         //Controlar que sea el mismo comprobante (local vs on-line)
                         if (comprobante.Nro != lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante)
