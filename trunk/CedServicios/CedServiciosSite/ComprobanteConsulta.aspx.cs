@@ -262,6 +262,22 @@ namespace CedServicios.Site
 
         private void CompletarUI(FeaEntidades.InterFacturas.lote_comprobantes lc, EventArgs e)
         {
+            switch (lc.comprobante[0].IdNaturalezaComprobante)
+            {
+                case "Venta":
+                    NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
+                    break;
+                case "VentaM":
+                    NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (manual)";
+                    break;
+                case "Compra":
+                    NaturalezaComprobanteLabel.Text = "COMPROBANTE DE COMPRA";
+                    break;
+                default:
+                    NaturalezaComprobanteLabel.Text = "<<< NATURALEZA DESCONOCIDA >>>";
+                    break;
+            }
+
             //Cabecera
             CompletarCabecera(lc);
 
@@ -612,6 +628,7 @@ namespace CedServicios.Site
 
         private void CompletarUI(org.dyndns.cedweb.consulta.ConsultarResult lc, EventArgs e)
         {
+            NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
             //Cabecera
             Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
             Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);

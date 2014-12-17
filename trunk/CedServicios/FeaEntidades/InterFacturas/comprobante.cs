@@ -25,6 +25,7 @@ namespace FeaEntidades.InterFacturas
 
 		[FileHelpers.FieldConverter(FileHelpers.ConverterKind.Boolean, "1", "0")]
 		private bool extensionesFieldSpecified;
+        private string idNaturalezaComprobante;
 
 
 		/// <comentarios/>
@@ -78,18 +79,30 @@ namespace FeaEntidades.InterFacturas
 				this.extensionesField = value;
 			}
 		}
-		[System.Xml.Serialization.XmlIgnoreAttribute()]
-		public bool extensionesSpecified
-		{
-			get
-			{
-				return this.extensionesFieldSpecified;
-			}
-			set
-			{
-				this.extensionesFieldSpecified = value;
-			}
-		}
-	}
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public bool extensionesSpecified
+        {
+            get
+            {
+                return this.extensionesFieldSpecified;
+            }
+            set
+            {
+                this.extensionesFieldSpecified = value;
+            }
+        }
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string IdNaturalezaComprobante
+        {
+            get
+            {
+                return this.idNaturalezaComprobante;
+            }
+            set
+            {
+                this.idNaturalezaComprobante = value;
+            }
+        }
+    }
 
 }

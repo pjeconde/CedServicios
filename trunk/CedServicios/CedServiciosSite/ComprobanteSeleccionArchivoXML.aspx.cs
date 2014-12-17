@@ -53,6 +53,7 @@ namespace CedServicios.Site
                                 return;
                             }
                             Cache["ComprobanteAConsultar"] = lc;
+                            lc.comprobante[0].IdNaturalezaComprobante = "Venta";
                             string script = "window.open('/ComprobanteConsulta.aspx', '');";
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                         }
