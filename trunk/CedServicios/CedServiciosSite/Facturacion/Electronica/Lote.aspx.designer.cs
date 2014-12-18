@@ -85,6 +85,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Label NaturalezaComprobanteLabel;
         
         /// <summary>
+        /// Control IdNaturalezaComprobanteTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox IdNaturalezaComprobanteTextBox;
+        
+        /// <summary>
         /// Control Tipo_De_ComprobanteUpdatePanel.
         /// </summary>
         /// <remarks>
@@ -119,6 +128,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList PuntoVtaDropDownList;
+        
+        /// <summary>
+        /// Control PuntoVtaTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PuntoVtaTextBox;
         
         /// <summary>
         /// Control TipoPtoVentaLabel.
