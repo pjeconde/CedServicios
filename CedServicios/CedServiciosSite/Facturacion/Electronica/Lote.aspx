@@ -93,6 +93,7 @@
                                         <tr>
                                             <td colspan="4" align="right" style="padding-top:5px">
                                                 <asp:Label ID="NaturalezaComprobanteLabel" runat="server" Text="NATURALEZA COMPROBANTE"></asp:Label>
+                                                <asp:TextBox ID="IdNaturalezaComprobanteTextBox" runat="server" Visible="false"> </asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -132,6 +133,7 @@
                                                         <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" AutoPostBack="True" Enabled="false" SkinID="ddlch" 
                                                         onselectedindexchanged="PuntoVtaDropDownList_SelectedIndexChanged">
                                                         </asp:DropDownList>
+                                                        <asp:TextBox ID="PuntoVtaTextBox" runat="server" Enabled="true" Visible="false" SkinID="TextoBoxFEAVendedorDetChCh" Text="0"></asp:TextBox>
                                                         <asp:Label ID="TipoPtoVentaLabel" runat="server"></asp:Label>
                                                         <asp:RadioButton ID="Version1RadioButton" runat="server" GroupName="Version" Text="V.1"
                                                             AutoPostBack="true" Visible="false" OnCheckedChanged="Version1RadioButton_CheckedChanged" Checked="True">
@@ -272,14 +274,14 @@
                                                 </asp:TextBox>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <hr noshade="noshade" size="1" color="#cccccc" />
+                                            </td>
+                                        </tr>
                                     </table>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- DATOS DEL LOTE -->
@@ -686,22 +688,19 @@
                                                                         Nro.:
                                                                     </td>
                                                                     <td style="padding-right: 5px">
-                                                                        <asp:TextBox ID="Domicilio_Numero_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                        </asp:TextBox>
+                                                                        <asp:TextBox ID="Domicilio_Numero_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                     </td>
                                                                     <td class="TC03S" style="padding-right: 5px">
                                                                         Piso:
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="Domicilio_Piso_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                        </asp:TextBox>
+                                                                        <asp:TextBox ID="Domicilio_Piso_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                     </td>
                                                                     <td class="TC01S" style="padding-right: 5px">
                                                                         Depto:
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="Domicilio_Depto_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                        </asp:TextBox>
+                                                                        <asp:TextBox ID="Domicilio_Depto_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -715,22 +714,19 @@
                                                                         Sector:
                                                                     </td>
                                                                     <td style="padding-right: 5px">
-                                                                        <asp:TextBox ID="Domicilio_Sector_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                        </asp:TextBox>
+                                                                        <asp:TextBox ID="Domicilio_Sector_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                     </td>
                                                                     <td class="TC03S" style="padding-right: 5px">
                                                                         Torre:
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="Domicilio_Torre_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                        </asp:TextBox>
+                                                                        <asp:TextBox ID="Domicilio_Torre_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                     </td>
                                                                     <td class="TC01S" style="padding-right: 5px">
                                                                         Manzana:
                                                                     </td>
                                                                     <td>
-                                                                        <asp:TextBox ID="Domicilio_Manzana_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
-                                                                        </asp:TextBox>
+                                                                        <asp:TextBox ID="Domicilio_Manzana_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -1222,34 +1218,46 @@
                                         </table>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                    </td>
+                                </tr>
                             </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- DATOS DE DESCUENTOS GLOBALES -->
                     <tr>
                         <td style="text-align:center">
-                            <DescUC:DescuentosGlobales ID="DescuentosGlobales" runat="server"></DescUC:DescuentosGlobales>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr noshade="noshade" size="1" color="#cccccc" />
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                                <tr>
+                                    <td>
+                                        <DescUC:DescuentosGlobales ID="DescuentosGlobales" runat="server"></DescUC:DescuentosGlobales>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                     <!-- DATOS DE IMPUESTOS GLOBALES -->
                     <tr>
                         <td style="text-align:center">
-                            <uc8:ImpuestosGlobales ID="ImpuestosGlobales" runat="server"></uc8:ImpuestosGlobales>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr noshade="noshade" size="1" color="#cccccc" />
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                                <tr>
+                                    <td>
+                                        <uc8:ImpuestosGlobales ID="ImpuestosGlobales" runat="server"></uc8:ImpuestosGlobales>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                     <!-- DATOS DE RESUMEN FINAL -->
@@ -1452,12 +1460,12 @@
                                         </asp:UpdatePanel>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td colspan="3">
+                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                    </td>
+                                </tr>
                             </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- OBSERVACIONES -->
@@ -1482,12 +1490,12 @@
                                         <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" Style="width:760px" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                    </td>
+                                </tr>
                             </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- ACCIONES -->
@@ -1598,12 +1606,12 @@
                                     <td style="height: 10px;">
                                     </td>
                                 </tr>
+                                <tr>
+                                    <td>
+                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                    </td>
+                                </tr>
                             </table>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <hr noshade="noshade" size="1" color="#cccccc" />
                         </td>
                     </tr>
                     <!-- OTROS -->

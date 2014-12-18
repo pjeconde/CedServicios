@@ -32,8 +32,8 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             if (!this.IsPostBack)
             {
-                string idNaturalezaComprobante = Session["IdNaturalezaComprobante"].ToString();
-                switch (idNaturalezaComprobante)
+                IdNaturalezaComprobanteTextBox.Text = Session["IdNaturalezaComprobante"].ToString();
+                switch (IdNaturalezaComprobanteTextBox.Text)
                 {
                     case "Venta":
                         NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
@@ -123,11 +123,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                 else
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    if (idNaturalezaComprobante.IndexOf("Venta") != -1)
+                    if (IdNaturalezaComprobanteTextBox.Text.IndexOf("Venta") != -1)
                     {
                         #region Personalización campos vendedor y comprador para VENTAS
                         VendedorUpdatePanel.Visible = false;
-                        if (idNaturalezaComprobante == "VentaM")
+                        if (IdNaturalezaComprobanteTextBox.Text == "VentaM")
                         {
                             UtilizarComprobantePreexistentePanel.Visible = false;
                             LoteUpdatePanel.Visible = false;
@@ -207,6 +207,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         #region Personalización campos vendedor y comprador para COMPRAS
                         UtilizarComprobantePreexistentePanel.Visible = false;
+                        PuntoVtaDropDownList.Visible = false;
+                        PuntoVtaTextBox.Visible = true;
                         LoteUpdatePanel.Visible = false;
                         compradorUpdatePanel.Visible = false;
                         ReferenciasPanel.Visible = false;
@@ -448,7 +450,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             comprobante.Leer(cAux, sesion);
                             if (cAux.Estado == null || cAux.Estado != "Vigente")
                             {
-                                comprobante.Registrar(lote, null, Session["IdNaturalezaComprobante"].ToString(), "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                                comprobante.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, "ITF", ((Entidades.Sesion)Session["Sesion"]));
                             }
                             else
                             {
@@ -1633,7 +1635,6 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             Entidades.Persona vendedor = new Entidades.Persona();
             vendedor.RazonSocial = Convert.ToString(VendedorDropDownList.SelectedValue);
-            int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
             try
             {
                 if (Funciones.SessionTimeOut(Session))
@@ -1666,8 +1667,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Telefono_VendedorTextBox.Text = Convert.ToString(vendedor.Contacto.Telefono);
                     Cuit_VendedorTextBox.Text = Convert.ToString(vendedor.Documento.Nro);
                     Condicion_IVA_VendedorDropDownList.SelectedValue = Convert.ToString(vendedor.DatosImpositivos.IdCondIVA);
-                    //NroIngBrutosTextBox.Text = vendedor.NroIngBrutos;
-                    //CondIngBrutosDropDownList.SelectedValue = Convert.ToString(vendedor.IdCondIngBrutos);
+                    Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = Convert.ToString(vendedor.DatosImpositivos.IdCondIngBrutos);
+                    NroIBVendedorTextBox.Text = vendedor.DatosImpositivos.NroIngBrutos;
                     string auxGLN = Convert.ToString(vendedor.DatosIdentificatorios.GLN);
                     if (!auxGLN.Equals("0"))
                     {
@@ -2487,7 +2488,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 RN.Comprobante comprobante = new RN.Comprobante();
                                 lcFea.cabecera_lote.DestinoComprobante = "ITF";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                comprobante.Registrar(lcFea, null, Session["IdNaturalezaComprobante"].ToString(), "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                                comprobante.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "ITF", ((Entidades.Sesion)Session["Sesion"]));
                             }
                         }
                         catch (System.Web.Services.Protocols.SoapException soapEx)
@@ -2591,7 +2592,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 RN.Comprobante c= new RN.Comprobante();
                                 lcFea.cabecera_lote.DestinoComprobante = "ITF";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                c.Registrar(lcFea, null, Session["IdNaturalezaComprobante"].ToString(), "ITF", ((Entidades.Sesion)Session["Sesion"]));
+                                c.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "ITF", ((Entidades.Sesion)Session["Sesion"]));
 
 
                                 //Consultar y Actualizar estado on-line.                              
@@ -2787,7 +2788,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 RN.Comprobante c = new RN.Comprobante();
                                 lcFea.cabecera_lote.DestinoComprobante = "AFIP";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                c.Registrar(lcFea, null, Session["IdNaturalezaComprobante"].ToString(), "AFIP", ((Entidades.Sesion)Session["Sesion"]));
+                                c.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", ((Entidades.Sesion)Session["Sesion"]));
 
                                 //Actualizar estado on-line.
                                 if (caeNro != "")
