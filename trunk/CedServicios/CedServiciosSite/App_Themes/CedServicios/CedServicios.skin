@@ -50,4 +50,4 @@
 <asp:DropDownList SkinID="ddlgr2c" runat="server" Style="width: 300px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>
 <asp:DropDownList SkinID="DropDownListCompradorGr" runat="server" Style="width: 280px" BorderStyle="NotSet"></asp:DropDownList>
 <asp:DropDownList SkinID="DropDownListTipoComprobante" runat="server" Style="width:400px" BorderStyle="NotSet"></asp:DropDownList>
-<asp:DropDownList SkinID="DropDownListComprador" runat="server" Style="width:400px" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="DropDownListPersona" runat="server" Style="width:400px" BorderStyle="NotSet"></asp:DropDownList>

@@ -40,6 +40,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Button PruebaPopupButton;
         
         /// <summary>
+        /// Control UtilizarComprobantePreexistentePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel UtilizarComprobantePreexistentePanel;
+        
+        /// <summary>
         /// Control XMLFileUpload.
         /// </summary>
         /// <remarks>
@@ -425,6 +434,33 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TipoNumeracionLote;
+        
+        /// <summary>
+        /// Control VendedorUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel VendedorUpdatePanel;
+        
+        /// <summary>
+        /// Control VendedorDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList VendedorDropDownList;
+        
+        /// <summary>
+        /// Control UpdateProgress1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress UpdateProgress1;
         
         /// <summary>
         /// Control Razon_Social_VendedorTextBox.
@@ -913,6 +949,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Telefono_CompradorTextBox;
         
         /// <summary>
+        /// Control ReferenciasPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ReferenciasPanel;
+        
+        /// <summary>
         /// Control referenciasUpdatePanel.
         /// </summary>
         /// <remarks>
@@ -956,6 +1001,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary ReferenciasFooterValidationSummary;
+        
+        /// <summary>
+        /// Control ExportacionPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ExportacionPanel;
         
         /// <summary>
         /// Control TipoExpoUpdatePanel.
@@ -1046,6 +1100,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::CedServicios.Site.Facturacion.Electronica.Permisos PermisosExpo;
+        
+        /// <summary>
+        /// Control DatosComerialesPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel DatosComerialesPanel;
         
         /// <summary>
         /// Control DatosComerciales.
@@ -1426,13 +1489,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Button ButtonPrueba;
         
         /// <summary>
-        /// Control PComprobantePanel.
+        /// Control ComprobantePanel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel PComprobantePanel;
+        protected global::System.Web.UI.WebControls.Panel ComprobantePanel;
         
         /// <summary>
         /// Control GuardarComprobanteButton.
