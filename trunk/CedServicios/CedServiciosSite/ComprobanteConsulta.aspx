@@ -43,13 +43,9 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                         <ContentTemplate>
                                             <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                                 <tr>
-                                                    <td colspan="4" align="right" style="padding-top:5px">
-                                                        <asp:Label ID="NaturalezaComprobanteLabel" runat="server" Text="NATURALEZA COMPROBANTE"></asp:Label>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="TextoResaltado" colspan="4" style="text-align: center;">
-                                                        COMPROBANTE
+                                                    <td class="TextoResaltado" colspan="4" style="text-align:center; padding-top:20px">
+                                                        <asp:Label ID="DatosComprobanteLabel" runat="server" Text="COMPROBANTE"></asp:Label>
+                                                        <asp:TextBox ID="IdNaturalezaComprobanteTextBox" runat="server" Visible="false"> </asp:TextBox>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -84,6 +80,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                 <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" AutoPostBack="True" Enabled="false" SkinID="ddlch" 
                                                                 onselectedindexchanged="PuntoVtaDropDownList_SelectedIndexChanged">
                                                                 </asp:DropDownList>
+                                                                <asp:TextBox ID="PuntoVtaTextBox" runat="server" Enabled="true" Visible="false" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
                                                                 <asp:Label ID="TipoPtoVentaLabel" runat="server"></asp:Label>
                                                                 <asp:RadioButton ID="Version1RadioButton" runat="server" GroupName="Version" Text="V.1"
                                                                     AutoPostBack="true" Visible="false" OnCheckedChanged="Version1RadioButton_CheckedChanged" Checked="True">

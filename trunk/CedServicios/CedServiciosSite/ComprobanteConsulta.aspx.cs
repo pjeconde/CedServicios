@@ -265,16 +265,20 @@ namespace CedServicios.Site
             switch (lc.comprobante[0].IdNaturalezaComprobante)
             {
                 case "Venta":
-                    NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
+                    DatosComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
+                    IdNaturalezaComprobanteTextBox.Text = "Venta";
                     break;
                 case "VentaM":
-                    NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (manual)";
+                    DatosComprobanteLabel.Text = "COMPROBANTE DE VENTA (manual)";
+                    IdNaturalezaComprobanteTextBox.Text = "VentaM";
                     break;
                 case "Compra":
-                    NaturalezaComprobanteLabel.Text = "COMPROBANTE DE COMPRA";
+                    DatosComprobanteLabel.Text = "COMPROBANTE DE COMPRA";
+                    IdNaturalezaComprobanteTextBox.Text = "Compra";
                     break;
                 default:
-                    NaturalezaComprobanteLabel.Text = "<<< NATURALEZA DESCONOCIDA >>>";
+                    DatosComprobanteLabel.Text = "<<< NATURALEZA DESCONOCIDA >>>";
+                    IdNaturalezaComprobanteTextBox.Text = String.Empty;
                     break;
             }
 
@@ -358,12 +362,21 @@ namespace CedServicios.Site
             {
                 Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
                 Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
-                PuntoVtaDropDownList.SelectedValue = Convert.ToString(lc.cabecera_lote.punto_de_venta);
-                int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+                {
+                    PuntoVtaDropDownList.SelectedValue = Convert.ToString(lc.cabecera_lote.punto_de_venta);
+                    AjustarCamposXPtaVentaChanged(PuntoVtaDropDownList.SelectedValue);
+                }
+                else
+                {
+                    PuntoVtaDropDownList.Visible = false;
+                    PuntoVtaTextBox.Visible = true;
+                    PuntoVtaTextBox.Text = Convert.ToString(lc.cabecera_lote.punto_de_venta);
+                }
+                int auxPV = Convert.ToInt32(lc.cabecera_lote.punto_de_venta);
                 ViewState["PuntoVenta"] = auxPV;
                 DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
                 Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
-                AjustarCamposXPtaVentaChanged(PuntoVtaDropDownList.SelectedValue);
                 AjustarCamposXVersion(lc);
                 Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
             }
@@ -628,7 +641,7 @@ namespace CedServicios.Site
 
         private void CompletarUI(org.dyndns.cedweb.consulta.ConsultarResult lc, EventArgs e)
         {
-            NaturalezaComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
+            DatosComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
             //Cabecera
             Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
             Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
