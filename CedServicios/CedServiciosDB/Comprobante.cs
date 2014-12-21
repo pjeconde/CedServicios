@@ -106,7 +106,7 @@ namespace CedServicios.DB
             a.Append("select ");
             a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante ");
             a.Append("from Comprobante ");
-            a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + "and Comprobante.NroComprobante=" + Comprobante.Nro.ToString() + " ");
+            a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Comprobante.NroComprobante=" + Comprobante.Nro.ToString() + " ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count != 0)
             {
@@ -268,10 +268,37 @@ namespace CedServicios.DB
             }
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
-        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante)
+        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado)
         {
             Entidades.Comprobante comprobante = new Entidades.Comprobante();
-            comprobante.Cuit = Lote.cabecera_lote.cuit_vendedor.ToString();
+            if (IdNaturalezaComprobante != "Compra")
+            {
+                comprobante.Cuit = Lote.cabecera_lote.cuit_vendedor.ToString();
+                comprobante.Documento.Tipo.Id = Lote.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
+                FeaEntidades.Documentos.Documento tipoDocumento = FeaEntidades.Documentos.Documento.Lista().Find(delegate(FeaEntidades.Documentos.Documento d) { return comprobante.Documento.Tipo.Id == d.Codigo.ToString(); });
+                if (tipoDocumento != null)
+                {
+                    comprobante.Documento.Tipo.Descr = tipoDocumento.Descr;
+                }
+                else
+                {
+                    comprobante.Documento.Tipo.Descr = "Desconocido";
+                }
+                comprobante.Documento.Nro = Lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;
+                comprobante.IdPersona = Lote.comprobante[0].cabecera.informacion_comprador.IdCliente;
+                comprobante.DesambiguacionCuitPais = Lote.comprobante[0].cabecera.informacion_comprador.DesambiguacionCuitPais;
+                comprobante.RazonSocial = Lote.comprobante[0].cabecera.informacion_comprador.denominacion;
+            }
+            else
+            {
+                comprobante.Cuit = Lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
+                comprobante.Documento.Tipo.Id = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
+                comprobante.Documento.Nro = Lote.cabecera_lote.cuit_vendedor;
+                comprobante.IdPersona = Lote.comprobante[0].cabecera.informacion_vendedor.id;
+                comprobante.DesambiguacionCuitPais = Lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais;
+                comprobante.RazonSocial = Lote.comprobante[0].cabecera.informacion_vendedor.razon_social;
+            }
+            comprobante.WF.Estado = IdEstado;
             comprobante.TipoComprobante.Id = Lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
             FeaEntidades.TiposDeComprobantes.TipoComprobante tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
             if (tipoComprobante != null)
@@ -285,20 +312,6 @@ namespace CedServicios.DB
             comprobante.NroPuntoVta = Lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
             comprobante.Nro = Lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
             comprobante.NroLote = Lote.cabecera_lote.id_lote;
-            comprobante.Documento.Tipo.Id = Lote.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
-            FeaEntidades.Documentos.Documento tipoDocumento = FeaEntidades.Documentos.Documento.Lista().Find(delegate(FeaEntidades.Documentos.Documento d) {return comprobante.Documento.Tipo.Id == d.Codigo.ToString();});
-            if (tipoDocumento != null)
-            {
-                comprobante.Documento.Tipo.Descr = tipoDocumento.Descr;
-            }
-            else
-            {
-                comprobante.Documento.Tipo.Descr = "Desconocido";
-            }
-            comprobante.Documento.Nro = Lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;
-            comprobante.IdPersona = Lote.comprobante[0].cabecera.informacion_comprador.IdCliente;
-            comprobante.DesambiguacionCuitPais = Lote.comprobante[0].cabecera.informacion_comprador.DesambiguacionCuitPais;
-            comprobante.RazonSocial = Lote.comprobante[0].cabecera.informacion_comprador.denominacion;
             comprobante.Detalle = Lote.comprobante[0].cabecera.informacion_comprobante.Observacion;
             comprobante.Fecha = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
             if (Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
@@ -322,7 +335,6 @@ namespace CedServicios.DB
                 comprobante.Response = Funciones.ObjetoSerializado(Response);
             }
             comprobante.IdDestinoComprobante = IdDestinoComprobante;
-            comprobante.WF.Estado = "PteConf";
             comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobante;
             Registrar(comprobante);
         }

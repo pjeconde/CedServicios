@@ -76,13 +76,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.UpdatePanel InfoComproUpdatePanel;
         
         /// <summary>
-        /// Control NaturalezaComprobanteLabel.
+        /// Control DatosComprobanteLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label NaturalezaComprobanteLabel;
+        protected global::System.Web.UI.WebControls.Label DatosComprobanteLabel;
         
         /// <summary>
         /// Control IdNaturalezaComprobanteTextBox.

@@ -16,10 +16,10 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaFiltrada(SoloVigentes, FechaDesde, FechaHasta, Persona, NaturalezaComprobante);
         }
-        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, Entidades.Sesion Sesion)
+        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            db.Registrar(Lote, Response, IdNaturalezaComprobante, IdDestinoComprobante);
+            db.Registrar(Lote, Response, IdNaturalezaComprobante, IdDestinoComprobante, IdEstado);
         }
         public void Leer(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {

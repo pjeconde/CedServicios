@@ -59,14 +59,21 @@ namespace CedServicios.Site.Facturacion.Electronica
 				return refs;
 			}
 		}
-		public string PuntoDeVenta
-		{
-			set
-			{
-				ViewState["puntoDeVenta"] = value;
-			}
-		}
-		public void CompletarDetallesWS(org.dyndns.cedweb.consulta.ConsultarResult lc)
+        public string PuntoDeVenta
+        {
+            set
+            {
+                ViewState["puntoDeVenta"] = value;
+            }
+        }
+        public string IdNaturalezaComprobante
+        {
+            set
+            {
+                ViewState["idNaturalezaComprobante"] = value;
+            }
+        }
+        public void CompletarDetallesWS(org.dyndns.cedweb.consulta.ConsultarResult lc)
 		{
 			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
 			foreach (org.dyndns.cedweb.consulta.ConsultarResultComprobanteDetalleLinea l in lc.comprobante[0].detalle.linea)
@@ -197,7 +204,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 try
                 {
-                    if (puntoDeVenta.Equals(string.Empty))
+                    if (puntoDeVenta.Equals(string.Empty) && ViewState["idNaturalezaComprobante"].ToString() != "Compra")
                     {
                         throw new Exception("Debe definir el punto de venta antes de ingresar un detalle");
                     }
@@ -707,7 +714,7 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             try
             {
-                if (puntoDeVenta.Equals(string.Empty))
+                if (puntoDeVenta.Equals(string.Empty) && ViewState["idNaturalezaComprobante"].ToString() != "Compra")
                 {
                     throw new Exception("Debe definir el punto de venta antes de editar un detalle");
                 }
@@ -976,24 +983,26 @@ namespace CedServicios.Site.Facturacion.Electronica
                         throw new Exception("Debe informar al menos un artículo");
                     }
                     double imptotdiscr = listadelineas[i].importe_total_articulo;
-                    //
-                    int auxPV = Convert.ToInt32(puntoDeVenta);
-                    try
+                    if (ViewState["idNaturalezaComprobante"].ToString() != "Compra")
                     {
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                        int auxPV = Convert.ToInt32(puntoDeVenta);
+                        try
                         {
-                            return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                        });
-                        if (listaPV.Count != 0)
-                        {
-                            if (listadelineas[i].importe_ivaSpecified)
+                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                             {
-                                imptotdiscr -= listadelineas[i].importe_iva;
+                                return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                            });
+                            if (listaPV.Count != 0)
+                            {
+                                if (listadelineas[i].importe_ivaSpecified)
+                                {
+                                    imptotdiscr -= listadelineas[i].importe_iva;
+                                }
                             }
                         }
-                    }
-                    catch
-                    {
+                        catch
+                        {
+                        }
                     }
                     if (listadelineas[i].importe_iva != 0)
                     {
