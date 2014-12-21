@@ -71,11 +71,15 @@
                                         <td colspan="1" style="height: 1px; background-color: Gray;">
                                         </td>
                                     </tr>
+                                    <tr>
+                                        <td style="height:20px;">
+                                        </td>
+                                    </tr>
                                 </table>
                             </asp:Panel>
                         </td>
                     </tr>
-                    <!-- INFORMACIÓN COMPROBANTE -->
+                    <!-- COMPROBANTE -->
                     <tr>
                         <td>
                             <asp:UpdatePanel ID="InfoComproUpdatePanel" runat="server" ChildrenAsTriggers="true"
@@ -91,14 +95,9 @@
                                 <ContentTemplate>
                                     <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                         <tr>
-                                            <td colspan="4" align="right" style="padding-top:5px">
-                                                <asp:Label ID="NaturalezaComprobanteLabel" runat="server" Text="NATURALEZA COMPROBANTE"></asp:Label>
+                                            <td class="TextoResaltado" colspan="4" style="text-align:center">
+                                                <asp:Label ID="DatosComprobanteLabel" runat="server" Text="COMPROBANTE"></asp:Label>
                                                 <asp:TextBox ID="IdNaturalezaComprobanteTextBox" runat="server" Visible="false"> </asp:TextBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="TextoResaltado" colspan="4" style="text-align: center;">
-                                                COMPROBANTE
                                             </td>
                                         </tr>
                                         <tr>
@@ -133,7 +132,7 @@
                                                         <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" AutoPostBack="True" Enabled="false" SkinID="ddlch" 
                                                         onselectedindexchanged="PuntoVtaDropDownList_SelectedIndexChanged">
                                                         </asp:DropDownList>
-                                                        <asp:TextBox ID="PuntoVtaTextBox" runat="server" Enabled="true" Visible="false" SkinID="TextoBoxFEAVendedorDetChCh" Text="0"></asp:TextBox>
+                                                        <asp:TextBox ID="PuntoVtaTextBox" runat="server" Enabled="true" Visible="false" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
                                                         <asp:Label ID="TipoPtoVentaLabel" runat="server"></asp:Label>
                                                         <asp:RadioButton ID="Version1RadioButton" runat="server" GroupName="Version" Text="V.1"
                                                             AutoPostBack="true" Visible="false" OnCheckedChanged="Version1RadioButton_CheckedChanged" Checked="True">
@@ -284,7 +283,7 @@
                             </asp:UpdatePanel>
                         </td>
                     </tr>
-                    <!-- DATOS DEL LOTE -->
+                    <!-- LOTE -->
                     <tr>
                         <td>
                             <asp:UpdatePanel ID="LoteUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
@@ -353,7 +352,7 @@
                             </asp:UpdatePanel>
                         </td>
                     </tr>
-                    <!-- DATOS DEL VENDEDOR -->
+                    <!-- VENDEDOR -->
                     <tr>
                         <td>
                             <asp:UpdatePanel ID="VendedorUpdatePanel" runat="server">
@@ -607,7 +606,7 @@
                             </asp:UpdatePanel>
                         </td>
                     </tr>
-                    <!-- DATOS DEL COMPRADOR -->
+                    <!-- COMPRADOR -->
                     <tr>
                         <td>
                             <asp:UpdatePanel ID="compradorUpdatePanel" runat="server" ChildrenAsTriggers="true"
@@ -894,7 +893,7 @@
                             </asp:UpdatePanel>
                         </td>
                     </tr>
-                    <!-- CODIGOS DE REFERENCIAS -->
+                    <!-- REFERENCIAS -->
                     <tr>
                         <td style="text-align: center">
                             <asp:Panel ID="ReferenciasPanel" runat="server">
@@ -1188,7 +1187,7 @@
                             </asp:Panel>
                         </td>
                     </tr>
-                    <!-- DATOS DEL DETALLE -->
+                    <!-- DETALLE DE ARTÍCULOS / SERVICIOS -->
                     <tr>
                         <td style="text-align: center">
                             <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
@@ -1226,7 +1225,7 @@
                             </table>
                         </td>
                     </tr>
-                    <!-- DATOS DE DESCUENTOS GLOBALES -->
+                    <!-- DESCUENTOS GLOBALES -->
                     <tr>
                         <td style="text-align:center">
                             <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
@@ -1243,7 +1242,7 @@
                             </table>
                         </td>
                     </tr>
-                    <!-- DATOS DE IMPUESTOS GLOBALES -->
+                    <!-- IMPUESTOS GLOBALES -->
                     <tr>
                         <td style="text-align:center">
                             <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
@@ -1260,7 +1259,7 @@
                             </table>
                         </td>
                     </tr>
-                    <!-- DATOS DE RESUMEN FINAL -->
+                    <!-- RESUMEN FINAL -->
                     <tr>
                         <td style="text-align: center">
                             <table border="0" cellpadding="0" cellspacing="0" style="width:782px">

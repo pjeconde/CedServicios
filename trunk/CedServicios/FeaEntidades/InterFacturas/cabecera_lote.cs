@@ -270,6 +270,5 @@ namespace FeaEntidades.InterFacturas
                 this.destinoComprobante = value;
             }
         }
-        
-	}
+    }
 }
