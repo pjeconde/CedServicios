@@ -1390,13 +1390,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Panel AFIPpanel;
         
         /// <summary>
-        /// Control EnviarAFIPButton.
+        /// Control SubirAAFIPButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EnviarAFIPButton;
+        protected global::System.Web.UI.WebControls.Button SubirAAFIPButton;
         
         /// <summary>
         /// Control ModalPopupExtender3.
@@ -1417,13 +1417,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Panel InterfacturasOnLinePanel;
         
         /// <summary>
-        /// Control ValidarIBKButton.
+        /// Control ValidarEnInterfacturasButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ValidarIBKButton;
+        protected global::System.Web.UI.WebControls.Button ValidarEnInterfacturasButton;
         
         /// <summary>
         /// Control ModalPopupExtender2.
@@ -1435,13 +1435,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender2;
         
         /// <summary>
-        /// Control EnviarIBKButton.
+        /// Control SubirAInterfacturasButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EnviarIBKButton;
+        protected global::System.Web.UI.WebControls.Button SubirAInterfacturasButton;
         
         /// <summary>
         /// Control ModalPopupExtender1.
@@ -1462,22 +1462,22 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Panel InterfacturasArchivoXMLpanel;
         
         /// <summary>
-        /// Control DescargarButton.
+        /// Control DescargarXMLButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button DescargarButton;
+        protected global::System.Web.UI.WebControls.Button DescargarXMLButton;
         
         /// <summary>
-        /// Control GenerarButton.
+        /// Control EnviarXMLporMailButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GenerarButton;
+        protected global::System.Web.UI.WebControls.Button EnviarXMLporMailButton;
         
         /// <summary>
         /// Control PrevisualizacionComprobantePanel.
@@ -1489,22 +1489,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Panel PrevisualizacionComprobantePanel;
         
         /// <summary>
-        /// Control PDFButton.
+        /// Control ObtenerPDFButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button PDFButton;
-        
-        /// <summary>
-        /// Control ButtonPrueba.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ButtonPrueba;
+        protected global::System.Web.UI.WebControls.Button ObtenerPDFButton;
         
         /// <summary>
         /// Control ComprobantePanel.

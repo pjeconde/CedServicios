@@ -1523,10 +1523,10 @@
                                                         AFIP: 
                                                     </td>
                                                     <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="EnviarAFIPButton" runat="server" CausesValidation="false" OnClick="EnviarAFIPButton_Click" 
+                                                        <asp:Button ID="SubirAAFIPButton" runat="server" CausesValidation="false" OnClick="AccionSubirAAFIPButton_Click" 
                                                             Text="Enviar" ToolTip="Impactar el comprobante en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
                                                         <cc1:ModalPopupExtender ID="ModalPopupExtender3" 
-                                                            PopupControlID="PopupEnviarAFIP" TargetControlID="EnviarAFIPButton" 
+                                                            PopupControlID="PopupEnviarAFIP" TargetControlID="SubirAAFIPButton" 
                                                             BackgroundCssClass="modalBackground" runat="server" 
                                                             onload="ModalPopupExtender3_Load" />
                                                     </td>
@@ -1540,16 +1540,16 @@
                                                         Interfacturas (on line): 
                                                     </td>
                                                     <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="ValidarIBKButton" runat="server" CausesValidation="false" OnClick="ValidarIBKButton_Click" 
+                                                        <asp:Button ID="ValidarEnInterfacturasButton" runat="server" CausesValidation="false" OnClick="AccionValidarEnInterfacturasButton_Click" 
                                                             Text="Validar" ToolTip="Validar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
                                                         <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
-                                                            PopupControlID="PopupValidarITF" TargetControlID="ValidarIBKButton" 
+                                                            PopupControlID="PopupValidarITF" TargetControlID="ValidarEnInterfacturasButton" 
                                                             BackgroundCssClass="modalBackground" runat="server" ValidateRequestMode="Enabled" 
                                                             onload="ModalPopupExtender1_Load" />
-                                                        <asp:Button ID="EnviarIBKButton" runat="server" CausesValidation="false" OnClick="EnviarIBKButton_Click" 
+                                                        <asp:Button ID="SubirAInterfacturasButton" runat="server" CausesValidation="false" OnClick="AccionSubirAInterfacturasButton_Click" 
                                                             Text="Enviar" ToolTip="Impactar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
                                                         <cc1:ModalPopupExtender ID="ModalPopupExtender1" 
-                                                            PopupControlID="PopupEnvioITF" TargetControlID="EnviarIBKButton" 
+                                                            PopupControlID="PopupEnvioITF" TargetControlID="SubirAInterfacturasButton" 
                                                             BackgroundCssClass="modalBackground" runat="server" 
                                                             onload="ModalPopupExtender1_Load" />
                                                     </td>
@@ -1563,9 +1563,9 @@
                                                         Interfacturas (archivo XML): 
                                                     </td>
                                                     <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="DescargarButton" runat="server" OnClick="GenerarButton_Click" 
+                                                        <asp:Button ID="DescargarXMLButton" runat="server" OnClick="AccionObtenerXMLButton_Click" 
                                                             Text="Descargar" ToolTip="Luego de descargar el archivo XML, realizar el (Upload) en Interfacturas." />
-                                                        <asp:Button ID="GenerarButton" runat="server" OnClick="GenerarButton_Click" 
+                                                        <asp:Button ID="EnviarXMLporMailButton" runat="server" OnClick="AccionObtenerXMLButton_Click" 
                                                             Text="Enviar por e-mail" ToolTip="Luego de descargar el archivo XML del correo, realizar el (Upload) en Interfacturas." />
                                                     </td>
                                                 </tr>
@@ -1578,10 +1578,7 @@
                                                         Previsualización comprobante: 
                                                     </td>
                                                     <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="PDFButton" runat="server" CausesValidation="true" OnClick="PDFButton_Click" 
-                                                            Text="Obtener" />
-                                                        <asp:Button ID="ButtonPrueba" runat="server" CausesValidation="false" Text="Prueba" Width="0%" style="display:none" 
-                                                            onclick="ButtonPrueba_Click" />
+                                                        <asp:Button ID="ObtenerPDFButton" runat="server" CausesValidation="true" OnClick="AccionObtenerPDFButton_Click" Text="Obtener" />
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1593,8 +1590,7 @@
                                                         Comprobante: 
                                                     </td>
                                                     <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="GuardarComprobanteButton" runat="server" CausesValidation="true" OnClick="GuardarComprobanteButton_Click" 
-                                                            Text="Guardar" />
+                                                        <asp:Button ID="GuardarComprobanteButton" runat="server" CausesValidation="true" OnClick="AccionGuardarComprobanteButton_Click" Text="Guardar" />
                                                     </td>
                                                 </tr>
                                             </table>
@@ -1670,7 +1666,7 @@
             </tr>
             <tr>
                 <td align="right" style="padding-top: 20px">
-                    <asp:Button ID="AceptarEnvioITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarEnvioITF.disabled = true;" OnClick="AceptarEnvioITFButton_Click" />
+                    <asp:Button ID="AceptarEnvioITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarEnvioITF.disabled = true;" OnClick="AccionSubirAInterfacturasButton_Click" />
                 </td>
                 <td align="center" style="width: 20px">
                 </td>
@@ -1691,7 +1687,7 @@
             </tr>
             <tr>
                 <td align="right" style="padding-top: 20px">
-                    <asp:Button ID="AceptarValidarITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarValidarITF.disabled = true;" OnClick="AceptarValidarITFButton_Click" ValidationGroup="RequeridosValidationSummary" />
+                    <asp:Button ID="AceptarValidarITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarValidarITF.disabled = true;" OnClick="AccionValidarEnInterfacturasButton_Click" ValidationGroup="RequeridosValidationSummary" />
                 </td>
                 <td align="center" style="width: 20px">
                 </td>
@@ -1712,7 +1708,7 @@
             </tr>
             <tr>
                 <td align="right" style="padding-top: 20px">
-                    <asp:Button ID="AceptarEnviarAFIP" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarEnviarAFIP.disabled = true;" OnClick="AceptarEnviarAFIPButton_Click" />
+                    <asp:Button ID="AceptarEnviarAFIP" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarEnviarAFIP.disabled = true;" OnClick="AccionSubirAAFIPButton_Click" />
                 </td>
                 <td align="center" style="width: 20px">
                 </td>
