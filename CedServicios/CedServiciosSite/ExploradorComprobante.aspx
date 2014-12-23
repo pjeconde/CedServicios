@@ -72,7 +72,7 @@
                             <Columns>
                                 <asp:TemplateField ControlStyle-Width="35">
                                     <ItemTemplate>
-                                        <asp:ImageButton ID="ConsultarButton" runat="server" ToolTip="Consulta Local" CommandName="ConsultaLocal" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Consultar.png" />
+                                        <asp:ImageButton ID="ConsultarButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Consultar.png" />
                                     </ItemTemplate>
                                 </asp:TemplateField>
                                 <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">
@@ -139,20 +139,16 @@
                                     <headerstyle horizontalalign="center" wrap="False" />
                                     <itemstyle horizontalalign="right" wrap="False" />
                                 </asp:BoundField>
-                                <asp:TemplateField ControlStyle-Width="35">
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="ConsultarOnLineButton" runat="server" ToolTip="Consultar On-Line" CommandName="ConsultarOnLine" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/ConsultarOnLine.png" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
                                 <asp:TemplateField>
                                     <ItemTemplate>
 		                                <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged" EnableViewState="false">
 			                                <asp:ListItem Value="" Text="--- elegir acción ---"></asp:ListItem>
-			                                <asp:ListItem Value="ActualizarOnLine" Text="Actualizar estado"></asp:ListItem>
-			                                <asp:ListItem Value="XML-ClonarAlta" Text="Clonar comprobante"></asp:ListItem>
+			                                <asp:ListItem Value="ActualizarOnLine" Text="Actualizar estado (Interfacturas/AFIP)"></asp:ListItem>
+			                                <asp:ListItem Value="ConsultarInterfacturas" Text="Consultar (Interfacturas)"></asp:ListItem>
 			                                <asp:ListItem Value="PDF-Viewer" Text="Viewer PDF (InterFacturas)"></asp:ListItem>
-			                                <asp:ListItem Value="PDF" Text="Descargar PDF"></asp:ListItem>
 			                                <asp:ListItem Value="XMLOnLine" Text="Descargar XML (InterFacturas)"></asp:ListItem>
+			                                <asp:ListItem Value="PDF" Text="Descargar PDF"></asp:ListItem>
+			                                <asp:ListItem Value="XML-ClonarAlta" Text="Clonar comprobante"></asp:ListItem>
 			                                <asp:ListItem Value="ExportarRG2485" Text="Descargar interface RG2485"></asp:ListItem>
 		                                </asp:DropDownList>
                                     </ItemTemplate>
