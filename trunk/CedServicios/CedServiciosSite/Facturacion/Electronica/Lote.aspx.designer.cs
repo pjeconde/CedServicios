@@ -22,24 +22,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Label Label2;
         
         /// <summary>
-        /// Control PruebaPopup.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label PruebaPopup;
-        
-        /// <summary>
-        /// Control PruebaPopupButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button PruebaPopupButton;
-        
-        /// <summary>
         /// Control UtilizarComprobantePreexistentePanel.
         /// </summary>
         /// <remarks>
@@ -472,6 +454,24 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList VendedorDropDownList;
         
         /// <summary>
+        /// Control IdPersonaVendedorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox IdPersonaVendedorTextBox;
+        
+        /// <summary>
+        /// Control DesambiguacionCuitPaisVendedorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DesambiguacionCuitPaisVendedorTextBox;
+        
+        /// <summary>
         /// Control UpdateProgress1.
         /// </summary>
         /// <remarks>
@@ -704,6 +704,24 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList CompradorDropDownList;
+        
+        /// <summary>
+        /// Control IdPersonaCompradorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox IdPersonaCompradorTextBox;
+        
+        /// <summary>
+        /// Control DesambiguacionCuitPaisCompradorTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DesambiguacionCuitPaisCompradorTextBox;
         
         /// <summary>
         /// Control compradorUpdateProgress.

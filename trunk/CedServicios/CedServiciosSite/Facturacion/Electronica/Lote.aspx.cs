@@ -182,7 +182,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         if (listacompradores.Count > 0)
                         {
                             CompradorDropDownList.Visible = true;
-                            CompradorDropDownList.DataValueField = "RazonSocial";
+                            CompradorDropDownList.DataValueField = "ClavePrimaria";
                             CompradorDropDownList.DataTextField = "RazonSocial";
                             Entidades.Persona persona = new Entidades.Persona();
                             System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
@@ -255,7 +255,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         if (listavendedores.Count > 0)
                         {
                             VendedorDropDownList.Visible = true;
-                            VendedorDropDownList.DataValueField = "RazonSocial";
+                            VendedorDropDownList.DataValueField = "ClavePrimaria";
                             VendedorDropDownList.DataTextField = "RazonSocial";
                             Entidades.Persona persona = new Entidades.Persona();
                             System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
@@ -818,18 +818,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     else
                     {
-                        //MensajePopupLabel.Text = "Debe seleccionar un archivo";
-                        //PruebaPopupButton_Click(PruebaPopupButton, new EventArgs());
                         ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe seleccionar un archivo');</script>", false);
                     }
                     VerificarMetodoNumeracionLote();
                 }
             }
 		}
-        protected void PruebaPopupButton_Click(object sender, EventArgs e)
-        {
-            //ModalPopupExtender1.Show();
-        }
 		private void LeerFormatoDetalleIBK(EventArgs e, FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
 		{
 			//Formato detalle_factura IBK
@@ -1193,9 +1187,12 @@ namespace CedServicios.Site.Facturacion.Electronica
         private void AjustarComprador()
         {
             Entidades.Persona comprador = new Entidades.Persona();
-            //comprador.IdCliente = ((Entidades.Sesion)Session["Sesion"]).Usuario.Id;
-            //comprador.RazonSocial = Convert.ToString(CompradorDropDownList.SelectedItem.Text);
-            comprador.RazonSocial = Convert.ToString(CompradorDropDownList.SelectedValue);
+            string[] elementosClavePrimaria = CompradorDropDownList.SelectedValue.ToString().Split('\t');
+            comprador.Cuit = elementosClavePrimaria[0];
+            comprador.Documento.Tipo.Id = elementosClavePrimaria[1];
+            comprador.Documento.Nro = Convert.ToInt64(elementosClavePrimaria[2]);
+            comprador.IdPersona = elementosClavePrimaria[3];
+            comprador.DesambiguacionCuitPais = Convert.ToInt32(elementosClavePrimaria[4]);
             int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
             try
             {
@@ -1205,7 +1202,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    RN.Persona.Leer(comprador, (Entidades.Sesion)Session["Sesion"]);
+                    RN.Persona.LeerPorClavePrimaria(comprador, (Entidades.Sesion)Session["Sesion"]);
+                    IdPersonaCompradorTextBox.Text = comprador.IdPersona;
+                    DesambiguacionCuitPaisCompradorTextBox.Text = comprador.DesambiguacionCuitPais.ToString();
                     Denominacion_CompradorTextBox.Text = comprador.RazonSocial;
                     Domicilio_Calle_CompradorTextBox.Text = comprador.Domicilio.Calle;
                     Domicilio_Numero_CompradorTextBox.Text = comprador.Domicilio.Nro;
@@ -1378,7 +1377,12 @@ namespace CedServicios.Site.Facturacion.Electronica
         private void AjustarVendedor()
         {
             Entidades.Persona vendedor = new Entidades.Persona();
-            vendedor.RazonSocial = Convert.ToString(VendedorDropDownList.SelectedValue);
+            string[] elementosClavePrimaria = VendedorDropDownList.SelectedValue.ToString().Split('\t');
+            vendedor.Cuit = elementosClavePrimaria[0];
+            vendedor.Documento.Tipo.Id = elementosClavePrimaria[1];
+            vendedor.Documento.Nro = Convert.ToInt64(elementosClavePrimaria[2]);
+            vendedor.IdPersona = elementosClavePrimaria[3];
+            vendedor.DesambiguacionCuitPais = Convert.ToInt32(elementosClavePrimaria[4]);
             try
             {
                 if (Funciones.SessionTimeOut(Session))
@@ -1387,7 +1391,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    RN.Persona.Leer(vendedor, (Entidades.Sesion)Session["Sesion"]);
+                    RN.Persona.LeerPorClavePrimaria(vendedor, (Entidades.Sesion)Session["Sesion"]);
+                    IdPersonaVendedorTextBox.Text = vendedor.IdPersona;
+                    DesambiguacionCuitPaisVendedorTextBox.Text = vendedor.DesambiguacionCuitPais.ToString();
                     Razon_Social_VendedorTextBox.Text = vendedor.RazonSocial;
                     Domicilio_Calle_VendedorTextBox.Text = vendedor.Domicilio.Calle;
                     Domicilio_Numero_VendedorTextBox.Text = vendedor.Domicilio.Nro;
@@ -1724,7 +1730,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         if (listacompradores.Count > 0)
                         {
                             CompradorDropDownList.Visible = true;
-                            CompradorDropDownList.DataValueField = "RazonSocial";
+                            CompradorDropDownList.DataValueField = "ClavePrimaria";
                             CompradorDropDownList.DataTextField = "RazonSocial";
                             Entidades.Persona persona = new Entidades.Persona();
                             System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
@@ -2868,6 +2874,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                             RN.Comprobante c = new RN.Comprobante();
                             lote.cabecera_lote.DestinoComprobante = "Ninguno";
                             lote.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+                            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+                            {
+                                lote.comprobante[0].cabecera.informacion_comprador.id = IdPersonaCompradorTextBox.Text;
+                                lote.comprobante[0].cabecera.informacion_comprador.desambiguacionCuitPais = Convert.ToInt32(DesambiguacionCuitPaisCompradorTextBox.Text);
+                            }
+                            else
+                            {
+                                lote.comprobante[0].cabecera.informacion_vendedor.id = IdPersonaVendedorTextBox.Text;
+                                lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais = Convert.ToInt32(DesambiguacionCuitPaisVendedorTextBox.Text);
+                            }
                             c.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, lote.cabecera_lote.DestinoComprobante, "Vigente", ((Entidades.Sesion)Session["Sesion"]));
                         }
                         catch (System.Web.Services.Protocols.SoapException soapEx)

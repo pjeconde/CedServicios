@@ -115,6 +115,23 @@ namespace CedServicios.DB
                 Copiar(dt.Rows[0], persona);
             }
         }
+        public void LeerPorClavePrimaria(Entidades.Persona persona)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("select ");
+            a.Append("Persona.Cuit, Persona.IdTipoDoc, Persona.NroDoc, Persona.IdPersona, Persona.DesambiguacionCuitPais, Persona.RazonSocial, Persona.DescrTipoDoc, Persona.Calle, Persona.Nro, Persona.Piso, Persona.Depto, Persona.Sector, Persona.Torre, Persona.Manzana, Persona.Localidad, Persona.IdProvincia, Persona.DescrProvincia, Persona.CodPost, Persona.NombreContacto, Persona.EmailContacto, Persona.TelefonoContacto, Persona.IdCondIVA, Persona.DescrCondIVA, Persona.NroIngBrutos, Persona.IdCondIngBrutos, Persona.DescrCondIngBrutos, Persona.GLN, Persona.FechaInicioActividades, Persona.CodigoInterno, Persona.EmailAvisoVisualizacion, Persona.PasswordAvisoVisualizacion, Persona.IdWF, Persona.Estado, Persona.UltActualiz, Persona.EsCliente, Persona.EsProveedor ");
+            a.Append("from Persona ");
+            a.Append("where Persona.Cuit='" + persona.Cuit + "' ");
+            a.Append("and Persona.IdTipoDoc = " + persona.Documento.Tipo.Id + " ");
+            a.Append("and Persona.NroDoc = " + persona.Documento.Nro.ToString() + " ");
+            a.Append("and Persona.IdPersona = '" + persona.IdPersona + "' ");
+            a.Append("and Persona.DesambiguacionCuitPais = " + persona.DesambiguacionCuitPais.ToString() + " ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            if (dt.Rows.Count != 0)
+            {
+                Copiar(dt.Rows[0], persona);
+            }
+        }
         public Entidades.Persona Leer(int IdWF)
         {
             System.Text.StringBuilder a = new StringBuilder();

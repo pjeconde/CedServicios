@@ -311,6 +311,20 @@ namespace CedServicios.Entidades
                 else if (esCliente) return "Cliente"; else return "Proveedor";
             }
         }
+        public string ClavePrimaria
+        {
+            get
+            {
+                if (cuit != null)
+                {
+                    return cuit + '\t' + documento.Tipo.Id + '\t' + documento.Nro.ToString() + '\t' + idPersona.ToString() + '\t' + desambiguacionCuitPais.ToString();
+                }
+                else
+                {
+                    return String.Empty + '\t' + "0" + '\t' + "0" + '\t' + String.Empty + '\t' + "0";
+                }
+            }
+        }
         #endregion
     }
 }

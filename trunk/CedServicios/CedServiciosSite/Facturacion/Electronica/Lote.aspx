@@ -20,8 +20,6 @@
                     <tr>
                         <td align="center" valign="middle">
                             <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Alta de Comprobante"></asp:Label>
-                            <asp:Label ID="PruebaPopup" runat="server" Text="" Visible="false"></asp:Label>
-                            <asp:Button ID="PruebaPopupButton" runat="server" Text="Button" Visible="false" CausesValidation="false" onclick="PruebaPopupButton_Click"/>
                         </td>
                     </tr>
                     <!-- UTILIZAR COMPROBANTE PREEXISTENTE -->
@@ -382,6 +380,8 @@
                                                             <asp:DropDownList ID="VendedorDropDownList" runat="server" AutoPostBack="True" Enabled="false"
                                                                 OnSelectedIndexChanged="VendedorDropDownList_SelectedIndexChanged" SkinID="DropDownListPersona" Visible="false">
                                                             </asp:DropDownList>
+                                                            <asp:TextBox ID="IdPersonaVendedorTextBox" runat="server" Visible="false"> </asp:TextBox>
+                                                            <asp:TextBox ID="DesambiguacionCuitPaisVendedorTextBox" runat="server" Visible="false"> </asp:TextBox>
                                                             <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="vendedorUpdatePanel"
                                                                 DisplayAfter="0">
                                                                 <ProgressTemplate>
@@ -641,6 +641,8 @@
                                                             <asp:DropDownList ID="CompradorDropDownList" runat="server" AutoPostBack="True" Enabled="false"
                                                                 OnSelectedIndexChanged="CompradorDropDownList_SelectedIndexChanged" SkinID="DropDownListPersona" Visible="false">
                                                             </asp:DropDownList>
+                                                            <asp:TextBox ID="IdPersonaCompradorTextBox" runat="server" Visible="false"> </asp:TextBox>
+                                                            <asp:TextBox ID="DesambiguacionCuitPaisCompradorTextBox" runat="server" Visible="false"> </asp:TextBox>
                                                             <asp:UpdateProgress ID="compradorUpdateProgress" runat="server" AssociatedUpdatePanelID="compradorUpdatePanel"
                                                                 DisplayAfter="0">
                                                                 <ProgressTemplate>
