@@ -75,9 +75,9 @@ namespace FeaEntidades.InterFacturas
 
         private string telefonoField;
 
-        private string idCliente;
+        private string idField;
 
-        private int desambiguacionCuitPais;
+        private int desambiguacionCuitPaisField;
 
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
@@ -418,29 +418,29 @@ namespace FeaEntidades.InterFacturas
 
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public string IdCliente
+        public string id
         {
             get
             {
-                return this.idCliente;
+                return this.idField;
             }
             set
             {
-                this.idCliente = value;
+                this.idField = value;
             }
         }
 
         /// <comentarios/>
         [System.Xml.Serialization.XmlIgnoreAttribute()]
-        public int DesambiguacionCuitPais
+        public int desambiguacionCuitPais
         {
             get
             {
-                return this.desambiguacionCuitPais;
+                return this.desambiguacionCuitPaisField;
             }
             set
             {
-                this.desambiguacionCuitPais = value;
+                this.desambiguacionCuitPaisField = value;
             }
         }
     }

@@ -285,8 +285,8 @@ namespace CedServicios.DB
                     comprobante.Documento.Tipo.Descr = "Desconocido";
                 }
                 comprobante.Documento.Nro = Lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;
-                comprobante.IdPersona = Lote.comprobante[0].cabecera.informacion_comprador.IdCliente;
-                comprobante.DesambiguacionCuitPais = Lote.comprobante[0].cabecera.informacion_comprador.DesambiguacionCuitPais;
+                comprobante.IdPersona = Lote.comprobante[0].cabecera.informacion_comprador.id;
+                comprobante.DesambiguacionCuitPais = Lote.comprobante[0].cabecera.informacion_comprador.desambiguacionCuitPais;
                 comprobante.RazonSocial = Lote.comprobante[0].cabecera.informacion_comprador.denominacion;
             }
             else

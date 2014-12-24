@@ -52,10 +52,15 @@ namespace CedServicios.RN
             DB.Persona db = new DB.Persona(Sesion);
             return db.ListaPorCuityIdPersona(Cuit, IdPersona, TipoPersona);
         }
-        public static void Leer(Entidades.Persona persona, Entidades.Sesion Sesion)
+        public static void Leer(Entidades.Persona Persona, Entidades.Sesion Sesion)
         {
-            DB.Persona comprador = new DB.Persona(Sesion);
-            comprador.Leer(persona);
+            DB.Persona persona = new DB.Persona(Sesion);
+            persona.Leer(Persona);
+        }
+        public static void LeerPorClavePrimaria(Entidades.Persona Persona, Entidades.Sesion Sesion)
+        {
+            DB.Persona persona = new DB.Persona(Sesion);
+            persona.LeerPorClavePrimaria(Persona);
         }
         public static string LeerYSerializar(int IdWF, Entidades.Sesion Sesion)
         {
