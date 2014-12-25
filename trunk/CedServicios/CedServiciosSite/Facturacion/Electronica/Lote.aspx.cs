@@ -2885,6 +2885,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais = Convert.ToInt32(DesambiguacionCuitPaisVendedorTextBox.Text);
                             }
                             c.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, lote.cabecera_lote.DestinoComprobante, "Vigente", ((Entidades.Sesion)Session["Sesion"]));
+                            AccionesPanel.Visible = false;
+                            MensajeLabel.Text = "Comprobante guardado satisfactoriamente";
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + MensajeLabel.Text + "')</script>", false);
                         }
                         catch (System.Web.Services.Protocols.SoapException soapEx)
                         {
@@ -2892,21 +2895,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 XmlDocument doc = new XmlDocument();
                                 doc.LoadXml(soapEx.Detail.OuterXml);
-                                XmlNamespaceManager nsManager = new
-                                    XmlNamespaceManager(doc.NameTable);
-                                nsManager.AddNamespace("errorNS",
-                                    "http://www.cedeira.com.ar/webservices");
-                                XmlNode Node =
-                                    doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
-                                string errorNumber =
-                                    Node.SelectSingleNode("errorNS:ErrorNumber",
-                                    nsManager).InnerText;
-                                string errorMessage =
-                                    Node.SelectSingleNode("errorNS:ErrorMessage",
-                                    nsManager).InnerText;
-                                string errorSource =
-                                    Node.SelectSingleNode("errorNS:ErrorSource",
-                                    nsManager).InnerText;
+                                XmlNamespaceManager nsManager = new XmlNamespaceManager(doc.NameTable);
+                                nsManager.AddNamespace("errorNS", "http://www.cedeira.com.ar/webservices");
+                                XmlNode Node = doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
+                                string errorNumber = Node.SelectSingleNode("errorNS:ErrorNumber", nsManager).InnerText;
+                                string errorMessage = Node.SelectSingleNode("errorNS:ErrorMessage", nsManager).InnerText;
+                                string errorSource = Node.SelectSingleNode("errorNS:ErrorSource", nsManager).InnerText;
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + "\\n" + errorMessage.Replace("\r", "").Replace("\\n", "") + "');</script>", false);
                             }
                             catch (Exception)

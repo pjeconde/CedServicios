@@ -1399,6 +1399,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Observaciones_ResumenTextBox;
         
         /// <summary>
+        /// Control AccionesPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel AccionesPanel;
+        
+        /// <summary>
         /// Control AFIPpanel.
         /// </summary>
         /// <remarks>
@@ -1534,6 +1543,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Button GuardarComprobanteButton;
         
         /// <summary>
+        /// Control MensajeLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label MensajeLabel;
+        
+        /// <summary>
         /// Control contactoHyperLink.
         /// </summary>
         /// <remarks>
@@ -1568,15 +1586,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ActualizarEstadoButton;
-        
-        /// <summary>
-        /// Control MensajeLabel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MensajeLabel;
         
         /// <summary>
         /// Control LabelEnvioITF.
