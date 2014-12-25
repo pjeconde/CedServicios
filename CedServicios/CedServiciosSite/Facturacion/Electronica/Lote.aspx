@@ -1502,118 +1502,126 @@
                     <!-- ACCIONES -->
                     <tr>
                         <td style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
-                                <tr>
-                                    <td style="height: 10px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="TextoResaltado" style="text-align:center">
-                                        ACCIONES
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="height: 10px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="padding-left:10px">
-                                        <asp:Panel ID="AFIPpanel" runat="server">
-                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
-                                                <tr>
-                                                    <td class="TC00S">
-                                                        AFIP: 
-                                                    </td>
-                                                    <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="SubirAAFIPButton" runat="server" CausesValidation="false" OnClick="AccionSubirAAFIPButton_Click" 
-                                                            Text="Enviar" ToolTip="Impactar el comprobante en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
-                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender3" 
-                                                            PopupControlID="PopupEnviarAFIP" TargetControlID="SubirAAFIPButton" 
-                                                            BackgroundCssClass="modalBackground" runat="server" 
-                                                            onload="ModalPopupExtender3_Load" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </asp:Panel>
-                                        <asp:Panel ID="InterfacturasOnLinePanel" runat="server">
-                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
-                                                <tr>
-                                                    <td class="TC00S">
-                                                        Interfacturas (on line): 
-                                                    </td>
-                                                    <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="ValidarEnInterfacturasButton" runat="server" CausesValidation="false" OnClick="AccionValidarEnInterfacturasButton_Click" 
-                                                            Text="Validar" ToolTip="Validar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
-                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
-                                                            PopupControlID="PopupValidarITF" TargetControlID="ValidarEnInterfacturasButton" 
-                                                            BackgroundCssClass="modalBackground" runat="server" ValidateRequestMode="Enabled" 
-                                                            onload="ModalPopupExtender1_Load" />
-                                                        <asp:Button ID="SubirAInterfacturasButton" runat="server" CausesValidation="false" OnClick="AccionSubirAInterfacturasButton_Click" 
-                                                            Text="Enviar" ToolTip="Impactar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
-                                                        <cc1:ModalPopupExtender ID="ModalPopupExtender1" 
-                                                            PopupControlID="PopupEnvioITF" TargetControlID="SubirAInterfacturasButton" 
-                                                            BackgroundCssClass="modalBackground" runat="server" 
-                                                            onload="ModalPopupExtender1_Load" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </asp:Panel>
-                                        <asp:Panel ID="InterfacturasArchivoXMLpanel" runat="server">
-                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
-                                                <tr>
-                                                    <td class="TC00S">
-                                                        Interfacturas (archivo XML): 
-                                                    </td>
-                                                    <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="DescargarXMLButton" runat="server" OnClick="AccionObtenerXMLButton_Click" 
-                                                            Text="Descargar" ToolTip="Luego de descargar el archivo XML, realizar el (Upload) en Interfacturas." />
-                                                        <asp:Button ID="EnviarXMLporMailButton" runat="server" OnClick="AccionObtenerXMLButton_Click" 
-                                                            Text="Enviar por e-mail" ToolTip="Luego de descargar el archivo XML del correo, realizar el (Upload) en Interfacturas." />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </asp:Panel>
-                                        <asp:Panel ID="PrevisualizacionComprobantePanel" runat="server">
-                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
-                                                <tr>
-                                                    <td class="TC00S">
-                                                        Previsualización comprobante: 
-                                                    </td>
-                                                    <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="ObtenerPDFButton" runat="server" CausesValidation="true" OnClick="AccionObtenerPDFButton_Click" Text="Obtener" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </asp:Panel>
-                                        <asp:Panel ID="ComprobantePanel" runat="server">
-                                            <table border="0" cellpadding="0" cellspacing="0">
-                                                <tr>
-                                                    <td class="TC00S">
-                                                        Comprobante: 
-                                                    </td>
-                                                    <td align="left" style="padding-left:5px">
-                                                        <asp:Button ID="GuardarComprobanteButton" runat="server" CausesValidation="true" OnClick="AccionGuardarComprobanteButton_Click" Text="Guardar" />
-                                                    </td>
-                                                </tr>
-                                            </table>
-                                        </asp:Panel>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="height: 10px;">
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <hr noshade="noshade" size="1" color="#cccccc" />
-                                    </td>
-                                </tr>
-                            </table>
+                            <asp:Panel ID="AccionesPanel" runat="server">
+                                <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                    <tr>
+                                        <td style="height: 10px;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="TextoResaltado" style="text-align:center">
+                                            ACCIONES
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height: 10px;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="padding-left:10px">
+                                            <asp:Panel ID="AFIPpanel" runat="server">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            AFIP: 
+                                                        </td>
+                                                        <td align="left" style="padding-left:5px">
+                                                            <asp:Button ID="SubirAAFIPButton" runat="server" CausesValidation="false" OnClick="AccionSubirAAFIPButton_Click" 
+                                                                Text="Enviar" ToolTip="Impactar el comprobante en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
+                                                            <cc1:ModalPopupExtender ID="ModalPopupExtender3" 
+                                                                PopupControlID="PopupEnviarAFIP" TargetControlID="SubirAAFIPButton" 
+                                                                BackgroundCssClass="modalBackground" runat="server" 
+                                                                onload="ModalPopupExtender3_Load" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                            <asp:Panel ID="InterfacturasOnLinePanel" runat="server">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Interfacturas (on line): 
+                                                        </td>
+                                                        <td align="left" style="padding-left:5px">
+                                                            <asp:Button ID="ValidarEnInterfacturasButton" runat="server" CausesValidation="false" OnClick="AccionValidarEnInterfacturasButton_Click" 
+                                                                Text="Validar" ToolTip="Validar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
+                                                            <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
+                                                                PopupControlID="PopupValidarITF" TargetControlID="ValidarEnInterfacturasButton" 
+                                                                BackgroundCssClass="modalBackground" runat="server" ValidateRequestMode="Enabled" 
+                                                                onload="ModalPopupExtender1_Load" />
+                                                            <asp:Button ID="SubirAInterfacturasButton" runat="server" CausesValidation="false" OnClick="AccionSubirAInterfacturasButton_Click" 
+                                                                Text="Enviar" ToolTip="Impactar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
+                                                            <cc1:ModalPopupExtender ID="ModalPopupExtender1" 
+                                                                PopupControlID="PopupEnvioITF" TargetControlID="SubirAInterfacturasButton" 
+                                                                BackgroundCssClass="modalBackground" runat="server" 
+                                                                onload="ModalPopupExtender1_Load" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                            <asp:Panel ID="InterfacturasArchivoXMLpanel" runat="server">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Interfacturas (archivo XML): 
+                                                        </td>
+                                                        <td align="left" style="padding-left:5px">
+                                                            <asp:Button ID="DescargarXMLButton" runat="server" OnClick="AccionObtenerXMLButton_Click" 
+                                                                Text="Descargar" ToolTip="Luego de descargar el archivo XML, realizar el (Upload) en Interfacturas." />
+                                                            <asp:Button ID="EnviarXMLporMailButton" runat="server" OnClick="AccionObtenerXMLButton_Click" 
+                                                                Text="Enviar por e-mail" ToolTip="Luego de descargar el archivo XML del correo, realizar el (Upload) en Interfacturas." />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                            <asp:Panel ID="PrevisualizacionComprobantePanel" runat="server">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Previsualización comprobante: 
+                                                        </td>
+                                                        <td align="left" style="padding-left:5px">
+                                                            <asp:Button ID="ObtenerPDFButton" runat="server" CausesValidation="true" OnClick="AccionObtenerPDFButton_Click" Text="Obtener" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                            <asp:Panel ID="ComprobantePanel" runat="server">
+                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Comprobante: 
+                                                        </td>
+                                                        <td align="left" style="padding-left:5px">
+                                                            <asp:Button ID="GuardarComprobanteButton" runat="server" CausesValidation="true" OnClick="AccionGuardarComprobanteButton_Click" Text="Guardar" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td style="height: 10px;">
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <hr noshade="noshade" size="1" color="#cccccc" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                        </td>
+                    </tr>
+                    <!-- MENSAJE -->
+                    <tr>
+                        <td style="width:100%; text-align:center; padding-top:10px; padding-bottom:10px">
+                            <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                         </td>
                     </tr>
                     <!-- OTROS -->
                     <tr>
-                        <td style="text-align: center; height: 10px;">
+                        <td style="text-align:center; height:10px;">
                             Agradeceríamos a los usuarios del sitio que nos informen sobre dudas, posibles omisiones
                             y/o errores y que nos envíen las correcciones o sugerencias por correo electrónico
                             a través de
@@ -1643,11 +1651,6 @@
                                         <asp:Button ID="ActualizarEstadoButton" runat="server" Text="Actualizar Estado" Width="100%"
                                             CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
                                             OnClick="ActualizarEstadoButton_Click" Visible="False" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 100%; padding-right: 3px">
-                                        <asp:Label ID="MensajeLabel" runat="server" Text=""></asp:Label>
                                     </td>
                                 </tr>
                             </table>
