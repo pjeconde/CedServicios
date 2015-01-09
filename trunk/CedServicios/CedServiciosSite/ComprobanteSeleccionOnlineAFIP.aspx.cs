@@ -241,6 +241,65 @@ namespace CedServicios.Site
                 }
             }
         }
+
+        protected void ConsultarCAEAFIPButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    //ValidarCampos();
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de CAE. CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+
+                    FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
+                    lcFea.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
+                    lcFea.cabecera_lote.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
+                    lcFea.comprobante[0] = new FeaEntidades.InterFacturas.comprobante();
+                    lcFea.comprobante[0].cabecera = new FeaEntidades.InterFacturas.cabecera();
+                    lcFea.comprobante[0].cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante = Convert.ToInt32(TipoComprobanteDropDownList.SelectedValue);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante = Convert.ToInt32(NroComprobanteTextBox.Text);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.cae = NroCAETextBox.Text;
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_emision = FecEmisionTextBox.Text;
+                    lcFea.comprobante[0].cabecera.informacion_vendedor = new FeaEntidades.InterFacturas.informacion_vendedor();
+                    lcFea.comprobante[0].cabecera.informacion_vendedor.cuit = Convert.ToInt64(CuitEmisorTextBox.Text);
+                    lcFea.comprobante[0].resumen = new FeaEntidades.InterFacturas.resumen();
+                    //lcFea.comprobante[0].resumen.importe_total_factura = Convert.ToDouble(ImporteTotalTextBox.Text);
+
+                    respuesta = RN.ComprobanteAFIP.ValidarAFIPNroCae(lcFea, ((Entidades.Sesion)Session["Sesion"]));
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                }
+            }
+        }
         
         private void GrabarLogTexto(string archivo, string mensaje)
         {

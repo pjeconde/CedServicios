@@ -276,7 +276,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             cIBK.extensiones.extensiones_camara_facturas.clave_de_vinculacion = lc.comprobante[i].extensiones.extensiones_camara_facturas.clave_de_vinculacion.Trim();
                         }
-                        cIBK.extensiones.extensiones_camara_facturas.id_idioma = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma.Trim();
+                        if (lc.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma != null)
+                        {
+                            cIBK.extensiones.extensiones_camara_facturas.id_idioma = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_idioma.Trim();
+                        }
                         if (lc.comprobante[i].extensiones.extensiones_camara_facturas.id_template != null)
                         {
                             cIBK.extensiones.extensiones_camara_facturas.id_template = lc.comprobante[i].extensiones.extensiones_camara_facturas.id_template.Trim();

@@ -100,8 +100,6 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     exportOpts.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat;
                     exportOpts.ExportFormatOptions = pdfOpts;
                     facturaRpt.ExportToHttpResponse(exportOpts, Response, true, sb.ToString());
-
-
                 }
                 catch (System.Threading.ThreadAbortException)
                 {
@@ -109,6 +107,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 }
                 catch (Exception ex)
                 {
+                    //throw new Exception(ex.Message); 
                     WebForms.Excepciones.Redireccionar(ex, "~/Excepciones/Excepciones.aspx");
                 }
             }
@@ -125,6 +124,10 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
 
         private void AsignarCamposOpcionales(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
+            if (lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago = string.Empty;
+            }
             if(lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae==null)
             {
                 lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = string.Empty;
@@ -155,25 +158,27 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
             lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified = true;
             lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified = true;
 
-            for (int i = 0; i < lc.comprobante[0].resumen.descuentos.Length; i++)
+            if (lc.comprobante[0].resumen.descuentos != null)
             {
-                if (lc.comprobante[0].resumen.descuentos[i]!=null)
+                for (int i = 0; i < lc.comprobante[0].resumen.descuentos.Length; i++)
                 {
-                    if (lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified.Equals(false))
+                    if (lc.comprobante[0].resumen.descuentos[i] != null)
                     {
-                        lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified = true;
-                    }
-                    if (lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified.Equals(false))
-                    {
-                        lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified = true;
-                    }
-                    if (lc.comprobante[0].resumen.descuentos[i].porcentaje_descuentoSpecified.Equals(false))
-                    {
-                        lc.comprobante[0].resumen.descuentos[i].porcentaje_descuentoSpecified = true;
+                        if (lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified.Equals(false))
+                        {
+                            lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified = true;
+                        }
+                        if (lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified.Equals(false))
+                        {
+                            lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified = true;
+                        }
+                        if (lc.comprobante[0].resumen.descuentos[i].porcentaje_descuentoSpecified.Equals(false))
+                        {
+                            lc.comprobante[0].resumen.descuentos[i].porcentaje_descuentoSpecified = true;
+                        }
                     }
                 }
             }
-
             for (int i = 0; i < lc.comprobante[0].detalle.linea.Length;i++)
             {
                 if (lc.comprobante[0].detalle.linea[i]!=null)

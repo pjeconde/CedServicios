@@ -22,6 +22,24 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label TituloPaginaLabel;
         
         /// <summary>
+        /// Control ConsultarTipoComprobantesButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarTipoComprobantesButton;
+        
+        /// <summary>
+        /// Control ConsultarUltNroLoteAFIPButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarUltNroLoteAFIPButton;
+        
+        /// <summary>
         /// Control TipoComprobanteDropDownList.
         /// </summary>
         /// <remarks>
@@ -58,15 +76,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Button ConsultarLoteAFIPButton;
         
         /// <summary>
-        /// Control ConsultarUltNroLoteAFIPButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConsultarUltNroLoteAFIPButton;
-        
-        /// <summary>
         /// Control ConsultarUltNroComprobanteAFIPButton.
         /// </summary>
         /// <remarks>
@@ -76,13 +85,49 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Button ConsultarUltNroComprobanteAFIPButton;
         
         /// <summary>
-        /// Control ConsultarTipoComprobantesButton.
+        /// Control CuitEmisorTextBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConsultarTipoComprobantesButton;
+        protected global::System.Web.UI.WebControls.TextBox CuitEmisorTextBox;
+        
+        /// <summary>
+        /// Control FecEmisionTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox FecEmisionTextBox;
+        
+        /// <summary>
+        /// Control NroCAETextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NroCAETextBox;
+        
+        /// <summary>
+        /// Control ImporteTotalTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ImporteTotalTextBox;
+        
+        /// <summary>
+        /// Control ConsultarCAEAFIPButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarCAEAFIPButton;
         
         /// <summary>
         /// Control MensajeLabel.

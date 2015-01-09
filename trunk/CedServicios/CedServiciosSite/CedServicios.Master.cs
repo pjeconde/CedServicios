@@ -22,7 +22,15 @@ namespace CedServicios.Site
                 }
                 else
                 {
-                    UsuarioContentPlaceHolder.Visible = false;
+                    if (Request.RawUrl != "/Facturacion/Electronica/Lote.aspx")
+                    {
+                        Cache.Remove("ComprobanteAClonar");
+                        Funciones.PersonalizarControlesMaster(this, true, sesion);
+                    }
+                    else
+                    {
+                        UsuarioContentPlaceHolder.Visible = false;
+                    }
                 }
             }
         }
