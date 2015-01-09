@@ -403,5 +403,66 @@ namespace CedServicios.RN
                 throw new Exception(ex.Message);
             }
         }
+        public static string ValidarAFIPNroCae(FeaEntidades.InterFacturas.lote_comprobantes lc, Entidades.Sesion Sesion)
+        {
+            try
+            {
+                string respuesta = "";
+                sesion = Sesion;
+                CrearTicket();
+                
+                ar.gov.afip.wsw.FEConsultaCAEReq objFECompConsultaReq = new ar.gov.afip.wsw.FEConsultaCAEReq();
+                objFECompConsultaReq.cuit_emisor = lc.comprobante[0].cabecera.informacion_vendedor.cuit;
+                objFECompConsultaReq.tipo_cbte = lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                objFECompConsultaReq.cbt_nro= lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                objFECompConsultaReq.punto_vta = lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                objFECompConsultaReq.cae = lc.comprobante[0].cabecera.informacion_comprobante.cae;
+                //objFECompConsultaReq.imp_total = lc.comprobante[0].resumen.importe_total_factura;
+                objFECompConsultaReq.fecha_cbte = lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision;     //formato: yyyyMMdd
+
+                ar.gov.afip.wsw.FEConsultaCAEResponse CAEResponse = new ar.gov.afip.wsw.FEConsultaCAEResponse();
+                CAEResponse = objWS.FEConsultaCAERequest(ticket.ObjAutorizacion, objFECompConsultaReq);
+                System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                if (CAEResponse.Resultado != 1)
+                {
+                    respuesta += "CAE Inválido o alguno de los datos solicitados no fueron ingresados correctamente.";
+                    if (CAEResponse.RError != null)
+                    {
+                        if (CAEResponse.RError.percode != 0)
+                        {
+                            respuesta += " Cod.: " + CAEResponse.RError.perrmsg + "  ";
+                        }
+                        if (CAEResponse.RError.perrmsg.ToUpper() != "OK" && CAEResponse.RError.perrmsg != "")
+                        {
+                            
+                            respuesta += " Msg.: " + CAEResponse.RError.perrmsg + "  ";
+                        }
+                    }
+                }
+                else
+                {
+                    respuesta += "CAE Válido";
+                }
+                return respuesta;
+ 
+                //if (cr.RError.perrmsg == "OK")
+                //{
+                //    MessageBox.Show("Consulta concluida satisfactoriamente.", "Información", MessageBoxButtons.OK);
+                //    resultadoTextBox.Text = "El resultado es: " + cr.Resultado.ToString();
+                //    estadoTextBox.Text = cr.RError.percode + " - " + cr.RError.perrmsg;
+                //}
+                //else
+                //{
+                //    MessageBox.Show("Consulta concluida con error.", "Información", MessageBoxButtons.OK);
+                //    resultadoTextBox.Text = "";
+                //    estadoTextBox.Text = cr.RError.percode + " - " + cr.RError.perrmsg;
+                //}
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
     }
 }

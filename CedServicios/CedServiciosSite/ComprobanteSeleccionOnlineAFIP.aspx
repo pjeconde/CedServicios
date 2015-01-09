@@ -8,6 +8,27 @@
             </td>
         </tr>
         <tr>
+            <td align="left" colspan="2" style="padding-top:10px">
+                Para consultar los Tipo de Comprobantes y el Ult. Nro. Lote disponible en AFIP no es necesario ingresar ningún dato.
+            </td>
+        </tr>        
+        <tr>
+            <td colspan="2" style="padding-top:10px">
+                <asp:Button ID="ConsultarTipoComprobantesButton" runat="server"
+                    OnClick="ConsultarTipoComprobantesAFIPButton_Click" Text="Consultar los Tipos de Comprobantes en AFIP"
+                    ToolTip="Consultar los Tipos de Comprobantes en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                    Width="100%" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top:10px">
+                <asp:Button ID="ConsultarUltNroLoteAFIPButton" runat="server"
+                    OnClick="ConsultarUltNroLoteAFIPButton_Click" Text="Consultar el último número de lote en AFIP"
+                    ToolTip="Consultar el Ult. Nro. Lote en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                    Width="100%" />
+            </td>
+        </tr>
+        <tr>
             <td align="right" style="padding-top:20px">
                 Tipo Comprobante:
             </td>
@@ -35,7 +56,12 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="padding-top:20px">
+            <td align="left" colspan="2" style="padding-top:20px">
+                Para consultar el CAE deberá ingresar el Punto de Venta, Tipo y Número de Comprobante.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top:10px">
                 <asp:Button ID="ConsultarLoteAFIPButton" runat="server"
                     OnClick="ConsultarLoteAFIPButton_Click" Text="Consultar lote en AFIP"
                     ToolTip="Consultar el comprobante en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
@@ -43,20 +69,12 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="padding-top:20px; height:40px;">
-                <hr />
+            <td align="left" colspan="2" style="padding-top:20px">
+                Para consultar el Ultimo Nro. de comprobante deberá ingresar el Punto de Venta y el Tipo de Comprobante.
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="padding-top:20px">
-                <asp:Button ID="ConsultarUltNroLoteAFIPButton" runat="server"
-                    OnClick="ConsultarUltNroLoteAFIPButton_Click" Text="Consultar el último número de lote en AFIP"
-                    ToolTip="Consultar el Ult. Nro. Lote en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
-                    Width="100%" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="2" style="padding-top:20px">
+            <td colspan="2" style="padding-top:10px">
                 <asp:Button ID="ConsultarUltNroComprobanteAFIPButton" runat="server"
                     OnClick="ConsultarUltNroComprobanteAFIPButton_Click" Text="Consultar el último número de comprobante en AFIP"
                     ToolTip="Consultar el Ult. Nro. Comprobante en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
@@ -64,10 +82,51 @@
             </td>
         </tr>
         <tr>
-            <td colspan="2" style="padding-top:20px">
-                <asp:Button ID="ConsultarTipoComprobantesButton" runat="server"
-                    OnClick="ConsultarTipoComprobantesAFIPButton_Click" Text="Consultar los Tipos de Comprobantes en AFIP"
-                    ToolTip="Consultar los Tipos de Comprobantes en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+            <td align="right" style="padding-top:10px">
+                Cuit del emisor:
+            </td>
+            <td align="left" style="padding-top:10px; padding-left:5px">
+                <asp:TextBox ID="CuitEmisorTextBox" runat="server" ToolTip="">
+                </asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" style="padding-top:10px">
+                Fecha Emisión:
+            </td>
+            <td align="left" style="padding-top:10px; padding-left:5px">
+                <asp:TextBox ID="FecEmisionTextBox" runat="server" ToolTip="">
+                </asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" style="padding-top:10px">
+                Nro. CAE:
+            </td>
+            <td align="left" style="padding-top:10px; padding-left:5px">
+                <asp:TextBox ID="NroCAETextBox" runat="server" ToolTip="Informar el número de CAE">
+                </asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td align="right" style="padding-top:10px">
+                Importe Total:
+            </td>
+            <td align="left" style="padding-top:10px; padding-left:5px">
+                <asp:TextBox ID="ImporteTotalTextBox" runat="server" 
+                    ToolTip="Informar el Importe total del comprobante" Enabled="False"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
+            <td align="left" colspan="2" style="padding-top:10px">
+                Para validar el CAE tambíen deberá ingresar el Punto de Venta, Tipo y Número de Comprobante.
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top:10px">
+                <asp:Button ID="ConsultarCAEAFIPButton" runat="server"
+                    OnClick="ConsultarCAEAFIPButton_Click" Text="Validar el CAE en AFIP"
+                    ToolTip="Validar el CAE en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
                     Width="100%" />
             </td>
         </tr>

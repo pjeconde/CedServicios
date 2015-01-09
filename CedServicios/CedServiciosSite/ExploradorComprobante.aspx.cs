@@ -124,7 +124,7 @@ namespace CedServicios.Site
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.Cells[12].Text != "Vigente")
+                if (e.Row.Cells[13].Text != "Vigente")
                 {
                     e.Row.ForeColor = Color.Red;
                 }
@@ -202,6 +202,7 @@ namespace CedServicios.Site
             string resp;
             string script;
 
+            Cache.Remove("ComprobanteAClonar");
             switch (comando)
             {
                 case "ActualizarOnLine":
@@ -319,7 +320,7 @@ namespace CedServicios.Site
                                 {
                                     comprobante.WF.Estado = "Rechazado";
                                     RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                                    script = "<SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF / AFIP.\\n" + "Resultado: " + lc.cabecera_lote.resultado + "  Motivo: " + lc.cabecera_lote.motivo + "');</script>";
+                                    script = "<SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF o AFIP.\\n " + "Resultado: " + lc.cabecera_lote.resultado + "  Motivo: " + lc.cabecera_lote.motivo + "');</script>";
                                     RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
                                     ScriptManager.RegisterStartupScript(this, typeof(Page), "Message", script, true);
                                 }
@@ -490,6 +491,7 @@ namespace CedServicios.Site
                     #region XML-ClonarAlta
                     if (comprobante.NaturalezaComprobante.Id == "Venta" && comprobante.IdDestinoComprobante == "ITF")
                     {
+                        Session["IdNaturalezaComprobante"] = "Venta";
                         lote = new FeaEntidades.InterFacturas.lote_comprobantes();
                         x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
                         try
@@ -642,81 +644,74 @@ namespace CedServicios.Site
                                 ms.Seek(0, System.IO.SeekOrigin.Begin);
                                 lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
-                                string comprobanteXML = "";
+                                RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
+                               
+                                Session["lote"] = lote;
+                                Response.Redirect("~\\Facturacion\\Electronica\\Reportes\\FacturaWebForm.aspx", true);
+                                                                    
+                                //string comprobanteXML = "";
 
-                                #region TRATAMIENTO DE LOGOTIPO
-                                string uRLfile = String.Empty;
-                                if (System.Configuration.ConfigurationManager.AppSettings["Ambiente"] == "DESA")
-                                {
-                                    uRLfile = "http://cedeiraweb.no-ip.org:8080/ImagenesSubidas/" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + ".gif";
-                                }
-                                else
-                                {
-                                    uRLfile = "http://www.cedeira.com.ar/ImagenesSubidas/" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + ".gif";
-                                }
-                                if (Existe(uRLfile))
-                                {
-                                    if (lote.comprobante[0].extensiones == null)
-                                    {
-                                        lote.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
-                                        lote.comprobante[0].extensionesSpecified = true;
-                                    }
-                                    if (lote.comprobante[0].extensiones.extensiones_camara_facturas == null)
-                                    {
-                                        lote.comprobante[0].extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
-                                        lote.comprobante[0].extensiones.extensiones_camara_facturasSpecified = true;
-                                    }
-                                    lote.comprobante[0].extensiones.extensiones_camara_facturas.id_logo = uRLfile;
-                                }
-                                #endregion
+                                //#region TRATAMIENTO DE LOGOTIPO
+                                //string uRLfile = String.Empty;
+                                //if (System.Configuration.ConfigurationManager.AppSettings["Ambiente"] == "DESA")
+                                //{
+                                //    uRLfile = "http://cedeiraweb.no-ip.org:8080/ImagenesSubidas/" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + ".gif";
+                                //}
+                                //else
+                                //{
+                                //    uRLfile = "http://www.cedeira.com.ar/ImagenesSubidas/" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + ".gif";
+                                //}
+                                //if (Existe(uRLfile))
+                                //{
+                                //    if (lote.comprobante[0].extensiones == null)
+                                //    {
+                                //        lote.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
+                                //        lote.comprobante[0].extensionesSpecified = true;
+                                //    }
+                                //    if (lote.comprobante[0].extensiones.extensiones_camara_facturas == null)
+                                //    {
+                                //        lote.comprobante[0].extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
+                                //        lote.comprobante[0].extensiones.extensiones_camara_facturasSpecified = true;
+                                //    }
+                                //    lote.comprobante[0].extensiones.extensiones_camara_facturas.id_logo = uRLfile;
+                                //}
+                                //#endregion
 
-                                RN.Comprobante.SerializarC(out comprobanteXML, lote.comprobante[0]);
+                                //RN.Comprobante.SerializarC(out comprobanteXML, lote.comprobante[0]);
+                                //try
+                                //{
+                                //    GrabarLogTexto("~/Detallar.txt", "Inicia ExecuteCommand");
+                                //    org.dyndns.cedweb.generoPDF.GeneroPDF pdfdyndns = new org.dyndns.cedweb.generoPDF.GeneroPDF();
 
-                                try
-                                {
-                                    GrabarLogTexto("~/Detallar.txt", "Inicia ExecuteCommand");
-                                    org.dyndns.cedweb.generoPDF.GeneroPDF pdfdyndns = new org.dyndns.cedweb.generoPDF.GeneroPDF();
+                                //    string GenerarPDFUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFUtilizarServidorExterno"];
+                                //    GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFUtilizarServidorExterno: " + GenerarPDFUtilizarServidorExterno);
+                                //    if (GenerarPDFUtilizarServidorExterno == "SI")
+                                //    {
+                                //        pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
+                                //        GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
+                                //    }
+                                //    string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobante.IdDestinoComprobante, comprobanteXML);
+                                //    GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
 
-                                    string GenerarPDFUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFUtilizarServidorExterno"];
-                                    GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFUtilizarServidorExterno: " + GenerarPDFUtilizarServidorExterno);
-                                    if (GenerarPDFUtilizarServidorExterno == "SI")
-                                    {
-                                        pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
-                                        GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
-                                    }
-                                    string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobante.IdDestinoComprobante, comprobanteXML);
-                                    GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
+                                //    //Crear nombre de archivo default sin extensión
+                                //    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                                //    sb.Append(comprobante.Cuit);
+                                //    sb.Append("-");
+                                //    sb.Append(comprobante.NroPuntoVta.ToString("0000"));
+                                //    sb.Append("-");
+                                //    sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
+                                //    sb.Append("-");
+                                //    sb.Append(comprobante.Nro.ToString("00000000"));
+                                //    sb.Append(".pdf");
 
-                                    //Crear nombre de archivo default sin extensión
-                                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                                    sb.Append(comprobante.Cuit);
-                                    sb.Append("-");
-                                    sb.Append(comprobante.NroPuntoVta.ToString("0000"));
-                                    sb.Append("-");
-                                    sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
-                                    sb.Append("-");
-                                    sb.Append(comprobante.Nro.ToString("00000000"));
-                                    sb.Append(".pdf");
+                                //    string url = RespPDF;
+                                //    string filename = sb.ToString();
+                                //    String dlDir = @"~/TempRenderAFIP/";
+                                //    new System.Net.WebClient().DownloadFile(url, Server.MapPath(dlDir + filename));
 
-                                    string url = RespPDF;
-                                    string filename = sb.ToString();
-                                    String dlDir = @"~/TempRenderAFIP/";
-                                    new System.Net.WebClient().DownloadFile(url, Server.MapPath(dlDir + filename));
-
-                                    script = "window.open('DescargaTemporarios.aspx?archivo=" + sb.ToString() + "&path=" + @"~/TempRenderAFIP/" + "', '');";
-                                    ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
-                                }
-                                catch (Exception ex)
-                                {
-                                    script = "Problemas para generar el PDF.\\n" + ex.Message;
-                                    script += ex.StackTrace;
-                                    if (ex.InnerException != null)
-                                    {
-                                        script = ex.InnerException.Message;
-                                    }
-                                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), script);
-                                    MensajeLabel.Text = script;
-                                }
+                                //    script = "window.open('DescargaTemporarios.aspx?archivo=" + sb.ToString() + "&path=" + @"~/TempRenderAFIP/" + "', '');";
+                                //    ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                                //}
                             }
                             catch (Exception ex)
                             {
