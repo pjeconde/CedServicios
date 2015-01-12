@@ -647,8 +647,11 @@ namespace CedServicios.Site
                                 RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
                                
                                 Session["lote"] = lote;
-                                Response.Redirect("~\\Facturacion\\Electronica\\Reportes\\FacturaWebForm.aspx", true);
-                                                                    
+                                //Response.Redirect("~\\Facturacion\\Electronica\\Reportes\\FacturaWebForm.aspx", true);
+
+                                script = "window.open('/Facturacion/Electronica/Reportes/FacturaWebForm.aspx', '');";
+                                ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+    
                                 //string comprobanteXML = "";
 
                                 //#region TRATAMIENTO DE LOGOTIPO

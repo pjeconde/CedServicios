@@ -86,6 +86,8 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
 					GenerarCodigoBarras(lc.cabecera_lote.cuit_vendedor + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00") + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + cae +System.DateTime.Now.ToString("yyyyMMdd"));
 					AsignarParametros(lc.comprobante[0].resumen.importe_total_factura);
 
+                    facturaRpt.Subreports["resumen"].DataDefinition.FormulaFields["TipoDeComprobante"].Text = "'" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "'"; 
+
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
                     sb.Append(lc.cabecera_lote.cuit_vendedor);
                     sb.Append("-");
@@ -120,7 +122,9 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
 			myDiscrete.Value = NumALet.ToCardinal(Convert.ToDecimal(p));
 			myVals.Add(myDiscrete);
 			facturaRpt.DataDefinition.ParameterFields[0].ApplyCurrentValues(myVals);
-		}
+            
+            facturaRpt.Subreports["resumen"].DataDefinition.FormulaFields["ImpTotTexto"].Text = "'" + NumALet.ToCardinal(Convert.ToDecimal(p)) + "'";
+ 	    }
 
         private void AsignarCamposOpcionales(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
