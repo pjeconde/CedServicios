@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Xml;
+using System.IO;
 
 namespace CedServicios.RN
 {
@@ -193,6 +194,16 @@ namespace CedServicios.RN
                     arrayFEDetalleRequest[0] = objFEDetalleRequest;
                 //}
                 objFERequest.FeDetReq = arrayFEDetalleRequest;
+
+                string loteXML = "";
+                SerializarC(out loteXML, objFERequest);
+                try
+                {
+                    Funciones.GrabarLogTexto("Consultar.txt", loteXML);
+                }
+                catch
+                { 
+                }
 
                 ar.gov.afip.wsfev1.FECAEResponse objFEResponse = new ar.gov.afip.wsfev1.FECAEResponse();
                 objFEResponse = objWSFEV1.FECAESolicitar(ticket.ObjAutorizacionfev1, objFERequest);
@@ -463,6 +474,24 @@ namespace CedServicios.RN
             {
                 throw new Exception(ex.Message);
             }
+        }
+        public static void SerializarC(out string LoteXML, ar.gov.afip.wsfev1.FECAERequest Lc)
+        {
+            //Serializar ( pasar de FeaEntidades.InterFacturas.lote_comprobantes a string XML )
+            MemoryStream ms = new MemoryStream();
+            XmlTextWriter writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("ISO-8859-1"));
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(Lc.GetType());
+            x.Serialize(writer, Lc);
+            ms = (MemoryStream)writer.BaseStream;
+            LoteXML = ByteArrayToString(ms.ToArray());
+            ms.Close();
+            ms = null;
+        }
+        public static string ByteArrayToString(byte[] characters)
+        {
+            System.Text.Encoding e = System.Text.Encoding.GetEncoding("ISO-8859-1");
+            String constructedString = e.GetString(characters);
+            return (constructedString);
         }
     }
 }

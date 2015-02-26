@@ -109,8 +109,9 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 }
                 catch (Exception ex)
                 {
-                    //throw new Exception(ex.Message); 
-                    WebForms.Excepciones.Redireccionar(ex, "~/Excepciones/Excepciones.aspx");
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Reporte: " + ex.Message + " " + ex.StackTrace);
+                    throw new Exception(ex.Message); 
+                    //WebForms.Excepciones.Redireccionar(ex, "~/Excepciones/Excepciones.aspx");
                 }
             }
         }

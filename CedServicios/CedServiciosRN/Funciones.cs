@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web;
 using System.Text;
 using System.Text.RegularExpressions;
 using CaptchaDotNet2.Security.Cryptography;
+using System.IO;
 
 namespace CedServicios.RN
 {
@@ -152,6 +154,22 @@ namespace CedServicios.RN
         public static bool IsValidNumericFijo(string strNro, string strCantidad)
         {
             return Regex.IsMatch(strNro, @"[0-9]{" + strCantidad + "}");
+        }
+        public static void GrabarLogTexto(string archivo, string mensaje)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(HttpContext.Current.Server.MapPath(archivo), FileMode.Append, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
+                    }
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }
