@@ -102,6 +102,7 @@ namespace CedServicios.RN
                 objFEDetalleRequest.DocTipo = lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio;  // Comprobante.TipoDoc;
                 objFEDetalleRequest.MonId = lc.comprobante[0].resumen.codigo_moneda;
                 objFEDetalleRequest.MonCotiz = lc.comprobante[0].resumen.tipo_de_cambio;
+                string TipoComp = lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString();
 
                 if (lc.comprobante[0].resumen.impuestos.Length > 0)
                 {
@@ -119,16 +120,24 @@ namespace CedServicios.RN
                                 {
                                     if (ivas[j].BaseImp == 0)
                                     {
-                                        for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
+                                        //Comprobantes "B"
+                                        if (TipoComp == "6" || TipoComp == "7" || TipoComp == "8")
                                         {
-                                            if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                            if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 10.5)
+                                            baseImponible +=  Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                        }
+                                        else
+                                        {
+                                            for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
                                             {
-                                                baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
-                                            }
-                                            if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
-                                            {
-                                                baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                                if (lc.comprobante[0].detalle.linea[k] == null) { break; }
+                                                if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 10.5)
+                                                {
+                                                    baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
+                                                }
+                                                if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
+                                                {
+                                                    baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                                }
                                             }
                                         }
                                     }
@@ -139,16 +148,24 @@ namespace CedServicios.RN
                                 {
                                     if (ivas[j].BaseImp == 0)
                                     {
-                                        for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
+                                        //Comprobantes "B"
+                                        if (TipoComp == "6" || TipoComp == "7" || TipoComp == "8")
                                         {
-                                            if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                            if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 21)
+                                            baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                        }
+                                        else
+                                        {
+                                            for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
                                             {
-                                                baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
-                                            }
-                                            if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
-                                            {
-                                                baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                                if (lc.comprobante[0].detalle.linea[k] == null) { break; }
+                                                if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 21)
+                                                {
+                                                    baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
+                                                }
+                                                if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
+                                                {
+                                                    baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                                }
                                             }
                                         }
                                     }
@@ -159,16 +176,24 @@ namespace CedServicios.RN
                                 {
                                     if (ivas[j].BaseImp == 0)
                                     {
-                                        for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
+                                        //Comprobantes "B"
+                                        if (TipoComp == "6" || TipoComp == "7" || TipoComp == "8")
                                         {
-                                            if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                            if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 27)
+                                            baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                        }
+                                        else
+                                        {
+                                            for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
                                             {
-                                                baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
-                                            }
-                                            if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
-                                            {
-                                                baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                                if (lc.comprobante[0].detalle.linea[k] == null) { break; }
+                                                if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 27)
+                                                {
+                                                    baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
+                                                }
+                                                if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
+                                                {
+                                                    baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                                }
                                             }
                                         }
                                     }
