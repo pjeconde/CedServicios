@@ -108,8 +108,8 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Artículos|Modificación");
                         opcionesHabilitadas.Add("Artículos|Consulta");
                         opcionesHabilitadas.Add("Comprobantes|Alta|Venta|Electrónica");
-                        opcionesHabilitadas.Add("Comprobantes|Alta|Venta|Manual");
-                        opcionesHabilitadas.Add("Comprobantes|Alta|Compra");
+                        //opcionesHabilitadas.Add("Comprobantes|Alta|Venta|Manual");
+                        //opcionesHabilitadas.Add("Comprobantes|Alta|Compra");
                         opcionesHabilitadas.Add("Comprobantes|Consulta");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");
