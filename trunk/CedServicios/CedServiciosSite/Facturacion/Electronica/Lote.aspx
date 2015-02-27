@@ -119,7 +119,7 @@
                                                         </asp:RadioButton>
                                                         <asp:UpdateProgress ID="ptoVentaUpdateProgress" runat="server" AssociatedUpdatePanelID="ptoVentaUpdatePanel" DisplayAfter="0">
                                                             <ProgressTemplate>
-                                                                <asp:Image ID="ptoVentaImage" runat="server" Height="18px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+                                                                <asp:Image ID="ptoVentaImage" runat="server" Height="18px" ImageUrl="~/Imagenes/301.gif">
                                                                 </asp:Image>
                                                             </ProgressTemplate>
                                                         </asp:UpdateProgress>
@@ -171,7 +171,7 @@
                                                 <asp:UpdateProgress ID="monedaUpdateProgress" runat="server" AssociatedUpdatePanelID="monedaUpdatePanel"
                                                     DisplayAfter="0">
                                                     <ProgressTemplate>
-                                                        <asp:Image ID="monedaImage" runat="server" Height="25px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+                                                        <asp:Image ID="monedaImage" runat="server" Height="25px" ImageUrl="~/Imagenes/301.gif">
                                                         </asp:Image>
                                                     </ProgressTemplate>
                                                 </asp:UpdateProgress>
@@ -385,7 +385,7 @@
                                                             <asp:UpdateProgress ID="UpdateProgress1" runat="server" AssociatedUpdatePanelID="vendedorUpdatePanel"
                                                                 DisplayAfter="0">
                                                                 <ProgressTemplate>
-                                                                    <asp:Image ID="vendedorImage" runat="server" Height="25px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+                                                                    <asp:Image ID="vendedorImage" runat="server" Height="25px" ImageUrl="~/Imagenes/301.gif">
                                                                     </asp:Image>
                                                                 </ProgressTemplate>
                                                             </asp:UpdateProgress>
@@ -609,129 +609,136 @@
                     <!-- INFORMACIÓN EXPORTACIÓN-->
                     <tr>
                         <td style="text-align: center">
-                            <asp:Panel ID="ExportacionPanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
-                                    <tr>
-                                        <td style="height:10px;">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2" class="TextoResaltado" style="text-align: center;">
-                                            INFORMACIÓN EXPORTACIÓN
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td style="height:10px;">
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:UpdatePanel ID="TipoExpoUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                UpdateMode="Conditional">
-                                                <Triggers>
-                                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                </Triggers>
-                                                <ContentTemplate>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Tipo Exportación:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="ddln">
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </ContentTemplate>
-                                            </asp:UpdatePanel>
-                                        </td>
-                                        <td>
-                                            <asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" UpdateMode="Conditional">
-                                                <ContentTemplate>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                País Destino Comprobante:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" OnSelectedIndexChanged="PaisDestinoExpDropDownList_SelectedIndexChanged"
-                                                                    SkinID="ddln" AutoPostBack="true">
-                                                                </asp:DropDownList>
-                                                                <asp:UpdateProgress ID="PaisDestinoUpdateProgress" runat="server" AssociatedUpdatePanelID="PaisDestinoExpUpdatePanel"
-                                                                    DisplayAfter="0">
-                                                                    <ProgressTemplate>
-                                                                        <asp:Image ID="PaisDestinoImage" runat="server" Height="18px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
-                                                                        </asp:Image>
-                                                                    </ProgressTemplate>
-                                                                </asp:UpdateProgress>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </ContentTemplate>
-                                                <Triggers>
-                                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                </Triggers>
-                                            </asp:UpdatePanel>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <asp:UpdatePanel ID="IdiomaUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                UpdateMode="Conditional">
-                                                <Triggers>
-                                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                </Triggers>
-                                                <ContentTemplate>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Idioma para exportación:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:DropDownList ID="IdiomaDropDownList" runat="server" SkinID="ddln">
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </ContentTemplate>
-                                            </asp:UpdatePanel>
-                                        </td>
-                                        <td>
-                                            <asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                UpdateMode="Conditional">
-                                                <Triggers>
-                                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                </Triggers>
-                                                <ContentTemplate>
-                                                    <table border="0" cellpadding="0" cellspacing="0">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Incoterms para exportación:
-                                                            </td>
-                                                            <td class="TC10S">
-                                                                <asp:DropDownList ID="IncotermsDropDownList" runat="server" SkinID="ddln">
-                                                                </asp:DropDownList>
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </ContentTemplate>
-                                            </asp:UpdatePanel>
-                                        </td>
-                                    </tr>
-                        <!-- PERMISOS EXPO-->
-                                    <tr>
-                                        <td colspan="2" style="height:19px; text-align:center">
-                                            <uc2:Permisos ID="PermisosExpo" runat="server"></uc2:Permisos>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">
-                                            <hr noshade="noshade" size="1" color="#cccccc" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </asp:Panel>
+                            <asp:UpdatePanel ID="ExportacionUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                </Triggers>
+                                <ContentTemplate>
+                                    <asp:Panel ID="ExportacionPanel" runat="server">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                                            <tr>
+                                                <td style="height:10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2" class="TextoResaltado" style="text-align: center;">
+                                                    INFORMACIÓN EXPORTACIÓN
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height:10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:UpdatePanel ID="TipoExpoUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                        UpdateMode="Conditional">
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                        </Triggers>
+                                                        <ContentTemplate>
+                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        Tipo Exportación:
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="ddln">
+                                                                        </asp:DropDownList>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </td>
+                                                <td>
+                                                    <asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        País Destino Comprobante:
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" OnSelectedIndexChanged="PaisDestinoExpDropDownList_SelectedIndexChanged"
+                                                                            SkinID="ddln" AutoPostBack="true">
+                                                                        </asp:DropDownList>
+                                                                        <asp:UpdateProgress ID="PaisDestinoUpdateProgress" runat="server" AssociatedUpdatePanelID="PaisDestinoExpUpdatePanel"
+                                                                            DisplayAfter="0">
+                                                                            <ProgressTemplate>
+                                                                                <asp:Image ID="PaisDestinoImage" runat="server" Height="18px" ImageUrl="~/Imagenes/301.gif">
+                                                                                </asp:Image>
+                                                                            </ProgressTemplate>
+                                                                        </asp:UpdateProgress>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <asp:UpdatePanel ID="IdiomaUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                        UpdateMode="Conditional">
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                        </Triggers>
+                                                        <ContentTemplate>
+                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        Idioma para exportación:
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:DropDownList ID="IdiomaDropDownList" runat="server" SkinID="ddln">
+                                                                        </asp:DropDownList>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </td>
+                                                <td>
+                                                    <asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                        UpdateMode="Conditional">
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                        </Triggers>
+                                                        <ContentTemplate>
+                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                                <tr>
+                                                                    <td class="TC00S">
+                                                                        Incoterms para exportación:
+                                                                    </td>
+                                                                    <td class="TC10S">
+                                                                        <asp:DropDownList ID="IncotermsDropDownList" runat="server" SkinID="ddln">
+                                                                        </asp:DropDownList>
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+                                                </td>
+                                            </tr>
+                                <!-- PERMISOS EXPO-->
+                                            <tr>
+                                                <td colspan="2" style="height:19px; text-align:center">
+                                                    <uc2:Permisos ID="PermisosExpo" runat="server"></uc2:Permisos>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="2">
+                                                    <hr noshade="noshade" size="1" color="#cccccc" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </td>
                     </tr>
                     <!-- COMPRADOR -->
@@ -774,7 +781,7 @@
                                                             <asp:UpdateProgress ID="compradorUpdateProgress" runat="server" AssociatedUpdatePanelID="compradorUpdatePanel"
                                                                 DisplayAfter="0">
                                                                 <ProgressTemplate>
-                                                                    <asp:Image ID="compradorImage" runat="server" Height="25px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+                                                                    <asp:Image ID="compradorImage" runat="server" Height="25px" ImageUrl="~/Imagenes/301.gif">
                                                                     </asp:Image>
                                                                 </ProgressTemplate>
                                                             </asp:UpdateProgress>
@@ -1141,7 +1148,7 @@
                                             <asp:UpdateProgress ID="referenciasUpdateProgress" runat="server" AssociatedUpdatePanelID="referenciasUpdatePanel"
                                                 DisplayAfter="0">
                                                 <ProgressTemplate>
-                                                    <asp:Image ID="referenciasImage" runat="server" Height="25px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+                                                    <asp:Image ID="referenciasImage" runat="server" Height="25px" ImageUrl="~/Imagenes/301.gif">
                                                     </asp:Image>
                                                 </ProgressTemplate>
                                             </asp:UpdateProgress>
@@ -1444,7 +1451,7 @@
                                                             </asp:TextBox>
                                                             <asp:UpdateProgress ID="tipoCambioUpdateProgress" runat="server" DisplayAfter="0">
                                                                 <ProgressTemplate>
-                                                                    <asp:Image ID="tipoCambioImage" runat="server" Height="25px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+                                                                    <asp:Image ID="tipoCambioImage" runat="server" Height="25px" ImageUrl="~/Imagenes/301.gif">
                                                                     </asp:Image>
                                                                 </ProgressTemplate>
                                                             </asp:UpdateProgress>

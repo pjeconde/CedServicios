@@ -200,7 +200,7 @@
 			<asp:UpdateProgress ID="descuentosUpdateProgress" runat="server" AssociatedUpdatePanelID="descuentosUpdatePanel"
 				DisplayAfter="0">
 				<ProgressTemplate>
-					<asp:Image ID="descuentosImage" runat="server" Height="25px" ImageUrl="~/Imagenes/CedeiraSF-icono-animado.gif">
+					<asp:Image ID="descuentosImage" runat="server" Height="25px" ImageUrl="~/Imagenes/301.gif">
 					</asp:Image>
 				</ProgressTemplate>
 			</asp:UpdateProgress>
