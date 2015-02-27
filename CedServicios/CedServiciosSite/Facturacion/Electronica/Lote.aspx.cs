@@ -2535,6 +2535,17 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         try
                         {
+                            int auxPV;
+                            auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                            {
+                                return pv.Nro == auxPV;
+                            }).IdTipoPuntoVta;
+                            if (idtipo != "Comun")
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta opción solo está habilitada para puntos de venta Comun RG.2485.')</script>", false);
+                                return;
+                            }
                             if (ValidarCamposObligatorios())
                             {
                                 string respuesta = "";
@@ -2942,7 +2953,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 response = (HttpWebResponse)request.GetResponse();
             }
-            catch (WebException ex)
+            catch (WebException)     //WebException ex
             {
                 existe = false;
             }

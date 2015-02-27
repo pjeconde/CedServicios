@@ -17,6 +17,7 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             if (!this.IsPostBack)
             {
+                cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
             }
             else
             {
