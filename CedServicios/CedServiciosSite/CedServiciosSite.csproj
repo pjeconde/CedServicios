@@ -105,6 +105,7 @@
     <Content Include="Ayuda\Novedades\images20130906\image20.png" />
     <Content Include="Ayuda\Novedades\images20130906\image21.png" />
     <Content Include="CedeiraSF-Logo.gif" />
+    <Content Include="Imagenes\301.gif" />
     <Content Include="PersonaBaja.aspx" />
     <Content Include="PersonaConsulta.aspx" />
     <Content Include="PersonaCrear.aspx" />

@@ -1676,7 +1676,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			PermisosExpo.ResetearGrillas();
 			DetalleLinea.ResetearGrillas();
 
-			ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado artículos, referencias y permisos de exportación por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
+			//ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado artículos, referencias y permisos de exportación por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
 		}
         private void AjustarCamposXPtaVentaChanged(string PuntoDeVenta)
         {
@@ -1720,7 +1720,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 break;
                             default:
                                 throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
-
                         }
                         Tipo_De_ComprobanteDropDownList.DataBind();
                         Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
@@ -1747,6 +1746,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             CompradorDropDownList.Visible = false;
                             CompradorDropDownList.DataSource = null;
+                        }
+                        if (idtipo == "Exportacion")
+                        {
+                            ExportacionPanel.Visible = true;
+                        }
+                        else
+                        {
+                            ExportacionPanel.Visible = false;
                         }
                     }
                 }
@@ -5035,5 +5042,5 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
 
         }
-	}
+    }
 }
