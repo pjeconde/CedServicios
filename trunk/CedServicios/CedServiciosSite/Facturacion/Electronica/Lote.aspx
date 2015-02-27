@@ -104,24 +104,6 @@
                                         </tr>
                                         <tr>
                                             <td class="TC00S">
-                                                Tipo de comprobante:
-                                            </td>
-                                            <td class="TC10S" colspan="3">
-                                                <asp:UpdatePanel ID="Tipo_De_ComprobanteUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                    UpdateMode="Conditional">
-                                                    <Triggers>
-                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                    </Triggers>
-                                                    <ContentTemplate>
-                                                        <asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListTipoComprobante" OnSelectedIndexChanged="Tipo_De_ComprobanteDropDownList_SelectedIndexChanged" AutoPostBack="true" 
-                                                        style="width:400px">
-                                                        </asp:DropDownList>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="TC00S">
                                                 Punto de venta:
                                             </td>
                                             <td class="TC10S">
@@ -150,6 +132,24 @@
                                             <td class="TC10S">
                                                 <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
                                                     ToolTip="Debe ser correlativo al último ingresado por Punto de Venta y Tipo de Comprobante. No es necesario ingresar ceros a la izquierda. Si su factura es p.ej.0002-00000005, puede ingresar 5."> </asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="TC00S">
+                                                Tipo de comprobante:
+                                            </td>
+                                            <td class="TC10S" colspan="3">
+                                                <asp:UpdatePanel ID="Tipo_De_ComprobanteUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                    UpdateMode="Conditional">
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                    </Triggers>
+                                                    <ContentTemplate>
+                                                        <asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListTipoComprobante" OnSelectedIndexChanged="Tipo_De_ComprobanteDropDownList_SelectedIndexChanged" AutoPostBack="true" 
+                                                        style="width:480px">
+                                                        </asp:DropDownList>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
                                             </td>
                                         </tr>
                                         <tr>
