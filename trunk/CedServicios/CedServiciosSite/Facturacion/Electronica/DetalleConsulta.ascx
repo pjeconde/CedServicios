@@ -38,6 +38,13 @@
 								<HeaderStyle Width="100px" />
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
+                            <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Unidad">
+								<ItemTemplate>
+									<asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidadDescripcion") %>'
+										Width="220px"></asp:Label>
+								</ItemTemplate>
+								<ItemStyle HorizontalAlign="Left" />
+							</asp:TemplateField>
 							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Precio unitario">
 								<ItemTemplate>
 									<asp:Label ID="lblprecio_unitario" runat="server" Text='<%# Eval("precio_unitario") %>'
@@ -66,13 +73,6 @@
 										Width="100px"></asp:Label>
 								</ItemTemplate>
 								<ItemStyle HorizontalAlign="Right" />
-							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Unidad">
-								<ItemTemplate>
-									<asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidadDescripcion") %>'
-										Width="220px"></asp:Label>
-								</ItemTemplate>
-								<ItemStyle HorizontalAlign="Left" />
 							</asp:TemplateField>
                             <asp:TemplateField HeaderStyle-Font-Bold="false" HeaderStyle-Width="150px" HeaderText="GTIN">
                                 <ItemTemplate>

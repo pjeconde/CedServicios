@@ -94,6 +94,21 @@
 								<HeaderStyle Width="100px" />
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
+                            <asp:TemplateField HeaderText="Unidad">
+								<ItemTemplate>
+									<asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidadDescripcion") %>'
+										Width="220px"></asp:Label>
+								</ItemTemplate>
+								<EditItemTemplate>
+									<asp:DropDownList ID="ddlunidadEdit" runat="server" Width="220px">
+									</asp:DropDownList>
+								</EditItemTemplate>
+								<FooterTemplate>
+									<asp:DropDownList ID="ddlunidad" runat="server" Width="220px">
+									</asp:DropDownList>
+								</FooterTemplate>
+								<ItemStyle HorizontalAlign="Left" />
+							</asp:TemplateField>
 							<asp:TemplateField HeaderText="Precio unitario">
 								<ItemTemplate>
 									<asp:Label ID="lblprecio_unitario" runat="server" Text='<%# Eval("precio_unitario") %>'
@@ -194,21 +209,6 @@
 								</FooterTemplate>
 								<HeaderStyle Width="150px" />
 								<ItemStyle HorizontalAlign="Center" />
-							</asp:TemplateField>
-							<asp:TemplateField HeaderText="Unidad">
-								<ItemTemplate>
-									<asp:Label ID="lbl_unidad" runat="server" Text='<%# Eval("unidadDescripcion") %>'
-										Width="220px"></asp:Label>
-								</ItemTemplate>
-								<EditItemTemplate>
-									<asp:DropDownList ID="ddlunidadEdit" runat="server" Width="220px">
-									</asp:DropDownList>
-								</EditItemTemplate>
-								<FooterTemplate>
-									<asp:DropDownList ID="ddlunidad" runat="server" Width="220px">
-									</asp:DropDownList>
-								</FooterTemplate>
-								<ItemStyle HorizontalAlign="Left" />
 							</asp:TemplateField>
                             <asp:TemplateField HeaderStyle-Width="150px" HeaderText="GTIN">
                                 <ItemTemplate>
