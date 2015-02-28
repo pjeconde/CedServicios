@@ -812,14 +812,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 }
                             }
                         }
-                        catch
+                        catch (Exception ex)
                         {
-                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>", false);
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas: " + ex.Message.ToString().Replace("'", "").Replace("\r\n", "  ") + "');</script>", false);
+                            return;
                         }
                     }
                     else
                     {
                         ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe seleccionar un archivo');</script>", false);
+                        return;
                     }
                     VerificarMetodoNumeracionLote();
                 }
@@ -4918,7 +4920,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
                     Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
                     Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
+
+                    Codigo_Doc_Identificatorio_CompradorDropDownList.Items.Clear();
+                    Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
+                    Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = null;
+                    Codigo_Doc_Identificatorio_CompradorDropDownList.ClearSelection();
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+                    Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+                    Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
                     Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
                     Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUITPais().Codigo.ToString();
                 }
