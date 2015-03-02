@@ -798,6 +798,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
                                 lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
                                 CompletarUI(lc, e);
+                                VerificarMetodoNumeracionLote();
+                                Numero_ComprobanteTextBox.Text = string.Empty;
+                                FechaEmisionDatePickerWebUserControl.Text = string.Empty;
+                                FechaServDesdeDatePickerWebUserControl.Text = string.Empty;
+                                FechaServHastaDatePickerWebUserControl.Text = string.Empty;
+                                FechaVencimientoDatePickerWebUserControl.Text = string.Empty;
+                                Id_LoteTextbox.Text = string.Empty;
+                                CAETextBox.Text = string.Empty;
+                                FechaCAEObtencionDatePickerWebUserControl.Text = string.Empty;
+                                FechaCAEVencimientoDatePickerWebUserControl.Text = string.Empty;
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>", false);
                             }
                             catch (InvalidOperationException)
@@ -853,8 +863,9 @@ namespace CedServicios.Site.Facturacion.Electronica
 				CompletarUI(lc, e);
 				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato Lote IBK');</script>");
 			}
-			catch
+			catch (Exception ex)
 			{
+                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "LeerFormatoLoteIBK: " + ex.Message);
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>", false);
 			}
 		}
