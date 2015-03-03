@@ -1008,7 +1008,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         totalGravado += imptotdiscr;
                     }
-                    else if (listadelineas[i].indicacion_exento_gravado.Equals("E"))
+                    else if (listadelineas[i].indicacion_exento_gravado != null && listadelineas[i].indicacion_exento_gravado.Equals("E"))
                     {
                         total_Operaciones_Exentas += imptotdiscr;
                     }
