@@ -33,7 +33,7 @@ namespace CedServicios.Site
                     }
                     else
                     {
-                        FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
+                        FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMM01");
                         FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                     }
                     ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
