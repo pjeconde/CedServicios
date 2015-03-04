@@ -238,7 +238,7 @@ namespace CedServicios.Site
             cArray[0] = c;
             lc.comprobante = cArray;
             CompletarUI(lc, e);
-            ClientScript.RegisterStartupScript(GetType(), "Message", RN.Funciones.TextoScript("Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml"));
+            ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml"));
         }
 
         private void LeerFormatoLoteIBK(EventArgs e, FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
@@ -252,11 +252,11 @@ namespace CedServicios.Site
                 clr = (FeaEntidades.InterFacturas.XML.consulta_lote_comprobantes_response)x.Deserialize(ms);
                 lc = clr.consulta_lote_response.lote_comprobantes;
                 CompletarUI(lc, e);
-                ClientScript.RegisterStartupScript(GetType(), "Message", RN.Funciones.TextoScript("Datos del comprobante correctamente cargados desde el archivo de formato Lote IBK"));
+                ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("Datos del comprobante correctamente cargados desde el archivo de formato Lote IBK"));
             }
             catch
             {
-                ClientScript.RegisterStartupScript(GetType(), "Message", RN.Funciones.TextoScript("El archivo no cumple con el esquema de Interfacturas"));
+                ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("El archivo no cumple con el esquema de Interfacturas"));
             }
         }
 
@@ -1057,7 +1057,7 @@ namespace CedServicios.Site
             else
             {
                 AjustarCamposXPtaVentaIndefinido();
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Debe definir el punto de venta"), false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Debe definir el punto de venta"), false);
             }
         }
 
@@ -2607,7 +2607,7 @@ namespace CedServicios.Site
             }
             catch (Exception ex)
             {
-                ClientScript.RegisterStartupScript(GetType(), "Message", RN.Funciones.TextoScript("Problemas al generar el pdf.  " + ex.Message));
+                ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("Problemas al generar el pdf.  " + ex.Message));
             }
         }
 

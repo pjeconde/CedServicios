@@ -754,5 +754,9 @@ namespace CedServicios.Site
             {
             }
         }
+        public static string TextoScript(string Contenido)
+        {
+            return "<SCRIPT LANGUAGE='javascript'>alert('" + Contenido.Replace("'", "").Replace("\r\n", "  ") + "');</SCRIPT>";
+        }
     }
 }

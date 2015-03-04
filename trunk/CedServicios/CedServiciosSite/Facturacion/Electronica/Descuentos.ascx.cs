@@ -134,7 +134,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			if (e.Exception != null)
 			{
-				ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", RN.Funciones.TextoScript(e.Exception.Message), false);
+				ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", Funciones.TextoScript(e.Exception.Message), false);
 				e.ExceptionHandled = true;
 			}
 		}
@@ -316,7 +316,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			}
 			catch (Exception ex)
 			{
-				ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", RN.Funciones.TextoScript(ex.Message), false);
+				ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", Funciones.TextoScript(ex.Message), false);
 			}
 		}
 
@@ -640,7 +640,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 						}
 						else
 						{
-							ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", RN.Funciones.TextoScript("La alícuota de IVA de un descuento (" + auxIVA.Codigo + ") no coincide con ninguna alícuota de los impuestos"), false);
+							ScriptManager.RegisterStartupScript(this.Parent.Page, GetType(), "Message", Funciones.TextoScript("La alícuota de IVA de un descuento (" + auxIVA.Codigo + ") no coincide con ninguna alícuota de los impuestos"), false);
 						}
 					}
 				}
