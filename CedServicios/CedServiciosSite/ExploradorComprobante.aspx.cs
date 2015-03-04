@@ -320,7 +320,7 @@ namespace CedServicios.Site
                                 {
                                     comprobante.WF.Estado = "Rechazado";
                                     RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                                    script = "<SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF o AFIP.\\n " + "Resultado: " + lc.cabecera_lote.resultado + "  Motivo: " + lc.cabecera_lote.motivo + "');</script>";
+                                    script = RN.Funciones.TextoScript("Respuesta de ITF o AFIP: " + "Resultado: " + lc.cabecera_lote.resultado + "  Motivo: " + lc.cabecera_lote.motivo);
                                     RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
                                     ScriptManager.RegisterStartupScript(this, typeof(Page), "Message", script, true);
                                 }

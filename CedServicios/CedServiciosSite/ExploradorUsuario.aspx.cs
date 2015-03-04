@@ -206,7 +206,7 @@ namespace CedServicios.Site
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Message", RN.Funciones.TextoScript(ex.Message), false);
             }
         }
         protected void UsuarioPagingGridView_SelectedIndexChanged(object sender, EventArgs e)
