@@ -926,7 +926,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 			try
 			{
 				Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
-				Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
 				PuntoVtaDropDownList.SelectedValue = Convert.ToString(lc.cabecera_lote.punto_de_venta);
                 PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
 				int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
@@ -934,7 +933,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
                 Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
 				AjustarCamposXPtaVentaChanged(PuntoVtaDropDownList.SelectedValue);
-				AjustarCamposXVersion(lc);
+                AjustarPrestaServxVersiones();
 				Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
 			}
 			catch (NullReferenceException)//detalle_factura.xml
@@ -945,7 +944,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				ViewState["PuntoVenta"] = auxPV;
 				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
 				AjustarCamposXPtaVentaChanged(PuntoVtaDropDownList.SelectedValue);
-				AjustarCamposXVersion(lc);
+                AjustarPrestaServxVersiones();
 				Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
 			}
 		}
@@ -1785,12 +1784,6 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
         private void AjustarCamposXPtaVentaExport(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
         {
-            Presta_ServCheckBox.Checked = false;
-            Presta_ServCheckBox.Enabled = false;
-            Presta_ServCheckBox.Visible = true;
-            Presta_ServLabel.Visible = true;
-            //Version0RadioButton.Visible = false;
-            Version1RadioButton.Visible = false;
             CodigoConceptoLabel.Visible = false;
             CodigoConceptoDropDownList.Visible = false;
             FechaInicioServLabel.Visible = false;
@@ -1837,12 +1830,6 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
         private void AjustarCamposXPtaVentaBonoFiscal(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
         {
-            Presta_ServCheckBox.Checked = false;
-            Presta_ServCheckBox.Enabled = false;
-            Presta_ServCheckBox.Visible = true;
-            Presta_ServLabel.Visible = true;
-            //Version0RadioButton.Visible = false;
-            Version1RadioButton.Visible = false;
             CodigoConceptoLabel.Visible = false;
             CodigoConceptoDropDownList.Visible = false;
             FechaInicioServLabel.Visible = false;
@@ -1886,13 +1873,10 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
         private void AjustarCamposXPtaVentaComun(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
         {
-            //Presta_ServCheckBox.Enabled = true;
-            HacerVisiblesV0V1();
             AjustarCamposXPtaVtaComunYRG2904(out listacompradores);
         }
         private void AjustarCamposXPtaVentaRG2904(out System.Collections.Generic.List<Entidades.Persona> listacompradores, string tipoComprobante)
         {
-            Presta_ServCheckBox.Enabled = true;
             AjustarCamposXPtaVtaComunYRG2904(out listacompradores);
             AjustarCodigoOperacionEn2904(tipoComprobante);
         }
@@ -1955,23 +1939,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                 CodigoOperacionLabel.Visible = true;
             }
         }
-        private void HacerVisiblesV0V1()
-        {
-            //Version0RadioButton.Visible = true;
-            //Version0RadioButton.Checked = true;
-            //Version1RadioButton.Visible = true;
-            //Version1RadioButton.Checked = false;
-            //Version1RadioButton.Visible = true;
-            Version1RadioButton.Checked = true;
-        }
         private void AjustarCamposXPtaVentaIndefinido()
         {
             TipoPtoVentaLabel.Text = "No definido";
-            Presta_ServCheckBox.Enabled = true;
-            Presta_ServCheckBox.Visible = true;
-            Presta_ServLabel.Visible = true;
-            //Version0RadioButton.Visible = false;
-            Version1RadioButton.Visible = false;
             CodigoConceptoLabel.Visible = false;
             CodigoConceptoDropDownList.Visible = false;
             FechaInicioServLabel.Visible = true;
@@ -3156,52 +3126,32 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             if (IdNaturalezaComprobanteTextBox.Text != "Compra")
             {
-                cab.presta_servSpecified = true;
-                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                try
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    if (Funciones.SessionTimeOut(Session))
-                    {
-                        Response.Redirect("~/SessionTimeout.aspx");
-                    }
-                    else
-                    {
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                        {
-                            return pv.Nro == auxPV;
-                        }).IdTipoPuntoVta;
-                        if (idtipo.Equals("Exportacion") || idtipo.Equals("RG2904"))
-                        {
-                            cab.presta_servSpecified = false;
-                        }
-                        else if (idtipo.Equals("Comun"))
-                        {
-                            GenerarV0oV1(cab);
-                        }
-                        else
-                        {
-                            cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
-                        }
-                    }
+                    Response.Redirect("~/SessionTimeout.aspx");
                 }
-                catch (System.NullReferenceException)
+                else
                 {
-                    cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
+                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                    {
+                        return pv.Nro == auxPV;
+                    }).IdTipoPuntoVta;
+                    switch (idtipo)
+                    {
+                        case "Exportacion":
+                        case "RG2904":
+                        case "Comun":
+                            cab.presta_servSpecified = false;
+                            break;
+                        case "BonoFiscal":
+                            cab.presta_servSpecified = true;
+                            cab.presta_serv = Convert.ToInt32(false);
+                            break;
+                    }
                 }
             }
         }
-		private void GenerarV0oV1(FeaEntidades.InterFacturas.cabecera_lote cab)
-		{
-            //if (Version0RadioButton.Checked)
-            //{
-            //    cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
-            //}
-            //else
-            //{
-            //    cab.presta_servSpecified = false;
-            //}
-            cab.presta_servSpecified = false;
-		}
 		private void GenerarInfoExtensionesDestinatarios(FeaEntidades.InterFacturas.comprobante comp)
 		{
 			if (!EmailAvisoVisualizacionTextBox.Text.Equals(string.Empty))
@@ -4814,44 +4764,10 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			ActualizarTipoDeCambio();
 		}
-		protected void Version1RadioButton_CheckedChanged(object sender, EventArgs e)
-		{
-			AjustarPrestaServxVersiones();
-		}
 		private void AjustarPrestaServxVersiones()
 		{
-            //if (Version0RadioButton.Checked && Version0RadioButton.Visible)
-            //{
-            //    Presta_ServCheckBox.Visible = true;
-            //    Presta_ServLabel.Visible = true;
-            //    CodigoConceptoLabel.Visible = false;
-            //    CodigoConceptoDropDownList.Visible = false;
-            //}
-            //if (Version1RadioButton.Checked && Version1RadioButton.Visible)
-            //{
-				Presta_ServCheckBox.Visible = false;
-				Presta_ServLabel.Visible = false;
-				CodigoConceptoLabel.Visible = true;
-				CodigoConceptoDropDownList.Visible = true;
-            //}
-		}
-
-		private void AjustarCamposXVersion(org.dyndns.cedweb.consulta.ConsultarResult lc)
-		{
-		}
-		private void AjustarCamposXVersion(FeaEntidades.InterFacturas.lote_comprobantes lc)
-		{
-            //if (lc.cabecera_lote.presta_servSpecified)
-            //{
-            //    Version0RadioButton.Checked = true;
-            //    Version1RadioButton.Checked=false;
-            //}
-            //else
-            //{
-				Version1RadioButton.Checked = true;
-                //Version0RadioButton.Checked=false;
-            //}
-			AjustarPrestaServxVersiones();
+			CodigoConceptoLabel.Visible = true;
+			CodigoConceptoDropDownList.Visible = true;
 		}
         protected void PaisDestinoExpDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
