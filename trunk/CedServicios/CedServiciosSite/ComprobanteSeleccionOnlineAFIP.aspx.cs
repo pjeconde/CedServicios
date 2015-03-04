@@ -79,7 +79,7 @@ namespace CedServicios.Site
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/", "");
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(respuesta), false);
                 }
                 catch (Exception ex)
                 {
@@ -119,7 +119,7 @@ namespace CedServicios.Site
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPUltNroLote((Entidades.Sesion)Session["Sesion"]);
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(respuesta), false);
                 }
                 catch (Exception ex)
                 {
@@ -178,7 +178,7 @@ namespace CedServicios.Site
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPUltNroComprobante(lcFea, (Entidades.Sesion)Session["Sesion"]);
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(respuesta), false);
                 }
                 catch (Exception ex)
                 {
@@ -219,7 +219,7 @@ namespace CedServicios.Site
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/", "");
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(respuesta), false);
                 }
                 catch (Exception ex)
                 {
@@ -278,7 +278,7 @@ namespace CedServicios.Site
                     respuesta = RN.ComprobanteAFIP.ValidarAFIPNroCae(lcFea, ((Entidades.Sesion)Session["Sesion"]));
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "');</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(respuesta), false);
                 }
                 catch (Exception ex)
                 {

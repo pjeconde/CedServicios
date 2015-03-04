@@ -238,7 +238,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 catch (Exception ex)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                    ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", RN.Funciones.TextoScript(ex.Message), false);
                 }
             }
         }
@@ -745,14 +745,14 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", RN.Funciones.TextoScript(ex.Message), false);
             }
         }
         protected void detalleGridView_RowUpdated(object sender, GridViewUpdatedEventArgs e)
         {
             if (e.Exception != null)
             {
-                ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+                ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", RN.Funciones.TextoScript(e.Exception.Message), false);
                 e.ExceptionHandled = true;
             }
         }
@@ -903,7 +903,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			if (e.Exception != null)
 			{
-				ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", RN.Funciones.TextoScript(e.Exception.Message), false);
 				e.ExceptionHandled = true;
 			}
 		}

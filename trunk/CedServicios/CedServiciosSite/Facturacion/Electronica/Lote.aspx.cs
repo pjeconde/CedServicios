@@ -422,7 +422,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 DescargarPDFButton.DataBind();
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
                 }
                 else
                 {
@@ -454,7 +454,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 }
                                 else
                                 {
-                                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('No se registro el comprobante en la base de datos ya que el comprobante está vigente.\\n');</script>", false);
+                                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("No se registro el comprobante en la base de datos ya que el comprobante está vigente."), false);
                                     return;
                                 }
                             }
@@ -547,13 +547,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                             }
                             else
                             {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Archivo enviado satisfactoriamente.');</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Archivo enviado satisfactoriamente"), false);
                             }
                         }
                     }
                     catch (Exception ex)
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el archivo.\\n " + ex.Message + "');</script>", false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Problemas al generar el archivo.  " + ex.Message), false);
                     }
                 }
             }
@@ -620,7 +620,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			if (e.Exception != null)
 			{
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + e.Exception.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				ScriptManager.RegisterStartupScript(this, GetType(), "Message", RN.Funciones.TextoScript(e.Exception.Message), false);
 				e.ExceptionHandled = true;
 			}
 		}
@@ -764,7 +764,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			}
 			catch (Exception ex)
 			{
-				ScriptManager.RegisterStartupScript(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + ex.Message.ToString().Replace("'", "") + "');</SCRIPT>", false);
+				ScriptManager.RegisterStartupScript(this, GetType(), "Message", RN.Funciones.TextoScript(ex.Message), false);
 			}
 		}
 		protected void FileUploadButton_Click(object sender, EventArgs e)
@@ -781,7 +781,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 DescargarPDFButton.DataBind();
                 if (((Button)sender).ID == "FileUploadButton" && ((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
                 }
                 else
                 {
@@ -808,7 +808,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 CAETextBox.Text = string.Empty;
                                 FechaCAEObtencionDatePickerWebUserControl.Text = string.Empty;
                                 FechaCAEVencimientoDatePickerWebUserControl.Text = string.Empty;
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo');</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Datos del comprobante correctamente cargados desde el archivo"), false);
                             }
                             catch (InvalidOperationException)
                             {
@@ -824,13 +824,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         catch (Exception ex)
                         {
-                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas: " + ex.Message.ToString().Replace("'", "").Replace("\r\n", "  ") + "');</script>", false);
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("El archivo no cumple con el esquema de Interfacturas: " + ex.Message), false);
                             return;
                         }
                     }
                     else
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe seleccionar un archivo');</script>", false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Debe seleccionar un archivo"), false);
                         return;
                     }
                     VerificarMetodoNumeracionLote();
@@ -848,7 +848,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			cArray[0] = c;
 			lc.comprobante = cArray;
 			CompletarUI(lc, e);
-            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml');</script>", false);
+            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml"), false);
 		}
 		private void LeerFormatoLoteIBK(EventArgs e, FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
 		{
@@ -861,12 +861,12 @@ namespace CedServicios.Site.Facturacion.Electronica
 				clr = (FeaEntidades.InterFacturas.XML.consulta_lote_comprobantes_response)x.Deserialize(ms);
 				lc = clr.consulta_lote_response.lote_comprobantes;
 				CompletarUI(lc, e);
-				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Datos del comprobante correctamente cargados desde el archivo de formato Lote IBK');</script>");
+				ClientScript.RegisterStartupScript(GetType(), "Message", RN.Funciones.TextoScript("Datos del comprobante correctamente cargados desde el archivo de formato Lote IBK"));
 			}
 			catch (Exception ex)
 			{
                 RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "LeerFormatoLoteIBK: " + ex.Message);
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('El archivo no cumple con el esquema de Interfacturas');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("El archivo no cumple con el esquema de Interfacturas"), false);
 			}
 		}
 		private void CompletarUI(FeaEntidades.InterFacturas.lote_comprobantes lc, EventArgs e)
@@ -928,6 +928,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
 				Presta_ServCheckBox.Checked = Convert.ToBoolean(lc.cabecera_lote.presta_serv);
 				PuntoVtaDropDownList.SelectedValue = Convert.ToString(lc.cabecera_lote.punto_de_venta);
+                PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
 				int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
 				ViewState["PuntoVenta"] = auxPV;
 				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
@@ -939,6 +940,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			catch (NullReferenceException)//detalle_factura.xml
 			{
 				PuntoVtaDropDownList.SelectedValue = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta);
+                PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
 				int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
 				ViewState["PuntoVenta"] = auxPV;
 				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
@@ -1496,7 +1498,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 if (((Button)sender).ID == "DescargarXMLButton" && ((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.');</SCRIPT>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
                 }
                 else
                 {
@@ -1587,7 +1589,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     catch (Exception ex)
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al calcular los totales.\\n " + ex.Message + "');</SCRIPT>", false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Problemas al calcular los totales:  " + ex.Message), false);
                     }
                     finally
                     {
@@ -1689,7 +1691,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			PermisosExpo.ResetearGrillas();
 			DetalleLinea.ResetearGrillas();
 
-			//ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Se han eliminado artículos, referencias y permisos de exportación por haber cambiado el tipo de punto de venta');</SCRIPT>", false);
+            //ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Se han eliminado artículos, referencias y permisos de exportación por haber cambiado el tipo de punto de venta"), false);
 		}
         private void AjustarCamposXPtaVentaChanged(string PuntoDeVenta)
         {
@@ -1778,7 +1780,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             else
             {
                 AjustarCamposXPtaVentaIndefinido();
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Debe definir el punto de venta');</SCRIPT>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Debe definir el punto de venta"), false);
             }
         }
         private void AjustarCamposXPtaVentaExport(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
@@ -1791,12 +1793,14 @@ namespace CedServicios.Site.Facturacion.Electronica
             Version1RadioButton.Visible = false;
             CodigoConceptoLabel.Visible = false;
             CodigoConceptoDropDownList.Visible = false;
+            FechaInicioServLabel.Visible = false;
             FechaServDesdeDatePickerWebUserControl.Text = string.Empty;
             FechaServDesdeDatePickerWebUserControl.Visible = false;
-            FechaInicioServLabel.Visible = false;
+            ImageCalendarFechaServDesde.Visible = false;
             FechaHstServLabel.Visible = false;
             FechaServHastaDatePickerWebUserControl.Text = string.Empty;
             FechaServHastaDatePickerWebUserControl.Visible = false;
+            ImageCalendarFechaServHasta.Visible = false;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaExportaciones();
 
             Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
@@ -1841,12 +1845,14 @@ namespace CedServicios.Site.Facturacion.Electronica
             Version1RadioButton.Visible = false;
             CodigoConceptoLabel.Visible = false;
             CodigoConceptoDropDownList.Visible = false;
+            FechaInicioServLabel.Visible = false;
             FechaServDesdeDatePickerWebUserControl.Text = string.Empty;
             FechaServDesdeDatePickerWebUserControl.Visible = false;
-            FechaInicioServLabel.Visible = false;
+            ImageCalendarFechaServDesde.Visible = false;
             FechaHstServLabel.Visible = false;
             FechaServHastaDatePickerWebUserControl.Text = string.Empty;
             FechaServHastaDatePickerWebUserControl.Visible = false;
+            ImageCalendarFechaServHasta.Visible = false;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
@@ -1907,10 +1913,12 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             AjustarPrestaServxVersiones();
 
-            FechaServDesdeDatePickerWebUserControl.Visible = true;
             FechaInicioServLabel.Visible = true;
+            FechaServDesdeDatePickerWebUserControl.Visible = true;
+            ImageCalendarFechaServDesde.Visible = true;
             FechaHstServLabel.Visible = true;
             FechaServHastaDatePickerWebUserControl.Visible = true;
+            ImageCalendarFechaServHasta.Visible = true;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
             if (Condicion_IVA_VendedorDropDownList.SelectedValue == "6")
             {
@@ -1966,10 +1974,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             Version1RadioButton.Visible = false;
             CodigoConceptoLabel.Visible = false;
             CodigoConceptoDropDownList.Visible = false;
-            FechaServDesdeDatePickerWebUserControl.Visible = true;
             FechaInicioServLabel.Visible = true;
+            FechaServDesdeDatePickerWebUserControl.Visible = true;
+            ImageCalendarFechaServDesde.Visible = true;
             FechaHstServLabel.Visible = true;
             FechaServHastaDatePickerWebUserControl.Visible = true;
+            ImageCalendarFechaServHasta.Visible = true;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
             Tipo_De_ComprobanteDropDownList.DataBind();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
@@ -2021,29 +2031,29 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el CUIT del vendedor');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el CUIT del vendedor"), false);
                 return false;
             }
             if (Id_LoteTextbox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el nro de lote');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el nro de lote"), false);
                 return false;
             }
             if (Numero_ComprobanteTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el número de comprobante');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el número de comprobante"), false);
                 return false;
             }
             if (!Numero_ComprobanteTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumeric(Numero_ComprobanteTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un dato numérico en el número de comprobante');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Ingresar un dato numérico en el número de comprobante"), false);
                 return false;
             }
             if (IdNaturalezaComprobanteTextBox.Text != "Compra")
             {
                 if (PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el punto de venta"), false);
                     return false;
                 }
             }
@@ -2051,68 +2061,68 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 if (PuntoVtaTextBox.Text.Equals(string.Empty) || !RN.Funciones.IsValidNumeric(PuntoVtaTextBox.Text))
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el punto de venta');</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el punto de venta"), false);
                     return false;
                 }
             }
             if (FechaEmisionDatePickerWebUserControl.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar la Fecha de Emisión del comprobante');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar la Fecha de Emisión del comprobante"), false);
                 return false;
             }
             if (Razon_Social_VendedorTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar la Razon Social del vendedor');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar la Razon Social del vendedor"), false);
                 return false;
             }
             if (Localidad_VendedorTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar la Localidad del vendedor');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar la Localidad del vendedor"), false);
                 return false;
             }
             if (Email_VendedorTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar la Localidad del vendedor');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar la Localidad del vendedor"), false);
                 return false;
             }
             if (!Id_LoteTextbox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumeric(Id_LoteTextbox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un dato numérico en el número de lote');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Ingresar un dato numérico en el número de lote"), false);
                 return false;
             }
             if (!Email_VendedorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_VendedorTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un email válido para el vendedor');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Ingresar un email válido para el vendedor"), false);
                 return false;
             }
             if (!NroIBVendedorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNroIB(NroIBVendedorTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un Nro. de IB válido para el vendedor');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Ingresar un Nro. de IB válido para el vendedor"), false);
                 return false;
             }
             if (!Email_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_CompradorTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un email válido para el comprador');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Ingresar un email válido para el comprador"), false);
                 return false;
             }
             if (!GLN_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericFijo(GLN_CompradorTextBox.Text, "13"))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Ingresar un dato numérico de 13 digitos en el GLN del comprador');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Ingresar un dato numérico de 13 digitos en el GLN del comprador"), false);
                 return false;
             }
             //if (Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue.Equals(string.Empty))
             //{
-            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Tipo de Documento del Comprador');</script>", false);
+            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el Tipo de Documento del Comprador"), false);
             //    return false;
             //}
             //if (Nro_Doc_Identificatorio_CompradorTextBox.Text.Equals(string.Empty))
             //{
-            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Nro. Doc. Comprador');</script>", false);
+            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el Nro. Doc. Comprador"), false);
             //    return false;
             //}
             //if (!Nro_Doc_Identificatorio_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Nro_Doc_Identificatorio_CompradorTextBox.Text))
             //{
-            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Nro. Doc. Comprador');</script>", false);
+            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del Nro. Doc. Comprador"), false);
             //    return false;
             //}
             //TIPO DE CAMBIO
@@ -2120,94 +2130,94 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 if (Tipo_de_cambioTextBox.Text.Equals(string.Empty))
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Tipo de Cambio');</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el Tipo de Cambio"), false);
                     return false;
                 }
                 if (!Tipo_de_cambioTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Tipo_de_cambioTextBox.Text))
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Tipo de Cambio en el Resumen');</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del Tipo de Cambio en el Resumen"), false);
                     return false;
                 }
             }
             //RESUMEN            
             if (Importe_Total_Neto_Gravado_ResumenTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Importe Total Neto Gravado del Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el Importe Total Neto Gravado del Resumen"), false);
                 return false;
             }
             if (!Importe_Total_Neto_Gravado_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Neto_Gravado_ResumenTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Neto Gravado en el Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del Importe Total Neto Gravado en el Resumen"), false);
                 return false;
             }
             if (Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Importe Total Concepto No Gravado del Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el Importe Total Concepto No Gravado del Resumen"), false);
                 return false;
             }
             if (!Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Concepto No Gravado en el Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del Importe Total Concepto No Gravado en el Resumen"), false);
                 return false;
             }
             if (Importe_Operaciones_Exentas_ResumenTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Importe Operaciones Exentas del Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el Importe Operaciones Exentas del Resumen"), false);
                 return false;
             }
             if (!Importe_Operaciones_Exentas_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Operaciones_Exentas_ResumenTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Operaciones Exentas en el Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del Importe Operaciones Exentas en el Resumen"), false);
                 return false;
             }
             if (Impuesto_Liq_ResumenTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el IVA del Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el IVA del Resumen"), false);
                 return false;
             }
             if (!Impuesto_Liq_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Impuesto_Liq_ResumenTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del IVA en el Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del IVA en el Resumen"), false);
                 return false;
             }
             if (Impuesto_Liq_Rni_ResumenTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el IVA RNI del Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el IVA RNI del Resumen"), false);
                 return false;
             }
             if (!Impuesto_Liq_Rni_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Impuesto_Liq_Rni_ResumenTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del IVA RNI en el Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del IVA RNI en el Resumen"), false);
                 return false;
             }
             if (!Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Impuestos Municipales en el Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del Importe Total Impuestos Municipales en el Resumen"), false);
                 return false;
             }
             if (!Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Impuestos Nacionales en el Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del Importe Total Impuestos Nacionales en el Resumen"), false);
                 return false;
             }
             if (!Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Ingresos Brutos en el Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del Importe Total Ingresos Brutos en el Resumen"), false);
                 return false;
             }
             if (!Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Impuestos_Internos_ResumenTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Impuestos Internos en el Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del Importe Total Impuestos Internos en el Resumen"), false);
                 return false;
             }
             if (Importe_Total_Factura_ResumenTextBox.Text.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Falta ingresar el Importe Total Factura del Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Falta ingresar el Importe Total Factura del Resumen"), false);
                 return false;
             }
             if (!Importe_Total_Factura_ResumenTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Importe_Total_Factura_ResumenTextBox.Text))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Formato erróneo del Importe Total Factura en el Resumen');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Formato erróneo del Importe Total Factura en el Resumen"), false);
                 return false;
             }
             return true;
@@ -2226,7 +2236,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 DescargarPDFButton.DataBind();
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
                 }
                 else
                 {
@@ -2235,7 +2245,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
                         if (NroCertif.Equals(string.Empty))
                         {
-                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>", false);
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Aún no disponemos de su certificado digital."), false);
                             return;
                         }
                         try
@@ -2260,7 +2270,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 //lcIBK = Conversor.Entidad2IBK(lcFea);
                                 respuesta = edyndns.ValidarIBK(xmlTexto, certificado);
 
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(respuesta), false);
 
                                 if (respuesta == "Comprobante enviado satisfactoriamente a Interfacturas.")
                                 {
@@ -2293,7 +2303,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 string errorSource =
                                     Node.SelectSingleNode("errorNS:ErrorSource",
                                     nsManager).InnerText;
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + "\\n" + errorMessage.Replace("\r", "").Replace("\n", "").Replace("'", " ") + "');</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(soapEx.Actor.Trim() + ": " + errorMessage), false);
                             }
                             catch (Exception)
                             {
@@ -2305,7 +2315,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     catch (Exception ex)
                     {
                         string a = ex.Message.Replace("'", " ");
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + a + "');</script>", false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + a), false);
                     }
                 }
             }
@@ -2324,7 +2334,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 DescargarPDFButton.DataBind();
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
                 }
                 else
                 {
@@ -2334,7 +2344,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
                         if (NroCertif.Equals(string.Empty))
                         {
-                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>", false);
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Aún no disponemos de su certificado digital."), false);
                             return;
                         }
                         try
@@ -2364,7 +2374,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                                 respuesta = respuesta.Replace("'", "-");
 
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(respuesta), false);
 
                                 if (respuesta == "Comprobante enviado satisfactoriamente a Interfacturas.")
                                 {
@@ -2443,7 +2453,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 string errorSource =
                                     Node.SelectSingleNode("errorNS:ErrorSource",
                                     nsManager).InnerText;
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + "\\n" + errorMessage.Replace("\r", "").Replace("\n", "") + "');</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(soapEx.Actor.Trim() + ": " + errorMessage), false);
                             }
                             catch (Exception)
                             {
@@ -2455,7 +2465,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     catch (Exception ex)
                     {
                         string a = ex.Message.Replace("'", " ");
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + a + "');</script>", false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + a), false);
                     }
                 }
             }
@@ -2466,7 +2476,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
             if (NroCertif.Equals(string.Empty))
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Aún no disponemos de su certificado digital.');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Aún no disponemos de su certificado digital."), false);
                 return;
             }
             try
@@ -2523,7 +2533,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             catch (Exception ex)
             {
                 string a = ex.Message.Replace("'", " ");
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a Interfacturas.\\n " + a + "');</script>", false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + a), false);
             }
         }
         protected void AccionSubirAAFIPButton_Click(object sender, EventArgs e)
@@ -2540,7 +2550,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 DescargarPDFButton.DataBind();
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
                 }
                 else
                 {
@@ -2556,7 +2566,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             }).IdTipoPuntoVta;
                             if (idtipo != "Comun")
                             {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Esta opción solo está habilitada para puntos de venta Comun RG.2485.')</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485."), false);
                                 return;
                             }
                             if (ValidarCamposObligatorios())
@@ -2569,7 +2579,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 respuesta = RN.ComprobanteAFIP.EnviarAFIP(out caeNro, out caeFecVto, lcFea, (Entidades.Sesion)Session["Sesion"]);
 
                                 RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), respuesta);
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + respuesta + "')</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(respuesta), false);
 
                                 if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
                                 {
@@ -2630,7 +2640,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 string errorSource =
                                     Node.SelectSingleNode("errorNS:ErrorSource",
                                     nsManager).InnerText;
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + "\\n" + errorMessage.Replace("\r", "").Replace("\\n", "") + "');</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(soapEx.Actor.Trim() + ": " + errorMessage), false);
                             }
                             catch (Exception)
                             {
@@ -2643,7 +2653,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), ex.Message);
                         string a = ex.Message.Replace("'", " ");
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a AFIP.\\n " + a + "');</script>", false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Problemas al enviar el comprobante a AFIP.  " + a), false);
                     }
                 }
             }
@@ -2658,7 +2668,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
                 }
                 else
                 {
@@ -2880,7 +2890,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     catch (Exception ex)
                     {
                         string a = ex.Message.Replace("'", " ");
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al descargar el archivo PDF.\\n " + a + "');</script>", false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Problemas al descargar el archivo PDF.  " + a), false);
                     }
                 }
             }
@@ -2895,7 +2905,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Su sesión ha caducado por inactividad. Por favor vuelva a loguearse.')</script>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
                 }
                 else
                 {
@@ -2923,7 +2933,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 c.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, lote.cabecera_lote.DestinoComprobante, "Vigente", ((Entidades.Sesion)Session["Sesion"]));
                                 AccionesPanel.Visible = false;
                                 MensajeLabel.Text = "Comprobante guardado satisfactoriamente";
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + MensajeLabel.Text + "')</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(MensajeLabel.Text), false);
                             }
                         }
                         catch (System.Web.Services.Protocols.SoapException soapEx)
@@ -2938,7 +2948,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 string errorNumber = Node.SelectSingleNode("errorNS:ErrorNumber", nsManager).InnerText;
                                 string errorMessage = Node.SelectSingleNode("errorNS:ErrorMessage", nsManager).InnerText;
                                 string errorSource = Node.SelectSingleNode("errorNS:ErrorSource", nsManager).InnerText;
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('" + soapEx.Actor + "\\n" + errorMessage.Replace("\r", "").Replace("\\n", "") + "');</script>", false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript(soapEx.Actor.Trim() + ": " + errorMessage), false);
                             }
                             catch (Exception)
                             {
@@ -2951,7 +2961,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), ex.Message);
                         string a = ex.Message.Replace("'", " ");
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al enviar el comprobante a AFIP.\\n " + a + "');</script>", false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", RN.Funciones.TextoScript("Problemas al enviar el comprobante a AFIP.  " + a), false);
                     }
                 }
             }
@@ -4765,7 +4775,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			}
 			catch (Exception ex)
 			{
-				ClientScript.RegisterStartupScript(GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>alert('Problemas al generar el pdf.\\n " + ex.Message + "');</script>");
+				ClientScript.RegisterStartupScript(GetType(), "Message", RN.Funciones.TextoScript("Problemas al generar el pdf.  " + ex.Message));
 			}
             
 		}

@@ -11,6 +11,10 @@ namespace CedServicios.RN
 {
     public class Funciones
     {
+        public static string TextoScript(string Contenido)
+        {
+            return "<SCRIPT LANGUAGE='javascript'>alert('" + Contenido.Replace("'", "").Replace("\r\n", "  ") + "');</SCRIPT>";
+        }
         public static bool EsEmail(string value)
         {
             string strRegex = @"^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}" +
