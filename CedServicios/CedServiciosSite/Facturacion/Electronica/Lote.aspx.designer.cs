@@ -112,15 +112,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Label TipoPtoVentaLabel;
         
         /// <summary>
-        /// Control Version1RadioButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton Version1RadioButton;
-        
-        /// <summary>
         /// Control ptoVentaUpdateProgress.
         /// </summary>
         /// <remarks>
@@ -398,24 +389,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Id_LoteTextbox;
-        
-        /// <summary>
-        /// Control Presta_ServLabel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Presta_ServLabel;
-        
-        /// <summary>
-        /// Control Presta_ServCheckBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox Presta_ServCheckBox;
         
         /// <summary>
         /// Control LabelTipoNumeracionLote.

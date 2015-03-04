@@ -83,8 +83,6 @@
                             <asp:UpdatePanel ID="InfoComproUpdatePanel" runat="server" ChildrenAsTriggers="true"
                                 UpdateMode="Conditional">
                                 <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="Version1RadioButton" EventName="CheckedChanged">
-                                    </asp:AsyncPostBackTrigger>
                                     <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList" EventName="TextChanged">
                                     </asp:AsyncPostBackTrigger>
                                     <asp:PostBackTrigger ControlID="FileUploadButton"></asp:PostBackTrigger>
@@ -114,9 +112,6 @@
                                                         </asp:DropDownList>
                                                         <asp:TextBox ID="PuntoVtaTextBox" runat="server" Enabled="true" Visible="false" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
                                                         <asp:Label ID="TipoPtoVentaLabel" runat="server"></asp:Label>
-                                                        <asp:RadioButton ID="Version1RadioButton" runat="server" GroupName="Version" Text="V.1"
-                                                            AutoPostBack="true" Visible="false" OnCheckedChanged="Version1RadioButton_CheckedChanged" Checked="True">
-                                                        </asp:RadioButton>
                                                         <asp:UpdateProgress ID="ptoVentaUpdateProgress" runat="server" AssociatedUpdatePanelID="ptoVentaUpdatePanel" DisplayAfter="0">
                                                             <ProgressTemplate>
                                                                 <asp:Image ID="ptoVentaImage" runat="server" Height="18px" ImageUrl="~/Imagenes/301.gif">
@@ -286,8 +281,6 @@
                         <td>
                             <asp:UpdatePanel ID="LoteUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
                                 <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="Version1RadioButton" EventName="CheckedChanged">
-                                    </asp:AsyncPostBackTrigger>
                                     <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList" EventName="TextChanged">
                                     </asp:AsyncPostBackTrigger>
                                     <asp:PostBackTrigger ControlID="FileUploadButton"></asp:PostBackTrigger>
@@ -321,13 +314,7 @@
                                                             <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Este número, que no necesariamente tiene que ser correlativo y consecutivo, siempre debe ser mayor al último número de lote procesado en Interfacturas. Este número NO SE PUEDE REPETIR.">
                                                             </asp:TextBox>
                                                         </td>
-                                                        <td class="TC00S">
-                                                            <asp:Label ID="Presta_ServLabel" Text="Presta servicios:" runat="server"></asp:Label>
-                                                        </td>
-                                                        <td class="TC02S" style="text-align: left;">
-                                                            <asp:CheckBox ID="Presta_ServCheckBox" runat="server"></asp:CheckBox>
-                                                        </td>
-                                                        <td class="TC00S" colspan="2">
+                                                        <td class="TC00S"">
                                                             <asp:Label ID="LabelTipoNumeracionLote" Text="Tipo de numeración:" runat="server"></asp:Label>
                                                         </td>
                                                         <td class="TC00S">
