@@ -157,7 +157,7 @@ namespace CedServicios.Site
             }
             catch (Exception ex)
             {
-                ScriptManager.RegisterStartupScript(this, GetType(), "Message", RN.Funciones.TextoScript(ex.Message), false);
+                ScriptManager.RegisterStartupScript(this, GetType(), "Message", Funciones.TextoScript(ex.Message), false);
             }
         }
         protected void ClientePagingGridView_SelectedIndexChanged(object sender, EventArgs e)
