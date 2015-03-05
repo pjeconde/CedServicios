@@ -761,10 +761,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     LeerXmlLoteResponse(out lc, ms);
                                 }
                             }
-                            catch (Exception ex) //Borrar esto una vez que pruebe los tres "Leer"
-                            {
-                                throw ex;
-                            }
                             LlenarCampos(lc);
                             BorrarCamposNoClonables();
                         }
