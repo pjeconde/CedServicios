@@ -155,9 +155,7 @@
                                                 <asp:UpdatePanel ID="monedaUpdatePanel" runat="server" ChildrenAsTriggers="true"
                                                     UpdateMode="Conditional">
                                                     <ContentTemplate>
-                                                        <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" AutoPostBack="True"
-                                                            Enabled="false" OnSelectedIndexChanged="MonedaComprobanteDropDownList_SelectedIndexChanged"
-                                                            SkinID="ddln">
+                                                        <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" AutoPostBack="True" Enabled="false" SkinID="ddln">
                                                         </asp:DropDownList>
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>

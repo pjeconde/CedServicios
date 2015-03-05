@@ -277,57 +277,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                         FeaEntidades.InterFacturas.lote_comprobantes lote = (FeaEntidades.InterFacturas.lote_comprobantes)Cache["ComprobanteAClonar"];
                         if (lote != null)
                         {
-                            CompletarUI(lote, new EventArgs());
-                            VerificarMetodoNumeracionLote();
-                            Numero_ComprobanteTextBox.Text = string.Empty;
-                            FechaEmisionDatePickerWebUserControl.Text = string.Empty;
-                            FechaServDesdeDatePickerWebUserControl.Text = string.Empty;
-                            FechaServHastaDatePickerWebUserControl.Text = string.Empty;
-                            FechaVencimientoDatePickerWebUserControl.Text = string.Empty;
-                            Id_LoteTextbox.Text = string.Empty;
-                            CAETextBox.Text = string.Empty;
-                            FechaCAEObtencionDatePickerWebUserControl.Text = string.Empty;
-                            FechaCAEVencimientoDatePickerWebUserControl.Text = string.Empty;
+                            LlenarCampos(lote);
+                            BorrarCamposNoClonables();
                         }
                     }
                     catch
                     {
-                    }
-                }
-            }
-        }
-        private void VerificarMetodoNumeracionLote()
-        {
-            TipoNumeracionLote.Text = "";
-            if (!PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
-            {
-                int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
-                if (Funciones.SessionTimeOut(Session))
-                {
-                    Response.Redirect("~/SessionTimeout.aspx");
-                }
-                else
-                {
-                    Entidades.PuntoVta pVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                    {
-                        return pv.Nro == auxPV;
-                    });
-                    if (!pVta.IdMetodoGeneracionNumeracionLote.Equals(string.Empty))
-                    {
-                        TipoNumeracionLote.Text = pVta.IdMetodoGeneracionNumeracionLote;
-                        switch (pVta.IdMetodoGeneracionNumeracionLote)
-                        {
-                            case "Autonumerador":
-                            case "TimeStamp1":
-                            case "TimeStamp2":
-                                Id_LoteTextbox.Enabled = false;
-                                ButtonGenerarNroLote.Visible = true;
-                                break;
-                            case "Ninguno":
-                                Id_LoteTextbox.Enabled = true;
-                                ButtonGenerarNroLote.Visible = false;
-                                break;
-                        }
                     }
                 }
             }
@@ -778,48 +733,40 @@ namespace CedServicios.Site.Facturacion.Electronica
                 DescargarPDFButton.Visible = false;
                 ActualizarEstadoButton.DataBind();
                 DescargarPDFButton.DataBind();
-                if (((Button)sender).ID == "FileUploadButton" && ((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+                if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
                 }
                 else
                 {
-                    FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                    FeaEntidades.InterFacturas.lote_comprobantes lc;
                     if (XMLFileUpload.HasFile)
                     {
                         try
                         {
                             System.IO.MemoryStream ms = new System.IO.MemoryStream(XMLFileUpload.FileBytes);
                             ms.Seek(0, System.IO.SeekOrigin.Begin);
-
                             try
                             {
-                                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
-                                lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-                                CompletarUI(lc, e);
-                                VerificarMetodoNumeracionLote();
-                                Numero_ComprobanteTextBox.Text = string.Empty;
-                                FechaEmisionDatePickerWebUserControl.Text = string.Empty;
-                                FechaServDesdeDatePickerWebUserControl.Text = string.Empty;
-                                FechaServHastaDatePickerWebUserControl.Text = string.Empty;
-                                FechaVencimientoDatePickerWebUserControl.Text = string.Empty;
-                                Id_LoteTextbox.Text = string.Empty;
-                                CAETextBox.Text = string.Empty;
-                                FechaCAEObtencionDatePickerWebUserControl.Text = string.Empty;
-                                FechaCAEVencimientoDatePickerWebUserControl.Text = string.Empty;
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Datos del comprobante correctamente cargados desde el archivo"), false);
+                                LeerXmlLote(out lc, ms);
                             }
                             catch (InvalidOperationException)
                             {
                                 try
                                 {
-                                    LeerFormatoDetalleIBK(e, lc, ms);
+                                    LeerXmlComprobante(out lc, ms);
                                 }
                                 catch (InvalidOperationException)
                                 {
-                                    LeerFormatoLoteIBK(e, lc, ms);
+                                    LeerXmlLoteResponse(out lc, ms);
                                 }
                             }
+                            catch (Exception ex) //Borrar esto una vez que pruebe los tres "Leer"
+                            {
+                                throw ex;
+                            }
+                            LlenarCampos(lc);
+                            BorrarCamposNoClonables();
                         }
                         catch (Exception ex)
                         {
@@ -832,13 +779,18 @@ namespace CedServicios.Site.Facturacion.Electronica
                         ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Debe seleccionar un archivo"), false);
                         return;
                     }
-                    VerificarMetodoNumeracionLote();
                 }
             }
 		}
-		private void LeerFormatoDetalleIBK(EventArgs e, FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
+		private void LeerXmlLote(out FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
 		{
-			//Formato detalle_factura IBK
+            lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lc.GetType());
+            lc = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+        }
+        private void LeerXmlComprobante(out FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
+		{
+            lc = new FeaEntidades.InterFacturas.lote_comprobantes();
 			ms.Seek(0, System.IO.SeekOrigin.Begin);
 			FeaEntidades.InterFacturas.comprobante c = new FeaEntidades.InterFacturas.comprobante();
 			System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(c.GetType());
@@ -846,114 +798,78 @@ namespace CedServicios.Site.Facturacion.Electronica
 			FeaEntidades.InterFacturas.comprobante[] cArray = new FeaEntidades.InterFacturas.comprobante[1];
 			cArray[0] = c;
 			lc.comprobante = cArray;
-			CompletarUI(lc, e);
-            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Datos del comprobante correctamente cargados desde el archivo de formato detalle_factura.xml"), false);
 		}
-		private void LeerFormatoLoteIBK(EventArgs e, FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
+		private void LeerXmlLoteResponse(out FeaEntidades.InterFacturas.lote_comprobantes lc, System.IO.MemoryStream ms)
 		{
 			try
 			{
-				//Formato Lote IBK
+                lc = new FeaEntidades.InterFacturas.lote_comprobantes();
 				ms.Seek(0, System.IO.SeekOrigin.Begin);
 				FeaEntidades.InterFacturas.XML.consulta_lote_comprobantes_response clr = new FeaEntidades.InterFacturas.XML.consulta_lote_comprobantes_response();
 				System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(clr.GetType());
 				clr = (FeaEntidades.InterFacturas.XML.consulta_lote_comprobantes_response)x.Deserialize(ms);
 				lc = clr.consulta_lote_response.lote_comprobantes;
-				CompletarUI(lc, e);
-				ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("Datos del comprobante correctamente cargados desde el archivo de formato Lote IBK"));
 			}
 			catch (Exception ex)
 			{
                 RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "LeerFormatoLoteIBK: " + ex.Message);
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("El archivo no cumple con el esquema de Interfacturas"), false);
+                throw ex;
 			}
 		}
-		private void CompletarUI(FeaEntidades.InterFacturas.lote_comprobantes lc, EventArgs e)
-		{
-			CompletarCabecera(lc);
-			CompletarComprobante(lc);
-			CompletarExportacion(lc);
-			CompletarReferencias(lc);
-			PermisosExpo.CompletarPermisos(lc);
-			CompletarComprador(lc);
-			CompletarVendedor(lc);
-			DetalleLinea.CompletarDetalles(lc);
-			DescuentosGlobales.Completar(lc);
-			ImpuestosGlobales.Completar(lc);
-			ComentariosTextBox.Text = lc.comprobante[0].detalle.comentarios;
-			CompletarResumen(lc);
-
-			Observaciones_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.observaciones);
-			if (!lc.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-			{
-				Tipo_de_cambioLabel.Visible = true;
-				Tipo_de_cambioTextBox.Visible = true;
-			}
-			else
-			{
-				Tipo_de_cambioLabel.Visible = false;
-				Tipo_de_cambioTextBox.Visible = false;
-				Tipo_de_cambioTextBox.Text = null;
-			}
-			//CAE
-			CompletarCAE(lc);
-
-			BindearDropDownLists();
-		}
-		private void CompletarCAE(FeaEntidades.InterFacturas.lote_comprobantes lc)
-		{
-            CAETextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.cae;
-            FechaCAEObtencionDatePickerWebUserControl.Text = lc.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae;
-            FechaCAEVencimientoDatePickerWebUserControl.Text = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
-            //ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
-            //MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
-		}
-        private void CompletarComprobante(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		private void LlenarCampos(FeaEntidades.InterFacturas.lote_comprobantes lote)
         {
-            Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
-            FechaEmisionDatePickerWebUserControl.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
-            FechaVencimientoDatePickerWebUserControl.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
-            FechaServDesdeDatePickerWebUserControl.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde);
-            FechaServHastaDatePickerWebUserControl.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta);
-            Condicion_De_PagoTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
-            IVAcomputableDropDownList.SelectedIndex = IVAcomputableDropDownList.Items.IndexOf(IVAcomputableDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.iva_computable)));
-            CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
-            CodigoConceptoDropDownList.SelectedIndex = CodigoConceptoDropDownList.Items.IndexOf(CodigoConceptoDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_concepto)));
-        }
-		private void CompletarCabecera(FeaEntidades.InterFacturas.lote_comprobantes lc)
-		{
-			try
-			{
-				Id_LoteTextbox.Text = Convert.ToString(lc.cabecera_lote.id_lote);
-				PuntoVtaDropDownList.SelectedValue = Convert.ToString(lc.cabecera_lote.punto_de_venta);
-                PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
-				int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
-				ViewState["PuntoVenta"] = auxPV;
-				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
-                Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
-				AjustarCamposXPtaVentaChanged(PuntoVtaDropDownList.SelectedValue);
-                AjustarPrestaServxVersiones();
-				Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
-			}
-			catch (NullReferenceException)//detalle_factura.xml
-			{
-				PuntoVtaDropDownList.SelectedValue = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta);
-                PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
-				int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
-				ViewState["PuntoVenta"] = auxPV;
-				DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
-				AjustarCamposXPtaVentaChanged(PuntoVtaDropDownList.SelectedValue);
-                AjustarPrestaServxVersiones();
-				Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
-			}
-		}
-        private void CompletarExportacion(FeaEntidades.InterFacturas.lote_comprobantes lc)
-        {
-            if (lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion != null)
+            #region Ajuste de controles
+            try
             {
-                PaisDestinoExpDropDownList.SelectedIndex = PaisDestinoExpDropDownList.Items.IndexOf(PaisDestinoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante)));
-                IncotermsDropDownList.SelectedIndex = IncotermsDropDownList.Items.IndexOf(IncotermsDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.incoterms)));
-                TipoExpDropDownList.SelectedIndex = TipoExpDropDownList.Items.IndexOf(TipoExpDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion)));
+                PuntoVtaDropDownList.SelectedValue = Convert.ToString(lote.cabecera_lote.punto_de_venta);
+            }
+            catch (NullReferenceException)
+            {
+                PuntoVtaDropDownList.SelectedValue = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta);
+            }
+            PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
+            if (!lote.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+            {
+                Tipo_de_cambioLabel.Visible = true;
+                Tipo_de_cambioTextBox.Visible = true;
+            }
+            else
+            {
+                Tipo_de_cambioLabel.Visible = false;
+                Tipo_de_cambioTextBox.Visible = false;
+                Tipo_de_cambioTextBox.Text = null;
+            }
+            #endregion
+            #region CompletarCabecera
+            try
+            {
+                Id_LoteTextbox.Text = Convert.ToString(lote.cabecera_lote.id_lote);
+            }
+            catch (NullReferenceException)
+            {
+            }
+            int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+            ViewState["PuntoVenta"] = auxPV;
+            DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
+            Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
+            #endregion
+            #region CompletarComprobante
+            Numero_ComprobanteTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
+            FechaEmisionDatePickerWebUserControl.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
+            FechaVencimientoDatePickerWebUserControl.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
+            FechaServDesdeDatePickerWebUserControl.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde);
+            FechaServHastaDatePickerWebUserControl.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta);
+            Condicion_De_PagoTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago);
+            IVAcomputableDropDownList.SelectedIndex = IVAcomputableDropDownList.Items.IndexOf(IVAcomputableDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.iva_computable)));
+            CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
+            CodigoConceptoDropDownList.SelectedIndex = CodigoConceptoDropDownList.Items.IndexOf(CodigoConceptoDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.codigo_concepto)));
+            #endregion
+            #region CompletarExportacion
+            if (lote.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion != null)
+            {
+                PaisDestinoExpDropDownList.SelectedIndex = PaisDestinoExpDropDownList.Items.IndexOf(PaisDestinoExpDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.destino_comprobante)));
+                IncotermsDropDownList.SelectedIndex = IncotermsDropDownList.Items.IndexOf(IncotermsDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.incoterms)));
+                TipoExpDropDownList.SelectedIndex = TipoExpDropDownList.Items.IndexOf(TipoExpDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion.tipo_exportacion)));
             }
             else
             {
@@ -962,26 +878,26 @@ namespace CedServicios.Site.Facturacion.Electronica
                 TipoExpDropDownList.SelectedIndex = -1;
             }
             PaisDestinoExpDropDownList_SelectedIndexChanged(PaisDestinoExpDropDownList, new EventArgs());
-            if (lc.comprobante[0].extensiones != null)
+            if (lote.comprobante[0].extensiones != null)
             {
-                if (lc.comprobante[0].extensiones.extensiones_camara_facturas != null)
+                if (lote.comprobante[0].extensiones.extensiones_camara_facturas != null)
                 {
-                    IdiomaDropDownList.SelectedIndex = IdiomaDropDownList.Items.IndexOf(IdiomaDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma)));
+                    IdiomaDropDownList.SelectedIndex = IdiomaDropDownList.Items.IndexOf(IdiomaDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma)));
                 }
                 else
                 {
                     IdiomaDropDownList.SelectedIndex = -1;
                 }
-                if (lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != "")
+                if (lote.comprobante[0].extensiones.extensiones_datos_comerciales != null && lote.comprobante[0].extensiones.extensiones_datos_comerciales != "")
                 {
                     //Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
-                    if (lc.comprobante[0].extensiones.extensiones_datos_comerciales.Substring(0, 1) == "%")
+                    if (lote.comprobante[0].extensiones.extensiones_datos_comerciales.Substring(0, 1) == "%")
                     {
-                        DatosComerciales.Texto = RN.Funciones.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
+                        DatosComerciales.Texto = RN.Funciones.HexToString(lote.comprobante[0].extensiones.extensiones_datos_comerciales).Replace("<br>", System.Environment.NewLine);
                     }
                     else
                     {
-                        DatosComerciales.Texto = lc.comprobante[0].extensiones.extensiones_datos_comerciales.Replace("<br>", System.Environment.NewLine);
+                        DatosComerciales.Texto = lote.comprobante[0].extensiones.extensiones_datos_comerciales.Replace("<br>", System.Environment.NewLine);
                     }
                 }
                 else
@@ -994,206 +910,225 @@ namespace CedServicios.Site.Facturacion.Electronica
                 IdiomaDropDownList.SelectedIndex = -1;
                 DatosComerciales.Texto = string.Empty;
             }
-        }
-		private void CompletarReferencias(FeaEntidades.InterFacturas.lote_comprobantes lc)
-		{
-			referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
-			if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
-			{
-				foreach (FeaEntidades.InterFacturas.informacion_comprobanteReferencias r in lc.comprobante[0].cabecera.informacion_comprobante.referencias)
-				{
-					//descripcioncodigo_de_referencia ( XmlIgnoreAttribute )
-					//Se busca la descripción a través del código.
-					try
-					{
-						if (r != null)
-						{
-							string descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
-							((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue = r.codigo_de_referencia.ToString();
-							descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
-							r.descripcioncodigo_de_referencia = descrcodigo;
-							referencias.Add(r);
-						}
-					}
-					catch
-					//Referencia no valida
-					{
-					}
-				}
-			}
-			if (referencias.Count.Equals(0))
-			{
-				referencias.Add(new FeaEntidades.InterFacturas.informacion_comprobanteReferencias());
-			}
-			referenciasGridView.DataSource = referencias;
-			referenciasGridView.DataBind();
-			ViewState["referencias"] = referencias;
-		}
-        private void CompletarVendedor(FeaEntidades.InterFacturas.lote_comprobantes lc)
-        {
-            if (lc.comprobante[0].cabecera.informacion_vendedor.razon_social != null)
+            PermisosExpo.CompletarPermisos(lote);
+            #endregion
+            #region CompletarReferencias
+            referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
+            if (lote.comprobante[0].cabecera.informacion_comprobante.referencias != null)
             {
-                Razon_Social_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.razon_social);
+                foreach (FeaEntidades.InterFacturas.informacion_comprobanteReferencias r in lote.comprobante[0].cabecera.informacion_comprobante.referencias)
+                {
+                    //descripcioncodigo_de_referencia ( XmlIgnoreAttribute )
+                    //Se busca la descripción a través del código.
+                    try
+                    {
+                        if (r != null)
+                        {
+                            string descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
+                            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue = r.codigo_de_referencia.ToString();
+                            descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
+                            r.descripcioncodigo_de_referencia = descrcodigo;
+                            referencias.Add(r);
+                        }
+                    }
+                    catch
+                    //Referencia no valida
+                    {
+                    }
+                }
             }
-            Localidad_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.localidad);
-            if (lc.comprobante[0].cabecera.informacion_vendedor.GLN != 0)
+            if (referencias.Count.Equals(0))
             {
-                GLN_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.GLN);
+                referencias.Add(new FeaEntidades.InterFacturas.informacion_comprobanteReferencias());
             }
-            Email_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.email);
-            Cuit_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.cuit);
-            Provincia_VendedorDropDownList.SelectedIndex = Provincia_VendedorDropDownList.Items.IndexOf(Provincia_VendedorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.provincia)));
-            Condicion_IVA_VendedorDropDownList.SelectedIndex = Condicion_IVA_VendedorDropDownList.Items.IndexOf(Condicion_IVA_VendedorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.condicion_IVA)));
-            Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedIndex = Condicion_Ingresos_Brutos_VendedorDropDownList.Items.IndexOf(Condicion_Ingresos_Brutos_VendedorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutos)));
-            Cp_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.cp);
-            Contacto_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.contacto);
-            Telefono_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.telefono);
-            Codigo_Interno_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.codigo_interno);
-            NroIBVendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.nro_ingresos_brutos);
-            InicioDeActividadesVendedorDatePickerWebUserControl.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.inicio_de_actividades);
-            Domicilio_Calle_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_calle);
-            Domicilio_Numero_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_numero);
-            Domicilio_Piso_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_piso);
-            Domicilio_Depto_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_depto);
-            Domicilio_Sector_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_sector);
-            Domicilio_Torre_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_torre);
-            Domicilio_Manzana_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_manzana);
-        }
-        private void CompletarComprador(FeaEntidades.InterFacturas.lote_comprobantes lc)
-        {
-            if (lc.comprobante[0].cabecera.informacion_comprador.GLN != 0)
+            referenciasGridView.DataSource = referencias;
+            referenciasGridView.DataBind();
+            ViewState["referencias"] = referencias;
+            #endregion
+            #region CompletarComprador
+            if (lote.comprobante[0].cabecera.informacion_comprador.GLN != 0)
             {
-                GLN_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.GLN);
+                GLN_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.GLN);
             }
-            Codigo_Interno_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_interno);
-            if (!lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.Equals(70) || PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
+            Codigo_Interno_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.codigo_interno);
+            if (!lote.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.Equals(70) || PaisDestinoExpDropDownList.SelectedItem.Text.ToUpper().Contains("ARGENTINA"))
             {
                 Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                 Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
-                Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
+                Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio);
             }
             else
             {
                 Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
                 Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
-                Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio)));
+                Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio)));
             }
-            Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Codigo_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Codigo_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio)));
-            Denominacion_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.denominacion);
-            Domicilio_Calle_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle);
-            Domicilio_Numero_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_numero);
-            Domicilio_Piso_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_piso);
-            Domicilio_Depto_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_depto);
-            Domicilio_Sector_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_sector);
-            Domicilio_Torre_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_torre);
-            Domicilio_Manzana_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.domicilio_manzana);
-            Localidad_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.localidad);
-            Cp_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.cp);
-            Contacto_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.contacto);
-            Email_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.email);
-            Telefono_CompradorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.telefono);
-            InicioDeActividadesCompradorDatePickerWebUserControl.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.inicio_de_actividades);
-            Provincia_CompradorDropDownList.SelectedIndex = Provincia_CompradorDropDownList.Items.IndexOf(Provincia_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.provincia)));
-            Condicion_IVA_CompradorDropDownList.SelectedIndex = Condicion_IVA_CompradorDropDownList.Items.IndexOf(Condicion_IVA_CompradorDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprador.condicion_IVA)));
-            if (lc.comprobante[0].extensiones != null)
+            Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Codigo_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Codigo_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio)));
+            Denominacion_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.denominacion);
+            Domicilio_Calle_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.domicilio_calle);
+            Domicilio_Numero_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.domicilio_numero);
+            Domicilio_Piso_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.domicilio_piso);
+            Domicilio_Depto_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.domicilio_depto);
+            Domicilio_Sector_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.domicilio_sector);
+            Domicilio_Torre_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.domicilio_torre);
+            Domicilio_Manzana_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.domicilio_manzana);
+            Localidad_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.localidad);
+            Cp_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.cp);
+            Contacto_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.contacto);
+            Email_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.email);
+            Telefono_CompradorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.telefono);
+            InicioDeActividadesCompradorDatePickerWebUserControl.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.inicio_de_actividades);
+            Provincia_CompradorDropDownList.SelectedIndex = Provincia_CompradorDropDownList.Items.IndexOf(Provincia_CompradorDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.provincia)));
+            Condicion_IVA_CompradorDropDownList.SelectedIndex = Condicion_IVA_CompradorDropDownList.Items.IndexOf(Condicion_IVA_CompradorDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprador.condicion_IVA)));
+            if (lote.comprobante[0].extensiones != null)
             {
-                if (lc.comprobante[0].extensiones.extensiones_destinatarios != null)
+                if (lote.comprobante[0].extensiones.extensiones_destinatarios != null)
                 {
-                    EmailAvisoVisualizacionTextBox.Text = lc.comprobante[0].extensiones.extensiones_destinatarios.email;
+                    EmailAvisoVisualizacionTextBox.Text = lote.comprobante[0].extensiones.extensiones_destinatarios.email;
                 }
             }
+            #endregion
+            #region CompletarVendedor(lote);
+            if (lote.comprobante[0].cabecera.informacion_vendedor.razon_social != null)
+            {
+                Razon_Social_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.razon_social);
+            }
+            Localidad_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.localidad);
+            if (lote.comprobante[0].cabecera.informacion_vendedor.GLN != 0)
+            {
+                GLN_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.GLN);
+            }
+            Email_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.email);
+            Cuit_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.cuit);
+            Provincia_VendedorDropDownList.SelectedIndex = Provincia_VendedorDropDownList.Items.IndexOf(Provincia_VendedorDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.provincia)));
+            Condicion_IVA_VendedorDropDownList.SelectedIndex = Condicion_IVA_VendedorDropDownList.Items.IndexOf(Condicion_IVA_VendedorDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.condicion_IVA)));
+            Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedIndex = Condicion_Ingresos_Brutos_VendedorDropDownList.Items.IndexOf(Condicion_Ingresos_Brutos_VendedorDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutos)));
+            Cp_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.cp);
+            Contacto_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.contacto);
+            Telefono_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.telefono);
+            Codigo_Interno_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.codigo_interno);
+            NroIBVendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.nro_ingresos_brutos);
+            InicioDeActividadesVendedorDatePickerWebUserControl.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.inicio_de_actividades);
+            Domicilio_Calle_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.domicilio_calle);
+            Domicilio_Numero_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.domicilio_numero);
+            Domicilio_Piso_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.domicilio_piso);
+            Domicilio_Depto_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.domicilio_depto);
+            Domicilio_Sector_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.domicilio_sector);
+            Domicilio_Torre_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.domicilio_torre);
+            Domicilio_Manzana_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.domicilio_manzana);
+            #endregion
+            DetalleLinea.CompletarDetalles(lote);
+			DescuentosGlobales.Completar(lote);
+			ImpuestosGlobales.Completar(lote);
+			ComentariosTextBox.Text = lote.comprobante[0].detalle.comentarios;
+            #region CompletarResumen
+            MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].resumen.codigo_moneda)));
+            Tipo_de_cambioTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.tipo_de_cambio);
+            if (lote.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+            {
+                Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importe_total_neto_gravado);
+                Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importe_total_concepto_no_gravado);
+                Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importe_operaciones_exentas);
+                Impuesto_Liq_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.impuesto_liq);
+                Impuesto_Liq_Rni_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.impuesto_liq_rni);
+                Importe_Total_Factura_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importe_total_factura);
+                if (lote.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified.Equals(true))
+                {
+                    Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importe_total_impuestos_nacionales);
+                }
+                else
+                {
+                    Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = string.Empty;
+                }
+                if (lote.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified.Equals(true))
+                {
+                    Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importe_total_impuestos_municipales);
+                }
+                else
+                {
+                    Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = string.Empty;
+                }
+                if (lote.comprobante[0].resumen.importe_total_impuestos_internosSpecified.Equals(true))
+                {
+                    Importe_Total_Impuestos_Internos_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importe_total_impuestos_internos);
+                }
+                else
+                {
+                    Importe_Total_Impuestos_Internos_ResumenTextBox.Text = string.Empty;
+                }
+                if (lote.comprobante[0].resumen.importe_total_ingresos_brutosSpecified.Equals(true))
+                {
+                    Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importe_total_ingresos_brutos);
+                }
+                else
+                {
+                    Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = string.Empty;
+                }
+            }
+            else
+            {
+                Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importes_moneda_origen.importe_total_neto_gravado);
+                Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importes_moneda_origen.importe_total_concepto_no_gravado);
+                Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importes_moneda_origen.importe_operaciones_exentas);
+                Impuesto_Liq_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importes_moneda_origen.impuesto_liq);
+                Impuesto_Liq_Rni_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importes_moneda_origen.impuesto_liq_rni);
+                Importe_Total_Factura_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importes_moneda_origen.importe_total_factura);
+                if (lote.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_nacionalesSpecified.Equals(true))
+                {
+                    Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_nacionales);
+                }
+                else
+                {
+                    Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = string.Empty;
+                }
+                if (lote.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_municipalesSpecified.Equals(true))
+                {
+                    Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_municipales);
+                }
+                else
+                {
+                    Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = string.Empty;
+                }
+                if (lote.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_internosSpecified.Equals(true))
+                {
+                    Importe_Total_Impuestos_Internos_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_internos);
+                }
+                else
+                {
+                    Importe_Total_Impuestos_Internos_ResumenTextBox.Text = string.Empty;
+                }
+                if (lote.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutosSpecified.Equals(true))
+                {
+                    Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutos);
+                }
+                else
+                {
+                    Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = string.Empty;
+                }
+            }
+            #endregion
+            Observaciones_ResumenTextBox.Text = Convert.ToString(lote.comprobante[0].resumen.observaciones);
+            #region CompletarCAE
+            CAETextBox.Text = lote.comprobante[0].cabecera.informacion_comprobante.cae;
+            FechaCAEObtencionDatePickerWebUserControl.Text = lote.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae;
+            FechaCAEVencimientoDatePickerWebUserControl.Text = lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae;
+            //ResultadoTextBox.Text = lote.comprobante[0].cabecera.informacion_comprobante.resultado;
+            //MotivoTextBox.Text = lote.comprobante[0].cabecera.informacion_comprobante.motivo;
+            #endregion
+            BindearDropDownLists();
+		}
+        private void BorrarCamposNoClonables()
+        {
+            Numero_ComprobanteTextBox.Text = string.Empty;
+            FechaEmisionDatePickerWebUserControl.Text = string.Empty;
+            FechaServDesdeDatePickerWebUserControl.Text = string.Empty;
+            FechaServHastaDatePickerWebUserControl.Text = string.Empty;
+            FechaVencimientoDatePickerWebUserControl.Text = string.Empty;
+            Id_LoteTextbox.Text = string.Empty;
+            CAETextBox.Text = string.Empty;
+            FechaCAEObtencionDatePickerWebUserControl.Text = string.Empty;
+            FechaCAEVencimientoDatePickerWebUserControl.Text = string.Empty;
         }
-		private void CompletarResumen(FeaEntidades.InterFacturas.lote_comprobantes lc)
-		{
-			MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].resumen.codigo_moneda)));
-			Tipo_de_cambioTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.tipo_de_cambio);
-			if (lc.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-			{
-				Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_neto_gravado);
-				Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_concepto_no_gravado);
-				Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_operaciones_exentas);
-				Impuesto_Liq_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq);
-				Impuesto_Liq_Rni_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.impuesto_liq_rni);
-				Importe_Total_Factura_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_factura);
-				if (lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified.Equals(true))
-				{
-					Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_nacionales);
-				}
-				else
-				{
-					Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = string.Empty;
-				}
-				if (lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified.Equals(true))
-				{
-					Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_municipales);
-				}
-				else
-				{
-					Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = string.Empty;
-				}
-				if (lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified.Equals(true))
-				{
-					Importe_Total_Impuestos_Internos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_impuestos_internos);
-				}
-				else
-				{
-					Importe_Total_Impuestos_Internos_ResumenTextBox.Text = string.Empty;
-				}
-				if (lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified.Equals(true))
-				{
-					Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importe_total_ingresos_brutos);
-				}
-				else
-				{
-					Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = string.Empty;
-				}
-			}
-			else
-			{
-				Importe_Total_Neto_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_neto_gravado);
-				Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_concepto_no_gravado);
-				Importe_Operaciones_Exentas_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_operaciones_exentas);
-				Impuesto_Liq_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.impuesto_liq);
-				Impuesto_Liq_Rni_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.impuesto_liq_rni);
-				Importe_Total_Factura_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura);
-				if (lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_nacionalesSpecified.Equals(true))
-				{
-					Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_nacionales);
-				}
-				else
-				{
-					Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text = string.Empty;
-				}
-				if (lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_municipalesSpecified.Equals(true))
-				{
-					Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_municipales);
-				}
-				else
-				{
-					Importe_Total_Impuestos_Municipales_ResumenTextBox.Text = string.Empty;
-				}
-				if (lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_internosSpecified.Equals(true))
-				{
-					Importe_Total_Impuestos_Internos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_internos);
-				}
-				else
-				{
-					Importe_Total_Impuestos_Internos_ResumenTextBox.Text = string.Empty;
-				}
-				if (lc.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutosSpecified.Equals(true))
-				{
-					Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = Convert.ToString(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutos);
-				}
-				else
-				{
-					Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = string.Empty;
-				}
-			}
-		}
-		protected void MonedaComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
-		{
-
-		}
 		protected void CompradorDropDownList_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			AjustarComprador();
@@ -1777,7 +1712,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Debe definir el punto de venta"), false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Debe seleccionar el punto de venta"), false);
             }
         }
         private void AjustarCamposXPtaVentaExport(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
@@ -1871,8 +1806,8 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
         private void AjustarCamposXPtaVentaComun(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
         {
-            AjustarPrestaServxVersiones();
-
+            CodigoConceptoLabel.Visible = true;
+            CodigoConceptoDropDownList.Visible = true;
             FechaInicioServLabel.Visible = true;
             FechaServDesdeDatePickerWebUserControl.Visible = true;
             ImageCalendarFechaServDesde.Visible = true;
@@ -2016,21 +1951,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un dato numérico de 13 digitos en el GLN del comprador"), false);
                 return false;
             }
-            //if (Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue.Equals(string.Empty))
-            //{
-            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar el Tipo de Documento del Comprador"), false);
-            //    return false;
-            //}
-            //if (Nro_Doc_Identificatorio_CompradorTextBox.Text.Equals(string.Empty))
-            //{
-            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar el Nro. Doc. Comprador"), false);
-            //    return false;
-            //}
-            //if (!Nro_Doc_Identificatorio_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericDecimals(Nro_Doc_Identificatorio_CompradorTextBox.Text))
-            //{
-            //    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Formato erróneo del Nro. Doc. Comprador"), false);
-            //    return false;
-            //}
             //TIPO DE CAMBIO
             if (!MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
             {
@@ -4700,11 +4620,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			ActualizarTipoDeCambio();
 		}
-		private void AjustarPrestaServxVersiones()
-		{
-			CodigoConceptoLabel.Visible = true;
-			CodigoConceptoDropDownList.Visible = true;
-		}
         protected void PaisDestinoExpDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
@@ -4834,16 +4749,12 @@ namespace CedServicios.Site.Facturacion.Electronica
 				return this.DetalleLinea;
 			}
 		}
-        protected void SalirButton_Click(object sender, EventArgs e)
-        {
-            
-        }
         protected void PuntoVtaDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int auxPV = Convert.ToInt32(((DropDownList)sender).SelectedValue);
             try
             {
                 AjustarCamposXPtaVentaChanged(((DropDownList)sender).SelectedValue);
-                int auxPV = Convert.ToInt32(((DropDownList)sender).SelectedValue);
                 if (ViewState["PuntoVenta"] != null)
                 {
                     int auxViewState = Convert.ToInt32(ViewState["PuntoVenta"]);
@@ -4883,8 +4794,43 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             //Al cambiar el punto de venta se inicializa el Nro.Lote
             if (IdNaturalezaComprobanteTextBox.Text == "Venta") Id_LoteTextbox.Text = "";
-            //Verificar método de numeración del lote.
-            VerificarMetodoNumeracionLote();
+            //Ajustar controles de generación de número de lote
+            Entidades.PuntoVta pVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+            {
+                return pv.Nro == auxPV;
+            });
+            if (!pVta.IdMetodoGeneracionNumeracionLote.Equals(string.Empty))
+            {
+                TipoNumeracionLote.Text = pVta.IdMetodoGeneracionNumeracionLote;
+                switch (pVta.IdMetodoGeneracionNumeracionLote)
+                {
+                    case "Autonumerador":
+                    case "TimeStamp1":
+                    case "TimeStamp2":
+                        Id_LoteTextbox.Enabled = false;
+                        ButtonGenerarNroLote.Visible = true;
+                        break;
+                    case "Ninguno":
+                        Id_LoteTextbox.Enabled = true;
+                        ButtonGenerarNroLote.Visible = false;
+                        break;
+                }
+            }
+        }
+        private void AjustarGeneracionNroLote()
+        {
+            TipoNumeracionLote.Text = "";
+            if (!PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
+            {
+                int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                }
+            }
         }
         protected void Tipo_De_ComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
