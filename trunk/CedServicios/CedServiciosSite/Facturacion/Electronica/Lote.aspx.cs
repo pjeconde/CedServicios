@@ -27,7 +27,6 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             Cache.Remove("ComprobanteAClonar");
         }
-        
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!this.IsPostBack)
@@ -1771,14 +1770,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                     }
                 }
-                catch
+                catch (Exception ex)
                 {
-                    AjustarCamposXPtaVentaIndefinido();
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(ex.Message), false);
                 }
             }
             else
             {
-                AjustarCamposXPtaVentaIndefinido();
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Debe definir el punto de venta"), false);
             }
         }
@@ -1873,28 +1871,6 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
         private void AjustarCamposXPtaVentaComun(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
         {
-            AjustarCamposXPtaVtaComunYRG2904(out listacompradores);
-        }
-        private void AjustarCamposXPtaVentaRG2904(out System.Collections.Generic.List<Entidades.Persona> listacompradores, string tipoComprobante)
-        {
-            AjustarCamposXPtaVtaComunYRG2904(out listacompradores);
-            AjustarCodigoOperacionEn2904(tipoComprobante);
-        }
-        private void AjustarCodigoOperacionEn2904(string valor)
-        {
-            if (valor.Equals("2") || valor.Equals("3"))
-            {
-                CodigoOperacionDropDownList.Visible = false;
-                CodigoOperacionLabel.Visible = false;
-            }
-            else
-            {
-                CodigoOperacionDropDownList.Visible = true;
-                CodigoOperacionLabel.Visible = true;
-            }
-        }
-        private void AjustarCamposXPtaVtaComunYRG2904(out System.Collections.Generic.List<Entidades.Persona> listacompradores)
-        {
             AjustarPrestaServxVersiones();
 
             FechaInicioServLabel.Visible = true;
@@ -1939,60 +1915,20 @@ namespace CedServicios.Site.Facturacion.Electronica
                 CodigoOperacionLabel.Visible = true;
             }
         }
-        private void AjustarCamposXPtaVentaIndefinido()
+        private void AjustarCamposXPtaVentaRG2904(out System.Collections.Generic.List<Entidades.Persona> listacompradores, string tipoComprobante)
         {
-            TipoPtoVentaLabel.Text = "No definido";
-            CodigoConceptoLabel.Visible = false;
-            CodigoConceptoDropDownList.Visible = false;
-            FechaInicioServLabel.Visible = true;
-            FechaServDesdeDatePickerWebUserControl.Visible = true;
-            ImageCalendarFechaServDesde.Visible = true;
-            FechaHstServLabel.Visible = true;
-            FechaServHastaDatePickerWebUserControl.Visible = true;
-            ImageCalendarFechaServHasta.Visible = true;
-            Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
-            Tipo_De_ComprobanteDropDownList.DataBind();
-            Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
-            Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
-            Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
-            Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
-            Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-            docCompradorRequiredFieldValidator.Enabled = true;
-            listaDocCompradorRequiredFieldValidator.Enabled = false;
-            docCompradorRequiredFieldValidator.DataBind();
-            listaDocCompradorRequiredFieldValidator.DataBind();
-            ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-            if (Funciones.SessionTimeOut(Session))
+            AjustarCamposXPtaVentaComun(out listacompradores);
+            AjustarCodigoOperacionEn2904(tipoComprobante);
+        }
+        private void AjustarCodigoOperacionEn2904(string valor)
+        {
+            if (valor.Equals("2") || valor.Equals("3"))
             {
-                Response.Redirect("~/SessionTimeout.aspx");
+                CodigoOperacionDropDownList.Visible = false;
+                CodigoOperacionLabel.Visible = false;
             }
             else
             {
-                System.Collections.Generic.List<Entidades.Persona> listacompradores = RN.Persona.ListaPorCuit(true, Entidades.Enum.TipoPersona.Cliente, ((Entidades.Sesion)Session["Sesion"]));
-                if (listacompradores.Count > 0)
-                {
-                    CompradorDropDownList.Visible = true;
-                    CompradorDropDownList.DataValueField = "ClavePrimaria";
-                    CompradorDropDownList.DataTextField = "RazonSocial";
-                    Entidades.Persona persona = new Entidades.Persona();
-                    System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
-                    persona.RazonSocial = "";
-                    personalist.Add(persona);
-                    personalist.AddRange(listacompradores);
-                    CompradorDropDownList.DataSource = personalist;
-                    CompradorDropDownList.DataBind();
-                    CompradorDropDownList.SelectedIndex = 0;
-                    AjustarComprador();
-                }
-                else
-                {
-                    CompradorDropDownList.Visible = false;
-                    CompradorDropDownList.DataSource = null;
-                }
-                TipoExpDropDownList.Enabled = true;
-                PaisDestinoExpDropDownList.Enabled = true;
-                IdiomaDropDownList.Enabled = true;
-                IncotermsDropDownList.Enabled = true;
                 CodigoOperacionDropDownList.Visible = true;
                 CodigoOperacionLabel.Visible = true;
             }
