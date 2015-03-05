@@ -41,7 +41,7 @@
                                     </tr>
                                     <tr>
                                         <td class="TextoResaltado" style="text-align: center;">
-                                            UTILIZAR COMPROBANTE PREEXISTENTE
+                                            Utilizar archivo XML de comprobante preexistente
                                         </td>
                                     </tr>
                                     <tr>
