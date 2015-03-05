@@ -52,18 +52,22 @@ namespace CedServicios.Site.Facturacion.Electronica
                 FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
                 referencias.Add(referencia);
                 referenciasGridView.DataSource = referencias;
+                referenciasGridView.DataBind();
                 ViewState["referencias"] = referencias;
 
                 //VENDEDOR
                 Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
                 Condicion_IVA_VendedorDropDownList.DataTextField = "Descr";
                 Condicion_IVA_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                Condicion_IVA_VendedorDropDownList.DataBind();
                 Condicion_Ingresos_Brutos_VendedorDropDownList.DataValueField = "Codigo";
                 Condicion_Ingresos_Brutos_VendedorDropDownList.DataTextField = "Descr";
                 Condicion_Ingresos_Brutos_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                Condicion_Ingresos_Brutos_VendedorDropDownList.DataBind();
                 Provincia_VendedorDropDownList.DataValueField = "Codigo";
                 Provincia_VendedorDropDownList.DataTextField = "Descr";
                 Provincia_VendedorDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                Provincia_VendedorDropDownList.DataBind();
 
                 //COMPRADOR
                 Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
@@ -74,40 +78,51 @@ namespace CedServicios.Site.Facturacion.Electronica
                 Condicion_IVA_CompradorDropDownList.DataValueField = "Codigo";
                 Condicion_IVA_CompradorDropDownList.DataTextField = "Descr";
                 Condicion_IVA_CompradorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                Condicion_IVA_CompradorDropDownList.DataBind();
                 Provincia_CompradorDropDownList.DataValueField = "Codigo";
                 Provincia_CompradorDropDownList.DataTextField = "Descr";
                 Provincia_CompradorDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                Provincia_CompradorDropDownList.DataBind();
 
                 //COMPROBANTE
                 Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
                 Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
                 Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
+                Tipo_De_ComprobanteDropDownList.DataBind();
                 CodigoOperacionDropDownList.DataValueField = "Codigo";
                 CodigoOperacionDropDownList.DataTextField = "Descr";
                 CodigoOperacionDropDownList.DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.Lista();
+                CodigoOperacionDropDownList.DataBind();
                 IVAcomputableDropDownList.DataValueField = "Codigo";
                 IVAcomputableDropDownList.DataTextField = "Descr";
                 IVAcomputableDropDownList.DataSource = FeaEntidades.Dicotomicos.Dicotomico.Lista();
+                IVAcomputableDropDownList.DataBind();
                 MonedaComprobanteDropDownList.DataValueField = "Codigo";
                 MonedaComprobanteDropDownList.DataTextField = "Descr";
                 MonedaComprobanteDropDownList.DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.ListaNoExportacion();
+                MonedaComprobanteDropDownList.DataBind();
 
                 //EXPORTACION
                 TipoExpDropDownList.DataValueField = "Codigo";
                 TipoExpDropDownList.DataTextField = "Descr";
                 TipoExpDropDownList.DataSource = FeaEntidades.TiposExportacion.TipoExportacion.ListaSinInformar();
+                TipoExpDropDownList.DataBind();
                 IdiomaDropDownList.DataValueField = "Codigo";
                 IdiomaDropDownList.DataTextField = "Descr";
                 IdiomaDropDownList.DataSource = FeaEntidades.Idiomas.Idioma.ListaSinInformar();
+                IdiomaDropDownList.DataBind();
                 PaisDestinoExpDropDownList.DataValueField = "Codigo";
                 PaisDestinoExpDropDownList.DataTextField = "Descr";
                 PaisDestinoExpDropDownList.DataSource = FeaEntidades.DestinosPais.DestinoPais.ListaSinInformar();
+                PaisDestinoExpDropDownList.DataBind();
                 IncotermsDropDownList.DataValueField = "Codigo";
                 IncotermsDropDownList.DataTextField = "Descr";
                 IncotermsDropDownList.DataSource = FeaEntidades.Incoterms.Incoterm.ListaSinInformar();
+                IncotermsDropDownList.DataBind();
                 CodigoConceptoDropDownList.DataValueField = "Codigo";
                 CodigoConceptoDropDownList.DataTextField = "Descr";
                 CodigoConceptoDropDownList.DataSource = FeaEntidades.CodigosConcepto.CodigosConcepto.Lista();
+                CodigoConceptoDropDownList.DataBind();
 
                 //DETALLE DE ARTÍCULOS / SERVICIOS
                 DetalleLinea.IdNaturalezaComprobante = IdNaturalezaComprobanteTextBox.Text;
@@ -322,16 +337,19 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 case "Comun":
                                 case "RG2904":
                                     ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
                                     ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
                                     ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
                                     break;
                                 case "BonoFiscal":
                                     ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
                                     ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
                                     ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
                                     break;
                                 case "Exportacion":
                                     ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
+                                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
                                     ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
                                     ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
                                     break;
@@ -342,6 +360,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         catch
                         {
                             ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
                             ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
                             ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
                         }
@@ -349,6 +368,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     else
                     {
                         ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
                         ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
                         ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
                     }
@@ -356,6 +376,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 else
                 {
                     ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
                     ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
                     ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
                 }
@@ -643,16 +664,19 @@ namespace CedServicios.Site.Facturacion.Electronica
                             case "Comun":
                             case "RG2904":
                                 ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                                ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
                                 ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
                                 ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
                                 break;
                             case "BonoFiscal":
                                 ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                                ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
                                 ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
                                 ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
                                 break;
                             case "Exportacion":
                                 ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
+                                ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
                                 ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = true;
                                 ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
                                 break;
@@ -664,6 +688,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 catch
                 {
                     ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                    ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
                     ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
                     ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
                 }
@@ -671,6 +696,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             else
             {
                 ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
                 ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
                 ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
             }
@@ -1613,8 +1639,8 @@ namespace CedServicios.Site.Facturacion.Electronica
 			FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
 			referencias.Add(referencia);
 			referenciasGridView.DataSource = referencias;
-			ViewState["referencias"] = referencias;
-			referenciasGridView.DataBind();
+            referenciasGridView.DataBind();
+            ViewState["referencias"] = referencias;
 
 			BindearDropDownLists();
 			PermisosExpo.ResetearGrillas();
@@ -1724,7 +1750,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             FechaServHastaDatePickerWebUserControl.Visible = false;
             ImageCalendarFechaServHasta.Visible = false;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaExportaciones();
-
+            Tipo_De_ComprobanteDropDownList.DataBind();
             Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
             Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
@@ -1732,9 +1758,17 @@ namespace CedServicios.Site.Facturacion.Electronica
             Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
             Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
             Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Nro_Doc_Identificatorio_CompradorTextBox.Text));
+
+            Codigo_Doc_Identificatorio_CompradorDropDownList.Items.Clear();
+            Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
+            Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = null;
+            Codigo_Doc_Identificatorio_CompradorDropDownList.ClearSelection();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
+            Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+            Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUITPais().Codigo.ToString();
+
             docCompradorRequiredFieldValidator.Enabled = false;
             listaDocCompradorRequiredFieldValidator.Enabled = true;
             docCompradorRequiredFieldValidator.DataBind();
@@ -1770,6 +1804,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             FechaServHastaDatePickerWebUserControl.Visible = false;
             ImageCalendarFechaServHasta.Visible = false;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
+            Tipo_De_ComprobanteDropDownList.DataBind();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
@@ -1811,9 +1846,11 @@ namespace CedServicios.Site.Facturacion.Electronica
             FechaServHastaDatePickerWebUserControl.Visible = true;
             ImageCalendarFechaServHasta.Visible = true;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
+            Tipo_De_ComprobanteDropDownList.DataBind();
             if (Condicion_IVA_VendedorDropDownList.SelectedValue == "6")
             {
                 Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaMonotributo();
+                Tipo_De_ComprobanteDropDownList.DataBind();
                 PermisosExpo.Visible = false;
             }
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
@@ -2136,8 +2173,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     catch (Exception ex)
                     {
-                        string a = ex.Message.Replace("'", " ");
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + a), false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + ex.Message), false);
                     }
                 }
             }
@@ -2286,8 +2322,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     catch (Exception ex)
                     {
-                        string a = ex.Message.Replace("'", " ");
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + a), false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + ex.Message), false);
                     }
                 }
             }
@@ -2354,8 +2389,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             catch (Exception ex)
             {
-                string a = ex.Message.Replace("'", " ");
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + a), false);
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + ex.Message), false);
             }
         }
         protected void AccionSubirAAFIPButton_Click(object sender, EventArgs e)
@@ -2474,8 +2508,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     catch (Exception ex)
                     {
                         RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), ex.Message);
-                        string a = ex.Message.Replace("'", " ");
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a AFIP.  " + a), false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a AFIP.  " + ex.Message), false);
                     }
                 }
             }
@@ -2711,8 +2744,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                       }
                     catch (Exception ex)
                     {
-                        string a = ex.Message.Replace("'", " ");
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al descargar el archivo PDF.  " + a), false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al descargar el archivo PDF.  " + ex.Message), false);
                     }
                 }
             }
@@ -2782,8 +2814,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     catch (Exception ex)
                     {
                         RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), ex.Message);
-                        string a = ex.Message.Replace("'", " ");
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a AFIP.  " + a), false);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a AFIP.  " + ex.Message), false);
                     }
                 }
             }
