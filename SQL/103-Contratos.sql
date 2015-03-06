@@ -6,3 +6,5 @@ delete NaturalezaComprobante where IdNaturalezaComprobante='VentaM'
 go
 insert NaturalezaComprobante values ('VentaContrato', 'Venta (contrato)')
 go
+insert Entidad values ('Contrato', 'Contrato', 90)
+go
