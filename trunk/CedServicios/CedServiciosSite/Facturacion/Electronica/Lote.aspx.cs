@@ -434,6 +434,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 }
                             }
 
+                            AjustarLoteParaITF(lote);
+
                             System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
                             System.Text.StringBuilder sb = new System.Text.StringBuilder();
                             sb.Append(lote.cabecera_lote.cuit_vendedor);
@@ -2122,6 +2124,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     edyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ValidarIBKurl"];
                                 }
                                 FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
+                                AjustarLoteParaITF(lcFea); 
 
                                 string xmlTexto = "";
                                 RN.Comprobante.SerializarLc(out xmlTexto, lcFea);
@@ -2220,6 +2223,15 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 }
                                 org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
                                 FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
+
+                                //Grabar en base de datos
+                                RN.Comprobante c = new RN.Comprobante();
+                                lcFea.cabecera_lote.DestinoComprobante = "ITF";
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+                                c.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "ITF", "PteConf", ((Entidades.Sesion)Session["Sesion"]));
+
+                                AjustarLoteParaITF(lcFea); 
+
                                 lcIBK = Conversor.Entidad2IBK(lcFea);
 
                                 respuesta = edyndns.EnviarIBK(lcIBK, certificado);
@@ -2236,12 +2248,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                                 if (respuesta == "Comprobante enviado satisfactoriamente a Interfacturas.")
                                 {
-                                    //Grabar en base de datos
-                                    RN.Comprobante c = new RN.Comprobante();
-                                    lcFea.cabecera_lote.DestinoComprobante = "ITF";
-                                    lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                    c.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "ITF", "PteConf", ((Entidades.Sesion)Session["Sesion"]));
-
                                     //Consultar y Actualizar estado on-line.                              
                                     org.dyndns.cedweb.consulta.ConsultaIBK clcdyndnsConsultaIBK = new org.dyndns.cedweb.consulta.ConsultaIBK();
                                     string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
@@ -2430,6 +2436,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 string respuesta = "";
                                 FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
 
+                                //Grabar en base de datos
+                                RN.Comprobante c = new RN.Comprobante();
+                                lcFea.cabecera_lote.DestinoComprobante = "AFIP";
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+                                c.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteConf", ((Entidades.Sesion)Session["Sesion"]));
+
                                 string caeNro = "";
                                 string caeFecVto = "";
                                 respuesta = RN.ComprobanteAFIP.EnviarAFIP(out caeNro, out caeFecVto, lcFea, (Entidades.Sesion)Session["Sesion"]);
@@ -2439,12 +2451,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                                 if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
                                 {
-                                    //Grabar en base de datos
-                                    RN.Comprobante c = new RN.Comprobante();
-                                    lcFea.cabecera_lote.DestinoComprobante = "AFIP";
-                                    lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                    c.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteConf", ((Entidades.Sesion)Session["Sesion"]));
-
                                     //Actualizar estado on-line.
                                     if (caeNro != "")
                                     {
@@ -4907,6 +4913,120 @@ namespace CedServicios.Site.Facturacion.Electronica
         protected void CancelarEnviarAFIPButton_Click(object sender, EventArgs e)
         {
 
+        }
+        private void AjustarLoteParaITF(FeaEntidades.InterFacturas.lote_comprobantes lote)
+        {
+            string TipoCbte = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString();
+            switch (TipoCbte)
+            {
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                case "10":
+                case "40":
+                case "61":
+                case "64":
+                    FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
+                    det = lote.comprobante[0].detalle;
+                    FeaEntidades.InterFacturas.linea[] listadelineas;
+                    listadelineas = det.linea;
+                    Double TipoDeCambio = lote.comprobante[0].resumen.tipo_de_cambio;
+
+                    int auxPV;
+                    auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                    {
+                        return pv.Nro == auxPV;
+                    }).IdTipoPuntoVta;
+
+                    for (int i = 0; i < listadelineas.Length; i++)
+                    {
+                        if (det.linea[i] == null)
+                        {
+                            break;
+                        }
+
+                        double precio_unitario = det.linea[i].precio_unitario;
+                        double alicuota_iva = det.linea[i].alicuota_iva;
+                        double importe_iva = det.linea[i].importe_iva;
+                        double importe_total_articulo = det.linea[i].importe_total_articulo;
+
+                        //Moneda Local
+                        if (lote.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+                        {
+                            det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+                            if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+                            {
+                                det.linea[i].precio_unitario = Math.Round(precio_unitario * (1 + alicuota_iva / 100), 3);
+                            }
+                            else
+                            {
+                                det.linea[i].precio_unitario = Math.Round(precio_unitario, 3);
+                            }
+                            if (idtipo.Equals("RG2904"))
+                            {
+                                det.linea[i].importe_total_articulo = Math.Round(importe_total_articulo, 2);
+                            }
+                            else
+                            {
+                                det.linea[i].importe_total_articulo = Math.Round(importe_total_articulo + importe_iva, 2);
+                            }
+                            //Borrar alicuota e importe
+                            det.linea[i].alicuota_ivaSpecified = false;
+                            det.linea[i].alicuota_iva = 0;
+                            det.linea[i].indicacion_exento_gravado = null;
+                            det.linea[i].importe_ivaSpecified = false;
+                            det.linea[i].importe_iva = 0;
+                        }
+                        else
+                        {
+                            //Moneda Extranjera
+
+                            det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+                            if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+                            {
+                                det.linea[i].precio_unitario = Math.Round(precio_unitario * Convert.ToDouble(TipoDeCambio) * (1 + alicuota_iva / 100), 3);
+                            }
+                            else
+                            {
+                                det.linea[i].precio_unitario = Math.Round(precio_unitario * Convert.ToDouble(TipoDeCambio), 3);
+                            }
+                            det.linea[i].importe_total_articulo = Math.Round(((importe_total_articulo) + importe_iva) * Convert.ToDouble(TipoDeCambio), 2);
+                            //Borrar alicuota e importe
+                            det.linea[i].alicuota_ivaSpecified = false;
+                            det.linea[i].alicuota_iva = 0;
+                            det.linea[i].indicacion_exento_gravado = null;
+                            det.linea[i].importe_ivaSpecified = false;
+                            det.linea[i].importe_iva = 0;
+
+                            //importes_moneda_origen
+                            FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+                            limo.importe_total_articuloSpecified = true;
+                            limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+                            if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+                            {
+                                limo.precio_unitario = Math.Round(precio_unitario * (1 + alicuota_iva / 100), 3);
+                            }
+                            else
+                            {
+                                limo.precio_unitario = Math.Round(precio_unitario, 3);
+                            }
+                            if (idtipo.Equals("RG2904"))
+                            {
+                                limo.importe_total_articulo = Math.Round(importe_total_articulo, 2);
+                            }
+                            else
+                            {
+                                limo.importe_total_articulo = Math.Round(importe_total_articulo + importe_iva, 2);
+                            }
+                            limo.importe_ivaSpecified = false;
+                            limo.importe_iva = 0;
+                            det.linea[i].importes_moneda_origen = limo;
+                        }
+                    }
+                    break;
+            }
         }
     }
 }

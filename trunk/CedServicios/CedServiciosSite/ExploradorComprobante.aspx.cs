@@ -489,28 +489,28 @@ namespace CedServicios.Site
                     break;
                 case "XML-ClonarAlta":
                     #region XML-ClonarAlta
-                    if (comprobante.NaturalezaComprobante.Id == "Venta" && comprobante.IdDestinoComprobante == "ITF")
+                    if (comprobante.NaturalezaComprobante.Id == "Venta")
                     {
                         Session["IdNaturalezaComprobante"] = "Venta";
                         lote = new FeaEntidades.InterFacturas.lote_comprobantes();
                         x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-                        try
-                        {
-                            comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
-                            bytes = new byte[comprobante.Response.Length * sizeof(char)];
-                            System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
-                            ms = new System.IO.MemoryStream(bytes);
-                            ms.Seek(0, System.IO.SeekOrigin.Begin);
-                            lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-                        }
-                        catch
-                        {
+                        //try
+                        //{
+                        //    comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
+                        //    bytes = new byte[comprobante.Response.Length * sizeof(char)];
+                        //    System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                        //    ms = new System.IO.MemoryStream(bytes);
+                        //    ms.Seek(0, System.IO.SeekOrigin.Begin);
+                        //    lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+                        //}
+                        //catch
+                        //{
                             bytes = new byte[comprobante.Request.Length * sizeof(char)];
                             System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
                             ms = new System.IO.MemoryStream(bytes);
                             ms.Seek(0, System.IO.SeekOrigin.Begin);
                             lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-                        }
+                        //}
                         Cache["ComprobanteAClonar"] = lote;
                         script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
