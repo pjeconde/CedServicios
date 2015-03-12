@@ -223,16 +223,20 @@ namespace CedServicios.RN
                                     CantAlicIVA += 1;
                                     break;
                                 case 2:  //Internos
+                                case 3:  //Otros
                                 case 4:  //Nacionales
                                 case 5:  //IB - Provinciales
                                 case 6:  //Municipales
-                                case 99: //99 - Otros
                                     objFEDetalleRequest.Tributos[CantTrib] = new ar.gov.afip.wsfev1.Tributo();
                                     objFEDetalleRequest.Tributos[CantTrib].Alic = lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto;
                                     objFEDetalleRequest.Tributos[CantTrib].BaseImp = 0;  //Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
                                     if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 2)
                                     {
                                         objFEDetalleRequest.Tributos[CantTrib].Id = 4;  //"AFIP - Impuestos Internos"
+                                    }
+                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 3)
+                                    {
+                                        objFEDetalleRequest.Tributos[CantTrib].Id = 99; //"AFIP - Otro"
                                     }
                                     else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 4)
                                     {
@@ -246,12 +250,8 @@ namespace CedServicios.RN
                                     {
                                         objFEDetalleRequest.Tributos[CantTrib].Id = 3;  //"AFIP - Impuestos municipales"
                                     }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 99)
-                                    {
-                                        objFEDetalleRequest.Tributos[CantTrib].Id = 99; //"AFIP - Otro"
-                                    }
                                     objFEDetalleRequest.Tributos[CantTrib].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
-                                    objFEDetalleRequest.Tributos[CantTrib].Desc = "";
+                                    objFEDetalleRequest.Tributos[CantTrib].Desc = lc.comprobante[0].resumen.impuestos[j].descripcion;
                                     impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
                                     CantTrib += 1;
                                     break;
