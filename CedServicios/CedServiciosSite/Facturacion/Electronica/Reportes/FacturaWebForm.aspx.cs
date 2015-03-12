@@ -303,11 +303,17 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
 
                     imagenRpt = facturaRpt.OpenSubreport("Imagen.rpt");
                     imagenRpt.SetDataSource(this.dsImages);
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Reporte: Imagen OK"  );
                 }
             }
-            catch
+            catch (Exception ex)
             {
-
+                string a = ex.Message.ToString().Replace("'", " ");
+                a = a.Replace("<", " ");
+                a = a.Replace(">", " ");
+                a = a.Replace("/", " ");
+                a = a.Replace(@"\", " ");
+                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Reporte: Imagen NOT OK " + a);
             }
         }
 
