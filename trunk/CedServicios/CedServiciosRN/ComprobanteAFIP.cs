@@ -73,6 +73,9 @@ namespace CedServicios.RN
                 UltNro = objWSFEV1.FECompUltimoAutorizado(ticket.ObjAutorizacionfev1, lc.cabecera_lote.punto_de_venta, lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante);
                 //UltNro.CbteNro;
 
+                ar.gov.afip.wsfev1.FETributoResponse arrayFETributoResponse = new ar.gov.afip.wsfev1.FETributoResponse();
+                arrayFETributoResponse = objWSFEV1.FEParamGetTiposTributos(ticket.ObjAutorizacionfev1);
+
                 //FEArn.ar.gov.afip.wsw.FELastCMPtype tipoComprobante = new FEArn.ar.gov.afip.wsw.FELastCMPtype();
                 //tipoComprobante.PtoVta = Comprobante.PuntoVenta;
                 //tipoComprobante.TipoCbte = Comprobante.Codigo;
@@ -95,7 +98,6 @@ namespace CedServicios.RN
                 objFEDetalleRequest.ImpIVA = lc.comprobante[0].resumen.impuesto_liq;                                        // Comprobante.Impto_liq;
                 objFEDetalleRequest.impto_liq_rni = lc.comprobante[0].resumen.impuesto_liq_rni;                             // Comprobante.Impto_liq_rni;
                 
-                objFEDetalleRequest.ImpTrib = 0; //Total de tributos;
                 objFEDetalleRequest.DocNro = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;      // Comprobante.Nro_doc;
                 //objFEDetalleRequest.punto_vta = Comprobante.PuntoVenta;
                 //objFEDetalleRequest.tipo_cbte = Comprobante.Codigo;
@@ -104,103 +106,157 @@ namespace CedServicios.RN
                 objFEDetalleRequest.MonCotiz = lc.comprobante[0].resumen.tipo_de_cambio;
                 string TipoComp = lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString();
 
+                double impTrib = 0;
                 if (lc.comprobante[0].resumen.impuestos.Length > 0)
                 {
                     if (lc.comprobante[0].resumen.impuestos[0] != null)
                     {
-                        ar.gov.afip.wsfev1.AlicIva[] ivas = new ar.gov.afip.wsfev1.AlicIva[lc.comprobante[0].resumen.impuestos.Length];
+                        int CantTrib = 0;
+                        int CantAlicIVA = 0;
                         for (int j = 0; j < lc.comprobante[0].resumen.impuestos.Length; j++)
                         {
-                            if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 1)
+                            if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto != 1)
                             {
-                                double baseImponible = 0;
-                                ivas[j] = new ar.gov.afip.wsfev1.AlicIva();
-                                ivas[j].BaseImp = lc.comprobante[0].resumen.impuestos[j].base_imponible;
-                                if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 10.5)
-                                {
-                                    if (ivas[j].BaseImp == 0)
+                                CantTrib += 1;
+                            }
+                            else
+                            {
+                                CantAlicIVA += 1;
+                            }
+                        }
+                        if (CantTrib != 0)
+                        {
+                            objFEDetalleRequest.Tributos = new ar.gov.afip.wsfev1.Tributo[CantTrib];
+                        }
+                        CantTrib = 0;
+                        
+                        ar.gov.afip.wsfev1.AlicIva[] ivas = new ar.gov.afip.wsfev1.AlicIva[CantAlicIVA];
+                        CantAlicIVA = 0;
+                        for (int j = 0; j < lc.comprobante[0].resumen.impuestos.Length; j++)
+                        {
+
+                            switch (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto)
+                            {
+                                case 1:
+                                    double baseImponible = 0;
+                                    ivas[CantAlicIVA] = new ar.gov.afip.wsfev1.AlicIva();
+                                    ivas[CantAlicIVA].BaseImp = lc.comprobante[0].resumen.impuestos[j].base_imponible;
+                                    if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 10.5)
                                     {
-                                        //Comprobantes "B"
-                                        if (TipoComp == "6" || TipoComp == "7" || TipoComp == "8")
+                                        if (ivas[CantAlicIVA].BaseImp == 0)
                                         {
-                                            baseImponible +=  Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                        }
-                                        else
-                                        {
-                                            for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
+                                            //Comprobantes "B"
+                                            if (TipoComp == "6" || TipoComp == "7" || TipoComp == "8")
                                             {
-                                                if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                                if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 10.5)
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
+                                            else
+                                            {
+                                                for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
                                                 {
-                                                    baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
-                                                }
-                                                if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
-                                                {
-                                                    baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                                    if (lc.comprobante[0].detalle.linea[k] == null) { break; }
+                                                    if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 10.5)
+                                                    {
+                                                        //baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
+                                                        baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
+                                                    }
                                                 }
                                             }
                                         }
+                                        ivas[CantAlicIVA].BaseImp = baseImponible;
+                                        ivas[CantAlicIVA].Id = 4;
                                     }
-                                    ivas[j].BaseImp = baseImponible;
-                                    ivas[j].Id = 4;
-                                }
-                                else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 21)
-                                {
-                                    if (ivas[j].BaseImp == 0)
+                                    else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 21)
                                     {
-                                        //Comprobantes "B"
-                                        if (TipoComp == "6" || TipoComp == "7" || TipoComp == "8")
+                                        if (ivas[CantAlicIVA].BaseImp == 0)
                                         {
-                                            baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                        }
-                                        else
-                                        {
-                                            for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
+                                            //Comprobantes "B"
+                                            if (TipoComp == "6" || TipoComp == "7" || TipoComp == "8")
                                             {
-                                                if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                                if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 21)
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
+                                            else
+                                            {
+                                                for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
                                                 {
-                                                    baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
-                                                }
-                                                if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
-                                                {
-                                                    baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                                    if (lc.comprobante[0].detalle.linea[k] == null) { break; }
+                                                    if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 21)
+                                                    {
+                                                        //baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
+                                                        baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
+                                                    }
                                                 }
                                             }
                                         }
+                                        ivas[CantAlicIVA].BaseImp = baseImponible;
+                                        ivas[CantAlicIVA].Id = 5;
                                     }
-                                    ivas[j].BaseImp = baseImponible;
-                                    ivas[j].Id = 5;
-                                }
-                                else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 27)
-                                {
-                                    if (ivas[j].BaseImp == 0)
+                                    else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 27)
                                     {
-                                        //Comprobantes "B"
-                                        if (TipoComp == "6" || TipoComp == "7" || TipoComp == "8")
+                                        if (ivas[CantAlicIVA].BaseImp == 0)
                                         {
-                                            baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                        }
-                                        else
-                                        {
-                                            for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
+                                            //Comprobantes "B"
+                                            if (TipoComp == "6" || TipoComp == "7" || TipoComp == "8")
                                             {
-                                                if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                                if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 27)
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
+                                            else
+                                            {
+                                                for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
                                                 {
-                                                    baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
-                                                }
-                                                if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
-                                                {
-                                                    baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                                    if (lc.comprobante[0].detalle.linea[k] == null) { break; }
+                                                    if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 27)
+                                                    {
+                                                        baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
+                                                    }
+                                                    if (Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2) == 0)
+                                                    {
+                                                        baseImponible += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
+                                                    }
                                                 }
                                             }
                                         }
+                                        ivas[CantAlicIVA].BaseImp = baseImponible;
+                                        ivas[CantAlicIVA].Id = 6;
                                     }
-                                    ivas[j].BaseImp = baseImponible;
-                                    ivas[j].Id = 6;
-                                }
-                                ivas[j].Importe = lc.comprobante[0].resumen.impuestos[j].importe_impuesto;
+                                    ivas[CantAlicIVA].Importe = lc.comprobante[0].resumen.impuestos[j].importe_impuesto;
+                                    CantAlicIVA += 1;
+                                    break;
+                                case 2:  //Internos
+                                case 4:  //Nacionales
+                                case 5:  //IB - Provinciales
+                                case 6:  //Municipales
+                                case 99: //99 - Otros
+                                    objFEDetalleRequest.Tributos[CantTrib] = new ar.gov.afip.wsfev1.Tributo();
+                                    objFEDetalleRequest.Tributos[CantTrib].Alic = lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto;
+                                    objFEDetalleRequest.Tributos[CantTrib].BaseImp = 0;  //Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                    if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 2)
+                                    {
+                                        objFEDetalleRequest.Tributos[CantTrib].Id = 4;  //"AFIP - Impuestos Internos"
+                                    }
+                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 4)
+                                    {
+                                        objFEDetalleRequest.Tributos[CantTrib].Id = 1;  //"AFIP - Impuestos nacionales"
+                                    }
+                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 5)
+                                    {
+                                        objFEDetalleRequest.Tributos[CantTrib].Id = 2;  //"AFIP - Impuestos provinciales"
+                                    }
+                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 6)
+                                    {
+                                        objFEDetalleRequest.Tributos[CantTrib].Id = 3;  //"AFIP - Impuestos municipales"
+                                    }
+                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 99)
+                                    {
+                                        objFEDetalleRequest.Tributos[CantTrib].Id = 99; //"AFIP - Otro"
+                                    }
+                                    objFEDetalleRequest.Tributos[CantTrib].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                    objFEDetalleRequest.Tributos[CantTrib].Desc = "";
+                                    impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                    CantTrib += 1;
+                                    break;
+                                default:
+                                    throw new Exception("Problemas para enviar el comprobante, código de impuesto incorrecto o inexistente. Código: " + lc.comprobante[0].resumen.impuestos[j].codigo_impuesto.ToString());
                             }
                         }
                         if (ivas != null && ivas.Length > 0)
@@ -209,6 +265,9 @@ namespace CedServicios.RN
                         }
                     }
                 }
+                objFEDetalleRequest.ImpTrib = impTrib; //Total de tributos;
+                
+                //objFEDetalleRequest.Tributos
 
                 arrayFEDetalleRequest[0] = objFEDetalleRequest;
                 //for (int c = 0; c < CantidadComprobantes; c++)
