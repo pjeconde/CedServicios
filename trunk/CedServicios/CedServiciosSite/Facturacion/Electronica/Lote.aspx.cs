@@ -4612,6 +4612,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(true);
                 RN.Comprobante.AjustarLoteParaImprimirPDF(lcFea);
 				Session["lote"] = lcFea;
+                Cache["EsComprobanteOriginal"] = false;
 				Response.Redirect("Reportes\\FacturaWebForm.aspx", true);
 			}
 			catch (Exception ex)

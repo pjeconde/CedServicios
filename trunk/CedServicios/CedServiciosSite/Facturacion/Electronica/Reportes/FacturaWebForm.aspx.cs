@@ -22,6 +22,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
         DataSet dsImages = new DataSet();
         protected void Page_Unload(object sender, EventArgs e)
         {
+            Cache.Remove("EsComprobanteOriginal");
             if (facturaRpt != null)
             {
                 facturaRpt.Dispose();
@@ -72,7 +73,19 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     StringReader objSR = new StringReader(objSW.ToString());
                     ds.ReadXml(objSR);
 
-					
+                    bool original = true;
+                    try
+                    {
+                        original = (bool)Cache["EsComprobanteOriginal"];
+                        if (original == false)
+                        {
+                            facturaRpt.DataDefinition.FormulaFields["Borrador"].Text = "'BORRADOR'";
+                        }
+                    }
+                    catch
+                    { 
+                    }
+
 					facturaRpt.SetDataSource(ds);
                     facturaRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
                     facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
@@ -86,6 +99,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
 					GenerarCodigoBarras(lc.cabecera_lote.cuit_vendedor + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00") + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + cae +System.DateTime.Now.ToString("yyyyMMdd"));
 					AsignarParametros(lc.comprobante[0].resumen.importe_total_factura);
 
+                    facturaRpt.Subreports["impuestos"].DataDefinition.FormulaFields["TipoDeComprobante"].Text = "'" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "'"; 
                     facturaRpt.Subreports["resumen"].DataDefinition.FormulaFields["TipoDeComprobante"].Text = "'" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "'"; 
 
                     System.Text.StringBuilder sb = new System.Text.StringBuilder();
