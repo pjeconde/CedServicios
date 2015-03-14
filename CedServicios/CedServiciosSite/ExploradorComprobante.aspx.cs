@@ -203,6 +203,7 @@ namespace CedServicios.Site
             string script;
 
             Cache.Remove("ComprobanteAClonar");
+            Cache.Remove("EsComprobanteOriginal");
             switch (comando)
             {
                 case "ActualizarOnLine":

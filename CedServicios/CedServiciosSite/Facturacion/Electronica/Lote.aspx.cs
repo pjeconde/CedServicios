@@ -26,6 +26,7 @@ namespace CedServicios.Site.Facturacion.Electronica
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
             Cache.Remove("ComprobanteAClonar");
+            Cache.Remove("EsComprobanteOriginal");
         }
         protected void Page_Load(object sender, EventArgs e)
         {
