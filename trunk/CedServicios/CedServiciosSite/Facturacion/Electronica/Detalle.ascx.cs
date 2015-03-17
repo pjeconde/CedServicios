@@ -34,6 +34,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         ResetearGrillas();
                     }
+                    else
+                    {
+                        BindearDropDownLists();
+                    }
                 }
 			}
 			else
