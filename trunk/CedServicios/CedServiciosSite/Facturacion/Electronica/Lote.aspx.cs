@@ -32,6 +32,7 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             if (!this.IsPostBack)
             {
+                Cache.Remove("FaltaCalcularTotales");
                 IdNaturalezaComprobanteTextBox.Text = Session["IdNaturalezaComprobante"].ToString();
                 switch (IdNaturalezaComprobanteTextBox.Text)
                 {
@@ -1462,6 +1463,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     try
                     {
+                        Cache.Remove("FaltaCalcularTotales");
                         //Proceso DETALLE
                         Importe_Total_Neto_Gravado_ResumenTextBox.Text = "0";
                         Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = "0";
@@ -1942,6 +1944,27 @@ namespace CedServicios.Site.Facturacion.Electronica
                     return false;
                 }
             }
+            try
+            {
+                RN.Comprobante c = new RN.Comprobante();
+                Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                comprobante.Cuit = Cuit_VendedorTextBox.Text;
+                comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue.ToString());
+                comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue.ToString());
+                comprobante.Nro = Convert.ToInt64(Numero_ComprobanteTextBox.Text);
+                c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                if (comprobante.Estado == "Vigente")
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Este Nro. de comprobante ya se encuentra vigente."), false);
+                    return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Error al comprobar la numeración del comprobante. " + ex.Message.ToString()), false);
+                return false;
+            }
+
             if (FechaEmisionDatePickerWebUserControl.Text.Equals(string.Empty))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar la Fecha de Emisión del comprobante"), false);
@@ -1985,6 +2008,19 @@ namespace CedServicios.Site.Facturacion.Electronica
             if (!GLN_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericFijo(GLN_CompradorTextBox.Text, "13"))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un dato numérico de 13 digitos en el GLN del comprador"), false);
+                return false;
+            }
+            bool faltaCalcularTotales = false;
+            try
+            {
+                faltaCalcularTotales = (bool)Cache["FaltaCalcularTotales"];
+            }
+            catch
+            { 
+            }
+            if (faltaCalcularTotales)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta presionar el botón de Sugerir totales."), false);
                 return false;
             }
             //TIPO DE CAMBIO

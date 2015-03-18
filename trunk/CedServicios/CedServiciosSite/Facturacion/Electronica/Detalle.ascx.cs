@@ -239,6 +239,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     detalleGridView.DataSource = ViewState["lineas"];
                     detalleGridView.DataBind();
                     BindearDropDownLists();
+                    Cache["FaltaCalcularTotales"] = true;
                 }
                 catch (Exception ex)
                 {
@@ -746,6 +747,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 detalleGridView.DataBind();
                 BindearDropDownLists();
                 ViewState["lineas"] = lineas;
+                Cache["FaltaCalcularTotales"] = true;
             }
             catch (Exception ex)
             {
@@ -897,6 +899,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				detalleGridView.DataSource = ViewState["lineas"];
 				detalleGridView.DataBind();
 				BindearDropDownLists();
+                Cache["FaltaCalcularTotales"] = true;
 			}
 			catch
 			{

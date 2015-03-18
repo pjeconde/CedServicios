@@ -1400,6 +1400,8 @@
     <Compile Include="InterFacturas\XML\Consulta_Lote_Comprobantes_Response.cs" />
     <Compile Include="InterFacturas\XML\Consulta_Lote_Response.cs" />
     <Compile Include="IVA\Cero.cs" />
+    <Compile Include="IVA\Cinco.cs" />
+    <Compile Include="IVA\DosYMedio.cs" />
     <Compile Include="IVA\DiezYMedio.cs" />
     <Compile Include="IVA\IVA.cs" />
     <Compile Include="IVA\SinInformar.cs" />

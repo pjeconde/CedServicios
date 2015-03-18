@@ -230,6 +230,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 					impuestosGridView.DataSource = ViewState["impuestos"];
 					impuestosGridView.DataBind();
 					BindearDropDownLists();
+                    Cache["FaltaCalcularTotales"] = true;
 
 				}
 				catch (Exception ex)
@@ -274,6 +275,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				impuestosGridView.DataSource = ViewState["impuestos"];
 				impuestosGridView.DataBind();
 				BindearDropDownLists();
+                Cache["FaltaCalcularTotales"] = true;
 			}
 			catch
 			{
@@ -380,6 +382,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				impuestosGridView.DataSource = ViewState["impuestos"];
 				impuestosGridView.DataBind();
 				BindearDropDownLists();
+                Cache["FaltaCalcularTotales"] = true;
 
 			}
 			catch (Exception ex)
