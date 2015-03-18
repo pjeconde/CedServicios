@@ -29,6 +29,8 @@ namespace FeaEntidades.IVA
 			lista.Add(new DiezYMedio());
 			lista.Add(new Veintiuno());
 			lista.Add(new Veintisiete());
+            lista.Add(new Cinco());
+            lista.Add(new DosYMedio());
 			return lista;
 		}
 
@@ -39,6 +41,8 @@ namespace FeaEntidades.IVA
 			lista.Add(new DiezYMedio());
 			lista.Add(new Veintiuno());
 			lista.Add(new Veintisiete());
+            lista.Add(new Cinco());
+            lista.Add(new DosYMedio());
 			return lista;
 		}
 
@@ -48,6 +52,8 @@ namespace FeaEntidades.IVA
             lista.Add(new DiezYMedio());
             lista.Add(new Veintiuno());
             lista.Add(new Veintisiete());
+            lista.Add(new Cinco());
+            lista.Add(new DosYMedio());
             return lista;
         }
 	}

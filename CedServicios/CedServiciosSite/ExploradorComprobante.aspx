@@ -65,102 +65,100 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="3" style="padding-top:35px">
-                    <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto" Height="500">
-                        <asp:GridView ID="ComprobantesGridView" runat="server" 
-                            AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
-                            <Columns>
-                                <asp:TemplateField ControlStyle-Width="35">
-                                    <ItemTemplate>
-                                        <asp:ImageButton ID="ConsultarButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Consultar.png" />
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                                <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="DescrTipoComprobante" HeaderText="Tipo" SortExpression="DescrTipoComprobante">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="NroPuntoVtaFORMATEADO" HeaderText="P.V." SortExpression="NroPuntoVtaFORMATEADO">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="NroFORMATEADO" HeaderText="Nro." SortExpression="NroFORMATEADO">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="center" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="DescrTipoDoc" HeaderText="T.Doc" SortExpression="DescrTipoDoc">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="NroDoc" HeaderText="Nro.Doc." SortExpression="NroDoc">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="RazonSocial" HeaderText="Razon Social" SortExpression="RazonSocial">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Fecha" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha" SortExpression="Fecha">
-                                    <headerstyle horizontalalign="left" wrap="False" />
-                                    <itemstyle horizontalalign="center" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Importe" HeaderText="Importe" DataFormatString="{0:0.00}" SortExpression="Importe">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="right" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Moneda" HeaderText="Mon" SortExpression="Moneda">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="ImporteMoneda" HeaderText="Imp.Mon" DataFormatString="{0:0.00}" SortExpression="ImporteMoneda">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="right" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="TipoCambio" HeaderText="Cambio" DataFormatString="{0:0.0000}" SortExpression="TipoCambio">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="right" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="IdDestinoComprobante" HeaderText="Canal" SortExpression="IdDestinoComprobante">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="left" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="FechaVto" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha Vto" SortExpression="FechaVto">
-                                    <headerstyle horizontalalign="left" wrap="False" />
-                                    <itemstyle horizontalalign="center" wrap="False" />
-                                </asp:BoundField>
-                                <asp:BoundField DataField="NroLote" HeaderText="Nro.Lote" SortExpression="NroLote">
-                                    <headerstyle horizontalalign="center" wrap="False" />
-                                    <itemstyle horizontalalign="right" wrap="False" />
-                                </asp:BoundField>
-                                <asp:TemplateField>
-                                    <ItemTemplate>
-		                                <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged" EnableViewState="false">
-			                                <asp:ListItem Value="" Text="--- elegir acción ---"></asp:ListItem>
-			                                <asp:ListItem Value="ActualizarOnLine" Text="Actualizar estado (Interfacturas/AFIP)"></asp:ListItem>
-			                                <asp:ListItem Value="ConsultarInterfacturas" Text="Consultar (Interfacturas)"></asp:ListItem>
-			                                <asp:ListItem Value="PDF-Viewer" Text="Viewer PDF (InterFacturas)"></asp:ListItem>
-			                                <asp:ListItem Value="XMLOnLine" Text="Descargar XML (InterFacturas)"></asp:ListItem>
-			                                <asp:ListItem Value="PDF" Text="Descargar PDF"></asp:ListItem>
-			                                <asp:ListItem Value="XML-ClonarAlta" Text="Clonar comprobante"></asp:ListItem>
-			                                <asp:ListItem Value="ExportarRG2485" Text="Descargar interface RG2485"></asp:ListItem>
-		                                </asp:DropDownList>
-                                    </ItemTemplate>
-                                </asp:TemplateField>
-                            </Columns>
-                        </asp:GridView>
-                    </asp:Panel>
+                <td align="center" colspan="3" style="padding-top:10px; padding-bottom:10px">
+                    <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="3" style="padding-top:20px">
-                    <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                <td colspan="3" style="padding-top:35px">
+                    <asp:GridView ID="ComprobantesGridView" runat="server" 
+                        AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
+                        <Columns>
+                            <asp:TemplateField ControlStyle-Width="35">
+                                <ItemTemplate>
+                                    <asp:ImageButton ID="ConsultarButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Consultar.png" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="DescrTipoComprobante" HeaderText="Tipo" SortExpression="DescrTipoComprobante">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NroPuntoVtaFORMATEADO" HeaderText="P.V." SortExpression="NroPuntoVtaFORMATEADO">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NroFORMATEADO" HeaderText="Nro." SortExpression="NroFORMATEADO">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="center" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="DescrTipoDoc" HeaderText="T.Doc" SortExpression="DescrTipoDoc">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NroDoc" HeaderText="Nro.Doc." SortExpression="NroDoc">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="RazonSocial" HeaderText="Razon Social" SortExpression="RazonSocial">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Fecha" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha" SortExpression="Fecha">
+                                <headerstyle horizontalalign="left" wrap="False" />
+                                <itemstyle horizontalalign="center" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Importe" HeaderText="Importe" DataFormatString="{0:0.00}" SortExpression="Importe">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="right" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Moneda" HeaderText="Mon" SortExpression="Moneda">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="ImporteMoneda" HeaderText="Imp.Mon" DataFormatString="{0:0.00}" SortExpression="ImporteMoneda">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="right" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="TipoCambio" HeaderText="Cambio" DataFormatString="{0:0.0000}" SortExpression="TipoCambio">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="right" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="IdDestinoComprobante" HeaderText="Canal" SortExpression="IdDestinoComprobante">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="FechaVto" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha Vto" SortExpression="FechaVto">
+                                <headerstyle horizontalalign="left" wrap="False" />
+                                <itemstyle horizontalalign="center" wrap="False" />
+                            </asp:BoundField>
+                            <asp:BoundField DataField="NroLote" HeaderText="Nro.Lote" SortExpression="NroLote">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="right" wrap="False" />
+                            </asp:BoundField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+		                            <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged" EnableViewState="false">
+			                            <asp:ListItem Value="" Text="--- elegir acción ---"></asp:ListItem>
+			                            <asp:ListItem Value="ActualizarOnLine" Text="Actualizar estado (Interfacturas/AFIP)"></asp:ListItem>
+			                            <asp:ListItem Value="ConsultarInterfacturas" Text="Consultar (Interfacturas)"></asp:ListItem>
+			                            <asp:ListItem Value="PDF-Viewer" Text="Viewer PDF (InterFacturas)"></asp:ListItem>
+			                            <asp:ListItem Value="XMLOnLine" Text="Descargar XML (InterFacturas)"></asp:ListItem>
+			                            <asp:ListItem Value="PDF" Text="Descargar PDF"></asp:ListItem>
+			                            <asp:ListItem Value="XML-ClonarAlta" Text="Clonar comprobante"></asp:ListItem>
+			                            <asp:ListItem Value="ExportarRG2485" Text="Descargar interface RG2485"></asp:ListItem>
+		                            </asp:DropDownList>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                        </Columns>
+                    </asp:GridView>
                 </td>
             </tr>
         </table>
