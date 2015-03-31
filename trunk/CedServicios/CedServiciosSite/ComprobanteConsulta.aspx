@@ -25,10 +25,10 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
                             <tr>
                                 <td align="center" valign="middle">
-                                    <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobante"></asp:Label>
+                                    <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobante"></asp:Label>
                                 </td>
                             </tr>
-                            <!-- INFORMACIÓN COMPROBANTE -->
+                            <!-- COMPROBANTE -->
                             <tr>
                                 <td>
                                     <asp:UpdatePanel ID="InfoComproUpdatePanel" runat="server" ChildrenAsTriggers="true"
@@ -46,6 +46,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                     <td class="TextoResaltado" colspan="4" style="text-align:center; padding-top:20px">
                                                         <asp:Label ID="DatosComprobanteLabel" runat="server" Text="COMPROBANTE"></asp:Label>
                                                         <asp:TextBox ID="IdNaturalezaComprobanteTextBox" runat="server" Visible="false"> </asp:TextBox>
+                                                        <asp:TextBox ID="TratamientoTextBox" runat="server" Visible="false"> </asp:TextBox>
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -77,11 +78,11 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                     <td class="TC10S">
                                                         <asp:UpdatePanel ID="ptoVentaUpdatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                                                             <ContentTemplate>
-                                                                <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" AutoPostBack="True" Enabled="false" SkinID="ddlch" 
+                                                                <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" AutoPostBack="True" Enabled="false" SkinID="ddln" 
                                                                 onselectedindexchanged="PuntoVtaDropDownList_SelectedIndexChanged">
                                                                 </asp:DropDownList>
                                                                 <asp:TextBox ID="PuntoVtaTextBox" runat="server" Enabled="true" Visible="false" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
-                                                                <asp:Label ID="TipoPtoVentaLabel" runat="server"></asp:Label>
+                                                                <asp:Label ID="TipoPtoVentaLabel" runat="server" Visible="false"></asp:Label>
                                                                 <asp:RadioButton ID="Version1RadioButton" runat="server" GroupName="Version" Text="V.1"
                                                                     AutoPostBack="true" Visible="false" OnCheckedChanged="Version1RadioButton_CheckedChanged" Checked="True">
                                                                 </asp:RadioButton>
@@ -95,7 +96,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                         </asp:UpdatePanel>
                                                     </td>
                                                     <td class="TC00S">
-                                                        Número de comprobante:
+                                                        <asp:Label ID="NumeroDeLabel" runat="server" Text="Número de comprobante:" Visible="true"></asp:Label>
                                                     </td>
                                                     <td class="TC10S">
                                                         <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -127,7 +128,8 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                         </asp:UpdateProgress>
                                                     </td>
                                                     <td class="TC00S">
-                                                        Fecha de emisión:
+
+                                                        <asp:Label ID="FechaEmisionLabel" runat="server" Text="Fecha de emisión:" Visible="true"></asp:Label>
                                                     </td>
                                                     <td class="TC10S">
                                                         <asp:TextBox ID="FechaEmisionDatePickerWebUserControl" runat="server" CausesValidation="true" SkinID="FechaFact"></asp:TextBox>
@@ -221,17 +223,17 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                         </asp:TextBox>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
-                                </td>
-                            </tr>
-                            <!-- DATOS DEL LOTE -->
+                            <!-- LOTE -->
                             <tr>
                                 <td>
                                     <asp:UpdatePanel ID="LoteUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
@@ -244,7 +246,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                         <ContentTemplate>
                                             <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                                 <tr>
-                                                    <td colspan="2" style="text-align: center; height: 10px;">
+                                                    <td style="text-align: center; height: 10px;">
                                                     </td>
                                                 </tr>
                                                 <tr>
@@ -273,7 +275,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                 <td class="TC02S" style="text-align: left;">
                                                                     <asp:CheckBox ID="Presta_ServCheckBox" runat="server"></asp:CheckBox>
                                                                 </td>
-                                                                <td class="TC00S" colspan="2">
+                                                                <td class="TC00S">
                                                                     <asp:Label ID="LabelTipoNumeracionLote" Text="Tipo de numeración:" runat="server"></asp:Label>
                                                                 </td>
                                                                 <td class="TC00S">
@@ -286,240 +288,379 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                         </table>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td>
+                                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </td>
                             </tr>
+                            <!-- VENDEDOR -->
                             <tr>
                                 <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
+                                    <asp:UpdatePanel ID="VendedorUpdatePanel" runat="server">
+                                        <ContentTemplate>
+                                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                                <tr>
+                                                    <td style="height:10px;">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="center" colspan="3" class="TextoResaltado" style="width: 240px">
+                                                        VENDEDOR
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="height:10px;">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td align="right" valign="top">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Razón Social:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Calle:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 5px; text-align: right;">
+                                                                        <tr>
+                                                                            <!--80 + 40 + 60 + 40 + 80 + 40 padding = 370px -->
+                                                                            <td class="TC01S" style="padding-right:5px">
+                                                                                Nro.:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                                            </td>
+                                                                            <td class="TC03S" style="padding-right:5px">
+                                                                                Piso:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                                            </td>
+                                                                            <td class="TC01S" style="padding-right:5px">
+                                                                                Depto:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox ID="Domicilio_Depto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="2">
+                                                                    <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 5px; text-align: right;">
+                                                                        <tr>
+                                                                            <!-- 80 + 40 + 60 + 40 + 80 + 40 padding = 370px -->
+                                                                            <td class="TC01S" style="padding-right:5px">
+                                                                                Sector:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                                            </td>
+                                                                            <td class="TC03S" style="padding-right:5px">
+                                                                                Torre:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox ID="Domicilio_Torre_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                                            </td>
+                                                                            <td class="TC01S" style="padding-right:5px">
+                                                                                Manzana:
+                                                                            </td>
+                                                                            <td>
+                                                                                <asp:TextBox ID="Domicilio_Manzana_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Localidad:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Provincia:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:DropDownList ID="Provincia_VendedorDropDownList" runat="server" SkinID="ddln">
+                                                                    </asp:DropDownList>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Código Postal:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="Cp_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Nombre contacto:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Teléfono contacto:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="Telefono_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                    <td class="bgFEAC" style="width: 40px; background-repeat: repeat-y;">
+                                                    </td>
+                                                    <td align="left" valign="top">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    CUIT:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Inicio de actividades:
+                                                                </td>
+                                                                <td align="left" style="padding-left: 4px; padding-top: 5px;" valign="top">
+                                                                    <asp:TextBox ID="InicioDeActividadesVendedorDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
+                                                                    <cc1:CalendarExtender ID="CalendarExtender2" runat="server" CssClass="MyCalendar"
+                                                                        OnClientShown="onCalendar1Shown" TargetControlID="InicioDeActividadesVendedorDatePickerWebUserControl"
+                                                                        Format="yyyyMMdd" PopupButtonID="ImageCalendarInicioDeActividadesVendedor">
+                                                                    </cc1:CalendarExtender>
+                                                                    <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarInicioDeActividadesVendedor" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Condición IB:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server"
+                                                                        SkinID="ddln">
+                                                                    </asp:DropDownList>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    IB:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                        ToolTip="Formatos válidos: XXXXXXX-XX o XX-XXXXXXXX-X o XXX-XXXXXX-X"> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    IVA:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:DropDownList ID="Condicion_IVA_VendedorDropDownList" runat="server" SkinID="ddln">
+                                                                    </asp:DropDownList>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    GLN:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                        ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres."> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Código interno:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                                        ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Código de Cliente, Proveedor, etc.)"> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    e-mail Contacto:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="Email_VendedorTextBox" runat="server" AutoCompleteType="Email" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </td>
                             </tr>
-                            <!-- DATOS DEL VENDEDOR -->
+                            <!-- INFORMACIÓN EXPORTACIÓN-->
                             <tr>
-                                <td>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
-                                        <tr>
-                                            <td style="height:10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center" colspan="3" class="TextoResaltado" style="width: 240px">
-                                                VENDEDOR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height:10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="right" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                <td style="text-align: center">
+                                    <asp:UpdatePanel ID="ExportacionUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+                                        <Triggers>
+                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                        </Triggers>
+                                        <ContentTemplate>
+                                            <asp:Panel ID="ExportacionPanel" runat="server">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
                                                     <tr>
-                                                        <td class="TC00S">
-                                                            Razón Social:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                        <td style="height:10px;">
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S">
-                                                            Calle:
+                                                        <td colspan="2" class="TextoResaltado" style="text-align: center;">
+                                                            INFORMACIÓN EXPORTACIÓN
                                                         </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="height:10px;">
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:UpdatePanel ID="TipoExpoUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                                UpdateMode="Conditional">
+                                                                <Triggers>
+                                                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                                </Triggers>
+                                                                <ContentTemplate>
+                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                        <tr>
+                                                                            <td class="TC00S">
+                                                                                Tipo Exportación:
+                                                                            </td>
+                                                                            <td class="TC10S">
+                                                                                <asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="ddln">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                        </td>
+                                                        <td>
+                                                            <asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" UpdateMode="Conditional">
+                                                                <ContentTemplate>
+                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                        <tr>
+                                                                            <td class="TC00S">
+                                                                                País Destino Comprobante:
+                                                                            </td>
+                                                                            <td class="TC10S">
+                                                                                <asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" OnSelectedIndexChanged="PaisDestinoExpDropDownList_SelectedIndexChanged"
+                                                                                    SkinID="ddln" AutoPostBack="true">
+                                                                                </asp:DropDownList>
+                                                                                <asp:UpdateProgress ID="PaisDestinoUpdateProgress" runat="server" AssociatedUpdatePanelID="PaisDestinoExpUpdatePanel"
+                                                                                    DisplayAfter="0">
+                                                                                    <ProgressTemplate>
+                                                                                        <asp:Image ID="PaisDestinoImage" runat="server" Height="18px" ImageUrl="~/Imagenes/301.gif">
+                                                                                        </asp:Image>
+                                                                                    </ProgressTemplate>
+                                                                                </asp:UpdateProgress>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </ContentTemplate>
+                                                                <Triggers>
+                                                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                                </Triggers>
+                                                            </asp:UpdatePanel>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <asp:UpdatePanel ID="IdiomaUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                                UpdateMode="Conditional">
+                                                                <Triggers>
+                                                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                                </Triggers>
+                                                                <ContentTemplate>
+                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                        <tr>
+                                                                            <td class="TC00S">
+                                                                                Idioma para exportación:
+                                                                            </td>
+                                                                            <td class="TC10S">
+                                                                                <asp:DropDownList ID="IdiomaDropDownList" runat="server" SkinID="ddln">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                        </td>
+                                                        <td>
+                                                            <asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                                UpdateMode="Conditional">
+                                                                <Triggers>
+                                                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                                </Triggers>
+                                                                <ContentTemplate>
+                                                                    <table border="0" cellpadding="0" cellspacing="0">
+                                                                        <tr>
+                                                                            <td class="TC00S">
+                                                                                Incoterms para exportación:
+                                                                            </td>
+                                                                            <td class="TC10S">
+                                                                                <asp:DropDownList ID="IncotermsDropDownList" runat="server" SkinID="ddln">
+                                                                                </asp:DropDownList>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </ContentTemplate>
+                                                            </asp:UpdatePanel>
+                                                        </td>
+                                                    </tr>
+                                        <!-- PERMISOS EXPO-->
+                                                    <tr>
+                                                        <td colspan="2" style="height:19px; text-align:center">
+                                                            <uc2:Permisos ID="PermisosExpo" runat="server"></uc2:Permisos>
                                                         </td>
                                                     </tr>
                                                     <tr>
                                                         <td colspan="2">
-                                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 5px; text-align: right;">
-                                                                <tr>
-                                                                    <!--80 + 40 + 60 + 40 + 80 + 40 padding = 370px -->
-                                                                    <td class="TC01S" style="padding-right:5px">
-                                                                        Nro.:
-                                                                    </td>
-                                                                    <td>
-                                                                        <asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
-                                                                    </td>
-                                                                    <td class="TC03S" style="padding-right:5px">
-                                                                        Piso:
-                                                                    </td>
-                                                                    <td>
-                                                                        <asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
-                                                                    </td>
-                                                                    <td class="TC01S" style="padding-right:5px">
-                                                                        Depto:
-                                                                    </td>
-                                                                    <td>
-                                                                        <asp:TextBox ID="Domicilio_Depto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td colspan="2">
-                                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 5px; text-align: right;">
-                                                                <tr>
-                                                                    <!-- 80 + 40 + 60 + 40 + 80 + 40 padding = 370px -->
-                                                                    <td class="TC01S" style="padding-right:5px">
-                                                                        Sector:
-                                                                    </td>
-                                                                    <td>
-                                                                        <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
-                                                                    </td>
-                                                                    <td class="TC03S" style="padding-right:5px">
-                                                                        Torre:
-                                                                    </td>
-                                                                    <td>
-                                                                        <asp:TextBox ID="Domicilio_Torre_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
-                                                                    </td>
-                                                                    <td class="TC01S" style="padding-right:5px">
-                                                                        Manzana:
-                                                                    </td>
-                                                                    <td>
-                                                                        <asp:TextBox ID="Domicilio_Manzana_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Localidad:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Provincia:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:DropDownList ID="Provincia_VendedorDropDownList" runat="server" SkinID="ddln">
-                                                            </asp:DropDownList>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Código Postal:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Cp_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Nombre contacto:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Teléfono contacto:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Telefono_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                            <hr noshade="noshade" size="1" color="#cccccc" />
                                                         </td>
                                                     </tr>
                                                 </table>
-                                            </td>
-                                            <td class="bgFEAC" style="width: 40px; background-repeat: repeat-y;">
-                                            </td>
-                                            <td align="left" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            CUIT:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Cuit_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Inicio de actividades:
-                                                        </td>
-                                                        <td align="left" style="padding-left: 4px; padding-top: 5px;" valign="top">
-                                                            <asp:TextBox ID="InicioDeActividadesVendedorDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
-                                                            <cc1:CalendarExtender ID="CalendarExtender2" runat="server" CssClass="MyCalendar"
-                                                                OnClientShown="onCalendar1Shown" TargetControlID="InicioDeActividadesVendedorDatePickerWebUserControl"
-                                                                Format="yyyyMMdd" PopupButtonID="ImageCalendarInicioDeActividadesVendedor">
-                                                            </cc1:CalendarExtender>
-                                                            <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarInicioDeActividadesVendedor" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Condición IB:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server"
-                                                                SkinID="ddln">
-                                                            </asp:DropDownList>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            IB:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                ToolTip="Formatos válidos: XXXXXXX-XX o XX-XXXXXXXX-X o XXX-XXXXXX-X"> </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            IVA:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:DropDownList ID="Condicion_IVA_VendedorDropDownList" runat="server" SkinID="ddln">
-                                                            </asp:DropDownList>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            GLN:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres."> </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Código interno:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Código de Cliente, Proveedor, etc.)"> </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            e-mail Contacto:
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Email_VendedorTextBox" runat="server" AutoCompleteType="Email" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                            </asp:Panel>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
-                                </td>
-                            </tr>
-                            <!-- DATOS DEL COMPRADOR -->
+                            <!-- COMPRADOR -->
                             <tr>
                                 <td>
                                     <asp:UpdatePanel ID="compradorUpdatePanel" runat="server" ChildrenAsTriggers="true"
@@ -775,281 +916,165 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                         </table>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                                    </td>
+                                                </tr>
                                             </table>
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
-                                </td>
-                            </tr>
-                            <!-- CODIGOS DE REFERENCIAS -->
+                            <!-- REFERENCIAS -->
                             <tr>
                                 <td style="text-align: center">
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
-                                        <tr>
-                                            <td style="text-align: center; height: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="TextoResaltado" style="text-align: center;">
-                                                REFERENCIAS
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: center; height: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: center; padding: 3px; font-weight: normal;">
-                                                <asp:UpdatePanel ID="referenciasUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                    UpdateMode="Conditional">
-                                                    <ContentTemplate>
-                                                        <asp:GridView ID="referenciasGridView" runat="server" AutoGenerateColumns="False"
-                                                            BorderColor="gray" BorderStyle="Solid" BorderWidth="1px"
-                                                            EnableViewState="true" Font-Bold="false"
-                                                            GridLines="Both"
-                                                            ShowFooter="true" ShowHeader="True" ToolTip="El dato de referencia debe ser un número entero"
-                                                            Width="100%">
-                                                            <Columns>
-                                                                <asp:TemplateField HeaderText="C&#243;digo de referencia">
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="lblcodigo_de_referencia" runat="server" Text='<%# Eval("descripcioncodigo_de_referencia") %>'
-                                                                            Width="320px"></asp:Label>
-                                                                    </ItemTemplate>
-                                                                    <EditItemTemplate>
-                                                                        <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="300px">
-                                                                        </asp:DropDownList>
-                                                                        <asp:RequiredFieldValidator ID="ddlcodigo_de_referenciaEditItemRequiredFieldValidator"
-                                                                            runat="server" ControlToValidate="ddlcodigo_de_referenciaEdit" ErrorMessage="Codigo de referencia en edición no informado"
-                                                                            SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
-                                                                    </EditItemTemplate>
-                                                                    <FooterTemplate>
-                                                                        <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="300px">
-                                                                        </asp:DropDownList>
-                                                                        <asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator" runat="server"
-                                                                            ControlToValidate="ddlcodigo_de_referencia" ErrorMessage="Codigo de referencia a agregar no informado"
-                                                                            SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
-                                                                    </FooterTemplate>
-                                                                    <ItemStyle HorizontalAlign="Left" Width="320px" />
-                                                                    <FooterStyle HorizontalAlign="Left" Width="320px" />
-                                                                </asp:TemplateField>
-                                                                <asp:TemplateField HeaderText="Número de referencia">
-                                                                    <ItemTemplate>
-                                                                        <asp:Label ID="lbldato_de_referencia" runat="server" Text='<%# Eval("dato_de_referencia") %>'></asp:Label>
-                                                                    </ItemTemplate>
-                                                                    <EditItemTemplate>
-                                                                        <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='<%# Eval("dato_de_referencia") %>'
-                                                                            Width="75%"></asp:TextBox>
-                                                                        <cc1:MaskedEditExtender ID="txtdato_de_referenciaEditExpoMaskedEditExtender" runat="server"
-                                                                            ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
-                                                                            PromptCharacter="?" TargetControlID="txtdato_de_referencia">
-                                                                        </cc1:MaskedEditExtender>
-                                                                        <cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaEditExpoFilteredTextBoxExtender"
-                                                                            runat="server" FilterMode="ValidChars" FilterType="Numbers" TargetControlID="txtdato_de_referencia">
-                                                                        </cc1:FilteredTextBoxExtender>
-                                                                        <asp:RequiredFieldValidator ID="txtdato_de_referenciaEditItemRequiredFieldValidator"
-                                                                            runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="dato de referencia en edición no informado"
-                                                                            SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
-                                                                    </EditItemTemplate>
-                                                                    <FooterTemplate>
-                                                                        <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="75%"></asp:TextBox>
-                                                                        <cc1:MaskedEditExtender ID="txtdato_de_referenciaFooterExpoMaskedEditExtender" runat="server"
-                                                                            ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
-                                                                            PromptCharacter="?" TargetControlID="txtdato_de_referencia">
-                                                                        </cc1:MaskedEditExtender>
-                                                                        <cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaFooterExpoFilteredTextBoxExtender"
-                                                                            runat="server" FilterMode="ValidChars" FilterType="Numbers" TargetControlID="txtdato_de_referencia">
-                                                                        </cc1:FilteredTextBoxExtender>
-                                                                        <asp:RequiredFieldValidator ID="txtdato_de_referenciaFooterRequiredFieldValidator"
-                                                                            runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="Dato de referencia a agregar no informado"
-                                                                            SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
-                                                                    </FooterTemplate>
-                                                                    <ItemStyle HorizontalAlign="Right" />
-                                                                </asp:TemplateField>
-                                                            </Columns>
-                                                            <HeaderStyle Font-Bold="true" />
-                                                        </asp:GridView>
-                                                    </ContentTemplate>
-                                                    <Triggers>
-                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                    </Triggers>
-                                                </asp:UpdatePanel>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: center; height: 10px;">
-                                                <asp:UpdateProgress ID="referenciasUpdateProgress" runat="server" AssociatedUpdatePanelID="referenciasUpdatePanel"
-                                                    DisplayAfter="0">
-                                                    <ProgressTemplate>
-                                                        <asp:Image ID="referenciasImage" runat="server" Height="25px" ImageUrl="~/Imagenes/301.gif">
-                                                        </asp:Image>
-                                                    </ProgressTemplate>
-                                                </asp:UpdateProgress>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-                                                <asp:ValidationSummary ID="ReferenciasEditValidationSummary" runat="server" BorderColor="Gray"
-                                                    BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
-                                                    ShowMessageBox="True" ValidationGroup="ReferenciasEditItem"></asp:ValidationSummary>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-                                                <asp:ValidationSummary ID="ReferenciasFooterValidationSummary" runat="server" BorderColor="Gray"
-                                                    BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
-                                                    ShowMessageBox="True" ValidationGroup="ReferenciasFooter"></asp:ValidationSummary>
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <asp:Panel ID="ReferenciasPanel" runat="server">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TextoResaltado" style="text-align: center;">
+                                                    REFERENCIAS
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; padding: 3px; font-weight: normal;">
+                                                    <asp:UpdatePanel ID="referenciasUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                        UpdateMode="Conditional">
+                                                        <ContentTemplate>
+                                                            <asp:GridView ID="referenciasGridView" runat="server" AutoGenerateColumns="False"
+                                                                BorderColor="gray" BorderStyle="Solid" BorderWidth="1px"
+                                                                EnableViewState="true" Font-Bold="false"
+                                                                GridLines="Both"
+                                                                ShowFooter="true" ShowHeader="True" ToolTip="El dato de referencia debe ser un número entero"
+                                                                Width="100%">
+                                                                <Columns>
+                                                                    <asp:TemplateField HeaderText="C&#243;digo de referencia">
+                                                                        <ItemTemplate>
+                                                                            <asp:Label ID="lblcodigo_de_referencia" runat="server" Text='<%# Eval("descripcioncodigo_de_referencia") %>'
+                                                                                Width="320px"></asp:Label>
+                                                                        </ItemTemplate>
+                                                                        <EditItemTemplate>
+                                                                            <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="300px">
+                                                                            </asp:DropDownList>
+                                                                            <asp:RequiredFieldValidator ID="ddlcodigo_de_referenciaEditItemRequiredFieldValidator"
+                                                                                runat="server" ControlToValidate="ddlcodigo_de_referenciaEdit" ErrorMessage="Codigo de referencia en edición no informado"
+                                                                                SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
+                                                                        </EditItemTemplate>
+                                                                        <FooterTemplate>
+                                                                            <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="300px">
+                                                                            </asp:DropDownList>
+                                                                            <asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator" runat="server"
+                                                                                ControlToValidate="ddlcodigo_de_referencia" ErrorMessage="Codigo de referencia a agregar no informado"
+                                                                                SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
+                                                                        </FooterTemplate>
+                                                                        <ItemStyle HorizontalAlign="Left" Width="320px" />
+                                                                        <FooterStyle HorizontalAlign="Left" Width="320px" />
+                                                                    </asp:TemplateField>
+                                                                    <asp:TemplateField HeaderText="Número de referencia">
+                                                                        <ItemTemplate>
+                                                                            <asp:Label ID="lbldato_de_referencia" runat="server" Text='<%# Eval("dato_de_referencia") %>'></asp:Label>
+                                                                        </ItemTemplate>
+                                                                        <EditItemTemplate>
+                                                                            <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='<%# Eval("dato_de_referencia") %>'
+                                                                                Width="75%"></asp:TextBox>
+                                                                            <cc1:MaskedEditExtender ID="txtdato_de_referenciaEditExpoMaskedEditExtender" runat="server"
+                                                                                ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
+                                                                                PromptCharacter="?" TargetControlID="txtdato_de_referencia">
+                                                                            </cc1:MaskedEditExtender>
+                                                                            <cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaEditExpoFilteredTextBoxExtender"
+                                                                                runat="server" FilterMode="ValidChars" FilterType="Numbers" TargetControlID="txtdato_de_referencia">
+                                                                            </cc1:FilteredTextBoxExtender>
+                                                                            <asp:RequiredFieldValidator ID="txtdato_de_referenciaEditItemRequiredFieldValidator"
+                                                                                runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="dato de referencia en edición no informado"
+                                                                                SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
+                                                                        </EditItemTemplate>
+                                                                        <FooterTemplate>
+                                                                            <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="75%"></asp:TextBox>
+                                                                            <cc1:MaskedEditExtender ID="txtdato_de_referenciaFooterExpoMaskedEditExtender" runat="server"
+                                                                                ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
+                                                                                PromptCharacter="?" TargetControlID="txtdato_de_referencia">
+                                                                            </cc1:MaskedEditExtender>
+                                                                            <cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaFooterExpoFilteredTextBoxExtender"
+                                                                                runat="server" FilterMode="ValidChars" FilterType="Numbers" TargetControlID="txtdato_de_referencia">
+                                                                            </cc1:FilteredTextBoxExtender>
+                                                                            <asp:RequiredFieldValidator ID="txtdato_de_referenciaFooterRequiredFieldValidator"
+                                                                                runat="server" ControlToValidate="txtdato_de_referencia" ErrorMessage="Dato de referencia a agregar no informado"
+                                                                                SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
+                                                                        </FooterTemplate>
+                                                                        <ItemStyle HorizontalAlign="Right" />
+                                                                    </asp:TemplateField>
+                                                                </Columns>
+                                                                <HeaderStyle Font-Bold="true" />
+                                                            </asp:GridView>
+                                                        </ContentTemplate>
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                        </Triggers>
+                                                    </asp:UpdatePanel>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; height: 10px;">
+                                                    <asp:UpdateProgress ID="referenciasUpdateProgress" runat="server" AssociatedUpdatePanelID="referenciasUpdatePanel"
+                                                        DisplayAfter="0">
+                                                        <ProgressTemplate>
+                                                            <asp:Image ID="referenciasImage" runat="server" Height="25px" ImageUrl="~/Imagenes/301.gif">
+                                                            </asp:Image>
+                                                        </ProgressTemplate>
+                                                    </asp:UpdateProgress>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; padding: 3px; font-weight: normal;">
+                                                    <asp:ValidationSummary ID="ReferenciasEditValidationSummary" runat="server" BorderColor="Gray"
+                                                        BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
+                                                        ShowMessageBox="True" ValidationGroup="ReferenciasEditItem"></asp:ValidationSummary>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: center; padding: 3px; font-weight: normal;">
+                                                    <asp:ValidationSummary ID="ReferenciasFooterValidationSummary" runat="server" BorderColor="Gray"
+                                                        BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:"
+                                                        ShowMessageBox="True" ValidationGroup="ReferenciasFooter"></asp:ValidationSummary>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <hr noshade="noshade" size="1" color="#cccccc" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
                                 </td>
                             </tr>
+                            <!-- DATOS COMERCIALES -->
                             <tr>
                                 <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
+                                    <asp:Panel ID="DatosComerialesPanel" runat="server">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                            <tr>
+                                                <td style="height:19px; text-align:center">
+                                                    <uc3:Comerciales ID="DatosComerciales" runat="server"></uc3:Comerciales>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <hr noshade="noshade" size="1" color="#cccccc" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
                                 </td>
                             </tr>
-                            <!-- INFORMACIÓN EXPORTACIÓN-->
-                            <tr>
-                                <td style="text-align: center">
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
-                                        <tr>
-                                            <td style="height:10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="2" class="TextoResaltado" style="text-align: center;">
-                                                INFORMACIÓN EXPORTACIÓN
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height:10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:UpdatePanel ID="TipoExpoUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                    UpdateMode="Conditional">
-                                                    <Triggers>
-                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                    </Triggers>
-                                                    <ContentTemplate>
-                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                            <tr>
-                                                                <td class="TC00S">
-                                                                    Tipo Exportación:
-                                                                </td>
-                                                                <td class="TC10S">
-                                                                    <asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="ddln">
-                                                                    </asp:DropDownList>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
-                                            </td>
-                                            <td>
-                                                <asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" UpdateMode="Conditional">
-                                                    <ContentTemplate>
-                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                            <tr>
-                                                                <td class="TC00S">
-                                                                    País Destino Comprobante:
-                                                                </td>
-                                                                <td class="TC10S">
-                                                                    <asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" OnSelectedIndexChanged="PaisDestinoExpDropDownList_SelectedIndexChanged"
-                                                                        SkinID="ddln" AutoPostBack="true">
-                                                                    </asp:DropDownList>
-                                                                    <asp:UpdateProgress ID="PaisDestinoUpdateProgress" runat="server" AssociatedUpdatePanelID="PaisDestinoExpUpdatePanel"
-                                                                        DisplayAfter="0">
-                                                                        <ProgressTemplate>
-                                                                            <asp:Image ID="PaisDestinoImage" runat="server" Height="18px" ImageUrl="~/Imagenes/301.gif">
-                                                                            </asp:Image>
-                                                                        </ProgressTemplate>
-                                                                    </asp:UpdateProgress>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </ContentTemplate>
-                                                    <Triggers>
-                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                    </Triggers>
-                                                </asp:UpdatePanel>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <asp:UpdatePanel ID="IdiomaUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                    UpdateMode="Conditional">
-                                                    <Triggers>
-                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                    </Triggers>
-                                                    <ContentTemplate>
-                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                            <tr>
-                                                                <td class="TC00S">
-                                                                    Idioma para exportación:
-                                                                </td>
-                                                                <td class="TC10S">
-                                                                    <asp:DropDownList ID="IdiomaDropDownList" runat="server" SkinID="ddln">
-                                                                    </asp:DropDownList>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
-                                            </td>
-                                            <td>
-                                                <asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                    UpdateMode="Conditional">
-                                                    <Triggers>
-                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                    </Triggers>
-                                                    <ContentTemplate>
-                                                        <table border="0" cellpadding="0" cellspacing="0">
-                                                            <tr>
-                                                                <td class="TC00S">
-                                                                    Incoterms para exportación:
-                                                                </td>
-                                                                <td class="TC10S">
-                                                                    <asp:DropDownList ID="IncotermsDropDownList" runat="server" SkinID="ddln">
-                                                                    </asp:DropDownList>
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </td>
-                            </tr>
-                            <!-- PERMISOS EXPO-->
-                            <tr>
-                                <td style="height:19px; text-align:center">
-                                    <uc2:Permisos ID="PermisosExpo" runat="server"></uc2:Permisos>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
-                                </td>
-                            </tr>
-                            <!-- DATOS COMERCIALES-->
-                            <tr>
-                                <td style="height:19px; text-align:center">
-                                    <uc3:Comerciales ID="DatosComerciales" runat="server"></uc3:Comerciales>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
-                                </td>
-                            </tr>
-                            <!-- DATOS DEL DETALLE -->
+                            <!-- DETALLE DE ARTÍCULOS / SERVICIOS -->
                             <tr>
                                 <td style="text-align: center">
                                     <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
@@ -1079,37 +1104,49 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                 </table>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <hr noshade="noshade" size="1" color="#cccccc" />
+                                            </td>
+                                        </tr>
                                     </table>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
-                                </td>
-                            </tr>
-                            <!-- DATOS DE DESCUENTOS GLOBALES -->
+                            <!-- DESCUENTOS GLOBALES -->
                             <tr>
                                 <td style="text-align:center">
-                                    <DescUC:DescuentosGlobales ID="DescuentosGlobales" runat="server"></DescUC:DescuentosGlobales>
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                                        <tr>
+                                            <td>
+                                                <DescUC:DescuentosGlobales ID="DescuentosGlobales" runat="server"></DescUC:DescuentosGlobales>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <hr noshade="noshade" size="1" color="#cccccc" />
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
-                                </td>
-                            </tr>
-                            <!-- DATOS DE IMPUESTOS GLOBALES -->
+                            <!-- IMPUESTOS GLOBALES -->
                             <tr>
                                 <td style="text-align:center">
-                                    <uc8:ImpuestosGlobales ID="ImpuestosGlobales" runat="server"></uc8:ImpuestosGlobales>
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                                        <tr>
+                                            <td>
+                                                <uc8:ImpuestosGlobales ID="ImpuestosGlobales" runat="server"></uc8:ImpuestosGlobales>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <hr noshade="noshade" size="1" color="#cccccc" />
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
-                                </td>
-                            </tr>
-                            <!-- DATOS DE RESUMEN FINAL -->
+                            <!-- RESUMEN FINAL -->
                             <tr>
                                 <td style="text-align: center">
                                     <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
@@ -1118,64 +1155,176 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="TextoResaltado" colspan="3" style="text-align: center">
-                                                RESUMEN FINAL
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td align="center" style="padding-bottom: 35px; padding-left: 5px; width: 180px"
-                                                valign="middle">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="border-color: Gray; border-width: 1px;
-                                                    border-style: solid" width="180px">
-                                                    <tr>
-                                                        <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                            Si ya solicitó la CAE a la AFIP, ingrésela aqui:
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC01S" style="padding-left: 5px; padding: 5px; text-align: left;
-                                                            width: 180px">
-                                                            CAE:<asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL C.A.E., debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado."
-                                                                Width="100px"></asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                            Fecha de vencimiento CAE:
-                                                            <asp:TextBox ID="FechaCAEVencimientoDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
-                                                            <cc1:CalendarExtender ID="CalendarExtender7" runat="server" TargetControlID="FechaCAEVencimientoDatePickerWebUserControl"
-                                                                Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEVencimiento">
-                                                            </cc1:CalendarExtender>
-                                                            <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaCAEVencimiento" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                            Fecha de obtención CAE:
-                                                            <asp:TextBox ID="FechaCAEObtencionDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
-                                                            <cc1:CalendarExtender ID="CalendarExtender8" runat="server" TargetControlID="FechaCAEObtencionDatePickerWebUserControl"
-                                                                Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEObtencion">
-                                                            </cc1:CalendarExtender>
-                                                            <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaCAEObtencion" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                            Resultado:<asp:TextBox ID="ResultadoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                Width="100px">
-                                                            </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                            Motivo:
-                                                            <asp:TextBox 
-                                                                ID="MotivoTextBox" runat="server"
-                                                                Width="170px" TextMode="MultiLine" Style="resize: none;" Height="50px">
-                                                            </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
+                                            <td align="center" style="padding-left:5px; width:180px" valign="top">
+                                                <asp:Panel ID="DatosEmisionPanel" runat="server">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="border-color: Gray; border-width: 1px; border-style: solid" width="180px">
+                                                        <tr>
+                                                            <td style="height:10px">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoResaltado" style="text-align:center">
+                                                                <asp:Label ID="Label1" runat="server" Text="DATOS DE EMISIÓN"></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:10px">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Periodicidad:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC10S" style="padding-right:3px">
+                                                                <asp:DropDownList ID="PeriodicidadEmisionDropDownList" runat="server" AutoPostBack="True" SkinID="ddln"></asp:DropDownList>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Destino del comprobante:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC10S" style="padding-right:3px">
+                                                                <asp:DropDownList ID="IdDestinoComprobanteDropDownList" runat="server" AutoPostBack="false" SkinID="ddln"></asp:DropDownList>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Próxima fecha de emisión:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC10S">
+                                                                <asp:TextBox ID="FechaProximaEmisionDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
+                                                                <cc1:CalendarExtender ID="CalendarExtender10" runat="server" TargetControlID="FechaProximaEmisionDatePickerWebUserControl"
+                                                                    Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaProximaEmision">
+                                                                </cc1:CalendarExtender>
+                                                                <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaProximaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Cant.máx.de comprobantes a emitir:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC10S">
+                                                                <asp:TextBox ID="CantidadComprobantesAEmitirTextBox" runat="server" Text="0" MaxLength="3" ToolTip="Debe ingresar sólo números." Width="70px" ></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Cant.de comprobantes ya emitidos:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC10S">
+                                                                <asp:TextBox ID="CantidadComprobantesEmitidosTextBox" runat="server" Text="0" MaxLength="3" ToolTip="Debe ingresar sólo números." Width="70px" ></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Cant.días p/cálculo de fecha vto.:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC10S">
+                                                                <asp:TextBox ID="CantidadDiasFechaVtoTextBox" runat="server" Text="0" MaxLength="3" ToolTip="Debe ingresar sólo números." Width="70px" ></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:10px">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </asp:Panel>
+                                                <asp:Panel ID="CAEPanel" runat="server">
+                                                    <table border="0" cellpadding="0" cellspacing="0" style="border-color: Gray; border-width: 1px; border-style: solid" width="180px">
+                                                        <tr>
+                                                            <td style="height:10px">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TextoResaltado" style="text-align:center">
+                                                                <asp:Label ID="Label4" runat="server" Text="DATOS C.A.E."></asp:Label>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:10px">
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Si ya solicitó la CAE a la AFIP, ingrésela aqui:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                CAE:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC10S" style="padding-right:5px">
+                                                                <asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL C.A.E., debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado." Width="100px"></asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Fecha de vencimiento CAE:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC10S">
+                                                                <asp:TextBox ID="FechaCAEVencimientoDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
+                                                                <cc1:CalendarExtender ID="CalendarExtender7" runat="server" TargetControlID="FechaCAEVencimientoDatePickerWebUserControl"
+                                                                    Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEVencimiento">
+                                                                </cc1:CalendarExtender>
+                                                                <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaCAEVencimiento" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Fecha de obtención CAE:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC10S">
+                                                                <asp:TextBox ID="FechaCAEObtencionDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
+                                                                <cc1:CalendarExtender ID="CalendarExtender8" runat="server" TargetControlID="FechaCAEObtencionDatePickerWebUserControl"
+                                                                    Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEObtencion">
+                                                                </cc1:CalendarExtender>
+                                                                <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaCAEObtencion" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Resultado:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
+                                                                <asp:TextBox ID="ResultadoTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" Width="100px"> </asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC00SL" style="padding-left:5px">
+                                                                Motivo:
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
+                                                                <asp:TextBox ID="MotivoTextBox" runat="server" Width="170px" TextMode="MultiLine" Style="resize: none;" Height="50px"> </asp:TextBox>
+                                                            </td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td style="height:10px">
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </asp:Panel>
                                             </td>
                                             <td>
                                             </td>
@@ -1187,6 +1336,14 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                     </Triggers>
                                                     <ContentTemplate>
                                                         <table border="0" cellpadding="0" cellspacing="0">
+                                                            <tr>
+                                                                <td class="TextoResaltado" style="width:390px; text-align:right">
+                                                                    RESUMEN FINAL&nbsp;
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:Button ID="TotalesButton" runat="server" CausesValidation="false" Text="Totales" Width="174px"/>
+                                                                </td>
+                                                            </tr>
                                                             <tr>
                                                                 <td class="TC00S" style="width: 390px">
                                                                     Importe total neto gravado:
@@ -1306,23 +1463,17 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                     </asp:UpdateProgress>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                                <td style="height: 46px">
-                                                                </td>
-                                                                <td style="height: 46px">
-                                                                </td>
-                                                            </tr>
                                                         </table>
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td colspan="3">
+                                                <hr noshade="noshade" size="1" color="#cccccc" />
+                                            </td>
+                                        </tr>
                                     </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
                                 </td>
                             </tr>
                             <!-- OBSERVACIONES -->
@@ -1347,53 +1498,55 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                 <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" Style="width:760px" TextMode="MultiLine"></asp:TextBox>
                                             </td>
                                         </tr>
+                                        <tr>
+                                            <td>
+                                                <hr noshade="noshade" size="1" color="#cccccc" />
+                                            </td>
+                                        </tr>
                                     </table>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <hr noshade="noshade" size="1" color="#cccccc" />
                                 </td>
                             </tr>
                             <!-- ACCIONES -->
                             <tr>
                                 <td style="text-align: center">
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
-                                        <tr>
-                                            <td style="height: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="TextoResaltado" style="text-align:center">
-                                                ACCIONES
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="padding-left:10px">
-                                                <asp:Panel ID="PrevisualizacionComprobantePanel" runat="server">
-                                                    <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
-                                                        <tr>
-                                                            <td class="TC00S">
-                                                                Previsualización comprobante: 
-                                                            </td>
-                                                            <td align="left" style="padding-left:5px">
-                                                                <asp:Button ID="PDFButton" runat="server" CausesValidation="true" OnClick="PDFButton_Click" 
-                                                                    Text="Obtener" />
-                                                            </td>
-                                                        </tr>
-                                                    </table>
-                                                </asp:Panel>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height: 10px;">
-                                            </td>
-                                        </tr>
-                                    </table>
+                                    <asp:Panel ID="AccionesPanel" runat="server">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                            <tr>
+                                                <td style="height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TextoResaltado" style="text-align:center">
+                                                    ACCIONES
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:10px">
+                                                    <asp:Panel ID="PrevisualizacionComprobantePanel" runat="server">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Previsualización comprobante: 
+                                                                </td>
+                                                                <td align="left" style="padding-left:5px">
+                                                                    <asp:Button ID="PDFButton" runat="server" CausesValidation="true" OnClick="PDFButton_Click" 
+                                                                        Text="Obtener" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height: 10px;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
                                 </td>
                             </tr>
                             <tr>

@@ -107,15 +107,22 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Artículos|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Artículos|Modificación");
                         opcionesHabilitadas.Add("Artículos|Consulta");
-                        opcionesHabilitadas.Add("Comprobantes|Alta|Venta|Electrónica");
-                        //opcionesHabilitadas.Add("Comprobantes|Alta|Venta|Manual");
-                        //opcionesHabilitadas.Add("Comprobantes|Alta|Compra");
+                        opcionesHabilitadas.Add("Contratos|Alta");
+                        //opcionesHabilitadas.Add("Contratos|Baja/Anul.baja");
+                        //opcionesHabilitadas.Add("Contratos|Modificación");
+                        opcionesHabilitadas.Add("Contratos|Consulta");
+                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Electrónica");
+                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Tradicional");
+                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Compra");
+                        //opcionesHabilitadas.Add("Comprobantes|Baja/Anul.baja");
+                        //opcionesHabilitadas.Add("Comprobantes|Modificación");
                         opcionesHabilitadas.Add("Comprobantes|Consulta");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online AFIP");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Archivo XML");
-                        opcionesHabilitadas.Add("Comprobantes|TyC");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Términos y condiciones");
+                        //opcionesHabilitadas.Add("Comprobantes|Facturación automática (contratos)");
                         if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                         {
                             opcionesHabilitadas.Add("Administración|Puntos de Venta|Alta");

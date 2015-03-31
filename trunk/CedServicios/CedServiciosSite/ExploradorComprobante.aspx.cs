@@ -25,29 +25,42 @@ namespace CedServicios.Site
                 }
                 else
                 {
+                    string a = HttpContext.Current.Request.Url.Query.ToString();
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    if (sesion.UsuarioDemo == true)
+                    switch (a.Replace("?", String.Empty))
                     {
-                        FechaDesdeTextBox.Text = "20130101";
-                        FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
-                    }
-                    else
-                    {
-                        FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMM01");
-                        FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
+                        case "Comprobante":
+                            TituloPaginaLabel.Text = "Consulta de Comprobantes";
+                            ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Comprobante, sesion);
+                            NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
+                            NaturalezaComprobanteDropDownList.SelectedValue = String.Empty;
+                            SoloVigentesLabel.Text = "Sólo comprobantes vigentes:";
+                            if (sesion.UsuarioDemo == true)
+                            {
+                                FechaDesdeTextBox.Text = "20130101";
+                                FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
+                            }
+                            else
+                            {
+                                FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMM01");
+                                FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
+                            }
+                            break;
+                        case "Contrato":
+                            TituloPaginaLabel.Text = "Consulta de Contratos";
+                            ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Contrato, sesion);
+                            NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
+                            SoloVigentesLabel.Text = "Sólo contratos vigentes:";
+                            ComprobantesGridView.Columns[17].Visible = false;
+                            PeriodoEmisionPanel.Visible = false;
+                            break;
                     }
                     ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
                     ClienteDropDownList.DataSource = (List<Entidades.Persona>)ViewState["Personas"];
-                    ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(true, sesion);
-                    NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
                     DataBind();
                     if (ClienteDropDownList.Items.Count > 0)
                     {
                         ClienteDropDownList.SelectedValue = "0";
-                    }
-                    if (NaturalezaComprobanteDropDownList.Items.Count > 0)
-                    {
-                        NaturalezaComprobanteDropDownList.SelectedValue = String.Empty;
                     }
                 }
             }
@@ -65,38 +78,13 @@ namespace CedServicios.Site
             org.dyndns.cedweb.detalle.DetalleIBK clcdyndns = new org.dyndns.cedweb.detalle.DetalleIBK();
             org.dyndns.cedweb.detalle.cecd cecd = new org.dyndns.cedweb.detalle.cecd();
             List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> listaR = new List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>();
-            System.Xml.Serialization.XmlSerializer x;
-            byte[] bytes;
-            System.IO.MemoryStream ms;
 
             switch (e.CommandName)
             {
                 case "Consulta":
-                    #region ConsultaLocal
-                    FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
-                    x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-                    try
-                    {
-                        comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
-                        bytes = new byte[comprobante.Response.Length * sizeof(char)];
-                        System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
-                        ms = new System.IO.MemoryStream(bytes);
-                        ms.Seek(0, System.IO.SeekOrigin.Begin);
-                        lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-                    }
-                    catch 
-                    {
-                        bytes = new byte[comprobante.Request.Length * sizeof(char)];
-                        System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
-                        ms = new System.IO.MemoryStream(bytes);
-                        ms.Seek(0, System.IO.SeekOrigin.Begin);
-                        lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-                    }
-                    lote.comprobante[0].IdNaturalezaComprobante = comprobante.NaturalezaComprobante.Id;
-                    Cache["ComprobanteAConsultar"] = lote;
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
                     script = "window.open('/ComprobanteConsulta.aspx', '');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
-                    #endregion
                     break;
             }
         }
@@ -159,7 +147,7 @@ namespace CedServicios.Site
                 {
                     naturalezaComprobante = new Entidades.NaturalezaComprobante();
                 }
-                lista = RN.Comprobante.ListaFiltrada(SoloVigentesCheckBox.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, sesion);
+                lista = RN.Comprobante.ListaFiltrada(SoloVigentesCheckBox.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, sesion);
                 if (lista.Count == 0)
                 {
                     ComprobantesGridView.DataSource = null;
@@ -202,8 +190,8 @@ namespace CedServicios.Site
             string resp;
             string script;
 
-            Cache.Remove("ComprobanteAClonar");
-            Cache.Remove("EsComprobanteOriginal");
+            Session.Remove("ComprobanteATratar");
+            Session.Remove("EsComprobanteOriginal");
             switch (comando)
             {
                 case "ActualizarOnLine":
@@ -241,7 +229,6 @@ namespace CedServicios.Site
                                 clcrdyndns = clcdyndnsConsultaIBK.Consultar(Convert.ToInt64(comprobante.Cuit), comprobante.NroLote, comprobante.NroPuntoVta, certificado);
                                 FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                                 lc = Funciones.Ws2Fea(clcrdyndns);
-                                Cache["ComprobanteAConsultar"] = lc;
                                 string XML = "";
                                 RN.Comprobante.SerializarLc(out XML, lc);
                                 comprobante.Response = XML;
@@ -312,6 +299,7 @@ namespace CedServicios.Site
 
                                     comprobante.WF.Estado = "Vigente";
                                     RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
                                     script = "window.open('/ComprobanteConsulta.aspx', '');";
                                     BuscarButton_Click(sender, new EventArgs());
                                     RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
@@ -346,7 +334,6 @@ namespace CedServicios.Site
                                 string caeFecVto;
                                 string caeFecPro;
                                 respuesta = RN.ComprobanteAFIP.ConsultarAFIP(out caeNro, out caeFecVto, out caeFecPro, lcFea, (Entidades.Sesion)Session["Sesion"]);
-                                Cache["ComprobanteAConsultar"] = lcFea;
                                 if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
                                 {
                                     comprobante.WF.Estado = "Vigente";
@@ -361,12 +348,12 @@ namespace CedServicios.Site
                                         lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae = caeFecPro;
                                         lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
                                     }
-                                    Cache["ComprobanteAConsultar"] = lcFea;
                                     string XML = "";
                                     RN.Comprobante.SerializarLc(out XML, lcFea);
                                     comprobante.Response = XML;
 
                                     RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
                                     script = "window.open('/ComprobanteConsulta.aspx', '');";
                                     BuscarButton_Click(sender, new EventArgs());
                                     RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
@@ -492,27 +479,7 @@ namespace CedServicios.Site
                     #region XML-ClonarAlta
                     if (comprobante.NaturalezaComprobante.Id == "Venta")
                     {
-                        Session["IdNaturalezaComprobante"] = "Venta";
-                        lote = new FeaEntidades.InterFacturas.lote_comprobantes();
-                        x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-                        //try
-                        //{
-                        //    comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
-                        //    bytes = new byte[comprobante.Response.Length * sizeof(char)];
-                        //    System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
-                        //    ms = new System.IO.MemoryStream(bytes);
-                        //    ms.Seek(0, System.IO.SeekOrigin.Begin);
-                        //    lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-                        //}
-                        //catch
-                        //{
-                            bytes = new byte[comprobante.Request.Length * sizeof(char)];
-                            System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
-                            ms = new System.IO.MemoryStream(bytes);
-                            ms.Seek(0, System.IO.SeekOrigin.Begin);
-                            lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-                        //}
-                        Cache["ComprobanteAClonar"] = lote;
+                        Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Clonado, comprobante);
                         script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     }
@@ -1095,11 +1062,9 @@ namespace CedServicios.Site
                             }
                             org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
                             clcrdyndns = clcdyndns1.Consultar(Convert.ToInt64(comprobante.Cuit), comprobante.NroLote, comprobante.NroPuntoVta, certificado);
-                            //Cache["ComprobanteAConsultar"] = clcrdyndns;
                             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
                             lc = Funciones.Ws2Fea(clcrdyndns);
                             lc.comprobante[0].IdNaturalezaComprobante = "Venta";
-                            Cache["ComprobanteAConsultar"] = lc;
                             //Controlar que sea el mismo comprobante (local vs on-line)
                             if (comprobante.Nro != lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante)
                             {
@@ -1111,6 +1076,7 @@ namespace CedServicios.Site
                                 MensajeLabel.Text = "(Campo: Tipo de Comprobante). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. No se puede actualizar el estado.";
                                 return;
                             }
+                            Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
                             script = "window.open('/ComprobanteConsulta.aspx', '');";
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                         }

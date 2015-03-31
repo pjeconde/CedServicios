@@ -18,8 +18,8 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			if (!this.IsPostBack)
 			{
-                Object o = Cache.Get("ComprobanteAClonar");
-                if (o == null)
+                Object o = Session["ComprobanteATratar"];
+                if (o == null || ((Entidades.ComprobanteATratar)o).Tratamiento == Entidades.Enum.TratamientoComprobante.Alta)
                 {
                     ResetearGrillas();
                 }
@@ -230,7 +230,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 					impuestosGridView.DataSource = ViewState["impuestos"];
 					impuestosGridView.DataBind();
 					BindearDropDownLists();
-                    Cache["FaltaCalcularTotales"] = true;
+                    Session["FaltaCalcularTotales"] = true;
 
 				}
 				catch (Exception ex)
@@ -275,7 +275,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				impuestosGridView.DataSource = ViewState["impuestos"];
 				impuestosGridView.DataBind();
 				BindearDropDownLists();
-                Cache["FaltaCalcularTotales"] = true;
+                Session["FaltaCalcularTotales"] = true;
 			}
 			catch
 			{
@@ -382,7 +382,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				impuestosGridView.DataSource = ViewState["impuestos"];
 				impuestosGridView.DataBind();
 				BindearDropDownLists();
-                Cache["FaltaCalcularTotales"] = true;
+                Session["FaltaCalcularTotales"] = true;
 
 			}
 			catch (Exception ex)

@@ -36,6 +36,11 @@ namespace CedServicios.Entidades
         //Campos Adicionales Opcionales
         private string cuitRazonSocial;
         private DateTime fechaAlta;
+        private string periodicidadEmision;
+        private DateTime fechaProximaEmision;
+        private int cantidadComprobantesAEmitir;
+        private int cantidadComprobantesEmitidos;
+        private int cantidadDiasFechaVto;
 
         public Comprobante()
         {
@@ -284,6 +289,61 @@ namespace CedServicios.Entidades
             get
             {
                 return naturalezaComprobante;
+            }
+        }
+        public string PeriodicidadEmision
+        {
+            set
+            {
+                periodicidadEmision = value;
+            }
+            get
+            {
+                return periodicidadEmision;
+            }
+        }
+        public DateTime FechaProximaEmision
+        {
+            set
+            {
+                fechaProximaEmision = value;
+            }
+            get
+            {
+                return fechaProximaEmision;
+            }
+        }
+        public int CantidadComprobantesAEmitir
+        {
+            set
+            {
+                cantidadComprobantesAEmitir = value;
+            }
+            get
+            {
+                return cantidadComprobantesAEmitir;
+            }
+        }
+        public int CantidadComprobantesEmitidos
+        {
+            set
+            {
+                cantidadComprobantesEmitidos = value;
+            }
+            get
+            {
+                return cantidadComprobantesEmitidos;
+            }
+        }
+        public int CantidadDiasFechaVto
+        {
+            set
+            {
+                cantidadDiasFechaVto = value;
+            }
+            get
+            {
+                return cantidadDiasFechaVto;
             }
         }
         #region propiedades adicionales opcionales

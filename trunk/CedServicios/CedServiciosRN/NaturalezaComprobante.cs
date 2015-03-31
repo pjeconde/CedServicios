@@ -7,10 +7,10 @@ namespace CedServicios.RN
 {
     public class NaturalezaComprobante
     {
-        public static List<Entidades.NaturalezaComprobante> Lista(bool IncluirOpcionTodos, Entidades.Sesion Sesion)
+        public static List<Entidades.NaturalezaComprobante> Lista(Entidades.Enum.Elemento Elemento, Entidades.Sesion Sesion)
         {
             CedServicios.DB.NaturalezaComprobante db = new DB.NaturalezaComprobante(Sesion);
-            List<Entidades.NaturalezaComprobante> lista = db.LeerLista(IncluirOpcionTodos);
+            List<Entidades.NaturalezaComprobante> lista = db.LeerLista(Elemento);
             return lista;
         }
     }

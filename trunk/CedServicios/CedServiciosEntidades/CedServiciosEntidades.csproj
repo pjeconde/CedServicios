@@ -43,9 +43,11 @@
     <Compile Include="Accion.cs" />
     <Compile Include="Archivo.cs" />
     <Compile Include="Articulo.cs" />
+    <Compile Include="ComprobanteATratar.cs" />
     <Compile Include="Const.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="NaturalezaComprobante.cs" />
+    <Compile Include="PeriodicidadEmision.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Comprobante.cs" />
     <Compile Include="Configuracion.cs" />

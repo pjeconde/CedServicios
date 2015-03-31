@@ -19,7 +19,7 @@
                     <!-- @@@ TITULO DE LA PAGINA @@@-->
                     <tr>
                         <td align="center" valign="middle">
-                            <asp:Label ID="Label2" runat="server" SkinID="TituloPagina" Text="Alta de Comprobante"></asp:Label>
+                            <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Alta de ..."></asp:Label>
                         </td>
                     </tr>
                     <!-- UTILIZAR COMPROBANTE PREEXISTENTE -->
@@ -94,6 +94,7 @@
                                             <td class="TextoResaltado" colspan="4" style="text-align:center">
                                                 <asp:Label ID="DatosComprobanteLabel" runat="server" Text="COMPROBANTE"></asp:Label>
                                                 <asp:TextBox ID="IdNaturalezaComprobanteTextBox" runat="server" Visible="false"> </asp:TextBox>
+                                                <asp:TextBox ID="TratamientoTextBox" runat="server" Visible="false"> </asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -107,11 +108,11 @@
                                             <td class="TC10S">
                                                 <asp:UpdatePanel ID="ptoVentaUpdatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                                                     <ContentTemplate>
-                                                        <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" AutoPostBack="True" Enabled="false" SkinID="ddlch" 
+                                                        <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" AutoPostBack="True" Enabled="false" SkinID="ddln" 
                                                         onselectedindexchanged="PuntoVtaDropDownList_SelectedIndexChanged">
                                                         </asp:DropDownList>
                                                         <asp:TextBox ID="PuntoVtaTextBox" runat="server" Enabled="true" Visible="false" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
-                                                        <asp:Label ID="TipoPtoVentaLabel" runat="server"></asp:Label>
+                                                        <asp:Label ID="TipoPtoVentaLabel" runat="server" Visible="false"></asp:Label>
                                                         <asp:UpdateProgress ID="ptoVentaUpdateProgress" runat="server" AssociatedUpdatePanelID="ptoVentaUpdatePanel" DisplayAfter="0">
                                                             <ProgressTemplate>
                                                                 <asp:Image ID="ptoVentaImage" runat="server" Height="18px" ImageUrl="~/Imagenes/301.gif">
@@ -122,7 +123,7 @@
                                                 </asp:UpdatePanel>
                                             </td>
                                             <td class="TC00S">
-                                                Número de comprobante:
+                                                <asp:Label ID="NumeroDeLabel" runat="server" Text="Número de comprobante:" Visible="true"></asp:Label>
                                             </td>
                                             <td class="TC10S">
                                                 <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" AutoCompleteType="None" 
@@ -170,7 +171,7 @@
                                                 </asp:UpdateProgress>
                                             </td>
                                             <td class="TC00S">
-                                                Fecha de emisión:
+                                                <asp:Label ID="FechaEmisionLabel" runat="server" Text="Fecha de emisión:" Visible="true"></asp:Label>
                                             </td>
                                             <td class="TC10S">
                                                 <asp:TextBox ID="FechaEmisionDatePickerWebUserControl" runat="server" CausesValidation="true" SkinID="FechaFact"></asp:TextBox>
@@ -1262,57 +1263,156 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="TextoResaltado" colspan="3" style="text-align: center">
-                                        RESUMEN FINAL
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td colspan="2">
-                                    </td>
-                                    <td align="right" style="padding-right:22px">
-                                        <asp:Button ID="CalcularTotalesButton" runat="server" CausesValidation="false" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales" Width="174" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td align="center" style="padding-bottom: 35px; padding-left: 5px; width: 180px"
-                                        valign="middle">
-                                        <table border="0" cellpadding="0" cellspacing="0" style="border-color: Gray; border-width: 1px;
-                                            border-style: solid" width="180px">
-                                            <tr>
-                                                <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                    Si ya solicitó la CAE a la AFIP, ingrésela aqui:
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="TC01S" style="padding-left: 5px; padding: 5px; text-align: left;
-                                                    width: 180px">
-                                                    CAE:<asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL C.A.E., debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado."
-                                                        Width="100px"></asp:TextBox>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                    Fecha de vencimiento CAE:
-                                                    <asp:TextBox ID="FechaCAEVencimientoDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
-                                                    <cc1:CalendarExtender ID="CalendarExtender7" runat="server" TargetControlID="FechaCAEVencimientoDatePickerWebUserControl"
-                                                        Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEVencimiento">
-                                                    </cc1:CalendarExtender>
-                                                    <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaCAEVencimiento" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td class="TC01S" style="padding: 5px; text-align: left; width: 180px">
-                                                    Fecha de obtención CAE:
-                                                    <asp:TextBox ID="FechaCAEObtencionDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
-                                                    <cc1:CalendarExtender ID="CalendarExtender8" runat="server" TargetControlID="FechaCAEObtencionDatePickerWebUserControl"
-                                                        Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEObtencion">
-                                                    </cc1:CalendarExtender>
-                                                    <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaCAEObtencion" ImageUrl="~/Imagenes/Calendar.gif" />
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </td>
-                                    <td>
+                                    <td align="center" style="padding-left:5px; width:180px" valign="top">
+                                        <asp:Panel ID="DatosEmisionPanel" runat="server">
+                                            <table border="0" cellpadding="0" cellspacing="0" style="border-color: Gray; border-width: 1px; border-style: solid" width="180px">
+                                                <tr>
+                                                    <td style="height:10px">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TextoResaltado" style="text-align:center">
+                                                        <asp:Label ID="Label2" runat="server" Text="DATOS DE EMISIÓN"></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="height:10px">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC00SL" style="padding-left:5px">
+                                                        Periodicidad:
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC10S" style="padding-right:3px">
+                                                        <asp:DropDownList ID="PeriodicidadEmisionDropDownList" runat="server" AutoPostBack="True" SkinID="ddln"></asp:DropDownList>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC00SL" style="padding-left:5px">
+                                                        Destino del comprobante:
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC10S" style="padding-right:3px">
+                                                        <asp:DropDownList ID="IdDestinoComprobanteDropDownList" runat="server" AutoPostBack="false" SkinID="ddln"></asp:DropDownList>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC00SL" style="padding-left:5px">
+                                                        Próxima fecha de emisión:
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC10S">
+                                                        <asp:TextBox ID="FechaProximaEmisionDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
+                                                        <cc1:CalendarExtender ID="CalendarExtender10" runat="server" TargetControlID="FechaProximaEmisionDatePickerWebUserControl"
+                                                            Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaProximaEmision">
+                                                        </cc1:CalendarExtender>
+                                                        <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaProximaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC00SL" style="padding-left:5px">
+                                                        Cant.máx.de comprobantes a emitir:
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC10S">
+                                                        <asp:TextBox ID="CantidadComprobantesAEmitirTextBox" runat="server" Text="0" MaxLength="3" ToolTip="Debe ingresar sólo números." Width="70px" ></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC00SL" style="padding-left:5px">
+                                                        Cant.de comprobantes ya emitidos:
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC10S">
+                                                        <asp:TextBox ID="CantidadComprobantesEmitidosTextBox" runat="server" Text="0" MaxLength="3" ToolTip="Debe ingresar sólo números." Width="70px" ></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC00SL" style="padding-left:5px">
+                                                        Cant.días p/cálculo de fecha vto.:
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC10S">
+                                                        <asp:TextBox ID="CantidadDiasFechaVtoTextBox" runat="server" Text="0" MaxLength="3" ToolTip="Debe ingresar sólo números." Width="70px" ></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="height:10px">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
+                                        <asp:Panel ID="CAEPanel" runat="server">
+                                            <table border="0" cellpadding="0" cellspacing="0" style="border-color: Gray; border-width: 1px; border-style: solid" width="180px">
+                                                <tr>
+                                                    <td style="height:10px">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TextoResaltado" style="text-align:center">
+                                                        <asp:Label ID="Label4" runat="server" Text="DATOS C.A.E."></asp:Label>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="height:10px">
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC00SL" style="padding-left:5px">
+                                                        Si ya solicitó la CAE a la AFIP, ingrésela aqui:
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC00SL" style="padding-left:5px">
+                                                        CAE:
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC10S" style="padding-right:5px">
+                                                        <asp:TextBox ID="CAETextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> MUY IMPORTANTE! Solo si YA TIENE GENERADO EL C.A.E., debe ingresar este dato. Si omite esta información, se generará una nueva factura ante la AFIP o bien se retornará un error por comprobante ya ingresado." Width="100px"></asp:TextBox>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC00SL" style="padding-left:5px">
+                                                        Fecha de vencimiento CAE:
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC10S">
+                                                        <asp:TextBox ID="FechaCAEVencimientoDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
+                                                        <cc1:CalendarExtender ID="CalendarExtender7" runat="server" TargetControlID="FechaCAEVencimientoDatePickerWebUserControl"
+                                                            Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEVencimiento">
+                                                        </cc1:CalendarExtender>
+                                                        <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaCAEVencimiento" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC00SL" style="padding-left:5px">
+                                                        Fecha de obtención CAE:
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="TC10S">
+                                                        <asp:TextBox ID="FechaCAEObtencionDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
+                                                        <cc1:CalendarExtender ID="CalendarExtender8" runat="server" TargetControlID="FechaCAEObtencionDatePickerWebUserControl"
+                                                            Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarFechaCAEObtencion">
+                                                        </cc1:CalendarExtender>
+                                                        <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaCAEObtencion" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="height:10px">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </asp:Panel>
                                     </td>
                                     <td align="left" valign="top">
                                         <asp:UpdatePanel ID="tipoCambioUpdatePanel" runat="server" ChildrenAsTriggers="true"
@@ -1323,6 +1423,14 @@
                                             </Triggers>
                                             <ContentTemplate>
                                                 <table border="0" cellpadding="0" cellspacing="0">
+                                                    <tr>
+                                                        <td class="TextoResaltado" style="width:390px; text-align:right">
+                                                            RESUMEN FINAL&nbsp;
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:Button ID="CalcularTotalesButton" runat="server" CausesValidation="false" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales" Width="174px" />
+                                                        </td>
+                                                    </tr>
                                                     <tr>
                                                         <td class="TC00S" style="width: 390px">
                                                             Importe total neto gravado:
@@ -1365,8 +1473,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="TC00S" style="width: 390px">
-                                                            Impuesto liquidado a RNI o percepción a no categorizados<br />
-                                                            (IVA R.G. 2126):
+                                                            Impuesto liquidado a RNI o percepción a no categorizados (IVA R.G.2126):
                                                         </td>
                                                         <td class="TC10S">
                                                             <asp:TextBox ID="Impuesto_Liq_Rni_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -1440,12 +1547,6 @@
                                                                     </asp:Image>
                                                                 </ProgressTemplate>
                                                             </asp:UpdateProgress>
-                                                        </td>
-                                                    </tr>
-                                                    <tr>
-                                                        <td style="height: 46px">
-                                                        </td>
-                                                        <td style="height: 46px">
                                                         </td>
                                                     </tr>
                                                 </table>

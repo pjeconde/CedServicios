@@ -13,5 +13,19 @@ namespace CedServicios.Entidades
             Proveedor,
             Ambos,
         }
+        public enum TratamientoComprobante
+        {
+            Alta,
+            Baja_AnulBaja,
+            Modificacion,
+            Clonado,
+            Consulta,
+            ConsultaITF,
+        }
+        public enum Elemento
+        {
+            Comprobante,
+            Contrato,
+        }
     }
 }

@@ -40,13 +40,7 @@ namespace CedServicios.Site
             switch (e.CommandName)
             {
                 case "Seleccionar":
-                    x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-                    byte[] bytes = new byte[comprobante.Request.Length * sizeof(char)];
-                    System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
-                    System.IO.MemoryStream ms = new System.IO.MemoryStream(bytes);
-                    ms.Seek(0, System.IO.SeekOrigin.Begin);
-                    lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-                    Cache["ComprobanteAConsultar"] = lote;
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
                     string script = "window.open('/ComprobanteConsulta.aspx', '');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;

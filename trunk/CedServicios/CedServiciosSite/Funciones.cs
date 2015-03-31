@@ -59,18 +59,33 @@ namespace CedServicios.Site
                 mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
-            mItem = new MenuItem("Comprobantes", "Comprobantes"); mItem.Selectable = false;
+            mItem = new MenuItem("Contratos", "Contratos"); mItem.Selectable = false;
             menu.Items.Add(mItem);
                 mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+
+            mItem = new MenuItem("Comprobantes", "Comprobantes"); mItem.Selectable = false;
+            menu.Items.Add(mItem);
+                mItem = new MenuItem("Alta manual", "Alta manual"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Venta", "Venta"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                         mItem = new MenuItem("Electrónica", "Electrónica"); mItem.Selectable = false;
                         menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems[0].ChildItems.Add(mItem);
-                        mItem = new MenuItem("Manual", "Manual"); mItem.Selectable = false;
+                        mItem = new MenuItem("Tradicional", "Tradicional"); mItem.Selectable = false;
                         menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems[0].ChildItems.Add(mItem);
                     mItem = new MenuItem("Compra", "Compra"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Otras Consultas", "Otras Consultas"); mItem.Selectable = false;
@@ -85,7 +100,9 @@ namespace CedServicios.Site
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Archivo XML", "Archivo XML"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("TyC", "TyC"); mItem.Selectable = false; mItem.ToolTip = "Términos y Condiciones";
+                    mItem = new MenuItem("Términos y condiciones", "Términos y condiciones"); mItem.Selectable = false; mItem.ToolTip = "Términos y Condiciones";
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Facturación automática (contratos)", "Facturación automática (contratos)"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
             mItem = new MenuItem("Administración", "Administración"); mItem.Selectable = false;

@@ -42,27 +42,11 @@ namespace CedServicios.Site
         }
         protected void ComprobantesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            if (e.CommandName == "Seleccionar")
-            {
-                //int item = Convert.ToInt32(e.CommandArgument);
-                //List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
-                //Entidades.Comprobante comprobante = lista[item];
-                //FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
-                //System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-                //byte[] bytes = new byte[comprobante.Request.Length * sizeof(char)];
-                //System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
-                //System.IO.MemoryStream ms = new System.IO.MemoryStream(bytes);
-                //ms.Seek(0, System.IO.SeekOrigin.Begin);
-                //lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-                //Cache["ComprobanteAConsultar"] = lote;
-                //string script = "window.open('/ComprobanteConsulta.aspx', '');";
-                //ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
-            }
-            else if (e.CommandName == "ConsultaOnLine")
+            if (e.CommandName == "ConsultaOnLine")
             {
                 int item = Convert.ToInt32(e.CommandArgument);
                 List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> lista = (List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>)ViewState["Comprobantes"];
-                FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado comprobante = lista[item];
+                FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado elem = lista[item];
                 try
                 {
                     string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
@@ -71,7 +55,7 @@ namespace CedServicios.Site
                         MensajeLabel.Text = "Aún no disponemos de su certificado digital";
                         return;
                     }
-                    GrabarLogTexto("~/Consultar.txt", "Consulta de Lote CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro + "  Nro.Lote: " + comprobante.id_lote + "  Nro. Punto de Vta.: " + comprobante.punto_de_venta);
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Lote CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro + "  Nro.Lote: " + elem.id_lote + "  Nro. Punto de Vta.: " + elem.punto_de_venta);
                     GrabarLogTexto("~/Consultar.txt", "NroSerieCertifITF: " + NroCertif);
                     if (NroCertif.Equals(string.Empty))
                     {
@@ -89,8 +73,9 @@ namespace CedServicios.Site
                         GrabarLogTexto("~/Consultar.txt", "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
                     }
                     org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
-                    clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro), comprobante.id_lote, comprobante.punto_de_venta, certificado);
-                    Cache["ComprobanteAConsultar"] = clcrdyndns;
+                    clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(((Entidades.Sesion)Session["Sesion"]).Cuit.Nro), elem.id_lote, elem.punto_de_venta, certificado);
+                    //Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.ConsultaITF, clcrdyndns);
                     string script = "window.open('/ComprobanteConsulta.aspx', '');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                 }

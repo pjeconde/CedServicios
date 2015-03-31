@@ -40,13 +40,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.ScriptManager MasterScriptManager;
         
         /// <summary>
-        /// Control Label2.
+        /// Control TituloPaginaLabel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label2;
+        protected global::System.Web.UI.WebControls.Label TituloPaginaLabel;
         
         /// <summary>
         /// Control InfoComproUpdatePanel.
@@ -74,6 +74,15 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IdNaturalezaComprobanteTextBox;
+        
+        /// <summary>
+        /// Control TratamientoTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TratamientoTextBox;
         
         /// <summary>
         /// Control Tipo_De_ComprobanteUpdatePanel.
@@ -148,6 +157,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.UpdateProgress ptoVentaUpdateProgress;
         
         /// <summary>
+        /// Control NumeroDeLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label NumeroDeLabel;
+        
+        /// <summary>
         /// Control Numero_ComprobanteTextBox.
         /// </summary>
         /// <remarks>
@@ -191,6 +209,15 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress monedaUpdateProgress;
+        
+        /// <summary>
+        /// Control FechaEmisionLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label FechaEmisionLabel;
         
         /// <summary>
         /// Control FechaEmisionDatePickerWebUserControl.
@@ -427,6 +454,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox TipoNumeracionLote;
         
         /// <summary>
+        /// Control VendedorUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel VendedorUpdatePanel;
+        
+        /// <summary>
         /// Control Razon_Social_VendedorTextBox.
         /// </summary>
         /// <remarks>
@@ -632,6 +668,114 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Email_VendedorTextBox;
+        
+        /// <summary>
+        /// Control ExportacionUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel ExportacionUpdatePanel;
+        
+        /// <summary>
+        /// Control ExportacionPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ExportacionPanel;
+        
+        /// <summary>
+        /// Control TipoExpoUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel TipoExpoUpdatePanel;
+        
+        /// <summary>
+        /// Control TipoExpDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList TipoExpDropDownList;
+        
+        /// <summary>
+        /// Control PaisDestinoExpUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel PaisDestinoExpUpdatePanel;
+        
+        /// <summary>
+        /// Control PaisDestinoExpDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PaisDestinoExpDropDownList;
+        
+        /// <summary>
+        /// Control PaisDestinoUpdateProgress.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdateProgress PaisDestinoUpdateProgress;
+        
+        /// <summary>
+        /// Control IdiomaUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel IdiomaUpdatePanel;
+        
+        /// <summary>
+        /// Control IdiomaDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList IdiomaDropDownList;
+        
+        /// <summary>
+        /// Control IncotermsUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel IncotermsUpdatePanel;
+        
+        /// <summary>
+        /// Control IncotermsDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList IncotermsDropDownList;
+        
+        /// <summary>
+        /// Control PermisosExpo.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::CedServicios.Site.Facturacion.Electronica.PermisosConsulta PermisosExpo;
         
         /// <summary>
         /// Control compradorUpdatePanel.
@@ -895,6 +1039,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox Telefono_CompradorTextBox;
         
         /// <summary>
+        /// Control ReferenciasPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ReferenciasPanel;
+        
+        /// <summary>
         /// Control referenciasUpdatePanel.
         /// </summary>
         /// <remarks>
@@ -940,94 +1093,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.ValidationSummary ReferenciasFooterValidationSummary;
         
         /// <summary>
-        /// Control TipoExpoUpdatePanel.
+        /// Control DatosComerialesPanel.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel TipoExpoUpdatePanel;
-        
-        /// <summary>
-        /// Control TipoExpDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList TipoExpDropDownList;
-        
-        /// <summary>
-        /// Control PaisDestinoExpUpdatePanel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel PaisDestinoExpUpdatePanel;
-        
-        /// <summary>
-        /// Control PaisDestinoExpDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList PaisDestinoExpDropDownList;
-        
-        /// <summary>
-        /// Control PaisDestinoUpdateProgress.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdateProgress PaisDestinoUpdateProgress;
-        
-        /// <summary>
-        /// Control IdiomaUpdatePanel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel IdiomaUpdatePanel;
-        
-        /// <summary>
-        /// Control IdiomaDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList IdiomaDropDownList;
-        
-        /// <summary>
-        /// Control IncotermsUpdatePanel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel IncotermsUpdatePanel;
-        
-        /// <summary>
-        /// Control IncotermsDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList IncotermsDropDownList;
-        
-        /// <summary>
-        /// Control PermisosExpo.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::CedServicios.Site.Facturacion.Electronica.PermisosConsulta PermisosExpo;
+        protected global::System.Web.UI.WebControls.Panel DatosComerialesPanel;
         
         /// <summary>
         /// Control DatosComerciales.
@@ -1073,6 +1145,114 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::CedServicios.Site.Facturacion.Electronica.ImpuestosConsulta ImpuestosGlobales;
+        
+        /// <summary>
+        /// Control DatosEmisionPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel DatosEmisionPanel;
+        
+        /// <summary>
+        /// Control Label1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// Control PeriodicidadEmisionDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PeriodicidadEmisionDropDownList;
+        
+        /// <summary>
+        /// Control IdDestinoComprobanteDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList IdDestinoComprobanteDropDownList;
+        
+        /// <summary>
+        /// Control FechaProximaEmisionDatePickerWebUserControl.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox FechaProximaEmisionDatePickerWebUserControl;
+        
+        /// <summary>
+        /// Control CalendarExtender10.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender CalendarExtender10;
+        
+        /// <summary>
+        /// Control ImageCalendarFechaProximaEmision.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaProximaEmision;
+        
+        /// <summary>
+        /// Control CantidadComprobantesAEmitirTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CantidadComprobantesAEmitirTextBox;
+        
+        /// <summary>
+        /// Control CantidadComprobantesEmitidosTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CantidadComprobantesEmitidosTextBox;
+        
+        /// <summary>
+        /// Control CantidadDiasFechaVtoTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CantidadDiasFechaVtoTextBox;
+        
+        /// <summary>
+        /// Control CAEPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel CAEPanel;
+        
+        /// <summary>
+        /// Control Label4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
         /// Control CAETextBox.
@@ -1163,6 +1343,15 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel tipoCambioUpdatePanel;
+        
+        /// <summary>
+        /// Control TotalesButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button TotalesButton;
         
         /// <summary>
         /// Control Importe_Total_Neto_Gravado_ResumenTextBox.
@@ -1289,6 +1478,15 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Observaciones_ResumenTextBox;
+        
+        /// <summary>
+        /// Control AccionesPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel AccionesPanel;
         
         /// <summary>
         /// Control PrevisualizacionComprobantePanel.
