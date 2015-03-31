@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Web;
+using System.IO;
 
 namespace CedServicios.DB
 {
@@ -21,6 +22,22 @@ namespace CedServicios.DB
         public static DateTime ConvertirFechaStringAAAAMMDDaDatetime(string FechaStringAAAAMMDD)
         {
             return new DateTime(Convert.ToInt32(FechaStringAAAAMMDD.Substring(0, 4)), Convert.ToInt32(FechaStringAAAAMMDD.Substring(4, 2)), Convert.ToInt32(FechaStringAAAAMMDD.Substring(6, 2)));
+        }
+        public static void GrabarLogTexto(string archivo, string mensaje)
+        {
+            try
+            {
+                using (FileStream fs = File.Open(HttpContext.Current.Server.MapPath(archivo), FileMode.Append, FileAccess.Write))
+                {
+                    using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
+                    {
+                        sw.WriteLine(DateTime.Now.ToString("yyyyMMdd hh:mm:ss") + "  " + mensaje);
+                    }
+                }
+            }
+            catch
+            {
+            }
         }
     }
 }

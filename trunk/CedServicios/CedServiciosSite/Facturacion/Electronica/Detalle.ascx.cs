@@ -1011,7 +1011,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                         }
                     }
-                    if (listadelineas[i].importe_iva != 0)
+                    //if (listadelineas[i].importe_iva != 0)
+                    if (listadelineas[i].indicacion_exento_gravado != null && listadelineas[i].indicacion_exento_gravado.Trim().ToUpper() == "G")
                     {
                         totalGravado += imptotdiscr;
                     }

@@ -22,6 +22,7 @@ namespace CedServicios.Entidades
         private bool estoyEnAyuda = false;
         private string ambiente;
         private bool usuarioDemo;
+        private Ticket ticket;
 
         public Sesion()
         {
@@ -194,6 +195,17 @@ namespace CedServicios.Entidades
             {
                 usuarioDemo = value;
             }
-        } 
+        }
+        public Ticket Ticket
+        {
+            get
+            {
+                return ticket;
+            }
+            set
+            {
+                ticket = value;
+            }
+        }
     }
 }

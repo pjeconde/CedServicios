@@ -72,6 +72,7 @@
     <Compile Include="PuntoVta.cs" />
     <Compile Include="ReporteActividad.cs" />
     <Compile Include="Sesion.cs" />
+    <Compile Include="Ticket.cs" />
     <Compile Include="TipoComprobante.cs" />
     <Compile Include="TipoDocumento.cs" />
     <Compile Include="TipoPermiso.cs" />

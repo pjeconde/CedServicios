@@ -1687,7 +1687,16 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ValidationSummary RequeridosValidationSummary;
         
         /// <summary>
-        /// Control DescargarPDFButton.
+        /// DescargarPDFPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel DescargarPDFPanel;
+        
+        /// <summary>
+        /// DescargarPDFButton control.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
@@ -1696,7 +1705,16 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.Button DescargarPDFButton;
         
         /// <summary>
-        /// Control ActualizarEstadoButton.
+        /// ActualizarEstadoPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel ActualizarEstadoPanel;
+        
+        /// <summary>
+        /// ActualizarEstadoButton control.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.

@@ -207,7 +207,10 @@ namespace CedServicios.Site.Facturacion.Electronica
 						}
 						else
 						{
-							throw new Exception("Impuesto global no agregado porque el importe debe ser mayor a 0");
+                            if (r.porcentaje_impuesto != 0)
+                            {
+                                throw new Exception("Impuesto global no agregado porque el importe debe ser mayor a 0");
+                            }
 						}
 					}
 					else
@@ -330,6 +333,25 @@ namespace CedServicios.Site.Facturacion.Electronica
 				string auxdescr_impuesto = ((DropDownList)impuestosGridView.Rows[e.RowIndex].FindControl("ddlcodigo_impuestoEdit")).SelectedItem.Text;
 				r.descripcion = auxdescr_impuesto;
 
+                string auxAlicuota = ((TextBox)impuestosGridView.Rows[e.RowIndex].FindControl("txtalicuota")).Text;
+                if (!auxAlicuota.Contains(","))
+                {
+                    r.porcentaje_impuesto = Convert.ToDouble(auxAlicuota);
+                    r.porcentaje_impuestoSpecified = true;
+                    //if (!r.porcentaje_impuesto.Equals(0))
+                    //{
+                    //    r.porcentaje_impuestoSpecified = true;
+                    //}
+                    //else
+                    //{
+                    //    r.porcentaje_impuestoSpecified = false;
+                    //}
+                }
+                else
+                {
+                    throw new Exception("Impuesto global no actualizado porque el separador de decimales debe ser el punto");
+                }
+
 				string auxTotal = ((TextBox)impuestosGridView.Rows[e.RowIndex].FindControl("txtimporte_impuesto")).Text;
 				if (!auxTotal.Contains(","))
 				{
@@ -340,7 +362,10 @@ namespace CedServicios.Site.Facturacion.Electronica
 					}
 					else
 					{
-						throw new Exception("Impuesto global no actualizado porque el importe debe ser mayor a 0");
+                        if (r.porcentaje_impuesto != 0)
+                        {
+                            throw new Exception("Impuesto global no actualizado porque el importe debe ser mayor a 0");
+                        }
 					}
 				}
 				else
@@ -358,24 +383,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 				{
 					r.codigo_jurisdiccion = 0;
 					r.codigo_jurisdiccionSpecified = false;
-				}
-
-				string auxAlicuota = ((TextBox)impuestosGridView.Rows[e.RowIndex].FindControl("txtalicuota")).Text;
-				if (!auxAlicuota.Contains(","))
-				{
-					r.porcentaje_impuesto = Convert.ToDouble(auxAlicuota);
-					if (!r.porcentaje_impuesto.Equals(0))
-					{
-						r.porcentaje_impuestoSpecified = true;
-					}
-					else
-					{
-						r.porcentaje_impuestoSpecified = false;
-					}
-				}
-				else
-				{
-					throw new Exception("Impuesto global no actualizado porque el separador de decimales debe ser el punto");
 				}
 
 				impuestosGridView.EditIndex = -1;
@@ -459,7 +466,8 @@ namespace CedServicios.Site.Facturacion.Electronica
 
 		internal void AgregarImpuestosIVA(System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas)
 		{
-            System.Collections.Generic.List<FeaEntidades.IVA.IVA> listaIVA = FeaEntidades.IVA.IVA.ListaMinimaSinCero();
+            //System.Collections.Generic.List<FeaEntidades.IVA.IVA> listaIVA = FeaEntidades.IVA.IVA.ListaMinimaSinCero();
+            System.Collections.Generic.List<FeaEntidades.IVA.IVA> listaIVA = FeaEntidades.IVA.IVA.ListaMinima();
 			double[] impivas = new double[listaIVA.Count];
             bool[] impivasinformados = new bool[listaIVA.Count];
             for (int i = 0; i < listadelineas.Count; i++)
@@ -472,8 +480,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                     });
                     if (k >= 0)
                     {
-                        impivas[k] += listadelineas[i].importe_iva;
-                        impivasinformados[k] = true;
+                        if (listadelineas[i].indicacion_exento_gravado == "G")
+                        {
+                            impivas[k] += listadelineas[i].importe_iva;
+                            impivasinformados[k] = true;
+                        }
                     }
                 }
             }
@@ -487,7 +498,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     imp.codigo_impuesto = iva.Codigo;
                     imp.importe_impuesto = Math.Round(impivas[j], 2);
                     imp.porcentaje_impuestoSpecified = true;
-                    imp.porcentaje_impuesto = FeaEntidades.IVA.IVA.ListaMinimaSinCero()[j].Codigo;
+                    //imp.porcentaje_impuesto = FeaEntidades.IVA.IVA.ListaMinimaSinCero()[j].Codigo;
+                    imp.porcentaje_impuesto = FeaEntidades.IVA.IVA.ListaMinima()[j].Codigo;
                     imp.descripcion = iva.Descr;
                     EliminarFilaAutomatica();
                     impuestos.Add(imp);

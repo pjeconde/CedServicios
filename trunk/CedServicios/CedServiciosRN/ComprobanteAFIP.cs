@@ -8,27 +8,94 @@ namespace CedServicios.RN
 {
     public class ComprobanteAFIP
     {
-        static Entidades.Sesion sesion;
-        static ar.gov.afip.wsw.FEResponse objFEResponse;
-        static LoginTicket ticket;
-        static ar.gov.afip.wsw.Service objWS;
-        static ar.gov.afip.wsfev1.Service objWSFEV1;
-        
-        private static void CrearTicket()
+        //static ar.gov.afip.wsw.FEResponse objFEResponse;
+        //static LoginTicket ticket;
+        //static ar.gov.afip.wsw.Service objWS;
+        //static ar.gov.afip.wsfev1.Service objWSFEV1;
+
+        private static void CrearTicket(Entidades.Sesion Sesion, out LoginTicket ticket, out ar.gov.afip.wsw.Service objWS, out ar.gov.afip.wsfev1.Service objWSFEV1)
         {
             string RutaCertificado = "";
-            if (ticket == null || Convert.ToInt32(ticket.ExpirationTime.ToString("hhmmss")) <= Convert.ToInt32(DateTime.Now.ToString("hhmmss")))
+            ticket = new LoginTicket();
+
+            DB.Ticket ticketDB = new DB.Ticket(Sesion);
+            bool SolicitarTicket = false;
+
+            if (Sesion.Ticket == null)
             {
-                ticket = new LoginTicket();
-                RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + sesion.Cuit.Nro + ".p12");
-                if (sesion.Cuit.UsaCertificadoAFIPPropio)
+                if (Sesion.Cuit.UsaCertificadoAFIPPropio)
                 {
-                    ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(sesion.Cuit.Nro));
+                    Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro);
                 }
                 else
                 {
-                    ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64("30710015062"));
+                    Sesion.Ticket = ticketDB.Leer("30710015062");
                 }
+            }
+            else
+            {
+                if (Sesion.Ticket.Cuit != Sesion.Cuit.Nro)
+                {
+                    if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                    {
+                        Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro);
+                    }
+                    else
+                    {
+                        if (Sesion.Ticket.Cuit != "30710015062")
+                        {
+                            Sesion.Ticket = ticketDB.Leer("30710015062");
+                        }
+                    }
+                }
+            }
+            if (Sesion.Ticket.Cuit == null)
+            {
+                SolicitarTicket = true;
+            }
+            else if (Convert.ToInt64(Sesion.Ticket.ExpirationTime.ToString("yyyyMMddHHmmss")) <= Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss")))
+            {
+                SolicitarTicket = true;
+            }
+            else
+            {
+                //ticket.GenerationTime = Sesion.Ticket.GenerationTime;
+                //ticket.ExpirationTime = Sesion.Ticket.ExpirationTime;
+                ticket.ObjAutorizacion = new ar.gov.afip.wsw.FEAuthRequest();
+                ticket.ObjAutorizacion.cuit = Convert.ToInt64(Sesion.Cuit.Nro);
+                ticket.ObjAutorizacion.Sign = Sesion.Ticket.Sign;
+                ticket.ObjAutorizacion.Token = Sesion.Ticket.Token;
+                ticket.ObjAutorizacionfev1 = new ar.gov.afip.wsfev1.FEAuthRequest();
+                ticket.ObjAutorizacionfev1.Cuit = Convert.ToInt64(Sesion.Cuit.Nro);
+                ticket.ObjAutorizacionfev1.Sign = Sesion.Ticket.Sign;
+                ticket.ObjAutorizacionfev1.Token = Sesion.Ticket.Token;
+            }
+ 
+            if (SolicitarTicket)
+            {
+                ticket = new LoginTicket();
+                if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                {
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + ".p12");
+                }
+                else
+                {
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Convert.ToInt64("30710015062") + ".p12");
+                }
+                ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro));
+
+                //Guardar Ticket de AFIP
+                Sesion.Ticket = new Entidades.Ticket();
+                Sesion.Ticket.Cuit = ticket.ObjAutorizacionfev1.Cuit.ToString().Trim();
+                Sesion.Ticket.Service = ticket.Service;
+                Sesion.Ticket.UniqueId = ticket.UniqueId.ToString().Trim();
+                Sesion.Ticket.GenerationTime = ticket.GenerationTime;
+                Sesion.Ticket.ExpirationTime = ticket.ExpirationTime;
+                Sesion.Ticket.Sign = ticket.Sign;
+                Sesion.Ticket.Token = ticket.Token;
+                ticketDB.Modificar(Sesion.Ticket);
+
+                SolicitarTicket = false;
             }
             objWS = new ar.gov.afip.wsw.Service();
             objWS.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_wsw_Service"];
@@ -43,8 +110,11 @@ namespace CedServicios.RN
             {
                 Cae = "";
                 CaeFecVto = "";
-                sesion = Sesion;
-                CrearTicket();
+                LoginTicket ticket;
+                ar.gov.afip.wsw.Service objWS;
+                ar.gov.afip.wsfev1.Service objWSFEV1;
+                CrearTicket(Sesion, out ticket, out objWS, out objWSFEV1);
+
                 ar.gov.afip.wsfev1.FECAERequest objFERequest = new ar.gov.afip.wsfev1.FECAERequest();
                 ar.gov.afip.wsfev1.FECAECabRequest objFECabeceraRequest = new ar.gov.afip.wsfev1.FECAECabRequest();
                 int CantidadComprobantes = 1;
@@ -148,14 +218,14 @@ namespace CedServicios.RN
                                             for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
                                             {
                                                 if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                                if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 0)
+                                                if (lc.comprobante[0].detalle.linea[k].indicacion_exento_gravado != null && lc.comprobante[0].detalle.linea[k].indicacion_exento_gravado.Trim().ToUpper() == "G" && lc.comprobante[0].detalle.linea[k].alicuota_iva == 0)
                                                 {
                                                     baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
                                                 }
                                             }
                                         }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
-                                        ivas[CantAlicIVA].Id = 4;
+                                        ivas[CantAlicIVA].Id = 3;
                                     }
                                     if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 10.5)
                                     {
@@ -345,8 +415,11 @@ namespace CedServicios.RN
                 CaeNro = "";
                 CaeFecVto = "";
                 CaeFecPro = "";
-                sesion = Sesion;
-                CrearTicket();
+                LoginTicket ticket;
+                ar.gov.afip.wsw.Service objWS;
+                ar.gov.afip.wsfev1.Service objWSFEV1;
+                CrearTicket(Sesion, out ticket, out objWS, out objWSFEV1);
+
                 ar.gov.afip.wsfev1.FECompConsultaReq objFECompConsultaReq = new ar.gov.afip.wsfev1.FECompConsultaReq();
                 objFECompConsultaReq.CbteTipo = lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                 objFECompConsultaReq.CbteNro = lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
@@ -391,8 +464,11 @@ namespace CedServicios.RN
             try
             {
                 string respuesta = "";
-                sesion = Sesion;
-                CrearTicket();
+                LoginTicket ticket;
+                ar.gov.afip.wsw.Service objWS;
+                ar.gov.afip.wsfev1.Service objWSFEV1;
+                CrearTicket(Sesion, out ticket, out objWS, out objWSFEV1);
+
                 ar.gov.afip.wsfev1.FECompConsultaReq objFECompConsultaReq = new ar.gov.afip.wsfev1.FECompConsultaReq();
                 objFECompConsultaReq.CbteTipo = lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                 objFECompConsultaReq.CbteNro = lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
@@ -421,8 +497,11 @@ namespace CedServicios.RN
             try
             {
                 string respuesta = "";
-                sesion = Sesion;
-                CrearTicket();
+                LoginTicket ticket;
+                ar.gov.afip.wsw.Service objWS;
+                ar.gov.afip.wsfev1.Service objWSFEV1;
+                CrearTicket(Sesion, out ticket, out objWS, out objWSFEV1);
+
                 ar.gov.afip.wsw.FEUltNroResponse FEUltNroResponse = new ar.gov.afip.wsw.FEUltNroResponse();
                 FEUltNroResponse = objWS.FEUltNroRequest(ticket.ObjAutorizacion);
                 System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
@@ -447,8 +526,11 @@ namespace CedServicios.RN
             try
             {
                 string respuesta = "";
-                sesion = Sesion;
-                CrearTicket();
+                LoginTicket ticket;
+                ar.gov.afip.wsw.Service objWS;
+                ar.gov.afip.wsfev1.Service objWSFEV1;
+                CrearTicket(Sesion, out ticket, out objWS, out objWSFEV1);
+
                 ar.gov.afip.wsw.FELastCMPtype FELastCMPtype = new ar.gov.afip.wsw.FELastCMPtype();
                 FELastCMPtype.TipoCbte = lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                 FELastCMPtype.PtoVta = lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
@@ -476,8 +558,11 @@ namespace CedServicios.RN
             try
             {
                 string respuesta = "";
-                sesion = Sesion;
-                CrearTicket();
+                LoginTicket ticket;
+                ar.gov.afip.wsw.Service objWS;
+                ar.gov.afip.wsfev1.Service objWSFEV1;
+                CrearTicket(Sesion, out ticket, out objWS, out objWSFEV1);
+
                 ar.gov.afip.wsfev1.CbteTipoResponse CbteTipoResponse = new ar.gov.afip.wsfev1.CbteTipoResponse();
                 CbteTipoResponse = objWSFEV1.FEParamGetTiposCbte(ticket.ObjAutorizacionfev1);
                 System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
@@ -502,8 +587,10 @@ namespace CedServicios.RN
             try
             {
                 string respuesta = "";
-                sesion = Sesion;
-                CrearTicket();
+                LoginTicket ticket;
+                ar.gov.afip.wsw.Service objWS;
+                ar.gov.afip.wsfev1.Service objWSFEV1;
+                CrearTicket(Sesion, out ticket, out objWS, out objWSFEV1);
                 
                 ar.gov.afip.wsw.FEConsultaCAEReq objFECompConsultaReq = new ar.gov.afip.wsw.FEConsultaCAEReq();
                 objFECompConsultaReq.cuit_emisor = lc.comprobante[0].cabecera.informacion_vendedor.cuit;

@@ -171,6 +171,8 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                 MonedaComprobanteDropDownList.Enabled = true;
 
+                Numero_ComprobanteTextBox.Attributes.Add("autocomplete", "off");
+
                 if (Funciones.SessionTimeOut(Session))
                 {
                     Response.Redirect("~/SessionTimeout.aspx");
@@ -367,6 +369,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                     }
                 }
+                DescargarPDFPanel.Visible = false;
+                DescargarPDFButton.Visible = true;
+                ActualizarEstadoPanel.Visible = false;
+                ActualizarEstadoButton.Visible = true;
             }
         }
 		private void BindearDropDownLists()
@@ -458,10 +464,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                ActualizarEstadoButton.Visible = false;
-                DescargarPDFButton.Visible = false;
-                ActualizarEstadoButton.DataBind();
-                DescargarPDFButton.DataBind();
+                ActualizarEstadoPanel.Visible = false;
+                DescargarPDFPanel.Visible = false;
+                //ActualizarEstadoButton.DataBind();
+                //DescargarPDFButton.DataBind();
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
@@ -824,10 +830,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                ActualizarEstadoButton.Visible = false;
-                DescargarPDFButton.Visible = false;
-                ActualizarEstadoButton.DataBind();
-                DescargarPDFButton.DataBind();
+                ActualizarEstadoPanel.Visible = false;
+                DescargarPDFPanel.Visible = false;
+                //ActualizarEstadoButton.DataBind();
+                //DescargarPDFButton.DataBind();
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
@@ -857,7 +863,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 }
                             }
                             LlenarCampos(lc);
-                            BorrarCamposNoClonables();
+                            BorrarCamposFileUpload();
                         }
                         catch (Exception ex)
                         {
@@ -1208,6 +1214,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             #endregion
             BindearDropDownLists();
 		}
+        private void BorrarCamposFileUpload()
+        {
+            CAETextBox.Text = string.Empty;
+            FechaCAEObtencionDatePickerWebUserControl.Text = string.Empty;
+            FechaCAEVencimientoDatePickerWebUserControl.Text = string.Empty;
+        }
         private void BorrarCamposNoClonables()
         {
             Numero_ComprobanteTextBox.Text = string.Empty;
@@ -2197,10 +2209,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                ActualizarEstadoButton.Visible = false;
-                DescargarPDFButton.Visible = false;
-                ActualizarEstadoButton.DataBind();
-                DescargarPDFButton.DataBind();
+                ActualizarEstadoPanel.Visible = false;
+                DescargarPDFPanel.Visible = false;
+                //ActualizarEstadoButton.DataBind();
+                //DescargarPDFButton.DataBind();
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
@@ -2295,10 +2307,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                ActualizarEstadoButton.Visible = false;
-                DescargarPDFButton.Visible = false;
-                ActualizarEstadoButton.DataBind();
-                DescargarPDFButton.DataBind();
+                ActualizarEstadoPanel.Visible = false;
+                DescargarPDFPanel.Visible = false;
+                //ActualizarEstadoButton.DataBind();
+                //DescargarPDFButton.DataBind();
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
@@ -2376,28 +2388,29 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     comprobante.NroPuntoVta = lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                                     comprobante.Nro = lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
                                     c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
-                                    Session["comprobantePDF"] = comprobante;
                                     comprobante.Response = XML;
                                     if (lc.cabecera_lote.resultado == "A")
                                     {
                                         comprobante.WF.Estado = "Vigente";
                                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
                                         c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
-                                        ActualizarEstadoButton.Visible = false;
-                                        DescargarPDFButton.Visible = true;
+                                        Session["comprobantePDF"] = comprobante;
+                                        ActualizarEstadoPanel.Visible = false;
+                                        DescargarPDFPanel.Visible = true;
                                     }
                                     else if (lc.cabecera_lote.resultado == "R")
                                     {
                                         comprobante.WF.Estado = "Rechazado";
                                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                                        ActualizarEstadoButton.Visible = false;
+                                        c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                        Session["comprobantePDF"] = comprobante;
+                                        ActualizarEstadoPanel.Visible = false;
+                                        DescargarPDFPanel.Visible = true;
                                     }
-                                    else
-                                    {
-                                        ActualizarEstadoButton.Visible = true;
-                                    }
-                                    ActualizarEstadoButton.DataBind();
-                                    DescargarPDFButton.DataBind();
+                                }
+                                else
+                                {
+                                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas. " + Funciones.TextoScript(respuesta)), false);
                                 }
                             }
                         }
@@ -2480,21 +2493,18 @@ namespace CedServicios.Site.Facturacion.Electronica
                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
                         c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                         Session["comprobantePDF"] = comprobante;
-                        ActualizarEstadoButton.Visible = false;
-                        DescargarPDFButton.Visible = true;
+                        ActualizarEstadoPanel.Visible = false;
+                        DescargarPDFPanel.Visible = true;
                     }
                     else if (lc.cabecera_lote.resultado == "R")
                     {
                         comprobante.WF.Estado = "Rechazado";
                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                        ActualizarEstadoButton.Visible = false;
+                        c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                        Session["comprobantePDF"] = comprobante;
+                        ActualizarEstadoPanel.Visible = false;
+                        DescargarPDFPanel.Visible = false;
                     }
-                    else
-                    {
-                        ActualizarEstadoButton.Visible = true;
-                    }
-                    ActualizarEstadoButton.DataBind();
-                    DescargarPDFButton.DataBind();
                 }
             }
             catch (Exception ex)
@@ -2510,10 +2520,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                ActualizarEstadoButton.Visible = false;
-                DescargarPDFButton.Visible = false;
-                ActualizarEstadoButton.DataBind();
-                DescargarPDFButton.DataBind();
+                ActualizarEstadoPanel.Visible = false;
+                DescargarPDFPanel.Visible = false;
+                //ActualizarEstadoButton.DataBind();
+                //DescargarPDFButton.DataBind();
                 if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
                 {
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
@@ -2584,6 +2594,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     comprobante.Response = XML;
                                     comprobante.WF.Estado = "Vigente";
                                     RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+
+                                    c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                    Session["comprobantePDF"] = comprobante;
+                                    DescargarPDFPanel.Visible = true;
                                 }
                             }
                         }
@@ -2769,81 +2783,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 ms.Seek(0, System.IO.SeekOrigin.Begin);
                                 lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
-                                string comprobanteXML = "";
-
-                                #region TRATAMIENTO DE LOGOTIPO
-                                string uRLfile = String.Empty;
-                                if (System.Configuration.ConfigurationManager.AppSettings["Ambiente"] == "DESA")
-                                {
-                                    uRLfile = "http://cedeiraweb.no-ip.org:8080/ImagenesSubidas/" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + ".gif";
-                                }
-                                else
-                                {
-                                    uRLfile = "http://www.cedeira.com.ar/ImagenesSubidas/" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + ".gif";
-                                }
-                                if (Existe(uRLfile))
-                                {
-                                    if (lote.comprobante[0].extensiones == null)
-                                    {
-                                        lote.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
-                                        lote.comprobante[0].extensionesSpecified = true;
-                                    }
-                                    if (lote.comprobante[0].extensiones.extensiones_camara_facturas == null)
-                                    {
-                                        lote.comprobante[0].extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
-                                        lote.comprobante[0].extensiones.extensiones_camara_facturasSpecified = true;
-                                    }
-                                    lote.comprobante[0].extensiones.extensiones_camara_facturas.id_logo = uRLfile;
-                                }
-                                #endregion
-
-                                RN.Comprobante.SerializarC(out comprobanteXML, lote.comprobante[0]);
-
-                                try
-                                {
-                                    Funciones.GrabarLogTexto("~/Detallar.txt", "Inicia ExecuteCommand");
-                                    org.dyndns.cedweb.generoPDF.GeneroPDF pdfdyndns = new org.dyndns.cedweb.generoPDF.GeneroPDF();
-
-                                    string GenerarPDFUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFUtilizarServidorExterno"];
-                                    Funciones.GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFUtilizarServidorExterno: " + GenerarPDFUtilizarServidorExterno);
-                                    if (GenerarPDFUtilizarServidorExterno == "SI")
-                                    {
-                                        pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
-                                        Funciones.GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
-                                    }
-                                    string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobante.IdDestinoComprobante, comprobanteXML);
-                                    Funciones.GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
-
-                                    //Crear nombre de archivo default sin extensión
-                                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                                    sb.Append(comprobante.Cuit);
-                                    sb.Append("-");
-                                    sb.Append(comprobante.NroPuntoVta.ToString("0000"));
-                                    sb.Append("-");
-                                    sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
-                                    sb.Append("-");
-                                    sb.Append(comprobante.Nro.ToString("00000000"));
-                                    sb.Append(".pdf");
-
-                                    string url = RespPDF;
-                                    string filename = sb.ToString();
-                                    String dlDir = @"~/TempRenderAFIP/";
-                                    new System.Net.WebClient().DownloadFile(url, Server.MapPath(dlDir + filename));
-
-                                    script = "window.open('/DescargaTemporarios.aspx?archivo=" + sb.ToString() + "&path=" + @"~/TempRenderAFIP/" + "', '');";
-                                    ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
-                                }
-                                catch (Exception ex)
-                                {
-                                    script = "Problemas para generar el PDF.\\n" + ex.Message;
-                                    script += ex.StackTrace;
-                                    if (ex.InnerException != null)
-                                    {
-                                        script = ex.InnerException.Message;
-                                    }
-                                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), script);
-                                    MensajeLabel.Text = script;
-                                }
+                                RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
+                               
+                                Session["lote"] = lote;
+                                script = "window.open('/Facturacion/Electronica/Reportes/FacturaWebForm.aspx', '');";
+                                ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+    
                             }
                             catch (Exception ex)
                             {

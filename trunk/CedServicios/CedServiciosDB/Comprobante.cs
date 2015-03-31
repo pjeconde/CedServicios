@@ -350,21 +350,6 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public void Actualizar(Entidades.Comprobante Comprobante)
-        {
-            System.Text.StringBuilder a = new StringBuilder();
-            a.Append("update Comprobante set Response = '" + Comprobante.Response + "', Estado = '" + Comprobante.Estado + "', ");
-            a.Append("Comprobante.IdTipoDoc='" + Comprobante.Documento.Tipo.Id + "', ");
-            a.Append("Comprobante.NroDoc=" + Comprobante.Documento.Nro.ToString() + ", ");
-            //a.Append("Comprobante.Fecha='" + Comprobante.Fecha.ToString("yyyyMMdd") + "', ");
-            //a.Append("Comprobante.FechaVto='" + Comprobante.FechaVto.ToString("yyyyMMdd") + "', ");
-            a.Append("Comprobante.Moneda='" + Comprobante.Moneda + "', ");
-            a.Append("Comprobante.ImporteMoneda='" + Comprobante.ImporteMoneda.ToString("0000000000000.00").Replace(",",".") + "', ");
-            a.Append("Comprobante.TipoCambio='" + Comprobante.TipoCambio.ToString("0000.000000").Replace(",", ".") + "', ");
-            a.Append("Comprobante.Importe='" + Comprobante.Importe.ToString("0000000000000.00").Replace(",", ".") + "' ");
-            a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + "and Comprobante.NroComprobante=" + Comprobante.Nro.ToString() + " ");
-            int Cantidad = (int)Ejecutar(a.ToString(), TipoRetorno.CantReg, Transaccion.NoAcepta, sesion.CnnStr);
-        }
         private void Copiar(DataRow Desde, Entidades.Comprobante Hasta)
         {
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
@@ -410,6 +395,22 @@ namespace CedServicios.DB
             Hasta.CantidadComprobantesAEmitir = Convert.ToInt32(Desde["CantidadComprobantesAEmitir"]);
             Hasta.CantidadComprobantesEmitidos = Convert.ToInt32(Desde["CantidadComprobantesEmitidos"]);
             Hasta.CantidadDiasFechaVto = Convert.ToInt32(Desde["CantidadDiasFechaVto"]);
+        }
+        public void Actualizar(Entidades.Comprobante Comprobante)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("insert Log values (" + Comprobante.WF.Id + ", getdate(), '" + sesion.Usuario.Id + "', 'Comprobante', 'CambioEstado', '" + Comprobante.Estado + "', '') ");
+            a.Append("update Comprobante set Response = '" + Comprobante.Response + "', Estado = '" + Comprobante.Estado + "', ");
+            a.Append("Comprobante.IdTipoDoc='" + Comprobante.Documento.Tipo.Id + "', ");
+            a.Append("Comprobante.NroDoc=" + Comprobante.Documento.Nro.ToString() + ", ");
+            //a.Append("Comprobante.Fecha='" + Comprobante.Fecha.ToString("yyyyMMdd") + "', ");
+            //a.Append("Comprobante.FechaVto='" + Comprobante.FechaVto.ToString("yyyyMMdd") + "', ");
+            a.Append("Comprobante.Moneda='" + Comprobante.Moneda + "', ");
+            a.Append("Comprobante.ImporteMoneda='" + Comprobante.ImporteMoneda.ToString("0000000000000.00").Replace(",",".") + "', ");
+            a.Append("Comprobante.TipoCambio='" + Comprobante.TipoCambio.ToString("0000.000000").Replace(",", ".") + "', ");
+            a.Append("Comprobante.Importe='" + Comprobante.Importe.ToString("0000000000000.00").Replace(",", ".") + "' ");
+            a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + "and Comprobante.NroComprobante=" + Comprobante.Nro.ToString() + " ");
+            int Cantidad = (int)Ejecutar(a.ToString(), TipoRetorno.CantReg, Transaccion.NoAcepta, sesion.CnnStr);
         }
     }
 }
