@@ -31,6 +31,69 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label TituloPaginaLabel;
         
         /// <summary>
+        /// Control ClienteDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ClienteDropDownList;
+        
+        /// <summary>
+        /// Control EstadoVigenteCheckBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox EstadoVigenteCheckBox;
+        
+        /// <summary>
+        /// Control EstadoPteConfCheckBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox EstadoPteConfCheckBox;
+        
+        /// <summary>
+        /// Control EstadoDeBajaCheckBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox EstadoDeBajaCheckBox;
+        
+        /// <summary>
+        /// Control EstadoPteAutorizCheckBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox EstadoPteAutorizCheckBox;
+        
+        /// <summary>
+        /// Control EstadoRechCheckBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox EstadoRechCheckBox;
+        
+        /// <summary>
+        /// Control NaturalezaComprobanteDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList NaturalezaComprobanteDropDownList;
+        
+        /// <summary>
         /// Control PeriodoEmisionPanel.
         /// </summary>
         /// <remarks>
@@ -92,42 +155,6 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image FechaHastaImage;
-        
-        /// <summary>
-        /// Control ClienteDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ClienteDropDownList;
-        
-        /// <summary>
-        /// Control NaturalezaComprobanteDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList NaturalezaComprobanteDropDownList;
-        
-        /// <summary>
-        /// Control SoloVigentesLabel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label SoloVigentesLabel;
-        
-        /// <summary>
-        /// Control SoloVigentesCheckBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox SoloVigentesCheckBox;
         
         /// <summary>
         /// Control BuscarButton.

@@ -11,10 +11,10 @@ namespace CedServicios.RN
 {
     public class Comprobante
     {
-        public static List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, Entidades.Sesion Sesion)
+        public static List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            return db.ListaFiltrada(SoloVigentes, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos);
+            return db.ListaFiltrada(Estados, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos);
         }
         public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, Entidades.Sesion Sesion)
         {

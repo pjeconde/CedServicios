@@ -11,7 +11,7 @@ namespace CedServicios.DB
         public Comprobante(Entidades.Sesion Sesion) : base(Sesion)
         {
         }
-        public List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos)
+        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)
@@ -22,9 +22,15 @@ namespace CedServicios.DB
                 a.Append("from Comprobante, NaturalezaComprobante ");
                 a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' ");
                 a.Append("and Comprobante.IdNaturalezaComprobante=NaturalezaComprobante.IdNaturalezaComprobante ");
-                if (SoloVigentes)
+                string estados = String.Empty;
+                for (int i = 0; i < Estados.Count; i++)
                 {
-                    a.Append("and Comprobante.Estado='Vigente' ");
+                    estados += "'" + Estados[i].Id + "'";
+                    if (i != (Estados.Count - 1)) estados += ", ";
+                }
+                if (estados != String.Empty)
+                {
+                    a.Append("and Comprobante.Estado in (" + estados + ") ");
                 }
                 if (FechaDesde != String.Empty)
                 {
