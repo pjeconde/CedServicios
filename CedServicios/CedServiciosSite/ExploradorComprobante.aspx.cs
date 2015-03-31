@@ -359,6 +359,10 @@ namespace CedServicios.Site
                                     RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
                                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                                 }
+                                else
+                                {
+                                    MensajeLabel.Text = respuesta;
+                                }
                             }
                         }
                         else

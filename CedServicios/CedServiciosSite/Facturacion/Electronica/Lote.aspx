@@ -126,7 +126,7 @@
                                                 <asp:Label ID="NumeroDeLabel" runat="server" Text="Número de comprobante:" Visible="true"></asp:Label>
                                             </td>
                                             <td class="TC10S">
-                                                <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" AutoCompleteType="None" 
+                                                <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" AutoCompleteType="Disabled"
                                                     ToolTip="Debe ser correlativo al último ingresado por Punto de Venta y Tipo de Comprobante. No es necesario ingresar ceros a la izquierda. Si su factura es p.ej.0002-00000005, puede ingresar 5."> </asp:TextBox>
                                             </td>
                                         </tr>
@@ -1640,7 +1640,7 @@
                                                                 Text="Validar" ToolTip="Validar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
                                                             <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
                                                                 PopupControlID="PopupValidarITF" TargetControlID="ValidarEnInterfacturasButton" 
-                                                                BackgroundCssClass="modalBackground" runat="server" ValidateRequestMode="Enabled" 
+                                                                BackgroundCssClass="modalBackground" runat="server" 
                                                                 onload="ModalPopupExtender1_Load" />
                                                             <asp:Button ID="SubirAInterfacturasButton" runat="server" CausesValidation="false" OnClick="AccionSubirAInterfacturasButton_Click" 
                                                                 Text="Enviar" ToolTip="Impactar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
@@ -1731,22 +1731,28 @@
                     </tr>
                     <tr>
                         <td align="left" style="text-align: center; width: 780px; padding: 5px;">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
-                                <tr>
-                                    <td style="width: 100%;">
-                                        <asp:Button ID="DescargarPDFButton" runat="server" Text="Descargar PDF" Width="100%"
-                                            CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
-                                            OnClick="DescargarPDFButton_Click" Visible="False" />
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td style="width: 100%;">
-                                        <asp:Button ID="ActualizarEstadoButton" runat="server" Text="Actualizar Estado" Width="100%"
-                                            CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
-                                            OnClick="ActualizarEstadoButton_Click" Visible="False" />
-                                    </td>
-                                </tr>
-                            </table>
+                            <asp:Panel ID="DescargarPDFPanel" runat="server">
+                                <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
+                                    <tr>
+                                        <td style="width: 100%;">
+                                            <asp:Button ID="DescargarPDFButton" runat="server" Text="Descargar PDF" Width="100%"
+                                                CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
+                                                OnClick="DescargarPDFButton_Click" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
+                            <asp:Panel ID="ActualizarEstadoPanel" runat="server">
+                                <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
+                                    <tr>
+                                        <td style="width: 100%;">
+                                            <asp:Button ID="ActualizarEstadoButton" runat="server" Text="Actualizar Estado" Width="100%"
+                                                CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
+                                                OnClick="ActualizarEstadoButton_Click" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
                         </td>
                     </tr>
                 </table>
