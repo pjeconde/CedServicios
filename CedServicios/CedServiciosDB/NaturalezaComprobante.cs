@@ -11,15 +11,19 @@ namespace CedServicios.DB
         public NaturalezaComprobante(Entidades.Sesion Sesion) : base(Sesion)
         {
         }
-        public List<Entidades.NaturalezaComprobante> LeerLista(bool IncluirOpcionTodos)
+        public List<Entidades.NaturalezaComprobante> LeerLista(Entidades.Enum.Elemento Elemento)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("select NaturalezaComprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante from NaturalezaComprobante ");
+            if (Elemento == Entidades.Enum.Elemento.Comprobante)
+                a.Append(" where NaturalezaComprobante.IdNaturalezaComprobante<>'VentaContrato' ");
+            else
+                a.Append(" where NaturalezaComprobante.IdNaturalezaComprobante='VentaContrato' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.NaturalezaComprobante> lista = new List<Entidades.NaturalezaComprobante>();
             if (dt.Rows.Count != 0)
             {
-                if (IncluirOpcionTodos)
+                if (Elemento == Entidades.Enum.Elemento.Comprobante)
                 {
                     Entidades.NaturalezaComprobante elem = new Entidades.NaturalezaComprobante();
                     elem.Id = String.Empty;

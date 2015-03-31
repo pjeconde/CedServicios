@@ -11,15 +11,15 @@ namespace CedServicios.RN
 {
     public class Comprobante
     {
-        public static List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, Entidades.Sesion Sesion)
+        public static List<Entidades.Comprobante> ListaFiltrada(bool SoloVigentes, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            return db.ListaFiltrada(SoloVigentes, FechaDesde, FechaHasta, Persona, NaturalezaComprobante);
+            return db.ListaFiltrada(SoloVigentes, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos);
         }
-        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, Entidades.Sesion Sesion)
+        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            db.Registrar(Lote, Response, IdNaturalezaComprobante, IdDestinoComprobante, IdEstado);
+            db.Registrar(Lote, Response, IdNaturalezaComprobante, IdDestinoComprobante, IdEstado, PeriodicidadEmision, FechaProximaEmision, CantidadComprobantesAEmitir, CantidadComprobantesEmitidos, CantidadDiasFechaVto);
         }
         public void Leer(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {

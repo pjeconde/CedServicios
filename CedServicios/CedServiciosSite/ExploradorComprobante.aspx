@@ -5,15 +5,16 @@
     <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton">
         <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
             <tr>
-                <td align="center" colspan="3" style="padding-top:20px">
+                <td align="center" colspan="3" style="padding-top:20px; padding-bottom:20px">
                     <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes"></asp:Label>
                 </td>
             </tr>
+            <asp:Panel ID="PeriodoEmisionPanel" runat="server">
             <tr>
-	            <td align="left" style="padding-right:5px; padding-top:20px">
+	            <td align="left" style="padding-right:5px">
                     Período de emisión:
 	            </td>
-			    <td align="left" style="padding-top:20px">
+			    <td align="left">
                     desde&nbsp;
                     <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
                     <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
@@ -28,6 +29,7 @@
                     <asp:Image runat="server" ID="FechaHastaImage" ImageUrl="~/Imagenes/Calendar.gif" />
                 </td>
             </tr>
+            </asp:Panel>
             <tr>
                 <td align="left" style="padding-right:5px; padding-top:5px">
                     Persona (cliente/proveedor):
@@ -50,7 +52,7 @@
             </tr>
             <tr>
                 <td align="left" style="padding-right:5px; padding-top:5px">
-                    Sólo comprobantes vigentes:
+                    <asp:Label ID="SoloVigentesLabel" runat="server" Text="Sólo comprobantes vigentes:" Visible="true"></asp:Label>
                 </td>
                 <td align="left" style="padding-top:5px">
                     <asp:CheckBox ID="SoloVigentesCheckBox" runat="server" Checked="false" AutoPostBack="true" TextAlign="Left" />
@@ -74,9 +76,9 @@
                     <asp:GridView ID="ComprobantesGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                         <Columns>
-                            <asp:TemplateField ControlStyle-Width="35">
+                            <asp:TemplateField>
                                 <ItemTemplate>
-                                    <asp:ImageButton ID="ConsultarButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ImageUrl="~/Imagenes/Iconos/Consultar.png" />
+                                    <asp:LinkButton ID="VerLinkButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Ver detalle</asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">

@@ -15,21 +15,22 @@ namespace CedServicios.Site
             if (!IsPostBack)
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                Object o = Cache.Get("ComprobanteAClonar");
-                if (o == null)
+                if (Session["ComprobanteATratar"] == null)
                 {
                     Funciones.PersonalizarControlesMaster(this, true, sesion);
                 }
                 else
                 {
-                    if (Request.RawUrl != "/Facturacion/Electronica/Lote.aspx")
+
+                    if (Request.RawUrl == "/Facturacion/Electronica/Lote.aspx" && ((Entidades.ComprobanteATratar)Session["ComprobanteATratar"]).Tratamiento != Entidades.Enum.TratamientoComprobante.Alta)
                     {
-                        Cache.Remove("ComprobanteAClonar");
-                        Funciones.PersonalizarControlesMaster(this, true, sesion);
+                        UsuarioContentPlaceHolder.Visible = false;
+                        CedeiraContentPlaceHolder.Visible = false;
                     }
                     else
                     {
-                        UsuarioContentPlaceHolder.Visible = false;
+                        Session.Remove("ComprobanteATratar");
+                        Funciones.PersonalizarControlesMaster(this, true, sesion);
                     }
                 }
             }
@@ -114,8 +115,8 @@ namespace CedServicios.Site
                 case "Artículos|Consulta":
                     Response.Redirect("~/ArticuloConsulta.aspx");
                     break;
-                case "Comprobantes|Alta|Venta|Electrónica":
-                    Session["IdNaturalezaComprobante"] = "Venta";
+                case "Contratos|Alta":
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("VentaContrato");
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {
                         Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
@@ -125,8 +126,15 @@ namespace CedServicios.Site
                         Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
                     }
                     break;
-                case "Comprobantes|Alta|Venta|Manual":
-                    Session["IdNaturalezaComprobante"] = "VentaM";
+                case "Contratos|Baja/Anul.baja":
+                    break;
+                case "Contratos|Modificación":
+                    break;
+                case "Contratos|Consulta":
+                    Response.Redirect("~/ExploradorComprobante.aspx?Contrato");
+                    break;
+                case "Comprobantes|Alta manual|Venta|Electrónica":
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Venta");
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {
                         Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
@@ -136,8 +144,8 @@ namespace CedServicios.Site
                         Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
                     }
                     break;
-                case "Comprobantes|Alta|Compra":
-                    Session["IdNaturalezaComprobante"] = "Compra";
+                case "Comprobantes|Alta manual|Venta|Tradicional":
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("VentaTradic");
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {
                         Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
@@ -146,9 +154,24 @@ namespace CedServicios.Site
                     {
                         Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
                     }
+                    break;
+                case "Comprobantes|Alta manual|Compra":
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Compra");
+                    if (sesion.Usuario.FechaOKeFactTyC == "00000000")
+                    {
+                        Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
+                    }
+                    break;
+                case "Comprobantes|Baja/Anul.baja":
+                    break;
+                case "Comprobantes|Modificación":
                     break;
                 case "Comprobantes|Consulta":
-                    Response.Redirect("~/ExploradorComprobante.aspx");
+                    Response.Redirect("~/ExploradorComprobante.aspx?Comprobante");
                     break;
                 case "Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes":
                     Response.Redirect("~/ExploradorComprobanteOnLineInterfacturas.aspx");
@@ -162,8 +185,10 @@ namespace CedServicios.Site
                 case "Comprobantes|Otras Consultas|Archivo XML":
                     Response.Redirect("~/ComprobanteSeleccionArchivoXML.aspx");
                     break;
-                case "Comprobantes|TyC":
+                case "Comprobantes|Otras Consultas|Términos y condiciones":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
+                    break;
+                case "Comprobantes|Facturación automática (contratos)":
                     break;
                 case "Administración|Autorizaciones|Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx");

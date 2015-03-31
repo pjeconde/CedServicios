@@ -29,8 +29,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                 else
                 {
                     ViewState["articulolista"] = RN.Articulo.ListaPorCuit(true, ((Entidades.Sesion)Session["Sesion"]));
-                    Object o = Cache.Get("ComprobanteAClonar");
-                    if (o == null)
+                    Object o = Session["ComprobanteATratar"];
+                    if (o == null || ((Entidades.ComprobanteATratar)o).Tratamiento == Entidades.Enum.TratamientoComprobante.Alta)
                     {
                         ResetearGrillas();
                     }
@@ -239,7 +239,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     detalleGridView.DataSource = ViewState["lineas"];
                     detalleGridView.DataBind();
                     BindearDropDownLists();
-                    Cache["FaltaCalcularTotales"] = true;
+                    Session["FaltaCalcularTotales"] = true;
                 }
                 catch (Exception ex)
                 {
@@ -747,7 +747,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 detalleGridView.DataBind();
                 BindearDropDownLists();
                 ViewState["lineas"] = lineas;
-                Cache["FaltaCalcularTotales"] = true;
+                Session["FaltaCalcularTotales"] = true;
             }
             catch (Exception ex)
             {
@@ -899,7 +899,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				detalleGridView.DataSource = ViewState["lineas"];
 				detalleGridView.DataBind();
 				BindearDropDownLists();
-                Cache["FaltaCalcularTotales"] = true;
+                Session["FaltaCalcularTotales"] = true;
 			}
 			catch
 			{
@@ -1322,34 +1322,37 @@ namespace CedServicios.Site.Facturacion.Electronica
 		public void ActualizarTipoDeCambio(string MonedaComprobante)
 		{
 			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
-			if (!MonedaComprobante.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-			{
-				for (int i = 0; i < listadelineas.Count; i++)
-				{
-					FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
-					limo.importe_total_articuloSpecified = true;
-					limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
-					limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
-					limo.importe_iva = listadelineas[i].importe_iva;
-					limo.precio_unitario = listadelineas[i].precio_unitario;
-					limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
-					listadelineas[i].importes_moneda_origen = limo;
-				}
-			}
-			else
-			{
-				for (int i = 0; i < listadelineas.Count; i++)
-				{
-					if (listadelineas[i].importes_moneda_origen != null)
-					{
-						listadelineas[i].importe_total_articulo = listadelineas[i].importes_moneda_origen.importe_total_articulo;
-						listadelineas[i].importe_ivaSpecified = listadelineas[i].importes_moneda_origen.importe_ivaSpecified;
-						listadelineas[i].importe_iva = listadelineas[i].importes_moneda_origen.importe_iva;
-						listadelineas[i].precio_unitario = listadelineas[i].importes_moneda_origen.precio_unitario;
-						listadelineas[i].precio_unitarioSpecified = listadelineas[i].importes_moneda_origen.precio_unitarioSpecified;
-					}
-				}
-			}
+            if (listadelineas != null)
+            {
+                if (!MonedaComprobante.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+                {
+                    for (int i = 0; i < listadelineas.Count; i++)
+                    {
+                        FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+                        limo.importe_total_articuloSpecified = true;
+                        limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
+                        limo.importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
+                        limo.importe_iva = listadelineas[i].importe_iva;
+                        limo.precio_unitario = listadelineas[i].precio_unitario;
+                        limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+                        listadelineas[i].importes_moneda_origen = limo;
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < listadelineas.Count; i++)
+                    {
+                        if (listadelineas[i].importes_moneda_origen != null)
+                        {
+                            listadelineas[i].importe_total_articulo = listadelineas[i].importes_moneda_origen.importe_total_articulo;
+                            listadelineas[i].importe_ivaSpecified = listadelineas[i].importes_moneda_origen.importe_ivaSpecified;
+                            listadelineas[i].importe_iva = listadelineas[i].importes_moneda_origen.importe_iva;
+                            listadelineas[i].precio_unitario = listadelineas[i].importes_moneda_origen.precio_unitario;
+                            listadelineas[i].precio_unitarioSpecified = listadelineas[i].importes_moneda_origen.precio_unitarioSpecified;
+                        }
+                    }
+                }
+            }
 		}
 		protected void CalcularImporteArtEnEdicion(object sender, EventArgs e)
 		{

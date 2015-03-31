@@ -82,7 +82,7 @@ namespace CedServicios.Site
                     }
                     org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
                     clcrdyndns = clcdyndns.Consultar(Convert.ToInt64(CuitConsultaTextBox.Text), Convert.ToInt64(NroLoteConsultaTextBox.Text), Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue), certificado);
-                    Cache["ComprobanteAConsultar"] = clcrdyndns;
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.ConsultaITF, clcrdyndns);
                     string script = "window.open('/ComprobanteConsulta.aspx', '');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                 }

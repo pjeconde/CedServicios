@@ -52,8 +52,13 @@ namespace CedServicios.Site
                                 MensajeLabel.Text = "El Punto de Venta: " + lc.cabecera_lote.punto_de_venta.ToString() + " que figura en el archivo XML, no coincide con los definidos para la UN que usted está operando.";
                                 return;
                             }
-                            Cache["ComprobanteAConsultar"] = lc;
                             lc.comprobante[0].IdNaturalezaComprobante = "Venta";
+
+                            Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                            string XML = "";
+                            RN.Comprobante.SerializarLc(out XML, lc);
+                            comprobante.Request = XML;
+                            Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
                             string script = "window.open('/ComprobanteConsulta.aspx', '');";
                             ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                         }
@@ -90,7 +95,13 @@ namespace CedServicios.Site
             FeaEntidades.InterFacturas.comprobante[] cArray = new FeaEntidades.InterFacturas.comprobante[1];
             cArray[0] = c;
             lc.comprobante = cArray;
-            Cache["ComprobanteAConsultar"] = lc;
+            Session["ComprobanteAConsultar"] = lc;
+
+            Entidades.Comprobante comprobante = new Entidades.Comprobante();
+            string XML = "";
+            RN.Comprobante.SerializarLc(out XML, lc);
+            comprobante.Request = XML;
+            Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
             string script = "window.open('/ComprobanteConsulta.aspx', '');";
             ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
         }
@@ -105,7 +116,11 @@ namespace CedServicios.Site
                 System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(clr.GetType());
                 clr = (FeaEntidades.InterFacturas.XML.consulta_lote_comprobantes_response)x.Deserialize(ms);
                 lc = clr.consulta_lote_response.lote_comprobantes;
-                Cache["ComprobanteAConsultar"] = lc;
+                Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                string XML = "";
+                RN.Comprobante.SerializarLc(out XML, lc);
+                comprobante.Request = XML;
+                Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
                 string script = "window.open('/ComprobanteConsulta.aspx', '');";
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
             }

@@ -22,7 +22,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
         DataSet dsImages = new DataSet();
         protected void Page_Unload(object sender, EventArgs e)
         {
-            Cache.Remove("EsComprobanteOriginal");
+            Session.Remove("EsComprobanteOriginal");
             if (facturaRpt != null)
             {
                 facturaRpt.Dispose();
@@ -76,7 +76,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     bool original = true;
                     try
                     {
-                        original = (bool)Cache["EsComprobanteOriginal"];
+                        original = (bool)Session["EsComprobanteOriginal"];
                         if (original == false)
                         {
                             facturaRpt.DataDefinition.FormulaFields["Borrador"].Text = "'BORRADOR'";
