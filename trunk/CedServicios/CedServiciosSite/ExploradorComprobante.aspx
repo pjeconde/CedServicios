@@ -9,9 +9,57 @@
                     <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes"></asp:Label>
                 </td>
             </tr>
+            <tr>
+                <td align="left" style="padding-right:5px; padding-top:5px">
+                    Persona (cliente/proveedor):
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
+                </td>
+                <td rowspan="3" align="left" style="padding-top:5px" valign="top">
+                    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+                        <tr>
+                            <td>
+                                Estado(s):
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="EstadoVigenteCheckBox" runat="server" Text="Vigente" AutoPostBack="false"/>
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="EstadoPteConfCheckBox" runat="server" Text="Pendiente de confirmación" AutoPostBack="false"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <asp:CheckBox ID="EstadoDeBajaCheckBox" runat="server" Text="De baja" AutoPostBack="false"/>
+                            </td>
+                            <td>
+                                <asp:CheckBox ID="EstadoPteAutorizCheckBox" runat="server" Text="Pendiente de autorización" AutoPostBack="false"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td>
+                                <asp:CheckBox ID="EstadoRechCheckBox" runat="server" Text="Rechazado" AutoPostBack="false"/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width:550px">
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="padding-right:5px; padding-top:5px">
+                    Naturaleza del comprobante:
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" Width="400px" DataValueField="Id" DataTextField="Descr"></asp:DropDownList>
+                </td>        
+            </tr>
             <asp:Panel ID="PeriodoEmisionPanel" runat="server">
             <tr>
-	            <td align="left" style="padding-right:5px">
+	            <td align="left" style="padding-right:5px; padding-top:5px">
                     Período de emisión:
 	            </td>
 			    <td align="left">
@@ -31,48 +79,20 @@
             </tr>
             </asp:Panel>
             <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    Persona (cliente/proveedor):
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
-                </td>        
-                <td style="width:550px">
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    Naturaleza del comprobante:
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" Width="400px" DataValueField="Id" DataTextField="Descr"></asp:DropDownList>
-                </td>        
-                <td style="width:550px">
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    <asp:Label ID="SoloVigentesLabel" runat="server" Text="Sólo comprobantes vigentes:" Visible="true"></asp:Label>
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:CheckBox ID="SoloVigentesCheckBox" runat="server" Checked="false" AutoPostBack="true" TextAlign="Left" />
-                </td>        
-            </tr>
-            <tr>
                 <td>
                 </td>
-                <td align="left" style="height: 24px; padding-top:5px">
+                <td align="left" style="height: 24px; padding-top:5px" valign="top">
                     <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
                     <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="3" style="padding-top:10px; padding-bottom:10px">
+                <td align="center" colspan="4" style="padding-top:20px; padding-bottom:10px">
                     <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td colspan="3" style="padding-top:35px">
+                <td colspan="4">
                     <asp:GridView ID="ComprobantesGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                         <Columns>

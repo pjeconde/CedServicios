@@ -34,7 +34,6 @@ namespace CedServicios.Site
                             ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Comprobante, sesion);
                             NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
                             NaturalezaComprobanteDropDownList.SelectedValue = String.Empty;
-                            SoloVigentesLabel.Text = "Sólo comprobantes vigentes:";
                             if (sesion.UsuarioDemo == true)
                             {
                                 FechaDesdeTextBox.Text = "20130101";
@@ -50,11 +49,15 @@ namespace CedServicios.Site
                             TituloPaginaLabel.Text = "Consulta de Contratos";
                             ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Contrato, sesion);
                             NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
-                            SoloVigentesLabel.Text = "Sólo contratos vigentes:";
                             ComprobantesGridView.Columns[17].Visible = false;
                             PeriodoEmisionPanel.Visible = false;
                             break;
                     }
+                    EstadoVigenteCheckBox.Checked = true;
+                    EstadoPteConfCheckBox.Checked = true;
+                    EstadoDeBajaCheckBox.Checked = false;
+                    EstadoPteAutorizCheckBox.Checked = true;
+                    EstadoRechCheckBox.Checked = false;
                     ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
                     ClienteDropDownList.DataSource = (List<Entidades.Persona>)ViewState["Personas"];
                     DataBind();
@@ -147,7 +150,13 @@ namespace CedServicios.Site
                 {
                     naturalezaComprobante = new Entidades.NaturalezaComprobante();
                 }
-                lista = RN.Comprobante.ListaFiltrada(SoloVigentesCheckBox.Checked, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, sesion);
+                List<Entidades.Estado> estados = new List<Entidades.Estado>();
+                if (EstadoVigenteCheckBox.Checked) estados.Add(new Entidades.EstadoVigente());
+                if (EstadoPteConfCheckBox.Checked) estados.Add(new Entidades.EstadoPteConf());
+                if (EstadoDeBajaCheckBox.Checked) estados.Add(new Entidades.EstadoDeBaja());
+                if (EstadoPteAutorizCheckBox.Checked) estados.Add(new Entidades.EstadoPteAutoriz());
+                if (EstadoRechCheckBox.Checked) estados.Add(new Entidades.EstadoRech());
+                lista = RN.Comprobante.ListaFiltrada(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, sesion);
                 if (lista.Count == 0)
                 {
                     ComprobantesGridView.DataSource = null;

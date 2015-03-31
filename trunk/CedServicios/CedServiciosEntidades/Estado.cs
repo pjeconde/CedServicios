@@ -8,8 +8,8 @@ namespace CedServicios.Entidades
     [Serializable]
     public class Estado
     {
-        private string id;
-        private string descr;
+        protected string id;
+        protected string descr;
 
         public Estado()
         {
@@ -42,6 +42,51 @@ namespace CedServicios.Entidades
             {
                 return descr;
             }
+        }
+    }
+    [Serializable]
+    public class EstadoVigente : Estado
+    {
+        public EstadoVigente()
+        {
+            id = "Vigente";
+            descr = "Vigente";
+        }
+    }
+    [Serializable]
+    public class EstadoPteAutoriz : Estado
+    {
+        public EstadoPteAutoriz()
+        {
+            id = "PteAutoriz";
+            descr = "Pendiente de autorización";
+        }
+    }
+    [Serializable]
+    public class EstadoPteConf : Estado
+    {
+        public EstadoPteConf()
+        {
+            id = "PteConf";
+            descr = "Pendiente de confirmación";
+        }
+    }
+    [Serializable]
+    public class EstadoDeBaja : Estado
+    {
+        public EstadoDeBaja()
+        {
+            id = "DeBaja";
+            descr = "De baja";
+        }
+    }
+    [Serializable]
+    public class EstadoRech : Estado
+    {
+        public EstadoRech()
+        {
+            id = "Rech";
+            descr = "Rechazado";
         }
     }
 }

@@ -10,11 +10,11 @@ namespace CedServicios.RN
         public static List<Entidades.Estado> Lista(bool IncluirOpcionTodos, Entidades.Sesion Sesion)
         {
             List<Entidades.Estado> lista = new List<Entidades.Estado>();
-            lista.Add(new Entidades.Estado("Vigente", "Vigente"));
-            lista.Add(new Entidades.Estado("PteAutoriz","Pendiente de autorización"));
-            lista.Add(new Entidades.Estado("PteConf", "Pendiente de confirmación"));
-            lista.Add(new Entidades.Estado("DeBaja", "De baja"));
-            lista.Add(new Entidades.Estado("Rech", "Rechazado"));
+            lista.Add(new Entidades.EstadoVigente());
+            lista.Add(new Entidades.EstadoPteAutoriz());
+            lista.Add(new Entidades.EstadoPteConf());
+            lista.Add(new Entidades.EstadoDeBaja());
+            lista.Add(new Entidades.EstadoRech());
             if (IncluirOpcionTodos) lista.Add(new Entidades.Estado(String.Empty, "Todos"));
             return lista;
         }
