@@ -52,7 +52,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 				((DropDownList)impuestosGridView.Rows[impuestosGridView.EditIndex].FindControl("ddljurisdiccionEdit")).DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
 				((DropDownList)impuestosGridView.Rows[impuestosGridView.EditIndex].FindControl("ddljurisdiccionEdit")).DataBind();
 			}
-
 		}
 		public void ResetearGrillas()
 		{
