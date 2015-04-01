@@ -149,9 +149,24 @@ namespace CedServicios.Site
                     {
                         case "Consulta":
                             descrTratamiento = "Consulta";
+                            Baja_AnulBaPanel.Visible = false;
                             break;
                         case "ConsultaITF":
                             descrTratamiento = "Consulta (ITF)";
+                            Baja_AnulBaPanel.Visible = false;
+                            break;
+                        case "Baja_AnulBaja":
+                            PrevisualizacionComprobantePanel.Visible = false;
+                            if (comprobanteATratar.Comprobante.Estado == "DeBaja")
+                            {
+                                descrTratamiento = "Anulación de baja";
+                                Baja_AnulBajaButton.Text = "Anular la baja";
+                            }
+                            else
+                            {
+                                descrTratamiento = "Baja";
+                                Baja_AnulBajaButton.Text = "Registrar la baja";
+                            }
                             break;
                     }
                     if (IdNaturalezaComprobanteTextBox.Text.IndexOf("Venta") != -1)
@@ -171,7 +186,7 @@ namespace CedServicios.Site
                                 DatosComprobanteLabel.Text = "COMPROBANTE DE VENTA (tradicional)";
                                 LoteUpdatePanel.Visible = false;
                                 Id_LoteTextbox.Text = "1";
-                                AccionesPanel.Visible = false;
+                                if (TratamientoTextBox.Text.IndexOf("Consulta") != -1) AccionesPanel.Visible = false;
                                 PrevisualizacionComprobantePanel.Visible = false;
                                 DatosEmisionPanel.Visible = false;
                                 FechaProximaEmisionDatePickerWebUserControl.Text = new DateTime(9999, 12, 31).ToString("yyyyMMdd");
@@ -181,7 +196,7 @@ namespace CedServicios.Site
                                 DatosComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
                                 LoteUpdatePanel.Visible = false;
                                 Id_LoteTextbox.Text = "1";
-                                AccionesPanel.Visible = false;
+                                if (TratamientoTextBox.Text.IndexOf("Consulta") != -1) AccionesPanel.Visible = false;
                                 PrevisualizacionComprobantePanel.Visible = false;
                                 CAEPanel.Visible = false;
                                 FechaProximaEmisionDatePickerWebUserControl.Text = DateTime.Today.ToString("yyyyMMdd");
@@ -203,7 +218,7 @@ namespace CedServicios.Site
                         ReferenciasPanel.Visible = false;
                         ExportacionPanel.Visible = false;
                         DatosComerciales.Visible = false;
-                        AccionesPanel.Visible = false;
+                        if (TratamientoTextBox.Text.IndexOf("Consulta") != -1) AccionesPanel.Visible = false;
                         PrevisualizacionComprobantePanel.Visible = false;
                         DatosEmisionPanel.Visible = false;
                         FechaProximaEmisionDatePickerWebUserControl.Text = new DateTime(9999, 12, 31).ToString("yyyyMMdd");
@@ -1127,10 +1142,12 @@ namespace CedServicios.Site
             CodigoConceptoDropDownList.Visible = false;
             FechaServDesdeDatePickerWebUserControl.Text = string.Empty;
             FechaServDesdeDatePickerWebUserControl.Visible = false;
+            ImageCalendarFechaServDesde.Visible = false;
             FechaInicioServLabel.Visible = false;
             FechaHstServLabel.Visible = false;
             FechaServHastaDatePickerWebUserControl.Text = string.Empty;
             FechaServHastaDatePickerWebUserControl.Visible = false;
+            ImageCalendarFechaServHasta.Visible = false;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaExportaciones();
 
             Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
@@ -1157,10 +1174,12 @@ namespace CedServicios.Site
             CodigoConceptoDropDownList.Visible = false;
             FechaServDesdeDatePickerWebUserControl.Text = string.Empty;
             FechaServDesdeDatePickerWebUserControl.Visible = false;
+            ImageCalendarFechaServDesde.Visible = false;
             FechaInicioServLabel.Visible = false;
             FechaHstServLabel.Visible = false;
             FechaServHastaDatePickerWebUserControl.Text = string.Empty;
             FechaServHastaDatePickerWebUserControl.Visible = false;
+            ImageCalendarFechaServHasta.Visible = false;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaParaBienesDeCapital();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
@@ -1206,10 +1225,8 @@ namespace CedServicios.Site
         {
             AjustarPrestaServxVersiones();
 
-            FechaServDesdeDatePickerWebUserControl.Visible = true;
             FechaInicioServLabel.Visible = true;
             FechaHstServLabel.Visible = true;
-            FechaServHastaDatePickerWebUserControl.Visible = true;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.Lista();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
@@ -1235,10 +1252,8 @@ namespace CedServicios.Site
             Version1RadioButton.Visible = false;
             CodigoConceptoLabel.Visible = false;
             CodigoConceptoDropDownList.Visible = false;
-            FechaServDesdeDatePickerWebUserControl.Visible = true;
             FechaInicioServLabel.Visible = true;
             FechaHstServLabel.Visible = true;
-            FechaServHastaDatePickerWebUserControl.Visible = true;
             Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
             Tipo_De_ComprobanteDropDownList.DataBind();
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
@@ -2663,6 +2678,55 @@ namespace CedServicios.Site
             catch (Exception ex)
             {
                 ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("Problemas al generar el pdf.  " + ex.Message));
+            }
+        }
+
+        protected void Baja_AnulBajaButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.Usuario.Id == null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
+                }
+                else
+                {
+                    string mensaje = String.Empty;
+                    try
+                    {
+                        Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                        comprobante.Cuit = sesion.Cuit.Nro;
+                        comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue);
+                        comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);  //OJO con comprobates de compra
+                        comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobanteTextBox.Text;
+                        comprobante.Nro = Convert.ToInt64(Numero_ComprobanteTextBox.Text);
+                        RN.Comprobante.Leer(comprobante, sesion);
+                        if (comprobante.Estado != "DeBaja")
+                        {
+                            RN.Comprobante.DarDeBaja(comprobante, sesion);
+                            mensaje = "Baja de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + " registrada satisfactoriamente";
+                        }
+                        else
+                        {
+                            RN.Comprobante.AnularBaja(comprobante, sesion);
+                            mensaje = "Anulación de baja de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + " registrada satisfactoriamente";
+                        }
+                        AccionesPanel.Visible = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        mensaje = "Problemas en la baja/anul.baja del " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + ".  " + ex.Message;
+                    }
+                    finally
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript(mensaje));
+                    }
+                }
             }
         }
 

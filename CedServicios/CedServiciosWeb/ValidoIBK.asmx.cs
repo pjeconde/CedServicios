@@ -22,7 +22,6 @@ namespace CedServiciosWeb
             try
             {
                 string nroSerie = CaptchaDotNet2.Security.Cryptography.Encryptor.Decrypt(pathCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                CedServicios.RN.Comprobante c = new CedServicios.RN.Comprobante();
                 using (FileStream fs = File.Open(Server.MapPath("~/Validar.txt"), FileMode.Append, FileAccess.Write))
                 {
                     using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
@@ -34,13 +33,11 @@ namespace CedServiciosWeb
                         //sw.WriteLine("id_lote:" + lc.cabecera_lote.id_lote);
                     }
                 }
-                resultado = c.ValidarIBK(lc, nroSerie);
+                resultado = CedServicios.RN.Comprobante.ValidarIBK(lc, nroSerie);
             }
             catch (Exception ex)
             {
-                throw ExcepcionesSOAP.RaiseException("Validar", "http://www.cedeira.com.ar/webservices", ex.Message,
-                    "0", ex.Source, FaultCode.Server);
-
+                throw ExcepcionesSOAP.RaiseException("Validar", "http://www.cedeira.com.ar/webservices", ex.Message, "0", ex.Source, FaultCode.Server);
             }
             return resultado;
         }

@@ -16,17 +16,27 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaFiltrada(Estados, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos);
         }
-        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, Entidades.Sesion Sesion)
+        public static void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
             db.Registrar(Lote, Response, IdNaturalezaComprobante, IdDestinoComprobante, IdEstado, PeriodicidadEmision, FechaProximaEmision, CantidadComprobantesAEmitir, CantidadComprobantesEmitidos, CantidadDiasFechaVto);
         }
-        public void Leer(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
+        public static void DarDeBaja(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            db.DarDeBaja(Comprobante);
+        }
+        public static void AnularBaja(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            db.AnularBaja(Comprobante);
+        }
+        public static void Leer(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
             db.Leer(Comprobante);
         }
-        public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
+        public static FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
@@ -102,7 +112,7 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-        public string EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
+        public static string EnviarIBK(FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
             lcIBK = Fea2Ibk(lc);
@@ -183,7 +193,7 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-        public FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(out IBK.error[] RespErroresLote, out IBK.error[] RespErroresComprobantes, IBK.consulta_lote_comprobantes clc, string certificado)
+        public static FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(out IBK.error[] RespErroresLote, out IBK.error[] RespErroresComprobantes, IBK.consulta_lote_comprobantes clc, string certificado)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
             lc.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
@@ -265,7 +275,7 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-        public void EnviarIBK(out IBK.lote_response Lr, FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
+        public static void EnviarIBK(out IBK.lote_response Lr, FeaEntidades.InterFacturas.lote_comprobantes lc, string certificado)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
             lcIBK = Fea2Ibk(lc);
@@ -362,7 +372,7 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-        private FeaEntidades.InterFacturas.lote_comprobantes Ibk2Fea(IBK.lote_comprobantes lcIBK)
+        private static FeaEntidades.InterFacturas.lote_comprobantes Ibk2Fea(IBK.lote_comprobantes lcIBK)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lcFEA = new FeaEntidades.InterFacturas.lote_comprobantes();
 
@@ -776,7 +786,7 @@ namespace CedServicios.RN
             }
             return lcFEA;
         }
-        public IBK.lote_comprobantes Fea2Ibk(FeaEntidades.InterFacturas.lote_comprobantes lc)
+        public static IBK.lote_comprobantes Fea2Ibk(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             IBK.lote_comprobantes lcIBK = new IBK.lote_comprobantes();
 
@@ -1397,7 +1407,7 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaGlobalFiltrada(SoloVigentes, EsFechaAlta, FechaDesde, FechaHasta, Persona, CUIT, CUITRazonSocial, NroComprobante);
         }
-        public string ValidarIBK(string lc, string certificado)
+        public static string ValidarIBK(string lc, string certificado)
         {
             RN.IBKValidate.ValidaFacturaWebService objIBK = new RN.IBKValidate.ValidaFacturaWebService();
             objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasValidate"];
@@ -1488,7 +1498,7 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-        public string ComprobantesListadoIBK(FeaEntidades.InterFacturas.Listado.consulta_emisor_comprobante_listado cecl, string certificado)
+        public static string ComprobantesListadoIBK(FeaEntidades.InterFacturas.Listado.consulta_emisor_comprobante_listado cecl, string certificado)
         {
             GrabarLogTexto("Listar.txt", "Paso1");
             RN.IBKComprobantesListado.ReporteFacturaWebService objIBK = new RN.IBKComprobantesListado.ReporteFacturaWebService();
@@ -1579,7 +1589,7 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-        public string ComprobanteDetalleIBK(FeaEntidades.InterFacturas.Detalle.consulta_emisor_comprobante_detalle cecd, string certificado)
+        public static string ComprobanteDetalleIBK(FeaEntidades.InterFacturas.Detalle.consulta_emisor_comprobante_detalle cecd, string certificado)
         {
             RN.IBKComprobantesListado.ReporteFacturaWebService objIBK = new RN.IBKComprobantesListado.ReporteFacturaWebService();
             objIBK.Url = System.Configuration.ConfigurationManager.AppSettings["URLinterfacturasListado"];
@@ -1675,7 +1685,7 @@ namespace CedServicios.RN
                 throw new Exception("Su certificado no está disponible en nuestro repositorio");
             }
         }
-        private void GrabarLogTexto(string archivo, string mensaje)
+        private static void GrabarLogTexto(string archivo, string mensaje)
         {
             try
             {
@@ -1726,7 +1736,7 @@ namespace CedServicios.RN
             ms.Close();
             ms = null;
         }
-        public string GenerarPDF(string CuitVendedor, int NroPuntoVta, int TipoComprobante, long NroComprobante, string IdDestinoComprobante, string ArchivoXML)
+        public static string GenerarPDF(string CuitVendedor, int NroPuntoVta, int TipoComprobante, long NroComprobante, string IdDestinoComprobante, string ArchivoXML)
         {
             try           
             {
@@ -1800,7 +1810,7 @@ namespace CedServicios.RN
                 return script;
             }
         }
-        public string ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF, string IdDestinoComprobante)
+        public static string ExecuteCommand(string NombreArchivosbXML, string NombreArchivosbPDF, string IdDestinoComprobante)
         {
             int exitcode;
 
@@ -1851,7 +1861,6 @@ namespace CedServicios.RN
             process.Close();
             return Mensaje;
         }
-
         public static void AjustarLoteParaImprimirPDF(FeaEntidades.InterFacturas.lote_comprobantes lcFea)
         {
             if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae == null || lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))

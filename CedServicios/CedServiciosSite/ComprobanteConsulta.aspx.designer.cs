@@ -913,33 +913,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.DropDownList Codigo_Doc_Identificatorio_CompradorDropDownList;
         
         /// <summary>
-        /// Control docCompradorRegularExpressionValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RegularExpressionValidator docCompradorRegularExpressionValidator;
-        
-        /// <summary>
-        /// Control docCompradorRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator docCompradorRequiredFieldValidator;
-        
-        /// <summary>
-        /// Control listaDocCompradorRequiredFieldValidator.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator listaDocCompradorRequiredFieldValidator;
-        
-        /// <summary>
         /// Control Nro_Doc_Identificatorio_CompradorTextBox.
         /// </summary>
         /// <remarks>
@@ -1505,6 +1478,24 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button PDFButton;
+        
+        /// <summary>
+        /// Control Baja_AnulBaPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Baja_AnulBaPanel;
+        
+        /// <summary>
+        /// Control Baja_AnulBajaButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Baja_AnulBajaButton;
         
         /// <summary>
         /// Control RequeridosValidationSummary.

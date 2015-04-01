@@ -827,15 +827,6 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                             </tr>
                                                             <tr>
                                                                 <td class="TC00S">
-                                                                    <asp:RegularExpressionValidator ID="docCompradorRegularExpressionValidator" runat="server"
-                                                                        ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="error de formateo en documento del comprador"
-                                                                        SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
-                                                                    <asp:RequiredFieldValidator ID="docCompradorRequiredFieldValidator" runat="server"
-                                                                        ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="documento del comprador"
-                                                                        SetFocusOnError="True">* </asp:RequiredFieldValidator>
-                                                                    <asp:RequiredFieldValidator ID="listaDocCompradorRequiredFieldValidator" runat="server"
-                                                                        ControlToValidate="Nro_Doc_Identificatorio_CompradorDropDownList" ErrorMessage="documento del comprador para exportación"
-                                                                        SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                                     Nro. de documento:
                                                                 </td>
                                                                 <td class="TC10S">
@@ -1535,6 +1526,18 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                 <td align="left" style="padding-left:5px">
                                                                     <asp:Button ID="PDFButton" runat="server" CausesValidation="true" OnClick="PDFButton_Click" 
                                                                         Text="Obtener" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+                                                    <asp:Panel ID="Baja_AnulBaPanel" runat="server">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Comprobante: 
+                                                                </td>
+                                                                <td align="left" style="padding-left:5px">
+                                                                    <asp:Button ID="Baja_AnulBajaButton" runat="server" CausesValidation="true" OnClick="Baja_AnulBajaButton_Click" Text="Baja o AnulBaja" />
                                                                 </td>
                                                             </tr>
                                                         </table>
