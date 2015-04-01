@@ -108,7 +108,7 @@
                                             <td class="TC10S">
                                                 <asp:UpdatePanel ID="ptoVentaUpdatePanel" runat="server" UpdateMode="Conditional" ChildrenAsTriggers="true">
                                                     <ContentTemplate>
-                                                        <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" AutoPostBack="True" Enabled="false" SkinID="ddln" 
+                                                        <asp:DropDownList ID="PuntoVtaDropDownList" runat="server" AutoPostBack="true" Enabled="false" SkinID="ddln" 
                                                         onselectedindexchanged="PuntoVtaDropDownList_SelectedIndexChanged">
                                                         </asp:DropDownList>
                                                         <asp:TextBox ID="PuntoVtaTextBox" runat="server" Enabled="true" Visible="false" SkinID="TextoBoxFEAVendedorDetChCh"></asp:TextBox>
@@ -156,7 +156,7 @@
                                                 <asp:UpdatePanel ID="monedaUpdatePanel" runat="server" ChildrenAsTriggers="true"
                                                     UpdateMode="Conditional">
                                                     <ContentTemplate>
-                                                        <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" AutoPostBack="True" Enabled="false" SkinID="ddln">
+                                                        <asp:DropDownList ID="MonedaComprobanteDropDownList" runat="server" AutoPostBack="true" Enabled="false" SkinID="ddln">
                                                         </asp:DropDownList>
                                                     </ContentTemplate>
                                                 </asp:UpdatePanel>
@@ -363,7 +363,7 @@
                                                             Elegir vendedor:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:DropDownList ID="VendedorDropDownList" runat="server" AutoPostBack="True" Enabled="false"
+                                                            <asp:DropDownList ID="VendedorDropDownList" runat="server" AutoPostBack="true" Enabled="false"
                                                                 OnSelectedIndexChanged="VendedorDropDownList_SelectedIndexChanged" SkinID="DropDownListPersona" Visible="false">
                                                             </asp:DropDownList>
                                                             <asp:TextBox ID="IdPersonaVendedorTextBox" runat="server" Visible="false"> </asp:TextBox>
@@ -759,7 +759,7 @@
                                                             Elegir comprador:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:DropDownList ID="CompradorDropDownList" runat="server" AutoPostBack="True" Enabled="false"
+                                                            <asp:DropDownList ID="CompradorDropDownList" runat="server" AutoPostBack="true" Enabled="false"
                                                                 OnSelectedIndexChanged="CompradorDropDownList_SelectedIndexChanged" SkinID="DropDownListPersona" Visible="false">
                                                             </asp:DropDownList>
                                                             <asp:TextBox ID="IdPersonaCompradorTextBox" runat="server" Visible="false"> </asp:TextBox>
@@ -1286,7 +1286,7 @@
                                                 </tr>
                                                 <tr>
                                                     <td class="TC10S" style="padding-right:3px">
-                                                        <asp:DropDownList ID="PeriodicidadEmisionDropDownList" runat="server" AutoPostBack="True" SkinID="ddln"></asp:DropDownList>
+                                                        <asp:DropDownList ID="PeriodicidadEmisionDropDownList" runat="server" AutoPostBack="false" SkinID="ddln"></asp:DropDownList>
                                                     </td>
                                                 </tr>
                                                 <tr>
