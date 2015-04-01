@@ -21,7 +21,6 @@ namespace CedServiciosWeb
             try
             {
                 string nroSerie = CaptchaDotNet2.Security.Cryptography.Encryptor.Decrypt(pathCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                CedServicios.RN.Comprobante c = new CedServicios.RN.Comprobante();
                 using (FileStream fs = File.Open(Server.MapPath("~/Listar.txt"), FileMode.Append, FileAccess.Write))
                 {
                     using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
@@ -33,7 +32,7 @@ namespace CedServiciosWeb
                         sw.WriteLine("Fecha_emision_desde:" + cecl.fecha_emision_desde + "  Fecha_emision_hasta: " + cecl.fecha_emision_hasta);
                     }
                 }
-                resultado = c.ComprobantesListadoIBK(cecl, nroSerie);
+                resultado = CedServicios.RN.Comprobante.ComprobantesListadoIBK(cecl, nroSerie);
             }
             catch (Exception ex)
             {

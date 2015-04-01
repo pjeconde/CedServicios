@@ -7,6 +7,8 @@
             <tr>
                 <td align="center" colspan="3" style="padding-top:20px; padding-bottom:20px">
                     <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes"></asp:Label>
+                    <asp:TextBox ID="ElementoTextBox" runat="server" Visible="false"> </asp:TextBox>
+                    <asp:TextBox ID="TratamientoTextBox" runat="server" Visible="false"> </asp:TextBox>
                 </td>
             </tr>
             <tr>
@@ -62,7 +64,7 @@
 	            <td align="left" style="padding-right:5px; padding-top:5px">
                     Período de emisión:
 	            </td>
-			    <td align="left">
+			    <td align="left" style="padding-top:5px">
                     desde&nbsp;
                     <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
                     <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
@@ -99,6 +101,11 @@
                             <asp:TemplateField>
                                 <ItemTemplate>
                                     <asp:LinkButton ID="VerLinkButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Ver detalle</asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="BajaAnulBajaLinkButton" runat="server" CommandName="Baja/Anul.baja" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Baja/Anul.baja</asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">

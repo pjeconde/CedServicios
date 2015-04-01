@@ -482,7 +482,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                             FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
 
                             //Grabar en base de datos
-                            RN.Comprobante comprobante = new RN.Comprobante();
                             lote.cabecera_lote.DestinoComprobante = "ITF";
                             lote.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
 
@@ -495,10 +494,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 cAux.TipoComprobante.Id = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                                 cAux.NroPuntoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                                 cAux.Nro = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
-                                comprobante.Leer(cAux, sesion);
+                                RN.Comprobante.Leer(cAux, sesion);
                                 if (cAux.Estado == null || cAux.Estado != "Vigente")
                                 {
-                                    comprobante.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, "ITF", "PteConf", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
+                                    RN.Comprobante.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, "ITF", "PteConf", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
                                 }
                                 else
                                 {
@@ -2026,13 +2025,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 try
                 {
-                    RN.Comprobante c = new RN.Comprobante();
                     Entidades.Comprobante comprobante = new Entidades.Comprobante();
                     comprobante.Cuit = Cuit_VendedorTextBox.Text;
                     comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue.ToString());
                     comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue.ToString());
                     comprobante.Nro = IdNaturalezaComprobanteTextBox.Text == "VentaContrato" ? -Convert.ToInt64(Numero_ComprobanteTextBox.Text) : Convert.ToInt64(Numero_ComprobanteTextBox.Text);
-                    c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                    RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                     if (comprobante.Estado == "Vigente")
                     {
                         ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Este Nro. de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante") + " ya se encuentra vigente."), false);
@@ -2255,10 +2253,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 if (respuesta == "Comprobante enviado satisfactoriamente a Interfacturas.")
                                 {
                                     //Grabar en base de datos
-                                    RN.Comprobante comprobante = new RN.Comprobante();
                                     lcFea.cabecera_lote.DestinoComprobante = "ITF";
                                     lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                    comprobante.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "ITF", "PteConf", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
+                                    RN.Comprobante.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "ITF", "PteConf", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
                                 }
                             }
                         }
@@ -2343,10 +2340,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
 
                                 //Grabar en base de datos
-                                RN.Comprobante c = new RN.Comprobante();
                                 lcFea.cabecera_lote.DestinoComprobante = "ITF";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                c.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "ITF", "PteConf", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
+                                RN.Comprobante.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "ITF", "PteConf", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
 
                                 AjustarLoteParaITF(lcFea); 
 
@@ -2357,8 +2353,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 //VIEJO MODO DE USO
                                 //certificado = NroCertif;
                                 //FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
-                                //RN.Comprobante cc = new RN.Comprobante();
-                                //respuesta = cc.EnviarIBK(lcFea, certificado);
+                                //respuesta = RN.Comprobante.EnviarIBK(lcFea, certificado);
 
                                 respuesta = respuesta.Replace("'", "-");
 
@@ -2387,13 +2382,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     comprobante.TipoComprobante.Id = lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                                     comprobante.NroPuntoVta = lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                                     comprobante.Nro = lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
-                                    c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                    RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                                     comprobante.Response = XML;
                                     if (lc.cabecera_lote.resultado == "A")
                                     {
                                         comprobante.WF.Estado = "Vigente";
                                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                                        c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                        RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                                         Session["comprobantePDF"] = comprobante;
                                         ActualizarEstadoPanel.Visible = false;
                                         DescargarPDFPanel.Visible = true;
@@ -2402,7 +2397,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     {
                                         comprobante.WF.Estado = "Rechazado";
                                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                                        c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                        RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                                         Session["comprobantePDF"] = comprobante;
                                         ActualizarEstadoPanel.Visible = false;
                                         DescargarPDFPanel.Visible = true;
@@ -2462,7 +2457,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             try
             {
-                RN.Comprobante c = new RN.Comprobante();
                 Entidades.Comprobante comprobante = (Entidades.Comprobante)Session["comprobantePDF"];
                 if (comprobante != null)
                 {
@@ -2491,7 +2485,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         comprobante.WF.Estado = "Vigente";
                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                        c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                        RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                         Session["comprobantePDF"] = comprobante;
                         ActualizarEstadoPanel.Visible = false;
                         DescargarPDFPanel.Visible = true;
@@ -2500,7 +2494,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         comprobante.WF.Estado = "Rechazado";
                         RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                        c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                        RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                         Session["comprobantePDF"] = comprobante;
                         ActualizarEstadoPanel.Visible = false;
                         DescargarPDFPanel.Visible = false;
@@ -2551,10 +2545,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
 
                                 //Grabar en base de datos
-                                RN.Comprobante c = new RN.Comprobante();
                                 lcFea.cabecera_lote.DestinoComprobante = "AFIP";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                c.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteConf", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
+                                RN.Comprobante.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteConf", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
 
                                 string caeNro = "";
                                 string caeFecVto = "";
@@ -2590,12 +2583,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     comprobante.TipoComprobante.Id = lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                                     comprobante.NroPuntoVta = lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                                     comprobante.Nro = lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
-                                    c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                    RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                                     comprobante.Response = XML;
                                     comprobante.WF.Estado = "Vigente";
                                     RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
 
-                                    c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                    RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                                     Session["comprobantePDF"] = comprobante;
                                     DescargarPDFPanel.Visible = true;
                                 }
@@ -2828,7 +2821,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
                                 //Grabar en base de datos
-                                RN.Comprobante c = new RN.Comprobante();
                                 lote.cabecera_lote.DestinoComprobante = "Ninguno";
                                 lote.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
                                 if (IdNaturalezaComprobanteTextBox.Text != "Compra")
@@ -2841,7 +2833,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     lote.comprobante[0].cabecera.informacion_vendedor.id = IdPersonaVendedorTextBox.Text;
                                     lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais = Convert.ToInt32(DesambiguacionCuitPaisVendedorTextBox.Text);
                                 }
-                                c.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, lote.cabecera_lote.DestinoComprobante, "Vigente", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
+                                RN.Comprobante.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, lote.cabecera_lote.DestinoComprobante, "Vigente", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
                                 AccionesPanel.Visible = false;
                                 MensajeLabel.Text = ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + " guardado satisfactoriamente";
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(MensajeLabel.Text), false);

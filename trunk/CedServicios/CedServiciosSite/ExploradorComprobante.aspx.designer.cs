@@ -31,6 +31,24 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label TituloPaginaLabel;
         
         /// <summary>
+        /// Control ElementoTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox ElementoTextBox;
+        
+        /// <summary>
+        /// Control TratamientoTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TratamientoTextBox;
+        
+        /// <summary>
         /// Control ClienteDropDownList.
         /// </summary>
         /// <remarks>

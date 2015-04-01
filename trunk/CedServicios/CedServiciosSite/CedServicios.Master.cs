@@ -127,11 +127,12 @@ namespace CedServicios.Site
                     }
                     break;
                 case "Contratos|Baja/Anul.baja":
+                    Response.Redirect("~/ExploradorComprobante.aspx?Baja/Anul.baja-Contrato");
                     break;
                 case "Contratos|Modificación":
                     break;
                 case "Contratos|Consulta":
-                    Response.Redirect("~/ExploradorComprobante.aspx?Contrato");
+                    Response.Redirect("~/ExploradorComprobante.aspx?Consulta-Contrato");
                     break;
                 case "Comprobantes|Alta manual|Venta|Electrónica":
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Venta");
@@ -167,11 +168,12 @@ namespace CedServicios.Site
                     }
                     break;
                 case "Comprobantes|Baja/Anul.baja":
+                    Response.Redirect("~/ExploradorComprobante.aspx?Baja/Anul.baja-Comprobante");
                     break;
                 case "Comprobantes|Modificación":
                     break;
                 case "Comprobantes|Consulta":
-                    Response.Redirect("~/ExploradorComprobante.aspx?Comprobante");
+                    Response.Redirect("~/ExploradorComprobante.aspx?Consulta-Comprobante");
                     break;
                 case "Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes":
                     Response.Redirect("~/ExploradorComprobanteOnLineInterfacturas.aspx");

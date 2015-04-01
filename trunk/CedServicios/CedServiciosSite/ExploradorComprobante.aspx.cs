@@ -25,12 +25,16 @@ namespace CedServicios.Site
                 }
                 else
                 {
-                    string a = HttpContext.Current.Request.Url.Query.ToString();
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    switch (a.Replace("?", String.Empty))
+                    string parametros = @HttpContext.Current.Request.Url.Query.ToString().Replace("?", String.Empty);
+                    char[] delimitador = { '-' };
+                    string[] itemsParametros = parametros.Split(delimitador);
+                    TratamientoTextBox.Text = itemsParametros[0];
+                    ElementoTextBox.Text = itemsParametros[1];
+                    TituloPaginaLabel.Text = TratamientoTextBox.Text + " de " + ElementoTextBox.Text + "s";
+                    switch (ElementoTextBox.Text)
                     {
                         case "Comprobante":
-                            TituloPaginaLabel.Text = "Consulta de Comprobantes";
                             ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Comprobante, sesion);
                             NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
                             NaturalezaComprobanteDropDownList.SelectedValue = String.Empty;
@@ -46,18 +50,32 @@ namespace CedServicios.Site
                             }
                             break;
                         case "Contrato":
-                            TituloPaginaLabel.Text = "Consulta de Contratos";
                             ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Contrato, sesion);
                             NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
-                            ComprobantesGridView.Columns[17].Visible = false;
+                            ComprobantesGridView.Columns[18].Visible = false;
                             PeriodoEmisionPanel.Visible = false;
                             break;
                     }
-                    EstadoVigenteCheckBox.Checked = true;
-                    EstadoPteConfCheckBox.Checked = true;
-                    EstadoDeBajaCheckBox.Checked = false;
-                    EstadoPteAutorizCheckBox.Checked = true;
-                    EstadoRechCheckBox.Checked = false;
+                    switch (TratamientoTextBox.Text)
+                    {
+                        case "Consulta":
+                            EstadoVigenteCheckBox.Checked = true;
+                            EstadoPteConfCheckBox.Checked = true;
+                            EstadoDeBajaCheckBox.Checked = false;
+                            EstadoPteAutorizCheckBox.Checked = true;
+                            EstadoRechCheckBox.Checked = false;
+                            ComprobantesGridView.Columns[1].Visible = false;
+                            break;
+                        case "Baja/Anul.baja":
+                            EstadoVigenteCheckBox.Checked = ElementoTextBox.Text == "Contrato";
+                            EstadoPteConfCheckBox.Checked = true;
+                            EstadoDeBajaCheckBox.Checked = true;
+                            EstadoPteAutorizCheckBox.Checked = true;
+                            EstadoRechCheckBox.Checked = true;
+                            ComprobantesGridView.Columns[0].Visible = false;
+                            ComprobantesGridView.Columns[18].Visible = false;
+                            break;
+                    }
                     ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
                     ClienteDropDownList.DataSource = (List<Entidades.Persona>)ViewState["Personas"];
                     DataBind();
@@ -86,6 +104,11 @@ namespace CedServicios.Site
             {
                 case "Consulta":
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
+                    script = "window.open('/ComprobanteConsulta.aspx', '');";
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                    break;
+                case "Baja/Anul.baja":
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Baja_AnulBaja, comprobante);
                     script = "window.open('/ComprobanteConsulta.aspx', '');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;

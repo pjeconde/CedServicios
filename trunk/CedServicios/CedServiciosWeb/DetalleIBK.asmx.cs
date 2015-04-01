@@ -21,7 +21,6 @@ namespace CedServiciosWeb
             try
             {
                 string nroSerie = CaptchaDotNet2.Security.Cryptography.Encryptor.Decrypt(pathCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                CedServicios.RN.Comprobante c = new CedServicios.RN.Comprobante();
                 using (FileStream fs = File.Open(Server.MapPath("~/Detallar.txt"), FileMode.Append, FileAccess.Write))
                 {
                     using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
@@ -34,7 +33,7 @@ namespace CedServiciosWeb
                         sw.WriteLine("tipo_de_comprobante:" + cecd.tipo_de_comprobante + "  numero_comprobante: " + cecd.numero_comprobante);
                     }
                 }
-                resultado = c.ComprobanteDetalleIBK(cecd, nroSerie);
+                resultado = CedServicios.RN.Comprobante.ComprobanteDetalleIBK(cecd, nroSerie);
             }
             catch (Exception ex)
             {

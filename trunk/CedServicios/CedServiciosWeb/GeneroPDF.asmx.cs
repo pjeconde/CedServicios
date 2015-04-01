@@ -21,7 +21,6 @@ namespace CedServiciosWeb
             string resultado = string.Empty;
             try
             {
-                CedServicios.RN.Comprobante c = new CedServicios.RN.Comprobante();
                 using (FileStream fs = File.Open(Server.MapPath("~/Detallar.txt"), FileMode.Append, FileAccess.Write))
                 {
                     using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
@@ -33,13 +32,11 @@ namespace CedServiciosWeb
                         sw.WriteLine("NroComprobante:" + NroComprobante.ToString());
                     }
                 }
-                resultado = c.GenerarPDF(CuitVendedor, NroPuntoVta, TipoComprobante, NroComprobante, IdDestinoComprobante, ArchivoXML);
+                resultado = CedServicios.RN.Comprobante.GenerarPDF(CuitVendedor, NroPuntoVta, TipoComprobante, NroComprobante, IdDestinoComprobante, ArchivoXML);
             }
             catch (Exception ex)
             {
-                throw ExcepcionesSOAP.RaiseException("GenerarPDF", "http://www.cedeira.com.ar/webservices", ex.Message,
-                    "0", ex.Source, FaultCode.Server);
-
+                throw ExcepcionesSOAP.RaiseException("GenerarPDF", "http://www.cedeira.com.ar/webservices", ex.Message, "0", ex.Source, FaultCode.Server);
             }
             return resultado;
         }

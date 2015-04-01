@@ -21,8 +21,6 @@ namespace CedServiciosWeb
             try
             {
                 string nroSerie = CaptchaDotNet2.Security.Cryptography.Encryptor.Decrypt(pathCertificado, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                CedServicios.RN.Comprobante c = new CedServicios.RN.Comprobante();
-
                 using (FileStream fs = File.Open(Server.MapPath("~/Consultar.txt"), FileMode.Append, FileAccess.Write))
                 {
                     using (StreamWriter sw = new StreamWriter(fs, System.Text.Encoding.UTF8))
@@ -42,7 +40,7 @@ namespace CedServiciosWeb
                 consulta.punto_de_ventaSpecified = true;
                 consulta.punto_de_venta = punto_de_venta;
 
-                lc = c.ConsultarIBK(consulta, nroSerie);
+                lc = CedServicios.RN.Comprobante.ConsultarIBK(consulta, nroSerie);
 
             }
             catch (Exception ex)
