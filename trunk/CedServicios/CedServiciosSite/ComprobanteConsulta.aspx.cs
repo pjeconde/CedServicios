@@ -179,7 +179,6 @@ namespace CedServicios.Site
                                 TituloPaginaLabel.Text = descrTratamiento + " de Comprobante";
                                 DatosComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
                                 DatosEmisionPanel.Visible = false;
-                                FechaProximaEmisionDatePickerWebUserControl.Text = new DateTime(9999, 12, 31).ToString("yyyyMMdd");
                                 break;
                             case "VentaTradic":
                                 TituloPaginaLabel.Text = descrTratamiento + " de Comprobante";
@@ -189,7 +188,6 @@ namespace CedServicios.Site
                                 if (TratamientoTextBox.Text.IndexOf("Consulta") != -1) AccionesPanel.Visible = false;
                                 PrevisualizacionComprobantePanel.Visible = false;
                                 DatosEmisionPanel.Visible = false;
-                                FechaProximaEmisionDatePickerWebUserControl.Text = new DateTime(9999, 12, 31).ToString("yyyyMMdd");
                                 break;
                             case "VentaContrato":
                                 TituloPaginaLabel.Text = descrTratamiento + " de Contrato";
@@ -199,7 +197,6 @@ namespace CedServicios.Site
                                 if (TratamientoTextBox.Text.IndexOf("Consulta") != -1) AccionesPanel.Visible = false;
                                 PrevisualizacionComprobantePanel.Visible = false;
                                 CAEPanel.Visible = false;
-                                FechaProximaEmisionDatePickerWebUserControl.Text = DateTime.Today.ToString("yyyyMMdd");
                                 FechaEmisionLabel.Text = "Fecha de alta:";
                                 break;
                         }
@@ -305,6 +302,13 @@ namespace CedServicios.Site
             FechaCAEObtencionDatePickerWebUserControl.ReadOnly = true; ImageCalendarFechaCAEObtencion.Enabled = false;
             ResultadoTextBox.ReadOnly = true;
             MotivoTextBox.ReadOnly = true;
+
+            PeriodicidadEmisionDropDownList.Enabled = false;
+            IdDestinoComprobanteDropDownList.Enabled = false;
+            FechaProximaEmisionDatePickerWebUserControl.ReadOnly = true; ImageCalendarFechaProximaEmision.Enabled = false;
+            CantidadComprobantesAEmitirTextBox.ReadOnly = true;
+            CantidadComprobantesEmitidosTextBox.ReadOnly = true;
+            CantidadDiasFechaVtoTextBox.ReadOnly = true;
 
             Importe_Total_Neto_Gravado_ResumenTextBox.ReadOnly = true;
             Importe_Total_Concepto_No_Gravado_ResumenTextBox.ReadOnly = true;
@@ -2704,7 +2708,7 @@ namespace CedServicios.Site
                         comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue);
                         comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);  //OJO con comprobates de compra
                         comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobanteTextBox.Text;
-                        comprobante.Nro = Convert.ToInt64(Numero_ComprobanteTextBox.Text);
+                        comprobante.Nro = Math.Abs(Convert.ToInt64(Numero_ComprobanteTextBox.Text));
                         RN.Comprobante.Leer(comprobante, sesion);
                         if (comprobante.Estado != "DeBaja")
                         {
