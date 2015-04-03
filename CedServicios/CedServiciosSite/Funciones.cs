@@ -102,7 +102,7 @@ namespace CedServicios.Site
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Términos y condiciones", "Términos y condiciones"); mItem.Selectable = false; mItem.ToolTip = "Términos y Condiciones";
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Facturación automática (contratos)", "Facturación automática (contratos)"); mItem.Selectable = false;
+                mItem = new MenuItem("Generación automática (contratos)", "Generación automática (contratos)"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
             mItem = new MenuItem("Administración", "Administración"); mItem.Selectable = false;
@@ -774,6 +774,18 @@ namespace CedServicios.Site
         public static string TextoScript(string Contenido)
         {
             return "<SCRIPT LANGUAGE='javascript'>alert('" + Contenido.Replace("'", "").Replace("\r\n", "  ") + "');</SCRIPT>";
+        }
+        public static int IndiceColumnaXNombre(GridView Grilla, string NombreColumna)
+        {
+            foreach (DataControlField col in Grilla.Columns)
+            {
+                if (col.HeaderText.ToLower().Trim() == NombreColumna.ToLower().Trim())
+                {
+                    return Grilla.Columns.IndexOf(col);
+                }
+            }
+
+            return -1;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorComprobante.aspx.cs" Inherits="CedServicios.Site.ExploradorComprobante" Theme="CedServicios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ComprobanteGeneracionAutomatica.aspx.cs" Inherits="CedServicios.Site.ComprobanteGeneracionAutomatica" Theme="CedServicios" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
@@ -6,7 +6,7 @@
         <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
             <tr>
                 <td align="center" colspan="3" style="padding-top:20px; padding-bottom:20px">
-                    <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes"></asp:Label>
+                    <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Generación automática de Comprobantes (contratos)"></asp:Label>
                     <asp:TextBox ID="ElementoTextBox" runat="server" Visible="false"> </asp:TextBox>
                     <asp:TextBox ID="TratamientoTextBox" runat="server" Visible="false"> </asp:TextBox>
                 </td>
@@ -18,68 +18,21 @@
                 <td align="left" style="padding-top:5px">
                     <asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
                 </td>
-                <td rowspan="3" align="left" style="padding-top:5px" valign="top">
-                    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
-                        <tr>
-                            <td>
-                                Estado(s):
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="EstadoVigenteCheckBox" runat="server" Text="Vigente" AutoPostBack="false"/>
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="EstadoPteConfCheckBox" runat="server" Text="Pendiente de confirmación" AutoPostBack="false"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <asp:CheckBox ID="EstadoDeBajaCheckBox" runat="server" Text="De baja" AutoPostBack="false"/>
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="EstadoPteAutorizCheckBox" runat="server" Text="Pendiente de autorización" AutoPostBack="false"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <asp:CheckBox ID="EstadoRechCheckBox" runat="server" Text="Rechazado" AutoPostBack="false"/>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
                 <td style="width:550px">
                 </td>
             </tr>
             <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    Naturaleza del comprobante:
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" Width="400px" DataValueField="Id" DataTextField="Descr"></asp:DropDownList>
-                </td>        
-            </tr>
-            <asp:Panel ID="PeriodoEmisionPanel" runat="server">
-            <tr>
 	            <td align="left" style="padding-right:5px; padding-top:5px">
-                    Período de emisión:
+                    Fecha de emisión:
 	            </td>
 			    <td align="left" style="padding-top:5px">
-                    desde&nbsp;
-                    <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
-                    <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
-                        TargetControlID="FechaDesdeTextBox" Format="yyyyMMdd" PopupButtonID="FechaDesdeImage" >
+                    <asp:TextBox ID="FechaTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
+                    <ajaxToolkit:CalendarExtender ID="FechaCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
+                        TargetControlID="FechaTextBox" Format="yyyyMMdd" PopupButtonID="FechaImage" >
                     </ajaxToolkit:CalendarExtender>
-                    <asp:Image runat="server" ID="FechaDesdeImage" ImageUrl="~/Imagenes/Calendar.gif" />
-                    &nbsp;&nbsp;hasta&nbsp;
-                    <asp:TextBox ID="FechaHastaTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
-                    <ajaxToolkit:CalendarExtender ID="FechaHastaCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
-                        TargetControlID="FechaHastaTextBox" Format="yyyyMMdd" PopupButtonID="FechaHastaImage" >
-                    </ajaxToolkit:CalendarExtender>
-                    <asp:Image runat="server" ID="FechaHastaImage" ImageUrl="~/Imagenes/Calendar.gif" />
+                    <asp:Image runat="server" ID="FechaImage" ImageUrl="~/Imagenes/Calendar.gif" />
                 </td>
             </tr>
-            </asp:Panel>
             <tr>
                 <td>
                 </td>
@@ -95,19 +48,8 @@
             </tr>
             <tr>
                 <td colspan="4">
-                    <asp:GridView ID="ComprobantesGridView" runat="server" 
-                        AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
+                    <asp:GridView ID="ComprobantesGridView" runat="server" AutoGenerateColumns="false" CssClass="grilla" GridLines="None">
                         <Columns>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="VerLinkButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Ver detalle</asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField>
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="BajaAnulBajaLinkButton" runat="server" CommandName="Baja/Anul.baja" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Baja/Anul.baja</asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
                             <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
@@ -137,10 +79,6 @@
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
                             <asp:BoundField DataField="Fecha" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha" SortExpression="Fecha">
-                                <headerstyle horizontalalign="left" wrap="False" />
-                                <itemstyle horizontalalign="center" wrap="False" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="FechaProximaEmision" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha emi." SortExpression="Fecha">
                                 <headerstyle horizontalalign="left" wrap="False" />
                                 <itemstyle horizontalalign="center" wrap="False" />
                             </asp:BoundField>
@@ -176,20 +114,6 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="right" wrap="False" />
                             </asp:BoundField>
-                            <asp:TemplateField HeaderText="Acción">
-                                <ItemTemplate>
-		                            <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged" EnableViewState="false">
-			                            <asp:ListItem Value="" Text="--- elegir acción ---"></asp:ListItem>
-			                            <asp:ListItem Value="ActualizarOnLine" Text="Actualizar estado (Interfacturas/AFIP)"></asp:ListItem>
-			                            <asp:ListItem Value="ConsultarInterfacturas" Text="Consultar (Interfacturas)"></asp:ListItem>
-			                            <asp:ListItem Value="PDF-Viewer" Text="Viewer PDF (InterFacturas)"></asp:ListItem>
-			                            <asp:ListItem Value="XMLOnLine" Text="Descargar XML (InterFacturas)"></asp:ListItem>
-			                            <asp:ListItem Value="PDF" Text="Descargar PDF"></asp:ListItem>
-			                            <asp:ListItem Value="XML-ClonarAlta" Text="Clonar comprobante"></asp:ListItem>
-			                            <asp:ListItem Value="ExportarRG2485" Text="Descargar interface RG2485"></asp:ListItem>
-		                            </asp:DropDownList>
-                                </ItemTemplate>
-                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </td>
