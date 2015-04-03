@@ -140,7 +140,7 @@
                                 <headerstyle horizontalalign="left" wrap="False" />
                                 <itemstyle horizontalalign="center" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="FechaProximaEmision" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha emi." SortExpression="Fecha">
+                            <asp:BoundField DataField="FechaProximaEmision" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha emi." SortExpression="FechaProximaEmision">
                                 <headerstyle horizontalalign="left" wrap="False" />
                                 <itemstyle horizontalalign="center" wrap="False" />
                             </asp:BoundField>

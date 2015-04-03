@@ -79,5 +79,8 @@ namespace CedServicios.Site
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
         }
+        protected void GenerarComprobantesButton_Click(object sender, EventArgs e)
+        {
+        }
     }
 }
