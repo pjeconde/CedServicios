@@ -387,30 +387,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 		}
         private void AjustarCodigosDeReferenciaEnFooter()
         {
-            //if (referenciasGridView.FooterRow != null)
-            //{
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).Items.Clear();
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedIndex = -1;
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue = null;
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).ClearSelection();
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue = new FeaEntidades.Documentos.CUITPais().Codigo.ToString();
-            //}
-            //if (!referenciasGridView.EditIndex.Equals(-1))
-            //{
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referenciaEdit")).Items.Clear();
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referenciaEdit")).SelectedIndex = -1;
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referenciaEdit")).SelectedValue = null;
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referenciaEdit")).ClearSelection();
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.Documentos.Documento.ListaExportacion();
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referenciaEdit")).DataValueField = "Codigo";
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referenciaEdit")).DataTextField = "Descr";
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
-            //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referenciaEdit")).SelectedValue = new FeaEntidades.Documentos.CUITPais().Codigo.ToString();
-            //}
             ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
             ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
             if (Funciones.SessionTimeOut(Session))

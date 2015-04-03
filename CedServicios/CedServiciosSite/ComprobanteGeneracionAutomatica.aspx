@@ -47,13 +47,14 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4">
+                <td colspan="3">
                     <asp:GridView ID="ComprobantesGridView" runat="server" AutoGenerateColumns="false" CssClass="grilla" GridLines="None">
                         <Columns>
-                            <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">
-                                <headerstyle horizontalalign="center" wrap="False" />
-                                <itemstyle horizontalalign="left" wrap="False" />
-                            </asp:BoundField>
+                            <asp:TemplateField HeaderText="Seleccionado<br/>para su emisión">
+                                <ItemTemplate>
+                                    <asp:CheckBox ID="SeleccionContratoCheckBox" runat="server" Checked="true" />
+                                </ItemTemplate>
+                            </asp:TemplateField>
                             <asp:BoundField DataField="DescrTipoComprobante" HeaderText="Tipo" SortExpression="DescrTipoComprobante">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
@@ -62,7 +63,7 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="NroFORMATEADO" HeaderText="Nro." SortExpression="NroFORMATEADO">
+                            <asp:BoundField DataField="NroFORMATEADO" HeaderText="Nº Contrato" SortExpression="NroFORMATEADO">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="center" wrap="False" />
                             </asp:BoundField>
@@ -78,7 +79,7 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Fecha" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha" SortExpression="Fecha">
+                            <asp:BoundField DataField="FechaProximaEmision" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha emi." SortExpression="FechaProximaEmision">
                                 <headerstyle horizontalalign="left" wrap="False" />
                                 <itemstyle horizontalalign="center" wrap="False" />
                             </asp:BoundField>
@@ -98,24 +99,19 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="right" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado">
-                                <headerstyle horizontalalign="center" wrap="False" />
-                                <itemstyle horizontalalign="left" wrap="False" />
-                            </asp:BoundField>
                             <asp:BoundField DataField="IdDestinoComprobante" HeaderText="Canal" SortExpression="IdDestinoComprobante">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="FechaVto" DataFormatString="{0:dd/MM/yy}" HeaderText="Fecha Vto" SortExpression="FechaVto">
-                                <headerstyle horizontalalign="left" wrap="False" />
-                                <itemstyle horizontalalign="center" wrap="False" />
-                            </asp:BoundField>
-                            <asp:BoundField DataField="NroLote" HeaderText="Nro.Lote" SortExpression="NroLote">
-                                <headerstyle horizontalalign="center" wrap="False" />
-                                <itemstyle horizontalalign="right" wrap="False" />
-                            </asp:BoundField>
                         </Columns>
                     </asp:GridView>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td align="left" style="height:24px; padding-top:30px" valign="top">
+                    <asp:Button ID="GenerarComprobantesButton" runat="server" Text="Generar Comprobantes para los Contratos seleccionados" onclick="GenerarComprobantesButton_Click" />
                 </td>
             </tr>
         </table>
