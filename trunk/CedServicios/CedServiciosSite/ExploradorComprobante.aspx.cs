@@ -48,11 +48,16 @@ namespace CedServicios.Site
                                 FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMM01");
                                 FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                             }
+                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Fecha emi.")].Visible = false;
                             break;
                         case "Contrato":
                             ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Contrato, sesion);
                             NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
-                            ComprobantesGridView.Columns[18].Visible = false;
+                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Naturaleza")].Visible = false;
+                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Fecha")].Visible = false;
+                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Fecha Vto")].Visible = false;
+                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Nro.Lote")].Visible = false;
+                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
                             PeriodoEmisionPanel.Visible = false;
                             break;
                     }
@@ -73,7 +78,7 @@ namespace CedServicios.Site
                             EstadoPteAutorizCheckBox.Checked = true;
                             EstadoRechCheckBox.Checked = true;
                             ComprobantesGridView.Columns[0].Visible = false;
-                            ComprobantesGridView.Columns[18].Visible = false;
+                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
                             break;
                     }
                     ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
@@ -138,7 +143,7 @@ namespace CedServicios.Site
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.Cells[13].Text != "Vigente")
+                if (e.Row.Cells[Funciones.IndiceColumnaXNombre((GridView)sender, "Estado")].Text != "Vigente")
                 {
                     e.Row.ForeColor = Color.Red;
                 }
@@ -184,7 +189,7 @@ namespace CedServicios.Site
                 {
                     ComprobantesGridView.DataSource = null;
                     ComprobantesGridView.DataBind();
-                    MensajeLabel.Text = "No se han encontrado Comprobantes que satisfagan la busqueda";
+                    MensajeLabel.Text = "No se han encontrado " + ((naturalezaComprobante.Id == "VentaContrato") ? "Contrato" : "Comprobante") + "s que satisfagan la busqueda";
                 }
                 else
                 {

@@ -190,7 +190,8 @@ namespace CedServicios.Site
                 case "Comprobantes|Otras Consultas|Términos y condiciones":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                     break;
-                case "Comprobantes|Facturación automática (contratos)":
+                case "Comprobantes|Generación automática (contratos)":
+                    Response.Redirect("~/ComprobanteGeneracionAutomatica.aspx");
                     break;
                 case "Administración|Autorizaciones|Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx");

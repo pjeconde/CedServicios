@@ -105,6 +105,7 @@
     <Content Include="Ayuda\Novedades\images20130906\image20.png" />
     <Content Include="Ayuda\Novedades\images20130906\image21.png" />
     <Content Include="CedeiraSF-Logo.gif" />
+    <Content Include="ComprobanteGeneracionAutomatica.aspx" />
     <Content Include="Imagenes\301.gif" />
     <Content Include="PersonaBaja.aspx" />
     <Content Include="PersonaConsulta.aspx" />
@@ -440,6 +441,13 @@
     </Compile>
     <Compile Include="CedServiciosAyuda.master.designer.cs">
       <DependentUpon>CedServiciosAyuda.master</DependentUpon>
+    </Compile>
+    <Compile Include="ComprobanteGeneracionAutomatica.aspx.cs">
+      <DependentUpon>ComprobanteGeneracionAutomatica.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComprobanteGeneracionAutomatica.aspx.designer.cs">
+      <DependentUpon>ComprobanteGeneracionAutomatica.aspx</DependentUpon>
     </Compile>
     <Compile Include="PersonaBaja.aspx.cs">
       <DependentUpon>PersonaBaja.aspx</DependentUpon>

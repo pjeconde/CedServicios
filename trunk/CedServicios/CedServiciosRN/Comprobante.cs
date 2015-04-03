@@ -11,6 +11,11 @@ namespace CedServicios.RN
 {
     public class Comprobante
     {
+        public static List<Entidades.Comprobante> ListaContratosFiltrada(List<Entidades.Estado> Estados, string FechaEmision, Entidades.Persona Persona, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            return db.ListaContratosFiltrada(Estados, FechaEmision, Persona);
+        }
         public static List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
