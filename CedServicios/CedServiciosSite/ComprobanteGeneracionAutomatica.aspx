@@ -37,12 +37,15 @@
                 <td>
                 </td>
                 <td align="left" style="height: 24px; padding-top:5px" valign="top">
-                    <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
-                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                    <asp:Button ID="GenerarComprobantesButton" runat="server" Text="Generar Comprobantes para los Contratos seleccionados" onclick="GenerarComprobantesButton_Click" Visible="false" />
+                    <asp:Button ID="BuscarButton" runat="server" Text="Buscar" onclick="BuscarButton_Click" />
+                    <asp:Button ID="SalirButton" runat="server" Text="Cancelar" onclick="SalirButton_Click" />
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="4" style="padding-top:20px; padding-bottom:10px">
+                <td>
+                </td>
+                <td align="left" colspan="2" style="padding-top:20px; padding-bottom:10px">
                     <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                 </td>
             </tr>
@@ -63,7 +66,7 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
-                            <asp:BoundField DataField="NroFORMATEADO" HeaderText="Nº Contrato" SortExpression="NroFORMATEADO">
+                            <asp:BoundField DataField="Nro" HeaderText="Nº Contrato" SortExpression="Nro">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="center" wrap="False" />
                             </asp:BoundField>
@@ -105,13 +108,6 @@
                             </asp:BoundField>
                         </Columns>
                     </asp:GridView>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                </td>
-                <td align="left" style="height:24px; padding-top:30px" valign="top">
-                    <asp:Button ID="GenerarComprobantesButton" runat="server" Text="Generar Comprobantes para los Contratos seleccionados" onclick="GenerarComprobantesButton_Click" />
                 </td>
             </tr>
         </table>

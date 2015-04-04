@@ -85,6 +85,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Image FechaImage;
         
         /// <summary>
+        /// Control GenerarComprobantesButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GenerarComprobantesButton;
+        
+        /// <summary>
         /// Control BuscarButton.
         /// </summary>
         /// <remarks>
@@ -119,14 +128,5 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView ComprobantesGridView;
-        
-        /// <summary>
-        /// Control GenerarComprobantesButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GenerarComprobantesButton;
     }
 }

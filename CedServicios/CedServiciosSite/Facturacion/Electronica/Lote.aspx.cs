@@ -2190,6 +2190,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Formato erróneo del Importe Total Factura en el Resumen"), false);
                 return false;
             }
+            if (IdNaturalezaComprobanteTextBox.Text == "VentaContrato")
+            {
+                if (PeriodicidadEmisionDropDownList.SelectedValue.IndexOf("<Mensual><Trimestral><Anual>") != -1 && Convert.ToInt32(DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd"))>=29)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Cuando la Periodicidad es Mensual, Trimestral o Anual, el día (dd) de la Próxima fecha de emisión no puede caer en 29, 30 o 31."), false);
+                    return false;
+                }
+            }
             return true;
         }
         protected void AccionValidarEnInterfacturasButton_Click(object sender, EventArgs e)
