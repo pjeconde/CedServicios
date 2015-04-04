@@ -82,6 +82,7 @@ namespace CedServicios.Site
         }
         protected void GenerarComprobantesButton_Click(object sender, EventArgs e)
         {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             int cantidadContratosSeleccionados = 0;
             int cantidadComprobantesGenerados = 0;
             List<string> listaErrores = new List<string>();
@@ -108,6 +109,10 @@ namespace CedServicios.Site
                     while (Convert.ToInt32(comprobante.FechaProximaEmision.ToString("yyyyMMdd")) <= Convert.ToInt32(DateTime.Today.ToString("yyyyMMdd")))
                     {
                         #region Generar nuevo comprobante
+                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision = FechaTextBox.Text;
+                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = DateTime.ParseExact(FechaTextBox.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddDays(comprobante.CantidadDiasFechaVto).ToString("yyyyMMdd");
+                        lote.cabecera_lote.DestinoComprobante = comprobante.IdDestinoComprobante;
+                        RN.Comprobante.Registrar(lote, null, "Venta", comprobante.IdDestinoComprobante, "PteConf", "No Aplica", new DateTime(9999, 12, 31), 0, 0, 0, sesion);
                         #endregion
                         try
                         {

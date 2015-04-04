@@ -2197,6 +2197,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Cuando la Periodicidad es Mensual, Trimestral o Anual, el día (dd) de la Próxima fecha de emisión no puede caer en 29, 30 o 31."), false);
                     return false;
                 }
+                int nroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                Entidades.PuntoVta puntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv){return pv.Nro == nroPuntoVta;});
+                if (puntoVta.IdMetodoGeneracionNumeracionLote == "Ninguno" && IdDestinoComprobanteDropDownList.SelectedIndex != -1 && IdDestinoComprobanteDropDownList.SelectedValue == "ITF")
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("No está permitido relacionar contratos con puntos de venta que no tengan un método automático de numeración de lotes (para comprobantes cuyo destino sea Interfacturas)"), false);
+                    return false;
+                }
             }
             return true;
         }
