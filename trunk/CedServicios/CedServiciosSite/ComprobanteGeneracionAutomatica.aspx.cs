@@ -91,7 +91,7 @@ namespace CedServicios.Site
                 if (((CheckBox)ComprobantesGridView.Rows[i].FindControl("SeleccionContratoCheckBox")).Checked)
                 {
                     cantidadContratosSeleccionados++;
-                    Entidades.Comprobante comprobante = ((List<Entidades.Comprobante>)ViewState["Comprobantes"])[i];
+                    Entidades.Comprobante contrato = ((List<Entidades.Comprobante>)ViewState["Comprobantes"])[i];
 
                     FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
                     #region Obtención del lote desde el comprobante
@@ -99,25 +99,49 @@ namespace CedServicios.Site
                     byte[] bytes;
                     System.IO.MemoryStream ms;
                     x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-                    bytes = new byte[comprobante.Request.Length * sizeof(char)];
-                    System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
+                    bytes = new byte[contrato.Request.Length * sizeof(char)];
+                    System.Buffer.BlockCopy(contrato.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
                     ms = new System.IO.MemoryStream(bytes);
                     ms.Seek(0, System.IO.SeekOrigin.Begin);
                     lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
                     #endregion
 
-                    while (Convert.ToInt32(comprobante.FechaProximaEmision.ToString("yyyyMMdd")) <= Convert.ToInt32(DateTime.Today.ToString("yyyyMMdd")))
+                    while (Convert.ToInt32(contrato.FechaProximaEmision.ToString("yyyyMMdd")) <= Convert.ToInt32(DateTime.Today.ToString("yyyyMMdd")))
                     {
-                        #region Generar nuevo comprobante
-                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision = FechaTextBox.Text;
-                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = DateTime.ParseExact(FechaTextBox.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddDays(comprobante.CantidadDiasFechaVto).ToString("yyyyMMdd");
-                        lote.cabecera_lote.DestinoComprobante = comprobante.IdDestinoComprobante;
-                        RN.Comprobante.Registrar(lote, null, "Venta", comprobante.IdDestinoComprobante, "PteConf", "No Aplica", new DateTime(9999, 12, 31), 0, 0, 0, sesion);
-                        #endregion
                         try
                         {
-                            listaErrores.Add("Timeout en web service AFIP");
-                            switch (comprobante.IdDestinoComprobante)
+                            #region Generar nuevo comprobante
+                            lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision = FechaTextBox.Text;
+                            lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = DateTime.ParseExact(FechaTextBox.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddDays(contrato.CantidadDiasFechaVto).ToString("yyyyMMdd");
+                            lote.cabecera_lote.DestinoComprobante = contrato.IdDestinoComprobante;
+                            //Nuevo número de lote
+                            if (contrato.IdDestinoComprobante == "ITF")
+                            {
+                                Entidades.PuntoVta puntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv) { return pv.Nro == contrato.NroPuntoVta; });
+                                switch (puntoVta.IdMetodoGeneracionNumeracionLote)
+                                {
+                                    case "Autonumerador":
+                                    case "TimeStamp1":
+                                    case "TimeStamp2":
+                                        RN.PuntoVta.GenerarNuevoNroLote(puntoVta, (Entidades.Sesion)Session["Sesion"]);
+                                        lote.cabecera_lote.id_lote = puntoVta.UltNroLote;
+                                        break;
+                                    default:
+                                        throw new Exception("El punto de venta no tiene definido un método de numeración automática de lotes.");
+                                }
+                            }
+                            //Nuevo número de comprobante
+                            Entidades.Comprobante ultimoComprobanteEmitido = new Entidades.Comprobante();
+                            ultimoComprobanteEmitido.TipoComprobante.Id = contrato.TipoComprobante.Id;
+                            ultimoComprobanteEmitido.NroPuntoVta = contrato.NroPuntoVta;
+                            ultimoComprobanteEmitido.NaturalezaComprobante.Id = "Venta";
+                            RN.Comprobante.LeerUltimoEmitido(ultimoComprobanteEmitido, sesion);
+                            lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante = ultimoComprobanteEmitido.Nro + 1;
+
+                            RN.Comprobante.Registrar(lote, null, "Venta", contrato.IdDestinoComprobante, "PteConf", "No Aplica", new DateTime(9999, 12, 31), 0, 0, 0, sesion);
+                            #endregion
+
+                            switch (contrato.IdDestinoComprobante)
                             {
                                 case "AFIP":
                                     #region Transmitir comprobante a la AFIP
@@ -130,28 +154,34 @@ namespace CedServicios.Site
                             }
                             cantidadComprobantesGenerados++;
                             #region Actualizar, en el Contrato, la fecha de próxima emisión
-                            switch (comprobante.PeriodicidadEmision)
+                            switch (contrato.PeriodicidadEmision)
                             {
                                 case "Mensual":
-                                    comprobante.FechaProximaEmision = comprobante.FechaProximaEmision.AddMonths(1);
+                                    contrato.FechaProximaEmision = contrato.FechaProximaEmision.AddMonths(1);
                                     break;
                                 case "Trimestral":
-                                    comprobante.FechaProximaEmision = comprobante.FechaProximaEmision.AddMonths(3);
+                                    contrato.FechaProximaEmision = contrato.FechaProximaEmision.AddMonths(3);
                                     break;
                                 case "Anual":
-                                    comprobante.FechaProximaEmision = comprobante.FechaProximaEmision.AddYears(1);
+                                    contrato.FechaProximaEmision = contrato.FechaProximaEmision.AddYears(1);
                                     break;
                             }
+                            RN.Comprobante.ActualizarFechaProximaEmision(contrato, sesion);
                             #endregion
                         }
                         catch (Exception ex)
                         {
                             #region Registrar error en la transmisión del comprobante
-                            listaErrores.Add(ex.Message);
+                            string a = "Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): " + ex.Message;
+                            if (ex.InnerException != null)
+                            {
+                                a += "  " + ex.InnerException.Message;
+                            }
+                            listaErrores.Add(a);
                             #endregion
                             #region Eliminar comprobante generado
                             #endregion
-                            comprobante.FechaProximaEmision = new DateTime(9999, 12, 31); //para forzar el salto al próximo contrato
+                            contrato.FechaProximaEmision = new DateTime(9999, 12, 31); //para forzar el salto al próximo contrato
                         }
                     }
                 }
