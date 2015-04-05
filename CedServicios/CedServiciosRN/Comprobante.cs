@@ -36,6 +36,11 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             db.AnularBaja(Comprobante);
         }
+        public static void ActualizarFechaProximaEmision(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            db.ActualizarFechaProximaEmision(Comprobante);
+        }
         public static void Leer(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
@@ -1915,6 +1920,11 @@ namespace CedServicios.RN
                     }
                 }
             }
+        }
+        public static void LeerUltimoEmitido(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            db.LeerUltimoEmitido(Comprobante);
         }
     }
 }

@@ -143,14 +143,15 @@ namespace CedServicios.DB
             if (comprobanteDesde.Documento.Tipo.Id == null)
             {
                 a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
-                a.Append("Insert Comprobante (Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.IdNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto) values (");
+                a.AppendLine("Insert Comprobante (Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.IdNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto) ");
+                a.Append("values (");
                 a.Append("'" + Comprobante.Cuit + "', ");
                 a.Append(Comprobante.TipoComprobante.Id.ToString() + ", ");
                 a.Append("'" + Comprobante.TipoComprobante.Descr + "', ");
                 a.Append(Comprobante.NroPuntoVta.ToString() + ", ");
                 a.Append((Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + ", ");
                 a.Append(Comprobante.NroLote.ToString() + ", ");
-                a.Append("'" + Comprobante.Documento.Tipo.Id + "', ");
+                a.Append(Comprobante.Documento.Tipo.Id + ", ");
                 a.Append(Comprobante.Documento.Nro.ToString() + ", ");
                 if (Comprobante.IdPersona == null)
                 {
@@ -173,9 +174,9 @@ namespace CedServicios.DB
                 a.Append("'" + Comprobante.Fecha.ToString("yyyyMMdd") + "', ");
                 a.Append("'" + Comprobante.FechaVto.ToString("yyyyMMdd") + "', ");
                 a.Append("'" + Comprobante.Moneda + "', ");
-                a.Append("'" + Comprobante.ImporteMoneda.ToString("0000000000000.00") + "', ");
-                a.Append("'" + Comprobante.TipoCambio.ToString("0000.000000") + "', ");
-                a.Append("'" + Comprobante.Importe.ToString("0000000000000.00") + "', ");
+                a.Append(Comprobante.ImporteMoneda.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", ");
+                a.Append(Comprobante.TipoCambio.ToString("0000.000000", System.Globalization.CultureInfo.InvariantCulture) + ", ");
+                a.Append(Comprobante.Importe.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", ");
                 a.Append("'" + Comprobante.Request + "', ");
                 if (Comprobante.Response == null)
                 {
@@ -203,7 +204,7 @@ namespace CedServicios.DB
                 a.Append("update Comprobante set ");
                 a.Append("Comprobante.DescrTipoComprobante='" + Comprobante.TipoComprobante.Descr + "', ");
                 a.Append("Comprobante.NroLote=" + Comprobante.NroLote.ToString() + ", ");
-                a.Append("Comprobante.IdTipoDoc='" + Comprobante.Documento.Tipo.Id + "', ");
+                a.Append("Comprobante.IdTipoDoc=" + Comprobante.Documento.Tipo.Id + ", ");
                 a.Append("Comprobante.NroDoc=" + Comprobante.Documento.Nro.ToString() + ", ");
                 if (Comprobante.IdPersona == null)
                 {
@@ -226,9 +227,9 @@ namespace CedServicios.DB
                 a.Append("Comprobante.Fecha='" + Comprobante.Fecha.ToString("yyyyMMdd") + "', ");
                 a.Append("Comprobante.FechaVto='" + Comprobante.FechaVto.ToString("yyyyMMdd") + "', ");
                 a.Append("Comprobante.Moneda='" + Comprobante.Moneda + "', ");
-                a.Append("Comprobante.ImporteMoneda='" + Comprobante.ImporteMoneda.ToString("0000000000000.00") + "', ");
-                a.Append("Comprobante.TipoCambio='" + Comprobante.TipoCambio.ToString("0000.000000") + "', ");
-                a.Append("Comprobante.Importe='" + Comprobante.Importe.ToString("0000000000000.00") + "', ");
+                a.Append("Comprobante.ImporteMoneda=" + Comprobante.ImporteMoneda.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", ");
+                a.Append("Comprobante.TipoCambio=" + Comprobante.TipoCambio.ToString("0000.000000", System.Globalization.CultureInfo.InvariantCulture) + ", ");
+                a.Append("Comprobante.Importe=" + Comprobante.Importe.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", ");
                 a.Append("Comprobante.Request='" + Comprobante.Request + "', ");
                 if (Comprobante.Response == null)
                 {
@@ -489,11 +490,34 @@ namespace CedServicios.DB
             //a.Append("Comprobante.Fecha='" + Comprobante.Fecha.ToString("yyyyMMdd") + "', ");
             //a.Append("Comprobante.FechaVto='" + Comprobante.FechaVto.ToString("yyyyMMdd") + "', ");
             a.Append("Comprobante.Moneda='" + Comprobante.Moneda + "', ");
-            a.Append("Comprobante.ImporteMoneda='" + Comprobante.ImporteMoneda.ToString("0000000000000.00").Replace(",",".") + "', ");
-            a.Append("Comprobante.TipoCambio='" + Comprobante.TipoCambio.ToString("0000.000000").Replace(",", ".") + "', ");
-            a.Append("Comprobante.Importe='" + Comprobante.Importe.ToString("0000000000000.00").Replace(",", ".") + "' ");
+            a.Append("Comprobante.ImporteMoneda=" + Comprobante.ImporteMoneda.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", ");
+            a.Append("Comprobante.TipoCambio=" + Comprobante.TipoCambio.ToString("0000.000000", System.Globalization.CultureInfo.InvariantCulture) + ", ");
+            a.Append("Comprobante.Importe=" + Comprobante.Importe.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + " ");
             a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + "and Comprobante.NroComprobante=" + Comprobante.Nro.ToString() + " ");
             int Cantidad = (int)Ejecutar(a.ToString(), TipoRetorno.CantReg, Transaccion.NoAcepta, sesion.CnnStr);
+        }
+        public void LeerUltimoEmitido(Entidades.Comprobante Comprobante)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("select top 1");
+            a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto ");
+            a.Append("from Comprobante, NaturalezaComprobante  ");
+            a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Comprobante.IdNaturalezaComprobante='" + Comprobante.NaturalezaComprobante.Id + "' ");
+            a.Append("and Comprobante.IdNaturalezaComprobante=NaturalezaComprobante.IdNaturalezaComprobante ");
+            a.Append("order by ABS(NroComprobante) desc ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            if (dt.Rows.Count != 0)
+            {
+                Copiar(dt.Rows[0], Comprobante);
+            }
+        }
+        public void ActualizarFechaProximaEmision(Entidades.Comprobante Comprobante)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("update Comprobante set ");
+            a.Append("Comprobante.FechaProximaEmision='" + Comprobante.FechaProximaEmision.ToString("yyyyMMdd") + "' ");
+            a.AppendLine("where Cuit='" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " ");
+            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
     }
 }
