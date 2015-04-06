@@ -114,6 +114,36 @@ namespace CedServicios.Site
                             lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision = FechaTextBox.Text;
                             lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = DateTime.ParseExact(FechaTextBox.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddDays(contrato.CantidadDiasFechaVto).ToString("yyyyMMdd");
                             lote.cabecera_lote.DestinoComprobante = contrato.IdDestinoComprobante;
+                            if (lote.comprobante[0].cabecera.informacion_comprobante.codigo_concepto != 1)  //Incluye Servicios
+                            {
+                                switch (contrato.PeriodicidadEmision)
+                                {
+                                    case "Mensual-A":
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = (new DateTime(contrato.FechaProximaEmision.Year, contrato.FechaProximaEmision.Month, 1)).ToString("yyyyMMdd");
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = DateTime.ParseExact(lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddMonths(1).AddDays(-1).ToString("yyyyMMdd");
+                                        break;
+                                    case "Mensual-V":
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = (new DateTime(contrato.FechaProximaEmision.AddMonths(-1).Year, contrato.FechaProximaEmision.AddMonths(-1).Month, 1)).ToString("yyyyMMdd");
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = DateTime.ParseExact(lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddMonths(1).AddDays(-1).ToString("yyyyMMdd");;
+                                        break;
+                                    case "Trimestral-A":
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = (new DateTime(contrato.FechaProximaEmision.Year, contrato.FechaProximaEmision.Month, 1)).ToString("yyyyMMdd");;
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = DateTime.ParseExact(lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddMonths(3).AddDays(-1).ToString("yyyyMMdd");;
+                                        break;
+                                    case "Trimestral-V":
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = (new DateTime(contrato.FechaProximaEmision.AddMonths(-3).Year, contrato.FechaProximaEmision.AddMonths(-3).Month, 1)).ToString("yyyyMMdd");
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = DateTime.ParseExact(lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddMonths(3).AddDays(-1).ToString("yyyyMMdd");;
+                                        break;
+                                    case "Anual-A":
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = (new DateTime(contrato.FechaProximaEmision.Year, contrato.FechaProximaEmision.Month, 1)).ToString("yyyyMMdd");;
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = DateTime.ParseExact(lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddMonths(12).AddDays(-1).ToString("yyyyMMdd");;
+                                        break;
+                                    case "Anual-V":
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = (new DateTime(contrato.FechaProximaEmision.AddMonths(-12).Year, contrato.FechaProximaEmision.AddMonths(-12).Month, 1)).ToString("yyyyMMdd");
+                                        lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = DateTime.ParseExact(lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddMonths(12).AddDays(-1).ToString("yyyyMMdd");;
+                                        break;
+                                }
+                            }
                             //Nuevo número de lote
                             if (contrato.IdDestinoComprobante == "ITF")
                             {
@@ -140,7 +170,6 @@ namespace CedServicios.Site
 
                             RN.Comprobante.Registrar(lote, null, "Venta", contrato.IdDestinoComprobante, "PteConf", "No Aplica", new DateTime(9999, 12, 31), 0, 0, 0, sesion);
                             #endregion
-
                             switch (contrato.IdDestinoComprobante)
                             {
                                 case "AFIP":
@@ -156,13 +185,16 @@ namespace CedServicios.Site
                             #region Actualizar, en el Contrato, la fecha de próxima emisión
                             switch (contrato.PeriodicidadEmision)
                             {
-                                case "Mensual":
+                                case "Mensual-A":
+                                case "Mensual-V":
                                     contrato.FechaProximaEmision = contrato.FechaProximaEmision.AddMonths(1);
                                     break;
-                                case "Trimestral":
+                                case "Trimestral-A":
+                                case "Trimestral-V":
                                     contrato.FechaProximaEmision = contrato.FechaProximaEmision.AddMonths(3);
                                     break;
-                                case "Anual":
+                                case "Anual-A":
+                                case "Anual-V":
                                     contrato.FechaProximaEmision = contrato.FechaProximaEmision.AddYears(1);
                                     break;
                             }
