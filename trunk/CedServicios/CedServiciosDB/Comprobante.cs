@@ -102,7 +102,7 @@ namespace CedServicios.DB
                 {
                     a.Append("and Comprobante.IdNaturalezaComprobante<>'VentaContrato' ");
                 }
-                a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, Comprobante.NroComprobante desc ");
+                a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
                 {

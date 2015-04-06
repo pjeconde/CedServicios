@@ -12,9 +12,12 @@ namespace CedServicios.RN
             List<Entidades.PeriodicidadEmision> lista = new List<Entidades.PeriodicidadEmision>();
             if (ParaContrato)
             {
-                lista.Add(new Entidades.PeriodicidadEmision("Mensual", "Mensual"));
-                lista.Add(new Entidades.PeriodicidadEmision("Trimestral", "Trimestral"));
-                lista.Add(new Entidades.PeriodicidadEmision("Anual", "Anual"));
+                lista.Add(new Entidades.PeriodicidadEmision("Mensual-A", "Mensual(adelantado)"));
+                lista.Add(new Entidades.PeriodicidadEmision("Mensual-V", "Mensual(vencido)"));
+                lista.Add(new Entidades.PeriodicidadEmision("Trimestral-A", "Trimestral(adelantado)"));
+                lista.Add(new Entidades.PeriodicidadEmision("Trimestral-V", "Trimestral(vencido)"));
+                lista.Add(new Entidades.PeriodicidadEmision("Anual-A", "Anual(adelantado)"));
+                lista.Add(new Entidades.PeriodicidadEmision("Anual-V", "Anual(vencido)"));
             }
             else
             {

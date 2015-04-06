@@ -221,6 +221,7 @@ namespace CedServicios.Site
                         FechaProximaEmisionDatePickerWebUserControl.Text = new DateTime(9999, 12, 31).ToString("yyyyMMdd");
                         #endregion
                     }
+                    LoteUpdatePanel.Visible = IdDestinoComprobanteDropDownList.SelectedValue == "ITF";
                 }
             }
         }
