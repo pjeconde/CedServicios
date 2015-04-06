@@ -1028,14 +1028,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             referenciasGridView.DataSource = referencias;
             referenciasGridView.DataBind();
             ViewState["referencias"] = referencias;
-
-            //referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
-            //FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-            //referencia.codigo_de_referencia = 1;
-            //referencia.descripcioncodigo_de_referencia = "prueba";
-            //referencias.Add(referencia);
-            //ViewState["referencias"] = referencias;
-
             #endregion
             #region CompletarComprador
             if (lote.comprobante[0].cabecera.informacion_comprador.GLN != 0)
