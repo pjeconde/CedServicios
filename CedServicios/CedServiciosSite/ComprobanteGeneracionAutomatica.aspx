@@ -22,6 +22,28 @@
                 </td>
             </tr>
             <tr>
+                <td align="left" style="padding-right:5px; padding-top:5px">
+                    Moneda:
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <asp:DropDownList ID="MonedaDropDownList" runat="server" Width="200px" OnSelectedIndexChanged="MonedaDropDownList_SelectedIndexChanged" AutoPostBack="true"></asp:DropDownList>
+                            </td>
+                            <td style="padding-left:10px">
+                                <asp:Label ID="Tipo_de_cambioLabel" runat="server" Text="Tipo de cambio:" Visible="false"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:TextBox ID="Tipo_de_cambioTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetCh" Text="1.00" ToolTip="El separador de decimales a utilizar es el punto" Visible="false"></asp:TextBox>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+                <td style="width:550px">
+                </td>
+            </tr>
+            <tr>
 	            <td align="left" style="padding-right:5px; padding-top:5px">
                     Fecha de emisión:
 	            </td>
@@ -36,10 +58,16 @@
             <tr>
                 <td>
                 </td>
-                <td align="left" style="height: 24px; padding-top:5px" valign="top">
-                    <asp:Button ID="GenerarComprobantesButton" runat="server" Text="Generar Comprobantes para los Contratos seleccionados" onclick="GenerarComprobantesButton_Click" Visible="false" />
-                    <asp:Button ID="BuscarButton" runat="server" Text="Buscar" onclick="BuscarButton_Click" />
+                <td align="left" style="height: 24px; padding-top:10px" valign="top">
+                    <asp:Button ID="BuscarButton" runat="server" Text="Leer contratos para seleccionar" onclick="BuscarButton_Click" Width="278px" />
                     <asp:Button ID="SalirButton" runat="server" Text="Cancelar" onclick="SalirButton_Click" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td align="left" style="height:24px" valign="top">
+                    <asp:Button ID="GenerarComprobantesButton" runat="server" Text="Generar Comprobantes para los Contratos seleccionados" onclick="GenerarComprobantesButton_Click" Visible="false" />
                 </td>
             </tr>
             <tr>

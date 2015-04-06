@@ -11,7 +11,7 @@ namespace CedServicios.DB
         public Comprobante(Entidades.Sesion Sesion) : base(Sesion)
         {
         }
-        public List<Entidades.Comprobante> ListaContratosFiltrada(List<Entidades.Estado> Estados, string FechaEmision, Entidades.Persona Persona)
+        public List<Entidades.Comprobante> ListaContratosFiltrada(List<Entidades.Estado> Estados, string FechaEmision, Entidades.Persona Persona, string Moneda)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)
@@ -44,6 +44,7 @@ namespace CedServicios.DB
                     a.Append("and Comprobante.DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
                 }
                 a.Append("and Comprobante.IdNaturalezaComprobante='VentaContrato' ");
+                a.Append("and Comprobante.Moneda='" + Moneda + "' ");
                 a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, Comprobante.NroComprobante desc ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
