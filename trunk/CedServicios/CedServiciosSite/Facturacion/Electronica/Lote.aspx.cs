@@ -364,7 +364,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             if (lote != null)
                             {
                                 LlenarCampos(lote);
-                                if (comprobanteATratar.Tratamiento != Entidades.Enum.TratamientoComprobante.Clonado) BorrarCamposNoClonables();
+                                if (comprobanteATratar.Tratamiento == Entidades.Enum.TratamientoComprobante.Clonado) BorrarCamposNoClonables();
                             }
                         }
                     }
@@ -469,7 +469,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     try
                     {
-                        if (ValidarCamposObligatorios())
+                        if (ValidarCamposObligatorios("ObtenerXML"))
                         {
                             //Generar Lote
                             FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
@@ -491,11 +491,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 if (cAux.Estado == null || cAux.Estado != "Vigente")
                                 {
                                     RN.Comprobante.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, "ITF", "PteConf", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), ((Entidades.Sesion)Session["Sesion"]));
-                                }
-                                else
-                                {
-                                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("No se registro el comprobante en la base de datos ya que el comprobante está vigente."), false);
-                                    return;
                                 }
                             }
 
@@ -1033,6 +1028,14 @@ namespace CedServicios.Site.Facturacion.Electronica
             referenciasGridView.DataSource = referencias;
             referenciasGridView.DataBind();
             ViewState["referencias"] = referencias;
+
+            //referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
+            //FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+            //referencia.codigo_de_referencia = 1;
+            //referencia.descripcioncodigo_de_referencia = "prueba";
+            //referencias.Add(referencia);
+            //ViewState["referencias"] = referencias;
+
             #endregion
             #region CompletarComprador
             if (lote.comprobante[0].cabecera.informacion_comprador.GLN != 0)
@@ -1971,7 +1974,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 CodigoOperacionLabel.Visible = true;
             }
         }
-        protected bool ValidarCamposObligatorios()
+        protected bool ValidarCamposObligatorios(string Accion)
         {
             if (Cuit_VendedorTextBox.Text.Equals(string.Empty))
             {
@@ -2026,8 +2029,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                     RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                     if (comprobante.Estado == "Vigente")
                     {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Este Nro. de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante") + " ya se encuentra vigente."), false);
-                        return false;
+                        if (Accion != "ObtenerXML")
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Este Nro. de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante") + " ya se encuentra vigente."), false);
+                            return false;
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -2235,7 +2241,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         try
                         {
-                            if (ValidarCamposObligatorios())
+                            if (ValidarCamposObligatorios(""))
                             {
                                 string certificado = "";
                                 string respuesta = "";
@@ -2333,7 +2339,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         try
                         {
-                            if (ValidarCamposObligatorios())
+                            if (ValidarCamposObligatorios(""))
                             {
                                 string certificado = "";
                                 string respuesta = "";
@@ -2547,7 +2553,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485."), false);
                                 return;
                             }
-                            if (ValidarCamposObligatorios())
+                            if (ValidarCamposObligatorios(""))
                             {
                                 string respuesta = "";
                                 FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
@@ -2825,7 +2831,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         try
                         {
-                            if (ValidarCamposObligatorios())
+                            if (ValidarCamposObligatorios(""))
                             {
                                 FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
                                 //Grabar en base de datos
