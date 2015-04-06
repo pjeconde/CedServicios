@@ -110,6 +110,10 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     sb.Append(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
                     sb.Append("-");
                     sb.Append(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
+                    if (original == false)
+                    {
+                        sb.Append("-BORRADOR");
+                    }
 
                     CrystalDecisions.Shared.ExportOptions exportOpts = new CrystalDecisions.Shared.ExportOptions();
                     CrystalDecisions.Shared.PdfRtfWordFormatOptions pdfOpts = CrystalDecisions.Shared.ExportOptions.CreatePdfRtfWordFormatOptions();
@@ -170,7 +174,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
             {
                 lc.comprobante[0].cabecera.informacion_comprador.provincia = string.Empty;
             }
-
+            
             lc.comprobante[0].resumen.cant_alicuotas_ivaSpecified = true;
             lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified=true;
             lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified = true;

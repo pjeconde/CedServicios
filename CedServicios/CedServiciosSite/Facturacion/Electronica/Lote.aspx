@@ -1691,6 +1691,28 @@
                                                     </tr>
                                                 </table>
                                             </asp:Panel>
+                                            <asp:Panel ID="DescargarPDFPanel" runat="server">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
+                                                    <tr>
+                                                        <td style="width: 100%;">
+                                                            <asp:Button ID="DescargarPDFButton" runat="server" Text="Descargar PDF" Width="100%" ForeColor="Brown"
+                                                                CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
+                                                                OnClick="DescargarPDFButton_Click" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
+                                            <asp:Panel ID="ActualizarEstadoPanel" runat="server">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
+                                                    <tr>
+                                                        <td style="width: 100%;">
+                                                            <asp:Button ID="ActualizarEstadoButton" runat="server" Text="Actualizar Estado" Width="100%" ForeColor="Brown"
+                                                                CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
+                                                                OnClick="ActualizarEstadoButton_Click" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
                                         </td>
                                     </tr>
                                     <tr>
@@ -1727,32 +1749,6 @@
                             <asp:ValidationSummary ID="RequeridosValidationSummary" runat="server" BorderColor="Gray"
                                 BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:" 
                                 ShowMessageBox="True"></asp:ValidationSummary>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td align="left" style="text-align: center; width: 780px; padding: 5px;">
-                            <asp:Panel ID="DescargarPDFPanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
-                                    <tr>
-                                        <td style="width: 100%;">
-                                            <asp:Button ID="DescargarPDFButton" runat="server" Text="Descargar PDF" Width="100%"
-                                                CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
-                                                OnClick="DescargarPDFButton_Click" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </asp:Panel>
-                            <asp:Panel ID="ActualizarEstadoPanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
-                                    <tr>
-                                        <td style="width: 100%;">
-                                            <asp:Button ID="ActualizarEstadoButton" runat="server" Text="Actualizar Estado" Width="100%"
-                                                CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
-                                                OnClick="ActualizarEstadoButton_Click" />
-                                        </td>
-                                    </tr>
-                                </table>
-                            </asp:Panel>
                         </td>
                     </tr>
                 </table>

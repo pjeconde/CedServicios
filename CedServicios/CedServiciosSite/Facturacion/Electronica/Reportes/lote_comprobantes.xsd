@@ -72,6 +72,7 @@
                               </xs:sequence>
                             </xs:complexType>
                           </xs:element>
+						              <xs:element minOccurs="0" maxOccurs="1" name="codigo_concepto" type="xs:int" />
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>

@@ -23,7 +23,7 @@
         <tr>
 	        <td align="right" valign="top" style="padding-right:5px; padding-top:5px">
 		        <asp:Label ID="Label4" runat="server" 
-                    Text="Logotipo&lt;br /&gt;para&lt;br /&gt;comprobantes&lt;br /&gt;(archivos JPG de 295 x 85 pixels,&lt;br /&gt;no debe pasar los 3 Kb)" ></asp:Label>
+                    Text="Logotipo&lt;br /&gt;para&lt;br /&gt;comprobantes&lt;br /&gt;(archivos JPG de pixels 146 ancho x 55 alto,&lt;br /&gt;no debe pasar los 10 Kb)" ></asp:Label>
 	        </td>
 			<td align="left" rowspan="2" style="padding-top:5px">
                 <asp:Image ID="LogotipoImage" runat="server" BorderStyle="Solid" BorderWidth="1px" BorderColor="#cccccc" ImageUrl="Imagenes/Interrogacion106x500.bmp" Width="295px" Height="85px" />

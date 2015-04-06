@@ -13,6 +13,7 @@
     <RootNamespace>CedServicios.Site</RootNamespace>
     <AssemblyName>CedServiciosSite</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <UseIISExpress>false</UseIISExpress>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -1217,6 +1218,7 @@
     <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
       <DependentUpon>lote_comprobantes.xsd</DependentUpon>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <SubType>Designer</SubType>
     </None>
     <Content Include="Facturacion\Electronica\Reportes\Web.config" />
   </ItemGroup>
