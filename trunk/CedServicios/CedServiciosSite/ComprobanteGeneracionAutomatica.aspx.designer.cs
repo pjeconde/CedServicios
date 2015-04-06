@@ -58,6 +58,33 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.DropDownList ClienteDropDownList;
         
         /// <summary>
+        /// Control MonedaDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList MonedaDropDownList;
+        
+        /// <summary>
+        /// Control Tipo_de_cambioLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Tipo_de_cambioLabel;
+        
+        /// <summary>
+        /// Control Tipo_de_cambioTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Tipo_de_cambioTextBox;
+        
+        /// <summary>
         /// Control FechaTextBox.
         /// </summary>
         /// <remarks>
@@ -85,15 +112,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Image FechaImage;
         
         /// <summary>
-        /// Control GenerarComprobantesButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button GenerarComprobantesButton;
-        
-        /// <summary>
         /// Control BuscarButton.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,15 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SalirButton;
+        
+        /// <summary>
+        /// Control GenerarComprobantesButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GenerarComprobantesButton;
         
         /// <summary>
         /// Control MensajeLabel.
