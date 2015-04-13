@@ -16,9 +16,9 @@ namespace CedServicios.DB
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("select NaturalezaComprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante from NaturalezaComprobante ");
             if (Elemento == Entidades.Enum.Elemento.Comprobante)
-                a.Append(" where NaturalezaComprobante.IdNaturalezaComprobante<>'VentaContrato' ");
+                a.Append("where NaturalezaComprobante.IdNaturalezaComprobante<>'VentaContrato' ");
             else
-                a.Append(" where NaturalezaComprobante.IdNaturalezaComprobante='VentaContrato' ");
+                a.Append("where NaturalezaComprobante.IdNaturalezaComprobante='VentaContrato' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.NaturalezaComprobante> lista = new List<Entidades.NaturalezaComprobante>();
             if (dt.Rows.Count != 0)
@@ -30,6 +30,24 @@ namespace CedServicios.DB
                     elem.Descr = "--- Todas ---";
                     lista.Add(elem);
                 }
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.NaturalezaComprobante elem = new Entidades.NaturalezaComprobante();
+                    Copiar(dt.Rows[i], elem);
+                    lista.Add(elem);
+                }
+            }
+            return lista;
+        }
+        public List<Entidades.NaturalezaComprobante> LeerLista(string IdNaturalezaComprobante)
+        {
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select NaturalezaComprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante from NaturalezaComprobante ");
+            a.Append("where NaturalezaComprobante.IdNaturalezaComprobante='" + IdNaturalezaComprobante + "' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.NaturalezaComprobante> lista = new List<Entidades.NaturalezaComprobante>();
+            if (dt.Rows.Count != 0)
+            {
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.NaturalezaComprobante elem = new Entidades.NaturalezaComprobante();

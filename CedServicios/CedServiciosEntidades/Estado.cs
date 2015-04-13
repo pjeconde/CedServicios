@@ -63,6 +63,15 @@ namespace CedServicios.Entidades
         }
     }
     [Serializable]
+    public class EstadoPteEnvio : Estado
+    {
+        public EstadoPteEnvio()
+        {
+            id = "PteEnvio";
+            descr = "Pendiente de envio (AFIP/ITF)";
+        }
+    }
+    [Serializable]
     public class EstadoPteConf : Estado
     {
         public EstadoPteConf()

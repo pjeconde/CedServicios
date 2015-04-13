@@ -18,6 +18,7 @@ namespace CedServicios.Entidades
             Alta,
             Baja_AnulBaja,
             Modificacion,
+            Envio,
             Clonado,
             Consulta,
             ConsultaITF,

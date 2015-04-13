@@ -109,13 +109,14 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Artículos|Consulta");
                         opcionesHabilitadas.Add("Contratos|Alta");
                         opcionesHabilitadas.Add("Contratos|Baja/Anul.baja");
-                        //opcionesHabilitadas.Add("Contratos|Modificación");
+                        opcionesHabilitadas.Add("Contratos|Modificación");
                         opcionesHabilitadas.Add("Contratos|Consulta");
                         opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Electrónica");
                         opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Tradicional");
                         opcionesHabilitadas.Add("Comprobantes|Alta manual|Compra");
                         opcionesHabilitadas.Add("Comprobantes|Baja/Anul.baja");
-                        //opcionesHabilitadas.Add("Comprobantes|Modificación");
+                        opcionesHabilitadas.Add("Comprobantes|Modificación");
+                        opcionesHabilitadas.Add("Comprobantes|Envio (AFIP/ITF)");
                         opcionesHabilitadas.Add("Comprobantes|Consulta");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");

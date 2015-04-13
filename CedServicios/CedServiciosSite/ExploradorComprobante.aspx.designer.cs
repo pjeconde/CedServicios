@@ -58,6 +58,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.DropDownList ClienteDropDownList;
         
         /// <summary>
+        /// Control EstadosPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel EstadosPanel;
+        
+        /// <summary>
         /// Control EstadoVigenteCheckBox.
         /// </summary>
         /// <remarks>
@@ -67,13 +76,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.CheckBox EstadoVigenteCheckBox;
         
         /// <summary>
-        /// Control EstadoPteConfCheckBox.
+        /// Control EstadoPteEnvioCheckBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox EstadoPteConfCheckBox;
+        protected global::System.Web.UI.WebControls.CheckBox EstadoPteEnvioCheckBox;
         
         /// <summary>
         /// Control EstadoDeBajaCheckBox.
@@ -85,13 +94,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.CheckBox EstadoDeBajaCheckBox;
         
         /// <summary>
-        /// Control EstadoPteAutorizCheckBox.
+        /// Control EstadoPteConfCheckBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox EstadoPteAutorizCheckBox;
+        protected global::System.Web.UI.WebControls.CheckBox EstadoPteConfCheckBox;
         
         /// <summary>
         /// Control EstadoRechCheckBox.
@@ -103,6 +112,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.CheckBox EstadoRechCheckBox;
         
         /// <summary>
+        /// Control EstadoPteAutorizCheckBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox EstadoPteAutorizCheckBox;
+        
+        /// <summary>
         /// Control NaturalezaComprobanteDropDownList.
         /// </summary>
         /// <remarks>
@@ -110,6 +128,24 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList NaturalezaComprobanteDropDownList;
+        
+        /// <summary>
+        /// Control DetallePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel DetallePanel;
+        
+        /// <summary>
+        /// Control DetalleTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox DetalleTextBox;
         
         /// <summary>
         /// Control PeriodoEmisionPanel.

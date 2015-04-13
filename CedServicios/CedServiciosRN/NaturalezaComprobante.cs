@@ -13,5 +13,11 @@ namespace CedServicios.RN
             List<Entidades.NaturalezaComprobante> lista = db.LeerLista(Elemento);
             return lista;
         }
+        public static List<Entidades.NaturalezaComprobante> Lista(string IdNaturalezaComprobante, Entidades.Sesion Sesion)
+        {
+            CedServicios.DB.NaturalezaComprobante db = new DB.NaturalezaComprobante(Sesion);
+            List<Entidades.NaturalezaComprobante> lista = db.LeerLista(IdNaturalezaComprobante);
+            return lista;
+        }
     }
 }

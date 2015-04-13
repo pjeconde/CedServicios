@@ -143,20 +143,19 @@ namespace CedServicios.Site
                     {
                         IdNaturalezaComprobanteTextBox.Text = comprobanteATratar.Comprobante.NaturalezaComprobante.Id;
                         CompletarUI(comprobanteATratar.Comprobante);
+                        ViewState["ComprobanteATratar"] = comprobanteATratar;
                     }
                     string descrTratamiento = String.Empty;
                     switch (TratamientoTextBox.Text)
                     {
                         case "Consulta":
                             descrTratamiento = "Consulta";
-                            Baja_AnulBaPanel.Visible = false;
                             break;
                         case "ConsultaITF":
                             descrTratamiento = "Consulta (ITF)";
-                            Baja_AnulBaPanel.Visible = false;
                             break;
                         case "Baja_AnulBaja":
-                            PrevisualizacionComprobantePanel.Visible = false;
+                            Baja_AnulBaPanel.Visible = true;
                             if (comprobanteATratar.Comprobante.Estado == "DeBaja")
                             {
                                 descrTratamiento = "Anulación de baja";
@@ -167,6 +166,11 @@ namespace CedServicios.Site
                                 descrTratamiento = "Baja";
                                 Baja_AnulBajaButton.Text = "Registrar la baja";
                             }
+                            break;
+                        case "Envio":
+                            AFIPpanel.Visible = true;
+                            InterfacturasOnLinePanel.Visible = true;
+                            descrTratamiento = "Envio (AFIP/ITF)";
                             break;
                     }
                     if (IdNaturalezaComprobanteTextBox.Text.IndexOf("Venta") != -1)
@@ -186,7 +190,6 @@ namespace CedServicios.Site
                                 LoteUpdatePanel.Visible = false;
                                 Id_LoteTextbox.Text = "1";
                                 if (TratamientoTextBox.Text.IndexOf("Consulta") != -1) AccionesPanel.Visible = false;
-                                PrevisualizacionComprobantePanel.Visible = false;
                                 DatosEmisionPanel.Visible = false;
                                 break;
                             case "VentaContrato":
@@ -195,7 +198,6 @@ namespace CedServicios.Site
                                 LoteUpdatePanel.Visible = false;
                                 Id_LoteTextbox.Text = "1";
                                 if (TratamientoTextBox.Text.IndexOf("Consulta") != -1) AccionesPanel.Visible = false;
-                                PrevisualizacionComprobantePanel.Visible = false;
                                 CAEPanel.Visible = false;
                                 FechaEmisionLabel.Text = "Fecha de alta:";
                                 break;
@@ -216,12 +218,11 @@ namespace CedServicios.Site
                         ExportacionPanel.Visible = false;
                         DatosComerciales.Visible = false;
                         if (TratamientoTextBox.Text.IndexOf("Consulta") != -1) AccionesPanel.Visible = false;
-                        PrevisualizacionComprobantePanel.Visible = false;
                         DatosEmisionPanel.Visible = false;
                         FechaProximaEmisionDatePickerWebUserControl.Text = new DateTime(9999, 12, 31).ToString("yyyyMMdd");
                         #endregion
                     }
-                    LoteUpdatePanel.Visible = IdDestinoComprobanteDropDownList.SelectedValue == "ITF";
+                    LoteUpdatePanel.Visible = IdDestinoComprobanteDropDownList.SelectedValue == "ITF" || comprobanteATratar.Comprobante.Estado == "PteEnvio";
                 }
             }
         }
@@ -325,14 +326,12 @@ namespace CedServicios.Site
 
             Observaciones_ResumenTextBox.ReadOnly = true;
         }
-
         private void BindearDropDownLists()
         {
             ImpuestosGlobales.BindearDropDownLists();
             PermisosExpo.BindearDropDownLists();
             DetalleLinea.BindearDropDownLists();
         }
-
         private void CompletarUI(Entidades.Comprobante Comprobante)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -405,7 +404,6 @@ namespace CedServicios.Site
 
             BindearDropDownLists();
         }
-
         private void CompletarCAE(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             CAETextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.cae;
@@ -414,7 +412,6 @@ namespace CedServicios.Site
             ResultadoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.resultado;
             MotivoTextBox.Text = lc.comprobante[0].cabecera.informacion_comprobante.motivo;
         }
-
         private void CompletarComprobante(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             Numero_ComprobanteTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante);
@@ -427,7 +424,6 @@ namespace CedServicios.Site
             CodigoOperacionDropDownList.SelectedIndex = CodigoOperacionDropDownList.Items.IndexOf(CodigoOperacionDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_operacion)));
             CodigoConceptoDropDownList.SelectedIndex = CodigoConceptoDropDownList.Items.IndexOf(CodigoConceptoDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.codigo_concepto)));
         }
-
         private void CompletarCabecera(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             try
@@ -463,7 +459,6 @@ namespace CedServicios.Site
                 Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
             }
         }
-
         private void CompletarExportacion(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             if (lc.comprobante[0].cabecera.informacion_comprobante.informacion_exportacion != null)
@@ -511,7 +506,6 @@ namespace CedServicios.Site
                 DatosComerciales.Texto = string.Empty;
             }
         }
-
         private void CompletarReferencias(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
@@ -577,7 +571,6 @@ namespace CedServicios.Site
             Domicilio_Torre_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_torre);
             Domicilio_Manzana_VendedorTextBox.Text = Convert.ToString(lc.comprobante[0].cabecera.informacion_vendedor.domicilio_manzana);
         }
-
         private void CompletarComprador(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             if (lc.comprobante[0].cabecera.informacion_comprador.GLN != 0)
@@ -622,7 +615,6 @@ namespace CedServicios.Site
                 }
             }
         }
-
         private void CompletarResumen(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].resumen.codigo_moneda)));
@@ -710,7 +702,6 @@ namespace CedServicios.Site
                 }
             }
         }
-
         private void CompletarUI(org.dyndns.cedweb.consulta.ConsultarResult lc, EventArgs e)
         {
             //Cabecera
@@ -944,11 +935,9 @@ namespace CedServicios.Site
             MotivoTextBox.Text += lc.cabecera_lote.motivo;
             BindearDropDownLists();
         }
-
         protected void MonedaComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
         }
-
         private void ResetearVendedor()
         {
             Razon_Social_VendedorTextBox.Text = string.Empty;
@@ -1014,7 +1003,6 @@ namespace CedServicios.Site
             EmailAvisoVisualizacionTextBox.Text = string.Empty;
             PasswordAvisoVisualizacionTextBox.Text = string.Empty;
         }
-
         private void ResetearGrillas()
         {
             DetalleLinea.ResetearGrillas();
@@ -1033,7 +1021,6 @@ namespace CedServicios.Site
             DatosComerciales.Texto = "";
             DatosComerciales.ReadOnly = true;
         }
-
         private void ResetearOtros()
         {
             //Información comprobante
@@ -1074,7 +1061,6 @@ namespace CedServicios.Site
             Importe_Total_Factura_ResumenTextBox.Text = "";
             Tipo_de_cambioTextBox.Text = "";
         }
-
         private void AjustarCamposXPtaVentaChanged(string PuntoDeVenta)
         {
             if (!PuntoDeVenta.Equals(string.Empty))
@@ -1135,7 +1121,6 @@ namespace CedServicios.Site
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Debe definir el punto de venta"), false);
             }
         }
-
         private void AjustarCamposXPtaVentaExport()
         {
             Presta_ServCheckBox.Checked = false;
@@ -1197,21 +1182,18 @@ namespace CedServicios.Site
             CodigoOperacionDropDownList.Visible = true;
             CodigoOperacionLabel.Visible = true;
         }
-
         private void AjustarCamposXPtaVentaComun()
         {
             //Presta_ServCheckBox.Enabled = true;
             HacerVisiblesV0V1();
             AjustarCamposXPtaVtaComunYRG2904();
         }
-
         private void AjustarCamposXPtaVentaRG2904(string tipoComprobante)
         {
             Presta_ServCheckBox.Enabled = true;
             AjustarCamposXPtaVtaComunYRG2904();
             AjustarCodigoOperacionEn2904(tipoComprobante);
         }
-
         private void AjustarCodigoOperacionEn2904(string valor)
         {
             if (valor.Equals("2") || valor.Equals("3"))
@@ -1225,7 +1207,6 @@ namespace CedServicios.Site
                 CodigoOperacionLabel.Visible = true;
             }
         }
-
         private void AjustarCamposXPtaVtaComunYRG2904()
         {
             AjustarPrestaServxVersiones();
@@ -1243,12 +1224,10 @@ namespace CedServicios.Site
             CodigoOperacionDropDownList.Visible = true;
             CodigoOperacionLabel.Visible = true;
         }
-
         private void HacerVisiblesV0V1()
         {
             Version1RadioButton.Checked = true;
         }
-
         private void AjustarCamposXPtaVentaIndefinido()
         {
             TipoPtoVentaLabel.Text = "No definido";
@@ -1268,7 +1247,6 @@ namespace CedServicios.Site
             CodigoOperacionDropDownList.Visible = true;
             CodigoOperacionLabel.Visible = true;
         }
-
         private FeaEntidades.InterFacturas.lote_comprobantes GenerarLote()
         {
             FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -1382,7 +1360,6 @@ namespace CedServicios.Site
             lote.comprobante[0] = comp;
             return lote;
         }
-
         private void GenerarPrestaServicio(FeaEntidades.InterFacturas.cabecera_lote cab)
         {
             cab.presta_servSpecified = true;
@@ -1411,13 +1388,10 @@ namespace CedServicios.Site
                 cab.presta_serv = Convert.ToInt32(Presta_ServCheckBox.Checked);
             }
         }
-
-
         private void GenerarV0oV1(FeaEntidades.InterFacturas.cabecera_lote cab)
         {
             cab.presta_servSpecified = false;
         }
-
         private void GenerarInfoExtensionesDestinatarios(FeaEntidades.InterFacturas.comprobante comp)
         {
             if (!EmailAvisoVisualizacionTextBox.Text.Equals(string.Empty))
@@ -1431,7 +1405,6 @@ namespace CedServicios.Site
                 comp.extensiones.extensiones_destinatarios.email = EmailAvisoVisualizacionTextBox.Text;
             }
         }
-
         private void GenerarInfoExtensionesComerciales(FeaEntidades.InterFacturas.comprobante comp)
         {
             if (!DatosComerciales.Texto.Equals(string.Empty))
@@ -1445,7 +1418,6 @@ namespace CedServicios.Site
                 comp.extensiones.extensiones_datos_comerciales = RN.Funciones.ConvertToHex(textoSinSaltoDeLinea);
             }
         }
-
         private void GenerarInfoExtensionesCamaraFacturas(FeaEntidades.InterFacturas.comprobante comp)
         {
             if (!PasswordAvisoVisualizacionTextBox.Text.Equals(string.Empty))
@@ -1463,7 +1435,6 @@ namespace CedServicios.Site
                 comp.extensiones.extensiones_camara_facturasSpecified = true;
             }
         }
-
         private FeaEntidades.InterFacturas.informacion_comprobante GenerarInfoComprobante()
         {
             FeaEntidades.InterFacturas.informacion_comprobante infcomprob = new FeaEntidades.InterFacturas.informacion_comprobante();
@@ -1552,7 +1523,6 @@ namespace CedServicios.Site
             }
             return infcomprob;
         }
-
         private void GenerarInfoFechaVto(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
         {
             if (!FechaVencimientoDatePickerWebUserControl.Text.Equals(string.Empty))
@@ -1579,7 +1549,6 @@ namespace CedServicios.Site
                 }
             }
         }
-
         private void GenerarIVAComputable(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
         {
             //No se tiene que informar para exportación
@@ -1608,7 +1577,6 @@ namespace CedServicios.Site
                 }
             }
         }
-
         private void GenerarCodigoOperacion(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
         {
             //No se tiene que informar para exportación
@@ -1662,7 +1630,6 @@ namespace CedServicios.Site
                 infcomprob.codigo_operacionSpecified = true;
             }
         }
-
         private void GenerarCodigoConcepto(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
         {
             //Se tiene que informar para versión 1 de punto común
@@ -1676,7 +1643,6 @@ namespace CedServicios.Site
                 infcomprob.codigo_conceptoSpecified = false;
             }
         }
-
         private void GenerarReferencias(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
         {
             System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> listareferencias = (System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"];
@@ -1708,7 +1674,6 @@ namespace CedServicios.Site
                 }
             }
         }
-
         private static void GenerarReferencia(FeaEntidades.InterFacturas.informacion_comprobante infcomprob, System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> listareferencias, int i)
         {
             infcomprob.referencias[i] = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
@@ -1716,7 +1681,6 @@ namespace CedServicios.Site
             infcomprob.referencias[i].descripcioncodigo_de_referencia = listareferencias[i].descripcioncodigo_de_referencia;
             infcomprob.referencias[i].dato_de_referencia = listareferencias[i].dato_de_referencia;
         }
-
         private void GenerarInfoExportacion(FeaEntidades.InterFacturas.comprobante comp, FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
         {
             FeaEntidades.InterFacturas.informacion_exportacion ie = new FeaEntidades.InterFacturas.informacion_exportacion();
@@ -1771,7 +1735,6 @@ namespace CedServicios.Site
             catch (System.NullReferenceException)
             {
             }
-
             if (!PaisDestinoExpDropDownList.SelectedValue.Equals("0"))
             {
                 ie.destino_comprobante = Convert.ToInt32(PaisDestinoExpDropDownList.SelectedValue);
@@ -1804,7 +1767,6 @@ namespace CedServicios.Site
                 infcomprob.informacion_exportacion = ie;
             }
         }
-
         private void GenerarInfoPermisosExportacion(FeaEntidades.InterFacturas.informacion_exportacion ie, FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
         {
             if (infcomprob.tipo_de_comprobante.Equals(19) && ie.tipo_exportacion.Equals(1))
@@ -1834,7 +1796,6 @@ namespace CedServicios.Site
                 }
             }
         }
-
         private void GenerarInfoVendedor(FeaEntidades.InterFacturas.cabecera compcab)
         {
             FeaEntidades.InterFacturas.informacion_vendedor infovend = new FeaEntidades.InterFacturas.informacion_vendedor();
@@ -1893,7 +1854,6 @@ namespace CedServicios.Site
             infovend.telefono = Telefono_VendedorTextBox.Text;
             compcab.informacion_vendedor = infovend;
         }
-
         private void GenerarInfoComprador(FeaEntidades.InterFacturas.cabecera compcab, FeaEntidades.InterFacturas.informacion_comprador infcompra)
         {
             if (!GLN_CompradorTextBox.Text.Equals(string.Empty))
@@ -2050,7 +2010,6 @@ namespace CedServicios.Site
 
             compcab.informacion_comprador = infcompra;
         }
-
         private void GenerarImportesMonedaExtranjera(FeaEntidades.InterFacturas.resumen r)
         {
             double tipodecambio = Convert.ToDouble(Tipo_de_cambioTextBox.Text);
@@ -2093,7 +2052,6 @@ namespace CedServicios.Site
             catch (FormatException)
             {
             }
-
             //para exportación no se debe informar
             try
             {
@@ -2124,7 +2082,6 @@ namespace CedServicios.Site
             catch (FormatException)
             {
             }
-
             //para exportación no se debe informar
             try
             {
@@ -2155,7 +2112,6 @@ namespace CedServicios.Site
             catch (FormatException)
             {
             }
-
             //para exportación no se debe informar
             try
             {
@@ -2190,7 +2146,6 @@ namespace CedServicios.Site
             rimo.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
             r.importes_moneda_origen = rimo;
         }
-
         private void GenerarImpuestoLiqRNIExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
         {
             //para exportación se debe informar en 0
@@ -2217,7 +2172,6 @@ namespace CedServicios.Site
                 rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
             }
         }
-
         private void GenerarImpuestoLiqExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
         {
             //para exportación se debe informar en 0
@@ -2244,7 +2198,6 @@ namespace CedServicios.Site
                 rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
             }
         }
-
         private void GenerarImporteOperacionesExentasExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
         {
             //para exportación se debe informar en 0
@@ -2271,7 +2224,6 @@ namespace CedServicios.Site
                 rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
             }
         }
-
         private void GenerarImporteTotalConceptoNoGravadoExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
         {
             //para exportación se debe informar en 0
@@ -2298,7 +2250,6 @@ namespace CedServicios.Site
                 rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
             }
         }
-
         private void GenerarImporteTotalNetoGravadoExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
         {
             //para exportación se debe informar en 0
@@ -2325,7 +2276,6 @@ namespace CedServicios.Site
                 rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
             }
         }
-
         private void GenerarImporteTotalImpuestosInternosMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
         {
             r.importe_total_impuestos_internos = 0;
@@ -2336,7 +2286,6 @@ namespace CedServicios.Site
                 rimo.importe_total_impuestos_internosSpecified = true;
             }
         }
-
         private void GenerarImporteTotalImpuestosMunicipalesMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
         {
             r.importe_total_impuestos_municipales = 0;
@@ -2347,7 +2296,6 @@ namespace CedServicios.Site
                 rimo.importe_total_impuestos_municipalesSpecified = true;
             }
         }
-
         private void GenerarImporteTotalIngresosBrutosMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
         {
             r.importe_total_ingresos_brutos = 0;
@@ -2358,7 +2306,6 @@ namespace CedServicios.Site
                 rimo.importe_total_ingresos_brutosSpecified = true;
             }
         }
-
         private void GenerarImporteTotalImpuestosNacionalesMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
         {
             r.importe_total_impuestos_nacionales = 0;
@@ -2369,7 +2316,6 @@ namespace CedServicios.Site
                 rimo.importe_total_impuestos_nacionalesSpecified = true;
             }
         }
-
         private void GenerarImportesMonedaLocal(FeaEntidades.InterFacturas.resumen r)
         {
             GenerarImporteTotalNetoGravado(r);
@@ -2407,7 +2353,6 @@ namespace CedServicios.Site
             catch (FormatException)
             {
             }
-
             //para exportación no se debe informar
             try
             {
@@ -2437,7 +2382,6 @@ namespace CedServicios.Site
             catch (FormatException)
             {
             }
-
             //para exportación no se debe informar
             try
             {
@@ -2467,7 +2411,6 @@ namespace CedServicios.Site
             catch (FormatException)
             {
             }
-
             //para exportación no se debe informar
             try
             {
@@ -2499,7 +2442,6 @@ namespace CedServicios.Site
             }
             r.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
         }
-
         private void GenerarImpuestoLiqRNI(FeaEntidades.InterFacturas.resumen r)
         {
             int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
@@ -2523,7 +2465,6 @@ namespace CedServicios.Site
                 r.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
             }
         }
-
         private void GenerarImpuestoLiq(FeaEntidades.InterFacturas.resumen r)
         {
             int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
@@ -2547,7 +2488,6 @@ namespace CedServicios.Site
                 r.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
             }
         }
-
         private void GenerarImporteOperacionesExentas(FeaEntidades.InterFacturas.resumen r)
         {
             int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
@@ -2571,7 +2511,6 @@ namespace CedServicios.Site
                 r.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
             }
         }
-
         private void GenerarImporteTotalConceptoNoGravado(FeaEntidades.InterFacturas.resumen r)
         {
             int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
@@ -2596,7 +2535,6 @@ namespace CedServicios.Site
             }
 
         }
-
         private void GenerarImporteTotalNetoGravado(FeaEntidades.InterFacturas.resumen r)
         {
             int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
@@ -2620,7 +2558,6 @@ namespace CedServicios.Site
                 r.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
             }
         }
-
         private void GenerarImporteTotalImpuestosInternos(FeaEntidades.InterFacturas.resumen r)
         {
             r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
@@ -2629,7 +2566,6 @@ namespace CedServicios.Site
                 r.importe_total_impuestos_internosSpecified = true;
             }
         }
-
         private void GenerarImporteTotalImpuestosMunicipales(FeaEntidades.InterFacturas.resumen r)
         {
             r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
@@ -2638,7 +2574,6 @@ namespace CedServicios.Site
                 r.importe_total_impuestos_municipalesSpecified = true;
             }
         }
-
         private void GenerarImporteTotalIngresosBrutos(FeaEntidades.InterFacturas.resumen r)
         {
             r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
@@ -2647,13 +2582,11 @@ namespace CedServicios.Site
                 r.importe_total_ingresos_brutosSpecified = true;
             }
         }
-
         private static void GenerarImporteTotalImpuestosNacionales(FeaEntidades.InterFacturas.resumen r, double importe_total_impuestos_nacionales)
         {
             r.importe_total_impuestos_nacionales = importe_total_impuestos_nacionales;
             r.importe_total_impuestos_nacionalesSpecified = true;
         }
-
         private void GrabarLogTexto(string archivo, string mensaje)
         {
             try
@@ -2670,23 +2603,7 @@ namespace CedServicios.Site
             {
             }
         }
-
-        protected void PDFButton_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote();
-                RN.Comprobante.AjustarLoteParaImprimirPDF(lcFea);
-                Session["lote"] = lcFea;
-                Response.Redirect("~\\Facturacion\\Electronica\\Reportes\\FacturaWebForm.aspx", true);
-            }
-            catch (Exception ex)
-            {
-                ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("Problemas al generar el pdf.  " + ex.Message));
-            }
-        }
-
-        protected void Baja_AnulBajaButton_Click(object sender, EventArgs e)
+        protected void AccionBaja_AnulBajaButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
             {
@@ -2734,7 +2651,6 @@ namespace CedServicios.Site
                 }
             }
         }
-
         private void ActualizarTipoDeCambio()
         {
             if (!MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
@@ -2749,17 +2665,14 @@ namespace CedServicios.Site
                 Tipo_de_cambioTextBox.Text = null;
             }
         }
-
         protected void tipoCambioUpdatePanel_Load(object sender, EventArgs e)
         {
             ActualizarTipoDeCambio();
         }
-
         protected void Version1RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             AjustarPrestaServxVersiones();
         }
-
         private void AjustarPrestaServxVersiones()
         {
             Presta_ServCheckBox.Visible = false;
@@ -2767,17 +2680,14 @@ namespace CedServicios.Site
             CodigoConceptoLabel.Visible = true;
             CodigoConceptoDropDownList.Visible = true;
         }
-
         private void AjustarCamposXVersion(org.dyndns.cedweb.consulta.ConsultarResult lc)
         {
         }
-
         private void AjustarCamposXVersion(FeaEntidades.InterFacturas.lote_comprobantes lc)
         {
             Version1RadioButton.Checked = true;
             AjustarPrestaServxVersiones();
         }
-
         protected void PaisDestinoExpDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             System.Collections.Generic.List<Entidades.Persona> listacompradores;
@@ -2832,7 +2742,6 @@ namespace CedServicios.Site
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = -1;
             ResetearComprador();
         }
-
         public DetalleConsulta Articulos
         {
             get
@@ -2840,12 +2749,10 @@ namespace CedServicios.Site
                 return this.DetalleLinea;
             }
         }
-
         protected void SalirButton_Click(object sender, EventArgs e)
         {
 
         }
-
         protected void PuntoVtaDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -2885,7 +2792,6 @@ namespace CedServicios.Site
             //Al cambiar el punto de venta se inicializa el Nro.Lote
             Id_LoteTextbox.Text = "";
         }
-
         protected void Tipo_De_ComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -2903,6 +2809,707 @@ namespace CedServicios.Site
             catch
             {
             }
+        }
+        protected void AccionSubirAAFIPButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                ActualizarEstadoPanel.Visible = false;
+                DescargarPDFPanel.Visible = false;
+                if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
+                }
+                else
+                {
+                    try
+                    {
+                        try
+                        {
+                            int auxPV;
+                            auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                            {
+                                return pv.Nro == auxPV;
+                            }).IdTipoPuntoVta;
+                            if (idtipo != "Comun")
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485."), false);
+                                return;
+                            }
+                            string respuesta = "";
+                            FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                            byte[] bytes = new byte[((Entidades.ComprobanteATratar)ViewState["ComprobanteATratar"]).Comprobante.Request.Length * sizeof(char)];
+                            System.Buffer.BlockCopy(((Entidades.ComprobanteATratar)ViewState["ComprobanteATratar"]).Comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
+                            System.IO.MemoryStream ms = new System.IO.MemoryStream(bytes);
+                            ms.Seek(0, System.IO.SeekOrigin.Begin);
+                            lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+
+                            //Grabar en base de datos
+                            lote.cabecera_lote.DestinoComprobante = "AFIP";
+                            lote.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+                            RN.Comprobante.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteEnvio", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), string.Empty, ((Entidades.Sesion)Session["Sesion"]));
+
+                            string caeNro = "";
+                            string caeFecVto = "";
+                            respuesta = RN.ComprobanteAFIP.EnviarAFIP(out caeNro, out caeFecVto, lote, (Entidades.Sesion)Session["Sesion"]);
+
+                            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), respuesta);
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+
+                            if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
+                            {
+                                AjustarLoteParaITF(lote);
+
+                                //Actualizar estado on-line.
+                                if (caeNro != "")
+                                {
+                                    lote.cabecera_lote.resultado = "A";
+                                    lote.comprobante[0].cabecera.informacion_comprobante.resultado = "A";
+                                    lote.comprobante[0].cabecera.informacion_comprobante.cae = caeNro;
+                                    lote.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+                                    lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = caeFecVto;
+                                    lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+                                    lote.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae = DateTime.Now.ToString("yyyyMMdd");
+                                    lote.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
+                                }
+                                string XML = "";
+                                RN.Comprobante.SerializarLc(out XML, lote);
+                                Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                                comprobante.Cuit = lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                                comprobante.TipoComprobante.Id = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                                comprobante.NroPuntoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                                comprobante.Nro = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                                RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                comprobante.Response = XML;
+                                comprobante.WF.Estado = "Vigente";
+                                RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+
+                                RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                DescargarPDFPanel.Visible = true;
+                            }
+                        }
+                        catch (System.Web.Services.Protocols.SoapException soapEx)
+                        {
+                            try
+                            {
+                                XmlDocument doc = new XmlDocument();
+                                doc.LoadXml(soapEx.Detail.OuterXml);
+                                XmlNamespaceManager nsManager = new
+                                    XmlNamespaceManager(doc.NameTable);
+                                nsManager.AddNamespace("errorNS",
+                                    "http://www.cedeira.com.ar/webservices");
+                                XmlNode Node =
+                                    doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
+                                string errorNumber =
+                                    Node.SelectSingleNode("errorNS:ErrorNumber",
+                                    nsManager).InnerText;
+                                string errorMessage =
+                                    Node.SelectSingleNode("errorNS:ErrorMessage",
+                                    nsManager).InnerText;
+                                string errorSource =
+                                    Node.SelectSingleNode("errorNS:ErrorSource",
+                                    nsManager).InnerText;
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(soapEx.Actor.Trim() + ": " + errorMessage), false);
+                            }
+                            catch (Exception)
+                            {
+                                throw soapEx;
+                            }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), ex.Message);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a AFIP.  " + ex.Message), false);
+                    }
+                }
+            }
+        }
+        protected void AccionValidarEnInterfacturasButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                ActualizarEstadoPanel.Visible = false;
+                DescargarPDFPanel.Visible = false;
+                //ActualizarEstadoButton.DataBind();
+                //DescargarPDFButton.DataBind();
+                if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
+                }
+                else
+                {
+                    try
+                    {
+                        string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+                        if (NroCertif.Equals(string.Empty))
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Aún no disponemos de su certificado digital."), false);
+                            return;
+                        }
+                        try
+                        {
+                            string certificado = "";
+                            string respuesta = "";
+
+                            certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                            org.dyndns.cedweb.valido.ValidoIBK edyndns = new org.dyndns.cedweb.valido.ValidoIBK();
+                            string ValidarIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ValidarIBKUtilizarServidorExterno"];
+                            if (ValidarIBKUtilizarServidorExterno == "SI")
+                            {
+                                edyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ValidarIBKurl"];
+                            }
+                            FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                            byte[] bytes = new byte[((Entidades.ComprobanteATratar)ViewState["ComprobanteATratar"]).Comprobante.Request.Length * sizeof(char)];
+                            System.Buffer.BlockCopy(((Entidades.ComprobanteATratar)ViewState["ComprobanteATratar"]).Comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
+                            System.IO.MemoryStream ms = new System.IO.MemoryStream(bytes);
+                            ms.Seek(0, System.IO.SeekOrigin.Begin);
+                            lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+
+                            AjustarLoteParaITF(lote);
+
+                            string xmlTexto = "";
+                            RN.Comprobante.SerializarLc(out xmlTexto, lote);
+
+                            respuesta = edyndns.ValidarIBK(xmlTexto, certificado);
+
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                        }
+                        catch (System.Web.Services.Protocols.SoapException soapEx)
+                        {
+                            try
+                            {
+                                XmlDocument doc = new XmlDocument();
+                                doc.LoadXml(soapEx.Detail.OuterXml);
+                                XmlNamespaceManager nsManager = new
+                                    XmlNamespaceManager(doc.NameTable);
+                                nsManager.AddNamespace("errorNS",
+                                    "http://www.cedeira.com.ar/webservices");
+                                XmlNode Node =
+                                    doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
+                                string errorNumber =
+                                    Node.SelectSingleNode("errorNS:ErrorNumber",
+                                    nsManager).InnerText;
+                                string errorMessage =
+                                    Node.SelectSingleNode("errorNS:ErrorMessage",
+                                    nsManager).InnerText;
+                                string errorSource =
+                                    Node.SelectSingleNode("errorNS:ErrorSource",
+                                    nsManager).InnerText;
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(soapEx.Actor.Trim() + ": " + errorMessage), false);
+                            }
+                            catch (Exception)
+                            {
+                                throw soapEx;
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + ex.Message), false);
+                    }
+                }
+            }
+        }
+        protected void AccionSubirAInterfacturasButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                ActualizarEstadoPanel.Visible = false;
+                DescargarPDFPanel.Visible = false;
+                if (sesion.Usuario.Id == null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
+                }
+                else
+                {
+                    try
+                    {
+                        string NroCertif = "";
+                        NroCertif = sesion.Cuit.NroSerieCertifITF;
+                        if (NroCertif.Equals(string.Empty))
+                        {
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Aún no disponemos de su certificado digital."), false);
+                            return;
+                        }
+                        try
+                        {
+                            string certificado = "";
+                            string respuesta = "";
+                            certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                            org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
+                            string EnvioIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKUtilizarServidorExterno"];
+                            if (EnvioIBKUtilizarServidorExterno == "SI")
+                            {
+                                edyndns.Url = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKurl"];
+                            }
+                            org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
+
+                            FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                            byte[] bytes = new byte[((Entidades.ComprobanteATratar)ViewState["ComprobanteATratar"]).Comprobante.Request.Length * sizeof(char)];
+                            System.Buffer.BlockCopy(((Entidades.ComprobanteATratar)ViewState["ComprobanteATratar"]).Comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
+                            System.IO.MemoryStream ms = new System.IO.MemoryStream(bytes);
+                            ms.Seek(0, System.IO.SeekOrigin.Begin);
+                            lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+
+                            //Grabar en base de datos
+                            lote.cabecera_lote.DestinoComprobante = "ITF";
+                            lote.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+
+                            AjustarLoteParaITF(lote);
+
+                            lcIBK = Conversor.Entidad2IBK(lote);
+
+                            respuesta = edyndns.EnviarIBK(lcIBK, certificado);
+                            respuesta = respuesta.Replace("'", "-");
+
+                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+
+                            if (respuesta == "Comprobante enviado satisfactoriamente a Interfacturas.")
+                            {
+                                Entidades.Comprobante comprobante = ((Entidades.ComprobanteATratar)ViewState["ComprobanteATratar"]).Comprobante;
+                                RN.Comprobante.Leer(comprobante, sesion);
+                                comprobante.WF.Estado = "PteConf";
+                                RN.Comprobante.Actualizar(comprobante, sesion);
+                                RN.Comprobante.Leer(comprobante, sesion);
+                                //Consultar y Actualizar estado on-line.                              
+                                org.dyndns.cedweb.consulta.ConsultaIBK clcdyndnsConsultaIBK = new org.dyndns.cedweb.consulta.ConsultaIBK();
+                                string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
+                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
+                                if (ConsultaIBKUtilizarServidorExterno == "SI")
+                                {
+                                    clcdyndnsConsultaIBK.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
+                                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
+                                }
+                                System.Threading.Thread.Sleep(2000);
+                                org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
+                                clcrdyndns = clcdyndnsConsultaIBK.Consultar(Convert.ToInt64(lote.comprobante[0].cabecera.informacion_vendedor.cuit), lote.cabecera_lote.id_lote, lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta, certificado);
+                                FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                                lc = Funciones.Ws2Fea(clcrdyndns);
+                                string XML = "";
+                                RN.Comprobante.SerializarLc(out XML, lc);
+                                comprobante.Response = XML;
+                                if (lc.cabecera_lote.resultado == "A")
+                                {
+                                    comprobante.WF.Estado = "Vigente";
+                                    RN.Comprobante.Actualizar(comprobante, sesion);
+                                    RN.Comprobante.Leer(comprobante, sesion);
+                                    DescargarPDFPanel.Visible = true;
+                                }
+                                else if (lc.cabecera_lote.resultado == "R")
+                                {
+                                    comprobante.WF.Estado = "Rechazado";
+                                    RN.Comprobante.Actualizar(comprobante, sesion);
+                                    RN.Comprobante.Leer(comprobante, sesion);
+                                    ActualizarEstadoPanel.Visible = false;
+                                    DescargarPDFPanel.Visible = true;
+                                }
+                            }
+                            else
+                            {
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas. " + Funciones.TextoScript(respuesta)), false);
+                            }
+                        }
+                        catch (System.Web.Services.Protocols.SoapException soapEx)
+                        {
+                            try
+                            {
+                                XmlDocument doc = new XmlDocument();
+                                doc.LoadXml(soapEx.Detail.OuterXml);
+                                XmlNamespaceManager nsManager = new
+                                    XmlNamespaceManager(doc.NameTable);
+                                nsManager.AddNamespace("errorNS",
+                                    "http://www.cedeira.com.ar/webservices");
+                                XmlNode Node =
+                                    doc.DocumentElement.SelectSingleNode("errorNS:Error", nsManager);
+                                string errorNumber =
+                                    Node.SelectSingleNode("errorNS:ErrorNumber",
+                                    nsManager).InnerText;
+                                string errorMessage =
+                                    Node.SelectSingleNode("errorNS:ErrorMessage",
+                                    nsManager).InnerText;
+                                string errorSource =
+                                    Node.SelectSingleNode("errorNS:ErrorSource",
+                                    nsManager).InnerText;
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(soapEx.Actor.Trim() + ": " + errorMessage), false);
+                            }
+                            catch (Exception)
+                            {
+                                throw soapEx;
+                            }
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + ex.Message), false);
+                    }
+                }
+            }
+        }
+        protected void AccionActualizarEstadoButton_Click(object sender, EventArgs e)
+        {
+            string NroCertif = "";
+            NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
+            if (NroCertif.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Aún no disponemos de su certificado digital."), false);
+                return;
+            }
+            try
+            {
+                Entidades.Comprobante comprobante = ((Entidades.ComprobanteATratar)ViewState["ComprobanteATratar"]).Comprobante;
+                if (comprobante != null)
+                {
+                    string certificado = "";
+                    certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+
+                    //Consultar y Actualizar estado on-line.                              
+                    org.dyndns.cedweb.consulta.ConsultaIBK clcdyndnsConsultaIBK = new org.dyndns.cedweb.consulta.ConsultaIBK();
+                    string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
+                    if (ConsultaIBKUtilizarServidorExterno == "SI")
+                    {
+                        clcdyndnsConsultaIBK.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
+                    }
+                    System.Threading.Thread.Sleep(2000);
+                    org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
+                    clcrdyndns = clcdyndnsConsultaIBK.Consultar(Convert.ToInt64(comprobante.Cuit), comprobante.NroLote, comprobante.NroPuntoVta, certificado);
+                    FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                    lc = Funciones.Ws2Fea(clcrdyndns);
+                    string XML = "";
+                    RN.Comprobante.SerializarLc(out XML, lc);
+                    //c.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                    comprobante.Response = XML;
+                    if (lc.cabecera_lote.resultado == "A")
+                    {
+                        comprobante.WF.Estado = "Vigente";
+                        RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                        RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                        ActualizarEstadoPanel.Visible = false;
+                        DescargarPDFPanel.Visible = true;
+                    }
+                    else if (lc.cabecera_lote.resultado == "R")
+                    {
+                        comprobante.WF.Estado = "Rechazado";
+                        RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                        RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                        ActualizarEstadoPanel.Visible = false;
+                        DescargarPDFPanel.Visible = false;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + ex.Message), false);
+            }
+        }
+        protected void AccionDescargarPDFButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
+                }
+                else
+                {
+                    try
+                    {
+                        FeaEntidades.InterFacturas.lote_comprobantes lote;
+                        string certificado;
+                        Entidades.Comprobante comprobante = ((Entidades.ComprobanteATratar)ViewState["ComprobanteATratar"]).Comprobante;
+                        Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                        string DetalleIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKUtilizarServidorExterno"];
+                        org.dyndns.cedweb.detalle.DetalleIBK clcdyndns = new org.dyndns.cedweb.detalle.DetalleIBK();
+                        org.dyndns.cedweb.detalle.cecd cecd = new org.dyndns.cedweb.detalle.cecd();
+                        System.Xml.Serialization.XmlSerializer x;
+                        byte[] bytes;
+                        System.IO.MemoryStream ms;
+                        string resp;
+                        string script;
+
+                        if (comprobante.IdDestinoComprobante == "ITF")
+                        {
+                            #region PDF (InterFacturas)
+                            //OBTENCIÓN DE PDF DE INTERFACTURAS
+                            if (comprobante.Estado != "Vigente")
+                            {
+                                ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("El comprobante no está vigente.")); 
+                                return;
+                            }
+
+                            //On-Line
+                            cecd.cuit_canal = Convert.ToInt64("30690783521");
+                            cecd.cuit_vendedor = Convert.ToInt64(comprobante.Cuit);
+                            cecd.punto_de_venta = Convert.ToInt32(comprobante.NroPuntoVta);
+                            cecd.tipo_de_comprobante = Convert.ToInt32(comprobante.TipoComprobante.Id);
+                            cecd.numero_comprobante = comprobante.Nro;
+                            cecd.id_Lote = 0;
+                            cecd.id_LoteSpecified = false;
+                            cecd.estado = "PR";
+
+                            if (sesion.Cuit.NroSerieCertifITF.Equals(string.Empty))
+                            {
+                                ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("Aún no disponemos de su certificado digital"));
+                                return;
+                            }
+                            Funciones.GrabarLogTexto("~/Detallar.txt", "Consulta de Lote CUIT: " + sesion.Cuit.Nro + "  Punto de Venta: " + cecd.punto_de_venta.ToString() + "  Tipo de Comprobante: " + cecd.tipo_de_comprobante.ToString() + "  Nro de Comprobante: " + cecd.numero_comprobante.ToString());
+                            Funciones.GrabarLogTexto("~/Detallar.txt", "NroSerieCertifITF: " + sesion.Cuit.NroSerieCertifITF);
+                            if (sesion.Cuit.NroSerieCertifITF.Equals(string.Empty))
+                            {
+                                ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("Aún no disponemos de su certificado digital"));
+                                return;
+                            }
+
+                            certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(sesion.Cuit.NroSerieCertifITF, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                            Funciones.GrabarLogTexto("~/Detallar.txt", "Parametro DetalleIBKUtilizarServidorExterno: " + DetalleIBKUtilizarServidorExterno);
+                            if (DetalleIBKUtilizarServidorExterno == "SI")
+                            {
+                                clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"];
+                                Funciones.GrabarLogTexto("~/Detallar.txt", "Parametro DetalleIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
+                            }
+                            resp = clcdyndns.DetallarIBK(cecd, certificado);
+                            resp = resp.Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
+                            resp = resp.Replace(" xmlns:xsi=\"http://lote.schemas.cfe.ib.com.ar/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", " xmlns=\"http://lote.schemas.cfe.ib.com.ar/\"");
+                            //Fin On-Line
+
+                            try
+                            {
+                                string comprobanteXML = resp;
+
+                                Funciones.GrabarLogTexto("~/Detallar.txt", "Inicia ExecuteCommand");
+                                org.dyndns.cedweb.generoPDF.GeneroPDF pdfdyndns = new org.dyndns.cedweb.generoPDF.GeneroPDF();
+
+                                string GenerarPDFUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFUtilizarServidorExterno"];
+                                Funciones.GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFUtilizarServidorExterno: " + GenerarPDFUtilizarServidorExterno);
+                                if (GenerarPDFUtilizarServidorExterno == "SI")
+                                {
+                                    pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
+                                    Funciones.GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
+                                }
+                                string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobante.IdDestinoComprobante, comprobanteXML);
+                                Funciones.GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
+
+                                //Crear nombre de archivo default sin extensión
+                                System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                                sb.Append(comprobante.Cuit);
+                                sb.Append("-");
+                                sb.Append(comprobante.NroPuntoVta.ToString("0000"));
+                                sb.Append("-");
+                                sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
+                                sb.Append("-");
+                                sb.Append(comprobante.Nro.ToString("00000000"));
+                                sb.Append(".pdf");
+
+                                string url = RespPDF;
+                                string filename = sb.ToString();
+                                String dlDir = @"~/TempRender/";
+                                new System.Net.WebClient().DownloadFile(url, Server.MapPath(dlDir + filename));
+
+                                script = "window.open('/DescargaTemporarios.aspx?archivo=" + sb.ToString() + "&path=" + @"~/TempRender/" + "', '');";
+                                ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                            }
+                            catch (Exception ex)
+                            {
+                                script = "Problemas para generar el PDF.\\n" + ex.Message;
+                                script += ex.StackTrace;
+                                if (ex.InnerException != null)
+                                {
+                                    script = ex.InnerException.Message;
+                                }
+                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), script);
+                                ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript(script));
+                            }
+                            #endregion
+                        }
+                        else
+                        {
+                            #region PDF (AFIP)
+                            //GENERACIÓN DE PDF A PARTIR DE DATOS LOCALES
+                            lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                            x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                            if (comprobante.Estado != "Vigente")
+                            {
+                                ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript("El comprobante no está vigente."));
+                                return;
+                            }
+                            try
+                            {
+                                comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
+                                bytes = new byte[comprobante.Response.Length * sizeof(char)];
+                                System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                                ms = new System.IO.MemoryStream(bytes);
+                                ms.Seek(0, System.IO.SeekOrigin.Begin);
+                                lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+
+                                RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
+
+                                Session["lote"] = lote;
+                                script = "window.open('/Facturacion/Electronica/Reportes/FacturaWebForm.aspx', '');";
+                                ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+
+                            }
+                            catch (Exception ex)
+                            {
+                                script = "Problemas para generar el PDF.\\n" + ex.Message;
+                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                                ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript(script));
+                            }
+                            #endregion
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al descargar el archivo PDF.  " + ex.Message), false);
+                    }
+                }
+            }
+        }
+        private void AjustarLoteParaITF(FeaEntidades.InterFacturas.lote_comprobantes lote)
+        {
+            string TipoCbte = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString();
+            switch (TipoCbte)
+            {
+                case "6":
+                case "7":
+                case "8":
+                case "9":
+                case "10":
+                case "40":
+                case "61":
+                case "64":
+                    FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
+                    det = lote.comprobante[0].detalle;
+                    FeaEntidades.InterFacturas.linea[] listadelineas;
+                    listadelineas = det.linea;
+                    Double TipoDeCambio = lote.comprobante[0].resumen.tipo_de_cambio;
+
+                    int auxPV;
+                    auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                    {
+                        return pv.Nro == auxPV;
+                    }).IdTipoPuntoVta;
+
+                    for (int i = 0; i < listadelineas.Length; i++)
+                    {
+                        if (det.linea[i] == null)
+                        {
+                            break;
+                        }
+
+                        double precio_unitario = det.linea[i].precio_unitario;
+                        double alicuota_iva = det.linea[i].alicuota_iva;
+                        double importe_iva = det.linea[i].importe_iva;
+                        double importe_total_articulo = det.linea[i].importe_total_articulo;
+
+                        //Moneda Local
+                        if (lote.comprobante[0].resumen.codigo_moneda.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+                        {
+                            det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+                            if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+                            {
+                                det.linea[i].precio_unitario = Math.Round(precio_unitario * (1 + alicuota_iva / 100), 3);
+                            }
+                            else
+                            {
+                                det.linea[i].precio_unitario = Math.Round(precio_unitario, 3);
+                            }
+                            if (idtipo.Equals("RG2904"))
+                            {
+                                det.linea[i].importe_total_articulo = Math.Round(importe_total_articulo, 2);
+                            }
+                            else
+                            {
+                                det.linea[i].importe_total_articulo = Math.Round(importe_total_articulo + importe_iva, 2);
+                            }
+                            //Borrar alicuota e importe
+                            det.linea[i].alicuota_ivaSpecified = false;
+                            det.linea[i].alicuota_iva = 0;
+                            det.linea[i].indicacion_exento_gravado = null;
+                            det.linea[i].importe_ivaSpecified = false;
+                            det.linea[i].importe_iva = 0;
+                        }
+                        else
+                        {
+                            //Moneda Extranjera
+
+                            det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+                            if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+                            {
+                                det.linea[i].precio_unitario = Math.Round(precio_unitario * Convert.ToDouble(TipoDeCambio) * (1 + alicuota_iva / 100), 3);
+                            }
+                            else
+                            {
+                                det.linea[i].precio_unitario = Math.Round(precio_unitario * Convert.ToDouble(TipoDeCambio), 3);
+                            }
+                            det.linea[i].importe_total_articulo = Math.Round(((importe_total_articulo) + importe_iva) * Convert.ToDouble(TipoDeCambio), 2);
+                            //Borrar alicuota e importe
+                            det.linea[i].alicuota_ivaSpecified = false;
+                            det.linea[i].alicuota_iva = 0;
+                            det.linea[i].indicacion_exento_gravado = null;
+                            det.linea[i].importe_ivaSpecified = false;
+                            det.linea[i].importe_iva = 0;
+
+                            //importes_moneda_origen
+                            FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+                            limo.importe_total_articuloSpecified = true;
+                            limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+                            if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+                            {
+                                limo.precio_unitario = Math.Round(precio_unitario * (1 + alicuota_iva / 100), 3);
+                            }
+                            else
+                            {
+                                limo.precio_unitario = Math.Round(precio_unitario, 3);
+                            }
+                            if (idtipo.Equals("RG2904"))
+                            {
+                                limo.importe_total_articulo = Math.Round(importe_total_articulo, 2);
+                            }
+                            else
+                            {
+                                limo.importe_total_articulo = Math.Round(importe_total_articulo + importe_iva, 2);
+                            }
+                            limo.importe_ivaSpecified = false;
+                            limo.importe_iva = 0;
+                            det.linea[i].importes_moneda_origen = limo;
+                        }
+                    }
+                    break;
+            }
+        }
+        protected void ModalPopupExtender1_Load(object sender, EventArgs e)
+        {
+
+        }
+        protected void ModalPopupExtender3_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

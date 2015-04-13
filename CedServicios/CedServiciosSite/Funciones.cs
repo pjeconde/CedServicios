@@ -86,6 +86,8 @@ namespace CedServicios.Site
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Envio (AFIP/ITF)", "Envio (AFIP/ITF)"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Otras Consultas", "Otras Consultas"); mItem.Selectable = false;
