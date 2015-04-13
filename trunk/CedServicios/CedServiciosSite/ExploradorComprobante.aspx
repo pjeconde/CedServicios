@@ -19,34 +19,39 @@
                     <asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
                 </td>
                 <td rowspan="3" align="left" style="padding-top:5px" valign="top">
-                    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
-                        <tr>
-                            <td>
-                                Estado(s):
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="EstadoVigenteCheckBox" runat="server" Text="Vigente" AutoPostBack="false"/>
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="EstadoPteConfCheckBox" runat="server" Text="Pendiente de confirmación" AutoPostBack="false"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <asp:CheckBox ID="EstadoDeBajaCheckBox" runat="server" Text="De baja" AutoPostBack="false"/>
-                            </td>
-                            <td>
-                                <asp:CheckBox ID="EstadoPteAutorizCheckBox" runat="server" Text="Pendiente de autorización" AutoPostBack="false"/>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td>
-                                <asp:CheckBox ID="EstadoRechCheckBox" runat="server" Text="Rechazado" AutoPostBack="false"/>
-                            </td>
-                        </tr>
-                    </table>
+                    <asp:Panel ID="EstadosPanel" runat="server">
+                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+                            <tr>
+                                <td>
+                                    Estado(s):
+                                </td>
+                                <td>
+                                    <asp:CheckBox ID="EstadoVigenteCheckBox" runat="server" Text="Vigente" AutoPostBack="false"/>
+                                </td>
+                                <td>
+                                    <asp:CheckBox ID="EstadoPteEnvioCheckBox" runat="server" Text="Pendiente de envio (AFIP/ITF)" AutoPostBack="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <asp:CheckBox ID="EstadoDeBajaCheckBox" runat="server" Text="De baja" AutoPostBack="false"/>
+                                </td>
+                                <td>
+                                    <asp:CheckBox ID="EstadoPteConfCheckBox" runat="server" Text="Pendiente de confirmación" AutoPostBack="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <asp:CheckBox ID="EstadoRechCheckBox" runat="server" Text="Rechazado" AutoPostBack="false"/>
+                                </td>
+                                <td>
+                                    <asp:CheckBox ID="EstadoPteAutorizCheckBox" runat="server" Text="Pendiente de autorización" AutoPostBack="false"/>
+                                </td>
+                            </tr>
+                        </table>
+                    </asp:Panel>
                 </td>
                 <td style="width:550px">
                 </td>
@@ -59,6 +64,17 @@
                     <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" Width="400px" DataValueField="Id" DataTextField="Descr"></asp:DropDownList>
                 </td>        
             </tr>
+            <asp:Panel ID="DetallePanel" runat="server">
+            <tr>
+	            <td align="left" style="padding-right:5px; padding-top:5px">
+                    Detalle:
+	            </td>
+			    <td align="left" colspan="2" style="padding-top:5px">
+				    <asp:TextBox ID="DetalleTextBox" runat="server" MaxLength="50"></asp:TextBox>
+                    (ej.: "autom" para seleccionar sólo comprobantes generados automaticamente)
+			    </td>
+            </tr>
+            </asp:Panel>
             <asp:Panel ID="PeriodoEmisionPanel" runat="server">
             <tr>
 	            <td align="left" style="padding-right:5px; padding-top:5px">
@@ -98,14 +114,24 @@
                     <asp:GridView ID="ComprobantesGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                         <Columns>
-                            <asp:TemplateField>
+                            <asp:TemplateField Visible="false">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="VerLinkButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Ver detalle</asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField>
+                            <asp:TemplateField Visible="false">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="BajaAnulBajaLinkButton" runat="server" CommandName="Baja/Anul.baja" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Baja/Anul.baja</asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField Visible="false">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="EnvioLinkButton" runat="server" CommandName="Envio" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Envio</asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField Visible="false">
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="ModificacionLinkButton" runat="server" CommandName="Modificacion" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Modificación</asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">

@@ -31,13 +31,19 @@ namespace CedServicios.Site
                     string[] itemsParametros = parametros.Split(delimitador);
                     TratamientoTextBox.Text = itemsParametros[0];
                     ElementoTextBox.Text = itemsParametros[1];
-                    TituloPaginaLabel.Text = TratamientoTextBox.Text + " de " + ElementoTextBox.Text + "s";
                     switch (ElementoTextBox.Text)
                     {
                         case "Comprobante":
-                            ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Comprobante, sesion);
+                            if (TratamientoTextBox.Text == "Envio")
+                            {
+                                ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista("Venta", sesion);
+                            }
+                            else
+                            {
+                                ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Comprobante, sesion);
+                            }
                             NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
-                            NaturalezaComprobanteDropDownList.SelectedValue = String.Empty;
+                            NaturalezaComprobanteDropDownList.SelectedIndex = 0;
                             if (sesion.UsuarioDemo == true)
                             {
                                 FechaDesdeTextBox.Text = "20130101";
@@ -58,29 +64,59 @@ namespace CedServicios.Site
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Fecha Vto")].Visible = false;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Nro.Lote")].Visible = false;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
+                            DetallePanel.Visible = false;
                             PeriodoEmisionPanel.Visible = false;
                             break;
                     }
+                    string descrTratamiento = TratamientoTextBox.Text;
                     switch (TratamientoTextBox.Text)
                     {
                         case "Consulta":
                             EstadoVigenteCheckBox.Checked = true;
+                            EstadoPteEnvioCheckBox.Checked = true;
                             EstadoPteConfCheckBox.Checked = true;
                             EstadoDeBajaCheckBox.Checked = false;
                             EstadoPteAutorizCheckBox.Checked = true;
                             EstadoRechCheckBox.Checked = false;
-                            ComprobantesGridView.Columns[1].Visible = false;
+                            ComprobantesGridView.Columns[0].Visible = true;
                             break;
                         case "Baja/Anul.baja":
                             EstadoVigenteCheckBox.Checked = ElementoTextBox.Text == "Contrato";
+                            EstadoPteEnvioCheckBox.Checked = true;
                             EstadoPteConfCheckBox.Checked = true;
                             EstadoDeBajaCheckBox.Checked = true;
                             EstadoPteAutorizCheckBox.Checked = true;
                             EstadoRechCheckBox.Checked = true;
-                            ComprobantesGridView.Columns[0].Visible = false;
+                            ComprobantesGridView.Columns[1].Visible = true;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
+                            EstadosPanel.Enabled = false;
+                            break;
+                        case "Envio":
+                            EstadoVigenteCheckBox.Checked = false;
+                            EstadoPteEnvioCheckBox.Checked = true;
+                            EstadoPteConfCheckBox.Checked = false;
+                            EstadoDeBajaCheckBox.Checked = false;
+                            EstadoPteAutorizCheckBox.Checked = false;
+                            EstadoRechCheckBox.Checked = false;
+                            ComprobantesGridView.Columns[2].Visible = true;
+                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
+                            EstadosPanel.Enabled = false;
+                            descrTratamiento += " (AFIP/ITF)";
+                            break;
+                        case "Modificacion":
+                            EstadoVigenteCheckBox.Checked = ElementoTextBox.Text == "Contrato";
+                            EstadoPteEnvioCheckBox.Checked = true;
+                            EstadoPteConfCheckBox.Checked = true;
+                            EstadoDeBajaCheckBox.Checked = false;
+                            EstadoPteAutorizCheckBox.Checked = true;
+                            EstadoRechCheckBox.Checked = false;
+                            ComprobantesGridView.Columns[3].Visible = true;
+                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
+                            EstadosPanel.Enabled = false;
+                            descrTratamiento = "Modificación";
                             break;
                     }
+                    TituloPaginaLabel.Text = descrTratamiento + " de " + ElementoTextBox.Text + "s";
                     ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
                     ClienteDropDownList.DataSource = (List<Entidades.Persona>)ViewState["Personas"];
                     DataBind();
@@ -115,6 +151,16 @@ namespace CedServicios.Site
                 case "Baja/Anul.baja":
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Baja_AnulBaja, comprobante);
                     script = "window.open('/ComprobanteConsulta.aspx', '');";
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                    break;
+                case "Envio":
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Envio, comprobante);
+                    script = "window.open('/ComprobanteConsulta.aspx', '');";
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                    break;
+                case "Modificacion":
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Modificacion, comprobante);
+                    script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
             }
@@ -180,11 +226,12 @@ namespace CedServicios.Site
                 }
                 List<Entidades.Estado> estados = new List<Entidades.Estado>();
                 if (EstadoVigenteCheckBox.Checked) estados.Add(new Entidades.EstadoVigente());
+                if (EstadoPteEnvioCheckBox.Checked) estados.Add(new Entidades.EstadoPteEnvio());
                 if (EstadoPteConfCheckBox.Checked) estados.Add(new Entidades.EstadoPteConf());
                 if (EstadoDeBajaCheckBox.Checked) estados.Add(new Entidades.EstadoDeBaja());
                 if (EstadoPteAutorizCheckBox.Checked) estados.Add(new Entidades.EstadoPteAutoriz());
                 if (EstadoRechCheckBox.Checked) estados.Add(new Entidades.EstadoRech());
-                lista = RN.Comprobante.ListaFiltrada(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, sesion);
+                lista = RN.Comprobante.ListaFiltrada(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, DetalleTextBox.Text, sesion);
                 if (lista.Count == 0)
                 {
                     ComprobantesGridView.DataSource = null;

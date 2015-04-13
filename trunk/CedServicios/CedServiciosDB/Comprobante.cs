@@ -59,7 +59,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos)
+        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)
@@ -103,6 +103,10 @@ namespace CedServicios.DB
                 {
                     a.Append("and Comprobante.IdNaturalezaComprobante<>'VentaContrato' ");
                 }
+                if (Detalle != string.Empty)
+                {
+                    a.Append("and Comprobante.Detalle like '%" + Detalle + "%' ");
+                }
                 a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
@@ -137,7 +141,7 @@ namespace CedServicios.DB
             comprobanteDesde.Cuit = Comprobante.Cuit;
             comprobanteDesde.TipoComprobante = Comprobante.TipoComprobante;
             comprobanteDesde.NroPuntoVta = Comprobante.NroPuntoVta;
-            comprobanteDesde.Nro = Comprobante.Nro;
+            comprobanteDesde.Nro = Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro;
             Leer(comprobanteDesde);
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @idWF varchar(256) ");
@@ -257,7 +261,7 @@ namespace CedServicios.DB
             }
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
-        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto)
+        public void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle)
         {
             Entidades.Comprobante comprobante = new Entidades.Comprobante();
             if (IdNaturalezaComprobante != "Compra")
@@ -301,7 +305,7 @@ namespace CedServicios.DB
             comprobante.NroPuntoVta = Lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
             comprobante.Nro = Lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
             comprobante.NroLote = Lote.cabecera_lote.id_lote;
-            comprobante.Detalle = Lote.comprobante[0].cabecera.informacion_comprobante.Observacion;
+            comprobante.Detalle = Detalle;
             comprobante.Fecha = Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
             if (Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null || Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == String.Empty)
             {

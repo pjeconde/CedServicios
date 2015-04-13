@@ -16,15 +16,15 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaContratosFiltrada(Estados, FechaEmision, Persona, Moneda);
         }
-        public static List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, Entidades.Sesion Sesion)
+        public static List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            return db.ListaFiltrada(Estados, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos);
+            return db.ListaFiltrada(Estados, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos, Detalle);
         }
-        public static void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, Entidades.Sesion Sesion)
+        public static void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            db.Registrar(Lote, Response, IdNaturalezaComprobante, IdDestinoComprobante, IdEstado, PeriodicidadEmision, FechaProximaEmision, CantidadComprobantesAEmitir, CantidadComprobantesEmitidos, CantidadDiasFechaVto);
+            db.Registrar(Lote, Response, IdNaturalezaComprobante, IdDestinoComprobante, IdEstado, PeriodicidadEmision, FechaProximaEmision, CantidadComprobantesAEmitir, CantidadComprobantesEmitidos, CantidadDiasFechaVto, Detalle);
         }
         public static void DarDeBaja(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {

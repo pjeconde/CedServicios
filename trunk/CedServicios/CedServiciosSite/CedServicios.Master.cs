@@ -130,6 +130,7 @@ namespace CedServicios.Site
                     Response.Redirect("~/ExploradorComprobante.aspx?Baja/Anul.baja-Contrato");
                     break;
                 case "Contratos|Modificación":
+                    Response.Redirect("~/ExploradorComprobante.aspx?Modificacion-Contrato");
                     break;
                 case "Contratos|Consulta":
                     Response.Redirect("~/ExploradorComprobante.aspx?Consulta-Contrato");
@@ -171,6 +172,10 @@ namespace CedServicios.Site
                     Response.Redirect("~/ExploradorComprobante.aspx?Baja/Anul.baja-Comprobante");
                     break;
                 case "Comprobantes|Modificación":
+                    Response.Redirect("~/ExploradorComprobante.aspx?Modificacion-Comprobante");
+                    break;
+                case "Comprobantes|Envio (AFIP/ITF)":
+                    Response.Redirect("~/ExploradorComprobante.aspx?Envio-Comprobante");
                     break;
                 case "Comprobantes|Consulta":
                     Response.Redirect("~/ExploradorComprobante.aspx?Consulta-Comprobante");

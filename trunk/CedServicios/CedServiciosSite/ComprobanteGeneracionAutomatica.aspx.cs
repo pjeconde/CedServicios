@@ -100,6 +100,9 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 int cantidadContratosSeleccionados = 0;
                 int cantidadComprobantesGenerados = 0;
+                int cantidadComprobantesEnviados = 0;
+                int cantidadComprobantesConfirmados = 0;
+                int cantidadComprobantesRechazados = 0;
                 List<string> listaErrores = new List<string>();
                 for (int i = 0; i < ComprobantesGridView.Rows.Count; i++)
                 {
@@ -120,26 +123,31 @@ namespace CedServicios.Site
                         ms.Seek(0, System.IO.SeekOrigin.Begin);
                         lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
                         #endregion
-
                         while (Convert.ToInt32(contrato.FechaProximaEmision.ToString("yyyyMMdd")) <= Convert.ToInt32(DateTime.Today.ToString("yyyyMMdd")))
                         {
+                            #region Generar nuevo comprobante
+                            bool comprobanteGenerado = false;
                             try
                             {
-                                #region Generar nuevo comprobante
                                 lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision = FechaTextBox.Text;
                                 lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = DateTime.ParseExact(FechaTextBox.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddDays(contrato.CantidadDiasFechaVto).ToString("yyyyMMdd");
                                 lote.cabecera_lote.DestinoComprobante = contrato.IdDestinoComprobante;
                                 if (lote.comprobante[0].cabecera.informacion_comprobante.codigo_concepto != 1)  //Incluye Servicios
                                 {
+                                    DateTime fechaServicioDesde;
                                     switch (contrato.PeriodicidadEmision)
                                     {
                                         case "Mensual-A":
-                                            lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = (new DateTime(contrato.FechaProximaEmision.Year, contrato.FechaProximaEmision.Month, 1)).ToString("yyyyMMdd");
+                                            fechaServicioDesde = new DateTime(contrato.FechaProximaEmision.Year, contrato.FechaProximaEmision.Month, 1);
+                                            lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = fechaServicioDesde.ToString("yyyyMMdd");
                                             lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = DateTime.ParseExact(lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddMonths(1).AddDays(-1).ToString("yyyyMMdd");
+                                            ReemplazaNombreClaveEnDescripcionDeArticulo(lote, "@MES", String.Format("{0} de {1}", System.Globalization.CultureInfo.InvariantCulture.TextInfo.ToTitleCase(fechaServicioDesde.ToString("MMMM")), fechaServicioDesde.Year.ToString()));
                                             break;
                                         case "Mensual-V":
-                                            lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = (new DateTime(contrato.FechaProximaEmision.AddMonths(-1).Year, contrato.FechaProximaEmision.AddMonths(-1).Month, 1)).ToString("yyyyMMdd");
+                                            fechaServicioDesde = new DateTime(contrato.FechaProximaEmision.AddMonths(-1).Year, contrato.FechaProximaEmision.AddMonths(-1).Month, 1);
+                                            lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = fechaServicioDesde.ToString("yyyyMMdd");
                                             lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta = DateTime.ParseExact(lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).AddMonths(1).AddDays(-1).ToString("yyyyMMdd"); ;
+                                            ReemplazaNombreClaveEnDescripcionDeArticulo(lote, "@MES", String.Format("{0} de {1}", System.Globalization.CultureInfo.InvariantCulture.TextInfo.ToTitleCase(fechaServicioDesde.ToString("MMMM")), fechaServicioDesde.Year.ToString()));
                                             break;
                                         case "Trimestral-A":
                                             lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde = (new DateTime(contrato.FechaProximaEmision.Year, contrato.FechaProximaEmision.Month, 1)).ToString("yyyyMMdd"); ;
@@ -162,13 +170,13 @@ namespace CedServicios.Site
                                 //Nuevo número de lote
                                 if (contrato.IdDestinoComprobante == "ITF")
                                 {
-                                    Entidades.PuntoVta puntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv) { return pv.Nro == contrato.NroPuntoVta; });
+                                    Entidades.PuntoVta puntoVta = sesion.UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv) { return pv.Nro == contrato.NroPuntoVta; });
                                     switch (puntoVta.IdMetodoGeneracionNumeracionLote)
                                     {
                                         case "Autonumerador":
                                         case "TimeStamp1":
                                         case "TimeStamp2":
-                                            RN.PuntoVta.GenerarNuevoNroLote(puntoVta, (Entidades.Sesion)Session["Sesion"]);
+                                            RN.PuntoVta.GenerarNuevoNroLote(puntoVta, sesion);
                                             lote.cabecera_lote.id_lote = puntoVta.UltNroLote;
                                             break;
                                         default:
@@ -183,85 +191,158 @@ namespace CedServicios.Site
                                 RN.Comprobante.LeerUltimoEmitido(ultimoComprobanteEmitido, sesion);
                                 lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante = ultimoComprobanteEmitido.Nro + 1;
 
-                                RN.Comprobante.Registrar(lote, null, "Venta", contrato.IdDestinoComprobante, "PteConf", "No Aplica", new DateTime(9999, 12, 31), 0, 0, 0, sesion);
-                                #endregion
-                                switch (contrato.IdDestinoComprobante)
+                                RN.Comprobante.Registrar(lote, null, "Venta", contrato.IdDestinoComprobante, "PteEnvio", "No Aplica", new DateTime(9999, 12, 31), 0, 0, 0, "Generación automática", sesion);
+                                cantidadComprobantesGenerados++;
+                                comprobanteGenerado = true;
+                            }
+                            catch (Exception ex)
+                            {
+                                #region Registrar error en la generación del comprobante
+                                string a = "Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): " + ex.Message;
+                                if (ex.InnerException != null)
                                 {
-                                    case "AFIP":
-                                        #region Transmitir comprobante a la AFIP
-                                        #endregion
-                                        break;
-                                    case "ITF":
-                                        #region Transmitir comprobante a la Interfacturas
-                                        string NroCertif = ((Entidades.Sesion)Session["Sesion"]).Cuit.NroSerieCertifITF;
-                                        if (NroCertif.Equals(string.Empty))
-                                        {
-                                            throw new Exception("Aún no disponemos de su certificado digital.");
-                                        }
-                                        else
-                                        {
-                                            string certificado = "";
-                                            string respuesta = "";
-                                            certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                                            org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
-                                            string EnvioIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKUtilizarServidorExterno"];
-                                            if (EnvioIBKUtilizarServidorExterno == "SI")
+                                    a += "  " + ex.InnerException.Message;
+                                }
+                                listaErrores.Add(a);
+                                #endregion
+                                comprobanteGenerado = false;
+                            }
+                            #endregion
+                            bool transmisionOk = false;
+                            if (comprobanteGenerado)
+                            {
+                                Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                                try
+                                {
+                                    string respuesta = "";
+                                    switch (contrato.IdDestinoComprobante)
+                                    {
+                                        case "AFIP":
+                                            #region Transmitir comprobante a la AFIP
+                                            string caeNro = "";
+                                            string caeFecVto = "";
+                                            respuesta = RN.ComprobanteAFIP.EnviarAFIP(out caeNro, out caeFecVto, lote, (Entidades.Sesion)Session["Sesion"]);
+                                            if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
                                             {
-                                                edyndns.Url = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKurl"];
-                                            }
-                                            org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
-                                            AjustarLoteParaITF(lote);
-                                            lcIBK = Facturacion.Electronica.Conversor.Entidad2IBK(lote);
-                                            respuesta = edyndns.EnviarIBK(lcIBK, certificado);
-                                            respuesta = respuesta.Replace("'", "-");
-                                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
-                                            if (respuesta == "Comprobante enviado satisfactoriamente a Interfacturas.")
-                                            {
-                                                //Consultar y Actualizar estado on-line.                              
-                                                org.dyndns.cedweb.consulta.ConsultaIBK clcdyndnsConsultaIBK = new org.dyndns.cedweb.consulta.ConsultaIBK();
-                                                string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
-                                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
-                                                if (ConsultaIBKUtilizarServidorExterno == "SI")
+                                                cantidadComprobantesEnviados++;
+                                                AjustarLoteParaITF(lote);
+                                                if (caeNro != "")
                                                 {
-                                                    clcdyndnsConsultaIBK.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
-                                                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
+                                                    lote.cabecera_lote.resultado = "A";
+                                                    lote.comprobante[0].cabecera.informacion_comprobante.resultado = "A";
+                                                    lote.comprobante[0].cabecera.informacion_comprobante.cae = caeNro;
+                                                    lote.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+                                                    lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = caeFecVto;
+                                                    lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+                                                    lote.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae = DateTime.Now.ToString("yyyyMMdd");
+                                                    lote.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
                                                 }
-                                                System.Threading.Thread.Sleep(2000);
-                                                org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
-                                                clcrdyndns = clcdyndnsConsultaIBK.Consultar(Convert.ToInt64(lote.comprobante[0].cabecera.informacion_vendedor.cuit), lote.cabecera_lote.id_lote, lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta, certificado);
-                                                FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
-                                                lc = Funciones.Ws2Fea(clcrdyndns);
                                                 string XML = "";
-                                                RN.Comprobante.SerializarLc(out XML, lc);
-                                                Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                                                RN.Comprobante.SerializarLc(out XML, lote);
                                                 comprobante.Cuit = lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
                                                 comprobante.TipoComprobante.Id = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                                                 comprobante.NroPuntoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                                                 comprobante.Nro = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
                                                 RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                                                 comprobante.Response = XML;
-                                                if (lc.cabecera_lote.resultado == "A")
-                                                {
-                                                    comprobante.WF.Estado = "Vigente";
-                                                    RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                                                    RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
-                                                }
-                                                else if (lc.cabecera_lote.resultado == "R")
-                                                {
-                                                    comprobante.WF.Estado = "Rechazado";
-                                                    RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                                                    RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
-                                                }
+                                                comprobante.WF.Estado = "Vigente";
+                                                RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                                                RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+                                                cantidadComprobantesConfirmados++;
                                             }
                                             else
                                             {
-                                                throw new Exception(Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas. " + Funciones.TextoScript(respuesta)));
+                                                throw new Exception(respuesta);
                                             }
-                                        }
-                                        #endregion
-                                        break;
+                                            #endregion
+                                            break;
+                                        case "ITF":
+                                            #region Transmitir comprobante a la Interfacturas
+                                            string NroCertif = sesion.Cuit.NroSerieCertifITF;
+                                            if (NroCertif.Equals(string.Empty))
+                                            {
+                                                throw new Exception("Aún no disponemos de su certificado digital.");
+                                            }
+                                            else
+                                            {
+                                                string certificado = "";
+                                                certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(NroCertif, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                                                org.dyndns.cedweb.envio.EnvioIBK edyndns = new org.dyndns.cedweb.envio.EnvioIBK();
+                                                string EnvioIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKUtilizarServidorExterno"];
+                                                if (EnvioIBKUtilizarServidorExterno == "SI")
+                                                {
+                                                    edyndns.Url = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKurl"];
+                                                }
+                                                org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
+                                                AjustarLoteParaITF(lote);
+                                                lcIBK = Facturacion.Electronica.Conversor.Entidad2IBK(lote);
+                                                respuesta = edyndns.EnviarIBK(lcIBK, certificado);
+                                                respuesta = respuesta.Replace("'", "-");
+                                                if (respuesta == "Comprobante enviado satisfactoriamente a Interfacturas.")
+                                                {
+                                                    cantidadComprobantesEnviados++;
+                                                    comprobante.Cuit = lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                                                    comprobante.TipoComprobante.Id = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                                                    comprobante.NroPuntoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                                                    comprobante.Nro = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                                                    RN.Comprobante.Leer(comprobante, sesion);
+                                                    comprobante.WF.Estado = "PteConf";
+                                                    RN.Comprobante.Actualizar(comprobante, sesion);
+                                                    RN.Comprobante.Leer(comprobante, sesion);
+                                                    //Consultar y Actualizar estado on-line.                              
+                                                    org.dyndns.cedweb.consulta.ConsultaIBK clcdyndnsConsultaIBK = new org.dyndns.cedweb.consulta.ConsultaIBK();
+                                                    string ConsultaIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKUtilizarServidorExterno"];
+                                                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKUtilizarServidorExterno: " + ConsultaIBKUtilizarServidorExterno);
+                                                    if (ConsultaIBKUtilizarServidorExterno == "SI")
+                                                    {
+                                                        clcdyndnsConsultaIBK.Url = System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"];
+                                                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Parametro ConsultaIBKurl: " + System.Configuration.ConfigurationManager.AppSettings["ConsultaIBKurl"]);
+                                                    }
+                                                    System.Threading.Thread.Sleep(2000);
+                                                    org.dyndns.cedweb.consulta.ConsultarResult clcrdyndns = new org.dyndns.cedweb.consulta.ConsultarResult();
+                                                    clcrdyndns = clcdyndnsConsultaIBK.Consultar(Convert.ToInt64(lote.comprobante[0].cabecera.informacion_vendedor.cuit), lote.cabecera_lote.id_lote, lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta, certificado);
+                                                    FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();
+                                                    lc = Funciones.Ws2Fea(clcrdyndns);
+                                                    string XML = "";
+                                                    RN.Comprobante.SerializarLc(out XML, lc);
+                                                    comprobante.Response = XML;
+                                                    if (lc.cabecera_lote.resultado == "A")
+                                                    {
+                                                        comprobante.WF.Estado = "Vigente";
+                                                        RN.Comprobante.Actualizar(comprobante, sesion);
+                                                        RN.Comprobante.Leer(comprobante, sesion);
+                                                        cantidadComprobantesConfirmados++;
+                                                    }
+                                                    else if (lc.cabecera_lote.resultado == "R")
+                                                    {
+                                                        comprobante.WF.Estado = "Rechazado";
+                                                        RN.Comprobante.Actualizar(comprobante, sesion);
+                                                        RN.Comprobante.Leer(comprobante, sesion);
+                                                        cantidadComprobantesRechazados++;
+                                                        listaErrores.Add("Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): Rechazado por Interfacturas.");
+                                                    }
+                                                }
+                                                else
+                                                {
+                                                    throw new Exception(Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas. " + Funciones.TextoScript(respuesta)));
+                                                }
+                                            }
+                                            #endregion
+                                            break;
+                                    }
+                                    transmisionOk = true;
                                 }
-                                cantidadComprobantesGenerados++;
+                                catch (Exception ex)
+                                {
+                                    #region Registrar error en la transmisión del comprobante
+                                    string a = "Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): " + ex.Message;
+                                    if (ex.InnerException != null)
+                                    {
+                                        a += "  " + ex.InnerException.Message;
+                                    }
+                                    listaErrores.Add(a);
+                                    #endregion
+                                }
                                 #region Actualizar, en el Contrato, la fecha de próxima emisión
                                 switch (contrato.PeriodicidadEmision)
                                 {
@@ -278,21 +359,99 @@ namespace CedServicios.Site
                                         contrato.FechaProximaEmision = contrato.FechaProximaEmision.AddYears(1);
                                         break;
                                 }
-                                RN.Comprobante.ActualizarFechaProximaEmision(contrato, sesion);
+                                //RN.Comprobante.ActualizarFechaProximaEmision(contrato, sesion);
                                 #endregion
-                            }
-                            catch (Exception ex)
-                            {
-                                #region Registrar error en la transmisión del comprobante
-                                string a = "Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): " + ex.Message;
-                                if (ex.InnerException != null)
+                                if (transmisionOk && comprobante.Estado == "Vigente")
                                 {
-                                    a += "  " + ex.InnerException.Message;
+                                    string script;
+                                    if (false && contrato.IdDestinoComprobante == "ITF")
+                                    {
+                                        #region Descarga de PDF (InterFacturas)
+                                        string certificado;
+                                        string DetalleIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKUtilizarServidorExterno"];
+                                        try
+                                        {
+                                            org.dyndns.cedweb.detalle.DetalleIBK clcdyndns = new org.dyndns.cedweb.detalle.DetalleIBK();
+                                            org.dyndns.cedweb.detalle.cecd cecd = new org.dyndns.cedweb.detalle.cecd();
+                                            cecd.cuit_canal = Convert.ToInt64("30690783521");
+                                            cecd.cuit_vendedor = Convert.ToInt64(comprobante.Cuit);
+                                            cecd.punto_de_venta = Convert.ToInt32(comprobante.NroPuntoVta);
+                                            cecd.tipo_de_comprobante = Convert.ToInt32(comprobante.TipoComprobante.Id);
+                                            cecd.numero_comprobante = comprobante.Nro;
+                                            cecd.id_Lote = 0;
+                                            cecd.id_LoteSpecified = false;
+                                            cecd.estado = "PR";
+                                            certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(sesion.Cuit.NroSerieCertifITF, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
+                                            if (DetalleIBKUtilizarServidorExterno == "SI")
+                                            {
+                                                clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"];
+                                            }
+                                            string resp = clcdyndns.DetallarIBK(cecd, certificado);
+                                            resp = resp.Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
+                                            resp = resp.Replace(" xmlns:xsi=\"http://lote.schemas.cfe.ib.com.ar/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", " xmlns=\"http://lote.schemas.cfe.ib.com.ar/\"");
+
+                                            string comprobanteXML = resp;
+                                            org.dyndns.cedweb.generoPDF.GeneroPDF pdfdyndns = new org.dyndns.cedweb.generoPDF.GeneroPDF();
+                                            string GenerarPDFUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFUtilizarServidorExterno"];
+                                            if (GenerarPDFUtilizarServidorExterno == "SI")
+                                            {
+                                                pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
+                                            }
+                                            string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobante.IdDestinoComprobante, comprobanteXML);
+                                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                                            sb.Append(comprobante.Cuit);
+                                            sb.Append("-");
+                                            sb.Append(comprobante.NroPuntoVta.ToString("0000"));
+                                            sb.Append("-");
+                                            sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
+                                            sb.Append("-");
+                                            sb.Append(comprobante.Nro.ToString("00000000"));
+                                            sb.Append(".pdf");
+                                            string url = RespPDF;
+                                            string filename = sb.ToString();
+                                            String dlDir = @"~/TempRender/";
+                                            new System.Net.WebClient().DownloadFile(url, Server.MapPath(dlDir + filename));
+                                            script = "window.open('DescargaTemporarios.aspx?archivo=" + sb.ToString() + "&path=" + @"~/TempRender/" + "', '');";
+                                            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            string a = "Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): Problemas para generar el PDF.  " + ex.Message;
+                                            if (ex.InnerException != null) a += ex.InnerException.Message;
+                                            listaErrores.Add(a);
+                                        }
+                                        #endregion
+                                    }
+                                    else
+                                    {
+                                        #region Descarga de PDF (AFIP)
+                                        try
+                                        {
+                                            lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                                            x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                                            comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
+                                            bytes = new byte[comprobante.Response.Length * sizeof(char)];
+                                            System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                                            ms = new System.IO.MemoryStream(bytes);
+                                            ms.Seek(0, System.IO.SeekOrigin.Begin);
+                                            lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+
+                                            RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
+
+                                            Session["lote"] = lote;
+                                            script = "window.open('/Facturacion/Electronica/Reportes/FacturaWebForm.aspx', '');";
+                                            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                                        }
+                                        catch (Exception ex)
+                                        {
+                                            listaErrores.Add("Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): Problemas para generar el PDF.  " + ex.Message);
+                                        }
+                                        #endregion
+                                    }
                                 }
-                                listaErrores.Add(a);
-                                #endregion
-                                #region Eliminar comprobante generado
-                                #endregion
+                            }
+                            else
+                            {
                                 contrato.FechaProximaEmision = new DateTime(9999, 12, 31); //para forzar el salto al próximo contrato
                             }
                         }
@@ -304,7 +463,7 @@ namespace CedServicios.Site
                 }
                 else
                 {
-                    MensajeLabel.Text = "Cantidad de comprobantes generados: " + cantidadComprobantesGenerados + ".";
+                    MensajeLabel.Text = "Cantidad de comprobantes--> Generados:" + cantidadComprobantesGenerados + ", Enviados:" + cantidadComprobantesEnviados + ", Confirmados:" + cantidadComprobantesConfirmados + ", Rechazados:" + cantidadComprobantesRechazados + ".";
                     if (listaErrores.Count > 0)
                     {
                         MensajeLabel.Text += "<br />ERRORES:";
@@ -315,6 +474,17 @@ namespace CedServicios.Site
                     }
                 }
                 GenerarComprobantesButton.Visible = false;
+            }
+        }
+        private void ReemplazaNombreClaveEnDescripcionDeArticulo(FeaEntidades.InterFacturas.lote_comprobantes Lote, string NombreClave, string Valor)
+        {
+            for (int i = 0; i < Lote.comprobante[0].detalle.linea.Length; i++)
+            {
+                string a = RN.Funciones.HexToString(Lote.comprobante[0].detalle.linea[i].descripcion);
+                if (a.IndexOf(NombreClave) != -1)
+                {
+                    Lote.comprobante[0].detalle.linea[i].descripcion = RN.Funciones.ConvertToHex(a.Substring(0, a.IndexOf(NombreClave)) + Valor + a.Substring(a.IndexOf(NombreClave) + NombreClave.Length));
+                }
             }
         }
         private void AjustarLoteParaITF(FeaEntidades.InterFacturas.lote_comprobantes lote)

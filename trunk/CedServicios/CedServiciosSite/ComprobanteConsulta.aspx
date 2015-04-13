@@ -1517,31 +1517,81 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                             </tr>
                                             <tr>
                                                 <td style="padding-left:10px">
-                                                    <asp:Panel ID="PrevisualizacionComprobantePanel" runat="server">
-                                                        <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
-                                                            <tr>
-                                                                <td class="TC00S">
-                                                                    Previsualización comprobante: 
-                                                                </td>
-                                                                <td align="left" style="padding-left:5px">
-                                                                    <asp:Button ID="PDFButton" runat="server" CausesValidation="true" OnClick="PDFButton_Click" 
-                                                                        Text="Obtener" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-                                                    </asp:Panel>
-                                                    <asp:Panel ID="Baja_AnulBaPanel" runat="server">
+                                                    <asp:Panel ID="Baja_AnulBaPanel" runat="server" Visible="false">
                                                         <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
                                                             <tr>
                                                                 <td class="TC00S">
                                                                     Comprobante: 
                                                                 </td>
                                                                 <td align="left" style="padding-left:5px">
-                                                                    <asp:Button ID="Baja_AnulBajaButton" runat="server" CausesValidation="true" OnClick="Baja_AnulBajaButton_Click" Text="Baja o AnulBaja" />
+                                                                    <asp:Button ID="Baja_AnulBajaButton" runat="server" CausesValidation="true" OnClick="AccionBaja_AnulBajaButton_Click" Text="Baja o AnulBaja" />
                                                                 </td>
                                                             </tr>
                                                         </table>
                                                     </asp:Panel>
+                                                    <asp:Panel ID="AFIPpanel" runat="server" Visible="false">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    AFIP: 
+                                                                </td>
+                                                                <td align="left" style="padding-left:5px">
+                                                                    <asp:Button ID="SubirAAFIPButton" runat="server" CausesValidation="false" OnClick="AccionSubirAAFIPButton_Click" 
+                                                                        Text="Enviar" ToolTip="Impactar el comprobante en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
+                                                                    <cc1:ModalPopupExtender ID="ModalPopupExtender3" 
+                                                                        PopupControlID="PopupEnviarAFIP" TargetControlID="SubirAAFIPButton" 
+                                                                        BackgroundCssClass="modalBackground" runat="server" 
+                                                                        onload="ModalPopupExtender3_Load" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+                                                    <asp:Panel ID="InterfacturasOnLinePanel" runat="server" Visible="false">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Interfacturas (on line): 
+                                                                </td>
+                                                                <td align="left" style="padding-left:5px">
+                                                                    <asp:Button ID="ValidarEnInterfacturasButton" runat="server" CausesValidation="false" OnClick="AccionValidarEnInterfacturasButton_Click" 
+                                                                        Text="Validar" ToolTip="Validar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
+                                                                    <cc1:ModalPopupExtender ID="ModalPopupExtender2" 
+                                                                        PopupControlID="PopupValidarITF" TargetControlID="ValidarEnInterfacturasButton" 
+                                                                        BackgroundCssClass="modalBackground" runat="server" 
+                                                                        onload="ModalPopupExtender1_Load" />
+                                                                    <asp:Button ID="SubirAInterfacturasButton" runat="server" CausesValidation="false" OnClick="AccionSubirAInterfacturasButton_Click" 
+                                                                        Text="Enviar" ToolTip="Impactar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación." />
+                                                                    <cc1:ModalPopupExtender ID="ModalPopupExtender1" 
+                                                                        PopupControlID="PopupEnvioITF" TargetControlID="SubirAInterfacturasButton" 
+                                                                        BackgroundCssClass="modalBackground" runat="server" 
+                                                                        onload="ModalPopupExtender1_Load" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+                                                    <asp:Panel ID="DescargarPDFPanel" runat="server" Visible="false">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
+                                                            <tr>
+                                                                <td style="width: 100%;">
+                                                                    <asp:Button ID="DescargarPDFButton" runat="server" Text="Descargar PDF" Width="100%" ForeColor="Brown"
+                                                                        CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
+                                                                        OnClick="AccionDescargarPDFButton_Click" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+                                                    <asp:Panel ID="ActualizarEstadoPanel" runat="server" Visible="false">
+                                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
+                                                            <tr>
+                                                                <td style="width: 100%;">
+                                                                    <asp:Button ID="ActualizarEstadoButton" runat="server" Text="Actualizar Estado" Width="100%" ForeColor="Brown"
+                                                                        CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
+                                                                        OnClick="AccionActualizarEstadoButton_Click" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+
                                                 </td>
                                             </tr>
                                             <tr>
