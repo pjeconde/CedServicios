@@ -2421,7 +2421,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                         RN.Comprobante.Leer(comprobante, sesion);
                                         Session["comprobantePDF"] = comprobante;
                                         ActualizarEstadoPanel.Visible = false;
-                                        DescargarPDFPanel.Visible = true;
+                                        DescargarPDFPanel.Visible = false;
                                     }
                                 }
                                 else
@@ -5040,16 +5040,19 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 det.linea[i].importe_total_articulo = Math.Round(importe_total_articulo + importe_iva, 2);
                             }
                             //Borrar alicuota e importe
-                            det.linea[i].alicuota_ivaSpecified = false;
-                            det.linea[i].alicuota_iva = 0;
-                            det.linea[i].indicacion_exento_gravado = null;
+                            if (!idtipo.Equals("BonoFiscal"))
+                            {
+                                det.linea[i].alicuota_ivaSpecified = false;
+                                det.linea[i].alicuota_iva = 0;
+                                det.linea[i].indicacion_exento_gravado = null;
+                            }
                             det.linea[i].importe_ivaSpecified = false;
                             det.linea[i].importe_iva = 0;
+
                         }
                         else
                         {
                             //Moneda Extranjera
-
                             det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
                             if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
                             {

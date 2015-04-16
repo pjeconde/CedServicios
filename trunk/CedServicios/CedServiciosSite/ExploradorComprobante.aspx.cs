@@ -882,6 +882,60 @@ namespace CedServicios.Site
                     }
                     #endregion
                     break;
+                case "XMLLocal":
+                    if (comprobante.NaturalezaComprobante.Id == "Venta")
+                    {
+                        try
+                        {
+                            if (comprobante.Estado != "Vigente")
+                            {
+                                MensajeLabel.Text = "El comprobante no está vigente.";
+                                return;
+                            }
+                            System.Text.StringBuilder sbXMLData = new System.Text.StringBuilder();
+                            sbXMLData.AppendLine(comprobante.Response);
+
+                            //Crear nombre de archivo default sin extensión
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                            sb.Append(comprobante.Cuit);
+                            sb.Append("-");
+                            sb.Append(comprobante.NroPuntoVta.ToString("0000"));
+                            sb.Append("-");
+                            sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
+                            sb.Append("-");
+                            sb.Append(comprobante.Nro.ToString("00000000"));
+
+                            //Crear nombre de archivo XML
+                            System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
+                            sbXML.Append(sb.ToString() + ".xml");
+
+                            //Crear archivo comprobante XML
+                            System.IO.MemoryStream m = new System.IO.MemoryStream();
+                            System.IO.FileStream fs = new System.IO.FileStream(Server.MapPath(@"~/Temp/" + sbXML.ToString()), System.IO.FileMode.Create);
+                            m.WriteTo(fs);
+                            fs.Close();
+
+                            //Grabar información comprobante XML
+                            using (StreamWriter outfile = new StreamWriter(Server.MapPath(@"~/Temp/" + sbXML.ToString())))
+                            {
+                                outfile.Write(sbXMLData.ToString());
+                            }
+                            script = "window.open('DescargaTemporarios.aspx?archivo=" + sbXML.ToString() + "', '');";
+                            ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                        }
+                        catch (Exception ex)
+                        {
+                            script = "Problemas para generar el XML.\\n" + ex.Message;
+                            script += ex.StackTrace;
+                            if (ex.InnerException != null)
+                            {
+                                script = ex.InnerException.Message;
+                            }
+                            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), script);
+                            MensajeLabel.Text += script;
+                        }
+                    }
+                    break;
                 case "ExportarRG2485":
                     #region ExportarRG2485
                     if (comprobante.NaturalezaComprobante.Id == "Venta")
