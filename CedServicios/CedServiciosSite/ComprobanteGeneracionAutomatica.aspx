@@ -67,7 +67,7 @@
                                 Uno por uno
                             </td>
                             <td>
-                                <asp:RadioButton ID="TratamientoDeContratosTodosRadioButton" runat="server" AutoPostBack="true" GroupName="TratamientoDeContratos"  OnCheckedChanged="TratamientoDeContratosCheckedChanged"/>
+                                <asp:RadioButton ID="TratamientoDeContratosTodosRadioButton" runat="server" AutoPostBack="true" GroupName="TratamientoDeContratos"  OnCheckedChanged="TratamientoDeContratosCheckedChanged" Enabled="false"/>
                             </td>
                             <td>
                                 Grupo de seleccionados
