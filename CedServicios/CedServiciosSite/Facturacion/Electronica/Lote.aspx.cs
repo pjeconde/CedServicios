@@ -341,7 +341,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         #endregion
                     }
 
-                    DataBind();
+                    //DataBind();
 
                     BindearDropDownLists();
 

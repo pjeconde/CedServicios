@@ -48,11 +48,32 @@
                     Fecha de emisión:
 	            </td>
 			    <td align="left" style="padding-top:5px">
-                    <asp:TextBox ID="FechaTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
-                    <ajaxToolkit:CalendarExtender ID="FechaCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
-                        TargetControlID="FechaTextBox" Format="yyyyMMdd" PopupButtonID="FechaImage" >
-                    </ajaxToolkit:CalendarExtender>
-                    <asp:Image runat="server" ID="FechaImage" ImageUrl="~/Imagenes/Calendar.gif" />
+                    <table border="0" cellpadding="0" cellspacing="0">
+                        <tr>
+                            <td>
+                                <asp:TextBox ID="FechaTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
+                                <ajaxToolkit:CalendarExtender ID="FechaCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
+                                    TargetControlID="FechaTextBox" Format="yyyyMMdd" PopupButtonID="FechaImage" >
+                                </ajaxToolkit:CalendarExtender>
+                                <asp:Image runat="server" ID="FechaImage" ImageUrl="~/Imagenes/Calendar.gif" />
+                            </td>
+                            <td style="padding-left:10px">
+                                <asp:Label ID="Label1" runat="server" Text="Tratamiento de contratos:"></asp:Label>
+                            </td>
+                            <td>
+                                <asp:RadioButton ID="TratamientoDeContratos1x1RadioButton" runat="server" AutoPostBack="true" Checked="true" GroupName="TratamientoDeContratos" OnCheckedChanged="TratamientoDeContratosCheckedChanged"/>
+                            </td>
+                            <td>
+                                Uno por uno
+                            </td>
+                            <td>
+                                <asp:RadioButton ID="TratamientoDeContratosTodosRadioButton" runat="server" AutoPostBack="true" GroupName="TratamientoDeContratos"  OnCheckedChanged="TratamientoDeContratosCheckedChanged"/>
+                            </td>
+                            <td>
+                                Grupo de seleccionados
+                            </td>
+                        </tr>
+                    </table>
                 </td>
             </tr>
             <tr>
