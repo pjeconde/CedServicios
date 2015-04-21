@@ -387,7 +387,7 @@ namespace CedServicios.Site
                     if (transmisionOk && comprobante.Estado == "Vigente")
                     {
                         string script;
-                        if (contrato.IdDestinoComprobante == "ITF")
+                        if (false && contrato.IdDestinoComprobante == "ITF")
                         {
                             #region Descarga de PDF (InterFacturas)
                             string certificado;
@@ -640,6 +640,21 @@ namespace CedServicios.Site
                 {
                     MensajeLabel.Text += "<br />&nbsp;&nbsp;&nbsp;&nbsp;" + ListaComprobantesGenerados[i];
                 }
+            }
+        }
+        protected void TratamientoDeContratosCheckedChanged(object sender, EventArgs e)
+        {
+            if (TratamientoDeContratos1x1RadioButton.Checked)
+            {
+                GenerarComprobantesPanel.Visible = false;
+                ComprobantesGridView.Columns[0].Visible = false;
+                ComprobantesGridView.Columns[1].Visible = true;
+            }
+            else
+            {
+                GenerarComprobantesPanel.Visible = true;
+                ComprobantesGridView.Columns[0].Visible = true;
+                ComprobantesGridView.Columns[1].Visible = false;
             }
         }
     }
