@@ -40,7 +40,8 @@
 </head>
 <body>
     <form id="form1" runat="server" visible="true">
-    <asp:ScriptManager ID="MasterScriptManager" runat="server">
+    <asp:ScriptManager ID="MasterScriptManager" runat="server" 
+        EnableScriptGlobalization="True">
     </asp:ScriptManager>
     <div id="DivUsuario" style="text-align:center">
         <table>

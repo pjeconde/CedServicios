@@ -1054,7 +1054,7 @@ AjaxControlToolkit.CalendarBehavior.prototype = {
         if (this._today.firstChild) {
             this._today.removeChild(this._today.firstChild);
         }
-        this._today.appendChild(document.createTextNode(String.format(AjaxControlToolkit.Resources.Calendar_Today, todaysDate.localeFormat("MMMM d, yyyy"))));
+        this._today.appendChild(document.createTextNode(String.format(AjaxControlToolkit.Resources.Calendar_Today, todaysDate.localeFormat("dd/MM/yyyy"))));
         this._today.date = todaysDate;        
     },
     
