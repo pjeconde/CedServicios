@@ -148,7 +148,7 @@
     <value>AjaxControlToolkit.Animation.createAnimation could not find an Animation corresponding to the name "{0}"</value>
   </data>
   <data name="Calendar_Today" xml:space="preserve">
-    <value>Today: {0}</value>
+    <value>Hoy: {0}</value>
   </data>
   <data name="CascadingDropDown_MethodError" xml:space="preserve">
     <value>[Method error {0}]</value>
