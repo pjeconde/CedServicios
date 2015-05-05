@@ -61,6 +61,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         case "Venta":
                             TituloPaginaLabel.Text = descrTratamiento + " de Comprobante";
                             DatosComprobanteLabel.Text = "COMPROBANTE DE VENTA (electrónica)";
+                            if (descrTratamiento == "Alta") ProximoNroComprobanteLinkButton.Visible = true;
                             break;
                         case "VentaTradic":
                             TituloPaginaLabel.Text = descrTratamiento + " de Comprobante";
@@ -1801,6 +1802,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             CompradorDropDownList.Visible = false;
                             CompradorDropDownList.DataSource = null;
                         }
+                        if (ProximoNroComprobanteLinkButton.Visible) ProximoNroComprobanteLinkButton_Click(ProximoNroComprobanteLinkButton, EventArgs.Empty);
                     }
                 }
                 catch (Exception ex)
@@ -4908,11 +4910,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                     case "TimeStamp1":
                     case "TimeStamp2":
                         Id_LoteTextbox.Enabled = false;
-                        ButtonGenerarNroLote.Visible = true;
+                        ProximoNroLoteLinkButton.Visible = true;
                         break;
                     case "Ninguno":
                         Id_LoteTextbox.Enabled = true;
-                        ButtonGenerarNroLote.Visible = false;
+                        ProximoNroLoteLinkButton.Visible = false;
                         break;
                 }
             }
@@ -4951,15 +4953,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         AjustarCodigoOperacionEn2904(((DropDownList)sender).SelectedValue);
                     }
+                    if (ProximoNroComprobanteLinkButton.Visible) ProximoNroComprobanteLinkButton_Click(ProximoNroComprobanteLinkButton, EventArgs.Empty);
                 }
             }
             catch
             {
             }
-        }
-        protected void ButtonGenerarNroLote_Click(object sender, EventArgs e)
-        {
-            GenerarNroLote();
         }
         protected void ModalPopupExtender1_Load(object sender, EventArgs e)
         {
@@ -4980,6 +4979,21 @@ namespace CedServicios.Site.Facturacion.Electronica
         protected void CancelarEnviarAFIPButton_Click(object sender, EventArgs e)
         {
 
+        }
+        protected void ProximoNroComprobanteLinkButton_Click(object sender, EventArgs e)
+        {
+            //Nuevo número de comprobante
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"]; 
+            Entidades.Comprobante ultimoComprobanteEmitido = new Entidades.Comprobante();
+            ultimoComprobanteEmitido.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue.ToString());
+            ultimoComprobanteEmitido.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue.ToString());
+            ultimoComprobanteEmitido.NaturalezaComprobante.Id = "Venta";
+            RN.Comprobante.LeerUltimoEmitido(ultimoComprobanteEmitido, sesion);
+            Numero_ComprobanteTextBox.Text = Convert.ToString(ultimoComprobanteEmitido.Nro + 1);
+        }
+        protected void ProximoNroLoteLinkButton_Click(object sender, EventArgs e)
+        {
+            GenerarNroLote();
         }
         private void AjustarLoteParaITF(FeaEntidades.InterFacturas.lote_comprobantes lote)
         {

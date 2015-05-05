@@ -126,8 +126,9 @@
                                                 <asp:Label ID="NumeroDeLabel" runat="server" Text="Número de comprobante:" Visible="true"></asp:Label>
                                             </td>
                                             <td class="TC10S">
-                                                <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" AutoCompleteType="Disabled"
+                                                <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetMed" AutoCompleteType="Disabled"
                                                     ToolTip="Debe ser correlativo al último ingresado por Punto de Venta y Tipo de Comprobante. No es necesario ingresar ceros a la izquierda. Si su factura es p.ej.0002-00000005, puede ingresar 5."> </asp:TextBox>
+                                                <asp:LinkButton ID="ProximoNroComprobanteLinkButton" runat="server" SkinID="LinkButtonChico" Text="Próximo" OnClick="ProximoNroComprobanteLinkButton_Click" Visible="false"></asp:LinkButton>
                                             </td>
                                         </tr>
                                         <tr>
@@ -304,23 +305,18 @@
                                                 <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
                                                     <tr>
                                                         <td class="TC00S">
-                                                            <asp:Button ID="ButtonGenerarNroLote" runat="server" Text="Generar" CausesValidation="false" onclick="ButtonGenerarNroLote_Click" />
-                                                        </td>
-                                                        <td class="TC00S">
                                                             Nº lote:
                                                         </td>
-                                                        <td class="TC00S">
-                                                            <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Este número, que no necesariamente tiene que ser correlativo y consecutivo, siempre debe ser mayor al último número de lote procesado en Interfacturas. Este número NO SE PUEDE REPETIR.">
-                                                            </asp:TextBox>
+                                                        <td class="TC10S" style="width:250px">
+                                                            <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Este número, que no necesariamente tiene que ser correlativo y consecutivo, siempre debe ser mayor al último número de lote procesado en Interfacturas. Este número NO SE PUEDE REPETIR."></asp:TextBox>
+                                                            <asp:LinkButton ID="ProximoNroLoteLinkButton" runat="server" SkinID="LinkButtonChico" Text="Próximo" OnClick="ProximoNroLoteLinkButton_Click" Visible="false"></asp:LinkButton>
                                                         </td>
                                                         <td class="TC00S"">
                                                             <asp:Label ID="LabelTipoNumeracionLote" Text="Tipo de numeración:" runat="server"></asp:Label>
                                                         </td>
-                                                        <td class="TC00S">
+                                                        <td class="TC10S">
                                                             <asp:TextBox ID="TipoNumeracionLote" runat="server" SkinID="TextoBoxFEAVendedorDet" ReadOnly="true" ToolTip="El tipo de númeración del lote se define a nivel de Punto de Venta. Solamente para el tipo 'Ninguno' estará habilitado el ingreso manual del Número de Lote.">
                                                             </asp:TextBox>
-                                                        </td>
-                                                        <td style="width:5px">
                                                         </td>
                                                     </tr>
                                                 </table>
