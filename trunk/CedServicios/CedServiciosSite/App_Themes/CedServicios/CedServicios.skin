@@ -27,6 +27,7 @@
 <asp:TextBox SkinID="TextoBoxMediano" runat="server" Style="width: 100px" BorderStyle="Solid" BorderWidth="1px" BorderColor=#071F70></asp:TextBox>
 
 <asp:TextBox SkinID="TextoBoxFEAVendedorDet" runat="server" Style="width: 170px" BorderStyle="NotSet"></asp:TextBox>
+<asp:TextBox SkinID="TextoBoxFEAVendedorDetMed" runat="server" Style="width: 140px" BorderStyle="NotSet"></asp:TextBox>
 <asp:TextBox SkinID="TextoBoxFEAVendedorDetCh" runat="server" Style="width: 80px" BorderStyle="NotSet"></asp:TextBox>
 <asp:TextBox SkinID="TextoBoxFEAVendedorDetChCh" runat="server" Style="width: 40px" BorderStyle="NotSet"></asp:TextBox>
 <asp:TextBox SkinID="Fecha" runat="server" Style="width: 60px" BorderStyle="NotSet"></asp:TextBox>
@@ -40,6 +41,7 @@
 <asp:HyperLink SkinID="LinkMedianoClaro" runat="server" Font-Size="12px" ForeColor="blue"></asp:HyperLink>
 
 <asp:LinkButton SkinID="LinkButtonAyuda" runat="server" Font-Size="14px" ForeColor="#284E98"></asp:LinkButton>
+<asp:LinkButton SkinID="LinkButtonChico" runat="server" Font-Size="10px" ForeColor="blue"></asp:LinkButton>
 <asp:Label SkinID="LabelAyuda" runat="server" Font-Size="14px" ></asp:Label>
 
 <asp:CheckBox SkinID="CheckBoxFEALoteDetChCh" runat="server" Width="40px"></asp:CheckBox>
