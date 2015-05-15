@@ -108,6 +108,8 @@
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="ComprobanteGeneracionAutomatica.aspx" />
     <Content Include="Imagenes\301.gif" />
+    <Content Include="Imagenes\Iconos\icon_collapse.gif" />
+    <Content Include="Imagenes\Iconos\icon_expand.gif" />
     <Content Include="PersonaBaja.aspx" />
     <Content Include="PersonaConsulta.aspx" />
     <Content Include="PersonaCrear.aspx" />

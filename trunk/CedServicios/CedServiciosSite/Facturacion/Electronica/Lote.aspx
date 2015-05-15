@@ -279,6 +279,7 @@
                     <!-- LOTE -->
                     <tr>
                         <td>
+                            
                             <asp:UpdatePanel ID="LoteUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList" EventName="TextChanged">
@@ -337,18 +338,15 @@
                         <td>
                             <asp:UpdatePanel ID="VendedorUpdatePanel" runat="server">
                                 <ContentTemplate>
+                                    <asp:Panel ID="pHeader" runat="server" CssClass="TextoResaltado">
+                                        <asp:Label ID="lblText" runat="server" Text="VENDEDOR" />
+                                        <asp:Image ID="imageCE" runat="server" ImageUrl="~/Imagenes/Iconos/icon_expand.gif" style="vertical-align:text-bottom" />
+                                    </asp:Panel>
+                                    <asp:Panel ID="pBody" runat="server" CssClass="cpBody">
                                     <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
                                         <tr>
-                                            <td style="height:10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
                                             <td align="center" colspan="3" class="TextoResaltado" style="width: 240px">
-                                                VENDEDOR
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="height:10px;">
+                                                
                                             </td>
                                         </tr>
                                         <tr>
@@ -578,14 +576,22 @@
                                                 </table>
                                             </td>
                                         </tr>
-                                        <tr>
-                                            <td colspan="3">
-                                                <hr noshade="noshade" size="1" color="#cccccc" />
-                                            </td>
-                                        </tr>
                                     </table>
+                                    </asp:Panel>
+                                    <cc1:CollapsiblePanelExtender ID="CollapsiblePanelExtender1" runat="server" TargetControlID="pBody" 
+                                        CollapseControlID="pHeader" ExpandControlID="pHeader" Collapsed="true" TextLabelID="lblText" CollapsedText="VENDEDOR" ExpandedText="VENDEDOR"  ImageControlID="imageCE" ExpandedImage="~/Imagenes/Iconos/icon_collapse.gif"
+                                        CollapsedImage="~/Imagenes/Iconos/icon_expand.gif"
+                                        CollapsedSize="0">
+                                    </cc1:CollapsiblePanelExtender>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 782px; vertical-align: top">
+                                <tr>
+                                    <td style="">
+                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                    </td>
+                                </tr>
+                            </table>
                         </td>
                     </tr>
                     <!-- INFORMACIÓN EXPORTACIÓN-->

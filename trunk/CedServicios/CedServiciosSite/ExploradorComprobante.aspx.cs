@@ -700,6 +700,13 @@ namespace CedServicios.Site
                                 ms.Seek(0, System.IO.SeekOrigin.Begin);
                                 lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
+                                //comprobante.Request = comprobante.Request.Replace("iso-8859-1", "utf-16");
+                                //bytes = new byte[comprobante.Request.Length * sizeof(char)];
+                                //System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
+                                //ms = new System.IO.MemoryStream(bytes);
+                                //ms.Seek(0, System.IO.SeekOrigin.Begin);
+                                //lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+
                                 RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
                                
                                 Session["lote"] = lote;
@@ -707,70 +714,6 @@ namespace CedServicios.Site
 
                                 script = "window.open('/Facturacion/Electronica/Reportes/FacturaWebForm.aspx', '');";
                                 ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
-    
-                                //string comprobanteXML = "";
-
-                                //#region TRATAMIENTO DE LOGOTIPO
-                                //string uRLfile = String.Empty;
-                                //if (System.Configuration.ConfigurationManager.AppSettings["Ambiente"] == "DESA")
-                                //{
-                                //    uRLfile = "http://cedeiraweb.no-ip.org:8080/ImagenesSubidas/" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + ".gif";
-                                //}
-                                //else
-                                //{
-                                //    uRLfile = "http://www.cedeira.com.ar/ImagenesSubidas/" + lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString() + ".gif";
-                                //}
-                                //if (Existe(uRLfile))
-                                //{
-                                //    if (lote.comprobante[0].extensiones == null)
-                                //    {
-                                //        lote.comprobante[0].extensiones = new FeaEntidades.InterFacturas.extensiones();
-                                //        lote.comprobante[0].extensionesSpecified = true;
-                                //    }
-                                //    if (lote.comprobante[0].extensiones.extensiones_camara_facturas == null)
-                                //    {
-                                //        lote.comprobante[0].extensiones.extensiones_camara_facturas = new FeaEntidades.InterFacturas.extensionesExtensiones_camara_facturas();
-                                //        lote.comprobante[0].extensiones.extensiones_camara_facturasSpecified = true;
-                                //    }
-                                //    lote.comprobante[0].extensiones.extensiones_camara_facturas.id_logo = uRLfile;
-                                //}
-                                //#endregion
-
-                                //RN.Comprobante.SerializarC(out comprobanteXML, lote.comprobante[0]);
-                                //try
-                                //{
-                                //    GrabarLogTexto("~/Detallar.txt", "Inicia ExecuteCommand");
-                                //    org.dyndns.cedweb.generoPDF.GeneroPDF pdfdyndns = new org.dyndns.cedweb.generoPDF.GeneroPDF();
-
-                                //    string GenerarPDFUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFUtilizarServidorExterno"];
-                                //    GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFUtilizarServidorExterno: " + GenerarPDFUtilizarServidorExterno);
-                                //    if (GenerarPDFUtilizarServidorExterno == "SI")
-                                //    {
-                                //        pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
-                                //        GrabarLogTexto("~/Detallar.txt", "Parametro GenerarPDFurl: " + System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"]);
-                                //    }
-                                //    string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobante.IdDestinoComprobante, comprobanteXML);
-                                //    GrabarLogTexto("~/Detallar.txt", "Finaliza ExecuteCommand");
-
-                                //    //Crear nombre de archivo default sin extensión
-                                //    System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                                //    sb.Append(comprobante.Cuit);
-                                //    sb.Append("-");
-                                //    sb.Append(comprobante.NroPuntoVta.ToString("0000"));
-                                //    sb.Append("-");
-                                //    sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
-                                //    sb.Append("-");
-                                //    sb.Append(comprobante.Nro.ToString("00000000"));
-                                //    sb.Append(".pdf");
-
-                                //    string url = RespPDF;
-                                //    string filename = sb.ToString();
-                                //    String dlDir = @"~/TempRenderAFIP/";
-                                //    new System.Net.WebClient().DownloadFile(url, Server.MapPath(dlDir + filename));
-
-                                //    script = "window.open('DescargaTemporarios.aspx?archivo=" + sb.ToString() + "&path=" + @"~/TempRenderAFIP/" + "', '');";
-                                //    ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
-                                //}
                             }
                             catch (Exception ex)
                             {
@@ -887,14 +830,6 @@ namespace CedServicios.Site
                     {
                         try
                         {
-                            if (comprobante.Estado != "Vigente")
-                            {
-                                MensajeLabel.Text = "El comprobante no está vigente.";
-                                return;
-                            }
-                            System.Text.StringBuilder sbXMLData = new System.Text.StringBuilder();
-                            sbXMLData.AppendLine(comprobante.Response);
-
                             //Crear nombre de archivo default sin extensión
                             System.Text.StringBuilder sb = new System.Text.StringBuilder();
                             sb.Append(comprobante.Cuit);
@@ -904,6 +839,20 @@ namespace CedServicios.Site
                             sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
                             sb.Append("-");
                             sb.Append(comprobante.Nro.ToString("00000000"));
+
+                            System.Text.StringBuilder sbXMLData;
+                            if (comprobante.Estado != "Vigente")
+                            {
+                                sbXMLData = new System.Text.StringBuilder();
+                                sbXMLData.AppendLine(comprobante.Request);
+                                sb.Append("-BORRADOR");
+                                MensajeLabel.Text = "El comprobante no está vigente. Usted está descargando un XML de BORRADOR.";
+                            }
+                            else
+                            {
+                                sbXMLData = new System.Text.StringBuilder();
+                                sbXMLData.AppendLine(comprobante.Response);
+                            }
 
                             //Crear nombre de archivo XML
                             System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
