@@ -175,12 +175,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                     if (IdNaturalezaComprobanteTextBox.Text.IndexOf("Venta") != -1)
                     {
                         #region Personalización campos vendedor y comprador para VENTAS
-                        VendedorUpdatePanel.Visible = false;
+                        //VendedorUpdatePanel.Visible = false;
+                        pBody.Enabled = false;
                         switch (IdNaturalezaComprobanteTextBox.Text)
                         {
                             case "Venta":
                                 ComprobantePanel.Visible = false;
-                                if (TratamientoTextBox.Text == "Clonado") UtilizarComprobantePreexistentePanel.Visible = false;
+                                if (TratamientoTextBox.Text == "Clonado" || TratamientoTextBox.Text == "Modificacion") UtilizarComprobantePreexistentePanel.Visible = false;
                                 DatosEmisionPanel.Visible = false;
                                 FechaProximaEmisionDatePickerWebUserControl.Text = new DateTime(9999, 12, 31).ToString("yyyyMMdd");
                                 break;
@@ -2081,6 +2082,11 @@ namespace CedServicios.Site.Facturacion.Electronica
             if (!NroIBVendedorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNroIB(NroIBVendedorTextBox.Text))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un Nro. de IB válido para el vendedor"), false);
+                return false;
+            }
+            if (Denominacion_CompradorTextBox.Text.Length > 50)
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("La descripción de la Razón Social del Comprador es muy larga. Máximo permitido 50 caracteres."), false);
                 return false;
             }
             if (!Email_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_CompradorTextBox.Text))
@@ -5056,13 +5062,15 @@ namespace CedServicios.Site.Facturacion.Electronica
                             //Borrar alicuota e importe
                             if (!idtipo.Equals("BonoFiscal"))
                             {
-                                det.linea[i].alicuota_ivaSpecified = false;
-                                det.linea[i].alicuota_iva = 0;
+                                if (!idtipo.Equals("RG2904"))
+                                {
+                                    det.linea[i].alicuota_ivaSpecified = false;
+                                    det.linea[i].alicuota_iva = 0;
+                                }
                                 det.linea[i].indicacion_exento_gravado = null;
                             }
                             det.linea[i].importe_ivaSpecified = false;
                             det.linea[i].importe_iva = 0;
-
                         }
                         else
                         {

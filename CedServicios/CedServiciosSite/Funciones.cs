@@ -15,6 +15,12 @@ namespace CedServicios.Site
         public static void PersonalizarControlesMaster(MasterPage Master, bool RefrescaDatosUsuario, Entidades.Sesion Sesion)
         {
             if (RefrescaDatosUsuario) RN.Sesion.RefrescarDatosUsuario(Sesion.Usuario, Sesion);
+            if (Sesion.Ambiente != "PROD")
+            {
+                ContentPlaceHolder cedeiraContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("CedeiraContentPlaceHolder"));
+                Label ambienteLabel = ((Label)cedeiraContentPlaceHolder.FindControl("AmbienteLabel"));
+                ambienteLabel.Text = Sesion.Ambiente;
+            }
 
             ContentPlaceHolder menuContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("MenuContentPlaceHolder"));
             Menu menu = ((Menu)menuContentPlaceHolder.FindControl("Menu"));
