@@ -9,6 +9,17 @@
         </tr>
         <tr>
             <td align="left" colspan="2" style="padding-top:10px">
+                Información Ticket AFIP.
+            </td>
+        </tr> 
+        <tr>
+            <td align="left" colspan="2" style="padding-top:10px">
+                <asp:TextBox ID="TicketInfoTextBox" runat="server" Width="100%" 
+                    TextMode="MultiLine"></asp:TextBox>
+            </td>
+        </tr>      
+        <tr>
+            <td align="left" colspan="2" style="padding-top:10px">
                 Para consultar los Tipo de Comprobantes y el Ult. Nro. Lote disponible en AFIP no es necesario ingresar ningún dato.
             </td>
         </tr>        
@@ -25,6 +36,14 @@
                 <asp:Button ID="ConsultarUltNroLoteAFIPButton" runat="server"
                     OnClick="ConsultarUltNroLoteAFIPButton_Click" Text="Consultar el último número de lote en AFIP"
                     ToolTip="Consultar el Ult. Nro. Lote en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                    Width="100%" />
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top:10px">
+                <asp:Button ID="ConsultarDocTipoButton" runat="server"
+                    OnClick="ConsultarDocTipoAFIPButton_Click" Text="Consultar los Tipo de documentos válidos en AFIP (FEv1)"
+                    ToolTip="Consultar los Tipos de Documentos válidos en AFIP (FEv1)."
                     Width="100%" />
             </td>
         </tr>

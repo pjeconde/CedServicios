@@ -12,9 +12,9 @@
 <%@ Register src="FacturaElectronicaFecha.ascx" tagname="FacturaElectronicaFecha" tagprefix="uc1" %>
 
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceDefault">
-    <table border="0" cellpadding="0" cellspacing="0" style="width: 800px; text-align:left; padding-left:10px">
+    <table border="0" cellpadding="0" cellspacing="0" style="width: 1300px; text-align:left; padding-left:10px">
         <tr>
-            <td align="center" valign="top" style="padding-top:20px; width:782px; vertical-align:middle; text-align:center;">
+            <td align="center" valign="top" style="padding-top:20px; width:1282px; vertical-align:middle; text-align:center;">
                 <table border="0" cellpadding="0" cellspacing="0">
                     <!-- @@@ TITULO DE LA PAGINA @@@-->
                     <tr>
@@ -24,9 +24,9 @@
                     </tr>
                     <!-- UTILIZAR COMPROBANTE PREEXISTENTE -->
                     <tr>
-                        <td align="center" style="width: 782px; vertical-align: middle; text-align: center; padding-top:20px;" valign="top">
+                        <td align="center" style="width: 1282px; vertical-align: middle; text-align: center; padding-top:20px;" valign="top">
                             <asp:Panel ID="UtilizarComprobantePreexistentePanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                     <tr>
                                         <td rowspan="6" style="width:1px; background-color:Gray;">
                                         </td>
@@ -46,16 +46,16 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
+                                            <table border="0" cellpadding="0" cellspacing="0" style="width:1280px">
                                                 <tr>
                                                     <td style="padding-top: 5px;">
-                                                        <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" Width="760px" size="100" ToolTip="Cargar los datos de un archivo XML.">
+                                                        <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" Width="1262px" size="100" ToolTip="Cargar los datos de un archivo XML.">
                                                         </asp:FileUpload>
                                                     </td>
                                                 </tr>
                                                 <tr>
                                                     <td style="padding-top: 5px">
-                                                        <asp:Button ID="FileUploadButton" runat="server" CausesValidation="false" OnClick="FileUploadButton_Click" Text="Completar datos automáticamente desde archivo xml seleccionado" Width="760px" />
+                                                        <asp:Button ID="FileUploadButton" runat="server" CausesValidation="false" OnClick="FileUploadButton_Click" Text="Completar datos automáticamente desde archivo xml seleccionado" Width="1262px" />
                                                     </td>
                                                 </tr>
                                             </table>
@@ -89,7 +89,7 @@
                                     <asp:AsyncPostBackTrigger ControlID="Tipo_De_ComprobanteDropDownList" EventName="SelectedIndexChanged"/>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                         <tr>
                                             <td class="TextoResaltado" colspan="4" style="text-align:center">
                                                 <asp:Label ID="DatosComprobanteLabel" runat="server" Text="COMPROBANTE"></asp:Label>
@@ -276,63 +276,6 @@
                             </asp:UpdatePanel>
                         </td>
                     </tr>
-                    <!-- LOTE -->
-                    <tr>
-                        <td>
-                            
-                            <asp:UpdatePanel ID="LoteUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
-                                <Triggers>
-                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList" EventName="TextChanged">
-                                    </asp:AsyncPostBackTrigger>
-                                    <asp:PostBackTrigger ControlID="FileUploadButton"></asp:PostBackTrigger>
-                                </Triggers>
-                                <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
-                                        <tr>
-                                            <td colspan="2" style="text-align: center; height: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td class="TextoResaltado" style="text-align: center;">
-                                                LOTE
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: center; height: 10px;">
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td style="text-align: center">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
-                                                    <tr>
-                                                        <td class="TC00S">
-                                                            Nº lote:
-                                                        </td>
-                                                        <td class="TC10S" style="width:250px">
-                                                            <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Este número, que no necesariamente tiene que ser correlativo y consecutivo, siempre debe ser mayor al último número de lote procesado en Interfacturas. Este número NO SE PUEDE REPETIR."></asp:TextBox>
-                                                            <asp:LinkButton ID="ProximoNroLoteLinkButton" runat="server" SkinID="LinkButtonChico" Text="Próximo" OnClick="ProximoNroLoteLinkButton_Click" Visible="false"></asp:LinkButton>
-                                                        </td>
-                                                        <td class="TC00S"">
-                                                            <asp:Label ID="LabelTipoNumeracionLote" Text="Tipo de numeración:" runat="server"></asp:Label>
-                                                        </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="TipoNumeracionLote" runat="server" SkinID="TextoBoxFEAVendedorDet" ReadOnly="true" ToolTip="El tipo de númeración del lote se define a nivel de Punto de Venta. Solamente para el tipo 'Ninguno' estará habilitado el ingreso manual del Número de Lote.">
-                                                            </asp:TextBox>
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td>
-                                                <hr noshade="noshade" size="1" color="#cccccc" />
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </ContentTemplate>
-                            </asp:UpdatePanel>
-                        </td>
-                    </tr>
                     <!-- VENDEDOR -->
                     <tr>
                         <td>
@@ -343,7 +286,7 @@
                                         <asp:Image ID="imageCE" runat="server" ImageUrl="~/Imagenes/Iconos/icon_expand.gif" style="vertical-align:text-bottom" />
                                     </asp:Panel>
                                     <asp:Panel ID="pBody" runat="server" CssClass="cpBody">
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                         <tr>
                                             <td align="center" colspan="3" class="TextoResaltado" style="width: 240px">
                                                 
@@ -578,20 +521,77 @@
                                         </tr>
                                     </table>
                                     </asp:Panel>
-                                    <cc1:CollapsiblePanelExtender ID="CollapsiblePanelExtender1" runat="server" TargetControlID="pBody" 
+                                    <cc1:CollapsiblePanelExtender ID="CollapsiblePanelExtenderVendedor" runat="server" TargetControlID="pBody" 
                                         CollapseControlID="pHeader" ExpandControlID="pHeader" Collapsed="true" TextLabelID="lblText" CollapsedText="VENDEDOR" ExpandedText="VENDEDOR"  ImageControlID="imageCE" ExpandedImage="~/Imagenes/Iconos/icon_collapse.gif"
                                         CollapsedImage="~/Imagenes/Iconos/icon_expand.gif"
                                         CollapsedSize="0">
                                     </cc1:CollapsiblePanelExtender>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                            <table border="0" cellpadding="0" cellspacing="0" style="width: 782px; vertical-align: top">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 1282px; vertical-align: top">
                                 <tr>
                                     <td style="">
                                         <hr noshade="noshade" size="1" color="#cccccc" />
                                     </td>
                                 </tr>
                             </table>
+                        </td>
+                    </tr>
+                    <!-- LOTE -->
+                    <tr>
+                        <td>
+                            
+                            <asp:UpdatePanel ID="LoteUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
+                                <Triggers>
+                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList" EventName="TextChanged">
+                                    </asp:AsyncPostBackTrigger>
+                                    <asp:PostBackTrigger ControlID="FileUploadButton"></asp:PostBackTrigger>
+                                </Triggers>
+                                <ContentTemplate>
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+                                        <tr>
+                                            <td colspan="2" style="text-align: center; height: 10px;">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="TextoResaltado" style="text-align: center;">
+                                                LOTE
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center; height: 10px;">
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="text-align: center">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Nº lote:
+                                                        </td>
+                                                        <td class="TC10S" style="width:250px">
+                                                            <asp:TextBox ID="Id_LoteTextbox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="Este número, que no necesariamente tiene que ser correlativo y consecutivo, siempre debe ser mayor al último número de lote procesado en Interfacturas. Este número NO SE PUEDE REPETIR."></asp:TextBox>
+                                                            <asp:LinkButton ID="ProximoNroLoteLinkButton" runat="server" SkinID="LinkButtonChico" Text="Próximo" OnClick="ProximoNroLoteLinkButton_Click" Visible="false"></asp:LinkButton>
+                                                        </td>
+                                                        <td class="TC00S"">
+                                                            <asp:Label ID="LabelTipoNumeracionLote" Text="Tipo de numeración:" runat="server"></asp:Label>
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:TextBox ID="TipoNumeracionLote" runat="server" SkinID="TextoBoxFEAVendedorDet" ReadOnly="true" ToolTip="El tipo de númeración del lote se define a nivel de Punto de Venta. Solamente para el tipo 'Ninguno' estará habilitado el ingreso manual del Número de Lote.">
+                                                            </asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <hr noshade="noshade" size="1" color="#cccccc" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </ContentTemplate>
+                            </asp:UpdatePanel>
                         </td>
                     </tr>
                     <!-- INFORMACIÓN EXPORTACIÓN-->
@@ -603,7 +603,7 @@
                                 </Triggers>
                                 <ContentTemplate>
                                     <asp:Panel ID="ExportacionPanel" runat="server">
-                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 1282px">
                                             <tr>
                                                 <td style="height:10px;">
                                                 </td>
@@ -739,7 +739,7 @@
                                     <asp:AsyncPostBackTrigger ControlID="PaisDestinoExpDropDownList"></asp:AsyncPostBackTrigger>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                    <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                         <tr>
                                             <td style="height:10px;">
                                             </td>
@@ -1022,7 +1022,7 @@
                     <tr>
                         <td style="text-align: center">
                             <asp:Panel ID="ReferenciasPanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                     <tr>
                                         <td style="text-align: center; height: 10px;">
                                         </td>
@@ -1169,7 +1169,7 @@
                     <tr>
                         <td>
                             <asp:Panel ID="DatosComerialesPanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                     <tr>
                                         <td style="height:19px; text-align:center">
                                             <uc3:Comerciales ID="DatosComerciales" runat="server"></uc3:Comerciales>
@@ -1187,7 +1187,7 @@
                     <!-- DETALLE DE ARTÍCULOS / SERVICIOS -->
                     <tr>
                         <td style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                 <tr>
                                     <td style="text-align: center; height: 10px;">
                                     </td>
@@ -1204,10 +1204,10 @@
                                 </tr>
                                 <tr>
                                     <td style="text-align: center">
-                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 780px">
+                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 1280">
                                             <tr>
                                                 <td class="TextoLabelFEADescrLarga" style="padding: 5px;">
-                                                    <asp:TextBox ID="ComentariosTextBox" runat="server" Style="width:760px; resize:none" TextMode="MultiLine"></asp:TextBox>
+                                                    <asp:TextBox ID="ComentariosTextBox" runat="server" Style="width:1260px; resize:none" TextMode="MultiLine"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <uc4:Detalle ID="DetalleLinea" runat="server"></uc4:Detalle>
@@ -1216,7 +1216,7 @@
                                 </tr>
                                 <tr>
                                     <td>
-                                        <hr noshade="noshade" size="1" color="#cccccc" />
+                                        <hr noshade="noshade" size="1" style="color:#cccccc" />
                                     </td>
                                 </tr>
                             </table>
@@ -1225,7 +1225,7 @@
                     <!-- DESCUENTOS GLOBALES -->
                     <tr>
                         <td style="text-align:center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 1282px">
                                 <tr>
                                     <td>
                                         <DescUC:DescuentosGlobales ID="DescuentosGlobales" runat="server"></DescUC:DescuentosGlobales>
@@ -1242,7 +1242,7 @@
                     <!-- IMPUESTOS GLOBALES -->
                     <tr>
                         <td style="text-align:center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width: 1282px">
                                 <tr>
                                     <td>
                                         <uc8:ImpuestosGlobales ID="ImpuestosGlobales" runat="server"></uc8:ImpuestosGlobales>
@@ -1259,7 +1259,7 @@
                     <!-- RESUMEN FINAL -->
                     <tr>
                         <td style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                 <tr>
                                     <td style="height: 10px;">
                                     </td>
@@ -1416,6 +1416,8 @@
                                             </table>
                                         </asp:Panel>
                                     </td>
+                                    <td style="width:300px">
+                                    </td>
                                     <td align="left" valign="top">
                                         <asp:UpdatePanel ID="tipoCambioUpdatePanel" runat="server" ChildrenAsTriggers="true"
                                             OnLoad="tipoCambioUpdatePanel_Load" UpdateMode="Conditional">
@@ -1426,15 +1428,15 @@
                                             <ContentTemplate>
                                                 <table border="0" cellpadding="0" cellspacing="0">
                                                     <tr>
-                                                        <td class="TextoResaltado" style="width:390px; text-align:right">
+                                                        <td class="TextoResaltado" style="width:600px; text-align:right">
                                                             RESUMEN FINAL&nbsp;
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:Button ID="CalcularTotalesButton" runat="server" CausesValidation="false" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales" Width="174px" />
+                                                            <asp:Button ID="CalcularTotalesButton" runat="server" CausesValidation="false" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales" Width="180px" />
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             Importe total neto gravado:
                                                         </td>
                                                         <td class="TC10S">
@@ -1444,7 +1446,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             Importe total de conceptos que no integren el precio neto gravado:
                                                         </td>
                                                         <td class="TC10S">
@@ -1454,7 +1456,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             Importe de operaciones exentas:
                                                         </td>
                                                         <td class="TC10S">
@@ -1464,7 +1466,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             IVA Responsable inscripto:
                                                         </td>
                                                         <td class="TC10S">
@@ -1474,7 +1476,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             Impuesto liquidado a RNI o percepción a no categorizados (IVA R.G.2126):
                                                         </td>
                                                         <td class="TC10S">
@@ -1484,7 +1486,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             Importe total impuestos municipales:
                                                         </td>
                                                         <td class="TC10S">
@@ -1494,7 +1496,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             Importe total impuestos nacionales:
                                                         </td>
                                                         <td class="TC10S">
@@ -1504,7 +1506,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             Importe total ingresos brutos:
                                                         </td>
                                                         <td class="TC10S">
@@ -1514,7 +1516,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             Importe total impuestos internos:
                                                         </td>
                                                         <td class="TC10S">
@@ -1524,7 +1526,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             Importe total:
                                                         </td>
                                                         <td class="TC10S">
@@ -1534,7 +1536,7 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="width: 390px">
+                                                        <td class="TC00S">
                                                             <asp:Label ID="Tipo_de_cambioLabel" runat="server" Text="Tipo de cambio:" Visible="true">
                                                             </asp:Label>
                                                         </td>
@@ -1567,7 +1569,7 @@
                     <!-- OBSERVACIONES -->
                     <tr>
                         <td style="text-align:center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:782px;">
+                            <table border="0" cellpadding="0" cellspacing="0" style="width:1282px;">
                                 <tr>
                                     <td style="height:10px;">
                                     </td>
@@ -1583,7 +1585,7 @@
                                 </tr>
                                 <tr>
                                     <td class="TextoLabelFEADescrLarga" style="text-align:center">
-                                        <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" Style="width:760px" TextMode="MultiLine"></asp:TextBox>
+                                        <asp:TextBox ID="Observaciones_ResumenTextBox" runat="server" Style="width:1260px; resize:none" TextMode="MultiLine"></asp:TextBox>
                                     </td>
                                 </tr>
                                 <tr>
@@ -1598,7 +1600,7 @@
                     <tr>
                         <td style="text-align: center">
                             <asp:Panel ID="AccionesPanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+                                <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                     <tr>
                                         <td style="height: 10px;">
                                         </td>
@@ -1694,7 +1696,7 @@
                                                 </table>
                                             </asp:Panel>
                                             <asp:Panel ID="DescargarPDFPanel" runat="server">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 1260px">
                                                     <tr>
                                                         <td style="width: 100%;">
                                                             <asp:Button ID="DescargarPDFButton" runat="server" Text="Descargar PDF" Width="100%" ForeColor="Brown"
@@ -1705,7 +1707,7 @@
                                                 </table>
                                             </asp:Panel>
                                             <asp:Panel ID="ActualizarEstadoPanel" runat="server">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 760px">
+                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 1260px">
                                                     <tr>
                                                         <td style="width: 100%;">
                                                             <asp:Button ID="ActualizarEstadoButton" runat="server" Text="Actualizar Estado" Width="100%" ForeColor="Brown"
@@ -1747,7 +1749,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td align="left" style="text-align: center; width: 780px;">
+                        <td align="left" style="text-align: center; width: 1280;">
                             <asp:ValidationSummary ID="RequeridosValidationSummary" runat="server" BorderColor="Gray"
                                 BorderWidth="1px" HeaderText="Hay que ingresar o corregir los siguientes campos:" 
                                 ShowMessageBox="True"></asp:ValidationSummary>

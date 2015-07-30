@@ -180,6 +180,9 @@ namespace CedServicios.Site
                 case "Comprobantes|Consulta":
                     Response.Redirect("~/ExploradorComprobante.aspx?Consulta-Comprobante");
                     break;
+                case "Comprobantes|Consulta RG":
+                    Response.Redirect("~/ExploradorComprobanteRG.aspx");
+                    break;
                 case "Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes":
                     Response.Redirect("~/ExploradorComprobanteOnLineInterfacturas.aspx");
                     break;

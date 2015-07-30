@@ -33,9 +33,13 @@ namespace CedServicios.Site
                 TipoComprobanteDropDownList.DataTextField = "Descr";
                 TipoComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
 
+                TicketCompletarInfo();
+
                 DataBind();
+
             }
         }
+
         protected void ConsultarLoteAFIPButton_Click(object sender, EventArgs e)
         {
             MensajeLabel.Text = "";
@@ -76,6 +80,7 @@ namespace CedServicios.Site
 
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPSerializer(lcFea, (Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/", "");
@@ -113,12 +118,55 @@ namespace CedServicios.Site
             {
                 try
                 {
-                    GrabarLogTexto("~/Consultar.txt", "Consulta de Ult. Nro. Lote CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro + "  Tipo.Comprobante: " + TipoComprobanteDropDownList.SelectedValue + "  Nro.Comprobante: " + NroComprobanteTextBox.Text + "  Nro. Punto de Vta.: " + PtoVtaConsultaDropDownList.SelectedValue);
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Ult. Nro. Lote CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
 
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPUltNroLote((Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                }
+            }
+        }
+
+        protected void ConsultarDocTipoAFIPButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consultar los Tipos de Documentos válidos en AFIP (FEv1) para el CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposDoc((Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/\"", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
                 }
                 catch (Exception ex)
@@ -176,6 +224,7 @@ namespace CedServicios.Site
 
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPUltNroComprobante(lcFea, (Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
@@ -216,9 +265,10 @@ namespace CedServicios.Site
 
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposComprobantes((Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
-                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/", "");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/\"", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
                 }
                 catch (Exception ex)
@@ -276,6 +326,7 @@ namespace CedServicios.Site
                     //lcFea.comprobante[0].resumen.importe_total_factura = Convert.ToDouble(ImporteTotalTextBox.Text);
 
                     respuesta = RN.ComprobanteAFIP.ValidarAFIPNroCae(lcFea, ((Entidades.Sesion)Session["Sesion"]));
+                    TicketCompletarInfo();
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
@@ -300,7 +351,20 @@ namespace CedServicios.Site
                 }
             }
         }
-        
+
+        private void TicketCompletarInfo()
+        {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            if (sesion.Ticket != null)
+            {
+                TicketInfoTextBox.Text = "Ticket CUIT: " + sesion.Ticket.Cuit + "   Unique Id.: " + sesion.Ticket.UniqueId + "\nExpiration Time: " + sesion.Ticket.ExpirationTime.ToString() + "   Generation Time: " + sesion.Ticket.GenerationTime.ToString();
+            }
+            else
+            {
+                TicketInfoTextBox.Text = "No hay ticket. La información del ticket se completará cuando se ejecute alguna consulta.";
+            }
+        }
+
         private void GrabarLogTexto(string archivo, string mensaje)
         {
             try

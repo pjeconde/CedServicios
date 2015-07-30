@@ -1,6 +1,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Impuestos.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Impuestos" %>
 
-		<table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+		<table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
 			<tr>
 				<td style="text-align: center; height: 10px;">
 				</td>

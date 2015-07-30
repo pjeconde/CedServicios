@@ -107,23 +107,24 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Artículos|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Artículos|Modificación");
                         opcionesHabilitadas.Add("Artículos|Consulta");
-                        opcionesHabilitadas.Add("Contratos|Alta");  //Nuevo
-                        opcionesHabilitadas.Add("Contratos|Baja/Anul.baja");    //Nuevo
-                        opcionesHabilitadas.Add("Contratos|Modificación");  //Nuevo
-                        opcionesHabilitadas.Add("Contratos|Consulta");  //Nuevo
+                        //opcionesHabilitadas.Add("Contratos|Alta");  //Nuevo
+                        //opcionesHabilitadas.Add("Contratos|Baja/Anul.baja");    //Nuevo
+                        //opcionesHabilitadas.Add("Contratos|Modificación");  //Nuevo
+                        //opcionesHabilitadas.Add("Contratos|Consulta");  //Nuevo
                         opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Electrónica");
                         //opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Tradicional");    //Nuevo
-                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Compra");
+                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Compra");     //Nuevo
                         opcionesHabilitadas.Add("Comprobantes|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Comprobantes|Modificación");
-                        opcionesHabilitadas.Add("Comprobantes|Envio (AFIP/ITF)");   //Nuevo
+                        //opcionesHabilitadas.Add("Comprobantes|Envio (AFIP/ITF)");   //Nuevo
                         opcionesHabilitadas.Add("Comprobantes|Consulta");
+                        opcionesHabilitadas.Add("Comprobantes|Consulta RG");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online AFIP");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Archivo XML");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Términos y condiciones");
-                        opcionesHabilitadas.Add("Comprobantes|Generación automática (contratos)");  //Nuevo
+                        //opcionesHabilitadas.Add("Comprobantes|Generación automática (contratos)");  //Nuevo
                         if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                         {
                             opcionesHabilitadas.Add("Administración|Puntos de Venta|Alta");
