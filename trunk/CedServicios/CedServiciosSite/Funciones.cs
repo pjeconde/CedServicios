@@ -96,6 +96,8 @@ namespace CedServicios.Site
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Consulta RG", "Consulta RG"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Otras Consultas", "Otras Consultas"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Online Interfacturas", "Online Interfacturas"); mItem.Selectable = false;

@@ -400,51 +400,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Condicion_De_PagoTextBox;
         
         /// <summary>
-        /// LoteUpdatePanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.UpdatePanel LoteUpdatePanel;
-        
-        /// <summary>
-        /// Id_LoteTextbox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Id_LoteTextbox;
-        
-        /// <summary>
-        /// ProximoNroLoteLinkButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ProximoNroLoteLinkButton;
-        
-        /// <summary>
-        /// LabelTipoNumeracionLote control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label LabelTipoNumeracionLote;
-        
-        /// <summary>
-        /// TipoNumeracionLote control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox TipoNumeracionLote;
-        
-        /// <summary>
         /// VendedorUpdatePanel control.
         /// </summary>
         /// <remarks>
@@ -733,13 +688,58 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Email_VendedorTextBox;
         
         /// <summary>
-        /// CollapsiblePanelExtender1 control.
+        /// CollapsiblePanelExtenderVendedor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CollapsiblePanelExtender CollapsiblePanelExtender1;
+        protected global::AjaxControlToolkit.CollapsiblePanelExtender CollapsiblePanelExtenderVendedor;
+        
+        /// <summary>
+        /// LoteUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel LoteUpdatePanel;
+        
+        /// <summary>
+        /// Id_LoteTextbox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Id_LoteTextbox;
+        
+        /// <summary>
+        /// ProximoNroLoteLinkButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton ProximoNroLoteLinkButton;
+        
+        /// <summary>
+        /// LabelTipoNumeracionLote control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LabelTipoNumeracionLote;
+        
+        /// <summary>
+        /// TipoNumeracionLote control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TipoNumeracionLote;
         
         /// <summary>
         /// ExportacionUpdatePanel control.

@@ -107,6 +107,7 @@
     <Content Include="Ayuda\Novedades\images20130906\image21.png" />
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="ComprobanteGeneracionAutomatica.aspx" />
+    <Content Include="ExploradorComprobanteRG.aspx" />
     <Content Include="Imagenes\301.gif" />
     <Content Include="Imagenes\Iconos\icon_collapse.gif" />
     <Content Include="Imagenes\Iconos\icon_expand.gif" />
@@ -451,6 +452,13 @@
     </Compile>
     <Compile Include="ComprobanteGeneracionAutomatica.aspx.designer.cs">
       <DependentUpon>ComprobanteGeneracionAutomatica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorComprobanteRG.aspx.cs">
+      <DependentUpon>ExploradorComprobanteRG.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorComprobanteRG.aspx.designer.cs">
+      <DependentUpon>ExploradorComprobanteRG.aspx</DependentUpon>
     </Compile>
     <Compile Include="PersonaBaja.aspx.cs">
       <DependentUpon>PersonaBaja.aspx</DependentUpon>

@@ -521,6 +521,35 @@ namespace CedServicios.RN
                 throw new Exception(ex.Message);
             }
         }
+        public static string ConsultarAFIPTiposDoc(Entidades.Sesion Sesion)
+        {
+            try
+            {
+                string respuesta = "";
+                LoginTicket ticket;
+                ar.gov.afip.wsw.Service objWS;
+                ar.gov.afip.wsfev1.Service objWSFEV1;
+                CrearTicket(Sesion, out ticket, out objWS, out objWSFEV1);
+
+                ar.gov.afip.wsfev1.DocTipoResponse FEDocTipoResponse = new ar.gov.afip.wsfev1.DocTipoResponse();
+                FEDocTipoResponse = objWSFEV1.FEParamGetTiposDoc(ticket.ObjAutorizacionfev1);
+                System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                if (FEDocTipoResponse.Errors != null)
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(FEDocTipoResponse.Errors);
+                }
+                else
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(FEDocTipoResponse.ResultGet);
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
         public static string ConsultarAFIPUltNroComprobante(FeaEntidades.InterFacturas.lote_comprobantes lc, Entidades.Sesion Sesion)
         {
             try

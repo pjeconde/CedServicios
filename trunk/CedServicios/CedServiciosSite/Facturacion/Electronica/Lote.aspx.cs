@@ -277,6 +277,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     else
                     {
                         #region Personalización campos vendedor y comprador para COMPRAS
+                        CollapsiblePanelExtenderVendedor.Collapsed = false;
                         UtilizarComprobantePreexistentePanel.Visible = false;
                         PuntoVtaDropDownList.Visible = false;
                         PuntoVtaTextBox.Visible = true;
@@ -2030,7 +2031,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Entidades.Comprobante comprobante = new Entidades.Comprobante();
                     comprobante.Cuit = Cuit_VendedorTextBox.Text;
                     comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue.ToString());
-                    comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue.ToString());
+                    if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+                    {
+                        comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue.ToString());
+                    }
+                    else
+                    {
+                        comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaTextBox.Text.ToString());
+                    }
                     comprobante.Nro = IdNaturalezaComprobanteTextBox.Text == "VentaContrato" ? -Convert.ToInt64(Numero_ComprobanteTextBox.Text) : Convert.ToInt64(Numero_ComprobanteTextBox.Text);
                     RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                     if (comprobante.Estado == "Vigente")

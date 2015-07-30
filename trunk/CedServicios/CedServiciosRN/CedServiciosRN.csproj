@@ -95,6 +95,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
     </Compile>
+    <Compile Include="Web References\ar.gov.afip.wsfexv1\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\ar.gov.afip.wsw\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -211,6 +216,59 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\ar.gov.afip.wsfev1\service.wsdl" />
+    <None Include="Web References\ar.gov.afip.wsfexv1\DummyResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXGetCMPResponse.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponseAuthorize.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponseLast_CMP.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_Cbte_Tipo.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_CheckPermiso.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_Ctz.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_DST_cuit.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_DST_pais.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_Idi.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_Inc.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_LastID.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_Mon.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_PtoVenta.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_Tex.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\FEXResponse_Umed.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ar.gov.afip.wsfexv1\service.wsdl" />
     <None Include="Web References\ar.gov.afip.wsw\DummyResponse.datasource">
       <DependentUpon>Reference.map</DependentUpon>
     </None>
@@ -318,6 +376,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CedServiciosRN_IBKValidate_ValidaFacturaWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://servicios1.afip.gov.ar/wsfexv1/service.asmx%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ar.gov.afip.wsfexv1\</RelPath>
+      <UpdateFromURL>https://servicios1.afip.gov.ar/wsfexv1/service.asmx%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosRN_ar_gov_afip_wsfexv1_Service</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://wswhomo.afip.gov.ar/wsfev1/service.asmx">
       <UrlBehavior>Dynamic</UrlBehavior>

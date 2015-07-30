@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorComprobante.aspx.cs" Inherits="CedServicios.Site.ExploradorComprobante" Theme="CedServicios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorComprobanteRG.aspx.cs" Inherits="CedServicios.Site.ExploradorComprobanteRG" Theme="CedServicios" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
@@ -6,9 +6,7 @@
         <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
             <tr>
                 <td align="center" colspan="3" style="padding-top:20px; padding-bottom:20px">
-                    <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes"></asp:Label>
-                    <asp:TextBox ID="ElementoTextBox" runat="server" Visible="false"> </asp:TextBox>
-                    <asp:TextBox ID="TratamientoTextBox" runat="server" Visible="false"> </asp:TextBox>
+                    <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes (para ITF.RG.AFIP)"></asp:Label>
                 </td>
             </tr>
             <tr>
@@ -102,6 +100,7 @@
                 <td align="left" style="height: 24px; padding-top:5px" valign="top">
                     <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
                     <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                    <asp:Button ID="DescargarButton" runat="server" TabIndex="10" Text="Descargar Interfaz RG.3685" onclick="DescargarButton_Click" Enabled="false" />
                 </td>
             </tr>
             <tr>
@@ -117,21 +116,6 @@
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="VerLinkButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Ver detalle</asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField Visible="false">
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="BajaAnulBajaLinkButton" runat="server" CommandName="Baja/Anul.baja" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Baja/Anul.baja</asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField Visible="false">
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="EnvioLinkButton" runat="server" CommandName="Envio" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Envio</asp:LinkButton>
-                                </ItemTemplate>
-                            </asp:TemplateField>
-                            <asp:TemplateField Visible="false">
-                                <ItemTemplate>
-                                    <asp:LinkButton ID="ModificacionLinkButton" runat="server" CommandName="Modificacion" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Modificación</asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">
@@ -206,14 +190,6 @@
                                 <ItemTemplate>
 		                            <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged" EnableViewState="false">
 			                            <asp:ListItem Value="" Text="--- elegir acción ---"></asp:ListItem>
-			                            <asp:ListItem Value="ActualizarOnLine" Text="Actualizar estado (Interfacturas/AFIP)"></asp:ListItem>
-			                            <asp:ListItem Value="ConsultarInterfacturas" Text="Consultar (Interfacturas)"></asp:ListItem>
-			                            <asp:ListItem Value="PDF-Viewer" Text="Viewer PDF (InterFacturas)"></asp:ListItem>
-			                            <asp:ListItem Value="XMLOnLine" Text="Descargar XML (InterFacturas)"></asp:ListItem>
-                                        <asp:ListItem Value="XMLLocal" Text="Descargar XML"></asp:ListItem>
-			                            <asp:ListItem Value="PDF" Text="Descargar PDF"></asp:ListItem>
-			                            <asp:ListItem Value="XML-ClonarAlta" Text="Clonar comprobante"></asp:ListItem>
-			                            <asp:ListItem Value="ExportarRG2485" Text="Descargar interface RG2485"></asp:ListItem>
                                         <asp:ListItem Value="ExportarRG3685" Text="Descargar interface RG3685 (Prueba)"></asp:ListItem>
 		                            </asp:DropDownList>
                                 </ItemTemplate>

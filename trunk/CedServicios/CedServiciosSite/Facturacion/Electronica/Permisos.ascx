@@ -1,6 +1,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" Codebehind="Permisos.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Permisos" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<table border="0" cellpadding="0" cellspacing="0" style="width:782px">
+<table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
 	<tr>
 		<td style="height:10px">
 		</td>
