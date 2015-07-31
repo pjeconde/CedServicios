@@ -143,6 +143,12 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
 	position: relative; border: 0px; text-align: right;
 	width: 60px; padding-top:5px;
 }
+.TC02SL
+{
+	position: relative; border: 0px;
+	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
+	width: 60px; padding-top:5px; padding-left: 5px; text-align:left;
+}
 .TC03S
 {
 	position: relative; border: 0px; text-align: right;

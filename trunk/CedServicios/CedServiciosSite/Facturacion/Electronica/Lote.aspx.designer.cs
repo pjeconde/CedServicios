@@ -499,33 +499,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Domicilio_Calle_VendedorTextBox;
         
         /// <summary>
-        /// Domicilio_Numero_VendedorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Domicilio_Numero_VendedorTextBox;
-        
-        /// <summary>
-        /// Domicilio_Piso_VendedorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Domicilio_Piso_VendedorTextBox;
-        
-        /// <summary>
-        /// Domicilio_Depto_VendedorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Domicilio_Depto_VendedorTextBox;
-        
-        /// <summary>
         /// Domicilio_Sector_VendedorTextBox control.
         /// </summary>
         /// <remarks>
@@ -533,33 +506,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Domicilio_Sector_VendedorTextBox;
-        
-        /// <summary>
-        /// Domicilio_Torre_VendedorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Domicilio_Torre_VendedorTextBox;
-        
-        /// <summary>
-        /// Domicilio_Manzana_VendedorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Domicilio_Manzana_VendedorTextBox;
-        
-        /// <summary>
-        /// Localidad_VendedorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Localidad_VendedorTextBox;
         
         /// <summary>
         /// Provincia_VendedorDropDownList control.
@@ -571,13 +517,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList Provincia_VendedorDropDownList;
         
         /// <summary>
-        /// Cp_VendedorTextBox control.
+        /// Condicion_Ingresos_Brutos_VendedorDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Cp_VendedorTextBox;
+        protected global::System.Web.UI.WebControls.DropDownList Condicion_Ingresos_Brutos_VendedorDropDownList;
         
         /// <summary>
         /// Contacto_VendedorTextBox control.
@@ -589,13 +535,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Contacto_VendedorTextBox;
         
         /// <summary>
-        /// Telefono_VendedorTextBox control.
+        /// GLN_VendedorTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Telefono_VendedorTextBox;
+        protected global::System.Web.UI.WebControls.TextBox GLN_VendedorTextBox;
         
         /// <summary>
         /// Cuit_VendedorTextBox control.
@@ -605,6 +551,60 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Cuit_VendedorTextBox;
+        
+        /// <summary>
+        /// Domicilio_Numero_VendedorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Domicilio_Numero_VendedorTextBox;
+        
+        /// <summary>
+        /// Domicilio_Torre_VendedorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Domicilio_Torre_VendedorTextBox;
+        
+        /// <summary>
+        /// Localidad_VendedorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Localidad_VendedorTextBox;
+        
+        /// <summary>
+        /// NroIBVendedorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NroIBVendedorTextBox;
+        
+        /// <summary>
+        /// Telefono_VendedorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Telefono_VendedorTextBox;
+        
+        /// <summary>
+        /// Codigo_Interno_VendedorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Codigo_Interno_VendedorTextBox;
         
         /// <summary>
         /// InicioDeActividadesVendedorDatePickerWebUserControl control.
@@ -634,22 +634,40 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ImageButton ImageCalendarInicioDeActividadesVendedor;
         
         /// <summary>
-        /// Condicion_Ingresos_Brutos_VendedorDropDownList control.
+        /// Domicilio_Piso_VendedorTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Condicion_Ingresos_Brutos_VendedorDropDownList;
+        protected global::System.Web.UI.WebControls.TextBox Domicilio_Piso_VendedorTextBox;
         
         /// <summary>
-        /// NroIBVendedorTextBox control.
+        /// Domicilio_Depto_VendedorTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox NroIBVendedorTextBox;
+        protected global::System.Web.UI.WebControls.TextBox Domicilio_Depto_VendedorTextBox;
+        
+        /// <summary>
+        /// Domicilio_Manzana_VendedorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Domicilio_Manzana_VendedorTextBox;
+        
+        /// <summary>
+        /// Cp_VendedorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Cp_VendedorTextBox;
         
         /// <summary>
         /// Condicion_IVA_VendedorDropDownList control.
@@ -659,24 +677,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Condicion_IVA_VendedorDropDownList;
-        
-        /// <summary>
-        /// GLN_VendedorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox GLN_VendedorTextBox;
-        
-        /// <summary>
-        /// Codigo_Interno_VendedorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Codigo_Interno_VendedorTextBox;
         
         /// <summary>
         /// Email_VendedorTextBox control.
@@ -913,33 +913,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Domicilio_Calle_CompradorTextBox;
         
         /// <summary>
-        /// Domicilio_Numero_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Domicilio_Numero_CompradorTextBox;
-        
-        /// <summary>
-        /// Domicilio_Piso_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Domicilio_Piso_CompradorTextBox;
-        
-        /// <summary>
-        /// Domicilio_Depto_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Domicilio_Depto_CompradorTextBox;
-        
-        /// <summary>
         /// Domicilio_Sector_CompradorTextBox control.
         /// </summary>
         /// <remarks>
@@ -947,33 +920,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Domicilio_Sector_CompradorTextBox;
-        
-        /// <summary>
-        /// Domicilio_Torre_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Domicilio_Torre_CompradorTextBox;
-        
-        /// <summary>
-        /// Domicilio_Manzana_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Domicilio_Manzana_CompradorTextBox;
-        
-        /// <summary>
-        /// Localidad_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Localidad_CompradorTextBox;
         
         /// <summary>
         /// Provincia_CompradorDropDownList control.
@@ -985,13 +931,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList Provincia_CompradorDropDownList;
         
         /// <summary>
-        /// Cp_CompradorTextBox control.
+        /// Contacto_CompradorTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Cp_CompradorTextBox;
+        protected global::System.Web.UI.WebControls.TextBox Contacto_CompradorTextBox;
         
         /// <summary>
         /// EmailAvisoVisualizacionTextBox control.
@@ -1003,13 +949,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox EmailAvisoVisualizacionTextBox;
         
         /// <summary>
-        /// PasswordAvisoVisualizacionTextBox control.
+        /// GLN_CompradorTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox PasswordAvisoVisualizacionTextBox;
+        protected global::System.Web.UI.WebControls.TextBox GLN_CompradorTextBox;
         
         /// <summary>
         /// Codigo_Doc_Identificatorio_CompradorDropDownList control.
@@ -1019,6 +965,60 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Codigo_Doc_Identificatorio_CompradorDropDownList;
+        
+        /// <summary>
+        /// Domicilio_Numero_CompradorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Domicilio_Numero_CompradorTextBox;
+        
+        /// <summary>
+        /// Domicilio_Torre_CompradorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Domicilio_Torre_CompradorTextBox;
+        
+        /// <summary>
+        /// Localidad_CompradorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Localidad_CompradorTextBox;
+        
+        /// <summary>
+        /// Email_CompradorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Email_CompradorTextBox;
+        
+        /// <summary>
+        /// PasswordAvisoVisualizacionTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox PasswordAvisoVisualizacionTextBox;
+        
+        /// <summary>
+        /// Codigo_Interno_CompradorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Codigo_Interno_CompradorTextBox;
         
         /// <summary>
         /// docCompradorRegularExpressionValidator control.
@@ -1066,6 +1066,51 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.DropDownList Nro_Doc_Identificatorio_CompradorDropDownList;
         
         /// <summary>
+        /// Domicilio_Piso_CompradorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Domicilio_Piso_CompradorTextBox;
+        
+        /// <summary>
+        /// Domicilio_Depto_CompradorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Domicilio_Depto_CompradorTextBox;
+        
+        /// <summary>
+        /// Domicilio_Manzana_CompradorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Domicilio_Manzana_CompradorTextBox;
+        
+        /// <summary>
+        /// Cp_CompradorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Cp_CompradorTextBox;
+        
+        /// <summary>
+        /// Telefono_CompradorTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Telefono_CompradorTextBox;
+        
+        /// <summary>
         /// InicioDeActividadesCompradorDatePickerWebUserControl control.
         /// </summary>
         /// <remarks>
@@ -1100,51 +1145,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Condicion_IVA_CompradorDropDownList;
-        
-        /// <summary>
-        /// GLN_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox GLN_CompradorTextBox;
-        
-        /// <summary>
-        /// Codigo_Interno_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Codigo_Interno_CompradorTextBox;
-        
-        /// <summary>
-        /// Contacto_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Contacto_CompradorTextBox;
-        
-        /// <summary>
-        /// Email_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Email_CompradorTextBox;
-        
-        /// <summary>
-        /// Telefono_CompradorTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Telefono_CompradorTextBox;
         
         /// <summary>
         /// ReferenciasPanel control.
