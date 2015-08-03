@@ -2217,9 +2217,9 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             if (IdNaturalezaComprobanteTextBox.Text == "VentaContrato")
             {
-                if (PeriodicidadEmisionDropDownList.SelectedValue.IndexOf("<Mensual><Trimestral><Anual>") != -1 && Convert.ToInt32(DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd"))>=29)
+                if (PeriodicidadEmisionDropDownList.SelectedValue.IndexOf("<Mensual><Trimestral><Semestral><Anual>") != -1 && Convert.ToInt32(DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd"))>=29)
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Cuando la Periodicidad es Mensual, Trimestral o Anual, el día (dd) de la Próxima fecha de emisión no puede caer en 29, 30 o 31."), false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Cuando la Periodicidad es Mensual, Trimestral, Semestral o Anual, el día (dd) de la Próxima fecha de emisión no puede caer en 29, 30 o 31."), false);
                     return false;
                 }
                 int nroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
