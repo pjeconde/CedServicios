@@ -16,6 +16,8 @@ namespace CedServicios.RN
                 lista.Add(new Entidades.PeriodicidadEmision("Mensual-V", "Mensual(vencido)"));
                 lista.Add(new Entidades.PeriodicidadEmision("Trimestral-A", "Trimestral(adelantado)"));
                 lista.Add(new Entidades.PeriodicidadEmision("Trimestral-V", "Trimestral(vencido)"));
+                lista.Add(new Entidades.PeriodicidadEmision("Semestral-A", "Semestral(adelantado)"));
+                lista.Add(new Entidades.PeriodicidadEmision("Semestral-V", "Semestral(vencido)"));
                 lista.Add(new Entidades.PeriodicidadEmision("Anual-A", "Anual(adelantado)"));
                 lista.Add(new Entidades.PeriodicidadEmision("Anual-V", "Anual(vencido)"));
             }
