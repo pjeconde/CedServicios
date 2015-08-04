@@ -130,6 +130,24 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.UpdateProgress ptoVentaUpdateProgress;
         
         /// <summary>
+        /// Tipo_De_ComprobanteUpdatePanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel Tipo_De_ComprobanteUpdatePanel;
+        
+        /// <summary>
+        /// Tipo_De_ComprobanteDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList Tipo_De_ComprobanteDropDownList;
+        
+        /// <summary>
         /// NumeroDeLabel control.
         /// </summary>
         /// <remarks>
@@ -157,22 +175,13 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.LinkButton ProximoNroComprobanteLinkButton;
         
         /// <summary>
-        /// Tipo_De_ComprobanteUpdatePanel control.
+        /// IVAcomputableDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel Tipo_De_ComprobanteUpdatePanel;
-        
-        /// <summary>
-        /// Tipo_De_ComprobanteDropDownList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList Tipo_De_ComprobanteDropDownList;
+        protected global::System.Web.UI.WebControls.DropDownList IVAcomputableDropDownList;
         
         /// <summary>
         /// monedaUpdatePanel control.
@@ -247,13 +256,22 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaEmision;
         
         /// <summary>
-        /// IVAcomputableDropDownList control.
+        /// CodigoOperacionLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList IVAcomputableDropDownList;
+        protected global::System.Web.UI.WebControls.Label CodigoOperacionLabel;
+        
+        /// <summary>
+        /// CodigoOperacionDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CodigoOperacionDropDownList;
         
         /// <summary>
         /// FechaVencimientoDatePickerWebUserControl control.
@@ -283,22 +301,31 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaVencimiento;
         
         /// <summary>
-        /// CodigoOperacionLabel control.
+        /// Condicion_De_PagoTextBox control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CodigoOperacionLabel;
+        protected global::System.Web.UI.WebControls.TextBox Condicion_De_PagoTextBox;
         
         /// <summary>
-        /// CodigoOperacionDropDownList control.
+        /// CodigoConceptoLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList CodigoOperacionDropDownList;
+        protected global::System.Web.UI.WebControls.Label CodigoConceptoLabel;
+        
+        /// <summary>
+        /// CodigoConceptoDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CodigoConceptoDropDownList;
         
         /// <summary>
         /// FechaInicioServLabel control.
@@ -337,24 +364,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaServDesde;
         
         /// <summary>
-        /// CodigoConceptoLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label CodigoConceptoLabel;
-        
-        /// <summary>
-        /// CodigoConceptoDropDownList control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList CodigoConceptoDropDownList;
-        
-        /// <summary>
         /// FechaHstServLabel control.
         /// </summary>
         /// <remarks>
@@ -389,15 +398,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ImageButton ImageCalendarFechaServHasta;
-        
-        /// <summary>
-        /// Condicion_De_PagoTextBox control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Condicion_De_PagoTextBox;
         
         /// <summary>
         /// VendedorUpdatePanel control.
