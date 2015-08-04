@@ -91,14 +91,14 @@
                                 <ContentTemplate>
                                     <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                         <tr>
-                                            <td class="TextoResaltado" colspan="4" style="text-align:center">
+                                            <td class="TextoResaltado" colspan="6" style="text-align:center">
                                                 <asp:Label ID="DatosComprobanteLabel" runat="server" Text="COMPROBANTE"></asp:Label>
                                                 <asp:TextBox ID="IdNaturalezaComprobanteTextBox" runat="server" Visible="false"> </asp:TextBox>
                                                 <asp:TextBox ID="TratamientoTextBox" runat="server" Visible="false"> </asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="4" style="height:10px">
+                                            <td colspan="6" style="height:10px">
                                             </td>
                                         </tr>
                                         <tr>
@@ -123,6 +123,22 @@
                                                 </asp:UpdatePanel>
                                             </td>
                                             <td class="TC00S">
+                                                Tipo de comprobante:
+                                            </td>
+                                            <td class="TC10S">
+                                                <asp:UpdatePanel ID="Tipo_De_ComprobanteUpdatePanel" runat="server" ChildrenAsTriggers="true"
+                                                    UpdateMode="Conditional">
+                                                    <Triggers>
+                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                    </Triggers>
+                                                    <ContentTemplate>
+                                                        <asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListTipoComprobante" OnSelectedIndexChanged="Tipo_De_ComprobanteDropDownList_SelectedIndexChanged" AutoPostBack="true" 
+                                                        style="width:300px">
+                                                        </asp:DropDownList>
+                                                    </ContentTemplate>
+                                                </asp:UpdatePanel>
+                                            </td>
+                                            <td class="TC00S">
                                                 <asp:Label ID="NumeroDeLabel" runat="server" Text="Número de comprobante:" Visible="true"></asp:Label>
                                             </td>
                                             <td class="TC10S">
@@ -133,23 +149,12 @@
                                         </tr>
                                         <tr>
                                             <td class="TC00S">
-                                                Tipo de comprobante:
+                                                IVA computable:
                                             </td>
-                                            <td class="TC10S" colspan="3">
-                                                <asp:UpdatePanel ID="Tipo_De_ComprobanteUpdatePanel" runat="server" ChildrenAsTriggers="true"
-                                                    UpdateMode="Conditional">
-                                                    <Triggers>
-                                                        <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                    </Triggers>
-                                                    <ContentTemplate>
-                                                        <asp:DropDownList ID="Tipo_De_ComprobanteDropDownList" runat="server" SkinID="DropDownListTipoComprobante" OnSelectedIndexChanged="Tipo_De_ComprobanteDropDownList_SelectedIndexChanged" AutoPostBack="true" 
-                                                        style="width:480px">
-                                                        </asp:DropDownList>
-                                                    </ContentTemplate>
-                                                </asp:UpdatePanel>
+                                            <td class="TC10S">
+                                                <asp:DropDownList ID="IVAcomputableDropDownList" runat="server" SkinID="ddlch">
+                                                </asp:DropDownList>
                                             </td>
-                                        </tr>
-                                        <tr>
                                             <td class="TC00S">
                                                 Moneda:
                                             </td>
@@ -184,11 +189,12 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="TC00S">
-                                                IVA computable:
+                                             <td class="TC00S">
+                                                <asp:Label ID="CodigoOperacionLabel" runat="server" Text="Código de operación:" 
+                                                    Visible="true"></asp:Label>
                                             </td>
                                             <td class="TC10S">
-                                                <asp:DropDownList ID="IVAcomputableDropDownList" runat="server" SkinID="ddlch">
+                                                <asp:DropDownList ID="CodigoOperacionDropDownList" runat="server" SkinID="ddln">
                                                 </asp:DropDownList>
                                             </td>
                                             <td class="TC00S">
@@ -205,30 +211,12 @@
                                                 <asp:ImageButton ID="ImageCalendarFechaVencimiento" runat="server" 
                                                     CausesValidation="false" ImageUrl="~/Imagenes/Calendar.gif" />
                                             </td>
-                                        </tr>
-                                        <tr>
                                             <td class="TC00S">
-                                                <asp:Label ID="CodigoOperacionLabel" runat="server" Text="Código de operación:" 
-                                                    Visible="true"></asp:Label>
+                                                Condición de pago:
                                             </td>
                                             <td class="TC10S">
-                                                <asp:DropDownList ID="CodigoOperacionDropDownList" runat="server" SkinID="ddln">
-                                                </asp:DropDownList>
-                                            </td>
-                                            <td class="TC00S">
-                                                <asp:Label ID="FechaInicioServLabel" runat="server" 
-                                                    Text="Fecha del servicio: inicio"></asp:Label>
-                                            </td>
-                                            <td class="TC10S">
-                                                <asp:TextBox ID="FechaServDesdeDatePickerWebUserControl" runat="server" 
-                                                    SkinID="FechaFact"></asp:TextBox>
-                                                <cc1:CalendarExtender ID="CalendarExtender5" runat="server" 
-                                                    CssClass="MyCalendar" Format="yyyyMMdd" 
-                                                    PopupButtonID="ImageCalendarFechaServDesde" 
-                                                    TargetControlID="FechaServDesdeDatePickerWebUserControl">
-                                                </cc1:CalendarExtender>
-                                                <asp:ImageButton ID="ImageCalendarFechaServDesde" runat="server" 
-                                                    CausesValidation="false" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                <asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" BorderStyle="NotSet" Style="width:300px; text-align:left">
+                                                </asp:TextBox>
                                             </td>
                                         </tr>
                                         <tr>
@@ -241,8 +229,24 @@
                                                     Visible="false">
                                                 </asp:DropDownList>
                                             </td>
+
                                             <td class="TC00S">
-                                                <asp:Label ID="FechaHstServLabel" runat="server" Text="finaliz.">
+                                                <asp:Label ID="FechaInicioServLabel" runat="server" 
+                                                    Text="Fecha servicio inicio:"></asp:Label>
+                                            </td>
+                                            <td class="TC10S">
+                                                <asp:TextBox ID="FechaServDesdeDatePickerWebUserControl" runat="server" 
+                                                    SkinID="FechaFact"></asp:TextBox>
+                                                <cc1:CalendarExtender ID="CalendarExtender5" runat="server" 
+                                                    CssClass="MyCalendar" Format="yyyyMMdd" 
+                                                    PopupButtonID="ImageCalendarFechaServDesde" 
+                                                    TargetControlID="FechaServDesdeDatePickerWebUserControl">
+                                                </cc1:CalendarExtender>
+                                                <asp:ImageButton ID="ImageCalendarFechaServDesde" runat="server" 
+                                                    CausesValidation="false" ImageUrl="~/Imagenes/Calendar.gif" />
+                                            </td>
+                                            <td class="TC00S">
+                                                <asp:Label ID="FechaHstServLabel" runat="server" Text="Fecha servicio fin:">
                                                 </asp:Label>
                                             </td>
                                             <td class="TC10S">
@@ -258,16 +262,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="TC00S">
-                                                Condición de pago:
-                                            </td>
-                                            <td class="TC10S" colspan="3">
-                                                <asp:TextBox ID="Condicion_De_PagoTextBox" runat="server" BorderStyle="NotSet" Style="width:563px; text-align:left">
-                                                </asp:TextBox>
-                                            </td>
-                                        </tr>
-                                        <tr>
-                                            <td colspan="4">
+                                            <td colspan="6">
                                                 <hr noshade="noshade" size="1" color="#cccccc" />
                                             </td>
                                         </tr>
@@ -548,7 +543,7 @@
                                 <ContentTemplate>
                                     <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
                                         <tr>
-                                            <td colspan="2" style="text-align: center; height: 10px;">
+                                            <td colspan="2" style="text-align: center; height: 5px;">
                                             </td>
                                         </tr>
                                         <tr>
@@ -557,7 +552,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td style="text-align: center; height: 10px;">
+                                            <td style="text-align: center; height: 5px;">
                                             </td>
                                         </tr>
                                         <tr>
@@ -1012,7 +1007,7 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td colspan="3">
+                                            <td colspan="5">
                                                 <hr noshade="noshade" size="1" color="#cccccc" />
                                             </td>
                                         </tr>
