@@ -31,13 +31,13 @@ namespace CedServicios.Site.Controles {
         protected global::System.Web.UI.WebControls.Label Label39;
         
         /// <summary>
-        /// Control RequiredFieldValidator7.
+        /// Control NombreContactoRequiredFieldValidator.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator7;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator NombreContactoRequiredFieldValidator;
         
         /// <summary>
         /// Control Label40.
@@ -85,13 +85,13 @@ namespace CedServicios.Site.Controles {
         protected global::System.Web.UI.WebControls.Label Label41;
         
         /// <summary>
-        /// Control RequiredFieldValidator8.
+        /// Control EmailContactoRequiredFieldValidator.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator RequiredFieldValidator8;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator EmailContactoRequiredFieldValidator;
         
         /// <summary>
         /// Control Label42.

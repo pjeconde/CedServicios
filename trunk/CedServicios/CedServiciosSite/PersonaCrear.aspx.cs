@@ -146,5 +146,9 @@ namespace CedServicios.Site
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
         }
+        protected void TipoPersona_CheckedChanged(object sender, EventArgs e)
+        {
+            Contacto.Required = ClienteRadioButton.Checked || AmbosRadioButton.Checked;
+        }
     }
 }

@@ -9,7 +9,7 @@
 			ValidationExpression="[A-Za-z\- ,.0-9]*">
 			<asp:Label ID="Label39" runat="server" SkinID="IndicadorValidacion"></asp:Label>
 		</asp:RegularExpressionValidator>
-		<asp:RequiredFieldValidator ID="RequiredFieldValidator7" runat="server" ControlToValidate="NombreContactoTextBox"
+		<asp:RequiredFieldValidator ID="NombreContactoRequiredFieldValidator" runat="server" ControlToValidate="NombreContactoTextBox"
 			ErrorMessage="Nombre Contacto" SetFocusOnError="True">
 			<asp:Label ID="Label40" runat="server" SkinID="IndicadorValidacion"></asp:Label>
 		</asp:RequiredFieldValidator>
@@ -28,7 +28,7 @@
 			ValidationExpression="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
 			<asp:Label ID="Label41" runat="server" SkinID="IndicadorValidacion"></asp:Label>
 		</asp:RegularExpressionValidator>
-		<asp:RequiredFieldValidator ID="RequiredFieldValidator8" runat="server" ControlToValidate="EmailContactoTextBox"
+		<asp:RequiredFieldValidator ID="EmailContactoRequiredFieldValidator" runat="server" ControlToValidate="EmailContactoTextBox"
 			ErrorMessage="Email Contacto" SetFocusOnError="True">
 			<asp:Label ID="Label42" runat="server" SkinID="IndicadorValidacion"></asp:Label>
 		</asp:RequiredFieldValidator>
