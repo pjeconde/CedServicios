@@ -55,5 +55,13 @@ namespace CedServicios.Site.Controles
                 TelefonoContactoTextBox.Enabled = value;
             }
         }
+        public bool Required
+        {
+            set
+            {
+                NombreContactoRequiredFieldValidator.Enabled = value;
+                EmailContactoRequiredFieldValidator.Enabled = value;
+            }
+        }
     }
 }

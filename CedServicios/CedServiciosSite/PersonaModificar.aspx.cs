@@ -34,14 +34,17 @@ namespace CedServicios.Site
                     if (persona.EsCliente && persona.EsProveedor)
                     {
                         AmbosRadioButton.Checked = true;
+                        TipoPersona_CheckedChanged(AmbosRadioButton, EventArgs.Empty);
                     }
                     if (persona.EsCliente)
                     {
                         ClienteRadioButton.Checked = true;
+                        TipoPersona_CheckedChanged(ClienteRadioButton, EventArgs.Empty);
                     }
                     else
                     {
                         ProveedorRadioButton.Checked = true;
+                        TipoPersona_CheckedChanged(ProveedorRadioButton, EventArgs.Empty);
                     }
                     TipoDocDropDownList.SelectedValue = persona.Documento.Tipo.Id;
                     TipoDocDropDownList_SelectedIndexChanged(TipoDocDropDownList, new EventArgs());
@@ -194,6 +197,10 @@ namespace CedServicios.Site
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        protected void TipoPersona_CheckedChanged(object sender, EventArgs e)
+        {
+            Contacto.Required = ClienteRadioButton.Checked || AmbosRadioButton.Checked;
         }
     }
 }
