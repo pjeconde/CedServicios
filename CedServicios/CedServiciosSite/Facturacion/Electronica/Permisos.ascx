@@ -1,6 +1,6 @@
 <%@ Control Language="C#" AutoEventWireup="true" Codebehind="Permisos.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Permisos" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+<table border="0" cellpadding="0" cellspacing="0" style="width: 1282px">
 	<tr>
 		<td style="height:10px">
 		</td>
@@ -23,14 +23,14 @@
 				</Triggers>
 				<ContentTemplate>
 					<asp:GridView ID="permisosGridView" runat="server" AutoGenerateColumns="False" BorderColor="gray"
-						BorderStyle="Solid" BorderWidth="1px"
+						BorderStyle="Solid" BorderWidth="1px" CssClass="gridview" HorizontalAlign="Center" 
 						EnableViewState="true" Font-Bold="false" GridLines="Both"
 						OnRowCancelingEdit="permisosGridView_RowCancelingEdit"
 						OnRowCommand="permisosGridView_RowCommand" OnRowDeleted="permisosGridView_RowDeleted"
 						OnRowDeleting="permisosGridView_RowDeleting" OnRowEditing="permisosGridView_RowEditing"
 						OnRowUpdated="permisosGridView_RowUpdated" OnRowUpdating="permisosGridView_RowUpdating"
 						ShowFooter="true" ShowHeader="True" ToolTip="El número de permiso debe ser un número entero"
-						Width="100%">
+						Width="1260px">
 						<Columns>
 							<asp:TemplateField HeaderText="Número de permiso">
 								<ItemTemplate>

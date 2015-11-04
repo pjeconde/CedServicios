@@ -40,67 +40,80 @@ namespace CedServicios.Site
                     FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
                     referencias.Add(referencia);
                     referenciasGridView.DataSource = referencias;
+                    referenciasGridView.DataBind();
                     ViewState["referencias"] = referencias;
 
+                    //VENDEDOR
                     Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
                     Condicion_IVA_VendedorDropDownList.DataTextField = "Descr";
                     Condicion_IVA_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
-
+                    Condicion_IVA_VendedorDropDownList.DataBind();
                     Condicion_Ingresos_Brutos_VendedorDropDownList.DataValueField = "Codigo";
                     Condicion_Ingresos_Brutos_VendedorDropDownList.DataTextField = "Descr";
                     Condicion_Ingresos_Brutos_VendedorDropDownList.DataSource = FeaEntidades.CondicionesIB.CondicionIB.Lista();
-
-                    Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
-                    Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
-                    Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
-
-                    Condicion_IVA_CompradorDropDownList.DataValueField = "Codigo";
-                    Condicion_IVA_CompradorDropDownList.DataTextField = "Descr";
-                    Condicion_IVA_CompradorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
-
-                    Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                    Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
-
-                    CodigoOperacionDropDownList.DataValueField = "Codigo";
-                    CodigoOperacionDropDownList.DataTextField = "Descr";
-                    CodigoOperacionDropDownList.DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.Lista();
-
-                    Provincia_CompradorDropDownList.DataValueField = "Codigo";
-                    Provincia_CompradorDropDownList.DataTextField = "Descr";
-                    Provincia_CompradorDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
-
+                    Condicion_Ingresos_Brutos_VendedorDropDownList.DataBind();
                     Provincia_VendedorDropDownList.DataValueField = "Codigo";
                     Provincia_VendedorDropDownList.DataTextField = "Descr";
                     Provincia_VendedorDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                    Provincia_VendedorDropDownList.DataBind();
 
+                    //COMPRADOR
+                    Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+                    Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+                    Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
+                    Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
+                    Condicion_IVA_CompradorDropDownList.DataValueField = "Codigo";
+                    Condicion_IVA_CompradorDropDownList.DataTextField = "Descr";
+                    Condicion_IVA_CompradorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                    Condicion_IVA_CompradorDropDownList.DataBind();
+                    Provincia_CompradorDropDownList.DataValueField = "Codigo";
+                    Provincia_CompradorDropDownList.DataTextField = "Descr";
+                    Provincia_CompradorDropDownList.DataSource = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                    Provincia_CompradorDropDownList.DataBind();
+
+                    //COMPROBANTE
+                    Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                    Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
+                    Tipo_De_ComprobanteDropDownList.DataBind();
+                    CodigoOperacionDropDownList.DataValueField = "Codigo";
+                    CodigoOperacionDropDownList.DataTextField = "Descr";
+                    CodigoOperacionDropDownList.DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.Lista();
+                    CodigoOperacionDropDownList.DataBind();
                     IVAcomputableDropDownList.DataValueField = "Codigo";
                     IVAcomputableDropDownList.DataTextField = "Descr";
                     IVAcomputableDropDownList.DataSource = FeaEntidades.Dicotomicos.Dicotomico.Lista();
-
+                    IVAcomputableDropDownList.DataBind();
                     MonedaComprobanteDropDownList.DataValueField = "Codigo";
                     MonedaComprobanteDropDownList.DataTextField = "Descr";
                     MonedaComprobanteDropDownList.DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.ListaNoExportacion();
+                    MonedaComprobanteDropDownList.DataBind();
+
 
                     TipoExpDropDownList.DataValueField = "Codigo";
                     TipoExpDropDownList.DataTextField = "Descr";
                     TipoExpDropDownList.DataSource = FeaEntidades.TiposExportacion.TipoExportacion.ListaSinInformar();
+                    TipoExpDropDownList.DataBind();
 
                     IdiomaDropDownList.DataValueField = "Codigo";
                     IdiomaDropDownList.DataTextField = "Descr";
                     IdiomaDropDownList.DataSource = FeaEntidades.Idiomas.Idioma.ListaSinInformar();
+                    IdiomaDropDownList.DataBind();
 
                     PaisDestinoExpDropDownList.DataValueField = "Codigo";
                     PaisDestinoExpDropDownList.DataTextField = "Descr";
                     PaisDestinoExpDropDownList.DataSource = FeaEntidades.DestinosPais.DestinoPais.ListaSinInformar();
+                    PaisDestinoExpDropDownList.DataBind();
 
                     IncotermsDropDownList.DataValueField = "Codigo";
                     IncotermsDropDownList.DataTextField = "Descr";
                     IncotermsDropDownList.DataSource = FeaEntidades.Incoterms.Incoterm.ListaSinInformar();
+                    IncotermsDropDownList.DataBind();
 
                     CodigoConceptoDropDownList.DataValueField = "Codigo";
                     CodigoConceptoDropDownList.DataTextField = "Descr";
                     CodigoConceptoDropDownList.DataSource = FeaEntidades.CodigosConcepto.CodigosConcepto.Lista();
+                    CodigoConceptoDropDownList.DataBind();
 
                     System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta;
                     PuntoVtaDropDownList.DataValueField = "Nro";
@@ -126,7 +139,7 @@ namespace CedServicios.Site
                     IdDestinoComprobanteDropDownList.DataSource = sesion.Cuit.DestinosComprobante();
                     IdDestinoComprobanteDropDownList.DataBind();
 
-                    DataBind();
+                    //DataBind();
                     BindearDropDownLists();
 
                     DeshabilitarControles();
@@ -176,7 +189,8 @@ namespace CedServicios.Site
                     if (IdNaturalezaComprobanteTextBox.Text.IndexOf("Venta") != -1)
                     {
                         #region Personalización campos vendedor y comprador para VENTAS
-                        VendedorUpdatePanel.Visible = false;
+                        //VendedorUpdatePanel.Visible = false;
+                        pBody.Enabled = false;
                         switch (IdNaturalezaComprobanteTextBox.Text)
                         {
                             case "Venta":
@@ -207,6 +221,7 @@ namespace CedServicios.Site
                     else
                     {
                         #region Personalización campos vendedor y comprador para COMPRAS
+                        CollapsiblePanelExtenderVendedor.Collapsed = false;
                         TituloPaginaLabel.Text = descrTratamiento + " de Comprobante";
                         DatosComprobanteLabel.Text = "COMPROBANTE DE COMPRA";
                         PuntoVtaDropDownList.Visible = false;

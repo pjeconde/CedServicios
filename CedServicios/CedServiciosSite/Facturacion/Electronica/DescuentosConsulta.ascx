@@ -1,7 +1,7 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="DescuentosConsulta.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.DescuentosConsulta" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
-<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+<table style="width: 1282px">
 	<tr>
 		<td style="height:10px">
 		</td>
@@ -16,17 +16,16 @@
 		</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; padding: 3px; font-weight: normal;">
+		<td style="text-align: center; font-weight: normal;">
 			<asp:UpdatePanel ID="descuentosUpdatePanel" runat="server" ChildrenAsTriggers="true"
 				UpdateMode="Conditional">
 				<ContentTemplate>
 					<asp:GridView ID="descuentosGridView" runat="server" AutoGenerateColumns="False"
 						BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" EnableViewState="true" Font-Bold="false"
-						GridLines="Both" 
-						ShowFooter="true" ShowHeader="True" ToolTip="El separador de decimales a utilizar es el punto"
-						Width="100%">
+						GridLines="Both"  HorizontalAlign="Center" ShowFooter="true" ShowHeader="True" ToolTip="El separador de decimales a utilizar es el punto"
+						Width="1260px">
 						<Columns>
-							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Descripci&#243;n del descuento">
+							<asp:TemplateField HeaderText="Descripci&#243;n del descuento">
 								<ItemTemplate>
 									<asp:Label ID="lbldescripcion" runat="server" Text='<%# Eval("descripcion_descuento") %>'></asp:Label>
 								</ItemTemplate>
@@ -34,7 +33,7 @@
 								<FooterStyle HorizontalAlign="Left" />
 								<HeaderStyle Width="200px" />
 							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="%">
+							<asp:TemplateField HeaderText="%">
 								<ItemTemplate>
 									<asp:Label ID="lblporcentaje" runat="server" Text='<%# Eval("porcentaje_descuento") %>'></asp:Label>
 								</ItemTemplate>
@@ -42,7 +41,7 @@
 								<FooterStyle HorizontalAlign="Right" />
 								<HeaderStyle Width="35px" />
 							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe Dto.">
+							<asp:TemplateField HeaderText="Importe Dto.">
 								<ItemTemplate>
 									<asp:Label ID="lblimporte_descuento" runat="server" Text='<%# Eval("importe_descuento") %>'></asp:Label>
 								</ItemTemplate>
@@ -50,7 +49,7 @@
 								<FooterStyle HorizontalAlign="Right" />
 								<HeaderStyle Width="100px" />
 							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="G / E / N">
+							<asp:TemplateField HeaderText="G / E / N">
 								<ItemTemplate>
 									<asp:Label ID="lblindicacion" runat="server" Text='<%# Eval("indicacion_exento_gravado_descuento")  %>'
 										Width="40px"></asp:Label>
@@ -59,7 +58,7 @@
 								<FooterStyle HorizontalAlign="Right" />
 								<HeaderStyle Width="40px" />
 							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Alícuota %">
+							<asp:TemplateField HeaderText="Alícuota %">
 								<ItemTemplate>
 									<asp:Label ID="lblalicuota_iva" runat="server" Text='<%# GetAlicuotaIVA((double)Eval("alicuota_iva_descuento"))  %>'
 										Width="65px"></asp:Label>
@@ -68,7 +67,7 @@
 								<FooterStyle HorizontalAlign="Right" />
 								<HeaderStyle Width="65px" />
 							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Font-Bold="false" HeaderText="Importe IVA Dto.">
+							<asp:TemplateField HeaderText="Importe IVA Dto.">
 								<ItemTemplate>
 									<asp:Label ID="lblimporte_iva" runat="server" Text='<%# Eval("importe_iva_descuento") %>'></asp:Label>
 								</ItemTemplate>
@@ -77,7 +76,6 @@
 								<HeaderStyle Width="80px" />
 							</asp:TemplateField>
 						</Columns>
-						<HeaderStyle Font-Bold="True" />
 					</asp:GridView>
 				</ContentTemplate>
 			</asp:UpdatePanel>

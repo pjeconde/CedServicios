@@ -1,6 +1,6 @@
 ﻿<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="PermisosConsulta.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.PermisosConsulta" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<table border="0" cellpadding="0" cellspacing="0" style="width: 782px">
+<table style="width: 1282px">
 	<tr>
 		<td style="height:10px">
 		</td>
@@ -15,17 +15,17 @@
 		</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; padding: 3px; font-weight: normal;">
+		<td style="text-align: center; font-weight: normal;">
 			<asp:UpdatePanel ID="permisosUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
 				<Triggers>
 					<asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
 				</Triggers>
 				<ContentTemplate>
 					<asp:GridView ID="permisosGridView" runat="server" AutoGenerateColumns="False" BorderColor="gray"
-						BorderStyle="Solid" BorderWidth="1px"
+						BorderStyle="Solid" BorderWidth="1px" CssClass="gridview" HorizontalAlign="Center"
 						EnableViewState="true" Font-Bold="false" GridLines="Both" 
 						ShowFooter="true" ShowHeader="True" ToolTip="El número de permiso debe ser un número entero"
-						Width="100%">
+						Width="1260px">
 						<Columns>
 							<asp:TemplateField HeaderText="Número de permiso">
 								<ItemTemplate>

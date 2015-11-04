@@ -1,8 +1,8 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Impuestos.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Impuestos" %>
 
-		<table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+		<table style="width:1282px">
 			<tr>
-				<td style="text-align: center; height: 10px;">
+				<td style="height: 10px;">
 				</td>
 			</tr>
 			<tr>
@@ -11,11 +11,11 @@
 				</td>
 			</tr>
 			<tr>
-				<td style="text-align: center; height: 10px;">
+				<td style="height: 10px;">
 				</td>
 			</tr>
 			<tr>
-				<td style="text-align: center; padding: 3px; font-weight: normal;">
+				<td style="text-align: center; font-weight: normal;">
 					<asp:UpdatePanel ID="impuestosUpdatePanel" runat="server" ChildrenAsTriggers="true"
 						UpdateMode="Conditional">
 						<Triggers>
@@ -23,14 +23,13 @@
 						</Triggers>
 						<ContentTemplate>
 							<asp:GridView ID="impuestosGridView" runat="server" AutoGenerateColumns="False" BorderColor="gray"
-								BorderStyle="Solid" BorderWidth="1px"
-								EnableViewState="true" Font-Bold="false" GridLines="Both"
-								OnRowCancelingEdit="impuestosGridView_RowCancelingEdit"
+								BorderStyle="Solid" BorderWidth="1px" HorizontalAlign="Center" EnableViewState="true" Font-Bold="false" GridLines="Both"
+								OnRowCancelingEdit="impuestosGridView_RowCancelingEdit" CssClass="gridview" 
 								OnRowCommand="impuestosGridView_RowCommand" OnRowDeleted="impuestosGridView_RowDeleted"
 								OnRowDeleting="impuestosGridView_RowDeleting" OnRowEditing="impuestosGridView_RowEditing"
 								OnRowUpdated="impuestosGridView_RowUpdated" OnRowUpdating="impuestosGridView_RowUpdating"
-								ShowFooter="true" ShowHeader="True" ToolTip="El separador de decimales a utilizar es el punto"
-								Width="100%">
+								ShowFooter="true" ShowHeader="True" ToolTip="El separador de decimales a utilizar es el punto" 
+								Width="1260px">
 								<Columns>
 									<asp:TemplateField HeaderText="C&#243;digo del impuesto">
 										<ItemTemplate>
@@ -38,15 +37,16 @@
 												Width="250px"></asp:Label>
 										</ItemTemplate>
 										<EditItemTemplate>
-											<asp:DropDownList ID="ddlcodigo_impuestoEdit" runat="server" Width="250px">
+											<asp:DropDownList ID="ddlcodigo_impuestoEdit" runat="server" Width="350px">
 											</asp:DropDownList>
 										</EditItemTemplate>
 										<FooterTemplate>
-											<asp:DropDownList ID="ddlcodigo_impuesto" runat="server" Width="250px">
+											<asp:DropDownList ID="ddlcodigo_impuesto" runat="server" Width="350px">
 											</asp:DropDownList>
 										</FooterTemplate>
-										<ItemStyle HorizontalAlign="Left" Width="250px" />
-										<FooterStyle HorizontalAlign="Left" Width="250px" />
+                                        <HeaderStyle HorizontalAlign="Center" />
+										<ItemStyle HorizontalAlign="Left" Width="350px" />
+										<FooterStyle HorizontalAlign="Left" Width="350px" />
 									</asp:TemplateField>
 									<asp:TemplateField HeaderText="Importe total">
 										<ItemTemplate>
@@ -54,7 +54,7 @@
 										</ItemTemplate>
 										<EditItemTemplate>
 											<asp:TextBox ID="txtimporte_impuesto" runat="server" Text='<%# Eval("importe_impuesto") %>'
-												Width="40px"></asp:TextBox>
+												Width="160px"></asp:TextBox>
 											<asp:RegularExpressionValidator ID="txtimporte_impuestoEditItemRegularExpressionValidator"
 												runat="server" ControlToValidate="txtimporte_impuesto" ErrorMessage="Importe total impuesto global en edición mal formateado"
 												SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ImpuestosGlobalesEditItem">*</asp:RegularExpressionValidator>
@@ -63,7 +63,7 @@
 												SetFocusOnError="True" ValidationGroup="ImpuestosGlobalesEditItem">*</asp:RequiredFieldValidator>
 										</EditItemTemplate>
 										<FooterTemplate>
-											<asp:TextBox ID="txtimporte_impuesto" runat="server" Text='' Width="40px"></asp:TextBox>
+											<asp:TextBox ID="txtimporte_impuesto" runat="server" Text='' Width="160px"></asp:TextBox>
 											<asp:RegularExpressionValidator ID="txtimporte_impuestoFooterRegularExpressionValidator"
 												runat="server" ControlToValidate="txtimporte_impuesto" ErrorMessage="Importe total impuesto global a agregar mal formateado"
 												SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ImpuestosGlobalesFooter">*</asp:RegularExpressionValidator>
@@ -71,7 +71,7 @@
 												runat="server" ControlToValidate="txtimporte_impuesto" ErrorMessage="Importe total impuesto global a agregar no informado"
 												SetFocusOnError="True" ValidationGroup="ImpuestosGlobalesFooter">*</asp:RequiredFieldValidator>
 										</FooterTemplate>
-										<ItemStyle HorizontalAlign="Right" Width="60px" />
+										<ItemStyle HorizontalAlign="Right" Width="160px" />
 										<HeaderStyle HorizontalAlign="Center" />
 									</asp:TemplateField>
 									<asp:TemplateField HeaderText="Jurisdicción">
@@ -92,22 +92,22 @@
 									</asp:TemplateField>
 									<asp:TemplateField HeaderText="Alícuota %">
 										<ItemTemplate>
-											<asp:Label ID="lblalicuota" runat="server" Width="50px" Text='<%# GetAlicuota((double)Eval("porcentaje_impuesto")) %>'></asp:Label>
+											<asp:Label ID="lblalicuota" runat="server" Width="100px" Text='<%# GetAlicuota((double)Eval("porcentaje_impuesto")) %>'></asp:Label>
 										</ItemTemplate>
 										<EditItemTemplate>
 											<asp:TextBox ID="txtalicuota" runat="server" Text='<%# Eval("porcentaje_impuesto") %>'
-												Width="30px"></asp:TextBox>
+												Width="100px"></asp:TextBox>
 											<asp:RegularExpressionValidator ID="txtalicuotaEditItemRegularExpressionValidator"
 												runat="server" ControlToValidate="txtalicuota" ErrorMessage="Alícuota del impuesto global en edición mal formateada"
 												SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ImpuestosGlobalesEditItem">*</asp:RegularExpressionValidator>
 										</EditItemTemplate>
 										<FooterTemplate>
-											<asp:TextBox ID="txtalicuota" runat="server" Text='' Width="30px"></asp:TextBox>
+											<asp:TextBox ID="txtalicuota" runat="server" Text='' Width="100px"></asp:TextBox>
 											<asp:RegularExpressionValidator ID="txtalicuotaFooterRegularExpressionValidator"
 												runat="server" ControlToValidate="txtalicuota" ErrorMessage="Alícuota de impuesto global a agregar mal formateada"
 												SetFocusOnError="true" ValidationExpression="[0-9]+(\.[0-9]+)?" ValidationGroup="ImpuestosGlobalesFooter">*</asp:RegularExpressionValidator>
 										</FooterTemplate>
-										<ItemStyle HorizontalAlign="Right"  Width="50px"/>
+										<ItemStyle HorizontalAlign="Right"  Width="100px"/>
 										<HeaderStyle Width="50px" />
 									</asp:TemplateField>
 									<asp:CommandField CancelText="Cancelar" EditText="Editar" HeaderText="Edici&#243;n"

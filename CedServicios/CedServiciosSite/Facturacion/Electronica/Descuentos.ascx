@@ -1,17 +1,9 @@
 <%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Descuentos.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Descuentos" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
-<table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
-<%--	<tr>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
-		</td>
-		<td colspan="1" style="height: 1px; background-color: Gray;">
-		</td>
-		<td rowspan="8" style="width: 1px; background-color: Gray;">
-		</td>
-	</tr>--%>
+<table  style="width:1282px">
 	<tr>
-		<td style="text-align: center; height: 10px;">
+		<td style="height: 10px;">
 		</td>
 	</tr>
 	<tr>
@@ -20,23 +12,23 @@
 		</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; height: 10px;">
+		<td style="height: 10px;">
 		</td>
 	</tr>
 	<tr>
-		<td style="text-align: center; padding: 3px; font-weight: normal;">
+		<td style="text-align: center; font-weight: normal;">
 			<asp:UpdatePanel ID="descuentosUpdatePanel" runat="server" ChildrenAsTriggers="true"
 				UpdateMode="Conditional">
 				<ContentTemplate>
 					<asp:GridView ID="descuentosGridView" runat="server" AutoGenerateColumns="False"
-						BorderColor="gray" BorderStyle="Solid" BorderWidth="1px"
-						EnableViewState="true" Font-Bold="false"
+						BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" HorizontalAlign="Center"
+						EnableViewState="true" Font-Bold="false" CssClass="gridview" 
 						GridLines="Both" OnRowCancelingEdit="descuentosGridView_RowCancelingEdit"
 						OnRowCommand="descuentosGridView_RowCommand" OnRowDeleted="descuentosGridView_RowDeleted"
 						OnRowDeleting="descuentosGridView_RowDeleting" OnRowEditing="descuentosGridView_RowEditing"
 						OnRowUpdated="descuentosGridView_RowUpdated" OnRowUpdating="descuentosGridView_RowUpdating"
 						ShowFooter="true" ShowHeader="True" ToolTip="El separador de decimales a utilizar es el punto"
-						Width="100%">
+						Width="1260px">
 						<Columns>
 							<asp:TemplateField HeaderText="Descripci&#243;n del descuento">
 								<ItemTemplate>

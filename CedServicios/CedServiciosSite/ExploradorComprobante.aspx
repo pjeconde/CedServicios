@@ -3,32 +3,32 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton">
-        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+        <table style="border:0; padding-left:10px">
             <tr>
-                <td align="center" colspan="3" style="padding-top:20px; padding-bottom:20px">
+                <td colspan="3" style="padding-top:20px; padding-bottom:20px; text-align:center">
                     <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes"></asp:Label>
                     <asp:TextBox ID="ElementoTextBox" runat="server" Visible="false"> </asp:TextBox>
                     <asp:TextBox ID="TratamientoTextBox" runat="server" Visible="false"> </asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
+                <td style="padding-right:5px; padding-top:5px; text-align:left;">
                     Persona (cliente/proveedor):
                 </td>
-                <td align="left" style="padding-top:5px">
+                <td style="padding-top:5px; text-align: left;">
                     <asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
                 </td>
-                <td rowspan="3" align="left" style="padding-top:5px" valign="top">
+                <td rowspan="3" style="padding-top:5px; padding-left: 10px; vertical-align: top; text-align: left">
                     <asp:Panel ID="EstadosPanel" runat="server">
-                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+                        <table style="border: 0;">
                             <tr>
                                 <td>
-                                    Estado(s):
+                                    Estado(s):&nbsp;
                                 </td>
                                 <td>
                                     <asp:CheckBox ID="EstadoVigenteCheckBox" runat="server" Text="Vigente" AutoPostBack="false"/>
                                 </td>
-                                <td>
+                                <td style="padding-left: 10px;">
                                     <asp:CheckBox ID="EstadoPteEnvioCheckBox" runat="server" Text="Pendiente de envio (AFIP/ITF)" AutoPostBack="false"/>
                                 </td>
                             </tr>
@@ -37,7 +37,7 @@
                                 <td>
                                     <asp:CheckBox ID="EstadoDeBajaCheckBox" runat="server" Text="De baja" AutoPostBack="false"/>
                                 </td>
-                                <td>
+                                <td style="padding-left: 10px;">
                                     <asp:CheckBox ID="EstadoPteConfCheckBox" runat="server" Text="Pendiente de confirmación" AutoPostBack="false"/>
                                 </td>
                             </tr>
@@ -46,7 +46,7 @@
                                 <td>
                                     <asp:CheckBox ID="EstadoRechCheckBox" runat="server" Text="Rechazado" AutoPostBack="false"/>
                                 </td>
-                                <td>
+                                <td style="padding-left: 10px;">
                                     <asp:CheckBox ID="EstadoPteAutorizCheckBox" runat="server" Text="Pendiente de autorización" AutoPostBack="false"/>
                                 </td>
                             </tr>
@@ -69,7 +69,7 @@
 	            <td align="left" style="padding-right:5px; padding-top:5px">
                     Detalle:
 	            </td>
-			    <td align="left" colspan="2" style="padding-top:5px">
+			    <td align="left" colspan="1" style="padding-top:5px; width:400px">
 				    <asp:TextBox ID="DetalleTextBox" runat="server" MaxLength="50"></asp:TextBox>
                     (ej.: "autom" para seleccionar sólo comprobantes generados automaticamente)
 			    </td>

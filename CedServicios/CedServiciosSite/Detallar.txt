@@ -1,0 +1,4 @@
+﻿20150922 11:52:15  Consulta de Lote CUIT: 30710015062  Fecha Desde: 20150101  Fecha Hasta: 20150922
+20150922 11:52:15  NroSerieCertifITF: 0146aac14e3a
+20150922 11:52:15  Parametro DetalleIBKUtilizarServidorExterno: SI
+20150922 11:52:15  Parametro DetalleIBKurl: http://cedeiraweb.no-ip.org:8084/DetalleIBK.asmx

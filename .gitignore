@@ -32,3 +32,5 @@ CedServicios/CedServiciosDB/obj/Debug/CedServiciosDB.pdb
 CedServicios/CedServiciosDB/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
 bin
 obj
+CedServicios/CedServiciosSite/CedServiciosSite.csproj.user
+.gitignore

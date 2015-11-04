@@ -5,7 +5,6 @@
 	font-family:Arial;
 	font-size:small;
 	margin: 0px;
-	border: none;
 	text-align: center;
 }
 #wrapper 
@@ -96,10 +95,6 @@
     font-size: 80%;
     text-align: right;
 }
-A:link {text-decoration: none; font-weight:normal; color: Blue;}
-A:visited {text-decoration: none; font-weight:normal; color: Blue;}
-A:active {text-decoration: none; font-weight:normal; color: Blue;}
-A:hover {text-decoration: none; font-weight:normal; color: Blue;}
 .TextoMensajeTitulo
 {
 	color: black; font-weight: normal; font-size: 20px; font-family: Verdana; font-style: normal;
@@ -346,4 +341,13 @@ A:hover {text-decoration: none; font-weight:normal; color: Blue;}
     padding-left: 4px;
     padding-right: 4px;
     font-size: 10px; font-style: normal; font-family: Arial;
+}
+.gridview th
+{
+	text-align: center;
+}
+
+.center 
+{
+	text-align: center;
 }

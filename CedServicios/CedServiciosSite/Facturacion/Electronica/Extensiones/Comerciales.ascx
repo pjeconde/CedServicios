@@ -15,7 +15,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td style="text-align:center; font-weight:normal; width:1180px;">
+		<td style="text-align:center; font-weight:normal; width:1280px;">
 			<asp:TextBox ID="DatosComericalesTextBox" runat="server" Style="width:1260px; resize:none" TextMode="MultiLine"></asp:TextBox>
 			<cc1:filteredtextboxextender id="DatosComFilteredTextBoxExtender" runat="server" targetcontrolid="DatosComericalesTextBox" 
 			FilterType="Custom" FilterMode="InvalidChars"  InvalidChars="<>"></cc1:filteredtextboxextender>

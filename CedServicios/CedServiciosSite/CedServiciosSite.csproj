@@ -107,10 +107,21 @@
     <Content Include="Ayuda\Novedades\images20130906\image21.png" />
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="ComprobanteGeneracionAutomatica.aspx" />
+    <Content Include="Imagenes\Empresa\SoftwareAMedida.jpg" />
+    <Content Include="InstitucionalSoftwareAMedida.aspx" />
+    <Content Include="PruebasBS.aspx" />
+    <Content Include="css\bootstrap-theme.css" />
+    <Content Include="css\bootstrap-theme.min.css" />
+    <Content Include="css\bootstrap.css" />
+    <Content Include="css\bootstrap.min.css" />
     <Content Include="ExploradorComprobanteRG.aspx" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Imagenes\301.gif" />
     <Content Include="Imagenes\Iconos\icon_collapse.gif" />
     <Content Include="Imagenes\Iconos\icon_expand.gif" />
+    <Content Include="js\bootstrap.js" />
+    <Content Include="js\bootstrap.min.js" />
+    <Content Include="js\npm.js" />
     <Content Include="PersonaBaja.aspx" />
     <Content Include="PersonaConsulta.aspx" />
     <Content Include="PersonaCrear.aspx" />
@@ -232,9 +243,15 @@
     <Content Include="UsuarioOlvidoId.aspx" />
     <Content Include="UsuarioOlvidoPassword.aspx" />
     <Content Include="CedServiciosAyuda.master" />
+    <None Include="css\bootstrap-theme.css.map" />
+    <None Include="css\bootstrap.css.map" />
     <None Include="Descargas\Cedeira-SistAdminFCIs.pdf" />
     <None Include="Descargas\Cedeira-SistTransfMEP.pdf" />
     <Content Include="Descargas\eFact-R-XL.zip" />
+    <None Include="fonts\glyphicons-halflings-regular.eot" />
+    <None Include="fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="fonts\glyphicons-halflings-regular.woff" />
+    <None Include="fonts\glyphicons-halflings-regular.woff2" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -452,6 +469,20 @@
     </Compile>
     <Compile Include="ComprobanteGeneracionAutomatica.aspx.designer.cs">
       <DependentUpon>ComprobanteGeneracionAutomatica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InstitucionalSoftwareAMedida.aspx.cs">
+      <DependentUpon>InstitucionalSoftwareAMedida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InstitucionalSoftwareAMedida.aspx.designer.cs">
+      <DependentUpon>InstitucionalSoftwareAMedida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PruebasBS.aspx.cs">
+      <DependentUpon>PruebasBS.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PruebasBS.aspx.designer.cs">
+      <DependentUpon>PruebasBS.aspx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorComprobanteRG.aspx.cs">
       <DependentUpon>ExploradorComprobanteRG.aspx</DependentUpon>

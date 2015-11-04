@@ -1,28 +1,31 @@
 <%@ Control Language="C#" AutoEventWireup="true" Codebehind="Detalle.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Detalle" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<tr>
-	<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-		<asp:Panel ID="detallePanel" runat="server" BorderStyle="Ridge" Height="300px" ScrollBars="Auto"
-			Width="1260px" Wrap="true">
+
+<table  style="width:1282px">
+	<tr>
+		<td style="height: 10px;">
+		</td>
+	</tr>
+    <tr>
+		<td style="text-align: center; font-weight: normal; padding-left:10px; ">
+		<asp:Panel ID="detallePanel" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="300px" ScrollBars="Auto" Wrap="true" Width="1260px" CssClass="center">
 			<asp:UpdatePanel ID="detalleUpdatePanel" runat="server" UpdateMode="conditional" ChildrenAsTriggers="true">
 				<Triggers>
 					<asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
 				</Triggers>
 				<ContentTemplate>
 					<asp:GridView ID="detalleGridView" runat="server" AutoGenerateColumns="False" BorderColor="Gray"
-						BorderStyle="Solid" BorderWidth="1px"
+						BorderStyle="None" BorderWidth="0px" Font-Bold="False" CssClass="gridview" 
 						OnRowCancelingEdit="detalleGridView_RowCancelingEdit"
 						OnRowCommand="detalleGridView_RowCommand" OnRowDeleted="detalleGridView_RowDeleted"
 						OnRowDeleting="detalleGridView_RowDeleting" OnRowEditing="detalleGridView_RowEditing"
 						OnRowUpdated="detalleGridView_RowUpdated" OnRowUpdating="detalleGridView_RowUpdating"
-						ShowFooter="True" 
-                        ToolTip="Recuerde que al ingresar importes con decimales el separador a utilizar es el punto" 
-                        Width="100%">
+						ShowFooter="True" ToolTip="Recuerde que al ingresar importes con decimales el separador a utilizar es el punto" 
+                        Width="1260px">
 						<Columns>
-                            <asp:TemplateField HeaderStyle-Width="50px" HeaderText="">
+                            <asp:TemplateField HeaderStyle-Width="50px" HeaderStyle-HorizontalAlign="Center" HeaderText=" ">
 								<ItemTemplate>
-									<asp:Label ID="lbl_articulosel" runat="server" Text=''
-										Width="50px"></asp:Label>
+									<asp:Label ID="lbl_articulosel" runat="server" Text='' Width="50px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
 									<asp:DropDownList ID="ddlarticuloselEdit" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlarticuloselEdit_SelectedIndexChanged" Width="50px">
@@ -32,10 +35,9 @@
 									<asp:DropDownList ID="ddlarticulosel" runat="server" AutoPostBack="true" OnSelectedIndexChanged="ddlarticuloselFooter_SelectedIndexChanged" Width="50px" tooltip="Elegir artículo">
 									</asp:DropDownList>
 								</FooterTemplate>
-								<HeaderStyle Width="50px" />
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
-							<asp:TemplateField HeaderStyle-Width="200px" HeaderText="Descripción del artículo">
+							<asp:TemplateField HeaderStyle-Width="200px" HeaderStyle-HorizontalAlign="Center" HeaderText="Descripción del artículo">
 								<ItemTemplate>
 									<asp:TextBox ID="lbldescripcion" runat="server" ReadOnly="true" Text='<%# Eval("descripcion") %>'
 										TextMode="multiLine" Width="200px">
@@ -54,7 +56,6 @@
 										FilterMode="InvalidChars" FilterType="Custom" InvalidChars="<>" TargetControlID="txtdescripcion">
 									</cc1:FilteredTextBoxExtender>
 								</FooterTemplate>
-								<HeaderStyle Width="200px" />
 								<ItemStyle HorizontalAlign="left" />
 								<FooterStyle HorizontalAlign="left" />
 							</asp:TemplateField>
@@ -91,7 +92,7 @@
 										FilterMode="ValidChars" FilterType="Custom" TargetControlID="txtcantidad" ValidChars="0123456789.">
 									</cc1:FilteredTextBoxExtender>
 								</FooterTemplate>
-								<HeaderStyle Width="100px" />
+								<HeaderStyle Width="100px" HorizontalAlign="Center" />
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
                             <asp:TemplateField HeaderText="Unidad">
@@ -193,9 +194,9 @@
 								<ItemStyle HorizontalAlign="Right" />
 							</asp:TemplateField>
 							<asp:CommandField CancelText="Cancelar" CausesValidation="true" EditText="Editar"
-								HeaderStyle-Font-Bold="false" HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
+								HeaderStyle-HorizontalAlign="Center" HeaderStyle-Width="150px"
 								HeaderText="Edición" ShowEditButton="True" UpdateText="Actualizar" ValidationGroup="DetalleEditItem">
-								<HeaderStyle Font-Bold="False" HorizontalAlign="Center" Width="150px" />
+								<HeaderStyle HorizontalAlign="Center" Width="150px" />
 								<ItemStyle HorizontalAlign="Center" Width="150px" />
 							</asp:CommandField>
 							<asp:TemplateField HeaderStyle-Width="150px" HeaderText="Eliminación / Incorporación">
@@ -265,16 +266,17 @@
 				</ContentTemplate>
 			</asp:UpdatePanel>
 		</asp:Panel>
-	</td>
-</tr>
-<tr>
-	<td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
-		<asp:UpdateProgress ID="detalleUpdateProgress" runat="server" AssociatedUpdatePanelID="detalleUpdatePanel"
-			DisplayAfter="0">
-			<ProgressTemplate>
-				<asp:Image ID="detalleImage" runat="server" Height="25px" ImageUrl="~/Imagenes/301.gif">
-				</asp:Image>
-			</ProgressTemplate>
-		</asp:UpdateProgress>
-	</td>
-</tr>
+	    </td>
+    </tr>
+    <tr>
+	    <td colspan="2" style="text-align: center; padding: 3px; font-weight: normal;">
+		    <asp:UpdateProgress ID="detalleUpdateProgress" runat="server" AssociatedUpdatePanelID="detalleUpdatePanel"
+			    DisplayAfter="0">
+			    <ProgressTemplate>
+				    <asp:Image ID="detalleImage" runat="server" Height="25px" ImageUrl="~/Imagenes/301.gif">
+				    </asp:Image>
+			    </ProgressTemplate>
+		    </asp:UpdateProgress>
+	    </td>
+    </tr>
+</table>

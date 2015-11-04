@@ -12,21 +12,21 @@
 <%@ Register src="FacturaElectronicaFecha.ascx" tagname="FacturaElectronicaFecha" tagprefix="uc1" %>
 
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceDefault">
-    <table border="0" cellpadding="0" cellspacing="0" style="width: 1300px; text-align:left; padding-left:10px">
+    <table style="border:0; width: 1300px; text-align:left; padding-left:10px">
         <tr>
-            <td align="center" valign="top" style="padding-top:20px; width:1282px; vertical-align:middle; text-align:center;">
-                <table border="0" cellpadding="0" cellspacing="0">
+            <td style="padding-top:20px; width:1282px; vertical-align:middle; text-align:center; vertical-align:top">
+                <table style="border:0">
                     <!-- @@@ TITULO DE LA PAGINA @@@-->
                     <tr>
-                        <td align="center" valign="middle">
+                        <td style="text-align: center; vertical-align: middle">
                             <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Alta de ..."></asp:Label>
                         </td>
                     </tr>
                     <!-- UTILIZAR COMPROBANTE PREEXISTENTE -->
                     <tr>
-                        <td align="center" style="width: 1282px; vertical-align: middle; text-align: center; padding-top:20px;" valign="top">
+                        <td style="width: 1282px; text-align: center; padding-top:20px; vertical-align:top">
                             <asp:Panel ID="UtilizarComprobantePreexistentePanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+                                <table style="width:1282px">
                                     <tr>
                                         <td rowspan="6" style="width:1px; background-color:Gray;">
                                         </td>
@@ -46,9 +46,9 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <table border="0" cellpadding="0" cellspacing="0" style="width:1280px">
+                                            <table style="border:0; width:1280px">
                                                 <tr>
-                                                    <td style="padding-top: 5px;">
+                                                    <td style="padding-top: 5px; padding-left:10px">
                                                         <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" Width="1262px" size="100" ToolTip="Cargar los datos de un archivo XML.">
                                                         </asp:FileUpload>
                                                     </td>
@@ -89,7 +89,7 @@
                                     <asp:AsyncPostBackTrigger ControlID="Tipo_De_ComprobanteDropDownList" EventName="SelectedIndexChanged"/>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+                                    <table style="width:1282px">
                                         <tr>
                                             <td class="TextoResaltado" colspan="6" style="text-align:center">
                                                 <asp:Label ID="DatosComprobanteLabel" runat="server" Text="COMPROBANTE"></asp:Label>
@@ -281,10 +281,10 @@
                                         <asp:Image ID="imageCE" runat="server" ImageUrl="~/Imagenes/Iconos/icon_expand.gif" style="vertical-align:text-bottom" />
                                     </asp:Panel>
                                     <asp:Panel ID="pBody" runat="server" CssClass="cpBody">
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+                                    <table style="width:1282px">
                                         <tr>
                                             <td colspan="5">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                <table style="width:100%">
                                                     <tr>
                                                         <td style="padding-top: 5px">
                                                             Elegir vendedor: 
@@ -363,7 +363,7 @@
                                                             <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
                                                         </td>
                                                     </tr>
-                                                                                                        <tr>
+                                                    <tr>
                                                         <td class="TC00S">
                                                             GLN:
                                                         </td>
@@ -521,7 +521,7 @@
                                     </cc1:CollapsiblePanelExtender>
                                 </ContentTemplate>
                             </asp:UpdatePanel>
-                            <table border="0" cellpadding="0" cellspacing="0" style="width: 1282px; vertical-align: top">
+                            <table style="width: 1282px; vertical-align: top">
                                 <tr>
                                     <td style="">
                                         <hr noshade="noshade" size="1" color="#cccccc" />
@@ -541,7 +541,7 @@
                                     <asp:PostBackTrigger ControlID="FileUploadButton"></asp:PostBackTrigger>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+                                    <table style="border:0; width:1282px">
                                         <tr>
                                             <td colspan="2" style="text-align: center; height: 5px;">
                                             </td>
@@ -557,7 +557,7 @@
                                         </tr>
                                         <tr>
                                             <td style="text-align: center">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 1280px">
+                                                <table style="width: 1280px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             Nº lote:
@@ -596,13 +596,13 @@
                                 </Triggers>
                                 <ContentTemplate>
                                     <asp:Panel ID="ExportacionPanel" runat="server">
-                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 1282px">
+                                        <table style="width: 1282px">
                                             <tr>
                                                 <td style="height:10px;">
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2" class="TextoResaltado" style="text-align: center;">
+                                                <td colspan="3" class="TextoResaltado" style="text-align: center;">
                                                     INFORMACIÓN EXPORTACIÓN
                                                 </td>
                                             </tr>
@@ -618,7 +618,7 @@
                                                             <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
                                                         </Triggers>
                                                         <ContentTemplate>
-                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                            <table>
                                                                 <tr>
                                                                     <td class="TC00S">
                                                                         Tipo Exportación:
@@ -632,10 +632,12 @@
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
                                                 </td>
+                                                <td style="width: 360px">
+                                                </td>
                                                 <td>
                                                     <asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" UpdateMode="Conditional">
                                                         <ContentTemplate>
-                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                            <table>
                                                                 <tr>
                                                                     <td class="TC00S">
                                                                         País Destino Comprobante:
@@ -669,7 +671,7 @@
                                                             <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
                                                         </Triggers>
                                                         <ContentTemplate>
-                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                            <table>
                                                                 <tr>
                                                                     <td class="TC00S">
                                                                         Idioma para exportación:
@@ -683,6 +685,8 @@
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
                                                 </td>
+                                                <td style="width: 360px">
+                                                </td>
                                                 <td>
                                                     <asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" ChildrenAsTriggers="true"
                                                         UpdateMode="Conditional">
@@ -690,7 +694,7 @@
                                                             <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
                                                         </Triggers>
                                                         <ContentTemplate>
-                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                            <table>
                                                                 <tr>
                                                                     <td class="TC00S">
                                                                         Incoterms para exportación:
@@ -707,12 +711,12 @@
                                             </tr>
                                             <!-- PERMISOS EXPO-->
                                             <tr>
-                                                <td colspan="2" style="height:19px; text-align:center">
+                                                <td colspan="3" style="height:19px; text-align:center">
                                                     <uc2:Permisos ID="PermisosExpo" runat="server"></uc2:Permisos>
                                                 </td>
                                             </tr>
                                             <tr>
-                                                <td colspan="2">
+                                                <td colspan="3">
                                                     <hr noshade="noshade" size="1" color="#cccccc" />
                                                 </td>
                                             </tr>
@@ -732,7 +736,7 @@
                                     <asp:AsyncPostBackTrigger ControlID="PaisDestinoExpDropDownList"></asp:AsyncPostBackTrigger>
                                 </Triggers>
                                 <ContentTemplate>
-                                    <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+                                    <table style="width:1282px">
                                         <tr>
                                             <td style="height:10px;">
                                             </td>
@@ -748,7 +752,7 @@
                                         </tr>
                                         <tr>
                                             <td colspan="5">
-                                                <table border="0" cellpadding="0" cellspacing="0" width="100%">
+                                                <table style="width: 100%">
                                                     <tr>
                                                         <td style="padding-top: 5px">
                                                             Elegir comprador: 
@@ -774,8 +778,8 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="right" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 400px">
+                                            <td style="text-align:right; vertical-align:top">
+                                                <table style="width: 400px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             Denominación:
@@ -844,8 +848,8 @@
                                             </td>
                                             <td class="bgFEAC" style="width: 30px; background-repeat: repeat-y;">
                                             </td>
-                                            <td align="left" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 400px">
+                                            <td style="text-align:left; vertical-align:top">
+                                                <table style="width: 400px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             Tipo de documento:
@@ -914,8 +918,8 @@
                                             </td>
                                             <td class="bgFEAC" style="width: 30px; background-repeat: repeat-y;">
                                             </td>
-                                            <td align="left" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 400px">
+                                            <td style="text-align:left; vertical-align:top">
+                                                <table style="width: 400px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             <asp:RegularExpressionValidator ID="docCompradorRegularExpressionValidator" runat="server"
@@ -1020,7 +1024,7 @@
                     <tr>
                         <td style="text-align: center">
                             <asp:Panel ID="ReferenciasPanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+                                <table style="width:1282px">
                                     <tr>
                                         <td style="text-align: center; height: 10px;">
                                         </td>
@@ -1040,36 +1044,36 @@
                                                 UpdateMode="Conditional">
                                                 <ContentTemplate>
                                                     <asp:GridView ID="referenciasGridView" runat="server" AutoGenerateColumns="False"
-                                                        BorderColor="gray" BorderStyle="Solid" BorderWidth="1px"
-                                                        EnableViewState="true" Font-Bold="false"
+                                                        BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" CssClass="gridview"
+                                                        EnableViewState="true" Font-Bold="false" HorizontalAlign="Center"
                                                         GridLines="Both" OnRowCancelingEdit="referenciasGridView_RowCancelingEdit"
                                                         OnRowCommand="referenciasGridView_RowCommand" OnRowDeleted="referenciasGridView_RowDeleted"
                                                         OnRowDeleting="referenciasGridView_RowDeleting" OnRowEditing="referenciasGridView_RowEditing"
                                                         OnRowUpdated="referenciasGridView_RowUpdated" OnRowUpdating="referenciasGridView_RowUpdating"
                                                         ShowFooter="true" ShowHeader="True" ToolTip="El dato de referencia debe ser un número entero"
-                                                        Width="100%">
+                                                        Width="1260px">
                                                         <Columns>
                                                             <asp:TemplateField HeaderText="C&#243;digo de referencia">
                                                                 <ItemTemplate>
                                                                     <asp:Label ID="lblcodigo_de_referencia" runat="server" Text='<%# Eval("descripcioncodigo_de_referencia") %>'
-                                                                        Width="320px"></asp:Label>
+                                                                        Width="620px"></asp:Label>
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
-                                                                    <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="300px">
+                                                                    <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="600px">
                                                                     </asp:DropDownList>
                                                                     <asp:RequiredFieldValidator ID="ddlcodigo_de_referenciaEditItemRequiredFieldValidator"
                                                                         runat="server" ControlToValidate="ddlcodigo_de_referenciaEdit" ErrorMessage="Codigo de referencia en edición no informado"
                                                                         SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
                                                                 </EditItemTemplate>
                                                                 <FooterTemplate>
-                                                                    <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="300px">
+                                                                    <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="600px">
                                                                     </asp:DropDownList>
                                                                     <asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator" runat="server"
                                                                         ControlToValidate="ddlcodigo_de_referencia" ErrorMessage="Codigo de referencia a agregar no informado"
                                                                         SetFocusOnError="True" ValidationGroup="ReferenciasFooter">*</asp:RequiredFieldValidator>
                                                                 </FooterTemplate>
-                                                                <ItemStyle HorizontalAlign="Left" Width="320px" />
-                                                                <FooterStyle HorizontalAlign="Left" Width="320px" />
+                                                                <ItemStyle HorizontalAlign="Left" Width="620px" />
+                                                                <FooterStyle HorizontalAlign="Left" Width="620px" />
                                                             </asp:TemplateField>
                                                             <asp:TemplateField HeaderText="Número de referencia">
                                                                 <ItemTemplate>
@@ -1077,7 +1081,7 @@
                                                                 </ItemTemplate>
                                                                 <EditItemTemplate>
                                                                     <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='<%# Eval("dato_de_referencia") %>'
-                                                                        Width="75%"></asp:TextBox>
+                                                                        Width="400px"></asp:TextBox>
                                                                     <cc1:MaskedEditExtender ID="txtdato_de_referenciaEditExpoMaskedEditExtender" runat="server"
                                                                         ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
                                                                         PromptCharacter="?" TargetControlID="txtdato_de_referencia">
@@ -1167,7 +1171,7 @@
                     <tr>
                         <td>
                             <asp:Panel ID="DatosComerialesPanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+                                <table style="width:1282px">
                                     <tr>
                                         <td style="height:19px; text-align:center">
                                             <uc3:Comerciales ID="DatosComerciales" runat="server"></uc3:Comerciales>
@@ -1185,7 +1189,7 @@
                     <!-- DETALLE DE ARTÍCULOS / SERVICIOS -->
                     <tr>
                         <td style="text-align: center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+                            <table style="width:1282px">
                                 <tr>
                                     <td style="text-align: center; height: 10px;">
                                     </td>
@@ -1201,14 +1205,18 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td style="text-align: center">
-                                        <table border="0" cellpadding="0" cellspacing="0" style="width: 1280">
+                                    <td>
+                                        <table style="width: 1282px; text-align:center">
                                             <tr>
-                                                <td class="TextoLabelFEADescrLarga" style="padding: 5px;">
+                                                <td class="TextoLabelFEADescrLarga" style="text-align:center">
                                                     <asp:TextBox ID="ComentariosTextBox" runat="server" Style="width:1260px; resize:none" TextMode="MultiLine"></asp:TextBox>
                                                 </td>
                                             </tr>
-                                            <uc4:Detalle ID="DetalleLinea" runat="server"></uc4:Detalle>
+                                            <tr>
+                                                <td>
+                                                    <uc4:Detalle ID="DetalleLinea" runat="server"></uc4:Detalle>
+                                                </td>
+                                            </tr>
                                         </table>
                                     </td>
                                 </tr>
@@ -1223,7 +1231,7 @@
                     <!-- DESCUENTOS GLOBALES -->
                     <tr>
                         <td style="text-align:center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width: 1282px">
+                            <table style="width: 1282px">
                                 <tr>
                                     <td>
                                         <DescUC:DescuentosGlobales ID="DescuentosGlobales" runat="server"></DescUC:DescuentosGlobales>
@@ -1240,7 +1248,7 @@
                     <!-- IMPUESTOS GLOBALES -->
                     <tr>
                         <td style="text-align:center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width: 1282px">
+                            <table style="width: 1282px">
                                 <tr>
                                     <td>
                                         <uc8:ImpuestosGlobales ID="ImpuestosGlobales" runat="server"></uc8:ImpuestosGlobales>
@@ -1350,7 +1358,7 @@
                                             </table>
                                         </asp:Panel>
                                         <asp:Panel ID="CAEPanel" runat="server">
-                                            <table border="0" cellpadding="0" cellspacing="0" style="border-color: Gray; border-width: 1px; border-style: solid" width="180px">
+                                            <table style="border-color: Gray; border-width: 1px; border-style: solid" width="180px">
                                                 <tr>
                                                     <td style="height:10px">
                                                     </td>
@@ -1424,13 +1432,13 @@
                                                 <asp:AsyncPostBackTrigger ControlID="CalcularTotalesButton"></asp:AsyncPostBackTrigger>
                                             </Triggers>
                                             <ContentTemplate>
-                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                <table>
                                                     <tr>
                                                         <td class="TextoResaltado" style="width:600px; text-align:right">
                                                             RESUMEN FINAL&nbsp;
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:Button ID="CalcularTotalesButton" runat="server" CausesValidation="false" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales" Width="180px" />
+                                                            <asp:Button ID="CalcularTotalesButton" runat="server" CausesValidation="false" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales" Width="170px" />
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -1567,7 +1575,7 @@
                     <!-- OBSERVACIONES -->
                     <tr>
                         <td style="text-align:center">
-                            <table border="0" cellpadding="0" cellspacing="0" style="width:1282px;">
+                            <table style="width:1282px;">
                                 <tr>
                                     <td style="height:10px;">
                                     </td>
@@ -1598,7 +1606,7 @@
                     <tr>
                         <td style="text-align: center">
                             <asp:Panel ID="AccionesPanel" runat="server">
-                                <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
+                                <table style="width:1282px">
                                     <tr>
                                         <td style="height: 10px;">
                                         </td>
@@ -1615,7 +1623,7 @@
                                     <tr>
                                         <td style="padding-left:10px">
                                             <asp:Panel ID="AFIPpanel" runat="server">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                <table style="padding-bottom:6px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             AFIP: 
@@ -1632,7 +1640,7 @@
                                                 </table>
                                             </asp:Panel>
                                             <asp:Panel ID="InterfacturasOnLinePanel" runat="server">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                <table style="padding-bottom:6px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             Interfacturas (on line): 
@@ -1655,7 +1663,7 @@
                                                 </table>
                                             </asp:Panel>
                                             <asp:Panel ID="InterfacturasArchivoXMLpanel" runat="server">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                <table style="padding-bottom:6px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             Interfacturas (archivo XML): 
@@ -1670,7 +1678,7 @@
                                                 </table>
                                             </asp:Panel>
                                             <asp:Panel ID="PrevisualizacionComprobantePanel" runat="server">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="padding-bottom:6px">
+                                                <table style="padding-bottom:6px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             Previsualización comprobante: 
@@ -1682,7 +1690,7 @@
                                                 </table>
                                             </asp:Panel>
                                             <asp:Panel ID="ComprobantePanel" runat="server">
-                                                <table border="0" cellpadding="0" cellspacing="0">
+                                                <table>
                                                     <tr>
                                                         <td class="TC00S">
                                                             Comprobante: 
@@ -1694,7 +1702,7 @@
                                                 </table>
                                             </asp:Panel>
                                             <asp:Panel ID="DescargarPDFPanel" runat="server">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 1260px">
+                                                <table style="width: 1260px">
                                                     <tr>
                                                         <td style="width: 100%;">
                                                             <asp:Button ID="DescargarPDFButton" runat="server" Text="Descargar PDF" Width="100%" ForeColor="Brown"
@@ -1705,7 +1713,7 @@
                                                 </table>
                                             </asp:Panel>
                                             <asp:Panel ID="ActualizarEstadoPanel" runat="server">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 1260px">
+                                                <table style="width: 1260px">
                                                     <tr>
                                                         <td style="width: 100%;">
                                                             <asp:Button ID="ActualizarEstadoButton" runat="server" Text="Actualizar Estado" Width="100%" ForeColor="Brown"
@@ -1781,19 +1789,19 @@
     <div id="PopupValidarITF" class="ModalWindow">
         <table width="100%" style="padding:20px;">
             <tr>
-                <td colspan="3" align="center">
+                <td colspan="3" style="text-align: center">
                     <asp:Label ID="Label1" runat="server" 
                         Text="Desea validar el comprobante de forma On-Line en Interfacturas ?" 
                         SkinID="TextoMediano"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td align="right" style="padding-top: 20px">
+                <td style="padding-top: 20px; text-align:right">
                     <asp:Button ID="AceptarValidarITF" runat="server" Text="Aceptar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$CancelarValidarITF.disabled = true;" OnClick="AccionValidarEnInterfacturasButton_Click" ValidationGroup="RequeridosValidationSummary" />
                 </td>
-                <td align="center" style="width: 20px">
+                <td style="width: 20px; text-align: center">
                 </td>
-                <td align="left" style="padding-top: 20px">
+                <td style="padding-top: 20px; text-align: left">
                     <asp:Button ID="CancelarValidarITF" runat="server" Text="Cancelar" CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;ctl00$ContentPlaceDefault$AceptarValidarITF.disabled = true;" OnClick="CancelarValidarITFButton_Click" />
                 </td>
             </tr>

@@ -3,49 +3,49 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton">
-        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+        <table style="border:0; padding-left:10px;">
             <tr>
-                <td align="center" colspan="3" style="padding-top:20px; padding-bottom:20px">
+                <td align="center" colspan="4" style="padding-top:20px; padding-bottom:20px">
                     <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes (para ITF.RG.AFIP)"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
+                <td style="padding-right:5px; padding-top:5px; text-align: left;">
                     Persona (cliente/proveedor):
                 </td>
-                <td align="left" style="padding-top:5px">
+                <td style="padding-top:5px; text-align: left;">
                     <asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
                 </td>
-                <td rowspan="3" align="left" style="padding-top:5px" valign="top">
+                <td rowspan="3" style="padding-top:5px; padding-left: 10px; vertical-align: top; text-align: left">
                     <asp:Panel ID="EstadosPanel" runat="server">
-                        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+                        <table style="border: 0;">
                             <tr>
                                 <td>
-                                    Estado(s):
+                                    Estado(s):&nbsp;
                                 </td>
                                 <td>
-                                    <asp:CheckBox ID="EstadoVigenteCheckBox" runat="server" Text="Vigente" AutoPostBack="false"/>
+                                    <asp:CheckBox ID="EstadoVigenteCheckBox" runat="server" Text="Vigente" AutoPostBack="false" Width="100px"/>
                                 </td>
-                                <td>
-                                    <asp:CheckBox ID="EstadoPteEnvioCheckBox" runat="server" Text="Pendiente de envio (AFIP/ITF)" AutoPostBack="false"/>
+                                <td style="padding-left: 10px;">
+                                    <asp:CheckBox ID="EstadoPteEnvioCheckBox" runat="server" Text="Pendiente de envio (AFIP/ITF)" AutoPostBack="false" Width="250px"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
-                                    <asp:CheckBox ID="EstadoDeBajaCheckBox" runat="server" Text="De baja" AutoPostBack="false"/>
+                                    <asp:CheckBox ID="EstadoDeBajaCheckBox" runat="server" Text="De baja" AutoPostBack="false" Width="100px"/>
                                 </td>
-                                <td>
-                                    <asp:CheckBox ID="EstadoPteConfCheckBox" runat="server" Text="Pendiente de confirmación" AutoPostBack="false"/>
+                                <td style="padding-left: 10px;">
+                                    <asp:CheckBox ID="EstadoPteConfCheckBox" runat="server" Text="Pendiente de confirmación" AutoPostBack="false" Width="250px"/>
                                 </td>
                             </tr>
                             <tr>
                                 <td></td>
                                 <td>
-                                    <asp:CheckBox ID="EstadoRechCheckBox" runat="server" Text="Rechazado" AutoPostBack="false"/>
+                                    <asp:CheckBox ID="EstadoRechCheckBox" runat="server" Text="Rechazado" AutoPostBack="false" Width="100px"/>
                                 </td>
-                                <td>
-                                    <asp:CheckBox ID="EstadoPteAutorizCheckBox" runat="server" Text="Pendiente de autorización" AutoPostBack="false"/>
+                                <td style="padding-left: 10px;">
+                                    <asp:CheckBox ID="EstadoPteAutorizCheckBox" runat="server" Text="Pendiente de autorización" AutoPostBack="false" Width="250px"/>
                                 </td>
                             </tr>
                         </table>
@@ -64,10 +64,10 @@
             </tr>
             <asp:Panel ID="DetallePanel" runat="server">
             <tr>
-	            <td align="left" style="padding-right:5px; padding-top:5px">
+	            <td style="padding-right:5px; padding-top:5px; text-align:left;">
                     Detalle:
 	            </td>
-			    <td align="left" colspan="2" style="padding-top:5px">
+			    <td colspan="1" style="padding-top:5px; width:400px; text-align:left;">
 				    <asp:TextBox ID="DetalleTextBox" runat="server" MaxLength="50"></asp:TextBox>
                     (ej.: "autom" para seleccionar sólo comprobantes generados automaticamente)
 			    </td>
@@ -75,10 +75,10 @@
             </asp:Panel>
             <asp:Panel ID="PeriodoEmisionPanel" runat="server">
             <tr>
-	            <td align="left" style="padding-right:5px; padding-top:5px">
+	            <td style="padding-right:5px; padding-top:5px; text-align:left;">
                     Período de emisión:
 	            </td>
-			    <td align="left" style="padding-top:5px">
+			    <td style="padding-top:5px; text-align:left;">
                     desde&nbsp;
                     <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
                     <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
@@ -186,18 +186,26 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="right" wrap="False" />
                             </asp:BoundField>
-                            <asp:TemplateField HeaderText="Acción">
-                                <ItemTemplate>
-		                            <asp:DropDownList ID="AccionDropDownList" runat="server" AutoPostBack="true" OnSelectedIndexChanged="AccionDropDownList_SelectedIndexChanged" EnableViewState="false">
-			                            <asp:ListItem Value="" Text="--- elegir acción ---"></asp:ListItem>
-                                        <asp:ListItem Value="ExportarRG3685" Text="Descargar interface RG3685 (Prueba)"></asp:ListItem>
-		                            </asp:DropDownList>
-                                </ItemTemplate>
-                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </td>
             </tr>
+            <tr>
+                <td colspan="4" style="padding-top:20px; text-align:left;">
+                    <asp:label ID="ResultadosLabel" runat="server" Text="Resultados: "></asp:label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="padding-bottom:10px; text-align:left;">
+                    <asp:TextBox ID="ResultadosTextBox" runat="server" Text="" TextMode="MultiLine" Width="100%" Rows="10" Height="100%"></asp:TextBox>
+                </td>
+            </tr>
         </table>
     </asp:Panel>
+    <style type="text/css">
+        textarea
+        {
+            resize: none;
+        }
+    </style>
 </asp:Content>
