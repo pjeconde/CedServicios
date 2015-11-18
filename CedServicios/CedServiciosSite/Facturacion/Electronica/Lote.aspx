@@ -15,6 +15,7 @@
     <table style="border:0; width: 1300px; text-align:left; padding-left:10px">
         <tr>
             <td style="padding-top:20px; width:1282px; vertical-align:middle; text-align:center; vertical-align:top">
+                
                 <table style="border:0">
                     <!-- @@@ TITULO DE LA PAGINA @@@-->
                     <tr>
@@ -24,7 +25,7 @@
                     </tr>
                     <!-- UTILIZAR COMPROBANTE PREEXISTENTE -->
                     <tr>
-                        <td style="width: 1282px; text-align: center; padding-top:20px; vertical-align:top">
+                        <td style="width: 1260px; text-align: center; padding-top:20px; padding-left:10px; vertical-align: top">
                             <asp:Panel ID="UtilizarComprobantePreexistentePanel" runat="server">
                                 <table style="width:1282px">
                                     <tr>
@@ -46,7 +47,7 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <table style="border:0; width:1280px">
+                                            <table style="border:0; width:1262px">
                                                 <tr>
                                                     <td style="padding-top: 5px; padding-left:10px">
                                                         <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" Width="1262px" size="100" ToolTip="Cargar los datos de un archivo XML.">
@@ -376,8 +377,8 @@
                                             </td>
                                             <td class="bgFEAC" style="width: 30px; background-repeat: repeat-y;">
                                             </td>
-                                            <td align="left" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 400px">
+                                            <td style="text-align:left; vertical-align:top">
+                                                <table style="width: 400px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             CUIT:
@@ -442,7 +443,7 @@
                                             <td class="bgFEAC" style="width: 30px; background-repeat: repeat-y;">
                                             </td>
                                             <td align="left" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 400px">
+                                                <table style="width: 400px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             Inicio de actividades:
@@ -461,7 +462,7 @@
                                                             Piso:
                                                         </td>
                                                         <td>
-                                                            <table border="0" cellpadding="0" cellspacing="0">
+                                                            <table border="0">
                                                                 <tr>
                                                                     <td class="TC02SL">
                                                                         <asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>

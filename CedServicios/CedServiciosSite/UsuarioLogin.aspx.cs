@@ -106,18 +106,21 @@ namespace CedServicios.Site
         }
         protected void MultiCuitLinkButton_Click(object sender, EventArgs e)
         {
+            Espacio.Visible = true;
             AclaracionTituloLabel.Text = "Entorno Multi-CUIT";
-            AclaracionDetalleLabel.Text = "Con la misma Cuenta se pueden operar uno o más CUITs.";
+            AclaracionDetalleLabel.Text = "<p>Con la misma Cuenta se pueden operar uno o más CUITs.</p><br />";
         }
         protected void MultiUNLinkButton_Click(object sender, EventArgs e)
         {
+            Espacio.Visible = true;
             AclaracionTituloLabel.Text = "Entorno Multi-Unidad de Negocio";
-            AclaracionDetalleLabel.Text = "Para cada CUIT se puede definir una o más Unidades de Negocio (*).<br /><br />(*) Concepto asimilable al de 'sucursal'";
+            AclaracionDetalleLabel.Text = "<p>Para cada CUIT se puede definir una o más Unidades de Negocio (*).<br /><br />(*) Concepto asimilable al de 'sucursal'</p><br />";
         }
         protected void MultiUsuarioLinkButton_Click(object sender, EventArgs e)
         {
+            Espacio.Visible = true;
             AclaracionTituloLabel.Text = "Entorno Multi-Usuario";
-            AclaracionDetalleLabel.Text = "Uno o más usuarios pueden compartir su trabajo dentro de su propio grupo.<br />Los usuarios administradores (de CUITs y de Unidades de Negocio), serán<br />los responsables de autorizar el acceso a los usuarios operadores.";
+            AclaracionDetalleLabel.Text = "<p>Uno o más usuarios pueden compartir su trabajo dentro de su propio grupo.<br />Los usuarios administradores (de CUITs y de Unidades de Negocio), serán<br />los responsables de autorizar el acceso a los usuarios operadores.</p><br />";
         }
     }
 }

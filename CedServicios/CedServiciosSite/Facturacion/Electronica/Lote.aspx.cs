@@ -181,7 +181,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             case "Venta":
                                 ComprobantePanel.Visible = false;
-                                if (TratamientoTextBox.Text == "Clonado" || TratamientoTextBox.Text == "Modificacion") UtilizarComprobantePreexistentePanel.Visible = false;
+                                if (TratamientoTextBox.Text == "Clonado" || TratamientoTextBox.Text == "Modificacion")
+                                {
+                                    UtilizarComprobantePreexistentePanel.Visible = false;
+                                }
                                 DatosEmisionPanel.Visible = false;
                                 FechaProximaEmisionDatePickerWebUserControl.Text = new DateTime(9999, 12, 31).ToString("yyyyMMdd");
                                 break;
@@ -368,6 +371,45 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 LlenarCampos(lote, comprobanteATratar);
                                 if (comprobanteATratar.Tratamiento == Entidades.Enum.TratamientoComprobante.Clonado) BorrarCamposNoClonables();
+                            }
+
+                            if (IdNaturalezaComprobanteTextBox.Text == "Venta" || IdNaturalezaComprobanteTextBox.Text == "VentaTradic")
+                            {
+                                //Informar datos actualizados del cuit.
+                                Entidades.Cuit v = ((Entidades.Sesion)Session["Sesion"]).Cuit;
+                                Razon_Social_VendedorTextBox.Text = v.RazonSocial;
+                                Domicilio_Calle_VendedorTextBox.Text = v.Domicilio.Calle;
+                                Domicilio_Sector_VendedorTextBox.Text = v.Domicilio.Sector;
+                                Provincia_VendedorDropDownList.SelectedValue = v.Domicilio.Provincia.Id;
+                                Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.DatosImpositivos.IdCondIngBrutos.ToString();
+                                Contacto_VendedorTextBox.Text = v.Contacto.Nombre;
+                                GLN_VendedorTextBox.Text = v.DatosIdentificatorios.GLN.ToString();
+
+                                Cuit_VendedorTextBox.Text = v.Nro;
+                                Domicilio_Numero_VendedorTextBox.Text = v.Domicilio.Nro;
+                                Domicilio_Torre_VendedorTextBox.Text = v.Domicilio.Torre;
+                                Localidad_VendedorTextBox.Text = v.Domicilio.Localidad;
+                                NroIBVendedorTextBox.Text = v.DatosImpositivos.NroIngBrutos;
+                                Telefono_VendedorTextBox.Text = v.Contacto.Telefono;
+                                Codigo_Interno_VendedorTextBox.Text = v.DatosIdentificatorios.CodigoInterno;
+
+                                InicioDeActividadesVendedorDatePickerWebUserControl.Text = v.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd");
+                                Domicilio_Piso_VendedorTextBox.Text = v.Domicilio.Piso;
+                                Domicilio_Depto_VendedorTextBox.Text = v.Domicilio.Depto;
+                                Domicilio_Manzana_VendedorTextBox.Text = v.Domicilio.Manzana;
+                                Cp_VendedorTextBox.Text = v.Domicilio.CodPost;
+                                Condicion_IVA_VendedorDropDownList.SelectedValue = v.DatosImpositivos.IdCondIVA.ToString();
+                                Email_VendedorTextBox.Text = v.Contacto.Email;
+
+                                //Informar datos actualizados del cliente.
+                                System.Collections.Generic.List<Entidades.Persona> listaP = sesion.ClientesDelCuit.FindAll(delegate(Entidades.Persona p)
+                                {
+                                    return p.Cuit == Nro_Doc_Identificatorio_CompradorTextBox.Text && p.IdPersona == IdPersonaCompradorTextBox.Text;
+                                });
+                                if (listaP.Count != 0)
+                                {
+                                    //Denominacion_CompradorTextBox.Text = listaP[0].RazonSocial;
+                                }
                             }
                         }
                     }

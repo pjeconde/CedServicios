@@ -2,11 +2,11 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <div class="container-fluid">
-    <div class="row">
+    <div class="row text-left">
         <div class="col-lg-12">
         <p>
             <br />
-            <span class="glyphicon glyphicon-home"></span> <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Empresa"></asp:Label>
+            <span class="glyphicon glyphicon-home gi-1-5x"></span>&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Empresa"></asp:Label>
         </p>
         <p>
             <asp:Label ID="Label2" runat="server" SkinID="TextoMediano" Text="Nuestra empresa fue fundada en el año 1980 por un grupo de profesionales con el objetivo de cubrir las necesidades informáticas que el mercado requería en ese momento.<br /> 

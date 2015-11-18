@@ -2,6 +2,7 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+
     <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton">
         <table style="border:0; padding-left:10px">
             <tr>
@@ -12,15 +13,15 @@
                 </td>
             </tr>
             <tr>
-                <td style="padding-right:5px; padding-top:5px; text-align:left;">
+                <td style="padding-right:5px; padding-top:5px; text-align:left; width: 180px">
                     Persona (cliente/proveedor):
                 </td>
-                <td style="padding-top:5px; text-align: left;">
+                <td style="padding-top:5px; text-align: left; width: 450px">
                     <asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
                 </td>
-                <td rowspan="3" style="padding-top:5px; padding-left: 10px; vertical-align: top; text-align: left">
+                <td rowspan="3" style="padding-top:5px; padding-left: 10px; vertical-align: top; text-align: left; width: 400px">
                     <asp:Panel ID="EstadosPanel" runat="server">
-                        <table style="border: 0;">
+                        <table style="width: 400px">
                             <tr>
                                 <td>
                                     Estado(s):&nbsp;
@@ -53,23 +54,23 @@
                         </table>
                     </asp:Panel>
                 </td>
-                <td style="width:550px">
+                <td style="width: 170px">
                 </td>
             </tr>
             <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
+                <td style="padding-right:5px; padding-top:5px; text-align: left">
                     Naturaleza del comprobante:
                 </td>
-                <td align="left" style="padding-top:5px">
+                <td style="padding-top:5px; text-align: left">
                     <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" Width="400px" DataValueField="Id" DataTextField="Descr"></asp:DropDownList>
                 </td>        
             </tr>
             <asp:Panel ID="DetallePanel" runat="server">
             <tr>
-	            <td align="left" style="padding-right:5px; padding-top:5px">
+	            <td style="padding-right:5px; padding-top:5px; vertical-align: top; text-align: left">
                     Detalle:
 	            </td>
-			    <td align="left" colspan="1" style="padding-top:5px; width:400px">
+			    <td colspan="1" style="padding-top:5px; width:400px; text-align: left">
 				    <asp:TextBox ID="DetalleTextBox" runat="server" MaxLength="50"></asp:TextBox>
                     (ej.: "autom" para seleccionar sólo comprobantes generados automaticamente)
 			    </td>
@@ -77,10 +78,10 @@
             </asp:Panel>
             <asp:Panel ID="PeriodoEmisionPanel" runat="server">
             <tr>
-	            <td align="left" style="padding-right:5px; padding-top:5px">
+	            <td style="padding-right:5px; padding-top:5px; text-align: left">
                     Período de emisión:
 	            </td>
-			    <td align="left" style="padding-top:5px">
+			    <td style="padding-top:5px; text-align:left">
                     desde&nbsp;
                     <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
                     <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
@@ -99,14 +100,112 @@
             <tr>
                 <td>
                 </td>
-                <td align="left" style="height: 24px; padding-top:5px" valign="top">
-                    <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
-                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                <td style="padding-top:5px; vertical-align: top; text-align: left">
+                    <asp:Button ID="BuscarButton" class="btn btn-default btn-sm" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
+                    <asp:Button ID="SalirButton" class="btn btn-default btn-sm" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                    <a href="#" role="button" class="popover-test" data-html="true" title="FILTROS DE BUSQUEDA" data-content="Si no selecciona ningún filtro, buscará todos los comprobantes que estén dentro del rango de fechas del período de emisión.<br><a href='Imagenes/Ayuda/PeriodoEmision.png' target='_blank'><br/><img src='Imagenes/Ayuda/PeriodoEmision.png' style='width:100%'/></a>"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="4" style="padding-top:20px; padding-bottom:10px">
+                <td colspan="4" style="padding-top:20px; padding-bottom:10px; text-align: center">
                     <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="4" style="text-align: left; padding-bottom: 5px;">
+                    <div style="text-align: right; width: 100%">
+                        <a href="#" role="button" runat="server" class="" data-toggle="modal" data-target="#myModalLarge" id="AyudaGrilla" visible="false"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>&nbsp;
+                    </div>
+                    <div id="myModalLarge" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="H1">GRILLA CONSULTA DE COMPROBANTES</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>
+                                        <h4>Dispone de una columna "Acción" que permite realizar las siguientes tareas:</h4>
+                                    </p>
+                                    <a href="Imagenes/Ayuda/ConsultaComprobante-Acciones.png" target="_blank"><img src="Imagenes/Ayuda/ConsultaComprobante-Acciones.png" style="width: auto" /></a>  
+                                    <br />
+                                    <h4>Actualizar estado (Interfacturas/AFIP)</h4>
+                                        <p>Actualiza un comprobante en estado "Pendiente de Confirmación" o "Pendiente de envío (AFIP/ITF)" o “Pendiente de confirmación” a estado "Vigente", para los siguientes casos:<br />
+                                        <br />
+                                        1) Gestión del CAE ONLINE aprobado por la AFIP.<br />
+                                        2) Gestión del CAE ONLINE aprobado por Interfacturas.<br />
+                                        <p>
+                                        Una vez cambiado el estado, se completan en el comprobante los siguientes datos:<br />
+                                        <a href="#" class="tooltip-test" data-placement="bottom" title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">CAE</a>, Fecha de Obtención y Vencimiento del CAE, y el Resultado.<br /><br />
+                                        Si el comprobante fue rechazado por la AFIP / Interfacturas, no se actualizará el estado. En dicho caso deberá corregir la información necesaria hasta que luego del envío, se acepte el comprobante.
+                                        </p>
+                                        Requisitos:
+                                        <ul>
+                                            <li>Estar utilizando los servicios OnLine.</li>
+                                            <li>El comprobante no debe estar en estado “Vigente” o “De baja” o “Rechazado”.</li>
+                                            <li>Solo para comprobantes de Venta electrónica.</li>
+                                        </ul>
+                                        <hr>
+                                    <h4>Consultar (Interfacturas)</h4>
+                                        <p>
+                                        Visualiza el comprobante obteniendo toda la información en línea directamente de Interfacturas. Se puede utilizar para consultar el CAE o el motivo del rechazo de la AFIP.
+                                        </p>
+                                        Requisitos:
+                                        <ul>
+                                            <li>Estar utilizando los servicios OnLine.</li>
+                                            <li>El comprobante debe haberse creado con el Canal Interfacturas. Si la gestión del
+                                                CAE la realizó contra los servicios de la AFIP, no podrà consultar con esta opción.</li>
+                                            <li>Solo para comprobantes de Venta electrónica.</li>
+                                        </ul>
+                                        <hr>
+                                    <h4>Viewer PDF (Interfacturas)</h4>
+                                        <p>Permite visualizar el comprobante en formato <kbd>PDF</kbd> en otra solapa de su navegador ( Browser ), utilizando el servicio OnLine de Interfacturas.
+                                        </p>
+                                        Requisitos:
+                                        <ul>
+                                            <li>Estar utilizando los servicios OnLine de Interfacturas.</li>
+                                            <li>El comprobante debe haberse creado con el Canal Interfacturas.</li> 
+                                            <li>Solo para comprobantes de Venta electrónica.</li>
+                                        </ul>
+                                        <hr>
+                                    <h4>Descargar XML (Interfacturas)</h4>
+                                        <p>
+                                        Descarga un archivo XML, similar al obtenido en el sitio de Interfacturas, con el CAE incluído.
+                                        </p>
+                                        Requisitos:
+                                        <ul>
+                                            <li>El comprobante debe estar con estado Vigente.</li>
+                                            <li>utilizando los servicios OnLine de Interfacturas.</li>
+                                            <li>Solo para comprobantes de Venta electrónica.</li>
+                                        </ul>
+                                        <hr>
+                                     <h4>Descargar XML</h4>
+                                        <p>
+                                        Descarga un archivo XML ( sin el <a href="#" class="tooltip-test" data-placement="bottom" title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">CAE</a> ), similar al que descarga luego del ingreso de una factura, 
+                                        <a href="Imagenes/Ayuda/AltaLote-Acciones.png" target="_blank"><img alt="Acciones" src="Imagenes/Ayuda/AltaLote-Acciones.png" style="width: auto" /></a>
+                                        para ser subido (UpLoad) en forma manual en en el sitio de Interfacturas, para obtener el CAE.
+                                        </p>
+                                        Requisitos:
+                                        <ul>
+                                            <li>El comprobante debe estar con estado “Pendiente de envío (AFIP/ITF)”.</li>
+                                            <li>Solo para comprobantes de Venta electrónica.</li>
+                                        </ul>
+                                        <hr>
+                                    <h4>Descargar PDF</h4>
+                                        <p>
+                                            Descarga el comprobante en formato <kbd>PDF</kbd>, listo para enviar a su cliente.
+                                        </p>
+                                        Requisito:
+                                        <ul>
+                                            <li>El comprobante debe estar con estado Vigente ( con el <a href="#" class="tooltip-test" data-placement="top" title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">CAE</a> generado ).</li>
+                                        </ul>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!
                 </td>
             </tr>
             <tr>
@@ -114,9 +213,9 @@
                     <asp:GridView ID="ComprobantesGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                         <Columns>
-                            <asp:TemplateField Visible="false">
+                            <asp:TemplateField Visible="false" HeaderStyle-Width="100px">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="VerLinkButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Ver detalle</asp:LinkButton>
+                                    <asp:LinkButton ID="VerLinkButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Ver</asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:TemplateField Visible="false">
@@ -213,8 +312,6 @@
                                         <asp:ListItem Value="XMLLocal" Text="Descargar XML"></asp:ListItem>
 			                            <asp:ListItem Value="PDF" Text="Descargar PDF"></asp:ListItem>
 			                            <asp:ListItem Value="XML-ClonarAlta" Text="Clonar comprobante"></asp:ListItem>
-			                            <asp:ListItem Value="ExportarRG2485" Text="Descargar interface RG2485"></asp:ListItem>
-                                        <asp:ListItem Value="ExportarRG3685" Text="Descargar interface RG3685 (Prueba)"></asp:ListItem>
 		                            </asp:DropDownList>
                                 </ItemTemplate>
                             </asp:TemplateField>

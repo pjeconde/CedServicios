@@ -27,6 +27,9 @@ namespace CedServicios.Site
                     DataBind();
                     CUITTextBox.Focus();
                 }
+                AyudaNroSerieCertif.Text = "<a href='#' role='button' class='popover-test' data-html='true' title='CERTIFICADO' data-content='Ingresar el número de serie del certificado solicitado a Interfacturas. Es de 12 dígitos.'><span class='glyphicon glyphicon-question-sign gi-1x' style='vertical-align: inherit'></span></a>";
+                //ContentPlaceHolder contentPlaceDefault = ((ContentPlaceHolder)Master.FindControl("ContentPlaceDefault"));
+                //Control control = ((Control)contentPlaceDefault.FindControl("AyudaNroSerieCertif"));
             }
         }
         protected void AceptarButton_Click(object sender, EventArgs e)

@@ -97,7 +97,7 @@
 </tr>
 <!-- Localidad -->
 <tr>
-	<td align="right" style="padding-right: 5px; padding-top:5px">
+	<td style="padding-right: 5px; padding-top:5px; text-align: right">
 		<asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ControlToValidate="LocalidadTextBox"
 			ErrorMessage="Localidad" SetFocusOnError="True" ValidationExpression="[A-Za-z\- ,.0-9]*">
 			<asp:Label ID="Label35" runat="server" SkinID="IndicadorValidacion"></asp:Label>
@@ -108,23 +108,23 @@
 		</asp:RequiredFieldValidator>
 		<asp:Label ID="Label4" runat="server" Text="Localidad"></asp:Label>
 	</td>
-	<td align="left" style="padding-top:5px">
+	<td style="padding-top:5px; text-align: left">
 		<asp:TextBox ID="LocalidadTextBox" runat="server" MaxLength="25" TabIndex="108" Width="400px"></asp:TextBox>
 	</td>
 </tr>
 <!-- Provincia y Código postal -->
 <tr>
-	<td align="right" style="padding-right: 5px; padding-top:5px; height: 25px;">
+	<td style="padding-right: 5px; padding-top:5px; height: 25px; text-align: right">
 		<asp:Label ID="Label5" runat="server" Text="Provincia"></asp:Label>
 	</td>
-	<td align="left" style="height: 25px; padding-top:5px">
-		<table border="0" cellpadding="0" cellspacing="0">
+	<td style="height: 25px; padding-top:5px; text-align: left">
+		<table>
 			<tr>
 				<td>
 					<asp:DropDownList ID="ProvinciaDropDownList" runat="server" TabIndex="109" Width="183px" DataValueField="Codigo" DataTextField="Descr">
 					</asp:DropDownList>
 				</td>
-				<td align="right" style="padding-left: 14px; padding-right: 5px">
+				<td style="padding-left: 14px; padding-right: 5px; text-align: right">
 					<asp:RegularExpressionValidator ID="RegularExpressionValidator10" runat="server"
 						ControlToValidate="CodPostTextBox" ErrorMessage="Codigo Postal" SetFocusOnError="True"
 						ValidationExpression="[A-Za-z\- ,.0-9]*">
@@ -132,7 +132,7 @@
 					</asp:RegularExpressionValidator>
 					<asp:Label ID="Label6" runat="server" Text="Código Postal"></asp:Label>
 				</td>
-				<td align="left">
+				<td style="text-align: left">
 					<asp:TextBox ID="CodPostTextBox" runat="server" MaxLength="8" TabIndex="110" Width="80px"></asp:TextBox>
 				</td>
 			</tr>

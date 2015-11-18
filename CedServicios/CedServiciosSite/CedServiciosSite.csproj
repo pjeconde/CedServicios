@@ -107,6 +107,11 @@
     <Content Include="Ayuda\Novedades\images20130906\image21.png" />
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="ComprobanteGeneracionAutomatica.aspx" />
+    <Content Include="Imagenes\Ayuda\AltaLote-Acciones.png" />
+    <Content Include="Imagenes\Ayuda\Cabecera_Factura-DatosVendedor.png" />
+    <Content Include="Imagenes\Ayuda\ConsultaComprobante-Acciones.png" />
+    <Content Include="Imagenes\Ayuda\ConsultaComprobante-DescargarXML.png" />
+    <Content Include="Imagenes\Ayuda\PeriodoEmision.png" />
     <Content Include="Imagenes\Empresa\SoftwareAMedida.jpg" />
     <Content Include="InstitucionalSoftwareAMedida.aspx" />
     <Content Include="PruebasBS.aspx" />

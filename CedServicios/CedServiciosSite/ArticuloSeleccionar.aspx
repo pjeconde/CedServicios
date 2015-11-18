@@ -13,7 +13,7 @@
                     <asp:Label ID="Label3" runat="server" Text="Articulo(s) perteneciente(s) al CUIT"></asp:Label>
                 </td>
                 <td align="left" style="padding-top:20px">
-                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
                 </td>
                 <td style="width:500px">
                 </td>

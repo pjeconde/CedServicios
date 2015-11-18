@@ -6,14 +6,14 @@
 <%@ Register TagPrefix="uc1" TagName="datosIdentificatorios" Src="~/Controles/DatosIdentificatorios.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <table style="padding-left:10px">
         <tr>
-            <td align="center" colspan="2" style="padding-top:20px">
+            <td colspan="2" style="padding-top:20px; text-align: center">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Modificación de Persona"></asp:Label>
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top: 20px">
+            <td style="padding-right:5px; padding-top: 20px; text-align: right">
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
                     ControlToValidate="CUITTextBox" ErrorMessage="CUIT" SetFocusOnError="True" ValidationExpression="[0-9]{11}">
                     <asp:Label ID="Label1" runat="server" SkinID="IndicadorValidacion"></asp:Label>
@@ -24,8 +24,8 @@
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="Label3" runat="server" Text="Persona perteneciente al CUIT"></asp:Label>
             </td>
-            <td align="left" style="padding-top:20px">
-                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+            <td style="padding-top:20px; text-align: left">
+                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:Label ID="Label10" runat="server" Text="Tipo de Persona:"></asp:Label>
                 <asp:RadioButton ID="ClienteRadioButton" Text="Cliente" GroupName="TipoPersona" runat="server" OnCheckedChanged="TipoPersona_CheckedChanged" AutoPostBack="true"  />
@@ -34,7 +34,7 @@
             </td>
         </tr>
         <tr>
-	        <td align="right" style="padding-right:5px; padding-top:5px">
+	        <td style="padding-right:5px; padding-top:5px; text-align: right">
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"
                     ControlToValidate="NroDocTextBox" ErrorMessage="Nro. de Documnento" SetFocusOnError="True" ValidationExpression="[0-9]{11}">
                     <asp:Label ID="Label4" runat="server" SkinID="IndicadorValidacion"></asp:Label>
@@ -45,20 +45,20 @@
                 </asp:RequiredFieldValidator>
 		        <asp:Label ID="Label18" runat="server" Text="Tipo y Nro. de Documento"></asp:Label>
 	        </td>
-			<td align="left" style="padding-top:5px">
+			<td style="padding-top:5px; text-align: left">
 				<asp:DropDownList ID="TipoDocDropDownList" runat="server" TabIndex="2" 
                     Width="100px" DataValueField="Codigo" DataTextField="Descr" 
                     ToolTip="Para personas del exterior seleccione 'CUITPais'" AutoPostBack="true"
                     onselectedindexchanged="TipoDocDropDownList_SelectedIndexChanged" ></asp:DropDownList>
-                <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="80px" ></asp:TextBox>
+                <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="90px" ></asp:TextBox>
                 <asp:DropDownList ID="DestinosCuitDropDownList" runat="server" TabIndex="3" Width="306px" DataValueField="Codigo" DataTextField="Descr" Visible="false" ></asp:DropDownList>
 			</td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top:5px">
+            <td style="padding-right:5px; padding-top:5px; text-align: right">
                 <asp:Label ID="Label7" runat="server" Text="Id.Persona"></asp:Label>
             </td>
-            <td align="left" style="padding-top:5px">
+            <td style="padding-top:5px; text-align: left">
                 <asp:TextBox ID="IdPersonaTextBox" runat="server" MaxLength="50" TabIndex="501" Width="300px"></asp:TextBox>
             </td>        
         </tr>
@@ -68,14 +68,14 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top:2px">
+            <td style="padding-right:5px; padding-top:2px; text-align: right">
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="RazonSocialTextBox"
                     ErrorMessage="Raz.Soc." SetFocusOnError="True">
                     <asp:Label ID="Label8" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="Label9" runat="server" Text="Razón Social"></asp:Label>
             </td>
-            <td align="left" style="padding-top:2px">
+            <td style="padding-top:2px; text-align: left">
                 <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="4" Width="300px"></asp:TextBox>
             </td>        
         </tr>
@@ -88,12 +88,12 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px">
+            <td style="padding-right:5px; text-align:right">
                 <asp:Label ID="Label38" runat="server" Text="Envío de <b>aviso</b> automático"></asp:Label><br />
                 <asp:Label ID="Label46" runat="server" Text="<b>para visualización</b> del comprobante"></asp:Label>
             </td>
             <td style="border-style:solid; border-color:Gray; border-width:1px">
-                <table border="0" cellpadding="0" cellspacing="0">
+                <table>
                     <tr>
                         <td align="right" style="padding-right:5px; padding-top:3px">
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator18" runat="server"
@@ -135,7 +135,7 @@
         <tr>
             <td>
             </td>
-            <td align="left" style="height: 24px; padding-top:20px">
+            <td style="height: 24px; padding-top:20px; text-align: left">
                 <asp:Button ID="AceptarButton" runat="server" TabIndex="504" Text="Aceptar" onclick="AceptarButton_Click" />
                 <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="505" Text="Cancelar" onclick="SalirButton_Click" />
             </td>

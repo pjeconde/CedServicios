@@ -74,7 +74,7 @@
                     <asp:Label ID="Label4" runat="server" Text="Artículo perteneciente al CUIT"></asp:Label>
                 </td>
                 <td align="left" style="padding-top:20px">
-                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
                 </td>
             </tr>
             <tr>

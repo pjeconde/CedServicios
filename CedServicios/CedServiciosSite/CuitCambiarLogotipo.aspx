@@ -6,18 +6,18 @@
 <%@ Register TagPrefix="uc1" TagName="datosIdentificatorios" Src="~/Controles/DatosIdentificatorios.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <table style="padding-left:10px">
         <tr>
-            <td align="center" colspan="2" style="padding-top:20px">
+            <td colspan="2" style="padding-top:20px; text-align:center">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Cambio del logotipo de CUIT"></asp:Label>
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top: 20px">
+            <td style="padding-right:5px; padding-top: 20px; text-align:right">
                 <asp:Label ID="Label3" runat="server" Text="CUIT"></asp:Label>
             </td>
-            <td align="left" style="padding-top:20px">
-                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+            <td style="padding-top:20px; text-align:left">
+                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
             </td>
         </tr>
         <tr>

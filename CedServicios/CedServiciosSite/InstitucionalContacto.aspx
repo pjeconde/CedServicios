@@ -1,10 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="InstitucionalContacto.aspx.cs" Inherits="CedServicios.Site.InstitucionalContacto" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <table style="padding-left:10px">
         <tr>
-            <td align="center" colspan="4" style="padding-top: 20px">
-                <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Contacto"></asp:Label>
+            <td colspan="4" style="padding-top: 20px; text-align: center">
+                <span class="glyphicon glyphicon-pencil gi-1-5x"></span>&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Contacto"></asp:Label>
             </td>
         </tr>
         <tr>
