@@ -25,7 +25,7 @@
                                 <table style="padding-left: 10px; padding-right: 10px;">
                                     <tr>
                                         <td colspan="3" style="padding-top: 10px; text-align: center">
-                                            <asp:Label ID="Label6" runat="server" SkinID="TituloPagina" Text="Inisiar sesión"></asp:Label>
+                                            <asp:Label ID="Label6" runat="server" SkinID="TituloPagina" Text="Iniciar sesión"></asp:Label>
                                         </td>
                                     </tr>
                                     <tr>
