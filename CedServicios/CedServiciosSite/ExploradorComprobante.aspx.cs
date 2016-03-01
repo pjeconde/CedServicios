@@ -206,7 +206,7 @@ namespace CedServicios.Site
                 }
             }
         }
-        private bool ValidarFiltros()
+        private bool ValidacionFiltrosOK()
         {
             if (!RN.Funciones.ValidarFechaYYYYMMDD(FechaDesdeTextBox.Text))
             {
@@ -228,52 +228,54 @@ namespace CedServicios.Site
             }
             else
             {
-                if (!ValidarFiltros()) { return; };
-                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
-                MensajeLabel.Text = String.Empty;
-                Entidades.Persona persona;
-                if (ClienteDropDownList.SelectedIndex >= 0)
+                if (ElementoTextBox.Text == "Contrato" || ValidacionFiltrosOK()) 
                 {
-                    persona = ((List<Entidades.Persona>)ViewState["Personas"])[ClienteDropDownList.SelectedIndex];
-                }
-                else
-                {
-                    persona = new Entidades.Persona();
-                }
-                Entidades.NaturalezaComprobante naturalezaComprobante;
-                if (NaturalezaComprobanteDropDownList.SelectedIndex >= 0)
-                {
-                    naturalezaComprobante = ((List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"])[NaturalezaComprobanteDropDownList.SelectedIndex];
-                }
-                else
-                {
-                    naturalezaComprobante = new Entidades.NaturalezaComprobante();
-                }
-                List<Entidades.Estado> estados = new List<Entidades.Estado>();
-                if (EstadoVigenteCheckBox.Checked) estados.Add(new Entidades.EstadoVigente());
-                if (EstadoPteEnvioCheckBox.Checked) estados.Add(new Entidades.EstadoPteEnvio());
-                if (EstadoPteConfCheckBox.Checked) estados.Add(new Entidades.EstadoPteConf());
-                if (EstadoDeBajaCheckBox.Checked) estados.Add(new Entidades.EstadoDeBaja());
-                if (EstadoPteAutorizCheckBox.Checked) estados.Add(new Entidades.EstadoPteAutoriz());
-                if (EstadoRechCheckBox.Checked) estados.Add(new Entidades.EstadoRech());
-                lista = RN.Comprobante.ListaFiltrada(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, DetalleTextBox.Text, sesion);
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
+                    MensajeLabel.Text = String.Empty;
+                    Entidades.Persona persona;
+                    if (ClienteDropDownList.SelectedIndex >= 0)
+                    {
+                        persona = ((List<Entidades.Persona>)ViewState["Personas"])[ClienteDropDownList.SelectedIndex];
+                    }
+                    else
+                    {
+                        persona = new Entidades.Persona();
+                    }
+                    Entidades.NaturalezaComprobante naturalezaComprobante;
+                    if (NaturalezaComprobanteDropDownList.SelectedIndex >= 0)
+                    {
+                        naturalezaComprobante = ((List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"])[NaturalezaComprobanteDropDownList.SelectedIndex];
+                    }
+                    else
+                    {
+                        naturalezaComprobante = new Entidades.NaturalezaComprobante();
+                    }
+                    List<Entidades.Estado> estados = new List<Entidades.Estado>();
+                    if (EstadoVigenteCheckBox.Checked) estados.Add(new Entidades.EstadoVigente());
+                    if (EstadoPteEnvioCheckBox.Checked) estados.Add(new Entidades.EstadoPteEnvio());
+                    if (EstadoPteConfCheckBox.Checked) estados.Add(new Entidades.EstadoPteConf());
+                    if (EstadoDeBajaCheckBox.Checked) estados.Add(new Entidades.EstadoDeBaja());
+                    if (EstadoPteAutorizCheckBox.Checked) estados.Add(new Entidades.EstadoPteAutoriz());
+                    if (EstadoRechCheckBox.Checked) estados.Add(new Entidades.EstadoRech());
+                    lista = RN.Comprobante.ListaFiltrada(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, DetalleTextBox.Text, sesion);
 
-                ContentPlaceHolder contentPlaceDefault = ((ContentPlaceHolder)Master.FindControl("ContentPlaceDefault"));
-                System.Web.UI.HtmlControls.HtmlAnchor control = ((System.Web.UI.HtmlControls.HtmlAnchor)contentPlaceDefault.FindControl("AyudaGrilla"));
-                control.Visible = false;
-                if (lista.Count == 0)
-                {
-                    ComprobantesGridView.DataSource = null;
-                    ComprobantesGridView.DataBind();
-                    MensajeLabel.Text = "No se han encontrado " + ((naturalezaComprobante.Id == "VentaContrato") ? "Contrato" : "Comprobante") + "s que satisfagan la busqueda";
-                }
-                else
-                {
-                    ComprobantesGridView.DataSource = lista;
-                    ViewState["Comprobantes"] = lista;
-                    ComprobantesGridView.DataBind();
-                    control.Visible = true;
+                    ContentPlaceHolder contentPlaceDefault = ((ContentPlaceHolder)Master.FindControl("ContentPlaceDefault"));
+                    System.Web.UI.HtmlControls.HtmlAnchor control = ((System.Web.UI.HtmlControls.HtmlAnchor)contentPlaceDefault.FindControl("AyudaGrilla"));
+                    control.Visible = false;
+                    if (lista.Count == 0)
+                    {
+                        ComprobantesGridView.DataSource = null;
+                        ComprobantesGridView.DataBind();
+                        MensajeLabel.Text = "No se han encontrado " + ((naturalezaComprobante.Id == "VentaContrato") ? "Contrato" : "Comprobante") + "s que satisfagan la busqueda";
+                    }
+                    else
+                    {
+                        ComprobantesGridView.DataSource = lista;
+                        ViewState["Comprobantes"] = lista;
+                        ComprobantesGridView.DataBind();
+                        control.Visible = true;
+                    }
                 }
             }
         }
