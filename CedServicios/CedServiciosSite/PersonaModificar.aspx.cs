@@ -29,6 +29,8 @@ namespace CedServicios.Site
                     DataBind();
 
                     Entidades.Persona persona = (Entidades.Persona)Session["Persona"];
+                    RN.Persona.LeerDestinatariosFrecuentes(persona, false, sesion);
+                    if (persona.DatosEmailAvisoComprobantePersona.DestinatariosFrecuentes.Count == 0) persona.DatosEmailAvisoComprobantePersona.DestinatariosFrecuentes.Add(new Entidades.DestinatarioFrecuente(string.Empty, string.Empty, string.Empty));
 
                     CUITTextBox.Text = persona.Cuit;
                     if (persona.EsCliente && persona.EsProveedor)
@@ -77,6 +79,7 @@ namespace CedServicios.Site
                     DatosIdentificatorios.GLN = persona.DatosIdentificatorios.GLN;
                     DatosIdentificatorios.CodigoInterno = persona.DatosIdentificatorios.CodigoInterno;
                     IdPersonaTextBox.Text = persona.IdPersona;
+                    DatosEmailAvisoComprobantePersona.Datos = persona.DatosEmailAvisoComprobantePersona;
                     EmailAvisoVisualizacionTextBox.Text = persona.EmailAvisoVisualizacion;
                     PasswordAvisoVisualizacionTextBox.Text = persona.PasswordAvisoVisualizacion;
                     CUITTextBox.Enabled = false;
@@ -155,6 +158,8 @@ namespace CedServicios.Site
                     personaHasta.IdPersona = IdPersonaTextBox.Text;
                     personaHasta.EmailAvisoVisualizacion = EmailAvisoVisualizacionTextBox.Text;
                     personaHasta.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
+                    personaHasta.DatosEmailAvisoComprobantePersona = DatosEmailAvisoComprobantePersona.Datos;
+                    RN.Persona.Validar(personaHasta);
                     RN.Persona.Modificar(personaDesde, personaHasta, sesion);
 
                     CUITTextBox.Enabled = false;
@@ -167,6 +172,7 @@ namespace CedServicios.Site
                     DatosImpositivos.Enabled = false;
                     DatosIdentificatorios.Enabled = false;
                     IdPersonaTextBox.Enabled = false;
+                    DatosEmailAvisoComprobantePersona.Enabled = false;
                     EmailAvisoVisualizacionTextBox.Enabled = false;
                     PasswordAvisoVisualizacionTextBox.Enabled = false;
                     AceptarButton.Enabled = false;

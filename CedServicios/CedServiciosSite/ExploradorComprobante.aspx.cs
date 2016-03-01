@@ -159,6 +159,17 @@ namespace CedServicios.Site
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
                 case "Modificacion":
+                    if (comprobante.NaturalezaComprobante.Id =="VentaContrato") 
+                    {
+                        Entidades.Persona persona = new Entidades.Persona();
+                        persona.Cuit = comprobante.Cuit;
+                        persona.Documento.Tipo = comprobante.Documento.Tipo;
+                        persona.Documento.Nro = comprobante.Documento.Nro;
+                        persona.IdPersona = comprobante.IdPersona;
+                        persona.DesambiguacionCuitPais = comprobante.DesambiguacionCuitPais;
+                        RN.Persona.LeerDestinatariosFrecuentes(persona, true, sesion);
+                        comprobante.DatosEmailAvisoComprobanteContrato.DestinatariosFrecuentes = persona.DatosEmailAvisoComprobantePersona.DestinatariosFrecuentes;
+                    }
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Modificacion, comprobante);
                     script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);

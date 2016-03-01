@@ -4,6 +4,7 @@
 <%@ Register TagPrefix="uc1" TagName="contactoConsulta" Src="~/Controles/ContactoConsulta.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="datosImpositivosConsulta" Src="~/Controles/DatosImpositivosConsulta.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="datosIdentificatoriosConsulta" Src="~/Controles/DatosIdentificatoriosConsulta.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="datosEmailAvisoComprobantePersona" Src="~/Controles/DatosEmailAvisoComprobantePersona.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
@@ -74,7 +75,7 @@
             </td>
         </tr>
     </table>
-    <asp:Panel ID="ClientePanel" runat="server" CssClass="ModalWindow" ScrollBars="Auto">
+    <asp:Panel ID="ClientePanel" runat="server" CssClass="ModalWindow" ScrollBars="Vertical" Height="98%">
         <table width="100%">
             <tr>
                 <td align="center" colspan="2" style="padding-top:20px">
@@ -115,8 +116,15 @@
                 </td>        
             </tr>
             <tr>
-                <td colspan="2">
-                     <hr noshade="noshade" size="1" color="#cccccc" />
+                <td colspan="2" style="padding-top:5px">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height:1px; background-color:#cccccc">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-top:5px">
                 </td>
             </tr>
             <tr>
@@ -131,6 +139,7 @@
             <uc1:contactoConsulta ID="Contacto" runat="server" />
             <uc1:datosImpositivosConsulta ID="DatosImpositivos" runat="server" />
             <uc1:datosIdentificatoriosConsulta ID="DatosIdentificatorios" runat="server" />
+            <uc1:datosEmailAvisoComprobantePersona ID="DatosEmailAvisoComprobantePersona" runat="server" />
             <tr>
                 <td colspan="2" style="padding-top:3px">
                 </td>
@@ -138,7 +147,8 @@
             <tr>
                 <td align="right" style="padding-right:5px">
                     <asp:Label ID="Label38" runat="server" Text="Envío de <b>aviso</b> automático"></asp:Label><br />
-                    <asp:Label ID="Label46" runat="server" Text="<b>para visualización</b> del comprobante"></asp:Label>
+                    <asp:Label ID="Label46" runat="server" Text="<b>para visualización</b> del comprobante"></asp:Label><br />
+                <asp:Label ID="Label4" runat="server" Text="(desde INTERFACTURAS)"></asp:Label>
                 </td>
                 <td style="border-style:solid; border-color:Gray; border-width:1px">
                     <table border="0" cellpadding="0" cellspacing="0">

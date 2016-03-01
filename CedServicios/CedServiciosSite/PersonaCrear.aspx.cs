@@ -18,6 +18,9 @@ namespace CedServicios.Site
                 Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
                 DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                 DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                Entidades.DatosEmailAvisoComprobantePersona datos = new Entidades.DatosEmailAvisoComprobantePersona();
+                datos.DestinatariosFrecuentes.Add(new Entidades.DestinatarioFrecuente(string.Empty, string.Empty, string.Empty));
+                DatosEmailAvisoComprobantePersona.Datos = datos;
                 DataBind();
                 if (Funciones.SessionTimeOut(Session))
                 {
@@ -101,6 +104,8 @@ namespace CedServicios.Site
                     persona.IdPersona = IdPersonaTextBox.Text;
                     persona.EmailAvisoVisualizacion = EmailAvisoVisualizacionTextBox.Text;
                     persona.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
+                    persona.DatosEmailAvisoComprobantePersona = DatosEmailAvisoComprobantePersona.Datos;
+                    RN.Persona.Validar(persona);
                     RN.Persona.Crear(persona, sesion);
 
                     CUITTextBox.Enabled = false;
@@ -112,6 +117,7 @@ namespace CedServicios.Site
                     DatosImpositivos.Enabled = false;
                     DatosIdentificatorios.Enabled = false;
                     IdPersonaTextBox.Enabled = false;
+                    DatosEmailAvisoComprobantePersona.Enabled = false;
                     EmailAvisoVisualizacionTextBox.Enabled = false;
                     PasswordAvisoVisualizacionTextBox.Enabled = false;
                     AceptarButton.Enabled = false;
@@ -126,6 +132,7 @@ namespace CedServicios.Site
                     {
                         MensajeLabel.Text = "Ya existe una Persona con este 'Nro.'";
                     }
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
                 }
             }
         }

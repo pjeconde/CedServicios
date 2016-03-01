@@ -59,6 +59,8 @@ namespace CedServicios.Site
                 int rowIndex = Convert.ToInt32(e.CommandArgument);
                 List<Entidades.Persona> lista = (List<Entidades.Persona>)ViewState["Personas"];
                 Entidades.Persona persona = lista[rowIndex];
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                RN.Persona.LeerDestinatariosFrecuentes(persona, false, sesion);
 
                 CUITTextBox.Text = persona.Cuit;
                 if (persona.EsCliente && persona.EsProveedor)
@@ -104,6 +106,7 @@ namespace CedServicios.Site
                 DatosIdentificatorios.GLN = persona.DatosIdentificatorios.GLN;
                 DatosIdentificatorios.CodigoInterno = persona.DatosIdentificatorios.CodigoInterno;
                 IdPersonaTextBox.Text = persona.IdPersona;
+                DatosEmailAvisoComprobantePersona.Datos = persona.DatosEmailAvisoComprobantePersona;
                 EmailAvisoVisualizacionTextBox.Text = persona.EmailAvisoVisualizacion;
                 PasswordAvisoVisualizacionTextBox.Text = persona.PasswordAvisoVisualizacion;
 
@@ -117,6 +120,7 @@ namespace CedServicios.Site
                 DatosImpositivos.Enabled = false;
                 DatosIdentificatorios.Enabled = false;
                 IdPersonaTextBox.Enabled = false;
+                DatosEmailAvisoComprobantePersona.Enabled = false;
                 EmailAvisoVisualizacionTextBox.Enabled = false;
                 PasswordAvisoVisualizacionTextBox.Enabled = false;
 

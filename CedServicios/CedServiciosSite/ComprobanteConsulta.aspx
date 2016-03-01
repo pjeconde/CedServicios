@@ -7,6 +7,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Src="~/Facturacion/Electronica/ImpuestosConsulta.ascx" TagName="ImpuestosGlobales" TagPrefix="uc8" %>
 <%@ Register Src="~/Facturacion/Electronica/DescuentosConsulta.ascx" TagName="DescuentosGlobales" TagPrefix="DescUC" %>
+<%@ Register Src="~/Controles/DatosEmailAvisoComprobanteContratoConsulta.ascx" TagName="DatosEmailAvisoComprobanteContratoConsulta" TagPrefix="uc5" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -1461,6 +1462,25 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                             </td>
                                         </tr>
                                     </table>
+                                </td>
+                            </tr>
+                            <!-- DATOS EMAIL AVISO COMPROBANTE CONTRATO -->
+                            <tr>
+                                <td style="text-align:center">
+                                    <asp:Panel ID="DatosEmailAvisoComprobanteContratoConsultaPanel" runat="server">
+                                        <table style="width:1282px">
+                                            <tr>
+                                                <td>
+                                                    <uc5:DatosEmailAvisoComprobanteContratoConsulta ID="DatosEmailAvisoComprobanteContratoConsulta1" runat="server"></uc5:DatosEmailAvisoComprobanteContratoConsulta>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <hr noshade="noshade" size="1" color="#cccccc" />
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
                                 </td>
                             </tr>
                             <!-- ACCIONES -->

@@ -107,6 +107,10 @@
     <Content Include="Ayuda\Novedades\images20130906\image21.png" />
     <Content Include="CedeiraSF-Logo.gif" />
     <Content Include="ComprobanteGeneracionAutomatica.aspx" />
+    <Content Include="Controles\DatosEmailAvisoComprobanteContrato.ascx" />
+    <Content Include="Controles\DatosEmailAvisoComprobanteContratoConsulta.ascx" />
+    <Content Include="Controles\DatosEmailAvisoComprobantePersona.ascx" />
+    <Content Include="Controles\DatosEmailAvisoComprobantePersonaConsulta.ascx" />
     <Content Include="Imagenes\Ayuda\AltaLote-Acciones.png" />
     <Content Include="Imagenes\Ayuda\Cabecera_Factura-DatosVendedor.png" />
     <Content Include="Imagenes\Ayuda\ConsultaComprobante-Acciones.png" />
@@ -477,6 +481,34 @@
     </Compile>
     <Compile Include="ComprobanteGeneracionAutomatica.aspx.designer.cs">
       <DependentUpon>ComprobanteGeneracionAutomatica.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\DatosEmailAvisoComprobanteContrato.ascx.cs">
+      <DependentUpon>DatosEmailAvisoComprobanteContrato.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\DatosEmailAvisoComprobanteContrato.ascx.designer.cs">
+      <DependentUpon>DatosEmailAvisoComprobanteContrato.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\DatosEmailAvisoComprobanteContratoConsulta.ascx.cs">
+      <DependentUpon>DatosEmailAvisoComprobanteContratoConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\DatosEmailAvisoComprobanteContratoConsulta.ascx.designer.cs">
+      <DependentUpon>DatosEmailAvisoComprobanteContratoConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\DatosEmailAvisoComprobantePersona.ascx.cs">
+      <DependentUpon>DatosEmailAvisoComprobantePersona.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\DatosEmailAvisoComprobantePersona.ascx.designer.cs">
+      <DependentUpon>DatosEmailAvisoComprobantePersona.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\DatosEmailAvisoComprobantePersonaConsulta.ascx.cs">
+      <DependentUpon>DatosEmailAvisoComprobantePersonaConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\DatosEmailAvisoComprobantePersonaConsulta.ascx.designer.cs">
+      <DependentUpon>DatosEmailAvisoComprobantePersonaConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="InstitucionalSoftwareAMedida.aspx.cs">
       <DependentUpon>InstitucionalSoftwareAMedida.aspx</DependentUpon>
