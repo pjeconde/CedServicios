@@ -148,6 +148,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Button ConsultarCAEAFIPButton;
         
         /// <summary>
+        /// CuitAConsultarTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox CuitAConsultarTextBox;
+        
+        /// <summary>
         /// ConsultarDatosFiscalesButton control.
         /// </summary>
         /// <remarks>

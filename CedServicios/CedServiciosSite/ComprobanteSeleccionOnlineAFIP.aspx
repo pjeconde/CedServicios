@@ -150,6 +150,15 @@
             </td>
         </tr>
         <tr>
+            <td align="right" style="padding-top:10px">
+                Cuit a consultar:
+            </td>
+            <td align="left" style="padding-top:10px; padding-left:5px">
+                <asp:TextBox ID="CuitAConsultarTextBox" runat="server" ToolTip="">
+                </asp:TextBox>
+            </td>
+        </tr>
+        <tr>
             <td colspan="2" style="padding-top:10px">
                 <asp:Button ID="ConsultarDatosFiscalesButton" runat="server"
                     OnClick="ConsultarDatosFiscalesButton_Click" Text="Obtener Datos Fiscales"

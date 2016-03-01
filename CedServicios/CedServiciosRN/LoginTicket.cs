@@ -46,7 +46,7 @@ namespace CedServicios.RN
         ar.gov.afip.wsfev1.FEAuthRequest objAutorizacionfev1;
         System.Net.WebProxy wp;
 
-        public void ObtenerTicket(string RutaCertificado, long Cuit)
+        public void ObtenerTicket(string RutaCertificado, long Cuit, string Servicio)
         {
             LoginTicket objTicketRespuesta;
             string strTicketRespuesta;
@@ -74,7 +74,12 @@ namespace CedServicios.RN
                 //URL Login
                 string urlWsaa = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_wsaa_LoginCMSService"];
                 //Obtener Ticket
-                strTicketRespuesta = ObtenerLoginTicketResponse(DEFAULT_SERVICIO, urlWsaa, RutaCertificado, false, Wp);
+                string servicio = DEFAULT_SERVICIO;
+                if (Servicio != "")
+                {
+                    servicio = Servicio;
+                }
+                strTicketRespuesta = ObtenerLoginTicketResponse(servicio, urlWsaa, RutaCertificado, false, Wp);
                 objAutorizacion = new ar.gov.afip.wsw.FEAuthRequest();
                 objAutorizacion.Token = Token;
                 objAutorizacion.Sign = Sign;

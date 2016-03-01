@@ -385,7 +385,31 @@ namespace CedServicios.Site
 
         protected void ConsultarDatosFiscalesButton_Click(object sender, EventArgs e)
         {
-            string respuesta = RN.ServiciosAFIP.DatosFiscales(CuitEmisorTextBox.Text, ((Entidades.Sesion)Session["Sesion"]));
+            try
+            {
+                string respuesta = RN.ServiciosAFIP.DatosFiscales(CuitAConsultarTextBox.Text, ((Entidades.Sesion)Session["Sesion"]));
+                respuesta = respuesta.Replace("\n", "\\n");
+                respuesta = respuesta.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" ,"");
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+            }
+            catch (Exception ex)
+            {
+                string errormsg = ex.Message.Replace("\n", "");
+                if (ex.InnerException != null)
+                {
+                    try
+                    {
+                        errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                    }
+                    catch
+                    {
+                    }
+                    errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                }
+                errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+            }
         }
     }
 }

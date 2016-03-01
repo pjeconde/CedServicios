@@ -82,7 +82,7 @@ namespace CedServicios.RN
                 {
                     RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Convert.ToInt64("30710015062") + ".p12");
                 }
-                ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro));
+                ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro), "wsfe");
 
                 //Guardar Ticket de AFIP
                 Sesion.Ticket = new Entidades.Ticket();
