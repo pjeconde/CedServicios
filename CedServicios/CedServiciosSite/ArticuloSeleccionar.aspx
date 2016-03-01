@@ -1,8 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ArticuloSeleccionar.aspx.cs" Inherits="CedServicios.Site.ArticuloSeleccionar" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
     <asp:Panel ID="Panel2" runat="server" DefaultButton="BuscarButton">
-        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+        <table align="center">
             <tr>
                 <td align="center" colspan="3" style="padding-top:20px">
                     <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="? de Artículo"></asp:Label>
@@ -97,6 +100,9 @@
             </tr>
         </table>
     </asp:Panel>
+    </div>
+    </div>
+    </div>
     <script type="text/javascript">
         function BorrarMensaje() {
             {

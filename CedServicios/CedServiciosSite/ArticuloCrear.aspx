@@ -1,7 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ArticuloCrear.aspx.cs" Inherits="CedServicios.Site.ArticuloCrear" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table style="padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table align="center">
         <tr>
             <td colspan="2" style="padding-top:20px; text-align: center">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Alta de Artículo"></asp:Label>
@@ -114,4 +117,7 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
 </asp:Content>

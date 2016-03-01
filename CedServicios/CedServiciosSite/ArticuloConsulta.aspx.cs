@@ -73,8 +73,10 @@ namespace CedServicios.Site
                 IndicacionExentoGravadoDropDownList.Enabled = false;
                 AlicuotaIVADropDownList.Enabled = false;
 
-                AjaxControlToolkit.ModalPopupExtender modalPopupExtender1 = (AjaxControlToolkit.ModalPopupExtender)ArticulosGridView.Rows[rowIndex].FindControl("ModalPopupExtender1");
-                modalPopupExtender1.Show();
+                ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", "ShowModalArticulo();", true);
+                
+                //AjaxControlToolkit.ModalPopupExtender modalPopupExtender1 = (AjaxControlToolkit.ModalPopupExtender)ArticulosGridView.Rows[rowIndex].FindControl("ModalPopupExtender1");
+                //modalPopupExtender1.Show();
             }
         }
         protected void SalirButton_Click(object sender, EventArgs e)

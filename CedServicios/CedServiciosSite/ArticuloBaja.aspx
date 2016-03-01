@@ -1,7 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ArticuloBaja.aspx.cs" Inherits="CedServicios.Site.ArticuloBaja" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table style="padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table align="center">
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Baja/Anul.baja de Artículo"></asp:Label>
@@ -108,6 +111,9 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
     <script type="text/javascript">
         function BorrarMensaje() {
             {
