@@ -24,6 +24,7 @@ namespace CedServicios.Entidades
         private int orden;
         private bool esCliente;
         private bool esProveedor;
+        private DatosEmailAvisoComprobantePersona datosEmailAvisoComprobantePersona;
 
         public Persona()
         {
@@ -32,6 +33,7 @@ namespace CedServicios.Entidades
             contacto = new Contacto();
             datosImpositivos = new DatosImpositivos();
             datosIdentificatorios = new DatosIdentificatorios();
+            datosEmailAvisoComprobantePersona = new DatosEmailAvisoComprobantePersona();
             wF = new WF();
         }
 
@@ -132,6 +134,17 @@ namespace CedServicios.Entidades
             get
             {
                 return datosIdentificatorios;
+            }
+        }
+        public DatosEmailAvisoComprobantePersona DatosEmailAvisoComprobantePersona
+        {
+            set
+            {
+                datosEmailAvisoComprobantePersona = value;
+            }
+            get
+            {
+                return datosEmailAvisoComprobantePersona;
             }
         }
         public string EmailAvisoVisualizacion

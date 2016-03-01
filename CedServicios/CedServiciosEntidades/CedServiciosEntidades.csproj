@@ -45,6 +45,9 @@
     <Compile Include="Articulo.cs" />
     <Compile Include="ComprobanteATratar.cs" />
     <Compile Include="Const.cs" />
+    <Compile Include="DestinatarioFrecuente.cs" />
+    <Compile Include="DatosEmailAvisoComprobanteContrato.cs" />
+    <Compile Include="DatosEmailAvisoComprobantePersona.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="NaturalezaComprobante.cs" />
     <Compile Include="PeriodicidadEmision.cs" />

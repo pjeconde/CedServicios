@@ -247,6 +247,15 @@ namespace CedServicios.Site {
         protected global::CedServicios.Site.Controles.DatosIdentificatoriosConsulta DatosIdentificatorios;
         
         /// <summary>
+        /// Control DatosEmailAvisoComprobantePersona.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::CedServicios.Site.Controles.DatosEmailAvisoComprobantePersona DatosEmailAvisoComprobantePersona;
+        
+        /// <summary>
         /// Control Label38.
         /// </summary>
         /// <remarks>
@@ -263,6 +272,15 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label46;
+        
+        /// <summary>
+        /// Control Label4.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
         /// Control Label45.

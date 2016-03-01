@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Data;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,11 +11,17 @@ using System.IO;
 using Ionic.Zip;
 using System.Diagnostics;
 using System.Net;
+using System.Xml.Serialization;
+using CedServicios.Site.Facturacion.Electronica.Reportes;
 
 namespace CedServicios.Site
 {
     public partial class ComprobanteGeneracionAutomatica : System.Web.UI.Page
     {
+        CrystalDecisions.CrystalReports.Engine.ReportDocument facturaRpt;
+        CrystalDecisions.CrystalReports.Engine.ReportDocument imagenRpt;
+        CrystalDecisions.CrystalReports.Engine.ReportDocument codigobarrasRpt;
+        DataSet dsImages = new DataSet();
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
@@ -122,6 +129,7 @@ namespace CedServicios.Site
                 else
                 {
                     MostrarResultadoEmision(cantidadContratosSeleccionados, cantidadComprobantesGenerados, cantidadComprobantesEnviados, cantidadComprobantesConfirmados, cantidadComprobantesRechazados, listaErrores, listaComprobantesGenerados);
+                    BuscarContratos(false);
                 }
                 GenerarComprobantesButton.Visible = false;
             }
@@ -132,20 +140,18 @@ namespace CedServicios.Site
             CantidadContratosSeleccionados++;
             Entidades.Comprobante contrato = ((List<Entidades.Comprobante>)ViewState["Comprobantes"])[NroItemContrato];
 
-            FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
-            #region Obtención del lote desde el comprobante
-            System.Xml.Serialization.XmlSerializer x;
-            byte[] bytes;
-            System.IO.MemoryStream ms;
-            x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-            bytes = new byte[contrato.Request.Length * sizeof(char)];
-            System.Buffer.BlockCopy(contrato.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
-            ms = new System.IO.MemoryStream(bytes);
-            ms.Seek(0, System.IO.SeekOrigin.Begin);
-            lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-            #endregion
             while (Convert.ToInt32(contrato.FechaProximaEmision.ToString("yyyyMMdd")) <= Convert.ToInt32(DateTime.Today.ToString("yyyyMMdd")))
             {
+                #region Obtención del lote desde el contrato
+                FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(lote.GetType()); ;
+                byte[] bytes = new byte[contrato.Request.Length * sizeof(char)];
+                System.Buffer.BlockCopy(contrato.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
+                System.IO.MemoryStream ms = new System.IO.MemoryStream(bytes);
+                ms.Seek(0, System.IO.SeekOrigin.Begin);
+                lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+                #endregion
+
                 #region Generar nuevo comprobante
                 bool comprobanteGenerado = false;
                 try
@@ -220,7 +226,7 @@ namespace CedServicios.Site
                     RN.Comprobante.LeerUltimoEmitido(ultimoComprobanteEmitido, sesion);
                     lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante = ultimoComprobanteEmitido.Nro + 1;
 
-                    RN.Comprobante.Registrar(lote, null, "Venta", contrato.IdDestinoComprobante, "PteEnvio", "No Aplica", new DateTime(9999, 12, 31), 0, 0, 0, "Generación automática", sesion);
+                    RN.Comprobante.Registrar(lote, null, "Venta", contrato.IdDestinoComprobante, "PteEnvio", "No Aplica", new DateTime(9999, 12, 31), 0, 0, 0, "Generación automática", false, string.Empty, string.Empty, string.Empty, sesion);
                     CantidadComprobantesGenerados++;
                     comprobanteGenerado = true;
                     string a = "Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): " + contrato.NroPuntoVta.ToString("0000") + "-" + lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000");
@@ -398,88 +404,101 @@ namespace CedServicios.Site
                     #endregion
                     if (transmisionOk && comprobante.Estado == "Vigente")
                     {
-                        string script;
-                        if (false && contrato.IdDestinoComprobante == "ITF")
+                        bool GeneracionPDFok = false;
+                        string filenamePDF = string.Empty;
+                        #region Generar PDF
+                        var culture = System.Globalization.CultureInfo.CreateSpecificCulture("en-GB");
+                        culture.NumberFormat.CurrencySymbol = string.Empty;
+                        System.Threading.Thread.CurrentThread.CurrentCulture = culture;
+                        System.Threading.Thread.CurrentThread.CurrentUICulture = culture;
+                        base.InitializeCulture(); 
+                        try
                         {
-                            #region Descarga de PDF (InterFacturas)
-                            string certificado;
-                            string DetalleIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKUtilizarServidorExterno"];
+                            lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                            x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                            comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
+                            bytes = new byte[comprobante.Response.Length * sizeof(char)];
+                            System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                            ms = new System.IO.MemoryStream(bytes);
+                            ms.Seek(0, System.IO.SeekOrigin.Begin);
+                            lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+                            RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
+
+                            string lcomp = Server.MapPath("~/Facturacion/Electronica/Reportes/lote_comprobantes.xsd");
+                            System.IO.File.Copy(lcomp, @System.IO.Path.GetTempPath() + "lote_comprobantes.xsd", true);
+                            string imagen = Server.MapPath("~/Facturacion/Electronica/Reportes/Imagen.xsd");
+                            System.IO.File.Copy(imagen, @System.IO.Path.GetTempPath() + "Imagen.xsd", true);
+                            facturaRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
+                            string reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Factura.rpt");
+                            facturaRpt.Load(reportPath);
+                            AsignarCamposOpcionales(lote);
+                            ReemplarResumenImportesMonedaExtranjera(lote);
+                            DataSet ds = new DataSet();
+                            XmlSerializer objXS = new XmlSerializer(lote.GetType());
+                            StringWriter objSW = new StringWriter();
+                            objXS.Serialize(objSW, lote);
+                            StringReader objSR = new StringReader(objSW.ToString());
+                            ds.ReadXml(objSR);
+                            bool original = true;
                             try
                             {
-                                org.dyndns.cedweb.detalle.DetalleIBK clcdyndns = new org.dyndns.cedweb.detalle.DetalleIBK();
-                                org.dyndns.cedweb.detalle.cecd cecd = new org.dyndns.cedweb.detalle.cecd();
-                                cecd.cuit_canal = Convert.ToInt64("30690783521");
-                                cecd.cuit_vendedor = Convert.ToInt64(comprobante.Cuit);
-                                cecd.punto_de_venta = Convert.ToInt32(comprobante.NroPuntoVta);
-                                cecd.tipo_de_comprobante = Convert.ToInt32(comprobante.TipoComprobante.Id);
-                                cecd.numero_comprobante = comprobante.Nro;
-                                cecd.id_Lote = 0;
-                                cecd.id_LoteSpecified = false;
-                                cecd.estado = "PR";
-                                certificado = CaptchaDotNet2.Security.Cryptography.Encryptor.Encrypt(sesion.Cuit.NroSerieCertifITF, "srgerg$%^bg", Convert.FromBase64String("srfjuoxp")).ToString();
-                                if (DetalleIBKUtilizarServidorExterno == "SI")
+                                original = (bool)Session["EsComprobanteOriginal"];
+                                if (original == false)
                                 {
-                                    clcdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKurl"];
+                                    facturaRpt.DataDefinition.FormulaFields["Borrador"].Text = "'BORRADOR'";
                                 }
-                                string resp = clcdyndns.DetallarIBK(cecd, certificado);
-                                resp = resp.Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
-                                resp = resp.Replace(" xmlns:xsi=\"http://lote.schemas.cfe.ib.com.ar/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", " xmlns=\"http://lote.schemas.cfe.ib.com.ar/\"");
-
-                                string comprobanteXML = resp;
-                                org.dyndns.cedweb.generoPDF.GeneroPDF pdfdyndns = new org.dyndns.cedweb.generoPDF.GeneroPDF();
-                                string GenerarPDFUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFUtilizarServidorExterno"];
-                                if (GenerarPDFUtilizarServidorExterno == "SI")
-                                {
-                                    pdfdyndns.Url = System.Configuration.ConfigurationManager.AppSettings["GenerarPDFurl"];
-                                }
-                                string RespPDF = pdfdyndns.GenerarPDF(comprobante.Cuit, comprobante.NroPuntoVta, comprobante.TipoComprobante.Id, comprobante.Nro, comprobante.IdDestinoComprobante, comprobanteXML);
-                                System.Text.StringBuilder sb = new System.Text.StringBuilder();
-                                sb.Append(comprobante.Cuit);
-                                sb.Append("-");
-                                sb.Append(comprobante.NroPuntoVta.ToString("0000"));
-                                sb.Append("-");
-                                sb.Append(comprobante.TipoComprobante.Id.ToString("00"));
-                                sb.Append("-");
-                                sb.Append(comprobante.Nro.ToString("00000000"));
-                                sb.Append(".pdf");
-                                string url = RespPDF;
-                                string filename = sb.ToString();
-                                String dlDir = @"~/TempRender/";
-                                new System.Net.WebClient().DownloadFile(url, Server.MapPath(dlDir + filename));
-                                script = "window.open('DescargaTemporarios.aspx?archivo=" + sb.ToString() + "&path=" + @"~/TempRender/" + "', '');";
-                                ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                             }
-                            catch (Exception ex)
+                            catch
                             {
-                                string a = "Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): Problemas para generar el PDF.  " + ex.Message;
-                                if (ex.InnerException != null) a += ex.InnerException.Message;
-                                ListaErrores.Add(a);
                             }
-                            #endregion
+                            facturaRpt.SetDataSource(ds);
+                            facturaRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
+                            facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
+                            IncrustarLogo(lote.cabecera_lote.cuit_vendedor.ToString());
+                            string cae = lote.comprobante[0].cabecera.informacion_comprobante.cae;
+                            if (cae.Replace(" ", string.Empty).Equals(string.Empty))
+                            {
+                                cae = "99999999999999";
+                            }
+                            GenerarCodigoBarras(lote.cabecera_lote.cuit_vendedor + lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00") + lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + cae + System.DateTime.Now.ToString("yyyyMMdd"));
+                            AsignarParametros(lote.comprobante[0].resumen.importe_total_factura);
+                            facturaRpt.Subreports["impuestos"].DataDefinition.FormulaFields["TipoDeComprobante"].Text = "'" + lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "'";
+                            facturaRpt.Subreports["resumen"].DataDefinition.FormulaFields["TipoDeComprobante"].Text = "'" + lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "'";
+                            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                            sb.Append(lote.cabecera_lote.cuit_vendedor);
+                            sb.Append("-");
+                            sb.Append(lote.cabecera_lote.punto_de_venta.ToString("0000"));
+                            sb.Append("-");
+                            sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
+                            sb.Append("-");
+                            sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
+                            if (original == false)
+                            {
+                                sb.Append("-BORRADOR");
+                            }
+                            filenamePDF = Server.MapPath("PDFs\\" + sb.ToString() + ".pdf");
+                            facturaRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.PortableDocFormat, filenamePDF);
+                            GeneracionPDFok = true;
                         }
-                        else
+                        catch (Exception ex)
                         {
-                            #region Descarga de PDF (AFIP)
-                            try
+                            ListaErrores.Add("Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): Problemas para generar el PDF.  " + ex.Message);
+                        }
+                        #endregion
+                        if (GeneracionPDFok)
+                        {
+                            #region Envio de mail
+                            Entidades.Persona persona = new Entidades.Persona();
+                            persona.Cuit = contrato.Cuit;
+                            persona.Documento.Tipo.Id = contrato.Documento.Tipo.Id;
+                            persona.Documento.Nro = contrato.Documento.Nro;
+                            persona.IdPersona = contrato.IdPersona;
+                            persona.DesambiguacionCuitPais = contrato.DesambiguacionCuitPais;
+                            RN.Persona.LeerPorClavePrimaria(persona, sesion);
+                            RN.Comprobante.LeerDestinatarioFrecuente(persona, contrato, sesion);
+                            if (persona.DatosEmailAvisoComprobantePersona.Activo && contrato.DatosEmailAvisoComprobanteContrato.Activo && persona.DatosEmailAvisoComprobantePersona.De != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Para != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.Asunto != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.Cuerpo != string.Empty)
                             {
-                                lote = new FeaEntidades.InterFacturas.lote_comprobantes();
-                                x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-                                comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
-                                bytes = new byte[comprobante.Response.Length * sizeof(char)];
-                                System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
-                                ms = new System.IO.MemoryStream(bytes);
-                                ms.Seek(0, System.IO.SeekOrigin.Begin);
-                                lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-
-                                RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
-
-                                Session["lote"] = lote;
-                                script = "window.open('/Facturacion/Electronica/Reportes/FacturaWebForm.aspx', '');";
-                                ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
-                            }
-                            catch (Exception ex)
-                            {
-                                ListaErrores.Add("Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): Problemas para generar el PDF.  " + ex.Message);
+                                RN.EnvioCorreo.AvisoGeneracionComprobante(persona, contrato, comprobante, filenamePDF, sesion);
                             }
                             #endregion
                         }
@@ -668,6 +687,235 @@ namespace CedServicios.Site
                 ComprobantesGridView.Columns[0].Visible = true;
                 ComprobantesGridView.Columns[1].Visible = false;
             }
+        }
+        private void GenerarPDF()
+        {
+
+
+            if (Session["lote"] == null)
+            {
+                Response.Redirect("~/Inicio.aspx");
+            }
+            else
+            {
+                try
+                {
+                }
+                catch (System.Threading.ThreadAbortException)
+                {
+                    Trace.Warn("Thread abortado");
+                }
+                catch (Exception ex)
+                {
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Reporte: " + ex.Message + " " + ex.StackTrace);
+                    throw new Exception(ex.Message);
+                    //WebForms.Excepciones.Redireccionar(ex, "~/Excepciones/Excepciones.aspx");
+                }
+            }
+        }
+        private void AsignarCamposOpcionales(FeaEntidades.InterFacturas.lote_comprobantes lc)
+        {
+            if (lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pago = string.Empty;
+            }
+            if (lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = string.Empty;
+            }
+            lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
+
+            lc.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified = true;
+            lc.comprobante[0].cabecera.informacion_vendedor.condicion_IVASpecified = true;
+            if (lc.comprobante[0].cabecera.informacion_vendedor.provincia == null)
+            {
+                lc.comprobante[0].cabecera.informacion_vendedor.provincia = string.Empty;
+            }
+
+            lc.comprobante[0].cabecera.informacion_comprador.condicion_ingresos_brutosSpecified = true;
+            lc.comprobante[0].cabecera.informacion_comprador.condicion_IVASpecified = true;
+            if (lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle = string.Empty;
+            }
+            if (lc.comprobante[0].cabecera.informacion_comprador.provincia == null)
+            {
+                lc.comprobante[0].cabecera.informacion_comprador.provincia = string.Empty;
+            }
+
+            lc.comprobante[0].resumen.cant_alicuotas_ivaSpecified = true;
+            lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified = true;
+            lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified = true;
+            lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified = true;
+            lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified = true;
+
+            if (lc.comprobante[0].resumen.descuentos != null)
+            {
+                for (int i = 0; i < lc.comprobante[0].resumen.descuentos.Length; i++)
+                {
+                    if (lc.comprobante[0].resumen.descuentos[i] != null)
+                    {
+                        if (lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified.Equals(false))
+                        {
+                            lc.comprobante[0].resumen.descuentos[i].importe_iva_descuentoSpecified = true;
+                        }
+                        if (lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified.Equals(false))
+                        {
+                            lc.comprobante[0].resumen.descuentos[i].alicuota_iva_descuentoSpecified = true;
+                        }
+                        if (lc.comprobante[0].resumen.descuentos[i].porcentaje_descuentoSpecified.Equals(false))
+                        {
+                            lc.comprobante[0].resumen.descuentos[i].porcentaje_descuentoSpecified = true;
+                        }
+                    }
+                }
+            }
+            for (int i = 0; i < lc.comprobante[0].detalle.linea.Length; i++)
+            {
+                if (lc.comprobante[0].detalle.linea[i] != null)
+                {
+                    lc.comprobante[0].detalle.linea[i].precio_unitarioSpecified = true;
+                    lc.comprobante[0].detalle.linea[i].importe_ivaSpecified = true;
+                    if (lc.comprobante[0].detalle.linea[i].alicuota_ivaSpecified.Equals(false))
+                    {
+                        lc.comprobante[0].detalle.linea[i].alicuota_ivaSpecified = true;
+                        lc.comprobante[0].detalle.linea[i].alicuota_iva = 99;
+                    }
+                    lc.comprobante[0].detalle.linea[i].cantidadSpecified = true;
+
+                    if (lc.comprobante[0].detalle.linea[i].unidad == null)
+                    {
+                        lc.comprobante[0].detalle.linea[i].unidad = string.Empty;
+                    }
+                    if (lc.comprobante[0].detalle.linea[i].indicacion_exento_gravado == null)
+                    {
+                        lc.comprobante[0].detalle.linea[i].indicacion_exento_gravado = string.Empty;
+                    }
+                    if (lc.comprobante[0].detalle.linea[i].importes_moneda_origen != null)
+                    {
+                        lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_ivaSpecified = true;
+                        lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_total_articuloSpecified = true;
+                        lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_total_descuentosSpecified = true;
+                        lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_total_impuestosSpecified = true;
+                        lc.comprobante[0].detalle.linea[i].importes_moneda_origen.precio_unitarioSpecified = true;
+                    }
+                }
+                else
+                {
+                    break;
+                }
+            }
+        }
+        private static void ReemplarResumenImportesMonedaExtranjera(FeaEntidades.InterFacturas.lote_comprobantes lc)
+        {
+            if (!lc.comprobante[0].resumen.codigo_moneda.Equals("PES"))
+            {
+                lc.comprobante[0].resumen.importe_total_neto_gravado = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_neto_gravado;
+
+                lc.comprobante[0].resumen.importe_total_concepto_no_gravado = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_concepto_no_gravado;
+                lc.comprobante[0].resumen.importe_operaciones_exentas = lc.comprobante[0].resumen.importes_moneda_origen.importe_operaciones_exentas;
+                lc.comprobante[0].resumen.impuesto_liq = lc.comprobante[0].resumen.importes_moneda_origen.impuesto_liq;
+                lc.comprobante[0].resumen.impuesto_liq_rni = lc.comprobante[0].resumen.importes_moneda_origen.impuesto_liq_rni;
+                lc.comprobante[0].resumen.importe_total_impuestos_municipales = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_municipales;
+                lc.comprobante[0].resumen.importe_total_impuestos_nacionales = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_nacionales;
+                lc.comprobante[0].resumen.importe_total_ingresos_brutos = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_ingresos_brutos;
+                lc.comprobante[0].resumen.importe_total_impuestos_internos = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_impuestos_internos;
+
+                lc.comprobante[0].resumen.importe_total_factura = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;
+
+                if (lc.comprobante[0].resumen.descuentos != null)
+                {
+                    for (int i = 0; i < lc.comprobante[0].resumen.descuentos.Length; i++)
+                    {
+                        if (lc.comprobante[0].resumen.descuentos[i] != null)
+                        {
+                            lc.comprobante[0].resumen.descuentos[i].importe_descuento = lc.comprobante[0].resumen.descuentos[i].importe_descuento_moneda_origen;
+                            lc.comprobante[0].resumen.descuentos[i].importe_iva_descuento = lc.comprobante[0].resumen.descuentos[i].importe_iva_descuento_moneda_origen;
+                        }
+                    }
+                }
+            }
+        }
+        private void IncrustarLogo(string cuit)
+        {
+            try
+            {
+                String path = Server.MapPath("~/ImagenesSubidas/");
+                string[] archivos = System.IO.Directory.GetFiles(path, cuit + ".*", System.IO.SearchOption.TopDirectoryOnly);
+                string imagenCUIT = "";
+                if (archivos.Length > 0)
+                {
+                    imagenCUIT = "~/ImagenesSubidas/" + archivos[0].Replace(Server.MapPath("~/ImagenesSubidas/"), String.Empty);
+                }
+                if (imagenCUIT != "")
+                {
+                    FileStream FilStr = new FileStream(Server.MapPath(imagenCUIT), FileMode.Open);
+                    CrearTabla();
+                    BinaryReader BinRed = new BinaryReader(FilStr);
+                    DataRow dr = this.dsImages.Tables["images"].NewRow();
+                    dr["path"] = Server.MapPath(imagenCUIT);
+                    dr["image"] = BinRed.ReadBytes((int)BinRed.BaseStream.Length);
+                    this.dsImages.Tables["images"].Rows.Add(dr);
+                    FilStr.Close();
+                    BinRed.Close();
+
+                    imagenRpt = facturaRpt.OpenSubreport("Imagen.rpt");
+                    imagenRpt.SetDataSource(this.dsImages);
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Reporte: Imagen OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                string a = ex.Message.ToString().Replace("'", " ");
+                a = a.Replace("<", " ");
+                a = a.Replace(">", " ");
+                a = a.Replace("/", " ");
+                a = a.Replace(@"\", " ");
+                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Reporte: Imagen NOT OK " + a);
+            }
+        }
+        private void GenerarCodigoBarras(string code)
+        {
+            if (code != null)
+            {
+                Facturacion.Electronica.Reportes.Code39 c39 = new Code39();
+                MemoryStream ms = new MemoryStream();
+                c39.FontFamilyName = "Free 3 of 9";
+                c39.FontFileName = Server.MapPath("Facturacion\\Electronica\\Reportes\\FREE3OF9.TTF");
+                c39.FontSize = 30;
+                c39.ShowCodeString = true;
+                System.Drawing.Bitmap objBitmap = c39.GenerateBarcode(code);
+                objBitmap.Save(ms, System.Drawing.Imaging.ImageFormat.Bmp);
+
+                codigobarrasRpt = facturaRpt.OpenSubreport("CodigoBarra.rpt");
+
+                CrearTabla();
+
+                DataRow dr = this.dsImages.Tables["images"].NewRow();
+                dr["path"] = "ninguno";
+                dr["image"] = ms.ToArray();
+                this.dsImages.Tables["images"].Rows.Add(dr);
+
+                codigobarrasRpt.SetDataSource(this.dsImages);
+            }
+        }
+        private void CrearTabla()
+        {
+            this.dsImages = new DataSet();
+            DataTable imageTable = new DataTable("Images");
+            imageTable.Columns.Add(new DataColumn("path", typeof(string)));
+            imageTable.Columns.Add(new DataColumn("image", typeof(System.Byte[])));
+            this.dsImages.Tables.Add(imageTable);
+        }
+        private void AsignarParametros(double p)
+        {
+            CrystalDecisions.Shared.ParameterValues myVals = new CrystalDecisions.Shared.ParameterValues();
+            CrystalDecisions.Shared.ParameterDiscreteValue myDiscrete = new CrystalDecisions.Shared.ParameterDiscreteValue();
+            myDiscrete.Value = NumALet.ToCardinal(Convert.ToDecimal(p));
+            myVals.Add(myDiscrete);
+            facturaRpt.DataDefinition.ParameterFields[0].ApplyCurrentValues(myVals);
+
+            facturaRpt.Subreports["resumen"].DataDefinition.FormulaFields["ImpTotTexto"].Text = "'" + NumALet.ToCardinal(Convert.ToDecimal(p)) + "'";
         }
     }
 }

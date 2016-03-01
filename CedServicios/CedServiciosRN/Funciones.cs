@@ -139,6 +139,17 @@ namespace CedServicios.RN
             // Return true if strIn is in valid e-mail format.
             return Regex.IsMatch(strMailAddress, @"^(?("")("".+?""@)|(([0-9a-zA-Z]((\.(?!\.))|[-!#\$%&'\*\+/=\?\^`\{\}\|~\w])*)(?<=[0-9a-zA-Z])@))" + @"(?(\[)(\[(\d{1,3}\.){3}\d{1,3}\])|(([0-9a-zA-Z][-\w]*[0-9a-zA-Z]\.)+[a-zA-Z]{2,6}))$");
         }
+        public static void ValidarListaDeMails(string Lista)
+        {
+            string[] elementos = Lista.Split(',');
+            for (int i = 0; i < elementos.Length; i++)
+            {
+                if (!IsValidEmail(elementos[i].Trim()))
+                {
+                    throw new Exception((i+1).ToString());
+                }
+            }
+        }
         public static bool IsValidNroIB(string strNroIB)
         {
             return Regex.IsMatch(strNroIB, @"[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}");

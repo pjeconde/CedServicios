@@ -61,13 +61,13 @@
                                 <asp:Label ID="Label1" runat="server" Text="Tratamiento de contratos:"></asp:Label>
                             </td>
                             <td>
-                                <asp:RadioButton ID="TratamientoDeContratos1x1RadioButton" runat="server" AutoPostBack="true" Checked="true" GroupName="TratamientoDeContratos" OnCheckedChanged="TratamientoDeContratosCheckedChanged"/>
+                                &nbsp;&nbsp;<asp:RadioButton ID="TratamientoDeContratos1x1RadioButton" runat="server" AutoPostBack="true" Checked="true" GroupName="TratamientoDeContratos" OnCheckedChanged="TratamientoDeContratosCheckedChanged"/>
                             </td>
                             <td>
                                 Uno por uno
                             </td>
                             <td>
-                                <asp:RadioButton ID="TratamientoDeContratosTodosRadioButton" runat="server" AutoPostBack="true" GroupName="TratamientoDeContratos"  OnCheckedChanged="TratamientoDeContratosCheckedChanged" Enabled="false"/>
+                                &nbsp;&nbsp;<asp:RadioButton ID="TratamientoDeContratosTodosRadioButton" runat="server" AutoPostBack="true" GroupName="TratamientoDeContratos"  OnCheckedChanged="TratamientoDeContratosCheckedChanged"/>
                             </td>
                             <td>
                                 Grupo de seleccionados
@@ -80,7 +80,7 @@
                 <td>
                 </td>
                 <td align="left" style="height: 24px; padding-top:10px" valign="top">
-                    <asp:Button ID="BuscarButton" runat="server" Text="Leer contratos para seleccionar" onclick="BuscarButton_Click" Width="304px" />
+                    <asp:Button ID="BuscarButton" runat="server" Text="Leer contratos para seleccionar" onclick="BuscarButton_Click" />
                     <asp:Button ID="SalirButton" runat="server" Text="Salir" onclick="SalirButton_Click" />
                 </td>
             </tr>
@@ -88,7 +88,7 @@
             <tr>
                 <td>
                 </td>
-                <td align="left" style="height:24px" valign="top">
+                <td align="left" style="height:24px; padding-top:10px" valign="top">
                     <asp:Button ID="GenerarComprobantesButton" runat="server" Text="Generar Comprobantes para los Contratos seleccionados" onclick="GenerarComprobantesButton_Click" Visible="false" />
                 </td>
             </tr>

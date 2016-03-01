@@ -69,7 +69,36 @@ namespace CedServicios.RN
             persona = comprador.Leer(IdWF);
             return DB.Funciones.ObjetoSerializado(persona);
         }
-        
+        public static void Validar(Entidades.Persona Persona)
+        {
+            if (Persona.DatosEmailAvisoComprobantePersona.Activo)
+            {
+                if (Persona.DatosEmailAvisoComprobantePersona.De.Equals(string.Empty)) throw new Exception("Dirección de email, en campo 'De', sin informar");
+                try
+                {
+                    RN.Funciones.ValidarListaDeMails(Persona.DatosEmailAvisoComprobantePersona.De);
+                }
+                catch
+                {
+                    throw new Exception("Dirección de email, en campo 'De', con formato inválido");
+                }
+                if (Persona.DatosEmailAvisoComprobantePersona.De.Split(',').Length != 1) throw new Exception("en campo 'De' debe consignarse una, y solo una, dirección de email, en campo 'De', con formato inválido");
+                if (Persona.DatosEmailAvisoComprobantePersona.DestinatariosFrecuentes.Count == 0) throw new Exception("Destinatarios frecuentes no informados");
+                if (!Persona.DatosEmailAvisoComprobantePersona.Cco.Equals(string.Empty))
+                {
+                    try
+                    {
+                        RN.Funciones.ValidarListaDeMails(Persona.DatosEmailAvisoComprobantePersona.Cco);
+                    }
+                    catch (Exception ex)
+                    {
+                        throw new Exception(ex.Message + "º dirección de email, en campo 'Cco', con formato inválido");
+                    }
+                }
+                if (Persona.DatosEmailAvisoComprobantePersona.Asunto.Equals(string.Empty)) throw new Exception("Asunto no informado");
+                if (Persona.DatosEmailAvisoComprobantePersona.Cuerpo.Equals(string.Empty)) throw new Exception("Cuerpo no informado");
+            }
+        }
         public static void Crear(Entidades.Persona Persona, Entidades.Sesion Sesion)
         {
             DB.Persona db = new DB.Persona(Sesion);
@@ -147,6 +176,11 @@ namespace CedServicios.RN
             int cantidadFilas = listaPersona.Count;
             CantidadFilas = cantidadFilas;
             return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaPersona);
+        }
+        public static void LeerDestinatariosFrecuentes(Entidades.Persona Persona, bool IncluirVacio, Entidades.Sesion Sesion)
+        {
+            DB.Persona persona = new DB.Persona(Sesion);
+            persona.LeerDestinatariosFrecuentes(Persona, IncluirVacio);
         }
     }
 }

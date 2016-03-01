@@ -186,6 +186,7 @@ namespace CedServicios.Site
                             descrTratamiento = "Envio (AFIP/ITF)";
                             break;
                     }
+                    DatosEmailAvisoComprobanteContratoConsultaPanel.Visible = false;
                     if (IdNaturalezaComprobanteTextBox.Text.IndexOf("Venta") != -1)
                     {
                         #region Personalización campos vendedor y comprador para VENTAS
@@ -214,6 +215,7 @@ namespace CedServicios.Site
                                 if (TratamientoTextBox.Text.IndexOf("Consulta") != -1) AccionesPanel.Visible = false;
                                 CAEPanel.Visible = false;
                                 FechaEmisionLabel.Text = "Fecha de alta:";
+                                DatosEmailAvisoComprobanteContratoConsultaPanel.Visible = true;
                                 break;
                         }
                         #endregion
@@ -416,6 +418,7 @@ namespace CedServicios.Site
             CantidadComprobantesAEmitirTextBox.Text = Comprobante.CantidadComprobantesAEmitir.ToString();
             CantidadComprobantesEmitidosTextBox.Text = Comprobante.CantidadComprobantesEmitidos.ToString();
             CantidadDiasFechaVtoTextBox.Text = Comprobante.CantidadDiasFechaVto.ToString();
+            DatosEmailAvisoComprobanteContratoConsulta1.Datos = Comprobante.DatosEmailAvisoComprobanteContrato;
 
             BindearDropDownLists();
         }
@@ -2868,7 +2871,7 @@ namespace CedServicios.Site
                             //Grabar en base de datos
                             lote.cabecera_lote.DestinoComprobante = "AFIP";
                             lote.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                            RN.Comprobante.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteEnvio", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), string.Empty, ((Entidades.Sesion)Session["Sesion"]));
+                            RN.Comprobante.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteEnvio", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), string.Empty, false, string.Empty, string.Empty, string.Empty, ((Entidades.Sesion)Session["Sesion"]));
 
                             string caeNro = "";
                             string caeFecVto = "";

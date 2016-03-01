@@ -9,7 +9,8 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Src="~/Facturacion/Electronica/Impuestos.ascx" TagName="ImpuestosGlobales" TagPrefix="uc8" %>
 <%@ Register Src="~/Facturacion/Electronica/Descuentos.ascx" TagName="DescuentosGlobales" TagPrefix="DescUC" %>
-<%@ Register src="FacturaElectronicaFecha.ascx" tagname="FacturaElectronicaFecha" tagprefix="uc1" %>
+<%@ Register Src="FacturaElectronicaFecha.ascx" TagName="FacturaElectronicaFecha" TagPrefix="uc1" %>
+<%@ Register Src="~/Controles/DatosEmailAvisoComprobanteContrato.ascx" TagName="DatosEmailAvisoComprobanteContrato" TagPrefix="uc5" %>
 
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceDefault">
     <table style="border:0; width: 1300px; text-align:left; padding-left:10px">
@@ -761,7 +762,7 @@
                                                                 OnSelectedIndexChanged="CompradorDropDownList_SelectedIndexChanged" SkinID="DropDownListPersona" Visible="false">
                                                             </asp:DropDownList>
                                                             <asp:TextBox ID="IdPersonaCompradorTextBox" runat="server" Visible="false"> </asp:TextBox>
-                                                            <asp:TextBox ID="DesambiguacionCuitPaisCompradorTextBox" runat="server" Visible="false"> </asp:TextBox>
+                                                            <asp:TextBox ID="DesambiguacionCuitPaisCompradorTextBox" runat="server" Visible="false" Text="0"> </asp:TextBox>
                                                             <asp:UpdateProgress ID="compradorUpdateProgress" runat="server" AssociatedUpdatePanelID="compradorUpdatePanel"
                                                                 DisplayAfter="0">
                                                                 <ProgressTemplate>
@@ -1601,6 +1602,25 @@
                                     </td>
                                 </tr>
                             </table>
+                        </td>
+                    </tr>
+                    <!-- DATOS EMAIL AVISO COMPROBANTE CONTRATO -->
+                    <tr>
+                        <td style="text-align:center">
+                            <asp:Panel ID="DatosEmailAvisoComprobanteContratoPanel" runat="server">
+                                <table style="width:1282px">
+                                    <tr>
+                                        <td>
+                                            <uc5:DatosEmailAvisoComprobanteContrato ID="DatosEmailAvisoComprobanteContrato1" runat="server"></uc5:DatosEmailAvisoComprobanteContrato>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <hr noshade="noshade" size="1" color="#cccccc" />
+                                        </td>
+                                    </tr>
+                                </table>
+                            </asp:Panel>
                         </td>
                     </tr>
                     <!-- ACCIONES -->

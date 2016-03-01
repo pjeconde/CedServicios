@@ -29,6 +29,7 @@ namespace CedServicios.Site
                     DataBind();
 
                     Entidades.Persona persona = (Entidades.Persona)Session["Persona"];
+                    RN.Persona.LeerDestinatariosFrecuentes(persona, false, sesion);
 
                     CUITTextBox.Text = persona.Cuit;
                     if (persona.EsCliente && persona.EsProveedor)
@@ -74,6 +75,7 @@ namespace CedServicios.Site
                     DatosIdentificatorios.GLN = persona.DatosIdentificatorios.GLN;
                     DatosIdentificatorios.CodigoInterno = persona.DatosIdentificatorios.CodigoInterno;
                     IdPersonaTextBox.Text = persona.IdPersona;
+                    DatosEmailAvisoComprobantePersona.Datos = persona.DatosEmailAvisoComprobantePersona;
                     EmailAvisoVisualizacionTextBox.Text = persona.EmailAvisoVisualizacion;
                     PasswordAvisoVisualizacionTextBox.Text = persona.PasswordAvisoVisualizacion;
 
@@ -87,6 +89,7 @@ namespace CedServicios.Site
                     DatosImpositivos.Enabled = false;
                     DatosIdentificatorios.Enabled = false;
                     IdPersonaTextBox.Enabled = false;
+                    DatosEmailAvisoComprobantePersona.Enabled = false;
                     EmailAvisoVisualizacionTextBox.Enabled = false;
                     PasswordAvisoVisualizacionTextBox.Enabled = false;
 

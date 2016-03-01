@@ -4,6 +4,7 @@
 <%@ Register TagPrefix="uc1" TagName="contacto" Src="~/Controles/Contacto.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="datosImpositivos" Src="~/Controles/DatosImpositivos.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="datosIdentificatorios" Src="~/Controles/DatosIdentificatorios.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="datosEmailAvisoComprobantePersona" Src="~/Controles/DatosEmailAvisoComprobantePersona.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <table style="padding-left:10px">
@@ -59,8 +60,15 @@
             </td>        
         </tr>
         <tr>
-            <td colspan="2">
-                <hr noshade="noshade" size="1" color="#cccccc" />
+            <td colspan="2" style="padding-top:5px">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="height:1px; background-color:#cccccc">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-top:5px">
             </td>
         </tr>
         <tr>
@@ -83,14 +91,16 @@
         <uc1:contacto ID="Contacto" runat="server" />
         <uc1:datosImpositivos ID="DatosImpositivos" runat="server" />
         <uc1:datosIdentificatorios ID="DatosIdentificatorios" runat="server" />
+        <uc1:datosEmailAvisoComprobantePersona ID="DatosEmailAvisoComprobantePersona" runat="server" />
         <tr>
             <td colspan="2" style="padding-top:5px">
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px">
+            <td align="right" valign="top" style="padding-right:5px">
                 <asp:Label ID="Label38" runat="server" Text="Envío de <b>aviso</b> automático"></asp:Label><br />
-                <asp:Label ID="Label46" runat="server" Text="<b>para visualización</b> del comprobante"></asp:Label>
+                <asp:Label ID="Label46" runat="server" Text="<b>para visualización</b> del comprobante"></asp:Label><br />
+                <asp:Label ID="Label4" runat="server" Text="(desde INTERFACTURAS)"></asp:Label>
             </td>
             <td style="border-style:solid; border-color:Gray; border-width:1px">
                 <table border="0" cellpadding="0" cellspacing="0">
@@ -110,7 +120,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td align="right" style="padding-left:5px; padding-right:5px; padding-top:3px">
+                        <td align="right" style="padding-left:5px; padding-right:5px; padding-top:3px; width:100px">
                             <asp:RegularExpressionValidator ID="RegularExpressionValidator14" runat="server"
                                 ControlToValidate="PasswordAvisoVisualizacionTextBox" ErrorMessage="Contraseña aviso automático para visualización" SetFocusOnError="True"
                                 ValidationExpression="[A-Za-z\- ,.0-9]*">
@@ -126,7 +136,7 @@
                     </tr>
                     <tr>
                         <td align="justify" style="padding-left:5px; padding-right:5px; padding-top:5px; font-size:xx-small" colspan="2">
-                            Interfacturas enviará, a última hora del día, un aviso (con un link) para que su destinatario<br/>pueda visualizar el comprobante electrónico generado.  Esta funcionalidad puede ser usada,<br/>por ejemplo, cuando, por cuestiones de seguridad, no se quiera enviar facturas por email.
+                            Interfacturas enviará, a última hora del día, un aviso (con un link) para que su destinatario pueda visualizar el comprobante generado.<br />Esta funcionalidad puede ser usada, por ejemplo, cuando, por cuestiones de seguridad, no se quiera enviar facturas por email.
                         </td>
                     </tr>
                 </table>

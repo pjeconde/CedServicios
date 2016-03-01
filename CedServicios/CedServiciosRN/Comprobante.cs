@@ -21,10 +21,10 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaFiltrada(Estados, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos, Detalle);
         }
-        public static void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle, Entidades.Sesion Sesion)
+        public static void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle, bool EmailAvisoComprobanteActivo, string IdDestinatarioFrecuente, string EmailAvisoComprobanteAsunto, string EmailAvisoComprobanteCuerpo, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            db.Registrar(Lote, Response, IdNaturalezaComprobante, IdDestinoComprobante, IdEstado, PeriodicidadEmision, FechaProximaEmision, CantidadComprobantesAEmitir, CantidadComprobantesEmitidos, CantidadDiasFechaVto, Detalle);
+            db.Registrar(Lote, Response, IdNaturalezaComprobante, IdDestinoComprobante, IdEstado, PeriodicidadEmision, FechaProximaEmision, CantidadComprobantesAEmitir, CantidadComprobantesEmitidos, CantidadDiasFechaVto, Detalle, EmailAvisoComprobanteActivo, IdDestinatarioFrecuente, EmailAvisoComprobanteAsunto, EmailAvisoComprobanteCuerpo);
         }
         public static void DarDeBaja(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {
@@ -1925,6 +1925,11 @@ namespace CedServicios.RN
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
             db.LeerUltimoEmitido(Comprobante);
+        }
+        public static void LeerDestinatarioFrecuente(Entidades.Persona Persona, Entidades.Comprobante Contrato, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            db.LeerDestinatarioFrecuente(Persona, Contrato);
         }
     }
 }

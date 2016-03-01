@@ -61,8 +61,15 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <hr noshade="noshade" size="1" color="#cccccc" />
+                <td colspan="2" style="padding-top:5px">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height:1px; background-color:#cccccc">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-top:5px">
                 </td>
             </tr>
             <tr>
@@ -149,8 +156,15 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <hr noshade="noshade" size="1" color="#cccccc" />
+                <td colspan="2" style="padding-top:5px">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height:1px; background-color:#cccccc">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-top:5px">
                 </td>
             </tr>
             <tr>
@@ -196,8 +210,15 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="2">
-                    <hr noshade="noshade" size="1" color="#cccccc" />
+                <td colspan="2" style="padding-top:5px">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="height:1px; background-color:#cccccc">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding-top:5px">
                 </td>
             </tr>
             <tr>

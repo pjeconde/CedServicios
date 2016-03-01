@@ -275,5 +275,48 @@ namespace CedServicios.RN
             smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
         }
+        public static void AvisoGeneracionComprobante(Entidades.Persona Persona, Entidades.Comprobante Contrato, Entidades.Comprobante Comprobante, string ArchivoPDF, Entidades.Sesion Sesion)
+        {
+            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress(Persona.DatosEmailAvisoComprobantePersona.De);
+            string[] para = Contrato.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Para.Split(',');
+            for (int i = 0; i < para.Length; i++)
+            {
+                if (para[i].Trim() != string.Empty) mail.To.Add(new MailAddress(para[i].Trim()));
+            }
+            string[] cc = Contrato.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Cc.Split(',');
+            for (int i = 0; i < cc.Length; i++)
+            {
+                if (cc[i].Trim() != string.Empty) mail.CC.Add(new MailAddress(cc[i].Trim()));
+            }
+            if (Sesion.Ambiente != "PROD")
+            {
+                mail.Subject = Contrato.DatosEmailAvisoComprobanteContrato.Asunto + " (" + Sesion.Ambiente + ")";
+            }
+            else
+            {
+                mail.Subject = Contrato.DatosEmailAvisoComprobanteContrato.Asunto;
+            }
+            mail.IsBodyHtml = true;
+            StringBuilder a = new StringBuilder();
+            a.Append(Contrato.DatosEmailAvisoComprobanteContrato.Cuerpo);
+            mail.Body = a.ToString();
+            mail.Attachments.Add(new Attachment(ArchivoPDF));
+            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+            smtpClient.Send(mail);
+        }
+        public static void Prueba(string Para)
+        {
+            SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
+            MailMessage mail = new MailMessage();
+            mail.From = new MailAddress("registrousuarios@cedeira.com.ar");
+            mail.To.Add(new MailAddress(Para));
+            mail.Subject = "Prueba de envio de mail";
+            mail.IsBodyHtml = true;
+            mail.Body = "Prueba de envio de mail";
+            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+            smtpClient.Send(mail);
+        }
     }
 }
