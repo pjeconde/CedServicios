@@ -6,8 +6,10 @@
 <%@ Register TagPrefix="uc1" TagName="datosIdentificatorios" Src="~/Controles/DatosIdentificatorios.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-<a href="#" class="tooltip-test" title="" data-original-title="Tooltip">This link</a>
-    <table style="padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table align="center">
         <tr>
             <td colspan="2" style="padding-top:20px; text-align: center">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Alta de CUIT"></asp:Label>
@@ -26,7 +28,8 @@
                 <asp:Label ID="Label3" runat="server" Text="CUIT"></asp:Label>
             </td>
             <td style="padding-top:20px; text-align: left">
-                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="DATOS DEL VENDEDOR" data-content="En esta página se registran todos los datos de la persona que emitirá facturas de venta."><span class="glyphicon glyphicon-question-sign gi-1x" style="vertical-align: inherit"></span></a>
+                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
+                &nbsp;<a href="#" id="example" role="button" class="popover-test" data-html="true" title="DATOS DEL VENDEDOR" data-content="En esta página se registran todos los datos de la persona que emitirá comprobantes de venta."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
             </td>
         </tr>
         <tr>
@@ -43,7 +46,7 @@
                 <asp:Label ID="Label9" runat="server" Text="Razón Social"></asp:Label>
             </td>
             <td style="padding-top:2px; text-align: left">
-                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="2" Width="300px"></asp:TextBox>
+                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="2" Width="400px"></asp:TextBox>
             </td>        
         </tr>
         <uc1:domicilio ID="Domicilio" runat="server"/>
@@ -76,7 +79,7 @@
                 <table>
                     <tr>
                         <td style="text-align: left; vertical-align: top">
-                            <asp:CheckBox ID="DestinoComprobanteITFCheckBox" runat="server" AutoPostBack="true" Text="&nbsp;Interfacturas" Checked="true" TabIndex="504"/>&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="INTERFACTURAS (INTERBANKING)" data-content="Marque este campo si gestionará el CAE a través de Interfacturas, en forma ONLINE.<br/><br/>Si solo genera archivos XML para subir en el Sitio Web de Interfacturas de forma manual, no debe marcar esta casilla."><span class="glyphicon glyphicon-question-sign gi-1x" style="vertical-align: inherit"></span></a>
+                            <asp:CheckBox ID="DestinoComprobanteITFCheckBox" runat="server" AutoPostBack="true" Text="&nbsp;Interfacturas" Checked="true" TabIndex="504"/>&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="INTERFACTURAS (INTERBANKING)" data-content="Marque este campo si gestionará el CAE a través de Interfacturas, en forma ONLINE.<br/><br/>Si solo genera archivos XML para subir en el Sitio Web de Interfacturas de forma manual, no debe marcar esta casilla."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
                         </td>
                         <td style="text-align: left; vertical-align: top; padding-left:40px">
                             <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>&nbsp;<font style="font-family: Sans-Serif"><b>Nro.serie certif.:</b></font>
@@ -89,11 +92,12 @@
                     </tr>
                     <tr>
                         <td style="text-align: left; vertical-align: top"">
-                            <asp:CheckBox ID="DestinoComprobanteAFIPCheckBox" runat="server" AutoPostBack="true" Text="&nbsp;A.F.I.P." Checked="true" TabIndex="506" />&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="A.F.I.P." data-content="Marque este campo si gestionará el CAE a través de la AFIP, en forma ONLINE."><span class="glyphicon glyphicon-question-sign gi-1x" style="vertical-align: inherit"></span></a>
+                            <asp:CheckBox ID="DestinoComprobanteAFIPCheckBox" runat="server" AutoPostBack="true" Text="&nbsp;A.F.I.P." Checked="true" TabIndex="506" />&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="A.F.I.P." data-content="Marque este campo si gestionará el CAE a través de la AFIP, en forma ONLINE."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
                         </td>
                         <td style="text-align: left; vertical-align: middle; padding-left:40px">
-                                 <font style="font-family: Sans-Serif"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>&nbsp;<asp:CheckBox ID="UsaCertificadoAFIPPropioCheckBox" runat="server" AutoPostBack="true"  TextAlign="Left" Text="Usa certificado propio&nbsp;" Checked="false" TabIndex="507" /></font>&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="USA CERTIFICADO PROPIO?" data-content="Marque esta casilla únicamente si:<br>
-                                Genera el CAE con la AFIP y tiene Certificado Digital propio generado en la AFIP.<br><br>( Si genera el CAE con AFIP pero utiliza el Certificado de Cedeira SF SRL, luego de haber delegado, no marque esta casilla )"><span class="glyphicon glyphicon-question-sign gi-1x" style="vertical-align: inherit"></span></a>
+                                 <font style="font-family: Sans-Serif"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>&nbsp;<asp:CheckBox ID="UsaCertificadoAFIPPropioCheckBox" runat="server" AutoPostBack="true"  TextAlign="Left" Text="Usa certificado propio&nbsp;" Checked="false" TabIndex="507" /></font>
+                                 &nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="USA CERTIFICADO PROPIO?" data-content="Marque esta casilla únicamente si:<br>
+                                Genera el CAE con la AFIP y tiene Certificado Digital propio generado en la AFIP.<br><br>( Si genera el CAE con AFIP pero utiliza el Certificado de Cedeira SF SRL, luego de haber delegado, no marque esta casilla )"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
                         </td>
                     </tr>
                 </table>
@@ -120,4 +124,7 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
 </asp:Content>

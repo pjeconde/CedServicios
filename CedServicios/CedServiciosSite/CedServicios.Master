@@ -9,8 +9,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="data:text/css;charset=utf-8," data-href="css/bootstrap-theme.min.css" rel="stylesheet" id="bsthemestylesheet">
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="data:text/css;charset=utf-8," data-href="/css/bootstrap-theme.min.css" rel="stylesheet" id="bsthemestylesheet">
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -38,6 +38,10 @@
           margin-right: auto;  
           margin-left: auto;  
         } 
+        textarea
+        {
+            resize: none;
+        }
     </style>
     <script type="text/javascript">
         function verifyDate(sender, args) {
@@ -54,11 +58,24 @@
             sender._popupBehavior._element.style.zIndex = 10005;
         }
     </script>
+    <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
+    <script src="/jquery/jquery-1.11.3.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function pageLoad() { // this gets fired when the UpdatePanel.Update() completes
+            ReBindJSdocs();
+        }
+        function ReBindJSdocs() { // create the rebinding logic in here
+            $(document).ready(function () {
+                $.getScript("/jquery/docs.min.js", function () {
+                    //alert("Script loaded but not necessarily executed.");
+                });
+            });
+        }
+    </script>
 </head>
 <body>
     <form id="form1" runat="server" visible="true">
-    <asp:ScriptManager ID="MasterScriptManager" runat="server" 
-        EnableScriptGlobalization="True">
+    <asp:ScriptManager ID="MasterScriptManager" runat="server"         EnableScriptGlobalization="True">
     </asp:ScriptManager>
     <div id="DivUsuario" style="text-align:center">
         <table>
@@ -159,14 +176,19 @@
             </td>
         </tr>
     </table>
-    <div id="DivContent" class="container-container-fluid" style="text-align: center; padding: 10px">
+    <div id="DivContent" class="container-fluid" style="text-align: center; padding: 10px">
         <asp:ContentPlaceHolder ID="ContentPlaceDefault" runat="server" Visible="true">
         </asp:ContentPlaceHolder>
     </div>
-
+    <script src="/js/bootstrap.min.js" type="text/javascript"></script>
     </form>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script src="http://getbootstrap.com/assets/js/docs.min.js"></script>
-    <script src="js/bootstrap.min.js" type="text/javascript"></script>
+    
+    <script type="text/javascript">
+        $(document).on("ready", function () {
+            var cuantos = 0;
+            cuantos = $('#DivMenu').length;
+            //alert("hola jquery. Cant controles: " + cuantos + ".");
+        });
+    </script>
 </body>
 </html>

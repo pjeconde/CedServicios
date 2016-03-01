@@ -211,6 +211,7 @@ namespace CedServicios.Site
                     UsaCertificadoAFIPPropioCheckBox.Enabled = false;
                     DestinoComprobanteITFCheckBox.Enabled = false;
                     NroSerieCertifITFTextBox.Enabled = false;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", "ShowModalCUIT();", true);
                     break;
                 case 1:
                     ModalPopupExtender1.PopupControlID = "UNPanel";
@@ -222,7 +223,7 @@ namespace CedServicios.Site
                     UNPanel_CUITTextBox.Enabled = false;
                     IdUNTextBox.Enabled = false;
                     DescrUNTextBox.Enabled = false;
-
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", "ShowModalUN();", true);
                     break;
                 case 2:
                     ModalPopupExtender1.PopupControlID = "PuntoVtaPanel";
@@ -236,9 +237,10 @@ namespace CedServicios.Site
                     UsaDatosCuitCheckBox.Checked = !puntoVta.UsaSetPropioDeDatosCuit;
                     UsaDatosCuitCheckBox_CheckedChanged(UsaDatosCuitCheckBox, new EventArgs());
                     PuntoVtaPanel_Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
+                    PuntoVtaPanel_Domicilio.DataBind();
                     PuntoVtaPanel_DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                     PuntoVtaPanel_DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
-                    DataBind();
+                    PuntoVtaPanel_DatosImpositivos.DataBind();
                     if (UsaDatosCuitCheckBox.Checked)
                     {
                         PuntoVtaPanel_Domicilio.Calle = cuit.Domicilio.Calle;
@@ -295,9 +297,10 @@ namespace CedServicios.Site
                     PuntoVtaPanel_Contacto.Enabled = false;
                     PuntoVtaPanel_DatosImpositivos.Enabled = false;
                     PuntoVtaPanel_DatosIdentificatorios.Enabled = false;
+                    ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", "ShowModalPTOVTA();", true);
                     break;
             }
-            ModalPopupExtender1.Show();
+            //ModalPopupExtender1.Show();
         }
         protected string SoloNroCuit(string a)
         {

@@ -114,6 +114,9 @@
     <Content Include="Imagenes\Ayuda\PeriodoEmision.png" />
     <Content Include="Imagenes\Empresa\SoftwareAMedida.jpg" />
     <Content Include="InstitucionalSoftwareAMedida.aspx" />
+    <Content Include="jquery\docs.min.js" />
+    <Content Include="jquery\jquery-1.11.3.js" />
+    <Content Include="PruebasBS-SinMaster.aspx" />
     <Content Include="PruebasBS.aspx" />
     <Content Include="css\bootstrap-theme.css" />
     <Content Include="css\bootstrap-theme.min.css" />
@@ -481,6 +484,13 @@
     </Compile>
     <Compile Include="InstitucionalSoftwareAMedida.aspx.designer.cs">
       <DependentUpon>InstitucionalSoftwareAMedida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PruebasBS-SinMaster.aspx.cs">
+      <DependentUpon>PruebasBS-SinMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PruebasBS-SinMaster.aspx.designer.cs">
+      <DependentUpon>PruebasBS-SinMaster.aspx</DependentUpon>
     </Compile>
     <Compile Include="PruebasBS.aspx.cs">
       <DependentUpon>PruebasBS.aspx</DependentUpon>

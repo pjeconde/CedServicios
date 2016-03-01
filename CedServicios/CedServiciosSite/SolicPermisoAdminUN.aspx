@@ -1,7 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="SolicPermisoAdminUN.aspx.cs" Inherits="CedServicios.Site.SolicPermisoAdminUN" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table align="center">
         <tr>
             <td align="center" colspan="3" style="padding-top: 20px">
                 <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Solicitud permiso de administrador de Unidad de Negocio"></asp:Label>
@@ -51,4 +54,7 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
 </asp:Content>

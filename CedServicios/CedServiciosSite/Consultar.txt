@@ -12,3 +12,47 @@
    en System.IO.StreamWriter..ctor(String path, Boolean append, Encoding encoding, Int32 bufferSize, Boolean checkHost)
    en System.IO.StreamWriter..ctor(String path)
    en CedServicios.Site.ExploradorComprobanteRG.GenerarInterfazRG3685(List`1 Comprobantes) en C:\GitHub\CedServicios\CedServicios\CedServiciosSite\ExploradorComprobanteRG.aspx.cs:línea 365
+20151218 11:51:46  La fecha de vencimiento es obligatoria
+20151218 11:52:15  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20151218 11:52:55  Resultado: R\n10031-El campo FchServDesde es obligatorio si se informa FchServHasta y/o FchVtoPago.\nCAE: 
+20151218 11:55:44  La fecha de vencimiento es obligatoria
+20151218 11:56:08  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 4.\n
+20160222 01:23:31  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160222 01:24:07  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160222 01:24:29  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160222 01:24:31  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160222 01:26:02  Consulta de Ult. Nro. Lote CUIT: 20225018805
+20160222 01:26:22  Consulta de Ult. Nro. Lote CUIT: 20225018805
+20160222 01:26:27  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160222 01:26:32  Consultar los Tipos de Documentos válidos en AFIP (FEv1) para el CUIT: 20225018805
+20160222 01:26:38  Consultar los Tipos de Documentos válidos en AFIP (FEv1) para el CUIT: 20225018805
+20160222 01:26:55  Consulta de Ult. Nro. Comprobante CUIT: 20225018805  Tipo.Comprobante: 1  Nro.Comprobante:   Nro. Punto de Vta.: 1
+20160222 01:27:17  Consulta de Ult. Nro. Lote CUIT: 30710015062
+20160222 01:27:30  Consulta de Ult. Nro. Comprobante CUIT: 30710015062  Tipo.Comprobante: 1  Nro.Comprobante:   Nro. Punto de Vta.: 1
+20160222 01:32:21  Consulta de Ult. Nro. Lote CUIT: 30710015062
+20160222 01:56:17  La fecha de vencimiento es obligatoria
+20160222 01:56:34  Debe informar al menos un artículo
+20160222 01:57:34  The request failed with HTTP status 503: Service Unavailable.
+20160222 02:05:44  The request failed with HTTP status 503: Service Unavailable.
+20160222 02:06:16  Consulta de Ult. Nro. Comprobante CUIT: 30710015062  Tipo.Comprobante: 1  Nro.Comprobante:   Nro. Punto de Vta.: 1
+20160222 02:06:26  Consulta de Ult. Nro. Comprobante CUIT: 30710015062  Tipo.Comprobante: 1  Nro.Comprobante:   Nro. Punto de Vta.: 1
+20160222 02:07:34  The request failed with HTTP status 503: Service Unavailable.
+20160222 02:08:45  The request failed with HTTP status 503: Service Unavailable.
+20160222 02:11:31  The request failed with HTTP status 503: Service Unavailable.
+20160222 02:19:07  The request failed with HTTP status 503: Service Unavailable.
+20160223 02:59:35  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160223 02:59:47  Consulta de Ult. Nro. Lote CUIT: 30710015062
+20160223 02:59:51  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160225 01:40:57  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160225 01:46:57  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160225 01:51:15  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160225 03:50:08  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160225 03:58:19  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160225 03:59:34  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160225 04:06:46  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160225 04:21:50  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160225 04:43:25  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160225 11:27:15  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160225 11:38:00  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160225 11:38:11  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160225 11:47:11  Consulta de Tipos de Comprobante CUIT: 20225018805

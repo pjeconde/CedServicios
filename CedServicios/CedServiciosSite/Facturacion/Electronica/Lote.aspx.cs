@@ -81,12 +81,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                             break;
                     }
 
-                    referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
-                    FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-                    referencias.Add(referencia);
-                    referenciasGridView.DataSource = referencias;
-                    referenciasGridView.DataBind();
-                    ViewState["referencias"] = referencias;
+                    //referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
+                    //FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+                    //referencias.Add(referencia);
+                    //referenciasGridView.DataSource = referencias;
+                    //referenciasGridView.DataBind();
+                    //ViewState["referencias"] = referencias;
 
                     //VENDEDOR
                     Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
@@ -120,7 +120,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     //COMPROBANTE
                     Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
                     Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
+                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
                     Tipo_De_ComprobanteDropDownList.DataBind();
                     CodigoOperacionDropDownList.DataValueField = "Codigo";
                     CodigoOperacionDropDownList.DataTextField = "Descr";
@@ -347,13 +347,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                         #endregion
                     }
 
-                    //DataBind();
-
                     BindearDropDownLists();
 
                     MonedaComprobanteDropDownList.Enabled = true;
 
                     Numero_ComprobanteTextBox.Attributes.Add("autocomplete", "off");
+
+                    AyudaFechaEmisionCalcular();
 
                     try
                     {
@@ -423,6 +423,54 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
             }
         }
+        private void AyudaFechaEmisionCalcular()
+        {
+            string texto = "";
+            string textoConcepto1 = "";
+            string textoConcepto2y3 = "";
+            DateTime fecha = DateTime.Now;
+            
+            string Ayuda1 = "<a href='javascript:void(0)' id='Ayuda1' role='button' class='popover-test' data-html='true' title='Fecha de Emisión' data-placement='auto' style='width: 200px'";
+            if (PuntoVtaDropDownList.SelectedItem.Text.IndexOf("(Exportacion)") != -1)
+            {
+                texto = "Para exportación la fecha de emisión permitida es del " + (fecha.AddDays(-5)).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(5)).ToString("dd/MM/yyyy");
+            }
+            else if (PuntoVtaDropDownList.SelectedItem.Text.IndexOf("(BonoFiscal)") != -1)
+            {
+                texto = "Para bono fiscal la fecha de emisión permitida es del " + (fecha.AddDays(-5)).ToString("dd/MM/yyyy") + " al " + fecha.ToString("dd/MM/yyyy");
+            }
+            else 
+            {
+                if (CodigoConceptoDropDownList.SelectedValue == "1")
+                {
+                    if (PuntoVtaDropDownList.SelectedItem.Text.IndexOf("(RG2904)") != -1)
+                    {
+                        textoConcepto1 = "Para Código de concepto igual a \"1-Productos\" la fecha de emisión permitida es del " + (fecha).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(5)).ToString("dd/MM/yyyy");
+                    }
+                    else
+                    {
+                        textoConcepto1 = "Para Código de concepto igual a \"1-Productos\" la fecha de emisión permitida es del " + (fecha.AddDays(-5)).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(5)).ToString("dd/MM/yyyy");
+                    }
+                    texto = textoConcepto1;
+                }
+                else if (CodigoConceptoDropDownList.SelectedValue == "2" || CodigoConceptoDropDownList.SelectedValue == "3")
+                {
+                    textoConcepto2y3 = "Para Código de concepto igual a \"2-Servicios\" ó \"3-Productos y Servicios\" la fecha de emisión permitida es del " + (fecha.AddDays(-10)).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(10)).ToString("dd/MM/yyyy");
+                    texto = textoConcepto2y3;
+                }
+                else
+                {
+                    texto = "El rango permitido dependerá del código de concepto.<br/>";
+                    texto += textoConcepto1 + "<br/>";
+                    texto += textoConcepto2y3;
+                }
+            }
+            texto += "<br/><br/>El formato válido es de 8 dígitos: YYYYMMDD (Año Mes Día).";
+            Ayuda1 += "data-content='" + texto + "'>";
+            Ayuda1 += "<span class='glyphicon glyphicon-info-sign gi-1x' style='vertical-align: inherit;'></span></a>";
+            AyudaFechaEmision.Text = Ayuda1; 
+        }
+
 		private void BindearDropDownLists()
 		{
 			AjustarCodigosDeReferenciaEnFooter();
@@ -432,6 +480,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 		}
         private void AjustarCodigosDeReferenciaEnFooter()
         {
+            referenciasGridView.DataBind();
             ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
             ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
             if (Funciones.SessionTimeOut(Session))
@@ -1766,8 +1815,9 @@ namespace CedServicios.Site.Facturacion.Electronica
 			referenciasGridView.DataSource = referencias;
             referenciasGridView.DataBind();
             ViewState["referencias"] = referencias;
+            DataBind();
+            AjustarCodigosDeReferenciaEnFooter();
 
-			BindearDropDownLists();
 			PermisosExpo.ResetearGrillas();
 			DetalleLinea.ResetearGrillas();
 
@@ -2114,19 +2164,22 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar la Localidad del vendedor"), false);
                 return false;
             }
-            if (Email_VendedorTextBox.Text.Equals(string.Empty))
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar la Localidad del vendedor"), false);
-                return false;
+                if (Email_VendedorTextBox.Text.Equals(string.Empty))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar la email del vendedor"), false);
+                    return false;
+                }
+                if (!Email_VendedorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_VendedorTextBox.Text))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un email válido para el vendedor"), false);
+                    return false;
+                }
             }
             if (!Id_LoteTextbox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumeric(Id_LoteTextbox.Text))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un dato numérico en el número de lote"), false);
-                return false;
-            }
-            if (!Email_VendedorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_VendedorTextBox.Text))
-            {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un email válido para el vendedor"), false);
                 return false;
             }
             if (!NroIBVendedorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNroIB(NroIBVendedorTextBox.Text))
@@ -2139,10 +2192,18 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("La descripción de la Razón Social del Comprador es muy larga. Máximo permitido 50 caracteres."), false);
                 return false;
             }
-            if (!Email_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_CompradorTextBox.Text))
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un email válido para el comprador"), false);
-                return false;
+                if (Email_CompradorTextBox.Text.Equals(string.Empty))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar la email del comprador"), false);
+                    return false;
+                }
+                if (!Email_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_CompradorTextBox.Text))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un email válido para el comprador"), false);
+                    return false;
+                }
             }
             if (!GLN_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericFijo(GLN_CompradorTextBox.Text, "13"))
             {
@@ -4974,6 +5035,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         break;
                 }
             }
+            AyudaFechaEmisionCalcular();
         }
         private void AjustarGeneracionNroLote()
         {
@@ -5168,6 +5230,24 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                     }
                     break;
+            }
+        }
+
+        protected void CodigoConceptoDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                if (Funciones.SessionTimeOut(Session))
+                {
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
+                {
+                    AyudaFechaEmisionCalcular();
+                }
+            }
+            catch
+            {
             }
         }
     }

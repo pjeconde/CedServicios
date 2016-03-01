@@ -80,11 +80,17 @@
     </Compile>
     <Compile Include="PuntoVta.cs" />
     <Compile Include="ReporteActividad.cs" />
+    <Compile Include="ServiciosAFIP.cs" />
     <Compile Include="Sesion.cs" />
     <Compile Include="TipoPermiso.cs" />
     <Compile Include="TipoPuntoVta.cs" />
     <Compile Include="UN.cs" />
     <Compile Include="Usuario.cs" />
+    <Compile Include="Web References\ar.gov.afip.awshomo\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
     <Compile Include="Web References\ar.gov.afip.wsaa\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -149,6 +155,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Web References\ar.gov.afip.awshomo\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+    <None Include="Web References\ar.gov.afip.awshomo\select.wsdl" />
     <None Include="Web References\ar.gov.afip.wsaa\LoginCms.wsdl" />
     <None Include="Web References\ar.gov.afip.wsaa\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -376,6 +387,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CedServiciosRN_IBKValidate_ValidaFacturaWebService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://awshomo.afip.gov.ar/padron-puc-ws/services/select.ContribuyenteNivel3SelectServiceImpl%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ar.gov.afip.awshomo\</RelPath>
+      <UpdateFromURL>https://awshomo.afip.gov.ar/padron-puc-ws/services/select.ContribuyenteNivel3SelectServiceImpl%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosRN_ar_gov_afip_awshomo_ContribuyenteNivel3SelectServiceImplService</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://servicios1.afip.gov.ar/wsfexv1/service.asmx%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>

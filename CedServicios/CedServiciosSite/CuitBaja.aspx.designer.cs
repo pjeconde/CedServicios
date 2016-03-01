@@ -184,15 +184,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.CheckBox DestinoComprobanteITFCheckBox;
         
         /// <summary>
-        /// Label12 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label12;
-        
-        /// <summary>
         /// NroSerieCertifITFTextBox control.
         /// </summary>
         /// <remarks>
@@ -202,6 +193,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox NroSerieCertifITFTextBox;
         
         /// <summary>
+        /// AyudaNroSerieCertif control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal AyudaNroSerieCertif;
+        
+        /// <summary>
         /// DestinoComprobanteAFIPCheckBox control.
         /// </summary>
         /// <remarks>
@@ -209,15 +209,6 @@ namespace CedServicios.Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox DestinoComprobanteAFIPCheckBox;
-        
-        /// <summary>
-        /// Label4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
         /// UsaCertificadoAFIPPropioCheckBox control.

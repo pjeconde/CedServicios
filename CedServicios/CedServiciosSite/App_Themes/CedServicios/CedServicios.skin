@@ -46,7 +46,9 @@
 
 <asp:CheckBox SkinID="CheckBoxFEALoteDetChCh" runat="server" Width="40px"></asp:CheckBox>
 
-<asp:DropDownList SkinID="ddln" runat="server" Style="width: 176px" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="ddlg" runat="server" Style="width: 250px" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="ddln" runat="server" Style="width: 150px" BorderStyle="NotSet"></asp:DropDownList>
+<asp:DropDownList SkinID="ddln2" runat="server" Style="width: 180px" BorderStyle="NotSet"></asp:DropDownList>
 <asp:DropDownList SkinID="ddlch" runat="server" Style="width: 60px" BorderStyle="NotSet"></asp:DropDownList>
 <asp:DropDownList SkinID="ddlgrc" runat="server" Style="width: 200px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>
 <asp:DropDownList SkinID="ddlgr2c" runat="server" Style="width: 300px" BackColor="peachpuff" ForeColor="brown" Font-Bold="true" BorderStyle="Solid" BorderColor="Brown" BorderWidth="1" ToolTip=""></asp:DropDownList>

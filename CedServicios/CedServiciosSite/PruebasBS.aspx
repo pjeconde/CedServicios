@@ -94,6 +94,22 @@
                 </div>
             </div>
         </div>
+
+        <button type="button" class="popover-test" data-toggle="modal" data-target="#Prueba1">
+            <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit">
+        </button>
+        <div id="Div1" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    Buenos dias !!!<br /> 
+                    Contamos con personal altamente capacitado.
+                </div>
+            </div>
+        </div>
+
+        <a href="#" id="example" role="button" class="popover-test" data-html="true" title="DATOS DEL VENDEDOR" data-content="En esta página se registran todos los datos de la persona que emitirá facturas de venta."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
+
+        <a href="#" id="A1" role="button" class="btn popover" data-html="true" title="HOLA" data-content="En esta página se registran todos los datos de la persona que emitirá facturas de venta."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
    </div>  
 
     <div class="container-fluid">

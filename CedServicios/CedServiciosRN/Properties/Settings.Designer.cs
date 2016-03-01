@@ -92,5 +92,16 @@ namespace CedServicios.RN.Properties {
                 return ((string)(this["CedServiciosRN_ar_gov_afip_wsfexv1_Service"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://awshomo.afip.gov.ar/padron-puc-ws/services/select.ContribuyenteNivel3Sele" +
+            "ctServiceImpl")]
+        public string CedServiciosRN_ar_gov_afip_awshomo_ContribuyenteNivel3SelectServiceImplService {
+            get {
+                return ((string)(this["CedServiciosRN_ar_gov_afip_awshomo_ContribuyenteNivel3SelectServiceImplService"]));
+            }
+        }
     }
 }

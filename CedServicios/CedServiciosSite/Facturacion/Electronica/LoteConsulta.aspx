@@ -855,7 +855,7 @@ EnableEventValidation="false" ValidateRequest="false"%>
                                                     </tr>
                                                     <tr>
                                                         <td align="right" valign="top">
-                                                            <table border="0" cellpadding="0" cellspacing="0" style="width: 370px">
+                                                            <table style="width: 370px">
                                                                 <tr>
                                                                     <td class="TC00S">
                                                                         GLN:
@@ -916,7 +916,7 @@ EnableEventValidation="false" ValidateRequest="false"%>
                                                                 </tr>
                                                                 <tr>
                                                                     <td colspan="2">
-                                                                        <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 5px; text-align: right;">
+                                                                        <table style="padding-top: 5px; text-align: right;">
                                                                             <tr>
                                                                                 <td class="TC01S" style="padding-right: 5px">
                                                                                     Nro.:
@@ -945,7 +945,7 @@ EnableEventValidation="false" ValidateRequest="false"%>
                                                                                 </td>
                                                                             </tr>
                                                                             <tr>
-                                                                                <td class="TC01S" style="padding-right: 5px">
+                                                                                <td class="TC03S" style="padding-right: 5px">
                                                                                     Sector:
                                                                                 </td>
                                                                                 <td style="padding-right: 5px">

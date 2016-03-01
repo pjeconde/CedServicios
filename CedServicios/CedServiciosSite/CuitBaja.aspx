@@ -6,23 +6,26 @@
 <%@ Register TagPrefix="uc1" TagName="datosIdentificatorios" Src="~/Controles/DatosIdentificatorios.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table style="padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table align="center">
         <tr>
-            <td align="center" colspan="2" style="padding-top:20px">
+            <td colspan="2" style="padding-top:20px; text-align: center">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Baja/Anul.baja de CUIT"></asp:Label>
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top: 20px">
+            <td style="padding-right:5px; padding-top: 20px; text-align: right">
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
                     ControlToValidate="CUITTextBox" ErrorMessage="CUIT" SetFocusOnError="True" ValidationExpression="[0-9]{11}"> <asp:Label ID="Label1" runat="server" SkinID="IndicadorValidacion"></asp:Label></asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="CUITTextBox"
                     ErrorMessage="CUIT" SetFocusOnError="True"> <asp:Label ID="Label2" runat="server" SkinID="IndicadorValidacion"></asp:Label></asp:RequiredFieldValidator>
                 <asp:Label ID="Label3" runat="server" Text="CUIT"></asp:Label>
             </td>
-            <td align="left" style="padding-top:20px">
+            <td style="padding-top:20px; text-align: left">
                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
-                    Width="90px"></asp:TextBox>
+                    Width="90px"></asp:TextBox>&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="DATOS DEL VENDEDOR" data-content="En esta página se registran todos los datos de la persona que emitirá comprobantes de venta."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
             </td>
         </tr>
         <tr>
@@ -31,13 +34,13 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-right:5px; padding-top:2px">
+            <td style="padding-right:5px; padding-top:2px; text-align: right">
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator3" runat="server" ControlToValidate="RazonSocialTextBox"
                     ErrorMessage="Raz.Soc." SetFocusOnError="True"> <asp:Label ID="Label8" runat="server" SkinID="IndicadorValidacion"></asp:Label></asp:RequiredFieldValidator>
                 <asp:Label ID="Label9" runat="server" Text="Razón Social"></asp:Label>
             </td>
-            <td align="left" style="padding-top:2px">
-                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="2" Width="300px"></asp:TextBox>
+            <td style="padding-top:2px; text-align: left">
+                <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="2" Width="400px"></asp:TextBox>
             </td>        
         </tr>
         <uc1:domicilio ID="Domicilio" runat="server"/>
@@ -45,7 +48,7 @@
         <uc1:datosImpositivos ID="DatosImpositivos" runat="server" />
         <uc1:datosIdentificatorios ID="DatosIdentificatorios" runat="server" />
         <tr>
-	        <td align="right" style="padding-right:5px; padding-top:5px">
+	        <td style="padding-right:5px; padding-top:5px; text-align: right">
 		        <asp:Label ID="Label18" runat="server" Text="¿Cómo nos conoció?"></asp:Label>
 	        </td>
 			<td align="left" style="padding-top:5px">
@@ -54,29 +57,31 @@
 			</td>
         </tr>
         <tr>
-            <td align="right" style="padding-right: 5px; padding-top:5px" valign="top">
+            <td style="padding-right: 5px; padding-top:5px; text-align: right; vertical-align:top">
                 <asp:Label ID="Label11" runat="server" Text="Destinos de comprobantes"></asp:Label>
             </td>
-            <td align="left" style="padding-top:5px">
-                <table border="0">
+            <td style="padding-top:5px; text-align: left">
+                <table>
                     <tr>
-                        <td align="left" valign="top">
-                            <asp:CheckBox ID="DestinoComprobanteITFCheckBox" runat="server" AutoPostBack="true" Text="Interbanking (Interfacturas)" Checked="true" TabIndex="501"/>
+                        <td style="text-align: left; vertical-align: top">
+                            <asp:CheckBox ID="DestinoComprobanteITFCheckBox" runat="server" AutoPostBack="true" Text="&nbsp;Interfacturas" Checked="true" TabIndex="504"/>&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="INTERFACTURAS (INTERBANKING)" data-content="Marque este campo si gestionará el CAE a través de Interfacturas, en forma ONLINE.<br/><br/>Si solo genera archivos XML para subir en el Sitio Web de Interfacturas de forma manual, no debe marcar esta casilla."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
                         </td>
-                        <td align="left" valign="middle" style="padding-left:5px">
-                            <asp:Label ID="Label12" runat="server" Text="--> Nro.serie certif.:"></asp:Label>
-                        </td>
-                        <td align="left" valign="top" style="padding-left:5px">
-                            <asp:TextBox ID="NroSerieCertifITFTextBox" runat="server" MaxLength="256" TabIndex="502" Width="120px"></asp:TextBox>
+                        <td style="text-align: left; vertical-align: top; padding-left:40px">
+                            <span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>&nbsp;<font style="font-family: Sans-Serif"><b>Nro.serie certif.:</b></font>
+                            <asp:TextBox ID="NroSerieCertifITFTextBox" runat="server" MaxLength="256" TabIndex="505" Width="100px"></asp:TextBox>&nbsp;<asp:Literal runat="server" ID="AyudaNroSerieCertif" />
                         </td>
                     </tr>
                     <tr>
-                        <td align="left" valign="top">
-                            <asp:CheckBox ID="DestinoComprobanteAFIPCheckBox" runat="server" AutoPostBack="true" Text="A.F.I.P." Checked="true" TabIndex="503" />
+                        <td style="padding-top:5px; vertical-align: top">
                         </td>
-                        <td align="left" valign="middle" style="padding-left:5px" colspan="2">
-                            <asp:Label ID="Label4" runat="server" Text="-->"></asp:Label>
-                            <asp:CheckBox ID="UsaCertificadoAFIPPropioCheckBox" runat="server" AutoPostBack="true" TextAlign="Left" Text="Usa certificado propio" Checked="false" TabIndex="504" />
+                    </tr>
+                    <tr>
+                        <td style="text-align: left; vertical-align: top"">
+                            <asp:CheckBox ID="DestinoComprobanteAFIPCheckBox" runat="server" AutoPostBack="true" Text="&nbsp;A.F.I.P." Checked="true" TabIndex="506" />&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="A.F.I.P." data-content="Marque este campo si gestionará el CAE a través de la AFIP, en forma ONLINE."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
+                        </td>
+                        <td style="text-align: left; vertical-align: middle; padding-left:40px">
+                                <font style="font-family: Sans-Serif"><span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>&nbsp;<asp:CheckBox ID="UsaCertificadoAFIPPropioCheckBox" runat="server" AutoPostBack="true"  TextAlign="Left" Text="Usa certificado propio&nbsp;" Checked="false" TabIndex="507" /></font>&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="USA CERTIFICADO PROPIO?" data-content="Marque esta casilla únicamente si:<br>
+                                Genera el CAE con la AFIP y tiene Certificado Digital propio generado en la AFIP.<br><br>( Si genera el CAE con AFIP pero utiliza el Certificado de Cedeira SF SRL, luego de haber delegado, no marque esta casilla )"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
                         </td>
                     </tr>
                 </table>
@@ -85,19 +90,22 @@
         <tr>
             <td>
             </td>
-            <td align="left" style="height: 24px; padding-top:20px">
+            <td style="height: 24px; padding-top:20px; text-align: left">
                 <asp:Button ID="AceptarButton" runat="server" TabIndex="505" Text="Aceptar" onclick="AceptarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                 <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="506" Text="Cancelar" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>
-            <td align="center" colspan="2" style="padding-top:20px">
+            <td colspan="2" style="padding-top:20px; text-align: center">
                 <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                 <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary">
                 </asp:ValidationSummary>
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
     <script type="text/javascript">
         function BorrarMensaje() {
             {

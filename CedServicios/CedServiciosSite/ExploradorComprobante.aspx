@@ -2,9 +2,11 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-
-    <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton">
-        <table style="border:0; padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton" align="left">
+        <table align="center">
             <tr>
                 <td colspan="3" style="padding-top:20px; padding-bottom:20px; text-align:center">
                     <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes"></asp:Label>
@@ -19,9 +21,9 @@
                 <td style="padding-top:5px; text-align: left; width: 450px">
                     <asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
                 </td>
-                <td rowspan="3" style="padding-top:5px; padding-left: 10px; vertical-align: top; text-align: left; width: 400px">
+                <td rowspan="3" style="padding-top:5px; padding-left: 10px; vertical-align: top; text-align: left; max-width: 400px">
                     <asp:Panel ID="EstadosPanel" runat="server">
-                        <table style="width: 400px">
+                        <table style="max-width: 400px">
                             <tr>
                                 <td>
                                     Estado(s):&nbsp;
@@ -53,8 +55,6 @@
                             </tr>
                         </table>
                     </asp:Panel>
-                </td>
-                <td style="width: 170px">
                 </td>
             </tr>
             <tr>
@@ -103,7 +103,7 @@
                 <td style="padding-top:5px; vertical-align: top; text-align: left">
                     <asp:Button ID="BuscarButton" class="btn btn-default btn-sm" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
                     <asp:Button ID="SalirButton" class="btn btn-default btn-sm" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
-                    <a href="#" role="button" class="popover-test" data-html="true" title="FILTROS DE BUSQUEDA" data-content="Si no selecciona ningún filtro, buscará todos los comprobantes que estén dentro del rango de fechas del período de emisión.<br><a href='Imagenes/Ayuda/PeriodoEmision.png' target='_blank'><br/><img src='Imagenes/Ayuda/PeriodoEmision.png' style='width:100%'/></a>"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>
+                    <a href="javascript:void(0)" role="button" class="popover-test" data-html="true" title="FILTROS DE BUSQUEDA" data-content="Si no selecciona ningún filtro, buscará todos los comprobantes que estén dentro del rango de fechas del período de emisión.<br><a href='Imagenes/Ayuda/PeriodoEmision.png' target='_blank'><br/><img src='Imagenes/Ayuda/PeriodoEmision.png' style='width:100%'/></a>"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>
                 </td>
             </tr>
             <tr>
@@ -113,7 +113,7 @@
             </tr>
             <tr>
                 <td colspan="4" style="text-align: left; padding-bottom: 5px;">
-                    <div style="text-align: right; width: 100%">
+                    <div style="text-align: right;">
                         <a href="#" role="button" runat="server" class="" data-toggle="modal" data-target="#myModalLarge" id="AyudaGrilla" visible="false"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>&nbsp;
                     </div>
                     <div id="myModalLarge" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -148,7 +148,7 @@
                                         <hr>
                                     <h4>Consultar (Interfacturas)</h4>
                                         <p>
-                                        Visualiza el comprobante obteniendo toda la información en línea directamente de Interfacturas. Se puede utilizar para consultar el CAE o el motivo del rechazo de la AFIP.
+                                        Visualiza el comprobante obteniendo toda la información en línea directamente de Interfacturas. Se puede utilizar para consultar el <a href="#" class="tooltip-test" data-placement="bottom" title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">CAE</a> o el motivo del rechazo de la AFIP.
                                         </p>
                                         Requisitos:
                                         <ul>
@@ -199,6 +199,21 @@
                                         <ul>
                                             <li>El comprobante debe estar con estado Vigente ( con el <a href="#" class="tooltip-test" data-placement="top" title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">CAE</a> generado ).</li>
                                         </ul>
+                                        <hr>
+                                    <h4>Clonar comprobante</h4>
+                                        <p>
+                                            La clonación de comprobante obtiene todos los datos del comprobante original, pero descarta los siguientes campos que usted deberá ingresar para geenrar un nuevo comprobante.
+                                        <p />
+                                        <ul>
+                                            <li>Numero de comprobante</li>
+                                            <li>Fecha de emision</li>
+                                            <li>Fecha de servicio inicio y fin</li>
+                                            <li>Fecha de vencimiento</li>
+                                            <li>Nro de lote</li>
+                                            <li>Nº de CAE</li>
+                                            <li>Fecha obtencion de CAE</li>
+                                            <li>Fecha vencimiento de CAE</li>
+                                        </ul>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -209,11 +224,11 @@
                 </td>
             </tr>
             <tr>
-                <td colspan="4">
+                <td colspan="4" style="">
                     <asp:GridView ID="ComprobantesGridView" runat="server" 
                         AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                         <Columns>
-                            <asp:TemplateField Visible="false" HeaderStyle-Width="100px">
+                            <asp:TemplateField Visible="false">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="VerLinkButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Ver</asp:LinkButton>
                                 </ItemTemplate>
@@ -321,4 +336,7 @@
             </tr>
         </table>
     </asp:Panel>
+    </div>
+    </div>
+    </div>
 </asp:Content>

@@ -2,6 +2,11 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <style>
+        .popover {
+            max-width: 500px;
+        }
+    </style>
     <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton">
         <table style="border:0; padding-left:10px;">
             <tr>
@@ -16,9 +21,9 @@
                 <td style="padding-top:5px; text-align: left;">
                     <asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
                 </td>
-                <td rowspan="3" style="padding-top:5px; padding-left: 10px; vertical-align: top; text-align: left">
+                <td rowspan="3" style="padding-top:5px; padding-left: 10px; vertical-align: top; text-align: left; max-width: 400px">
                     <asp:Panel ID="EstadosPanel" runat="server">
-                        <table style="border: 0;">
+                        <table style="border: 0; max-width: 400px">
                             <tr>
                                 <td>
                                     Estado(s):&nbsp;
@@ -27,7 +32,7 @@
                                     <asp:CheckBox ID="EstadoVigenteCheckBox" runat="server" Text="Vigente" AutoPostBack="false" Width="100px"/>
                                 </td>
                                 <td style="padding-left: 10px;">
-                                    <asp:CheckBox ID="EstadoPteEnvioCheckBox" runat="server" Text="Pendiente de envio (AFIP/ITF)" AutoPostBack="false" Width="250px"/>
+                                    <asp:CheckBox ID="EstadoPteEnvioCheckBox" runat="server" Text="Pendiente de envio (AFIP/ITF)" AutoPostBack="false"/>
                                 </td>
                             </tr>
                             <tr>
@@ -36,7 +41,7 @@
                                     <asp:CheckBox ID="EstadoDeBajaCheckBox" runat="server" Text="De baja" AutoPostBack="false" Width="100px"/>
                                 </td>
                                 <td style="padding-left: 10px;">
-                                    <asp:CheckBox ID="EstadoPteConfCheckBox" runat="server" Text="Pendiente de confirmación" AutoPostBack="false" Width="250px"/>
+                                    <asp:CheckBox ID="EstadoPteConfCheckBox" runat="server" Text="Pendiente de confirmación" AutoPostBack="false"/>
                                 </td>
                             </tr>
                             <tr>
@@ -45,20 +50,18 @@
                                     <asp:CheckBox ID="EstadoRechCheckBox" runat="server" Text="Rechazado" AutoPostBack="false" Width="100px"/>
                                 </td>
                                 <td style="padding-left: 10px;">
-                                    <asp:CheckBox ID="EstadoPteAutorizCheckBox" runat="server" Text="Pendiente de autorización" AutoPostBack="false" Width="250px"/>
+                                    <asp:CheckBox ID="EstadoPteAutorizCheckBox" runat="server" Text="Pendiente de autorización" AutoPostBack="false"/>
                                 </td>
                             </tr>
                         </table>
                     </asp:Panel>
                 </td>
-                <td style="width:550px">
-                </td>
             </tr>
             <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
+                <td style="padding-right:5px; padding-top:5px; text-align: left">
                     Naturaleza del comprobante:
                 </td>
-                <td align="left" style="padding-top:5px">
+                <td style="padding-top:5px; text-align: left">
                     <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" Width="400px" DataValueField="Id" DataTextField="Descr"></asp:DropDownList>
                 </td>        
             </tr>
@@ -97,14 +100,15 @@
             <tr>
                 <td>
                 </td>
-                <td align="left" style="height: 24px; padding-top:5px" valign="top">
-                    <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
-                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
-                    <asp:Button ID="DescargarButton" runat="server" TabIndex="10" Text="Descargar Interfaz RG.3685" onclick="DescargarButton_Click" Enabled="false" />
+                <td style="height: 24px; padding-top:5px; vertical-align: top; text-align: left">
+                    <asp:Button ID="BuscarButton" runat="server" class="btn btn-default btn-sm" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
+                    <asp:Button ID="SalirButton" runat="server" class="btn btn-default btn-sm" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                    <asp:Button ID="DescargarButton" runat="server" class="btn btn-default btn-sm" TabIndex="10" Text="Descargar Interfaz RG.3685" onclick="DescargarButton_Click" disabled="disabled" />
+                    <a href="#" role="button" class="popover-test" data-html="true" data-trigger="focus" title="FILTROS DE BUSQUEDA" data-content="Si no selecciona ningún filtro, buscará todos los comprobantes que estén dentro del rango de fechas del período de emisión.<br><br>El botón de 'Descargar Interfaz RG.3685' se habilita cuando se encuentren comprobantes vigentes en la busqueda."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>
                 </td>
             </tr>
             <tr>
-                <td align="center" colspan="4" style="padding-top:20px; padding-bottom:10px">
+                <td colspan="4" style="padding-top:20px; padding-bottom:10px; text-align: center">
                     <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                 </td>
             </tr>
@@ -115,7 +119,7 @@
                         <Columns>
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
-                                    <asp:LinkButton ID="VerLinkButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Ver detalle</asp:LinkButton>
+                                    <asp:LinkButton ID="VerLinkButton" runat="server" CommandName="Consulta" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Ver</asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DescrNaturalezaComprobante" HeaderText="Naturaleza" SortExpression="DescrNaturalezaComprobante">

@@ -141,7 +141,7 @@ namespace CedServicios.RN
         }
         public static bool IsValidNroIB(string strNroIB)
         {
-            return Regex.IsMatch(strNroIB, @"[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}");
+            return Regex.IsMatch(strNroIB, @"[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}|[0-9]{11}");
         }
         public static bool IsValidNumeric(string strNro)
         {
@@ -170,6 +170,22 @@ namespace CedServicios.RN
             catch
             {
             }
+        }
+        public static bool ValidarFechaYYYYMMDD(string Fecha)
+        {
+            if (Fecha.Length != 8) 
+            { 
+                return false; 
+            }
+            try
+            {
+                DateTime a = Convert.ToDateTime(Fecha.Substring(6, 2) + "/" + Fecha.Substring(4, 2) + "/" + Fecha.Substring(0, 4));
+            }
+            catch
+            {
+                return false;
+            }
+            return true;
         }
     }
 }

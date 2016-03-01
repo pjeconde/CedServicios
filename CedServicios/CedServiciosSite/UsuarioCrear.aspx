@@ -1,7 +1,10 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioCrear.aspx.cs" Inherits="CedServicios.Site.UsuarioCrear" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="height: 500px; width: 800px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table align="center" style="height: 500px; width: 800px">
         <tr>
             <td valign="top">
                 <table border="0" cellpadding="0" cellspacing="0" class="TextoComun" style="width: 100%;">
@@ -236,4 +239,7 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
 </asp:Content>

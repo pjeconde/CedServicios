@@ -752,7 +752,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                     </td>
                                                     <td class="bgFEAC" style="width: 30px; background-repeat: repeat-y;">
                                                     </td>
-                                                    <td align="left" valign="top">
+                                                    <td style="text-align:left; vertical-align: top">
                                                         <table style="width: 400px">
                                                             <tr>
                                                                 <td class="TC00S">
@@ -764,19 +764,19 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="TC01S" style="padding-right: 5px">
+                                                                <td class="TC00S">
                                                                     Nro.:
                                                                 </td>
-                                                                <td style="padding-right: 5px">
+                                                                <td class="TC10S" style="padding-right: 5px">
                                                                     <asp:TextBox ID="Domicilio_Numero_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
                                                                     </asp:TextBox>
                                                                 </td>
                                                             </tr>
                                                             <tr>
-                                                                <td class="TC03S" style="padding-right: 5px">
+                                                                <td class="TC00S">
                                                                     Torre:
                                                                 </td>
-                                                                <td>
+                                                                <td class="TC10S">
                                                                     <asp:TextBox ID="Domicilio_Torre_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh">
                                                                     </asp:TextBox>
                                                                 </td>
@@ -940,6 +940,9 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                 <td style="text-align: center; font-weight: normal;">
                                                     <asp:UpdatePanel ID="referenciasUpdatePanel" runat="server" ChildrenAsTriggers="true"
                                                         UpdateMode="Conditional">
+                                                        <Triggers>
+                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                        </Triggers>
                                                         <ContentTemplate>
                                                             <asp:GridView ID="referenciasGridView" runat="server" AutoGenerateColumns="False"
                                                                 BorderColor="gray" BorderStyle="Solid" BorderWidth="1px"
@@ -972,9 +975,6 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                 <HeaderStyle Font-Bold="true" />
                                                             </asp:GridView>
                                                         </ContentTemplate>
-                                                        <Triggers>
-                                                            <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                        </Triggers>
                                                     </asp:UpdatePanel>
                                                 </td>
                                             </tr>

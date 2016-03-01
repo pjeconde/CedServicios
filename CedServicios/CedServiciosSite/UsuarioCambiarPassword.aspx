@@ -1,15 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioCambiarPassword.aspx.cs" Inherits="CedServicios.Site.UsuarioCambiarPassword" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
     <asp:Panel ID="Panel1" runat="server" DefaultButton="AceptarButton">
-        <table border="0" cellpadding="0" cellspacing="0" class="TextoComun" style="text-align:left; padding-left:10px;">
+        <table align="center" class="TextoComun">
             <tr>
-                <td colspan="2" align="center" style="padding-top:20px">
+                <td colspan="2" style="padding-top:20px; text-align: center">
                     <asp:Label ID="TituloLabel" runat="server" SkinID="TituloPagina" Text="Cambio de Contraseña de Usuario"></asp:Label>
                 </td>
             </tr>
             <tr>
-                <td colspan="2" align="center" style="padding-top:20px;">
+                <td colspan="2" style="padding-top:20px; text-align: center">
                     <asp:Label ID="Label8" runat="server" SkinID="TextoMediano" Text="Para realizar el cambio de la Contraseña de su cuenta eFact, ingrese los datos que se solicitan a continuación:"></asp:Label>
                 </td>
             </tr>
@@ -81,6 +84,9 @@
             </tr>
         </table>
     </asp:Panel>
+    </div>
+    </div>
+    </div>
     <script type="text/javascript">
         function BorrarMensaje() {
             {

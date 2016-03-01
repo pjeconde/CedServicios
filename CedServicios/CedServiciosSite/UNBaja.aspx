@@ -1,7 +1,10 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UNBaja.aspx.cs" Inherits="CedServicios.Site.UNBaja" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table align="center">
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Baja/Anul.baja de Unidad de Negocio"></asp:Label>
@@ -21,7 +24,7 @@
             </td>
             <td align="left" style="padding-top:20px">
                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
-                    Width="80px"></asp:TextBox>
+                    Width="90px"></asp:TextBox>
             </td>
         </tr>
         <tr>
@@ -69,6 +72,9 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
     <script type="text/javascript">
         function BorrarMensaje() {
             {

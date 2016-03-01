@@ -114,6 +114,20 @@ namespace CedServicios.Site
                 }
             }
         }
+        private bool ValidarFiltros()
+        {
+            if (!RN.Funciones.ValidarFechaYYYYMMDD(FechaDesdeTextBox.Text))
+            {
+                MensajeLabel.Text = "Fecha Desde inválida. Formato correcto de 8 dígitos (YYYYMMDD).";
+                return false;
+            }
+            if (!RN.Funciones.ValidarFechaYYYYMMDD(FechaHastaTextBox.Text))
+            {
+                MensajeLabel.Text = "Fecha Hasta inválida. Formato correcto de 8 dígitos (YYYYMMDD).";
+                return false;
+            }
+            return true;
+        }
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
@@ -122,6 +136,7 @@ namespace CedServicios.Site
             }
             else
             {
+                if (!ValidarFiltros()) { return; };
                 ResultadosTextBox.Text = "";
                 ResultadosLabel.Visible = false;
                 ResultadosTextBox.Visible = false;
@@ -156,14 +171,16 @@ namespace CedServicios.Site
                 lista = RN.Comprobante.ListaFiltrada(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, DetalleTextBox.Text, sesion);
                 if (lista.Count == 0)
                 {
-                    DescargarButton.Enabled = false;
+                    //DescargarButton.Enabled = false;
+                    DescargarButton.Attributes.Add("Disabled", "Disabled");
                     ComprobantesGridView.DataSource = null;
                     ComprobantesGridView.DataBind();
                     MensajeLabel.Text = "No se han encontrado Comprobantes que satisfagan la busqueda";
                 }
                 else
                 {
-                    DescargarButton.Enabled = true;
+                    //DescargarButton.Enabled = true;
+                    DescargarButton.Attributes.Remove("Disabled");
                     ComprobantesGridView.DataSource = lista;
                     ViewState["Comprobantes"] = lista;
                     ComprobantesGridView.DataBind();

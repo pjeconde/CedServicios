@@ -195,6 +195,20 @@ namespace CedServicios.Site
                 }
             }
         }
+        private bool ValidarFiltros()
+        {
+            if (!RN.Funciones.ValidarFechaYYYYMMDD(FechaDesdeTextBox.Text))
+            {
+                MensajeLabel.Text = "Fecha Desde inválida. Formato correcto de 8 dígitos (YYYYMMDD).";
+                return false;
+            }
+            if (!RN.Funciones.ValidarFechaYYYYMMDD(FechaHastaTextBox.Text))
+            {
+                MensajeLabel.Text = "Fecha Hasta inválida. Formato correcto de 8 dígitos (YYYYMMDD).";
+                return false;
+            }
+            return true;
+        }
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
@@ -203,6 +217,7 @@ namespace CedServicios.Site
             }
             else
             {
+                if (!ValidarFiltros()) { return; };
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
                 MensajeLabel.Text = String.Empty;

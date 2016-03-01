@@ -34,7 +34,15 @@ namespace CedServicios.Site
                     }
                 }
             }
+            //Detectar la ejecución de un UpdatePanel
+            if (MasterScriptManager.IsInAsyncPostBack)
+            {
+                //string someScript = "";
+                //someScript = "<script language='javascript'>alert('Called from CodeBehind');</script>";
+                //Page.ClientScript.RegisterStartupScript(this.GetType(), "onload", someScript);
+            }
         }
+
         protected void Menu_MenuItemClick(object sender, MenuEventArgs e)
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];

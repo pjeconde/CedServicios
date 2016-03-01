@@ -381,5 +381,11 @@ namespace CedServicios.Site
             {
             }
         }
+
+
+        protected void ConsultarDatosFiscalesButton_Click(object sender, EventArgs e)
+        {
+            string respuesta = RN.ServiciosAFIP.DatosFiscales(CuitEmisorTextBox.Text, ((Entidades.Sesion)Session["Sesion"]));
+        }
     }
 }

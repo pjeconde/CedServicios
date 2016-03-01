@@ -150,6 +150,14 @@
             </td>
         </tr>
         <tr>
+            <td colspan="2" style="padding-top:10px">
+                <asp:Button ID="ConsultarDatosFiscalesButton" runat="server"
+                    OnClick="ConsultarDatosFiscalesButton_Click" Text="Obtener Datos Fiscales"
+                    ToolTip="Obtener Datos Fiscales de un CUIT. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                    Width="100%" />
+            </td>
+        </tr>
+        <tr>
             <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
             </td>

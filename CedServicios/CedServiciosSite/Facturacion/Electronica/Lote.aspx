@@ -12,6 +12,17 @@
 <%@ Register src="FacturaElectronicaFecha.ascx" tagname="FacturaElectronicaFecha" tagprefix="uc1" %>
 
 <asp:Content ID="XMLContent" runat="Server" ContentPlaceHolderID="ContentPlaceDefault">
+    <script type="text/javascript">
+        $(function () {
+            $('[data-toggle="popover"]').popover()
+        });
+    </script>
+    <style type="text/css">
+    .popover
+    {
+    	width: 400px;
+    }
+    </style>
     <table style="border:0; width: 1300px; text-align:left; padding-left:10px">
         <tr>
             <td style="padding-top:20px; width:1282px; vertical-align:middle; text-align:center; vertical-align:top">
@@ -155,6 +166,10 @@
                                             <td class="TC10S">
                                                 <asp:DropDownList ID="IVAcomputableDropDownList" runat="server" SkinID="ddlch">
                                                 </asp:DropDownList>
+                                                <a href="javascript:void(0)" id="A1" role="button" class="popover-test" data-html="true" title="IVA Computable"
+                                                        data-content="Especifica si es o no computable el impuesto al valor agregado.">
+                                                        <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit">
+                                                </span></a>
                                             </td>
                                             <td class="TC00S">
                                                 Moneda:
@@ -187,6 +202,7 @@
                                                     Format="yyyyMMdd" PopupButtonID="ImageCalendarFechaEmision">
                                                 </cc1:CalendarExtender>
                                                 <asp:ImageButton runat="server" CausesValidation="false" ID="ImageCalendarFechaEmision" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                <asp:Literal runat="server" ID="AyudaFechaEmision" />
                                             </td>
                                         </tr>
                                         <tr>
@@ -197,6 +213,10 @@
                                             <td class="TC10S">
                                                 <asp:DropDownList ID="CodigoOperacionDropDownList" runat="server" SkinID="ddln">
                                                 </asp:DropDownList>
+                                                <a href="javascript:void(0)" id="A2" role="button" class="popover-test" data-html="true" title="Código de operación" style="width: 200px"
+                                                        data-content="Sólo se informa cuando el impuesto liquidado sea igual a 0 y el importe total de conceptos que no integran el precio neto gravado es distinto de cero.">
+                                                        <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;">
+                                                </span></a>
                                             </td>
                                             <td class="TC00S">
                                                 Fecha de vencimiento:
@@ -226,7 +246,7 @@
                                                     Visible="false"></asp:Label>
                                             </td>
                                             <td class="TC10S">
-                                                <asp:DropDownList ID="CodigoConceptoDropDownList" runat="server" SkinID="ddln" 
+                                                <asp:DropDownList ID="CodigoConceptoDropDownList" runat="server" SkinID="ddln" OnSelectedIndexChanged="CodigoConceptoDropDownList_SelectedIndexChanged" AutoPostBack="true"  
                                                     Visible="false">
                                                 </asp:DropDownList>
                                             </td>
@@ -311,8 +331,8 @@
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td align="right" valign="top">
-                                                <table border="0" cellpadding="0" cellspacing="0" style="width: 400px">
+                                            <td align="left" style="text-align: left; vertical-align: top">
+                                                <table style="width: 400px">
                                                     <tr>
                                                         <td class="TC00S">
                                                             Razón Social:
@@ -333,8 +353,8 @@
                                                         <td class="TC00S">
                                                             Sector:
                                                         </td>
-                                                        <td class="TC10S">
-                                                            <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                        <td class="TC10S" style="padding-right: 5px">
+                                                            <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -342,7 +362,7 @@
                                                             Provincia:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:DropDownList ID="Provincia_VendedorDropDownList" runat="server" SkinID="ddln">
+                                                            <asp:DropDownList ID="Provincia_VendedorDropDownList" runat="server" SkinID="ddln2">
                                                             </asp:DropDownList>
                                                         </td>
                                                     </tr>
@@ -352,7 +372,7 @@
                                                         </td>
                                                         <td class="TC10S">
                                                             <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server"
-                                                                SkinID="ddln">
+                                                                SkinID="ddln2">
                                                             </asp:DropDownList>
                                                         </td>
                                                     </tr>
@@ -370,7 +390,11 @@
                                                         </td>
                                                         <td class="TC10S">
                                                             <asp:TextBox ID="GLN_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres."> </asp:TextBox>
+                                                                ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor."> </asp:TextBox>
+                                                            <a href="javascript:void(0)" id="A3" role="button" class="popover-test" data-html="true" title="GLN" data-placement="top" 
+                                                                style="width: 200px" data-content="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
+                                                                <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;">
+                                                                </span></a>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -498,7 +522,7 @@
                                                             IVA:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:DropDownList ID="Condicion_IVA_VendedorDropDownList" runat="server" SkinID="ddln">
+                                                            <asp:DropDownList ID="Condicion_IVA_VendedorDropDownList" runat="server" SkinID="ddln2">
                                                             </asp:DropDownList>
                                                         </td>
                                                     </tr>
@@ -625,7 +649,7 @@
                                                                         Tipo Exportación:
                                                                     </td>
                                                                     <td class="TC10S">
-                                                                        <asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="ddln">
+                                                                        <asp:DropDownList ID="TipoExpDropDownList" runat="server" SkinID="ddlg">
                                                                         </asp:DropDownList>
                                                                     </td>
                                                                 </tr>
@@ -633,7 +657,7 @@
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
                                                 </td>
-                                                <td style="width: 360px">
+                                                <td style="width: 340px">
                                                 </td>
                                                 <td>
                                                     <asp:UpdatePanel ID="PaisDestinoExpUpdatePanel" runat="server" UpdateMode="Conditional">
@@ -645,7 +669,7 @@
                                                                     </td>
                                                                     <td class="TC10S">
                                                                         <asp:DropDownList ID="PaisDestinoExpDropDownList" runat="server" OnSelectedIndexChanged="PaisDestinoExpDropDownList_SelectedIndexChanged"
-                                                                            SkinID="ddln" AutoPostBack="true">
+                                                                            SkinID="ddlg" AutoPostBack="true">
                                                                         </asp:DropDownList>
                                                                         <asp:UpdateProgress ID="PaisDestinoUpdateProgress" runat="server" AssociatedUpdatePanelID="PaisDestinoExpUpdatePanel"
                                                                             DisplayAfter="0">
@@ -686,7 +710,7 @@
                                                         </ContentTemplate>
                                                     </asp:UpdatePanel>
                                                 </td>
-                                                <td style="width: 360px">
+                                                <td>
                                                 </td>
                                                 <td>
                                                     <asp:UpdatePanel ID="IncotermsUpdatePanel" runat="server" ChildrenAsTriggers="true"
@@ -841,8 +865,12 @@
                                                             GLN:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
+                                                            <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor.">
                                                             </asp:TextBox>
+                                                            <a href="javascript:void(0)" id="A4" role="button" class="popover-test" data-html="true"
+                                                                title="GLN" data-placement="top" style="width: 200px" data-content="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
+                                                                <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;">
+                                                                </span></a>
                                                         </td>
                                                     </tr>
                                                 </table>
@@ -861,10 +889,10 @@
                                                         </td>
                                                     </tr>
                                                     <tr>
-                                                        <td class="TC00S" style="padding-right: 5px">
+                                                        <td class="TC00S">
                                                             Nro.:
                                                         </td>
-                                                        <td class="TC10S">
+                                                        <td class="TC10S" style="padding-right: 5px">
                                                             <asp:TextBox ID="Domicilio_Numero_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -946,7 +974,7 @@
                                                             Piso:
                                                         </td>
                                                         <td>
-                                                            <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 5px; text-align: right;">
+                                                            <table style="padding-top: 5px; text-align: right;">
                                                                 <tr>
                                                                     <td class="TC02SL">
                                                                         <asp:TextBox ID="Domicilio_Piso_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
@@ -1043,7 +1071,10 @@
                                         <td style="text-align: center; padding: 3px; font-weight: normal;">
                                             <asp:UpdatePanel ID="referenciasUpdatePanel" runat="server" ChildrenAsTriggers="true"
                                                 UpdateMode="Conditional">
-                                                <ContentTemplate>
+                                                <Triggers>
+                                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
+                                                </Triggers>
+                                                    <ContentTemplate>
                                                     <asp:GridView ID="referenciasGridView" runat="server" AutoGenerateColumns="False"
                                                         BorderColor="gray" BorderStyle="Solid" BorderWidth="1px" CssClass="gridview"
                                                         EnableViewState="true" Font-Bold="false" HorizontalAlign="Center"
@@ -1127,10 +1158,7 @@
                                                         </Columns>
                                                         <HeaderStyle Font-Bold="true" />
                                                     </asp:GridView>
-                                                </ContentTemplate>
-                                                <Triggers>
-                                                    <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                                </Triggers>
+                                                    </ContentTemplate>
                                             </asp:UpdatePanel>
                                         </td>
                                     </tr>

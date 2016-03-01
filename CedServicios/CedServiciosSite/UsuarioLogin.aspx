@@ -206,7 +206,7 @@
                     </ul>
                     <!-- Tab panes -->
                     <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane active text-left" id="Comprobantes">
+                        <div role="tabpanel" class="tab-pane fade in active text-left" id="Comprobantes">
                             <table class="">
                                 <tbody>
                                     <tr>
@@ -260,7 +260,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div role="tabpanel" class="tab-pane text-left" id="Sujetos">
+                        <div role="tabpanel" class="tab-pane fade text-left" id="Sujetos">
                             <table class="">
                                 <tbody>
                                     <tr>
@@ -297,7 +297,7 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div role="tabpanel" class="tab-pane text-left" id="IncorporacionAlRegimen">
+                        <div role="tabpanel" class="tab-pane fade text-left" id="IncorporacionAlRegimen">
                             <table class="">
                                 <tbody>
                                     <tr>

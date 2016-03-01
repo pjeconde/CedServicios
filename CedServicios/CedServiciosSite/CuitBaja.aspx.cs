@@ -53,6 +53,7 @@ namespace CedServicios.Site
                     UsaCertificadoAFIPPropioCheckBox.Checked = sesion.Cuit.UsaCertificadoAFIPPropio;
                     DestinoComprobanteITFCheckBox.Checked = sesion.Cuit.DestinoComprobanteITF;
                     NroSerieCertifITFTextBox.Text = sesion.Cuit.NroSerieCertifITF;
+                    AyudaNroSerieCertif.Text = "<a href='#' role='button' class='popover-test' data-html='true' title='CERTIFICADO' data-content='Ingresar el número de serie del certificado solicitado a Interfacturas. Es de 12 dígitos.'><span class='glyphicon glyphicon-info-sign gi-1x' style='vertical-align: inherit'></span></a>";
 
                     CUITTextBox.Enabled = false;
                     RazonSocialTextBox.Enabled = false;
