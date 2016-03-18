@@ -86,7 +86,7 @@
     <Compile Include="TipoPuntoVta.cs" />
     <Compile Include="UN.cs" />
     <Compile Include="Usuario.cs" />
-    <Compile Include="Web References\ar.gov.afip.awshomo\Reference.cs">
+    <Compile Include="Web References\ar.gov.afip.padron-puc-ws\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -155,11 +155,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Web References\ar.gov.afip.awshomo\Reference.map">
+    <None Include="Web References\ar.gov.afip.padron-puc-ws\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <None Include="Web References\ar.gov.afip.awshomo\select.wsdl" />
+    <None Include="Web References\ar.gov.afip.padron-puc-ws\select.wsdl" />
     <None Include="Web References\ar.gov.afip.wsaa\LoginCms.wsdl" />
     <None Include="Web References\ar.gov.afip.wsaa\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -390,7 +390,7 @@
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://awshomo.afip.gov.ar/padron-puc-ws/services/select.ContribuyenteNivel3SelectServiceImpl%3fWSDL">
       <UrlBehavior>Dynamic</UrlBehavior>
-      <RelPath>Web References\ar.gov.afip.awshomo\</RelPath>
+      <RelPath>Web References\ar.gov.afip.padron-puc-ws\</RelPath>
       <UpdateFromURL>https://awshomo.afip.gov.ar/padron-puc-ws/services/select.ContribuyenteNivel3SelectServiceImpl%3fWSDL</UpdateFromURL>
       <ServiceLocationURL>
       </ServiceLocationURL>

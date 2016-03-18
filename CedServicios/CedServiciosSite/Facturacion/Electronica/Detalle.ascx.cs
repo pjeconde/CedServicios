@@ -20,6 +20,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
+            puntoDeVenta = Convert.ToString(ViewState["puntoDeVenta"]);
 			if (!this.IsPostBack)
 			{
                 if (Funciones.SessionTimeOut(Session))
@@ -40,11 +41,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                 }
 			}
-			else
-			{
-				puntoDeVenta = Convert.ToString(ViewState["puntoDeVenta"]);
-			}
-    	}
+        }
 		public void ResetearGrillas()
 		{
 			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
@@ -68,6 +65,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             set
             {
                 ViewState["puntoDeVenta"] = value;
+                puntoDeVenta = value;
             }
         }
         public string IdNaturalezaComprobante

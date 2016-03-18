@@ -20,16 +20,16 @@ namespace CedServicios.RN
 
             DB.Ticket ticketDB = new DB.Ticket(Sesion);
             bool SolicitarTicket = false;
-
+            
             if (Sesion.Ticket == null)
             {
                 if (Sesion.Cuit.UsaCertificadoAFIPPropio)
                 {
-                    Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro);
+                    Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro, TipoServicios.FacturaE);
                 }
                 else
                 {
-                    Sesion.Ticket = ticketDB.Leer("30710015062");
+                    Sesion.Ticket = ticketDB.Leer("30710015062", TipoServicios.FacturaE);
                 }
             }
             else
@@ -38,13 +38,13 @@ namespace CedServicios.RN
                 {
                     if (Sesion.Cuit.UsaCertificadoAFIPPropio)
                     {
-                        Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro);
+                        Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro, TipoServicios.FacturaE);
                     }
                     else
                     {
                         if (Sesion.Ticket.Cuit != "30710015062")
                         {
-                            Sesion.Ticket = ticketDB.Leer("30710015062");
+                            Sesion.Ticket = ticketDB.Leer("30710015062",TipoServicios.FacturaE);
                         }
                     }
                 }

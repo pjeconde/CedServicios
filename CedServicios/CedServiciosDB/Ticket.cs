@@ -12,7 +12,7 @@ namespace CedServicios.DB
         {
         }
 
-        public Entidades.Ticket Leer(string Cuit)
+        public Entidades.Ticket Leer(string Cuit, string Service)
         {
             Entidades.Ticket ticket = new Entidades.Ticket();
             if (sesion.Cuit.Nro != null)
@@ -21,7 +21,7 @@ namespace CedServicios.DB
                 a.Append("select ");
                 a.Append("Cuit, Service, UniqueId, GenerationTime, ExpirationTime, Sign, Token ");
                 a.Append("from Ticket ");
-                a.Append("where Ticket.Cuit='" + sesion.Cuit.Nro + "' ");
+                a.Append("where Ticket.Cuit='" + Cuit + "' and Service = '" + Service + "' ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
                 {
@@ -58,7 +58,7 @@ namespace CedServicios.DB
         {
             try
             {
-                Entidades.Ticket t = Leer(Ticket.Cuit);
+                Entidades.Ticket t = Leer(Ticket.Cuit, Ticket.Service);
                 if (t.Cuit == null)
                 {
                     Crear(Ticket);
@@ -73,7 +73,7 @@ namespace CedServicios.DB
                     a.Append("ExpirationTime='" + Ticket.ExpirationTime.ToString("yyyyMMdd HH:mm:ss") + "', ");
                     a.Append("Sign='" + Ticket.Sign + "', ");
                     a.Append("Token='" + Ticket.Token + "' ");
-                    a.AppendLine("where Cuit='" + Ticket.Cuit + "'");
+                    a.AppendLine("where Cuit='" + Ticket.Cuit + "' and Service = '" + Ticket.Service + "' ");
                     Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
                 }
             }

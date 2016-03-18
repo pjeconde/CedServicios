@@ -23,6 +23,8 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <ExcludeApp_Data>false</ExcludeApp_Data>
+    <FilesToIncludeForPublish>OnlyFilesToRunTheApp</FilesToIncludeForPublish>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -111,6 +113,8 @@
     <Content Include="Controles\DatosEmailAvisoComprobanteContratoConsulta.ascx" />
     <Content Include="Controles\DatosEmailAvisoComprobantePersona.ascx" />
     <Content Include="Controles\DatosEmailAvisoComprobantePersonaConsulta.ascx" />
+    <Content Include="Facturacion\Electronica\ReferenciasConsulta.ascx" />
+    <Content Include="Facturacion\Electronica\Referencias.ascx" />
     <Content Include="Imagenes\Ayuda\AltaLote-Acciones.png" />
     <Content Include="Imagenes\Ayuda\Cabecera_Factura-DatosVendedor.png" />
     <Content Include="Imagenes\Ayuda\ConsultaComprobante-Acciones.png" />
@@ -509,6 +513,20 @@
     </Compile>
     <Compile Include="Controles\DatosEmailAvisoComprobantePersonaConsulta.ascx.designer.cs">
       <DependentUpon>DatosEmailAvisoComprobantePersonaConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ReferenciasConsulta.ascx.cs">
+      <DependentUpon>ReferenciasConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ReferenciasConsulta.ascx.designer.cs">
+      <DependentUpon>ReferenciasConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Referencias.ascx.cs">
+      <DependentUpon>Referencias.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Referencias.ascx.designer.cs">
+      <DependentUpon>Referencias.ascx</DependentUpon>
     </Compile>
     <Compile Include="InstitucionalSoftwareAMedida.aspx.cs">
       <DependentUpon>InstitucionalSoftwareAMedida.aspx</DependentUpon>
@@ -1396,7 +1414,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>4642</DevelopmentServerPort>
+          <DevelopmentServerPort>62278</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

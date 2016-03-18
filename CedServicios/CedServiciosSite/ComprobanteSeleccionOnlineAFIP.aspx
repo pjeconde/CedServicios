@@ -1,25 +1,28 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ComprobanteSeleccionOnlineAFIP.aspx.cs" Inherits="CedServicios.Site.ComprobanteSeleccionOnlineAFIP" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table align="center">
         <tr>
-            <td align="center" colspan="2" style="padding-top:20px">
+            <td colspan="2" style="padding-top:20px; text-align: center">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes (online AFIP)"></asp:Label>
             </td>
         </tr>
         <tr>
-            <td align="left" colspan="2" style="padding-top:10px">
+            <td colspan="2" style="padding-top:10px; text-align: left">
                 Información Ticket AFIP.
             </td>
         </tr> 
         <tr>
-            <td align="left" colspan="2" style="padding-top:10px">
+            <td colspan="2" style="padding-top:10px; text-align: left">
                 <asp:TextBox ID="TicketInfoTextBox" runat="server" Width="100%" 
                     TextMode="MultiLine"></asp:TextBox>
             </td>
         </tr>      
         <tr>
-            <td align="left" colspan="2" style="padding-top:10px">
+            <td colspan="2" style="padding-top:10px; text-align: left">
                 Para consultar los Tipo de Comprobantes y el Ult. Nro. Lote disponible en AFIP no es necesario ingresar ningún dato.
             </td>
         </tr>        
@@ -48,34 +51,34 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-top:20px">
+            <td style="padding-top:20px; text-align: right">
                 Tipo Comprobante:
             </td>
-            <td align="left" style="padding-top:20px; padding-left:5px">
+            <td style="padding-top:20px; padding-left:5px; text-align: left">
                 <asp:DropDownList ID="TipoComprobanteDropDownList" runat="server" AutoPostBack="True" SkinID="DropDownListTipoComprobante" ToolTip="">
                 </asp:DropDownList>
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-top:10px">
+            <td style="padding-top:10px; text-align: right">
                 Nro. Comprobante:
             </td>
-            <td align="left" style="padding-top:10px; padding-left:5px">
+            <td style="padding-top:10px; padding-left:5px; text-align: left">
                 <asp:TextBox ID="NroComprobanteTextBox" runat="server" ToolTip="">
                 </asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-top:10px">
+            <td style="padding-top:10px; text-align: right">
                 Punto de Venta:
             </td>
-            <td align="left" style="padding-top:10px; padding-left:5px">
+            <td style="padding-top:10px; padding-left:5px; text-align: left">
                 <asp:DropDownList ID="PtoVtaConsultaDropDownList" runat="server" AutoPostBack="True" SkinID="ddlch" ToolTip="">
                 </asp:DropDownList>
             </td>
         </tr>
         <tr>
-            <td align="left" colspan="2" style="padding-top:20px">
+            <td colspan="2" style="padding-top:20px; text-align: left">
                 Para consultar el CAE deberá ingresar el Punto de Venta, Tipo y Número de Comprobante.
             </td>
         </tr>
@@ -88,7 +91,7 @@
             </td>
         </tr>
         <tr>
-            <td align="left" colspan="2" style="padding-top:20px">
+            <td colspan="2" style="padding-top:20px; text-align: left">
                 Para consultar el Ultimo Nro. de comprobante deberá ingresar el Punto de Venta y el Tipo de Comprobante.
             </td>
         </tr>
@@ -101,43 +104,43 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-top:10px">
+            <td style="padding-top:10px; text-align: right">
                 Cuit del emisor:
             </td>
-            <td align="left" style="padding-top:10px; padding-left:5px">
+            <td style="padding-top:10px; padding-left:5px; text-align: left">
                 <asp:TextBox ID="CuitEmisorTextBox" runat="server" ToolTip="">
                 </asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-top:10px">
+            <td style="padding-top:10px; text-align: right">
                 Fecha Emisión:
             </td>
-            <td align="left" style="padding-top:10px; padding-left:5px">
+            <td style="padding-top:10px; padding-left:5px; text-align: left">
                 <asp:TextBox ID="FecEmisionTextBox" runat="server" ToolTip="">
                 </asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-top:10px">
+            <td style="padding-top:10px; text-align: right">
                 Nro. CAE:
             </td>
-            <td align="left" style="padding-top:10px; padding-left:5px">
+            <td style="padding-top:10px; padding-left:5px; text-align: left">
                 <asp:TextBox ID="NroCAETextBox" runat="server" ToolTip="Informar el número de CAE">
                 </asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-top:10px">
+            <td style="padding-top:10px; text-align: right">
                 Importe Total:
             </td>
-            <td align="left" style="padding-top:10px; padding-left:5px">
+            <td style="padding-top:10px; padding-left:5px; text-align: left">
                 <asp:TextBox ID="ImporteTotalTextBox" runat="server" 
                     ToolTip="Informar el Importe total del comprobante" Enabled="False"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td align="left" colspan="2" style="padding-top:10px">
+            <td colspan="2" style="padding-top:10px; text-align: left">
                 Para validar el CAE tambíen deberá ingresar el Punto de Venta, Tipo y Número de Comprobante.
             </td>
         </tr>
@@ -150,10 +153,10 @@
             </td>
         </tr>
         <tr>
-            <td align="right" style="padding-top:10px">
+            <td style="padding-top:10px; text-align: right">
                 Cuit a consultar:
             </td>
-            <td align="left" style="padding-top:10px; padding-left:5px">
+            <td style="padding-top:10px; padding-left:5px; text-align: left">
                 <asp:TextBox ID="CuitAConsultarTextBox" runat="server" ToolTip="">
                 </asp:TextBox>
             </td>
@@ -172,4 +175,7 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
 </asp:Content>

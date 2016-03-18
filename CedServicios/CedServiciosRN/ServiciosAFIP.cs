@@ -23,7 +23,8 @@ namespace CedServicios.RN
                 }
                 LoginTicket ticket = new LoginTicket();
                 ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro.ToString()), "padron-puc-ws-consulta-nivel3");
-                ar.gov.afip.awshomo.ContribuyenteNivel3SelectServiceImplService c = new ar.gov.afip.awshomo.ContribuyenteNivel3SelectServiceImplService();
+                ar.gov.afip.padron_puc_ws.ContribuyenteNivel3SelectServiceImplService c = new ar.gov.afip.padron_puc_ws.ContribuyenteNivel3SelectServiceImplService();
+                c.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_padron-puc-ws_Service"];
                 string cuit = "<contribuyentePK><id>" + Cuit + "</id></contribuyentePK>";
                 string token = "-----BEGIN SSOTOKENBASE64-----\n" + ticket.Token + " -----END SSOTOKENBASE64-----";
                 string sign = "-----BEGIN SSOSIGNBASE64-----\n" + ticket.Sign + " -----END SSOSIGNBASE64-----";

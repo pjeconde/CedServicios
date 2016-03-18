@@ -387,10 +387,26 @@ namespace CedServicios.Site
         {
             try
             {
+                if (CuitAConsultarTextBox.Text == "")
+                {
+                    MensajeLabel.Text = "Ingrese el CUIT a consultar";
+                    return;
+                }
+                if (!RN.Funciones.IsValidNumeric(CuitAConsultarTextBox.Text))
+                {
+                    MensajeLabel.Text = "El CUIT a consultar deberá tener solo dígitos numéricos.";
+                    return;
+                }
+                if (CuitAConsultarTextBox.Text.Length != 11)
+                {
+                    MensajeLabel.Text = "El CUIT a consultar deberá tener 11 dígitos.";
+                    return;
+                }
                 string respuesta = RN.ServiciosAFIP.DatosFiscales(CuitAConsultarTextBox.Text, ((Entidades.Sesion)Session["Sesion"]));
                 respuesta = respuesta.Replace("\n", "\\n");
-                respuesta = respuesta.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>" ,"");
+                respuesta = respuesta.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                
             }
             catch (Exception ex)
             {

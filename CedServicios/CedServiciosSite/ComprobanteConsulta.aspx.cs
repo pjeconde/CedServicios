@@ -36,12 +36,12 @@ namespace CedServicios.Site
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
 
-                    referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
-                    FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-                    referencias.Add(referencia);
-                    referenciasGridView.DataSource = referencias;
-                    referenciasGridView.DataBind();
-                    ViewState["referencias"] = referencias;
+                    //referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
+                    //FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+                    //referencias.Add(referencia);
+                    //referenciasGridView.DataSource = referencias;
+                    //referenciasGridView.DataBind();
+                    //ViewState["referencias"] = referencias;
 
                     //VENDEDOR
                     Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
@@ -305,7 +305,7 @@ namespace CedServicios.Site
             Email_CompradorTextBox.ReadOnly = true;
             Telefono_CompradorTextBox.ReadOnly = true;
 
-            referenciasGridView.Enabled = false;
+            //referenciasGridView.Enabled = false;
 
             TipoExpDropDownList.Enabled = false;
             PaisDestinoExpDropDownList.Enabled = false;
@@ -345,6 +345,7 @@ namespace CedServicios.Site
         }
         private void BindearDropDownLists()
         {
+            InfoReferencias.BindearDropDownLists();
             ImpuestosGlobales.BindearDropDownLists();
             PermisosExpo.BindearDropDownLists();
             DetalleLinea.BindearDropDownLists();
@@ -382,7 +383,8 @@ namespace CedServicios.Site
             //Exportacion
             CompletarExportacion(lc);
             //Referencias
-            CompletarReferencias(lc);
+            //CompletarReferencias(lc);
+            InfoReferencias.CompletarReferencias(lc);
             PermisosExpo.CompletarPermisos(lc);
             //Comprador
             CompletarComprador(lc);
@@ -462,6 +464,7 @@ namespace CedServicios.Site
                 int auxPV = Convert.ToInt32(lc.cabecera_lote.punto_de_venta);
                 ViewState["PuntoVenta"] = auxPV;
                 DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
+                //InfoReferencias.PuntoDeVenta = Convert.ToString(auxPV);
                 Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
                 AjustarCamposXVersion(lc);
                 Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
@@ -472,6 +475,7 @@ namespace CedServicios.Site
                 int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
                 ViewState["PuntoVenta"] = auxPV;
                 DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
+                //InfoReferencias.PuntoDeVenta = Convert.ToString(auxPV);
                 AjustarCamposXPtaVentaChanged(PuntoVtaDropDownList.SelectedValue);
                 AjustarCamposXVersion(lc);
                 Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
@@ -523,40 +527,6 @@ namespace CedServicios.Site
                 IdiomaDropDownList.SelectedIndex = -1;
                 DatosComerciales.Texto = string.Empty;
             }
-        }
-        private void CompletarReferencias(FeaEntidades.InterFacturas.lote_comprobantes lc)
-        {
-            referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
-            if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
-            {
-                foreach (FeaEntidades.InterFacturas.informacion_comprobanteReferencias r in lc.comprobante[0].cabecera.informacion_comprobante.referencias)
-                {
-                    //descripcioncodigo_de_referencia ( XmlIgnoreAttribute )
-                    //Se busca la descripción a través del código.
-                    try
-                    {
-                        if (r != null)
-                        {
-                            string descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
-                            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue = r.codigo_de_referencia.ToString();
-                            descrcodigo = ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedItem.Text;
-                            r.descripcioncodigo_de_referencia = descrcodigo;
-                            referencias.Add(r);
-                        }
-                    }
-                    catch
-                    //Referencia no valida
-                    {
-                    }
-                }
-            }
-            if (referencias.Count.Equals(0))
-            {
-                referencias.Add(new FeaEntidades.InterFacturas.informacion_comprobanteReferencias());
-            }
-            referenciasGridView.DataSource = referencias;
-            referenciasGridView.DataBind();
-            ViewState["referencias"] = referencias;
         }
 
         private void CompletarVendedor(FeaEntidades.InterFacturas.lote_comprobantes lc)
@@ -784,36 +754,8 @@ namespace CedServicios.Site
             }
 
             //Referencias
-            if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
-            {
-                referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
-                foreach (org.dyndns.cedweb.consulta.ConsultarResultComprobanteCabeceraInformacion_comprobanteReferencias r in lc.comprobante[0].cabecera.informacion_comprobante.referencias)
-                {
-                    //descripcioncodigo_de_referencia ( XmlIgnoreAttribute )
-                    //Se busca la descripción a través del código.
-                    if (r != null)
-                    {
-                        FeaEntidades.InterFacturas.informacion_comprobanteReferencias icr = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-                        icr.codigo_de_referencia = r.codigo_de_referencia;
-                        icr.dato_de_referencia = Convert.ToString(r.dato_de_referencia);
-                        icr.descripcioncodigo_de_referencia = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista()
-                            .Find(
-                            delegate(FeaEntidades.CodigosReferencia.CodigoReferencia c)
-                            {
-                                return c.Codigo == Convert.ToString(icr.codigo_de_referencia);
-                            }
-                            ).Descr;
-                        referencias.Add(icr);
-                    }
-                }
-                if (referencias.Count.Equals(0))
-                {
-                    referencias.Add(new FeaEntidades.InterFacturas.informacion_comprobanteReferencias());
-                }
-                referenciasGridView.DataSource = referencias;
-                referenciasGridView.DataBind();
-                ViewState["referencias"] = referencias;
-            }
+            InfoReferencias.CompletarWS(lc);
+
             //Comprador
             if (lc.comprobante[0].cabecera.informacion_comprador.GLN != 0)
             {
@@ -1025,14 +967,15 @@ namespace CedServicios.Site
         {
             DetalleLinea.ResetearGrillas();
 
-            referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
-            FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-            referencias.Add(referencia);
-            referenciasGridView.DataSource = referencias;
-            ViewState["referencias"] = referencias;
-            referenciasGridView.DataBind();
+            //referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
+            //FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+            //referencias.Add(referencia);
+            //referenciasGridView.DataSource = referencias;
+            //ViewState["referencias"] = referencias;
+            //referenciasGridView.DataBind();
 
             BindearDropDownLists();
+            InfoReferencias.ResetearGrillas();
             PermisosExpo.ResetearGrillas();
             DetalleLinea.ResetearGrillas();
             ImpuestosGlobales.ResetearGrillas();
@@ -1663,41 +1606,21 @@ namespace CedServicios.Site
         }
         private void GenerarReferencias(FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
         {
-            System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> listareferencias = (System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"];
-            for (int i = 0; i < listareferencias.Count; i++)
+            if (this.InfoReferencias.HayReferencias)
             {
-                if (listareferencias[i].descripcioncodigo_de_referencia != null)
+                //infcomprob.referencias = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias[5];
+                for (int i = 0; i < this.InfoReferencias.ListaReferencias.Count; i++)
                 {
-                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                    try
+                    if (infcomprob.tipo_de_comprobante.Equals(19))
                     {
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                        {
-                            return pv.Nro == auxPV;
-                        }).IdTipoPuntoVta;
-                        string tipoComp = Tipo_De_ComprobanteDropDownList.SelectedValue;
-                        if (idtipo.Equals("Exportacion") && tipoComp.Equals("19"))
-                        {
-                            throw new Exception("Las referencias no se deben informar para facturas de exportación(19). Sólo para notas de débito y/o crédito (20 y 21).");
-                        }
-                        else
-                        {
-                            GenerarReferencia(infcomprob, listareferencias, i);
-                        }
+                        throw new Exception("Las referencias no se deben informar para facturas de exportación(19). Sólo para notas de débito y/o crédito (20 y 21).");
                     }
-                    catch (System.NullReferenceException)
-                    {
-                        GenerarReferencia(infcomprob, listareferencias, i);
-                    }
+                    infcomprob.referencias[i] = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
+                    infcomprob.referencias[i].descripcioncodigo_de_referencia = this.InfoReferencias.ListaReferencias[i].descripcioncodigo_de_referencia;
+                    infcomprob.referencias[i].dato_de_referencia = this.InfoReferencias.ListaReferencias[i].dato_de_referencia;
+                    infcomprob.referencias[i].codigo_de_referencia = this.InfoReferencias.ListaReferencias[i].codigo_de_referencia;
                 }
             }
-        }
-        private static void GenerarReferencia(FeaEntidades.InterFacturas.informacion_comprobante infcomprob, System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> listareferencias, int i)
-        {
-            infcomprob.referencias[i] = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-            infcomprob.referencias[i].codigo_de_referencia = Convert.ToInt32(listareferencias[i].codigo_de_referencia);
-            infcomprob.referencias[i].descripcioncodigo_de_referencia = listareferencias[i].descripcioncodigo_de_referencia;
-            infcomprob.referencias[i].dato_de_referencia = listareferencias[i].dato_de_referencia;
         }
         private void GenerarInfoExportacion(FeaEntidades.InterFacturas.comprobante comp, FeaEntidades.InterFacturas.informacion_comprobante infcomprob)
         {

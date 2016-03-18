@@ -13,7 +13,7 @@
 // 
 #pragma warning disable 1591
 
-namespace CedServicios.RN.ar.gov.afip.awshomo {
+namespace CedServicios.RN.ar.gov.afip.padron_puc_ws {
     using System;
     using System.Web.Services;
     using System.Diagnostics;

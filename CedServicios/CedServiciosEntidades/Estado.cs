@@ -94,7 +94,7 @@ namespace CedServicios.Entidades
     {
         public EstadoRech()
         {
-            id = "Rech";
+            id = "Rechazado";
             descr = "Rechazado";
         }
     }

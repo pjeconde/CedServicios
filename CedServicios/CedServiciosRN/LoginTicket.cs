@@ -15,6 +15,14 @@ namespace CedServicios.RN
 	/// <summary> 
 	/// Clase para crear objetos Login Tickets 
 	/// </summary> 
+    /// 
+
+    public class TipoServicios
+    {
+        public const string FacturaE = "wsfe";
+        public const string ConsultaPadronN3 = "padron-puc-ws-consulta-nivel3";
+    }
+
 	public class LoginTicket
 	{
 		// Entero de 32 bits sin signo que identifica el requerimiento 

@@ -425,9 +425,23 @@ namespace CedServicios.Site
                                 {
                                     comprobante.WF.Estado = "Rechazado";
                                     RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                                    script = Funciones.TextoScript("Respuesta de ITF o AFIP: " + "Resultado: " + lc.cabecera_lote.resultado + "  Motivo: " + lc.cabecera_lote.motivo);
+                                    string motivo = "";
+                                    if (lc.cabecera_lote.motivo != null)
+                                    {
+                                        motivo = "Motivo: " + lc.cabecera_lote.motivo;
+                                    }
+                                    if (lc.comprobante != null && lc.comprobante[0].cabecera.informacion_comprobante.motivo != null)
+                                    {
+                                        if (motivo != "")
+                                        {
+                                            motivo += "  ";
+                                        }
+                                        motivo += "Motivo del comprobante: " + lc.comprobante[0].cabecera.informacion_comprobante.motivo;
+                                    }
+                                    script = Funciones.TextoScript("Respuesta de ITF o AFIP: " + "Resultado: " + lc.cabecera_lote.resultado + "  " + motivo);
                                     RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
-                                    ScriptManager.RegisterStartupScript(this, typeof(Page), "Message", script, true);
+                                    MensajeLabel.Text = script;
+                                    //ScriptManager.RegisterStartupScript(this, typeof(Page), "Message", script, true);
                                 }
                                 else
                                 {

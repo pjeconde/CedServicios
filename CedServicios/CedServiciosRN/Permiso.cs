@@ -208,7 +208,7 @@ namespace CedServicios.RN
         public static bool Rechazar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
         {
             DB.Permiso db = new DB.Permiso(Sesion);
-            bool resultado = db.CambioEstado(Permiso, "Rech", "Rech");
+            bool resultado = db.CambioEstado(Permiso, "Rech", "Rechazado");
             if (resultado) RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario);
             return resultado;
         }
