@@ -152,6 +152,31 @@ namespace CedServicios.Site
                 lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
                 #endregion
 
+                #region Asignacion campos vendedor
+                lote.comprobante[0].cabecera.informacion_vendedor.codigo_interno = sesion.Cuit.DatosIdentificatorios.CodigoInterno;
+                lote.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutos = sesion.Cuit.DatosImpositivos.IdCondIngBrutos;
+                lote.comprobante[0].cabecera.informacion_vendedor.condicion_IVA = sesion.Cuit.DatosImpositivos.IdCondIVA;
+                lote.comprobante[0].cabecera.informacion_vendedor.contacto = sesion.Cuit.Contacto.Nombre;
+                lote.comprobante[0].cabecera.informacion_vendedor.cp = sesion.Cuit.Domicilio.CodPost;
+                lote.comprobante[0].cabecera.informacion_vendedor.cuit = Convert.ToInt64(sesion.Cuit.Nro);
+                //lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais = sesion.Cuit.DatosImpositivos.
+                lote.comprobante[0].cabecera.informacion_vendedor.domicilio_depto = sesion.Cuit.Domicilio.Depto;
+                lote.comprobante[0].cabecera.informacion_vendedor.domicilio_manzana = sesion.Cuit.Domicilio.Manzana;
+                lote.comprobante[0].cabecera.informacion_vendedor.domicilio_numero = sesion.Cuit.Domicilio.Nro;
+                lote.comprobante[0].cabecera.informacion_vendedor.domicilio_piso = sesion.Cuit.Domicilio.Piso;
+                lote.comprobante[0].cabecera.informacion_vendedor.domicilio_sector = sesion.Cuit.Domicilio.Sector;
+                lote.comprobante[0].cabecera.informacion_vendedor.domicilio_torre = sesion.Cuit.Domicilio.Torre;
+                //lote.comprobante[0].cabecera.informacion_vendedor.email = sesion.Cuit.DatosIdentificatorios.
+                lote.comprobante[0].cabecera.informacion_vendedor.GLN = sesion.Cuit.DatosIdentificatorios.GLN;
+                //lote.comprobante[0].cabecera.informacion_vendedor.id = sesion.Cuit.DatosIdentificatorios.
+                lote.comprobante[0].cabecera.informacion_vendedor.inicio_de_actividades = sesion.Cuit.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd");
+                lote.comprobante[0].cabecera.informacion_vendedor.localidad = sesion.Cuit.Domicilio.Localidad;
+                lote.comprobante[0].cabecera.informacion_vendedor.nro_ingresos_brutos = sesion.Cuit.DatosImpositivos.NroIngBrutos;
+                lote.comprobante[0].cabecera.informacion_vendedor.provincia = sesion.Cuit.Domicilio.Provincia.Id;
+                lote.comprobante[0].cabecera.informacion_vendedor.razon_social = sesion.Cuit.RazonSocial;
+                //lote.comprobante[0].cabecera.informacion_vendedor.telefono = sesion.Cuit.Contacto.Telefono
+                #endregion
+
                 #region Generar nuevo comprobante
                 bool comprobanteGenerado = false;
                 try
@@ -498,7 +523,7 @@ namespace CedServicios.Site
                             RN.Comprobante.LeerDestinatarioFrecuente(persona, contrato, sesion);
                             if (persona.DatosEmailAvisoComprobantePersona.Activo && contrato.DatosEmailAvisoComprobanteContrato.Activo && persona.DatosEmailAvisoComprobantePersona.De != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Para != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.Asunto != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.Cuerpo != string.Empty)
                             {
-                                RN.EnvioCorreo.AvisoGeneracionComprobante(persona, contrato, comprobante, filenamePDF, sesion);
+                                RN.EnvioCorreo.AvisoGeneracionComprobante(persona, contrato, comprobante, lote, filenamePDF, Server.MapPath("~/Imagenes/CedeiraSF_v1.jpg"), sesion);
                             }
                             #endregion
                         }

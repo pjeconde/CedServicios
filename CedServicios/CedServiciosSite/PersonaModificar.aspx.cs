@@ -199,6 +199,7 @@ namespace CedServicios.Site
                 NroDocTextBox.Visible = true;
                 DestinosCuitDropDownList.Visible = false;
             }
+            TraerDatosDeAFIPLinkButton.Visible = TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUIT().Codigo.ToString()) || TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUIL().Codigo.ToString());
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
@@ -207,6 +208,9 @@ namespace CedServicios.Site
         protected void TipoPersona_CheckedChanged(object sender, EventArgs e)
         {
             Contacto.Required = ClienteRadioButton.Checked || AmbosRadioButton.Checked;
+        }
+        protected void TraerDatosDeAFIPLinkButton_Click(object sender, EventArgs e)
+        {
         }
     }
 }

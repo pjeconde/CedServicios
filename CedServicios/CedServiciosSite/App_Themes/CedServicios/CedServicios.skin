@@ -42,6 +42,7 @@
 
 <asp:LinkButton SkinID="LinkButtonAyuda" runat="server" Font-Size="14px" ForeColor="#284E98"></asp:LinkButton>
 <asp:LinkButton SkinID="LinkButtonChico" runat="server" Font-Size="10px" ForeColor="blue"></asp:LinkButton>
+<asp:LinkButton SkinID="LinkButtonMediano" runat="server" Font-Size="12px" ForeColor="blue"></asp:LinkButton>
 <asp:Label SkinID="LabelAyuda" runat="server" Font-Size="14px" ></asp:Label>
 
 <asp:CheckBox SkinID="CheckBoxFEALoteDetChCh" runat="server" Width="40px"></asp:CheckBox>

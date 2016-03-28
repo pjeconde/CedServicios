@@ -374,7 +374,8 @@
                                                         </td>
                                                         <td class="TC10S">
                                                             <asp:DropDownList ID="Condicion_Ingresos_Brutos_VendedorDropDownList" runat="server"
-                                                                SkinID="ddln2">
+                                                                SkinID="ddln2" 
+                                                                onselectedindexchanged="Condicion_Ingresos_Brutos_VendedorDropDownList_SelectedIndexChanged">
                                                             </asp:DropDownList>
                                                         </td>
                                                     </tr>

@@ -49,6 +49,7 @@
                     onselectedindexchanged="TipoDocDropDownList_SelectedIndexChanged" ></asp:DropDownList>
                 <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="90px" ></asp:TextBox>
                 <asp:DropDownList ID="DestinosCuitDropDownList" runat="server" TabIndex="3" Width="306px" DataValueField="Codigo" DataTextField="Descr" Visible="false" ></asp:DropDownList>
+                <asp:LinkButton ID="TraerDatosDeAFIPLinkButton" runat="server" SkinID="LinkButtonMediano" Text="Traer datos de AFIP" OnClick="TraerDatosDeAFIPLinkButton_Click" CausesValidation="false"></asp:LinkButton>
 			</td>
         </tr>
         <tr>

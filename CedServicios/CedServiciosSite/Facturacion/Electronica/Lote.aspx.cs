@@ -5266,5 +5266,9 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
             }
         }
+
+        protected void Condicion_Ingresos_Brutos_VendedorDropDownList_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
     }
 }

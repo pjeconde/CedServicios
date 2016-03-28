@@ -5,6 +5,9 @@ using System.Text;
 using System.Net.Mail;
 using System.Net;
 using CaptchaDotNet2.Security.Cryptography;
+using System.Web;
+using System.Web.UI;
+using System.Web.UI.WebControls;
 
 namespace CedServicios.RN
 {
@@ -275,7 +278,7 @@ namespace CedServicios.RN
             smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
         }
-        public static void AvisoGeneracionComprobante(Entidades.Persona Persona, Entidades.Comprobante Contrato, Entidades.Comprobante Comprobante, string ArchivoPDF, Entidades.Sesion Sesion)
+        public static void AvisoGeneracionComprobante(Entidades.Persona Persona, Entidades.Comprobante Contrato, Entidades.Comprobante Comprobante, FeaEntidades.InterFacturas.lote_comprobantes Lote, string ArchivoPDF, string LogoPath, Entidades.Sesion Sesion)
         {
             SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
             MailMessage mail = new MailMessage();
@@ -300,11 +303,38 @@ namespace CedServicios.RN
             }
             mail.IsBodyHtml = true;
             StringBuilder a = new StringBuilder();
-            a.Append(Contrato.DatosEmailAvisoComprobanteContrato.Cuerpo);
+            a.Append(TratamientoCuerpo(Contrato.DatosEmailAvisoComprobanteContrato.Cuerpo, Comprobante, Lote, LogoPath));
+
+            ////Create two views, one text, one HTML.
+            //var htmlView = AlternateView.CreateAlternateViewFromString(a.ToString(), null, "text/html");
+            ////Add image to HTML version
+            //var imageResource = new LinkedResource(HttpContext.Current.Server.MapPath("~/Imagenes/CedeiraSF_v1.jpg"), System.Net.Mime.MediaTypeNames.Image.Jpeg)
+            //    {
+            //        ContentId = "LogoImage"
+            //    };
+            //htmlView.LinkedResources.Add(imageResource);
+            //mail.AlternateViews.Add(htmlView);
+            
             mail.Body = a.ToString();
             mail.Attachments.Add(new Attachment(ArchivoPDF));
             smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
+        }
+        private static string TratamientoCuerpo(string Cuerpo, Entidades.Comprobante Comprobante, FeaEntidades.InterFacturas.lote_comprobantes Lote, string LogoPath)
+        {
+            string a = Cuerpo.Replace("\r\n", "<br />");
+            a = a.Replace("@RAZONSOCIAL", "<b>" + Comprobante.RazonSocial + " </b>");
+            a = a.Replace("@TIPOYNROCOMPROBANTE", Comprobante.TipoComprobante.Descr.Replace("s ", " ") + " Nº " + Comprobante.NroPuntoVta.ToString("0000") + "-<b>" + Comprobante.Nro.ToString("00000000") + " </b>");
+            a = a.Replace("@MONEDAEIMPORTETOTAL", "<b>" + Comprobante.Moneda.Replace("PES", "$").Replace("DOL", "u$s") + " " + Comprobante.Importe.ToString("N2",  new System.Globalization.CultureInfo("es-AR")) + " </b>");
+            try
+            {
+                a = a.Replace("@PERIODODELSERVICIO", "del <b>" + DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy") + "</b> al <b>" + DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy") + " </b>");
+            }
+            catch {}
+            a = a.Replace("@FECHAVTO", "<b>" + Comprobante.FechaVto.ToString("dd/MM/yyyy") + " </b>");
+            a = a.Replace("@TAB", "&emsp;");
+            //a = a + "<br />" + "<image src='cid:LogoImage' alt='logo' />";
+            return a;
         }
         public static void Prueba(string Para)
         {
