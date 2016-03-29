@@ -209,6 +209,9 @@ namespace CedServicios.Site
                 case "Comprobantes|Generación automática (contratos)":
                     Response.Redirect("~/ComprobanteGeneracionAutomatica.aspx");
                     break;
+                case "Comprobantes|Consulta PDFs":
+                    Response.Redirect("~/ExploradorPDFComprobante.aspx");
+                    break;
                 case "Administración|Autorizaciones|Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx");
                     break;

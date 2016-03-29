@@ -114,6 +114,8 @@ namespace CedServicios.Site
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Generación automática (contratos)", "Generación automática (contratos)"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Consulta PDFs", "Consulta PDFs"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
             mItem = new MenuItem("Administración", "Administración"); mItem.Selectable = false;
             menu.Items.Add(mItem);

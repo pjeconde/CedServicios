@@ -50,6 +50,7 @@
     <Compile Include="DatosEmailAvisoComprobantePersona.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="NaturalezaComprobante.cs" />
+    <Compile Include="PDF.cs" />
     <Compile Include="PeriodicidadEmision.cs" />
     <Compile Include="Persona.cs" />
     <Compile Include="Comprobante.cs" />

@@ -113,6 +113,7 @@
     <Content Include="Controles\DatosEmailAvisoComprobanteContratoConsulta.ascx" />
     <Content Include="Controles\DatosEmailAvisoComprobantePersona.ascx" />
     <Content Include="Controles\DatosEmailAvisoComprobantePersonaConsulta.ascx" />
+    <Content Include="ExploradorPDFComprobante.aspx" />
     <Content Include="Facturacion\Electronica\ReferenciasConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Referencias.ascx" />
     <Content Include="Imagenes\Ayuda\AltaLote-Acciones.png" />
@@ -513,6 +514,13 @@
     </Compile>
     <Compile Include="Controles\DatosEmailAvisoComprobantePersonaConsulta.ascx.designer.cs">
       <DependentUpon>DatosEmailAvisoComprobantePersonaConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="ExploradorPDFComprobante.aspx.cs">
+      <DependentUpon>ExploradorPDFComprobante.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ExploradorPDFComprobante.aspx.designer.cs">
+      <DependentUpon>ExploradorPDFComprobante.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\ReferenciasConsulta.ascx.cs">
       <DependentUpon>ReferenciasConsulta.ascx</DependentUpon>

@@ -125,6 +125,7 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Archivo XML");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Términos y condiciones");
                         opcionesHabilitadas.Add("Comprobantes|Generación automática (contratos)");  //Nuevo
+                        opcionesHabilitadas.Add("Comprobantes|Consulta PDFs");  //Nuevo
                         if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                         {
                             opcionesHabilitadas.Add("Administración|Puntos de Venta|Alta");
