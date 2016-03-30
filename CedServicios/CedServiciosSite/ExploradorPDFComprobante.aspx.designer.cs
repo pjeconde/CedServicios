@@ -121,15 +121,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label MensajeLabel;
         
         /// <summary>
-        /// Control AyudaGrilla.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor AyudaGrilla;
-        
-        /// <summary>
         /// Control PDFsGridView.
         /// </summary>
         /// <remarks>

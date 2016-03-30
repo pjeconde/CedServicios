@@ -61,16 +61,16 @@
                                 <asp:Label ID="Label1" runat="server" Text="Tratamiento de contratos:"></asp:Label>
                             </td>
                             <td>
-                                &nbsp;&nbsp;<asp:RadioButton ID="TratamientoDeContratos1x1RadioButton" runat="server" AutoPostBack="true" Checked="true" GroupName="TratamientoDeContratos" OnCheckedChanged="TratamientoDeContratosCheckedChanged"/>
+                                &nbsp;&nbsp;<asp:RadioButton ID="TratamientoDeContratos1x1RadioButton" runat="server" AutoPostBack="true" GroupName="TratamientoDeContratos" OnCheckedChanged="TratamientoDeContratosCheckedChanged"/>
                             </td>
                             <td>
                                 Uno por uno
                             </td>
                             <td>
-                                &nbsp;&nbsp;<asp:RadioButton ID="TratamientoDeContratosTodosRadioButton" runat="server" AutoPostBack="true" GroupName="TratamientoDeContratos"  OnCheckedChanged="TratamientoDeContratosCheckedChanged"/>
+                                &nbsp;&nbsp;<asp:RadioButton ID="TratamientoDeContratosTodosRadioButton" runat="server" AutoPostBack="true" Checked="true" GroupName="TratamientoDeContratos"  OnCheckedChanged="TratamientoDeContratosCheckedChanged"/>
                             </td>
                             <td>
-                                Grupo de seleccionados
+                                Todos los seleccionados
                             </td>
                         </tr>
                     </table>
@@ -84,12 +84,12 @@
                     <asp:Button ID="SalirButton" runat="server" Text="Salir" onclick="SalirButton_Click" />
                 </td>
             </tr>
-            <asp:Panel ID="GenerarComprobantesPanel" runat="server" Visible="false">
+            <asp:Panel ID="GenerarComprobantesPanel" runat="server">
             <tr>
                 <td>
                 </td>
                 <td align="left" style="height:24px; padding-top:10px" valign="top">
-                    <asp:Button ID="GenerarComprobantesButton" runat="server" Text="Generar Comprobantes para los Contratos seleccionados" onclick="GenerarComprobantesButton_Click" Visible="false" />
+                    <asp:Button ID="GenerarComprobantesButton" runat="server" Text="Generar Comprobantes para los Contratos seleccionados" onclick="GenerarComprobantesButton_Click" />
                 </td>
             </tr>
             </asp:Panel>
@@ -104,12 +104,12 @@
                 <td colspan="3">
                     <asp:GridView ID="ComprobantesGridView" runat="server" AutoGenerateColumns="false" CssClass="grilla" GridLines="None" OnRowCommand="ComprobantesGridView_RowCommand">
                         <Columns>
-                            <asp:TemplateField HeaderText="Seleccionado<br/>para su emisión" Visible="false">
+                            <asp:TemplateField HeaderText="Seleccionado<br/>para su emisión">
                                 <ItemTemplate>
                                     <asp:CheckBox ID="SeleccionContratoCheckBox" runat="server" Checked="true" />
                                 </ItemTemplate>
                             </asp:TemplateField>
-                            <asp:TemplateField>
+                            <asp:TemplateField Visible="false">
                                 <ItemTemplate>
                                     <asp:LinkButton ID="EmisionLinkButton" runat="server" CommandName="Emision" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Emitir</asp:LinkButton>
                                 </ItemTemplate>

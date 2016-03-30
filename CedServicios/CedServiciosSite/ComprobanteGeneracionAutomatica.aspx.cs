@@ -130,8 +130,8 @@ namespace CedServicios.Site
                 {
                     MostrarResultadoEmision(cantidadContratosSeleccionados, cantidadComprobantesGenerados, cantidadComprobantesEnviados, cantidadComprobantesConfirmados, cantidadComprobantesRechazados, listaErrores, listaComprobantesGenerados);
                     BuscarContratos(false);
+                    GenerarComprobantesButton.Visible = false;
                 }
-                GenerarComprobantesButton.Visible = false;
             }
         }
         private void EmitirComprobantesContrato(int NroItemContrato, ref int CantidadContratosSeleccionados, ref int CantidadComprobantesGenerados, ref int CantidadComprobantesEnviados, ref int CantidadComprobantesConfirmados, ref int CantidadComprobantesRechazados, ref List<string> ListaErrores, ref List<string> ListaComprobantesGenerados)

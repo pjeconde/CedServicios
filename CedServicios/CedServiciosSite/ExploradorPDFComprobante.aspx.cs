@@ -27,6 +27,7 @@ namespace CedServicios.Site
                 {
                     FechaDesdeTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
                     FechaHastaTextBox.Text = DateTime.Today.ToString("yyyyMMdd");
+                    BuscarButton_Click(BuscarButton, EventArgs.Empty);
                 }
             }
         }
@@ -36,7 +37,7 @@ namespace CedServicios.Site
             int item = Convert.ToInt32(e.CommandArgument);
             List<Entidades.PDF> lista = (List<Entidades.PDF>)ViewState["PDFs"];
             Entidades.PDF pDF = lista[item];
-            if (e.CommandName == "Consulta")
+            if (e.CommandName == "Descargar")
             {
                 string script = "window.open('DescargaTemporarios.aspx?archivo=" + pDF.NombreArchivo + "&path=~/PDFs/', '');";
                 ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
