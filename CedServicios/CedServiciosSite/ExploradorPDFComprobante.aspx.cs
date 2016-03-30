@@ -33,7 +33,7 @@ namespace CedServicios.Site
         }
         protected void PDFsGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
-            MensajeLabel.Text = "";
+            MensajeLabel.Text = string.Empty;
             int item = Convert.ToInt32(e.CommandArgument);
             List<Entidades.PDF> lista = (List<Entidades.PDF>)ViewState["PDFs"];
             Entidades.PDF pDF = lista[item];
@@ -45,6 +45,7 @@ namespace CedServicios.Site
         }
         private bool ValidacionFiltrosOK()
         {
+            MensajeLabel.Text = string.Empty;
             if (!RN.Funciones.ValidarFechaYYYYMMDD(FechaDesdeTextBox.Text))
             {
                 MensajeLabel.Text = "Fecha Desde inválida. Formato correcto de 8 dígitos (YYYYMMDD).";
@@ -108,6 +109,29 @@ namespace CedServicios.Site
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        protected void DescargarTodosButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = string.Empty;
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            List<Entidades.PDF> lista = (List<Entidades.PDF>)ViewState["PDFs"];
+            if (lista.Count == 0)
+            {
+                MensajeLabel.Text = "No hay archivos PDFs para agregar al ZIP que intenta descargar.";
+            }
+            else
+            {
+                ZipFile zip = new ZipFile();
+                for (int i = 0; i < lista.Count; i++)
+                {
+                    zip.AddFile(lista[i].Path, "");
+                }
+                string nombreZip = sesion.Cuit.Nro + "-" + "PDFs del " + FechaDesdeTextBox.Text + " al " + FechaHastaTextBox.Text + ".zip";
+                string pathZip = @"~/Temp/";
+                zip.Save(Server.MapPath(pathZip + nombreZip));
+                string script = "window.open('DescargaTemporarios.aspx?archivo=" + nombreZip + "&path=" + pathZip + "', '');";
+                ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+            }
         }
     }
 }

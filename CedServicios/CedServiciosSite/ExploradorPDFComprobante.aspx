@@ -44,6 +44,13 @@
             <tr>
                 <td>
                 </td>
+                <td style="padding-top:5px; vertical-align: top; text-align: left">
+                    <asp:Button ID="DescargarTodosButton" class="btn btn-default btn-sm" runat="server" TabIndex="8" Text="Descargar todos los PDFs en un archivo ZIP" onclick="DescargarTodosButton_Click" />
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
                 <td style="padding-top:20px; padding-bottom:10px; text-align: center">
                     <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
                 </td>

@@ -295,15 +295,15 @@ namespace CedServicios.RN
             }
             if (Sesion.Ambiente != "PROD")
             {
-                mail.Subject = Contrato.DatosEmailAvisoComprobanteContrato.Asunto + " (" + Sesion.Ambiente + ")";
+                mail.Subject = TratamientoPalabrasReservadas(Contrato.DatosEmailAvisoComprobanteContrato.Asunto, Comprobante, Lote, LogoPath) + " (" + Sesion.Ambiente + ")";
             }
             else
             {
-                mail.Subject = Contrato.DatosEmailAvisoComprobanteContrato.Asunto;
+                mail.Subject = TratamientoPalabrasReservadas(Contrato.DatosEmailAvisoComprobanteContrato.Asunto, Comprobante, Lote, LogoPath);
             }
             mail.IsBodyHtml = true;
             StringBuilder a = new StringBuilder();
-            a.Append(TratamientoCuerpo(Contrato.DatosEmailAvisoComprobanteContrato.Cuerpo, Comprobante, Lote, LogoPath));
+            a.Append(TratamientoPalabrasReservadas(Contrato.DatosEmailAvisoComprobanteContrato.Cuerpo, Comprobante, Lote, LogoPath));
 
             ////Create two views, one text, one HTML.
             //var htmlView = AlternateView.CreateAlternateViewFromString(a.ToString(), null, "text/html");
@@ -320,7 +320,7 @@ namespace CedServicios.RN
             smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
         }
-        private static string TratamientoCuerpo(string Cuerpo, Entidades.Comprobante Comprobante, FeaEntidades.InterFacturas.lote_comprobantes Lote, string LogoPath)
+        private static string TratamientoPalabrasReservadas(string Cuerpo, Entidades.Comprobante Comprobante, FeaEntidades.InterFacturas.lote_comprobantes Lote, string LogoPath)
         {
             string a = Cuerpo.Replace("\r\n", "<br />");
             a = a.Replace("@RAZONSOCIAL", "<b>" + Comprobante.RazonSocial + " </b>");
@@ -329,6 +329,7 @@ namespace CedServicios.RN
             try
             {
                 a = a.Replace("@PERIODODELSERVICIO", "del <b>" + DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy") + "</b> al <b>" + DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy") + " </b>");
+                a = a.Replace("@MESDELSERVICIO", "<b>" + DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("MMMM yyyy", new System.Globalization.CultureInfo("es-AR")).Replace(" ", " de ") + "</b>");
             }
             catch {}
             a = a.Replace("@FECHAVTO", "<b>" + Comprobante.FechaVto.ToString("dd/MM/yyyy") + " </b>");
