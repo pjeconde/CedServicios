@@ -165,25 +165,35 @@ namespace CedServicios.Site
             {
                 try
                 {
-                    //Si no todos los CUITs tienen acceso a este servicio de la AFIP, crear un objeto Sesion nuevo con
-                    //los siguientes datos ajustados: Sesion.Cuit.UsaCertificadoAFIPPropio y Sesion.Cuit.Nro
-                    string xmlString = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, ((Entidades.Sesion)Session["Sesion"]));
-                    System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Entidades.AFIP.Contribuyente));
-                    StringReader rdr = new StringReader(xmlString);
-                    Entidades.AFIP.Contribuyente contribuyente = (Entidades.AFIP.Contribuyente)serializer.Deserialize(rdr);
-                    RazonSocialTextBox.Text = contribuyente.Persona.DescripcionCorta;
-                    if (contribuyente.Domicilios.Length > 0)
+                    Entidades.Sesion sesion = ((Entidades.Sesion)Session["Sesion"]);
+                    Entidades.Sesion sesionConsultaAFIP = new Entidades.Sesion();
+                    sesionConsultaAFIP.Cuit.UsaCertificadoAFIPPropio = true;
+                    sesionConsultaAFIP.Cuit.Nro = RN.Configuracion.CuitConsultaAFIP(sesion);
+                    if (sesionConsultaAFIP.Cuit.Nro != string.Empty)
                     {
-                        Domicilio.Calle = contribuyente.Domicilios[0].Calle;
-                        Domicilio.Nro = contribuyente.Domicilios[0].Numero;
-                        Domicilio.Piso = contribuyente.Domicilios[0].Piso;
-                        Domicilio.Depto = contribuyente.Domicilios[0].OficinaDeptoLocal;
-                        Domicilio.Sector = string.Empty;
-                        Domicilio.Torre = string.Empty;
-                        Domicilio.Manzana = string.Empty;
-                        Domicilio.Localidad = contribuyente.Domicilios[0].Localidad;
-                        Domicilio.IdProvincia = contribuyente.Domicilios[0].IdProvincia;
-                        Domicilio.CodPost = contribuyente.Domicilios[0].CodigoPostal;
+                        string xmlString = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesionConsultaAFIP);
+                        System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Entidades.AFIP.Contribuyente));
+                        StringReader rdr = new StringReader(xmlString);
+                        Entidades.AFIP.Contribuyente contribuyente = (Entidades.AFIP.Contribuyente)serializer.Deserialize(rdr);
+                        RazonSocialTextBox.Text = contribuyente.Persona.DescripcionCorta;
+                        if (contribuyente.Domicilios.Length > 0)
+                        {
+                            Domicilio.Calle = contribuyente.Domicilios[0].Calle;
+                            Domicilio.Nro = contribuyente.Domicilios[0].Numero;
+                            Domicilio.Piso = contribuyente.Domicilios[0].Piso;
+                            Domicilio.Depto = contribuyente.Domicilios[0].OficinaDeptoLocal;
+                            Domicilio.Sector = string.Empty;
+                            Domicilio.Torre = string.Empty;
+                            Domicilio.Manzana = string.Empty;
+                            Domicilio.Localidad = contribuyente.Domicilios[0].Localidad;
+                            Domicilio.IdProvincia = contribuyente.Domicilios[0].IdProvincia;
+                            Domicilio.CodPost = contribuyente.Domicilios[0].CodigoPostal;
+                        }
+                    }
+                    else
+                    {
+                        MensajeLabel.Text = "Servicio de consulta no disponible en estos momentos";
+                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
                     }
                 }
                 catch (Exception ex)

@@ -63,5 +63,19 @@ namespace CedServicios.RN
             }
             return usuarioDEMO;
         }
+        public static string CuitConsultaAFIP(Entidades.Sesion Sesion)
+        {
+            Entidades.Configuracion elem = new Entidades.Configuracion("CuitConsultaAFIP");
+            DB.Configuracion db = new DB.Configuracion(Sesion);
+            try
+            {
+                db.Leer(elem);
+                return elem.Valor;
+            }
+            catch
+            {
+                return string.Empty;
+            }
+        }
     }
 }
