@@ -56,3 +56,65 @@
 20160225 11:38:00  Consulta de Tipos de Comprobante CUIT: 20225018805
 20160225 11:38:11  Consulta de Tipos de Comprobante CUIT: 20225018805
 20160225 11:47:11  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160301 05:26:02  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160301 05:27:33  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160301 05:27:46  Consultar los Tipos de Documentos válidos en AFIP (FEv1) para el CUIT: 20225018805
+20160301 05:46:42  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160301 05:48:22  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160301 05:50:07  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160301 05:50:23  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160301 05:51:19  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160301 05:52:31  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160301 07:08:11  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160302 01:23:09  Consulta de Tipos de Comprobante CUIT: 30710015062
+20160302 01:23:37  SCRIPT crear Ticket: Insert Ticket (Cuit, Service, UniqueId, GenerationTime, ExpirationTime, Sign, Token) values ('30710015062', 'wsfe', '568635911', '20160302 13:32:07', '20160303 01:32:07', 'Hkdi8bB/X8qs9zuw8JicCxnaajAFW1YwKYOfhNaRZlDo3fw0lkcq2yxKqRtvP4SpUzVn7aq8p73Ker3Zc5oL1XdYc54mErpnNgennYjvIOGY+P7tTH5lTTPYOUxXsHUJAtmYJ4c6PwOJfVOGs5FF+jI0A+cCR+GUP6ruiBZJMiM=', 'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgdW5pcXVlX2lkPSIyNDkwMDkxODAxIiBzcmM9IkNOPXdzYWFob21vLCBPPUFGSVAsIEM9QVIsIFNFUklBTE5VTUJFUj1DVUlUIDMzNjkzNDUwMjM5IiBnZW5fdGltZT0iMTQ1NjkzNjI2NyIgZXhwX3RpbWU9IjE0NTY5Nzk1MjciIGRzdD0iQ049d3NmZSwgTz1BRklQLCBDPUFSIi8+CiAgICA8b3BlcmF0aW9uIHZhbHVlPSJncmFudGVkIiB0eXBlPSJsb2dpbiI+CiAgICAgICAgPGxvZ2luIHVpZD0iQz1hciwgTz1jZWRlaXJhc2YsIFNFUklBTE5VTUJFUj1DVUlUIDMwNzEwMDE1MDYyLCBDTj1jZWRlaXJhc2YiIHNlcnZpY2U9IndzZmUiIHJlZ21ldGhvZD0iMjIiIGVudGl0eT0iMzM2OTM0NTAyMzkiIGF1dGhtZXRob2Q9ImNtcyI+CiAgICAgICAgICAgIDxyZWxhdGlvbnM+CiAgICAgICAgICAgICAgICA8cmVsYXRpb24gcmVsdHlwZT0iNCIga2V5PSIzMDcxMDAxNTA2MiIvPgogICAgICAgICAgICA8L3JlbGF0aW9ucz4KICAgICAgICA8L2xvZ2luPgogICAgPC9vcGVyYXRpb24+Cjwvc3NvPgoK')
+20160303 12:10:17  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160303 12:10:17  SCRIPT crear Ticket: Insert Ticket (Cuit, Service, UniqueId, GenerationTime, ExpirationTime, Sign, Token) values ('20225018805', 'wsfe', '1286192363', '20160303 12:18:49', '20160304 00:18:49', 'gvUUoAHaft7YLJM0peS2pVnktcdE+rhRY+iPFFsNjoqoxshgVUJQ33GwYzbse6kinjx6cNqcrcFUL51BPpMBjcoRIyfScEzMXEf8fRO4D1Bn8NeRKQmjX2HQk35eo2i/sIRfsw7dzSSfAI1nKJh17q4jo2cvewomqCWYdiAOuQw=', 'PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9InllcyI/Pgo8c3NvIHZlcnNpb249IjIuMCI+CiAgICA8aWQgdW5pcXVlX2lkPSIyMzE0NzY2MzIyIiBzcmM9IkNOPXdzYWFob21vLCBPPUFGSVAsIEM9QVIsIFNFUklBTE5VTUJFUj1DVUlUIDMzNjkzNDUwMjM5IiBnZW5fdGltZT0iMTQ1NzAxODI2OSIgZXhwX3RpbWU9IjE0NTcwNjE1MjkiIGRzdD0iQ049d3NmZSwgTz1BRklQLCBDPUFSIi8+CiAgICA8b3BlcmF0aW9uIHZhbHVlPSJncmFudGVkIiB0eXBlPSJsb2dpbiI+CiAgICAgICAgPGxvZ2luIHVpZD0iQz1hciwgTz1jb25kZSwgU0VSSUFMTlVNQkVSPUNVSVQgMjAyMjUwMTg4MDUsIENOPXBqZWNvbmRlIiBzZXJ2aWNlPSJ3c2ZlIiByZWdtZXRob2Q9IjIyIiBlbnRpdHk9IjMzNjkzNDUwMjM5IiBhdXRobWV0aG9kPSJjbXMiPgogICAgICAgICAgICA8cmVsYXRpb25zPgogICAgICAgICAgICAgICAgPHJlbGF0aW9uIHJlbHR5cGU9IjQiIGtleT0iMjAyMjUwMTg4MDUiLz4KICAgICAgICAgICAgPC9yZWxhdGlvbnM+CiAgICAgICAgPC9sb2dpbj4KICAgIDwvb3BlcmF0aW9uPgo8L3Nzbz4KCg==')
+20160303 12:10:39  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160303 12:11:31  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160303 12:12:54  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160303 12:24:46  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160303 12:59:39  Parametro ConsultaIBKUtilizarServidorExterno: SI
+20160303 12:59:39  Parametro ConsultaIBKurl: http://cedeiraweb.no-ip.org:8084/ConsultaIBK.asmx
+20160303 05:13:33  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160303 06:13:19  Consulta de Tipos de Comprobante CUIT: 20225018805
+20160314 12:08:34  Consulta de Lote CUIT: 30710015062  Nro.Lote: 20160303125716  Nro. Punto de Vta.: 41
+20160314 12:08:34  NroSerieCertifITF: 014ff6698c79
+20160314 12:08:34  Parametro ConsultaIBKUtilizarServidorExterno: SI
+20160314 12:08:34  Parametro ConsultaIBKurl: http://cedeiraweb.no-ip.org:8084/ConsultaIBK.asmx
+20160314 12:13:22  Parametro ConsultaIBKUtilizarServidorExterno: SI
+20160314 12:13:22  Parametro ConsultaIBKurl: http://cedeiraweb.no-ip.org:8084/ConsultaIBK.asmx
+20160314 03:55:21  Consulta de Lote CUIT: 30710015062  Nro.Lote: 20160314121046  Nro. Punto de Vta.: 41
+20160314 03:55:21  NroSerieCertifITF: 014ff6698c79
+20160314 03:55:21  Parametro ConsultaIBKUtilizarServidorExterno: SI
+20160314 03:55:21  Parametro ConsultaIBKurl: http://cedeiraweb.no-ip.org:8084/ConsultaIBK.asmx
+20160314 03:55:33  <SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF o AFIP: Resultado: R  Motivo: ');</SCRIPT>
+20160314 03:57:15  Consulta de Lote CUIT: 30710015062  Nro.Lote: 20160314121046  Nro. Punto de Vta.: 41
+20160314 03:57:15  NroSerieCertifITF: 014ff6698c79
+20160314 03:57:15  Parametro ConsultaIBKUtilizarServidorExterno: SI
+20160314 03:57:15  Parametro ConsultaIBKurl: http://cedeiraweb.no-ip.org:8084/ConsultaIBK.asmx
+20160314 03:59:06  Consulta de Lote CUIT: 30710015062  Nro.Lote: 20160314121046  Nro. Punto de Vta.: 41
+20160314 03:59:07  NroSerieCertifITF: 014ff6698c79
+20160314 03:59:10  Parametro ConsultaIBKUtilizarServidorExterno: SI
+20160314 03:59:12  Parametro ConsultaIBKurl: http://cedeiraweb.no-ip.org:8084/ConsultaIBK.asmx
+20160314 04:01:10  <SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF o AFIP: Resultado: R  Motivo: ');</SCRIPT>
+20160314 04:03:33  Consulta de Lote CUIT: 30710015062  Nro.Lote: 20160314121046  Nro. Punto de Vta.: 41
+20160314 04:03:33  NroSerieCertifITF: 014ff6698c79
+20160314 04:03:33  Parametro ConsultaIBKUtilizarServidorExterno: SI
+20160314 04:03:33  Parametro ConsultaIBKurl: http://cedeiraweb.no-ip.org:8084/ConsultaIBK.asmx
+20160314 04:05:07  <SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF o AFIP: Resultado: R  Motivo: ');</SCRIPT>
+20160314 04:14:04  Consulta de Lote CUIT: 30710015062  Nro.Lote: 20160314121046  Nro. Punto de Vta.: 41
+20160314 04:14:04  NroSerieCertifITF: 014ff6698c79
+20160314 04:14:04  Parametro ConsultaIBKUtilizarServidorExterno: SI
+20160314 04:14:04  Parametro ConsultaIBKurl: http://cedeiraweb.no-ip.org:8084/ConsultaIBK.asmx
+20160314 04:14:19  <SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF o AFIP: Resultado: R  Motivo del comprobante: 501');</SCRIPT>
+20160314 04:15:35  Consulta de Lote CUIT: 30710015062  Nro.Lote: 20160314121046  Nro. Punto de Vta.: 41
+20160314 04:15:35  NroSerieCertifITF: 014ff6698c79
+20160314 04:15:35  Parametro ConsultaIBKUtilizarServidorExterno: SI
+20160314 04:15:35  Parametro ConsultaIBKurl: http://cedeiraweb.no-ip.org:8084/ConsultaIBK.asmx
+20160314 04:15:42  <SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF o AFIP: Resultado: R  Motivo del comprobante: 501');</SCRIPT>
+20160314 04:18:27  Consulta de Lote CUIT: 30710015062  Nro.Lote: 20160314121046  Nro. Punto de Vta.: 41
+20160314 04:18:27  NroSerieCertifITF: 014ff6698c79
+20160314 04:18:27  Parametro ConsultaIBKUtilizarServidorExterno: SI
+20160314 04:18:27  Parametro ConsultaIBKurl: http://cedeiraweb.no-ip.org:8084/ConsultaIBK.asmx
+20160314 04:18:31  <SCRIPT LANGUAGE='javascript'>alert('Respuesta de ITF o AFIP: Resultado: R  Motivo del comprobante: 501');</SCRIPT>

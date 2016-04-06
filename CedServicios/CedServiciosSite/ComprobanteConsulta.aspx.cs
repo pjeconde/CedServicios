@@ -384,6 +384,7 @@ namespace CedServicios.Site
             CompletarExportacion(lc);
             //Referencias
             //CompletarReferencias(lc);
+            InfoReferencias.PuntoDeVenta = lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString();
             InfoReferencias.CompletarReferencias(lc);
             PermisosExpo.CompletarPermisos(lc);
             //Comprador

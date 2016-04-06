@@ -1441,6 +1441,10 @@
     <Compile Include="Reporte\resumenDescuentos.cs" />
     <Compile Include="Reporte\resumenImportes_moneda_origen.cs" />
     <Compile Include="Reporte\resumenImpuestos.cs" />
+    <Compile Include="TipoComprobanteAFIP\SinInformar.cs" />
+    <Compile Include="TipoComprobanteAFIP\TipoComprobanteAFIP.cs" />
+    <Compile Include="TipoComprobanteAFIP\SI.cs" />
+    <Compile Include="TipoComprobanteAFIP\NO.cs" />
     <Compile Include="TiposDeComprobantes\CuentaDeVentaYLiquido\A.cs" />
     <Compile Include="TiposDeComprobantes\CuentaDeVentaYLiquido\B.cs" />
     <Compile Include="TiposDeComprobantes\CuentaDeVentaYLiquido\CuentaDeVentaYLiquido.cs" />

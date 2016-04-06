@@ -2,3 +2,11 @@
 20150922 11:52:15  NroSerieCertifITF: 0146aac14e3a
 20150922 11:52:15  Parametro DetalleIBKUtilizarServidorExterno: SI
 20150922 11:52:15  Parametro DetalleIBKurl: http://cedeiraweb.no-ip.org:8084/DetalleIBK.asmx
+20160303 12:59:55  Consulta de Lote CUIT: 30710015062  Punto de Venta: 41  Tipo de Comprobante: 1  Nro de Comprobante: 35
+20160303 12:59:55  NroSerieCertifITF: 014ff6698c79
+20160303 12:59:55  Parametro DetalleIBKUtilizarServidorExterno: SI
+20160303 12:59:55  Parametro DetalleIBKurl: http://cedeiraweb.no-ip.org:8084/DetalleIBK.asmx
+20160303 12:59:57  Inicia ExecuteCommand
+20160303 12:59:57  Parametro GenerarPDFUtilizarServidorExterno: SI
+20160303 12:59:57  Parametro GenerarPDFurl: http://cedeiraweb.no-ip.org:8084/DetalleIBK.asmx
+20160303 01:00:19  Finaliza ExecuteCommand

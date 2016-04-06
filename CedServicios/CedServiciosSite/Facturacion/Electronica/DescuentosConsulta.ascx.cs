@@ -14,7 +14,7 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             if (!this.IsPostBack)
             {
-                ResetearGrillas();
+                //ResetearGrillas();
             }
         }
  

@@ -32,6 +32,22 @@
 						ShowFooter="true" ShowHeader="True" ToolTip="El dato de referencia debe ser un número entero"
 						Width="1260px">
 						<Columns>
+                            <asp:TemplateField HeaderText="Tipo de comprobante AFIP">
+                                <ItemTemplate>
+                                    <asp:Label ID="lbltipo_comprobante_afip" runat="server" Text='<%# Eval("tipo_comprobante_afip") %>'
+                                        Width="100px"></asp:Label>
+                                </ItemTemplate>
+                                <EditItemTemplate>
+                                    <asp:DropDownList ID="ddltipo_comprobante_afipEdit" runat="server" Width="80px">
+                                    </asp:DropDownList>
+                                </EditItemTemplate>
+                                <FooterTemplate>
+                                    <asp:DropDownList ID="ddltipo_comprobante_afip" runat="server" Width="80px">
+                                    </asp:DropDownList>
+                                </FooterTemplate>
+                                <ItemStyle HorizontalAlign="Left" Width="100px" />
+                                <FooterStyle HorizontalAlign="Left" Width="100px" />
+                            </asp:TemplateField>
                             <asp:TemplateField HeaderText="C&#243;digo de referencia">
                                 <ItemTemplate>
                                     <asp:Label ID="lblcodigo_de_referencia" runat="server" Text='<%# Eval("descripcioncodigo_de_referencia") %>'

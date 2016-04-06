@@ -204,7 +204,6 @@
     <Content Include="Facturacion\Electronica\Impuestos.ascx" />
     <Content Include="Facturacion\Electronica\ImpuestosConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Lote.aspx" />
-    <Content Include="Facturacion\Electronica\LoteConsulta.aspx" />
     <Content Include="Facturacion\Electronica\Permisos.ascx" />
     <Content Include="Facturacion\Electronica\PermisosConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Reportes\FacturaWebForm.aspx" />
@@ -943,13 +942,6 @@
     <Compile Include="Facturacion\Electronica\Lote.aspx.designer.cs">
       <DependentUpon>Lote.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Facturacion\Electronica\LoteConsulta.aspx.cs">
-      <DependentUpon>LoteConsulta.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Facturacion\Electronica\LoteConsulta.aspx.designer.cs">
-      <DependentUpon>LoteConsulta.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Facturacion\Electronica\Mails\Body.cs" />
     <Compile Include="Facturacion\Electronica\Permisos.ascx.cs">
       <DependentUpon>Permisos.ascx</DependentUpon>
@@ -1410,6 +1402,7 @@
   <ItemGroup>
     <Folder Include="CertificadosAFIP\" />
     <Folder Include="ImagenesSubidas\" />
+    <Folder Include="PDFs\" />
     <Folder Include="TempRenderAFIP\" />
     <Folder Include="TempRender\" />
     <Folder Include="Temp\" />

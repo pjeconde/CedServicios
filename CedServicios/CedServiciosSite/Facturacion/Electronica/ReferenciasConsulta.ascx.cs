@@ -21,7 +21,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			if (!this.IsPostBack)
 			{
-				ResetearGrillas();
+				//ResetearGrillas();
 			}
             puntoDeVenta = Convert.ToString(ViewState["puntoDeVenta"]);
 		}
