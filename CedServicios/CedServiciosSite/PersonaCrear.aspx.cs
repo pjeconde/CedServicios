@@ -186,7 +186,7 @@ namespace CedServicios.Site
                             Domicilio.Torre = string.Empty;
                             Domicilio.Manzana = string.Empty;
                             Domicilio.Localidad = contribuyente.Domicilios[0].Localidad;
-                            Domicilio.IdProvincia = contribuyente.Domicilios[0].IdProvincia;
+                            Domicilio.IdProvincia = RN.ServiciosAFIP.IdProvincia(contribuyente.Domicilios[0].IdProvincia);
                             Domicilio.CodPost = contribuyente.Domicilios[0].CodigoPostal;
                         }
                     }
