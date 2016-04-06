@@ -406,7 +406,6 @@ namespace CedServicios.Site
                 respuesta = respuesta.Replace("\n", "\\n");
                 respuesta = respuesta.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
-                
             }
             catch (Exception ex)
             {

@@ -45,6 +45,7 @@
     <Compile Include="Articulo.cs" />
     <Compile Include="ComprobanteATratar.cs" />
     <Compile Include="Const.cs" />
+    <Compile Include="Contribuyente.cs" />
     <Compile Include="DestinatarioFrecuente.cs" />
     <Compile Include="DatosEmailAvisoComprobanteContrato.cs" />
     <Compile Include="DatosEmailAvisoComprobantePersona.cs" />
