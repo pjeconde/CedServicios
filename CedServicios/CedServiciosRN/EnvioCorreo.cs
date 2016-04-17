@@ -295,15 +295,15 @@ namespace CedServicios.RN
             }
             if (Sesion.Ambiente != "PROD")
             {
-                mail.Subject = TratamientoPalabrasReservadas(Contrato.DatosEmailAvisoComprobanteContrato.Asunto, Comprobante, Lote, LogoPath) + " (" + Sesion.Ambiente + ")";
+                mail.Subject = TratamientoPalabrasReservadas(Contrato.DatosEmailAvisoComprobanteContrato.Asunto, Comprobante, Lote, LogoPath, false) + " (" + Sesion.Ambiente + ")";
             }
             else
             {
-                mail.Subject = TratamientoPalabrasReservadas(Contrato.DatosEmailAvisoComprobanteContrato.Asunto, Comprobante, Lote, LogoPath);
+                mail.Subject = TratamientoPalabrasReservadas(Contrato.DatosEmailAvisoComprobanteContrato.Asunto, Comprobante, Lote, LogoPath, false);
             }
             mail.IsBodyHtml = true;
             StringBuilder a = new StringBuilder();
-            a.Append(TratamientoPalabrasReservadas(Contrato.DatosEmailAvisoComprobanteContrato.Cuerpo, Comprobante, Lote, LogoPath));
+            a.Append(TratamientoPalabrasReservadas(Contrato.DatosEmailAvisoComprobanteContrato.Cuerpo, Comprobante, Lote, LogoPath, true));
 
             ////Create two views, one text, one HTML.
             //var htmlView = AlternateView.CreateAlternateViewFromString(a.ToString(), null, "text/html");
@@ -320,19 +320,28 @@ namespace CedServicios.RN
             smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
             smtpClient.Send(mail);
         }
-        private static string TratamientoPalabrasReservadas(string Cuerpo, Entidades.Comprobante Comprobante, FeaEntidades.InterFacturas.lote_comprobantes Lote, string LogoPath)
+        private static string TratamientoPalabrasReservadas(string Cuerpo, Entidades.Comprobante Comprobante, FeaEntidades.InterFacturas.lote_comprobantes Lote, string LogoPath, bool Negritas)
         {
+            string negritasDsd = "<b>";
+            string negritasHst = "</b>";
+            if (!Negritas)
+            {
+                negritasDsd = string.Empty;
+                negritasHst = string.Empty;
+            }
             string a = Cuerpo.Replace("\r\n", "<br />");
-            a = a.Replace("@RAZONSOCIAL", "<b>" + Comprobante.RazonSocial + " </b>");
-            a = a.Replace("@TIPOYNROCOMPROBANTE", Comprobante.TipoComprobante.Descr.Replace("s ", " ") + " Nº " + Comprobante.NroPuntoVta.ToString("0000") + "-<b>" + Comprobante.Nro.ToString("00000000") + " </b>");
-            a = a.Replace("@MONEDAEIMPORTETOTAL", "<b>" + Comprobante.Moneda.Replace("PES", "$").Replace("DOL", "u$s") + " " + Comprobante.Importe.ToString("N2",  new System.Globalization.CultureInfo("es-AR")) + " </b>");
+            a = a.Replace("@RAZONSOCIAL", negritasDsd + Comprobante.RazonSocial + negritasHst);
+            a = a.Replace("@TIPOYNROCOMPROBANTE", Comprobante.TipoComprobante.Descr.Replace("s ", " ") + " Nº " + Comprobante.NroPuntoVta.ToString("0000") + "-" + negritasDsd + Comprobante.Nro.ToString("00000000") + negritasHst);
+            a = a.Replace("@MONEDAEIMPORTETOTAL", negritasDsd + Comprobante.Moneda.Replace("PES", "$").Replace("DOL", "u$s") + " " + Comprobante.Importe.ToString("N2", new System.Globalization.CultureInfo("es-AR")) + negritasHst);
             try
             {
-                a = a.Replace("@PERIODODELSERVICIO", "del <b>" + DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy") + "</b> al <b>" + DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy") + " </b>");
-                a = a.Replace("@MESDELSERVICIO", "<b>" + DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("MMMM yyyy", new System.Globalization.CultureInfo("es-AR")).Replace(" ", " de ") + "</b>");
+                a = a.Replace("@PERIODODELSERVICIO", "del " + negritasDsd + DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy") + negritasHst + " al " + negritasDsd + DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("dd/MM/yyyy") + negritasHst);
+                string mesDelServicio = DateTime.ParseExact(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_serv_desde, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture).ToString("MMMM yyyy", new System.Globalization.CultureInfo("es-AR")).Replace(" ", " de ");
+                mesDelServicio = mesDelServicio.Substring(0, 1).ToUpper() + mesDelServicio.Substring(1, mesDelServicio.Length - 1);
+                a = a.Replace("@MESDELSERVICIO", negritasDsd + mesDelServicio + negritasHst);
             }
             catch {}
-            a = a.Replace("@FECHAVTO", "<b>" + Comprobante.FechaVto.ToString("dd/MM/yyyy") + " </b>");
+            a = a.Replace("@FECHAVTO", negritasDsd + Comprobante.FechaVto.ToString("dd/MM/yyyy") + negritasHst);
             a = a.Replace("@TAB", "&emsp;");
             //a = a + "<br />" + "<image src='cid:LogoImage' alt='logo' />";
             return a;

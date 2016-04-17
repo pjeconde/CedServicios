@@ -40,7 +40,7 @@
         } 
         textarea
         {
-            resize: none;
+            /*resize: none;*/
         }
     </style>
     <script type="text/javascript">

@@ -52,7 +52,7 @@
                                 <asp:Label ID="CuerpoLabel" runat="server" Text="Cuerpo"></asp:Label>
                             </td>
                             <td align="left" style="padding-top:3px">
-                                <asp:TextBox ID="CuerpoTextBox" runat="server" MaxLength="2048" TabIndex="504" Width="627px" TextMode="MultiLine"></asp:TextBox>
+                                <asp:TextBox ID="CuerpoTextBox" runat="server" MaxLength="2048" TabIndex="504" Width="627px" TextMode="MultiLine" resize="both"></asp:TextBox>
                             </td>
                         </tr>
                     </table>
