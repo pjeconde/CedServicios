@@ -117,13 +117,15 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Comprobantes|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Comprobantes|Modificación");
                         opcionesHabilitadas.Add("Comprobantes|Envio (AFIP/ITF)");                   //Nuevo
-                        opcionesHabilitadas.Add("Comprobantes|Consulta");
-                        opcionesHabilitadas.Add("Comprobantes|Consulta RG");
-                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
-                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");
-                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online AFIP");
-                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Archivo XML");
-                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Términos y condiciones");
+                        opcionesHabilitadas.Add("Comprobantes|Consultas");
+                        opcionesHabilitadas.Add("Comprobantes|Consultas|Explorador de Comprobantes");
+                        opcionesHabilitadas.Add("Comprobantes|Consultas|IVA Ventas");
+                        opcionesHabilitadas.Add("Comprobantes|Consultas|Interfaz RG.3685");
+                        opcionesHabilitadas.Add("Comprobantes|Consultas|Online Interfacturas|Varios comprobantes");
+                        opcionesHabilitadas.Add("Comprobantes|Consultas|Online Interfacturas|Un comprobante");
+                        opcionesHabilitadas.Add("Comprobantes|Consultas|Online AFIP");
+                        opcionesHabilitadas.Add("Comprobantes|Consultas|Archivo XML");
+                        opcionesHabilitadas.Add("Comprobantes|Consultas|Términos y condiciones");
                         opcionesHabilitadas.Add("Comprobantes|Generación automática (contratos)");  //Nuevo
                         opcionesHabilitadas.Add("Comprobantes|Consulta PDFs");  //Nuevo
                         if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)

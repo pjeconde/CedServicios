@@ -15,29 +15,66 @@ namespace CedServicios.Site
         {
             if (!this.IsPostBack)
             {
-                System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta;
-                System.Collections.Generic.List<Entidades.PuntoVta> puntoVtalist = new System.Collections.Generic.List<Entidades.PuntoVta>();
-                Entidades.PuntoVta puntoVta = new Entidades.PuntoVta();
-                puntoVta.Nro = 0;
-                puntoVtalist.Add(puntoVta);
-                if (listaPuntoVta != null)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    puntoVtalist.AddRange(listaPuntoVta);
+                    Response.Redirect("~/SessionTimeout.aspx");
                 }
-                PtoVtaConsultaDropDownList.DataValueField = "Nro";
-                PtoVtaConsultaDropDownList.DataTextField = "DescrCombo";
-                PtoVtaConsultaDropDownList.DataSource = puntoVtalist;
-                PtoVtaConsultaDropDownList.DataBind();
+                else
+                {
+                    System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta;
+                    System.Collections.Generic.List<Entidades.PuntoVta> puntoVtalist = new System.Collections.Generic.List<Entidades.PuntoVta>();
+                    Entidades.PuntoVta puntoVta = new Entidades.PuntoVta();
+                    puntoVta.Nro = 0;
+                    puntoVtalist.Add(puntoVta);
+                    if (listaPuntoVta != null)
+                    {
+                        puntoVtalist.AddRange(listaPuntoVta);
+                    }
+                    PtoVtaConsultaDropDownList.DataValueField = "Nro";
+                    PtoVtaConsultaDropDownList.DataTextField = "DescrCombo";
+                    PtoVtaConsultaDropDownList.DataSource = puntoVtalist;
+                    PtoVtaConsultaDropDownList.DataBind();
 
-                TipoComprobanteDropDownList.DataValueField = "Codigo";
-                TipoComprobanteDropDownList.DataTextField = "Descr";
-                TipoComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
+                    PtoVtaConsultaUltNroCompDropDownList.DataValueField = "Nro";
+                    PtoVtaConsultaUltNroCompDropDownList.DataTextField = "DescrCombo";
+                    PtoVtaConsultaUltNroCompDropDownList.DataSource = puntoVtalist;
+                    PtoVtaConsultaUltNroCompDropDownList.DataBind();
 
-                TicketCompletarInfo();
+                    PtoVtaConsultaValidarCAEDropDownList.DataValueField = "Nro";
+                    PtoVtaConsultaValidarCAEDropDownList.DataTextField = "DescrCombo";
+                    PtoVtaConsultaValidarCAEDropDownList.DataSource = puntoVtalist;
+                    PtoVtaConsultaValidarCAEDropDownList.DataBind();
 
-                DataBind();
+                    TipoComprobanteDropDownList.DataValueField = "Codigo";
+                    TipoComprobanteDropDownList.DataTextField = "Descr";
+                    TipoComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
+                    TipoComprobanteDropDownList.DataBind();
 
+                    TipoComprobanteUltNroCompDropDownList.DataValueField = "Codigo";
+                    TipoComprobanteUltNroCompDropDownList.DataTextField = "Descr";
+                    TipoComprobanteUltNroCompDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
+                    TipoComprobanteUltNroCompDropDownList.DataBind();
+
+                    TipoComprobanteValidarCAEDropDownList.DataValueField = "Codigo";
+                    TipoComprobanteValidarCAEDropDownList.DataTextField = "Descr";
+                    TipoComprobanteValidarCAEDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
+                    TipoComprobanteValidarCAEDropDownList.DataBind();
+
+                    TicketCompletarInfo();
+
+                    DataBind();
+                }
             }
+            else
+            {
+                TabName.Value = Request.Form[TabName.UniqueID];
+            }
+            //    tab1.Attributes.Remove("class");
+            //    Comprobantes.Attributes.Remove("class");
+            //    Comprobantes.Attributes.Add("class", "tab-pane fade text-left");
+            //    tab3.Attributes.Add("class", "active");
+            //    Parametros.Attributes.Remove("class");
+            //    Parametros.Attributes.Add("class", "tab-pane fade in active text-left");
         }
 
         protected void ConsultarLoteAFIPButton_Click(object sender, EventArgs e)
@@ -102,7 +139,7 @@ namespace CedServicios.Site
 
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
-                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
                 }
             }
         }
@@ -143,7 +180,7 @@ namespace CedServicios.Site
 
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
-                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
                 }
             }
         }
@@ -185,7 +222,7 @@ namespace CedServicios.Site
 
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
-                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
                 }
             }
         }
@@ -201,12 +238,12 @@ namespace CedServicios.Site
             {
                 try
                 {
-                    if (TipoComprobanteDropDownList.SelectedValue.Equals("0") || TipoComprobanteDropDownList.SelectedValue.Equals(string.Empty))
+                    if (TipoComprobanteUltNroCompDropDownList.SelectedValue.Equals("0") || TipoComprobanteUltNroCompDropDownList.SelectedValue.Equals(string.Empty))
                     {
                         MensajeLabel.Text = "Falta ingresar el tipo de comprobante";
                         return;
                     }
-                    if (PtoVtaConsultaDropDownList.SelectedValue.Equals("0") || PtoVtaConsultaDropDownList.SelectedValue.Equals(string.Empty))
+                    if (PtoVtaConsultaUltNroCompDropDownList.SelectedValue.Equals("0") || PtoVtaConsultaUltNroCompDropDownList.SelectedValue.Equals(string.Empty))
                     {
                         MensajeLabel.Text = "Falta ingresar el punto de venta";
                         return;
@@ -215,12 +252,12 @@ namespace CedServicios.Site
 
                     FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
                     lcFea.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
-                    lcFea.cabecera_lote.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
+                    lcFea.cabecera_lote.punto_de_venta = Convert.ToInt32(PtoVtaConsultaUltNroCompDropDownList.SelectedValue);
                     lcFea.comprobante[0] = new FeaEntidades.InterFacturas.comprobante();
                     lcFea.comprobante[0].cabecera = new FeaEntidades.InterFacturas.cabecera();
                     lcFea.comprobante[0].cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
-                    lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
-                    lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante = Convert.ToInt32(TipoComprobanteDropDownList.SelectedValue);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta = Convert.ToInt32(PtoVtaConsultaUltNroCompDropDownList.SelectedValue);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante = Convert.ToInt32(TipoComprobanteUltNroCompDropDownList.SelectedValue);
 
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPUltNroComprobante(lcFea, (Entidades.Sesion)Session["Sesion"]);
@@ -245,7 +282,7 @@ namespace CedServicios.Site
 
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
-                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
                 }
             }
         }
@@ -270,6 +307,7 @@ namespace CedServicios.Site
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/\"", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                    //MensajeLabel.Text = Funciones.TextoScript(respuesta);
                 }
                 catch (Exception ex)
                 {
@@ -287,7 +325,7 @@ namespace CedServicios.Site
 
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
-                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
                 }
             }
         }
@@ -303,20 +341,30 @@ namespace CedServicios.Site
             {
                 try
                 {
-                    //ValidarCampos();
+                    if (TipoComprobanteValidarCAEDropDownList.SelectedValue.Equals("0") || TipoComprobanteValidarCAEDropDownList.SelectedValue.Equals(string.Empty))
+                    {
+                        MensajeLabel.Text = "Falta ingresar el tipo de comprobante";
+                        return;
+                    }
+                    if (PtoVtaConsultaValidarCAEDropDownList.SelectedValue.Equals("0") || PtoVtaConsultaValidarCAEDropDownList.SelectedValue.Equals(string.Empty))
+                    {
+                        MensajeLabel.Text = "Falta ingresar el punto de venta";
+                        return;
+                    }
+
                     GrabarLogTexto("~/Consultar.txt", "Consulta de CAE. CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
 
                     string respuesta;
 
                     FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
                     lcFea.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
-                    lcFea.cabecera_lote.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
+                    lcFea.cabecera_lote.punto_de_venta = Convert.ToInt32(PtoVtaConsultaValidarCAEDropDownList.SelectedValue);
                     lcFea.comprobante[0] = new FeaEntidades.InterFacturas.comprobante();
                     lcFea.comprobante[0].cabecera = new FeaEntidades.InterFacturas.cabecera();
                     lcFea.comprobante[0].cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
-                    lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta = Convert.ToInt32(PtoVtaConsultaDropDownList.SelectedValue);
-                    lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante = Convert.ToInt32(TipoComprobanteDropDownList.SelectedValue);
-                    lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante = Convert.ToInt32(NroComprobanteTextBox.Text);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta = Convert.ToInt32(PtoVtaConsultaValidarCAEDropDownList.SelectedValue);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante = Convert.ToInt32(TipoComprobanteValidarCAEDropDownList.SelectedValue);
+                    lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante = Convert.ToInt32(NroComprobanteValidarCAETextBox.Text);
                     lcFea.comprobante[0].cabecera.informacion_comprobante.cae = NroCAETextBox.Text;
                     lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
                     lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_emision = FecEmisionTextBox.Text;
@@ -347,7 +395,7 @@ namespace CedServicios.Site
 
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
-                    MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
                 }
             }
         }
@@ -357,7 +405,14 @@ namespace CedServicios.Site
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             if (sesion.Ticket != null)
             {
-                TicketInfoTextBox.Text = "Ticket CUIT: " + sesion.Ticket.Cuit + "   Unique Id.: " + sesion.Ticket.UniqueId + "\nExpiration Time: " + sesion.Ticket.ExpirationTime.ToString() + "   Generation Time: " + sesion.Ticket.GenerationTime.ToString();
+                if (sesion.Cuit.Nro == sesion.Ticket.Cuit)
+                {
+                    TicketInfoTextBox.Text = "Ticket CUIT: " + sesion.Ticket.Cuit + "   Unique Id.: " + sesion.Ticket.UniqueId + "   Servicio: "+ sesion.Ticket.Service + "\nGeneration Time: " + sesion.Ticket.GenerationTime.ToString() + "   Expiration Time: " + sesion.Ticket.ExpirationTime.ToString();
+                }
+                else
+                {
+                    TicketInfoTextBox.Text = "No hay ticket. La información del ticket se completará cuando se ejecute alguna consulta.";
+                }
             }
             else
             {
@@ -387,6 +442,7 @@ namespace CedServicios.Site
         {
             try
             {
+                MensajeLabel.Text = "";
                 if (CuitAConsultarTextBox.Text == "")
                 {
                     MensajeLabel.Text = "Ingrese el CUIT a consultar";
@@ -403,6 +459,7 @@ namespace CedServicios.Site
                     return;
                 }
                 string respuesta = RN.ServiciosAFIP.DatosFiscales(CuitAConsultarTextBox.Text, ((Entidades.Sesion)Session["Sesion"]));
+                TicketCompletarInfo();
                 respuesta = respuesta.Replace("\n", "\\n");
                 respuesta = respuesta.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
@@ -423,7 +480,7 @@ namespace CedServicios.Site
 
                 }
                 errormsg = errormsg.Replace("'", "").Replace("\r", " ");
-                MensajeLabel.Text = "Problemas al consultar en AFIP.\\n " + errormsg;
+                MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
             }
         }
     }

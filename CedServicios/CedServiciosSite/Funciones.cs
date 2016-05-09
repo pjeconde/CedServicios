@@ -40,6 +40,8 @@ namespace CedServicios.Site
             menu.Enabled = true;
             menu.Visible = true;
             MenuItem mItem;
+            MenuItem mItemNivel3;
+
             mItem = new MenuItem("Iniciar sesión", "Iniciar sesión"); mItem.Selectable = false;
             menu.Items.Add(mItem);
 
@@ -83,9 +85,11 @@ namespace CedServicios.Site
                     mItem = new MenuItem("Venta", "Venta"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                         mItem = new MenuItem("Electrónica", "Electrónica"); mItem.Selectable = false;
-                        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems[0].ChildItems.Add(mItem);
+                        mItemNivel3 = menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1];
+                        mItemNivel3.ChildItems[mItemNivel3.ChildItems.Count - 1].ChildItems.Add(mItem);
                         mItem = new MenuItem("Tradicional", "Tradicional"); mItem.Selectable = false;
-                        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems[0].ChildItems.Add(mItem);
+                        mItemNivel3 = menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1];
+                        mItemNivel3.ChildItems[mItemNivel3.ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Compra", "Compra"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
@@ -94,18 +98,22 @@ namespace CedServicios.Site
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Envio (AFIP/ITF)", "Envio (AFIP/ITF)"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
+                mItem = new MenuItem("Consultas", "Consultas"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Consulta RG", "Consulta RG"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Otras Consultas", "Otras Consultas"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Explorador de Comprobantes", "Explorador de Comprobantes"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("IVA Ventas", "IVA Ventas"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Interfaz RG.3685", "Interfaz RG.3685"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Online Interfacturas", "Online Interfacturas"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                         mItem = new MenuItem("Varios comprobantes", "Varios comprobantes"); mItem.Selectable = false;
-                        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems[0].ChildItems.Add(mItem);
+                        mItemNivel3 = menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1];
+                        mItemNivel3.ChildItems[mItemNivel3.ChildItems.Count - 1].ChildItems.Add(mItem);
                         mItem = new MenuItem("Un comprobante", "Un comprobante"); mItem.Selectable = false;
-                        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems[0].ChildItems.Add(mItem);
+                        mItemNivel3 = menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1];
+                        mItemNivel3.ChildItems[mItemNivel3.ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Online AFIP", "Online AFIP"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Archivo XML", "Archivo XML"); mItem.Selectable = false;

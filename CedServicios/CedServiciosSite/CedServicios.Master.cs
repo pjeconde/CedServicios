@@ -185,25 +185,28 @@ namespace CedServicios.Site
                 case "Comprobantes|Envio (AFIP/ITF)":
                     Response.Redirect("~/ExploradorComprobante.aspx?Envio-Comprobante");
                     break;
-                case "Comprobantes|Consulta":
+                case "Comprobantes|Consultas|Explorador de Comprobantes":
                     Response.Redirect("~/ExploradorComprobante.aspx?Consulta-Comprobante");
                     break;
-                case "Comprobantes|Consulta RG":
+                case "Comprobantes|Consultas|IVA Ventas":
+                    Response.Redirect("~/Facturacion/Electronica/Reportes/IvaVentasFiltros.aspx");
+                    break;
+                case "Comprobantes|Consultas|Interfaz RG.3685":
                     Response.Redirect("~/ExploradorComprobanteRG.aspx");
                     break;
-                case "Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes":
+                case "Comprobantes|Consultas|Online Interfacturas|Varios comprobantes":
                     Response.Redirect("~/ExploradorComprobanteOnLineInterfacturas.aspx");
                     break;
-                case "Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante":
+                case "Comprobantes|Consultas|Online Interfacturas|Un comprobante":
                     Response.Redirect("~/ComprobanteSeleccionOnlineInterfacturas.aspx");
                     break;
-                case "Comprobantes|Otras Consultas|Online AFIP":
+                case "Comprobantes|Consultas|Online AFIP":
                     Response.Redirect("~/ComprobanteSeleccionOnlineAFIP.aspx");
                     break;
-                case "Comprobantes|Otras Consultas|Archivo XML":
+                case "Comprobantes|Consultas|Archivo XML":
                     Response.Redirect("~/ComprobanteSeleccionArchivoXML.aspx");
                     break;
-                case "Comprobantes|Otras Consultas|Términos y condiciones":
+                case "Comprobantes|Consultas|Términos y condiciones":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                     break;
                 case "Comprobantes|Generación automática (contratos)":

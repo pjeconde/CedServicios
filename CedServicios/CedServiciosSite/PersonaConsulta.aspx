@@ -7,7 +7,10 @@
 <%@ Register TagPrefix="uc1" TagName="datosEmailAvisoComprobantePersona" Src="~/Controles/DatosEmailAvisoComprobantePersona.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table style="padding-left:10px; width: 100%;" align="center">
         <tr>
             <td align="center" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Personas"></asp:Label>
@@ -15,15 +18,14 @@
         </tr>
         <tr>
             <td style="padding-top:20px;">
-                <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
-                    <asp:GridView ID="ClientesGridView" runat="server"
+                    <asp:GridView ID="ClientesGridView" runat="server" Width="100%"
                         AutoGenerateColumns="false" onrowcommand="ClientesGridView_RowCommand" OnRowDataBound="ClientesGridView_RowDataBound" CssClass="grilla" GridLines="None">
                         <Columns>
                             <asp:TemplateField HeaderText="Persona">
                                 <ItemTemplate>
                                     <asp:Button ID="TargetControlButton" runat="server" style="Display:none" Text="Button" />
                                     <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" PopupControlID="ClientePanel" TargetControlID="TargetControlButton" BackgroundCssClass="modalBackground" runat="server" />
-                                    <asp:LinkButton ID="VerLinkButton" CommandName="Ver" runat="server">Ver detalle</asp:LinkButton>
+                                    <asp:LinkButton ID="VerLinkButton" CommandName="Ver" runat="server">Ver</asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>
                             <asp:BoundField DataField="DocumentoTipoDescr" HeaderText="Tipo Doc." SortExpression="DocumentoTipoDescr">
@@ -60,7 +62,7 @@
                             </asp:BoundField>
                         </Columns>
                     </asp:GridView>
-                </asp:Panel>
+
             </td>
         </tr>
         <tr>
@@ -75,8 +77,14 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
     <asp:Panel ID="ClientePanel" runat="server" CssClass="ModalWindow" ScrollBars="Vertical" Height="98%">
-        <table width="100%">
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-12 col-md-12">
+        <table width="100%" align="center">
             <tr>
                 <td align="center" colspan="2" style="padding-top:20px">
                     <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Consulta de Persona"></asp:Label>
@@ -87,7 +95,7 @@
                    <asp:Label ID="Label5" runat="server" Text="Persona perteneciente al CUIT"></asp:Label>
                 </td>
                 <td align="left" style="padding-top:20px">
-                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                     <asp:Label ID="Label10" runat="server" Text="Tipo de Persona:"></asp:Label>
                     <asp:RadioButton ID="ClienteRadioButton" Text="Cliente" GroupName="TipoPersona" runat="server" Enabled="false" />
@@ -103,7 +111,7 @@
 				    <asp:DropDownList ID="TipoDocDropDownList" runat="server" TabIndex="2" 
                         Width="100px" DataValueField="Codigo" DataTextField="Descr" 
                         ToolTip="Para personas del exterior seleccione 'CUITPais'" ></asp:DropDownList>
-                    <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="80px" ></asp:TextBox>
+                    <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="90px" ></asp:TextBox>
                     <asp:DropDownList ID="DestinosCuitDropDownList" runat="server" TabIndex="3" Width="306px" DataValueField="Codigo" DataTextField="Descr" Visible="false" ></asp:DropDownList>
 			    </td>
             </tr>
@@ -151,22 +159,22 @@
                 <asp:Label ID="Label4" runat="server" Text="(desde INTERFACTURAS)"></asp:Label>
                 </td>
                 <td style="border-style:solid; border-color:Gray; border-width:1px">
-                    <table border="0" cellpadding="0" cellspacing="0">
+                    <table>
                         <tr>
-                            <td align="right" style="padding-right:5px; padding-top:3px">
+                            <td style="padding-right:5px; padding-top:3px; text-align: right">
                                 <asp:Label ID="Label45" runat="server" Text="Email"></asp:Label>
                             </td>
-                            <td align="left" style="padding-top:3px">
+                            <td style="padding-top:3px; text-align: left">
                                 <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" MaxLength="60" TabIndex="501"
                                     ToolTip="A esta dirección se enviará un email de aviso para que el destinatario pueda visualizar el comprobante"
                                     Width="315px"></asp:TextBox>
                             </td>
                         </tr>
                         <tr>
-                            <td align="right" style="padding-left:5px; padding-right:5px; padding-top:3px">
+                            <td style="padding-left:5px; padding-right:5px; padding-top:3px; text-align: right">
                                 <asp:Label ID="Label42" runat="server" Text="Contraseña"></asp:Label>
                             </td>
-                            <td align="left" style="padding-top:3px">
+                            <td style="padding-top:3px; text-align: left">
                                 <asp:TextBox ID="PasswordAvisoVisualizacionTextBox" runat="server" MaxLength="25" TabIndex="502"
                                     ToolTip="Para poder acceder al contenido del comprobante, se solicitará al destinatario el ingreso de esta contraseña"
                                     Width="100px"></asp:TextBox>
@@ -183,5 +191,8 @@
                 </td>
             </tr>
         </table>
+        </div>
+        </div>
+        </div>
     </asp:Panel>
 </asp:Content>

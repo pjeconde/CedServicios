@@ -25,11 +25,12 @@ namespace CedServicios.RN
 
 	public class LoginTicket
 	{
+        public string Cuit;
 		// Entero de 32 bits sin signo que identifica el requerimiento 
 		public UInt32 UniqueId;
 		// Momento en que fue generado el requerimiento 
 		public DateTime GenerationTime;
-		// Momento en el que exoira la solicitud 
+		// Momento en el que expira la solicitud 
 		public DateTime ExpirationTime;
 		// Identificacion del WSN para el cual se solicita el TA 
 		public string Service;

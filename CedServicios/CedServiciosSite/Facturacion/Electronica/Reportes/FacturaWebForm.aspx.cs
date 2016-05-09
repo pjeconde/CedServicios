@@ -120,6 +120,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     exportOpts.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat;
                     exportOpts.ExportFormatOptions = pdfOpts;
                     facturaRpt.ExportToHttpResponse(exportOpts, Response, true, sb.ToString());
+                    facturaRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.Excel, Server.MapPath("~") + "pepe.xls");
                 }
                 catch (System.Threading.ThreadAbortException)
                 {

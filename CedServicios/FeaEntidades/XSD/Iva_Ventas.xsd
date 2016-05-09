@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="IvaVentas" nillable="true" type="IvaVentas" />
+  <xs:complexType name="IvaVentas">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Cuit" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PeriodoDsd" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PeriodoHst" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IvaVentasComprobantes" type="IvaVentasComprobantes" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IvaVentasTotXImpuestos" type="IvaVentasTotXImpuestos" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="IvaVentasTotXIVA" type="IvaVentasTotXIVA" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IvaVentasComprobantes">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="FechaEmi" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RazSoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TipoDoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="NroDoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PtoVta" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TipoCompCodigo" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="TipoComp" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="NroComp" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Moneda" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Exento" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NoGravado" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Gravado" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Iva" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="OtrosImp" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ImporteTotal" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Cambio" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ImporteTotalME" type="xs:double" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Concepto" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IvaVentasTotXImpuestos">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Descr" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ImporteTotal" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="IvaVentasTotXIVA">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Concepto" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ImporteNG" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ImporteTotal" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Alicuota" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

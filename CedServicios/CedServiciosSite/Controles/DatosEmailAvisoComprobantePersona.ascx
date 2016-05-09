@@ -8,6 +8,8 @@
 <tr>
     <td valign="top" style="padding-right:5px; text-align:right">
         <asp:Label ID="DatosEmailAvisoComprobantePersonaLabel" runat="server" Text="Datos para envio de mail de aviso<br />de <b>Generación automática</b><br />de comprobantes"></asp:Label>
+        &nbsp;<a href="#" role="button" class="popover-test" data-html="true" data-placement="top" title="INFORMACIÓN ENVÍO MAIL DE AVISO" data-content="<b>Habilitado:</b> si está chequeado se habilita el envío de mail (a nivel de Contrato).<br /><br /><b>Destinatario:</b> se elige uno de entre los “Destinatarios frecuentes” definidos a nivel de Persona (cliente).<br /><br /><b>Asunto:</b>  título del mail aviso.
+        <br /><br /><b>Cuerpo:</b> cuerpo del mail de aviso.<br />Tanto el Asunto como el Cuerpo arrancan, como valores “default”, con el texto ingresado a nivel de Persona (cliente), pero permite hacer los ajustes específicos que exige el Contrato.<br />También se pueden incluir ciertas Palabras reservadas que serán reemplazadas por valores concretos correspondientes al comprobante que se está emitiendo (ver “Palabras reservadas del Cuerpo”)."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
     </td>
     <td style="border-style:solid; border-color:Gray; border-width:1px">
         <table>
@@ -177,6 +179,69 @@
                 </td>
                 <td align="left" style="padding-top:3px">
                     <asp:TextBox ID="AsuntoTextBox" runat="server" MaxLength="256" TabIndex="503" Width="627px"></asp:TextBox>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td align="left" style="padding-top: 5px";>
+                    <div style="text-align: right">
+                        Palabras reservadas del Cuerpo&nbsp;<a href="#" role="button" runat="server" class="" data-toggle="modal" data-target="#myModalLarge" id="AyudaGrilla" visible="true"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    </div>
+                    <div id="myModalLarge" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                    <h4 class="modal-title" id="H1">CUERPO DEL MAIL. USO DE PALABRAS RESERVADAS</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <h4>Se pueden utilzar las siguientes palabras reservadas:</h4>
+                                        <ul>
+                                            <li>@RAZONSOCIAL               Ej.: EMPRESA S.A</li>
+                                            <li>@TIPOYNROCOMPROBANTE       Ej.: Factura A Nº 0041-00000055</li>
+                                            <li>@MONEDAEIMPORTETOTAL       Ej.: $ 30.976,00</li>
+                                            <li>@PERIODODELSERVICIO        Ej.: 01/04/2016 al 30/04/2016</li>
+                                            <li>@MESDELSERVICIO            Ej.: Abril de 2016</li>
+                                            <li>@FECHAVTO                  Ej.: 14/04/2016</li>
+                                            <li>@TAB                       (Inserta una marca de tabulación para indentar el texto)</li>
+                                        </ul>
+                                        Estas palabras reservadas serán reemplazadas por los valores concretos que correspondan al comprobante que se está emitiendo.  La última es sólo un tabulador.
+                                        <hr>
+                                    <h4>Modelo de ejemplo para el cuerpo del mail:</h4>
+                                        <p>
+                                        Sres.<br />
+                                        @RAZONSOCIAL<br />
+                                        <br />
+                                        At.  Juan Perez / Mariano Moreno<br />
+                                        <br />
+                                        Adjuntamos el comprobante cuyo detalle consignamos a continuación:<br />
+                                        <br />
+                                        @TAB@TIPOYNROCOMPROBANTE<br />
+                                        @TABImporte: @MONEDAEIMPORTETOTAL<br />
+                                        @TABCorrespondiente a: Abono mensual de mantenimiento de Facturación Electrónica versión Interfaz TXT.<br />
+                                        @TABPeríodo del servicio: @PERIODODELSERVICIO (@MESDELSERVICIO)<br />
+                                        @TABFecha de vencimiento: @FECHAVTO<br />
+                                        <br />
+                                        Puede ser abonada, por transferencia electrónica o depósito bancario, en la siguiente cuenta:<br />
+                                        <br />
+                                        @TABCta. Cte. Pesos Nº 2512-0 175-1 Banco Galicia (CBU 00701750-20000002512011)<br />
+                                        @TABTitular: CEDEIRA SOFTWARE FACTORY S.R.L.<br />
+                                        @TABCUIT: 30-71001506-2<br />
+                                        <br />
+                                        Una vez realizada la operación, agradeceremos que nos confirmen el pago por esta vía.<br />
+                                        <br />
+                                        Desde ya muchas gracias.<br />
+                                        <br />
+                                        DPTO DE ADMINISTRACIÓN.<br />
+                                        </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                </div>
+                            </div><!-- /.modal-content -->
+                        </div><!-- /.modal-dialog -->
+                    </div><!
                 </td>
             </tr>
             <tr>

@@ -7,6 +7,9 @@
 <%@ Register TagPrefix="uc1" TagName="datosEmailAvisoComprobantePersona" Src="~/Controles/DatosEmailAvisoComprobantePersona.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
     <table style="padding-left:10px">
         <tr>
             <td colspan="2" style="padding-top:20px; text-align: center">
@@ -54,6 +57,7 @@
                 <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="90px" ></asp:TextBox>
                 <asp:DropDownList ID="DestinosCuitDropDownList" runat="server" TabIndex="3" Width="306px" DataValueField="Codigo" DataTextField="Descr" Visible="false" ></asp:DropDownList>
                 <asp:LinkButton ID="TraerDatosDeAFIPLinkButton" runat="server" SkinID="LinkButtonMediano" Text="Traer datos de AFIP" OnClick="TraerDatosDeAFIPLinkButton_Click" CausesValidation="false"></asp:LinkButton>
+                &nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="OBTENER DATOS FISCALES" data-content="Permite obtener datos del Padrón de la AFIP, a partir del ingreso del CUIT.<br /><br />En breve estará habilitado."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
 			</td>
         </tr>
         <tr>
@@ -158,4 +162,7 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
 </asp:Content>
