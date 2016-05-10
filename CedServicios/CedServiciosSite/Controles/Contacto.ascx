@@ -28,10 +28,6 @@
 			ValidationExpression="^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$">
 			<asp:Label ID="Label41" runat="server" SkinID="IndicadorValidacion"></asp:Label>
 		</asp:RegularExpressionValidator>
-		<asp:RequiredFieldValidator ID="EmailContactoRequiredFieldValidator" runat="server" ControlToValidate="EmailContactoTextBox"
-			ErrorMessage="Email Contacto" SetFocusOnError="True">
-			<asp:Label ID="Label42" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-		</asp:RequiredFieldValidator>
 		<asp:Label ID="Label9" runat="server" Text="Email Contacto"></asp:Label>
 	</td>
 	<td align="left" style="padding-top: 3px">

@@ -60,7 +60,6 @@ namespace CedServicios.Site.Controles
             set
             {
                 NombreContactoRequiredFieldValidator.Enabled = value;
-                EmailContactoRequiredFieldValidator.Enabled = value;
             }
         }
     }
