@@ -11,6 +11,7 @@
         <br />
         <p style="text-align: center">
         <asp:Button ID="SalirButton" class="btn btn-default btn-sm" runat="server" CausesValidation="false" TabIndex="9" Text="Cerrar" onclick="SalirButton_Click" />
+        <input type="button" class="btn btn-default btn-sm" value="Volver atrás" name="Volver" onclick="history.back()" />
         </p>
     </div>
     </div>

@@ -4,7 +4,7 @@
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">
-    <table align="center">">
+    <table align="center">
         <tr>
             <td align="center" colspan="2" style="padding-top: 20px">
                 <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Solicitud permiso de operador para un<br />servicio de una Unidad de Negocio"></asp:Label>
@@ -24,7 +24,7 @@
             </td>
             <td align="left" style="padding-top: 20px">
                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
-                    Width="80px"></asp:TextBox>
+                    Width="90px"></asp:TextBox>
                 <asp:Button ID="LeerListaUNsButton" runat="server" OnClick="LeerListaUNsButton_Click" TabIndex="3"
                     Text="Leer unidad(es) de negocio y servicios habilitados para el CUIT ingresado" />
             </td>

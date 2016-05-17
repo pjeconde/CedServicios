@@ -85,6 +85,24 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes {
         protected global::System.Web.UI.WebControls.Image FechaHastaImage;
         
         /// <summary>
+        /// FechaYHoraCheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox FechaYHoraCheckBox;
+        
+        /// <summary>
+        /// FormatosRptExportarDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList FormatosRptExportarDropDownList;
+        
+        /// <summary>
         /// BuscarButton control.
         /// </summary>
         /// <remarks>

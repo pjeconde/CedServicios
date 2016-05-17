@@ -34,6 +34,22 @@
                     </td>
                 </tr>
                 <tr>
+                    <td>
+                        Visualizar:&nbsp;
+                    </td>
+                    <td style="padding-top:5px; vertical-align:middle">
+                        <asp:CheckBox ID="FechaYHoraCheckBox" runat="server" Text="&nbsp;Fecha y Hora de generación del reporte" AutoPostBack="false"/>
+                    </td>
+                </tr>
+                 <tr>
+                    <td style="padding-right:5px; padding-top:5px; text-align: left">
+                        Exportar:
+                    </td>
+                    <td style="padding-top:5px; text-align: left">
+                        <asp:DropDownList ID="FormatosRptExportarDropDownList" runat="server" Width="100px" DataValueField="Id" DataTextField="Descr"></asp:DropDownList>
+                    </td>        
+                </tr>
+                <tr>
                    <td colspan="2" style="padding-top:5px; vertical-align: top; text-align: center">
                         <asp:Button ID="BuscarButton" class="btn btn-default btn-sm" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
                         <asp:Button ID="SalirButton" class="btn btn-default btn-sm" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />

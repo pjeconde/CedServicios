@@ -90,7 +90,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     facturaRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
                     facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
 
-                    IncrustarLogo(lc.cabecera_lote.cuit_vendedor.ToString());
+                    IncrustarLogo(lc.cabecera_lote.cuit_vendedor.ToString(), lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString());
 					string cae = lc.comprobante[0].cabecera.informacion_comprobante.cae;
 					if (cae.Replace(" ",string.Empty).Equals(string.Empty))
 					{
@@ -120,7 +120,6 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     exportOpts.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat;
                     exportOpts.ExportFormatOptions = pdfOpts;
                     facturaRpt.ExportToHttpResponse(exportOpts, Response, true, sb.ToString());
-                    facturaRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.Excel, Server.MapPath("~") + "pepe.xls");
                 }
                 catch (System.Threading.ThreadAbortException)
                 {
@@ -297,17 +296,28 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
             }
         }
 
-        private void IncrustarLogo(string cuit)
+        private void IncrustarLogo(string cuit, string PtoVta)
         {
             try
             {
                 String path = Server.MapPath("~/ImagenesSubidas/");
-                string[] archivos = System.IO.Directory.GetFiles(path, cuit + ".*", System.IO.SearchOption.TopDirectoryOnly);
+
+                string[] archivos = System.IO.Directory.GetFiles(path, cuit + "-" + PtoVta + ".*", System.IO.SearchOption.TopDirectoryOnly);
                 string imagenCUIT = "";
                 if (archivos.Length > 0)
                 {
                     imagenCUIT = "~/ImagenesSubidas/" + archivos[0].Replace(Server.MapPath("~/ImagenesSubidas/"), String.Empty);
                 }
+                else
+                {
+                    archivos = System.IO.Directory.GetFiles(path, cuit + ".*", System.IO.SearchOption.TopDirectoryOnly);
+                    imagenCUIT = "";
+                    if (archivos.Length > 0)
+                    {
+                        imagenCUIT = "~/ImagenesSubidas/" + archivos[0].Replace(Server.MapPath("~/ImagenesSubidas/"), String.Empty);
+                    }
+                }
+
                 if (imagenCUIT != "")
                 {
                     FileStream FilStr = new FileStream(Server.MapPath(imagenCUIT), FileMode.Open);

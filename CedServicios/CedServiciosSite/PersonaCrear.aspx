@@ -40,7 +40,7 @@
         <tr>
 	        <td align="right" style="padding-right:5px; padding-top:5px">
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NroDocTextBox"
-                    ErrorMessage="Nro. de Documnento" SetFocusOnError="True">
+                    ErrorMessage="Nro. de Documento" SetFocusOnError="True">
                     <asp:Label ID="Label5" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                 </asp:RequiredFieldValidator>
 		        <asp:Label ID="Label18" runat="server" Text="Tipo y Nro. de Documento"></asp:Label>

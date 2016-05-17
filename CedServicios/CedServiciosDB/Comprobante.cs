@@ -111,11 +111,22 @@ namespace CedServicios.DB
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
                 {
+                    List<Entidades.UN> listaUN = sesion.Cuit.UNs.FindAll(delegate(Entidades.UN un)
+                    {
+                        return un.Id == sesion.UN.Id;
+                    });
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         Entidades.Comprobante elem = new Entidades.Comprobante();
                         Copiar(dt.Rows[i], elem);
-                        lista.Add(elem);
+                        List<Entidades.PuntoVta> listaPV = listaUN[0].PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == elem.NroPuntoVta;
+                        });
+                        if (listaPV.Count > 0)
+                        {
+                            lista.Add(elem);
+                        }
                     }
                 }
             }

@@ -226,7 +226,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                         if (sesion.Cuit.Nro != null && sesion.Cuit.Nro != "")
                         {
                             Entidades.Cuit v = ((Entidades.Sesion)Session["Sesion"]).Cuit;
+                            Cuit_VendedorTextBox.Text = v.Nro.ToString();
                             Razon_Social_VendedorTextBox.Text = v.RazonSocial;
+
                             Domicilio_Calle_VendedorTextBox.Text = v.Domicilio.Calle;
                             Domicilio_Numero_VendedorTextBox.Text = v.Domicilio.Nro;
                             Domicilio_Piso_VendedorTextBox.Text = v.Domicilio.Piso;
@@ -240,7 +242,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                             Contacto_VendedorTextBox.Text = v.Contacto.Nombre;
                             Email_VendedorTextBox.Text = v.Contacto.Email;
                             Telefono_VendedorTextBox.Text = v.Contacto.Telefono.ToString();
-                            Cuit_VendedorTextBox.Text = v.Nro.ToString();
                             Condicion_IVA_VendedorDropDownList.SelectedValue = v.DatosImpositivos.IdCondIVA.ToString();
                             NroIBVendedorTextBox.Text = v.DatosImpositivos.NroIngBrutos.ToString();
                             Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.DatosImpositivos.IdCondIngBrutos.ToString();
@@ -278,6 +279,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                         PuntoVtaDropDownList.DataSource = listaPuntoVta;
                         PuntoVtaDropDownList.DataBind();
                         PuntoVtaDropDownList_SelectedIndexChanged(PuntoVtaDropDownList, new EventArgs());
+
+                        VerificarDatosVendedorDelPuntoVta();
                         #endregion
                     }
                     else
@@ -379,40 +382,17 @@ namespace CedServicios.Site.Facturacion.Electronica
                             if (IdNaturalezaComprobanteTextBox.Text == "Venta" || IdNaturalezaComprobanteTextBox.Text == "VentaTradic")
                             {
                                 //Informar datos actualizados del cuit.
-                                Entidades.Cuit v = ((Entidades.Sesion)Session["Sesion"]).Cuit;
-                                Razon_Social_VendedorTextBox.Text = v.RazonSocial;
-                                Domicilio_Calle_VendedorTextBox.Text = v.Domicilio.Calle;
-                                Domicilio_Sector_VendedorTextBox.Text = v.Domicilio.Sector;
-                                Provincia_VendedorDropDownList.SelectedValue = v.Domicilio.Provincia.Id;
-                                Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.DatosImpositivos.IdCondIngBrutos.ToString();
-                                Contacto_VendedorTextBox.Text = v.Contacto.Nombre;
-                                GLN_VendedorTextBox.Text = v.DatosIdentificatorios.GLN.ToString();
-
-                                Cuit_VendedorTextBox.Text = v.Nro;
-                                Domicilio_Numero_VendedorTextBox.Text = v.Domicilio.Nro;
-                                Domicilio_Torre_VendedorTextBox.Text = v.Domicilio.Torre;
-                                Localidad_VendedorTextBox.Text = v.Domicilio.Localidad;
-                                NroIBVendedorTextBox.Text = v.DatosImpositivos.NroIngBrutos;
-                                Telefono_VendedorTextBox.Text = v.Contacto.Telefono;
-                                Codigo_Interno_VendedorTextBox.Text = v.DatosIdentificatorios.CodigoInterno;
-
-                                InicioDeActividadesVendedorDatePickerWebUserControl.Text = v.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd");
-                                Domicilio_Piso_VendedorTextBox.Text = v.Domicilio.Piso;
-                                Domicilio_Depto_VendedorTextBox.Text = v.Domicilio.Depto;
-                                Domicilio_Manzana_VendedorTextBox.Text = v.Domicilio.Manzana;
-                                Cp_VendedorTextBox.Text = v.Domicilio.CodPost;
-                                Condicion_IVA_VendedorDropDownList.SelectedValue = v.DatosImpositivos.IdCondIVA.ToString();
-                                Email_VendedorTextBox.Text = v.Contacto.Email;
+                                VerificarDatosVendedorDelPuntoVta();
 
                                 //Informar datos actualizados del cliente.
-                                System.Collections.Generic.List<Entidades.Persona> listaP = sesion.ClientesDelCuit.FindAll(delegate(Entidades.Persona p)
-                                {
-                                    return p.Cuit == Nro_Doc_Identificatorio_CompradorTextBox.Text && p.IdPersona == IdPersonaCompradorTextBox.Text;
-                                });
-                                if (listaP.Count != 0)
-                                {
-                                    //Denominacion_CompradorTextBox.Text = listaP[0].RazonSocial;
-                                }
+                                //System.Collections.Generic.List<Entidades.Persona> listaP = sesion.ClientesDelCuit.FindAll(delegate(Entidades.Persona p)
+                                //{
+                                //    return p.Cuit == Nro_Doc_Identificatorio_CompradorTextBox.Text && p.IdPersona == IdPersonaCompradorTextBox.Text;
+                                //});
+                                //if (listaP.Count != 0)
+                                //{
+                                //    //Denominacion_CompradorTextBox.Text = listaP[0].RazonSocial;
+                                //}
                             }
                         }
                     }
@@ -423,6 +403,53 @@ namespace CedServicios.Site.Facturacion.Electronica
                     DescargarPDFButton.Visible = true;
                     ActualizarEstadoPanel.Visible = false;
                     ActualizarEstadoButton.Visible = true;
+                }
+            }
+        }
+        private void VerificarDatosVendedorDelPuntoVta()
+        {
+            //Verificar si el Punto de Venta tiene datos especificados para el vendedor.
+            Entidades.Sesion s = (Entidades.Sesion)Session["Sesion"];
+            List<Entidades.UN> listaUN = s.Cuit.UNs.FindAll(delegate(Entidades.UN un)
+            {
+                return un.Id == s.UN.Id;
+            });
+            if (listaUN.Count != 0)
+            {
+                List<Entidades.PuntoVta> listaPV = listaUN[0].PuntosVtaVigentes.FindAll(delegate(Entidades.PuntoVta pv)
+                {
+                    return pv.Nro == Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                });
+                if (listaPV.Count != 0)
+                {
+                    if (listaPV[0].UsaSetPropioDeDatosCuit == true)
+                    {
+                        Entidades.PuntoVta v = listaPV[0];
+                        //Cuit y Razon_Social no se ajustan.
+                        Domicilio_Calle_VendedorTextBox.Text = v.Domicilio.Calle;
+                        Domicilio_Numero_VendedorTextBox.Text = v.Domicilio.Nro;
+                        Domicilio_Piso_VendedorTextBox.Text = v.Domicilio.Piso;
+                        Domicilio_Depto_VendedorTextBox.Text = v.Domicilio.Depto;
+                        Domicilio_Sector_VendedorTextBox.Text = v.Domicilio.Sector;
+                        Domicilio_Torre_VendedorTextBox.Text = v.Domicilio.Torre;
+                        Domicilio_Manzana_VendedorTextBox.Text = v.Domicilio.Manzana;
+                        Localidad_VendedorTextBox.Text = v.Domicilio.Localidad;
+                        Provincia_VendedorDropDownList.SelectedValue = v.Domicilio.Provincia.Id;
+                        Cp_VendedorTextBox.Text = v.Domicilio.CodPost;
+                        Contacto_VendedorTextBox.Text = v.Contacto.Nombre;
+                        Email_VendedorTextBox.Text = v.Contacto.Email;
+                        Telefono_VendedorTextBox.Text = v.Contacto.Telefono.ToString();
+                        Condicion_IVA_VendedorDropDownList.SelectedValue = v.DatosImpositivos.IdCondIVA.ToString();
+                        NroIBVendedorTextBox.Text = v.DatosImpositivos.NroIngBrutos.ToString();
+                        Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = v.DatosImpositivos.IdCondIngBrutos.ToString();
+                        if (!v.DatosIdentificatorios.GLN.ToString().Equals("0"))
+                        {
+                            GLN_VendedorTextBox.Text = v.DatosIdentificatorios.GLN.ToString();
+                        }
+                        Codigo_Interno_VendedorTextBox.Text = v.DatosIdentificatorios.CodigoInterno;
+                        InicioDeActividadesVendedorDatePickerWebUserControl.Text = v.DatosImpositivos.FechaInicioActividades.ToString("yyyyMMdd");
+
+                    }
                 }
             }
         }
@@ -1982,9 +2009,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUITPais().Codigo.ToString();
 
-            docCompradorRequiredFieldValidator.Enabled = false;
             listaDocCompradorRequiredFieldValidator.Enabled = true;
-            docCompradorRequiredFieldValidator.DataBind();
             listaDocCompradorRequiredFieldValidator.DataBind();
 
             if (Funciones.SessionTimeOut(Session))
@@ -2022,9 +2047,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
             Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-            docCompradorRequiredFieldValidator.Enabled = true;
             listaDocCompradorRequiredFieldValidator.Enabled = false;
-            docCompradorRequiredFieldValidator.DataBind();
             listaDocCompradorRequiredFieldValidator.DataBind();
             
             if (Funciones.SessionTimeOut(Session))
@@ -2070,9 +2093,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
             Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-            docCompradorRequiredFieldValidator.Enabled = true;
             listaDocCompradorRequiredFieldValidator.Enabled = false;
-            docCompradorRequiredFieldValidator.DataBind();
             listaDocCompradorRequiredFieldValidator.DataBind();
             
             if (Funciones.SessionTimeOut(Session))
@@ -2234,15 +2255,18 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             if (IdNaturalezaComprobanteTextBox.Text != "Compra")
             {
-                if (Email_CompradorTextBox.Text.Equals(string.Empty))
+                if (Accion != "SubirAAFIP")
                 {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar la email del comprador"), false);
-                    return false;
-                }
-                if (!Email_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_CompradorTextBox.Text))
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un email válido para el comprador"), false);
-                    return false;
+                    if (Email_CompradorTextBox.Text.Equals(string.Empty))
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar la email del comprador"), false);
+                        return false;
+                    }
+                    if (!Email_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidEmail(Email_CompradorTextBox.Text))
+                    {
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un email válido para el comprador"), false);
+                        return false;
+                    }
                 }
             }
             if (!GLN_CompradorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericFijo(GLN_CompradorTextBox.Text, "13"))
@@ -2720,7 +2744,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485."), false);
                                 return;
                             }
-                            if (ValidarCamposObligatorios(""))
+                            if (ValidarCamposObligatorios("SubirAAFIP"))
                             {
                                 string respuesta = "";
                                 FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
@@ -3795,7 +3819,17 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 try
                 {
-                    infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorTextBox.Text);
+                    //Para comprobantes B y C, cuando no se informa un número de documento, se envía en el codigo_doc_identificatorio el valor 99.
+                    string tdc = "/6/7/8/9/11/12/13/15/";
+                    if (tdc.IndexOf("/" + Tipo_De_ComprobanteDropDownList.SelectedValue + "/") != -1 && (Nro_Doc_Identificatorio_CompradorTextBox.Text == "" || Nro_Doc_Identificatorio_CompradorTextBox.Text == "0"))
+                    {
+                        infcompra.codigo_doc_identificatorio = Convert.ToInt32("99");
+                        infcompra.nro_doc_identificatorio = Convert.ToInt64("0");
+                    }
+                    else
+                    {
+                        infcompra.nro_doc_identificatorio = Convert.ToInt64(Nro_Doc_Identificatorio_CompradorTextBox.Text);
+                    }
                 }
                 catch (FormatException)
                 {

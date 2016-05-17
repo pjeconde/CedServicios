@@ -39,9 +39,10 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 oRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
                 string reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/IvaVentasCR.rpt");
                 oRpt.Load(reportPath);
+                Entidades.IvaVentas ivaVentas = new Entidades.IvaVentas();
                 if (Session["ivaVentas"] != null)
                 {
-                    Entidades.IvaVentas ivaVentas = (Entidades.IvaVentas)Session["ivaVentas"];
+                    ivaVentas = (Entidades.IvaVentas)Session["ivaVentas"];
                     DataSet ds = new DataSet();
                     XmlSerializer objXS = new XmlSerializer(ivaVentas.GetType());
                     StringWriter objSW = new StringWriter();
@@ -54,12 +55,62 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 {
                     Response.Redirect("~/Facturacion/Electronica/Reportes/IvaVentasFiltros.aspx", true);
                 }
+                string formatoRptExportar = "";
+                if (Session["formatoRptExportar"] != null)
+                {
+                    formatoRptExportar = (string)Session["formatoRptExportar"];
+                }
+                if (Session["mostrarFechaYHora"] != null)
+                {
+                    if ((bool)Session["mostrarFechaYHora"] == false)
+                    {
+                        oRpt.DataDefinition.FormulaFields["MostrarFechaYHora"].Text = "'N'";
+                    }
+                }
                 oRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
                 oRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Landscape;
-                oRpt.DataDefinition.FormulaFields["RazSoc"].Text = "'" + ((Entidades.Sesion)Session["Sesion"]).Cuit.RazonSocial + "'"; 
-                CrystalReportViewer1.ToolPanelView = CrystalDecisions.Web.ToolPanelViewType.None;
-                CrystalReportViewer1.ReportSource = oRpt;
-                CrystalReportViewer1.HasPrintButton = true;
+                oRpt.DataDefinition.FormulaFields["RazSoc"].Text = "'" + ((Entidades.Sesion)Session["Sesion"]).Cuit.RazonSocial + "'";
+                if (formatoRptExportar == "")
+                {
+                    CrystalReportViewer1.ToolPanelView = CrystalDecisions.Web.ToolPanelViewType.None;
+                    CrystalReportViewer1.ReportSource = oRpt;
+                    CrystalReportViewer1.HasPrintButton = true;
+                }
+                else
+                {
+                    System.Text.StringBuilder sb = new System.Text.StringBuilder();
+                    sb.Append(ivaVentas.Cuit);
+                    sb.Append("-");
+                    sb.Append(Convert.ToDateTime(ivaVentas.PeriodoDsd).ToString("yyyyMMdd"));
+                    sb.Append("-");
+                    sb.Append(Convert.ToDateTime(ivaVentas.PeriodoHst).ToString("yyyyMMdd"));
+
+                    if (formatoRptExportar == "PDF")
+                    {
+                        CrystalDecisions.Shared.ExportOptions exportOpts = new CrystalDecisions.Shared.ExportOptions();
+                        CrystalDecisions.Shared.PdfRtfWordFormatOptions pdfOpts = CrystalDecisions.Shared.ExportOptions.CreatePdfRtfWordFormatOptions();
+                        exportOpts.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat;
+                        exportOpts.ExportFormatOptions = pdfOpts;
+                        oRpt.ExportToHttpResponse(exportOpts, Response, true, sb.ToString());
+                    }
+                    if (formatoRptExportar == "Excel")
+                    {
+                        CrystalDecisions.Shared.ExportOptions exportOpts = new CrystalDecisions.Shared.ExportOptions();
+                        CrystalDecisions.Shared.ExcelFormatOptions pdfOpts = CrystalDecisions.Shared.ExportOptions.CreateExcelFormatOptions();
+                        exportOpts.ExportFormatType = CrystalDecisions.Shared.ExportFormatType.PortableDocFormat;
+                        exportOpts.ExportFormatOptions = pdfOpts;
+                        oRpt.ExportToDisk(CrystalDecisions.Shared.ExportFormatType.Excel, Server.MapPath("~/TempExcel/") + sb.ToString() + ".xls");
+                        
+                        System.Web.HttpResponse response = System.Web.HttpContext.Current.Response;
+                        response.ClearContent();
+                        response.Clear();
+                        response.ContentType = "application/vnd.ms-excel";
+                        response.AddHeader("Content-Disposition", "attachment; filename=" + sb.ToString() + ".xls" + ";");
+                        response.TransmitFile(Server.MapPath("~/TempExcel/" + sb.ToString() + ".xls"));
+                        response.Flush();
+                        response.End();  
+                    }
+                }
             }
             catch (System.Threading.ThreadAbortException)
             {

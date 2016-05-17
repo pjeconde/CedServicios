@@ -39,12 +39,8 @@
         </tr>
         <tr>
 	        <td style="padding-right:5px; padding-top:5px; text-align: right">
-                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"
-                    ControlToValidate="NroDocTextBox" ErrorMessage="Nro. de Documnento" SetFocusOnError="True" ValidationExpression="[0-9]{11}">
-                    <asp:Label ID="Label4" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                </asp:RegularExpressionValidator>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="NroDocTextBox"
-                    ErrorMessage="Nro. de Documnento" SetFocusOnError="True">
+                    ErrorMessage="Nro. de Documento" SetFocusOnError="True">
                     <asp:Label ID="Label5" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                 </asp:RequiredFieldValidator>
 		        <asp:Label ID="Label18" runat="server" Text="Tipo y Nro. de Documento"></asp:Label>
