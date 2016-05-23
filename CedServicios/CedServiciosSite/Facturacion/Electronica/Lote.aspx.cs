@@ -4016,183 +4016,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 			GenerarImporteOperacionesExentasExtranjera(r, tipodecambio, rimo);
 			GenerarImpuestoLiqExtranjera(r, tipodecambio, rimo);
 			GenerarImpuestoLiqRNIExtranjera(r, tipodecambio, rimo);
-
-			//para exportación no se debe informar
-			try
-			{
-				double importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
-                if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-                {
-                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                    try
-                    {
-                        if (Funciones.SessionTimeOut(Session))
-                        {
-                            Response.Redirect("~/SessionTimeout.aspx");
-                        }
-                        else
-                        {
-                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.Nro == auxPV;
-                            }).IdTipoPuntoVta;
-                            if (idtipo.Equals("Exportacion"))
-                            {
-                                r.importe_total_impuestos_nacionalesSpecified = false;
-                                rimo.importe_total_impuestos_nacionalesSpecified = false;
-                                throw new Exception("El importe total de impuestos nacionales en moneda extranjera no se debe informar para exportación");
-                            }
-                            else
-                            {
-                                GenerarImporteTotalImpuestosNacionalesMonedaExtranjera(r, tipodecambio, rimo);
-                            }
-                        }
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        GenerarImporteTotalImpuestosNacionalesMonedaExtranjera(r, tipodecambio, rimo);
-                    }
-                }
-                else
-                {
-                    GenerarImporteTotalImpuestosNacionalesMonedaExtranjera(r, tipodecambio, rimo);
-                }
-			}
-			catch (FormatException)
-			{
-			}
-			//para exportación no se debe informar
-            try
-            {
-                double importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
-                if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-                {
-                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                    try
-                    {
-                        if (Funciones.SessionTimeOut(Session))
-                        {
-                            Response.Redirect("~/SessionTimeout.aspx");
-                        }
-                        else
-                        {
-                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.Nro == auxPV;
-                            }).IdTipoPuntoVta;
-                            if (idtipo.Equals("Exportacion"))
-                            {
-                                r.importe_total_ingresos_brutosSpecified = false;
-                                rimo.importe_total_ingresos_brutosSpecified = false;
-                                throw new Exception("El importe total de ingresos brutos en moneda extranjera no se debe informar para exportación");
-                            }
-                            else
-                            {
-                                GenerarImporteTotalIngresosBrutosMonedaExtranjera(r, tipodecambio, rimo);
-                            }
-                        }
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        GenerarImporteTotalIngresosBrutosMonedaExtranjera(r, tipodecambio, rimo);
-                    }
-                }
-                else
-                {
-                    GenerarImporteTotalIngresosBrutosMonedaExtranjera(r, tipodecambio, rimo);
-                }
-            }
-            catch (FormatException)
-            {
-            }
-			//para exportación no se debe informar
-			try
-			{
-				double importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
-                if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-                {
-                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                    try
-                    {
-                        if (Funciones.SessionTimeOut(Session))
-                        {
-                            Response.Redirect("~/SessionTimeout.aspx");
-                        }
-                        else
-                        {
-                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.Nro == auxPV;
-                            }).IdTipoPuntoVta;
-                            if (idtipo.Equals("Exportacion"))
-                            {
-                                r.importe_total_impuestos_municipalesSpecified = false;
-                                rimo.importe_total_impuestos_municipalesSpecified = false;
-                                throw new Exception("El importe total de impuestos municipales en moneda extranjera no se debe informar para exportación");
-                            }
-                            else
-                            {
-                                GenerarImporteTotalImpuestosMunicipalesMonedaExtranjera(r, tipodecambio, rimo);
-                            }
-                        }
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        GenerarImporteTotalImpuestosMunicipalesMonedaExtranjera(r, tipodecambio, rimo);
-                    }
-                }
-                else
-                {
-                    GenerarImporteTotalImpuestosMunicipalesMonedaExtranjera(r, tipodecambio, rimo);
-                }
-            }
-            catch (FormatException)
-            {
-            }
-			//para exportación no se debe informar
-            try
-            {
-                double importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
-                if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-                {
-                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                    try
-                    {
-                        if (Funciones.SessionTimeOut(Session))
-                        {
-                            Response.Redirect("~/SessionTimeout.aspx");
-                        }
-                        else
-                        {
-                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.Nro == auxPV;
-                            }).IdTipoPuntoVta;
-                            if (idtipo.Equals("Exportacion"))
-                            {
-                                r.importe_total_impuestos_internosSpecified = false;
-                                rimo.importe_total_impuestos_internosSpecified = false;
-                                throw new Exception("El importe total de impuestos internos en moneda extranjera no se debe informar para exportación");
-                            }
-                            else
-                            {
-                                GenerarImporteTotalImpuestosInternosMonedaExtranjera(r, tipodecambio, rimo);
-                            }
-                        }
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        GenerarImporteTotalImpuestosInternosMonedaExtranjera(r, tipodecambio, rimo);
-                    }
-                }
-                else
-                {
-                    GenerarImporteTotalImpuestosInternosMonedaExtranjera(r, tipodecambio, rimo);
-                }
-            }
-            catch (FormatException)
-            {
-            }
+            GenerarImporteTotalImpuestosNacionalesMonedaExtranjera(r, tipodecambio, rimo);
+            GenerarImporteTotalIngresosBrutosMonedaExtranjera(r, tipodecambio, rimo);
+            GenerarImporteTotalImpuestosMunicipalesMonedaExtranjera(r, tipodecambio, rimo);
+            GenerarImporteTotalImpuestosInternosMonedaExtranjera(r, tipodecambio, rimo);
+            
             r.importe_total_factura = 0;
             rimo.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
             r.importes_moneda_origen = rimo;
@@ -4221,8 +4049,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         else
                         {
-                            r.impuesto_liq_rni = 0;
-                            rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+                            if (idtipo.Equals("Exportacion"))
+                            {
+                                r.impuesto_liq_rni = 0;
+                                rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+                            }
+                            else
+                            {
+                                r.impuesto_liq_rni = Math.Round(Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text) * tipodecambio, 2);
+                                rimo.impuesto_liq_rni = Convert.ToDouble(Impuesto_Liq_Rni_ResumenTextBox.Text);
+                            }
                         }
                     }
                 }
@@ -4262,8 +4098,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         else
                         {
-                            r.impuesto_liq = 0;
-                            rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+                            if (idtipo.Equals("Exportacion"))
+                            {
+                                r.impuesto_liq = 0;
+                                rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+                            }
+                            else
+                            {
+                                r.impuesto_liq = Math.Round(Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text) * tipodecambio, 2);
+                                rimo.impuesto_liq = Convert.ToDouble(Impuesto_Liq_ResumenTextBox.Text);
+                            }
                         }
                     }
                 }
@@ -4303,8 +4147,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         else
                         {
-                            r.importe_operaciones_exentas = 0;
-                            rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+                            if (idtipo.Equals("Exportacion"))
+                            {
+                                r.importe_operaciones_exentas = 0;
+                                rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+                            }
+                            else
+                            {
+                                r.importe_operaciones_exentas = Math.Round(Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text) * tipodecambio, 2);
+                                rimo.importe_operaciones_exentas = Convert.ToDouble(Importe_Operaciones_Exentas_ResumenTextBox.Text);
+                            }
                         }
                     }
                 }
@@ -4344,8 +4196,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         else
                         {
-                            r.importe_total_concepto_no_gravado = 0;
-                            rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+                            if (idtipo.Equals("Exportacion"))
+                            {
+                                r.importe_total_concepto_no_gravado = 0;
+                                rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+                            }
+                            else
+                            {
+                                r.importe_total_concepto_no_gravado = Math.Round(Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+                                rimo.importe_total_concepto_no_gravado = Convert.ToDouble(Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text);
+                            }
                         }
                     }
                 }
@@ -4385,8 +4245,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         else
                         {
-                            r.importe_total_neto_gravado = 0;
-                            rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+                            if (idtipo.Equals("Exportacion"))
+                            {
+                                r.importe_total_neto_gravado = 0;
+                                rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+                            }
+                            else
+                            {
+                                r.importe_total_neto_gravado = Math.Round(Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text) * tipodecambio, 2);
+                                rimo.importe_total_neto_gravado = Convert.ToDouble(Importe_Total_Neto_Gravado_ResumenTextBox.Text);
+                            }
                         }
                     }
                 }
@@ -4404,44 +4272,245 @@ namespace CedServicios.Site.Facturacion.Electronica
 		}
 		private void GenerarImporteTotalImpuestosInternosMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
 		{
-			r.importe_total_impuestos_internos = 0;
-			rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
-			if (rimo.importe_total_impuestos_internos != 0)
-			{
-				r.importe_total_impuestos_internosSpecified = true;
-				rimo.importe_total_impuestos_internosSpecified = true;
-			}
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+            {
+                //para exportación se debe informar en 0
+                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+                try
+                {
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo.Equals("Exportacion") && !Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals("0"))
+                        {
+                            throw new Exception("El importe total de impuestos internos debe informarse en 0 para exportación.");
+                        }
+                        else
+                        {
+                            if (idtipo.Equals("Exportacion"))
+                            {
+                                r.importe_total_impuestos_internos = 0;
+                                rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                            }
+                            else
+                            {
+                                r.importe_total_impuestos_internos = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio, 2);
+                                rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                            }
+                        }
+                    }
+                }
+                catch (System.NullReferenceException)
+                {
+                    r.importe_total_impuestos_internos = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio, 2);
+                    rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                }
+            }
+            else
+            {
+                r.importe_total_impuestos_internos = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio, 2);
+                rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+            }
+            //Marcar si están informados
+            if (rimo.importe_total_impuestos_internos != 0)
+            {
+                r.importe_total_impuestos_internosSpecified = true;
+                rimo.importe_total_impuestos_internosSpecified = true;
+            }
+            else
+            {
+                r.importe_total_impuestos_internosSpecified = false;
+                rimo.importe_total_impuestos_internosSpecified = false;
+            }
 		}
 		private void GenerarImporteTotalImpuestosMunicipalesMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
 		{
-			r.importe_total_impuestos_municipales = 0;
-			rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
-			if (rimo.importe_total_impuestos_municipales != 0)
-			{
-				r.importe_total_impuestos_municipalesSpecified = true;
-				rimo.importe_total_impuestos_municipalesSpecified = true;
-			}
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+            {
+                //para exportación se debe informar en 0
+                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+                try
+                {
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo.Equals("Exportacion") && !Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals("0"))
+                        {
+                            throw new Exception("El importe total de impuestos municipales debe informarse en 0 para exportación.");
+                        }
+                        else
+                        {
+                            if (idtipo.Equals("Exportacion"))
+                            {
+                                r.importe_total_impuestos_municipales = 0;
+                                rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+                            }
+                            else
+                            {
+                                r.importe_total_impuestos_municipales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio, 2);
+                                rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+                            }
+                        }
+                    }
+                }
+                catch (System.NullReferenceException)
+                {
+                    r.importe_total_impuestos_municipales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio, 2);
+                    rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+                }
+            }
+            else
+            {
+                r.importe_total_impuestos_municipales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio, 2);
+                rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+            }
+            //Marcar si están informados
+            if (rimo.importe_total_impuestos_municipales != 0)
+            {
+                r.importe_total_impuestos_municipalesSpecified = true;
+                rimo.importe_total_impuestos_municipalesSpecified = true;
+            }
+            else
+            {
+                r.importe_total_impuestos_municipalesSpecified = false;
+                rimo.importe_total_impuestos_municipalesSpecified = false;
+            }
 		}
 		private void GenerarImporteTotalIngresosBrutosMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
 		{
-			r.importe_total_ingresos_brutos = 0;
-			rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
-			if (rimo.importe_total_ingresos_brutos != 0)
-			{
-				r.importe_total_ingresos_brutosSpecified = true;
-				rimo.importe_total_ingresos_brutosSpecified = true;
-			}
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+            {
+                //para exportación se debe informar en 0
+                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+                try
+                {
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo.Equals("Exportacion") && !Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals("0"))
+                        {
+                            throw new Exception("El importe total de ingresos brutos debe informarse en 0 para exportación.");
+                        }
+                        else
+                        {
+                            if (idtipo.Equals("Exportacion"))
+                            {
+                                r.importe_total_ingresos_brutos = 0;
+                                rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+                            }
+                            else
+                            {
+                                r.importe_total_ingresos_brutos = Math.Round(Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio, 2);
+                                rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+                            }
+                        }
+                    }
+                }
+                catch (System.NullReferenceException)
+                {
+                    r.importe_total_ingresos_brutos = Math.Round(Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio, 2);
+                    rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+                }
+            }
+            else
+            {
+                r.importe_total_ingresos_brutos = Math.Round(Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio, 2);
+                rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+            }
+            //Marcar si están informados
+            if (rimo.importe_total_ingresos_brutos != 0)
+            {
+                r.importe_total_ingresos_brutosSpecified = true;
+                rimo.importe_total_ingresos_brutosSpecified = true;
+            }
+            else
+            {
+                r.importe_total_ingresos_brutosSpecified = false;
+                rimo.importe_total_ingresos_brutosSpecified = false;
+            }
 		}
 		private void GenerarImporteTotalImpuestosNacionalesMonedaExtranjera(FeaEntidades.InterFacturas.resumen r, double tipodecambio, FeaEntidades.InterFacturas.resumenImportes_moneda_origen rimo)
 		{
-			r.importe_total_impuestos_nacionales = 0;
-			rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+            {
+                //para exportación se debe informar en 0
+                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+                try
+                {
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo.Equals("Exportacion") && !Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals("0"))
+                        {
+                            throw new Exception("El importe total de impuestos nacionales debe informarse en 0 para exportación.");
+                        }
+                        else
+                        {
+                            if (idtipo.Equals("Exportacion"))
+                            {
+                                r.importe_total_impuestos_nacionales = 0;
+                                rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+                            }
+                            else
+                            {
+                                r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio, 2);
+                                rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+                            }
+                        }
+                    }
+                }
+                catch (System.NullReferenceException)
+                {
+                    r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio, 2);
+                    rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+                }
+            }
+            else
+            {
+                r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio, 2);
+                rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+            }
+            //Marcar si están informados
 			if (rimo.importe_total_impuestos_nacionales != 0)
 			{
 				r.importe_total_impuestos_nacionalesSpecified = true;
 				rimo.importe_total_impuestos_nacionalesSpecified = true;
 			}
+            else
+            {
+                r.importe_total_impuestos_nacionalesSpecified = false;
+                rimo.importe_total_impuestos_nacionalesSpecified = false;
+            }
 		}
+
 		private void GenerarImportesMonedaLocal(FeaEntidades.InterFacturas.resumen r)
 		{
 			GenerarImporteTotalNetoGravado(r);
@@ -4449,179 +4518,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 			GenerarImporteOperacionesExentas(r);
 			GenerarImpuestoLiq(r);
 			GenerarImpuestoLiqRNI(r);
-
-			//para exportación no se debe informar
-			try
-			{
-				double importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
-                if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-                {
-                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                    try
-                    {
-                        if (Funciones.SessionTimeOut(Session))
-                        {
-                            Response.Redirect("~/SessionTimeout.aspx");
-                        }
-                        else
-                        {
-                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.Nro == auxPV;
-                            }).IdTipoPuntoVta;
-                            if (idtipo.Equals("Exportacion"))
-                            {
-                                r.importe_total_impuestos_nacionalesSpecified = false;
-                                throw new Exception("El importe total de impuestos nacionales no se debe informar para exportación");
-                            }
-                            else
-                            {
-                                GenerarImporteTotalImpuestosNacionales(r, importe_total_impuestos_nacionales);
-                            }
-                        }
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        GenerarImporteTotalImpuestosNacionales(r, importe_total_impuestos_nacionales);
-                    }
-                }
-                else
-                {
-                    GenerarImporteTotalImpuestosNacionales(r, importe_total_impuestos_nacionales);
-                }
- 			}
-			catch (FormatException)
-			{
-			}
-			//para exportación no se debe informar
-            try
-            {
-                double importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
-                if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-                {
-                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                    try
-                    {
-                        if (Funciones.SessionTimeOut(Session))
-                        {
-                            Response.Redirect("~/SessionTimeout.aspx");
-                        }
-                        else
-                        {
-                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.Nro == auxPV;
-                            }).IdTipoPuntoVta;
-                            if (idtipo.Equals("Exportacion"))
-                            {
-                                r.importe_total_ingresos_brutosSpecified = false;
-                                throw new Exception("El importe total de ingresos brutos no se debe informar para exportación");
-                            }
-                            else
-                            {
-                                GenerarImporteTotalIngresosBrutos(r);
-                            }
-                        }
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        GenerarImporteTotalIngresosBrutos(r);
-                    }
-                }
-                else
-                {
-                    GenerarImporteTotalIngresosBrutos(r);
-                }
-            }
-            catch (FormatException)
-            {
-            }
-			//para exportación no se debe informar
-            try
-            {
-                double importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
-                if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-                {
-                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                    try
-                    {
-                        if (Funciones.SessionTimeOut(Session))
-                        {
-                            Response.Redirect("~/SessionTimeout.aspx");
-                        }
-                        else
-                        {
-                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.Nro == auxPV;
-                            }).IdTipoPuntoVta;
-                            if (idtipo.Equals("Exportacion"))
-                            {
-                                r.importe_total_impuestos_municipalesSpecified = false;
-                                throw new Exception("El importe total de impuestos municipales no se debe informar para exportación");
-                            }
-                            else
-                            {
-                                GenerarImporteTotalImpuestosMunicipales(r);
-                            }
-                        }
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        GenerarImporteTotalImpuestosMunicipales(r);
-                    }
-                }
-                else
-                {
-                    GenerarImporteTotalImpuestosMunicipales(r);
-                }
-            }
-            catch (FormatException)
-            {
-            }
-			//para exportación no se debe informar
-            try
-            {
-                double importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
-                if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-                {
-                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                    try
-                    {
-                        if (Funciones.SessionTimeOut(Session))
-                        {
-                            Response.Redirect("~/SessionTimeout.aspx");
-                        }
-                        else
-                        {
-                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.Nro == auxPV;
-                            }).IdTipoPuntoVta;
-                            if (idtipo.Equals("Exportacion"))
-                            {
-                                r.importe_total_impuestos_internosSpecified = false;
-                                throw new Exception("El importe total de impuestos internos no se debe informar para exportación");
-                            }
-                            else
-                            {
-                                GenerarImporteTotalImpuestosInternos(r);
-                            }
-                        }
-                    }
-                    catch (System.NullReferenceException)
-                    {
-                        GenerarImporteTotalImpuestosInternos(r);
-                    }
-                }
-                else
-                {
-                    GenerarImporteTotalImpuestosInternos(r);
-                }
-            }
-            catch (FormatException)
-            {
-            }
+			GenerarImporteTotalImpuestosNacionales(r);
+            GenerarImporteTotalIngresosBrutos(r);
+            GenerarImporteTotalImpuestosMunicipales(r);
+            GenerarImporteTotalImpuestosInternos(r);
+            
 			r.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
 		}
 		private void GenerarImpuestoLiqRNI(FeaEntidades.InterFacturas.resumen r)
@@ -4811,32 +4712,199 @@ namespace CedServicios.Site.Facturacion.Electronica
 		}
 		private void GenerarImporteTotalImpuestosInternos(FeaEntidades.InterFacturas.resumen r)
 		{
-			r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
-			if (r.importe_total_impuestos_internos != 0)
-			{
-				r.importe_total_impuestos_internosSpecified = true;
-			}
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+            {
+                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+                try
+                {
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo.Equals("Exportacion") && !(Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals("0") || Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals("")))
+                        {
+                            throw new Exception("Los impuestos internos deben informarse en 0 para exportación.");
+                        }
+                        else
+                        {
+                            if (!Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals(""))
+                            {
+                                r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                            }
+                        }
+                    }
+                }
+                catch (System.NullReferenceException)
+                {
+                    r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                }
+            }
+            else
+            {
+                r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+            }
+            //Marcar si están informados
+            if (!Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals(""))
+            {
+                r.importe_total_impuestos_internosSpecified = true;
+            }
+            else
+            {
+                r.importe_total_impuestos_internosSpecified = false;
+            }
 		}
 		private void GenerarImporteTotalImpuestosMunicipales(FeaEntidades.InterFacturas.resumen r)
 		{
-			r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
-			if (r.importe_total_impuestos_municipales != 0)
-			{
-				r.importe_total_impuestos_municipalesSpecified = true;
-			}
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+            {
+                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+                try
+                {
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo.Equals("Exportacion") && !(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals("0") || Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals("")))
+                        {
+                            throw new Exception("Los impuestos municipales deben informarse en 0 para exportación.");
+                        }
+                        else
+                        {
+                            if (!Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals(""))
+                            {
+                                r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+                            }
+                        }
+                    }
+                }
+                catch (System.NullReferenceException)
+                {
+                    r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+                }
+            }
+            else
+            {
+                r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+            }
+            //Marcar si están informados
+            if (!Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals(""))
+            {
+                r.importe_total_impuestos_municipalesSpecified = true;
+            }
+            else
+            {
+                r.importe_total_impuestos_municipalesSpecified = false;
+            }
 		}
 		private void GenerarImporteTotalIngresosBrutos(FeaEntidades.InterFacturas.resumen r)
 		{
-			r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
-			if (r.importe_total_ingresos_brutos != 0)
-			{
-				r.importe_total_ingresos_brutosSpecified = true;
-			}
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+            {
+                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+                try
+                {
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo.Equals("Exportacion") && !(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals("0") || Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals("")))
+                        {
+                            throw new Exception("Los ingresos brutos deben informarse en 0 para exportación.");
+                        }
+                        else
+                        {
+                            if (!Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals(""))
+                            {
+                                r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+                            }
+                        }
+                    }
+                }
+                catch (System.NullReferenceException)
+                {
+                    r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+                }
+            }
+            else
+            {
+                r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+            }
+            //Marcar si están informados
+            if (!Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals(""))
+            {
+                r.importe_total_ingresos_brutosSpecified = true;
+            }
+            else
+            {
+                r.importe_total_ingresos_brutosSpecified = false;
+            }
 		}
-		private static void GenerarImporteTotalImpuestosNacionales(FeaEntidades.InterFacturas.resumen r, double importe_total_impuestos_nacionales)
+		private void GenerarImporteTotalImpuestosNacionales(FeaEntidades.InterFacturas.resumen r)
 		{
-			r.importe_total_impuestos_nacionales = importe_total_impuestos_nacionales;
-			r.importe_total_impuestos_nacionalesSpecified = true;
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+            {
+                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+                try
+                {
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo.Equals("Exportacion") && !(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals("0") || Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals("")))
+                        {
+                            throw new Exception("Los impuestos nacionales deben informarse en 0 para exportación.");
+                        }
+                        else
+                        {
+                            if (!Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals(""))
+                            {
+                                r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+                            }
+                        }
+                    }
+                }
+                catch (System.NullReferenceException)
+                {
+                    r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+                }
+            }
+            else
+            {
+                r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+            }
+            //Marcar si están informados
+            if (!Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals(""))
+            {
+                r.importe_total_impuestos_nacionalesSpecified = true;
+            }
+            else
+            {
+                r.importe_total_impuestos_nacionalesSpecified = false;
+            }
 		}
 		protected void AccionObtenerPDFButton_Click(object sender, EventArgs e)
 		{

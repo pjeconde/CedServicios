@@ -541,6 +541,12 @@
     <Compile Include="Facturacion\Electronica\Referencias.ascx.designer.cs">
       <DependentUpon>Referencias.ascx</DependentUpon>
     </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\IvaVentasMECR.cs">
+      <DependentUpon>IvaVentasMECR.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\IvaVentasCR.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1321,6 +1327,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CodigoBarra.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Facturacion\Electronica\Reportes\IvaVentasMECR.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IvaVentasMECR.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Facturacion\Electronica\Reportes\Factura.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Factura.cs</LastGenOutput>
@@ -1435,6 +1445,7 @@
     <Folder Include="CertificadosAFIP\" />
     <Folder Include="ImagenesSubidas\" />
     <Folder Include="PDFs\" />
+    <Folder Include="TempExcel\" />
     <Folder Include="TempRenderAFIP\" />
     <Folder Include="TempRender\" />
     <Folder Include="Temp\" />

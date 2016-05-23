@@ -60,7 +60,7 @@
     </script>
     <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>-->
     <script src="/jquery/jquery-1.11.3.js" type="text/javascript"></script>
-    <script type="text/javascript">
+    <!--<script type="text/javascript">
         function pageLoad() { // this gets fired when the UpdatePanel.Update() completes
             ReBindJSdocs();
         }
@@ -71,7 +71,7 @@
                 });
             });
         }
-    </script>
+    </script>-->
 </head>
 <body>
     <form id="form1" runat="server" visible="true">

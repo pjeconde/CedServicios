@@ -40,6 +40,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 try
                 {
                     MensajeLabel.Text = "";
+                    bool monedasExtranjeras = false;
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     List<Entidades.Comprobante> listaC = new List<Entidades.Comprobante>();
 
@@ -50,7 +51,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     Entidades.Persona persona = new Entidades.Persona();
                     Entidades.NaturalezaComprobante nc = new Entidades.NaturalezaComprobante();
                     nc.Id = "Venta";
-                    listaC = RN.Comprobante.ListaFiltrada(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, nc, false, "", sesion);
+                    listaC = RN.Comprobante.ListaFiltradaIvaVentas(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, nc, false, "", sesion);
 
                     Entidades.IvaVentas ivaVentas = new Entidades.IvaVentas();
                     ivaVentas.Cuit = sesion.Cuit.Nro;
@@ -90,9 +91,15 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                                 ivc.TipoDoc = "";
                             }
                         }
+                        
+                        double signo = 1;
+                        if (("/3/8/13/").IndexOf("/" + ivc.TipoCompCodigo + "/") != -1)
+                        {
+                            signo = -1;
+                        }
+
                         ivc.ImporteTotal = comprobante.Importe;
                         ivc.FechaEmi = comprobante.Fecha.ToString("dd/MM/yyyy");
-                        
 
                         lote = new FeaEntidades.InterFacturas.lote_comprobantes();
                         x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
@@ -104,18 +111,23 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                         ms.Seek(0, System.IO.SeekOrigin.Begin);
                         lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
-                        ivc.Exento = lote.comprobante[0].resumen.importe_operaciones_exentas;
-                        ivc.NoGravado = lote.comprobante[0].resumen.importe_total_concepto_no_gravado;
-                        ivc.Gravado = lote.comprobante[0].resumen.importe_total_neto_gravado;
+                        ivc.Exento = lote.comprobante[0].resumen.importe_operaciones_exentas * signo;
+                        ivc.NoGravado = lote.comprobante[0].resumen.importe_total_concepto_no_gravado * signo;
+                        ivc.Gravado = lote.comprobante[0].resumen.importe_total_neto_gravado * signo;
                         double otrosImp = Math.Round(lote.comprobante[0].resumen.importe_total_ingresos_brutos + lote.comprobante[0].resumen.importe_total_impuestos_nacionales + lote.comprobante[0].resumen.importe_total_impuestos_municipales + lote.comprobante[0].resumen.importe_total_impuestos_internos, 2);
-                        ivc.OtrosImp = otrosImp;
-                        ivc.Iva = lote.comprobante[0].resumen.impuesto_liq;
+                        ivc.OtrosImp = otrosImp * signo;
+                        ivc.Iva = lote.comprobante[0].resumen.impuesto_liq * signo;
+                        
                         ivc.Moneda = lote.comprobante[0].resumen.codigo_moneda;
+                        if (ivc.Moneda != "PES")
+                        {
+                            monedasExtranjeras = true;
+                        }
                         ivc.Cambio = lote.comprobante[0].resumen.tipo_de_cambio;
                         ivc.Concepto = lote.comprobante[0].cabecera.informacion_comprobante.codigo_concepto.ToString();
                         if (lote.comprobante[0].resumen.importes_moneda_origen != null)
                         {
-                            ivc.ImporteTotalME = lote.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;
+                            ivc.ImporteTotalME = lote.comprobante[0].resumen.importes_moneda_origen.importe_total_factura * signo;
                         }
                         ivaVentas.IvaVentasComprobantes.Add(ivc);
                         
@@ -126,24 +138,24 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                         {
                             for (int z = 0; z < lote.comprobante[0].resumen.impuestos.Length; z++)
                             {
-                                double importe = lote.comprobante[0].resumen.impuestos[z].importe_impuesto;
+                                double importe = lote.comprobante[0].resumen.impuestos[z].importe_impuesto * signo;
                                 listaTotIVAxComprobante = new List<Entidades.IvaVentasTotXIVA>();
                                 if (lote.comprobante[0].resumen.impuestos[z].codigo_impuesto == 1)
                                 {
                                     string concepto = lote.comprobante[0].cabecera.informacion_comprobante.codigo_concepto.ToString();
                                     double alicuota = lote.comprobante[0].resumen.impuestos[z].porcentaje_impuesto;
-                                    double baseImponible = lote.comprobante[0].resumen.impuestos[z].base_imponible;
+                                    double baseImponible = lote.comprobante[0].resumen.impuestos[z].base_imponible * signo;
                                     if (lote.comprobante[0].resumen.impuestos[z].base_imponible == 0)
                                     {
                                         if (lote.comprobante[0].detalle.linea == null || lote.comprobante[0].detalle.linea[0] == null)
                                         {
                                             //Si no hay renglones uso este método de cálculo para obtener la base imponible.
-                                            baseImponible = Math.Round((lote.comprobante[0].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[0].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                            baseImponible = Math.Round((lote.comprobante[0].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[0].resumen.impuestos[z].porcentaje_impuesto, 2) * signo;
                                         }
                                         else if (lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante == 6 || lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante == 7 || lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante == 8)
                                         {
                                             //Si hay renglones y es un comprobante 'B' también uso este método de cálculo para obtener la base imponible.
-                                            baseImponible = Math.Round((lote.comprobante[0].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[0].resumen.impuestos[z].porcentaje_impuesto, 2);
+                                            baseImponible = Math.Round((lote.comprobante[0].resumen.impuestos[z].importe_impuesto * 100) / lote.comprobante[0].resumen.impuestos[z].porcentaje_impuesto, 2) * signo;
                                         }
                                         else
                                         {
@@ -153,7 +165,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                                             {
                                                 if (lote.comprobante[0].detalle.linea[k].indicacion_exento_gravado != null && lote.comprobante[0].detalle.linea[k].indicacion_exento_gravado.Trim().ToUpper() == "G" && lote.comprobante[0].detalle.linea[k].alicuota_iva == alicuota)
                                                 {
-                                                    baseImponible += Math.Round(lote.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
+                                                    baseImponible += Math.Round(lote.comprobante[0].detalle.linea[k].importe_total_articulo, 2) * signo;
                                                 }
                                             }
                                             //Verificar el impuesto IVA que no exista mas de una vez la misma alicuota.
@@ -207,6 +219,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     }
                     Session["formatoRptExportar"] = FormatosRptExportarDropDownList.SelectedValue;
                     Session["mostrarFechaYHora"] = FechaYHoraCheckBox.Checked;
+                    Session["monedasExtranjeras"] = monedasExtranjeras;
                     if (ivaVentas.IvaVentasComprobantes.Count != 0)
                     {
                         Session["ivaVentas"] = ivaVentas;

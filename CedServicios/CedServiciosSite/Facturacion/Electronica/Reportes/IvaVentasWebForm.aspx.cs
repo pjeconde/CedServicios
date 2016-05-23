@@ -37,7 +37,21 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 System.IO.File.Copy(lcomp, @System.IO.Path.GetTempPath() + "Iva_Ventas.xsd", true);
 
                 oRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-                string reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/IvaVentasCR.rpt");
+
+                bool HayME = false;
+                string reportPath = "";
+                if (Session["monedasExtranjeras"] != null)
+                {
+                    HayME = (bool)Session["monedasExtranjeras"];
+                }
+                if (!HayME)
+                {
+                    reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/IvaVentasCR.rpt");
+                }
+                else
+                {
+                    reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/IvaVentasMECR.rpt");
+                }
                 oRpt.Load(reportPath);
                 Entidades.IvaVentas ivaVentas = new Entidades.IvaVentas();
                 if (Session["ivaVentas"] != null)
@@ -72,6 +86,8 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 oRpt.DataDefinition.FormulaFields["RazSoc"].Text = "'" + ((Entidades.Sesion)Session["Sesion"]).Cuit.RazonSocial + "'";
                 if (formatoRptExportar == "")
                 {
+                    CrystalReportViewer1.GroupTreeStyle.ShowLines = false;
+                    CrystalReportViewer1.HasToggleGroupTreeButton = false;
                     CrystalReportViewer1.ToolPanelView = CrystalDecisions.Web.ToolPanelViewType.None;
                     CrystalReportViewer1.ReportSource = oRpt;
                     CrystalReportViewer1.HasPrintButton = true;

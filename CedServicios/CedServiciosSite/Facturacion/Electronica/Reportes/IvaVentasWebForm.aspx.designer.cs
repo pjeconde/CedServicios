@@ -13,15 +13,6 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes {
     public partial class IvaVentasWebForm {
         
         /// <summary>
-        /// CrystalReportViewer1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::CrystalDecisions.Web.CrystalReportViewer CrystalReportViewer1;
-        
-        /// <summary>
         /// SalirButton control.
         /// </summary>
         /// <remarks>
@@ -29,5 +20,14 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SalirButton;
+        
+        /// <summary>
+        /// CrystalReportViewer1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::CrystalDecisions.Web.CrystalReportViewer CrystalReportViewer1;
     }
 }

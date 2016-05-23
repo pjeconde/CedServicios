@@ -7,12 +7,12 @@
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">
-        <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
-        <br />
         <p style="text-align: center">
         <asp:Button ID="SalirButton" class="btn btn-default btn-sm" runat="server" CausesValidation="false" TabIndex="9" Text="Cerrar" onclick="SalirButton_Click" />
         <input type="button" class="btn btn-default btn-sm" value="Volver atrás" name="Volver" onclick="history.back()" />
         </p>
+        <CR:CrystalReportViewer ID="CrystalReportViewer1" runat="server" AutoDataBind="true" />
+        <br />
     </div>
     </div>
     </div>
