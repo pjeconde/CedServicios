@@ -129,7 +129,8 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Comprobantes|Modificación");
                         opcionesHabilitadas.Add("Comprobantes|Envio (AFIP/ITF)");                   //Nuevo
                         opcionesHabilitadas.Add("Comprobantes|Consulta");
-                        opcionesHabilitadas.Add("Comprobantes|Consulta RG");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|IVA Ventas");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Interfaz RG.3685");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online AFIP");

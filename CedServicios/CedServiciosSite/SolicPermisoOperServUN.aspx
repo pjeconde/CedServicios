@@ -24,7 +24,7 @@
             </td>
             <td align="left" style="padding-top: 20px">
                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números."
-                    Width="80px"></asp:TextBox>
+                    Width="90px"></asp:TextBox>
                 <asp:Button ID="LeerListaUNsButton" runat="server" OnClick="LeerListaUNsButton_Click" TabIndex="3"
                     Text="Leer unidad(es) de negocio y servicios habilitados para el CUIT ingresado" />
             </td>

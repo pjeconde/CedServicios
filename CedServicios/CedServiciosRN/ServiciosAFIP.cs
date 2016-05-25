@@ -7,22 +7,85 @@ namespace CedServicios.RN
 {
     public class ServiciosAFIP
     {
+        private static void CrearTicket(Entidades.Sesion Sesion, out LoginTicket ticket)
+        {
+            string RutaCertificado = "";
+            ticket = new LoginTicket();
+            string cuitServicioAFIP = RN.Configuracion.CuitConsultaAFIP(Sesion);
+                
+            DB.Ticket ticketDB = new DB.Ticket(Sesion);
+            bool SolicitarTicket = false;
+
+            if (Sesion.Ticket == null)
+            {
+                Sesion.Ticket = ticketDB.Leer(cuitServicioAFIP, TipoServicios.ConsultaPadronN3);
+            }
+            else
+            {
+                if (Sesion.Ticket.Cuit != cuitServicioAFIP || Sesion.Ticket.Service != TipoServicios.ConsultaPadronN3)
+                {
+                    Sesion.Ticket = ticketDB.Leer(cuitServicioAFIP, TipoServicios.ConsultaPadronN3);
+                }
+            }
+            if (Sesion.Ticket.Cuit == null)
+            {
+                SolicitarTicket = true;
+            }
+            else if (Convert.ToInt64(Sesion.Ticket.ExpirationTime.ToString("yyyyMMddHHmmss")) <= Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss")))
+            {
+                SolicitarTicket = true;
+            }
+            else
+            {
+                ticket.Service = TipoServicios.ConsultaPadronN3;
+                ticket.Cuit = Sesion.Ticket.Cuit;
+                ticket.Sign = Sesion.Ticket.Sign;
+                ticket.Token = Sesion.Ticket.Token;
+                ticket.UniqueId = Convert.ToUInt32(Sesion.Ticket.UniqueId);
+                ticket.GenerationTime = Sesion.Ticket.GenerationTime;
+                ticket.ExpirationTime = Sesion.Ticket.ExpirationTime;
+            }
+
+            if (SolicitarTicket)
+            {
+                ticket = new LoginTicket();
+                RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + cuitServicioAFIP + ".p12");
+
+                ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro), TipoServicios.ConsultaPadronN3);
+
+                //Guardar Ticket de AFIP
+                Sesion.Ticket = new Entidades.Ticket();
+                Sesion.Ticket.Cuit = ticket.ObjAutorizacionfev1.Cuit.ToString().Trim();
+                Sesion.Ticket.Service = ticket.Service;
+                Sesion.Ticket.UniqueId = ticket.UniqueId.ToString().Trim();
+                Sesion.Ticket.GenerationTime = ticket.GenerationTime;
+                Sesion.Ticket.ExpirationTime = ticket.ExpirationTime;
+                Sesion.Ticket.Sign = ticket.Sign;
+                Sesion.Ticket.Token = ticket.Token;
+                ticketDB.Modificar(Sesion.Ticket);
+
+                SolicitarTicket = false;
+            }
+        }
         public static string DatosFiscales(string Cuit, Entidades.Sesion Sesion)
         {
             string resp = "";
             try
             {
-                string RutaCertificado = "";
-                if (Sesion.Cuit.UsaCertificadoAFIPPropio)
-                {
-                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + ".p12");
-                }
-                else
-                {
-                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Convert.ToInt64("30710015062") + ".p12");
-                }
+                //string RutaCertificado = "";
+                //if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                //{
+                //    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + ".p12");
+                //}
+                //else
+                //{
+                //    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Convert.ToInt64("30710015062") + ".p12");
+                //}
+                //LoginTicket ticket = new LoginTicket();
+                //ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro.ToString()), "padron-puc-ws-consulta-nivel3");
+
                 LoginTicket ticket = new LoginTicket();
-                ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro.ToString()), "padron-puc-ws-consulta-nivel3");
+                CrearTicket(Sesion, out ticket);
                 ar.gov.afip.padron_puc_ws.ContribuyenteNivel3SelectServiceImplService c = new ar.gov.afip.padron_puc_ws.ContribuyenteNivel3SelectServiceImplService();
                 c.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_padron-puc-ws_Service"];
                 string cuit = "<contribuyentePK><id>" + Cuit + "</id></contribuyentePK>";

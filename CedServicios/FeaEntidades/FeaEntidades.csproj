@@ -1532,6 +1532,10 @@
     <Compile Include="UnidadesMedidaExpo\Uiactig.cs" />
     <Compile Include="UnidadesMedidaExpo\Unidades.cs" />
     <Compile Include="UnidadesMedidaExpo\UnidadMedidaExpo.cs" />
+    <Compile Include="XSD\IvaVentasTotXIVA.cs" />
+    <Compile Include="XSD\IvaVentas.cs" />
+    <Compile Include="XSD\IvaVentasComprobantes.cs" />
+    <Compile Include="XSD\IvaVentasTotXImpuestos.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FileHelpers\FileHelpers.2005.csproj">

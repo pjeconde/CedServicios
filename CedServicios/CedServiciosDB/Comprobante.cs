@@ -59,6 +59,79 @@ namespace CedServicios.DB
             }
             return lista;
         }
+        public List<Entidades.Comprobante> ListaFiltradaIvaVentas(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle)
+        {
+            List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
+            if (sesion.Cuit.Nro != null)
+            {
+                System.Text.StringBuilder a = new StringBuilder();
+                a.Append("select ");
+                a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto, Comprobante.EmailAvisoComprobanteActivo, Comprobante.IdDestinatarioFrecuente, Comprobante.EmailAvisoComprobanteAsunto, Comprobante.EmailAvisoComprobanteCuerpo ");
+                a.Append("from Comprobante, NaturalezaComprobante ");
+                a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' ");
+                a.Append("and Comprobante.IdNaturalezaComprobante=NaturalezaComprobante.IdNaturalezaComprobante ");
+                string estados = String.Empty;
+                for (int i = 0; i < Estados.Count; i++)
+                {
+                    estados += "'" + Estados[i].Id + "'";
+                    if (i != (Estados.Count - 1)) estados += ", ";
+                }
+                if (estados != String.Empty)
+                {
+                    a.Append("and Comprobante.Estado in (" + estados + ") ");
+                }
+                if (FechaDesde != String.Empty)
+                {
+                    a.Append("and Comprobante.Fecha>='" + FechaDesde + "' ");
+                }
+                if (FechaHasta != String.Empty)
+                {
+                    a.Append("and Comprobante.Fecha<='" + FechaHasta + "' ");
+                }
+                if (Persona.Orden != 0)
+                {
+                    a.Append("and Comprobante.IdTipoDoc=" + Persona.Documento.Tipo.Id + " ");
+                    a.Append("and Comprobante.NroDoc=" + Persona.Documento.Nro.ToString() + " ");
+                    a.Append("and Comprobante.IdPersona='" + Persona.IdPersona + "' ");
+                    a.Append("and Comprobante.DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
+                }
+                if (NaturalezaComprobante.Id != String.Empty)
+                {
+                    a.Append("and Comprobante.IdNaturalezaComprobante='" + NaturalezaComprobante.Id + "' ");
+                }
+                else if (!IncluirContratos)
+                {
+                    a.Append("and Comprobante.IdNaturalezaComprobante<>'VentaContrato' ");
+                }
+                if (Detalle != string.Empty)
+                {
+                    a.Append("and Comprobante.Detalle like '%" + Detalle + "%' ");
+                }
+                a.Append("order by Comprobante.Fecha asc, Comprobante.DescrTipoComprobante asc, Comprobante.NroPuntoVta asc, ABS(Comprobante.NroComprobante) asc ");
+                DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+                if (dt.Rows.Count != 0)
+                {
+                    List<Entidades.UN> listaUN = sesion.Cuit.UNs.FindAll(delegate(Entidades.UN un)
+                    {
+                        return un.Id == sesion.UN.Id;
+                    });
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Entidades.Comprobante elem = new Entidades.Comprobante();
+                        Copiar(dt.Rows[i], elem);
+                        List<Entidades.PuntoVta> listaPV = listaUN[0].PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == elem.NroPuntoVta;
+                        });
+                        if (listaPV.Count > 0)
+                        {
+                            lista.Add(elem);
+                        }
+                    }
+                }
+            }
+            return lista;
+        }
         public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
@@ -111,11 +184,22 @@ namespace CedServicios.DB
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
                 {
+                    List<Entidades.UN> listaUN = sesion.Cuit.UNs.FindAll(delegate(Entidades.UN un)
+                    {
+                        return un.Id == sesion.UN.Id;
+                    });
                     for (int i = 0; i < dt.Rows.Count; i++)
                     {
                         Entidades.Comprobante elem = new Entidades.Comprobante();
                         Copiar(dt.Rows[i], elem);
-                        lista.Add(elem);
+                        List<Entidades.PuntoVta> listaPV = listaUN[0].PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == elem.NroPuntoVta;
+                        });
+                        if (listaPV.Count > 0)
+                        {
+                            lista.Add(elem);
+                        }
                     }
                 }
             }

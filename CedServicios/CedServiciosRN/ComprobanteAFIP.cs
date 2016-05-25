@@ -34,7 +34,7 @@ namespace CedServicios.RN
             }
             else
             {
-                if (Sesion.Ticket.Cuit != Sesion.Cuit.Nro)
+                if (Sesion.Ticket.Cuit != Sesion.Cuit.Nro || Sesion.Ticket.Service != TipoServicios.FacturaE)
                 {
                     if (Sesion.Cuit.UsaCertificadoAFIPPropio)
                     {

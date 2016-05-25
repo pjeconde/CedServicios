@@ -31,31 +31,49 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox TicketInfoTextBox;
         
         /// <summary>
-        /// ConsultarTipoComprobantesButton control.
+        /// MensajeLabel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConsultarTipoComprobantesButton;
+        protected global::System.Web.UI.WebControls.Label MensajeLabel;
         
         /// <summary>
-        /// ConsultarUltNroLoteAFIPButton control.
+        /// TabName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConsultarUltNroLoteAFIPButton;
+        protected global::System.Web.UI.WebControls.HiddenField TabName;
         
         /// <summary>
-        /// ConsultarDocTipoButton control.
+        /// TipoComprobanteUltNroCompDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConsultarDocTipoButton;
+        protected global::System.Web.UI.WebControls.DropDownList TipoComprobanteUltNroCompDropDownList;
+        
+        /// <summary>
+        /// PtoVtaConsultaUltNroCompDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PtoVtaConsultaUltNroCompDropDownList;
+        
+        /// <summary>
+        /// ConsultarUltNroComprobanteAFIPButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarUltNroComprobanteAFIPButton;
         
         /// <summary>
         /// TipoComprobanteDropDownList control.
@@ -94,13 +112,31 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Button ConsultarLoteAFIPButton;
         
         /// <summary>
-        /// ConsultarUltNroComprobanteAFIPButton control.
+        /// TipoComprobanteValidarCAEDropDownList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ConsultarUltNroComprobanteAFIPButton;
+        protected global::System.Web.UI.WebControls.DropDownList TipoComprobanteValidarCAEDropDownList;
+        
+        /// <summary>
+        /// NroComprobanteValidarCAETextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NroComprobanteValidarCAETextBox;
+        
+        /// <summary>
+        /// PtoVtaConsultaValidarCAEDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PtoVtaConsultaValidarCAEDropDownList;
         
         /// <summary>
         /// CuitEmisorTextBox control.
@@ -148,6 +184,33 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Button ConsultarCAEAFIPButton;
         
         /// <summary>
+        /// ConsultarTipoComprobantesButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarTipoComprobantesButton;
+        
+        /// <summary>
+        /// ConsultarUltNroLoteAFIPButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarUltNroLoteAFIPButton;
+        
+        /// <summary>
+        /// ConsultarDocTipoButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarDocTipoButton;
+        
+        /// <summary>
         /// CuitAConsultarTextBox control.
         /// </summary>
         /// <remarks>
@@ -164,14 +227,5 @@ namespace CedServicios.Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarDatosFiscalesButton;
-        
-        /// <summary>
-        /// MensajeLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label MensajeLabel;
     }
 }

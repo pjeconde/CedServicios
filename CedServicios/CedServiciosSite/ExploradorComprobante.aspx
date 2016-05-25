@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorComprobante.aspx.cs" Inherits="CedServicios.Site.ExploradorComprobante" Theme="CedServicios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorComprobante.aspx.cs" Culture="en-GB" UICulture="en-GB" Inherits="CedServicios.Site.ExploradorComprobante" Theme="CedServicios" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
@@ -214,6 +214,9 @@
                                             <li>Fecha obtencion de CAE</li>
                                             <li>Fecha vencimiento de CAE</li>
                                         </ul>
+                                        <p>
+                                            Además, serán actualizados los datos del vendedor según corresponda. En primer medida, se tomaran los datos del vendedor registrados para el punto de venta que figura en el comprobante que usted ha seleccionado para clonar, siempre y cuando, en la definición del punto de venta, figure desmarcada la casilla de "Usa datos CUIT". De lo contrario, se tomaran los datos del vendedor que se encuentran registrados a nivel de CUIT.
+                                        <p />
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>

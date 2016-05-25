@@ -8,7 +8,10 @@
 <%@ Register TagPrefix="uc1" TagName="listaPrecioDefaultPersona" Src="~/Controles/ListaPrecioDefaultPersona.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table style="padding-left:10px;">
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Baja/Anul.baja de Persona"></asp:Label>
@@ -19,7 +22,7 @@
                 <asp:Label ID="Label3" runat="server" Text="Persona perteneciente al CUIT"></asp:Label>
             </td>
             <td align="left" style="padding-top:20px">
-                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
+                <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <asp:Label ID="Label10" runat="server" Text="Tipo de Persona:"></asp:Label>
                 <asp:RadioButton ID="ClienteRadioButton" Text="Cliente" GroupName="TipoPersona" runat="server" Enabled="false" />
@@ -36,7 +39,7 @@
                     Width="100px" DataValueField="Codigo" DataTextField="Descr" 
                     ToolTip="Para personas del exterior seleccione 'CUITPais'" AutoPostBack="true"
                     onselectedindexchanged="TipoDocDropDownList_SelectedIndexChanged" ></asp:DropDownList>
-                <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="80px" ></asp:TextBox>
+                <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="90px" ></asp:TextBox>
                 <asp:DropDownList ID="DestinosCuitDropDownList" runat="server" TabIndex="3" Width="306px" DataValueField="Codigo" DataTextField="Descr" Visible="false" ></asp:DropDownList>
 			</td>
         </tr>
@@ -129,4 +132,7 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
 </asp:Content>

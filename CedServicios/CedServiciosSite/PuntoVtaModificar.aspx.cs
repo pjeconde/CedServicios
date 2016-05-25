@@ -48,7 +48,7 @@ namespace CedServicios.Site
                         Domicilio.Torre = puntoVta.Domicilio.Torre;
                         Domicilio.Localidad = puntoVta.Domicilio.Localidad;
                         Domicilio.IdProvincia = puntoVta.Domicilio.Provincia.Id;
-                        puntoVta.Domicilio.CodPost = Domicilio.CodPost;
+                        Domicilio.CodPost = puntoVta.Domicilio.CodPost;
                         Contacto.Nombre = puntoVta.Contacto.Nombre;
                         Contacto.Email = puntoVta.Contacto.Email;
                         Contacto.Telefono = puntoVta.Contacto.Telefono;
