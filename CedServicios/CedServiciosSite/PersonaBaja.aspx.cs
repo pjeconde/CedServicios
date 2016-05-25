@@ -26,6 +26,7 @@ namespace CedServicios.Site
                     Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
                     DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                     DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                    ListaPrecioDefaultPersona.ListasPrecio = RN.ListaPrecio.ListaPorCuit(true, false, sesion);
                     DataBind();
 
                     Entidades.Persona persona = (Entidades.Persona)Session["Persona"];
@@ -76,6 +77,7 @@ namespace CedServicios.Site
                     DatosIdentificatorios.CodigoInterno = persona.DatosIdentificatorios.CodigoInterno;
                     IdPersonaTextBox.Text = persona.IdPersona;
                     DatosEmailAvisoComprobantePersona.Datos = persona.DatosEmailAvisoComprobantePersona;
+                    ListaPrecioDefaultPersona.IdListaPrecio = persona.IdListaPrecio;
                     EmailAvisoVisualizacionTextBox.Text = persona.EmailAvisoVisualizacion;
                     PasswordAvisoVisualizacionTextBox.Text = persona.PasswordAvisoVisualizacion;
 
@@ -90,6 +92,7 @@ namespace CedServicios.Site
                     DatosIdentificatorios.Enabled = false;
                     IdPersonaTextBox.Enabled = false;
                     DatosEmailAvisoComprobantePersona.Enabled = false;
+                    ListaPrecioDefaultPersona.Enabled = false;
                     EmailAvisoVisualizacionTextBox.Enabled = false;
                     PasswordAvisoVisualizacionTextBox.Enabled = false;
 

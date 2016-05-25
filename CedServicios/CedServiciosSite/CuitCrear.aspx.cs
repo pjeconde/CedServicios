@@ -49,7 +49,11 @@ namespace CedServicios.Site
                 try
                 {
                     List<string> servicios = new List<string>();
-                    if (eFactCheckBox.Checked) servicios.Add("eFact");
+                    if (eFactCheckBox.Checked)
+                    {
+                        servicios.Add("eFact");
+                        servicios.Add("eFactConsulta");
+                    }
                     if (resTurCheckBox.Checked) servicios.Add("resTur");
                     cuit.Nro = CUITTextBox.Text;
                     cuit.RazonSocial = RazonSocialTextBox.Text;

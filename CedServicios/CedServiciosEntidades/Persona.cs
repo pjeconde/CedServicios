@@ -25,6 +25,7 @@ namespace CedServicios.Entidades
         private bool esCliente;
         private bool esProveedor;
         private DatosEmailAvisoComprobantePersona datosEmailAvisoComprobantePersona;
+        private string idListaPrecio;
 
         public Persona()
         {
@@ -222,6 +223,17 @@ namespace CedServicios.Entidades
             get
             {
                 return esProveedor;
+            }
+        }
+        public string IdListaPrecio
+        {
+            set
+            {
+                idListaPrecio = value;
+            }
+            get
+            {
+                return idListaPrecio;
             }
         }
         #region Propiedades redundantes

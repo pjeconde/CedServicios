@@ -43,7 +43,7 @@ namespace CedServicios.Site
             mItem = new MenuItem("Iniciar sesión", "Iniciar sesión"); mItem.Selectable = false;
             menu.Items.Add(mItem);
 
-            mItem = new MenuItem("Personas(clientes/proveedores)", "Personas(clientes/proveedores)"); mItem.Selectable = false;
+            mItem = new MenuItem("Personas", "Personas"); mItem.Selectable = false; mItem.ToolTip = "Clientes / Proveedores";
             menu.Items.Add(mItem);
                 mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
@@ -64,6 +64,26 @@ namespace CedServicios.Site
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Listas de Precios", "Listas de Precios"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
+                    //menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    //mItem = new MenuItem("Clonado", "Clonado"); mItem.Selectable = false;
+                    //menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    //mItem = new MenuItem("Reemplazo", "Reemplazo"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Precios", "Precios"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Ingreso Manual", "Ingreso Manual"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Importación desde Excel", "Importación desde Excel"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
 
             mItem = new MenuItem("Contratos", "Contratos"); mItem.Selectable = false;
             menu.Items.Add(mItem);

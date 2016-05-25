@@ -5,6 +5,7 @@
 <%@ Register TagPrefix="uc1" TagName="datosImpositivos" Src="~/Controles/DatosImpositivos.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="datosIdentificatorios" Src="~/Controles/DatosIdentificatorios.ascx" %>
 <%@ Register TagPrefix="uc1" TagName="datosEmailAvisoComprobantePersona" Src="~/Controles/DatosEmailAvisoComprobantePersona.ascx" %>
+<%@ Register TagPrefix="uc1" TagName="listaPrecioDefaultPersona" Src="~/Controles/ListaPrecioDefaultPersona.ascx" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
@@ -112,6 +113,7 @@
                 </table>
             </td>
         </tr>
+        <uc1:listaPrecioDefaultPersona ID="ListaPrecioDefaultPersona" runat="server" />
         <tr>
             <td>
             </td>

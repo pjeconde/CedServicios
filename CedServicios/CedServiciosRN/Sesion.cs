@@ -58,11 +58,6 @@ namespace CedServicios.RN
                 {
                     opcionesHabilitadas.Add("Administración|CUIT|Consulta");
                     opcionesHabilitadas.Add("Administración|Unidad de Negocio|Consulta");
-                    opcionesHabilitadas.Add("Personas(clientes/proveedores)|Alta");
-                    opcionesHabilitadas.Add("Personas(clientes/proveedores)|Baja/Anul.baja");
-                    opcionesHabilitadas.Add("Personas(clientes/proveedores)|Modificación");
-                    opcionesHabilitadas.Add("Personas(clientes/proveedores)|Consulta");
-                    
                     List<Entidades.Permiso> esAdminCUITdeCUITseleccionado = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
                     {
                         return p.TipoPermiso.Id == "AdminCUIT" && p.Cuit == Sesion.Cuit.Nro && p.WF.Estado == "Vigente";
@@ -101,12 +96,28 @@ namespace CedServicios.RN
                     {
                         return p.TipoPermiso.Id == "eFact" && p.UN.Id == Sesion.UN.Id && p.Cuit == Sesion.UN.Cuit && p.WF.Estado == "Vigente";
                     });
+                    List<Entidades.Permiso> elUsuarioTieneHabilitadoElServicioEFACTCONSULTAParaLaUNSeleccionada = Sesion.Usuario.Permisos.FindAll(delegate(Entidades.Permiso p)
+                    {
+                        return p.TipoPermiso.Id == "eFactConsulta" && p.UN.Id == Sesion.UN.Id && p.Cuit == Sesion.UN.Cuit && p.WF.Estado == "Vigente";
+                    });
                     if (elUsuarioTieneHabilitadoElServicioEFACTParaLaUNSeleccionada.Count != 0 && Sesion.Cuit.WF.Estado == "Vigente" && Sesion.UN.WF.Estado == "Vigente")
                     {
+                        opcionesHabilitadas.Add("Personas|Alta");
+                        opcionesHabilitadas.Add("Personas|Baja/Anul.baja");
+                        opcionesHabilitadas.Add("Personas|Modificación");
+                        opcionesHabilitadas.Add("Personas|Consulta");
                         opcionesHabilitadas.Add("Artículos|Alta");
                         opcionesHabilitadas.Add("Artículos|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Artículos|Modificación");
                         opcionesHabilitadas.Add("Artículos|Consulta");
+                        opcionesHabilitadas.Add("Artículos|Listas de Precios|Alta");
+                        opcionesHabilitadas.Add("Artículos|Listas de Precios|Baja/Anul.baja");
+                        opcionesHabilitadas.Add("Artículos|Listas de Precios|Modificación");
+                        opcionesHabilitadas.Add("Artículos|Listas de Precios|Clonado");
+                        opcionesHabilitadas.Add("Artículos|Listas de Precios|Reemplazo");
+                        opcionesHabilitadas.Add("Artículos|Listas de Precios|Consulta");
+                        opcionesHabilitadas.Add("Artículos|Precios|Ingreso Manual");
+                        opcionesHabilitadas.Add("Artículos|Precios|Importación desde Excel");
                         opcionesHabilitadas.Add("Contratos|Alta");
                         opcionesHabilitadas.Add("Contratos|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Contratos|Modificación");
@@ -134,6 +145,52 @@ namespace CedServicios.RN
                         }
                         opcionesHabilitadas.Add("Administración|Puntos de Venta|Consulta");
                     }
+                    else if (elUsuarioTieneHabilitadoElServicioEFACTCONSULTAParaLaUNSeleccionada.Count != 0 && Sesion.Cuit.WF.Estado == "Vigente" && Sesion.UN.WF.Estado == "Vigente")
+                    {
+                        //opcionesHabilitadas.Add("Personas|Alta");
+                        //opcionesHabilitadas.Add("Personas|Baja/Anul.baja");
+                        //opcionesHabilitadas.Add("Personas|Modificación");
+                        opcionesHabilitadas.Add("Personas|Consulta");
+                        //opcionesHabilitadas.Add("Artículos|Alta");
+                        //opcionesHabilitadas.Add("Artículos|Baja/Anul.baja");
+                        //opcionesHabilitadas.Add("Artículos|Modificación");
+                        opcionesHabilitadas.Add("Artículos|Consulta");
+                        //opcionesHabilitadas.Add("Artículos|Listas de Precios|Alta");
+                        //opcionesHabilitadas.Add("Artículos|Listas de Precios|Baja/Anul.baja");
+                        //opcionesHabilitadas.Add("Artículos|Listas de Precios|Modificación");
+                        //opcionesHabilitadas.Add("Artículos|Listas de Precios|Clonado");
+                        //opcionesHabilitadas.Add("Artículos|Listas de Precios|Reemplazo");
+                        opcionesHabilitadas.Add("Artículos|Listas de Precios|Consulta");
+                        //opcionesHabilitadas.Add("Artículos|Precios|Ingreso Manual");
+                        //opcionesHabilitadas.Add("Artículos|Precios|Importación desde Excel");
+                        //opcionesHabilitadas.Add("Contratos|Alta");
+                        //opcionesHabilitadas.Add("Contratos|Baja/Anul.baja");
+                        //opcionesHabilitadas.Add("Contratos|Modificación");
+                        opcionesHabilitadas.Add("Contratos|Consulta");
+                        //opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Electrónica");
+                        ////opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Tradicional");    //Nuevo
+                        //opcionesHabilitadas.Add("Comprobantes|Alta manual|Compra");                 //Nuevo
+                        //opcionesHabilitadas.Add("Comprobantes|Baja/Anul.baja");
+                        //opcionesHabilitadas.Add("Comprobantes|Modificación");
+                        //opcionesHabilitadas.Add("Comprobantes|Envio (AFIP/ITF)");                   //Nuevo
+                        opcionesHabilitadas.Add("Comprobantes|Consulta");
+                        opcionesHabilitadas.Add("Comprobantes|Consulta RG");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online AFIP");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Archivo XML");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Términos y condiciones");
+                        //opcionesHabilitadas.Add("Comprobantes|Generación automática (contratos)");  //Nuevo
+                        opcionesHabilitadas.Add("Comprobantes|Consulta PDFs");  //Nuevo
+                        //if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
+                        //{
+                        //    opcionesHabilitadas.Add("Administración|Puntos de Venta|Alta");
+                        //    opcionesHabilitadas.Add("Administración|Puntos de Venta|Baja/Anul.baja");
+                        //    opcionesHabilitadas.Add("Administración|Puntos de Venta|Modificación");
+                        //}
+                        opcionesHabilitadas.Add("Administración|Puntos de Venta|Consulta");
+                    }
+
                 }
             }
             else

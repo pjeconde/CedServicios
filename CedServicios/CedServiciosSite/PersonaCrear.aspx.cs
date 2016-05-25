@@ -14,6 +14,7 @@ namespace CedServicios.Site
         {
             if (!IsPostBack)
             {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 TipoDocDropDownList.DataSource = FeaEntidades.Documentos.Documento.Lista();
                 DestinosCuitDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.Lista();
                 Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
@@ -22,6 +23,7 @@ namespace CedServicios.Site
                 Entidades.DatosEmailAvisoComprobantePersona datos = new Entidades.DatosEmailAvisoComprobantePersona();
                 datos.DestinatariosFrecuentes.Add(new Entidades.DestinatarioFrecuente(string.Empty, string.Empty, string.Empty));
                 DatosEmailAvisoComprobantePersona.Datos = datos;
+                ListaPrecioDefaultPersona.ListasPrecio = RN.ListaPrecio.ListaPorCuit(true, false, sesion);
                 DataBind();
                 if (Funciones.SessionTimeOut(Session))
                 {
@@ -29,7 +31,6 @@ namespace CedServicios.Site
                 }
                 else
                 {
-                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     CUITTextBox.Text = sesion.Cuit.Nro;
                     CUITTextBox.Enabled = false;
                     TipoDocDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
@@ -106,6 +107,7 @@ namespace CedServicios.Site
                     persona.EmailAvisoVisualizacion = EmailAvisoVisualizacionTextBox.Text;
                     persona.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
                     persona.DatosEmailAvisoComprobantePersona = DatosEmailAvisoComprobantePersona.Datos;
+                    persona.IdListaPrecio = ListaPrecioDefaultPersona.IdListaPrecio;
                     RN.Persona.Validar(persona);
                     RN.Persona.Crear(persona, sesion);
 
@@ -119,6 +121,7 @@ namespace CedServicios.Site
                     DatosIdentificatorios.Enabled = false;
                     IdPersonaTextBox.Enabled = false;
                     DatosEmailAvisoComprobantePersona.Enabled = false;
+                    ListaPrecioDefaultPersona.Enabled = false;
                     EmailAvisoVisualizacionTextBox.Enabled = false;
                     PasswordAvisoVisualizacionTextBox.Enabled = false;
                     AceptarButton.Enabled = false;

@@ -112,7 +112,8 @@
     <Content Include="Controles\DatosEmailAvisoComprobanteContrato.ascx" />
     <Content Include="Controles\DatosEmailAvisoComprobanteContratoConsulta.ascx" />
     <Content Include="Controles\DatosEmailAvisoComprobantePersona.ascx" />
-    <Content Include="Controles\DatosEmailAvisoComprobantePersonaConsulta.ascx" />
+    <Content Include="Controles\ListaPrecioDefaultPersona.ascx" />
+    <Content Include="Controles\ListaPrecioDefaultPersonaConsulta.ascx" />
     <Content Include="ExploradorPDFComprobante.aspx" />
     <Content Include="Facturacion\Electronica\ReferenciasConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Referencias.ascx" />
@@ -125,6 +126,14 @@
     <Content Include="InstitucionalSoftwareAMedida.aspx" />
     <Content Include="jquery\docs.min.js" />
     <Content Include="jquery\jquery-1.11.3.js" />
+    <Content Include="ListaPrecioBaja.aspx" />
+    <Content Include="ListaPrecioClonar.aspx" />
+    <Content Include="ListaPrecioConsulta.aspx" />
+    <Content Include="ListaPrecioCrear.aspx" />
+    <Content Include="ListaPrecioModificar.aspx" />
+    <Content Include="ListaPrecioReemplazar.aspx" />
+    <Content Include="ListaPrecioSeleccionar.aspx" />
+    <Content Include="PrecioIngresoManual.aspx" />
     <Content Include="PruebasBS-SinMaster.aspx" />
     <Content Include="PruebasBS.aspx" />
     <Content Include="css\bootstrap-theme.css" />
@@ -507,12 +516,19 @@
     <Compile Include="Controles\DatosEmailAvisoComprobantePersona.ascx.designer.cs">
       <DependentUpon>DatosEmailAvisoComprobantePersona.ascx</DependentUpon>
     </Compile>
-    <Compile Include="Controles\DatosEmailAvisoComprobantePersonaConsulta.ascx.cs">
-      <DependentUpon>DatosEmailAvisoComprobantePersonaConsulta.ascx</DependentUpon>
+    <Compile Include="Controles\ListaPrecioDefaultPersona.ascx.cs">
+      <DependentUpon>ListaPrecioDefaultPersona.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Controles\DatosEmailAvisoComprobantePersonaConsulta.ascx.designer.cs">
-      <DependentUpon>DatosEmailAvisoComprobantePersonaConsulta.ascx</DependentUpon>
+    <Compile Include="Controles\ListaPrecioDefaultPersona.ascx.designer.cs">
+      <DependentUpon>ListaPrecioDefaultPersona.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Controles\ListaPrecioDefaultPersonaConsulta.ascx.cs">
+      <DependentUpon>ListaPrecioDefaultPersonaConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Controles\ListaPrecioDefaultPersonaConsulta.ascx.designer.cs">
+      <DependentUpon>ListaPrecioDefaultPersonaConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="ExploradorPDFComprobante.aspx.cs">
       <DependentUpon>ExploradorPDFComprobante.aspx</DependentUpon>
@@ -541,6 +557,62 @@
     </Compile>
     <Compile Include="InstitucionalSoftwareAMedida.aspx.designer.cs">
       <DependentUpon>InstitucionalSoftwareAMedida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaPrecioBaja.aspx.cs">
+      <DependentUpon>ListaPrecioBaja.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaPrecioBaja.aspx.designer.cs">
+      <DependentUpon>ListaPrecioBaja.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaPrecioClonar.aspx.cs">
+      <DependentUpon>ListaPrecioClonar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaPrecioClonar.aspx.designer.cs">
+      <DependentUpon>ListaPrecioClonar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaPrecioConsulta.aspx.cs">
+      <DependentUpon>ListaPrecioConsulta.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaPrecioConsulta.aspx.designer.cs">
+      <DependentUpon>ListaPrecioConsulta.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaPrecioCrear.aspx.cs">
+      <DependentUpon>ListaPrecioCrear.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaPrecioCrear.aspx.designer.cs">
+      <DependentUpon>ListaPrecioCrear.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaPrecioModificar.aspx.cs">
+      <DependentUpon>ListaPrecioModificar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaPrecioModificar.aspx.designer.cs">
+      <DependentUpon>ListaPrecioModificar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaPrecioReemplazar.aspx.cs">
+      <DependentUpon>ListaPrecioReemplazar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaPrecioReemplazar.aspx.designer.cs">
+      <DependentUpon>ListaPrecioReemplazar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ListaPrecioSeleccionar.aspx.cs">
+      <DependentUpon>ListaPrecioSeleccionar.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ListaPrecioSeleccionar.aspx.designer.cs">
+      <DependentUpon>ListaPrecioSeleccionar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PrecioIngresoManual.aspx.cs">
+      <DependentUpon>PrecioIngresoManual.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrecioIngresoManual.aspx.designer.cs">
+      <DependentUpon>PrecioIngresoManual.aspx</DependentUpon>
     </Compile>
     <Compile Include="PruebasBS-SinMaster.aspx.cs">
       <DependentUpon>PruebasBS-SinMaster.aspx</DependentUpon>

@@ -9,7 +9,7 @@
         </tr>
         <tr>
             <td align="left" style="padding-top:20px">
-                <asp:Label ID="Label2" runat="server" SkinID="LabelAyuda" Text="Para crear un nuevo Cliente, elegir la opción: Personas(clientes/proveedores) --> Alta." ></asp:Label>
+                <asp:Label ID="Label2" runat="server" SkinID="LabelAyuda" Text="Para crear un nuevo Cliente, elegir la opción: Personas --> Alta." ></asp:Label>
             </td>
         </tr>
         <tr>

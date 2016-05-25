@@ -4,7 +4,7 @@
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">
-    <table align="center">">
+    <table align="center">
         <tr>
             <td align="center" colspan="2" style="padding-top: 20px">
                 <asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Solicitud permiso de operador para un<br />servicio de una Unidad de Negocio"></asp:Label>

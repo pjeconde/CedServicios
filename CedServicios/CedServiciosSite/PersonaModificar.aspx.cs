@@ -27,6 +27,7 @@ namespace CedServicios.Site
                     Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
                     DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                     DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
+                    ListaPrecioDefaultPersona.ListasPrecio = RN.ListaPrecio.ListaPorCuit(true, false, sesion);
                     DataBind();
 
                     Entidades.Persona persona = (Entidades.Persona)Session["Persona"];
@@ -81,6 +82,7 @@ namespace CedServicios.Site
                     DatosIdentificatorios.CodigoInterno = persona.DatosIdentificatorios.CodigoInterno;
                     IdPersonaTextBox.Text = persona.IdPersona;
                     DatosEmailAvisoComprobantePersona.Datos = persona.DatosEmailAvisoComprobantePersona;
+                    ListaPrecioDefaultPersona.IdListaPrecio = persona.IdListaPrecio;
                     EmailAvisoVisualizacionTextBox.Text = persona.EmailAvisoVisualizacion;
                     PasswordAvisoVisualizacionTextBox.Text = persona.PasswordAvisoVisualizacion;
                     CUITTextBox.Enabled = false;
@@ -160,6 +162,7 @@ namespace CedServicios.Site
                     personaHasta.EmailAvisoVisualizacion = EmailAvisoVisualizacionTextBox.Text;
                     personaHasta.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
                     personaHasta.DatosEmailAvisoComprobantePersona = DatosEmailAvisoComprobantePersona.Datos;
+                    personaHasta.IdListaPrecio = ListaPrecioDefaultPersona.IdListaPrecio;
                     RN.Persona.Validar(personaHasta);
                     RN.Persona.Modificar(personaDesde, personaHasta, sesion);
 
@@ -174,6 +177,7 @@ namespace CedServicios.Site
                     DatosIdentificatorios.Enabled = false;
                     IdPersonaTextBox.Enabled = false;
                     DatosEmailAvisoComprobantePersona.Enabled = false;
+                    ListaPrecioDefaultPersona.Enabled = false;
                     EmailAvisoVisualizacionTextBox.Enabled = false;
                     PasswordAvisoVisualizacionTextBox.Enabled = false;
                     AceptarButton.Enabled = false;

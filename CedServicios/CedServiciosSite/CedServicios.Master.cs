@@ -99,16 +99,16 @@ namespace CedServicios.Site
                 case "Administración|Puntos de Venta|Consulta":
                     Response.Redirect("~/CuitTreeView.aspx?PuntoVta");
                     break;
-                case "Personas(clientes/proveedores)|Alta":
+                case "Personas|Alta":
                     Response.Redirect("~/PersonaCrear.aspx");
                     break;
-                case "Personas(clientes/proveedores)|Baja/Anul.baja":
+                case "Personas|Baja/Anul.baja":
                     Response.Redirect("~/PersonaSeleccionar.aspx?Baja");
                     break;
-                case "Personas(clientes/proveedores)|Modificación":
+                case "Personas|Modificación":
                     Response.Redirect("~/PersonaSeleccionar.aspx?Modificar");
                     break;
-                case "Personas(clientes/proveedores)|Consulta":
+                case "Personas|Consulta":
                     Response.Redirect("~/PersonaConsulta.aspx");
                     break;
                 case "Artículos|Alta":
@@ -123,7 +123,30 @@ namespace CedServicios.Site
                 case "Artículos|Consulta":
                     Response.Redirect("~/ArticuloConsulta.aspx");
                     break;
-                case "Contratos|Alta":
+                case "Artículos|Listas de Precios|Alta":
+                    Response.Redirect("~/ListaPrecioCrear.aspx");
+                    break;
+                case "Artículos|Listas de Precios|Baja/Anul.baja":
+                    Response.Redirect("~/ListaPrecioSeleccionar.aspx?Baja");
+                    break;
+                case "Artículos|Listas de Precios|Modificación":
+                    Response.Redirect("~/ListaPrecioSeleccionar.aspx?Modificar");
+                    break;
+                case "Artículos|Listas de Precios|Clonado":
+                    Response.Redirect("~/ListaPrecioSeleccionar.aspx?Clonar");
+                    break;
+                case "Artículos|Listas de Precios|Reemplazo":
+                    Response.Redirect("~/ListaPrecioSeleccionar.aspx?Reemplazar");
+                    break;
+                case "Artículos|Listas de Precios|Consulta":
+                    Response.Redirect("~/ListaPrecioConsulta.aspx");
+                    break;
+                case "Artículos|Precios|Ingreso Manual":
+                    Response.Redirect("~/PrecioIngresoManual.aspx");
+                    break;
+                case "Artículos|Precios|Importación desde Excel":
+                    break;
+               case "Contratos|Alta":
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("VentaContrato");
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {

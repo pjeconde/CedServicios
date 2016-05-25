@@ -281,7 +281,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::CedServicios.Site.Controles.DatosIdentificatorios DatosIdentificatorios;
-        
+
         /// <summary>
         /// Control DatosEmailAvisoComprobantePersona.
         /// </summary>
@@ -290,7 +290,16 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::CedServicios.Site.Controles.DatosEmailAvisoComprobantePersona DatosEmailAvisoComprobantePersona;
-        
+
+        /// <summary>
+        /// Control ListaPrecioDefaultPersona.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::CedServicios.Site.Controles.ListaPrecioDefaultPersona ListaPrecioDefaultPersona;
+
         /// <summary>
         /// Control Label38.
         /// </summary>

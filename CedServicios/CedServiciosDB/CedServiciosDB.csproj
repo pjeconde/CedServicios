@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Articulo.cs" />
+    <Compile Include="ListaPrecio.cs" />
+    <Compile Include="Precio.cs" />
     <Compile Include="Ticket.cs" />
     <Compile Include="NaturalezaComprobante.cs" />
     <Compile Include="Persona.cs" />
