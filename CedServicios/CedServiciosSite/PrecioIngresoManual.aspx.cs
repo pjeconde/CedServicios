@@ -32,6 +32,7 @@ namespace CedServicios.Site
         }
         protected void AceptarButton_Click(object sender, EventArgs e)
         {
+            MensajeLabel.Text = String.Empty;
             if (Funciones.SessionTimeOut(Session))
             {
                 Response.Redirect("~/SessionTimeout.aspx");
@@ -43,19 +44,26 @@ namespace CedServicios.Site
                 {
                     Response.Redirect("~/MensajeUsuarioDEMO.aspx");
                 }
-                try
+                if (preciosGridView.EditIndex != -1)
                 {
-                    DataTable dt = (DataTable)ViewState["MatrizDePrecios"];
-                    List<Entidades.ListaPrecio> listasPrecio = (List<Entidades.ListaPrecio>) ViewState["ListasPrecio"];
-                    RN.Precio.ImpactarMatriz(listasPrecio, dt, sesion);
-                    AceptarButton.Enabled = false;
-                    preciosGridView.Enabled = false;
-                    SalirButton.Text = "Salir";
-                    MensajeLabel.Text = "Las Listas de Precios fueron actualizadas satisfactoriamente";
+                    MensajeLabel.Text = "Antes de confirmar el ingreso manual: actualice, o cancele, la edición de los precios del artículo en curso.";
                 }
-                catch (Exception ex)
+                else
                 {
-                    MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    try
+                    {
+                        DataTable dt = (DataTable)ViewState["MatrizDePrecios"];
+                        List<Entidades.ListaPrecio> listasPrecio = (List<Entidades.ListaPrecio>)ViewState["ListasPrecio"];
+                        RN.Precio.ImpactarMatriz(listasPrecio, dt, sesion);
+                        AceptarButton.Enabled = false;
+                        preciosGridView.Enabled = false;
+                        SalirButton.Text = "Salir";
+                        MensajeLabel.Text = "Las Listas de Precios fueron actualizadas satisfactoriamente";
+                    }
+                    catch (Exception ex)
+                    {
+                        MensajeLabel.Text = EX.Funciones.Detalle(ex);
+                    }
                 }
             }
         }
