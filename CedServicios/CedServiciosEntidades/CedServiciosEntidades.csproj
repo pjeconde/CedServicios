@@ -50,6 +50,7 @@
     <Compile Include="DatosEmailAvisoComprobanteContrato.cs" />
     <Compile Include="DatosEmailAvisoComprobantePersona.cs" />
     <Compile Include="Enum.cs" />
+    <Compile Include="FormatosRptExportar\PDF.cs" />
     <Compile Include="ListaPrecio.cs" />
     <Compile Include="FormatosRptExportar\FormatoRptExportar.cs" />
     <Compile Include="FormatosRptExportar\SinInformar.cs" />

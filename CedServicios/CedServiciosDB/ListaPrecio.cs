@@ -15,7 +15,7 @@ namespace CedServicios.DB
         public List<Entidades.ListaPrecio> ListaPorCuit(bool SoloVigentes, bool IncluirVacio)
         {
             List<Entidades.ListaPrecio> lista = new List<Entidades.ListaPrecio>();
-            lista.Add(new Entidades.ListaPrecio(String.Empty, "Ninguna"));
+            if (IncluirVacio) lista.Add(new Entidades.ListaPrecio(String.Empty, "Ninguna"));
             if (sesion.Cuit.Nro != null)
             {
                 System.Text.StringBuilder a = new StringBuilder();
