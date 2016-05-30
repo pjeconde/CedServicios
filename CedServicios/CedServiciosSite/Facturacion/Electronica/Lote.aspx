@@ -402,7 +402,7 @@
                                                     </tr>
                                                 </table>
                                             </td>
-                                            <td class="bgFEAC" style="width: 30px; background-repeat: repeat-y;">
+                                            <td style="width: 30px;">
                                             </td>
                                             <td style="text-align:left; vertical-align:top">
                                                 <table style="width: 400px">
@@ -467,7 +467,7 @@
                                                     </tr>
                                                 </table>
                                             </td>
-                                            <td class="bgFEAC" style="width: 30px; background-repeat: repeat-y;">
+                                            <td style="width: 30px;">
                                             </td>
                                             <td align="left" valign="top">
                                                 <table style="width: 400px">

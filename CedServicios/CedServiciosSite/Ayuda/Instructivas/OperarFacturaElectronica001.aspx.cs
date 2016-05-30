@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-namespace CedServicios.Site
+namespace CedServicios.Site.Ayuda.Instructivas
 {
     public partial class OperarFacturaElectronica001 : System.Web.UI.Page
     {
