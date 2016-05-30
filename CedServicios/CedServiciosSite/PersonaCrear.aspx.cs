@@ -23,7 +23,7 @@ namespace CedServicios.Site
                 Entidades.DatosEmailAvisoComprobantePersona datos = new Entidades.DatosEmailAvisoComprobantePersona();
                 datos.DestinatariosFrecuentes.Add(new Entidades.DestinatarioFrecuente(string.Empty, string.Empty, string.Empty));
                 DatosEmailAvisoComprobantePersona.Datos = datos;
-                ListaPrecioDefaultPersona.ListasPrecio = RN.ListaPrecio.ListaPorCuit(true, false, sesion);
+                ListaPrecioDefaultPersona.ListasPrecio = RN.ListaPrecio.ListaPorCuit(true, true, sesion);
                 DataBind();
                 if (Funciones.SessionTimeOut(Session))
                 {
