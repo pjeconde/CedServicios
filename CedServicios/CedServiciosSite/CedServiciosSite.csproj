@@ -116,6 +116,7 @@
     <Content Include="Controles\ListaPrecioDefaultPersona.ascx" />
     <Content Include="Controles\ListaPrecioDefaultPersonaConsulta.ascx" />
     <Content Include="ExploradorPDFComprobante.aspx" />
+    <Content Include="Facturacion\Electronica\ReferenciasAFIP.ascx" />
     <Content Include="Facturacion\Electronica\ReferenciasConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Referencias.ascx" />
     <Content Include="Facturacion\Electronica\Reportes\IvaVentasWebForm.aspx" />
@@ -542,6 +543,13 @@
     </Compile>
     <Compile Include="ExploradorPDFComprobante.aspx.designer.cs">
       <DependentUpon>ExploradorPDFComprobante.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ReferenciasAFIP.ascx.cs">
+      <DependentUpon>ReferenciasAFIP.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ReferenciasAFIP.ascx.designer.cs">
+      <DependentUpon>ReferenciasAFIP.ascx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\ReferenciasConsulta.ascx.cs">
       <DependentUpon>ReferenciasConsulta.ascx</DependentUpon>

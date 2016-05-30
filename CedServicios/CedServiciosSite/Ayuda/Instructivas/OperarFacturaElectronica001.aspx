@@ -1,7 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServiciosAyuda.master" AutoEventWireup="true" CodeBehind="OperarFacturaElectronica001.aspx.cs" Inherits="CedServicios.Site.OperarFacturaElectronica001" Theme="CedServicios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServiciosAyuda.master" AutoEventWireup="true" CodeBehind="OperarFacturaElectronica001.aspx.cs" Inherits="CedServicios.Site.Ayuda.Instructivas.OperarFacturaElectronica001" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" Visible="true" ContentPlaceHolderID="ContentPlaceAyuda" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0">
+    <table>
         <tr>
             <td align="center">
                 <asp:Label ID="Label3" runat="server" SkinID="TituloPagina" Text="¿Cómo empiezo a operar con facturas electrónicas?"></asp:Label>

@@ -3,7 +3,10 @@
 <%@ Register Assembly="CedServiciosWebForms" Namespace="CedServicios.WebForms" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table cellspacing="0" cellpadding="0" align="left" style="padding-left:10px; border-color: Black; border-width: 1px;">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table style="padding-left:10px; border-color: Black; border-width: 1px;">
         <tr>
             <td align="center" colspan="3" style="padding-top: 20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Administración del Site"></asp:Label>
@@ -56,6 +59,9 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
     <script type="text/javascript">
         function BorrarMensaje() {
             {
