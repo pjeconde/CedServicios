@@ -172,6 +172,7 @@ namespace CedServicios.Site
                     Entidades.Sesion sesionConsultaAFIP = new Entidades.Sesion();
                     sesionConsultaAFIP.Cuit.UsaCertificadoAFIPPropio = true;
                     sesionConsultaAFIP.Cuit.Nro = RN.Configuracion.CuitConsultaAFIP(sesion);
+                    sesionConsultaAFIP.CnnStr = sesion.CnnStr;
                     if (sesionConsultaAFIP.Cuit.Nro != string.Empty)
                     {
                         string xmlString = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesionConsultaAFIP);
