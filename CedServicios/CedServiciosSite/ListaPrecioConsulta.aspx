@@ -42,6 +42,10 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
+                            <asp:BoundField DataField="Orden" HeaderText="orden" SortExpression="Orden">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
                         </Columns>
                     </asp:GridView>
                 </asp:Panel>
@@ -97,6 +101,14 @@
                             </td>
                             <td style="padding-top:2px; text-align: left">
                                 <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="100" TabIndex="3" Width="300px" TextMode="MultiLine"></asp:TextBox>
+                            </td>        
+                        </tr>
+                        <tr>
+                            <td style="padding-right:5px; padding-top:2px; text-align: right">
+                                <asp:Label ID="Label2" runat="server" Text="Orden"></asp:Label>
+                            </td>
+                            <td style="padding-top:2px; text-align: left">
+                                <asp:TextBox ID="OrdenTextBox" runat="server" MaxLength="100" TabIndex="4"></asp:TextBox>
                             </td>        
                         </tr>
                     </table>

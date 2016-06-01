@@ -13,6 +13,7 @@ namespace CedServicios.Entidades
         private string descr;
         private WF wF;
         private string ultActualiz;
+        private int orden;
 
         public ListaPrecio()
         {
@@ -78,6 +79,17 @@ namespace CedServicios.Entidades
             get
             {
                 return ultActualiz;
+            }
+        }
+        public int Orden
+        {
+            set
+            {
+                orden = value;
+            }
+            get
+            {
+                return orden;
             }
         }
         #region Propiedades redundantes

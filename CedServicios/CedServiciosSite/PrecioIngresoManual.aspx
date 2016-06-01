@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="PrecioIngresoManual.aspx.cs" Inherits="CedServicios.Site.PrecioIngresoManual" Theme="CedServicios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" Culture="en-GB" UICulture="en-GB" CodeBehind="PrecioIngresoManual.aspx.cs" Inherits="CedServicios.Site.PrecioIngresoManual" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <div class="container">
@@ -63,9 +63,10 @@
 						                GridLines="Both" OnRowCancelingEdit="preciosGridView_RowCancelingEdit"
 						                OnRowCommand="preciosGridView_RowCommand" OnRowEditing="preciosGridView_RowEditing"
 						                OnRowUpdated="preciosGridView_RowUpdated" OnRowUpdating="preciosGridView_RowUpdating"
+                                        OnRowDataBound="preciosGridView_RowDataBound"
 						                ShowFooter="false" ShowHeader="True" ToolTip="El separador de decimales a utilizar es el punto"
                                         DataKeyNames="IdArticulo, DescrArticulo">
-                                        <HeaderStyle Font-Bold="True"  />
+                                        <HeaderStyle Font-Bold="True" />
 					                </asp:GridView>
 				                </ContentTemplate>
 			                </asp:UpdatePanel>

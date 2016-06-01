@@ -7,10 +7,10 @@ namespace CedServicios.RN
 {
     public class ListaPrecio
     {
-        public static List<Entidades.ListaPrecio> ListaPorCuit(bool SoloVigentes, bool IncluirVacio, Entidades.Sesion Sesion)
+        public static List<Entidades.ListaPrecio> ListaPorCuit(bool SoloVigentes, bool IncluirVacio, bool ClasificadoPorOrden, Entidades.Sesion Sesion)
         {
             DB.ListaPrecio db = new DB.ListaPrecio(Sesion);
-            return db.ListaPorCuit(SoloVigentes, IncluirVacio);
+            return db.ListaPorCuit(SoloVigentes, IncluirVacio, ClasificadoPorOrden);
         }
         public static void Crear(Entidades.ListaPrecio ListaPrecio, Entidades.Sesion Sesion)
         {
@@ -47,6 +47,7 @@ namespace CedServicios.RN
             hasta.UltActualiz = Desde.UltActualiz;
             hasta.WF.Id = Desde.WF.Id;
             hasta.WF.Estado = Desde.WF.Estado;
+            hasta.Orden = Desde.Orden;
             return hasta;
         }
         public static List<Entidades.ListaPrecio> ListaSegunFiltros(string Cuit, string IdListaPrecio, string DescrListaPrecio, string Estado, Entidades.Sesion Sesion)

@@ -22,8 +22,8 @@ namespace CedServicios.DB
             for (int i = 0; i < ListasPrecio.Count; i++)
             {
                 string nombreListaPrecio = ListasPrecio[i].Id;
-                select.Append(", isnull(" + nombreListaPrecio + ".Valor, 0) as '" + nombreListaPrecio + "' ");
-                from.Append("left outer join Precio " + nombreListaPrecio + " on " + nombreListaPrecio + ".Cuit+" + nombreListaPrecio + ".IdListaPrecio+" + nombreListaPrecio + ".IdArticulo=Articulo.Cuit+'" + nombreListaPrecio + "'+Articulo.IdArticulo ");
+                select.Append(", isnull([" + nombreListaPrecio + "].Valor, 0) as '" + nombreListaPrecio + "' ");
+                from.Append("left outer join Precio [" + nombreListaPrecio + "] on [" + nombreListaPrecio + "].Cuit+[" + nombreListaPrecio + "].IdListaPrecio+[" + nombreListaPrecio + "].IdArticulo=Articulo.Cuit+'" + nombreListaPrecio + "'+Articulo.IdArticulo ");
             }
             where.Append("where Articulo.Cuit='" + sesion.Cuit.Nro + "' and Articulo.Estado='Vigente' ");
             DataTable dt = (DataTable)Ejecutar(select.ToString() + from.ToString() + where.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);

@@ -23,10 +23,17 @@ namespace CedServicios.Site
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     CUITTextBox.Text = sesion.Cuit.Nro;
                     CUITTextBox.Enabled = false;
-                    List<Entidades.ListaPrecio> listasPrecio = RN.ListaPrecio.ListaPorCuit(true, false, sesion);
+                    List<Entidades.ListaPrecio> listasPrecio = RN.ListaPrecio.ListaPorCuit(true, false, true, sesion);
                     ViewState["ListasPrecio"] = listasPrecio;
-                    ViewState["MatrizDePrecios"] = RN.Precio.Matriz(listasPrecio, sesion);
-                    ActualizarGrilla();
+                    if (listasPrecio.Count == 0)
+                    {
+                        MensajeLabel.Text = "No hay ninguna Lista de precios definida";
+                    }
+                    else
+                    {
+                        ViewState["MatrizDePrecios"] = RN.Precio.Matriz(listasPrecio, sesion);
+                        ActualizarGrilla();
+                    }
                 }
             }
         }
@@ -102,6 +109,16 @@ namespace CedServicios.Site
             ViewState["MatrizDePrecios"] = dt;
             preciosGridView.EditIndex = -1;
             ActualizarGrilla();
+        }
+        protected void preciosGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header)
+            {
+                for (int i = 3; i < e.Row.Cells.Count; i++)
+                {
+                    e.Row.Cells[i].Text = "&nbsp" + e.Row.Cells[i].Text + "&nbsp";
+                }
+            }
         }
         private void ActualizarGrilla()
         {

@@ -22,7 +22,7 @@ namespace CedServicios.Site
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     List<Entidades.ListaPrecio> lista = new List<Entidades.ListaPrecio>();
-                    lista = RN.ListaPrecio.ListaPorCuit(false, false, sesion);
+                    lista = RN.ListaPrecio.ListaPorCuit(false, false, false, sesion);
                     ListasPrecioGridView.DataSource = lista;
                     ViewState["ListasPrecio"] = lista;
                     ListasPrecioGridView.DataBind();
@@ -56,10 +56,12 @@ namespace CedServicios.Site
                 CUITTextBox.Text = listaPrecio.Cuit;
                 IdTextBox.Text = listaPrecio.Id;
                 DescrTextBox.Text = listaPrecio.Descr;
+                OrdenTextBox.Text = listaPrecio.Orden.ToString();
 
                 CUITTextBox.Enabled = false;
                 IdTextBox.Enabled = false;
                 DescrTextBox.Enabled = false;
+                OrdenTextBox.Enabled = false;
 
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", "ShowModalListaPrecio();", true);
 

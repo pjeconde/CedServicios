@@ -69,6 +69,23 @@
             </td>        
         </tr>
         <tr>
+            <td align="right" style="padding-right: 5px; padding-top:5px">
+                <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"
+                    ControlToValidate="OrdenTextBox" ErrorMessage="Orden" SetFocusOnError="True" ValidationExpression="[0-9]{0,2}">
+                    <asp:Label ID="Label4" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                </asp:RegularExpressionValidator>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" ControlToValidate="OrdenTextBox"
+                    ErrorMessage="Orden" SetFocusOnError="True">
+                    <asp:Label ID="Label5" runat="server" SkinID="IndicadorValidacion"></asp:Label>
+                </asp:RequiredFieldValidator>
+                <asp:Label ID="Label11" runat="server" Text="Orden"></asp:Label>
+            </td>
+            <td align="left" style="padding-top:5px">
+                <asp:TextBox ID="OrdenTextBox" runat="server" MaxLength="2" TabIndex="2" ToolTip="Debe ingresar sólo números."
+                    Width="40px"></asp:TextBox>
+            </td>
+        </tr>
+        <tr>
             <td>
             </td>
             <td style="height: 24px; padding-top:20px; text-align: left">

@@ -20,7 +20,7 @@ namespace CedServicios.Site
                 Domicilio.ListaProvincia = FeaEntidades.CodigosProvincia.CodigoProvincia.Lista();
                 DatosImpositivos.ListaCondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
                 DatosImpositivos.ListaCondIngBrutos = FeaEntidades.CondicionesIB.CondicionIB.Lista();
-                ListaPrecioDefaultPersona.ListasPrecio = RN.ListaPrecio.ListaPorCuit(true, true, sesion);
+                ListaPrecioDefaultPersona.ListasPrecio = RN.ListaPrecio.ListaPorCuit(true, true, false, sesion);
                 DataBind();
 
                 if (Funciones.SessionTimeOut(Session))

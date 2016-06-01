@@ -46,11 +46,13 @@ namespace CedServicios.Site
                     listaPrecio.Cuit = CUITTextBox.Text;
                     listaPrecio.Id = IdTextBox.Text;
                     listaPrecio.Descr = DescrTextBox.Text;
+                    listaPrecio.Orden = Convert.ToInt32(OrdenTextBox.Text);
                     RN.ListaPrecio.Crear(listaPrecio, sesion);
 
                     CUITTextBox.Enabled = false;
                     IdTextBox.Enabled = false;
                     DescrTextBox.Enabled = false;
+                    OrdenTextBox.Enabled = false;
                     AceptarButton.Enabled = false;
                     SalirButton.Text = "Salir";
 

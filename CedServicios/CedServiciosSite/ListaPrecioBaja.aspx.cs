@@ -25,10 +25,12 @@ namespace CedServicios.Site
                     CUITTextBox.Text = listaPrecio.Cuit;
                     IdTextBox.Text = listaPrecio.Id;
                     DescrTextBox.Text = listaPrecio.Descr;
+                    OrdenTextBox.Text = listaPrecio.Orden.ToString();
 
                     CUITTextBox.Enabled = false;
                     IdTextBox.Enabled = false;
                     DescrTextBox.Enabled = false;
+                    OrdenTextBox.Enabled = false;
 
                     if (listaPrecio.WF.Estado == "Vigente")
                     {

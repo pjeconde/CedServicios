@@ -75,6 +75,10 @@
                                     <headerstyle horizontalalign="center" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>
+                                <asp:BoundField DataField="Orden" HeaderText="orden" SortExpression="Orden">
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="left" wrap="False" />
+                                </asp:BoundField>
                             </Columns>
                         </asp:GridView>
                     </asp:Panel>

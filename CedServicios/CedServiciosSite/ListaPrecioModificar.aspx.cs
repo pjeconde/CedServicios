@@ -24,6 +24,7 @@ namespace CedServicios.Site
                     CUITTextBox.Text = listaPrecio.Cuit;
                     IdTextBox.Text = listaPrecio.Id;
                     DescrTextBox.Text = listaPrecio.Descr;
+                    OrdenTextBox.Text = listaPrecio.Orden.ToString();
                     CUITTextBox.Enabled = false;
                     IdTextBox.Enabled = false;
                     DescrTextBox.Focus();
@@ -50,6 +51,7 @@ namespace CedServicios.Site
                     listaPrecioHasta.Cuit = CUITTextBox.Text;
                     listaPrecioHasta.Id = IdTextBox.Text;
                     listaPrecioHasta.Descr = DescrTextBox.Text;
+                    listaPrecioHasta.Orden = Convert.ToInt32(OrdenTextBox.Text);
                     RN.ListaPrecio.Modificar(listaPrecioDesde, listaPrecioHasta, sesion);
 
                     CUITTextBox.Enabled = false;

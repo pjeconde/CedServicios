@@ -130,6 +130,24 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox DescrTextBox;
         
         /// <summary>
+        /// Control Label2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
+        /// Control OrdenTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox OrdenTextBox;
+        
+        /// <summary>
         /// Control ListaPrecioPanel.
         /// </summary>
         /// <remarks>
