@@ -213,9 +213,27 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     {
                         ivaVentas.IvaVentasTotXImpuestos = listaTotXIMP;
                     }
+                    else
+                    {
+                        //Para arreglar bug en towebs.
+                        Entidades.IvaVentasTotXImpuestos totXimp = new Entidades.IvaVentasTotXImpuestos();
+                        totXimp.Descr = "";
+                        totXimp.ImporteTotal = 0;
+                        ivaVentas.IvaVentasTotXImpuestos.Add(totXimp);
+                    }
                     if (listaTotXIVA.Count != 0)
                     {
                         ivaVentas.IvaVentasTotXIVA = listaTotXIVA;
+                    }
+                    else
+                    {
+                        //Para arreglar bug en towebs.
+                        Entidades.IvaVentasTotXIVA totXiva = new Entidades.IvaVentasTotXIVA();
+                        totXiva.Concepto = "";
+                        totXiva.Alicuota = 0;
+                        totXiva.ImporteNG = 0;
+                        totXiva.ImporteTotal = 0;
+                        ivaVentas.IvaVentasTotXIVA.Add(totXiva);
                     }
                     Session["formatoRptExportar"] = FormatosRptExportarDropDownList.SelectedValue;
                     Session["mostrarFechaYHora"] = FechaYHoraCheckBox.Checked;

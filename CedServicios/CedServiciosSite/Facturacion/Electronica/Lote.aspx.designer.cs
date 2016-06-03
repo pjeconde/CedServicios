@@ -1162,7 +1162,7 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::CedServicios.Site.Facturacion.Electronica.Referencias InfoReferencias;
+        protected global::CedServicios.Site.Facturacion.Electronica.ReferenciasAFIP InfoReferencias;
         
         /// <summary>
         /// DatosComerialesPanel control.

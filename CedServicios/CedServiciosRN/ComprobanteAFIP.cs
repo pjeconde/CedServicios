@@ -176,6 +176,49 @@ namespace CedServicios.RN
                 objFEDetalleRequest.MonCotiz = lc.comprobante[0].resumen.tipo_de_cambio;
                 string TipoComp = lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString();
 
+                //Referencias
+                if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
+                {
+                    if (lc.comprobante[0].cabecera.informacion_comprobante.referencias.Length > 0)
+                    {
+                        int CantReferenciasAFIP = 0;
+                        for (int j = 0; j < lc.comprobante[0].cabecera.informacion_comprobante.referencias.Length; j++)
+                        {
+                            if (lc.comprobante[0].cabecera.informacion_comprobante.referencias[j] == null)
+                            {
+                                break;
+                            }
+                            if (lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip == "S")
+                            {
+                                CantReferenciasAFIP += 1;
+                            }
+                            
+                        }
+                        if (CantReferenciasAFIP != 0)
+                        {
+                            objFEDetalleRequest.CbtesAsoc = new ar.gov.afip.wsfev1.CbteAsoc[CantReferenciasAFIP];
+                        }
+                        CantReferenciasAFIP = 0;
+
+                        for (int j = 0; j < lc.comprobante[0].cabecera.informacion_comprobante.referencias.Length; j++)
+                        {
+                            if (lc.comprobante[0].cabecera.informacion_comprobante.referencias[j] == null)
+                            {
+                                break;
+                            }
+                            if (lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip == "S")
+                            {
+                                objFEDetalleRequest.CbtesAsoc[CantReferenciasAFIP] = new ar.gov.afip.wsfev1.CbteAsoc();
+                                objFEDetalleRequest.CbtesAsoc[CantReferenciasAFIP].Tipo = lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
+                                objFEDetalleRequest.CbtesAsoc[CantReferenciasAFIP].PtoVta = Convert.ToInt32(lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Substring(0, 4));
+                                objFEDetalleRequest.CbtesAsoc[CantReferenciasAFIP].Nro = Convert.ToInt32(lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Substring(5, 8));
+                                CantReferenciasAFIP += 1;
+                            }
+                        }
+                    }
+                }
+
+                //Impuestos
                 double impTrib = 0;
                 if (lc.comprobante[0].resumen.impuestos.Length > 0)
                 {

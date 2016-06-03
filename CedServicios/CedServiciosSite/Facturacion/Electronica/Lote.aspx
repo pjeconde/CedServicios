@@ -6,7 +6,7 @@
 <%@ Register Src="Detalle.ascx" TagName="Detalle" TagPrefix="uc4" %>
 <%@ Register Src="Extensiones/Comerciales.ascx" TagName="Comerciales" TagPrefix="uc3" %>
 <%@ Register Src="Permisos.ascx" TagName="Permisos" TagPrefix="uc2" %>
-<%@ Register Src="Referencias.ascx" TagName="Referencias" TagPrefix="uc9" %>
+<%@ Register Src="ReferenciasAFIP.ascx" TagName="ReferenciasAFIP" TagPrefix="uc9" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <%@ Register Src="~/Facturacion/Electronica/Impuestos.ascx" TagName="ImpuestosGlobales" TagPrefix="uc8" %>
 <%@ Register Src="~/Facturacion/Electronica/Descuentos.ascx" TagName="DescuentosGlobales" TagPrefix="DescUC" %>
@@ -1056,7 +1056,7 @@
                                 <table style="width:1282px">
                                     <tr>
                                         <td style="height:19px; text-align:center">
-                                            <uc9:Referencias ID="InfoReferencias" runat="server"></uc9:Referencias>
+                                            <uc9:ReferenciasAFIP ID="InfoReferencias" runat="server"></uc9:ReferenciasAFIP>
                                         </td>
                                     </tr>
                                     <tr>
