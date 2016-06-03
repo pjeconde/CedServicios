@@ -350,6 +350,17 @@ namespace CedServicios.Entidades
                 }
             }
         }
+        public string RazonSocialeIdPersona
+        {
+            get
+            {
+                if (idPersona == String.Empty || idPersona == null)
+                    return razonSocial;
+                else
+                    return razonSocial + " - " + idPersona;
+            }
+        }
+
         #endregion
     }
 }

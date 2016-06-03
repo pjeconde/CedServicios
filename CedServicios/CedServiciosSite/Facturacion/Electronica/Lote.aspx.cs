@@ -1947,7 +1947,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             CompradorDropDownList.Visible = true;
                             CompradorDropDownList.DataValueField = "ClavePrimaria";
-                            CompradorDropDownList.DataTextField = "RazonSocial";
+                            CompradorDropDownList.DataTextField = "RazonSocialeIdPersona";
                             Entidades.Persona persona = new Entidades.Persona();
                             System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
                             persona.RazonSocial = "";
