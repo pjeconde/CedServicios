@@ -1,3 +1,13 @@
+/* OJO QUE SE DESCONCHA LA FK DE LogDetalle a Log
+alter table Log add IdLognuevo int identity (1,1) not null
+alter table Log drop column IdLog
+EXEC sp_rename 'Log.IdLognuevo', 'IdLog', 'COLUMN';
+alter table LogDetalle add IdLogDetallenuevo int identity (1,1) not null
+alter table LogDetalle drop column IdLogDetalle
+*/
+
+EXEC sp_rename 'LogDetalle.IdLogDetallenuevo', 'IdLogDetalle', 'COLUMN';
+go
 ALTER TABLE [dbo].[Medio] ADD CONSTRAINT [PK_Table_Medio] PRIMARY KEY CLUSTERED 
 (
 	[IdMedio] ASC

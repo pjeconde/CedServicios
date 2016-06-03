@@ -24,13 +24,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ResetearGrillas();
                 //DataBind();
             }
-            else
-            {
-                //((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
-                //((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
-                //((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
-                //((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
-            }
 		}
 
         public string PuntoDeVenta
@@ -76,31 +69,32 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 case "Comun":
                                 case "RG2904":
+                                case "BonoFiscal":
                                     ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).DataSource = FeaEntidades.TipoComprobanteAFIP.TipoComprobanteAFIP.Lista();
                                     ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).Visible = true;
                                     break;
                                 default:
                                     ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).DataSource = FeaEntidades.TipoComprobanteAFIP.TipoComprobanteAFIP.Lista();
-                                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).Visible = true;
+                                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).Visible = false;
                                     break;
                             }
                         }
                         catch
                         {
                             ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).DataSource = FeaEntidades.TipoComprobanteAFIP.TipoComprobanteAFIP.Lista();
-                            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).Visible = true;
+                            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).Visible = false;
                         }
                     }
                     else
                     {
                         ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).DataSource = FeaEntidades.TipoComprobanteAFIP.TipoComprobanteAFIP.Lista();
-                        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).Visible = true;
+                        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).Visible = false;
                     }
                 }
                 else
                 {
                     ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).DataSource = FeaEntidades.TipoComprobanteAFIP.TipoComprobanteAFIP.Lista();
-                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).Visible = true;
+                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).Visible = false;
                 }
                 ((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).DataBind();
             }
@@ -133,9 +127,18 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 case "Comun":
                                 case "RG2904":
                                 case "BonoFiscal":
-                                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-                                    ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-                                    ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+                                    if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).SelectedValue.ToString() == "S")
+                                    {
+                                        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPSinInf();
+                                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
+                                        ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
+                                    }
+                                    else
+                                    {
+                                        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+                                        ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+                                    }
                                     break;
                                 case "Exportacion":
                                     ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
@@ -278,22 +281,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			referenciasGridView.DataBind();
 			BindearDropDownLists();
 
-            AjustarCodigoReferenciaEnEdicion(sender, e);
             AjustarTipoComprobanteAFIPEnEdicion(sender, e);
-
-            //((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_permisoEdit")).DataValueField = "Codigo";
-            //((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_permisoEdit")).DataTextField = "Descr";
-            //((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_permisoEdit")).DataSource = FeaEntidades.DestinosPais.DestinoPais.ListaSinInformar();
-            //((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_permisoEdit")).DataBind();
-
-			try
-			{
-                ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"])[e.NewEditIndex].codigo_de_referencia.ToString());
-				li.Selected = true;
-			}
-			catch
-			{
-			}
             try
             {
                 ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_comprobante_afipEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"])[e.NewEditIndex].tipo_comprobante_afip.ToString());
@@ -302,6 +290,17 @@ namespace CedServicios.Site.Facturacion.Electronica
             catch
             {
             }
+
+            AjustarCodigoReferenciaEnEdicion(sender, e);
+			try
+			{
+                ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"])[e.NewEditIndex].codigo_de_referencia.ToString());
+				li.Selected = true;
+			}
+			catch
+			{
+			}
+            
 		}
         private void AjustarTipoComprobanteAFIPEnEdicion(object sender, GridViewEditEventArgs e)
         {
@@ -327,6 +326,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             case "Comun":
                             case "RG2904":
+                            case "BonoFiscal":
                                 ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_comprobante_afipEdit")).DataSource = FeaEntidades.TipoComprobanteAFIP.TipoComprobanteAFIP.Lista();
                                 ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_comprobante_afipEdit")).DataBind();
                                 ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_comprobante_afipEdit")).Visible = true;
@@ -379,16 +379,21 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             case "Comun":
                             case "RG2904":
-                                ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-                                ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
-                                ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
-                                ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
-                                break;
                             case "BonoFiscal":
-                                ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-                                ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
-                                ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
-                                ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
+                                if (((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_comprobante_afipEdit")).SelectedValue.ToString() == "S")
+                                {
+                                    ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPSinInf();
+                                    ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
+                                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = true;
+                                    ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
+                                }
+                                else
+                                {
+                                    ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                                    ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
+                                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+                                    ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
+                                }
                                 break;
                             case "Exportacion":
                                 ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
@@ -545,51 +550,34 @@ namespace CedServicios.Site.Facturacion.Electronica
 
         protected void ddltipo_comprobante_afip_SelectedIndexChanged(object sender, System.EventArgs e)
         {
-            Response.Write("Function Called");
-            DropDownList ddlAFIP = (DropDownList)sender;
-            string educationEstablishmentCode = ddlAFIP.SelectedValue;
+            //DropDownList ddlAFIP = (DropDownList)sender;
+            //string educationEstablishmentCode = ddlAFIP.SelectedValue;
 
-            // Get the GridViewRow in which this master DropDownList exists
-            GridViewRow row = (GridViewRow)ddlAFIP.NamingContainer;
-
-            DropDownList ddlREF = (DropDownList)row.FindControl("ddlcodigo_de_referencia");
-            ddlREF.DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-            ddlREF.DataValueField = "Codigo";
-            ddlREF.DataTextField = "Descr";
-            ddlREF.DataBind();
+            ////Get the GridViewRow in which this master DropDownList exists
+            //GridViewRow row = (GridViewRow)ddlAFIP.NamingContainer;
             
-            TextBox TextREF = (TextBox)row.FindControl("txtdato_de_referencia");
-            TextREF.Text = "1234-12345678";
+            //DropDownList ddlREF = (DropDownList)row.FindControl("ddlcodigo_de_referencia");
+            //ddlREF.DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+            //ddlREF.DataValueField = "Codigo";
+            //ddlREF.DataTextField = "Descr";
+            //ddlREF.DataBind();
+            //TextBox TextREF = (TextBox)row.FindControl("txtdato_de_referencia");
+            //TextREF.Text = "1234-12345678";
 
-            row.DataBind();
-
-            //((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
-            //((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
-            //((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
-            //((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
-            //DataBind();
-
-
+            AjustarCodigosDeReferenciaEnFooter();
+            referenciasUpdatePanel.Update();
         }
 
-        //protected void ddlEditEducationEstablishment_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    // Get the master DropDownList and its value
-        //    DropDownList ddlEditEducationEstablishment = (DropDownList)sender;
-        //    string educationEstablishmentCode = ddlEditEducationEstablishment.SelectedValue;
-
-        //    // Get the GridViewRow in which this master DropDownList exists
-        //    GridViewRow row = (GridViewRow)ddlEditEducationEstablishment.NamingContainer;
-
-        //    // Find all of the other DropDownLists within the same row and bind them
-        //    DropDownList ddlEditSchool = (DropDownList)row.FindControl("ddlEditSchool");
-        //    ddlEditSchool.DataSource = schoolBLO.SelectSchoolOfEstablishment(educationEstablishmentCode);
-        //    ddlEditSchool.DataValueField = "school_code";
-        //    ddlEditSchool.DataTextField = "school";
-        //    ddlEditSchool.DataBind();
-
-        //    // etc...
-        //}
+        protected void ddltipo_comprobante_afipEdit_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            DropDownList ddlAFIP = (DropDownList)sender;
+            GridViewRow row = (GridViewRow)ddlAFIP.NamingContainer;
+            GridView griview = (GridView)row.NamingContainer;
+            GridViewEditEventArgs ev = new GridViewEditEventArgs(row.RowIndex);
+            AjustarCodigoReferenciaEnEdicion(griview, ev);
+            
+            referenciasUpdatePanel.Update();
+        }
 
         protected void referenciasGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
@@ -600,9 +588,20 @@ namespace CedServicios.Site.Facturacion.Electronica
             //        DropDownList ddl = e.Row.FindControl("ddltipo_comprobante_afip") as DropDownList;
             //        if (ddl != null)
             //        {
-            //            ddl.SelectedIndexChanged += new EventHandler(ddltipo_comprobante_afip_SelectedIndexChanged);
+            //            
             //        }
             //    }
+            //}
+        }
+
+        protected void referenciasGridView_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            //Control ddlTipoCompAFIP = e.Row.Cells[0].FindControl("ddltipo_comprobante_afip");
+            //if (ddlTipoCompAFIP != null)
+            //{
+            //    MasterPage Master = this.Parent.Page.Master as MasterPage;
+            //    ScriptManager sm = ((ScriptManager)Master.FindControl("MasterScriptManager"));
+            //    sm.RegisterAsyncPostBackControl(ddlTipoCompAFIP);
             //}
         }
 	}
