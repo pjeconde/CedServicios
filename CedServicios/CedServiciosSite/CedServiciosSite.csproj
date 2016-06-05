@@ -137,6 +137,7 @@
     <Content Include="ListaPrecioModificar.aspx" />
     <Content Include="ListaPrecioReemplazar.aspx" />
     <Content Include="ListaPrecioSeleccionar.aspx" />
+    <Content Include="PrecioImportacionExcel.aspx" />
     <Content Include="PrecioIngresoManual.aspx" />
     <Content Include="PruebasBS-SinMaster.aspx" />
     <Content Include="PruebasBS.aspx" />
@@ -646,6 +647,13 @@
     </Compile>
     <Compile Include="ListaPrecioSeleccionar.aspx.designer.cs">
       <DependentUpon>ListaPrecioSeleccionar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PrecioImportacionExcel.aspx.cs">
+      <DependentUpon>PrecioImportacionExcel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PrecioImportacionExcel.aspx.designer.cs">
+      <DependentUpon>PrecioImportacionExcel.aspx</DependentUpon>
     </Compile>
     <Compile Include="PrecioIngresoManual.aspx.cs">
       <DependentUpon>PrecioIngresoManual.aspx</DependentUpon>
@@ -1388,6 +1396,14 @@
     <ProjectReference Include="..\FeaEntidades\FeaEntidades.csproj">
       <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
       <Name>FeaEntidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileHelpers.ExcelStorage\FileHelpers.ExcelStorage.2005.csproj">
+      <Project>{B3F2B976-73D5-49C7-BEAA-BF62E233132A}</Project>
+      <Name>FileHelpers.ExcelStorage.2005</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\FileHelpers\FileHelpers.2005.csproj">
+      <Project>{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}</Project>
+      <Name>FileHelpers.2005</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

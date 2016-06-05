@@ -22,7 +22,7 @@ namespace CedServicios.DB
             for (int i = 0; i < ListasPrecio.Count; i++)
             {
                 string nombreListaPrecio = ListasPrecio[i].Id;
-                select.Append(", isnull([" + nombreListaPrecio + "].Valor, 0) as '" + nombreListaPrecio + "' ");
+                select.Append(", isnull(convert(varchar(20), [" + nombreListaPrecio + "].Valor), '') as '" + nombreListaPrecio + "' ");
                 from.Append("left outer join Precio [" + nombreListaPrecio + "] on [" + nombreListaPrecio + "].Cuit+[" + nombreListaPrecio + "].IdListaPrecio+[" + nombreListaPrecio + "].IdArticulo=Articulo.Cuit+'" + nombreListaPrecio + "'+Articulo.IdArticulo ");
             }
             where.Append("where Articulo.Cuit='" + sesion.Cuit.Nro + "' and Articulo.Estado='Vigente' ");
@@ -42,8 +42,11 @@ namespace CedServicios.DB
             {
                 for (int j = 0; j < ListasPrecio.Count; j++)
                 {
-                    double precio = Convert.ToDouble(Matriz.Rows[i][ListasPrecio[j].Id]);
-                    if (precio != 0) a.AppendLine("insert Precio values ('" + sesion.Cuit.Nro + "', '" + ListasPrecio[j].Id + "', '" + Matriz.Rows[i]["IdArticulo"].ToString() + "', " + precio + ") ");
+                    if (Matriz.Rows[i][ListasPrecio[j].Id].ToString() != "")
+                    {
+                        double precio = Convert.ToDouble(Matriz.Rows[i][ListasPrecio[j].Id]);
+                        a.AppendLine("insert Precio values ('" + sesion.Cuit.Nro + "', '" + ListasPrecio[j].Id + "', '" + Matriz.Rows[i]["IdArticulo"].ToString() + "', " + precio + ") ");
+                    }
                 }
             }
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);

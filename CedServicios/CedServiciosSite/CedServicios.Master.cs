@@ -145,6 +145,7 @@ namespace CedServicios.Site
                     Response.Redirect("~/PrecioIngresoManual.aspx");
                     break;
                 case "Artículos|Precios|Importación desde Excel":
+                    Response.Redirect("~/PrecioImportacionExcel.aspx");
                     break;
                case "Contratos|Alta":
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("VentaContrato");
