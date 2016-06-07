@@ -25,6 +25,11 @@ namespace CedServicios.Entidades
             descr = DescrListaPrecio;
             wF = new WF();
         }
+        public ListaPrecio(string IdListaPrecio)
+        {
+            id = IdListaPrecio;
+            wF = new WF();
+        }
 
         public string Cuit
         {

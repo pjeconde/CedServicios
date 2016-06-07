@@ -15,11 +15,17 @@ namespace CedServicios.Site
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-            //ModalPopupExtender1.Hide();
+            ModalPopupExtender1.Hide();
         }
         protected void PruebaButton_Click(object sender, EventArgs e)
         {
-            RN.EnvioCorreo.ReporteActividad(DateTime.Now, DateTime.Now, (Entidades.Sesion)Session["Sesion"]);
+            ModalPopupExtender1.Show();
+            //RN.EnvioCorreo.ReporteActividad(DateTime.Now, DateTime.Now, (Entidades.Sesion)Session["Sesion"]);
+        }
+        protected void ValorTextBox_TextChanged(object sender, EventArgs e)
+        {
+            ValorTextBox.Text = "Hola mundo";
+            ModalPopupExtender1.Show();
         }
     }
 }

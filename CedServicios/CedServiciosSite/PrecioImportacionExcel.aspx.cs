@@ -33,7 +33,12 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (!IsPostBack)
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                CUITTextBox.Text = sesion.Cuit.Nro;
+                CUITTextBox.Enabled = false;
+            }
         }
 
         protected void FileUploadButton_Click(object sender, EventArgs e)
@@ -77,32 +82,6 @@ namespace CedServicios.Site
                 }
             }
         }
-        private Entidades.ListaPrecio VerificarNombreListasDePrecio(string NombreLista, Entidades.Sesion sesion)
-        {
-            Entidades.ListaPrecio lista = new Entidades.ListaPrecio();
-            if (NombreLista == "")
-            {
-                MensajeLabel.Text = "";
-                throw new Exception();
-            }
-            List<Entidades.ListaPrecio> l = RN.ListaPrecio.ListaSegunFiltros(sesion.Cuit.Nro, "", NombreLista, "", sesion);
-            if (l.Count == 0)
-            {
-                MensajeLabel.Text = "No existe en la base de datos la lista de precios: (" + NombreLista + ")";
-                throw new Exception();
-            }
-            else
-            {
-                if (l[0].Estado != "Vigente")
-                {
-                    MensajeLabel.Text = "No está vigente en la base de datos la lista de precios: (" + NombreLista + ")";
-                    throw new Exception();
-                }
-                lista = l[0];
-            }
-            return lista; 
-        }
-
         private void LeerExcel()
         {
             try
@@ -116,8 +95,7 @@ namespace CedServicios.Site
 
                 List<Entidades.ListaPrecio> listasPrecio = new List<Entidades.ListaPrecio>();
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                Entidades.ListaPrecio lAux = new Entidades.ListaPrecio();
-
+                
                 if (resCab.Length > 1)
                 {
                     MensajeLabel.Text = "Proceso cancelado: La cabecera del archivo excel debe tener un solo renglón.";
@@ -132,23 +110,19 @@ namespace CedServicios.Site
                 {
                     try
                     {
-                        lAux = VerificarNombreListasDePrecio(resCab[0].Lista1.Trim(), sesion);
-                        listasPrecio.Add(lAux);
-                        lAux = VerificarNombreListasDePrecio(resCab[0].Lista2.Trim(), sesion);
-                        listasPrecio.Add(lAux);
-                        lAux = VerificarNombreListasDePrecio(resCab[0].Lista3.Trim(), sesion);
-                        listasPrecio.Add(lAux);
-                        lAux = VerificarNombreListasDePrecio(resCab[0].Lista4.Trim(), sesion);
-                        listasPrecio.Add(lAux);
-                        lAux = VerificarNombreListasDePrecio(resCab[0].Lista5.Trim(), sesion);
-                        listasPrecio.Add(lAux);
+                        listasPrecio.Add(new Entidades.ListaPrecio(resCab[0].Lista1.Trim()));
+                        listasPrecio.Add(new Entidades.ListaPrecio(resCab[0].Lista2.Trim()));
+                        listasPrecio.Add(new Entidades.ListaPrecio(resCab[0].Lista3.Trim()));
+                        listasPrecio.Add(new Entidades.ListaPrecio(resCab[0].Lista4.Trim()));
+                        listasPrecio.Add(new Entidades.ListaPrecio(resCab[0].Lista5.Trim()));
+                        listasPrecio.Add(new Entidades.ListaPrecio(resCab[0].Lista6.Trim()));
+                        listasPrecio.Add(new Entidades.ListaPrecio(resCab[0].Lista7.Trim()));
+                        listasPrecio.Add(new Entidades.ListaPrecio(resCab[0].Lista8.Trim()));
+                        listasPrecio.Add(new Entidades.ListaPrecio(resCab[0].Lista9.Trim()));
+                        listasPrecio.Add(new Entidades.ListaPrecio(resCab[0].Lista10.Trim()));
                     }
-                    catch 
+                    catch
                     {
-                        if (MensajeLabel.Text != "") 
-                        { 
-                            return; 
-                        }
                     }
                 }
 
@@ -175,7 +149,7 @@ namespace CedServicios.Site
                 List<Entidades.ListaPrecio> listasPrecioNew = (List<Entidades.ListaPrecio>)ViewState["ListasPrecio"];
                 RN.Precio.ImpactarMatriz(listasPrecioNew, dt, sesion);
                 MensajeLabel.Enabled = true;
-                MensajeLabel.Text = "Proceso concluido: Las Listas de Precios fueron actualizadas satisfactoriamente.\n";
+                MensajeLabel.Text = "PROCESO CONCLUIDO SATISFACTORIAMENTE.\n";
                 string listasImp = "Listas importadas: ";
                 foreach (Entidades.ListaPrecio lp in listasPrecio)
                 {
@@ -183,9 +157,10 @@ namespace CedServicios.Site
                     {
                         listasImp += ", ";
                     }
-                    listasImp += lp.Descr;
+                    listasImp += lp.Id;
                 }
-                MensajeLabel.Text += "\n" + listasImp;
+                MensajeLabel.Text += listasImp + "\n";
+                MensajeLabel.Text += "Cantidad total de artículos: " + dt.Rows.Count;
                 MensajeLabel.Enabled = false;
             }
             catch (Exception ex)
@@ -202,7 +177,7 @@ namespace CedServicios.Site
             matrizDePrecios.Columns.Add(new DataColumn("DescrArticulo", typeof(string)));
             foreach (Entidades.ListaPrecio lp in llp)
             {
-                matrizDePrecios.Columns.Add(new DataColumn(lp.Descr, typeof(string)));
+                matrizDePrecios.Columns.Add(new DataColumn(lp.Id, typeof(string)));
             }
             for (int i = 0; i < resDet.Length; i++)
             {

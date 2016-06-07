@@ -33,6 +33,8 @@ namespace CedServicios.DB
         {
             StringBuilder a = new StringBuilder(String.Empty);
             a.Append("delete Precio where Cuit='" + sesion.Cuit.Nro + "' and IdListaPrecio in (");
+            StringBuilder b = new StringBuilder(String.Empty);
+            b.AppendLine("CREATE TABLE #ArticuloPlanillaPrecios ([IdArticulo] [varchar](20) NOT NULL) ");
             for (int i = 0; i < ListasPrecio.Count; i++)
             {
                 if (i == 0) a.Append("'" + ListasPrecio[i].Id + "'"); else a.Append(", '" + ListasPrecio[i].Id + "'");
@@ -40,6 +42,7 @@ namespace CedServicios.DB
             a.AppendLine(") ");
             for (int i = 0; i < Matriz.Rows.Count; i++)
             {
+                b.AppendLine("insert #ArticuloPlanillaPrecios values ('" + Matriz.Rows[i]["IdArticulo"].ToString() + "') ");
                 for (int j = 0; j < ListasPrecio.Count; j++)
                 {
                     if (Matriz.Rows[i][ListasPrecio[j].Id].ToString() != "")
@@ -49,7 +52,23 @@ namespace CedServicios.DB
                     }
                 }
             }
-            Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+            b.AppendLine("select IdArticulo from #ArticuloPlanillaPrecios where IdArticulo not in (select IdArticulo from Articulo where Cuit='" + sesion.Cuit.Nro + "') ");
+            b.AppendLine("DROP TABLE #ArticuloPlanillaPrecios ");
+            DataTable dt = (DataTable)Ejecutar(b.ToString(), TipoRetorno.TB, Transaccion.Acepta, sesion.CnnStr);
+            if (dt.Rows.Count == 0)
+            {
+                Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+            }
+            else
+            {
+                StringBuilder articulosInexistentes = new StringBuilder(String.Empty);
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    if (articulosInexistentes.ToString() != String.Empty) articulosInexistentes.Append(", ");
+                    articulosInexistentes.Append(dt.Rows[i]["IdArticulo"].ToString());
+                }
+                throw new EX.Precio.ArticuloInex(articulosInexistentes.ToString());
+            }
         }
     }
 }

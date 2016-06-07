@@ -84,7 +84,7 @@ namespace CedServicios.Site
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Ingreso Manual", "Ingreso Manual"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Importación desde Excel", "Importación desde Excel"); mItem.Selectable = false;
+                    mItem = new MenuItem("Importación desde archivo Excel", "Importación desde archivo Excel"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
 
             mItem = new MenuItem("Contratos", "Contratos"); mItem.Selectable = false;

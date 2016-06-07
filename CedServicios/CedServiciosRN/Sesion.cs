@@ -117,7 +117,7 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Artículos|Listas de Precios|Reemplazo");
                         opcionesHabilitadas.Add("Artículos|Listas de Precios|Consulta");
                         opcionesHabilitadas.Add("Artículos|Precios|Ingreso Manual");
-                        opcionesHabilitadas.Add("Artículos|Precios|Importación desde Excel");
+                        opcionesHabilitadas.Add("Artículos|Precios|Importación desde archivo Excel");
                         opcionesHabilitadas.Add("Contratos|Alta");
                         opcionesHabilitadas.Add("Contratos|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Contratos|Modificación");
@@ -163,7 +163,7 @@ namespace CedServicios.RN
                         //opcionesHabilitadas.Add("Artículos|Listas de Precios|Reemplazo");
                         opcionesHabilitadas.Add("Artículos|Listas de Precios|Consulta");
                         //opcionesHabilitadas.Add("Artículos|Precios|Ingreso Manual");
-                        //opcionesHabilitadas.Add("Artículos|Precios|Importación desde Excel");
+                        //opcionesHabilitadas.Add("Artículos|Precios|Importación desde archivo Excel");
                         //opcionesHabilitadas.Add("Contratos|Alta");
                         //opcionesHabilitadas.Add("Contratos|Baja/Anul.baja");
                         //opcionesHabilitadas.Add("Contratos|Modificación");

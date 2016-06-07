@@ -144,7 +144,7 @@ namespace CedServicios.Site
                 case "Artículos|Precios|Ingreso Manual":
                     Response.Redirect("~/PrecioIngresoManual.aspx");
                     break;
-                case "Artículos|Precios|Importación desde Excel":
+                case "Artículos|Precios|Importación desde archivo Excel":
                     Response.Redirect("~/PrecioImportacionExcel.aspx");
                     break;
                case "Contratos|Alta":

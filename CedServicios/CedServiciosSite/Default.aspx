@@ -15,13 +15,13 @@
         <table width="100%">
             <tr>
                 <td align="center">
-                    <asp:Label ID="MensajePopupLabel" runat="server" Text="xxxxxxxxxx" SkinID="TextoMediano"></asp:Label>
+                    <asp:Label ID="MensajePopupLabel" runat="server" Text="Valor" SkinID="TextoMediano"></asp:Label>
+                    <asp:TextBox ID="ValorTextBox" runat="server" AutoPostBack="true" OnTextChanged="ValorTextBox_TextChanged"></asp:TextBox>
                 </td>
             </tr>
             <tr>
                 <td align="center" style="padding-top:20px">
-                    <asp:Button ID="SalirPuntoVtaButton" runat="server" Text="Continuar" 
-                        onclick="SalirButton_Click"/>
+                    <asp:Button ID="SalirPuntoVtaButton" runat="server" Text="Salir" onclick="SalirButton_Click"/>
                 </td>
             </tr>
         </table>

@@ -44,6 +44,16 @@ namespace CedServicios.DB
             }
             return lista;
         }
+        public string ListaPorCuitString(bool SoloVigentes, bool IncluirVacio, bool ClasificadoPorOrden)
+        {
+            StringBuilder a = new StringBuilder(String.Empty);
+            List<Entidades.ListaPrecio> lista = ListaPorCuit(SoloVigentes, IncluirVacio, ClasificadoPorOrden);
+            for (int i = 0; i < lista.Count; i++)
+            {
+                a.Append("[" + lista[i].Id + "]");
+            }
+            return a.ToString();
+        }
         private void Copiar(DataRow Desde, Entidades.ListaPrecio Hasta)
         {
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);

@@ -11,18 +11,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding-right:5px; padding-top: 20px; text-align:right">
-                            <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
-                                ControlToValidate="CUITTextBox" ErrorMessage="CUIT" SetFocusOnError="True" ValidationExpression="[0-9]{11}">
-                                <asp:Label ID="Label1" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                            </asp:RegularExpressionValidator>
-                            <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" ControlToValidate="CUITTextBox"
-                                ErrorMessage="CUIT" SetFocusOnError="True">
-                                <asp:Label ID="Label2" runat="server" SkinID="IndicadorValidacion"></asp:Label>
-                            </asp:RequiredFieldValidator>
+                        <td style="padding-right:5px; padding-top: 20px; text-align:center">
                             <asp:Label ID="Label3" runat="server" Text="Listas de Precios pertenecientes al CUIT"></asp:Label>
-                        </td>
-                        <td style="padding-top:20px; text-align: left">
                             <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
                         </td>
                     </tr>
@@ -35,13 +25,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="2" style="padding-top:5px">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                        </td>
-                        <td style="height: 24px; padding-top:20px; text-align: left">
+                        <td colspan="2" style="height: 24px; padding-top:25px; text-align:center">
                             <asp:Button ID="AceptarButton" runat="server" TabIndex="504" Text="Aceptar" onclick="AceptarButton_Click" />
                             <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="505" Text="Cancelar" onclick="SalirButton_Click" />
                         </td>

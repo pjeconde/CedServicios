@@ -582,4 +582,57 @@ namespace CedServicios.EX
             return a.ToString();
         }
     }
+    namespace Precio
+    {
+        [Serializable]
+        public class BaseApplicationException : CedServicios.EX.BaseApplicationException
+        {
+            public BaseApplicationException(string TextoError)
+                : base(TextoError)
+            {
+            }
+            public BaseApplicationException(string TextoError, Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public BaseApplicationException(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class ArticuloInex : CedServicios.EX.Validaciones.BaseApplicationException
+        {
+            static string TextoError = "Los precios de la planilla NO FUERON IMPORTADOS porque hay artículos desconocidos.  Corrija esta situación y vuelva a importar los precios.  Artículo(s) inexistente(s):";
+            public ArticuloInex(string descrProp)
+                : base(TextoError + " " + descrProp + ".")
+            {
+            }
+            public ArticuloInex(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public ArticuloInex(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+        [Serializable]
+        public class ListaPrecioInex : CedServicios.EX.Validaciones.BaseApplicationException
+        {
+            static string TextoError = "Los precios de la planilla NO FUERON IMPORTADOS porque hay listas de precios desconocidas.  Corrija esta situación y vuelva a importar los precios.  Lista(s) de Precios inexistente(s):";
+            public ListaPrecioInex(string descrProp)
+                : base(TextoError + " " + descrProp + ".")
+            {
+            }
+            public ListaPrecioInex(Exception inner)
+                : base(TextoError, inner)
+            {
+            }
+            public ListaPrecioInex(SerializationInfo info, StreamingContext context)
+                : base(info, context)
+            {
+            }
+        }
+    }
 }
