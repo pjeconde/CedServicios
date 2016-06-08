@@ -35,5 +35,22 @@ namespace CedServicios.RN
                 throw new EX.Precio.ListaPrecioInex(ListasPrecioInex.ToString());
             }
         }
+        public static double Valor(string IdArticulo, string IdListaPrecio, Entidades.Sesion Sesion)
+        {
+            Entidades.Precio precio = new Entidades.Precio();
+            precio.Cuit = Sesion.Cuit.Nro;
+            precio.IdArticulo = IdArticulo;
+            precio.IdListaPrecio = IdListaPrecio;
+            DB.Precio db = new DB.Precio(Sesion);
+            try
+            {
+                db.Leer(precio);
+                return precio.Valor;
+            }
+            catch
+            {
+                return 0;
+            }
+        }
     }
 }

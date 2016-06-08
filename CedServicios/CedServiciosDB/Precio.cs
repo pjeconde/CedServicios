@@ -70,5 +70,19 @@ namespace CedServicios.DB
                 throw new EX.Precio.ArticuloInex(articulosInexistentes.ToString());
             }
         }
+        public void Leer(Entidades.Precio Precio)
+        {
+            StringBuilder a = new StringBuilder(String.Empty);
+            a.Append("select Valor from Precio where Cuit='" + sesion.Cuit.Nro + "' and IdArticulo='" + Precio.IdArticulo + "' and IdListaPrecio='" + Precio.IdListaPrecio + "' ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.Acepta, sesion.CnnStr);
+            if (dt.Rows.Count == 1)
+            {
+                Precio.Valor = Convert.ToDouble(dt.Rows[0]["Valor"]);
+            }
+            else
+            {
+                throw new EX.Validaciones.ElementoInexistente("Precio");
+            }
+        }
     }
 }

@@ -1466,6 +1466,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             GLN_CompradorTextBox.Text = string.Empty;
                         }
+                        IdListaPrecioTextBox.Text = comprador.IdListaPrecio;
+                        DetalleLinea.IdListaPrecio = comprador.IdListaPrecio;
                         Codigo_Interno_CompradorTextBox.Text = comprador.DatosIdentificatorios.CodigoInterno;
                         if (comprador.DatosImpositivos.FechaInicioActividades.Equals(new DateTime(9999, 12, 31)) || comprador.DatosImpositivos.FechaInicioActividades.Equals(new DateTime(0001, 01, 01)))
                         {
@@ -1576,6 +1578,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			//NroIngBrutosTextBox.Text = comprador.NroIngBrutos;
 			//CondIngBrutosDropDownList.SelectedValue = Convert.ToString(comprador.IdCondIngBrutos);
 			GLN_CompradorTextBox.Text = string.Empty;
+            IdListaPrecioTextBox.Text = string.Empty;
 			Codigo_Interno_CompradorTextBox.Text = string.Empty;
 			InicioDeActividadesCompradorDatePickerWebUserControl.Text = string.Empty;
 			EmailAvisoVisualizacionTextBox.Text = string.Empty;

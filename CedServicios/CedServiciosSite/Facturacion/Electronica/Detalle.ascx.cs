@@ -17,11 +17,13 @@ namespace CedServicios.Site.Facturacion.Electronica
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas;
 		private System.Globalization.CultureInfo cedeiraCultura;
 		string puntoDeVenta;
+        string idListaPrecio;
 
 		protected void Page_Load(object sender, EventArgs e)
 		{
             puntoDeVenta = Convert.ToString(ViewState["puntoDeVenta"]);
-			if (!this.IsPostBack)
+            idListaPrecio = Convert.ToString(ViewState["idListaPrecio"]);
+            if (!this.IsPostBack)
 			{
                 if (Funciones.SessionTimeOut(Session))
                 {
@@ -66,6 +68,14 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 ViewState["puntoDeVenta"] = value;
                 puntoDeVenta = value;
+            }
+        }
+        public string IdListaPrecio
+        {
+            set
+            {
+                ViewState["idListaPrecio"] = value;
+                idListaPrecio = value;
             }
         }
         public string IdNaturalezaComprobante
@@ -1504,31 +1514,40 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             try
             {
-                DropDownList ddl = (DropDownList)sender;
-                System.Collections.Generic.List<Entidades.Articulo> listaArt = ((System.Collections.Generic.List<Entidades.Articulo>)ViewState["articulolista"]).FindAll(delegate(Entidades.Articulo art)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    return art.Id == ddl.SelectedValue;
-                });
-                if (listaArt.Count != 0)
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
                 {
-                    ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcpvendedor"))).Text = listaArt[0].Id;
-                    ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtGTIN"))).Text = listaArt[0].GTIN;
-                    ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtdescripcion"))).Text = listaArt[0].Descr;
-                    ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit"))).SelectedValue = listaArt[0].IndicacionExentoGravado;
-                    ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit"))).SelectedValue = listaArt[0].Unidad.Id;
-                    ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit"))).SelectedValue = Convert.ToString(listaArt[0].AlicuotaIVA);
-                    ddl = ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")));
-                    TextBox txtprecio_unitario = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario")));
-                    TextBox txtcantidad = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad"));
-                    TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"));
-                    TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"));
-                    if (Funciones.SessionTimeOut(Session))
+                    DropDownList ddl = (DropDownList)sender;
+                    System.Collections.Generic.List<Entidades.Articulo> listaArt = ((System.Collections.Generic.List<Entidades.Articulo>)ViewState["articulolista"]).FindAll(delegate(Entidades.Articulo art)
                     {
-                        Response.Redirect("~/SessionTimeout.aspx");
-                    }
-                    else
+                        return art.Id == ddl.SelectedValue;
+                    });
+                    if (listaArt.Count != 0)
                     {
-                        RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (Entidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
+                        Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                        ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcpvendedor"))).Text = listaArt[0].Id;
+                        ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtGTIN"))).Text = listaArt[0].GTIN;
+                        ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtdescripcion"))).Text = listaArt[0].Descr;
+                        ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit"))).SelectedValue = listaArt[0].IndicacionExentoGravado;
+                        ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit"))).SelectedValue = listaArt[0].Unidad.Id;
+                        if (idListaPrecio != string.Empty)
+                        {
+                            double precio = RN.Precio.Valor(listaArt[0].Id, idListaPrecio, sesion);
+                            if (precio != 0)
+                            {
+                                ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario"))).Text = precio.ToString();
+                            }
+                        }
+                        ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit"))).SelectedValue = Convert.ToString(listaArt[0].AlicuotaIVA);
+                        ddl = ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")));
+                        TextBox txtprecio_unitario = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario")));
+                        TextBox txtcantidad = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad"));
+                        TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"));
+                        TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"));
+                        RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, sesion, txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
                         ((DropDownList)sender).SelectedValue = "(Elegir artículo)";
                     }
                 }
@@ -1546,31 +1565,40 @@ namespace CedServicios.Site.Facturacion.Electronica
         {
             try
             {
-                DropDownList ddl = (DropDownList)sender;
-                System.Collections.Generic.List<Entidades.Articulo> listaArt = ((System.Collections.Generic.List<Entidades.Articulo>)ViewState["articulolista"]).FindAll(delegate(Entidades.Articulo art)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    return art.Id == ddl.SelectedValue;
-                });
-                if (listaArt.Count != 0)
+                    Response.Redirect("~/SessionTimeout.aspx");
+                }
+                else
                 {
-                    ((TextBox)(detalleGridView.FooterRow.FindControl("txtcpvendedor"))).Text = listaArt[0].Id;
-                    ((TextBox)(detalleGridView.FooterRow.FindControl("txtGTIN"))).Text = listaArt[0].GTIN;
-                    ((TextBox)(detalleGridView.FooterRow.FindControl("txtdescripcion"))).Text = listaArt[0].Descr;
-                    ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado"))).SelectedValue = listaArt[0].IndicacionExentoGravado;
-                    ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlunidad"))).SelectedValue = listaArt[0].Unidad.Id;
-                    ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"))).SelectedValue = Convert.ToString(listaArt[0].AlicuotaIVA);
-                    ddl = ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")));
-                    TextBox txtprecio_unitario = ((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario")));
-                    TextBox txtcantidad = (TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad"));
-                    TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"));
-                    TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"));
-                    if (Funciones.SessionTimeOut(Session))
+                    DropDownList ddl = (DropDownList)sender;
+                    System.Collections.Generic.List<Entidades.Articulo> listaArt = ((System.Collections.Generic.List<Entidades.Articulo>)ViewState["articulolista"]).FindAll(delegate(Entidades.Articulo art)
                     {
-                        Response.Redirect("~/SessionTimeout.aspx");
-                    }
-                    else
+                        return art.Id == ddl.SelectedValue;
+                    });
+                    if (listaArt.Count != 0)
                     {
-                        RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (Entidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
+                        Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                        ((TextBox)(detalleGridView.FooterRow.FindControl("txtcpvendedor"))).Text = listaArt[0].Id;
+                        ((TextBox)(detalleGridView.FooterRow.FindControl("txtGTIN"))).Text = listaArt[0].GTIN;
+                        ((TextBox)(detalleGridView.FooterRow.FindControl("txtdescripcion"))).Text = listaArt[0].Descr;
+                        ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado"))).SelectedValue = listaArt[0].IndicacionExentoGravado;
+                        ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlunidad"))).SelectedValue = listaArt[0].Unidad.Id;
+                        if (idListaPrecio != string.Empty)
+                        {
+                            double precio = RN.Precio.Valor(listaArt[0].Id, idListaPrecio, sesion);
+                            if (precio != 0)
+                            {
+                                ((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario"))).Text = precio.ToString();
+                            }
+                        }
+                        ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"))).SelectedValue = Convert.ToString(listaArt[0].AlicuotaIVA);
+                        ddl = ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")));
+                        TextBox txtprecio_unitario = ((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario")));
+                        TextBox txtcantidad = (TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad"));
+                        TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"));
+                        TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"));
+                        RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, sesion, txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
                         ((DropDownList)sender).SelectedValue = "(Elegir artículo)";
                     }
                 }

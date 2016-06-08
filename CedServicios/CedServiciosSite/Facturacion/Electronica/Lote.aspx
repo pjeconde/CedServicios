@@ -876,6 +876,14 @@
                                                                 </span></a>
                                                         </td>
                                                     </tr>
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Lista de Precios predefinida
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:TextBox ID="IdListaPrecioTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ReadOnly="true"> </asp:TextBox>
+                                                        </td>
+                                                    </tr>
                                                 </table>
                                             </td>
                                             <td class="bgFEAC" style="width: 30px; background-repeat: repeat-y;">
