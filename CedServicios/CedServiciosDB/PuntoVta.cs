@@ -200,7 +200,7 @@ namespace CedServicios.DB
         public void GenerarNuevoNroLote(Entidades.PuntoVta PuntoVta)
         {
             System.Text.StringBuilder a = new StringBuilder();
-            a.Append("declare @UltNroLote numeric(14) ");
+            a.Append("declare @UltNroLote decimal(14,0) ");
             switch (PuntoVta.IdMetodoGeneracionNumeracionLote)
             {
                 case "Autonumerador":

@@ -42,6 +42,14 @@
     <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="FileHelpers, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
+      <HintPath>..\packages\FileHelpers.3.1.5\lib\net40\FileHelpers.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="FileHelpers.ExcelNPOIStorage, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
+      <HintPath>..\packages\FileHelpers.ExcelNPOIStorage.3.1.5\lib\net40\FileHelpers.ExcelNPOIStorage.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\..\DocsU\Utilitarios\.NET 2010\DotNetZipLib-DevKit-v1.9\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -119,6 +127,8 @@
     <Content Include="Facturacion\Electronica\ReferenciasAFIP.ascx" />
     <Content Include="Facturacion\Electronica\ReferenciasConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Referencias.ascx" />
+    <Content Include="Facturacion\Electronica\Reportes\VentasXArticuloWebForm.aspx" />
+    <Content Include="Facturacion\Electronica\Reportes\VentasXArticuloFiltros.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\IvaVentasWebForm.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\IvaVentasFiltros.aspx" />
     <Content Include="Imagenes\Ayuda\AltaLote-Acciones.png" />
@@ -278,13 +288,17 @@
     <None Include="Descargas\Cedeira-SistAdminFCIs.pdf" />
     <None Include="Descargas\Cedeira-SistTransfMEP.pdf" />
     <Content Include="Descargas\eFact-R-XL.zip" />
-    <None Include="Facturacion\Electronica\Reportes\Iva_Ventas.xsd">
+    <Content Include="Facturacion\Electronica\Reportes\Iva_Ventas.xsd">
       <SubType>Designer</SubType>
-    </None>
+    </Content>
+    <Content Include="Facturacion\Electronica\Reportes\Ventas_XArticulo.xsd">
+      <SubType>Designer</SubType>
+    </Content>
     <None Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="fonts\glyphicons-halflings-regular.ttf" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
     <None Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -565,6 +579,26 @@
     </Compile>
     <Compile Include="Facturacion\Electronica\Referencias.ascx.designer.cs">
       <DependentUpon>Referencias.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\VentasXArticulo.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>VentasXArticulo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\VentasXArticuloWebForm.aspx.cs">
+      <DependentUpon>VentasXArticuloWebForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\VentasXArticuloWebForm.aspx.designer.cs">
+      <DependentUpon>VentasXArticuloWebForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\VentasXArticuloFiltros.aspx.cs">
+      <DependentUpon>VentasXArticuloFiltros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\VentasXArticuloFiltros.aspx.designer.cs">
+      <DependentUpon>VentasXArticuloFiltros.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\IvaVentasMECR.cs">
       <DependentUpon>IvaVentasMECR.rpt</DependentUpon>
@@ -1397,14 +1431,6 @@
       <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
       <Name>FeaEntidades</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FileHelpers.ExcelStorage\FileHelpers.ExcelStorage.2005.csproj">
-      <Project>{B3F2B976-73D5-49C7-BEAA-BF62E233132A}</Project>
-      <Name>FileHelpers.ExcelStorage.2005</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\FileHelpers\FileHelpers.2005.csproj">
-      <Project>{EB8633FF-CEED-40EE-8D1A-CA1BF5678C42}</Project>
-      <Name>FileHelpers.2005</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Content Include="CedServicios.Master" />
@@ -1423,43 +1449,45 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>CodigoBarra.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Facturacion\Electronica\Reportes\IvaVentasMECR.rpt">
+    <Content Include="Facturacion\Electronica\Reportes\IvaVentasMECR.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>IvaVentasMECR.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Facturacion\Electronica\Reportes\Factura.rpt">
+    </Content>
+    <Content Include="Facturacion\Electronica\Reportes\Factura.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Factura.cs</LastGenOutput>
-    </EmbeddedResource>
+    </Content>
     <EmbeddedResource Include="Facturacion\Electronica\Reportes\Imagen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Imagen.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Facturacion\Electronica\Reportes\IvaVentasCR.rpt">
+    <Content Include="Facturacion\Electronica\Reportes\IvaVentasCR.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>IvaVentasCR.cs</LastGenOutput>
-    </EmbeddedResource>
+    </Content>
+    <Content Include="Facturacion\Electronica\Reportes\VentasXArticulo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>VentasXArticulo.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
     <None Include="Facturacion\Electronica\Reportes\Imagen.xsc">
       <DependentUpon>Imagen.xsd</DependentUpon>
     </None>
-    <None Include="Facturacion\Electronica\Reportes\Imagen.xsd">
+    <Content Include="Facturacion\Electronica\Reportes\Imagen.xsd">
       <Generator>MSDataSetGenerator</Generator>
       <LastGenOutput>Imagen.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
-    </None>
+    </Content>
     <None Include="Facturacion\Electronica\Reportes\Imagen.xss">
       <DependentUpon>Imagen.xsd</DependentUpon>
     </None>
-    <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsd">
+    <Content Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsd">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
     <None Include="Facturacion\Electronica\Reportes\lote_comprobantes.xsx">
       <DependentUpon>lote_comprobantes.xsd</DependentUpon>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
       <SubType>Designer</SubType>
     </None>
     <Content Include="Facturacion\Electronica\Reportes\Web.config">
@@ -1554,7 +1582,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>43489</DevelopmentServerPort>
+          <DevelopmentServerPort>16302</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

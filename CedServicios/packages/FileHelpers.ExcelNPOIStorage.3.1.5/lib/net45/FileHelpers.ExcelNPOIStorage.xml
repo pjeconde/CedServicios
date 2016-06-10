@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>FileHelpers.ExcelNPOIStorage</name>
+    </assembly>
+    <members>
+        <member name="T:FileHelpers.ExcelNPOIStorage.ExcelBadUsageException">
+            <summary>Indicates the wrong usage of the ExcelStorage of the library.</summary>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.ExcelBadUsageException.#ctor(System.String)">
+            <summary>Creates an instance of an ExcelBadUsageException.</summary>
+            <param name="message">The exception Message</param>
+        </member>
+        <member name="T:FileHelpers.ExcelNPOIStorage.ExcelNPOIStorage">
+            <summary><para>This class implements the <see cref="T:FileHelpers.DataLink.DataStorage"/> for Microsoft Excel Files using the NPOI library.</para>
+            <para><b>WARNING you need to reference NPOI.dll in your project to use this feature.</b></para>
+            <para><b>To use this class you need to reference the FileHelpers.ExcelNPOIStorage.dll file.</b></para>
+            </summary>
+            <remarks><b>This class is contained in the FileHelpers.ExcelNPOIStorage.dll and need the NPOI.dll to work correctly.</b></remarks>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.ExcelNPOIStorage.#ctor(System.Type)">
+            <summary>Create a new ExcelStorage to work with the specified type</summary>
+            <param name="recordType">The type of records.</param>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.ExcelNPOIStorage.#ctor(System.Type,System.Int32,System.Int32)">
+            <summary>Create a new ExcelStorage to work with the specified type</summary>
+            <param name="recordType">The type of records.</param>
+            <param name="startRow">The row of the first data cell. Begining in 1.</param>
+            <param name="startCol">The column of the first data cell. Begining in 1.</param>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.ExcelNPOIStorage.#ctor(System.Type,System.String,System.Int32,System.Int32)">
+            <summary>Create a new ExcelStorage to work with the specified type</summary>
+            <param name="recordType">The type of records.</param>
+            <param name="startRow">The row of the first data cell. Begining in 1.</param>
+            <param name="startCol">The column of the first data cell. Begining in 1.</param>
+            <param name="fileName">The file path to work with.</param>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.ExcelNPOIStorage.CellAsString(System.Object,System.Object)">
+            <summary>
+            Get the string value of a cell
+            </summary>
+            <param name="row">Cell Row</param>
+            <param name="col">Cell Column</param>
+            <returns>Cell Value as string</returns>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.ExcelNPOIStorage.InsertRecords(System.Object[])">
+            <summary>Insert all the records in the specified Excel File.</summary>
+            <param name="records">The records to insert.</param>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.ExcelNPOIStorage.ExtractRecords">
+            <summary>Returns the records extracted from Excel file.</summary>
+            <returns>The extracted records.</returns>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.ExcelNPOIStorage.CellExtractor.#ctor">
+            <summary>
+            Initializes a new instance of the CellExtractor class.
+            </summary>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.ExcelNPOIStorage.CellInserter.#ctor(System.Collections.Generic.List{System.Object})">
+            <summary>
+            Initializes a new instance of the CellInserter class.
+            </summary>
+        </member>
+        <member name="T:FileHelpers.ExcelNPOIStorage.ExcelUpdateLinksMode">
+            <summary>
+            Specifies the way links in the file are updated.
+            </summary>
+        </member>
+        <member name="F:FileHelpers.ExcelNPOIStorage.ExcelUpdateLinksMode.UserPrompted">
+            <summary>User specifies how links will be updated</summary>
+        </member>
+        <member name="F:FileHelpers.ExcelNPOIStorage.ExcelUpdateLinksMode.NeverUpdate">
+            <summary>Never update links for this workbook on opening</summary>
+        </member>
+        <member name="F:FileHelpers.ExcelNPOIStorage.ExcelUpdateLinksMode.AlwaysUpdate">
+            <summary>Always update links for this workbook on opening</summary>
+        </member>
+        <member name="T:FileHelpers.ExcelNPOIStorage.NPOIUtils">
+            <summary>
+            Helper class for NPOI work
+            </summary>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.NPOIUtils.GetCellValue(NPOI.SS.UserModel.ICell)">
+            <summary>
+            Get a cell value
+            </summary>
+            <param name="cell">The cell object</param>
+            <returns>The value of the cell</returns>
+        </member>
+        <member name="M:FileHelpers.ExcelNPOIStorage.NPOIUtils.SetCellValue(NPOI.SS.UserModel.ICell,System.Object)">
+            <summary>
+            Sets a cell value
+            </summary>
+            <param name="cell">The cell</param>
+            <param name="value">The value to be assigned to the cell</param>
+        </member>
+    </members>
+</doc>
