@@ -1,6 +1,7 @@
 using System;
 using System.Data;
 using System.Configuration;
+using System.Collections.Generic;
 using System.Collections;
 using System.Web;
 using System.Web.Security;
@@ -8,23 +9,23 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.WebParts;
 using System.Web.UI.HtmlControls;
-
+using System.Drawing;
 
 namespace CedServicios.Site.Facturacion.Electronica
 {
-	public partial class Detalle : System.Web.UI.UserControl
-	{
-		System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas;
-		private System.Globalization.CultureInfo cedeiraCultura;
-		string puntoDeVenta;
+    public partial class Detalle : System.Web.UI.UserControl
+    {
+        System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas;
+        private System.Globalization.CultureInfo cedeiraCultura;
+        string puntoDeVenta;
         string idListaPrecio;
 
-		protected void Page_Load(object sender, EventArgs e)
-		{
+        protected void Page_Load(object sender, EventArgs e)
+        {
             puntoDeVenta = Convert.ToString(ViewState["puntoDeVenta"]);
             idListaPrecio = Convert.ToString(ViewState["idListaPrecio"]);
             if (!this.IsPostBack)
-			{
+            {
                 if (Funciones.SessionTimeOut(Session))
                 {
                     Response.Redirect("~/SessionTimeout.aspx");
@@ -42,26 +43,26 @@ namespace CedServicios.Site.Facturacion.Electronica
                         BindearDropDownLists();
                     }
                 }
-			}
+            }
         }
-		public void ResetearGrillas()
-		{
-			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
-			FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
-			lineas.Add(linea);
-			detalleGridView.DataSource = lineas;
-			ViewState["lineas"] = lineas;
-			detalleGridView.DataBind();
-			BindearDropDownLists();
-		}
-		public System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> Lineas
-		{
-			get
-			{
-				System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
-				return refs;
-			}
-		}
+        public void ResetearGrillas()
+        {
+            lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
+            FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+            lineas.Add(linea);
+            detalleGridView.DataSource = lineas;
+            ViewState["lineas"] = lineas;
+            detalleGridView.DataBind();
+            BindearDropDownLists();
+        }
+        public System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> Lineas
+        {
+            get
+            {
+                System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
+                return refs;
+            }
+        }
         public string PuntoDeVenta
         {
             set
@@ -86,130 +87,130 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
         public void CompletarDetallesWS(org.dyndns.cedweb.consulta.ConsultarResult lc)
-		{
-			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
-			foreach (org.dyndns.cedweb.consulta.ConsultarResultComprobanteDetalleLinea l in lc.comprobante[0].detalle.linea)
-			{
-				FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
-				//Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
-				if (l.descripcion.Substring(0, 1) == "%")
-				{
-					linea.descripcion = RN.Funciones.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
-				}
-				else
-				{
-					linea.descripcion = l.descripcion.Replace("<br>", System.Environment.NewLine);
-				}
-				if (l.alicuota_ivaSpecified)
-				{
-					linea.alicuota_iva = l.alicuota_iva;
-				}
-				else
-				{
-					linea.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-				}
-				linea.alicuota_ivaSpecified = l.alicuota_ivaSpecified;
-				linea.importe_ivaSpecified = l.importe_ivaSpecified;
-				if (l.unidad != null)
-				{
-					linea.unidad = l.unidad;
-				}
-				else
-				{
-					linea.unidad = Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo);
-				}
-				linea.cantidad = l.cantidad;
-				linea.cantidadSpecified = l.cantidadSpecified;
-				linea.codigo_producto_comprador = l.codigo_producto_comprador;
-				linea.codigo_producto_vendedor = l.codigo_producto_vendedor;
-				linea.indicacion_exento_gravado = l.indicacion_exento_gravado;
+        {
+            lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
+            foreach (org.dyndns.cedweb.consulta.ConsultarResultComprobanteDetalleLinea l in lc.comprobante[0].detalle.linea)
+            {
+                FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+                //Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
+                if (l.descripcion.Substring(0, 1) == "%")
+                {
+                    linea.descripcion = RN.Funciones.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+                }
+                else
+                {
+                    linea.descripcion = l.descripcion.Replace("<br>", System.Environment.NewLine);
+                }
+                if (l.alicuota_ivaSpecified)
+                {
+                    linea.alicuota_iva = l.alicuota_iva;
+                }
+                else
+                {
+                    linea.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                }
+                linea.alicuota_ivaSpecified = l.alicuota_ivaSpecified;
+                linea.importe_ivaSpecified = l.importe_ivaSpecified;
+                if (l.unidad != null)
+                {
+                    linea.unidad = l.unidad;
+                }
+                else
+                {
+                    linea.unidad = Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo);
+                }
+                linea.cantidad = l.cantidad;
+                linea.cantidadSpecified = l.cantidadSpecified;
+                linea.codigo_producto_comprador = l.codigo_producto_comprador;
+                linea.codigo_producto_vendedor = l.codigo_producto_vendedor;
+                linea.indicacion_exento_gravado = l.indicacion_exento_gravado;
 
-				if (l.importes_moneda_origen == null)
-				{
-					linea.importe_total_articulo = l.importe_total_articulo;
-					linea.importe_iva = l.importe_iva;
-					linea.precio_unitario = l.precio_unitario;
-					linea.precio_unitarioSpecified = l.precio_unitarioSpecified;
-				}
-				else
-				{
-					linea.importe_total_articulo = l.importes_moneda_origen.importe_total_articulo;
-					linea.importe_iva = l.importes_moneda_origen.importe_iva;
-					linea.precio_unitario = l.importes_moneda_origen.precio_unitario;
-					linea.precio_unitarioSpecified = l.importes_moneda_origen.precio_unitarioSpecified;
-				}
-				lineas.Add(linea);
-			}
-			detalleGridView.DataSource = lineas;
-			detalleGridView.DataBind();
-			BindearDropDownLists();
-			ViewState["lineas"] = lineas;
-		}
-		public void CompletarDetalles(FeaEntidades.InterFacturas.lote_comprobantes lc)
-		{
-			lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
-			foreach (FeaEntidades.InterFacturas.linea l in lc.comprobante[0].detalle.linea)
-			{
-				FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+                if (l.importes_moneda_origen == null)
+                {
+                    linea.importe_total_articulo = l.importe_total_articulo;
+                    linea.importe_iva = l.importe_iva;
+                    linea.precio_unitario = l.precio_unitario;
+                    linea.precio_unitarioSpecified = l.precio_unitarioSpecified;
+                }
+                else
+                {
+                    linea.importe_total_articulo = l.importes_moneda_origen.importe_total_articulo;
+                    linea.importe_iva = l.importes_moneda_origen.importe_iva;
+                    linea.precio_unitario = l.importes_moneda_origen.precio_unitario;
+                    linea.precio_unitarioSpecified = l.importes_moneda_origen.precio_unitarioSpecified;
+                }
+                lineas.Add(linea);
+            }
+            detalleGridView.DataSource = lineas;
+            detalleGridView.DataBind();
+            BindearDropDownLists();
+            ViewState["lineas"] = lineas;
+        }
+        public void CompletarDetalles(FeaEntidades.InterFacturas.lote_comprobantes lc)
+        {
+            lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
+            foreach (FeaEntidades.InterFacturas.linea l in lc.comprobante[0].detalle.linea)
+            {
+                FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
                 if (l.GTINSpecified)
                 {
                     linea.GTIN = l.GTIN;
                     linea.GTINSpecified = true;
                 }
-				//Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
-				if (l.descripcion.Substring(0, 1) == "%")
-				{
-					linea.descripcion = RN.Funciones.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
-				}
-				else
-				{
-					linea.descripcion = l.descripcion.Replace("<br>", System.Environment.NewLine);
-				}
-				if (l.alicuota_ivaSpecified)
-				{
-					linea.alicuota_iva = l.alicuota_iva;
-				}
-				else
-				{
-					linea.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
-				}
-				linea.alicuota_ivaSpecified = l.alicuota_ivaSpecified;
-				linea.importe_ivaSpecified = l.importe_ivaSpecified;
-				if (l.unidad != null)
-				{
-					linea.unidad = l.unidad;
-				}
-				else
-				{
-					linea.unidad = Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo);
-				}
-				linea.cantidad = l.cantidad;
-				linea.cantidadSpecified = l.cantidadSpecified;
-				linea.codigo_producto_comprador = l.codigo_producto_comprador;
-				linea.codigo_producto_vendedor = l.codigo_producto_vendedor;
-				linea.indicacion_exento_gravado = l.indicacion_exento_gravado;
+                //Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
+                if (l.descripcion.Substring(0, 1) == "%")
+                {
+                    linea.descripcion = RN.Funciones.HexToString(l.descripcion).Replace("<br>", System.Environment.NewLine);
+                }
+                else
+                {
+                    linea.descripcion = l.descripcion.Replace("<br>", System.Environment.NewLine);
+                }
+                if (l.alicuota_ivaSpecified)
+                {
+                    linea.alicuota_iva = l.alicuota_iva;
+                }
+                else
+                {
+                    linea.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
+                }
+                linea.alicuota_ivaSpecified = l.alicuota_ivaSpecified;
+                linea.importe_ivaSpecified = l.importe_ivaSpecified;
+                if (l.unidad != null)
+                {
+                    linea.unidad = l.unidad;
+                }
+                else
+                {
+                    linea.unidad = Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo);
+                }
+                linea.cantidad = l.cantidad;
+                linea.cantidadSpecified = l.cantidadSpecified;
+                linea.codigo_producto_comprador = l.codigo_producto_comprador;
+                linea.codigo_producto_vendedor = l.codigo_producto_vendedor;
+                linea.indicacion_exento_gravado = l.indicacion_exento_gravado;
 
-				if (l.importes_moneda_origen == null || l.importes_moneda_origen.importe_total_articulo.Equals(0))
-				{
-					linea.importe_total_articulo = l.importe_total_articulo;
-					linea.importe_iva = l.importe_iva;
-					linea.precio_unitario = l.precio_unitario;
-					linea.precio_unitarioSpecified = l.precio_unitarioSpecified;
-				}
-				else
-				{
-					linea.importe_total_articulo = l.importes_moneda_origen.importe_total_articulo;
-					linea.importe_iva = l.importes_moneda_origen.importe_iva;
-					linea.precio_unitario = l.importes_moneda_origen.precio_unitario;
-					linea.precio_unitarioSpecified = l.importes_moneda_origen.precio_unitarioSpecified;
-				}
-				lineas.Add(linea);
-			}
-			detalleGridView.DataSource = lineas;
-			detalleGridView.DataBind();
-			ViewState["lineas"] = lineas;
+                if (l.importes_moneda_origen == null || l.importes_moneda_origen.importe_total_articulo.Equals(0))
+                {
+                    linea.importe_total_articulo = l.importe_total_articulo;
+                    linea.importe_iva = l.importe_iva;
+                    linea.precio_unitario = l.precio_unitario;
+                    linea.precio_unitarioSpecified = l.precio_unitarioSpecified;
+                }
+                else
+                {
+                    linea.importe_total_articulo = l.importes_moneda_origen.importe_total_articulo;
+                    linea.importe_iva = l.importes_moneda_origen.importe_iva;
+                    linea.precio_unitario = l.importes_moneda_origen.precio_unitario;
+                    linea.precio_unitarioSpecified = l.importes_moneda_origen.precio_unitarioSpecified;
+                }
+                lineas.Add(linea);
+            }
+            detalleGridView.DataSource = lineas;
+            detalleGridView.DataBind();
+            ViewState["lineas"] = lineas;
 
-		}
+        }
         protected void detalleGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             if (e.CommandName.Equals("AddDetalle"))
@@ -452,7 +453,7 @@ namespace CedServicios.Site.Facturacion.Electronica
         private void ValidarAlicuotaIVA(FeaEntidades.InterFacturas.linea l, DropDownList ddl)
         {
             double auxAliIVA = Convert.ToDouble(ddl.SelectedValue);
-            string auxDescAliIVA = ddl.SelectedItem.Text; 
+            string auxDescAliIVA = ddl.SelectedItem.Text;
             if (!auxDescAliIVA.Equals(string.Empty))
             {
                 if (!puntoDeVenta.Equals(string.Empty))
@@ -741,9 +742,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ValidarDescripcion(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtdescripcion"));
                 ValidarImporte(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo"));
                 ValidarImporteIVA(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_alicuota_articulo"));
-                ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravadoEdit"));
-                ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articuloEdit"));
-                ValidarUnidad(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidadEdit"));
+                ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravado"));
+                ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articulo"));
+                ValidarUnidad(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidad"));
                 ValidarCantidad(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcantidad"));
                 ValidarCodigoProductoComprador(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador"));
                 ValidarCodigoProductoVendedor(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor"));
@@ -777,39 +778,39 @@ namespace CedServicios.Site.Facturacion.Electronica
             detalleGridView.DataBind();
             BindearDropDownLists();
 
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articuloEdit")).DataValueField = "Codigo";
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articuloEdit")).DataTextField = "Descr";
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articuloEdit")).DataSource = FeaEntidades.IVA.IVA.Lista();
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articuloEdit")).DataBind();
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).DataBind();
             try
             {
-                ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articuloEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].alicuota_iva.ToString());
+                ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].alicuota_iva.ToString());
                 li.Selected = true;
             }
             catch
             {
             }
 
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidadEdit")).DataValueField = "Codigo";
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidadEdit")).DataTextField = "Descr";
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidadEdit")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidadEdit")).DataBind();
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).DataValueField = "Codigo";
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).DataTextField = "Descr";
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).DataBind();
             try
             {
-                ListItem liUnidad = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidadEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].unidad.ToString());
+                ListItem liUnidad = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].unidad.ToString());
                 liUnidad.Selected = true;
             }
             catch
             {
             }
 
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataValueField = "Codigo";
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataTextField = "Descr";
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataBind();
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravado")).DataValueField = "Codigo";
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravado")).DataTextField = "Descr";
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravado")).DataBind();
             try
             {
-                ListItem liIndExento = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].indicacion_exento_gravado.ToString());
+                ListItem liIndExento = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravado")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].indicacion_exento_gravado.ToString());
                 liIndExento.Selected = true;
             }
             catch
@@ -817,24 +818,28 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-		protected void detalleGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
-		{
-			detalleGridView.EditIndex = -1;
-			detalleGridView.DataSource = ViewState["lineas"];
-			detalleGridView.DataBind();
-			BindearDropDownLists();
-		}
+        protected void detalleGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            detalleGridView.EditIndex = -1;
+            detalleGridView.DataSource = ViewState["lineas"];
+            detalleGridView.DataBind();
+            BindearDropDownLists();
+        }
 
-		public void BindearDropDownLists()
-		{
-			if (detalleGridView.FooterRow != null)
-			{
+        public void BindearDropDownLists()
+        {
+            if (detalleGridView.FooterRow != null)
+            {
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel")).DataValueField = "Id";
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel")).DataTextField = "Descr";
                 System.Collections.Generic.List<Entidades.Articulo> articuloslist = new System.Collections.Generic.List<Entidades.Articulo>();
                 Entidades.Articulo articulo = new Entidades.Articulo();
                 articulo.Id = "(Elegir artículo)";
                 articulo.Descr = "(Elegir artículo)";
+                articuloslist.Add(articulo);
+                articulo = new Entidades.Articulo();
+                articulo.Id = "(Buscar)";
+                articulo.Descr = "(Buscar)";
                 articuloslist.Add(articulo);
                 if (ViewState["articulolista"] != null)
                 {
@@ -843,24 +848,24 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel")).DataSource = articuloslist;
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel")).DataBind();
 
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataBind();
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataBind();
 
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataValueField = "Codigo";
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataTextField = "Descr";
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataBind();
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).AppendDataBoundItems = false;
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataValueField = "Codigo";
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataTextField = "Descr";
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataBind();
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).AppendDataBoundItems = false;
 
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataValueField = "Codigo";
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataTextField = "Descr";
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
-				((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataBind();
-			}
-			if (!detalleGridView.EditIndex.Equals(-1))
-			{
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataValueField = "Codigo";
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataTextField = "Descr";
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataBind();
+            }
+            if (!detalleGridView.EditIndex.Equals(-1))
+            {
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlarticuloselEdit")).DataValueField = "Id";
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlarticuloselEdit")).DataTextField = "Descr";
                 System.Collections.Generic.List<Entidades.Articulo> articuloslist = new System.Collections.Generic.List<Entidades.Articulo>();
@@ -868,60 +873,64 @@ namespace CedServicios.Site.Facturacion.Electronica
                 articulo.Id = "(Elegir artículo)";
                 articulo.Descr = "(Elegir artículo)";
                 articuloslist.Add(articulo);
+                articulo = new Entidades.Articulo();
+                articulo.Id = "(Buscar)";
+                articulo.Descr = "(Buscar)";
+                articuloslist.Add(articulo);
                 articuloslist.AddRange(((System.Collections.Generic.List<Entidades.Articulo>)ViewState["articulolista"]));
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlarticuloselEdit")).DataSource = articuloslist;
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlarticuloselEdit")).DataBind();
 
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")).DataValueField = "Codigo";
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")).DataTextField = "Descr";
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")).DataSource = FeaEntidades.IVA.IVA.Lista();
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")).DataBind();
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articulo")).DataBind();
 
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit")).DataValueField = "Codigo";
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit")).DataTextField = "Descr";
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit")).DataBind();
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidad")).DataValueField = "Codigo";
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidad")).DataTextField = "Descr";
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidad")).DataBind();
 
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataValueField = "Codigo";
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataTextField = "Descr";
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
-				((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit")).DataBind();
-			}
-		}
-		protected void detalleGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
-		{
-			try
-			{
-				System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
-				FeaEntidades.InterFacturas.linea l = lineas[e.RowIndex];
-				lineas.Remove(l);
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravado")).DataValueField = "Codigo";
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravado")).DataTextField = "Descr";
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravado")).DataBind();
+            }
+        }
+        protected void detalleGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
+        {
+            try
+            {
+                System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
+                FeaEntidades.InterFacturas.linea l = lineas[e.RowIndex];
+                lineas.Remove(l);
 
-				if (lineas.Count.Equals(0))
-				{
-					FeaEntidades.InterFacturas.linea nueva = new FeaEntidades.InterFacturas.linea();
-					lineas.Add(nueva);
-				}
+                if (lineas.Count.Equals(0))
+                {
+                    FeaEntidades.InterFacturas.linea nueva = new FeaEntidades.InterFacturas.linea();
+                    lineas.Add(nueva);
+                }
 
-				detalleGridView.EditIndex = -1;
+                detalleGridView.EditIndex = -1;
 
-				detalleGridView.DataSource = ViewState["lineas"];
-				detalleGridView.DataBind();
-				BindearDropDownLists();
+                detalleGridView.DataSource = ViewState["lineas"];
+                detalleGridView.DataBind();
+                BindearDropDownLists();
                 Session["FaltaCalcularTotales"] = true;
-			}
-			catch
-			{
-			}
+            }
+            catch
+            {
+            }
 
-		}
-		protected void detalleGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
-		{
-			if (e.Exception != null)
-			{
-				ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", Funciones.TextoScript(e.Exception.Message), false);
-				e.ExceptionHandled = true;
-			}
-		}
+        }
+        protected void detalleGridView_RowDeleted(object sender, GridViewDeletedEventArgs e)
+        {
+            if (e.Exception != null)
+            {
+                ScriptManager.RegisterClientScriptBlock(this.Parent.Page, GetType(), "Message", Funciones.TextoScript(e.Exception.Message), false);
+                e.ExceptionHandled = true;
+            }
+        }
         private void ValidarCodigoProductoComprador(FeaEntidades.InterFacturas.linea l, TextBox txtcpcomprador)
         {
             string auxcpcomprador = txtcpcomprador.Text;
@@ -973,24 +982,24 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-		protected string GetAlicuotaIVA(double alic)
-		{
-			if (alic != 99)
-			{
-				string aux = Convert.ToString(alic);
-				return aux;
-			}
-			else
-			{
-				return string.Empty;
-			}
-		}
+        protected string GetAlicuotaIVA(double alic)
+        {
+            if (alic != 99)
+            {
+                string aux = Convert.ToString(alic);
+                return aux;
+            }
+            else
+            {
+                return string.Empty;
+            }
+        }
 
-		public void CalcularTotalesLineas(ref double totalGravado, ref double totalNoGravado, ref double totalIVA, ref double total_Operaciones_Exentas)
-		{
-			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
-			for (int i = 0; i < listadelineas.Count; i++)
-			{
+        public void CalcularTotalesLineas(ref double totalGravado, ref double totalNoGravado, ref double totalIVA, ref double total_Operaciones_Exentas)
+        {
+            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+            for (int i = 0; i < listadelineas.Count; i++)
+            {
                 try
                 {
                     if (listadelineas[i].descripcion == null)
@@ -1037,48 +1046,48 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     totalNoGravado += listadelineas[i].importe_total_articulo;
                 }
-				totalIVA += listadelineas[i].importe_iva;
-			}
-		}
+                totalIVA += listadelineas[i].importe_iva;
+            }
+        }
 
-		public double CalcularTotalImporte()
-		{
-			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
-			double total = 0;
-			for (int i = 0; i < listadelineas.Count; i++)
-			{
-				if (listadelineas[i].descripcion == null)
-				{
-					break;
-				}
-				total += listadelineas[i].importe_total_articulo;
-			}
-			return total;
-		}
+        public double CalcularTotalImporte()
+        {
+            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+            double total = 0;
+            for (int i = 0; i < listadelineas.Count; i++)
+            {
+                if (listadelineas[i].descripcion == null)
+                {
+                    break;
+                }
+                total += listadelineas[i].importe_total_articulo;
+            }
+            return total;
+        }
 
         public FeaEntidades.InterFacturas.detalle GenerarDetalles(string MonedaComprobante, string TipoDeCambio, string TipoPtoVta, string TipoCbte, bool EsParaImprimirPDF)
-		{
-			FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
-			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
-			for (int i = 0; i < listadelineas.Count; i++)
-			{
-				det.linea[i] = new FeaEntidades.InterFacturas.linea();
-				det.linea[i].numeroLinea = i + 1;
-				if (listadelineas[i].descripcion == null)
-				{
-					throw new Exception("Debe informar al menos un artículo");
-				}
-				string textoSinSaltoDeLinea = listadelineas[i].descripcion.Replace("\n", "<br>").Replace("\r",string.Empty);
-				det.linea[i].descripcion = RN.Funciones.ConvertToHex(textoSinSaltoDeLinea);
+        {
+            FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
+            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+            for (int i = 0; i < listadelineas.Count; i++)
+            {
+                det.linea[i] = new FeaEntidades.InterFacturas.linea();
+                det.linea[i].numeroLinea = i + 1;
+                if (listadelineas[i].descripcion == null)
+                {
+                    throw new Exception("Debe informar al menos un artículo");
+                }
+                string textoSinSaltoDeLinea = listadelineas[i].descripcion.Replace("\n", "<br>").Replace("\r", string.Empty);
+                det.linea[i].descripcion = RN.Funciones.ConvertToHex(textoSinSaltoDeLinea);
 
-				GenerarDetallesAlicuotaIVA(TipoPtoVta, TipoCbte, det, listadelineas, i);
+                GenerarDetallesAlicuotaIVA(TipoPtoVta, TipoCbte, det, listadelineas, i);
 
-				if (!listadelineas[i].unidad.Equals(Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo)))
-				{
-					det.linea[i].unidad = listadelineas[i].unidad;
-				}
-				det.linea[i].cantidad = listadelineas[i].cantidad;
-				det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
+                if (!listadelineas[i].unidad.Equals(Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo)))
+                {
+                    det.linea[i].unidad = listadelineas[i].unidad;
+                }
+                det.linea[i].cantidad = listadelineas[i].cantidad;
+                det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
                 det.linea[i].GTIN = listadelineas[i].GTIN;
                 det.linea[i].GTINSpecified = listadelineas[i].GTINSpecified;
                 if (TipoPtoVta.Equals("RG2904") && EsParaImprimirPDF != true)
@@ -1088,27 +1097,27 @@ namespace CedServicios.Site.Facturacion.Electronica
                     det.linea[i].informacion_adicional[0].tipo = "UNIDAD_MTX";
                     det.linea[i].informacion_adicional[0].valor = listadelineas[i].unidad;
                 }
-				det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
-				det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
+                det.linea[i].codigo_producto_comprador = listadelineas[i].codigo_producto_comprador;
+                det.linea[i].codigo_producto_vendedor = listadelineas[i].codigo_producto_vendedor;
 
-				GenerarDetallesIndExGravado(TipoPtoVta, TipoCbte, det, listadelineas, i);
+                GenerarDetallesIndExGravado(TipoPtoVta, TipoCbte, det, listadelineas, i);
 
-				if (MonedaComprobante.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
-				{
+                if (MonedaComprobante.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
+                {
 
                     GenerarDetalleMonedaLocal(TipoCbte, det, listadelineas, i, TipoPtoVta);
-				}
-				else
-				{
-					GenerarDetalleMonedaExtranjera(TipoDeCambio, TipoCbte, det, listadelineas, i, TipoPtoVta);
-				}
-			}
-			return det;
-		}
+                }
+                else
+                {
+                    GenerarDetalleMonedaExtranjera(TipoDeCambio, TipoCbte, det, listadelineas, i, TipoPtoVta);
+                }
+            }
+            return det;
+        }
 
         private static void GenerarDetalleMonedaExtranjera(string TipoDeCambio, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i, string TipoPtoVta)
-		{
-			det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+        {
+            det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
             //switch (TipoCbte)
             //{
             //    case "6":
@@ -1143,10 +1152,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             det.linea[i].precio_unitario = Math.Round(listadelineas[i].precio_unitario * Convert.ToDouble(TipoDeCambio), 3);
             det.linea[i].importe_total_articulo = Math.Round(listadelineas[i].importe_total_articulo * Convert.ToDouble(TipoDeCambio), 2);
 
-			FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
-			limo.importe_total_articuloSpecified = true;
+            FeaEntidades.InterFacturas.lineaImportes_moneda_origen limo = new FeaEntidades.InterFacturas.lineaImportes_moneda_origen();
+            limo.importe_total_articuloSpecified = true;
 
-			limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
+            limo.precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
 
             //switch (TipoCbte)
             //{
@@ -1189,12 +1198,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             limo.precio_unitario = listadelineas[i].precio_unitario;
             limo.importe_total_articulo = listadelineas[i].importe_total_articulo;
 
-			det.linea[i].importes_moneda_origen = limo;
+            det.linea[i].importes_moneda_origen = limo;
 
-		}
+        }
 
         private static void GenerarDetalleMonedaLocal(string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i, string TipoPtoVta)
-		{
+        {
             //switch (TipoCbte)
             //{
             //    case "6":
@@ -1236,20 +1245,20 @@ namespace CedServicios.Site.Facturacion.Electronica
             det.linea[i].importe_total_articulo = listadelineas[i].importe_total_articulo;
             det.linea[i].importe_ivaSpecified = listadelineas[i].importe_ivaSpecified;
             det.linea[i].importe_iva = listadelineas[i].importe_iva;
-		}
+        }
 
-		private static void GenerarDetallesIndExGravado(string TipoPtoVta, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
-		{
-			if (listadelineas[i].indicacion_exento_gravado != null)
-			{
-				if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
-				{
+        private static void GenerarDetallesIndExGravado(string TipoPtoVta, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
+        {
+            if (listadelineas[i].indicacion_exento_gravado != null)
+            {
+                if (!listadelineas[i].indicacion_exento_gravado.Equals(string.Empty))
+                {
                     if (!(TipoPtoVta.Equals("Comun") || TipoPtoVta.Equals("RG2904")))
-					{
-						det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
-					}
-					else
-					{
+                    {
+                        det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
+                    }
+                    else
+                    {
                         //switch (TipoCbte)
                         //{
                         //    case "6":
@@ -1267,23 +1276,23 @@ namespace CedServicios.Site.Facturacion.Electronica
                         //        break;
                         //}
                         det.linea[i].indicacion_exento_gravado = listadelineas[i].indicacion_exento_gravado;
-					}
-				}
-			}
-		}
+                    }
+                }
+            }
+        }
 
-		private static void GenerarDetallesAlicuotaIVA(string TipoPtoVta, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
-		{
+        private static void GenerarDetallesAlicuotaIVA(string TipoPtoVta, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
+        {
             if (!(TipoPtoVta.Equals("Comun") || TipoPtoVta.Equals("RG2904")))
-			{
-				det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
-				if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
-				{
-					det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
-				}
-			}
-			else
-			{
+            {
+                det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
+                if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
+                {
+                    det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
+                }
+            }
+            else
+            {
                 if (TipoPtoVta.Equals("RG2904"))
                 {
                     if (listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
@@ -1319,18 +1328,18 @@ namespace CedServicios.Site.Facturacion.Electronica
                     //        }
                     //        break;
                     //}
-                    
+
                     det.linea[i].alicuota_ivaSpecified = listadelineas[i].alicuota_ivaSpecified;
                     if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
                     {
                         det.linea[i].alicuota_iva = listadelineas[i].alicuota_iva;
                     }
                 }
-			}
-		}
-		public void ActualizarTipoDeCambio(string MonedaComprobante)
-		{
-			System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+            }
+        }
+        public void ActualizarTipoDeCambio(string MonedaComprobante)
+        {
+            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
             if (listadelineas != null)
             {
                 if (!MonedaComprobante.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
@@ -1362,11 +1371,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                 }
             }
-		}
-		protected void CalcularImporteArtEnEdicion(object sender, EventArgs e)
-		{
-			try
-			{
+        }
+        protected void CalcularImporteArtEnEdicion(object sender, EventArgs e)
+        {
+            try
+            {
                 TextBox txtimporte_total_articulo = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo")));
                 TextBox txtimporte_alicuota_articulo = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo")));
                 DropDownList ddl = ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit"));
@@ -1381,14 +1390,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                     RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (Entidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
                 }
             }
-			catch
-			{
-			}
-		}
-		protected void CalcularImporteArtEnFooter(object sender, EventArgs e)
-		{
-			try
-			{
+            catch
+            {
+            }
+        }
+        protected void CalcularImporteArtEnFooter(object sender, EventArgs e)
+        {
+            try
+            {
                 TextBox txtprecio_unitario = ((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario")));
                 TextBox txtcantidad = ((TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad")));
                 TextBox txtimporte_total_articulo = (TextBox)detalleGridView.FooterRow.FindControl("txtimporte_total_articulo");
@@ -1402,15 +1411,15 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (Entidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
                 }
-			}
-			catch
-			{
-			}
-		}
-		protected void ddlalicuota_articuloEdit_SelectedIndexChanged(object sender, EventArgs e)
-		{
-			try
-			{
+            }
+            catch
+            {
+            }
+        }
+        protected void ddlalicuota_articuloEdit_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
                 TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"));
                 TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"));
                 DropDownList ddl = (DropDownList)sender;
@@ -1425,10 +1434,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                     RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, (Entidades.Sesion)Session["Sesion"], txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
                 }
             }
-			catch
-			{
-			}
-		}
+            catch
+            {
+            }
+        }
         protected void ddlalicuota_articuloFooter_SelectedIndexChanged(object sender, EventArgs e)
         {
             try
@@ -1451,44 +1460,8 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
             }
         }
-        protected void RecalcularLinea(TextBox txtimporte_alicuota_articulo, string puntoDeVenta, Entidades.Sesion sesion, TextBox txtimporte_total_articulo, DropDownList ddl, TextBox txtprecio_unitario, TextBox txtcantidad)
+        protected void RecalcularLinea(TextBox txtimporte_alicuota_articulo, string puntoDeVenta, Entidades.Sesion sesion, TextBox txtimporte_total_articulo, DropDownList ddlalicuota_articulo, TextBox txtprecio_unitario, TextBox txtcantidad)
         {
-            double preUni;
-            try
-            {
-                preUni = Convert.ToDouble(txtprecio_unitario.Text);
-            }
-            catch
-            {
-                preUni = 0;
-            }
-            double cant;
-            try
-            {
-                cant = Convert.ToDouble(txtcantidad.Text);
-            }
-            catch
-            {
-                cant = 0;
-            }
-            if (!preUni.Equals(0) && !cant.Equals(0))
-            {
-                txtimporte_total_articulo.Text = Convert.ToString(Math.Round(preUni * cant, 2));
-            }
-            double imptot = Convert.ToDouble(txtimporte_total_articulo.Text);
-            double alic = Convert.ToDouble(ddl.SelectedValue);
-            if (!imptot.Equals(0) && !alic.Equals(99))
-            {
-                double aux = imptot * alic / 100;
-                txtimporte_alicuota_articulo.Text = Convert.ToString(Math.Round(aux, 2));
-            }
-            if (alic.Equals(99))
-            {
-                txtimporte_alicuota_articulo.Text = string.Empty;
-            }
-
-            //if (CedWebRN.Fun.EstaLogueadoUnUsuarioPremium(sesion))
-            //{
             if (!puntoDeVenta.Equals(string.Empty))
             {
                 if (Funciones.SessionTimeOut(Session))
@@ -1497,21 +1470,61 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                    double preUni;
+                    try
                     {
-                        return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                    });
-                    if (listaPV.Count != 0)
+                        preUni = Convert.ToDouble(txtprecio_unitario.Text);
+                    }
+                    catch
                     {
-                        txtimporte_total_articulo.Text = Convert.ToString(Convert.ToDouble(txtimporte_total_articulo.Text) + Convert.ToDouble(txtimporte_alicuota_articulo.Text));
+                        preUni = 0;
+                    }
+                    double cant;
+                    try
+                    {
+                        cant = Convert.ToDouble(txtcantidad.Text);
+                    }
+                    catch
+                    {
+                        cant = 0;
+                    }
+                    if (!preUni.Equals(0) && !cant.Equals(0))
+                    {
+                        txtimporte_total_articulo.Text = Convert.ToString(Math.Round(preUni * cant, 2));
+                        double imptot = Convert.ToDouble(txtimporte_total_articulo.Text);
+                        double alic = Convert.ToDouble(ddlalicuota_articulo.SelectedValue);
+                        if (alic.Equals(99))
+                        {
+                            txtimporte_alicuota_articulo.Text = string.Empty;
+                        }
+                        else if (!imptot.Equals(0))
+                        {
+                            double aux = imptot * alic / 100;
+                            txtimporte_alicuota_articulo.Text = Convert.ToString(Math.Round(aux, 2));
+                        }
+                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                        });
+                        if (listaPV.Count != 0)
+                        {
+                            try
+                            {
+                                txtimporte_total_articulo.Text = Convert.ToString(Convert.ToDouble(txtimporte_total_articulo.Text) + Convert.ToDouble(txtimporte_alicuota_articulo.Text));
+                            }
+                            catch
+                            {
+                                cant = 0;
+                            }
+                        }
                     }
                 }
             }
-            //}
         }
 
         protected void ddlarticuloselEdit_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DropDownList ddl = (DropDownList)sender;
             try
             {
                 if (Funciones.SessionTimeOut(Session))
@@ -1520,49 +1533,32 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    DropDownList ddl = (DropDownList)sender;
-                    System.Collections.Generic.List<Entidades.Articulo> listaArt = ((System.Collections.Generic.List<Entidades.Articulo>)ViewState["articulolista"]).FindAll(delegate(Entidades.Articulo art)
+                    if (ddl.SelectedValue == "(Buscar)")
                     {
-                        return art.Id == ddl.SelectedValue;
-                    });
-                    if (listaArt.Count != 0)
-                    {
+                        ViewState["rowOrigen"] = detalleGridView.EditIndex.ToString();
                         Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                        ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcpvendedor"))).Text = listaArt[0].Id;
-                        ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtGTIN"))).Text = listaArt[0].GTIN;
-                        ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtdescripcion"))).Text = listaArt[0].Descr;
-                        ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravadoEdit"))).SelectedValue = listaArt[0].IndicacionExentoGravado;
-                        ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidadEdit"))).SelectedValue = listaArt[0].Unidad.Id;
-                        if (idListaPrecio != string.Empty)
-                        {
-                            double precio = RN.Precio.Valor(listaArt[0].Id, idListaPrecio, sesion);
-                            if (precio != 0)
-                            {
-                                ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario"))).Text = precio.ToString();
-                            }
-                        }
-                        ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit"))).SelectedValue = Convert.ToString(listaArt[0].AlicuotaIVA);
-                        ddl = ((DropDownList)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articuloEdit")));
-                        TextBox txtprecio_unitario = ((TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtprecio_unitario")));
-                        TextBox txtcantidad = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtcantidad"));
-                        TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_alicuota_articulo"));
-                        TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.Rows[detalleGridView.EditIndex].FindControl("txtimporte_total_articulo"));
-                        RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, sesion, txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
-                        ((DropDownList)sender).SelectedValue = "(Elegir artículo)";
+                        CUITTextBox.Text = sesion.Cuit.Nro;
+                        CUITTextBox.Enabled = false;
+                        DescrRadioButton.Checked = true;
+                        AjustarPorTipoBusqueda();
+                        ddl.SelectedValue = "(Elegir artículo)";
+                        DescrTextBox.Focus();
+                        ModalPopupExtender1.Show();
+                    }
+                    else
+                    {
+                        AsignarArticuloBuscado(ddl, detalleGridView.Rows[detalleGridView.EditIndex]);
                     }
                 }
             }
             catch
             {
-            }
-            finally
-            {
-                ((DropDownList)sender).SelectedValue = "(Elegir artículo)";
+                ddl.SelectedValue = "(Elegir artículo)";
             }
         }
-
         protected void ddlarticuloselFooter_SelectedIndexChanged(object sender, EventArgs e)
         {
+            DropDownList ddl = (DropDownList)sender;
             try
             {
                 if (Funciones.SessionTimeOut(Session))
@@ -1571,45 +1567,200 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    DropDownList ddl = (DropDownList)sender;
-                    System.Collections.Generic.List<Entidades.Articulo> listaArt = ((System.Collections.Generic.List<Entidades.Articulo>)ViewState["articulolista"]).FindAll(delegate(Entidades.Articulo art)
+                    if (ddl.SelectedValue == "(Buscar)")
                     {
-                        return art.Id == ddl.SelectedValue;
-                    });
-                    if (listaArt.Count != 0)
-                    {
+                        ViewState["rowOrigen"] = "Footer";
                         Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                        ((TextBox)(detalleGridView.FooterRow.FindControl("txtcpvendedor"))).Text = listaArt[0].Id;
-                        ((TextBox)(detalleGridView.FooterRow.FindControl("txtGTIN"))).Text = listaArt[0].GTIN;
-                        ((TextBox)(detalleGridView.FooterRow.FindControl("txtdescripcion"))).Text = listaArt[0].Descr;
-                        ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado"))).SelectedValue = listaArt[0].IndicacionExentoGravado;
-                        ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlunidad"))).SelectedValue = listaArt[0].Unidad.Id;
-                        if (idListaPrecio != string.Empty)
-                        {
-                            double precio = RN.Precio.Valor(listaArt[0].Id, idListaPrecio, sesion);
-                            if (precio != 0)
-                            {
-                                ((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario"))).Text = precio.ToString();
-                            }
-                        }
-                        ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"))).SelectedValue = Convert.ToString(listaArt[0].AlicuotaIVA);
-                        ddl = ((DropDownList)(detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")));
-                        TextBox txtprecio_unitario = ((TextBox)(detalleGridView.FooterRow.FindControl("txtprecio_unitario")));
-                        TextBox txtcantidad = (TextBox)(detalleGridView.FooterRow.FindControl("txtcantidad"));
-                        TextBox txtimporte_alicuota_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_alicuota_articulo"));
-                        TextBox txtimporte_total_articulo = (TextBox)(detalleGridView.FooterRow.FindControl("txtimporte_total_articulo"));
-                        RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, sesion, txtimporte_total_articulo, ddl, txtprecio_unitario, txtcantidad);
-                        ((DropDownList)sender).SelectedValue = "(Elegir artículo)";
+                        CUITTextBox.Text = sesion.Cuit.Nro;
+                        CUITTextBox.Enabled = false;
+                        DescrRadioButton.Checked = true;
+                        AjustarPorTipoBusqueda();
+                        ddl.SelectedValue = "(Elegir artículo)";
+                        DescrTextBox.Focus();
+                        ModalPopupExtender1.Show();
+                    }
+                    else
+                    {
+                        AsignarArticuloBuscado(ddl, detalleGridView.FooterRow);
                     }
                 }
             }
             catch
             {
-            }
-            finally
-            {
-                ((DropDownList)sender).SelectedValue = "(Elegir artículo)";
+                ddl.SelectedValue = "(Elegir artículo)";
             }
         }
-	}
+        protected void TipoBusquedaRadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            AjustarPorTipoBusqueda();
+            ModalPopupExtender1.Show();
+        }
+        protected void AjustarPorTipoBusqueda()
+        {
+            ArticulosGridView.DataSource = null;
+            ArticulosGridView.DataBind();
+            MensajeLabel.Text = String.Empty;
+            if (IdRadioButton.Checked)
+            {
+                DescrTextBox.Text = String.Empty;
+                IdTextBox.Visible = true;
+                DescrTextBox.Visible = false;
+            }
+            else
+            {
+                IdTextBox.Text = String.Empty;
+                IdTextBox.Visible = false;
+                DescrTextBox.Visible = true;
+            }
+        }
+        protected void BuscarButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
+                MensajeLabel.Text = String.Empty;
+                if (IdRadioButton.Checked)
+                {
+                    if (IdTextBox.Text.Equals(String.Empty))
+                    {
+                        MensajeLabel.Text = IdRadioButton.Text + " no informada";
+                        return;
+                    }
+                    else
+                    {
+                        lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, sesion);
+                    }
+                }
+                else
+                {
+                    if (DescrTextBox.Text.Equals(String.Empty))
+                    {
+                        MensajeLabel.Text = DescrRadioButton.Text + " no informada";
+                        return;
+                    }
+                    else
+                    {
+                        lista = RN.Articulo.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, sesion);
+                    }
+                }
+                if (lista.Count == 0)
+                {
+                    ArticulosGridView.DataSource = null;
+                    ArticulosGridView.DataBind();
+                    MensajeLabel.Text = "No se han encontrado artículos que satisfagan la busqueda";
+                    ModalPopupExtender1.Show();
+                }
+                else
+                {
+                    ArticulosGridView.DataSource = lista;
+                    ViewState["ArticulosBuscados"] = lista;
+                    ArticulosGridView.DataBind();
+                    if (lista.Count == 1)
+                    {
+                        DropDownList ddl;
+                        GridViewRow row;
+                        if (ViewState["rowOrigen"].ToString() == "Footer")
+                        {
+                            ddl = (DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel");
+                            row = detalleGridView.FooterRow;
+                        }
+                        else
+                        {
+                            int rowIndex = Convert.ToInt32(ViewState["rowOrigen"].ToString());
+                            ddl = (DropDownList)detalleGridView.Rows[rowIndex].FindControl("ddlarticuloselEdit");
+                            row = detalleGridView.Rows[rowIndex];
+                        }
+                        ddl.SelectedValue = lista[0].Id;
+                        AsignarArticuloBuscado(ddl, row);
+                        ModalPopupExtender1.Hide();
+                    }
+                    else
+                    {
+                        ModalPopupExtender1.Show();
+                    }
+                }
+            }
+        }
+        protected void SalirButton_Click(object sender, EventArgs e)
+        {
+            ModalPopupExtender1.Hide();
+        }
+        protected void ArticulosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            int item = Convert.ToInt32(e.CommandArgument);
+            List<Entidades.Articulo> lista = (List<Entidades.Articulo>)ViewState["ArticulosBuscados"];
+            Entidades.Articulo articulo = lista[item];
+            if (e.CommandName == "Seleccionar")
+            {
+                DropDownList ddl;
+                GridViewRow row;
+                if (ViewState["rowOrigen"].ToString() == "Footer")
+                {
+                    ddl = (DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel");
+                    row = detalleGridView.FooterRow;
+                }
+                else
+                {
+                    int rowIndex = Convert.ToInt32(ViewState["rowOrigen"].ToString());
+                    ddl = (DropDownList)detalleGridView.Rows[rowIndex].FindControl("ddlarticuloselEdit");
+                    row = detalleGridView.Rows[rowIndex];
+                }
+                ddl.SelectedValue = articulo.Id;
+                AsignarArticuloBuscado(ddl, row);
+                ModalPopupExtender1.Hide();
+            }
+            else
+            {
+                ModalPopupExtender1.Show();
+            }
+        }
+        protected void ArticulosGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                if (e.Row.Cells[7].Text != "Vigente")
+                {
+                    e.Row.ForeColor = Color.Red;
+                }
+            }
+            ModalPopupExtender1.Show();
+        }
+        protected void AsignarArticuloBuscado(DropDownList ddl, GridViewRow row)
+        {
+            System.Collections.Generic.List<Entidades.Articulo> listaArt = ((System.Collections.Generic.List<Entidades.Articulo>)ViewState["articulolista"]).FindAll(delegate(Entidades.Articulo art)
+            {
+                return art.Id == ddl.SelectedValue;
+            });
+            if (listaArt.Count != 0)
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                ((TextBox)(row.FindControl("txtcpvendedor"))).Text = listaArt[0].Id;
+                ((TextBox)(row.FindControl("txtGTIN"))).Text = listaArt[0].GTIN;
+                ((TextBox)(row.FindControl("txtdescripcion"))).Text = listaArt[0].Descr;
+                ((DropDownList)(row.FindControl("ddlindicacion_exento_gravado"))).SelectedValue = listaArt[0].IndicacionExentoGravado;
+                ((DropDownList)(row.FindControl("ddlunidad"))).SelectedValue = listaArt[0].Unidad.Id;
+                if (idListaPrecio != string.Empty)
+                {
+                    double precio = RN.Precio.Valor(listaArt[0].Id, idListaPrecio, sesion);
+                    if (precio != 0)
+                    {
+                        ((TextBox)(row.FindControl("txtprecio_unitario"))).Text = precio.ToString();
+                    }
+                }
+                ((DropDownList)(row.FindControl("ddlalicuota_articulo"))).SelectedValue = Convert.ToString(listaArt[0].AlicuotaIVA);
+                DropDownList ddlalicuota_articulo = ((DropDownList)(row.FindControl("ddlalicuota_articulo")));
+                TextBox txtprecio_unitario = ((TextBox)(row.FindControl("txtprecio_unitario")));
+                TextBox txtcantidad = (TextBox)(row.FindControl("txtcantidad"));
+                TextBox txtimporte_alicuota_articulo = (TextBox)(row.FindControl("txtimporte_alicuota_articulo"));
+                TextBox txtimporte_total_articulo = (TextBox)(row.FindControl("txtimporte_total_articulo"));
+                RecalcularLinea(txtimporte_alicuota_articulo, puntoDeVenta, sesion, txtimporte_total_articulo, ddlalicuota_articulo, txtprecio_unitario, txtcantidad);
+                ddl.SelectedValue = "(Elegir artículo)";
+            }
+        }
+   }
 }

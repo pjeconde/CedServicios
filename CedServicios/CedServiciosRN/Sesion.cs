@@ -123,11 +123,11 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Contratos|Modificación");
                         opcionesHabilitadas.Add("Contratos|Consulta");
                         opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Electrónica");
-                        //opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Tradicional");    //Nuevo
-                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Compra");                 //Nuevo
+                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Tradicional");
+                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Compra");
                         opcionesHabilitadas.Add("Comprobantes|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Comprobantes|Modificación");
-                        opcionesHabilitadas.Add("Comprobantes|Envio (AFIP/ITF)");                   //Nuevo
+                        opcionesHabilitadas.Add("Comprobantes|Envio (AFIP/ITF)");
                         opcionesHabilitadas.Add("Comprobantes|Consulta");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|IVA Ventas");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Interfaz RG.3685");
@@ -136,8 +136,8 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online AFIP");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Archivo XML");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Términos y condiciones");
-                        opcionesHabilitadas.Add("Comprobantes|Generación automática (contratos)");  //Nuevo
-                        opcionesHabilitadas.Add("Comprobantes|Consulta PDFs");  //Nuevo
+                        opcionesHabilitadas.Add("Comprobantes|Generación automática (contratos)");
+                        opcionesHabilitadas.Add("Comprobantes|Consulta PDFs");
                         if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                         {
                             opcionesHabilitadas.Add("Administración|Puntos de Venta|Alta");

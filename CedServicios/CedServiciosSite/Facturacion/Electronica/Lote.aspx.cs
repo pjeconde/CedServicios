@@ -2714,6 +2714,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a Interfacturas.  " + ex.Message), false);
             }
         }
+        protected void CancelarButton_Click(object sender, EventArgs e)
+        {
+            Response.Redirect("~/default.aspx");
+        }
         protected void AccionSubirAAFIPButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
