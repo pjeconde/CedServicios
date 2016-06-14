@@ -1651,6 +1651,18 @@
                                                     </tr>
                                                 </table>
                                             </asp:Panel>
+                                            <asp:Panel ID="Panel1" runat="server">
+                                                <table style="padding-bottom:6px">
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Cancelación ingreso: 
+                                                        </td>
+                                                        <td align="left" style="padding-left:5px">
+                                                            <asp:Button ID="CancelarButton" runat="server" CausesValidation="true" OnClick="CancelarButton_Click" Text="Cancelar" />
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </asp:Panel>
                                         </td>
                                     </tr>
                                     <tr>

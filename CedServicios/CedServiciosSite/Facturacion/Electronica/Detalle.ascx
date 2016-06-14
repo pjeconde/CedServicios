@@ -9,7 +9,7 @@
     <tr>
 		<td style="text-align: center; font-weight: normal; padding-left:10px; ">
 		<asp:Panel ID="detallePanel" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="300px" ScrollBars="Auto" Wrap="true" Width="1260px" CssClass="center">
-			<asp:UpdatePanel ID="detalleUpdatePanel" runat="server" UpdateMode="conditional" ChildrenAsTriggers="true">
+            <asp:UpdatePanel ID="detalleUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
 				<Triggers>
 					<asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
 				</Triggers>
@@ -65,7 +65,7 @@
 										Width="130px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:DropDownList ID="ddlindicacion_exento_gravadoEdit" runat="server" Width="130px">
+									<asp:DropDownList ID="ddlindicacion_exento_gravado" runat="server" Width="130px">
 									</asp:DropDownList>
 								</EditItemTemplate>
 								<FooterTemplate>
@@ -101,7 +101,7 @@
 										Width="220px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:DropDownList ID="ddlunidadEdit" runat="server" Width="220px">
+									<asp:DropDownList ID="ddlunidad" runat="server" Width="220px">
 									</asp:DropDownList>
 								</EditItemTemplate>
 								<FooterTemplate>
@@ -159,7 +159,7 @@
 										Width="50px"></asp:Label>
 								</ItemTemplate>
 								<EditItemTemplate>
-									<asp:DropDownList ID="ddlalicuota_articuloEdit" runat="server" AutoPostBack="true"
+									<asp:DropDownList ID="ddlalicuota_articulo" runat="server" AutoPostBack="true"
 										OnSelectedIndexChanged="ddlalicuota_articuloEdit_SelectedIndexChanged" Width="50px">
 									</asp:DropDownList>
 								</EditItemTemplate>
@@ -280,3 +280,117 @@
 	    </td>
     </tr>
 </table>
+
+    <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
+    <cc1:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
+    PopupControlID="BusquedaArticuloPanel"
+    PopupDragHandleControlID="BusquedaArticuloPanel" 
+    TargetControlID="TargetControlIDdelModalPopupExtender1"
+    BackgroundCssClass="modalBackground"
+    BehaviorID="mdlPopup">
+    </cc1:ModalPopupExtender>
+    <asp:Panel ID="BusquedaArticuloPanel" runat="server" DefaultButton="BuscarButton" ScrollBars="Vertical" Height="500px" CssClass="ModalWindow">
+        <table align="center">
+            <tr>
+                <td align="center" colspan="3" style="padding-top:20px">
+                    <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Búsqueda de Artículo"></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-right:5px; padding-top:20px; padding-left:10px">
+                    <asp:Label ID="Label3" runat="server" Text="Articulo(s) perteneciente(s) al CUIT"></asp:Label>
+                </td>
+                <td align="left" style="padding-top:20px">
+                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
+                </td>
+                <td style="width:500px">
+                </td>
+            </tr>
+            <tr>
+	            <td align="right" style="padding-right:5px; padding-top:20px">
+                    <asp:RadioButton ID="IdRadioButton" runat="server" AutoPostBack="true" Text="Id." GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="1" TextAlign="Left" />
+	            </td>
+			    <td align="left" style="padding-top:20px">
+                    <asp:TextBox ID="IdTextBox" runat="server" MaxLength="50" TabIndex="6" Width="300px"></asp:TextBox>
+			    </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td align="right" style="padding-right:5px; padding-top:5px">
+                    <asp:RadioButton ID="DescrRadioButton" runat="server" AutoPostBack="true" Text="Descripción" Checked="true" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="2" TextAlign="Left" />
+                </td>
+                <td align="left" style="padding-top:5px">
+                    <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="50" TabIndex="6" Width="300px" TextMode="MultiLine"></asp:TextBox>
+                </td>        
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                </td>
+                <td align="left" style="height: 24px; padding-top:20px">
+                    <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
+<%--                     OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false"
+--%>
+                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                </td>
+                <td>
+                </td>
+            </tr>
+            <tr>
+                <td style="padding-top:20px; padding-left:10px" colspan="3">
+                    <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
+                        <asp:GridView ID="ArticulosGridView" runat="server"
+                            AutoGenerateColumns="false" onrowcommand="ArticulosGridView_RowCommand" OnRowDataBound="ArticulosGridView_RowDataBound" CssClass="grilla" GridLines="None">
+                            <Columns>
+                                <asp:ButtonField HeaderText="Artículo" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue" ItemStyle-Width="90px">
+                                </asp:ButtonField>
+                                <asp:BoundField DataField="Cuit" HeaderText="Cuit" SortExpression="Cuit" Visible="false">
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="left" wrap="False" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Id" HeaderText="Id" SortExpression="Id">
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="left" wrap="False" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Descr" HeaderText="descripción" SortExpression="Descr">
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="left" wrap="False" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="UnidadDescr" HeaderText="Unidad de medida" SortExpression="UnidadDescr">
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="left" wrap="False" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="IndicacionExentoGravado" HeaderText="Exento/Gravado/No gravado" SortExpression="IndicacionExentoGravado">
+                                    <headerstyle horizontalalign="left" wrap="False" />
+                                    <itemstyle horizontalalign="center" wrap="False" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="AlicuotaIVA" HeaderText="Alicuota IVA (%)" SortExpression="AlicuotaIVA">
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="center" wrap="False" />
+                                </asp:BoundField>
+                                <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado">
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="left" wrap="False" />
+                                </asp:BoundField>
+                            </Columns>
+                        </asp:GridView>
+                    </asp:Panel>
+                </td>
+            </tr>
+            <tr>
+                <td align="center" colspan="3" style="padding-top:20px">
+                    <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                    <asp:ValidationSummary ID="MensajeValidationSummary" runat="server" SkinID="MensajeValidationSummary"></asp:ValidationSummary>
+                </td>
+            </tr>
+        </table>
+    </asp:Panel>
+    <script type="text/javascript">
+        function BorrarMensaje() {
+            {
+                document.getElementById('<%=MensajeLabel.ClientID%>').innerHTML = '';
+            }
+        }
+    </script>

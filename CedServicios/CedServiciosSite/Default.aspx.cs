@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Drawing;
 
 namespace CedServicios.Site
 {
@@ -11,21 +12,6 @@ namespace CedServicios.Site
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            //ModalPopupExtender1.Show();
-        }
-        protected void SalirButton_Click(object sender, EventArgs e)
-        {
-            ModalPopupExtender1.Hide();
-        }
-        protected void PruebaButton_Click(object sender, EventArgs e)
-        {
-            ModalPopupExtender1.Show();
-            //RN.EnvioCorreo.ReporteActividad(DateTime.Now, DateTime.Now, (Entidades.Sesion)Session["Sesion"]);
-        }
-        protected void ValorTextBox_TextChanged(object sender, EventArgs e)
-        {
-            ValorTextBox.Text = "Hola mundo";
-            ModalPopupExtender1.Show();
         }
     }
 }

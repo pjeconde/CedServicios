@@ -22,8 +22,8 @@
                 </td>
             </tr>
             <tr>
-	            <td align="left" style="padding-right:5px; padding-top:20px">
-                    <asp:RadioButton ID="IdRadioButton" runat="server" AutoPostBack="true" Text="Id." GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="1" />
+	            <td align="right" style="padding-right:5px; padding-top:20px">
+                    <asp:RadioButton ID="IdRadioButton" runat="server" AutoPostBack="true" Text="Id." GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="1" TextAlign="Left" />
 	            </td>
 			    <td align="left" style="padding-top:20px">
                     <asp:TextBox ID="IdTextBox" runat="server" MaxLength="50" TabIndex="6" Width="300px"></asp:TextBox>
@@ -32,8 +32,8 @@
                 </td>
             </tr>
             <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    <asp:RadioButton ID="DescrRadioButton" runat="server" AutoPostBack="true" Text="Descripción" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="2"/>
+                <td align="right" style="padding-right:5px; padding-top:5px">
+                    <asp:RadioButton ID="DescrRadioButton" runat="server" AutoPostBack="true" Text="Descripción" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="2" TextAlign="Left" />
                 </td>
                 <td align="left" style="padding-top:5px">
                     <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="50" TabIndex="6" Width="300px" TextMode="MultiLine"></asp:TextBox>
