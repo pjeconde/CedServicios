@@ -71,14 +71,14 @@
         <tr>
 	        <td style="padding-right:5px; padding-top:5px; text-align: right">
 		        <asp:RegularExpressionValidator ID="RegularExpressionValidator16" runat="server"
-			        ControlToValidate="GTINTextBox" ErrorMessage="GTIN" SetFocusOnError="True" ValidationExpression="[0-9]{20}">
+			        ControlToValidate="GTINTextBox" ErrorMessage="GTIN" SetFocusOnError="True" ValidationExpression="[0-9]*">
 			        <asp:Label ID="Label49" runat="server" SkinID="IndicadorValidacion"></asp:Label>
 		        </asp:RegularExpressionValidator>
 		        <asp:Label ID="Label11" runat="server" Text="GTIN"></asp:Label>
 	        </td>
             <td style="padding-top:5px; text-align: left">
 		        <asp:TextBox ID="GTINTextBox" runat="server" MaxLength="20" TabIndex="4"
-                    ToolTip="(opcional) Código estándar GSI global de identificación de productos. Se utiliza para comercio internacional. Es un campo numérico de 20 caracteres."
+                    ToolTip="(opcional) Código estándar GSI global de identificación de productos. Se utiliza para comercio internacional. Es un campo numérico hasta 20 caracteres."
 			        Width="150px"></asp:TextBox>
             </td>									
         </tr>

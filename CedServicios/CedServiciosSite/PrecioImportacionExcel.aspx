@@ -25,6 +25,11 @@
                         </td>
                     </tr>
                     <tr>
+                        <td align="center" style="padding-top:20px">
+                            Formato: <asp:RadioButton ID="FormatoCSVRadioButton" runat="server" Text=".csv" Checked="true" GroupName="formato" /> &nbsp;&nbsp; <asp:RadioButton ID="FormatoXLSTRadioButton" runat="server" Text=".xls" GroupName="formato"  />
+                        </td>
+                    </tr>
+                    <tr>
                         <td style="padding-top:5px; padding-left:10px; padding-top:25px">
                             <asp:FileUpload ID="XMLFileUpload" runat="server" Height="25px" Width="100%" size="100" ToolTip="Importar precios desde un archivo Excel"> 
                             </asp:FileUpload>
