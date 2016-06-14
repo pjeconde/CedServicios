@@ -2258,7 +2258,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             if (IdNaturalezaComprobanteTextBox.Text != "Compra")
             {
-                if (Accion != "SubirAAFIP")
+                if (Accion != "SubirAAFIP" && Accion != "ObtenerXML")
                 {
                     if (Email_CompradorTextBox.Text.Equals(string.Empty))
                     {
@@ -3025,7 +3025,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         try
                         {
-                            if (ValidarCamposObligatorios(""))
+                            if (ValidarCamposObligatorios("GuardarComprobante"))
                             {
                                 FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
                                 //Grabar en base de datos
@@ -4023,8 +4023,8 @@ namespace CedServicios.Site.Facturacion.Electronica
             GenerarImporteTotalIngresosBrutosMonedaExtranjera(r, tipodecambio, rimo);
             GenerarImporteTotalImpuestosMunicipalesMonedaExtranjera(r, tipodecambio, rimo);
             GenerarImporteTotalImpuestosInternosMonedaExtranjera(r, tipodecambio, rimo);
-            
-            r.importe_total_factura = 0;
+
+            r.importe_total_factura = Math.Round(Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text) * tipodecambio, 2); ;
             rimo.importe_total_factura = Convert.ToDouble(Importe_Total_Factura_ResumenTextBox.Text);
             r.importes_moneda_origen = rimo;
         }
@@ -4291,7 +4291,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
-                        if (idtipo.Equals("Exportacion") && !Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals("0"))
+                        if (idtipo.Equals("Exportacion") && !(Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals("0") || Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals("")))
                         {
                             throw new Exception("El importe total de impuestos internos debe informarse en 0 para exportación.");
                         }
@@ -4300,12 +4300,20 @@ namespace CedServicios.Site.Facturacion.Electronica
                             if (idtipo.Equals("Exportacion"))
                             {
                                 r.importe_total_impuestos_internos = 0;
-                                rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                                rimo.importe_total_impuestos_internos = 0;
                             }
                             else
                             {
-                                r.importe_total_impuestos_internos = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio, 2);
-                                rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                                if (!Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals(""))
+                                {
+                                    r.importe_total_impuestos_internos = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text) * tipodecambio, 2);
+                                    rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                                }
+                                else
+                                {
+                                    r.importe_total_impuestos_internos = 0;
+                                    rimo.importe_total_impuestos_internos = 0;
+                                }
                             }
                         }
                     }
@@ -4322,7 +4330,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 rimo.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
             }
             //Marcar si están informados
-            if (rimo.importe_total_impuestos_internos != 0)
+            if (!Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals(""))
             {
                 r.importe_total_impuestos_internosSpecified = true;
                 rimo.importe_total_impuestos_internosSpecified = true;
@@ -4351,7 +4359,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
-                        if (idtipo.Equals("Exportacion") && !Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals("0"))
+                        if (idtipo.Equals("Exportacion") && !(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals("0") || Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals("")))
                         {
                             throw new Exception("El importe total de impuestos municipales debe informarse en 0 para exportación.");
                         }
@@ -4360,12 +4368,20 @@ namespace CedServicios.Site.Facturacion.Electronica
                             if (idtipo.Equals("Exportacion"))
                             {
                                 r.importe_total_impuestos_municipales = 0;
-                                rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+                                rimo.importe_total_impuestos_municipales = 0;
                             }
                             else
                             {
-                                r.importe_total_impuestos_municipales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio, 2);
-                                rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+                                if (!Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals(""))
+                                {
+                                    r.importe_total_impuestos_municipales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text) * tipodecambio, 2);
+                                    rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+                                }
+                                else
+                                {
+                                    r.importe_total_impuestos_municipales = 0;
+                                    rimo.importe_total_impuestos_municipales = 0;
+                                }
                             }
                         }
                     }
@@ -4382,7 +4398,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 rimo.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
             }
             //Marcar si están informados
-            if (rimo.importe_total_impuestos_municipales != 0)
+            if (!Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals(""))
             {
                 r.importe_total_impuestos_municipalesSpecified = true;
                 rimo.importe_total_impuestos_municipalesSpecified = true;
@@ -4411,7 +4427,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
-                        if (idtipo.Equals("Exportacion") && !Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals("0"))
+                        if (idtipo.Equals("Exportacion") && !(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals("0") || Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals("")))
                         {
                             throw new Exception("El importe total de ingresos brutos debe informarse en 0 para exportación.");
                         }
@@ -4420,12 +4436,20 @@ namespace CedServicios.Site.Facturacion.Electronica
                             if (idtipo.Equals("Exportacion"))
                             {
                                 r.importe_total_ingresos_brutos = 0;
-                                rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+                                rimo.importe_total_ingresos_brutos = 0;
                             }
                             else
                             {
-                                r.importe_total_ingresos_brutos = Math.Round(Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio, 2);
-                                rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+                                if (!Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals(""))
+                                {
+                                    r.importe_total_ingresos_brutos = Math.Round(Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text) * tipodecambio, 2);
+                                    rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+                                }
+                                else
+                                {
+                                    r.importe_total_ingresos_brutos = 0;
+                                    rimo.importe_total_ingresos_brutos = 0;
+                                }
                             }
                         }
                     }
@@ -4442,7 +4466,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 rimo.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
             }
             //Marcar si están informados
-            if (rimo.importe_total_ingresos_brutos != 0)
+            if (!Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals(""))
             {
                 r.importe_total_ingresos_brutosSpecified = true;
                 rimo.importe_total_ingresos_brutosSpecified = true;
@@ -4471,7 +4495,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
-                        if (idtipo.Equals("Exportacion") && !Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals("0"))
+                        if (idtipo.Equals("Exportacion") && !(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals("0") || Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals("")))
                         {
                             throw new Exception("El importe total de impuestos nacionales debe informarse en 0 para exportación.");
                         }
@@ -4480,12 +4504,20 @@ namespace CedServicios.Site.Facturacion.Electronica
                             if (idtipo.Equals("Exportacion"))
                             {
                                 r.importe_total_impuestos_nacionales = 0;
-                                rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+                                rimo.importe_total_impuestos_nacionales = 0;
                             }
                             else
                             {
-                                r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio, 2);
-                                rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+                                if (!Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals(""))
+                                {
+                                    r.importe_total_impuestos_nacionales = Math.Round(Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text) * tipodecambio, 2);
+                                    rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+                                }
+                                else
+                                {
+                                    r.importe_total_impuestos_nacionales = 0;
+                                    rimo.importe_total_impuestos_nacionales = 0;
+                                }
                             }
                         }
                     }
@@ -4502,7 +4534,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 rimo.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
             }
             //Marcar si están informados
-			if (rimo.importe_total_impuestos_nacionales != 0)
+            if (!Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals(""))
 			{
 				r.importe_total_impuestos_nacionalesSpecified = true;
 				rimo.importe_total_impuestos_nacionalesSpecified = true;

@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using FileHelpers;
-using FileHelpers.RunTime; 
+//using FileHelpers.RunTime; 
 
 namespace FeaEntidades.InterFacturas
 {

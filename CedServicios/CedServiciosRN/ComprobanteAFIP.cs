@@ -160,13 +160,28 @@ namespace CedServicios.RN
                     objFEDetalleRequest.FchServHasta = lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta;     // Comprobante.Fecha_serv_hasta.ToString("yyyyMMdd");
                     objFEDetalleRequest.FchVtoPago = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento;      // Comprobante.Fecha_venc_pago.ToString("yyyyMMdd");
                 }
-
-                objFEDetalleRequest.ImpNeto = lc.comprobante[0].resumen.importe_total_neto_gravado;                         // Comprobante.Imp_neto;
-                objFEDetalleRequest.ImpOpEx = lc.comprobante[0].resumen.importe_operaciones_exentas;                        // Comprobante.Imp_op_ex;
-                objFEDetalleRequest.ImpTotConc = lc.comprobante[0].resumen.importe_total_concepto_no_gravado;               // Comprobante.Imp_tot_conc;
-                objFEDetalleRequest.ImpTotal = lc.comprobante[0].resumen.importe_total_factura;                             // Comprobante.Imp_total;
-                objFEDetalleRequest.ImpIVA = lc.comprobante[0].resumen.impuesto_liq;                                        // Comprobante.Impto_liq;
-                objFEDetalleRequest.impto_liq_rni = lc.comprobante[0].resumen.impuesto_liq_rni;                             // Comprobante.Impto_liq_rni;
+                if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                {
+                    objFEDetalleRequest.ImpNeto = lc.comprobante[0].resumen.importe_total_neto_gravado;                         // Comprobante.Imp_neto;
+                    objFEDetalleRequest.ImpOpEx = lc.comprobante[0].resumen.importe_operaciones_exentas;                        // Comprobante.Imp_op_ex;
+                    objFEDetalleRequest.ImpTotConc = lc.comprobante[0].resumen.importe_total_concepto_no_gravado;               // Comprobante.Imp_tot_conc;
+                    objFEDetalleRequest.ImpTotal = lc.comprobante[0].resumen.importe_total_factura;                             // Comprobante.Imp_total;
+                    objFEDetalleRequest.ImpIVA = lc.comprobante[0].resumen.impuesto_liq;                                        // Comprobante.Impto_liq;
+                    objFEDetalleRequest.impto_liq_rni = lc.comprobante[0].resumen.impuesto_liq_rni;
+                }
+                else if (lc.comprobante[0].resumen.codigo_moneda == "DOL")
+                {
+                    objFEDetalleRequest.ImpNeto = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_neto_gravado;                         // Comprobante.Imp_neto;
+                    objFEDetalleRequest.ImpOpEx = lc.comprobante[0].resumen.importes_moneda_origen.importe_operaciones_exentas;                        // Comprobante.Imp_op_ex;
+                    objFEDetalleRequest.ImpTotConc = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_concepto_no_gravado;               // Comprobante.Imp_tot_conc;
+                    objFEDetalleRequest.ImpTotal = lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;                             // Comprobante.Imp_total;
+                    objFEDetalleRequest.ImpIVA = lc.comprobante[0].resumen.importes_moneda_origen.impuesto_liq;                                        // Comprobante.Impto_liq;
+                    objFEDetalleRequest.impto_liq_rni = lc.comprobante[0].resumen.importes_moneda_origen.impuesto_liq_rni;
+                }
+                else
+                {
+                    throw new Exception("Moneda no permitida: " + lc.comprobante[0].resumen.codigo_moneda.ToString());
+                }
                 
                 objFEDetalleRequest.DocNro = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;      // Comprobante.Nro_doc;
                 //objFEDetalleRequest.punto_vta = Comprobante.PuntoVenta;
@@ -253,7 +268,14 @@ namespace CedServicios.RN
                                 case 1:
                                     double baseImponible = 0;
                                     ivas[CantAlicIVA] = new ar.gov.afip.wsfev1.AlicIva();
-                                    ivas[CantAlicIVA].BaseImp = lc.comprobante[0].resumen.impuestos[j].base_imponible;
+                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                    {
+                                        ivas[CantAlicIVA].BaseImp = lc.comprobante[0].resumen.impuestos[j].base_imponible;
+                                    }
+                                    else
+                                    {
+                                        ivas[CantAlicIVA].BaseImp = lc.comprobante[0].resumen.impuestos[j].base_imponible_moneda_origen;
+                                    }
                                     if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 0)
                                     {
                                         if (ivas[CantAlicIVA].BaseImp == 0)
@@ -263,7 +285,14 @@ namespace CedServicios.RN
                                                 if (lc.comprobante[0].detalle.linea[k] == null) { break; }
                                                 if (lc.comprobante[0].detalle.linea[k].indicacion_exento_gravado != null && lc.comprobante[0].detalle.linea[k].indicacion_exento_gravado.Trim().ToUpper() == "G" && lc.comprobante[0].detalle.linea[k].alicuota_iva == 0)
                                                 {
-                                                    baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
+                                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                                    {
+                                                        baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
+                                                    }
+                                                    else
+                                                    {
+                                                        baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].importes_moneda_origen.importe_total_articulo, 2);
+                                                    }
                                                 }
                                             }
                                         }
@@ -274,7 +303,14 @@ namespace CedServicios.RN
                                     {
                                         if (ivas[CantAlicIVA].BaseImp == 0)
                                         {
-                                            baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                            {
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
+                                            else
+                                            {
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
                                         }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 4;
@@ -283,7 +319,14 @@ namespace CedServicios.RN
                                     {
                                         if (ivas[CantAlicIVA].BaseImp == 0)
                                         {
-                                            baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                            {
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
+                                            else
+                                            {
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
                                         }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 5;
@@ -292,23 +335,14 @@ namespace CedServicios.RN
                                     {
                                         if (ivas[CantAlicIVA].BaseImp == 0)
                                         {
-                                            //Comprobantes "B"
-                                            //if (TipoComp == "6" || TipoComp == "7" || TipoComp == "8")
-                                            //{
+                                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                            {
                                                 baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            //}
-                                            //else
-                                            //{
-                                            //    for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
-                                            //    {
-                                            //        if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                            //        if (lc.comprobante[0].detalle.linea[k].alicuota_iva == 27)
-                                            //        {
-                                            //            //baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].precio_unitario * lc.comprobante[0].detalle.linea[k].cantidad, 2);
-                                            //            baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
-                                            //        }
-                                            //    }
-                                            //}
+                                            }
+                                            else
+                                            {
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
                                         }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 6;
@@ -317,7 +351,14 @@ namespace CedServicios.RN
                                     {
                                         if (ivas[CantAlicIVA].BaseImp == 0)
                                         {
-                                            baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                            {
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
+                                            else
+                                            {
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
                                         }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 8;
@@ -326,12 +367,26 @@ namespace CedServicios.RN
                                     {
                                         if (ivas[CantAlicIVA].BaseImp == 0)
                                         {
-                                            baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                            {
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
+                                            else
+                                            {
+                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                            }
                                         }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 9;
                                     }
-                                    ivas[CantAlicIVA].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                    {
+                                        ivas[CantAlicIVA].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                    }
+                                    else
+                                    {
+                                        ivas[CantAlicIVA].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
+                                    }
                                     CantAlicIVA += 1;
                                     break;
                                 case 2:  //Internos
@@ -362,9 +417,23 @@ namespace CedServicios.RN
                                     {
                                         objFEDetalleRequest.Tributos[CantTrib].Id = 3;  //"AFIP - Impuestos municipales"
                                     }
-                                    objFEDetalleRequest.Tributos[CantTrib].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                    {
+                                        objFEDetalleRequest.Tributos[CantTrib].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                    }
+                                    else
+                                    {
+                                        objFEDetalleRequest.Tributos[CantTrib].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
+                                    }
                                     objFEDetalleRequest.Tributos[CantTrib].Desc = lc.comprobante[0].resumen.impuestos[j].descripcion;
-                                    impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                    {
+                                        impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                    }
+                                    else
+                                    {
+                                        impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
+                                    }
                                     CantTrib += 1;
                                     break;
                                 default:
