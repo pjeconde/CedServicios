@@ -64,45 +64,54 @@ namespace CedServicios.Site
                 MensajeLabel.Text = String.Empty;
 
                 Entidades.Enum.TipoPersona tipoPersona = new Entidades.Enum.TipoPersona();
-                if (ClienteRadioButton.Checked) tipoPersona = Entidades.Enum.TipoPersona.Cliente; else if (ProveedorRadioButton.Checked) tipoPersona = Entidades.Enum.TipoPersona.Proveedor; else tipoPersona = Entidades.Enum.TipoPersona.Ambos;
+                if (ClienteRadioButton.Checked) tipoPersona = Entidades.Enum.TipoPersona.Cliente; 
+                else if (ProveedorRadioButton.Checked) tipoPersona = Entidades.Enum.TipoPersona.Proveedor; 
+                else tipoPersona = Entidades.Enum.TipoPersona.Ambos;
 
-                if (TipoDocRadioButton.Checked)
+                if (TodosRadioButton.Checked)
                 {
-                    if (NroDocTextBox.Text.Equals(String.Empty))
-                    {
-                        MensajeLabel.Text = TipoDocRadioButton.Text + " no informado";
-                        return;
-                    }
-                    else
-                    {
-                        Entidades.Documento documento = new Entidades.Documento();
-                        documento.Tipo.Id = TipoDocDropDownList.SelectedValue.ToString();
-                        documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
-                        lista = RN.Persona.ListaPorCuityTipoyNroDoc(sesion.Cuit.Nro, documento, tipoPersona, sesion);
-                    }
-                }
-                else if (RazonSocialRadioButton.Checked)
-                {
-                    if (RazonSocialTextBox.Text.Equals(String.Empty))
-                    {
-                        MensajeLabel.Text = RazonSocialRadioButton.Text + " no informado";
-                        return;
-                    }
-                    else
-                    {
-                        lista = RN.Persona.ListaPorCuityRazonSocial(sesion.Cuit.Nro, RazonSocialTextBox.Text, tipoPersona, sesion);
-                    }
+                    lista = RN.Persona.ListaPorCuit(false, false, tipoPersona, sesion);
                 }
                 else
                 {
-                    if (IdPersonaTextBox.Text.Equals(String.Empty))
+                    if (TipoDocRadioButton.Checked)
                     {
-                        MensajeLabel.Text = IdClienteRadioButton.Text + " no informado";
-                        return;
+                        if (NroDocTextBox.Text.Equals(String.Empty))
+                        {
+                            MensajeLabel.Text = TipoDocRadioButton.Text + " no informado";
+                            return;
+                        }
+                        else
+                        {
+                            Entidades.Documento documento = new Entidades.Documento();
+                            documento.Tipo.Id = TipoDocDropDownList.SelectedValue.ToString();
+                            documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                            lista = RN.Persona.ListaPorCuityTipoyNroDoc(sesion.Cuit.Nro, documento, tipoPersona, sesion);
+                        }
+                    }
+                    else if (RazonSocialRadioButton.Checked)
+                    {
+                        if (RazonSocialTextBox.Text.Equals(String.Empty))
+                        {
+                            MensajeLabel.Text = RazonSocialRadioButton.Text + " no informado";
+                            return;
+                        }
+                        else
+                        {
+                            lista = RN.Persona.ListaPorCuityRazonSocial(sesion.Cuit.Nro, RazonSocialTextBox.Text, tipoPersona, sesion);
+                        }
                     }
                     else
                     {
-                        lista = RN.Persona.ListaPorCuityIdPersona(sesion.Cuit.Nro, IdPersonaTextBox.Text, tipoPersona, sesion);
+                        if (IdPersonaTextBox.Text.Equals(String.Empty))
+                        {
+                            MensajeLabel.Text = IdClienteRadioButton.Text + " no informado";
+                            return;
+                        }
+                        else
+                        {
+                            lista = RN.Persona.ListaPorCuityIdPersona(sesion.Cuit.Nro, IdPersonaTextBox.Text, tipoPersona, sesion);
+                        }
                     }
                 }
                 if (lista.Count == 0)
@@ -118,6 +127,7 @@ namespace CedServicios.Site
                 }
                 else
                 {
+                    MensajeLabel.Text = "Se encontraron " + lista.Count.ToString() + " Personas";
                     ClientesGridView.DataSource = lista;
                     ViewState["Personas"] = lista;
                     ClientesGridView.DataBind();
@@ -186,6 +196,19 @@ namespace CedServicios.Site
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        protected void FiltroButton_CheckedChanged(object sender, EventArgs e)
+        {
+            TipoDocRadioButton.Enabled = FiltradosRadioButton.Checked;
+            RazonSocialRadioButton.Enabled = FiltradosRadioButton.Checked;
+            IdClienteRadioButton.Enabled = FiltradosRadioButton.Checked;
+            TipoDocDropDownList.Enabled = FiltradosRadioButton.Checked;
+            NroDocTextBox.Enabled = FiltradosRadioButton.Checked;
+            RazonSocialTextBox.Enabled = FiltradosRadioButton.Checked;
+            IdPersonaTextBox.Enabled = FiltradosRadioButton.Checked;
+            MensajeLabel.Text = string.Empty;
+            ClientesGridView.DataSource = null;
+            ClientesGridView.DataBind();
         }
     }
 }
