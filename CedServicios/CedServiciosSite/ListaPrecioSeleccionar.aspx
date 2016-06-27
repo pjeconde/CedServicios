@@ -12,50 +12,51 @@
                 </td>
             </tr>
             <tr>
-                <td align="right" style="padding-right:5px; padding-top: 20px">
+                <td align="center" style="padding-right:5px; padding-top: 20px" colspan="3">
                     <asp:Label ID="Label3" runat="server" Text="Lista(s) de Precios perteneciente(s) al CUIT"></asp:Label>
-                </td>
-                <td align="left" style="padding-top:20px">
                     <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
                 </td>
-                <td style="width:500px">
-                </td>
             </tr>
             <tr>
+			    <td style="padding-top:20px; padding-right:30px">
+                    <asp:Label ID="Label10" runat="server" Text="Ver listas de precios"></asp:Label>
+			    </td>
+                <td align="left" style="padding-top:20px; padding-right:30px">
+                    <asp:RadioButton ID="FiltradosRadioButton" Text="Filtradas por:" GroupName="Filtro" Checked="true" runat="server" AutoPostBack="true" oncheckedchanged="FiltroButton_CheckedChanged" />
+                </td>
 	            <td align="left" style="padding-right:5px; padding-top:20px">
                     <asp:RadioButton ID="IdRadioButton" runat="server" AutoPostBack="true" Text="Id." GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="1" />
-	            </td>
-			    <td align="left" style="padding-top:20px">
                     <asp:TextBox ID="IdTextBox" runat="server" MaxLength="50" TabIndex="6" Width="300px"></asp:TextBox>
-			    </td>
-                <td>
-                </td>
+	            </td>
             </tr>
             <tr>
+			    <td>
+			    </td>
+			    <td>
+			    </td>
                 <td align="left" style="padding-right:5px; padding-top:5px">
                     <asp:RadioButton ID="DescrRadioButton" runat="server" AutoPostBack="true" Text="Descripción" GroupName="TipoBusqueda" oncheckedchanged="TipoBusquedaRadioButton_CheckedChanged" TabIndex="2"/>
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="50" TabIndex="6" Width="300px" TextMode="MultiLine"></asp:TextBox>
-                </td>        
-                <td>
+                    <asp:TextBox ID="DescrTextBox" runat="server" MaxLength="50" TabIndex="6" Width="300px"></asp:TextBox>
                 </td>
             </tr>
             <tr>
-                <td>
+			    <td>
+			    </td>
+                <td align="left">
+                    <asp:RadioButton ID="TodosRadioButton" Text="Todas" GroupName="Filtro" runat="server" AutoPostBack="true" oncheckedchanged="FiltroButton_CheckedChanged" />
                 </td>
-                <td align="left" style="height: 24px; padding-top:20px">
+            </tr>
+            <tr>
+                <td align="center" style="height: 24px; padding-top:20px" colspan="3">
                     <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
                     <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
                 </td>
-                <td>
-                </td>
             </tr>
             <tr>
-                <td style="padding-top:20px;" colspan="3">
+                <td align="center" style="padding-top:20px;" colspan="3">
                     <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                         <asp:GridView ID="ListasPrecioGridView" runat="server"
-                            AutoGenerateColumns="false" onrowcommand="ListasPrecioGridView_RowCommand" OnRowDataBound="ListasPrecioGridView_RowDataBound" CssClass="grilla" GridLines="None">
+                            AutoGenerateColumns="false" onrowcommand="ListasPrecioGridView_RowCommand" OnRowDataBound="ListasPrecioGridView_RowDataBound" CssClass="grilla" GridLines="None" CaptionAlign="Bottom">
                             <Columns>
                                 <asp:ButtonField HeaderText="Lista de Precios" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue" ItemStyle-Width="90px">
                                 </asp:ButtonField>

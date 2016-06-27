@@ -59,32 +59,40 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
                 MensajeLabel.Text = String.Empty;
-                if (IdRadioButton.Checked)
+                if (TodosRadioButton.Checked)
                 {
-                    if (IdTextBox.Text.Equals(String.Empty))
-                    {
-                        MensajeLabel.Text = IdRadioButton.Text + " no informada";
-                        return;
-                    }
-                    else
-                    {
-                        lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, sesion);
-                    }
+                    lista = RN.Articulo.ListaPorCuit(false, sesion);
                 }
                 else
                 {
-                    if (DescrTextBox.Text.Equals(String.Empty))
+                    if (IdRadioButton.Checked)
                     {
-                        MensajeLabel.Text = DescrRadioButton.Text + " no informada";
-                        return;
+                        if (IdTextBox.Text.Equals(String.Empty))
+                        {
+                            MensajeLabel.Text = IdRadioButton.Text + " no informada";
+                            return;
+                        }
+                        else
+                        {
+                            lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, sesion);
+                        }
                     }
                     else
                     {
-                        lista = RN.Articulo.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, sesion);
+                        if (DescrTextBox.Text.Equals(String.Empty))
+                        {
+                            MensajeLabel.Text = DescrRadioButton.Text + " no informada";
+                            return;
+                        }
+                        else
+                        {
+                            lista = RN.Articulo.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, sesion);
+                        }
                     }
                 }
                 if (lista.Count == 0)
                 {
+                    ArticulosGridView.Caption = string.Empty;
                     ArticulosGridView.DataSource = null;
                     ArticulosGridView.DataBind();
                     MensajeLabel.Text = "No se han encontrado artículos que satisfagan la busqueda";
@@ -96,6 +104,7 @@ namespace CedServicios.Site
                 }
                 else
                 {
+                    ArticulosGridView.Caption = "Se encontraron " + lista.Count.ToString() + " Artículos";
                     ArticulosGridView.DataSource = lista;
                     ViewState["Articulo"] = lista;
                     ArticulosGridView.DataBind();
@@ -148,6 +157,17 @@ namespace CedServicios.Site
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        protected void FiltroButton_CheckedChanged(object sender, EventArgs e)
+        {
+            IdRadioButton.Enabled = FiltradosRadioButton.Checked;
+            IdTextBox.Enabled = FiltradosRadioButton.Checked;
+            DescrRadioButton.Enabled = FiltradosRadioButton.Checked;
+            DescrTextBox.Enabled = FiltradosRadioButton.Checked;
+            MensajeLabel.Text = string.Empty;
+            ArticulosGridView.Caption = string.Empty;
+            ArticulosGridView.DataSource = null;
+            ArticulosGridView.DataBind();
         }
     }
 }
