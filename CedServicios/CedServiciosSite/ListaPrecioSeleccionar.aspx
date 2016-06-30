@@ -80,6 +80,10 @@
                                     <headerstyle horizontalalign="center" wrap="False" />
                                     <itemstyle horizontalalign="left" wrap="False" />
                                 </asp:BoundField>
+                                <asp:BoundField DataField="IdTipo" HeaderText="Tipo" SortExpression="IdTipo">
+                                    <headerstyle horizontalalign="center" wrap="False" />
+                                    <itemstyle horizontalalign="left" wrap="False" />
+                                </asp:BoundField>
                             </Columns>
                         </asp:GridView>
                     </asp:Panel>

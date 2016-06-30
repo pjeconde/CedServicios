@@ -57,11 +57,13 @@ namespace CedServicios.Site
                 IdTextBox.Text = listaPrecio.Id;
                 DescrTextBox.Text = listaPrecio.Descr;
                 OrdenTextBox.Text = listaPrecio.Orden.ToString();
+                IdTipoTextBox.Text = listaPrecio.IdTipo;
 
                 CUITTextBox.Enabled = false;
                 IdTextBox.Enabled = false;
                 DescrTextBox.Enabled = false;
                 OrdenTextBox.Enabled = false;
+                IdTipoTextBox.Enabled = false;
 
                 ScriptManager.RegisterStartupScript(this.Page, this.GetType(), "script", "ShowModalListaPrecio();", true);
 

@@ -220,6 +220,24 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox OrdenTextBox;
         
         /// <summary>
+        /// Control Label14.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label14;
+        
+        /// <summary>
+        /// Control IdTipoListaPrecioDropDownList.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList IdTipoListaPrecioDropDownList;
+        
+        /// <summary>
         /// Control AceptarButton.
         /// </summary>
         /// <remarks>

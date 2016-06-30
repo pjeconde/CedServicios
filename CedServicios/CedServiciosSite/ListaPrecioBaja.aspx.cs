@@ -26,11 +26,13 @@ namespace CedServicios.Site
                     IdTextBox.Text = listaPrecio.Id;
                     DescrTextBox.Text = listaPrecio.Descr;
                     OrdenTextBox.Text = listaPrecio.Orden.ToString();
+                    IdTipoListaPrecioDropDownList.SelectedValue = listaPrecio.IdTipo;
 
                     CUITTextBox.Enabled = false;
                     IdTextBox.Enabled = false;
                     DescrTextBox.Enabled = false;
                     OrdenTextBox.Enabled = false;
+                    IdTipoListaPrecioDropDownList.Enabled = false;
 
                     if (listaPrecio.WF.Estado == "Vigente")
                     {

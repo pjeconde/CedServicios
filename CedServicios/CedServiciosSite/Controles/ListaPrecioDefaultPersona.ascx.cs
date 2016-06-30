@@ -13,35 +13,60 @@ namespace CedServicios.Site.Controles
         {
 
         }
-        public List<Entidades.ListaPrecio> ListasPrecio
+        public List<Entidades.ListaPrecio> ListasPrecioVenta
         {
             set
             {
-                ViewState["ListasPrecio"] = value;
-                IdListaPrecioDropDownList.DataSource = value;
-                IdListaPrecioDropDownList.DataBind();
+                ViewState["ListasPrecioVenta"] = value;
+                IdListaPrecioVentaDropDownList.DataSource = value;
+                IdListaPrecioVentaDropDownList.DataBind();
             }
             get
             {
-                return (List<Entidades.ListaPrecio>)ViewState["ListasPrecio"];
+                return (List<Entidades.ListaPrecio>)ViewState["ListasPrecioVenta"];
             }
         }
-        public string IdListaPrecio
+        public List<Entidades.ListaPrecio> ListasPrecioCompra
+        {
+            set
+            {
+                ViewState["ListasPrecioCompra"] = value;
+                IdListaPrecioCompraDropDownList.DataSource = value;
+                IdListaPrecioCompraDropDownList.DataBind();
+            }
+            get
+            {
+                return (List<Entidades.ListaPrecio>)ViewState["ListasPrecioCompra"];
+            }
+        }
+        public string IdListaPrecioVenta
         {
             get
             {
-                return IdListaPrecioDropDownList.SelectedValue;
+                return IdListaPrecioVentaDropDownList.SelectedValue;
             }
             set
             {
-                IdListaPrecioDropDownList.SelectedValue = value;
+                IdListaPrecioVentaDropDownList.SelectedValue = value;
+            }
+        }
+        public string IdListaPrecioCompra
+        {
+            get
+            {
+                return IdListaPrecioCompraDropDownList.SelectedValue;
+            }
+            set
+            {
+                IdListaPrecioCompraDropDownList.SelectedValue = value;
             }
         }
         public bool Enabled
         {
             set
             {
-                IdListaPrecioDropDownList.Enabled = value;
+                IdListaPrecioVentaDropDownList.Enabled = value;
+                IdListaPrecioCompraDropDownList.Enabled = value;
             }
         }
     }

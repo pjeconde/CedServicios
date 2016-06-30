@@ -20,9 +20,41 @@ namespace CedServicios.DB
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
-                a.Append("Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, UltActualiz, Orden ");
+                a.Append("Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, UltActualiz, Orden, IdTipoListaPrecio ");
                 a.Append("from ListaPrecio ");
                 a.Append("where ListaPrecio.Cuit='" + sesion.Cuit.Nro + "' ");
+                if (SoloVigentes)
+                {
+                    a.Append("and ListaPrecio.Estado='Vigente' ");
+                }
+                if (ClasificadoPorOrden)
+                    a.Append("order by ListaPrecio.Orden ");
+                else
+                    a.Append("order by ListaPrecio.DescrListaPrecio ");
+                DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+                if (dt.Rows.Count != 0)
+                {
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Entidades.ListaPrecio elem = new Entidades.ListaPrecio();
+                        Copiar(dt.Rows[i], elem);
+                        lista.Add(elem);
+                    }
+                }
+            }
+            return lista;
+        }
+        public List<Entidades.ListaPrecio> ListaPorCuityTipoLista(bool SoloVigentes, bool IncluirVacio, bool ClasificadoPorOrden, string IdTipoListaPrecio)
+        {
+            List<Entidades.ListaPrecio> lista = new List<Entidades.ListaPrecio>();
+            if (IncluirVacio) lista.Add(new Entidades.ListaPrecio(String.Empty, "Ninguna"));
+            if (sesion.Cuit.Nro != null)
+            {
+                System.Text.StringBuilder a = new StringBuilder();
+                a.Append("select ");
+                a.Append("Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, UltActualiz, Orden, IdTipoListaPrecio ");
+                a.Append("from ListaPrecio ");
+                a.Append("where ListaPrecio.Cuit='" + sesion.Cuit.Nro + "' and IdTipoListaPrecio='" + IdTipoListaPrecio + "' ");
                 if (SoloVigentes)
                 {
                     a.Append("and ListaPrecio.Estado='Vigente' ");
@@ -63,29 +95,21 @@ namespace CedServicios.DB
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
             Hasta.Orden = Convert.ToInt32(Desde["Orden"]);
-        }
-        private void CopiarListaPaging(DataRow Desde, Entidades.ListaPrecio Hasta)
-        {
-            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
-            Hasta.Id = Convert.ToString(Desde["IdListaPrecio"]);
-            Hasta.Descr = Convert.ToString(Desde["DescrListaPrecio"]);
-            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
-            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
-            Hasta.UltActualiz = Convert.ToString(Desde["UltActualiz"]);
-            Hasta.Orden = Convert.ToInt32(Desde["Orden"]);
+            Hasta.IdTipo = Convert.ToString(Desde["IdTipoListaPrecio"]);
         }
         public void Crear(Entidades.ListaPrecio ListaPrecio)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @idWF varchar(256) ");
             a.AppendLine("update Configuracion set @idWF=Valor=convert(varchar(256), convert(int, Valor)+1) where IdItemConfig='UltimoIdWF' ");
-            a.Append("Insert ListaPrecio (Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, Orden) values (");
+            a.Append("Insert ListaPrecio (Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, Orden, IdTipoListaPrecio) values (");
             a.Append("'" + ListaPrecio.Cuit + "', ");
             a.Append("'" + ListaPrecio.Id + "', ");
             a.Append("'" + ListaPrecio.Descr + "', ");
             a.Append("@idWF, ");
             a.Append("'" + ListaPrecio.WF.Estado + "', ");
-            a.Append("'" + ListaPrecio.Orden + "' ");
+            a.Append("'" + ListaPrecio.Orden + "', ");
+            a.Append("'" + ListaPrecio.IdTipo + "' ");
             a.AppendLine(") ");
             a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'ListaPrecio', 'Alta', '" + ListaPrecio.WF.Estado + "', '') ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
@@ -95,7 +119,8 @@ namespace CedServicios.DB
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("update ListaPrecio set ");
             a.Append("DescrListaPrecio='" + Hasta.Descr + "', ");
-            a.Append("Orden='" + Hasta.Orden + "' ");
+            a.Append("Orden='" + Hasta.Orden + "', ");
+            a.Append("IdTipoListaPrecio='" + Hasta.IdTipo + "' ");
             a.AppendLine("where Cuit='" + Hasta.Cuit + "' and IdListaPrecio='" + Hasta.Id + "' ");
             a.AppendLine("insert Log values (" + Hasta.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'ListaPrecio', 'Modif', '" + Hasta.WF.Estado + "', '') ");
             a.AppendLine("declare @idLog int ");
@@ -121,7 +146,7 @@ namespace CedServicios.DB
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
-                a.Append("Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, UltActualiz, Orden ");
+                a.Append("Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, UltActualiz, Orden, IdTipoListaPrecio ");
                 a.Append("from ListaPrecio ");
                 a.Append("where ListaPrecio.Cuit='" + Cuit + "' and ListaPrecio.IdListaPrecio='" + IdListaPrecio + "'");
                 a.Append("order by ListaPrecio.DescrListaPrecio ");
@@ -145,7 +170,7 @@ namespace CedServicios.DB
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
-                a.Append("Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, UltActualiz, Orden ");
+                a.Append("Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, UltActualiz, Orden, IdTipoListaPrecio ");
                 a.Append("from ListaPrecio ");
                 a.Append("where ListaPrecio.Cuit='" + Cuit + "' and ListaPrecio.DescrListaPrecio like '%" + DescrListaPrecio + "%' ");
                 a.Append("order by ListaPrecio.DescrListaPrecio ");
@@ -165,7 +190,7 @@ namespace CedServicios.DB
         public List<Entidades.ListaPrecio> ListaSegunFiltros(string Cuit, string IdListaPrecio, string DescrListaPrecio, string Estado)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("select Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, UltActualiz, Orden ");
+            a.AppendLine("select Cuit, IdListaPrecio, DescrListaPrecio, IdWF, Estado, UltActualiz, Orden, IdTipoListaPrecio ");
             a.AppendLine("from ListaPrecio where 1=1 ");
             if (Cuit != String.Empty) a.AppendLine("and Cuit like '%" + Cuit + "%' ");
             if (IdListaPrecio != String.Empty) a.AppendLine("and IdListaPrecio like '%" + IdListaPrecio + "%' ");
@@ -240,7 +265,7 @@ namespace CedServicios.DB
                 for (int i = 0; i < dt.Rows.Count; i++)
                 {
                     Entidades.ListaPrecio ListaPrecio = new Entidades.ListaPrecio();
-                    CopiarListaPaging(dt.Rows[i], ListaPrecio);
+                    Copiar(dt.Rows[i], ListaPrecio);
                     lista.Add(ListaPrecio);
                 }
             }
