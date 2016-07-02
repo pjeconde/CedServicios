@@ -116,6 +116,7 @@ namespace CedServicios.Site
                 }
                 if (lista.Count == 0)
                 {
+                    ClientesGridView.Caption = string.Empty;
                     ClientesGridView.DataSource = null;
                     ClientesGridView.DataBind();
                     MensajeLabel.Text = "No se han encontrado Personas que satisfagan la busqueda";
@@ -127,7 +128,7 @@ namespace CedServicios.Site
                 }
                 else
                 {
-                    MensajeLabel.Text = "Se encontraron " + lista.Count.ToString() + " Personas";
+                    ClientesGridView.Caption = "Se encontraron " + lista.Count.ToString() + " Personas";
                     ClientesGridView.DataSource = lista;
                     ViewState["Personas"] = lista;
                     ClientesGridView.DataBind();
@@ -207,6 +208,7 @@ namespace CedServicios.Site
             RazonSocialTextBox.Enabled = FiltradosRadioButton.Checked;
             IdPersonaTextBox.Enabled = FiltradosRadioButton.Checked;
             MensajeLabel.Text = string.Empty;
+            ClientesGridView.Caption = string.Empty;
             ClientesGridView.DataSource = null;
             ClientesGridView.DataBind();
         }

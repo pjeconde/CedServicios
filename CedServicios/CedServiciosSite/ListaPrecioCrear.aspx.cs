@@ -23,6 +23,7 @@ namespace CedServicios.Site
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     CUITTextBox.Text = sesion.Cuit.Nro;
                     CUITTextBox.Enabled = false;
+                    IdTipoListaPrecioDropDownList.SelectedValue = "Venta";
                     IdTextBox.Focus();
                 }
             }
@@ -47,6 +48,7 @@ namespace CedServicios.Site
                     listaPrecio.Id = IdTextBox.Text;
                     listaPrecio.Descr = DescrTextBox.Text;
                     listaPrecio.Orden = Convert.ToInt32(OrdenTextBox.Text);
+                    listaPrecio.IdTipo = IdTipoListaPrecioDropDownList.SelectedValue;
                     RN.ListaPrecio.Crear(listaPrecio, sesion);
 
                     CUITTextBox.Enabled = false;

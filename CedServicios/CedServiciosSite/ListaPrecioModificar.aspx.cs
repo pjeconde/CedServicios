@@ -25,6 +25,7 @@ namespace CedServicios.Site
                     IdTextBox.Text = listaPrecio.Id;
                     DescrTextBox.Text = listaPrecio.Descr;
                     OrdenTextBox.Text = listaPrecio.Orden.ToString();
+                    IdTipoListaPrecioDropDownList.SelectedValue = listaPrecio.IdTipo;
                     CUITTextBox.Enabled = false;
                     IdTextBox.Enabled = false;
                     DescrTextBox.Focus();
@@ -52,6 +53,7 @@ namespace CedServicios.Site
                     listaPrecioHasta.Id = IdTextBox.Text;
                     listaPrecioHasta.Descr = DescrTextBox.Text;
                     listaPrecioHasta.Orden = Convert.ToInt32(OrdenTextBox.Text);
+                    listaPrecioHasta.IdTipo = IdTipoListaPrecioDropDownList.SelectedValue;
                     RN.ListaPrecio.Modificar(listaPrecioDesde, listaPrecioHasta, sesion);
 
                     CUITTextBox.Enabled = false;

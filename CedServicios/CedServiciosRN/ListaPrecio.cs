@@ -12,6 +12,11 @@ namespace CedServicios.RN
             DB.ListaPrecio db = new DB.ListaPrecio(Sesion);
             return db.ListaPorCuit(SoloVigentes, IncluirVacio, ClasificadoPorOrden);
         }
+        public static List<Entidades.ListaPrecio> ListaPorCuityTipoLista(bool SoloVigentes, bool IncluirVacio, bool ClasificadoPorOrden, string IdTipoListaPrecio, Entidades.Sesion Sesion)
+        {
+            DB.ListaPrecio db = new DB.ListaPrecio(Sesion);
+            return db.ListaPorCuityTipoLista(SoloVigentes, IncluirVacio, ClasificadoPorOrden, IdTipoListaPrecio);
+        }
         public static string ListaPorCuitString(bool SoloVigentes, bool IncluirVacio, bool ClasificadoPorOrden, Entidades.Sesion Sesion)
         {
             DB.ListaPrecio db = new DB.ListaPrecio(Sesion);

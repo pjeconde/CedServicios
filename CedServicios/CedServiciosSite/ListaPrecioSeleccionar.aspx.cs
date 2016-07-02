@@ -59,32 +59,40 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.ListaPrecio> lista = new List<Entidades.ListaPrecio>();
                 MensajeLabel.Text = String.Empty;
-                if (IdRadioButton.Checked)
+                if (TodosRadioButton.Checked)
                 {
-                    if (IdTextBox.Text.Equals(String.Empty))
-                    {
-                        MensajeLabel.Text = IdRadioButton.Text + " no informada";
-                        return;
-                    }
-                    else
-                    {
-                        lista = RN.ListaPrecio.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, sesion);
-                    }
+                    lista = RN.ListaPrecio.ListaPorCuit(false, false, false, sesion);
                 }
                 else
                 {
-                    if (DescrTextBox.Text.Equals(String.Empty))
+                    if (IdRadioButton.Checked)
                     {
-                        MensajeLabel.Text = DescrRadioButton.Text + " no informada";
-                        return;
+                        if (IdTextBox.Text.Equals(String.Empty))
+                        {
+                            MensajeLabel.Text = IdRadioButton.Text + " no informada";
+                            return;
+                        }
+                        else
+                        {
+                            lista = RN.ListaPrecio.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, sesion);
+                        }
                     }
                     else
                     {
-                        lista = RN.ListaPrecio.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, sesion);
+                        if (DescrTextBox.Text.Equals(String.Empty))
+                        {
+                            MensajeLabel.Text = DescrRadioButton.Text + " no informada";
+                            return;
+                        }
+                        else
+                        {
+                            lista = RN.ListaPrecio.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, sesion);
+                        }
                     }
                 }
                 if (lista.Count == 0)
                 {
+                    ListasPrecioGridView.Caption = string.Empty;
                     ListasPrecioGridView.DataSource = null;
                     ListasPrecioGridView.DataBind();
                     MensajeLabel.Text = "No se han encontrado listas de precios que satisfagan la busqueda";
@@ -96,6 +104,7 @@ namespace CedServicios.Site
                 }
                 else
                 {
+                    ListasPrecioGridView.Caption = "Se encontraron " + lista.Count.ToString() + " Listas de precios";
                     ListasPrecioGridView.DataSource = lista;
                     ViewState["ListaPrecio"] = lista;
                     ListasPrecioGridView.DataBind();
@@ -148,6 +157,17 @@ namespace CedServicios.Site
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        protected void FiltroButton_CheckedChanged(object sender, EventArgs e)
+        {
+            IdRadioButton.Enabled = FiltradosRadioButton.Checked;
+            IdTextBox.Enabled = FiltradosRadioButton.Checked;
+            DescrRadioButton.Enabled = FiltradosRadioButton.Checked;
+            DescrTextBox.Enabled = FiltradosRadioButton.Checked;
+            MensajeLabel.Text = string.Empty;
+            ListasPrecioGridView.Caption = string.Empty;
+            ListasPrecioGridView.DataSource = null;
+            ListasPrecioGridView.DataBind();
         }
     }
 }

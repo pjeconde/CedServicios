@@ -86,6 +86,17 @@
             </td>
         </tr>
         <tr>
+            <td align="right" style="padding-right: 5px; padding-top:5px">
+                <asp:Label ID="Label14" runat="server" Text="Tipo de lista"></asp:Label>
+            </td>
+            <td align="left" style="padding-top:5px">
+		        <asp:DropDownList ID="IdTipoListaPrecioDropDownList" runat="server" EnableViewState="false">
+			        <asp:ListItem Value="Compra" Text="Compra"></asp:ListItem>
+			        <asp:ListItem Value="Venta" Text="Venta"></asp:ListItem>
+		        </asp:DropDownList>
+            </td>
+        </tr>
+        <tr>
             <td>
             </td>
             <td style="height: 24px; padding-top:20px; text-align: left">

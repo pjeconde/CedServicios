@@ -23,7 +23,8 @@ namespace CedServicios.Site
                 Entidades.DatosEmailAvisoComprobantePersona datos = new Entidades.DatosEmailAvisoComprobantePersona();
                 datos.DestinatariosFrecuentes.Add(new Entidades.DestinatarioFrecuente(string.Empty, string.Empty, string.Empty));
                 DatosEmailAvisoComprobantePersona.Datos = datos;
-                ListaPrecioDefaultPersona.ListasPrecio = RN.ListaPrecio.ListaPorCuit(true, true, false, sesion);
+                ListaPrecioDefaultPersona.ListasPrecioVenta = RN.ListaPrecio.ListaPorCuityTipoLista(true, true, false, "Venta", sesion);
+                ListaPrecioDefaultPersona.ListasPrecioCompra = RN.ListaPrecio.ListaPorCuityTipoLista(true, true, false, "Compra", sesion);
                 DataBind();
                 if (Funciones.SessionTimeOut(Session))
                 {
@@ -107,7 +108,8 @@ namespace CedServicios.Site
                     persona.EmailAvisoVisualizacion = EmailAvisoVisualizacionTextBox.Text;
                     persona.PasswordAvisoVisualizacion = PasswordAvisoVisualizacionTextBox.Text;
                     persona.DatosEmailAvisoComprobantePersona = DatosEmailAvisoComprobantePersona.Datos;
-                    persona.IdListaPrecio = ListaPrecioDefaultPersona.IdListaPrecio;
+                    persona.IdListaPrecioVenta = ListaPrecioDefaultPersona.IdListaPrecioVenta;
+                    persona.IdListaPrecioCompra = ListaPrecioDefaultPersona.IdListaPrecioCompra;
                     RN.Persona.Validar(persona);
                     RN.Persona.Crear(persona, sesion);
 

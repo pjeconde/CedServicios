@@ -335,7 +335,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             VendedorDropDownList.Visible = true;
                             VendedorDropDownList.DataValueField = "ClavePrimaria";
-                            VendedorDropDownList.DataTextField = "RazonSocial";
+                            VendedorDropDownList.DataTextField = "RazonSocialeIdPersona";
                             Entidades.Persona persona = new Entidades.Persona();
                             System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
                             persona.RazonSocial = "";
@@ -1466,8 +1466,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             GLN_CompradorTextBox.Text = string.Empty;
                         }
-                        IdListaPrecioTextBox.Text = comprador.IdListaPrecio;
-                        DetalleLinea.IdListaPrecio = comprador.IdListaPrecio;
+                        IdListaPrecioTextBox.Text = comprador.IdListaPrecioVenta;
+                        DetalleLinea.IdListaPrecio = comprador.IdListaPrecioVenta;
                         Codigo_Interno_CompradorTextBox.Text = comprador.DatosIdentificatorios.CodigoInterno;
                         if (comprador.DatosImpositivos.FechaInicioActividades.Equals(new DateTime(9999, 12, 31)) || comprador.DatosImpositivos.FechaInicioActividades.Equals(new DateTime(0001, 01, 01)))
                         {
@@ -1642,6 +1642,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     {
                         GLN_VendedorTextBox.Text = string.Empty;
                     }
+                    IdListaPrecioTextBox.Text = vendedor.IdListaPrecioCompra;
+                    DetalleLinea.IdListaPrecio = vendedor.IdListaPrecioCompra;
                     Codigo_Interno_VendedorTextBox.Text = vendedor.DatosIdentificatorios.CodigoInterno;
                     if (vendedor.DatosImpositivos.FechaInicioActividades.Equals(new DateTime(9999, 12, 31)) || vendedor.DatosImpositivos.FechaInicioActividades.Equals(new DateTime(0001, 01, 01)))
                     {

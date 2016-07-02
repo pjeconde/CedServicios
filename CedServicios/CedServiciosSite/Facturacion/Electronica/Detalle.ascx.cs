@@ -1462,7 +1462,7 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
         protected void RecalcularLinea(TextBox txtimporte_alicuota_articulo, string puntoDeVenta, Entidades.Sesion sesion, TextBox txtimporte_total_articulo, DropDownList ddlalicuota_articulo, TextBox txtprecio_unitario, TextBox txtcantidad)
         {
-            if (!puntoDeVenta.Equals(string.Empty))
+            if (!puntoDeVenta.Equals(string.Empty) || ViewState["idNaturalezaComprobante"].ToString().Equals("Compra"))
             {
                 if (Funciones.SessionTimeOut(Session))
                 {
@@ -1502,19 +1502,22 @@ namespace CedServicios.Site.Facturacion.Electronica
                             double aux = imptot * alic / 100;
                             txtimporte_alicuota_articulo.Text = Convert.ToString(Math.Round(aux, 2));
                         }
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                        if (!puntoDeVenta.Equals(string.Empty))
                         {
-                            return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
-                        });
-                        if (listaPV.Count != 0)
-                        {
-                            try
+                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                             {
-                                txtimporte_total_articulo.Text = Convert.ToString(Convert.ToDouble(txtimporte_total_articulo.Text) + Convert.ToDouble(txtimporte_alicuota_articulo.Text));
-                            }
-                            catch
+                                return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                            });
+                            if (listaPV.Count != 0)
                             {
-                                cant = 0;
+                                try
+                                {
+                                    txtimporte_total_articulo.Text = Convert.ToString(Convert.ToDouble(txtimporte_total_articulo.Text) + Convert.ToDouble(txtimporte_alicuota_articulo.Text));
+                                }
+                                catch
+                                {
+                                    cant = 0;
+                                }
                             }
                         }
                     }
