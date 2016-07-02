@@ -77,7 +77,7 @@
                                         </td>
                                         <td style="padding-top: 10px; padding-left: 5px; text-align: left">
                                             <asp:DropDownList ID="PtoVtaConsultaUltNroCompDropDownList" runat="server" AutoPostBack="false"
-                                                SkinID="ddlch" ToolTip="">
+                                                SkinID="ddln" ToolTip="">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
@@ -125,7 +125,7 @@
                                         </td>
                                         <td style="padding-top: 10px; padding-left: 5px; text-align: left">
                                             <asp:DropDownList ID="PtoVtaConsultaDropDownList" runat="server" AutoPostBack="True"
-                                                SkinID="ddlch" ToolTip="">
+                                                SkinID="ddln" ToolTip="">
                                             </asp:DropDownList>
                                         </td>
                                     </tr>
@@ -174,7 +174,7 @@
                                             </td>
                                             <td style="padding-top: 10px; padding-left: 5px; text-align: left">
                                                 <asp:DropDownList ID="PtoVtaConsultaValidarCAEDropDownList" runat="server" AutoPostBack="false"
-                                                    SkinID="ddlch" ToolTip="">
+                                                    SkinID="ddln" ToolTip="">
                                                 </asp:DropDownList>
                                             </td>
                                         </tr>
@@ -236,6 +236,11 @@
                                     <table>
                                         <tr>
                                             <td colspan="2" style="padding-top: 10px">
+                                                RG.2485 (Común)
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
                                                 <asp:Button ID="ConsultarTipoComprobantesButton" runat="server" OnClick="ConsultarTipoComprobantesAFIPButton_Click"
                                                     Text="Consultar los Tipos de Comprobantes en AFIP" ToolTip="Consultar los Tipos de Comprobantes en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
                                                     Width="100%" />
@@ -252,6 +257,53 @@
                                             <td colspan="2" style="padding-top: 10px">
                                                 <asp:Button ID="ConsultarDocTipoButton" runat="server" OnClick="ConsultarDocTipoAFIPButton_Click"
                                                     Text="Consultar los Tipo de documentos válidos en AFIP (FEv1)" ToolTip="Consultar los Tipos de Documentos válidos en AFIP (FEv1)."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 20px">
+                                                Exportación
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="Button1" runat="server" OnClick="ConsultarTipoComprobantesAFIPEXPOButton_Click"
+                                                    Text="Consultar los Tipos de Comprobantes en AFIP" ToolTip="Consultar los Tipos de Comprobantes en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="Button2" runat="server" OnClick="ConsultarTiposDeExportacionAFIPEXPOButton_Click"
+                                                    Text="Consultar los Tipos de Exportación posibles en AFIP" ToolTip="Consultar los Tipos de Exportación en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="Button5" runat="server" OnClick="ConsultarUnidadesDeMedidaAFIPEXPOButton_Click"
+                                                    Text="Consultar las Unidades de Medida de exportación en AFIP" ToolTip="Consultar las Unidades de Medida de Exportación en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="Button6" runat="server" OnClick="ConsultarIncotermsAFIPEXPOButton_Click"
+                                                    Text="Consultar los Tipos de Incoterms en AFIP" ToolTip="Consultar los Tipos de Incoterms habilitados en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="Button3" runat="server" OnClick="ConsultarDST_CuitAFIPEXPOButton_click"
+                                                    Text="Consultar los Destinos Cuit en AFIP " ToolTip="Consultar los Destinos Cuit en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="Button4" runat="server" OnClick="ConsultarDST_PaisAFIPEXPOButton_click"
+                                                    Text="Consultar los Destinos Pais en AFIP" ToolTip="Consultar los Destinos Pais en AFIP. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
                                                     Width="100%" />
                                             </td>
                                         </tr>
@@ -292,8 +344,7 @@
                 </div>
             </div>
         </div>
-
-        
+        <asp:TextBox ID="InfoRespuestaTextBox" runat="server" Width="100%" TextMode="MultiLine" Visible="false"></asp:TextBox>
     </div>
     </div>
     </div>

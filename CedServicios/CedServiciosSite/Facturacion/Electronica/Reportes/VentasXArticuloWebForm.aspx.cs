@@ -81,6 +81,13 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                         oRpt.DataDefinition.FormulaFields["MostrarFechaYHora"].Text = "'N'";
                     }
                 }
+                if (Session["mostrarDetalleComprobantes"] != null)
+                {
+                    if ((bool)Session["mostrarDetalleComprobantes"] == false)
+                    {
+                        oRpt.DataDefinition.FormulaFields["MostrarDetalleComprobantes"].Text = "'N'";
+                    }
+                }
                 oRpt.PrintOptions.PaperSize = CrystalDecisions.Shared.PaperSize.PaperLetter;
                 oRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
                 //oRpt.DataDefinition.FormulaFields["RazSoc"].Text = "'" + ((Entidades.Sesion)Session["Sesion"]).Cuit.RazonSocial + "'";

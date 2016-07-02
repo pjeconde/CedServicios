@@ -98,64 +98,52 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                                 //});
                                 //if (listaAux.Count == 0 || lote.comprobante[0].detalle.linea[z].codigo_producto_vendedor.Trim() == "")
                                 //{
-                                    vd = new Entidades.VentasXArticuloDetalle();
-                                    vd.IdArticulo = lote.comprobante[0].detalle.linea[z].codigo_producto_vendedor;
-                                    vd.GTIN = lote.comprobante[0].detalle.linea[z].GTIN.ToString();
-                                    vd.IdArticuloEmp = lote.comprobante[0].detalle.linea[z].codigo_producto_comprador;
+                                //}
+                                vd = new Entidades.VentasXArticuloDetalle();
+                                vd.IdArticulo = lote.comprobante[0].detalle.linea[z].codigo_producto_vendedor;
+                                vd.GTIN = lote.comprobante[0].detalle.linea[z].GTIN.ToString();
+                                vd.IdArticuloEmp = lote.comprobante[0].detalle.linea[z].codigo_producto_comprador;
+                                if (lote.comprobante[0].detalle.linea[z].indicacion_exento_gravado != null)
+                                {
                                     vd.IndicacionExentoGravado = lote.comprobante[0].detalle.linea[z].indicacion_exento_gravado;
-                                    vd.NumeroLinea = lote.comprobante[0].detalle.linea[z].numeroLinea;
-                                    vd.UnidadCod = lote.comprobante[0].detalle.linea[z].unidad;
-                                    vd.UnidadDescr = lote.comprobante[0].detalle.linea[z].unidadDescripcion;
-                                    vd.CompTipo = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString();
-                                    vd.CompNro = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString();
-                                    vd.CompPtoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString();
-                                    vd.CompFecEmi = lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision;
+                                }
+                                else
+                                {
+                                    vd.IndicacionExentoGravado = "";
+                                }
+                                vd.NumeroLinea = lote.comprobante[0].detalle.linea[z].numeroLinea;
+                                vd.UnidadCod = lote.comprobante[0].detalle.linea[z].unidad;
+                                vd.UnidadDescr = lote.comprobante[0].detalle.linea[z].unidadDescripcion;
+                                vd.CompTipo = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString();
+                                vd.CompNro = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString();
+                                vd.CompPtoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString();
+                                vd.CompFecEmi = lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(6, 2) + "/" + lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(4, 2) + "/" + lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(0, 4);
 
-                                    vd.EmpNroDoc = lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
-                                    vd.EmpCodDoc = lote.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
-                                    vd.EmpDescrDoc = ""; //Obtener la descripcion; 
-                                    vd.EmpNombre = lote.comprobante[0].cabecera.informacion_comprador.denominacion;
+                                vd.EmpNroDoc = lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
+                                vd.EmpCodDoc = lote.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
+                                vd.EmpDescrDoc = ""; //Obtener la descripcion; 
+                                vd.EmpNombre = lote.comprobante[0].cabecera.informacion_comprador.denominacion;
 
-                                    if (lote.comprobante[0].detalle.linea[z].descripcion.Length > 0 && lote.comprobante[0].detalle.linea[z].descripcion.Substring(0, 1) == "%")
-                                    {
-                                        vd.Descr = RN.Funciones.HexToString(lote.comprobante[0].detalle.linea[z].descripcion);
-                                    }
-                                    else
-                                    {
-                                        vd.Descr = lote.comprobante[0].detalle.linea[z].descripcion;
-                                    }
-                                    vd.ImporteTotal = lote.comprobante[0].detalle.linea[z].importe_total_articulo * signo;
-                                    if (lote.comprobante[0].detalle.linea[z].cantidadSpecified == true && lote.comprobante[0].detalle.linea[z].precio_unitarioSpecified == true)
-                                    {
-                                        vd.Cantidad = lote.comprobante[0].detalle.linea[z].cantidad * signo;
-                                        vd.PrecioUnitario = lote.comprobante[0].detalle.linea[z].precio_unitario * signo;
-                                    }
-                                    if (lote.comprobante[0].detalle.linea[z].alicuota_ivaSpecified == true && lote.comprobante[0].detalle.linea[z].importe_ivaSpecified == true)
-                                    {
-                                        vd.AlicuotaIVA = lote.comprobante[0].detalle.linea[z].alicuota_iva;
-                                        vd.ImporteIVA = lote.comprobante[0].detalle.linea[z].importe_iva * signo;
-                                    }
-                                    lvd.Add(vd); 
-                                //}
-                                //else
-                                //{
-                                //    listaAux[0].ImporteTotal += lote.comprobante[0].detalle.linea[z].importe_total_articulo * signo;
-                                //    if (lote.comprobante[0].detalle.linea[z].cantidadSpecified == true && lote.comprobante[0].detalle.linea[z].precio_unitarioSpecified == true)
-                                //    {
-                                //        listaAux[0].Cantidad += lote.comprobante[0].detalle.linea[z].cantidad * signo;
-                                //        listaAux[0].PrecioUnitario += lote.comprobante[0].detalle.linea[z].precio_unitario * signo;
-                                //    }
-                                //    if (lote.comprobante[0].detalle.linea[z].alicuota_ivaSpecified == true && lote.comprobante[0].detalle.linea[z].importe_ivaSpecified == true)
-                                //    {
-                                //        if (listaAux[0].AlicuotaIVA != lote.comprobante[0].detalle.linea[z].alicuota_iva)
-                                //        {
-                                //            throw new Exception("Problemas al generar el reporte. En el artículo: " + listaAux[0].IdArticulo + " " + listaAux[0].Descr + " se encontró más de una alícuota para el período seleccionado.");
-                                //        }
-                                //        //listaAux[0].AlicuotaIVA = lote.comprobante[0].detalle.linea[z].alicuota_iva;
-                                //        listaAux[0].ImporteIVA = lote.comprobante[0].detalle.linea[z].importe_iva * signo;
-                                //    }
-                                //}
-                                
+                                if (lote.comprobante[0].detalle.linea[z].descripcion.Length > 0 && lote.comprobante[0].detalle.linea[z].descripcion.Substring(0, 1) == "%")
+                                {
+                                    vd.Descr = RN.Funciones.HexToString(lote.comprobante[0].detalle.linea[z].descripcion);
+                                }
+                                else
+                                {
+                                    vd.Descr = lote.comprobante[0].detalle.linea[z].descripcion;
+                                }
+                                vd.ImporteTotal = lote.comprobante[0].detalle.linea[z].importe_total_articulo * signo;
+                                if (lote.comprobante[0].detalle.linea[z].cantidadSpecified == true && lote.comprobante[0].detalle.linea[z].precio_unitarioSpecified == true)
+                                {
+                                    vd.Cantidad = lote.comprobante[0].detalle.linea[z].cantidad * signo;
+                                    vd.PrecioUnitario = lote.comprobante[0].detalle.linea[z].precio_unitario * signo;
+                                }
+                                if (lote.comprobante[0].detalle.linea[z].alicuota_ivaSpecified == true && lote.comprobante[0].detalle.linea[z].importe_ivaSpecified == true)
+                                {
+                                    vd.AlicuotaIVA = lote.comprobante[0].detalle.linea[z].alicuota_iva;
+                                    vd.ImporteIVA = lote.comprobante[0].detalle.linea[z].importe_iva * signo;
+                                }
+                                lvd.Add(vd); 
                             }
                         }
                     }
@@ -165,6 +153,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     }
                     Session["formatoRptExportar"] = FormatosRptExportarDropDownList.SelectedValue;
                     Session["mostrarFechaYHora"] = FechaYHoraCheckBox.Checked;
+                    Session["mostrarDetalleComprobantes"] = DetalleComprobanteCheckBox.Checked;
                     Session["monedasExtranjeras"] = monedasExtranjeras;
                     if (ventas.VentasXArticuloDetalle.Count != 0)
                     {

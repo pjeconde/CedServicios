@@ -121,6 +121,7 @@ namespace CedServicios.Site
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/", "");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
                 }
                 catch (Exception ex)
@@ -308,6 +309,260 @@ namespace CedServicios.Site
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/\"", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
                     //MensajeLabel.Text = Funciones.TextoScript(respuesta);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+            }
+        }
+
+        protected void ConsultarTipoComprobantesAFIPEXPOButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de Comprobante (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposComprobantesEXPO((Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace("\n<", "<");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                    //MensajeLabel.Text = Funciones.TextoScript(respuesta);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+            }
+        }
+        protected void ConsultarTiposDeExportacionAFIPEXPOButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de exportación posibles (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposDeEXPO((Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                    //MensajeLabel.Text = Funciones.TextoScript(respuesta);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+            }
+        }
+        protected void ConsultarUnidadesDeMedidaAFIPEXPOButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Unidades de Medida (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPUnidadesDeMedidaEXPO((Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                    //MensajeLabel.Text = Funciones.TextoScript(respuesta);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+            }
+        }
+        protected void ConsultarIncotermsAFIPEXPOButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Incoterms (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPDST_CuitEXPO((Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                    //InfoRespuestaTextBox.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+            }
+        }
+        protected void ConsultarDST_CuitAFIPEXPOButton_click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Destinos cuit (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPDST_CuitEXPO((Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                    //InfoRespuestaTextBox.Text = "";
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+            }
+        }
+        protected void ConsultarDST_PaisAFIPEXPOButton_click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Destinos pais (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPDST_PaisEXPO((Entidades.Sesion)Session["Sesion"]);
+                    TicketCompletarInfo();
+
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                    //InfoRespuestaTextBox.Text = "";
                 }
                 catch (Exception ex)
                 {

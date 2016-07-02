@@ -98,7 +98,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                             signo = -1;
                         }
 
-                        ivc.ImporteTotal = comprobante.Importe;
+                        ivc.ImporteTotal = comprobante.Importe * signo;
                         ivc.FechaEmi = comprobante.Fecha.ToString("dd/MM/yyyy");
 
                         lote = new FeaEntidades.InterFacturas.lote_comprobantes();

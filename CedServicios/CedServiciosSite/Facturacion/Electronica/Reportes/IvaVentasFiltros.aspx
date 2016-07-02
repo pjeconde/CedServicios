@@ -3,6 +3,11 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <style>
+        label {
+            font-weight: normal;
+        }
+    </style>
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">

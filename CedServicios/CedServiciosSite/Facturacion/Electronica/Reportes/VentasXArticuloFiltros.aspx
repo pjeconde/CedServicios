@@ -3,6 +3,11 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <style>
+        label {
+            font-weight: normal;
+        }
+    </style>
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">
@@ -39,6 +44,13 @@
                     </td>
                     <td style="padding-top:5px; vertical-align:middle">
                         <asp:CheckBox ID="FechaYHoraCheckBox" runat="server" Text="&nbsp;Fecha y Hora de generación del reporte" AutoPostBack="false"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    </td>
+                    <td style="padding-top:5px; vertical-align:middle">
+                        <asp:CheckBox ID="DetalleComprobanteCheckBox" runat="server" Text="&nbsp;Detalle de comprobantes" Checked="true" AutoPostBack="false"/>
                     </td>
                 </tr>
                  <tr>

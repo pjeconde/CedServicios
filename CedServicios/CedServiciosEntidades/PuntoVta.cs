@@ -188,7 +188,7 @@ namespace CedServicios.Entidades
                 string resp = "";
                 if (nro != 0)
                 {
-                    resp = nro.ToString();
+                    resp = nro.ToString("0000") + " (" + idTipoPuntoVta + ")";
                 }
                 return resp;
             }

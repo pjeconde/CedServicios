@@ -2746,7 +2746,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 return pv.Nro == auxPV;
                             }).IdTipoPuntoVta;
-                            if (idtipo != "Comun")
+                            if (idtipo != "Comun" && idtipo != "Exportacion")
                             {
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485."), false);
                                 return;
@@ -2763,8 +2763,15 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                                 string caeNro = "";
                                 string caeFecVto = "";
-                                respuesta = RN.ComprobanteAFIP.EnviarAFIP(out caeNro, out caeFecVto, lcFea, (Entidades.Sesion)Session["Sesion"]);
-
+                                if (idtipo == "Exportacion")
+                                {
+                                    respuesta = RN.ComprobanteAFIP.EnviarAFIPExpo(out caeNro, out caeFecVto, lcFea, (Entidades.Sesion)Session["Sesion"]);
+                                }
+                                else
+                                {
+                                    respuesta = RN.ComprobanteAFIP.EnviarAFIP(out caeNro, out caeFecVto, lcFea, (Entidades.Sesion)Session["Sesion"]);
+                                }
+                                
                                 RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), respuesta);
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
 
@@ -3106,22 +3113,30 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
         private void GenerarNroLote()
         {
-            int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
-            if (Funciones.SessionTimeOut(Session))
+            try
             {
-                Response.Redirect("~/SessionTimeout.aspx");
-            }
-            else
-            {
-                Entidades.PuntoVta puntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    return pv.Nro == auxPV;
-                });
-                if (puntoVta.IdMetodoGeneracionNumeracionLote.Equals("Autonumerador") || puntoVta.IdMetodoGeneracionNumeracionLote.Equals("TimeStamp1") || puntoVta.IdMetodoGeneracionNumeracionLote.Equals("TimeStamp2"))
-                {
-                    RN.PuntoVta.GenerarNuevoNroLote(puntoVta, (Entidades.Sesion)Session["Sesion"]);
-                    Id_LoteTextbox.Text = puntoVta.UltNroLote.ToString();
+                    Response.Redirect("~/SessionTimeout.aspx");
                 }
+                else
+                {
+                    Entidades.PuntoVta puntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                    {
+                        return pv.Nro == auxPV;
+                    });
+                    if (puntoVta.IdMetodoGeneracionNumeracionLote.Equals("Autonumerador") || puntoVta.IdMetodoGeneracionNumeracionLote.Equals("TimeStamp1") || puntoVta.IdMetodoGeneracionNumeracionLote.Equals("TimeStamp2"))
+                    {
+                        RN.PuntoVta.GenerarNuevoNroLote(puntoVta, (Entidades.Sesion)Session["Sesion"]);
+                        Id_LoteTextbox.Text = puntoVta.UltNroLote.ToString();
+                        //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "GenerarNroLote - Nro.: " + puntoVta.UltNroLote.ToString());
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "GenerarNroLote - " + ex.Message);
             }
         }
         private FeaEntidades.InterFacturas.lote_comprobantes GenerarLote(bool EsParaImprimirPDF)
