@@ -1491,13 +1491,32 @@ namespace CedServicios.Site.Facturacion.Electronica
                     if (!preUni.Equals(0) && !cant.Equals(0))
                     {
                         txtimporte_total_articulo.Text = Convert.ToString(Math.Round(preUni * cant, 2));
-                        double imptot = Convert.ToDouble(txtimporte_total_articulo.Text);
-                        double alic = Convert.ToDouble(ddlalicuota_articulo.SelectedValue);
+                    }
+                    double imptot;
+                    try
+                    {
+                        imptot = Convert.ToDouble(txtimporte_total_articulo.Text);
+                    }
+                    catch
+                    {
+                        imptot = 0;
+                    }
+                    double alic;
+                    try
+                    {
+                        alic = Convert.ToDouble(ddlalicuota_articulo.SelectedValue);
+                    }
+                    catch
+                    {
+                        alic = 0;
+                    }
+                    if (!imptot.Equals(0) && !alic.Equals(0))
+                    {
                         if (alic.Equals(99))
                         {
                             txtimporte_alicuota_articulo.Text = string.Empty;
                         }
-                        else if (!imptot.Equals(0))
+                        else
                         {
                             double aux = imptot * alic / 100;
                             txtimporte_alicuota_articulo.Text = Convert.ToString(Math.Round(aux, 2));
@@ -1514,10 +1533,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 {
                                     txtimporte_total_articulo.Text = Convert.ToString(Convert.ToDouble(txtimporte_total_articulo.Text) + Convert.ToDouble(txtimporte_alicuota_articulo.Text));
                                 }
-                                catch
-                                {
-                                    cant = 0;
-                                }
+                                catch {}
                             }
                         }
                     }
