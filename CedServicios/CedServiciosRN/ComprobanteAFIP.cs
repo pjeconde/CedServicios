@@ -262,117 +262,63 @@ namespace CedServicios.RN
                                 case 1:
                                     double baseImponible = 0;
                                     ivas[CantAlicIVA] = new ar.gov.afip.wsfev1.AlicIva();
+                                    //No funciona por el redondeo.
+                                    //"PES"
+                                    //baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                    //"DOL"
+                                    //baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+
+                                    //Obtener o Calcular la base imponible
                                     if (lc.comprobante[0].resumen.codigo_moneda == "PES")
                                     {
-                                        ivas[CantAlicIVA].BaseImp = lc.comprobante[0].resumen.impuestos[j].base_imponible;
+                                        baseImponible = lc.comprobante[0].resumen.impuestos[j].base_imponible;
                                     }
                                     else
                                     {
-                                        ivas[CantAlicIVA].BaseImp = lc.comprobante[0].resumen.impuestos[j].base_imponible_moneda_origen;
+                                        baseImponible = lc.comprobante[0].resumen.impuestos[j].base_imponible_moneda_origen;
                                     }
+                                    if (baseImponible == 0)
+                                    {
+                                        baseImponible = CalcularBaseImponible(lc, lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto);
+                                    }
+                                    //Informar la base imponible y el código de impuesto según la alícuota.
                                     if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 0)
                                     {
-                                        if (ivas[CantAlicIVA].BaseImp == 0)
-                                        {
-                                            for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
-                                            {
-                                                if (lc.comprobante[0].detalle.linea[k] == null) { break; }
-                                                if (lc.comprobante[0].detalle.linea[k].indicacion_exento_gravado != null && lc.comprobante[0].detalle.linea[k].indicacion_exento_gravado.Trim().ToUpper() == "G" && lc.comprobante[0].detalle.linea[k].alicuota_iva == 0)
-                                                {
-                                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
-                                                    {
-                                                        baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
-                                                    }
-                                                    else
-                                                    {
-                                                        baseImponible += Math.Round(lc.comprobante[0].detalle.linea[k].importes_moneda_origen.importe_total_articulo, 2);
-                                                    }
-                                                }
-                                            }
-                                        }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 3;
                                     }
                                     if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 10.5)
                                     {
-                                        if (ivas[CantAlicIVA].BaseImp == 0)
-                                        {
-                                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
-                                            {
-                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            }
-                                            else
-                                            {
-                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            }
-                                        }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 4;
                                     }
                                     else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 21)
                                     {
-                                        if (ivas[CantAlicIVA].BaseImp == 0)
-                                        {
-                                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
-                                            {
-                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            }
-                                            else
-                                            {
-                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            }
-                                        }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 5;
                                     }
                                     else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 27)
                                     {
-                                        if (ivas[CantAlicIVA].BaseImp == 0)
-                                        {
-                                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
-                                            {
-                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            }
-                                            else
-                                            {
-                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            }
-                                        }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 6;
                                     }
                                     else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 5)
                                     {
-                                        if (ivas[CantAlicIVA].BaseImp == 0)
-                                        {
-                                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
-                                            {
-                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            }
-                                            else
-                                            {
-                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            }
-                                        }
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 8;
                                     }
                                     else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 2.5)
                                     {
-                                        if (ivas[CantAlicIVA].BaseImp == 0)
-                                        {
-                                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
-                                            {
-                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            }
-                                            else
-                                            {
-                                                baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                            }
-                                        }
+                                        
                                         ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].Id = 9;
                                     }
+                                    else
+                                    {
+                                        throw new Exception("Problemas para encontrar el código de la alícuota cuyo porcentaje es: " + lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto.ToString());
+                                    }
+
+                                    //Importe del impuesto
                                     if (lc.comprobante[0].resumen.codigo_moneda == "PES")
                                     {
                                         ivas[CantAlicIVA].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
@@ -512,7 +458,26 @@ namespace CedServicios.RN
                 throw new Exception(ex.Message);
             }
         }
-
+        private static double CalcularBaseImponible(FeaEntidades.InterFacturas.lote_comprobantes lc, double Alicuota)
+        {
+            double baseImp = 0;
+            for (int k = 0; k < lc.comprobante[0].detalle.linea.Length; k++)
+            {
+                if (lc.comprobante[0].detalle.linea[k] == null) { break; }
+                if (lc.comprobante[0].detalle.linea[k].indicacion_exento_gravado != null && lc.comprobante[0].detalle.linea[k].indicacion_exento_gravado.Trim().ToUpper() == "G" && lc.comprobante[0].detalle.linea[k].alicuota_iva == Alicuota)
+                {
+                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                    {
+                        baseImp += Math.Round(lc.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
+                    }
+                    else
+                    {
+                        baseImp += Math.Round(lc.comprobante[0].detalle.linea[k].importes_moneda_origen.importe_total_articulo, 2);
+                    }
+                }
+            }
+            return baseImp;
+        }
         private static void CrearTicketExpo(Entidades.Sesion Sesion, out LoginTicket ticket, out ar.gov.afip.wsw.Service objWS, out ar.gov.afip.wsfexv1.Service objWSFEXV1)
         {
             string RutaCertificado = "";
