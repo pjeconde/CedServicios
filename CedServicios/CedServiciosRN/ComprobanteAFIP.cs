@@ -1200,7 +1200,7 @@ namespace CedServicios.RN
                 throw new Exception(ex.Message);
             }
         }
-        public static string ConsultarIncotermsDST_CuitEXPO(Entidades.Sesion Sesion)
+        public static string ConsultarAFIPIncotermsEXPO(Entidades.Sesion Sesion)
         {
             try
             {

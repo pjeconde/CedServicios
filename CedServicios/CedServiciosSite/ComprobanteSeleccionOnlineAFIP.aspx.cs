@@ -472,7 +472,7 @@ namespace CedServicios.Site
                     GrabarLogTexto("~/Consultar.txt", "Consulta de Incoterms (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
 
                     string respuesta;
-                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPDST_CuitEXPO((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPIncotermsEXPO((Entidades.Sesion)Session["Sesion"]);
                     TicketCompletarInfo();
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
