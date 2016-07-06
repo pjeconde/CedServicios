@@ -998,15 +998,17 @@ namespace CedServicios.Site.Facturacion.Electronica
         public void CalcularTotalesLineas(ref double totalGravado, ref double totalNoGravado, ref double totalIVA, ref double total_Operaciones_Exentas)
         {
             System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+
             for (int i = 0; i < listadelineas.Count; i++)
             {
+                double imptotdiscr = 0;
                 try
                 {
                     if (listadelineas[i].descripcion == null)
                     {
                         throw new Exception("Debe informar al menos un artículo");
                     }
-                    double imptotdiscr = listadelineas[i].importe_total_articulo;
+                    imptotdiscr = listadelineas[i].importe_total_articulo;
                     if (ViewState["idNaturalezaComprobante"].ToString() != "Compra")
                     {
                         int auxPV = Convert.ToInt32(puntoDeVenta);
@@ -1046,8 +1048,9 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     totalNoGravado += listadelineas[i].importe_total_articulo;
                 }
-                totalIVA += listadelineas[i].importe_iva;
+                if (!listadelineas[i].alicuota_iva.Equals(99)) totalIVA += imptotdiscr * listadelineas[i].alicuota_iva / 100; //listadelineas[i].importe_iva;
             }
+            totalIVA = Math.Round(totalIVA, 2);
         }
 
         public double CalcularTotalImporte()

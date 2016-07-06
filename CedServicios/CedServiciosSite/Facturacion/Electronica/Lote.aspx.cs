@@ -1078,6 +1078,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
             ViewState["PuntoVenta"] = auxPV;
             DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
+            ImpuestosGlobales.PuntoDeVenta = Convert.ToString(auxPV);
             InfoReferencias.PuntoDeVenta = Convert.ToString(auxPV);
             Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
             #endregion
@@ -2748,7 +2749,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 return pv.Nro == auxPV;
                             }).IdTipoPuntoVta;
-                            if (idtipo != "Comun" && idtipo != "Exportacion")
+                            //if (idtipo != "Comun" && idtipo != "Exportacion")
+                            if (idtipo != "Comun")
                             {
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485."), false);
                                 return;
@@ -5149,6 +5151,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 AjustarCamposXPtaVentaChanged(((DropDownList)sender).SelectedValue);
                 DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
+                ImpuestosGlobales.PuntoDeVenta = Convert.ToString(auxPV);
                 InfoReferencias.PuntoDeVenta = Convert.ToString(auxPV);
                 if (ViewState["PuntoVenta"] != null)
                 {

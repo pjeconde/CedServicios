@@ -13,9 +13,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 {
 	public partial class Impuestos : System.Web.UI.UserControl
 	{
+        string puntoDeVenta;
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> impuestos;
 		protected void Page_Load(object sender, EventArgs e)
 		{
+            puntoDeVenta = Convert.ToString(ViewState["puntoDeVenta"]);
 			if (!this.IsPostBack)
 			{
                 Object o = Session["ComprobanteATratar"];
@@ -25,6 +27,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
 			}
 		}
+        public string PuntoDeVenta
+        {
+            set
+            {
+                ViewState["puntoDeVenta"] = value;
+                puntoDeVenta = value;
+            }
+        }
 		public void BindearDropDownLists()
 		{
 			if (impuestosGridView.FooterRow != null)
@@ -479,9 +489,22 @@ namespace CedServicios.Site.Facturacion.Electronica
                     });
                     if (k >= 0)
                     {
-                        if (listadelineas[i].indicacion_exento_gravado == "G")
+                        if (listadelineas[i].indicacion_exento_gravado == "G" && !listadelineas[i].alicuota_iva.Equals(99))
                         {
-                            impivas[k] += listadelineas[i].importe_iva;
+                            double imptot = listadelineas[i].importe_total_articulo;
+                            System.Collections.Generic.List<Entidades.PuntoVta> listaPV = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                            {
+                                return pv.IdTipoPuntoVta == "RG2904" && pv.Nro == Convert.ToInt32(puntoDeVenta);
+                            });
+                            if (listaPV.Count != 0)
+                            {
+                                try
+                                {
+                                    imptot -= listadelineas[i].importe_iva;
+                                }
+                                catch { }
+                            }
+                            impivas[k] += imptot * listadelineas[i].alicuota_iva / 100; //listadelineas[i].importe_iva;
                             impivasinformados[k] = true;
                         }
                     }

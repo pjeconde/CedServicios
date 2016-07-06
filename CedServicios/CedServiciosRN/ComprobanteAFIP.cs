@@ -468,15 +468,15 @@ namespace CedServicios.RN
                 {
                     if (lc.comprobante[0].resumen.codigo_moneda == "PES")
                     {
-                        baseImp += Math.Round(lc.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
+                        baseImp += lc.comprobante[0].detalle.linea[k].importe_total_articulo;
                     }
                     else
                     {
-                        baseImp += Math.Round(lc.comprobante[0].detalle.linea[k].importes_moneda_origen.importe_total_articulo, 2);
+                        baseImp += lc.comprobante[0].detalle.linea[k].importes_moneda_origen.importe_total_articulo;
                     }
                 }
             }
-            return baseImp;
+            return Math.Round(baseImp, 2);
         }
         private static void CrearTicketExpo(Entidades.Sesion Sesion, out LoginTicket ticket, out ar.gov.afip.wsw.Service objWS, out ar.gov.afip.wsfexv1.Service objWSFEXV1)
         {
