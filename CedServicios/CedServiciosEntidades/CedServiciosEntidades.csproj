@@ -44,6 +44,7 @@
     <Compile Include="Archivo.cs" />
     <Compile Include="Articulo.cs" />
     <Compile Include="ComprobanteATratar.cs" />
+    <Compile Include="ComprobanteDetalle.cs" />
     <Compile Include="Const.cs" />
     <Compile Include="Contribuyente.cs" />
     <Compile Include="DestinatarioFrecuente.cs" />
@@ -51,6 +52,7 @@
     <Compile Include="DatosEmailAvisoComprobantePersona.cs" />
     <Compile Include="Enum.cs" />
     <Compile Include="FormatosRptExportar\PDF.cs" />
+    <Compile Include="ItemDetalle.cs" />
     <Compile Include="ListaPrecio.cs" />
     <Compile Include="FormatosRptExportar\FormatoRptExportar.cs" />
     <Compile Include="FormatosRptExportar\SinInformar.cs" />
@@ -82,6 +84,8 @@
     <Compile Include="Provincia.cs" />
     <Compile Include="PuntoVta.cs" />
     <Compile Include="ReporteActividad.cs" />
+    <Compile Include="Rubro.cs" />
+    <Compile Include="EsquemaContable.cs" />
     <Compile Include="Sesion.cs" />
     <Compile Include="Ticket.cs" />
     <Compile Include="TipoComprobante.cs" />

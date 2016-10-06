@@ -32,11 +32,15 @@ namespace CedServicios.Site.Controles
             }
             get
             {
-                Entidades.DatosEmailAvisoComprobanteContrato datosEmailAvisoComprobanteContrato = ((Entidades.DatosEmailAvisoComprobanteContrato)ViewState["datosEmailAvisoComprobanteContrato"]);
-                datosEmailAvisoComprobanteContrato.Activo = ActivoCheckBox.Checked;
-                datosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id = IdDestinatarioFrecuenteDropDownList.SelectedValue;
-                datosEmailAvisoComprobanteContrato.Asunto = AsuntoTextBox.Text;
-                datosEmailAvisoComprobanteContrato.Cuerpo = CuerpoTextBox.Text;
+                Entidades.DatosEmailAvisoComprobanteContrato datosEmailAvisoComprobanteContrato = new Entidades.DatosEmailAvisoComprobanteContrato();
+                if (ViewState["datosEmailAvisoComprobanteContrato"] != null)
+                {
+                    datosEmailAvisoComprobanteContrato = ((Entidades.DatosEmailAvisoComprobanteContrato)ViewState["datosEmailAvisoComprobanteContrato"]);
+                    datosEmailAvisoComprobanteContrato.Activo = ActivoCheckBox.Checked;
+                    datosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id = IdDestinatarioFrecuenteDropDownList.SelectedValue;
+                    datosEmailAvisoComprobanteContrato.Asunto = AsuntoTextBox.Text;
+                    datosEmailAvisoComprobanteContrato.Cuerpo = CuerpoTextBox.Text;
+                }
                 return datosEmailAvisoComprobanteContrato;
             }
         }

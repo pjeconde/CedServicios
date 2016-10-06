@@ -42,6 +42,8 @@ namespace CedServicios.Entidades
         private int cantidadComprobantesEmitidos;
         private int cantidadDiasFechaVto;
         private DatosEmailAvisoComprobanteContrato datosEmailAvisoComprobanteContrato;
+        //Stock y contabilidad
+        private List<ComprobanteDetalle> minutas;
 
         public Comprobante()
         {
@@ -50,6 +52,7 @@ namespace CedServicios.Entidades
             wF = new WF();
             naturalezaComprobante = new NaturalezaComprobante();
             datosEmailAvisoComprobanteContrato = new DatosEmailAvisoComprobanteContrato();
+            minutas = new List<ComprobanteDetalle>();
         }
         public string Cuit
         {
@@ -357,6 +360,17 @@ namespace CedServicios.Entidades
             get
             {
                 return datosEmailAvisoComprobanteContrato;
+            }
+        }
+        public List<ComprobanteDetalle> Minutas
+        {
+            set
+            {
+                minutas = value;
+            }
+            get
+            {
+                return minutas;
             }
         }
         #region propiedades adicionales opcionales

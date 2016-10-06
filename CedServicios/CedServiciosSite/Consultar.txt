@@ -124,3 +124,60 @@
 20160417 12:15:03  <?xml version="1.0" encoding="iso-8859-1"?><FECAERequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><FeCabReq xmlns="http://ar.gov.afip.dif.FEV1/"><CantReg>1</CantReg><PtoVta>42</PtoVta><CbteTipo>1</CbteTipo></FeCabReq><FeDetReq xmlns="http://ar.gov.afip.dif.FEV1/"><FECAEDetRequest><Concepto>2</Concepto><DocTipo>80</DocTipo><DocNro>33709728119</DocNro><CbteDesde>104</CbteDesde><CbteHasta>104</CbteHasta><CbteFch>20160417</CbteFch><ImpTotal>1210</ImpTotal><ImpTotConc>0</ImpTotConc><ImpNeto>1000</ImpNeto><ImpOpEx>0</ImpOpEx><ImpTrib>0</ImpTrib><ImpIVA>210</ImpIVA><FchServDesde>20160401</FchServDesde><FchServHasta>20160430</FchServHasta><FchVtoPago>20160417</FchVtoPago><MonId>PES</MonId><MonCotiz>1</MonCotiz><Iva><AlicIva><Id>5</Id><BaseImp>1000</BaseImp><Importe>210</Importe></AlicIva></Iva><impto_liq_rni>0</impto_liq_rni></FECAEDetRequest></FeDetReq></FECAERequest>
 20160417 12:18:53  <?xml version="1.0" encoding="iso-8859-1"?><FECAERequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><FeCabReq xmlns="http://ar.gov.afip.dif.FEV1/"><CantReg>1</CantReg><PtoVta>42</PtoVta><CbteTipo>1</CbteTipo></FeCabReq><FeDetReq xmlns="http://ar.gov.afip.dif.FEV1/"><FECAEDetRequest><Concepto>2</Concepto><DocTipo>80</DocTipo><DocNro>33709728119</DocNro><CbteDesde>102</CbteDesde><CbteHasta>102</CbteHasta><CbteFch>20160417</CbteFch><ImpTotal>1210</ImpTotal><ImpTotConc>0</ImpTotConc><ImpNeto>1000</ImpNeto><ImpOpEx>0</ImpOpEx><ImpTrib>0</ImpTrib><ImpIVA>210</ImpIVA><FchServDesde>20160401</FchServDesde><FchServHasta>20160430</FchServHasta><FchVtoPago>20160417</FchVtoPago><MonId>PES</MonId><MonCotiz>1</MonCotiz><Iva><AlicIva><Id>5</Id><BaseImp>1000</BaseImp><Importe>210</Importe></AlicIva></Iva><impto_liq_rni>0</impto_liq_rni></FECAEDetRequest></FeDetReq></FECAERequest>
 20160417 12:25:36  <?xml version="1.0" encoding="iso-8859-1"?><FECAERequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><FeCabReq xmlns="http://ar.gov.afip.dif.FEV1/"><CantReg>1</CantReg><PtoVta>42</PtoVta><CbteTipo>1</CbteTipo></FeCabReq><FeDetReq xmlns="http://ar.gov.afip.dif.FEV1/"><FECAEDetRequest><Concepto>2</Concepto><DocTipo>80</DocTipo><DocNro>33709728119</DocNro><CbteDesde>103</CbteDesde><CbteHasta>103</CbteHasta><CbteFch>20160417</CbteFch><ImpTotal>1210</ImpTotal><ImpTotConc>0</ImpTotConc><ImpNeto>1000</ImpNeto><ImpOpEx>0</ImpOpEx><ImpTrib>0</ImpTrib><ImpIVA>210</ImpIVA><FchServDesde>20160401</FchServDesde><FchServHasta>20160430</FchServHasta><FchVtoPago>20160417</FchVtoPago><MonId>PES</MonId><MonCotiz>1</MonCotiz><Iva><AlicIva><Id>5</Id><BaseImp>1000</BaseImp><Importe>210</Importe></AlicIva></Iva><impto_liq_rni>0</impto_liq_rni></FECAEDetRequest></FeDetReq></FECAERequest>
+20161005 09:43:40  GenerarNroLote - Problema en ejecución de script de SQL
+20161005 09:43:47  GenerarNroLote - Problema en ejecución de script de SQL
+20161005 09:45:01  GenerarNroLote - Problema en ejecución de script de SQL
+20161005 09:45:42  GenerarNroLote - Problema en ejecución de script de SQL
+20161005 09:45:42  GenerarNroLote - Problema en ejecución de script de SQL
+20161005 09:50:00  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 10:07:07  Object reference not set to an instance of an object.
+20161005 10:11:06  Object reference not set to an instance of an object.
+20161005 12:01:50  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 12:33:38  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 12:36:44  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 01:06:56  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 01:16:05  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 01:22:37  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 01:29:25  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 01:43:13  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 01:47:26  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 01:53:07  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 01:54:49  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 01:59:50  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 02:02:31  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 02:05:01  Rubro ppal. para Facturas A () Inexistente
+20161005 02:12:00  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 02:14:15  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 02:19:36  Rubro ppal. para Facturas A () Inexistente
+20161005 02:25:09  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 02:28:59  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 02:31:38  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 02:34:27  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 02:37:12  10016-El nÃºmero o fecha del comprobante no se corresponde con el prÃ³ximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 108.\n
+20161005 02:38:43  Input string was not in a correct format.
+20161005 02:41:09  Input string was not in a correct format.
+20161005 02:42:05  Input string was not in a correct format.
+20161005 02:44:51  Input string was not in a correct format.
+20161006 07:58:41  Rubro ppal. para Facturas A () Inexistente
+20161006 08:03:21  Esquema contable para Facturas A, de Venta (concepto: A),  Inexistente
+20161006 08:04:01  Esquema contable para Facturas A, de Venta (concepto: A),  Inexistente
+20161006 08:13:07  Input string was not in a correct format.
+20161006 08:13:35  Input string was not in a correct format.
+20161006 08:15:26  Input string was not in a correct format.
+20161006 08:16:19  Input string was not in a correct format.
+20161006 08:48:59  Input string was not in a correct format.
+20161006 08:50:00  Input string was not in a correct format.
+20161006 08:51:01  Input string was not in a correct format.
+20161006 08:51:48  Input string was not in a correct format.
+20161006 08:54:10  Input string was not in a correct format.
+20161006 08:55:12  Object reference not set to an instance of an object.
+20161006 09:01:09  Input string was not in a correct format.
+20161006 09:01:38  Input string was not in a correct format.
+20161006 09:02:08  Input string was not in a correct format.
+20161006 09:10:11  Object reference not set to an instance of an object.
+20161006 09:10:52  Object reference not set to an instance of an object.
+20161006 09:12:28  Object reference not set to an instance of an object.
+20161006 09:12:42  Object reference not set to an instance of an object.
+20161006 09:17:22  Object reference not set to an instance of an object.
+20161006 09:18:39  Object reference not set to an instance of an object.
+20161006 10:07:57  Esquema contable para Facturas A, de Compra (concepto: I-1-21),  Inexistente

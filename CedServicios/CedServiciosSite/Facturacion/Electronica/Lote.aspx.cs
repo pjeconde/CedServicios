@@ -1689,7 +1689,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 			EmailAvisoVisualizacionTextBox.Text = string.Empty;
 			PasswordAvisoVisualizacionTextBox.Text = string.Empty;
 		}
-		protected void CalcularTotalesButton_Click(object sender, EventArgs e)
+		protected void SugerirTotalesButton_Click(object sender, EventArgs e)
 		{
             if (Funciones.SessionTimeOut(Session))
             {
@@ -1735,14 +1735,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                         if (IdNaturalezaComprobanteTextBox.Text == "Compra")
                         {
                             CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales, total_Operaciones_Exentas);
-                            if (CodigoConceptoDropDownList.Visible)
-                            {
+                            //if (CodigoConceptoDropDownList.Visible)
+                            //{
                                 ImpuestosGlobales.EliminarImpuestosIVA();
-                                ImpuestosGlobales.AgregarImpuestosIVA(DetalleLinea.Lineas);
+                                ImpuestosGlobales.AgregarImpuestosIVA(IdNaturalezaComprobanteTextBox.Text, DetalleLinea.Lineas);
                                 //Descontar descuentos a impuestos
                                 DescuentosGlobales.RestarDescuentosAImpuestosGlobales(ImpuestosGlobales.Lista);
                                 ImpuestosGlobales.Actualizar(ImpuestosGlobales.Lista);
-                            }
+                            //}
                         }
                         else
                         {
@@ -1765,7 +1765,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                             if (CodigoConceptoDropDownList.Visible)
                                             {
                                                 ImpuestosGlobales.EliminarImpuestosIVA();
-                                                ImpuestosGlobales.AgregarImpuestosIVA(DetalleLinea.Lineas);
+                                                ImpuestosGlobales.AgregarImpuestosIVA(IdNaturalezaComprobanteTextBox.Text, DetalleLinea.Lineas);
                                                 //Descontar descuentos a impuestos
                                                 DescuentosGlobales.RestarDescuentosAImpuestosGlobales(ImpuestosGlobales.Lista);
                                                 ImpuestosGlobales.Actualizar(ImpuestosGlobales.Lista);
@@ -4805,7 +4805,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                if (Importe_Total_Impuestos_Internos_ResumenTextBox.Text != string.Empty)
+                    r.importe_total_impuestos_internos = Convert.ToDouble(Importe_Total_Impuestos_Internos_ResumenTextBox.Text);
+                else
+                    r.importe_total_impuestos_internos = 0;
             }
             //Marcar si están informados
             if (!Importe_Total_Impuestos_Internos_ResumenTextBox.Text.Equals(""))
@@ -4854,7 +4857,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+                if (Importe_Total_Impuestos_Municipales_ResumenTextBox.Text != string.Empty)
+                    r.importe_total_impuestos_municipales = Convert.ToDouble(Importe_Total_Impuestos_Municipales_ResumenTextBox.Text);
+                else
+                    r.importe_total_impuestos_municipales = 0;
             }
             //Marcar si están informados
             if (!Importe_Total_Impuestos_Municipales_ResumenTextBox.Text.Equals(""))
@@ -4903,7 +4909,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+                if (Importe_Total_Ingresos_Brutos_ResumenTextBox.Text != string.Empty)
+                    r.importe_total_ingresos_brutos = Convert.ToDouble(Importe_Total_Ingresos_Brutos_ResumenTextBox.Text);
+                else
+                    r.importe_total_ingresos_brutos = 0;
             }
             //Marcar si están informados
             if (!Importe_Total_Ingresos_Brutos_ResumenTextBox.Text.Equals(""))
@@ -4952,7 +4961,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+                if (Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text != string.Empty)
+                    r.importe_total_impuestos_nacionales = Convert.ToDouble(Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text);
+                else
+                    r.importe_total_impuestos_nacionales = 0;
             }
             //Marcar si están informados
             if (!Importe_Total_Impuestos_Nacionales_ResumenTextBox.Text.Equals(""))

@@ -19,7 +19,7 @@
 					<asp:UpdatePanel ID="impuestosUpdatePanel" runat="server" ChildrenAsTriggers="true"
 						UpdateMode="Conditional">
 						<Triggers>
-							<asp:AsyncPostBackTrigger ControlID="CalcularTotalesButton"></asp:AsyncPostBackTrigger>
+							<asp:AsyncPostBackTrigger ControlID="SugerirTotalesButton"></asp:AsyncPostBackTrigger>
 						</Triggers>
 						<ContentTemplate>
 							<asp:GridView ID="impuestosGridView" runat="server" AutoGenerateColumns="False" BorderColor="gray"

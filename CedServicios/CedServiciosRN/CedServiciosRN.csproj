@@ -82,6 +82,7 @@
     </Compile>
     <Compile Include="PuntoVta.cs" />
     <Compile Include="ReporteActividad.cs" />
+    <Compile Include="Rubro.cs" />
     <Compile Include="ServiciosAFIP.cs" />
     <Compile Include="Sesion.cs" />
     <Compile Include="TipoPermiso.cs" />

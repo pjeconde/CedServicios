@@ -1338,7 +1338,7 @@
                                             OnLoad="tipoCambioUpdatePanel_Load" UpdateMode="Conditional">
                                             <Triggers>
                                                 <asp:AsyncPostBackTrigger ControlID="MonedaComprobanteDropDownList"></asp:AsyncPostBackTrigger>
-                                                <asp:AsyncPostBackTrigger ControlID="CalcularTotalesButton"></asp:AsyncPostBackTrigger>
+                                                <asp:AsyncPostBackTrigger ControlID="SugerirTotalesButton"></asp:AsyncPostBackTrigger>
                                             </Triggers>
                                             <ContentTemplate>
                                                 <table>
@@ -1347,7 +1347,7 @@
                                                             RESUMEN FINAL&nbsp;
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:Button ID="CalcularTotalesButton" runat="server" CausesValidation="false" OnClick="CalcularTotalesButton_Click" Text="Sugerir totales" Width="170px" />
+                                                            <asp:Button ID="SugerirTotalesButton" runat="server" CausesValidation="false" OnClick="SugerirTotalesButton_Click" Text="Sugerir totales" Width="170px" />
                                                         </td>
                                                     </tr>
                                                     <tr>
