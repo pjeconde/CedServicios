@@ -226,6 +226,32 @@ namespace CedServicios.DB
                 Copiar(dt.Rows[0], Comprobante);
             }
         }
+        public void LeerMinutas(Entidades.Comprobante Comprobante)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("select ComprobanteDetalle.IdWF, ComprobanteDetalle.IdTipoItem, ComprobanteDetalle.NroItem, ComprobanteDetalle.IdArticulo, ComprobanteDetalle.IdRubro, ComprobanteDetalle.Cantidad, ComprobanteDetalle.PrecioUnitario, ComprobanteDetalle.Importe, ComprobanteDetalle.IdUbicacion, ComprobanteDetalle.IndicadorExentoGravado, ComprobanteDetalle.Detalle, Rubro.DescrRubro from ComprobanteDetalle, Rubro where IdWF=" + Comprobante.WF.Id.ToString() + " and ComprobanteDetalle.IdRubro=Rubro.IdRubro ");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            if (dt.Rows.Count != 0)
+            {
+                Comprobante.Minutas.Clear();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.ComprobanteDetalle minuta = new Entidades.ComprobanteDetalle();
+                    minuta.Item.IdTipo = Convert.ToString(dt.Rows[i]["IdTipoItem"]);
+                    minuta.Item.Nro = Convert.ToInt32(dt.Rows[i]["NroItem"]);
+                    minuta.Articulo.Id = Convert.ToString(dt.Rows[i]["IdArticulo"]);
+                    minuta.Rubro.Id = Convert.ToString(dt.Rows[i]["IdRubro"]);
+                    minuta.Cantidad = Convert.ToDouble(dt.Rows[i]["Cantidad"]);
+                    minuta.PrecioUnitario = Convert.ToDouble(dt.Rows[i]["PrecioUnitario"]);
+                    minuta.Importe = Convert.ToDouble(dt.Rows[i]["Importe"]);
+                    minuta.IdUbicacion = Convert.ToString(dt.Rows[i]["IdUbicacion"]);
+                    minuta.IndicadorExentoGravado = Convert.ToString(dt.Rows[i]["IndicadorExentoGravado"]);
+                    minuta.Detalle = Convert.ToString(dt.Rows[i]["Detalle"]);
+                    minuta.Rubro.Descr = Convert.ToString(dt.Rows[i]["DescrRubro"]);
+                    Comprobante.Minutas.Add(minuta);
+                }
+            }
+        }
         public void Registrar(Entidades.Comprobante Comprobante)
         {
             Entidades.Comprobante comprobanteDesde = new Entidades.Comprobante();

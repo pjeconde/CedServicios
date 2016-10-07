@@ -228,6 +228,11 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             db.Leer(Comprobante);
         }
+        public static void LeerMinutas(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            db.LeerMinutas(Comprobante);
+        }
         public static FeaEntidades.InterFacturas.lote_comprobantes ConsultarIBK(IBK.consulta_lote_comprobantes clc, string certificado)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lc = new FeaEntidades.InterFacturas.lote_comprobantes();

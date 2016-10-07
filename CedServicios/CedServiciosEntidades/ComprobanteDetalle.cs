@@ -123,5 +123,32 @@ namespace CedServicios.Entidades
                 return detalle;
             }
         }
+        public string DescrRubro
+        {
+            get
+            {
+                return rubro.Descr;
+            }
+        }
+        public string Debe
+        {
+            get
+            {
+                if (importe > 0)
+                    return importe.ToString();
+                else
+                    return string.Empty;
+            }
+        }
+        public string Haber
+        {
+            get
+            {
+                if (importe < 0)
+                    return (-importe).ToString();
+                else
+                    return string.Empty;
+            }
+        }
     }
 }

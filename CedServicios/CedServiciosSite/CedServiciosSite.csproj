@@ -123,6 +123,7 @@
     <Content Include="Controles\DatosEmailAvisoComprobantePersona.ascx" />
     <Content Include="Controles\ListaPrecioDefaultPersona.ascx" />
     <Content Include="ExploradorPDFComprobante.aspx" />
+    <Content Include="Facturacion\Electronica\EsquemaContableConsulta.ascx" />
     <Content Include="Facturacion\Electronica\ReferenciasAFIP.ascx" />
     <Content Include="Facturacion\Electronica\ReferenciasConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Referencias.ascx" />
@@ -550,6 +551,13 @@
     </Compile>
     <Compile Include="ExploradorPDFComprobante.aspx.designer.cs">
       <DependentUpon>ExploradorPDFComprobante.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\EsquemaContableConsulta.ascx.cs">
+      <DependentUpon>EsquemaContableConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\EsquemaContableConsulta.ascx.designer.cs">
+      <DependentUpon>EsquemaContableConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\ReferenciasAFIP.ascx.cs">
       <DependentUpon>ReferenciasAFIP.ascx</DependentUpon>

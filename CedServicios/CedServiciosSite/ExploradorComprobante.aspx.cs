@@ -144,6 +144,7 @@ namespace CedServicios.Site
             switch (e.CommandName)
             {
                 case "Consulta":
+                    RN.Comprobante.LeerMinutas(comprobante, sesion);
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
                     script = "window.open('/ComprobanteConsulta.aspx', '');";
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);

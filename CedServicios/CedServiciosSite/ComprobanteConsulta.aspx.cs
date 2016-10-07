@@ -346,7 +346,6 @@ namespace CedServicios.Site
         private void BindearDropDownLists()
         {
             InfoReferencias.BindearDropDownLists();
-            ImpuestosGlobales.BindearDropDownLists();
             PermisosExpo.BindearDropDownLists();
             DetalleLinea.BindearDropDownLists();
         }
@@ -422,6 +421,8 @@ namespace CedServicios.Site
             CantidadComprobantesEmitidosTextBox.Text = Comprobante.CantidadComprobantesEmitidos.ToString();
             CantidadDiasFechaVtoTextBox.Text = Comprobante.CantidadDiasFechaVto.ToString();
             DatosEmailAvisoComprobanteContratoConsulta1.Datos = Comprobante.DatosEmailAvisoComprobanteContrato;
+            //Esquema contable
+            EsquemaContable.Completar(Comprobante);
 
             BindearDropDownLists();
         }

@@ -9,6 +9,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
 <%@ Register Src="~/Facturacion/Electronica/ImpuestosConsulta.ascx" TagName="ImpuestosGlobales" TagPrefix="uc8" %>
 <%@ Register Src="~/Facturacion/Electronica/DescuentosConsulta.ascx" TagName="DescuentosGlobales" TagPrefix="DescUC" %>
 <%@ Register Src="~/Controles/DatosEmailAvisoComprobanteContratoConsulta.ascx" TagName="DatosEmailAvisoComprobanteContratoConsulta" TagPrefix="uc5" %>
+<%@ Register Src="~/Facturacion/Electronica/EsquemaContableConsulta.ascx" TagName="EsquemaContable" TagPrefix="uc10" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -1408,6 +1409,23 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                             </tr>
                                         </table>
                                     </asp:Panel>
+                                </td>
+                            </tr>
+                            <!-- ESQUEMA CONTABLE -->
+                            <tr>
+                                <td style="text-align:center">
+                                    <table style="width: 1282px">
+                                        <tr>
+                                            <td>
+                                                <uc10:EsquemaContable ID="EsquemaContable" runat="server"></uc10:EsquemaContable>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <hr noshade="noshade" size="1" color="#cccccc" />
+                                            </td>
+                                        </tr>
+                                    </table>
                                 </td>
                             </tr>
                             <!-- ACCIONES -->
