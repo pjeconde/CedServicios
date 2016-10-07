@@ -61,7 +61,7 @@ namespace CedServicios.Site
                 MensajeLabel.Text = String.Empty;
                 if (TodosRadioButton.Checked)
                 {
-                    lista = RN.Articulo.ListaPorCuit(false, sesion);
+                    lista = RN.Articulo.ListaPorCuit(false, true, sesion);
                 }
                 else
                 {

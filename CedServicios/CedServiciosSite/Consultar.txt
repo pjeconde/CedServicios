@@ -181,3 +181,4 @@
 20161006 09:17:22  Object reference not set to an instance of an object.
 20161006 09:18:39  Object reference not set to an instance of an object.
 20161006 10:07:57  Esquema contable para Facturas A, de Compra (concepto: I-1-21),  Inexistente
+20161007 11:50:21  Esquema contable para Facturas A, de VentaContrato (concepto: T),  Inexistente

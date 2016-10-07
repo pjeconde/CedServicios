@@ -32,7 +32,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
-                    ViewState["articulolista"] = RN.Articulo.ListaPorCuit(true, ((Entidades.Sesion)Session["Sesion"]));
+                    ViewState["articulolista"] = RN.Articulo.ListaPorCuit(true, true, ((Entidades.Sesion)Session["Sesion"]));
                     Object o = Session["ComprobanteATratar"];
                     if (o == null || ((Entidades.ComprobanteATratar)o).Tratamiento == Entidades.Enum.TratamientoComprobante.Alta)
                     {
@@ -831,7 +831,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             if (detalleGridView.FooterRow != null)
             {
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel")).DataValueField = "Id";
-                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel")).DataTextField = "Descr";
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlarticulosel")).DataTextField = "DescrConStockeIdArticulo";
                 System.Collections.Generic.List<Entidades.Articulo> articuloslist = new System.Collections.Generic.List<Entidades.Articulo>();
                 Entidades.Articulo articulo = new Entidades.Articulo();
                 articulo.Id = "(Elegir artículo)";

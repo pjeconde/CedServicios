@@ -17,6 +17,7 @@ namespace CedServicios.Entidades
         private double alicuotaIVA;
         private WF wF;
         private string ultActualiz;
+        private double stock;
 
         public Articulo()
         {
@@ -121,6 +122,29 @@ namespace CedServicios.Entidades
             get
             {
                 return ultActualiz;
+            }
+        }
+        public double Stock
+        {
+            set
+            {
+                stock = value;
+            }
+            get
+            {
+                return stock;
+            }
+        }
+        public string DescrConStockeIdArticulo
+        {
+            get
+            {
+                if (id == "(Elegir artículo)" || id == "(Buscar)")
+                    return Descr;
+                else if (stock != 0)
+                    return Descr + " (id: " + id + ", stock: " + stock.ToString() + ")";
+                else
+                    return Descr + " (id: " + id + ")";
             }
         }
         #region Propiedades redundantes

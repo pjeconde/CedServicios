@@ -387,19 +387,10 @@ namespace CedServicios.DB
                 a.AppendLine("delete ComprobanteDetalle where IdWF=@idWF ");
             }
             //Alta ComprobanteDetalle (minutas)
-            switch (Comprobante.NaturalezaComprobante.Id)
+            for (int i = 0; i < Comprobante.Minutas.Count; i++)
             {
-                case "Compra":
-                case "Venta":
-                case "VentaTradic":
-                    for (int i = 0; i < Comprobante.Minutas.Count; i++)
-                    {
-                        a.AppendLine("insert ComprobanteDetalle (IdWF, IdTipoItem, NroItem, IdArticulo, IdRubro, Cantidad, PrecioUnitario, Importe, IdUbicacion, IndicadorExentoGravado, Detalle) ");
-                        a.AppendLine("values (@idWF, '" + Comprobante.Minutas[i].Item.IdTipo + "', " + Comprobante.Minutas[i].Item.Nro.ToString() + ", '" + Comprobante.Minutas[i].Articulo.Id + "', '" + Comprobante.Minutas[i].Rubro.Id + "', " + Comprobante.Minutas[i].Cantidad.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", " + Comprobante.Minutas[i].PrecioUnitario.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", " + Comprobante.Minutas[i].Importe.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", '" + Comprobante.Minutas[i].IdUbicacion + "', '" + Comprobante.Minutas[i].IndicadorExentoGravado + "', '" + Comprobante.Minutas[i].Detalle + "') ");
-                    }
-                    break;
-                case "VentaContrato":
-                    break;
+                a.AppendLine("insert ComprobanteDetalle (IdWF, IdTipoItem, NroItem, IdArticulo, IdRubro, Cantidad, PrecioUnitario, Importe, IdUbicacion, IndicadorExentoGravado, Detalle) ");
+                a.AppendLine("values (@idWF, '" + Comprobante.Minutas[i].Item.IdTipo + "', " + Comprobante.Minutas[i].Item.Nro.ToString() + ", '" + Comprobante.Minutas[i].Articulo.Id + "', '" + Comprobante.Minutas[i].Rubro.Id + "', " + Comprobante.Minutas[i].Cantidad.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", " + Comprobante.Minutas[i].PrecioUnitario.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", " + Comprobante.Minutas[i].Importe.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", '" + Comprobante.Minutas[i].IdUbicacion + "', '" + Comprobante.Minutas[i].IndicadorExentoGravado + "', '" + Comprobante.Minutas[i].Detalle + "') ");
             }
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }

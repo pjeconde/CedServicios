@@ -12,21 +12,17 @@ namespace CedServicios.DB
         {
         }
 
-        public List<Entidades.Articulo> ListaPorCuit(bool SoloVigentes)
+        public List<Entidades.Articulo> ListaPorCuit(bool SoloVigentes, bool ConStock)
         {
             List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
             if (sesion.Cuit.Nro != null)
             {
                 System.Text.StringBuilder a = new StringBuilder();
-                a.Append("select ");
-                a.Append("Cuit, IdArticulo, DescrArticulo, GTIN, IdUnidad, DescrUnidad, IndicacionExentoGravado, AlicuotaIVA, IdWF, Estado, UltActualiz ");
-                a.Append("from Articulo ");
-                a.Append("where Articulo.Cuit='" + sesion.Cuit.Nro + "' ");
-                if (SoloVigentes)
-                {
-                    a.Append("and Articulo.Estado='Vigente' ");
-                }
-                a.Append("order by Articulo.DescrArticulo ");
+                a.AppendLine("select Cuit, IdArticulo, DescrArticulo, GTIN, IdUnidad, DescrUnidad, IndicacionExentoGravado, AlicuotaIVA, IdWF, Estado, UltActualiz ");
+                if (ConStock) a.AppendLine(", (select isnull(sum(ComprobanteDetalle.Cantidad), convert(decimal(15,2), 0)) from Comprobante, ComprobanteDetalle where Comprobante.IdWF=ComprobanteDetalle.IdWF and Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.Estado='Vigente' and ComprobanteDetalle.IdArticulo=Articulo.IdArticulo) as Stock ");
+                a.AppendLine("from Articulo where Articulo.Cuit='" + sesion.Cuit.Nro + "' ");
+                if (SoloVigentes) a.AppendLine("and Articulo.Estado='Vigente' ");
+                a.AppendLine("order by Articulo.DescrArticulo ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
                 {
@@ -53,6 +49,11 @@ namespace CedServicios.DB
             Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
             Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
+            try
+            {
+                Hasta.Stock = Convert.ToDouble(Desde["Stock"]);
+            }
+            catch { }
         }
         private void CopiarListaPaging(DataRow Desde, Entidades.Articulo Hasta)
         {

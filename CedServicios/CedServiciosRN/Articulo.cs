@@ -7,10 +7,10 @@ namespace CedServicios.RN
 {
     public class Articulo
     {
-        public static List<Entidades.Articulo> ListaPorCuit(bool SoloVigentes, Entidades.Sesion Sesion)
+        public static List<Entidades.Articulo> ListaPorCuit(bool SoloVigentes, bool ConStock, Entidades.Sesion Sesion)
         {
             DB.Articulo db = new DB.Articulo(Sesion);
-            return db.ListaPorCuit(SoloVigentes);
+            return db.ListaPorCuit(SoloVigentes, ConStock);
         }
         public static void Crear(Entidades.Articulo Articulo, Entidades.Sesion Sesion)
         {
