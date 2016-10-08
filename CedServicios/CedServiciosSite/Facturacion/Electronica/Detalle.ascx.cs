@@ -1655,7 +1655,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     else
                     {
-                        lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, sesion);
+                        lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, true, sesion);
                     }
                 }
                 else
@@ -1667,7 +1667,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     else
                     {
-                        lista = RN.Articulo.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, sesion);
+                        lista = RN.Articulo.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, true, sesion);
                     }
                 }
                 if (lista.Count == 0)

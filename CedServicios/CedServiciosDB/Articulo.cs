@@ -117,7 +117,7 @@ namespace CedServicios.DB
             a.AppendLine("insert Log values (" + Articulo.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Articulo', '" + evento + "', '" + Estado + "', '') ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
-        public List<Entidades.Articulo> ListaPorCuityId(string Cuit, string IdArticulo)
+        public List<Entidades.Articulo> ListaPorCuityId(string Cuit, string IdArticulo, bool ConStock)
         {
             List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
             if (sesion.Cuit.Nro != null)
@@ -125,6 +125,7 @@ namespace CedServicios.DB
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
                 a.Append("Cuit, IdArticulo, DescrArticulo, GTIN, IdUnidad, DescrUnidad, IndicacionExentoGravado, AlicuotaIVA, IdWF, Estado, UltActualiz ");
+                if (ConStock) a.AppendLine(", (select isnull(sum(ComprobanteDetalle.Cantidad), convert(decimal(15,2), 0)) from Comprobante, ComprobanteDetalle where Comprobante.IdWF=ComprobanteDetalle.IdWF and Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.Estado='Vigente' and ComprobanteDetalle.IdArticulo=Articulo.IdArticulo) as Stock ");
                 a.Append("from Articulo ");
                 a.Append("where Articulo.Cuit='" + Cuit + "' and Articulo.IdArticulo='" + IdArticulo + "'");
                 a.Append("order by Articulo.DescrArticulo ");
@@ -141,7 +142,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Articulo> ListaPorCuityDescr(string Cuit, string DescrArticulo)
+        public List<Entidades.Articulo> ListaPorCuityDescr(string Cuit, string DescrArticulo, bool ConStock)
         {
             List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
             if (sesion.Cuit.Nro != null)
@@ -149,6 +150,7 @@ namespace CedServicios.DB
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
                 a.Append("Cuit, IdArticulo, DescrArticulo, GTIN, IdUnidad, DescrUnidad, IndicacionExentoGravado, AlicuotaIVA, IdWF, Estado, UltActualiz ");
+                if (ConStock) a.AppendLine(", (select isnull(sum(ComprobanteDetalle.Cantidad), convert(decimal(15,2), 0)) from Comprobante, ComprobanteDetalle where Comprobante.IdWF=ComprobanteDetalle.IdWF and Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.Estado='Vigente' and ComprobanteDetalle.IdArticulo=Articulo.IdArticulo) as Stock ");
                 a.Append("from Articulo ");
                 a.Append("where Articulo.Cuit='" + Cuit + "' and Articulo.DescrArticulo like '%" + DescrArticulo + "%' ");
                 a.Append("order by Articulo.DescrArticulo ");

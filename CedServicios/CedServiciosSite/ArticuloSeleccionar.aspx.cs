@@ -74,7 +74,7 @@ namespace CedServicios.Site
                         }
                         else
                         {
-                            lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, sesion);
+                            lista = RN.Articulo.ListaPorCuityId(sesion.Cuit.Nro, IdTextBox.Text, false, sesion);
                         }
                     }
                     else
@@ -86,7 +86,7 @@ namespace CedServicios.Site
                         }
                         else
                         {
-                            lista = RN.Articulo.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, sesion);
+                            lista = RN.Articulo.ListaPorCuityDescr(sesion.Cuit.Nro, DescrTextBox.Text, false, sesion);
                         }
                     }
                 }

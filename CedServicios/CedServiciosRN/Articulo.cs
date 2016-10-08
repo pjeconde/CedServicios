@@ -18,15 +18,15 @@ namespace CedServicios.RN
             Articulo.WF.Estado = "Vigente";
             db.Crear(Articulo);
         }
-        public static List<Entidades.Articulo> ListaPorCuityId(string Cuit, string Id, Entidades.Sesion Sesion)
+        public static List<Entidades.Articulo> ListaPorCuityId(string Cuit, string Id, bool ConStock, Entidades.Sesion Sesion)
         {
             DB.Articulo db = new DB.Articulo(Sesion);
-            return db.ListaPorCuityId(Cuit, Id);
+            return db.ListaPorCuityId(Cuit, Id, ConStock);
         }
-        public static List<Entidades.Articulo> ListaPorCuityDescr(string Cuit, string Descr, Entidades.Sesion Sesion)
+        public static List<Entidades.Articulo> ListaPorCuityDescr(string Cuit, string Descr, bool ConStock, Entidades.Sesion Sesion)
         {
             DB.Articulo db = new DB.Articulo(Sesion);
-            return db.ListaPorCuityDescr(Cuit, Descr);
+            return db.ListaPorCuityDescr(Cuit, Descr, ConStock);
         }
         public static void Modificar(Entidades.Articulo ArticuloDesde, Entidades.Articulo ArticuloHasta, Entidades.Sesion Sesion)
         {
