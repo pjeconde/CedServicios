@@ -147,6 +147,49 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                             }
                         }
                     }
+                    //Si se muestran artículos vigentes no vendidos. 
+                    List<Entidades.Articulo> listaArt = new List<Entidades.Articulo>();
+                    if (VerTodosLosArticulosCheckBox.Enabled == true && VerTodosLosArticulosCheckBox.Checked == true)
+                    {
+                        listaArt = RN.Articulo.ListaPorCuit(true, false, sesion);
+                        if (listaArt.Count != 0)
+                        {
+                            foreach (Entidades.Articulo art in listaArt)
+                            {
+                                bool existeArt = false;
+                                if (lvd.Count != 0)
+                                {
+                                    System.Collections.Generic.List<Entidades.VentasXArticuloDetalle> listaVXArt = lvd.FindAll(delegate(Entidades.VentasXArticuloDetalle vxart)
+                                    {
+                                        return vxart.IdArticulo == art.Id;
+                                    });
+                                    if (listaVXArt.Count != 0)
+                                    {
+                                        existeArt = true;
+                                    }
+                                }
+                                if (!existeArt)
+                                {
+                                    vd = new Entidades.VentasXArticuloDetalle();
+                                    vd.IdArticulo = art.Id;
+                                    vd.Descr = art.Descr;
+                                    vd.CompFecEmi = "";
+                                    vd.CompNro = "";
+                                    vd.CompPtoVta = "";
+                                    vd.CompTipo = "";
+                                    vd.UnidadCod = "";
+                                    vd.UnidadDescr = "";
+                                    vd.IndicacionExentoGravado = "";
+                                    vd.EmpNroDoc = "";
+                                    vd.EmpCodDoc = "";
+                                    vd.EmpDescrDoc = "";
+                                    vd.EmpNombre = "";
+                                    lvd.Add(vd);
+                                }
+                            }
+
+                        }
+                    }
                     if (lvd.Count != 0)
                     {
                         ventas.VentasXArticuloDetalle = lvd;
@@ -184,6 +227,17 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
             else
             {
                 Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+            }
+        }
+        protected void VerTodosLosArticulosCheckBox_Click(object sender, EventArgs e)
+        {
+            if (DetalleComprobanteCheckBox.Checked == true)
+            {
+                VerTodosLosArticulosCheckBox.Enabled = false; 
+            }
+            else
+            {
+                VerTodosLosArticulosCheckBox.Enabled = true; 
             }
         }
     }

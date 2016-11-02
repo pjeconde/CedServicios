@@ -121,10 +121,20 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Provincia_CompradorDropDownList.DataBind();
 
                     //COMPROBANTE
-                    Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                    Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
-                    Tipo_De_ComprobanteDropDownList.DataBind();
+                    if (IdNaturalezaComprobanteTextBox.Text.IndexOf("Venta") != -1)
+                    {
+                        Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                        Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                        Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
+                        Tipo_De_ComprobanteDropDownList.DataBind();
+                    }
+                    else
+                    {
+                        Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                        Tipo_De_ComprobanteDropDownList.DataTextField = "DescrCompleta";
+                        Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPCompras();
+                        Tipo_De_ComprobanteDropDownList.DataBind();
+                    }
                     CodigoOperacionDropDownList.DataValueField = "Codigo";
                     CodigoOperacionDropDownList.DataTextField = "Descr";
                     CodigoOperacionDropDownList.DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.Lista();
@@ -2749,10 +2759,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 return pv.Nro == auxPV;
                             }).IdTipoPuntoVta;
-                            //if (idtipo != "Comun" && idtipo != "Exportacion")
                             if (idtipo != "Comun")
+                            //if (idtipo != "Comun" && idtipo != "Exportacion")
                             {
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485."), false);
+                                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485 y Exportación."), false);
                                 return;
                             }
                             if (ValidarCamposObligatorios("SubirAAFIP"))

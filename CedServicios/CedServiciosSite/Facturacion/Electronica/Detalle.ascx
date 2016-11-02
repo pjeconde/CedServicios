@@ -8,7 +8,7 @@
 	</tr>
     <tr>
 		<td style="text-align: center; font-weight: normal; padding-left:10px; ">
-		<asp:Panel ID="detallePanel" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="300px" ScrollBars="Auto" Wrap="true" Width="1260px" CssClass="center">
+		<asp:Panel ID="detallePanel" runat="server" BorderStyle="Solid" BorderWidth="1px" Height="100%" ScrollBars="Auto" Wrap="true" Width="1260px" CssClass="center">
             <asp:UpdatePanel ID="detalleUpdatePanel" runat="server" ChildrenAsTriggers="true" UpdateMode="Conditional">
 				<Triggers>
 					<asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>

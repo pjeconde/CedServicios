@@ -50,7 +50,7 @@
                     <td>
                     </td>
                     <td style="padding-top:5px; vertical-align:middle">
-                        <asp:CheckBox ID="DetalleComprobanteCheckBox" runat="server" Text="&nbsp;Detalle de comprobantes" Checked="true" AutoPostBack="false"/>
+                        <asp:CheckBox ID="DetalleComprobanteCheckBox" runat="server" Text="&nbsp;Detalle de comprobantes" Checked="true" AutoPostBack="true" OnCheckedChanged="VerTodosLosArticulosCheckBox_Click"/>&nbsp;&nbsp;<asp:CheckBox ID="VerTodosLosArticulosCheckBox" runat="server" Text="&nbsp;Ver todos los artículos" Checked="false" Enabled="false" AutoPostBack="false"/>
                     </td>
                 </tr>
                  <tr>

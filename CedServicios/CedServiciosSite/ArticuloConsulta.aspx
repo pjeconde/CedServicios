@@ -54,6 +54,10 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
+                            <asp:BoundField DataField="Stock" HeaderText="Stock" SortExpression="Stock">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="Right" wrap="False" />
+                            </asp:BoundField>
                         </Columns>
                     </asp:GridView>
                 </asp:Panel>

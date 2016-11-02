@@ -25,179 +25,179 @@ namespace CedServicios.Site {
         /// Panel1 control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel Panel1;
         
         /// <summary>
-        /// Control ArticulosGridView.
+        /// ArticulosGridView control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView ArticulosGridView;
         
         /// <summary>
-        /// Control SalirButton.
+        /// SalirButton control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button SalirButton;
         
         /// <summary>
-        /// Control MensajeLabel.
+        /// MensajeLabel control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label MensajeLabel;
         
         /// <summary>
-        /// Control MensajeValidationSummary.
+        /// MensajeValidationSummary control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ValidationSummary MensajeValidationSummary;
         
         /// <summary>
-        /// Control Label1.
+        /// Label1 control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
-        /// Control Label4.
+        /// Label4 control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label4;
         
         /// <summary>
-        /// Control CUITTextBox.
+        /// CUITTextBox control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CUITTextBox;
         
         /// <summary>
-        /// Control Label9.
+        /// Label9 control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label9;
         
         /// <summary>
-        /// Control IdTextBox.
+        /// IdTextBox control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IdTextBox;
         
         /// <summary>
-        /// Control Label10.
+        /// Label10 control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label10;
         
         /// <summary>
-        /// Control DescrTextBox.
+        /// DescrTextBox control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox DescrTextBox;
         
         /// <summary>
-        /// Control Label11.
+        /// Label11 control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label11;
         
         /// <summary>
-        /// Control GTINTextBox.
+        /// GTINTextBox control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox GTINTextBox;
         
         /// <summary>
-        /// Control Label18.
+        /// Label18 control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label18;
         
         /// <summary>
-        /// Control UnidadDropDownList.
+        /// UnidadDropDownList control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList UnidadDropDownList;
         
         /// <summary>
-        /// Control Label5.
+        /// Label5 control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label5;
         
         /// <summary>
-        /// Control IndicacionExentoGravadoDropDownList.
+        /// IndicacionExentoGravadoDropDownList control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList IndicacionExentoGravadoDropDownList;
         
         /// <summary>
-        /// Control Label6.
+        /// Label6 control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label6;
         
         /// <summary>
-        /// Control AlicuotaIVADropDownList.
+        /// AlicuotaIVADropDownList control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList AlicuotaIVADropDownList;
         
@@ -205,8 +205,8 @@ namespace CedServicios.Site {
         /// ArticuloPanel control.
         /// </summary>
         /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel ArticuloPanel;
     }

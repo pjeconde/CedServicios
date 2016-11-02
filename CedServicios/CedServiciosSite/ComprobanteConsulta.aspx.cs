@@ -72,10 +72,20 @@ namespace CedServicios.Site
                     Provincia_CompradorDropDownList.DataBind();
 
                     //COMPROBANTE
-                    Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                    Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompleta();
-                    Tipo_De_ComprobanteDropDownList.DataBind();
+                    if (IdNaturalezaComprobanteTextBox.Text.IndexOf("Venta") != -1)
+                    {
+                        Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                        Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                        Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
+                        Tipo_De_ComprobanteDropDownList.DataBind();
+                    }
+                    else
+                    {
+                        Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                        Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                        Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPCompras();
+                        Tipo_De_ComprobanteDropDownList.DataBind();
+                    }
                     CodigoOperacionDropDownList.DataValueField = "Codigo";
                     CodigoOperacionDropDownList.DataTextField = "Descr";
                     CodigoOperacionDropDownList.DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.Lista();

@@ -28,6 +28,11 @@ namespace FeaEntidades.TiposDeComprobantes
 			set { descr = value; }
 		}
 
+        public string DescrCompleta
+        {
+            get { return Codigo.ToString("00") + "-" + descr; }
+        }
+
 		public static List<TipoComprobante> Lista()
 		{
 			List<TipoComprobante> lista = new List<TipoComprobante>();
@@ -185,6 +190,43 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new Recibos.C());
             return lista;
         }
-        
+
+        public static List<TipoComprobante> ListaCompletaAFIPCompras()
+        {
+            List<TipoComprobante> lista = new List<TipoComprobante>();
+            lista.Add(new Facturas.A());
+            lista.Add(new NotasDebito.A());
+            lista.Add(new NotasCredito.A());
+            lista.Add(new Recibos.A());
+            lista.Add(new NotasDeVentaAlContado.A());
+            lista.Add(new Facturas.B());
+            lista.Add(new NotasDebito.B());
+            lista.Add(new NotasCredito.B());
+            lista.Add(new Recibos.B());
+            lista.Add(new NotasDeVentaAlContado.B());
+            lista.Add(new Facturas.C());
+            lista.Add(new NotasDebito.C());
+            lista.Add(new NotasCredito.C());
+            lista.Add(new Recibos.C());
+            lista.Add(new Exportaciones.FacturasDeExportacion());
+            lista.Add(new Exportaciones.NotaDeDebitoPorOperacionesConElExterior());
+            lista.Add(new Exportaciones.NotaDeCreditoPorOperacionesConElExterior());
+            lista.Add(new OtrosCompras.BienesUsados());
+            lista.Add(new Otros.A());
+            lista.Add(new Otros.B());
+            lista.Add(new CuentaDeVentaYLiquido.A());
+            lista.Add(new CuentaDeVentaYLiquido.B());
+            lista.Add(new Liquidacion.A());
+            lista.Add(new Liquidacion.B());
+            lista.Add(new OtrosCompras.ImportacionServicios());
+            lista.Add(new OtrosCompras.RecibosFactCredito());
+            lista.Add(new OtrosCompras.Tique());
+            lista.Add(new OtrosCompras.TiqueFactA());
+            lista.Add(new OtrosCompras.TiqueFactB());
+            lista.Add(new OtrosCompras.NCServiciosPublicos());
+            lista.Add(new OtrosCompras.NDServiciosPublicos());
+            lista.Add(new OtrosCompras.OtrosNoCumplenRG3419());
+            return lista;
+        }
 	}
 }

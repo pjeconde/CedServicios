@@ -9,7 +9,7 @@ namespace FeaEntidades.TiposDeComprobantes.Otros
 		public A()
 		{
 			codigo = 39;
-			descr = "Otros comprobantes A que cumplan con la R.G. N° 3419";
+            descr = "Otros comprobantes A que cumplan con la R.G. N° 1415";
 		}
 	}
 }

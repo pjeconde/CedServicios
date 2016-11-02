@@ -1278,5 +1278,16 @@ namespace CedServicios.Site
             }
             return existe;
         }
+        protected void VerificarEstadosPosibles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (((DropDownList)sender).SelectedValue == "Compra")
+            {
+                //EstadoVigenteCheckBox.Checked = true;
+            }
+            else
+            {
+                //EstadoVigenteCheckBox.Checked = false;
+            }
+        }
     }
 }

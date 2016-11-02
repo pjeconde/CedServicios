@@ -80,6 +80,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             List<FeaEntidades.CodigosReferencia.CodigoReferencia> listaCR = new List<FeaEntidades.CodigosReferencia.CodigoReferencia>();
                             List<FeaEntidades.CodigosReferencia.Exportaciones.Exportacion> listaCRExpo = new List<FeaEntidades.CodigosReferencia.Exportaciones.Exportacion>();
+                            List<FeaEntidades.TiposDeComprobantes.TipoComprobante> listaCRAfip = new List<FeaEntidades.TiposDeComprobantes.TipoComprobante>(); 
                             string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                             {
                                 return pv.Nro == Convert.ToInt32(puntoDeVenta);
@@ -89,11 +90,22 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 case "Comun":
                                 case "RG2904":
                                 case "BonoFiscal":
-                                    listaCR = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-                                    r.descripcioncodigo_de_referencia = listaCR.Find(delegate(FeaEntidades.CodigosReferencia.CodigoReferencia cr)
+                                    if (r.tipo_comprobante_afip == "S")
                                     {
-                                        return cr.Codigo == r.codigo_de_referencia.ToString();
-                                    }).Descr;
+                                        listaCRAfip = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPSinInf();
+                                        r.descripcioncodigo_de_referencia = listaCRAfip.Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante cr)
+                                        {
+                                            return cr.Codigo == Convert.ToInt16(r.codigo_de_referencia);
+                                        }).Descr;
+                                    }
+                                    else
+                                    {
+                                        listaCR = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                                        r.descripcioncodigo_de_referencia = listaCR.Find(delegate(FeaEntidades.CodigosReferencia.CodigoReferencia cr)
+                                        {
+                                            return cr.Codigo == r.codigo_de_referencia.ToString();
+                                        }).Descr;
+                                    }
                                     break;
                                 case "Exportacion":
                                     listaCRExpo = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();

@@ -26,7 +26,7 @@ namespace CedServicios.Site
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     List<Entidades.Articulo> lista = new List<Entidades.Articulo>();
-                    lista = RN.Articulo.ListaPorCuit(false, false, sesion);
+                    lista = RN.Articulo.ListaPorCuit(false, true, sesion);
                     ArticulosGridView.DataSource = lista;
                     ViewState["Articulos"] = lista;
                     ArticulosGridView.DataBind();

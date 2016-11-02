@@ -156,6 +156,10 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = string.Empty;
             }
             lc.comprobante[0].cabecera.informacion_comprobante.condicion_de_pagoSpecified = true;
+            if (lc.comprobante[0].cabecera.informacion_comprobante.codigo_conceptoSpecified == false)
+            {
+                lc.comprobante[0].cabecera.informacion_comprobante.codigo_conceptoSpecified = true;
+            }
 
             lc.comprobante[0].cabecera.informacion_vendedor.condicion_ingresos_brutosSpecified=true;
             lc.comprobante[0].cabecera.informacion_vendedor.condicion_IVASpecified = true;
@@ -180,7 +184,6 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
             lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified = true;
             lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified = true;
             lc.comprobante[0].resumen.importe_total_ingresos_brutosSpecified = true;
-
             if (lc.comprobante[0].resumen.descuentos != null)
             {
                 for (int i = 0; i < lc.comprobante[0].resumen.descuentos.Length; i++)

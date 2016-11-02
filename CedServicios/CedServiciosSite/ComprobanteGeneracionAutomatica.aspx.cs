@@ -824,6 +824,11 @@ namespace CedServicios.Site
                         lc.comprobante[0].detalle.linea[i].importes_moneda_origen.importe_total_impuestosSpecified = true;
                         lc.comprobante[0].detalle.linea[i].importes_moneda_origen.precio_unitarioSpecified = true;
                     }
+                    if (lc.comprobante[0].detalle.linea[i].GTINSpecified.Equals(false))
+                    {
+                        lc.comprobante[0].detalle.linea[i].GTINSpecified = true;
+                        lc.comprobante[0].detalle.linea[i].GTIN = 0;
+                    }
                 }
                 else
                 {

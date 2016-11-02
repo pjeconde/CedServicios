@@ -738,16 +738,27 @@ namespace CedServicios.RN
                             {
                                 item.Pro_ds = lc.comprobante[0].detalle.linea[j].descripcion;
                             }
-                            if (lc.comprobante[0].detalle.linea[j].precio_unitarioSpecified == true)
-                            {
-                                item.Pro_precio_uni = Convert.ToDecimal(lc.comprobante[0].detalle.linea[j].precio_unitario);
-                            }
                             if (lc.comprobante[0].detalle.linea[j].cantidadSpecified == true)
                             {
                                 item.Pro_qty = Convert.ToDecimal(lc.comprobante[0].detalle.linea[j].cantidad);
                             }
                             item.Pro_umed = Convert.ToInt32(lc.comprobante[0].detalle.linea[j].unidad);
-                            item.Pro_total_item = Convert.ToDecimal(lc.comprobante[0].detalle.linea[j].importe_total_articulo);
+                            if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                            {
+                                if (lc.comprobante[0].detalle.linea[j].precio_unitarioSpecified == true)
+                                {
+                                    item.Pro_precio_uni = Convert.ToDecimal(lc.comprobante[0].detalle.linea[j].precio_unitario);
+                                }
+                                item.Pro_total_item = Convert.ToDecimal(lc.comprobante[0].detalle.linea[j].importe_total_articulo);
+                            }
+                            else
+                            {
+                                if (lc.comprobante[0].detalle.linea[j].importes_moneda_origen.precio_unitarioSpecified == true)
+                                {
+                                    item.Pro_precio_uni = Convert.ToDecimal(lc.comprobante[0].detalle.linea[j].importes_moneda_origen.precio_unitario);
+                                }
+                                item.Pro_total_item = Convert.ToDecimal(lc.comprobante[0].detalle.linea[j].importes_moneda_origen.importe_total_articulo);
+                            }
                             items[j] = item;
                         }
                         objFECabeceraRequest.Items = items;

@@ -62,7 +62,7 @@
                     Naturaleza del comprobante:
                 </td>
                 <td style="padding-top:5px; text-align: left">
-                    <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" Width="400px" DataValueField="Id" DataTextField="Descr"></asp:DropDownList>
+                    <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" Width="400px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" OnSelectedIndexChanged="VerificarEstadosPosibles_SelectedIndexChanged"></asp:DropDownList>
                 </td>        
             </tr>
             <asp:Panel ID="DetallePanel" runat="server">
@@ -239,12 +239,12 @@
                                                 Clonar comprobante</h4>
                                             <p>
                                                 La clonación de comprobante obtiene todos los datos del comprobante original, 
-                                                pero descarta los siguientes campos que usted deberá ingresar para geenrar un 
+                                                pero descarta los siguientes campos que usted deberá ingresar para generar un 
                                                 nuevo comprobante.
                                                 <p />
                                                 <ul>
-                                                    <li>Numero de comprobante</li>
-                                                    <li>Fecha de emision</li>
+                                                    <li>Número de comprobante</li>
+                                                    <li>Fecha de emisión</li>
                                                     <li>Fecha de servicio inicio y fin</li>
                                                     <li>Fecha de vencimiento</li>
                                                     <li>Nro de lote</li>

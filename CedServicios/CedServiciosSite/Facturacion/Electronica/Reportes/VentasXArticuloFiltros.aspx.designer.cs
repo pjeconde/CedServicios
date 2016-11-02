@@ -103,6 +103,15 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes {
         protected global::System.Web.UI.WebControls.CheckBox DetalleComprobanteCheckBox;
         
         /// <summary>
+        /// VerTodosLosArticulosCheckBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox VerTodosLosArticulosCheckBox;
+        
+        /// <summary>
         /// FormatosRptExportarDropDownList control.
         /// </summary>
         /// <remarks>
