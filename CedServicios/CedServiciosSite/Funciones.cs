@@ -126,6 +126,10 @@ namespace CedServicios.Site
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Ventas por Artículo", "Ventas por Artículo"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("IVA Compras", "IVA Compras"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Compras por Artículo", "Compras por Artículo"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Interfaz RG.3685", "Interfaz RG.3685"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Online Interfacturas", "Online Interfacturas"); mItem.Selectable = false;

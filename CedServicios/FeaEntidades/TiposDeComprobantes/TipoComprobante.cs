@@ -220,9 +220,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new Liquidacion.B());
             lista.Add(new OtrosCompras.ImportacionServicios());
             lista.Add(new OtrosCompras.RecibosFactCredito());
-            lista.Add(new OtrosCompras.Tique());
             lista.Add(new OtrosCompras.TiqueFactA());
             lista.Add(new OtrosCompras.TiqueFactB());
+            lista.Add(new OtrosCompras.Tique());
             lista.Add(new OtrosCompras.NCServiciosPublicos());
             lista.Add(new OtrosCompras.NDServiciosPublicos());
             lista.Add(new OtrosCompras.OtrosNoCumplenRG3419());

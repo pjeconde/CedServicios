@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ComprasXArticulo" nillable="true" type="ComprasXArticulo" />
+  <xs:complexType name="ComprasXArticulo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Cuit" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RazSoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PeriodoDsd" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PeriodoHst" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="ComprasXArticuloDetalle" type="ComprasXArticuloDetalle" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ComprasXArticuloDetalle">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="IdArticulo" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Descr" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="GTIN" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="IdArticuloEmp" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="IndicacionExentoGravado" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="NumeroLinea" type="xs:int" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UnidadCod" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="UnidadDescr" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CompTipo" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CompNro" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CompPtoVta" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CompFecEmi" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmpNroDoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmpCodDoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmpDescrDoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmpNombre" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Cantidad" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PrecioUnitario" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ImporteTotal" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="AlicuotaIVA" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ImporteIVA" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

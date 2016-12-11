@@ -131,6 +131,8 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Comprobantes|Consulta");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|IVA Ventas");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Ventas por Artículo");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|IVA Compras");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Compras por Artículo");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Interfaz RG.3685");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");
@@ -179,6 +181,7 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|IVA Ventas");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Ventas por Artículo");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Interfaz RG.3685");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Compras por Artículo");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online AFIP");

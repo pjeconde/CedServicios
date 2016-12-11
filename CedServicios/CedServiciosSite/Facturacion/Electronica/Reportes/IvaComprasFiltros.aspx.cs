@@ -10,11 +10,11 @@ using System.IO;
 
 namespace CedServicios.Site.Facturacion.Electronica.Reportes
 {
-    public partial class IvaVentasFiltros : System.Web.UI.Page
+    public partial class IvaComprasFiltros : System.Web.UI.Page
     {
-        List<Entidades.IvaVentasTotXImpuestos> listaTotXIMP;
-        List<Entidades.IvaVentasTotXIVA> listaTotXIVA;
-        List<Entidades.IvaVentasTotXIVA> listaTotIVAxComprobante;
+        List<Entidades.IvaComprasTotXImpuestos> listaTotXIMP;
+        List<Entidades.IvaComprasTotXIVA> listaTotXIVA;
+        List<Entidades.IvaComprasTotXIVA> listaTotIVAxComprobante;
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -50,96 +50,96 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     estados.Add(es);
                     Entidades.Persona persona = new Entidades.Persona();
                     Entidades.NaturalezaComprobante nc = new Entidades.NaturalezaComprobante();
-                    nc.Id = "Venta";
+                    nc.Id = "Compra";
                     listaC = RN.Comprobante.ListaFiltradaIvaYMovimientos(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, nc, false, "", sesion);
 
-                    Entidades.IvaVentas ivaVentas = new Entidades.IvaVentas();
-                    ivaVentas.Cuit = sesion.Cuit.Nro;
-                    ivaVentas.PeriodoDsd = FechaDesdeTextBox.Text.Substring(6, 2) + "/" + FechaDesdeTextBox.Text.Substring(4, 2) + "/" + FechaDesdeTextBox.Text.Substring(0, 4);
-                    ivaVentas.PeriodoHst = FechaHastaTextBox.Text.Substring(6, 2) + "/" + FechaHastaTextBox.Text.Substring(4, 2) + "/" + FechaHastaTextBox.Text.Substring(0, 4);
+                    Entidades.IvaCompras ivaCompras = new Entidades.IvaCompras();
+                    ivaCompras.Cuit = sesion.Cuit.Nro;
+                    ivaCompras.PeriodoDsd = FechaDesdeTextBox.Text.Substring(6, 2) + "/" + FechaDesdeTextBox.Text.Substring(4, 2) + "/" + FechaDesdeTextBox.Text.Substring(0, 4);
+                    ivaCompras.PeriodoHst = FechaHastaTextBox.Text.Substring(6, 2) + "/" + FechaHastaTextBox.Text.Substring(4, 2) + "/" + FechaHastaTextBox.Text.Substring(0, 4);
 
                     System.Xml.Serialization.XmlSerializer x;
                     byte[] bytes;
                     System.IO.MemoryStream ms;
                     FeaEntidades.InterFacturas.lote_comprobantes lote;
 
-                    ivaVentas.IvaVentasComprobantes = new List<Entidades.IvaVentasComprobantes>();
+                    ivaCompras.IvaComprasComprobantes = new List<Entidades.IvaComprasComprobantes>();
 
-                    listaTotXIMP = new List<Entidades.IvaVentasTotXImpuestos>();
-                    listaTotXIVA = new List<Entidades.IvaVentasTotXIVA>();
+                    listaTotXIMP = new List<Entidades.IvaComprasTotXImpuestos>();
+                    listaTotXIVA = new List<Entidades.IvaComprasTotXIVA>();
                     foreach (Entidades.Comprobante comprobante in listaC)
                     {
-                        Entidades.IvaVentasComprobantes ivc = new Entidades.IvaVentasComprobantes();
-                        ivc.PtoVta = comprobante.NroPuntoVta.ToString();
-                        ivc.TipoComp = comprobante.TipoComprobante.Descr;
-                        ivc.NroComp = comprobante.Nro.ToString();
-                        ivc.NroDoc = comprobante.NroDoc.ToString();
-                        ivc.TipoCompCodigo = comprobante.TipoComprobante.Id.ToString();
-                        ivc.RazSoc = comprobante.RazonSocial;
+                        Entidades.IvaComprasComprobantes icc = new Entidades.IvaComprasComprobantes();
+                        icc.PtoVta = comprobante.NroPuntoVta.ToString();
+                        icc.TipoComp = comprobante.TipoComprobante.Descr;
+                        icc.NroComp = comprobante.Nro.ToString();
+                        icc.NroDoc = comprobante.NroDoc.ToString();
+                        icc.TipoCompCodigo = comprobante.TipoComprobante.Id.ToString();
+                        icc.RazSoc = comprobante.RazonSocial;
                         if (comprobante.Documento.Tipo.Id != "99")
                         {
-                            ivc.TipoDoc = comprobante.DescrTipoDoc;
+                            icc.TipoDoc = comprobante.DescrTipoDoc;
                         }
                         else
                         {
-                            if (ivc.RazSoc == "")
+                            if (icc.RazSoc == "")
                             {
-                                ivc.TipoDoc = "Sin identificar/venta global";
+                                icc.TipoDoc = "Sin identificar/compra global";
                             }
                             else
                             {
-                                ivc.TipoDoc = "";
+                                icc.TipoDoc = "";
                             }
                         }
                         
                         double signo = 1;
-                        if (("/3/8/13/").IndexOf("/" + ivc.TipoCompCodigo + "/") != -1)
+                        if (("/3/8/13/").IndexOf("/" + icc.TipoCompCodigo + "/") != -1)
                         {
                             signo = -1;
                         }
 
-                        ivc.ImporteTotal = comprobante.Importe * signo;
-                        ivc.FechaEmi = comprobante.Fecha.ToString("dd/MM/yyyy");
+                        icc.ImporteTotal = comprobante.Importe * signo;
+                        icc.FechaEmi = comprobante.Fecha.ToString("dd/MM/yyyy");
 
                         lote = new FeaEntidades.InterFacturas.lote_comprobantes();
                         x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
 
-                        comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
-                        bytes = new byte[comprobante.Response.Length * sizeof(char)];
-                        System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                        comprobante.Request = comprobante.Request.Replace("iso-8859-1", "utf-16");
+                        bytes = new byte[comprobante.Request.Length * sizeof(char)];
+                        System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
                         ms = new System.IO.MemoryStream(bytes);
                         ms.Seek(0, System.IO.SeekOrigin.Begin);
                         lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
-                        ivc.Exento = lote.comprobante[0].resumen.importe_operaciones_exentas * signo;
-                        ivc.NoGravado = lote.comprobante[0].resumen.importe_total_concepto_no_gravado * signo;
-                        ivc.Gravado = lote.comprobante[0].resumen.importe_total_neto_gravado * signo;
+                        icc.Exento = lote.comprobante[0].resumen.importe_operaciones_exentas * signo;
+                        icc.NoGravado = lote.comprobante[0].resumen.importe_total_concepto_no_gravado * signo;
+                        icc.Gravado = lote.comprobante[0].resumen.importe_total_neto_gravado * signo;
                         double otrosImp = Math.Round(lote.comprobante[0].resumen.importe_total_ingresos_brutos + lote.comprobante[0].resumen.importe_total_impuestos_nacionales + lote.comprobante[0].resumen.importe_total_impuestos_municipales + lote.comprobante[0].resumen.importe_total_impuestos_internos, 2);
-                        ivc.OtrosImp = otrosImp * signo;
-                        ivc.Iva = lote.comprobante[0].resumen.impuesto_liq * signo;
+                        icc.OtrosImp = otrosImp * signo;
+                        icc.Iva = lote.comprobante[0].resumen.impuesto_liq * signo;
                         
-                        ivc.Moneda = lote.comprobante[0].resumen.codigo_moneda;
-                        if (ivc.Moneda != "PES")
+                        icc.Moneda = lote.comprobante[0].resumen.codigo_moneda;
+                        if (icc.Moneda != "PES")
                         {
                             monedasExtranjeras = true;
                         }
-                        ivc.Cambio = lote.comprobante[0].resumen.tipo_de_cambio;
-                        ivc.Concepto = lote.comprobante[0].cabecera.informacion_comprobante.codigo_concepto.ToString();
+                        icc.Cambio = lote.comprobante[0].resumen.tipo_de_cambio;
+                        icc.Concepto = lote.comprobante[0].cabecera.informacion_comprobante.codigo_concepto.ToString();
                         if (lote.comprobante[0].resumen.importes_moneda_origen != null)
                         {
-                            ivc.ImporteTotalME = lote.comprobante[0].resumen.importes_moneda_origen.importe_total_factura * signo;
+                            icc.ImporteTotalME = lote.comprobante[0].resumen.importes_moneda_origen.importe_total_factura * signo;
                         }
-                        ivaVentas.IvaVentasComprobantes.Add(ivc);
+                        ivaCompras.IvaComprasComprobantes.Add(icc);
                         
                         //Totales por Impuestos y Totales por alicuota de IVA y concepto
-                        ivaVentas.IvaVentasTotXImpuestos = new List<Entidades.IvaVentasTotXImpuestos>();
-                        ivaVentas.IvaVentasTotXIVA = new List<Entidades.IvaVentasTotXIVA>();
+                        ivaCompras.IvaComprasTotXImpuestos = new List<Entidades.IvaComprasTotXImpuestos>();
+                        ivaCompras.IvaComprasTotXIVA = new List<Entidades.IvaComprasTotXIVA>();
                         if (lote.comprobante[0].resumen.impuestos != null)
                         {
                             for (int z = 0; z < lote.comprobante[0].resumen.impuestos.Length; z++)
                             {
                                 double importe = lote.comprobante[0].resumen.impuestos[z].importe_impuesto * signo;
-                                listaTotIVAxComprobante = new List<Entidades.IvaVentasTotXIVA>();
+                                listaTotIVAxComprobante = new List<Entidades.IvaComprasTotXIVA>();
                                 if (lote.comprobante[0].resumen.impuestos[z].codigo_impuesto == 1)
                                 {
                                     string concepto = lote.comprobante[0].cabecera.informacion_comprobante.codigo_concepto.ToString();
@@ -169,7 +169,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                                                 }
                                             }
                                             //Verificar el impuesto IVA que no exista mas de una vez la misma alicuota.
-                                            List<Entidades.IvaVentasTotXIVA> listaAux = listaTotIVAxComprobante.FindAll(delegate(Entidades.IvaVentasTotXIVA txi)
+                                            List<Entidades.IvaComprasTotXIVA> listaAux = listaTotIVAxComprobante.FindAll(delegate(Entidades.IvaComprasTotXIVA txi)
                                             {
                                                 return txi.Concepto == concepto && txi.Alicuota == alicuota;
                                             });
@@ -211,37 +211,37 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     }
                     if (listaTotXIMP.Count != 0)
                     {
-                        ivaVentas.IvaVentasTotXImpuestos = listaTotXIMP;
+                        ivaCompras.IvaComprasTotXImpuestos = listaTotXIMP;
                     }
                     else
                     {
                         //Para arreglar bug en towebs.
-                        Entidades.IvaVentasTotXImpuestos totXimp = new Entidades.IvaVentasTotXImpuestos();
+                        Entidades.IvaComprasTotXImpuestos totXimp = new Entidades.IvaComprasTotXImpuestos();
                         totXimp.Descr = "";
                         totXimp.ImporteTotal = 0;
-                        ivaVentas.IvaVentasTotXImpuestos.Add(totXimp);
+                        ivaCompras.IvaComprasTotXImpuestos.Add(totXimp);
                     }
                     if (listaTotXIVA.Count != 0)
                     {
-                        ivaVentas.IvaVentasTotXIVA = listaTotXIVA;
+                        ivaCompras.IvaComprasTotXIVA = listaTotXIVA;
                     }
                     else
                     {
                         //Para arreglar bug en towebs.
-                        Entidades.IvaVentasTotXIVA totXiva = new Entidades.IvaVentasTotXIVA();
+                        Entidades.IvaComprasTotXIVA totXiva = new Entidades.IvaComprasTotXIVA();
                         totXiva.Concepto = "";
                         totXiva.Alicuota = 0;
                         totXiva.ImporteNG = 0;
                         totXiva.ImporteTotal = 0;
-                        ivaVentas.IvaVentasTotXIVA.Add(totXiva);
+                        ivaCompras.IvaComprasTotXIVA.Add(totXiva);
                     }
                     Session["formatoRptExportar"] = FormatosRptExportarDropDownList.SelectedValue;
                     Session["mostrarFechaYHora"] = FechaYHoraCheckBox.Checked;
                     Session["monedasExtranjeras"] = monedasExtranjeras;
-                    if (ivaVentas.IvaVentasComprobantes.Count != 0)
+                    if (ivaCompras.IvaComprasComprobantes.Count != 0)
                     {
-                        Session["ivaVentas"] = ivaVentas;
-                        Response.Redirect("~/Facturacion/Electronica/Reportes/IvaVentasWebForm.aspx", true);
+                        Session["ivaCompras"] = ivaCompras;
+                        Response.Redirect("~/Facturacion/Electronica/Reportes/IvaComprasWebForm.aspx", true);
                     }
                     else
                     {
@@ -271,13 +271,13 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
         }
         private void TotalesXImpuestos(string descr, double importe) 
         {
-            List<Entidades.IvaVentasTotXImpuestos> listaAux = listaTotXIMP.FindAll(delegate(Entidades.IvaVentasTotXImpuestos txi)
+            List<Entidades.IvaComprasTotXImpuestos> listaAux = listaTotXIMP.FindAll(delegate(Entidades.IvaComprasTotXImpuestos txi)
             {
                 return txi.Descr == descr;
             });
             if (listaAux.Count == 0)
             {
-                Entidades.IvaVentasTotXImpuestos itximp = new Entidades.IvaVentasTotXImpuestos();
+                Entidades.IvaComprasTotXImpuestos itximp = new Entidades.IvaComprasTotXImpuestos();
                 itximp.Descr = descr;
                 itximp.ImporteTotal = importe;
                 listaTotXIMP.Add(itximp);
@@ -290,13 +290,13 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
         
         private void TotalesXIVA(string concepto, double alicuota, double importeNG, double importeIVA) 
         {
-            List<Entidades.IvaVentasTotXIVA> listaAux = listaTotXIVA.FindAll(delegate(Entidades.IvaVentasTotXIVA txi)
+            List<Entidades.IvaComprasTotXIVA> listaAux = listaTotXIVA.FindAll(delegate(Entidades.IvaComprasTotXIVA txi)
             {
                 return txi.Concepto == concepto && txi.Alicuota == alicuota;
             });
             if (listaAux.Count == 0)
             {
-                Entidades.IvaVentasTotXIVA itxiva = new Entidades.IvaVentasTotXIVA();
+                Entidades.IvaComprasTotXIVA itxiva = new Entidades.IvaComprasTotXIVA();
                 itxiva.Concepto = concepto;
                 itxiva.ImporteNG = importeNG;
                 itxiva.ImporteTotal = importeIVA;
@@ -311,13 +311,13 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
         }
         private void TotalesIVAXComprobante(string concepto, double alicuota, double importeNG, double importeIVA)
         {
-            List<Entidades.IvaVentasTotXIVA> listaAux = listaTotIVAxComprobante.FindAll(delegate(Entidades.IvaVentasTotXIVA txi)
+            List<Entidades.IvaComprasTotXIVA> listaAux = listaTotIVAxComprobante.FindAll(delegate(Entidades.IvaComprasTotXIVA txi)
             {
                 return txi.Concepto == concepto && txi.Alicuota == alicuota;
             });
             if (listaAux.Count == 0)
             {
-                Entidades.IvaVentasTotXIVA itxiva = new Entidades.IvaVentasTotXIVA();
+                Entidades.IvaComprasTotXIVA itxiva = new Entidades.IvaComprasTotXIVA();
                 itxiva.Concepto = concepto;
                 itxiva.ImporteNG = importeNG;
                 itxiva.ImporteTotal = importeIVA;

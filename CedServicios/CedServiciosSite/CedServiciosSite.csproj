@@ -127,6 +127,9 @@
     <Content Include="Facturacion\Electronica\ReferenciasAFIP.ascx" />
     <Content Include="Facturacion\Electronica\ReferenciasConsulta.ascx" />
     <Content Include="Facturacion\Electronica\Referencias.ascx" />
+    <Content Include="Facturacion\Electronica\Reportes\ComprasXArticuloFiltros.aspx" />
+    <Content Include="Facturacion\Electronica\Reportes\IvaComprasWebForm.aspx" />
+    <Content Include="Facturacion\Electronica\Reportes\IvaComprasFiltros.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\VentasXArticuloWebForm.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\VentasXArticuloFiltros.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\IvaVentasWebForm.aspx" />
@@ -292,6 +295,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="Facturacion\Electronica\Reportes\Ventas_XArticulo.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Facturacion\Electronica\Reportes\Iva_Compras.xsd">
       <SubType>Designer</SubType>
     </Content>
     <None Include="fonts\glyphicons-halflings-regular.eot" />
@@ -579,6 +585,33 @@
     </Compile>
     <Compile Include="Facturacion\Electronica\Referencias.ascx.designer.cs">
       <DependentUpon>Referencias.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\ComprasXArticuloFiltros.aspx.cs">
+      <DependentUpon>ComprasXArticuloFiltros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\ComprasXArticuloFiltros.aspx.designer.cs">
+      <DependentUpon>ComprasXArticuloFiltros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\IvaComprasCR.cs">
+      <DependentUpon>IvaComprasCR.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\IvaComprasWebForm.aspx.cs">
+      <DependentUpon>IvaComprasWebForm.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\IvaComprasWebForm.aspx.designer.cs">
+      <DependentUpon>IvaComprasWebForm.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\IvaComprasFiltros.aspx.cs">
+      <DependentUpon>IvaComprasFiltros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\IvaComprasFiltros.aspx.designer.cs">
+      <DependentUpon>IvaComprasFiltros.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\VentasXArticulo.cs">
       <AutoGen>True</AutoGen>
@@ -1456,6 +1489,10 @@
     <Content Include="Facturacion\Electronica\Reportes\Factura.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Factura.cs</LastGenOutput>
+    </Content>
+    <Content Include="Facturacion\Electronica\Reportes\IvaComprasCR.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>IvaComprasCR.cs</LastGenOutput>
     </Content>
     <EmbeddedResource Include="Facturacion\Electronica\Reportes\Imagen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

@@ -1547,6 +1547,12 @@
     <Compile Include="UnidadesMedidaExpo\Uiactig.cs" />
     <Compile Include="UnidadesMedidaExpo\Unidades.cs" />
     <Compile Include="UnidadesMedidaExpo\UnidadMedidaExpo.cs" />
+    <Compile Include="XSD\ComprasXArticulo.cs" />
+    <Compile Include="XSD\ComprasXArticuloDetalle.cs" />
+    <Compile Include="XSD\IvaCompras.cs" />
+    <Compile Include="XSD\IvaComprasComprobantes.cs" />
+    <Compile Include="XSD\IvaComprasTotXImpuestos.cs" />
+    <Compile Include="XSD\IvaComprasTotXIVA.cs" />
     <Compile Include="XSD\VentasXArticuloDetalle.cs" />
     <Compile Include="XSD\VentasXArticulo.cs" />
     <Compile Include="XSD\IvaVentasTotXIVA.cs" />

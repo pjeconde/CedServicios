@@ -16,7 +16,7 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaContratosFiltrada(Estados, FechaEmision, Persona, Moneda);
         }
-        public static List<Entidades.Comprobante> ListaFiltradaIvaVentas(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle, Entidades.Sesion Sesion)
+        public static List<Entidades.Comprobante> ListaFiltradaIvaYMovimientos(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaFiltradaIvaVentas(Estados, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos, Detalle);

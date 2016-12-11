@@ -612,7 +612,7 @@ namespace CedServicios.Site
                     break;
                 case "XML-ClonarAlta":
                     #region XML-ClonarAlta
-                    if (comprobante.NaturalezaComprobante.Id == "Venta")
+                    if (comprobante.NaturalezaComprobante.Id == "Venta" || comprobante.NaturalezaComprobante.Id == "Compra")
                     {
                         Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Clonado, comprobante);
                         script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
@@ -620,7 +620,7 @@ namespace CedServicios.Site
                     }
                     else
                     {
-                        MensajeLabel.Text = "Esta opción está disponible sólo para comprobantes de venta electrónica, canal ITF (Interfacturas)";
+                        MensajeLabel.Text = "Esta opción está disponible sólo para comprobantes de venta electrónica o compras.";
                     }                    
                     #endregion
                     break;

@@ -10,7 +10,7 @@ using System.IO;
 
 namespace CedServicios.Site.Facturacion.Electronica.Reportes
 {
-    public partial class VentasXArticuloFiltros : System.Web.UI.Page
+    public partial class ComprasXArticuloFiltros : System.Web.UI.Page
     {
 
         protected void Page_Load(object sender, EventArgs e)
@@ -47,24 +47,24 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     estados.Add(es);
                     Entidades.Persona persona = new Entidades.Persona();
                     Entidades.NaturalezaComprobante nc = new Entidades.NaturalezaComprobante();
-                    nc.Id = "Venta";
+                    nc.Id = "Compra";
                     listaC = RN.Comprobante.ListaFiltradaIvaYMovimientos(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, nc, false, "", sesion);
 
-                    Entidades.VentasXArticulo ventas = new Entidades.VentasXArticulo();
+                    Entidades.ComprasXArticulo compras = new Entidades.ComprasXArticulo();
 
-                    ventas.Cuit = sesion.Cuit.Nro;
-                    ventas.RazSoc = sesion.Cuit.RazonSocial;
-                    ventas.PeriodoDsd = FechaDesdeTextBox.Text.Substring(6, 2) + "/" + FechaDesdeTextBox.Text.Substring(4, 2) + "/" + FechaDesdeTextBox.Text.Substring(0, 4);
-                    ventas.PeriodoHst = FechaHastaTextBox.Text.Substring(6, 2) + "/" + FechaHastaTextBox.Text.Substring(4, 2) + "/" + FechaHastaTextBox.Text.Substring(0, 4);
+                    compras.Cuit = sesion.Cuit.Nro;
+                    compras.RazSoc = sesion.Cuit.RazonSocial;
+                    compras.PeriodoDsd = FechaDesdeTextBox.Text.Substring(6, 2) + "/" + FechaDesdeTextBox.Text.Substring(4, 2) + "/" + FechaDesdeTextBox.Text.Substring(0, 4);
+                    compras.PeriodoHst = FechaHastaTextBox.Text.Substring(6, 2) + "/" + FechaHastaTextBox.Text.Substring(4, 2) + "/" + FechaHastaTextBox.Text.Substring(0, 4);
 
                     System.Xml.Serialization.XmlSerializer x;
                     byte[] bytes;
                     System.IO.MemoryStream ms;
                     FeaEntidades.InterFacturas.lote_comprobantes lote;
 
-                    ventas.VentasXArticuloDetalle = new List<Entidades.VentasXArticuloDetalle>();
-                    List<Entidades.VentasXArticuloDetalle> lvd = new List<Entidades.VentasXArticuloDetalle>();
-                    Entidades.VentasXArticuloDetalle vd;
+                    compras.ComprasXArticuloDetalle = new List<Entidades.ComprasXArticuloDetalle>();
+                    List<Entidades.ComprasXArticuloDetalle> lvd = new List<Entidades.ComprasXArticuloDetalle>();
+                    Entidades.ComprasXArticuloDetalle vd;
                     foreach (Entidades.Comprobante comprobante in listaC)
                     {
                         lote = new FeaEntidades.InterFacturas.lote_comprobantes();
@@ -89,14 +89,14 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                                 }
 
                                 //Verificar el articulo ya existe en la lista.
-                                //List<Entidades.VentasXArticuloDetalle> listaAux = lvd.FindAll(delegate(Entidades.VentasXArticuloDetalle vxad)
+                                //List<Entidades.ComprasXArticuloDetalle> listaAux = lvd.FindAll(delegate(Entidades.ComprasXArticuloDetalle vxad)
                                 //{
                                 //    return vxad.IdArticulo == lote.comprobante[0].detalle.linea[z].codigo_producto_vendedor;
                                 //});
                                 //if (listaAux.Count == 0 || lote.comprobante[0].detalle.linea[z].codigo_producto_vendedor.Trim() == "")
                                 //{
                                 //}
-                                vd = new Entidades.VentasXArticuloDetalle();
+                                vd = new Entidades.ComprasXArticuloDetalle();
                                 vd.IdArticulo = lote.comprobante[0].detalle.linea[z].codigo_producto_vendedor;
                                 vd.GTIN = lote.comprobante[0].detalle.linea[z].GTIN.ToString();
                                 vd.IdArticuloEmp = lote.comprobante[0].detalle.linea[z].codigo_producto_comprador;
@@ -144,61 +144,18 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                             }
                         }
                     }
-                    //Si se muestran artículos vigentes no vendidos. 
-                    List<Entidades.Articulo> listaArt = new List<Entidades.Articulo>();
-                    if (VerTodosLosArticulosCheckBox.Enabled == true && VerTodosLosArticulosCheckBox.Checked == true)
-                    {
-                        listaArt = RN.Articulo.ListaPorCuit(true, false, sesion);
-                        if (listaArt.Count != 0)
-                        {
-                            foreach (Entidades.Articulo art in listaArt)
-                            {
-                                bool existeArt = false;
-                                if (lvd.Count != 0)
-                                {
-                                    System.Collections.Generic.List<Entidades.VentasXArticuloDetalle> listaVXArt = lvd.FindAll(delegate(Entidades.VentasXArticuloDetalle vxart)
-                                    {
-                                        return vxart.IdArticulo == art.Id;
-                                    });
-                                    if (listaVXArt.Count != 0)
-                                    {
-                                        existeArt = true;
-                                    }
-                                }
-                                if (!existeArt)
-                                {
-                                    vd = new Entidades.VentasXArticuloDetalle();
-                                    vd.IdArticulo = art.Id;
-                                    vd.Descr = art.Descr;
-                                    vd.CompFecEmi = "";
-                                    vd.CompNro = "";
-                                    vd.CompPtoVta = "";
-                                    vd.CompTipo = "";
-                                    vd.UnidadCod = "";
-                                    vd.UnidadDescr = "";
-                                    vd.IndicacionExentoGravado = "";
-                                    vd.EmpNroDoc = "";
-                                    vd.EmpCodDoc = "";
-                                    vd.EmpDescrDoc = "";
-                                    vd.EmpNombre = "";
-                                    lvd.Add(vd);
-                                }
-                            }
-
-                        }
-                    }
                     if (lvd.Count != 0)
                     {
-                        ventas.VentasXArticuloDetalle = lvd;
+                        compras.ComprasXArticuloDetalle = lvd;
                     }
                     Session["formatoRptExportar"] = FormatosRptExportarDropDownList.SelectedValue;
                     Session["mostrarFechaYHora"] = FechaYHoraCheckBox.Checked;
                     Session["mostrarDetalleComprobantes"] = DetalleComprobanteCheckBox.Checked;
                     Session["monedasExtranjeras"] = monedasExtranjeras;
-                    if (ventas.VentasXArticuloDetalle.Count != 0)
+                    if (compras.ComprasXArticuloDetalle.Count != 0)
                     {
-                        Session["ventasXArticulo"] = ventas;
-                        Response.Redirect("~/Facturacion/Electronica/Reportes/VentasXArticuloWebForm.aspx", true);
+                        Session["comprasXArticulo"] = compras;
+                        Response.Redirect("~/Facturacion/Electronica/Reportes/ComprasXArticuloWebForm.aspx", true);
                     }
                     else
                     {
