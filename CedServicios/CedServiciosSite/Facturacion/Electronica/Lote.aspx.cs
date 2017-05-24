@@ -5155,8 +5155,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 {
                                     det.linea[i].alicuota_ivaSpecified = false;
                                     det.linea[i].alicuota_iva = 0;
+                                    det.linea[i].indicacion_exento_gravado = null;
                                 }
-                                det.linea[i].indicacion_exento_gravado = null;
                             }
                             det.linea[i].importe_ivaSpecified = false;
                             det.linea[i].importe_iva = 0;

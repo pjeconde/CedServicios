@@ -111,20 +111,32 @@ namespace CedServicios.DB
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
                 {
-                    List<Entidades.UN> listaUN = sesion.Cuit.UNs.FindAll(delegate(Entidades.UN un)
+                    if (NaturalezaComprobante.Id != "Compra")
                     {
-                        return un.Id == sesion.UN.Id;
-                    });
-                    for (int i = 0; i < dt.Rows.Count; i++)
-                    {
-                        Entidades.Comprobante elem = new Entidades.Comprobante();
-                        Copiar(dt.Rows[i], elem);
-                        List<Entidades.PuntoVta> listaPV = listaUN[0].PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                        List<Entidades.UN> listaUN = sesion.Cuit.UNs.FindAll(delegate(Entidades.UN un)
                         {
-                            return pv.Nro == elem.NroPuntoVta;
+                            return un.Id == sesion.UN.Id;
                         });
-                        if (listaPV.Count > 0)
+                        for (int i = 0; i < dt.Rows.Count; i++)
                         {
+                            Entidades.Comprobante elem = new Entidades.Comprobante();
+                            Copiar(dt.Rows[i], elem);
+                            List<Entidades.PuntoVta> listaPV = listaUN[0].PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
+                            {
+                                return pv.Nro == elem.NroPuntoVta;
+                            });
+                            if (listaPV.Count > 0)
+                            {
+                                lista.Add(elem);
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int i = 0; i < dt.Rows.Count; i++)
+                        {
+                            Entidades.Comprobante elem = new Entidades.Comprobante();
+                            Copiar(dt.Rows[i], elem);
                             lista.Add(elem);
                         }
                     }
@@ -598,6 +610,58 @@ namespace CedServicios.DB
             a.Append("Comprobante.FechaProximaEmision='" + Comprobante.FechaProximaEmision.ToString("yyyyMMdd") + "' ");
             a.AppendLine("where Cuit='" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
+        }
+        public List<Entidades.StockXArticuloDetalle> ListaStock(string Cuit, string FechaHasta)
+        {
+            List<Entidades.StockXArticuloDetalle> lista = new List<Entidades.StockXArticuloDetalle>();
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.Append("select Comprobante.Cuit, IdNaturalezaComprobante, IdTipoComprobante, DescrTipoComprobante, NroPuntoVta, NroComprobante, IdTipoDoc, NroDoc, RazonSocial, ");
+            a.Append("Moneda, ImporteMoneda, Fecha, TipoCambio, Comprobante.Importe as ImporteTotalComprabante, Comprobante.IdWF, Comprobante.Estado, ");
+            a.Append("IdTipoItem, NroItem, ComprobanteDetalle.IdArticulo, Articulo.DescrArticulo, IdRubro, Cantidad, PrecioUnitario, ComprobanteDetalle.Importe, IdUbicacion, IndicadorExentoGravado ");
+            a.Append("from Comprobante, ComprobanteDetalle, Articulo where Comprobante.IdWF = ComprobanteDetalle.IdWF and ComprobanteDetalle.IdArticulo = Articulo.IdArticulo and Articulo.Cuit = Comprobante.Cuit ");
+            a.Append("and Comprobante.Fecha <= '" + FechaHasta + "' and Comprobante.Cuit = '" + Cuit + "'");
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.StockXArticuloDetalle elem = new Entidades.StockXArticuloDetalle();
+                    CopiarListaStock(dt.Rows[i], elem);
+                    lista.Add(elem);
+                }
+            }
+            return lista;
+        }
+        private void CopiarListaStock(DataRow Desde, Entidades.StockXArticuloDetalle Hasta)
+        {
+            Hasta.IdArticulo = Convert.ToString(Desde["IdArticulo"]); ;
+            Hasta.Descr = Convert.ToString(Desde["DescrArticulo"]); ;
+            Hasta.IdNaturalezaComprobante = Convert.ToString(Desde["IdNaturalezaComprobante"]);
+            Hasta.CompTipo = Convert.ToString(Desde["IdTipoComprobante"]);
+            Hasta.CompPtoVta = Convert.ToString(Desde["NroPuntoVta"]);
+            Hasta.CompNro = Math.Abs(Convert.ToInt64(Desde["NroComprobante"])).ToString();
+            //Hasta.NroLote = Convert.ToInt64(Desde["NroLote"]);
+            Hasta.EmpCodDoc = Convert.ToString(Desde["IdTipoDoc"]);
+            FeaEntidades.Documentos.Documento tipoDocumento = FeaEntidades.Documentos.Documento.Lista().Find(delegate(FeaEntidades.Documentos.Documento d)
+            {
+                return Hasta.EmpCodDoc == d.Codigo.ToString();
+            });
+            if (tipoDocumento != null)
+            {
+                Hasta.EmpDescrDoc = tipoDocumento.Descr;
+            }
+            else
+            {
+                Hasta.EmpDescrDoc = "Desconocido";
+            }
+            Hasta.EmpNroDoc = Convert.ToString(Desde["NroDoc"]);
+            Hasta.EmpNombre = Convert.ToString(Desde["RazonSocial"]);
+            Hasta.CompFecEmi = Convert.ToDateTime(Desde["Fecha"]).ToString("dd/MM/yyyy");
+            Hasta.Moneda = Convert.ToString(Desde["Moneda"]);
+            Hasta.TipoCambio = Convert.ToDouble(Desde["TipoCambio"]);
+            Hasta.Cantidad = Convert.ToDouble(Desde["Cantidad"]);
+            Hasta.PrecioUnitario = Convert.ToDouble(Desde["PrecioUnitario"]);
+            Hasta.ImporteTotal = Convert.ToDouble(Desde["Importe"]);
         }
     }
 }

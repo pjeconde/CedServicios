@@ -70,9 +70,9 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                         lote = new FeaEntidades.InterFacturas.lote_comprobantes();
                         x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
 
-                        comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
-                        bytes = new byte[comprobante.Response.Length * sizeof(char)];
-                        System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                        comprobante.Request = comprobante.Request.Replace("iso-8859-1", "utf-16");
+                        bytes = new byte[comprobante.Request.Length * sizeof(char)];
+                        System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
                         ms = new System.IO.MemoryStream(bytes);
                         ms.Seek(0, System.IO.SeekOrigin.Begin);
                         lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
@@ -116,10 +116,10 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                                 vd.CompPtoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString();
                                 vd.CompFecEmi = lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(6, 2) + "/" + lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(4, 2) + "/" + lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(0, 4);
 
-                                vd.EmpNroDoc = lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
-                                vd.EmpCodDoc = lote.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
+                                vd.EmpNroDoc = lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                                vd.EmpCodDoc = "80";
                                 vd.EmpDescrDoc = ""; //Obtener la descripcion; 
-                                vd.EmpNombre = lote.comprobante[0].cabecera.informacion_comprador.denominacion;
+                                vd.EmpNombre = lote.comprobante[0].cabecera.informacion_vendedor.razon_social;
 
                                 if (lote.comprobante[0].detalle.linea[z].descripcion.Length > 0 && lote.comprobante[0].detalle.linea[z].descripcion.Substring(0, 1) == "%")
                                 {
@@ -181,17 +181,6 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
             else
             {
                 Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
-            }
-        }
-        protected void VerTodosLosArticulosCheckBox_Click(object sender, EventArgs e)
-        {
-            if (DetalleComprobanteCheckBox.Checked == true)
-            {
-                VerTodosLosArticulosCheckBox.Enabled = false; 
-            }
-            else
-            {
-                VerTodosLosArticulosCheckBox.Enabled = true; 
             }
         }
     }

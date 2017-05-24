@@ -10,7 +10,7 @@
 namespace CedServicios.Site.Facturacion.Electronica.Reportes {
     
     
-    public partial class ComprasXArticuloFiltros {
+    public partial class StockXArticuloFiltros {
         
         /// <summary>
         /// Panel0 control.

@@ -175,6 +175,17 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                                             });
                                             if (listaAux.Count == 0)
                                             {
+                                                //Verifico si tiene descuentos con IVA, para ajustar la base imponible que corresponda.
+                                                if (lote.comprobante[0].resumen.descuentos != null)
+                                                {
+                                                    for (int d = 0; d < lote.comprobante[0].resumen.descuentos.Length; d++)
+                                                    {
+                                                        if (lote.comprobante[0].resumen.descuentos[d].alicuota_iva_descuentoSpecified && lote.comprobante[0].resumen.descuentos[d].alicuota_iva_descuento == alicuota)
+                                                        {
+                                                            baseImponible += lote.comprobante[0].resumen.descuentos[d].importe_descuento * (signo * -1);
+                                                        }
+                                                    }
+                                                }
                                                 TotalesIVAXComprobante(concepto, alicuota, baseImponible, importe);
                                             }
                                             else
@@ -209,31 +220,34 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                             }
                         }
                     }
-                    if (listaTotXIMP.Count != 0)
+                    if (ivaVentas.IvaVentasComprobantes.Count != 0)
                     {
-                        ivaVentas.IvaVentasTotXImpuestos = listaTotXIMP;
-                    }
-                    else
-                    {
-                        //Para arreglar bug en towebs.
-                        Entidades.IvaVentasTotXImpuestos totXimp = new Entidades.IvaVentasTotXImpuestos();
-                        totXimp.Descr = "";
-                        totXimp.ImporteTotal = 0;
-                        ivaVentas.IvaVentasTotXImpuestos.Add(totXimp);
-                    }
-                    if (listaTotXIVA.Count != 0)
-                    {
-                        ivaVentas.IvaVentasTotXIVA = listaTotXIVA;
-                    }
-                    else
-                    {
-                        //Para arreglar bug en towebs.
-                        Entidades.IvaVentasTotXIVA totXiva = new Entidades.IvaVentasTotXIVA();
-                        totXiva.Concepto = "";
-                        totXiva.Alicuota = 0;
-                        totXiva.ImporteNG = 0;
-                        totXiva.ImporteTotal = 0;
-                        ivaVentas.IvaVentasTotXIVA.Add(totXiva);
+                        if (listaTotXIMP.Count != 0)
+                        {
+                            ivaVentas.IvaVentasTotXImpuestos = listaTotXIMP;
+                        }
+                        else
+                        {
+                            //Para arreglar bug en towebs.
+                            Entidades.IvaVentasTotXImpuestos totXimp = new Entidades.IvaVentasTotXImpuestos();
+                            totXimp.Descr = "";
+                            totXimp.ImporteTotal = 0;
+                            ivaVentas.IvaVentasTotXImpuestos.Add(totXimp);
+                        }
+                        if (listaTotXIVA.Count != 0)
+                        {
+                            ivaVentas.IvaVentasTotXIVA = listaTotXIVA;
+                        }
+                        else
+                        {
+                            //Para arreglar bug en towebs.
+                            Entidades.IvaVentasTotXIVA totXiva = new Entidades.IvaVentasTotXIVA();
+                            totXiva.Concepto = "";
+                            totXiva.Alicuota = 0;
+                            totXiva.ImporteNG = 0;
+                            totXiva.ImporteTotal = 0;
+                            ivaVentas.IvaVentasTotXIVA.Add(totXiva);
+                        }
                     }
                     Session["formatoRptExportar"] = FormatosRptExportarDropDownList.SelectedValue;
                     Session["mostrarFechaYHora"] = FechaYHoraCheckBox.Checked;

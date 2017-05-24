@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ComprasXArticuloFiltros.aspx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Reportes.ComprasXArticuloFiltros" Theme="CedServicios" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="StockXArticuloFiltros.aspx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Reportes.StockXArticuloFiltros" Theme="CedServicios" %>
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 
@@ -15,7 +15,7 @@
             <table align="center">
                 <tr>
                     <td colspan="3" style="padding-top:20px; padding-bottom:20px; text-align:center">
-                        <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Compras por artículo"></asp:Label>
+                        <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Stock por artículo"></asp:Label>
                 
                     </td>
                 </tr>
@@ -25,8 +25,8 @@
 	                </td>
 			        <td style="padding-top:5px; text-align:left">
                         desde&nbsp;
-                        <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
-                        <cc1:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server" CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
+                        <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304" Enabled="false"></asp:TextBox>
+                        <cc1:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server" CssClass="MyCalendar" OnClientShown="onCalendar1Shown" Enabled="false" 
                             TargetControlID="FechaDesdeTextBox" Format="yyyyMMdd" PopupButtonID="FechaDesdeImage" >
                         </cc1:CalendarExtender>
                         <asp:Image runat="server" ID="FechaDesdeImage" ImageUrl="~/Imagenes/Calendar.gif" />
@@ -50,7 +50,7 @@
                     <td>
                     </td>
                     <td style="padding-top:5px; vertical-align:middle">
-                        <asp:CheckBox ID="DetalleComprobanteCheckBox" runat="server" Text="&nbsp;Detalle de comprobantes" Checked="true" AutoPostBack="true" />
+                        <asp:CheckBox ID="DetalleComprobanteCheckBox" runat="server" Text="&nbsp;Detalle de movimientos" Checked="true" AutoPostBack="true" />
                     </td>
                 </tr>
                  <tr>

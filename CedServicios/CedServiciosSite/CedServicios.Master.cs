@@ -224,6 +224,9 @@ namespace CedServicios.Site
                 case "Comprobantes|Otras Consultas|Compras por Artículo":
                     Response.Redirect("~/Facturacion/Electronica/Reportes/ComprasXArticuloFiltros.aspx");
                     break;
+                case "Comprobantes|Otras Consultas|Stock por Artículo":
+                    Response.Redirect("~/Facturacion/Electronica/Reportes/StockXArticuloFiltros.aspx");
+                    break;
                 case "Comprobantes|Otras Consultas|Interfaz RG.3685":
                     Response.Redirect("~/ExploradorComprobanteRG.aspx");
                     break;

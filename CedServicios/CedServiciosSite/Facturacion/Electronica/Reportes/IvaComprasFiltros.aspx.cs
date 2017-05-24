@@ -209,31 +209,34 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                             }
                         }
                     }
-                    if (listaTotXIMP.Count != 0)
+                    if (ivaCompras.IvaComprasComprobantes.Count != 0)
                     {
-                        ivaCompras.IvaComprasTotXImpuestos = listaTotXIMP;
-                    }
-                    else
-                    {
-                        //Para arreglar bug en towebs.
-                        Entidades.IvaComprasTotXImpuestos totXimp = new Entidades.IvaComprasTotXImpuestos();
-                        totXimp.Descr = "";
-                        totXimp.ImporteTotal = 0;
-                        ivaCompras.IvaComprasTotXImpuestos.Add(totXimp);
-                    }
-                    if (listaTotXIVA.Count != 0)
-                    {
-                        ivaCompras.IvaComprasTotXIVA = listaTotXIVA;
-                    }
-                    else
-                    {
-                        //Para arreglar bug en towebs.
-                        Entidades.IvaComprasTotXIVA totXiva = new Entidades.IvaComprasTotXIVA();
-                        totXiva.Concepto = "";
-                        totXiva.Alicuota = 0;
-                        totXiva.ImporteNG = 0;
-                        totXiva.ImporteTotal = 0;
-                        ivaCompras.IvaComprasTotXIVA.Add(totXiva);
+                        if (listaTotXIMP.Count != 0)
+                        {
+                            ivaCompras.IvaComprasTotXImpuestos = listaTotXIMP;
+                        }
+                        else
+                        {
+                            //Para arreglar bug en towebs.
+                            Entidades.IvaComprasTotXImpuestos totXimp = new Entidades.IvaComprasTotXImpuestos();
+                            totXimp.Descr = "";
+                            totXimp.ImporteTotal = 0;
+                            ivaCompras.IvaComprasTotXImpuestos.Add(totXimp);
+                        }
+                        if (listaTotXIVA.Count != 0)
+                        {
+                            ivaCompras.IvaComprasTotXIVA = listaTotXIVA;
+                        }
+                        else
+                        {
+                            //Para arreglar bug en towebs.
+                            Entidades.IvaComprasTotXIVA totXiva = new Entidades.IvaComprasTotXIVA();
+                            totXiva.Concepto = "";
+                            totXiva.Alicuota = 0;
+                            totXiva.ImporteNG = 0;
+                            totXiva.ImporteTotal = 0;
+                            ivaCompras.IvaComprasTotXIVA.Add(totXiva);
+                        }
                     }
                     Session["formatoRptExportar"] = FormatosRptExportarDropDownList.SelectedValue;
                     Session["mostrarFechaYHora"] = FechaYHoraCheckBox.Checked;

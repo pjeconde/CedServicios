@@ -277,6 +277,7 @@ namespace CedServicios.RN
             }
             store.Open(OpenFlags.ReadOnly);
             X509Certificate2Collection col = store.Certificates.Find(X509FindType.FindBySerialNumber, certificado, true);
+            //X509Certificate cert = new X509Certificate(System.Web.HttpContext.Current.Server.MapPath(@"~\cedeira.pfx"), "ibg0220");
             if (col.Count.Equals(1))
             {
                 objIBK.ClientCertificates.Add(col[0]);
@@ -2131,6 +2132,11 @@ namespace CedServicios.RN
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
             db.LeerDestinatarioFrecuente(Persona, Contrato);
+        }
+        public static List<Entidades.StockXArticuloDetalle> ListaStock(string FechaHasta, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            return db.ListaStock(Sesion.Cuit.Nro.ToString(), FechaHasta);
         }
     }
 }

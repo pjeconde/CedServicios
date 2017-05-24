@@ -1549,6 +1549,8 @@
     <Compile Include="UnidadesMedidaExpo\UnidadMedidaExpo.cs" />
     <Compile Include="XSD\ComprasXArticulo.cs" />
     <Compile Include="XSD\ComprasXArticuloDetalle.cs" />
+    <Compile Include="XSD\StockXArticuloDetalle.cs" />
+    <Compile Include="XSD\StockXArticulo.cs" />
     <Compile Include="XSD\IvaCompras.cs" />
     <Compile Include="XSD\IvaComprasComprobantes.cs" />
     <Compile Include="XSD\IvaComprasTotXImpuestos.cs" />

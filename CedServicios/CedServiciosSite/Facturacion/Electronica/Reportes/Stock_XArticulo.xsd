@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="StockXArticulo" nillable="true" type="StockXArticulo" />
+  <xs:complexType name="StockXArticulo">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="Cuit" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="RazSoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PeriodoDsd" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="PeriodoHst" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="StockXArticuloDetalle" type="StockXArticuloDetalle" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="StockXArticuloDetalle">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="1" name="IdArticulo" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Descr" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="IdNaturalezaComprobante" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="IndicacionExentoGravado" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CompTipo" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CompNro" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CompPtoVta" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="CompFecEmi" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmpNroDoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmpCodDoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmpDescrDoc" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="EmpNombre" type="xs:string" />
+      <xs:element minOccurs="0" maxOccurs="1" name="Moneda" type="xs:string" />
+      <xs:element minOccurs="1" maxOccurs="1" name="TipoCambio" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="Cantidad" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="PrecioUnitario" type="xs:double" />
+      <xs:element minOccurs="1" maxOccurs="1" name="ImporteTotal" type="xs:double" />
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>

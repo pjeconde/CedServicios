@@ -336,7 +336,7 @@ namespace CedServicios.Site
                             string Campo5 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
                             string Campo6 = lote.comprobante[cl].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString("00");
                             string Campo7 = lote.comprobante[cl].cabecera.informacion_comprador.nro_doc_identificatorio.ToString(new string(Convert.ToChar("0"), 20));
-                            string Campo8 = Truncate(String.Format("{0,-30}", lote.comprobante[cl].cabecera.informacion_comprador.denominacion), 30);
+                            string Campo8 = Truncate(String.Format("{0,-30}", lote.comprobante[cl].cabecera.informacion_comprador.denominacion), 30).Replace("Ñ", "N").Replace("ñ", "n");
 
                             //Solo se utiliza para los datos de control
                             //Las Notas de Créditos van en positivo a la AFIP, ya que ellos ponen el signo que corresponde.
@@ -431,6 +431,17 @@ namespace CedServicios.Site
                                                     if (lote.comprobante[0].detalle.linea[k].indicacion_exento_gravado != null && lote.comprobante[0].detalle.linea[k].indicacion_exento_gravado.Trim().ToUpper() == "G" && lote.comprobante[0].detalle.linea[k].alicuota_iva == alicuota)
                                                     {
                                                         baseImponible += Math.Round(lote.comprobante[0].detalle.linea[k].importe_total_articulo, 2);
+                                                    }
+                                                }
+                                                //Verifico si tiene descuentos con IVA, para ajustar la base imponible que corresponda.
+                                                if (lote.comprobante[0].resumen.descuentos != null)
+                                                {
+                                                    for (int d = 0; d < lote.comprobante[0].resumen.descuentos.Length; d++)
+                                                    {
+                                                        if (lote.comprobante[0].resumen.descuentos[d].alicuota_iva_descuentoSpecified && lote.comprobante[0].resumen.descuentos[d].alicuota_iva_descuento == alicuota)
+                                                        {
+                                                            baseImponible += lote.comprobante[0].resumen.descuentos[d].importe_descuento * (-1);
+                                                        }
                                                     }
                                                 }
                                                 TotalNetoGravado += baseImponible * signo;
