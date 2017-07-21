@@ -123,6 +123,10 @@
     <Content Include="Controles\DatosEmailAvisoComprobantePersona.ascx" />
     <Content Include="Controles\ListaPrecioDefaultPersona.ascx" />
     <Content Include="ExploradorPDFComprobante.aspx" />
+    <Content Include="Facturacion\Electronica\ImpuestosCT.ascx" />
+    <Content Include="Facturacion\Electronica\DetalleCT.ascx" />
+    <Content Include="Facturacion\Electronica\ReferenciasCTAFIP.ascx" />
+    <Content Include="Facturacion\Electronica\LoteCT.aspx" />
     <Content Include="Facturacion\Electronica\EsquemaContableConsulta.ascx" />
     <Content Include="Facturacion\Electronica\ReferenciasAFIP.ascx" />
     <Content Include="Facturacion\Electronica\ReferenciasConsulta.ascx" />
@@ -566,6 +570,34 @@
     </Compile>
     <Compile Include="ExploradorPDFComprobante.aspx.designer.cs">
       <DependentUpon>ExploradorPDFComprobante.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ImpuestosCT.ascx.cs">
+      <DependentUpon>ImpuestosCT.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ImpuestosCT.ascx.designer.cs">
+      <DependentUpon>ImpuestosCT.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DetalleCT.ascx.cs">
+      <DependentUpon>DetalleCT.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DetalleCT.ascx.designer.cs">
+      <DependentUpon>DetalleCT.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ReferenciasCTAFIP.ascx.cs">
+      <DependentUpon>ReferenciasCTAFIP.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ReferenciasCTAFIP.ascx.designer.cs">
+      <DependentUpon>ReferenciasCTAFIP.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\LoteCT.aspx.cs">
+      <DependentUpon>LoteCT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\LoteCT.aspx.designer.cs">
+      <DependentUpon>LoteCT.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\EsquemaContableConsulta.ascx.cs">
       <DependentUpon>EsquemaContableConsulta.ascx</DependentUpon>

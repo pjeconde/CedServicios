@@ -172,7 +172,19 @@ namespace CedServicios.Site
                         comprobante.DatosEmailAvisoComprobanteContrato.DestinatariosFrecuentes = persona.DatosEmailAvisoComprobantePersona.DestinatariosFrecuentes;
                     }
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Modificacion, comprobante);
-                    script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
+                    int auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                    {
+                        return pv.Nro == auxPV;
+                    }).IdTipoPuntoVta;
+                    if (idtipo != "Turismo")
+                    {
+                        script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
+                    }
+                    else
+                    {
+                        script = "window.open('/Facturacion/Electronica/LoteCT.aspx', '');";
+                    }
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
             }
@@ -676,6 +688,7 @@ namespace CedServicios.Site
                             resp = clcdyndns.DetallarIBK(cecd, certificado);
                             resp = resp.Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"", "");
                             resp = resp.Replace(" xmlns:xsi=\"http://lote.schemas.cfe.ib.com.ar/\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", " xmlns=\"http://lote.schemas.cfe.ib.com.ar/\"");
+                            resp = resp.Replace(" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", " xmlns=\"http://lote.schemas.cfe.ib.com.ar/\"");
                             //Fin On-Line
 
                             try

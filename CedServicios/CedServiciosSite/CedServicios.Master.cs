@@ -27,6 +27,11 @@ namespace CedServicios.Site
                         UsuarioContentPlaceHolder.Visible = false;
                         CedeiraContentPlaceHolder.Visible = false;
                     }
+                    else if (Request.RawUrl == "/Facturacion/Electronica/LoteCT.aspx" && ((Entidades.ComprobanteATratar)Session["ComprobanteATratar"]).Tratamiento != Entidades.Enum.TratamientoComprobante.Alta)
+                    {
+                        UsuarioContentPlaceHolder.Visible = false;
+                        CedeiraContentPlaceHolder.Visible = false;
+                    }
                     else
                     {
                         Session.Remove("ComprobanteATratar");
@@ -176,6 +181,17 @@ namespace CedServicios.Site
                     else
                     {
                         Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
+                    }
+                    break;
+                case "Comprobantes|Alta manual|Venta|Electrónica Turismo":
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Venta");
+                    if (sesion.Usuario.FechaOKeFactTyC == "00000000")
+                    {
+                        Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
+                    }
+                    else
+                    {
+                        Response.Redirect("~/Facturacion/Electronica/LoteCT.aspx");
                     }
                     break;
                 case "Comprobantes|Alta manual|Venta|Tradicional":

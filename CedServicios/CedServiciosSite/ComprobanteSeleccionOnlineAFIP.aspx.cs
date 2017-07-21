@@ -69,12 +69,6 @@ namespace CedServicios.Site
             {
                 TabName.Value = Request.Form[TabName.UniqueID];
             }
-            //    tab1.Attributes.Remove("class");
-            //    Comprobantes.Attributes.Remove("class");
-            //    Comprobantes.Attributes.Add("class", "tab-pane fade text-left");
-            //    tab3.Attributes.Add("class", "active");
-            //    Parametros.Attributes.Remove("class");
-            //    Parametros.Attributes.Add("class", "tab-pane fade in active text-left");
         }
 
         protected void ConsultarLoteAFIPButton_Click(object sender, EventArgs e)
@@ -117,8 +111,6 @@ namespace CedServicios.Site
 
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPSerializer(lcFea, (Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/", "");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
@@ -137,10 +129,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -157,11 +152,8 @@ namespace CedServicios.Site
                 try
                 {
                     GrabarLogTexto("~/Consultar.txt", "Consulta de Ult. Nro. Lote CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
-
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPUltNroLote((Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
                 }
@@ -178,10 +170,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -201,8 +196,6 @@ namespace CedServicios.Site
 
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposDoc((Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/\"", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
@@ -220,10 +213,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -262,8 +258,6 @@ namespace CedServicios.Site
 
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPUltNroComprobante(lcFea, (Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
                 }
@@ -280,10 +274,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -303,8 +300,6 @@ namespace CedServicios.Site
 
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposComprobantes((Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/\"", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
@@ -323,10 +318,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -346,7 +344,6 @@ namespace CedServicios.Site
 
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposComprobantesEXPO((Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
 
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace("\n<", "<");
@@ -367,10 +364,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -386,11 +386,8 @@ namespace CedServicios.Site
                 try
                 {
                     GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de exportación posibles (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
-
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposDeEXPO((Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
@@ -409,10 +406,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -428,11 +428,8 @@ namespace CedServicios.Site
                 try
                 {
                     GrabarLogTexto("~/Consultar.txt", "Consulta de Unidades de Medida (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
-
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPUnidadesDeMedidaEXPO((Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
@@ -451,10 +448,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -470,11 +470,8 @@ namespace CedServicios.Site
                 try
                 {
                     GrabarLogTexto("~/Consultar.txt", "Consulta de Incoterms (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
-
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPIncotermsEXPO((Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
@@ -493,10 +490,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -512,11 +512,8 @@ namespace CedServicios.Site
                 try
                 {
                     GrabarLogTexto("~/Consultar.txt", "Consulta de Destinos cuit (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
-
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPDST_CuitEXPO((Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
@@ -535,10 +532,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -554,15 +554,11 @@ namespace CedServicios.Site
                 try
                 {
                     GrabarLogTexto("~/Consultar.txt", "Consulta de Destinos pais (EXPO) CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
-
                     string respuesta;
                     respuesta = RN.ComprobanteAFIP.ConsultarAFIPDST_PaisEXPO((Entidades.Sesion)Session["Sesion"]);
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
-                    //InfoRespuestaTextBox.Text = "";
                 }
                 catch (Exception ex)
                 {
@@ -577,10 +573,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -608,9 +607,7 @@ namespace CedServicios.Site
                     }
 
                     GrabarLogTexto("~/Consultar.txt", "Consulta de CAE. CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
-
                     string respuesta;
-
                     FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
                     lcFea.cabecera_lote = new FeaEntidades.InterFacturas.cabecera_lote();
                     lcFea.cabecera_lote.punto_de_venta = Convert.ToInt32(PtoVtaConsultaValidarCAEDropDownList.SelectedValue);
@@ -629,8 +626,6 @@ namespace CedServicios.Site
                     //lcFea.comprobante[0].resumen.importe_total_factura = Convert.ToDouble(ImporteTotalTextBox.Text);
 
                     respuesta = RN.ComprobanteAFIP.ValidarAFIPNroCae(lcFea, ((Entidades.Sesion)Session["Sesion"]));
-                    TicketCompletarInfo();
-
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
                 }
@@ -647,10 +642,13 @@ namespace CedServicios.Site
                         {
                         }
                         errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                     }
                     errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                     MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
                 }
             }
         }
@@ -692,6 +690,579 @@ namespace CedServicios.Site
             }
         }
 
+        protected void ConsultarFormasDePagoCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Formas de Pago: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPFormasDePago_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarTiposComprobantesCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de Comprobantes: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposDeComprobantes_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarTiposDocumentoCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de Documento: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposDeDocumento_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarTiposDeIVACTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de IVA: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposDeIVA_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarTiposDeTributosCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de Tributos: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposDeTributos_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarRelacionEmisorReceptorCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de Tributos: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPRelacionEmisorReceptor_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarPaisesCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Paises: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPPaises_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarMonedasCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos Monedas: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPMonedas_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarCondicionesIVACTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de Tributos: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPCondicionesIVA_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarTiposDeTarjetasCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de Tarjetas: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposDeTarjetas_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarNovedadesCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Novedades: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPNovedades_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarTiposDeCuentasCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de Cuentas: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposDeCuentas_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarAFIPTiposItemCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Tipos de Item: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposItem_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
+        protected void ConsultarAFIPCodigosItemTurismoCTButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Códigos de Item Turismo: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPCodigosItemTurismo_CT((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
 
         protected void ConsultarDatosFiscalesButton_Click(object sender, EventArgs e)
         {

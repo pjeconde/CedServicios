@@ -163,7 +163,7 @@ namespace CedServicios.DB
                 }
                 if (estados != String.Empty)
                 {
-                    a.Append("and Comprobante.Estado in (" + estados + ") ");
+                    a.Append("and (Comprobante.Estado in (" + estados + ") or (Comprobante.Estado = 'Vigente' and Comprobante.IdNaturalezaComprobante='Compra')) ");
                 }
                 if (FechaDesde != String.Empty)
                 {

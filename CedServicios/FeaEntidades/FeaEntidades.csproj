@@ -1460,6 +1460,7 @@
     <Compile Include="TiposDeComprobantes\Facturas\A.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\B.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\C.cs" />
+    <Compile Include="TiposDeComprobantes\Facturas\T.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\Factura.cs" />
     <Compile Include="TiposDeComprobantes\Liquidacion\A.cs" />
     <Compile Include="TiposDeComprobantes\Liquidacion\B.cs" />
@@ -1467,10 +1468,12 @@
     <Compile Include="TiposDeComprobantes\NotasCredito\A.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\B.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\C.cs" />
+    <Compile Include="TiposDeComprobantes\NotasCredito\T.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\NotaCredito.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\A.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\B.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\C.cs" />
+    <Compile Include="TiposDeComprobantes\NotasDebito\T.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\NotaDebito.cs" />
     <Compile Include="TiposDeComprobantes\NotasDeVentaAlContado\A.cs" />
     <Compile Include="TiposDeComprobantes\NotasDeVentaAlContado\B.cs" />

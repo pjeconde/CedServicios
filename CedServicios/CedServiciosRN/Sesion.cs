@@ -123,6 +123,7 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Contratos|Modificación");
                         opcionesHabilitadas.Add("Contratos|Consulta");
                         opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Electrónica");
+                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Electrónica Turismo");
                         opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Tradicional");
                         opcionesHabilitadas.Add("Comprobantes|Alta manual|Compra");
                         opcionesHabilitadas.Add("Comprobantes|Baja/Anul.baja");

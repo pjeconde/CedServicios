@@ -20,11 +20,14 @@
     <Setting Name="CedServiciosRN_ar_gov_afip_wsw_Service" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://wswhomo.afip.gov.ar/wsfe/service.asmx</Value>
     </Setting>
-    <Setting Name="CedServiciosRN_ar_gov_afip_wsfexv1_Service" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">https://servicios1.afip.gov.ar/wsfexv1/service.asmx</Value>
-    </Setting>
     <Setting Name="CedServiciosRN_ar_gov_afip_awshomo_ContribuyenteNivel3SelectServiceImplService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://awshomo.afip.gov.ar/padron-puc-ws/services/select.ContribuyenteNivel3SelectServiceImpl</Value>
+    </Setting>
+    <Setting Name="CedServiciosRN_ar_gov_afip_wsfexv1_Service" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://wswhomo.afip.gov.ar/wsfexv1/service.asmx</Value>
+    </Setting>
+    <Setting Name="CedServiciosRN_ar_gov_afip_WSCT_CTService" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://fwshomo.afip.gov.ar:443/wsct/CTService</Value>
     </Setting>
   </Settings>
 </SettingsFile>

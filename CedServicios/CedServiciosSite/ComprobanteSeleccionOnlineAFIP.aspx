@@ -307,6 +307,92 @@
                                                     Width="100%" />
                                             </td>
                                         </tr>
+                                         <tr>
+                                            <td colspan="2" style="padding-top: 20px">
+                                                Factura T - Turistas
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarFormasDePagoCTButton" runat="server" OnClick="ConsultarFormasDePagoCTButton_Click"
+                                                    Text="Consultar los Medios de Pago" ToolTip="Consultar los medios de pago de factura T. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarTiposComprobantesCTButton" runat="server" OnClick="ConsultarTiposComprobantesCTButton_Click"
+                                                    Text="Consultar los Tipos de Comprobantes" ToolTip="Consultar los tipos de comprobantes habilitados. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarTiposDocumentoCTButton" runat="server" OnClick="ConsultarTiposDocumentoCTButton_Click"
+                                                    Text="Consultar los Tipos de Documento" ToolTip="Consultar los tipos de documentos habilitados. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarTiposDeIVACTButton" runat="server" OnClick="ConsultarTiposDeIVACTButton_Click"
+                                                    Text="Consultar los Tipos de IVA" ToolTip="Consultar los tipos de IVA. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarTiposTributoCTButton" runat="server" OnClick="ConsultarTiposDeTributosCTButton_Click"
+                                                    Text="Consultar los Tipos de Tributos" ToolTip="Consultar los tipos de tributos. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarRelacionEmisorReceptorCTButton" runat="server" OnClick="ConsultarRelacionEmisorReceptorCTButton_Click"
+                                                    Text="Consultar Relacion Emisor / Receptor" ToolTip="Consultar eelacion Emisor / Receptor. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarPaisesCTButton" runat="server" OnClick="ConsultarPaisesCTButton_Click"
+                                                    Text="Consultar los Paises" ToolTip="Consultar paises habilitados. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarMonedasCTButton" runat="server" OnClick="ConsultarMonedasCTButton_Click"
+                                                    Text="Consultar las Monedas" ToolTip="Consultar monedas habilitadas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarCondicionesIVACTAButton" runat="server" OnClick="ConsultarCondicionesIVACTButton_Click"
+                                                    Text="Consultar Condiciones de IVA" ToolTip="Consultar Condiciones de IVA. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarTiposDeTarjetasCTButton" runat="server" OnClick="ConsultarTiposDeTarjetasCTButton_Click"
+                                                    Text="Consultar Tipos de Tarjetas" ToolTip="Consultar los tipos de tarjetas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarNovedadesCTButton" runat="server" OnClick="ConsultarNovedadesCTButton_Click"
+                                                    Text="Consultar Novedades" ToolTip="Consultar novedades. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarTiposDeCuentasCTButton" runat="server" OnClick="ConsultarTiposDeCuentasCTButton_Click"
+                                                    Text="Consultar Tipos de Cuentas" ToolTip="Consultar tipos de cuentas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                            
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarAFIPTiposItemCTButton" runat="server" OnClick="ConsultarAFIPTiposItemCTButton_Click"
+                                                    Text="Consultar Tipos de Item" ToolTip="Consultar los tipos de item. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarAFIPCodigosItemTurismoCTButton" runat="server" OnClick="ConsultarAFIPCodigosItemTurismoCTButton_Click"
+                                                    Text="Consultar Códigos de Item Turismo" ToolTip="Consultar los codigos de item turismo. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
                                     </table>
                                 </td>
                             </tr>

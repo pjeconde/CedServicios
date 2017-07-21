@@ -1,0 +1,1116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://ar.gob.afip.wsct/CTService/" name="CTService" targetNamespace="http://ar.gob.afip.wsct/CTService/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://ar.gob.afip.wsct/CTService/">
+      <xsd:element name="dummyResponse" type="tns:DummyResponseType" />
+      <xsd:complexType name="DummyResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="dummyReturn" type="tns:DummyReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="DummyReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="appserver" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="authserver" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="dbserver" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AuthRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="token" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="sign" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="cuitRepresentada" type="tns:CuitSimpleType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="CuitSimpleType">
+        <xsd:restriction base="xsd:long">
+          <xsd:minExclusive value="9999999999" />
+          <xsd:maxInclusive value="99999999999" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="ArrayCodigosDescripcionesType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="codigoDescripcion" type="tns:CodigoDescripcionType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayCodigosDescripcionesStringType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="codigoDescripcionString" type="tns:CodigoDescripcionStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CodigoDescripcionType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:short" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="descripcion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="CodigoDescripcionStringType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="descripcion" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="autorizarComprobanteRequest" type="tns:AutorizarComprobanteRequestType" />
+      <xsd:element name="autorizarComprobanteResponse" type="tns:AutorizarComprobanteResponseType" />
+      <xsd:complexType name="AutorizarComprobanteRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="comprobanteRequest" type="tns:ComprobanteType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ComprobanteType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigoTipoComprobante" type="xsd:short" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroPuntoVenta" type="tns:NumeroPuntoVentaSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroComprobante" type="tns:NumeroComprobanteSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaEmision" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="codigoTipoAutorizacion" type="tns:CodigoTipoAutorizacionSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="codigoAutorizacion" type="xsd:long" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaVencimiento" type="xsd:date" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigoTipoDocumento" type="xsd:short" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroDocumento" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="idImpositivo" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="codigoPais" type="xsd:short" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="domicilioReceptor" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigoRelacionEmisorReceptor" type="xsd:short" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="importeGravado" type="tns:ImporteNoNegativoSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="importeNoGravado" type="tns:ImporteNoNegativoSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="importeExento" type="tns:ImporteNoNegativoSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="importeOtrosTributos" type="tns:ImporteNoNegativoSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="importeReintegro" type="tns:ImporteSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="importeTotal" type="tns:ImporteNoNegativoSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigoMoneda" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="cotizacionMoneda" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="observaciones" type="xsd:string" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="arrayItems" type="tns:ArrayItemsType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayComprobantesAsociados" type="tns:ArrayComprobantesAsociadosType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayOtrosTributos" type="tns:ArrayOtrosTributosType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arraySubtotalesIVA" type="tns:ArraySubtotalesIVAType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayDatosAdicionales" type="tns:ArrayTiposDatosAdicionalesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayFormasPago" type="tns:ArrayFormasPagoType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="NumeroPuntoVentaSimpleType">
+        <xsd:restriction base="xsd:short">
+          <xsd:minInclusive value="1" />
+          <xsd:maxInclusive value="9999" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="NumeroComprobanteSimpleType">
+        <xsd:restriction base="xsd:long">
+          <xsd:minInclusive value="1" />
+          <xsd:maxInclusive value="99999999" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="CodigoTipoAutorizacionSimpleType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="A" />
+          <xsd:enumeration value="E" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ImporteSimpleType">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:minInclusive value="-9999999999999.99" />
+          <xsd:maxInclusive value="9999999999999.99" />
+          <xsd:totalDigits value="15" />
+          <xsd:fractionDigits value="2" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:complexType name="ArrayComprobantesAsociadosType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="comprobanteAsociado" type="tns:ComprobanteAsociadoType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ComprobanteAsociadoType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigoTipoComprobante" type="xsd:short" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroPuntoVenta" type="tns:NumeroPuntoVentaSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroComprobante" type="tns:NumeroComprobanteSimpleType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayOtrosTributosType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="otroTributo" type="tns:OtroTributoType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="OtroTributoType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:short" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="descripcion" type="tns:Texto50SimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="baseImponible" type="tns:ImporteSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="importe" type="tns:ImporteSimpleType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArraySubtotalesIVAType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="subtotalIVA" type="tns:SubtotalIVAType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="SubtotalIVAType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:short" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="importe" type="tns:ImporteSimpleType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AutorizarComprobanteResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="autorizarComprobanteReturn" type="tns:AutorizarComprobanteReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="AutorizarComprobanteReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="comprobanteResponse" type="tns:ComprobanteResponseType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayObservaciones" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="resultado" type="tns:ResultadoSimpleType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ComprobanteResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="cuit" type="tns:CuitSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigoTipoComprobante" type="xsd:short" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroPuntoVenta" type="tns:NumeroPuntoVentaSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroComprobante" type="tns:NumeroComprobanteSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="fechaEmision" type="xsd:date" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="CAE" type="xsd:long" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="fechaVencimientoCAE" type="xsd:date" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarComprobanteReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="comprobante" type="tns:ComprobanteType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayObservaciones" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarComprobanteResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarComprobanteReturn" type="tns:ConsultarComprobanteReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarComprobanteTipoPVentaNroRequest" type="tns:ConsultarComprobanteTipoPVentaNroRequestType" />
+      <xsd:element name="consultarComprobanteTipoPVentaNroResponse" type="tns:ConsultarComprobanteResponseType" />
+      <xsd:complexType name="ConsultarComprobanteTipoPVentaNroRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigoTipoComprobante" type="xsd:short" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroPuntoVenta" type="tns:NumeroPuntoVentaSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroComprobante" type="tns:NumeroComprobanteSimpleType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarUltimoComprobanteAutorizadoRequest" type="tns:ConsultarUltimoComprobanteAutorizadoRequestType" />
+      <xsd:element name="consultarUltimoComprobanteAutorizadoResponse" type="tns:ConsultarUltimoComprobanteAutorizadoResponseType" />
+      <xsd:complexType name="ConsultarUltimoComprobanteAutorizadoRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigoTipoComprobante" type="xsd:short" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroPuntoVenta" type="tns:NumeroPuntoVentaSimpleType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarUltimoComprobanteAutorizadoResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarUltimoComprobanteAutorizadoReturn" type="tns:ConsultarUltimoComprobanteAutorizadoReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarUltimoComprobanteAutorizadoReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="numeroComprobante" type="tns:NumeroComprobanteSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaEmision" type="xsd:date" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarPuntosVentaRequest" type="tns:ConsultarPuntosVentaRequestType" />
+      <xsd:element name="consultarPuntosVentaResponse" type="tns:ConsultarPuntosVentaResponseType" />
+      <xsd:complexType name="ConsultarPuntosVentaRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarPuntosVentaResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarPuntosVentaReturn" type="tns:ConsultarPuntosVentaReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarPuntosVentaReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayPuntosVenta" type="tns:ArrayPuntosVentaType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="PuntosVentaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="numeroPuntoVenta" type="tns:NumeroPuntoVentaSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="bloqueado" type="tns:SiNoSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="fechaBaja" type="xsd:date" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="SiNoSimpleType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="S" />
+          <xsd:enumeration value="N" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="consultarTiposComprobantesRequest" type="tns:ConsultarTiposComprobantesRequestType" />
+      <xsd:element name="consultarTiposComprobantesResponse" type="tns:ConsultarTiposComprobantesResponseType" />
+      <xsd:element name="consultarMonedasRequest" type="tns:ConsultarMonedasRequestType" />
+      <xsd:element name="consultarMonedasResponse" type="tns:ConsultarMonedasResponseType" />
+      <xsd:complexType name="ConsultarTiposComprobantesRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposComprobantesResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarTiposComprobantesReturn" type="tns:ConsultarTiposComprobantesReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposComprobantesReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayTiposComprobantes" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarMonedasResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarMonedasReturn" type="tns:ConsultarMonedasReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarMonedasRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarMonedasReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayTiposMoneda" type="tns:ArrayCodigosDescripcionesStringType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarCotizacionResponse" type="tns:ConsultarCotizacionResponseType" />
+      <xsd:complexType name="ConsultarCotizacionRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigoMoneda" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarCotizacionRequest" type="tns:ConsultarCotizacionRequestType" />
+      <xsd:complexType name="ConsultarCotizacionResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarCotizacionReturn" type="tns:ConsultarCotizacionReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarCotizacionReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="cotizacionMoneda" type="xsd:decimal" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarTiposDocumentoRequest" type="tns:ConsultarTiposDocumentoRequestType" />
+      <xsd:element name="consultarTiposDocumentoResponse" type="tns:ConsultarTiposDocumentoResponseType" />
+      <xsd:complexType name="ConsultarTiposDocumentoRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposDocumentoResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarTiposDocumentoReturn" type="tns:ConsultarTiposDocumentoReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposDocumentoReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayTiposDocumento" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarPaisesRequest" type="tns:ConsultarPaisesRequestType" />
+      <xsd:element name="consultarPaisesResponse" type="tns:ConsultarPaisesResponseType" />
+      <xsd:complexType name="ConsultarPaisesRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarPaisesResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarPaisesReturn" type="tns:ConsultarPaisesReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarPaisesReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayPaises" type="tns:ArrayCodigosDescripcionesStringType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarCUITsPaisesRequest" type="tns:ConsultarCUITsPaisesRequestType" />
+      <xsd:element name="consultarCUITsPaisesResponse" type="tns:ConsultarCUITsPaisesResponseType" />
+      <xsd:complexType name="ConsultarCUITsPaisesRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarCUITsPaisesResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarCUITsPaisesReturn" type="tns:ConsultarCuitPaisesReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarCuitPaisesReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayCuitPaises" type="tns:ArrayCodigosDescripcionesStringType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarTiposIVARequest" type="tns:ConsultarTiposIVARequestType" />
+      <xsd:element name="consultarTiposIVAResponse" type="tns:ConsultarTiposIVAResponseType" />
+      <xsd:complexType name="ConsultarTiposIVARequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposIVAResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarTiposIVAReturn" type="tns:ConsultarTiposIVAReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposIVAReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayTiposIVA" type="tns:ArrayCodigosDescripcionesStringType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarTiposDatosAdicionalesRequest" type="tns:ConsultarTiposDatosAdicionalesRequest" />
+      <xsd:element name="consultarTiposDatosAdicionalesResponse" type="tns:ConsultarTiposDatosAdicionalesResponse" />
+      <xsd:complexType name="ConsultarTiposDatosAdicionalesRequest">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposDatosAdicionalesResponse">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarTiposDatosAdicionalesReturn" type="tns:ConsultarTiposDatosAdicionalesReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposDatosAdicionalesReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayTiposDatosAdicionales" type="tns:ArrayCodigosDescripcionesStringType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="TipoDatoAdicionalType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="t" type="xsd:short" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="c1" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="c2" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="c3" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="c4" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="c5" type="xsd:string" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="c6" type="xsd:string" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarTiposTributoRequest" type="tns:ConsultarTiposTributosRequestType" />
+      <xsd:element name="consultarTiposTributoResponse" type="tns:ConsultarTiposTributoResponseType" />
+      <xsd:complexType name="ConsultarTiposTributosRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposTributoResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarTiposTributoReturn" type="tns:ConsultarTiposTributoReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposTributoReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayTiposTributo" type="tns:ArrayCodigosDescripcionesStringType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarCondicionesIVARequest" type="tns:ConsultarCondicionesIVARequestType" />
+      <xsd:element name="consultarCondicionesIVAResponse" type="tns:ConsultarCondicionesIVAResponseType" />
+      <xsd:complexType name="ConsultarCondicionesIVARequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarCondicionesIVAResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarCondicionesIVAReturn" type="tns:ConsultarCondicionesIVAReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarCondicionesIVAReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayCondicionesIVA" type="tns:ArrayCodigosDescripcionesStringType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarNovedadesRequest" type="tns:ConsultarNovedadesRequestType" />
+      <xsd:element name="consultarNovedadesResponse" type="tns:ConsultarNovedadesResponseType" />
+      <xsd:complexType name="ConsultarNovedadesRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarNovedadesResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="ConsultarNovedadesReturn" type="tns:ConsultarNovedadesReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarNovedadesReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayNovedades" type="tns:ArrayCodigosDescripcionesStringType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayTiposDatosAdicionalesType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="tipoDatoAdicional" type="tns:TipoDatoAdicionalType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayFormasPagoType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="formaPago" type="tns:FormaPagoType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="FormaPagoType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigo" type="xsd:short" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="tipoTarjeta" type="tns:TipoTarjetaSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="numeroTarjeta" type="tns:NumeroTarjetaSeisPrimerosSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="swiftCode" type="tns:SwiftCodeSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="tipoCuenta" type="tns:TipoCuentaSimpleType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="numeroCuenta" type="tns:NumeroCuentaSimpleType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarFormasPagoRequest" type="tns:ConsultarFormasPagoRequestType" />
+      <xsd:element name="consultarFormasPagoResponse" type="tns:ConsultarFormasPagoResponseType" />
+      <xsd:complexType name="ConsultarFormasPagoRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarFormasPagoResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarFormasPagoReturn" type="tns:ConsultarFormasPagoReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarFormasPagoReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayFormasPago" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="Texto50SimpleType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="3" />
+          <xsd:maxLength value="50" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Texto4000SimpleType">
+        <xsd:restriction base="xsd:string">
+          <xsd:minLength value="1" />
+          <xsd:maxLength value="4000" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="SwiftCodeSimpleType">
+        <xsd:restriction base="xsd:string">
+          <xsd:length value="11" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="TipoCuentaSimpleType">
+        <xsd:restriction base="xsd:short">
+          <xsd:minInclusive value="0" />
+          <xsd:maxInclusive value="99" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="NumeroCuentaSimpleType">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:minExclusive value="9999999999999999999" />
+          <xsd:maxInclusive value="99999999999999999999" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="NumeroTarjetaSeisPrimerosSimpleType">
+        <xsd:restriction base="xsd:long">
+          <xsd:minExclusive value="99999" />
+          <xsd:maxInclusive value="999999" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="consultarTiposItemRequest" type="tns:ConsultarTiposItemRequestType" />
+      <xsd:element name="consultarTiposItemResponse" type="tns:ConsultarTiposItemResponseType" />
+      <xsd:element name="consultarCodigosItemTurismoRequest" type="tns:ConsultarCodigosItemTurismoRequestType" />
+      <xsd:element name="consultarCodigosItemTurismoResponse" type="tns:ConsultarCodigosItemTurismoResponseType" />
+      <xsd:complexType name="ConsultarTiposItemRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposItemReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayTiposItem" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarCodigosItemTurismoRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarCodigosItemTurismoReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayCodigosItem" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayItemsType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="item" type="tns:ItemType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ItemType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="tipo" type="xsd:short" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="codigoTurismo" type="xsd:short" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="codigo" type="tns:Texto50SimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="descripcion" type="tns:Texto4000SimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="codigoAlicuotaIVA" type="xsd:short" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="importeIVA" type="tns:ImporteSimpleType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="importeItem" type="tns:ImporteSimpleType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarRelacionEmisorReceptorRequest" type="tns:ConsultarRelacionEmisorReceptorRequestType" />
+      <xsd:element name="consultarRelacionEmisorReceptorResponse" type="tns:ConsultarRelacionEmisorReceptorResponseType" />
+      <xsd:complexType name="ConsultarRelacionEmisorReceptorRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarRelacionEmisorReceptorReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayRelacionesEmisorReceptor" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarRelacionEmisorReceptorResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarRelacionEmisorReceptorReturn" type="tns:ConsultarRelacionEmisorReceptorReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposItemResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarTiposItemReturn" type="tns:ConsultarTiposItemReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarCodigosItemTurismoResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarCodigosItemTurismoReturn" type="tns:ConsultarCodigosItemTurismoReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ArrayPuntosVentaType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="unbounded" name="puntoVenta" type="tns:PuntosVentaType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="consultarTiposCuentaRequest" type="tns:ConsultarTiposCuentaRequestType" />
+      <xsd:element name="consultarTiposCuentaResponse" type="tns:ConsultarTiposCuentaResponseType" />
+      <xsd:complexType name="ConsultarTiposCuentaRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposCuentaResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarTiposCuentaReturn" type="tns:ConsultarTiposCuentaReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposCuentaReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayTiposCuenta" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="ResultadoSimpleType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="A" />
+          <xsd:enumeration value="O" />
+          <xsd:enumeration value="R" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="consultarTiposTarjetaRequest" type="tns:ConsultarTiposTarjetaRequestType" />
+      <xsd:element name="consultarTiposTarjetaResponse" type="tns:ConsultarTiposTarjetaResponseType" />
+      <xsd:complexType name="ConsultarTiposTarjetaRequestType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="authRequest" type="tns:AuthRequestType" />
+          <xsd:element minOccurs="1" maxOccurs="1" name="formaPago" type="xsd:short" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposTarjetaResponseType">
+        <xsd:sequence>
+          <xsd:element minOccurs="1" maxOccurs="1" name="consultarTiposTarjetaReturn" type="tns:ConsultarTiposTarjetaReturnType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:complexType name="ConsultarTiposTarjetaReturnType">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayTiposTarjeta" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErrores" type="tns:ArrayCodigosDescripcionesType" />
+          <xsd:element minOccurs="0" maxOccurs="1" name="arrayErroresFormato" type="tns:ArrayCodigosDescripcionesStringType" />
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="TipoTarjetaSimpleType">
+        <xsd:restriction base="xsd:short">
+          <xsd:minInclusive value="0" />
+          <xsd:maxInclusive value="99" />
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="ImporteNoNegativoSimpleType">
+        <xsd:restriction base="xsd:decimal">
+          <xsd:minInclusive value="0" />
+          <xsd:maxInclusive value="9999999999999.99" />
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="dummyRequest" />
+  <wsdl:message name="dummyResponse">
+    <wsdl:part name="parameters" element="tns:dummyResponse" />
+  </wsdl:message>
+  <wsdl:message name="autorizarComprobanteRequest">
+    <wsdl:part name="parameters" element="tns:autorizarComprobanteRequest" />
+  </wsdl:message>
+  <wsdl:message name="autorizarComprobanteResponse">
+    <wsdl:part name="parameters" element="tns:autorizarComprobanteResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarComprobanteTipoPVentaNroRequest">
+    <wsdl:part name="parameters" element="tns:consultarComprobanteTipoPVentaNroRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarComprobanteTipoPVentaNroResponse">
+    <wsdl:part name="parameters" element="tns:consultarComprobanteTipoPVentaNroResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarUltimoComprobanteAutorizadoRequest">
+    <wsdl:part name="parameters" element="tns:consultarUltimoComprobanteAutorizadoRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarUltimoComprobanteAutorizadoResponse">
+    <wsdl:part name="parameters" element="tns:consultarUltimoComprobanteAutorizadoResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarPuntosVentaRequest">
+    <wsdl:part name="parameters" element="tns:consultarPuntosVentaRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarPuntosVentaResponse">
+    <wsdl:part name="parameters" element="tns:consultarPuntosVentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposComprobantesRequest">
+    <wsdl:part name="parameters" element="tns:consultarTiposComprobantesRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposComprobantesResponse">
+    <wsdl:part name="parameters" element="tns:consultarTiposComprobantesResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarMonedasRequest">
+    <wsdl:part name="parameters" element="tns:consultarMonedasRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarMonedasResponse">
+    <wsdl:part name="parameters" element="tns:consultarMonedasResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarCotizacionRequest">
+    <wsdl:part name="parameters" element="tns:consultarCotizacionRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarCotizacionResponse">
+    <wsdl:part name="parameters" element="tns:consultarCotizacionResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposDocumentoRequest">
+    <wsdl:part name="parameters" element="tns:consultarTiposDocumentoRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposDocumentoResponse">
+    <wsdl:part name="parameters" element="tns:consultarTiposDocumentoResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarPaisesRequest">
+    <wsdl:part name="parameters" element="tns:consultarPaisesRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarPaisesResponse">
+    <wsdl:part name="parameters" element="tns:consultarPaisesResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarCUITsPaisesRequest">
+    <wsdl:part name="parameters" element="tns:consultarCUITsPaisesRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarCUITsPaisesResponse">
+    <wsdl:part name="parameters" element="tns:consultarCUITsPaisesResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposIVARequest">
+    <wsdl:part name="parameters" element="tns:consultarTiposIVARequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposIVAResponse">
+    <wsdl:part name="parameters" element="tns:consultarTiposIVAResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposDatosAdicionalesRequest">
+    <wsdl:part name="parameters" element="tns:consultarTiposDatosAdicionalesRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposDatosAdicionalesResponse">
+    <wsdl:part name="parameters" element="tns:consultarTiposDatosAdicionalesResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposTributoRequest">
+    <wsdl:part name="parameters" element="tns:consultarTiposTributoRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposTributoResponse">
+    <wsdl:part name="parameters" element="tns:consultarTiposTributoResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarCondicionesIVARequest">
+    <wsdl:part name="parameters" element="tns:consultarCondicionesIVARequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarCondicionesIVAResponse">
+    <wsdl:part name="parameters" element="tns:consultarCondicionesIVAResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarNovedadesRequest">
+    <wsdl:part name="parameters" element="tns:consultarNovedadesRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarNovedadesResponse">
+    <wsdl:part name="parameters" element="tns:consultarNovedadesResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarFormasPagoRequest">
+    <wsdl:part name="parameters" element="tns:consultarFormasPagoRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarFormasPagoResponse">
+    <wsdl:part name="parameters" element="tns:consultarFormasPagoResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposItemRequest">
+    <wsdl:part name="parameters" element="tns:consultarTiposItemRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposItemResponse">
+    <wsdl:part name="parameters" element="tns:consultarTiposItemResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarCodigosItemTurismoRequest">
+    <wsdl:part name="parameters" element="tns:consultarCodigosItemTurismoRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarCodigosItemTurismoResponse">
+    <wsdl:part name="parameters" element="tns:consultarCodigosItemTurismoResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarRelacionEmisorReceptorRequest">
+    <wsdl:part name="parameters" element="tns:consultarRelacionEmisorReceptorRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarRelacionEmisorReceptorResponse">
+    <wsdl:part name="parameters" element="tns:consultarRelacionEmisorReceptorResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposCuentaRequest">
+    <wsdl:part name="parameters" element="tns:consultarTiposCuentaRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposCuentaResponse">
+    <wsdl:part name="parameters" element="tns:consultarTiposCuentaResponse" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposTarjetaRequest">
+    <wsdl:part name="parameters" element="tns:consultarTiposTarjetaRequest" />
+  </wsdl:message>
+  <wsdl:message name="consultarTiposTarjetaResponse">
+    <wsdl:part name="parameters" element="tns:consultarTiposTarjetaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="CTServicePortType">
+    <wsdl:operation name="dummy">
+      <wsdl:input message="tns:dummyRequest" />
+      <wsdl:output message="tns:dummyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="autorizarComprobante">
+      <wsdl:input message="tns:autorizarComprobanteRequest" />
+      <wsdl:output message="tns:autorizarComprobanteResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarUltimoComprobanteAutorizado">
+      <wsdl:input message="tns:consultarUltimoComprobanteAutorizadoRequest" />
+      <wsdl:output message="tns:consultarUltimoComprobanteAutorizadoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarComprobanteTipoPVentaNro">
+      <wsdl:input message="tns:consultarComprobanteTipoPVentaNroRequest" />
+      <wsdl:output message="tns:consultarComprobanteTipoPVentaNroResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarPuntosVenta">
+      <wsdl:input message="tns:consultarPuntosVentaRequest" />
+      <wsdl:output message="tns:consultarPuntosVentaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposComprobantes">
+      <wsdl:input message="tns:consultarTiposComprobantesRequest" />
+      <wsdl:output message="tns:consultarTiposComprobantesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarMonedas">
+      <wsdl:input message="tns:consultarMonedasRequest" />
+      <wsdl:output message="tns:consultarMonedasResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarCotizacion">
+      <wsdl:input message="tns:consultarCotizacionRequest" />
+      <wsdl:output message="tns:consultarCotizacionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposDocumento">
+      <wsdl:input message="tns:consultarTiposDocumentoRequest" />
+      <wsdl:output message="tns:consultarTiposDocumentoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarPaises">
+      <wsdl:input message="tns:consultarPaisesRequest" />
+      <wsdl:output message="tns:consultarPaisesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarCUITsPaises">
+      <wsdl:input message="tns:consultarCUITsPaisesRequest" />
+      <wsdl:output message="tns:consultarCUITsPaisesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposIVA">
+      <wsdl:input message="tns:consultarTiposIVARequest" />
+      <wsdl:output message="tns:consultarTiposIVAResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposDatosAdicionales">
+      <wsdl:input message="tns:consultarTiposDatosAdicionalesRequest" />
+      <wsdl:output message="tns:consultarTiposDatosAdicionalesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposTributo">
+      <wsdl:input message="tns:consultarTiposTributoRequest" />
+      <wsdl:output message="tns:consultarTiposTributoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarCondicionesIVA">
+      <wsdl:input message="tns:consultarCondicionesIVARequest" />
+      <wsdl:output message="tns:consultarCondicionesIVAResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarNovedades">
+      <wsdl:input message="tns:consultarNovedadesRequest" />
+      <wsdl:output message="tns:consultarNovedadesResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarFormasPago">
+      <wsdl:input message="tns:consultarFormasPagoRequest" />
+      <wsdl:output message="tns:consultarFormasPagoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposItem">
+      <wsdl:input message="tns:consultarTiposItemRequest" />
+      <wsdl:output message="tns:consultarTiposItemResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarCodigosItemTurismo">
+      <wsdl:input message="tns:consultarCodigosItemTurismoRequest" />
+      <wsdl:output message="tns:consultarCodigosItemTurismoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarRelacionEmisorReceptor">
+      <wsdl:input message="tns:consultarRelacionEmisorReceptorRequest" />
+      <wsdl:output message="tns:consultarRelacionEmisorReceptorResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposCuenta">
+      <wsdl:input message="tns:consultarTiposCuentaRequest" />
+      <wsdl:output message="tns:consultarTiposCuentaResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposTarjeta">
+      <wsdl:input message="tns:consultarTiposTarjetaRequest" />
+      <wsdl:output message="tns:consultarTiposTarjetaResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CTServiceSOAP" type="tns:CTServicePortType">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="dummy">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/dummy" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="autorizarComprobante">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/autorizarComprobante" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarComprobanteTipoPVentaNro">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarComprobanteTipoPVentaNro" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarUltimoComprobanteAutorizado">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarUltimoComprobanteAutorizado" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarPuntosVenta">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarPuntosVenta" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposComprobantes">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarTiposComprobantes" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarMonedas">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarMonedas" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarCotizacion">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarCotizacion" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposDocumento">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarTiposDocumento" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarPaises">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarPaises" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarCUITsPaises">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarCUITsPaises" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposIVA">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarTiposIVA" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposDatosAdicionales">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarTiposDatosAdicionales" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposTributo">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarTiposTributo" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarCondicionesIVA">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarCondicionesIVA" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarNovedades">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarNovedades" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarFormasPago">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarFormasPago" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposItem">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarTiposItem" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarCodigosItemTurismo">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarCodigosItemTurismo" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarRelacionEmisorReceptor">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarRelacionEmisorReceptor" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposCuenta">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarTiposCuenta" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="consultarTiposTarjeta">
+      <soap:operation soapAction="http://ar.gob.afip.wsct/CTService/consultarTiposTarjeta" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CTService">
+    <wsdl:port name="CTServiceSOAP" binding="tns:CTServiceSOAP">
+      <soap:address location="https://fwshomo.afip.gov.ar:443/wsct/CTService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -565,9 +565,9 @@ namespace CedServicios.Site
                         }
                         try
                         {
-                            comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
-                            bytes = new byte[comprobante.Response.Length * sizeof(char)];
-                            System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                            comprobante.Request = comprobante.Request.Replace("iso-8859-1", "utf-16");
+                            bytes = new byte[comprobante.Request.Length * sizeof(char)];
+                            System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
                             ms = new System.IO.MemoryStream(bytes);
                             ms.Seek(0, System.IO.SeekOrigin.Begin);
                             lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
@@ -635,7 +635,15 @@ namespace CedServicios.Site
                                 CantAlicuotas = lote.comprobante[cl].resumen.cant_alicuotas_iva;
                             }
                             string Campo19 = String.Format("{0,1}", CantAlicuotas);
-                            string Campo20 = String.Format("{0,1}", lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion);
+                            string Campo20 = "";
+                            if (lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion == null || lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion.Trim() == "")
+                            {
+                                Campo20 = String.Format("{0,1}", "0");
+                            }
+                            else
+                            {
+                                Campo20 = String.Format("{0,1}", lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion);
+                            }
                             string Campo21 = new string(Convert.ToChar("0"), 15);           //Crédito Fiscal Computable
                             string Campo22 = new string(Convert.ToChar("0"), 15);           //Otros Tributos
                             string Campo23 = new string(Convert.ToChar("0"), 11);           //CUIT emisor / corredor

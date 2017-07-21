@@ -265,6 +265,132 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Button Button4;
         
         /// <summary>
+        /// ConsultarFormasDePagoCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarFormasDePagoCTButton;
+        
+        /// <summary>
+        /// ConsultarTiposComprobantesCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarTiposComprobantesCTButton;
+        
+        /// <summary>
+        /// ConsultarTiposDocumentoCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarTiposDocumentoCTButton;
+        
+        /// <summary>
+        /// ConsultarTiposDeIVACTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarTiposDeIVACTButton;
+        
+        /// <summary>
+        /// ConsultarTiposTributoCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarTiposTributoCTButton;
+        
+        /// <summary>
+        /// ConsultarRelacionEmisorReceptorCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarRelacionEmisorReceptorCTButton;
+        
+        /// <summary>
+        /// ConsultarPaisesCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarPaisesCTButton;
+        
+        /// <summary>
+        /// ConsultarMonedasCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarMonedasCTButton;
+        
+        /// <summary>
+        /// ConsultarCondicionesIVACTAButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarCondicionesIVACTAButton;
+        
+        /// <summary>
+        /// ConsultarTiposDeTarjetasCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarTiposDeTarjetasCTButton;
+        
+        /// <summary>
+        /// ConsultarNovedadesCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarNovedadesCTButton;
+        
+        /// <summary>
+        /// ConsultarTiposDeCuentasCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarTiposDeCuentasCTButton;
+        
+        /// <summary>
+        /// ConsultarAFIPTiposItemCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarAFIPTiposItemCTButton;
+        
+        /// <summary>
+        /// ConsultarAFIPCodigosItemTurismoCTButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button ConsultarAFIPCodigosItemTurismoCTButton;
+        
+        /// <summary>
         /// CuitAConsultarTextBox control.
         /// </summary>
         /// <remarks>

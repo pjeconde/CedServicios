@@ -58,11 +58,20 @@ namespace CedServicios.RN
                 comprobante.RazonSocial = Lote.comprobante[0].cabecera.informacion_vendedor.razon_social;
             }
             comprobante.WF.Estado = IdEstado;
+            comprobante.NroPuntoVta = Lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
             comprobante.TipoComprobante.Id = Lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
             FeaEntidades.TiposDeComprobantes.TipoComprobante tipoComprobante;
             if (IdNaturalezaComprobante != "Compra")
             {
-                tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
+                Entidades.PuntoVta ptoVta = Sesion.UN.PuntosVtaVigentes.Find(delegate(Entidades.PuntoVta d) { return comprobante.NroPuntoVta == d.Nro; });
+                if (ptoVta != null && ptoVta.IdTipoPuntoVta == "Turismo")
+                {
+                    tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaTurismoAFIP().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
+                }
+                else
+                {
+                    tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
+                }
             }
             else
             {
@@ -76,7 +85,7 @@ namespace CedServicios.RN
             {
                 comprobante.TipoComprobante.Descr = "Desconocido";
             }
-            comprobante.NroPuntoVta = Lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+            
             comprobante.Nro = Lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
             comprobante.NroLote = Lote.cabecera_lote.id_lote;
             comprobante.Detalle = Detalle;
@@ -148,7 +157,14 @@ namespace CedServicios.RN
                     else
                     {
                         minuta.Articulo.Id = string.Empty;
-                        minuta.Detalle = RN.Funciones.HexToString(Lote.comprobante[0].detalle.linea[i].descripcion);
+                        if (Lote.comprobante[0].detalle.linea[i].descripcion.Substring(0, 1) == "%")
+                        {
+                            minuta.Detalle = RN.Funciones.HexToString(Lote.comprobante[0].detalle.linea[i].descripcion);
+                        }
+                        else
+                        {
+                            minuta.Detalle = Lote.comprobante[0].detalle.linea[i].descripcion.Trim();
+                        }
                     }
                     minuta.Rubro.Id = esquemaContable.Rubro.Id;
                     if (Lote.comprobante[0].detalle.linea[i].cantidadSpecified)

@@ -228,5 +228,14 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new OtrosCompras.OtrosNoCumplenRG3419());
             return lista;
         }
+
+        public static List<TipoComprobante> ListaTurismoAFIP()
+        {
+            List<TipoComprobante> lista = new List<TipoComprobante>();
+            lista.Add(new Facturas.T());
+            lista.Add(new NotasDebito.T());
+            lista.Add(new NotasCredito.T());
+            return lista;
+        }
 	}
 }

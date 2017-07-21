@@ -36,7 +36,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td></td>
+                                <td>Venta</td>
                                 <td>
                                     <asp:CheckBox ID="EstadoDeBajaCheckBox" runat="server" Text="De baja" AutoPostBack="false"/>
                                 </td>
@@ -51,6 +51,13 @@
                                 </td>
                                 <td style="padding-left: 10px;">
                                     <asp:CheckBox ID="EstadoPteAutorizCheckBox" runat="server" Text="Pendiente de autorización" AutoPostBack="false"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td colspan="2">
+                                    <asp:Label ID="Label1" runat="server" Text="<font style='color:maroon'>Para la Naturaleza del Comprobante <b>'Compra'</b> solo obtiene los comprobantes en estado <b>'Vigente'</b>.</font>"></asp:Label>
                                 </td>
                             </tr>
                         </table>
@@ -263,6 +270,22 @@
                                                 </p>
                                                 <p>
                                                 </p>
+                                                <p>
+                                                </p>
+                                                <p>
+                                                </p>
+                                                <p>
+                                                </p>
+                                                <p>
+                                                </p>
+                                                <p>
+                                                </p>
+                                                <p>
+                                                </p>
+                                                <p>
+                                                </p>
+                                                <p>
+                                                </p>
                                             </p>
                                             </hr>
                                             </hr>
@@ -270,6 +293,38 @@
                                             </hr>
                                             </hr>
                                             </hr>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
+                                            <p>
+                                            </p>
                                             <p>
                                             </p>
                                             <p>

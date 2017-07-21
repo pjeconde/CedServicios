@@ -1028,6 +1028,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             Domicilio_Sector_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.domicilio_sector);
             Domicilio_Torre_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.domicilio_torre);
             Domicilio_Manzana_VendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.domicilio_manzana);
+            DesambiguacionCuitPaisVendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais);
             #endregion
             DetalleLinea.CompletarDetalles(lote);
 			DescuentosGlobales.Completar(lote);
@@ -5163,6 +5164,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         else
                         {
+                            precio_unitario = det.linea[i].importes_moneda_origen.precio_unitario;
+                            importe_iva = det.linea[i].importes_moneda_origen.importe_iva;
+                            importe_total_articulo = det.linea[i].importes_moneda_origen.importe_total_articulo;
+
                             //Moneda Extranjera
                             det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
                             if (!listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
