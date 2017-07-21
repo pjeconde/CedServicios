@@ -1499,6 +1499,14 @@
     <Compile Include="TiposExportacion\Servicios.cs" />
     <Compile Include="TiposExportacion\SinInformar.cs" />
     <Compile Include="TiposExportacion\TipoExportacion.cs" />
+    <Compile Include="Turismo\cabecera.cs" />
+    <Compile Include="Turismo\comprobante.cs" />
+    <Compile Include="Turismo\detalle.cs" />
+    <Compile Include="Turismo\forma_pago.cs" />
+    <Compile Include="Turismo\informacion_comprador.cs" />
+    <Compile Include="Turismo\informacion_comprobante.cs" />
+    <Compile Include="Turismo\linea.cs" />
+    <Compile Include="Turismo\resumen.cs" />
     <Compile Include="UnidadesMedidaExpo\Kwh1000.cs" />
     <Compile Include="UnidadesMedidaExpo\Bonificacion.cs" />
     <Compile Include="UnidadesMedidaExpo\Centimetros.cs" />
