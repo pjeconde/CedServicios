@@ -15,7 +15,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 {
     public partial class DetalleCT : System.Web.UI.UserControl
     {
-        System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas;
+        System.Collections.Generic.List<FeaEntidades.Turismo.linea> lineas;
         private System.Globalization.CultureInfo cedeiraCultura;
         string puntoDeVenta;
         string idListaPrecio;
@@ -47,19 +47,19 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
         public void ResetearGrillas()
         {
-            lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
-            FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+            lineas = new System.Collections.Generic.List<FeaEntidades.Turismo.linea>();
+            FeaEntidades.Turismo.linea linea = new FeaEntidades.Turismo.linea();
             lineas.Add(linea);
             detalleGridView.DataSource = lineas;
             ViewState["lineas"] = lineas;
             detalleGridView.DataBind();
             BindearDropDownLists();
         }
-        public System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> Lineas
+        public System.Collections.Generic.List<FeaEntidades.Turismo.linea> Lineas
         {
             get
             {
-                System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> refs = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
+                System.Collections.Generic.List<FeaEntidades.Turismo.linea> refs = ((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"]);
                 return refs;
             }
         }
@@ -88,10 +88,10 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
         public void CompletarDetallesWS(org.dyndns.cedweb.consulta.ConsultarResult lc)
         {
-            lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
+            lineas = new System.Collections.Generic.List<FeaEntidades.Turismo.linea>();
             foreach (org.dyndns.cedweb.consulta.ConsultarResultComprobanteDetalleLinea l in lc.comprobante[0].detalle.linea)
             {
-                FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+                FeaEntidades.Turismo.linea linea = new FeaEntidades.Turismo.linea();
                 //Compatibilidad con archivos xml viejos. Verificar si la descripcion está en Hexa.
                 if (l.descripcion.Substring(0, 1) == "%")
                 {
@@ -146,12 +146,12 @@ namespace CedServicios.Site.Facturacion.Electronica
             BindearDropDownLists();
             ViewState["lineas"] = lineas;
         }
-        public void CompletarDetalles(FeaEntidades.InterFacturas.lote_comprobantes lc)
+        public void CompletarDetalles(FeaEntidades.Turismo.comprobante lc)
         {
-            lineas = new System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>();
-            foreach (FeaEntidades.InterFacturas.linea l in lc.comprobante[0].detalle.linea)
+            lineas = new System.Collections.Generic.List<FeaEntidades.Turismo.linea>();
+            foreach (FeaEntidades.Turismo.linea l in lc.detalle.linea)
             {
-                FeaEntidades.InterFacturas.linea linea = new FeaEntidades.InterFacturas.linea();
+                FeaEntidades.Turismo.linea linea = new FeaEntidades.Turismo.linea();
                 if (l.GTINSpecified)
                 {
                     linea.GTIN = l.GTIN;
@@ -224,19 +224,19 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                     cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
 
-                    FeaEntidades.InterFacturas.linea l = new FeaEntidades.InterFacturas.linea();
+                    FeaEntidades.Turismo.linea l = new FeaEntidades.Turismo.linea();
 
                     ValidarYAsignarPropiedades(l);
 
-                    ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Add(l);
+                    ((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"]).Add(l);
 
 
                     //Me fijo si elimino la fila automática
-                    System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
-                    FeaEntidades.InterFacturas.linea lineaInicial = lineas[0];
+                    System.Collections.Generic.List<FeaEntidades.Turismo.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"]);
+                    FeaEntidades.Turismo.linea lineaInicial = lineas[0];
                     if (lineaInicial.descripcion == null)
                     {
-                        ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]).Remove(lineaInicial);
+                        ((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"]).Remove(lineaInicial);
                     }
 
                     //Saco de edición la fila que estén modificando
@@ -257,7 +257,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void ValidarYAsignarPropiedades(FeaEntidades.InterFacturas.linea l)
+        private void ValidarYAsignarPropiedades(FeaEntidades.Turismo.linea l)
         {
             ValidarGTIN(l, (TextBox)detalleGridView.FooterRow.FindControl("txtGTIN"));
             ValidarDescripcion(l, (TextBox)detalleGridView.FooterRow.FindControl("txtdescripcion"));
@@ -266,13 +266,14 @@ namespace CedServicios.Site.Facturacion.Electronica
             ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado"));
             ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo"));
             ValidarUnidad(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad"));
+            ValidarCodigoTurismo(l, (DropDownList)detalleGridView.FooterRow.FindControl("ddlcodigoTurismo"));
             ValidarCantidad(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcantidad"));
             ValidarCodigoProductoComprador(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcpcomprador"));
             ValidarCodigoProductoVendedor(l, (TextBox)detalleGridView.FooterRow.FindControl("txtcpvendedor"));
             ValidarPrecioUnitario(l, (TextBox)detalleGridView.FooterRow.FindControl("txtprecio_unitario"));
         }
 
-        private void ValidarGTIN(FeaEntidades.InterFacturas.linea l, TextBox txtGTIN)
+        private void ValidarGTIN(FeaEntidades.Turismo.linea l, TextBox txtGTIN)
         {
             string auxGTIN = txtGTIN.Text;
             if (!auxGTIN.Equals(string.Empty) && !auxGTIN.Equals("0"))
@@ -288,13 +289,13 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void ValidarCodigoProductoVendedor(FeaEntidades.InterFacturas.linea l, TextBox txtcpvendedor)
+        private void ValidarCodigoProductoVendedor(FeaEntidades.Turismo.linea l, TextBox txtcpvendedor)
         {
             string auxcpvendedor = txtcpvendedor.Text;
             l.codigo_producto_vendedor = auxcpvendedor;
         }
 
-        private void ValidarImporteIVA(FeaEntidades.InterFacturas.linea l, TextBox txtimporte_alicuota_articulo)
+        private void ValidarImporteIVA(FeaEntidades.Turismo.linea l, TextBox txtimporte_alicuota_articulo)
         {
             string auxNull = txtimporte_alicuota_articulo.Text;
             if (!auxNull.Equals(string.Empty) && !auxNull.Equals("0"))
@@ -317,7 +318,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void ValidarImporte(FeaEntidades.InterFacturas.linea l, TextBox txtimporte_total_articulo)
+        private void ValidarImporte(FeaEntidades.Turismo.linea l, TextBox txtimporte_total_articulo)
         {
             string auxTotal = txtimporte_total_articulo.Text;
             if (auxTotal.Equals(string.Empty))
@@ -341,7 +342,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void ValidarDescripcion(FeaEntidades.InterFacturas.linea l, TextBox txtdescripcion)
+        private void ValidarDescripcion(FeaEntidades.Turismo.linea l, TextBox txtdescripcion)
         {
             string auxDescr = txtdescripcion.Text;
             if (!auxDescr.Equals(string.Empty))
@@ -354,7 +355,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void ValidarAlicuotaIVA(FeaEntidades.InterFacturas.linea l, DropDownList ddl)
+        private void ValidarAlicuotaIVA(FeaEntidades.Turismo.linea l, DropDownList ddl)
         {
             double auxAliIVA = Convert.ToDouble(ddl.SelectedValue);
             string auxDescAliIVA = ddl.SelectedItem.Text;
@@ -369,8 +370,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                 l.alicuota_iva = new FeaEntidades.IVA.SinInformar().Codigo;
             }
         }
-
-        private void ValidarUnidad(FeaEntidades.InterFacturas.linea l, DropDownList ddlunidad)
+        
+        private void ValidarUnidad(FeaEntidades.Turismo.linea l, DropDownList ddlunidad)
         {
             string auxUnidad = ddlunidad.SelectedItem.Value;
             if (Funciones.SessionTimeOut(Session))
@@ -383,7 +384,20 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void ValidarCantidad(FeaEntidades.InterFacturas.linea l, TextBox txtCantidad)
+        private void ValidarCodigoTurismo(FeaEntidades.Turismo.linea l, DropDownList ddlcodigoTurismo)
+        {
+            string auxCodigoTurismo = ddlcodigoTurismo.SelectedItem.Value;
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                l.codigo_Turismo = Convert.ToInt16(auxCodigoTurismo);
+            }
+        }
+
+        private void ValidarCantidad(FeaEntidades.Turismo.linea l, TextBox txtCantidad)
         {
             string auxCantidad = txtCantidad.Text;
             if (!auxCantidad.Contains(","))
@@ -412,7 +426,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void ValidarIndicacionExentoGravado(FeaEntidades.InterFacturas.linea l, DropDownList ddlindicacion_exento_gravado)
+        private void ValidarIndicacionExentoGravado(FeaEntidades.Turismo.linea l, DropDownList ddlindicacion_exento_gravado)
         {
             string auxindicacion_exento_gravado = ddlindicacion_exento_gravado.SelectedItem.Value;
             if (Funciones.SessionTimeOut(Session))
@@ -425,7 +439,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private void ValidarPrecioUnitario(FeaEntidades.InterFacturas.linea l, TextBox txtprecio_unitario)
+        private void ValidarPrecioUnitario(FeaEntidades.Turismo.linea l, TextBox txtprecio_unitario)
         {
             string auxprecio_unitario = txtprecio_unitario.Text;
             if (!auxprecio_unitario.Equals(string.Empty) && !auxprecio_unitario.Equals("0"))
@@ -466,9 +480,9 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                 cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"]);
 
-                System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
+                System.Collections.Generic.List<FeaEntidades.Turismo.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"]);
 
-                FeaEntidades.InterFacturas.linea l = lineas[e.RowIndex];
+                FeaEntidades.Turismo.linea l = lineas[e.RowIndex];
 
                 ValidarDescripcion(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtdescripcion"));
                 ValidarImporte(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtimporte_total_articulo"));
@@ -476,6 +490,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ValidarIndicacionExentoGravado(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlindicacion_exento_gravado"));
                 ValidarAlicuotaIVA(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlalicuota_articulo"));
                 ValidarUnidad(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlunidad"));
+                ValidarCodigoTurismo(l, (DropDownList)detalleGridView.Rows[e.RowIndex].FindControl("ddlcodigoTurismo"));
                 ValidarCantidad(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcantidad"));
                 ValidarCodigoProductoComprador(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpcomprador"));
                 ValidarCodigoProductoVendedor(l, (TextBox)detalleGridView.Rows[e.RowIndex].FindControl("txtcpvendedor"));
@@ -511,11 +526,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.ListaTuristas();
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).DataBind();
             try
             {
-                ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].alicuota_iva.ToString());
+                ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlalicuota_articulo")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"])[e.NewEditIndex].alicuota_iva.ToString());
                 li.Selected = true;
             }
             catch
@@ -524,11 +539,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).DataValueField = "Codigo";
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).DataTextField = "Descr";
-            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.ListaTurismo();
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).DataBind();
             try
             {
-                ListItem liUnidad = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].unidad.ToString());
+                ListItem liUnidad = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlunidad")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"])[e.NewEditIndex].unidad.ToString());
                 liUnidad.Selected = true;
             }
             catch
@@ -541,8 +556,21 @@ namespace CedServicios.Site.Facturacion.Electronica
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravado")).DataBind();
             try
             {
-                ListItem liIndExento = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravado")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"])[e.NewEditIndex].indicacion_exento_gravado.ToString());
+                ListItem liIndExento = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlindicacion_exento_gravado")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"])[e.NewEditIndex].indicacion_exento_gravado.ToString());
                 liIndExento.Selected = true;
+            }
+            catch
+            {
+            }
+
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigoTurismo")).DataValueField = "Codigo";
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigoTurismo")).DataTextField = "Descr";
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigoTurismo")).DataSource = FeaEntidades.CodigosTurismo.CodigoTurismo.Lista();
+            ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigoTurismo")).DataBind();
+            try
+            {
+                ListItem liUnidad = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigoTurismo")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"])[e.NewEditIndex].unidad.ToString());
+                liUnidad.Selected = true;
             }
             catch
             {
@@ -581,12 +609,12 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
-                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.ListaTuristas();
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlalicuota_articulo")).DataBind();
 
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataValueField = "Codigo";
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataTextField = "Descr";
-                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.ListaTurismo();
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).DataBind();
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlunidad")).AppendDataBoundItems = false;
 
@@ -594,6 +622,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataTextField = "Descr";
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
                 ((DropDownList)detalleGridView.FooterRow.FindControl("ddlindicacion_exento_gravado")).DataBind();
+
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlcodigoTurismo")).DataValueField = "Codigo";
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlcodigoTurismo")).DataTextField = "Descr";
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlcodigoTurismo")).DataSource = FeaEntidades.CodigosTurismo.CodigoTurismo.Lista();
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlcodigoTurismo")).DataBind();
+                ((DropDownList)detalleGridView.FooterRow.FindControl("ddlcodigoTurismo")).AppendDataBoundItems = false;
             }
             if (!detalleGridView.EditIndex.Equals(-1))
             {
@@ -614,31 +648,36 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articulo")).DataValueField = "Codigo";
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articulo")).DataTextField = "Descr";
-                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.Lista();
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articulo")).DataSource = FeaEntidades.IVA.IVA.ListaTuristas();
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlalicuota_articulo")).DataBind();
 
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidad")).DataValueField = "Codigo";
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidad")).DataTextField = "Descr";
-                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.Lista();
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidad")).DataSource = FeaEntidades.CodigosUnidad.CodigoUnidad.ListaTurismo();
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlunidad")).DataBind();
 
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravado")).DataValueField = "Codigo";
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravado")).DataTextField = "Descr";
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravado")).DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.ListaDetalle();
                 ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlindicacion_exento_gravado")).DataBind();
+
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlcodigoTurismo")).DataValueField = "Codigo";
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlcodigoTurismo")).DataTextField = "Descr";
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlcodigoTurismo")).DataSource = FeaEntidades.CodigosTurismo.CodigoTurismo.Lista();
+                ((DropDownList)detalleGridView.Rows[detalleGridView.EditIndex].FindControl("ddlcodigoTurismo")).DataBind();
             }
         }
         protected void detalleGridView_RowDeleting(object sender, GridViewDeleteEventArgs e)
         {
             try
             {
-                System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"]);
-                FeaEntidades.InterFacturas.linea l = lineas[e.RowIndex];
+                System.Collections.Generic.List<FeaEntidades.Turismo.linea> lineas = ((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"]);
+                FeaEntidades.Turismo.linea l = lineas[e.RowIndex];
                 lineas.Remove(l);
 
                 if (lineas.Count.Equals(0))
                 {
-                    FeaEntidades.InterFacturas.linea nueva = new FeaEntidades.InterFacturas.linea();
+                    FeaEntidades.Turismo.linea nueva = new FeaEntidades.Turismo.linea();
                     lineas.Add(nueva);
                 }
 
@@ -662,7 +701,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 e.ExceptionHandled = true;
             }
         }
-        private void ValidarCodigoProductoComprador(FeaEntidades.InterFacturas.linea l, TextBox txtcpcomprador)
+        private void ValidarCodigoProductoComprador(FeaEntidades.Turismo.linea l, TextBox txtcpcomprador)
         {
             string auxcpcomprador = txtcpcomprador.Text;
             l.codigo_producto_comprador = auxcpcomprador;
@@ -681,9 +720,9 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        public void CalcularTotalesLineas(ref double totalGravado, ref double totalNoGravado, ref double totalIVA, ref double total_Operaciones_Exentas)
+        public void CalcularTotalesLineas(ref double totalGravado, ref double totalNoGravado, ref double totalIVA, ref double total_Operaciones_Exentas, ref double total_Reintegros)
         {
-            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+            System.Collections.Generic.List<FeaEntidades.Turismo.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"];
             for (int i = 0; i < listadelineas.Count; i++)
             {
                 double imptotdiscr = 0;
@@ -697,6 +736,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                     if (listadelineas[i].indicacion_exento_gravado != null && listadelineas[i].indicacion_exento_gravado.Trim().ToUpper() == "G")
                     {
                         totalGravado += imptotdiscr;
+                        if (listadelineas[i].codigo_Turismo == 1 || listadelineas[i].codigo_Turismo == 2)
+                        {
+                            total_Reintegros += listadelineas[i].importe_iva;
+                        }
                     }
                     else if (listadelineas[i].indicacion_exento_gravado != null && listadelineas[i].indicacion_exento_gravado.Equals("E"))
                     {
@@ -718,7 +761,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 
         public double CalcularTotalImporte()
         {
-            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+            System.Collections.Generic.List<FeaEntidades.Turismo.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"];
             double total = 0;
             for (int i = 0; i < listadelineas.Count; i++)
             {
@@ -731,13 +774,13 @@ namespace CedServicios.Site.Facturacion.Electronica
             return total;
         }
 
-        public FeaEntidades.InterFacturas.detalle GenerarDetalles(string MonedaComprobante, string TipoDeCambio, string TipoPtoVta, string TipoCbte, bool EsParaImprimirPDF)
+        public FeaEntidades.Turismo.detalle GenerarDetalles(string MonedaComprobante, string TipoDeCambio, string TipoPtoVta, string TipoCbte, bool EsParaImprimirPDF)
         {
-            FeaEntidades.InterFacturas.detalle det = new FeaEntidades.InterFacturas.detalle();
-            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+            FeaEntidades.Turismo.detalle det = new FeaEntidades.Turismo.detalle();
+            System.Collections.Generic.List<FeaEntidades.Turismo.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"];
             for (int i = 0; i < listadelineas.Count; i++)
             {
-                det.linea[i] = new FeaEntidades.InterFacturas.linea();
+                det.linea[i] = new FeaEntidades.Turismo.linea();
                 det.linea[i].numeroLinea = i + 1;
                 if (listadelineas[i].descripcion == null)
                 {
@@ -752,6 +795,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     det.linea[i].unidad = listadelineas[i].unidad;
                 }
+                det.linea[i].codigo_Turismo = listadelineas[i].codigo_Turismo;
                 det.linea[i].cantidad = listadelineas[i].cantidad;
                 det.linea[i].cantidadSpecified = listadelineas[i].cantidadSpecified;
                 det.linea[i].GTIN = listadelineas[i].GTIN;
@@ -774,7 +818,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             return det;
         }
 
-        private static void GenerarDetalleMonedaExtranjera(string TipoDeCambio, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i, string TipoPtoVta)
+        private static void GenerarDetalleMonedaExtranjera(string TipoDeCambio, string TipoCbte, FeaEntidades.Turismo.detalle det, System.Collections.Generic.List<FeaEntidades.Turismo.linea> listadelineas, int i, string TipoPtoVta)
         {
             det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
             det.linea[i].importe_iva = Math.Round(listadelineas[i].importe_iva * Convert.ToDouble(TipoDeCambio), 2);
@@ -794,7 +838,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             det.linea[i].importes_moneda_origen = limo;
         }
 
-        private static void GenerarDetalleMonedaLocal(string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i, string TipoPtoVta)
+        private static void GenerarDetalleMonedaLocal(string TipoCbte, FeaEntidades.Turismo.detalle det, System.Collections.Generic.List<FeaEntidades.Turismo.linea> listadelineas, int i, string TipoPtoVta)
         {
             det.linea[i].precio_unitarioSpecified = listadelineas[i].precio_unitarioSpecified;
             det.linea[i].precio_unitario = listadelineas[i].precio_unitario;
@@ -803,7 +847,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             det.linea[i].importe_iva = listadelineas[i].importe_iva;
         }
 
-        private static void GenerarDetallesIndExGravado(string TipoPtoVta, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
+        private static void GenerarDetallesIndExGravado(string TipoPtoVta, string TipoCbte, FeaEntidades.Turismo.detalle det, System.Collections.Generic.List<FeaEntidades.Turismo.linea> listadelineas, int i)
         {
             if (listadelineas[i].indicacion_exento_gravado != null)
             {
@@ -814,7 +858,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
         }
 
-        private static void GenerarDetallesAlicuotaIVA(string TipoPtoVta, string TipoCbte, FeaEntidades.InterFacturas.detalle det, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas, int i)
+        private static void GenerarDetallesAlicuotaIVA(string TipoPtoVta, string TipoCbte, FeaEntidades.Turismo.detalle det, System.Collections.Generic.List<FeaEntidades.Turismo.linea> listadelineas, int i)
         {
             if (listadelineas[i].alicuota_iva.Equals(new FeaEntidades.IVA.SinInformar().Codigo))
             {
@@ -830,7 +874,7 @@ namespace CedServicios.Site.Facturacion.Electronica
         }
         public void ActualizarTipoDeCambio(string MonedaComprobante)
         {
-            System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.InterFacturas.linea>)ViewState["lineas"];
+            System.Collections.Generic.List<FeaEntidades.Turismo.linea> listadelineas = (System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"];
             if (listadelineas != null)
             {
                 if (!MonedaComprobante.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))
@@ -1239,6 +1283,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ((TextBox)(row.FindControl("txtdescripcion"))).Text = listaArt[0].Descr;
                 ((DropDownList)(row.FindControl("ddlindicacion_exento_gravado"))).SelectedValue = listaArt[0].IndicacionExentoGravado;
                 ((DropDownList)(row.FindControl("ddlunidad"))).SelectedValue = listaArt[0].Unidad.Id;
+                //((DropDownList)(row.FindControl("ddlcodigoTurismo"))).SelectedValue = "" //no existe aun
                 if (idListaPrecio != string.Empty)
                 {
                     double precio = RN.Precio.Valor(listaArt[0].Id, idListaPrecio, sesion);

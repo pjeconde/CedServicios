@@ -5,6 +5,7 @@ using System.Text;
 
 namespace FeaEntidades.Turismo
 {
+    [System.SerializableAttribute()]
     public partial class linea : FeaEntidades.InterFacturas.linea
     {
         private short codigo_TurismoField;
@@ -22,6 +23,32 @@ namespace FeaEntidades.Turismo
             set
             {
                 this.codigo_TurismoField = value;
+            }
+        }
+
+        /// <comentarios/>
+        [System.Xml.Serialization.XmlIgnoreAttribute()]
+        public string codigoTurismoDescripcion
+        {
+            get
+            {
+                if (codigo_Turismo != null && !codigo_Turismo.Equals(string.Empty))
+                {
+                    List<CodigosTurismo.CodigoTurismo> lct = CodigosTurismo.CodigoTurismo.Lista();
+                    foreach (CodigosTurismo.CodigoTurismo ct in lct)
+                    {
+                        short auxCodigoTurismo = Convert.ToInt16(codigo_Turismo);
+                        if (ct.Codigo.Equals(auxCodigoTurismo))
+                        {
+                            return ct.Descr;
+                        }
+                    }
+                    return string.Empty;
+                }
+                else
+                {
+                    return string.Empty;
+                }
             }
         }
     }

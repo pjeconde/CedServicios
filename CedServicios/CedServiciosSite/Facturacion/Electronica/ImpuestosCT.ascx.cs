@@ -76,12 +76,12 @@ namespace CedServicios.Site.Facturacion.Electronica
 
 		}
 
-		public void Completar(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		public void Completar(FeaEntidades.Turismo.comprobante Comprobante)
 		{
 			impuestos = new System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>();
-			if (lc.comprobante[0].resumen.impuestos != null)
+			if (Comprobante.resumen.impuestos != null)
 			{
-				foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lc.comprobante[0].resumen.impuestos)
+				foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in Comprobante.resumen.impuestos)
 				{
 					if (imp.importe_impuesto_moneda_origenSpecified)
 					{
@@ -414,7 +414,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 				}
 			}
 		}
-		public void GenerarImpuestos(FeaEntidades.InterFacturas.comprobante comp, string monedaComprobante, string tipoDeCambio)
+		public void GenerarImpuestos(FeaEntidades.Turismo.comprobante comp, string monedaComprobante, string tipoDeCambio)
 		{
 			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = ((System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos>)ViewState["impuestos"]);
 			comp.resumen.impuestos = new FeaEntidades.InterFacturas.resumenImpuestos[listadeimpuestos.Count];
@@ -465,7 +465,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             return Convert.ToString(alic);
 		}
 
-		internal void AgregarImpuestosIVA(string IdNaturalezaComprobante, System.Collections.Generic.List<FeaEntidades.InterFacturas.linea> listadelineas)
+		internal void AgregarImpuestosIVA(string IdNaturalezaComprobante, System.Collections.Generic.List<FeaEntidades.Turismo.linea> listadelineas)
 		{
             System.Collections.Generic.List<FeaEntidades.IVA.IVA> listaIVA = FeaEntidades.IVA.IVA.ListaMinima();
 			double[] impivas = new double[listaIVA.Count];

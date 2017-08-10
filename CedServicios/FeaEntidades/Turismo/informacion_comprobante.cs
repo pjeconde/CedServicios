@@ -5,6 +5,7 @@ using System.Text;
 
 namespace FeaEntidades.Turismo
 {
+    [System.SerializableAttribute()]
     public partial class informacion_comprobante : FeaEntidades.InterFacturas.informacion_comprobante
     {
         private string tipo_AutorizacionField;

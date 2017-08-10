@@ -82,6 +82,12 @@ namespace FeaEntidades.CodigosUnidad
             return lista;
         }
 
+        public static List<CodigoUnidad> ListaTurismo()
+        {
+            List<CodigoUnidad> lista = new List<CodigoUnidad>();
+            lista.Add(new Unidad());
+            return lista;
+        }
 
 		#region Miembros de IComparable
 

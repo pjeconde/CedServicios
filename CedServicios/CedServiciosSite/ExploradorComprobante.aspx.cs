@@ -140,13 +140,27 @@ namespace CedServicios.Site
             org.dyndns.cedweb.detalle.DetalleIBK clcdyndns = new org.dyndns.cedweb.detalle.DetalleIBK();
             org.dyndns.cedweb.detalle.cecd cecd = new org.dyndns.cedweb.detalle.cecd();
             List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado> listaR = new List<FeaEntidades.InterFacturas.Listado.emisor_comprobante_listado>();
+            int auxPV;
+            string idtipo;
 
             switch (e.CommandName)
             {
                 case "Consulta":
                     RN.Comprobante.LeerMinutas(comprobante, sesion);
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
-                    script = "window.open('/ComprobanteConsulta.aspx', '');";
+                    auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                    idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                    {
+                        return pv.Nro == auxPV;
+                    }).IdTipoPuntoVta;
+                    if (idtipo != "Turismo")
+                    {
+                        script = "window.open('/ComprobanteConsulta.aspx', '');";
+                    }
+                    else
+                    {
+                        script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                    }
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
                 case "Baja/Anul.baja":
@@ -172,8 +186,8 @@ namespace CedServicios.Site
                         comprobante.DatosEmailAvisoComprobanteContrato.DestinatariosFrecuentes = persona.DatosEmailAvisoComprobantePersona.DestinatariosFrecuentes;
                     }
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Modificacion, comprobante);
-                    int auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                    auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                    idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
                         return pv.Nro == auxPV;
                     }).IdTipoPuntoVta;
@@ -420,10 +434,10 @@ namespace CedServicios.Site
                                         MensajeLabel.Text += "(Campo: Cod.Doc). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
                                         comprobante.Documento.Tipo.Id = lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
                                     }
-                                    if (comprobante.Documento.Nro != lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio)
+                                    if (comprobante.Documento.Nro != lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString())
                                     {
                                         MensajeLabel.Text += "(Campo: Nro.Doc). Hay diferencias entre en comprobante local y el registrado en Interfacturas / AFIP. Igualmente se pudo actualizar la información y el estado.";
-                                        comprobante.Documento.Nro = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;
+                                        comprobante.Documento.Nro = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
                                     }
 
                                     comprobante.WF.Estado = "Vigente";

@@ -5,12 +5,13 @@ using System.Text;
 
 namespace FeaEntidades.Turismo
 {
+    [System.SerializableAttribute()]
     public partial class informacion_comprador : FeaEntidades.InterFacturas.informacion_comprador
     {
-        private string codigo_PaisField;
+        private short codigo_PaisField;
         private string id_ImpositivoField;
         private short codigo_Relacion_Receptor_EmisorField;
-        private string nro_doc_identificatorioField;
+        private string nro_doc_identificatorio_afipField;
 
         public informacion_comprador() : base()
         {
@@ -27,7 +28,7 @@ namespace FeaEntidades.Turismo
                 this.id_ImpositivoField = value;
             }
         }
-        public string codigo_Pais
+        public short codigo_Pais
         {
             get
             {
@@ -49,15 +50,16 @@ namespace FeaEntidades.Turismo
                 this.codigo_Relacion_Receptor_EmisorField = value;
             }
         }
-        public new string nro_doc_identificatorio
+
+        public new string nro_doc_identificatorio_afip
         {
             get
             {
-                return this.nro_doc_identificatorioField;
+                return this.nro_doc_identificatorio_afipField;
             }
             set
             {
-                this.nro_doc_identificatorioField = value;
+                this.nro_doc_identificatorio_afipField = value;
             }
         }
     }

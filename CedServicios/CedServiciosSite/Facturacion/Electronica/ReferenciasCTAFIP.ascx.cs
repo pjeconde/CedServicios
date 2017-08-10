@@ -261,13 +261,13 @@ namespace CedServicios.Site.Facturacion.Electronica
 				return refs;
 			}
 		}
-		public void CompletarReferencias(FeaEntidades.InterFacturas.lote_comprobantes lc)
+		public void CompletarReferencias(FeaEntidades.Turismo.comprobante Comprobante)
 		{
 			//Permisos de exportación
 			referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
-            if (lc.comprobante[0].cabecera.informacion_comprobante != null && lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
+            if (Comprobante.cabecera.informacion_comprobante != null && Comprobante.cabecera.informacion_comprobante.referencias != null)
 			{
-				foreach (FeaEntidades.InterFacturas.informacion_comprobanteReferencias r in lc.comprobante[0].cabecera.informacion_comprobante.referencias)
+				foreach (FeaEntidades.InterFacturas.informacion_comprobanteReferencias r in Comprobante.cabecera.informacion_comprobante.referencias)
 				{
 					//descripcioncodigo_de_permiso ( XmlIgnoreAttribute )
 					//Se busca la descripción a través del código.
@@ -307,29 +307,5 @@ namespace CedServicios.Site.Facturacion.Electronica
 
             BindearDropDownLists();
 		}
-
-        protected void ddltipo_comprobante_afip_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            AjustarCodigosDeReferenciaEnFooter();
-            referenciasUpdatePanel.Update();
-        }
-
-        protected void ddltipo_comprobante_afipEdit_SelectedIndexChanged(object sender, System.EventArgs e)
-        {
-            DropDownList ddlAFIP = (DropDownList)sender;
-            GridViewRow row = (GridViewRow)ddlAFIP.NamingContainer;
-            GridView griview = (GridView)row.NamingContainer;
-            GridViewEditEventArgs ev = new GridViewEditEventArgs(row.RowIndex);
-            AjustarCodigoReferenciaEnEdicion(griview, ev);
-            referenciasUpdatePanel.Update();
-        }
-
-        protected void referenciasGridView_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-        }
-
-        protected void referenciasGridView_RowCreated(object sender, GridViewRowEventArgs e)
-        {
-        }
 	}
 }

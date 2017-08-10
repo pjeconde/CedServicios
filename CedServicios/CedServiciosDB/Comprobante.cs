@@ -285,8 +285,8 @@ namespace CedServicios.DB
                 a.Append(Comprobante.NroPuntoVta.ToString() + ", ");
                 a.Append((Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + ", ");
                 a.Append(Comprobante.NroLote.ToString() + ", ");
-                a.Append(Comprobante.Documento.Tipo.Id + ", ");
-                a.Append(Comprobante.Documento.Nro.ToString() + ", ");
+                a.Append(Comprobante.Documento.Tipo.Id + ", '");
+                a.Append(Comprobante.Documento.Nro.ToString() + "', ");
                 if (Comprobante.IdPersona == null)
                 {
                     a.Append("'', ");
@@ -530,7 +530,7 @@ namespace CedServicios.DB
             {
                 Hasta.Documento.Tipo.Descr = "Desconocido";
             }
-            Hasta.Documento.Nro = Convert.ToInt64(Desde["NroDoc"]);
+            Hasta.Documento.Nro = Convert.ToString(Desde["NroDoc"]);
             Hasta.IdPersona = Convert.ToString(Desde["IdPersona"]);
             Hasta.DesambiguacionCuitPais = Convert.ToInt32(Desde["DesambiguacionCuitPais"]);
             Hasta.RazonSocial = Convert.ToString(Desde["RazonSocial"]);

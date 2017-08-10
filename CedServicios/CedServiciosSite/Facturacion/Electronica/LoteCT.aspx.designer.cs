@@ -814,6 +814,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Codigo_Interno_CompradorTextBox;
         
         /// <summary>
+        /// CodigoRelacionReceptorEmisorDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CodigoRelacionReceptorEmisorDropDownList;
+        
+        /// <summary>
         /// docCompradorRegularExpressionValidator control.
         /// </summary>
         /// <remarks>
@@ -929,6 +938,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList Condicion_IVA_CompradorDropDownList;
+        
+        /// <summary>
+        /// CodigoPaisDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList CodigoPaisDropDownList;
         
         /// <summary>
         /// ReferenciasPanel control.
@@ -1174,6 +1192,15 @@ namespace CedServicios.Site.Facturacion.Electronica {
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Impuestos_Internos_ResumenTextBox;
         
         /// <summary>
+        /// Importe_Total_Reintegros_ResumenTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Importe_Total_Reintegros_ResumenTextBox;
+        
+        /// <summary>
         /// Importe_Total_Factura_ResumenTextBox control.
         /// </summary>
         /// <remarks>
@@ -1307,24 +1334,6 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button DescargarPDFButton;
-        
-        /// <summary>
-        /// ActualizarEstadoPanel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ActualizarEstadoPanel;
-        
-        /// <summary>
-        /// ActualizarEstadoButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button ActualizarEstadoButton;
         
         /// <summary>
         /// Panel1 control.

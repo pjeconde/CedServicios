@@ -662,7 +662,15 @@
                                                             </asp:TextBox>
                                                         </td>
                                                     </tr>
-
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Relación:
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:DropDownList ID="CodigoRelacionReceptorEmisorDropDownList" runat="server" SkinID="ddln">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
                                                 </table>
                                             </td>
                                             <td class="bgFEAC" style="width: 30px; background-repeat: repeat-y;">
@@ -750,6 +758,15 @@
                                                         </td>
                                                         <td class="TC10S">
                                                             <asp:DropDownList ID="Condicion_IVA_CompradorDropDownList" runat="server" SkinID="ddln">
+                                                            </asp:DropDownList>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Pais:
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:DropDownList ID="CodigoPaisDropDownList" runat="server" SkinID="ddln">
                                                             </asp:DropDownList>
                                                         </td>
                                                     </tr>
@@ -1029,7 +1046,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="TC00S">
-                                                            Importe total ingresos brutos:
+                                                            Importe total impuestos provinciales:
                                                         </td>
                                                         <td class="TC10S">
                                                             <asp:TextBox ID="Importe_Total_Ingresos_Brutos_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
@@ -1043,6 +1060,16 @@
                                                         </td>
                                                         <td class="TC10S">
                                                             <asp:TextBox ID="Importe_Total_Impuestos_Internos_ResumenTextBox" runat="server"
+                                                                SkinID="TextoBoxFEAVendedorDet" ToolTip="El separador de decimales a utilizar es el punto">
+                                                            </asp:TextBox>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="TC00S">
+                                                            Importe total reintegros:
+                                                        </td>
+                                                        <td class="TC10S">
+                                                            <asp:TextBox ID="Importe_Total_Reintegros_ResumenTextBox" runat="server"
                                                                 SkinID="TextoBoxFEAVendedorDet" ToolTip="El separador de decimales a utilizar es el punto">
                                                             </asp:TextBox>
                                                         </td>
@@ -1186,17 +1213,6 @@
                                                             <asp:Button ID="DescargarPDFButton" runat="server" Text="Descargar PDF" Width="100%" ForeColor="Brown"
                                                                 CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
                                                                 OnClick="DescargarPDFButton_Click" />
-                                                        </td>
-                                                    </tr>
-                                                </table>
-                                            </asp:Panel>
-                                            <asp:Panel ID="ActualizarEstadoPanel" runat="server">
-                                                <table style="width: 1260px">
-                                                    <tr>
-                                                        <td style="width: 100%;">
-                                                            <asp:Button ID="ActualizarEstadoButton" runat="server" Text="Actualizar Estado" Width="100%" ForeColor="Brown"
-                                                                CausesValidation="false" UseSubmitBehavior="false" OnClientClick="this.disabled = true;"
-                                                                OnClick="ActualizarEstadoButton_Click" />
                                                         </td>
                                                     </tr>
                                                 </table>

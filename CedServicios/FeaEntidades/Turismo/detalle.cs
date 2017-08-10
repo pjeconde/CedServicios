@@ -5,8 +5,10 @@ using System.Text;
 
 namespace FeaEntidades.Turismo
 {
-    public partial class detalle : FeaEntidades.InterFacturas.detalle
+    [System.SerializableAttribute()]
+    public partial class detalle 
     {
+        private string comentariosField;
         private linea[] lineaField;
 
         public detalle() : base()
@@ -14,6 +16,7 @@ namespace FeaEntidades.Turismo
             lineaField = new linea[1000];
         }
 
+        [System.Xml.Serialization.XmlElementAttribute("linea")]
         public new linea[] linea
         {
             get
@@ -23,6 +26,18 @@ namespace FeaEntidades.Turismo
             set
             {
                 this.lineaField = value;
+            }
+        }
+
+        public string comentarios
+        {
+            get
+            {
+                return this.comentariosField;
+            }
+            set
+            {
+                this.comentariosField = value;
             }
         }
     }

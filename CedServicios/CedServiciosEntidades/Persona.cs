@@ -263,7 +263,7 @@ namespace CedServicios.Entidades
                 return documento.Tipo.Descr;
             }
         }
-        public long DocumentoNro
+        public string DocumentoNro
         {
             get
             {

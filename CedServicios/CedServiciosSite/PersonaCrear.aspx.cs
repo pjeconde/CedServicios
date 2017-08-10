@@ -75,11 +75,11 @@ namespace CedServicios.Site
                     persona.Documento.Tipo.Descr = TipoDocDropDownList.SelectedItem.Text;
                     if (TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
                     {
-                        persona.Documento.Nro = Convert.ToInt64(DestinosCuitDropDownList.SelectedItem.Value);
+                        persona.Documento.Nro = Convert.ToString(DestinosCuitDropDownList.SelectedItem.Value);
                     }
                     else
                     {
-                        persona.Documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                        persona.Documento.Nro = NroDocTextBox.Text;
                     }
                     persona.RazonSocial = RazonSocialTextBox.Text;
                     persona.Domicilio.Calle = Domicilio.Calle;

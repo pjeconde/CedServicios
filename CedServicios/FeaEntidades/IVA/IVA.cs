@@ -56,5 +56,13 @@ namespace FeaEntidades.IVA
             lista.Add(new DosYMedio());
             return lista;
         }
+
+        public static List<IVA> ListaTuristas()
+        {
+            List<IVA> lista = new List<IVA>();
+            lista.Add(new SinInformar());
+            lista.Add(new Veintiuno());
+            return lista;
+        }
 	}
 }

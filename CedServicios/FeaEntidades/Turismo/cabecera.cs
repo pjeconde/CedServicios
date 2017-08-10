@@ -5,18 +5,33 @@ using System.Text;
 
 namespace FeaEntidades.Turismo
 {
-    public partial class cabecera : FeaEntidades.InterFacturas.cabecera
+    [System.SerializableAttribute()]
+    public partial class cabecera 
     {
+        private informacion_vendedor informacion_vendedorField;
         private informacion_comprador informacion_compradorField;
         private informacion_comprobante informacion_comprobanteField;
 
-        public cabecera() : base()
+        public cabecera() 
         {
+            informacion_vendedorField = new informacion_vendedor();
             informacion_compradorField = new informacion_comprador();
             informacion_comprobanteField = new informacion_comprobante();
         }
 
-        public new informacion_comprador informacion_comprador
+        public informacion_vendedor informacion_vendedor
+        {
+            get
+            {
+                return this.informacion_vendedorField;
+            }
+            set
+            {
+                this.informacion_vendedorField = value;
+            }
+        }
+
+        public informacion_comprador informacion_comprador
         {
             get
             {
@@ -27,7 +42,8 @@ namespace FeaEntidades.Turismo
                 this.informacion_compradorField = value;
             }
         }
-        public new informacion_comprobante informacion_comprobante
+
+        public informacion_comprobante informacion_comprobante
         {
             get
             {

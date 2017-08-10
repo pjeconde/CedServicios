@@ -68,7 +68,7 @@ namespace CedServicios.DB
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
             Hasta.Documento.Tipo.Id = Convert.ToString(Desde["IdTipoDoc"]);
             Hasta.Documento.Tipo.Descr = Convert.ToString(Desde["DescrTipoDoc"]);
-            Hasta.Documento.Nro = Convert.ToInt64(Desde["NroDoc"]);
+            Hasta.Documento.Nro = Convert.ToString(Desde["NroDoc"]);
             Hasta.IdPersona = Convert.ToString(Desde["IdPersona"]);
             Hasta.DesambiguacionCuitPais = Convert.ToInt32(Desde["DesambiguacionCuitPais"]);
             Hasta.RazonSocial = Convert.ToString(Desde["RazonSocial"]);
@@ -533,7 +533,7 @@ namespace CedServicios.DB
                     Entidades.Persona persona = new Entidades.Persona();
                     persona.Cuit = dt.Rows[i]["Cuit"].ToString();
                     persona.Documento.Tipo.Id = dt.Rows[i]["IdTipoDoc"].ToString();
-                    persona.Documento.Nro = Convert.ToInt64(dt.Rows[i]["NroDoc"].ToString());
+                    persona.Documento.Nro = Convert.ToString(dt.Rows[i]["NroDoc"].ToString());
                     persona.IdPersona = dt.Rows[i]["IdPersona"].ToString();
                     persona.DesambiguacionCuitPais = Convert.ToInt32(dt.Rows[i]["DesambiguacionCuitPais"].ToString());
                     persona.RazonSocial = dt.Rows[i]["RazonSocial"].ToString();

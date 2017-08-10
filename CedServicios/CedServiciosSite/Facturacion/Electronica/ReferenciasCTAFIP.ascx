@@ -36,8 +36,7 @@
 						OnRowDeleting="referenciasGridView_RowDeleting" OnRowEditing="referenciasGridView_RowEditing"
 						OnRowUpdated="referenciasGridView_RowUpdated" OnRowUpdating="referenciasGridView_RowUpdating"
 						ShowFooter="true" ShowHeader="True" ToolTip="El dato de referencia debe ser un número entero"
-						Width="1260px" onrowdatabound="referenciasGridView_RowDataBound" 
-                        onrowcreated="referenciasGridView_RowCreated">
+						Width="1260px">
 						<Columns>
                             <asp:TemplateField HeaderText="C&#243;digo de referencia">
                                 <ItemTemplate>

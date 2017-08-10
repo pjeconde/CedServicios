@@ -17,6 +17,8 @@ namespace CedServicios.RN
         {
             string RutaCertificado = "";
             ticket = new LoginTicket();
+            string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
+            string Ambiente = System.Configuration.ConfigurationManager.AppSettings["Ambiente"];
 
             DB.Ticket ticketDB = new DB.Ticket(Sesion);
             bool SolicitarTicket = false;
@@ -29,7 +31,7 @@ namespace CedServicios.RN
                 }
                 else
                 {
-                    Sesion.Ticket = ticketDB.Leer("30710015062", TipoServicios.FacturaE);
+                    Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.FacturaE);
                 }
             }
             else
@@ -42,9 +44,9 @@ namespace CedServicios.RN
                     }
                     else
                     {
-                        if (Sesion.Ticket.Cuit != "30710015062")
+                        if (Sesion.Ticket.Cuit != CuitCanalAFIP)
                         {
-                            Sesion.Ticket = ticketDB.Leer("30710015062",TipoServicios.FacturaE);
+                            Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.FacturaE);
                         }
                     }
                 }
@@ -70,11 +72,11 @@ namespace CedServicios.RN
                 ticket = new LoginTicket();
                 if (Sesion.Cuit.UsaCertificadoAFIPPropio)
                 {
-                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + ".p12");
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + "-" + Ambiente + ".p12");
                 }
                 else
                 {
-                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Convert.ToInt64("30710015062") + ".p12");
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + CuitCanalAFIP + "-" + Ambiente + ".p12");
                 }
                 ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro), "wsfe");
 
@@ -482,6 +484,8 @@ namespace CedServicios.RN
         {
             string RutaCertificado = "";
             ticket = new LoginTicket();
+            string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
+            string Ambiente = System.Configuration.ConfigurationManager.AppSettings["Ambiente"];
 
             DB.Ticket ticketDB = new DB.Ticket(Sesion);
             bool SolicitarTicket = false;
@@ -494,7 +498,7 @@ namespace CedServicios.RN
                 }
                 else
                 {
-                    Sesion.Ticket = ticketDB.Leer("30710015062", TipoServicios.FacturaEX);
+                    Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.FacturaEX);
                 }
             }
             else
@@ -507,9 +511,9 @@ namespace CedServicios.RN
                     }
                     else
                     {
-                        if (Sesion.Ticket.Cuit != "30710015062")
+                        if (Sesion.Ticket.Cuit != CuitCanalAFIP)
                         {
-                            Sesion.Ticket = ticketDB.Leer("30710015062", TipoServicios.FacturaEX);
+                            Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.FacturaEX);
                         }
                     }
                 }
@@ -535,11 +539,11 @@ namespace CedServicios.RN
                 ticket = new LoginTicket();
                 if (Sesion.Cuit.UsaCertificadoAFIPPropio)
                 {
-                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + ".p12");
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + "-" + Ambiente + ".p12");
                 }
                 else
                 {
-                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Convert.ToInt64("30710015062") + ".p12");
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + CuitCanalAFIP + "-" + Ambiente + ".p12");
                 }
                 ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro), "wsfex");
 
@@ -805,6 +809,8 @@ namespace CedServicios.RN
         {
             string RutaCertificado = "";
             ticket = new LoginTicket();
+            string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
+            string Ambiente = System.Configuration.ConfigurationManager.AppSettings["Ambiente"];
 
             DB.Ticket ticketDB = new DB.Ticket(Sesion);
             bool SolicitarTicket = false;
@@ -817,7 +823,7 @@ namespace CedServicios.RN
                 }
                 else
                 {
-                    Sesion.Ticket = ticketDB.Leer("30710015062", TipoServicios.FacturaCT);
+                    Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.FacturaCT);
                 }
             }
             else
@@ -830,9 +836,9 @@ namespace CedServicios.RN
                     }
                     else
                     {
-                        if (Sesion.Ticket.Cuit != "30710015062")
+                        if (Sesion.Ticket.Cuit != CuitCanalAFIP)
                         {
-                            Sesion.Ticket = ticketDB.Leer("30710015062", TipoServicios.FacturaCT);
+                            Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.FacturaCT);
                         }
                     }
                 }
@@ -858,11 +864,11 @@ namespace CedServicios.RN
                 ticket = new LoginTicket();
                 if (Sesion.Cuit.UsaCertificadoAFIPPropio)
                 {
-                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + ".p12");
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + "-" + Ambiente + ".p12");
                 }
                 else
                 {
-                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Convert.ToInt64("30710015062") + ".p12");
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + CuitCanalAFIP + "-" + Ambiente +".p12");
                 }
                 ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro), "wsct");
 
@@ -883,7 +889,7 @@ namespace CedServicios.RN
             objWSCT.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_WSCT_Service"];
             objWSCT.Proxy = ticket.Wp;
         }
-        public static string EnviarAFIPCT(out string Cae, out string CaeFecVto, FeaEntidades.InterFacturas.lote_comprobantes lc, Entidades.Sesion Sesion)
+        public static string EnviarAFIPCT(out string Cae, out string CaeFecVto, FeaEntidades.Turismo.comprobante Comprobante, Entidades.Sesion Sesion)
         {
             try
             {
@@ -894,72 +900,82 @@ namespace CedServicios.RN
                 CrearTicketWSCT(Sesion, out ticket, out objWSCT);
 
                 ar.gov.afip.WSCT.ComprobanteType objFERequest = new ar.gov.afip.WSCT.ComprobanteType();
-                objFERequest.codigoTipoComprobante = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante);  //Comprobante.Codigo;
-                objFERequest.numeroPuntoVenta = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta);
-                objFERequest.numeroComprobante = lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                objFERequest.codigoTipoComprobante = Convert.ToInt16(Comprobante.cabecera.informacion_comprobante.tipo_de_comprobante);  //Comprobante.Codigo;
+                objFERequest.numeroPuntoVenta = Convert.ToInt16(Comprobante.cabecera.informacion_comprobante.punto_de_venta);
+                objFERequest.numeroComprobante = Comprobante.cabecera.informacion_comprobante.numero_comprobante;
 
                 //Obtener ultimo Nro. de Comprobante
                 ar.gov.afip.WSCT.ConsultarUltimoComprobanteAutorizadoReturnType UltNro = new ar.gov.afip.WSCT.ConsultarUltimoComprobanteAutorizadoReturnType();
-                UltNro = objWSCT.consultarUltimoComprobanteAutorizado(ticket.ObjAutorizacionWSCT, Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante), Convert.ToInt16(lc.cabecera_lote.punto_de_venta));
+                UltNro = objWSCT.consultarUltimoComprobanteAutorizado(ticket.ObjAutorizacionWSCT, Convert.ToInt16(Comprobante.cabecera.informacion_comprobante.tipo_de_comprobante), Convert.ToInt16(Comprobante.cabecera.informacion_comprobante.punto_de_venta));
 
-                objFERequest.fechaEmision = Convert.ToDateTime(lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(6,2) + "/" + lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(4,2) + "/" + lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(0,4));
+                objFERequest.fechaEmision = Convert.ToDateTime(Comprobante.cabecera.informacion_comprobante.fecha_emision.Substring(6,2) + "/" + Comprobante.cabecera.informacion_comprobante.fecha_emision.Substring(4,2) + "/" + Comprobante.cabecera.informacion_comprobante.fecha_emision.Substring(0,4));
                 objFERequest.fechaEmisionSpecified = true;
-                if (lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento != "")
+                if (Comprobante.cabecera.informacion_comprobante.fecha_vencimiento != "")
                 {
-                    objFERequest.fechaVencimiento = Convert.ToDateTime(lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento.Substring(6,2) + "/" + lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento.Substring(4,2) + "/" + lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento.Substring(0,4));
+                    objFERequest.fechaVencimiento = Convert.ToDateTime(Comprobante.cabecera.informacion_comprobante.fecha_vencimiento.Substring(6,2) + "/" + Comprobante.cabecera.informacion_comprobante.fecha_vencimiento.Substring(4,2) + "/" + Comprobante.cabecera.informacion_comprobante.fecha_vencimiento.Substring(0,4));
                     objFERequest.fechaVencimientoSpecified = false;
                 }
-                if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                if (Comprobante.resumen.codigo_moneda == "PES")
                 {
-                    objFERequest.importeGravado = Convert.ToDecimal(lc.comprobante[0].resumen.importe_total_neto_gravado);      
+                    objFERequest.importeGravado = Convert.ToDecimal(Comprobante.resumen.importe_total_neto_gravado);      
                     objFERequest.importeGravadoSpecified = true;
-                    objFERequest.importeExento = Convert.ToDecimal(lc.comprobante[0].resumen.importe_operaciones_exentas);
+                    objFERequest.importeExento = Convert.ToDecimal(Comprobante.resumen.importe_operaciones_exentas);
                     objFERequest.importeExentoSpecified = true;
-                    objFERequest.importeNoGravado = Convert.ToDecimal(lc.comprobante[0].resumen.importe_total_concepto_no_gravado);
+                    objFERequest.importeNoGravado = Convert.ToDecimal(Comprobante.resumen.importe_total_concepto_no_gravado);
                     objFERequest.importeNoGravadoSpecified = true;
                     double otrosTrib = 0;
-                    if (lc.comprobante[0].resumen.importe_total_impuestos_internosSpecified == true)
+                    if (Comprobante.resumen.importe_total_impuestos_internosSpecified == true)
                     {
-                        otrosTrib = lc.comprobante[0].resumen.importe_total_impuestos_internos;
+                        otrosTrib = Comprobante.resumen.importe_total_impuestos_internos;
                     }
-                    if (lc.comprobante[0].resumen.importe_total_impuestos_municipalesSpecified == true)
+                    if (Comprobante.resumen.importe_total_impuestos_municipalesSpecified == true)
                     {
-                        otrosTrib += lc.comprobante[0].resumen.importe_total_impuestos_municipales;
+                        otrosTrib += Comprobante.resumen.importe_total_impuestos_municipales;
                     }
-                    if (lc.comprobante[0].resumen.importe_total_impuestos_nacionalesSpecified == true)
+                    if (Comprobante.resumen.importe_total_impuestos_nacionalesSpecified == true)
                     {
-                        otrosTrib += lc.comprobante[0].resumen.importe_total_impuestos_nacionales;
+                        otrosTrib += Comprobante.resumen.importe_total_impuestos_nacionales;
                     }
                     objFERequest.importeOtrosTributos = Convert.ToDecimal(otrosTrib);
                     objFERequest.codigoMoneda = "PES";
-                    objFERequest.importeTotal = Convert.ToDecimal(lc.comprobante[0].resumen.importe_total_factura);                             
+                    objFERequest.importeTotal = Convert.ToDecimal(Comprobante.resumen.importe_total_factura);
+                    if (Comprobante.resumen.importe_ReintegroSpecified == true)
+                    {
+                        objFERequest.importeReintegro = (Comprobante.resumen.importe_Reintegro * -1);
+                        objFERequest.importeReintegroSpecified = true;
+                    }
                 }
-                else if (lc.comprobante[0].resumen.codigo_moneda == "DOL")
+                else if (Comprobante.resumen.codigo_moneda == "DOL")
                 {
-                    objFERequest.importeGravado = Convert.ToDecimal(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_neto_gravado);
+                    objFERequest.importeGravado = Convert.ToDecimal(Comprobante.resumen.importes_moneda_origen.importe_total_neto_gravado);
                     objFERequest.importeGravadoSpecified = true;
-                    objFERequest.importeExento = Convert.ToDecimal(lc.comprobante[0].resumen.importes_moneda_origen.importe_operaciones_exentas);
+                    objFERequest.importeExento = Convert.ToDecimal(Comprobante.resumen.importes_moneda_origen.importe_operaciones_exentas);
                     objFERequest.importeExentoSpecified = true;
-                    objFERequest.importeNoGravado = Convert.ToDecimal(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_concepto_no_gravado);
+                    objFERequest.importeNoGravado = Convert.ToDecimal(Comprobante.resumen.importes_moneda_origen.importe_total_concepto_no_gravado);
                     objFERequest.importeNoGravadoSpecified = true;
                     objFERequest.codigoMoneda = "DOL";
-                    objFERequest.importeTotal = Convert.ToDecimal(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura);                             
+                    objFERequest.importeTotal = Convert.ToDecimal(Comprobante.resumen.importes_moneda_origen.importe_total_factura);
+                    if (Comprobante.resumen.importe_ReintegroSpecified == true)
+                    {
+                        objFERequest.importeReintegro = (Comprobante.resumen.importe_Reintegro * -1);
+                        objFERequest.importeReintegroSpecified = true;
+                    }   
                 }
                 else
                 {
-                    throw new Exception("Moneda no permitida: " + lc.comprobante[0].resumen.codigo_moneda.ToString());
+                    throw new Exception("Moneda no permitida: " + Comprobante.resumen.codigo_moneda.ToString());
                 }
 
-                objFERequest.numeroDocumento = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();            // Comprobante.Nro_doc;
-                objFERequest.codigoTipoDocumento = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio);    // Comprobante.TipoDoc;
-                objFERequest.cotizacionMoneda = Convert.ToDecimal(lc.comprobante[0].resumen.tipo_de_cambio);
+                objFERequest.numeroDocumento = Comprobante.cabecera.informacion_comprador.nro_doc_identificatorio_afip.ToString();            // Documento formato AFIP texto
+                objFERequest.codigoTipoDocumento = Convert.ToInt16(Comprobante.cabecera.informacion_comprador.codigo_doc_identificatorio);    
+                objFERequest.cotizacionMoneda = Convert.ToDecimal(Comprobante.resumen.tipo_de_cambio);
                 objFERequest.codigoTipoAutorizacion = ar.gov.afip.WSCT.CodigoTipoAutorizacionSimpleType.E;
                 objFERequest.codigoTipoAutorizacionSpecified = true;
-                objFERequest.domicilioReceptor = lc.comprobante[0].cabecera.informacion_comprador.domicilio_calle + " " + lc.comprobante[0].cabecera.informacion_comprador.domicilio_numero;
+                objFERequest.domicilioReceptor = Comprobante.cabecera.informacion_comprador.domicilio_calle + " " + Comprobante.cabecera.informacion_comprador.domicilio_numero;
 
                 FeaEntidades.CondicionesIVA.CondicionIVA CondIVA = FeaEntidades.CondicionesIVA.CondicionIVA.Lista().Find(delegate(FeaEntidades.CondicionesIVA.CondicionIVA ci)
                 {
-                    return (ci.Codigo == Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprador.condicion_IVA));
+                    return (ci.Codigo == Convert.ToInt16(Comprobante.cabecera.informacion_comprador.condicion_IVA));
                 });
                 if (CondIVA != null)
                 {
@@ -969,20 +985,20 @@ namespace CedServicios.RN
                 {
                     throw new Exception("Problemas para encontrar la codición de IVA del cliente.");
                 }
-                objFERequest.codigoPais = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprador.codigo_interno);
+                objFERequest.codigoPais = Comprobante.cabecera.informacion_comprador.codigo_Pais;
                 objFERequest.codigoPaisSpecified = true;
-                objFERequest.codigoRelacionEmisorReceptor = 1;
+                objFERequest.codigoRelacionEmisorReceptor = Comprobante.cabecera.informacion_comprador.codigo_Relacion_Receptor_Emisor;
 
                 //Lineas
                 ar.gov.afip.WSCT.ItemType[] arrayFEDetalleRequest = new ar.gov.afip.WSCT.ItemType[0];
-                if (lc.comprobante[0].detalle.linea != null)
+                if (Comprobante.detalle.linea != null)
                 {
-                    if (lc.comprobante[0].detalle.linea.Length > 0)
+                    if (Comprobante.detalle.linea.Length > 0)
                     {
                         int CantLineasAFIP = 0;
-                        for (int j = 0; j < lc.comprobante[0].detalle.linea.Length; j++)
+                        for (int j = 0; j < Comprobante.detalle.linea.Length; j++)
                         {
-                            if (lc.comprobante[0].detalle.linea[j] == null)
+                            if (Comprobante.detalle.linea[j] == null)
                             {
                                 break;
                             }
@@ -995,18 +1011,18 @@ namespace CedServicios.RN
                         {
                             arrayFEDetalleRequest = new ar.gov.afip.WSCT.ItemType[CantLineasAFIP];
                         }
-                        for (int j = 0; j < lc.comprobante[0].detalle.linea.Length; j++)
+                        for (int j = 0; j < Comprobante.detalle.linea.Length; j++)
                         {
-                            if (lc.comprobante[0].detalle.linea[j] == null)
+                            if (Comprobante.detalle.linea[j] == null)
                             {
                                 break;
                             }
                             ar.gov.afip.WSCT.ItemType item = new ar.gov.afip.WSCT.ItemType();
                             //No puede tener menos de 3 digitos el codigo.
-                            item.codigo = lc.comprobante[0].detalle.linea[j].codigo_producto_vendedor.PadRight(3);
-                            item.codigoTurismo = Convert.ToInt16(lc.comprobante[0].detalle.linea[j].codigo_producto_comprador);  //combo con el codigo de produco turismo.
+                            item.codigo = Comprobante.detalle.linea[j].codigo_producto_vendedor.PadRight(3);
+                            item.codigoTurismo = Convert.ToInt16(Comprobante.detalle.linea[j].codigo_Turismo);      //combo con el codigo de producto turismo.
                             item.codigoTurismoSpecified = true;
-                            if (lc.comprobante[0].detalle.linea[j].alicuota_iva == 21)
+                            if (Comprobante.detalle.linea[j].alicuota_iva == 21)
                             {
                                 item.codigoAlicuotaIVA = Convert.ToInt16("5");
                             }
@@ -1014,10 +1030,10 @@ namespace CedServicios.RN
                             {
                                 throw new Exception("Solo se puede utilizar IVA del 21% para el item: " + (j+1));
                             }
-                            item.importeItem = Convert.ToDecimal(lc.comprobante[0].detalle.linea[j].importe_total_articulo);
-                            item.importeIVA = Convert.ToDecimal(lc.comprobante[0].detalle.linea[j].importe_iva);
+                            item.importeItem = Convert.ToDecimal(Comprobante.detalle.linea[j].importe_total_articulo + Comprobante.detalle.linea[j].importe_iva);
+                            item.importeIVA = Convert.ToDecimal(Comprobante.detalle.linea[j].importe_iva);
                             item.tipo = 0;
-                            item.descripcion = lc.comprobante[0].detalle.linea[j].descripcion;
+                            item.descripcion = Comprobante.detalle.linea[j].descripcion;
                             arrayFEDetalleRequest[j] = item;
                         }
                         if (arrayFEDetalleRequest != null && arrayFEDetalleRequest.Length > 0)
@@ -1029,18 +1045,18 @@ namespace CedServicios.RN
 
                 //Referencias
                 ar.gov.afip.WSCT.ComprobanteAsociadoType[] arrayFECompAsocRequest = new ar.gov.afip.WSCT.ComprobanteAsociadoType[0];
-                if (lc.comprobante[0].cabecera.informacion_comprobante.referencias != null)
+                if (Comprobante.cabecera.informacion_comprobante.referencias != null)
                 {
-                    if (lc.comprobante[0].cabecera.informacion_comprobante.referencias.Length > 0)
+                    if (Comprobante.cabecera.informacion_comprobante.referencias.Length > 0)
                     {
                         int CantReferenciasAFIP = 0;
-                        for (int j = 0; j < lc.comprobante[0].cabecera.informacion_comprobante.referencias.Length; j++)
+                        for (int j = 0; j < Comprobante.cabecera.informacion_comprobante.referencias.Length; j++)
                         {
-                            if (lc.comprobante[0].cabecera.informacion_comprobante.referencias[j] == null)
+                            if (Comprobante.cabecera.informacion_comprobante.referencias[j] == null)
                             {
                                 break;
                             }
-                            if (lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip == "S")
+                            if (Comprobante.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip == "S")
                             {
                                 CantReferenciasAFIP += 1;
                             }
@@ -1052,16 +1068,16 @@ namespace CedServicios.RN
                         }
                         CantReferenciasAFIP = 0;
 
-                        for (int j = 0; j < lc.comprobante[0].cabecera.informacion_comprobante.referencias.Length; j++)
+                        for (int j = 0; j < Comprobante.cabecera.informacion_comprobante.referencias.Length; j++)
                         {
-                            if (lc.comprobante[0].cabecera.informacion_comprobante.referencias[j] == null)
+                            if (Comprobante.cabecera.informacion_comprobante.referencias[j] == null)
                             {
                                 break;
                             }
                             ar.gov.afip.WSCT.ComprobanteAsociadoType item = new ar.gov.afip.WSCT.ComprobanteAsociadoType();
-                            item.codigoTipoComprobante = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia);
-                            item.numeroPuntoVenta = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Substring(0, 4));
-                            item.numeroComprobante = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Substring(5, 8));
+                            item.codigoTipoComprobante = Convert.ToInt16(Comprobante.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia);
+                            item.numeroPuntoVenta = Convert.ToInt16(Comprobante.cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Substring(0, 4));
+                            item.numeroComprobante = Convert.ToInt16(Comprobante.cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Substring(5, 8));
                             arrayFECompAsocRequest[j] = item;
                         }
                         if (arrayFECompAsocRequest != null && arrayFECompAsocRequest.Length > 0)
@@ -1073,15 +1089,15 @@ namespace CedServicios.RN
 
                 //Impuestos
                 double impTrib = 0;
-                if (lc.comprobante[0].resumen.impuestos.Length > 0)
+                if (Comprobante.resumen.impuestos.Length > 0)
                 {
-                    if (lc.comprobante[0].resumen.impuestos[0] != null)
+                    if (Comprobante.resumen.impuestos[0] != null)
                     {
                         int CantTrib = 0;
                         int CantAlicIVA = 0;
-                        for (int j = 0; j < lc.comprobante[0].resumen.impuestos.Length; j++)
+                        for (int j = 0; j < Comprobante.resumen.impuestos.Length; j++)
                         {
-                            if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto != 1)
+                            if (Comprobante.resumen.impuestos[j].codigo_impuesto != 1)
                             {
                                 CantTrib += 1;
                             }
@@ -1102,32 +1118,32 @@ namespace CedServicios.RN
                             ivas = new ar.gov.afip.WSCT.SubtotalIVAType[CantAlicIVA];
                         }
                         CantAlicIVA = 0;
-                        for (int j = 0; j < lc.comprobante[0].resumen.impuestos.Length; j++)
+                        for (int j = 0; j < Comprobante.resumen.impuestos.Length; j++)
                         {
 
-                            switch (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto)
+                            switch (Comprobante.resumen.impuestos[j].codigo_impuesto)
                             {
                                 case 1:
                                     //double baseImponible = 0;
                                     ivas[CantAlicIVA] = new ar.gov.afip.WSCT.SubtotalIVAType();
                                     //Informar la base imponible y el código de impuesto según la alícuota.
-                                    if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 21)
+                                    if (Comprobante.resumen.impuestos[j].porcentaje_impuesto == 21)
                                     {
                                         //ivas[CantAlicIVA].BaseImp = baseImponible;
                                         ivas[CantAlicIVA].codigo = 5;
                                     }
                                     else
                                     {
-                                        throw new Exception("Problemas para encontrar el código de la alícuota cuyo porcentaje es: " + lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto.ToString());
+                                        throw new Exception("Problemas para encontrar el código de la alícuota cuyo porcentaje es: " + Comprobante.resumen.impuestos[j].porcentaje_impuesto.ToString());
                                     }
                                     //Importe del impuesto
-                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                    if (Comprobante.resumen.codigo_moneda == "PES")
                                     {
-                                        ivas[CantAlicIVA].importe = Convert.ToDecimal(Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2));
+                                        ivas[CantAlicIVA].importe = Convert.ToDecimal(Math.Round(Comprobante.resumen.impuestos[j].importe_impuesto, 2));
                                     }
                                     else
                                     {
-                                        ivas[CantAlicIVA].importe = Convert.ToDecimal(Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2));
+                                        ivas[CantAlicIVA].importe = Convert.ToDecimal(Math.Round(Comprobante.resumen.impuestos[j].importe_impuesto_moneda_origen, 2));
                                     }
                                     CantAlicIVA += 1;
                                     break;
@@ -1137,49 +1153,49 @@ namespace CedServicios.RN
                                 case 5:  //IB - Provinciales
                                 case 6:  //Municipales
                                     otrosTrib[CantTrib] = new ar.gov.afip.WSCT.OtroTributoType();
-                                    otrosTrib[CantTrib].descripcion = lc.comprobante[0].resumen.impuestos[j].descripcion;
-                                    otrosTrib[CantTrib].baseImponible = 0;  //Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                    otrosTrib[CantTrib].descripcion = Comprobante.resumen.impuestos[j].descripcion;
+                                    otrosTrib[CantTrib].baseImponible = 0;  //Math.Round((Comprobante.resumen.impuestos[j].importe_impuesto * 100) / Comprobante.resumen.impuestos[j].porcentaje_impuesto, 2);
                                     otrosTrib[CantTrib].baseImponibleSpecified = false;
-                                    if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 2)
+                                    if (Comprobante.resumen.impuestos[j].codigo_impuesto == 2)
                                     {
                                         otrosTrib[CantTrib].codigo = 4;  //"AFIP - Impuestos Internos"
                                     }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 3)
+                                    else if (Comprobante.resumen.impuestos[j].codigo_impuesto == 3)
                                     {
                                         otrosTrib[CantTrib].codigo = 99; //"AFIP - Otro"
                                     }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 4)
+                                    else if (Comprobante.resumen.impuestos[j].codigo_impuesto == 4)
                                     {
                                         otrosTrib[CantTrib].codigo = 1;  //"AFIP - Impuestos nacionales"
                                     }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 5)
+                                    else if (Comprobante.resumen.impuestos[j].codigo_impuesto == 5)
                                     {
                                         otrosTrib[CantTrib].codigo = 2;  //"AFIP - Impuestos provinciales"
                                     }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 6)
+                                    else if (Comprobante.resumen.impuestos[j].codigo_impuesto == 6)
                                     {
                                         otrosTrib[CantTrib].codigo = 3;  //"AFIP - Impuestos municipales"
                                     }
-                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                    if (Comprobante.resumen.codigo_moneda == "PES")
                                     {
-                                        otrosTrib[CantTrib].importe = Convert.ToDecimal(Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2));
+                                        otrosTrib[CantTrib].importe = Convert.ToDecimal(Math.Round(Comprobante.resumen.impuestos[j].importe_impuesto, 2));
                                     }
                                     else
                                     {
-                                        otrosTrib[CantTrib].importe = Convert.ToDecimal(Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2));
+                                        otrosTrib[CantTrib].importe = Convert.ToDecimal(Math.Round(Comprobante.resumen.impuestos[j].importe_impuesto_moneda_origen, 2));
                                     }
-                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                    if (Comprobante.resumen.codigo_moneda == "PES")
                                     {
-                                        impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                        impTrib += Math.Round(Comprobante.resumen.impuestos[j].importe_impuesto, 2);
                                     }
                                     else
                                     {
-                                        impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
+                                        impTrib += Math.Round(Comprobante.resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
                                     }
                                     CantTrib += 1;
                                     break;
                                 default:
-                                    throw new Exception("Problemas para enviar el comprobante, código de impuesto incorrecto o inexistente. Código: " + lc.comprobante[0].resumen.impuestos[j].codigo_impuesto.ToString());
+                                    throw new Exception("Problemas para enviar el comprobante, código de impuesto incorrecto o inexistente. Código: " + Comprobante.resumen.impuestos[j].codigo_impuesto.ToString());
                             }
                         }
                         if (ivas != null && ivas.Length > 0)
@@ -1212,7 +1228,7 @@ namespace CedServicios.RN
                 if (objFEResponse.arrayErrores == null && objFEResponse.arrayErroresFormato == null)
                 {
                     respuesta += "Resultado: " + objFEResponse.resultado + "\\n";
-                    if (objFEResponse.arrayObservaciones.Length != null)
+                    if (objFEResponse.arrayObservaciones != null)
                     {
                         for (int j = 0; j < objFEResponse.arrayObservaciones.Length; j++)
                         {
@@ -1360,6 +1376,7 @@ namespace CedServicios.RN
                 ar.gov.afip.wsw.Service objWS;
                 ar.gov.afip.wsfev1.Service objWSFEV1;
                 ar.gov.afip.wsfexv1.Service objWSFEXV1;
+                ar.gov.afip.WSCT.CTService objWSCT;
                 
                 System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
                 cedeiraCultura.DateTimeFormat = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
@@ -1408,6 +1425,23 @@ namespace CedServicios.RN
                             respuesta += DB.Funciones.ObjetoSerializado(cmpResponse.FEXResultGet);
                         }
                     }
+                    else if (listaPV[0].IdTipoPuntoVta == "Turismo")
+                    {
+                        CrearTicketWSCT(Sesion, out ticket, out objWSCT);
+                        short tipo = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante);
+                        short ptoVta = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta);
+                        long nro = lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                        ar.gov.afip.WSCT.ConsultarComprobanteReturnType arrayFEResponse = new ar.gov.afip.WSCT.ConsultarComprobanteReturnType();
+                        arrayFEResponse = objWSCT.consultarComprobanteTipoPVentaNro(ticket.ObjAutorizacionWSCT, tipo, ptoVta, nro);
+                        if (arrayFEResponse.arrayErrores != null)
+                        {
+                            respuesta += DB.Funciones.ObjetoSerializado(arrayFEResponse.arrayErrores);
+                        }
+                        else
+                        {
+                            respuesta += DB.Funciones.ObjetoSerializado(arrayFEResponse.comprobante);
+                        }
+                    }
                     else
                     {
                         throw new Exception("Este tipo de punto de venta no está disponible para la consulta On-Line. Punto de venta: " + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString() + " " + listaPV[0].IdTipoPuntoVta);
@@ -1417,9 +1451,6 @@ namespace CedServicios.RN
                 {
                     throw new Exception("Problemas para obtener los datos del punto de venta: " + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString());
                 }
-                
-
-
                 return respuesta;
             }
             catch (Exception ex)

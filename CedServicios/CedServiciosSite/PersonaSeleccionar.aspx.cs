@@ -85,7 +85,7 @@ namespace CedServicios.Site
                         {
                             Entidades.Documento documento = new Entidades.Documento();
                             documento.Tipo.Id = TipoDocDropDownList.SelectedValue.ToString();
-                            documento.Nro = Convert.ToInt64(NroDocTextBox.Text);
+                            documento.Nro = NroDocTextBox.Text;
                             lista = RN.Persona.ListaPorCuityTipoyNroDoc(sesion.Cuit.Nro, documento, tipoPersona, sesion);
                         }
                     }

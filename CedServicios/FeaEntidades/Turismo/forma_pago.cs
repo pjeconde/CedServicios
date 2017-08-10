@@ -5,6 +5,7 @@ using System.Text;
 
 namespace FeaEntidades.Turismo
 {
+    [System.SerializableAttribute()]
     public partial class forma_pago
     {
         private short codigoField;

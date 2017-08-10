@@ -142,7 +142,7 @@ namespace CedServicios.Site
                 {
                     cecl.tipo_doc_comprador = Convert.ToInt32(persona.DocumentoIdTipoDoc);
                     cecl.tipo_doc_compradorSpecified = true;
-                    cecl.doc_comprador = persona.DocumentoNro;
+                    cecl.doc_comprador = Convert.ToInt64(persona.Documento.Nro);
                     cecl.doc_compradorSpecified = true;
                 }
                 else

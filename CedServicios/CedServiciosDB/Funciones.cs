@@ -15,6 +15,13 @@ namespace CedServicios.DB
             x.Serialize(textWriter, Objeto);
             return textWriter.ToString();
         }
+        public static string ObjetoSerializadoFEAcomprobante(Object Objeto)
+        {
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(typeof(FeaEntidades.Turismo.comprobante));
+            System.IO.StringWriter textWriter = new System.IO.StringWriter();
+            x.Serialize(textWriter, Objeto);
+            return textWriter.ToString();
+        }
         public static string ObjetoSerializadoParaSQL(Object Objeto)
         {
             return ObjetoSerializado(Objeto).Replace(Environment.NewLine, "' + CHAR(13) + CHAR(10) + '");

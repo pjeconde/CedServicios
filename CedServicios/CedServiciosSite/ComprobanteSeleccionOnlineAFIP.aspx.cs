@@ -47,7 +47,7 @@ namespace CedServicios.Site
 
                     TipoComprobanteDropDownList.DataValueField = "Codigo";
                     TipoComprobanteDropDownList.DataTextField = "Descr";
-                    TipoComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
+                    TipoComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPTurismo();
                     TipoComprobanteDropDownList.DataBind();
 
                     TipoComprobanteUltNroCompDropDownList.DataValueField = "Codigo";
@@ -114,6 +114,7 @@ namespace CedServicios.Site
                     respuesta = respuesta.Replace("\r\n", "\\n");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/", "");
                     respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.fexv1/", "");
+                    respuesta = respuesta.Replace(" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"", "");
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
                 }
                 catch (Exception ex)

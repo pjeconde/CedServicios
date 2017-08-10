@@ -146,6 +146,14 @@
     <Compile Include="CodigosReferencia\Exportaciones\NotaDeCreditoPorOperacionesConElExterior.cs" />
     <Compile Include="CodigosReferencia\Exportaciones\NotaDeDebitoPorOperacionesConElExterior.cs" />
     <Compile Include="CodigosReferencia\Exportaciones\SinInformar.cs" />
+    <Compile Include="CodigosRelacionReceptorEmisor\CodigoRelacionReceptorEmisor.cs" />
+    <Compile Include="CodigosRelacionReceptorEmisor\AlojTuristaNoResidente.cs" />
+    <Compile Include="CodigosRelacionReceptorEmisor\AlojAgenciaViajeResidente.cs" />
+    <Compile Include="CodigosRelacionReceptorEmisor\AlojAgenciaViajeNoResidente.cs" />
+    <Compile Include="CodigosTurismo\CodigoTurismo.cs" />
+    <Compile Include="CodigosTurismo\AlojaminetoSinDesayuno.cs" />
+    <Compile Include="CodigosTurismo\AlojamientoConDesayuno.cs" />
+    <Compile Include="CodigosTurismo\Excedentes.cs" />
     <Compile Include="CodigosUnidad\Anticipos.cs" />
     <Compile Include="CodigosUnidad\Bonificacion.cs" />
     <Compile Include="DestinosCuit\SinInformar.cs" />
@@ -1504,6 +1512,8 @@
     <Compile Include="TiposExportacion\TipoExportacion.cs" />
     <Compile Include="Turismo\cabecera.cs" />
     <Compile Include="Turismo\comprobante.cs" />
+    <Compile Include="Turismo\extensiones.cs" />
+    <Compile Include="Turismo\informacion_vendedor.cs" />
     <Compile Include="Turismo\detalle.cs" />
     <Compile Include="Turismo\forma_pago.cs" />
     <Compile Include="Turismo\informacion_comprador.cs" />

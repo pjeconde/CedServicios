@@ -122,7 +122,11 @@
     <Content Include="Controles\DatosEmailAvisoComprobanteContratoConsulta.ascx" />
     <Content Include="Controles\DatosEmailAvisoComprobantePersona.ascx" />
     <Content Include="Controles\ListaPrecioDefaultPersona.ascx" />
+    <Content Include="ComprobanteConsultaTurismo.aspx" />
     <Content Include="ExploradorPDFComprobante.aspx" />
+    <Content Include="Facturacion\Electronica\ImpuestosCTConsulta.ascx" />
+    <Content Include="Facturacion\Electronica\DetalleCTConsulta.ascx" />
+    <Content Include="Facturacion\Electronica\ReferenciasCTAFIPConsulta.ascx" />
     <Content Include="Facturacion\Electronica\ImpuestosCT.ascx" />
     <Content Include="Facturacion\Electronica\DetalleCT.ascx" />
     <Content Include="Facturacion\Electronica\ReferenciasCTAFIP.ascx" />
@@ -564,12 +568,40 @@
     <Compile Include="Controles\ListaPrecioDefaultPersona.ascx.designer.cs">
       <DependentUpon>ListaPrecioDefaultPersona.ascx</DependentUpon>
     </Compile>
+    <Compile Include="ComprobanteConsultaTurismo.aspx.cs">
+      <DependentUpon>ComprobanteConsultaTurismo.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComprobanteConsultaTurismo.aspx.designer.cs">
+      <DependentUpon>ComprobanteConsultaTurismo.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ExploradorPDFComprobante.aspx.cs">
       <DependentUpon>ExploradorPDFComprobante.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ExploradorPDFComprobante.aspx.designer.cs">
       <DependentUpon>ExploradorPDFComprobante.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ImpuestosCTConsulta.ascx.cs">
+      <DependentUpon>ImpuestosCTConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ImpuestosCTConsulta.ascx.designer.cs">
+      <DependentUpon>ImpuestosCTConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DetalleCTConsulta.ascx.cs">
+      <DependentUpon>DetalleCTConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DetalleCTConsulta.ascx.designer.cs">
+      <DependentUpon>DetalleCTConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ReferenciasCTAFIPConsulta.ascx.cs">
+      <DependentUpon>ReferenciasCTAFIPConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\ReferenciasCTAFIPConsulta.ascx.designer.cs">
+      <DependentUpon>ReferenciasCTAFIPConsulta.ascx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\ImpuestosCT.ascx.cs">
       <DependentUpon>ImpuestosCT.ascx</DependentUpon>

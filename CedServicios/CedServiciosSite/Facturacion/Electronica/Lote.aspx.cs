@@ -1161,7 +1161,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 string[] elementosClavePrimaria = CompradorDropDownList.SelectedValue.ToString().Split('\t');
                 comprador.Cuit = elementosClavePrimaria[0];
                 comprador.Documento.Tipo.Id = elementosClavePrimaria[1];
-                comprador.Documento.Nro = Convert.ToInt64(elementosClavePrimaria[2]);
+                comprador.Documento.Nro = elementosClavePrimaria[2];
                 comprador.IdPersona = elementosClavePrimaria[3];
                 comprador.DesambiguacionCuitPais = Convert.ToInt32(elementosClavePrimaria[4]);
                 int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
@@ -1208,7 +1208,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
-                            Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(comprador.Documento.Nro);
+                            Nro_Doc_Identificatorio_CompradorTextBox.Text = comprador.Documento.Nro;
                             Codigo_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.Documentos.Documento.ListaNoExportacion();
                             Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
                             if (comprador.Documento.Tipo.Id != null)
@@ -1379,7 +1379,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             string[] elementosClavePrimaria = VendedorDropDownList.SelectedValue.ToString().Split('\t');
             vendedor.Cuit = elementosClavePrimaria[0];
             vendedor.Documento.Tipo.Id = elementosClavePrimaria[1];
-            vendedor.Documento.Nro = Convert.ToInt64(elementosClavePrimaria[2]);
+            vendedor.Documento.Nro = elementosClavePrimaria[2];
             vendedor.IdPersona = elementosClavePrimaria[3];
             vendedor.DesambiguacionCuitPais = Convert.ToInt32(elementosClavePrimaria[4]);
             try
@@ -1414,7 +1414,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Contacto_VendedorTextBox.Text = vendedor.Contacto.Nombre;
                     Email_VendedorTextBox.Text = vendedor.Contacto.Email;
                     Telefono_VendedorTextBox.Text = Convert.ToString(vendedor.Contacto.Telefono);
-                    Cuit_VendedorTextBox.Text = Convert.ToString(vendedor.Documento.Nro);
+                    Cuit_VendedorTextBox.Text = vendedor.Documento.Nro;
                     Condicion_IVA_VendedorDropDownList.SelectedValue = Convert.ToString(vendedor.DatosImpositivos.IdCondIVA);
                     Condicion_Ingresos_Brutos_VendedorDropDownList.SelectedValue = Convert.ToString(vendedor.DatosImpositivos.IdCondIngBrutos);
                     NroIBVendedorTextBox.Text = vendedor.DatosImpositivos.NroIngBrutos;
@@ -2536,11 +2536,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 return pv.Nro == auxPV;
                             }).IdTipoPuntoVta;
-                            if (idtipo != "Comun")
-                            //if (idtipo != "Comun" && idtipo != "Exportacion")
+                            //if (idtipo != "Comun")
+                            if (idtipo != "Comun" && idtipo != "Exportacion")
                             {
-                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485."), false);
-                                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485 y Exportación."), false);
+                                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485."), false);
+                                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485 y Exportación."), false);
                                 return;
                             }
                             if (ValidarCamposObligatorios("SubirAAFIP"))

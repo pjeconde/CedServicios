@@ -21,7 +21,6 @@ namespace CedServicios.Site
                 }
                 else
                 {
-
                     if (Request.RawUrl == "/Facturacion/Electronica/Lote.aspx" && ((Entidades.ComprobanteATratar)Session["ComprobanteATratar"]).Tratamiento != Entidades.Enum.TratamientoComprobante.Alta)
                     {
                         UsuarioContentPlaceHolder.Visible = false;
@@ -38,6 +37,16 @@ namespace CedServicios.Site
                         Funciones.PersonalizarControlesMaster(this, true, sesion);
                     }
                 }
+                //VersionLabel.Text = "Ver. " + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+                //try
+                //{
+                //    System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(typeof(FeaEntidades.Turismo.comprobante));
+                //    System.IO.StringWriter textWriter = new System.IO.StringWriter();
+                //}
+                //catch (Exception exSerializer)
+                //{
+                //    Console.WriteLine(exSerializer.Message);
+                //}
             }
             //Detectar la ejecución de un UpdatePanel
             if (MasterScriptManager.IsInAsyncPostBack)
