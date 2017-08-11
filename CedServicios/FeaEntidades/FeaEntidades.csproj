@@ -1519,6 +1519,7 @@
     <Compile Include="Turismo\informacion_comprador.cs" />
     <Compile Include="Turismo\informacion_comprobante.cs" />
     <Compile Include="Turismo\linea.cs" />
+    <Compile Include="Turismo\lote_comprobantes.cs" />
     <Compile Include="Turismo\resumen.cs" />
     <Compile Include="UnidadesMedidaExpo\Kwh1000.cs" />
     <Compile Include="UnidadesMedidaExpo\Bonificacion.cs" />

@@ -137,6 +137,7 @@
     <Content Include="Facturacion\Electronica\Referencias.ascx" />
     <Content Include="Facturacion\Electronica\Reportes\ComprasXArticuloFiltros.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\ComprasXArticuloWebForm.aspx" />
+    <Content Include="Facturacion\Electronica\Reportes\FacturaWebFormT.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\StockXArticuloWebForm.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\StockXArticuloFiltros.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\IvaComprasWebForm.aspx" />
@@ -314,6 +315,13 @@
     <Content Include="Facturacion\Electronica\Reportes\Compras_XArticulo.xsd">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="Facturacion\Electronica\Reportes\lote_comprobantesT.xsd">
+      <SubType>Designer</SubType>
+    </Content>
+    <None Include="Facturacion\Electronica\Reportes\lote_comprobantesT.xsx">
+      <DependentUpon>lote_comprobantesT.xsd</DependentUpon>
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Facturacion\Electronica\Reportes\Stock_XArticulo.xsd">
       <SubType>Designer</SubType>
     </None>
@@ -678,6 +686,19 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\FacturaT.cs">
+      <DependentUpon>FacturaT.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\FacturaWebFormT.aspx.cs">
+      <DependentUpon>FacturaWebFormT.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\Reportes\FacturaWebFormT.aspx.designer.cs">
+      <DependentUpon>FacturaWebFormT.aspx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\StockXArticulo.cs">
       <DependentUpon>StockXArticulo.rpt</DependentUpon>
@@ -1608,6 +1629,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>StockXArticulo.cs</LastGenOutput>
     </Content>
+    <Content Include="Facturacion\Electronica\Reportes\FacturaT.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>FacturaT.cs</LastGenOutput>
+    </Content>
     <EmbeddedResource Include="Facturacion\Electronica\Reportes\Imagen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Imagen.cs</LastGenOutput>
@@ -1733,7 +1758,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>43489</DevelopmentServerPort>
+          <DevelopmentServerPort>61754</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

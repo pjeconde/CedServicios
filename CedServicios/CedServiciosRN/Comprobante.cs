@@ -2297,6 +2297,51 @@ namespace CedServicios.RN
                 }
             }
         }
+        public static void AjustarLoteTParaImprimirPDF(FeaEntidades.Turismo.lote_comprobantes lcFea)
+        {
+            if (lcFea.comprobante[0].cabecera.informacion_comprobante.cae == null || lcFea.comprobante[0].cabecera.informacion_comprobante.cae.Equals(string.Empty))
+            {
+                lcFea.comprobante[0].cabecera.informacion_comprobante.cae = " ";
+            }
+            lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+            lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+            foreach (FeaEntidades.InterFacturas.linea l in lcFea.comprobante[0].detalle.linea)
+            {
+                if (l != null)
+                {
+                    l.descripcion = l.descripcion.Replace("<br>", System.Environment.NewLine);
+                }
+                else
+                {
+                    break;
+                }
+            }
+            if (lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null)
+            {
+                lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento = string.Empty;
+            }
+            if (lcFea.comprobante[0].extensiones != null && lcFea.comprobante[0].extensiones.extensiones_datos_comerciales != null && !lcFea.comprobante[0].extensiones.extensiones_datos_comerciales.Equals(string.Empty))
+            {
+                string dc = RN.Funciones.HexToString(lcFea.comprobante[0].extensiones.extensiones_datos_comerciales);
+                lcFea.comprobante[0].extensiones.extensiones_datos_comerciales = dc.Replace("<br>", System.Environment.NewLine);
+            }
+            else
+            {
+                lcFea.comprobante[0].extensiones = new FeaEntidades.Turismo.extensiones();
+            }
+            if (lcFea.comprobante[0].resumen.impuestos != null)
+            {
+                foreach (FeaEntidades.InterFacturas.resumenImpuestos imp in lcFea.comprobante[0].resumen.impuestos)
+                {
+                    if (imp != null)
+                    {
+                        imp.codigo_jurisdiccionSpecified = true;
+                        imp.porcentaje_impuestoSpecified = true;
+                        imp.importe_impuesto_moneda_origenSpecified = true;
+                    }
+                }
+            }
+        }
         public static void LeerUltimoEmitido(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);

@@ -12,7 +12,7 @@ namespace FeaEntidades.Turismo
         private informacion_comprador informacion_compradorField;
         private informacion_comprobante informacion_comprobanteField;
 
-        public cabecera() 
+        public cabecera() : base()
         {
             informacion_vendedorField = new informacion_vendedor();
             informacion_compradorField = new informacion_comprador();

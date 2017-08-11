@@ -321,6 +321,7 @@ namespace CedServicios.Site
             string comando = ddl.SelectedValue;
             ddl.ClearSelection();
             FeaEntidades.InterFacturas.lote_comprobantes lote;
+            FeaEntidades.Turismo.lote_comprobantes loteT;
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             string certificado;
             string DetalleIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKUtilizarServidorExterno"];
@@ -758,8 +759,6 @@ namespace CedServicios.Site
                         {
                             #region PDF (AFIP)
                             //GENERACIÓN DE PDF A PARTIR DE DATOS LOCALES
-                            lote = new FeaEntidades.InterFacturas.lote_comprobantes();
-                            x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
                             if (comprobante.Estado != "Vigente")
                             {
                                 MensajeLabel.Text = "El comprobante no está vigente.";
@@ -767,26 +766,58 @@ namespace CedServicios.Site
                             }
                             try
                             {
-                                comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
-                                bytes = new byte[comprobante.Response.Length * sizeof(char)];
-                                System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
-                                ms = new System.IO.MemoryStream(bytes);
-                                ms.Seek(0, System.IO.SeekOrigin.Begin);
-                                lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+                                int auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                                {
+                                    return pv.Nro == auxPV;
+                                }).IdTipoPuntoVta;
+                                if (idtipo != "Turismo")
+                                {
+                                    lote = new FeaEntidades.InterFacturas.lote_comprobantes();
+                                    x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
+                            
+                                    comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
+                                    bytes = new byte[comprobante.Response.Length * sizeof(char)];
+                                    System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                                    ms = new System.IO.MemoryStream(bytes);
+                                    ms.Seek(0, System.IO.SeekOrigin.Begin);
+                                    lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
 
-                                //comprobante.Request = comprobante.Request.Replace("iso-8859-1", "utf-16");
-                                //bytes = new byte[comprobante.Request.Length * sizeof(char)];
-                                //System.Buffer.BlockCopy(comprobante.Request.ToCharArray(), 0, bytes, 0, bytes.Length);
-                                //ms = new System.IO.MemoryStream(bytes);
-                                //ms.Seek(0, System.IO.SeekOrigin.Begin);
-                                //lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
+                                    RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
 
-                                RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
-                               
-                                Session["lote"] = lote;
+                                    Session["lote"] = lote;
+                                }
+                                else
+                                {
+                                    loteT = new FeaEntidades.Turismo.lote_comprobantes();
+
+                                    FeaEntidades.Turismo.comprobante compT = new FeaEntidades.Turismo.comprobante();
+                                    x = new System.Xml.Serialization.XmlSerializer(compT.GetType());
+
+                                    comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
+                                    bytes = new byte[comprobante.Response.Length * sizeof(char)];
+                                    System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
+                                    ms = new System.IO.MemoryStream(bytes);
+                                    ms.Seek(0, System.IO.SeekOrigin.Begin);
+                                    compT = (FeaEntidades.Turismo.comprobante)x.Deserialize(ms);
+
+                                    loteT.comprobante[0] = compT;
+
+                                    RN.Comprobante.AjustarLoteTParaImprimirPDF(loteT);
+
+                                    Session["lote"] = loteT;
+
+                                }
+                                
                                 //Response.Redirect("~\\Facturacion\\Electronica\\Reportes\\FacturaWebForm.aspx", true);
-
-                                script = "window.open('/Facturacion/Electronica/Reportes/FacturaWebForm.aspx', '');";
+                                if (idtipo != "Turismo")
+                                {
+                                    script = "window.open('/Facturacion/Electronica/Reportes/FacturaWebForm.aspx', '');";
+                                }
+                                else
+                                {
+                                    script = "window.open('/Facturacion/Electronica/Reportes/FacturaWebFormT.aspx', '');";
+                                }
                                 ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                             }
                             catch (Exception ex)

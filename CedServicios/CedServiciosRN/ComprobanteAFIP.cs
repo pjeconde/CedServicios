@@ -1357,7 +1357,7 @@ namespace CedServicios.RN
                     }
                     else
                     {
-                        throw new Exception("Este tipo de punto de venta no está disponible para la consulta On-Line. Punto de venta: " + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString() + " " + listaPV[0].IdTipoPuntoVta);
+                        respuesta += "Este tipo de punto de venta no está disponible para la consulta On-Line. Punto de venta: " + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString() + " " + listaPV[0].IdTipoPuntoVta;
                     }
                 }
                 return respuesta;
