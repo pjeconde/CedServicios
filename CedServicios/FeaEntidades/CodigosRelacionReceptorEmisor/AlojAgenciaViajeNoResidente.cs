@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosRelacionReceptorEmisor
         public AlojAgenciaViajeNoResidente()
 		{
 			codigo = 3;
-            descr = "Aloj.a Agencia de Viaje No Residente ";
+            descr = "Aloj. a Agencia de Viaje No Residente";
 		}
 	}
 }

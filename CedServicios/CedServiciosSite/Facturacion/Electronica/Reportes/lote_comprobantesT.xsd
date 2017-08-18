@@ -73,6 +73,8 @@
                             </xs:complexType>
                           </xs:element>
 						              <xs:element minOccurs="0" maxOccurs="1" name="codigo_concepto" type="xs:int" />
+                          <xs:element minOccurs="0" maxOccurs="1" name="tipo_Autorizacion" type="xs:string" />
+                          <xs:element minOccurs="0" maxOccurs="1" name="codigo_Autotizacion" type="xs:long" />
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
@@ -129,6 +131,9 @@
                           <xs:element minOccurs="0" maxOccurs="1" name="email" type="xs:string" />
                           <xs:element minOccurs="0" maxOccurs="1" name="telefono" type="xs:string" />
                           <xs:element minOccurs="0" maxOccurs="1" name="codigo_Pais" type="xs:short" />
+                          <xs:element minOccurs="0" maxOccurs="1" name="id_Impositivo" type="xs:string" />
+                          <xs:element minOccurs="0" maxOccurs="1" name="codigo_Relacion_Receptor_Emisor" type="xs:short" />
+                          <xs:element minOccurs="0" maxOccurs="1" name="nro_doc_identificatorio_afip" type="xs:string" />
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
@@ -186,6 +191,7 @@
                               </xs:sequence>
                             </xs:complexType>
                           </xs:element>
+                          <xs:element minOccurs="0" maxOccurs="1" name="codigo_Turismo" type="xs:short" />
                         </xs:sequence>
                         <xs:attribute name="numeroLinea" type="xs:int" use="required" />
                       </xs:complexType>
@@ -253,6 +259,7 @@
                         </xs:sequence>
                       </xs:complexType>
                     </xs:element>
+                    <xs:element minOccurs="1" maxOccurs="1" name="importe_Reintegro" type="xs:double" />
                   </xs:sequence>
                 </xs:complexType>
               </xs:element>
