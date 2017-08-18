@@ -122,34 +122,39 @@ namespace CedServicios.RN
                         opcionesHabilitadas.Add("Contratos|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Contratos|Modificación");
                         opcionesHabilitadas.Add("Contratos|Consulta");
-                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Electrónica");
+
+                        opcionesHabilitadas.Add("Facturación|Común / RG.2904 / Bono Fiscal / Exportación");
                         List<Entidades.PuntoVta> lpv = Sesion.UN.PuntosVtaVigentes.FindAll(delegate(Entidades.PuntoVta pv)
                         {
                             return pv.IdTipoPuntoVta == "Turismo";
                         });
                         if (lpv.Count != 0)
                         {
-                            opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Electrónica Turismo");
+                            opcionesHabilitadas.Add("Facturación|Turismo");
                         }
-                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Venta|Tradicional");
-                        opcionesHabilitadas.Add("Comprobantes|Alta manual|Compra");
+                        opcionesHabilitadas.Add("Facturación|Automática de Contratos/Servicios");
+
+                        opcionesHabilitadas.Add("Registro de Facturas|Venta Resguardo");
+                        opcionesHabilitadas.Add("Registro de Facturas|Compra");
+
                         opcionesHabilitadas.Add("Comprobantes|Baja/Anul.baja");
                         opcionesHabilitadas.Add("Comprobantes|Modificación");
                         opcionesHabilitadas.Add("Comprobantes|Envio (AFIP/ITF)");
                         opcionesHabilitadas.Add("Comprobantes|Consulta");
+                        opcionesHabilitadas.Add("Comprobantes|Consulta PDFs");
+
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|IVA Ventas");
-                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Ventas por Artículo");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|IVA Compras");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Interfaz CITI Ventas/Compras RG.3685");
+                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Ventas por Artículo");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Compras por Artículo");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Stock por Artículo");
-                        opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Interfaz RG.3685");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online Interfacturas|Un comprobante");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Online AFIP");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Archivo XML");
                         opcionesHabilitadas.Add("Comprobantes|Otras Consultas|Términos y condiciones");
-                        opcionesHabilitadas.Add("Comprobantes|Generación automática (contratos)");
-                        opcionesHabilitadas.Add("Comprobantes|Consulta PDFs");
+                        
                         if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                         {
                             opcionesHabilitadas.Add("Administración|Puntos de Venta|Alta");

@@ -138,9 +138,10 @@
                 <br />
                 Soporta los siguientes tipos de Factura Electrónica:<br />
                 <br />
-                &#8226; Común (RG2485 / RG2904), <br />
-                &#8226; Bono Fiscal (Bienes de Capital) y <br />
-                &#8226; Exportación (RG2758/2010).<br />
+                &#8226; Común (RG.2485 / RG.2904), <br />
+                &#8226; Bono Fiscal (Bienes de Capital), <br />
+                &#8226; Exportación (RG.2758/2010) y <br />
+                &#8226; Turismo (RG.3971).<br />
                 <br />
                 Entorno 
                 <asp:LinkButton ID="MultiCuitLinkButton" runat="server" TabIndex="4" Text="Multi-CUIT" class="tooltip-test" title="Con la misma Cuenta se pueden operar uno o más CUITs." onclick="MultiCuitLinkButton_Click" />, 
@@ -218,11 +219,13 @@
                                                 <li>Facturas y Recibos clase “B”.</li>
                                                 <li>Facturas y Recibos clase “C”.</li>
                                                 <li>Facturas y Recibos clase “E”.</li>
+                                                <li>Facturas clase “T”.</li>
                                                 <li>Notas de crédito y notas de débito clase “A”, “A” con la leyenda “PAGO EN C.B.U.
                                                     INFORMADA” y/o “M”. </li>
                                                 <li>Notas de crédito y notas de débito clase “B”.</li>
                                                 <li>Notas de crédito y notas de débito clase “C”.</li>
                                                 <li>Notas de crédito y notas de débito clase “E”.</li>
+                                                <li>Notas de crédito y notas de débito clase “T”.</li>
                                             </ul>
                                             <h4>
                                                 Comprobantes excluídos</h4>

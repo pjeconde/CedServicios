@@ -98,23 +98,25 @@ namespace CedServicios.Site
                 mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
+
+            mItem = new MenuItem("Facturación", "Facturación"); mItem.Selectable = false;
+            menu.Items.Add(mItem);
+                mItem = new MenuItem("Común / RG.2904 / Bono Fiscal / Exportación", "Común / RG.2904 / Bono Fiscal / Exportación"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Turismo", "Turismo"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Automática de Contratos/Servicios", "Automática de Contratos/Servicios"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+
+            mItem = new MenuItem("Registro de Facturas", "Registro de Facturas"); mItem.Selectable = false;
+            menu.Items.Add(mItem);
+                mItem = new MenuItem("Venta Resguardo", "Venta Resguardo"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Compra", "Compra"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            
             mItem = new MenuItem("Comprobantes", "Comprobantes"); mItem.Selectable = false;
             menu.Items.Add(mItem);
-                mItem = new MenuItem("Alta manual", "Alta manual"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Venta", "Venta"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                        mItem = new MenuItem("Electrónica", "Electrónica"); mItem.Selectable = false;
-                        mItemNivel3 = menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1];
-                        mItemNivel3.ChildItems[mItemNivel3.ChildItems.Count - 1].ChildItems.Add(mItem);
-                        mItem = new MenuItem("Electrónica Turismo", "Electrónica Turismo"); mItem.Selectable = false;
-                        mItemNivel3 = menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1];
-                        mItemNivel3.ChildItems[mItemNivel3.ChildItems.Count - 1].ChildItems.Add(mItem);
-                        mItem = new MenuItem("Tradicional", "Tradicional"); mItem.Selectable = false;
-                        mItemNivel3 = menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1];
-                        mItemNivel3.ChildItems[mItemNivel3.ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Compra", "Compra"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
@@ -123,19 +125,22 @@ namespace CedServicios.Site
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Consulta PDFs", "Consulta PDFs"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+
                 mItem = new MenuItem("Otras Consultas", "Otras Consultas"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("IVA Ventas", "IVA Ventas"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Ventas por Artículo", "Ventas por Artículo"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("IVA Compras", "IVA Compras"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Interfaz CITI Ventas/Compras RG.3685", "Interfaz CITI Ventas/Compras RG.3685"); mItem.Selectable = false;
+                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+                    mItem = new MenuItem("Ventas por Artículo", "Ventas por Artículo"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Compras por Artículo", "Compras por Artículo"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Stock por Artículo", "Stock por Artículo"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Interfaz RG.3685", "Interfaz RG.3685"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Online Interfacturas", "Online Interfacturas"); mItem.Selectable = false;
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
@@ -151,10 +156,7 @@ namespace CedServicios.Site
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
                     mItem = new MenuItem("Términos y condiciones", "Términos y condiciones"); mItem.Selectable = false; mItem.ToolTip = "Términos y Condiciones";
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Generación automática (contratos)", "Generación automática (contratos)"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Consulta PDFs", "Consulta PDFs"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+
 
             mItem = new MenuItem("Administración", "Administración"); mItem.Selectable = false;
             menu.Items.Add(mItem);

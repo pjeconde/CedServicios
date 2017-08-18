@@ -181,7 +181,7 @@ namespace CedServicios.Site
                 case "Contratos|Consulta":
                     Response.Redirect("~/ExploradorComprobante.aspx?Consulta-Contrato");
                     break;
-                case "Comprobantes|Alta manual|Venta|Electrónica":
+                case "Facturación|Común / RG.2904 / Bono Fiscal / Exportación":
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Venta");
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {
@@ -192,7 +192,7 @@ namespace CedServicios.Site
                         Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
                     }
                     break;
-                case "Comprobantes|Alta manual|Venta|Electrónica Turismo":
+                case "Facturación|Turismo":
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Venta");
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {
@@ -203,7 +203,10 @@ namespace CedServicios.Site
                         Response.Redirect("~/Facturacion/Electronica/LoteCT.aspx");
                     }
                     break;
-                case "Comprobantes|Alta manual|Venta|Tradicional":
+                case "Facturación|Automática de Contratos/Servicios":
+                    Response.Redirect("~/ComprobanteGeneracionAutomatica.aspx");
+                    break;
+                case "Registro de Facturas|Venta Resguardo":
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("VentaTradic");
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {
@@ -214,7 +217,7 @@ namespace CedServicios.Site
                         Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
                     }
                     break;
-                case "Comprobantes|Alta manual|Compra":
+                case "Registro de Facturas|Compra":
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Compra");
                     if (sesion.Usuario.FechaOKeFactTyC == "00000000")
                     {
@@ -237,23 +240,26 @@ namespace CedServicios.Site
                 case "Comprobantes|Consulta":
                     Response.Redirect("~/ExploradorComprobante.aspx?Consulta-Comprobante");
                     break;
+                case "Comprobantes|Consulta PDFs":
+                    Response.Redirect("~/ExploradorPDFComprobante.aspx");
+                    break;
                 case "Comprobantes|Otras Consultas|IVA Ventas":
                     Response.Redirect("~/Facturacion/Electronica/Reportes/IvaVentasFiltros.aspx");
                     break;
-                case "Comprobantes|Otras Consultas|Ventas por Artículo":
-                    Response.Redirect("~/Facturacion/Electronica/Reportes/VentasXArticuloFiltros.aspx");
-                    break;
                 case "Comprobantes|Otras Consultas|IVA Compras":
                     Response.Redirect("~/Facturacion/Electronica/Reportes/IvaComprasFiltros.aspx");
+                    break;
+                case "Comprobantes|Otras Consultas|Interfaz CITI Ventas/Compras RG.3685":
+                    Response.Redirect("~/ExploradorComprobanteRG.aspx");
+                    break;
+                case "Comprobantes|Otras Consultas|Ventas por Artículo":
+                    Response.Redirect("~/Facturacion/Electronica/Reportes/VentasXArticuloFiltros.aspx");
                     break;
                 case "Comprobantes|Otras Consultas|Compras por Artículo":
                     Response.Redirect("~/Facturacion/Electronica/Reportes/ComprasXArticuloFiltros.aspx");
                     break;
                 case "Comprobantes|Otras Consultas|Stock por Artículo":
                     Response.Redirect("~/Facturacion/Electronica/Reportes/StockXArticuloFiltros.aspx");
-                    break;
-                case "Comprobantes|Otras Consultas|Interfaz RG.3685":
-                    Response.Redirect("~/ExploradorComprobanteRG.aspx");
                     break;
                 case "Comprobantes|Otras Consultas|Online Interfacturas|Varios comprobantes":
                     Response.Redirect("~/ExploradorComprobanteOnLineInterfacturas.aspx");
@@ -269,12 +275,6 @@ namespace CedServicios.Site
                     break;
                 case "Comprobantes|Otras Consultas|Términos y condiciones":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
-                    break;
-                case "Comprobantes|Generación automática (contratos)":
-                    Response.Redirect("~/ComprobanteGeneracionAutomatica.aspx");
-                    break;
-                case "Comprobantes|Consulta PDFs":
-                    Response.Redirect("~/ExploradorPDFComprobante.aspx");
                     break;
                 case "Administración|Autorizaciones|Explorador de Autorizaciones pendientes":
                     Response.Redirect("~/ExploradorAutorizacion.aspx");

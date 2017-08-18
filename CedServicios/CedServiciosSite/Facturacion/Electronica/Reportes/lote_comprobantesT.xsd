@@ -3,6 +3,22 @@
   <xs:element name="lote_comprobantes">
     <xs:complexType>
       <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="1" name="cabecera_lote">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element minOccurs="1" maxOccurs="1" name="id_lote" type="xs:long" />
+              <xs:element minOccurs="1" maxOccurs="1" name="cuit_canal" type="xs:long" />
+              <xs:element minOccurs="0" maxOccurs="1" name="cod_interno_canal" type="xs:string" />
+              <xs:element minOccurs="1" maxOccurs="1" name="cuit_vendedor" type="xs:long" />
+              <xs:element minOccurs="1" maxOccurs="1" name="cantidad_reg" type="xs:int" />
+              <xs:element minOccurs="0" maxOccurs="1" name="presta_serv" type="xs:int" />
+              <xs:element minOccurs="0" maxOccurs="1" name="fecha_envio_lote" type="xs:string" />
+              <xs:element minOccurs="1" maxOccurs="1" name="punto_de_venta" type="xs:int" />
+              <xs:element minOccurs="0" maxOccurs="1" name="resultado" type="xs:string" />
+              <xs:element minOccurs="0" maxOccurs="1" name="motivo" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
         <xs:element minOccurs="0" maxOccurs="unbounded" name="comprobante">
           <xs:complexType>
             <xs:sequence>
@@ -33,6 +49,26 @@
                               <xs:sequence>
                                 <xs:element minOccurs="1" maxOccurs="1" name="codigo_de_referencia" type="xs:int" />
                                 <xs:element minOccurs="0" maxOccurs="1" name="dato_de_referencia" type="xs:string" />
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                          <xs:element minOccurs="0" maxOccurs="1" name="informacion_exportacion">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element minOccurs="1" maxOccurs="1" name="destino_comprobante" type="xs:int" />
+                                <xs:element minOccurs="1" maxOccurs="1" name="tipo_exportacion" type="xs:int" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="id_impositivo" type="xs:string" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="incoterms" type="xs:string" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="descripcion_incoterms" type="xs:string" />
+                                <xs:element minOccurs="0" maxOccurs="1" name="permiso_existente" type="xs:string" />
+                                <xs:element minOccurs="0" maxOccurs="unbounded" name="permisos">
+                                  <xs:complexType>
+                                    <xs:sequence>
+                                      <xs:element minOccurs="0" maxOccurs="1" name="id_permiso" type="xs:string" />
+                                      <xs:element minOccurs="1" maxOccurs="1" name="destino_mercaderia" type="xs:int" />
+                                    </xs:sequence>
+                                  </xs:complexType>
+                                </xs:element>
                               </xs:sequence>
                             </xs:complexType>
                           </xs:element>
@@ -150,7 +186,6 @@
                               </xs:sequence>
                             </xs:complexType>
                           </xs:element>
-                          <xs:element minOccurs="0" maxOccurs="1" name="codigo_Turismo" type="xs:short" />
                         </xs:sequence>
                         <xs:attribute name="numeroLinea" type="xs:int" use="required" />
                       </xs:complexType>

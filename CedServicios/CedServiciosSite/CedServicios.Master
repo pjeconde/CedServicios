@@ -143,7 +143,7 @@
                 <td align="left" style="text-align: left">
                     <asp:Menu ID="Menu" runat="server" BackColor="white"  
                         DynamicHorizontalOffset="0" CssClass="MainMenu" 
-                        Font-Names="Verdana" Font-Size="10px" ForeColor="#284E98" PathSeparator="|" 
+                        Font-Names="Verdana" Font-Size="12px" ForeColor="#284E98" PathSeparator="|" 
                         StaticSubMenuIndent="30px" onmenuitemclick="Menu_MenuItemClick" 
                         Orientation="Horizontal" StaticEnableDefaultPopOutImage="false" DynamicEnableDefaultPopOutImage="false">
                         <DynamicHoverStyle Font-Underline="true" BackColor="Cornsilk"/>
