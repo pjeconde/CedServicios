@@ -1306,6 +1306,15 @@
     <Compile Include="Documentos\CI\CedulaIdentidad.cs" />
     <Compile Include="Documentos\CI\Chaco.cs" />
     <Compile Include="Documentos\CI\Chubut.cs" />
+    <Compile Include="Documentos\CI\Catamarca.cs" />
+    <Compile Include="Documentos\CI\TierraDelFuego.cs" />
+    <Compile Include="Documentos\CI\SantaCruz.cs" />
+    <Compile Include="Documentos\CI\RioNegro.cs" />
+    <Compile Include="Documentos\CI\LaPampa.cs" />
+    <Compile Include="Documentos\CI\Jujuy.cs" />
+    <Compile Include="Documentos\CI\EntreRios.cs" />
+    <Compile Include="Documentos\CI\Corrientes.cs" />
+    <Compile Include="Documentos\CI\Cordoba.cs" />
     <Compile Include="Documentos\CI\Extranjera.cs" />
     <Compile Include="Documentos\CI\Formosa.cs" />
     <Compile Include="Documentos\CI\LaRioja.cs" />
@@ -1319,6 +1328,8 @@
     <Compile Include="Documentos\CI\SantaFe.cs" />
     <Compile Include="Documentos\CI\SantiagoDelEstero.cs" />
     <Compile Include="Documentos\CI\Tucuman.cs" />
+    <Compile Include="Documentos\CertificadoDeMigracion.cs" />
+    <Compile Include="Documentos\Otro.cs" />
     <Compile Include="Documentos\CUIL.cs" />
     <Compile Include="Documentos\CUIT.cs" />
     <Compile Include="Documentos\CUITPais.cs" />

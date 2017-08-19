@@ -26,6 +26,13 @@ namespace FeaEntidades.CodigosMoneda
 			get { return "PES"; }
 		}
 
+        public static List<CodigoMoneda> ListaTurismo()
+        {
+            List<CodigoMoneda> lista = new List<CodigoMoneda>();
+            lista.Add(new PesosArgentinos());
+            return lista;
+        }
+
 		public static List<CodigoMoneda> ListaNoExportacion()
 		{
 			List<CodigoMoneda> lista = new List<CodigoMoneda>();

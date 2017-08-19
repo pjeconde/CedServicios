@@ -604,7 +604,8 @@
                                                             Tipo de documento:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:DropDownList ID="Codigo_Doc_Identificatorio_CompradorDropDownList" runat="server" SkinID="ddln">
+                                                            <asp:DropDownList ID="Codigo_Doc_Identificatorio_CompradorDropDownList" AutoPostBack="true" runat="server" SkinID="ddln" 
+                                                            onselectedindexchanged="Codigo_Doc_Identificatorio_CompradorDropDownList_SelectedIndexChanged">
                                                             </asp:DropDownList>
                                                         </td>
                                                     </tr>

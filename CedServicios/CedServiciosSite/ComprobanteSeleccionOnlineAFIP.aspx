@@ -392,6 +392,11 @@
                                                     Text="Consultar Códigos de Item Turismo" ToolTip="Consultar los codigos de item turismo. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
                                                     Width="100%" />
                                             </td>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="Button7" runat="server" OnClick="ConsultarAFIPCuitPaisesCTButton_Click"
+                                                    Text="Consultar Cuit Paises" ToolTip="Consultar los codigos de Cuit Paises. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
+                                                    Width="100%" />
+                                            </td>
                                         </tr>
                                     </table>
                                 </td>

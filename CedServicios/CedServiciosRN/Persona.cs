@@ -37,6 +37,12 @@ namespace CedServicios.RN
             });
             return lista;
         }
+        public static List<Entidades.Persona> ListaTurismo(Entidades.Sesion Sesion)
+        {
+            DB.Persona comprador = new DB.Persona(Sesion);
+            List<Entidades.Persona> lista = comprador.ListaPorCuit(true, CedServicios.Entidades.Enum.TipoPersona.Cliente);
+            return lista;
+        }
         public static List<Entidades.Persona> ListaPorCuityTipoyNroDoc(string Cuit, Entidades.Documento Documento, CedServicios.Entidades.Enum.TipoPersona TipoPersona, Entidades.Sesion Sesion)
         {
             DB.Persona db = new DB.Persona(Sesion);

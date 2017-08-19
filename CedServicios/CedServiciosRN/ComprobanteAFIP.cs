@@ -941,7 +941,7 @@ namespace CedServicios.RN
                     objFERequest.importeTotal = Convert.ToDecimal(Comprobante.resumen.importe_total_factura);
                     if (Comprobante.resumen.importe_ReintegroSpecified == true)
                     {
-                        objFERequest.importeReintegro = (Comprobante.resumen.importe_Reintegro * -1);
+                        objFERequest.importeReintegro = Comprobante.resumen.importe_Reintegro;
                         objFERequest.importeReintegroSpecified = true;
                     }
                 }
@@ -957,7 +957,7 @@ namespace CedServicios.RN
                     objFERequest.importeTotal = Convert.ToDecimal(Comprobante.resumen.importes_moneda_origen.importe_total_factura);
                     if (Comprobante.resumen.importe_ReintegroSpecified == true)
                     {
-                        objFERequest.importeReintegro = (Comprobante.resumen.importe_Reintegro * -1);
+                        objFERequest.importeReintegro = Comprobante.resumen.importe_Reintegro;
                         objFERequest.importeReintegroSpecified = true;
                     }   
                 }
@@ -967,7 +967,14 @@ namespace CedServicios.RN
                 }
 
                 objFERequest.numeroDocumento = Comprobante.cabecera.informacion_comprador.nro_doc_identificatorio_afip.ToString();            // Documento formato AFIP texto
-                objFERequest.codigoTipoDocumento = Convert.ToInt16(Comprobante.cabecera.informacion_comprador.codigo_doc_identificatorio);    
+                if (Comprobante.cabecera.informacion_comprador.codigo_doc_identificatorio == 70)
+                {
+                    objFERequest.codigoTipoDocumento = Convert.ToInt16(80);
+                }
+                else
+                {
+                    objFERequest.codigoTipoDocumento = Convert.ToInt16(Comprobante.cabecera.informacion_comprador.codigo_doc_identificatorio);
+                }
                 objFERequest.cotizacionMoneda = Convert.ToDecimal(Comprobante.resumen.tipo_de_cambio);
                 objFERequest.codigoTipoAutorizacion = ar.gov.afip.WSCT.CodigoTipoAutorizacionSimpleType.E;
                 objFERequest.codigoTipoAutorizacionSpecified = true;
@@ -1237,7 +1244,7 @@ namespace CedServicios.RN
                     }
                     respuesta += "CAE: " + objFEResponse.comprobanteResponse.CAE;
                     Cae = objFEResponse.comprobanteResponse.CAE.ToString().Trim();
-                    CaeFecVto = objFEResponse.comprobanteResponse.fechaVencimientoCAE.ToString("dd/MM/yyyy");
+                    CaeFecVto = objFEResponse.comprobanteResponse.fechaVencimientoCAE.ToString("yyyyMMdd");
                 }
                 else
                 {
@@ -2224,6 +2231,35 @@ namespace CedServicios.RN
                 else
                 {
                     respuesta += DB.Funciones.ObjetoSerializado(arrayFEResponse.arrayCodigosItem);
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static string ConsultarAFIPCuitPaises_CT(Entidades.Sesion Sesion)
+        {
+            try
+            {
+                string respuesta = "";
+                LoginTicket ticket;
+                ar.gov.afip.WSCT.CTService objWSCT;
+                CrearTicketWSCT(Sesion, out ticket, out objWSCT);
+
+                ar.gov.afip.WSCT.ConsultarCuitPaisesReturnType arrayFEResponse = new ar.gov.afip.WSCT.ConsultarCuitPaisesReturnType();
+                arrayFEResponse = objWSCT.consultarCUITsPaises(ticket.ObjAutorizacionWSCT);
+                System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                if (arrayFEResponse.arrayErrores != null)
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(arrayFEResponse.arrayErrores);
+                }
+                else
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(arrayFEResponse.arrayCuitPaises);
                 }
                 return respuesta;
             }

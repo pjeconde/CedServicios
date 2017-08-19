@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosRelacionReceptorEmisor
 		public AlojTuristaNoResidente()
 		{
 			codigo = 1;
-			descr = "Aloj. Directo Turista No Residente";
+			descr = "1-Aloj. Directo Turista No Residente";
 		}
 	}
 }

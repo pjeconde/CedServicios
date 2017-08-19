@@ -9,7 +9,7 @@ namespace FeaEntidades.CodigosRelacionReceptorEmisor
 		public AlojAgenciaViajeResidente()
 		{
 			codigo = 2;
-            descr = "Aloj. a Agencia de Viaje Residente";
+            descr = "2-Aloj. a Agencia de Viaje Residente";
 		}
 	}
 }

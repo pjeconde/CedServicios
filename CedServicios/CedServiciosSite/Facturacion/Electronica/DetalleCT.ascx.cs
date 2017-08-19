@@ -204,6 +204,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     linea.precio_unitario = l.importes_moneda_origen.precio_unitario;
                     linea.precio_unitarioSpecified = l.importes_moneda_origen.precio_unitarioSpecified;
                 }
+                linea.codigo_Turismo = l.codigo_Turismo;
                 lineas.Add(linea);
             }
             detalleGridView.DataSource = lineas;
@@ -569,7 +570,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigoTurismo")).DataBind();
             try
             {
-                ListItem liUnidad = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigoTurismo")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"])[e.NewEditIndex].unidad.ToString());
+                ListItem liUnidad = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigoTurismo")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.Turismo.linea>)ViewState["lineas"])[e.NewEditIndex].codigo_Turismo.ToString());
                 liUnidad.Selected = true;
             }
             catch
@@ -738,7 +739,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         totalGravado += imptotdiscr;
                         if (listadelineas[i].codigo_Turismo == 1 || listadelineas[i].codigo_Turismo == 2)
                         {
-                            total_Reintegros += listadelineas[i].importe_iva;
+                            total_Reintegros -= listadelineas[i].importe_iva;
                         }
                     }
                     else if (listadelineas[i].indicacion_exento_gravado != null && listadelineas[i].indicacion_exento_gravado.Equals("E"))

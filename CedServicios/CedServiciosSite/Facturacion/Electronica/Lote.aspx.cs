@@ -282,7 +282,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                             CompradorDropDownList.DataSource = null;
                         }
                         PuntoVtaDropDownList.Enabled = true;
-                        System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVtaVigentes;
+                        System.Collections.Generic.List<Entidades.PuntoVta> listaPuntoVta = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVtaVigentes.FindAll(delegate(Entidades.PuntoVta pv)
+                        {
+                            return (pv.IdTipoPuntoVta != "Turismo");
+                        });
+                        if (listaPuntoVta.Count == 0)
+                        {
+                            WebForms.Excepciones.Redireccionar(new EX.Validaciones.ValorNoInfo("Puntos de Venta Común / RG.2904 / Bono Fiscal o Exportación"), "~/NotificacionDeExcepcion.aspx");
+                        }
                         PuntoVtaDropDownList.Visible = true;
                         PuntoVtaDropDownList.DataValueField = "Nro";
                         PuntoVtaDropDownList.DataTextField = "Descr";
@@ -391,7 +398,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 //Informar datos actualizados del cuit.
                                 VerificarDatosVendedorDelPuntoVta();
-
                                 //Informar datos actualizados del cliente.
                                 //System.Collections.Generic.List<Entidades.Persona> listaP = sesion.ClientesDelCuit.FindAll(delegate(Entidades.Persona p)
                                 //{
@@ -526,71 +532,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 			PermisosExpo.BindearDropDownLists();
 			DetalleLinea.BindearDropDownLists();
 		}
-        //private void AjustarCodigosDeReferenciaEnFooter()
-        //{
-        //    referenciasGridView.DataBind();
-        //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataValueField = "Codigo";
-        //    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataTextField = "Descr";
-        //    if (Funciones.SessionTimeOut(Session))
-        //    {
-        //        Response.Redirect("~/SessionTimeout.aspx");
-        //    }
-        //    else
-        //    {
-        //        if (((Entidades.Sesion)Session["Sesion"]).Usuario != null)
-        //        {
-        //            //if (!Punto_VentaTextBox.Text.Equals(string.Empty))
-        //            if (!PuntoVtaDropDownList.SelectedValue.Equals(string.Empty))
-        //            {
-        //                int auxPV;
-        //                try
-        //                {
-        //                    auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
-        //                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-        //                    {
-        //                        return pv.Nro == auxPV;
-        //                    }).IdTipoPuntoVta;
-        //                    switch (idtipo)
-        //                    {
-        //                        case "Comun":
-        //                        case "RG2904":
-        //                        case "BonoFiscal":
-        //                            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-        //                            ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-        //                            ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
-        //                            break;
-        //                        case "Exportacion":
-        //                            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
-        //                            ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
-        //                            ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
-        //                            break;
-        //                        default:
-        //                            throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
-        //                    }
-        //                }
-        //                catch
-        //                {
-        //                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-        //                    ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-        //                    ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-        //                ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-        //                ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-        //            ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-        //            ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
-        //        }
-        //        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataBind();
-        //    }
-        //}
         protected void AccionObtenerXMLButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
@@ -1738,18 +1679,18 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }).IdTipoPuntoVta;
                         if (listacompradores.Count > 0)
                         {
-                            CompradorDropDownList.Visible = true;
-                            CompradorDropDownList.DataValueField = "ClavePrimaria";
-                            CompradorDropDownList.DataTextField = "RazonSocialeIdPersona";
-                            Entidades.Persona persona = new Entidades.Persona();
-                            System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
-                            persona.RazonSocial = "";
-                            RN.Persona.LeerDestinatariosFrecuentes(persona, true, (Entidades.Sesion)Session["Sesion"]); 
-                            personalist.Add(persona);
-                            personalist.AddRange(listacompradores);
-                            CompradorDropDownList.DataSource = personalist;
-                            CompradorDropDownList.DataBind();
-                            CompradorDropDownList.SelectedIndex = 0;
+                            //CompradorDropDownList.Visible = true;
+                            //CompradorDropDownList.DataValueField = "ClavePrimaria";
+                            //CompradorDropDownList.DataTextField = "RazonSocialeIdPersona";
+                            //Entidades.Persona persona = new Entidades.Persona();
+                            //System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
+                            //persona.RazonSocial = "";
+                            //RN.Persona.LeerDestinatariosFrecuentes(persona, true, (Entidades.Sesion)Session["Sesion"]); 
+                            //personalist.Add(persona);
+                            //personalist.AddRange(listacompradores);
+                            //CompradorDropDownList.DataSource = personalist;
+                            //CompradorDropDownList.DataBind();
+                            //CompradorDropDownList.SelectedIndex = 0;
                             AjustarComprador();
                         }
                         else

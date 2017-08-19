@@ -114,6 +114,20 @@ namespace CedServicios.RN
             minuta.IdUbicacion = string.Empty;
             minuta.IndicadorExentoGravado = string.Empty;
             comprobante.Minutas.Add(minuta);
+            //Reintegro
+            esquemaContable = new Entidades.EsquemaContable(comprobante.TipoComprobante, comprobante.NaturalezaComprobante, "R");
+            RN.Rubro.LeerEsquemaContable(esquemaContable, Sesion);
+            minuta = new Entidades.ComprobanteDetalle();
+            minuta.Item.IdTipo = esquemaContable.Concepto;
+            minuta.Item.Nro = 0;
+            minuta.Articulo.Id = string.Empty;
+            minuta.Rubro.Id = esquemaContable.Rubro.Id;
+            minuta.Cantidad = 0;
+            minuta.PrecioUnitario = 0;
+            minuta.Importe = Math.Abs(comprobante.Importe) * esquemaContable.Signo;
+            minuta.IdUbicacion = string.Empty;
+            minuta.IndicadorExentoGravado = string.Empty;
+            comprobante.Minutas.Add(minuta);
             //Articulos
             for (int i = 0; i < Comprobante.detalle.linea.Length; i++)
             {

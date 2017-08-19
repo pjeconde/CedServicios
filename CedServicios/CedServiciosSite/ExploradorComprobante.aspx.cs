@@ -642,7 +642,19 @@ namespace CedServicios.Site
                     if (comprobante.NaturalezaComprobante.Id == "Venta" || comprobante.NaturalezaComprobante.Id == "Compra")
                     {
                         Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Clonado, comprobante);
-                        script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
+                        int auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo != "Turismo")
+                        {
+                            script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
+                        }
+                        else
+                        {
+                            script = "window.open('/Facturacion/Electronica/LoteCT.aspx', '');";
+                        }
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     }
                     else
@@ -782,15 +794,12 @@ namespace CedServicios.Site
                                     ms = new System.IO.MemoryStream(bytes);
                                     ms.Seek(0, System.IO.SeekOrigin.Begin);
                                     lote = (FeaEntidades.InterFacturas.lote_comprobantes)x.Deserialize(ms);
-
                                     RN.Comprobante.AjustarLoteParaImprimirPDF(lote);
-
                                     Session["lote"] = lote;
                                 }
                                 else
                                 {
                                     loteT = new FeaEntidades.Turismo.lote_comprobantes();
-
                                     FeaEntidades.Turismo.comprobante compT = new FeaEntidades.Turismo.comprobante();
                                     x = new System.Xml.Serialization.XmlSerializer(compT.GetType());
 
@@ -800,13 +809,9 @@ namespace CedServicios.Site
                                     ms = new System.IO.MemoryStream(bytes);
                                     ms.Seek(0, System.IO.SeekOrigin.Begin);
                                     compT = (FeaEntidades.Turismo.comprobante)x.Deserialize(ms);
-
                                     loteT.comprobante[0] = compT;
-
                                     RN.Comprobante.AjustarLoteTParaImprimirPDF(loteT);
-
                                     Session["lote"] = loteT;
-
                                 }
                                 
                                 //Response.Redirect("~\\Facturacion\\Electronica\\Reportes\\FacturaWebForm.aspx", true);
