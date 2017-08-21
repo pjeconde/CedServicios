@@ -117,7 +117,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Tipo_De_ComprobanteDropDownList.DataBind();
                     MonedaComprobanteDropDownList.DataValueField = "Codigo";
                     MonedaComprobanteDropDownList.DataTextField = "Descr";
-                    MonedaComprobanteDropDownList.DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.ListaNoExportacion();
+                    MonedaComprobanteDropDownList.DataSource = FeaEntidades.CodigosMoneda.CodigoMoneda.ListaTurismo();
                     MonedaComprobanteDropDownList.DataBind();
 
                     //DETALLE DE ARTÍCULOS / SERVICIOS
@@ -396,6 +396,10 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
                 Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
+                Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+                Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+                Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
+                Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
                 Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(comprobante.cabecera.informacion_comprador.nro_doc_identificatorio_afip)));
             }
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Codigo_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Codigo_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(comprobante.cabecera.informacion_comprador.codigo_doc_identificatorio)));

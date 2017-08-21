@@ -124,7 +124,7 @@ namespace CedServicios.RN
             minuta.Rubro.Id = esquemaContable.Rubro.Id;
             minuta.Cantidad = 0;
             minuta.PrecioUnitario = 0;
-            minuta.Importe = Math.Abs(comprobante.Importe) * esquemaContable.Signo;
+            minuta.Importe = Math.Abs(Convert.ToDouble(Comprobante.resumen.importe_Reintegro)) * esquemaContable.Signo;
             minuta.IdUbicacion = string.Empty;
             minuta.IndicadorExentoGravado = string.Empty;
             comprobante.Minutas.Add(minuta);

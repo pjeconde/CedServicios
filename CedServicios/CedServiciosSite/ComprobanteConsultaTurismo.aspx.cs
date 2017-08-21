@@ -378,13 +378,17 @@ namespace CedServicios.Site
             {
                 Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
                 Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
-                Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(c.cabecera.informacion_comprador.nro_doc_identificatorio);
+                Nro_Doc_Identificatorio_CompradorTextBox.Text = Convert.ToString(c.cabecera.informacion_comprador.nro_doc_identificatorio_afip);
             }
             else
             {
                 Nro_Doc_Identificatorio_CompradorTextBox.Visible = false;
                 Nro_Doc_Identificatorio_CompradorDropDownList.Visible = true;
-                Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(c.cabecera.informacion_comprador.nro_doc_identificatorio)));
+                Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
+                Nro_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
+                Nro_Doc_Identificatorio_CompradorDropDownList.DataSource = FeaEntidades.DestinosCuit.DestinoCuit.ListaSinInformar();
+                Nro_Doc_Identificatorio_CompradorDropDownList.DataBind();
+                Nro_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Nro_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Nro_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(c.cabecera.informacion_comprador.nro_doc_identificatorio_afip)));
             }
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedIndex = Codigo_Doc_Identificatorio_CompradorDropDownList.Items.IndexOf(Codigo_Doc_Identificatorio_CompradorDropDownList.Items.FindByValue(Convert.ToString(c.cabecera.informacion_comprador.codigo_doc_identificatorio)));
             Denominacion_CompradorTextBox.Text = Convert.ToString(c.cabecera.informacion_comprador.denominacion);
