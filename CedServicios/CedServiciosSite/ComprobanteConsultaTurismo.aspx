@@ -18,10 +18,10 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManagerConsulta" runat="server">
         </asp:ScriptManager>
-            <table style="width: 1300px; text-align:left; padding-left:10px">
+            <table style="border:0; width: 1300px; text-align:left; padding-left:10px">
                 <tr>
-                    <td style="padding-top:20px; width:1282px; vertical-align:top; text-align:center;">
-                        <table>
+                    <td style="padding-top:20px; width:1282px; vertical-align:middle; text-align:center; vertical-align:top;">
+                        <table style="border:0">
                             <!-- @@@ TITULO DE LA PAGINA @@@-->
                             <tr>
                                 <td>
@@ -108,8 +108,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                             PopupButtonID="ImageCalendarFechaVencimiento" 
                                                             TargetControlID="FechaVencimientoDatePickerWebUserControl">
                                                         </cc1:CalendarExtender>
-                                                        <asp:ImageButton ID="ImageCalendarFechaVencimiento" runat="server" 
-                                                            CausesValidation="false" ImageUrl="~/Imagenes/Calendar.gif" />
+                                                        <asp:ImageButton ID="ImageCalendarFechaVencimiento" runat="server" CausesValidation="false" ImageUrl="~/Imagenes/Calendar.gif" />
                                                     </td>
                                                     <td class="TC00S">
                                                         Moneda:
@@ -1090,6 +1089,16 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                 </td>
                                                             </tr>
                                                             <tr>
+                                                                <td class="TC00S">
+                                                                    Reintegro Decreto 1043/2016:
+                                                                </td>
+                                                                <td class="TC10S">
+                                                                    <asp:TextBox ID="Importe_Total_Reintegros_ResumenTextBox" runat="server"
+                                                                        SkinID="TextoBoxFEAVendedorDet" ToolTip="El separador de decimales a utilizar es el punto">
+                                                                    </asp:TextBox>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
                                                                 <td class="TC00S" style="width: 390px">
                                                                     Importe total:
                                                                 </td>
@@ -1175,6 +1184,48 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                             </td>
                                         </tr>
                                     </table>
+                                </td>
+                            </tr>
+                            <!-- ACCIONES -->
+                            <tr>
+                                <td style="text-align: center">
+                                    <asp:Panel ID="AccionesPanel" runat="server">
+                                        <table style="width:1282px">
+                                            <tr>
+                                                <td style="height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="TextoResaltado" style="text-align:center">
+                                                    ACCIONES
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height: 10px;">
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="padding-left:10px">
+                                                    <asp:Panel ID="Baja_AnulBaPanel" runat="server" Visible="false">
+                                                        <table style="padding-bottom:6px">
+                                                            <tr>
+                                                                <td class="TC00S">
+                                                                    Comprobante: 
+                                                                </td>
+                                                                <td align="left" style="padding-left:5px">
+                                                                    <asp:Button ID="Baja_AnulBajaButton" runat="server" CausesValidation="true" OnClick="AccionBaja_AnulBajaButton_Click" Text="Baja o AnulBaja" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+                                                    </asp:Panel>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="height: 10px;">
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </asp:Panel>
                                 </td>
                             </tr>
                             <!-- OTROS -->

@@ -84,12 +84,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                             break;
                     }
 
-                    //referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
-                    //FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-                    //referencias.Add(referencia);
-                    //referenciasGridView.DataSource = referencias;
-                    //referenciasGridView.DataBind();
-                    //ViewState["referencias"] = referencias;
 
                     //VENDEDOR
                     Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
@@ -1743,9 +1737,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             Codigo_Doc_Identificatorio_CompradorDropDownList.DataBind();
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUITPais().Codigo.ToString();
 
-            listaDocCompradorRequiredFieldValidator.Enabled = true;
-            listaDocCompradorRequiredFieldValidator.DataBind();
-
             if (Funciones.SessionTimeOut(Session))
             {
                 listacompradores = new List<Entidades.Persona>();
@@ -1781,8 +1772,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
             Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-            listaDocCompradorRequiredFieldValidator.Enabled = false;
-            listaDocCompradorRequiredFieldValidator.DataBind();
             
             if (Funciones.SessionTimeOut(Session))
             {
@@ -1827,8 +1816,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
             Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-            listaDocCompradorRequiredFieldValidator.Enabled = false;
-            listaDocCompradorRequiredFieldValidator.DataBind();
             
             if (Funciones.SessionTimeOut(Session))
             {
@@ -1943,7 +1930,27 @@ namespace CedServicios.Site.Facturacion.Electronica
                     return false;
                 }
             }
-
+            if (Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue == "70")
+            {
+                if (Nro_Doc_Identificatorio_CompradorDropDownList.SelectedValue.Equals(string.Empty))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta seleccionar el número de documento"), false);
+                    return false;
+                }
+            }
+            else
+            {
+                if (Nro_Doc_Identificatorio_CompradorTextBox.Text.Equals(string.Empty))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar el número de documento"), false);
+                    return false;
+                }
+                if (Nro_Doc_Identificatorio_CompradorTextBox.Text.Length > 11)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("El número de documento no puede superar los 11 dígitos"), false);
+                    return false;
+                }
+            }
             if (FechaEmisionDatePickerWebUserControl.Text.Equals(string.Empty))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar la Fecha de Emisión del comprobante"), false);
@@ -1975,11 +1982,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             if (!Id_LoteTextbox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumeric(Id_LoteTextbox.Text))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un dato numérico en el número de lote"), false);
-                return false;
-            }
-            if (!NroIBVendedorTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNroIB(NroIBVendedorTextBox.Text))
-            {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un Nro. de IB válido para el vendedor"), false);
                 return false;
             }
             if (Denominacion_CompradorTextBox.Text.Length > 50)

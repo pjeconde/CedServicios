@@ -28,6 +28,7 @@ namespace FeaEntidades.CondicionesIB
 			lista.Add(new ContribuyenteLocal());
 			lista.Add(new ContribuyenteMultilateral());
 			lista.Add(new Exento());
+            lista.Add(new RegimenSimplificado());
 			return lista;
 		}
 
@@ -37,6 +38,7 @@ namespace FeaEntidades.CondicionesIB
             lista.Add(new ContribuyenteLocal());
             lista.Add(new ContribuyenteMultilateral());
             lista.Add(new Exento());
+            lista.Add(new RegimenSimplificado());
             return lista;
         }
     }

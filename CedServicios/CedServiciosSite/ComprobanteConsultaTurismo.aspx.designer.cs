@@ -1201,6 +1201,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox Importe_Total_Impuestos_Internos_ResumenTextBox;
         
         /// <summary>
+        /// Importe_Total_Reintegros_ResumenTextBox control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Importe_Total_Reintegros_ResumenTextBox;
+        
+        /// <summary>
         /// Importe_Total_Factura_ResumenTextBox control.
         /// </summary>
         /// <remarks>
@@ -1253,6 +1262,33 @@ namespace CedServicios.Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::CedServicios.Site.Facturacion.Electronica.EsquemaContableConsulta EsquemaContable;
+        
+        /// <summary>
+        /// AccionesPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel AccionesPanel;
+        
+        /// <summary>
+        /// Baja_AnulBaPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Baja_AnulBaPanel;
+        
+        /// <summary>
+        /// Baja_AnulBajaButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button Baja_AnulBajaButton;
         
         /// <summary>
         /// RequeridosValidationSummary control.

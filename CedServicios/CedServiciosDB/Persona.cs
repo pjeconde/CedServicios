@@ -130,7 +130,7 @@ namespace CedServicios.DB
             a.Append("from Persona ");
             a.Append("where Persona.Cuit='" + persona.Cuit + "' ");
             a.Append("and Persona.IdTipoDoc = " + persona.Documento.Tipo.Id + " ");
-            a.Append("and Persona.NroDoc = " + persona.Documento.Nro.ToString() + " ");
+            a.Append("and Persona.NroDoc = '" + persona.Documento.Nro.ToString() + "' ");
             a.Append("and Persona.IdPersona = '" + persona.IdPersona + "' ");
             a.Append("and Persona.DesambiguacionCuitPais = " + persona.DesambiguacionCuitPais.ToString() + " ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
@@ -162,7 +162,7 @@ namespace CedServicios.DB
             a.AppendLine("declare @desambiguacionCuitPais int ");
             if (Persona.Documento.Tipo.Id.Equals(new FeaEntidades.Documentos.CUITPais().Codigo.ToString()))
             {
-                a.Append("select @desambiguacionCuitPais=count(*)+1 from Persona where Cuit='" + Persona.Cuit + "' and IdTipoDoc=" + Persona.Documento.Tipo.Id + " and NroDoc=" + Persona.Documento.Nro.ToString() + " ");
+                a.Append("select @desambiguacionCuitPais=count(*)+1 from Persona where Cuit='" + Persona.Cuit + "' and IdTipoDoc=" + Persona.Documento.Tipo.Id + " and NroDoc='" + Persona.Documento.Nro.ToString() + "' ");
             }
             else
             {
@@ -173,7 +173,7 @@ namespace CedServicios.DB
             a.Append("values (");
             a.Append("'" + Persona.Cuit + "', ");
             a.Append(Persona.Documento.Tipo.Id + ", ");
-            a.Append(Persona.Documento.Nro.ToString() + ", ");
+            a.Append("'" + Persona.Documento.Nro.ToString() + "', ");
             a.Append("'" + Persona.IdPersona + "', ");
             a.Append("@desambiguacionCuitPais, ");
             a.Append("'" + Persona.RazonSocial + "', ");
@@ -224,7 +224,7 @@ namespace CedServicios.DB
         public void DesambiguarPersonaNacional(Entidades.Persona Persona)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("update Persona set IdPersona=Razonsocial where Cuit='" + Persona.Cuit + "' and IdTipoDoc=" + Persona.Documento.Tipo.Id + " and NroDoc=" + Persona.Documento.Nro.ToString() + " and IdPersona='' ");
+            a.AppendLine("update Persona set IdPersona=Razonsocial where Cuit='" + Persona.Cuit + "' and IdTipoDoc=" + Persona.Documento.Tipo.Id + " and NroDoc='" + Persona.Documento.Nro.ToString() + "' and IdPersona='' ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
         }
         public void Modificar(Entidades.Persona Desde, Entidades.Persona Hasta)
@@ -270,7 +270,7 @@ namespace CedServicios.DB
             a.Append("EmailAvisoComprobanteCuerpo='" + Hasta.DatosEmailAvisoComprobantePersona.Cuerpo + "', ");
             a.Append("IdListaPrecioVenta='" + Hasta.IdListaPrecioVenta + "', ");
             a.Append("IdListaPrecioCompra='" + Hasta.IdListaPrecioCompra + "' ");
-            a.AppendLine("where Cuit='" + Hasta.Cuit + "' and IdTipoDoc=" + Hasta.Documento.Tipo.Id + " and NroDoc=" + Hasta.Documento.Nro.ToString() + " and IdPersona='" + Hasta.IdPersona + "' and DesambiguacionCuitPais=" + Hasta.DesambiguacionCuitPais.ToString() + " ");
+            a.AppendLine("where Cuit='" + Hasta.Cuit + "' and IdTipoDoc=" + Hasta.Documento.Tipo.Id + " and NroDoc='" + Hasta.Documento.Nro.ToString() + "' and IdPersona='" + Hasta.IdPersona + "' and DesambiguacionCuitPais=" + Hasta.DesambiguacionCuitPais.ToString() + " ");
             a.AppendLine("insert Log values (" + Hasta.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Persona', 'Modif', '" + Hasta.WF.Estado + "', '') ");
             a.AppendLine("declare @idLog int ");
             a.AppendLine("select @idLog=@@Identity ");
@@ -285,7 +285,7 @@ namespace CedServicios.DB
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("update Persona set ");
             a.Append("Estado='" + Estado + "' ");
-            a.AppendLine("where Cuit='" + Persona.Cuit + "' and IdTipoDoc=" + Persona.Documento.Tipo.Id + " and NroDoc=" + Persona.Documento.Nro.ToString() + " and IdPersona='" + Persona.IdPersona + "' and DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
+            a.AppendLine("where Cuit='" + Persona.Cuit + "' and IdTipoDoc=" + Persona.Documento.Tipo.Id + " and NroDoc='" + Persona.Documento.Nro.ToString() + "' and IdPersona='" + Persona.IdPersona + "' and DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
             string evento = (Estado == "DeBaja") ? "Baja" : "AnulBaja";
             a.AppendLine("insert Log values (" + Persona.WF.Id.ToString() + ", getdate(), '" + sesion.Usuario.Id + "', 'Persona', '" + evento + "', '" + Estado + "', '') ");
             Ejecutar(a.ToString(), TipoRetorno.None, Transaccion.Usa, sesion.CnnStr);
@@ -299,7 +299,7 @@ namespace CedServicios.DB
                 a.Append("select ");
                 a.Append("Persona.Cuit, Persona.IdTipoDoc, Persona.NroDoc, Persona.IdPersona, Persona.DesambiguacionCuitPais, Persona.RazonSocial, Persona.DescrTipoDoc, Persona.Calle, Persona.Nro, Persona.Piso, Persona.Depto, Persona.Sector, Persona.Torre, Persona.Manzana, Persona.Localidad, Persona.IdProvincia, Persona.DescrProvincia, Persona.CodPost, Persona.NombreContacto, Persona.EmailContacto, Persona.TelefonoContacto, Persona.IdCondIVA, Persona.DescrCondIVA, Persona.NroIngBrutos, Persona.IdCondIngBrutos, Persona.DescrCondIngBrutos, Persona.GLN, Persona.FechaInicioActividades, Persona.CodigoInterno, Persona.EmailAvisoVisualizacion, Persona.PasswordAvisoVisualizacion, Persona.IdWF, Persona.Estado, Persona.UltActualiz, Persona.EsCliente, Persona.EsProveedor, Persona.EmailAvisoComprobanteActivo, Persona.EmailAvisoComprobanteDe, Persona.EmailAvisoComprobanteCco, Persona.EmailAvisoComprobanteAsunto, Persona.EmailAvisoComprobanteCuerpo, Persona.IdListaPrecioVenta, Persona.IdListaPrecioCompra ");
                 a.Append("from Persona ");
-                a.Append("where Persona.Cuit='" + Cuit + "' and Persona.IdTipoDoc=" + Documento.Tipo.Id + " and Persona.NroDoc=" + Documento.Nro.ToString() + " ");
+                a.Append("where Persona.Cuit='" + Cuit + "' and Persona.IdTipoDoc=" + Documento.Tipo.Id + " and Persona.NroDoc='" + Documento.Nro.ToString() + "' ");
                 switch (TipoPersona.ToString())
                 {
                     case "Cliente":
@@ -567,7 +567,7 @@ namespace CedServicios.DB
             a.Append("from DestinatarioFrecuente ");
             string idTipoDocumento = "0";
             if (persona.Documento.Tipo.Id != null) idTipoDocumento = persona.Documento.Tipo.Id;
-            a.AppendLine("where Cuit='" + persona.Cuit + "' and IdTipoDoc=" + idTipoDocumento + " and NroDoc=" + persona.Documento.Nro.ToString() + " and IdPersona='" + persona.IdPersona + "' and DesambiguacionCuitPais=" + persona.DesambiguacionCuitPais.ToString() + " ");
+            a.AppendLine("where Cuit='" + persona.Cuit + "' and IdTipoDoc=" + idTipoDocumento + " and NroDoc='" + persona.Documento.Nro.ToString() + "' and IdPersona='" + persona.IdPersona + "' and DesambiguacionCuitPais=" + persona.DesambiguacionCuitPais.ToString() + " ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count != 0)
             {
@@ -581,7 +581,7 @@ namespace CedServicios.DB
         {
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("delete DestinatarioFrecuente ");
-            a.AppendLine("where Cuit='" + persona.Cuit + "' and IdTipoDoc=" + persona.Documento.Tipo.Id + " and NroDoc=" + persona.Documento.Nro.ToString() + " and IdPersona='" + persona.IdPersona + "' and DesambiguacionCuitPais=" + persona.DesambiguacionCuitPais.ToString() + " ");
+            a.AppendLine("where Cuit='" + persona.Cuit + "' and IdTipoDoc=" + persona.Documento.Tipo.Id + " and NroDoc='" + persona.Documento.Nro.ToString() + "' and IdPersona='" + persona.IdPersona + "' and DesambiguacionCuitPais=" + persona.DesambiguacionCuitPais.ToString() + " ");
             return a.ToString();
         }
         public string AgregarDestinatariosFrecuentesHandler(Entidades.Persona Persona)
@@ -592,7 +592,7 @@ namespace CedServicios.DB
                 a.Append("insert DestinatarioFrecuente (Cuit, IdTipoDoc, NroDoc, IdPersona, DesambiguacionCuitPais, IdDestinatarioFrecuente, Para, Cc) values (");
                 a.Append("'" + Persona.Cuit + "', ");
                 a.Append(Persona.Documento.Tipo.Id + ", ");
-                a.Append(Persona.Documento.Nro.ToString() + ", ");
+                a.Append("'" + Persona.Documento.Nro.ToString() + "', ");
                 a.Append("'" + Persona.IdPersona + "', ");
                 a.Append(Persona.DesambiguacionCuitPais.ToString() + ", ");
                 a.Append("'" + Persona.DatosEmailAvisoComprobantePersona.DestinatariosFrecuentes[i].Id + "', ");

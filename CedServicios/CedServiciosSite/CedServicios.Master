@@ -72,8 +72,15 @@
             });
         }
     </script>
+    <script type="text/javascript">
+         function mp_onload() {
+             if (window.body_onload != null)
+                 window.body_onload();
+             setInterval(KeepSession, 30000);
+         }
+    </script>
 </head>
-<body>
+<body onload="mp_onload();" id="mainBody">
     <form id="form1" runat="server" visible="true">
     <asp:ScriptManager ID="MasterScriptManager" runat="server"         EnableScriptGlobalization="True">
     </asp:ScriptManager>
@@ -184,6 +191,14 @@
     </form>
     
     <script type="text/javascript">
+        function KeepSession() {
+            try {
+                $.post($(location).attr('protocol') + "//" + $(location).attr('host') + "/SessionCheck.aspx");
+            }
+            catch (e) {
+            }
+        }
+
         $(document).on("ready", function () {
             var cuantos = 0;
             cuantos = $('#DivMenu').length;

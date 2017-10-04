@@ -281,6 +281,7 @@
     <Content Include="PuntoVtaCrear.aspx" />
     <Content Include="PuntoVtaModificar.aspx" />
     <Content Include="PuntoVtaSeleccionar.aspx" />
+    <Content Include="SessionCheck.aspx" />
     <Content Include="SessionTimeout.aspx" />
     <Content Include="Admin\SettingsRulesConfiguration.aspx" />
     <Content Include="SolicPermisoAdminCUIT.aspx" />
@@ -692,6 +693,7 @@
       <AutoGen>True</AutoGen>
       <SubType>Component</SubType>
       <DesignTime>True</DesignTime>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\FacturaWebFormT.aspx.cs">
       <DependentUpon>FacturaWebFormT.aspx</DependentUpon>
@@ -1283,6 +1285,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Factura.rpt</DependentUpon>
       <SubType>Component</SubType>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\FacturaWebForm.aspx.cs">
       <DependentUpon>FacturaWebForm.aspx</DependentUpon>
@@ -1416,6 +1419,13 @@
     </Compile>
     <Compile Include="PuntoVtaSeleccionar.aspx.designer.cs">
       <DependentUpon>PuntoVtaSeleccionar.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="SessionCheck.aspx.cs">
+      <DependentUpon>SessionCheck.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="SessionCheck.aspx.designer.cs">
+      <DependentUpon>SessionCheck.aspx</DependentUpon>
     </Compile>
     <Compile Include="SessionTimeout.aspx.cs">
       <DependentUpon>SessionTimeout.aspx</DependentUpon>
@@ -1616,6 +1626,7 @@
     <Content Include="Facturacion\Electronica\Reportes\Factura.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Factura.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Facturacion\Electronica\Reportes\IvaComprasCR.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
@@ -1632,6 +1643,7 @@
     <Content Include="Facturacion\Electronica\Reportes\FacturaT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FacturaT.cs</LastGenOutput>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <EmbeddedResource Include="Facturacion\Electronica\Reportes\Imagen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>

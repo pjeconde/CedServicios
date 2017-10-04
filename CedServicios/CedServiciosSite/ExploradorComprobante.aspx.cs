@@ -164,13 +164,39 @@ namespace CedServicios.Site
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
                 case "Baja/Anul.baja":
+                    RN.Comprobante.LeerMinutas(comprobante, sesion);
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Baja_AnulBaja, comprobante);
-                    script = "window.open('/ComprobanteConsulta.aspx', '');";
+                    auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                    idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                    {
+                        return pv.Nro == auxPV;
+                    }).IdTipoPuntoVta;
+                    if (idtipo != "Turismo")
+                    {
+                        script = "window.open('/ComprobanteConsulta.aspx', '');";
+                    }
+                    else
+                    {
+                        script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                    }
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
                 case "Envio":
+                    RN.Comprobante.LeerMinutas(comprobante, sesion);
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Envio, comprobante);
-                    script = "window.open('/ComprobanteConsulta.aspx', '');";
+                    auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                    idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                    {
+                        return pv.Nro == auxPV;
+                    }).IdTipoPuntoVta;
+                    if (idtipo != "Turismo")
+                    {
+                        script = "window.open('/ComprobanteConsulta.aspx', '');";
+                    }
+                    else
+                    {
+                        script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                    }
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
                 case "Modificacion":
@@ -480,46 +506,100 @@ namespace CedServicios.Site
                             else
                             {
                                 string respuesta = "";
-                                //Deserializar
-                                FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
-                                string xml = comprobante.Request;
-                                var serializer = new System.Xml.Serialization.XmlSerializer(typeof(FeaEntidades.InterFacturas.lote_comprobantes));
-                                using (TextReader reader = new StringReader(xml))
+                                int auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                                 {
-                                    lcFea = (FeaEntidades.InterFacturas.lote_comprobantes)serializer.Deserialize(reader);
-                                }
-                                string caeNro;
-                                string caeFecVto;
-                                string caeFecPro;
-                                respuesta = RN.ComprobanteAFIP.ConsultarAFIP(out caeNro, out caeFecVto, out caeFecPro, lcFea, (Entidades.Sesion)Session["Sesion"]);
-                                if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
+                                    return pv.Nro == auxPV;
+                                }).IdTipoPuntoVta;
+                                if (idtipo != "Turismo")
                                 {
-                                    comprobante.WF.Estado = "Vigente";
-                                    if (caeNro != "")
+                                    //Deserializar
+                                    FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
+                                    string xml = comprobante.Request;
+                                    var serializer = new System.Xml.Serialization.XmlSerializer(typeof(FeaEntidades.InterFacturas.lote_comprobantes));
+                                    using (TextReader reader = new StringReader(xml))
                                     {
-                                        lcFea.cabecera_lote.resultado = "A";
-                                        lcFea.comprobante[0].cabecera.informacion_comprobante.resultado = "A";
-                                        lcFea.comprobante[0].cabecera.informacion_comprobante.cae = caeNro;
-                                        lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
-                                        lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = caeFecVto;
-                                        lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
-                                        lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae = caeFecPro;
-                                        lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
+                                        lcFea = (FeaEntidades.InterFacturas.lote_comprobantes)serializer.Deserialize(reader);
                                     }
-                                    string XML = "";
-                                    RN.Comprobante.SerializarLc(out XML, lcFea);
-                                    comprobante.Response = XML;
+                                    string caeNro;
+                                    string caeFecVto;
+                                    string caeFecPro;
+                                    respuesta = RN.ComprobanteAFIP.ConsultarAFIP(out caeNro, out caeFecVto, out caeFecPro, lcFea, (Entidades.Sesion)Session["Sesion"]);
+                                    if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
+                                    {
+                                        comprobante.WF.Estado = "Vigente";
+                                        if (caeNro != "")
+                                        {
+                                            lcFea.cabecera_lote.resultado = "A";
+                                            lcFea.comprobante[0].cabecera.informacion_comprobante.resultado = "A";
+                                            lcFea.comprobante[0].cabecera.informacion_comprobante.cae = caeNro;
+                                            lcFea.comprobante[0].cabecera.informacion_comprobante.caeSpecified = true;
+                                            lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_cae = caeFecVto;
+                                            lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+                                            lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_cae = caeFecPro;
+                                            lcFea.comprobante[0].cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
+                                        }
+                                        string XML = "";
+                                        RN.Comprobante.SerializarLc(out XML, lcFea);
+                                        comprobante.Response = XML;
 
-                                    RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
-                                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
-                                    script = "window.open('/ComprobanteConsulta.aspx', '');";
-                                    BuscarButton_Click(sender, new EventArgs());
-                                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
-                                    ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                                        RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                                        Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
+                                        script = "window.open('/ComprobanteConsulta.aspx', '');";
+                                        BuscarButton_Click(sender, new EventArgs());
+                                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                                        ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                                    }
+                                    else
+                                    {
+                                        MensajeLabel.Text = respuesta;
+                                    }
                                 }
                                 else
                                 {
-                                    MensajeLabel.Text = respuesta;
+                                    //Deserializar Turismo
+                                    FeaEntidades.InterFacturas.lote_comprobantes lcFea = new FeaEntidades.InterFacturas.lote_comprobantes();
+                                    FeaEntidades.Turismo.comprobante cTur = new FeaEntidades.Turismo.comprobante();
+                                    string xml = comprobante.Request;
+                                    var serializer = new System.Xml.Serialization.XmlSerializer(typeof(FeaEntidades.Turismo.comprobante));
+                                    using (TextReader reader = new StringReader(xml))
+                                    {
+                                        cTur = (FeaEntidades.Turismo.comprobante)serializer.Deserialize(reader);
+                                    }
+                                    lcFea.comprobante[0] = new FeaEntidades.InterFacturas.comprobante();
+                                    lcFea.comprobante[0].cabecera = new FeaEntidades.InterFacturas.cabecera();
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante = new FeaEntidades.InterFacturas.informacion_comprobante();
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta = cTur.cabecera.informacion_comprobante.punto_de_venta;
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante = cTur.cabecera.informacion_comprobante.tipo_de_comprobante;
+                                    lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante = cTur.cabecera.informacion_comprobante.numero_comprobante;
+                                    string caeNro;
+                                    string caeFecVto;
+                                    string caeFecPro;
+                                    respuesta = RN.ComprobanteAFIP.ConsultarAFIP(out caeNro, out caeFecVto, out caeFecPro, lcFea, (Entidades.Sesion)Session["Sesion"]);
+                                    if (respuesta.Length >= 12 && respuesta.Substring(0, 12) == "Resultado: A")
+                                    {
+                                        comprobante.WF.Estado = "Vigente";
+                                        if (caeNro != "")
+                                        {
+                                            cTur.cabecera.informacion_comprobante.resultado = "A";
+                                            cTur.cabecera.informacion_comprobante.cae = caeNro;
+                                            cTur.cabecera.informacion_comprobante.caeSpecified = true;
+                                            cTur.cabecera.informacion_comprobante.fecha_vencimiento_cae = caeFecVto;
+                                            cTur.cabecera.informacion_comprobante.fecha_vencimiento_caeSpecified = true;
+                                            cTur.cabecera.informacion_comprobante.fecha_obtencion_cae = caeFecPro;
+                                            cTur.cabecera.informacion_comprobante.fecha_obtencion_caeSpecified = true;
+                                        }
+                                        string XML = "";
+                                        RN.Comprobante.SerializarLc(out XML, cTur);
+                                        comprobante.Response = XML;
+
+                                        RN.Comprobante.Actualizar(comprobante, (Entidades.Sesion)Session["Sesion"]);
+                                        Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
+                                        script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                                        BuscarButton_Click(sender, new EventArgs());
+                                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), script);
+                                        ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                                    }
                                 }
                             }
                         }

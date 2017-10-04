@@ -55,5 +55,15 @@ namespace FeaEntidades.CondicionesIVA
             lista.Add(new ResponsableInscriptoAgentePercepcion());
             return lista;
         }
+
+        public static List<CondicionIVA> ListaTurismo()
+        {
+            List<CondicionIVA> lista = new List<CondicionIVA>();
+            lista.Add(new SinInformar());
+            lista.Add(new ResponsableInscripto());
+            lista.Add(new ConsumidorFinal());
+            lista.Add(new ClienteDelExterior());
+            return lista;
+        }
     }
 }

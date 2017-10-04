@@ -962,12 +962,6 @@
                                                 <table style="width: 400px">
                                                     <tr>
                                                         <td class="TC00S">
-                                                            <asp:RegularExpressionValidator ID="docCompradorRegularExpressionValidator" runat="server"
-                                                                ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="error de formateo en documento del comprador"
-                                                                SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
-                                                            <asp:RequiredFieldValidator ID="listaDocCompradorRequiredFieldValidator" runat="server"
-                                                                ControlToValidate="Nro_Doc_Identificatorio_CompradorDropDownList" ErrorMessage="documento del comprador para exportación"
-                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                             Nro. de documento:
                                                         </td>
                                                         <td class="TC10S">

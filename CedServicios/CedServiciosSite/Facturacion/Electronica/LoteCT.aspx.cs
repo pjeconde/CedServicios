@@ -95,7 +95,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
                     Condicion_IVA_CompradorDropDownList.DataValueField = "Codigo";
                     Condicion_IVA_CompradorDropDownList.DataTextField = "Descr";
-                    Condicion_IVA_CompradorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.Lista();
+                    Condicion_IVA_CompradorDropDownList.DataSource = FeaEntidades.CondicionesIVA.CondicionIVA.ListaTurismo();
                     Condicion_IVA_CompradorDropDownList.DataBind();
                     Provincia_CompradorDropDownList.DataValueField = "Codigo";
                     Provincia_CompradorDropDownList.DataTextField = "Descr";
@@ -292,7 +292,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             string Ayuda1 = "<a href='javascript:void(0)' id='Ayuda1' role='button' class='popover-test' data-html='true' title='Fecha de Emisión' data-placement='auto' style='width: 200px'";
             texto = "Para turismo la fecha de emisión permitida es del " + (fecha.AddDays(-10)).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(10)).ToString("dd/MM/yyyy");
             //texto += "El formato válido es de 8 dígitos: YYYYMMDD (Año Mes Día).";
-            Ayuda1 += "data-content='" + texto + "'>";
+            Ayuda1 += " data-content='" + texto + "'> ";
             Ayuda1 += "<span class='glyphicon glyphicon-info-sign gi-1x' style='vertical-align: inherit;'></span></a>";
             AyudaFechaEmision.Text = Ayuda1; 
         }
@@ -1064,8 +1064,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
             Nro_Doc_Identificatorio_CompradorDropDownList.Visible = false;
             Nro_Doc_Identificatorio_CompradorTextBox.Visible = true;
-            listaDocCompradorRequiredFieldValidator.Enabled = false;
-            listaDocCompradorRequiredFieldValidator.DataBind();
             
             if (Funciones.SessionTimeOut(Session))
             {
@@ -1090,7 +1088,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar el número de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante")), false);
                 return false;
             }
-            if (!Numero_ComprobanteTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumeric(Numero_ComprobanteTextBox.Text))
+            if (!Numero_ComprobanteTextBox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumericOnly(Numero_ComprobanteTextBox.Text))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un dato numérico en el número de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante")), false);
                 return false;
@@ -1127,10 +1125,62 @@ namespace CedServicios.Site.Facturacion.Electronica
                     return false;
                 }
             }
+            if (Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue == "70")
+            {
+                if (Nro_Doc_Identificatorio_CompradorDropDownList.SelectedValue.Equals(string.Empty))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta seleccionar el número de documento"), false);
+                    return false;
+                }
+            }
+            else
+            {
+                if (Nro_Doc_Identificatorio_CompradorTextBox.Text.Equals(string.Empty))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar el número de documento"), false);
+                    return false;
+                }
+            }
             if (FechaEmisionDatePickerWebUserControl.Text.Equals(string.Empty))
             {
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar la Fecha de Emisión del comprobante"), false);
                 return false;
+            }
+            if (!FechaEmisionDatePickerWebUserControl.Text.Equals(string.Empty))
+            {
+                bool resp = RN.Funciones.IsValidNumericDateyyyyMMdd(FechaEmisionDatePickerWebUserControl.Text);
+                if (!resp)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar la Fecha de Emisión con el formato yyyyMMdd"), false);
+                    return false;
+                }
+            }
+            if (!FechaVencimientoDatePickerWebUserControl.Text.Equals(string.Empty))
+            {
+                bool resp = RN.Funciones.IsValidNumericDateyyyyMMdd(FechaVencimientoDatePickerWebUserControl.Text);
+                if (!resp)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar la Fecha de Vencimiento con el formato yyyyMMdd"), false);
+                    return false;
+                }
+            }
+            if (!FechaServDesdeDatePickerWebUserControl.Text.Equals(string.Empty))
+            {
+                bool resp = RN.Funciones.IsValidNumericDateyyyyMMdd(FechaServDesdeDatePickerWebUserControl.Text);
+                if (!resp)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar la Fecha de Servicio Desde con el formato yyyyMMdd"), false);
+                    return false;
+                }
+            }
+            if (!FechaServHastaDatePickerWebUserControl.Text.Equals(string.Empty))
+            {
+                bool resp = RN.Funciones.IsValidNumericDateyyyyMMdd(FechaServHastaDatePickerWebUserControl.Text);
+                if (!resp)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar la Fecha de Servicio Hasta con el formato yyyyMMdd"), false);
+                    return false;
+                }
             }
             if (Condicion_De_PagoTextBox.Text.Equals(string.Empty))
             {

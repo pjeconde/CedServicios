@@ -97,7 +97,7 @@
                                                 <asp:Label ID="NumeroDeLabel" runat="server" Text="Número de comprobante:" Visible="true"></asp:Label>
                                             </td>
                                             <td class="TC10S">
-                                                <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetMed" AutoCompleteType="Disabled"
+                                                <asp:TextBox ID="Numero_ComprobanteTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetMed" AutoCompleteType="Disabled"  MaxLength="8" 
                                                     ToolTip="Debe ser correlativo al último ingresado por Punto de Venta y Tipo de Comprobante. No es necesario ingresar ceros a la izquierda. Si su factura es p.ej.0002-00000005, puede ingresar 5."> </asp:TextBox>
                                                 <asp:LinkButton ID="ProximoNroComprobanteLinkButton" runat="server" SkinID="LinkButtonChico" Text="Próximo" OnClick="ProximoNroComprobanteLinkButton_Click" Visible="false"></asp:LinkButton>
                                             </td>
@@ -108,7 +108,7 @@
                                             </td>
                                             <td class="TC10S">
                                                 <asp:TextBox ID="FechaVencimientoDatePickerWebUserControl" runat="server" 
-                                                    SkinID="FechaFact"></asp:TextBox>
+                                                    SkinID="FechaFact" MaxLength="8"></asp:TextBox>
                                                 <cc1:CalendarExtender ID="CalendarExtender4" runat="server" 
                                                     CssClass="MyCalendar" Format="yyyyMMdd" 
                                                     PopupButtonID="ImageCalendarFechaVencimiento" 
@@ -142,7 +142,7 @@
                                                 <asp:Label ID="FechaEmisionLabel" runat="server" Text="Fecha de emisión:" Visible="true"></asp:Label>
                                             </td>
                                             <td class="TC10S">
-                                                <asp:TextBox ID="FechaEmisionDatePickerWebUserControl" runat="server" CausesValidation="true" SkinID="FechaFact"></asp:TextBox>
+                                                <asp:TextBox ID="FechaEmisionDatePickerWebUserControl" runat="server" CausesValidation="true" SkinID="FechaFact" MaxLength="8"></asp:TextBox>
                                                 <cc1:CalendarExtender ID="CalendarExtender1" runat="server" CssClass="MyCalendar" BehaviorID="a2"
                                                     TargetControlID="FechaEmisionDatePickerWebUserControl"  
                                                     Format="yyyyMMdd" PopupButtonID="ImageCalendarFechaEmision">
@@ -158,7 +158,7 @@
                                             </td>
                                             <td class="TC10S">
                                                 <asp:TextBox ID="FechaServDesdeDatePickerWebUserControl" runat="server" 
-                                                    SkinID="FechaFact"></asp:TextBox>
+                                                    SkinID="FechaFact" MaxLength="8"></asp:TextBox>
                                                 <cc1:CalendarExtender ID="CalendarExtender5" runat="server" 
                                                     CssClass="MyCalendar" Format="yyyyMMdd" 
                                                     PopupButtonID="ImageCalendarFechaServDesde" 
@@ -173,7 +173,7 @@
                                             </td>
                                             <td class="TC10S">
                                                 <asp:TextBox ID="FechaServHastaDatePickerWebUserControl" runat="server" 
-                                                    SkinID="FechaFact"></asp:TextBox>
+                                                    SkinID="FechaFact" MaxLength="8"></asp:TextBox>
                                                 <cc1:CalendarExtender ID="CalendarExtender6" runat="server" 
                                                     CssClass="MyCalendar" Format="yyyyMMdd" 
                                                     PopupButtonID="ImageCalendarFechaServHasta" 
@@ -246,7 +246,7 @@
                                                             Razón Social:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                            <asp:TextBox ID="Razon_Social_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="50"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -254,7 +254,7 @@
                                                             Calle:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                            <asp:TextBox ID="Domicilio_Calle_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="60"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -262,7 +262,7 @@
                                                             Sector:
                                                         </td>
                                                         <td class="TC10S" style="padding-right: 5px">
-                                                            <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                            <asp:TextBox ID="Domicilio_Sector_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh" MaxLength="5"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -290,7 +290,7 @@
                                                             Nombre contacto:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                            <asp:TextBox ID="Contacto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="25"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -325,7 +325,7 @@
                                                             Nro.:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                            <asp:TextBox ID="Domicilio_Numero_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh" MaxLength="6"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -333,7 +333,7 @@
                                                             Torre:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Domicilio_Torre_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                            <asp:TextBox ID="Domicilio_Torre_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh" MaxLength="5"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -341,7 +341,7 @@
                                                             Localidad:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                            <asp:TextBox ID="Localidad_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="25"> </asp:TextBox>
                                                         </td>
                                                     </tr>
 
@@ -351,7 +351,7 @@
                                                         </td>
                                                         <td class="TC10S">
                                                             <asp:TextBox ID="NroIBVendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                ToolTip="Formatos válidos: XXXXXXX-XX o XX-XXXXXXXX-X o XXX-XXXXXX-X"> </asp:TextBox>
+                                                                ToolTip="Formatos válidos: XXXXXXX-XX o XX-XXXXXXXX-X o XXX-XXXXXX-X o XXXXXXXXXXX" MaxLength="13"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -367,7 +367,7 @@
                                                             Código interno:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                            <asp:TextBox ID="Codigo_Interno_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="20"
                                                                 ToolTip="<Opcional> Código utilizado para identificar al vendedor dentro de una empresa/organización. (Ej. Código de Cliente, Proveedor, etc.)"> </asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -382,7 +382,7 @@
                                                             Inicio de actividades:
                                                         </td>
                                                         <td align="left" style="padding-left: 4px; padding-top: 5px;" valign="top">
-                                                            <asp:TextBox ID="InicioDeActividadesVendedorDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
+                                                            <asp:TextBox ID="InicioDeActividadesVendedorDatePickerWebUserControl" runat="server" SkinID="FechaFact" MaxLength="8"></asp:TextBox>
                                                             <cc1:CalendarExtender ID="CalendarExtender2" runat="server" CssClass="MyCalendar"
                                                                 OnClientShown="onCalendar1Shown" TargetControlID="InicioDeActividadesVendedorDatePickerWebUserControl"
                                                                 Format="yyyyMMdd" PopupButtonID="ImageCalendarInicioDeActividadesVendedor">
@@ -398,13 +398,13 @@
                                                             <table border="0">
                                                                 <tr>
                                                                     <td class="TC02SL">
-                                                                        <asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                                        <asp:TextBox ID="Domicilio_Piso_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh" MaxLength="5"> </asp:TextBox>
                                                                     </td>
                                                                     <td class="TC02S">
                                                                         Depto:
                                                                     </td>
                                                                     <td class="TC02SL">
-                                                                        <asp:TextBox ID="Domicilio_Depto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                                        <asp:TextBox ID="Domicilio_Depto_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh" MaxLength="5"> </asp:TextBox>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -415,7 +415,7 @@
                                                             Manzana:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Domicilio_Manzana_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                            <asp:TextBox ID="Domicilio_Manzana_VendedorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh" MaxLength="5"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -523,7 +523,7 @@
                                                         </td>
                                                         <td class="TC10S">
                                                             <asp:TextBox ID="Denominacion_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                ToolTip="Razón Social y Nombre del comprador">
+                                                                ToolTip="Razón Social y Nombre del comprador" MaxLength="50">
                                                             </asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -532,7 +532,7 @@
                                                             Calle:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Domicilio_Calle_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                            <asp:TextBox ID="Domicilio_Calle_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="30">
                                                             </asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -541,7 +541,7 @@
                                                             Sector:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Domicilio_Sector_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                            <asp:TextBox ID="Domicilio_Sector_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="5"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -558,7 +558,7 @@
                                                             Nombre contacto:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Contacto_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                            <asp:TextBox ID="Contacto_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="25">
                                                             </asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -567,7 +567,7 @@
                                                             e-mail para aviso:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                            <asp:TextBox ID="EmailAvisoVisualizacionTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="60" 
                                                                 ToolTip="A esta dirección se enviará un email de aviso para que el destinatario pueda visualizar el comprobante">
                                                             </asp:TextBox>
                                                         </td>
@@ -577,7 +577,7 @@
                                                             GLN:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor.">
+                                                            <asp:TextBox ID="GLN_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="13" ToolTip="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor.">
                                                             </asp:TextBox>
                                                             <a href="javascript:void(0)" id="A4" role="button" class="popover-test" data-html="true"
                                                                 title="GLN" data-placement="top" style="width: 200px" data-content="<Opcional> Código estándar para identificar locaciones o empresas (Global location number) del comprador o vendedor. Se utiliza para comercio internacional. Es un campo numérico de 13 caracteres.">
@@ -614,7 +614,7 @@
                                                             Nro.:
                                                         </td>
                                                         <td class="TC10S" style="padding-right: 5px">
-                                                            <asp:TextBox ID="Domicilio_Numero_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                            <asp:TextBox ID="Domicilio_Numero_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh" MaxLength="6"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -622,7 +622,7 @@
                                                             Torre:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Domicilio_Torre_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                            <asp:TextBox ID="Domicilio_Torre_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="5"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -630,7 +630,7 @@
                                                             Localidad:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Localidad_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                            <asp:TextBox ID="Localidad_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="25">
                                                             </asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -639,7 +639,7 @@
                                                             e-mail Contacto:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Email_CompradorTextBox" runat="server" AutoCompleteType="Email"
+                                                            <asp:TextBox ID="Email_CompradorTextBox" runat="server" AutoCompleteType="Email" MaxLength="60"
                                                                 SkinID="TextoBoxFEAVendedorDet">
                                                             </asp:TextBox>
                                                         </td>
@@ -658,7 +658,7 @@
                                                             Código interno:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Codigo_Interno_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
+                                                            <asp:TextBox ID="Codigo_Interno_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="20"
                                                                 ToolTip="<Opcional> Código utilizado para identificar al comprador dentro de una empresa/organización. (Ej. Código de Cliente, Proveedor, etc.)">
                                                             </asp:TextBox>
                                                         </td>
@@ -680,16 +680,10 @@
                                                 <table style="width: 400px">
                                                     <tr>
                                                         <td class="TC00S">
-                                                            <asp:RegularExpressionValidator ID="docCompradorRegularExpressionValidator" runat="server"
-                                                                ControlToValidate="Nro_Doc_Identificatorio_CompradorTextBox" ErrorMessage="error de formateo en documento del comprador"
-                                                                SetFocusOnError="True" ValidationExpression="[0-9]+">* </asp:RegularExpressionValidator>
-                                                            <asp:RequiredFieldValidator ID="listaDocCompradorRequiredFieldValidator" runat="server"
-                                                                ControlToValidate="Nro_Doc_Identificatorio_CompradorDropDownList" ErrorMessage="documento del comprador para exportación"
-                                                                SetFocusOnError="True">* </asp:RequiredFieldValidator>
                                                             Nro. de documento:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Nro_Doc_Identificatorio_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                            <asp:TextBox ID="Nro_Doc_Identificatorio_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="11">
                                                             </asp:TextBox>
                                                             <asp:DropDownList ID="Nro_Doc_Identificatorio_CompradorDropDownList" runat="server" SkinID="ddln" Visible="false" CausesValidation="false">
                                                             </asp:DropDownList>
@@ -703,13 +697,13 @@
                                                             <table style="padding-top: 5px; text-align: right;">
                                                                 <tr>
                                                                     <td class="TC02SL">
-                                                                        <asp:TextBox ID="Domicilio_Piso_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                                        <asp:TextBox ID="Domicilio_Piso_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh" MaxLength="5"> </asp:TextBox>
                                                                     </td>
                                                                     <td class="TC03S" style="padding-right: 5px">
                                                                         Depto:
                                                                     </td>
                                                                     <td class="TC02SL">
-                                                                        <asp:TextBox ID="Domicilio_Depto_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh"> </asp:TextBox>
+                                                                        <asp:TextBox ID="Domicilio_Depto_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDetChCh" MaxLength="5"> </asp:TextBox>
                                                                     </td>
                                                                 </tr>
                                                             </table>
@@ -720,7 +714,7 @@
                                                             Manzana:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Domicilio_Manzana_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"> </asp:TextBox>
+                                                            <asp:TextBox ID="Domicilio_Manzana_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="5"> </asp:TextBox>
                                                         </td>
                                                     </tr>
                                                     <tr>
@@ -728,7 +722,7 @@
                                                             Código Postal:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Cp_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                            <asp:TextBox ID="Cp_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="8">
                                                             </asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -737,7 +731,7 @@
                                                             Teléfono contacto:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Telefono_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet">
+                                                            <asp:TextBox ID="Telefono_CompradorTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" MaxLength="50">
                                                             </asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -746,7 +740,7 @@
                                                             Inicio de actividades:
                                                         </td>
                                                         <td style="padding-left: 6px; padding-top: 5px;">
-                                                            <asp:TextBox ID="InicioDeActividadesCompradorDatePickerWebUserControl" runat="server" SkinID="FechaFact"></asp:TextBox>
+                                                            <asp:TextBox ID="InicioDeActividadesCompradorDatePickerWebUserControl" runat="server" SkinID="FechaFact" MaxLength="8"></asp:TextBox>
                                                             <cc1:CalendarExtender ID="CalendarExtender3" runat="server" TargetControlID="InicioDeActividadesCompradorDatePickerWebUserControl"
                                                                 Format="yyyyMMdd" CssClass="MyCalendar" PopupButtonID="ImageCalendarInicioDeActividadesComprador">
                                                             </cc1:CalendarExtender>
@@ -980,8 +974,7 @@
                                                             Importe total neto gravado:
                                                         </td>
                                                         <td class="TC10S">
-                                                            <asp:TextBox ID="Importe_Total_Neto_Gravado_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet"
-                                                                ToolTip="<Obligatorio> En el caso que no informe este campo, debe ingresar 0 (cero).El separador de decimales a utilizar es el punto">
+                                                            <asp:TextBox ID="Importe_Total_Neto_Gravado_ResumenTextBox" runat="server" SkinID="TextoBoxFEAVendedorDet" ToolTip="<Obligatorio> En el caso que no informe este campo, debe ingresar 0 (cero).El separador de decimales a utilizar es el punto">
                                                             </asp:TextBox>
                                                         </td>
                                                     </tr>
@@ -1067,7 +1060,7 @@
                                                     </tr>
                                                     <tr>
                                                         <td class="TC00S">
-                                                            Importe total reintegros:
+                                                            Reintegro Decreto 1043/2016:
                                                         </td>
                                                         <td class="TC10S">
                                                             <asp:TextBox ID="Importe_Total_Reintegros_ResumenTextBox" runat="server"

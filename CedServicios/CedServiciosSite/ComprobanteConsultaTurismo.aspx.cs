@@ -120,13 +120,27 @@ namespace CedServicios.Site
                     ViewState["ComprobanteATratar"] = comprobanteATratar;
 
                     string descrTratamiento = String.Empty;
-                    if (TratamientoTextBox.Text == "Consulta")
+                    switch (TratamientoTextBox.Text)
                     {
-                        descrTratamiento = "Consulta";
-                    }
-                    else
-                    {
-                        WebForms.Excepciones.Redireccionar(new EX.Validaciones.ValorInvalido("Tratamiento del Comprobante"), "~/NotificacionDeExcepcion.aspx");
+                        case "Consulta":
+                            descrTratamiento = "Consulta";
+                            break;
+                        case "Baja_AnulBaja":
+                            Baja_AnulBaPanel.Visible = true;
+                            if (comprobanteATratar.Comprobante.Estado == "DeBaja")
+                            {
+                                descrTratamiento = "Anulación de baja";
+                                Baja_AnulBajaButton.Text = "Anular la baja";
+                            }
+                            else
+                            {
+                                descrTratamiento = "Baja";
+                                Baja_AnulBajaButton.Text = "Registrar la baja";
+                            }
+                            break;
+                        default:
+                            WebForms.Excepciones.Redireccionar(new EX.Validaciones.ValorInvalido("Tratamiento del Comprobante"), "~/NotificacionDeExcepcion.aspx");
+                            break;
                     }
 
                     #region Personalización campos vendedor y comprador para VENTAS
@@ -193,6 +207,9 @@ namespace CedServicios.Site
             Contacto_CompradorTextBox.ReadOnly = true;
             Email_CompradorTextBox.ReadOnly = true;
             Telefono_CompradorTextBox.ReadOnly = true;
+            CodigoPaisDropDownList.Enabled = false;
+            CodigoRelacionReceptorEmisorDropDownList.Enabled = false;
+            Codigo_Doc_Identificatorio_CompradorDropDownList.Enabled = false;
 
             DatosComerciales.ReadOnly = true;
 
@@ -220,6 +237,7 @@ namespace CedServicios.Site
             Importe_Total_Impuestos_Nacionales_ResumenTextBox.ReadOnly = true;
             Importe_Total_Ingresos_Brutos_ResumenTextBox.ReadOnly = true;
             Importe_Total_Impuestos_Internos_ResumenTextBox.ReadOnly = true;
+            Importe_Total_Reintegros_ResumenTextBox.ReadOnly = true;
             Importe_Total_Factura_ResumenTextBox.ReadOnly = true;
             Tipo_de_cambioTextBox.ReadOnly = true;
 
@@ -502,6 +520,10 @@ namespace CedServicios.Site
                 {
                     Importe_Total_Ingresos_Brutos_ResumenTextBox.Text = string.Empty;
                 }
+            }
+            if (c.resumen.importe_ReintegroSpecified == true)
+            {
+                Importe_Total_Reintegros_ResumenTextBox.Text = c.resumen.importe_Reintegro.ToString();
             }
         }
         protected void MonedaComprobanteDropDownList_SelectedIndexChanged(object sender, EventArgs e)
@@ -1013,9 +1035,56 @@ namespace CedServicios.Site
                 return this.DetalleLinea;
             }
         }
+        protected void AccionBaja_AnulBajaButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.Usuario.Id == null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
+                }
+                else
+                {
+                    string mensaje = String.Empty;
+                    try
+                    {
+                        Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                        comprobante.Cuit = sesion.Cuit.Nro;
+                        comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue);
+                        comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                        comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobanteTextBox.Text;
+                        comprobante.Nro = Math.Abs(Convert.ToInt64(Numero_ComprobanteTextBox.Text));
+                        RN.Comprobante.Leer(comprobante, sesion);
+                        if (comprobante.Estado != "DeBaja")
+                        {
+                            RN.Comprobante.DarDeBaja(comprobante, sesion);
+                            mensaje = "Baja de Comprobante registrada satisfactoriamente";
+                        }
+                        else
+                        {
+                            RN.Comprobante.AnularBaja(comprobante, sesion);
+                            mensaje = "Anulación de baja de Comprobante registrada satisfactoriamente";
+                        }
+                        AccionesPanel.Visible = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        mensaje = "Problemas en la baja/anul.baja del Comprobante. " + ex.Message;
+                    }
+                    finally
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript(mensaje));
+                    }
+                }
+            }
+        }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
-
         }
         protected void PuntoVtaDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {

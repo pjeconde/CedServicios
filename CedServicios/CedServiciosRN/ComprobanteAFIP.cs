@@ -1063,18 +1063,12 @@ namespace CedServicios.RN
                             {
                                 break;
                             }
-                            if (Comprobante.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip == "S")
-                            {
-                                CantReferenciasAFIP += 1;
-                            }
-
+                            CantReferenciasAFIP += 1;
                         }
                         if (CantReferenciasAFIP != 0)
                         {
                             arrayFECompAsocRequest = new ar.gov.afip.WSCT.ComprobanteAsociadoType[CantReferenciasAFIP];
                         }
-                        CantReferenciasAFIP = 0;
-
                         for (int j = 0; j < Comprobante.cabecera.informacion_comprobante.referencias.Length; j++)
                         {
                             if (Comprobante.cabecera.informacion_comprobante.referencias[j] == null)
@@ -1294,6 +1288,7 @@ namespace CedServicios.RN
                 ar.gov.afip.wsw.Service objWS;
                 ar.gov.afip.wsfev1.Service objWSFEV1;
                 ar.gov.afip.wsfexv1.Service objWSFEXV1;
+                ar.gov.afip.WSCT.CTService objWSCT;
 
                 List<Entidades.PuntoVta> listaPV = Sesion.UN.PuntosVta.FindAll(delegate(Entidades.PuntoVta pv)
                 {
@@ -1360,6 +1355,55 @@ namespace CedServicios.RN
                             CaeNro = cmpResponse.FEXResultGet.Cae;
                             CaeFecVto = cmpResponse.FEXResultGet.Fch_venc_Cae;
                             CaeFecPro = cmpResponse.FEXResultGet.Fecha_cbte_cae;
+                            if (CaeFecPro == null)
+                            {
+                                CaeFecPro = DateTime.Today.ToString("yyyyMMdd");
+                            }
+                        }
+                    }
+                    else if (listaPV[0].IdTipoPuntoVta == "Turismo")
+                    {
+                        CrearTicketWSCT(Sesion, out ticket, out objWSCT);
+                        short tipo = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante);
+                        short ptoVta = Convert.ToInt16(lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta);
+                        long nro = lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                        ar.gov.afip.WSCT.ConsultarComprobanteReturnType arrayFEResponse = new ar.gov.afip.WSCT.ConsultarComprobanteReturnType();
+                        arrayFEResponse = objWSCT.consultarComprobanteTipoPVentaNro(ticket.ObjAutorizacionWSCT, tipo, ptoVta, nro);
+                        if (arrayFEResponse.arrayErrores != null || arrayFEResponse.arrayErroresFormato != null)
+                        {
+                            respuesta = "Resultado: R\\n";
+                            if (arrayFEResponse.arrayErrores != null)
+                            {
+                                for (int i = 0; i < arrayFEResponse.arrayErrores.Length; i++)
+                                {
+                                    respuesta += "Errores: " + arrayFEResponse.arrayErrores[i].codigo + " - " + arrayFEResponse.arrayErrores[i].descripcion + "\\n";
+                                }
+                            }
+                            if (arrayFEResponse.arrayErroresFormato != null)
+                            {
+                                for (int i = 0; i < arrayFEResponse.arrayErroresFormato.Length; i++)
+                                {
+                                    respuesta += "Errores Formato: " + arrayFEResponse.arrayErroresFormato[i].codigo + "-" + arrayFEResponse.arrayErroresFormato[i].descripcion + ".\\n ";
+
+                                }
+                            }
+                        }
+                        else
+                        {
+                            respuesta += "Resultado: A\\n";
+                            respuesta += "CAE: " + arrayFEResponse.comprobante.codigoAutorizacion;
+                            respuesta += "CAE Fec.Vto: " + arrayFEResponse.comprobante.fechaVencimiento.ToString("yyyyMMdd");
+                            CaeNro = arrayFEResponse.comprobante.codigoAutorizacion.ToString();
+                            CaeFecVto = arrayFEResponse.comprobante.fechaVencimiento.ToString("yyyyMMdd");
+                            CaeFecPro = DateTime.Today.ToString("yyyyMMdd");
+                            if (arrayFEResponse.arrayErroresFormato != null)
+                            {
+                                for (int i = 0; i < arrayFEResponse.arrayErroresFormato.Length; i++)
+                                {
+                                    respuesta += "Errores Formato: " + arrayFEResponse.arrayErroresFormato[i].codigo + "-" + arrayFEResponse.arrayErroresFormato[i].descripcion + ".\\n ";
+
+                                }
+                            }
                         }
                     }
                     else

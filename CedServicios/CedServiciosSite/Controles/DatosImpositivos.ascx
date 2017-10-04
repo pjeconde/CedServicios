@@ -31,7 +31,7 @@
 	            </td>
 				<td>
 					<asp:TextBox ID="NroIngBrutosTextBox" runat="server" MaxLength="13" TabIndex="303"
-						ToolTip="Para convenio multilateral deberá ingresar el CUIT" Width="90px"></asp:TextBox>&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="NRO. DE INGRESOS BRUTOS" data-content="Fórmatos válidos son:<br />XXXXXXX-XX<br />XX-XXXXXXXX-X<br />XXX-XXXXXX-X<br />Donde X puede ser un número de 0 a 9<br /><br />Si es CONVENIO MULTILATERAL debe informar el CUIT sin guiones.<br />(Seg. COMISIÓN ARBITRAL CONVENIO Resolución General 3/2015 del 15/07/2015 )<br /><br />"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
+						ToolTip="Para convenio multilateral deberá ingresar el CUIT" Width="90px"></asp:TextBox>&nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="NRO. DE INGRESOS BRUTOS" data-content="Fórmatos válidos son:<br />XXXXXXX-XX<br />XX-XXXXXXXX-X<br />XXX-XXXXXX-X<br />Donde X puede ser un número de 0 a 9<br /><br />Si es CONVENIO MULTILATERAL debe informar el CUIT sin guiones.<br />XXXXXXXXXXX<br /><br />(Seg. COMISIÓN ARBITRAL CONVENIO Resolución General 3/2015 del 15/07/2015 )<br /><br />"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
 				</td>
 			</tr>
 		</table>

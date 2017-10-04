@@ -74,6 +74,10 @@ namespace CedServicios.Site
                 Entidades.Cuit cuit = RN.Cuit.ObtenerCopia((Entidades.Cuit)sesion.Cuit);
                 try
                 {
+                    if (ValidarCampos() == false)
+                    {
+                        return;
+                    }
                     cuit.Nro = CUITTextBox.Text;
                     cuit.RazonSocial = RazonSocialTextBox.Text;
                     cuit.Domicilio.Calle = Domicilio.Calle;
@@ -133,6 +137,25 @@ namespace CedServicios.Site
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        private bool ValidarCampos()
+        {
+            if (DatosImpositivos.IdCondIngBrutos.ToString().Trim() == "")
+            {
+                MensajeLabel.Text = "Ingresar la condición de Ingresos Brutos";
+                return false;
+            }
+            if (DatosImpositivos.NroIngBrutos.ToString().Trim() == "")
+            {
+                MensajeLabel.Text = "Ingresar un Nro. de Ingresos Brutos";
+                return false;
+            }
+            if (!RN.Funciones.IsValidNroIB(DatosImpositivos.NroIngBrutos))
+            {
+                MensajeLabel.Text = "Nro. de Ingresos Brutos con formato inválido";
+                return false;
+            }
+            return true;
         }
     }
 }

@@ -116,6 +116,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     linea.unidad = Convert.ToString(new FeaEntidades.CodigosUnidad.SinInformar().Codigo);
                 }
+                linea.codigo_Turismo = l.codigo_Turismo;
                 linea.cantidad = l.cantidad;
                 linea.cantidadSpecified = l.cantidadSpecified;
                 linea.codigo_producto_comprador = l.codigo_producto_comprador;

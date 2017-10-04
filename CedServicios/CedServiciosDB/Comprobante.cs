@@ -39,7 +39,7 @@ namespace CedServicios.DB
                 if (Persona.Orden != 0)
                 {
                     a.Append("and Comprobante.IdTipoDoc=" + Persona.Documento.Tipo.Id + " ");
-                    a.Append("and Comprobante.NroDoc=" + Persona.Documento.Nro.ToString() + " ");
+                    a.Append("and Comprobante.NroDoc='" + Persona.Documento.Nro.ToString() + "' ");
                     a.Append("and Comprobante.IdPersona='" + Persona.IdPersona + "' ");
                     a.Append("and Comprobante.DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
                 }
@@ -91,7 +91,7 @@ namespace CedServicios.DB
                 if (Persona.Orden != 0)
                 {
                     a.Append("and Comprobante.IdTipoDoc=" + Persona.Documento.Tipo.Id + " ");
-                    a.Append("and Comprobante.NroDoc=" + Persona.Documento.Nro.ToString() + " ");
+                    a.Append("and Comprobante.NroDoc='" + Persona.Documento.Nro.ToString() + "' ");
                     a.Append("and Comprobante.IdPersona='" + Persona.IdPersona + "' ");
                     a.Append("and Comprobante.DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
                 }
@@ -176,7 +176,7 @@ namespace CedServicios.DB
                 if (Persona.Orden != 0)
                 {
                     a.Append("and Comprobante.IdTipoDoc=" + Persona.Documento.Tipo.Id + " ");
-                    a.Append("and Comprobante.NroDoc=" + Persona.Documento.Nro.ToString() + " ");
+                    a.Append("and Comprobante.NroDoc='" + Persona.Documento.Nro.ToString() + "' ");
                     a.Append("and Comprobante.IdPersona='" + Persona.IdPersona + "' ");
                     a.Append("and Comprobante.DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
                 }
@@ -343,7 +343,7 @@ namespace CedServicios.DB
                 a.Append("Comprobante.DescrTipoComprobante='" + Comprobante.TipoComprobante.Descr + "', ");
                 a.Append("Comprobante.NroLote=" + Comprobante.NroLote.ToString() + ", ");
                 a.Append("Comprobante.IdTipoDoc=" + Comprobante.Documento.Tipo.Id + ", ");
-                a.Append("Comprobante.NroDoc=" + Comprobante.Documento.Nro.ToString() + ", ");
+                a.Append("Comprobante.NroDoc='" + Comprobante.Documento.Nro.ToString() + "', ");
                 if (Comprobante.IdPersona == null)
                 {
                     a.Append("Comprobante.IdPersona='', ");
@@ -489,7 +489,7 @@ namespace CedServicios.DB
                 //if (Persona.Orden != 0)
                 //{
                 //    a.Append("and Comprobante.IdTipoDoc=" + Persona.Documento.Tipo.Id + " ");
-                //    a.Append("and Comprobante.NroDoc=" + Persona.Documento.Nro.ToString() + " ");
+                //    a.Append("and Comprobante.NroDoc='" + Persona.Documento.Nro.ToString() + "' ");
                 //    a.Append("and Comprobante.IdPersona='" + Persona.IdPersona + "' ");
                 //    a.Append("and Comprobante.DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
                 //}
@@ -565,7 +565,7 @@ namespace CedServicios.DB
             a.Append("insert Log values (" + Comprobante.WF.Id + ", getdate(), '" + sesion.Usuario.Id + "', 'Comprobante', 'CambioEstado', '" + Comprobante.Estado + "', '') ");
             a.Append("update Comprobante set Response = '" + Comprobante.Response + "', Estado = '" + Comprobante.Estado + "', ");
             a.Append("Comprobante.IdTipoDoc='" + Comprobante.Documento.Tipo.Id + "', ");
-            a.Append("Comprobante.NroDoc=" + Comprobante.Documento.Nro.ToString() + ", ");
+            a.Append("Comprobante.NroDoc='" + Comprobante.Documento.Nro.ToString() + "', ");
             //a.Append("Comprobante.Fecha='" + Comprobante.Fecha.ToString("yyyyMMdd") + "', ");
             //a.Append("Comprobante.FechaVto='" + Comprobante.FechaVto.ToString("yyyyMMdd") + "', ");
             a.Append("Comprobante.Moneda='" + Comprobante.Moneda + "', ");
@@ -580,7 +580,7 @@ namespace CedServicios.DB
             System.Text.StringBuilder a = new StringBuilder();
             a.Append("select DestinatarioFrecuente.Para, DestinatarioFrecuente.Cc ");
             a.Append("from DestinatarioFrecuente ");
-            a.Append("where DestinatarioFrecuente.Cuit='" + Persona.Cuit + "' and DestinatarioFrecuente.IdTipoDoc = " + Persona.Documento.Tipo.Id + " and DestinatarioFrecuente.NroDoc = " + Persona.Documento.Nro.ToString() + " and DestinatarioFrecuente.IdPersona = '" + Persona.IdPersona + "' and DestinatarioFrecuente.DesambiguacionCuitPais = " + Persona.DesambiguacionCuitPais.ToString() + " and IdDestinatarioFrecuente='" + Contrato.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id + "' ");
+            a.Append("where DestinatarioFrecuente.Cuit='" + Persona.Cuit + "' and DestinatarioFrecuente.IdTipoDoc = " + Persona.Documento.Tipo.Id + " and DestinatarioFrecuente.NroDoc = '" + Persona.Documento.Nro.ToString() + "' and DestinatarioFrecuente.IdPersona = '" + Persona.IdPersona + "' and DestinatarioFrecuente.DesambiguacionCuitPais = " + Persona.DesambiguacionCuitPais.ToString() + " and IdDestinatarioFrecuente='" + Contrato.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id + "' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count != 0)
             {

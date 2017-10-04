@@ -156,6 +156,7 @@
     <Compile Include="CodigosTurismo\Excedentes.cs" />
     <Compile Include="CodigosUnidad\Anticipos.cs" />
     <Compile Include="CodigosUnidad\Bonificacion.cs" />
+    <Compile Include="CondicionesIB\RegimenSimplificado.cs" />
     <Compile Include="DestinosCuit\SinInformar.cs" />
     <Compile Include="DestinosPais\AaeTierraDelFuegoArgentina.cs" />
     <Compile Include="DestinosPais\Afganistan.cs" />

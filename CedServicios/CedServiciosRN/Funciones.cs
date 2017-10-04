@@ -152,7 +152,27 @@ namespace CedServicios.RN
         }
         public static bool IsValidNroIB(string strNroIB)
         {
-            return Regex.IsMatch(strNroIB, @"[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}|[0-9]{11}");
+            bool respRegex = Regex.IsMatch(strNroIB, @"[0-9]{7}-[0-9]{2}|[0-9]{2}-[0-9]{8}-[0-9]{1}|[0-9]{3}-[0-9]{6}-[0-9]{1}");
+            if (respRegex == false)
+            {
+                if (strNroIB.Length == 11)
+                {
+                    respRegex = Regex.IsMatch(strNroIB, @"[0-9]{11}");
+                }
+                else
+                {
+                    respRegex = false;
+                }
+            }
+            return respRegex;
+        }
+        public static bool IsValidNumericDateyyyyMMdd(string strNro)
+        {
+            return Regex.IsMatch(strNro, @"[0-9]{8}");
+        }
+        public static bool IsValidNumericOnly(string strNro)
+        {
+            return Regex.IsMatch(strNro, @"^[0-9]*$");
         }
         public static bool IsValidNumeric(string strNro)
         {
