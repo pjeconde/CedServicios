@@ -80,6 +80,31 @@
     <Content Include="ArticuloCrear.aspx" />
     <Content Include="ArticuloModificar.aspx" />
     <Content Include="ArticuloSeleccionar.aspx" />
+    <Content Include="assets\css\bootstrap.min.css" />
+    <Content Include="assets\css\plugins.css" />
+    <Content Include="assets\css\responsive.css" />
+    <Content Include="assets\css\roboto-webfont.css" />
+    <Content Include="assets\css\style.css" />
+    <Content Include="assets\fonts\fontawesome-webfont.svg" />
+    <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\fonts\Roboto-Light-webfont.svg" />
+    <Content Include="assets\fonts\Roboto-Regular-webfont.svg" />
+    <Content Include="assets\images\bg.png" />
+    <Content Include="assets\images\feature-1.jpg" />
+    <Content Include="assets\images\feature-2.jpg" />
+    <Content Include="assets\images\flaticon1.png" />
+    <Content Include="assets\images\flaticon2.png" />
+    <Content Include="assets\images\flaticon3.png" />
+    <Content Include="assets\images\flaticon4.png" />
+    <Content Include="assets\images\homebg.jpg" />
+    <Content Include="assets\images\logo.png" />
+    <Content Include="assets\images\preloading.gif" />
+    <Content Include="assets\js\main.js" />
+    <Content Include="assets\js\modernizr.js" />
+    <Content Include="assets\js\plugins.js" />
+    <Content Include="assets\js\vendor\bootstrap.min.js" />
+    <Content Include="assets\js\vendor\jquery-1.11.2.min.js" />
+    <Content Include="assets\js\vendor\modernizr-2.8.3-respond-1.4.2.min.js" />
     <Content Include="Autorizacion.aspx" />
     <Content Include="Ayuda\Instructivas\OperarFacturaElectronica001.aspx" />
     <Content Include="Ayuda\ExploradorNovedad.aspx" />
@@ -151,7 +176,36 @@
     <Content Include="Imagenes\Ayuda\ConsultaComprobante-Acciones.png" />
     <Content Include="Imagenes\Ayuda\ConsultaComprobante-DescargarXML.png" />
     <Content Include="Imagenes\Ayuda\PeriodoEmision.png" />
+    <Content Include="Imagenes\Clientes\Logo-Abasto.jpg" />
+    <Content Include="Imagenes\Clientes\Logo-Adm-Arg.jpg" />
+    <Content Include="Imagenes\Clientes\Logo-alfred-c-toepfer-international.png" />
+    <Content Include="Imagenes\Clientes\Logo-AltoAvellaneda.jpg" />
+    <Content Include="Imagenes\Clientes\Logo-AltoPalermo.jpg" />
+    <Content Include="Imagenes\Clientes\Logo-bueno-aires-desing.jpg" />
+    <Content Include="Imagenes\Clientes\Logo-Disco.jpg" />
+    <Content Include="Imagenes\Clientes\Logo-Galicia.jpg" />
+    <Content Include="Imagenes\Clientes\Logo-PatioBullrich.jpg" />
+    <Content Include="Imagenes\Clientes\Logo_Carrefour_alta.jpg" />
+    <Content Include="Imagenes\Clientes\Logo_CeraAlb.png" />
+    <Content Include="Imagenes\Clientes\Logo_Clan.png" />
+    <Content Include="Imagenes\Clientes\Logo_cmsi.jpg" />
+    <Content Include="Imagenes\Clientes\Logo_Compo.jpg" />
+    <Content Include="Imagenes\Clientes\Logo_Formulagro.bmp" />
+    <Content Include="Imagenes\Clientes\Logo_Lear.png" />
+    <Content Include="Imagenes\Clientes\Logo_Magnus.png" />
+    <Content Include="Imagenes\Clientes\Logo_Opdea.png" />
+    <Content Include="Imagenes\Clientes\Logo_Orbis.png" />
+    <Content Include="Imagenes\Clientes\Logo_Schaeffler.png" />
+    <Content Include="Imagenes\Clientes\Logo_Tia.png" />
+    <Content Include="Imagenes\Clientes\Logo_TV.png" />
     <Content Include="Imagenes\Empresa\SoftwareAMedida.jpg" />
+    <Content Include="Imagenes\Iconos\PagPpal\key.png" />
+    <Content Include="Imagenes\Iconos\PagPpal\partnership.png" />
+    <Content Include="Imagenes\Iconos\PagPpal\searching.png" />
+    <Content Include="Imagenes\Iconos\PagPpal\Teamwork.png" />
+    <Content Include="Imagenes\Iconos\Teamwork.png" />
+    <Content Include="index_prueba.html" />
+    <Content Include="Inicio.aspx" />
     <Content Include="InstitucionalSoftwareAMedida.aspx" />
     <Content Include="jquery\docs.min.js" />
     <Content Include="jquery\jquery-1.11.3.js" />
@@ -299,6 +353,20 @@
     <Content Include="UsuarioOlvidoId.aspx" />
     <Content Include="UsuarioOlvidoPassword.aspx" />
     <Content Include="CedServiciosAyuda.master" />
+    <None Include="assets\fonts\fontawesome-webfont.eot" />
+    <None Include="assets\fonts\fontawesome-webfont.ttf" />
+    <None Include="assets\fonts\fontawesome-webfont.woff" />
+    <None Include="assets\fonts\fontawesome-webfont.woff2" />
+    <None Include="assets\fonts\FontAwesome.otf" />
+    <None Include="assets\fonts\glyphicons-halflings-regular.eot" />
+    <None Include="assets\fonts\glyphicons-halflings-regular.ttf" />
+    <None Include="assets\fonts\glyphicons-halflings-regular.woff" />
+    <None Include="assets\fonts\Roboto-Light-webfont.eot" />
+    <None Include="assets\fonts\Roboto-Light-webfont.ttf" />
+    <None Include="assets\fonts\Roboto-Light-webfont.woff" />
+    <None Include="assets\fonts\Roboto-Regular-webfont.eot" />
+    <None Include="assets\fonts\Roboto-Regular-webfont.ttf" />
+    <None Include="assets\fonts\Roboto-Regular-webfont.woff" />
     <None Include="css\bootstrap-theme.css.map" />
     <None Include="css\bootstrap.css.map" />
     <None Include="Descargas\Cedeira-SistAdminFCIs.pdf" />
@@ -787,6 +855,13 @@
     </Compile>
     <Compile Include="Facturacion\Electronica\Reportes\IvaVentasFiltros.aspx.designer.cs">
       <DependentUpon>IvaVentasFiltros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Inicio.aspx.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Inicio.aspx.designer.cs">
+      <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
     <Compile Include="InstitucionalSoftwareAMedida.aspx.cs">
       <DependentUpon>InstitucionalSoftwareAMedida.aspx</DependentUpon>

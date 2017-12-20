@@ -17,8 +17,9 @@ namespace CedServicios.Site
             if (RefrescaDatosUsuario) RN.Sesion.RefrescarDatosUsuario(Sesion.Usuario, Sesion);
             if (Sesion.Ambiente != "PROD")
             {
-                ContentPlaceHolder cedeiraContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("CedeiraContentPlaceHolder"));
-                Label ambienteLabel = ((Label)cedeiraContentPlaceHolder.FindControl("AmbienteLabel"));
+                //ContentPlaceHolder cedeiraContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("CedeiraContentPlaceHolder"));
+                //Label ambienteLabel = ((Label)cedeiraContentPlaceHolder.FindControl("AmbienteLabel"));
+                Label ambienteLabel = ((Label)Master.FindControl("AmbienteLabel"));
                 ambienteLabel.Text = Sesion.Ambiente;
             }
 

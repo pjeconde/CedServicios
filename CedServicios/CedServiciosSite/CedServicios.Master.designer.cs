@@ -49,33 +49,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.ScriptManager MasterScriptManager;
         
         /// <summary>
-        /// CedeiraContentPlaceHolder control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder CedeiraContentPlaceHolder;
-        
-        /// <summary>
-        /// EmpresaImageButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton EmpresaImageButton;
-        
-        /// <summary>
-        /// VersionLabel control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label VersionLabel;
-        
-        /// <summary>
         /// AmbienteLabel control.
         /// </summary>
         /// <remarks>
@@ -83,6 +56,15 @@ namespace CedServicios.Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label AmbienteLabel;
+        
+        /// <summary>
+        /// CedeiraContentPlaceHolder control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ContentPlaceHolder CedeiraContentPlaceHolder;
         
         /// <summary>
         /// UsuarioContentPlaceHolder control.
