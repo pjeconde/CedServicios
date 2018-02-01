@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="InstitucionalContacto.aspx.cs" Inherits="CedServicios.Site.InstitucionalContacto" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table style="padding-left:10px">
+    <table style="padding-left:10px" >
         <tr>
             <td colspan="4" style="padding-top: 20px; text-align: center">
                 <span class="glyphicon glyphicon-pencil gi-1-5x"></span>&nbsp;&nbsp;<asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Contacto"></asp:Label>
@@ -90,14 +90,6 @@
             </td>
             <td align="right" style="padding-top: 10px; padding-right: 2px">
                 <asp:Button ID="BorrarDatosButton" runat="server" OnClick="BorrarDatosButton_Click" Text="Borrar Datos" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-            </td>
-        </tr>
-        <tr>
-            <td align="center" colspan="4" style="height: 24px; padding-top: 20px">
-                <asp:Button ID="EmpresaButton" runat="server" TabIndex="10" Text="Empresa" onclick="EmpresaButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                <asp:Button ID="SolucionesButton" runat="server" CausesValidation="false" TabIndex="11" Text="Soluciones" onclick="SolucionesButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                <asp:Button ID="RefeComButton" runat="server" CausesValidation="false" TabIndex="12" Text="Referencias Comerciales" onclick="RefeComButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="13" Text="Salir" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

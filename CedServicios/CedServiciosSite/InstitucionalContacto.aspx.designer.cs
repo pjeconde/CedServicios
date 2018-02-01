@@ -211,42 +211,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Button BorrarDatosButton;
         
         /// <summary>
-        /// EmpresaButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button EmpresaButton;
-        
-        /// <summary>
-        /// SolucionesButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SolucionesButton;
-        
-        /// <summary>
-        /// RefeComButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button RefeComButton;
-        
-        /// <summary>
-        /// SalirButton control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button SalirButton;
-        
-        /// <summary>
         /// MensajeLabel control.
         /// </summary>
         /// <remarks>

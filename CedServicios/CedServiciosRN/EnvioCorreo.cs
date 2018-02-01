@@ -180,7 +180,7 @@ namespace CedServicios.RN
             a.Append(ContactoSite.Mensaje + "<br />");
             a.Append("------------------------------------------------<br />");
             mail2Cedeira.Body = a.ToString();
-            smtpClient2Cedeira.Credentials = new NetworkCredential("contacto@cedeira.com.ar", "cedeira123");
+            smtpClient2Cedeira.Credentials = new NetworkCredential("contacto@cedeira.com.ar", "ibg0220");
             smtpClient2Cedeira.Send(mail2Cedeira);
 
             //Mail para el Contacto
@@ -209,7 +209,7 @@ namespace CedServicios.RN
             a.Append("<br />");
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             mail2Contacto.Body = a.ToString();
-            smtpClient2Contacto.Credentials = new NetworkCredential("contacto@cedeira.com.ar", "cedeira123");
+            smtpClient2Contacto.Credentials = new NetworkCredential("contacto@cedeira.com.ar", "ibg0220");
             smtpClient2Contacto.Send(mail2Contacto);
         }
         public static void ReporteActividad(DateTime FechaDsd, DateTime FechaHst, Entidades.Sesion Sesion)

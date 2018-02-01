@@ -58,6 +58,24 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label AmbienteLabel;
         
         /// <summary>
+        /// btnUsuarioLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnUsuarioLogin;
+        
+        /// <summary>
+        /// btnCerrarLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor btnCerrarLogin;
+        
+        /// <summary>
         /// CedeiraContentPlaceHolder control.
         /// </summary>
         /// <remarks>
@@ -164,5 +182,14 @@ namespace CedServicios.Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder ContentPlaceDefault;
+        
+        /// <summary>
+        /// footerNoLogin control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl footerNoLogin;
     }
 }

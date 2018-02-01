@@ -80,31 +80,85 @@
     <Content Include="ArticuloCrear.aspx" />
     <Content Include="ArticuloModificar.aspx" />
     <Content Include="ArticuloSeleccionar.aspx" />
-    <Content Include="assets\css\bootstrap.min.css" />
-    <Content Include="assets\css\plugins.css" />
-    <Content Include="assets\css\responsive.css" />
-    <Content Include="assets\css\roboto-webfont.css" />
-    <Content Include="assets\css\style.css" />
-    <Content Include="assets\fonts\fontawesome-webfont.svg" />
-    <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="assets\fonts\Roboto-Light-webfont.svg" />
-    <Content Include="assets\fonts\Roboto-Regular-webfont.svg" />
-    <Content Include="assets\images\bg.png" />
-    <Content Include="assets\images\feature-1.jpg" />
-    <Content Include="assets\images\feature-2.jpg" />
-    <Content Include="assets\images\flaticon1.png" />
-    <Content Include="assets\images\flaticon2.png" />
-    <Content Include="assets\images\flaticon3.png" />
-    <Content Include="assets\images\flaticon4.png" />
-    <Content Include="assets\images\homebg.jpg" />
-    <Content Include="assets\images\logo.png" />
-    <Content Include="assets\images\preloading.gif" />
-    <Content Include="assets\js\main.js" />
-    <Content Include="assets\js\modernizr.js" />
-    <Content Include="assets\js\plugins.js" />
-    <Content Include="assets\js\vendor\bootstrap.min.js" />
-    <Content Include="assets\js\vendor\jquery-1.11.2.min.js" />
-    <Content Include="assets\js\vendor\modernizr-2.8.3-respond-1.4.2.min.js" />
+    <Content Include="assets\css\bootstrap.min.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\css\plugins.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\css\responsive.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\css\roboto-webfont.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\css\style.css">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\fonts\fontawesome-webfont.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\fonts\glyphicons-halflings-regular.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\fonts\Roboto-Light-webfont.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\fonts\Roboto-Regular-webfont.svg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\bg.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\feature-1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\feature-2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\flaticon1.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\flaticon2.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\flaticon3.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\flaticon4.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\homebg2.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\logo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\homebg3.jpg" />
+    <Content Include="assets\images\homebg.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\images\preloading.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\js\main.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\js\modernizr.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\js\plugins.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\js\vendor\bootstrap.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\js\vendor\jquery-1.11.2.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="assets\js\vendor\modernizr-2.8.3-respond-1.4.2.min.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Autorizacion.aspx" />
     <Content Include="Ayuda\Instructivas\OperarFacturaElectronica001.aspx" />
     <Content Include="Ayuda\ExploradorNovedad.aspx" />
@@ -148,6 +202,10 @@
     <Content Include="Controles\DatosEmailAvisoComprobantePersona.ascx" />
     <Content Include="Controles\ListaPrecioDefaultPersona.ascx" />
     <Content Include="ComprobanteConsultaTurismo.aspx" />
+    <Content Include="Imagenes\Clientes\Logo_Opdea.png" />
+    <Content Include="Imagenes\Servicios\SF1.png" />
+    <Content Include="InicioEmpresa.aspx" />
+    <Content Include="InicioFEA.aspx" />
     <Content Include="ExploradorPDFComprobante.aspx" />
     <Content Include="Facturacion\Electronica\ImpuestosCTConsulta.ascx" />
     <Content Include="Facturacion\Electronica\DetalleCTConsulta.ascx" />
@@ -171,42 +229,149 @@
     <Content Include="Facturacion\Electronica\Reportes\VentasXArticuloFiltros.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\IvaVentasWebForm.aspx" />
     <Content Include="Facturacion\Electronica\Reportes\IvaVentasFiltros.aspx" />
-    <Content Include="Imagenes\Ayuda\AltaLote-Acciones.png" />
-    <Content Include="Imagenes\Ayuda\Cabecera_Factura-DatosVendedor.png" />
-    <Content Include="Imagenes\Ayuda\ConsultaComprobante-Acciones.png" />
-    <Content Include="Imagenes\Ayuda\ConsultaComprobante-DescargarXML.png" />
-    <Content Include="Imagenes\Ayuda\PeriodoEmision.png" />
-    <Content Include="Imagenes\Clientes\Logo-Abasto.jpg" />
-    <Content Include="Imagenes\Clientes\Logo-Adm-Arg.jpg" />
-    <Content Include="Imagenes\Clientes\Logo-alfred-c-toepfer-international.png" />
-    <Content Include="Imagenes\Clientes\Logo-AltoAvellaneda.jpg" />
-    <Content Include="Imagenes\Clientes\Logo-AltoPalermo.jpg" />
-    <Content Include="Imagenes\Clientes\Logo-bueno-aires-desing.jpg" />
-    <Content Include="Imagenes\Clientes\Logo-Disco.jpg" />
-    <Content Include="Imagenes\Clientes\Logo-Galicia.jpg" />
-    <Content Include="Imagenes\Clientes\Logo-PatioBullrich.jpg" />
-    <Content Include="Imagenes\Clientes\Logo_Carrefour_alta.jpg" />
-    <Content Include="Imagenes\Clientes\Logo_CeraAlb.png" />
-    <Content Include="Imagenes\Clientes\Logo_Clan.png" />
-    <Content Include="Imagenes\Clientes\Logo_cmsi.jpg" />
-    <Content Include="Imagenes\Clientes\Logo_Compo.jpg" />
-    <Content Include="Imagenes\Clientes\Logo_Formulagro.bmp" />
-    <Content Include="Imagenes\Clientes\Logo_Lear.png" />
-    <Content Include="Imagenes\Clientes\Logo_Magnus.png" />
-    <Content Include="Imagenes\Clientes\Logo_Opdea.png" />
-    <Content Include="Imagenes\Clientes\Logo_Orbis.png" />
-    <Content Include="Imagenes\Clientes\Logo_Schaeffler.png" />
-    <Content Include="Imagenes\Clientes\Logo_Tia.png" />
-    <Content Include="Imagenes\Clientes\Logo_TV.png" />
-    <Content Include="Imagenes\Empresa\SoftwareAMedida.jpg" />
-    <Content Include="Imagenes\Iconos\PagPpal\key.png" />
-    <Content Include="Imagenes\Iconos\PagPpal\partnership.png" />
-    <Content Include="Imagenes\Iconos\PagPpal\searching.png" />
-    <Content Include="Imagenes\Iconos\PagPpal\Teamwork.png" />
-    <Content Include="Imagenes\Iconos\Teamwork.png" />
+    <Content Include="font-awesome-4.7.0\css\font-awesome.css" />
+    <Content Include="font-awesome-4.7.0\css\font-awesome.min.css" />
+    <Content Include="font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <Content Include="Imagenes\Aplicaciones\CedAPC.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Aplicaciones\CedCCT.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Aplicaciones\CedFCIForm.JPG">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Aplicaciones\CedFCIForm_ProcesoDiario.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Aplicaciones\CedST-EsquemaMEP.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Ayuda\AltaLote-Acciones.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Ayuda\Cabecera_Factura-DatosVendedor.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Ayuda\ConsultaComprobante-Acciones.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Ayuda\ConsultaComprobante-DescargarXML.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Ayuda\PeriodoEmision.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo-Abasto.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo-Adm-Arg.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo-alfred-c-toepfer-international.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo-AltoAvellaneda.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo-AltoPalermo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo-Asamach.jpg" />
+    <Content Include="Imagenes\Clientes\Logo-bueno-aires-desing.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo-Disco.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo-Galicia.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo-MagnoConsulting.png" />
+    <Content Include="Imagenes\Clientes\Logo-PatioBullrich.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo-Schaeffler.jpg" />
+    <Content Include="Imagenes\Clientes\Logo_Carrefour_alta.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo_CeraAlb.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo_Clan.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo_cmsi.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo_Compo.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo_Formulagro.bmp">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo_Lear.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo_Magnus.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo_Orbis.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo_Tia.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Clientes\Logo_TV.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Servicios\EquipoDeTrabajo.jpg" />
+    <Content Include="Imagenes\Empresa\InterBanking.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Empresa\SoftwareAMedida.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\PagPpal\key.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\PagPpal\partnership.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\PagPpal\rrhh.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\PagPpal\searching.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\PagPpal\Teamwork.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\Teamwork.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Productos\CedST\CedST-CapturaRecibidas.jpg" />
+    <Content Include="Imagenes\Productos\CedST\CedST-Esperadas.jpg" />
+    <Content Include="Imagenes\Productos\CedST\CedST-Nueva.jpg" />
+    <Content Include="Imagenes\Productos\CedST\CedST-Tablero.jpg" />
+    <Content Include="Imagenes\Productos\CedST\CedST-Tablero2.jpg" />
+    <Content Include="Imagenes\Tecnologias\ajax-development.png" />
+    <Content Include="Imagenes\Tecnologias\aspNET.png" />
+    <Content Include="Imagenes\Tecnologias\bootstrap.png" />
+    <Content Include="Imagenes\Tecnologias\jquery-logo.jpg" />
+    <Content Include="Imagenes\Tecnologias\puntoNET.jpg" />
+    <Content Include="Imagenes\Tecnologias\sap-crystal-reports1.png" />
+    <Content Include="Imagenes\Tecnologias\SQL.png" />
+    <Content Include="Imagenes\Tecnologias\visual-studio.jpg" />
     <Content Include="index_prueba.html" />
+    <Content Include="InicioBusquedas.aspx" />
+    <Content Include="InicioDesarrolloAMedida.aspx" />
+    <Content Include="InicioFEAPrecios.aspx" />
     <Content Include="Inicio.aspx" />
-    <Content Include="InstitucionalSoftwareAMedida.aspx" />
+    <Content Include="InicioInformacion.aspx" />
+    <Content Include="InicioProductos.aspx" />
+    <Content Include="InicioServicioSF.aspx" />
+    <Content Include="InicioTYC.aspx" />
     <Content Include="jquery\docs.min.js" />
     <Content Include="jquery\jquery-1.11.3.js" />
     <Content Include="ListaPrecioBaja.aspx" />
@@ -226,9 +391,15 @@
     <Content Include="css\bootstrap.min.css" />
     <Content Include="ExploradorComprobanteRG.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Imagenes\301.gif" />
-    <Content Include="Imagenes\Iconos\icon_collapse.gif" />
-    <Content Include="Imagenes\Iconos\icon_expand.gif" />
+    <Content Include="Imagenes\301.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\icon_collapse.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\icon_expand.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="js\bootstrap.js" />
     <Content Include="js\bootstrap.min.js" />
     <Content Include="js\npm.js" />
@@ -241,17 +412,39 @@
     <Content Include="ComprobanteSeleccionArchivoXML.aspx" />
     <Content Include="ComprobanteSeleccionOnlineAFIP.aspx" />
     <Content Include="ExploradorComprobanteOnLineInterfacturas.aspx" />
-    <Content Include="Imagenes\Diapositiva1.GIF" />
-    <Content Include="Imagenes\DiapositivaAll.gif" />
-    <Content Include="Imagenes\Iconos\ActualizarOnLine.png" />
-    <Content Include="Imagenes\Iconos\Afip.png" />
-    <Content Include="Imagenes\Iconos\ClonarAlta.png" />
-    <Content Include="Imagenes\Iconos\Consultar.png" />
-    <Content Include="Imagenes\Iconos\ConsultarOnLine.png" />
-    <Content Include="Imagenes\Iconos\Pdf.png" />
-    <Content Include="Imagenes\Iconos\PdfLupa.png" />
-    <Content Include="Imagenes\Iconos\Xml.png" />
-    <Content Include="Imagenes\Iconos\XmlOnLine.png" />
+    <Content Include="Imagenes\Diapositiva1.GIF">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\DiapositivaAll.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\ActualizarOnLine.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\Afip.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\ClonarAlta.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\Consultar.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\ConsultarOnLine.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\Pdf.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\PdfLupa.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\Xml.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Iconos\XmlOnLine.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="LogoService.aspx" />
     <Content Include="MensajeUsuarioDemo.aspx" />
     <Content Include="ExploradorAdministracion.aspx" />
@@ -302,25 +495,63 @@
     <Content Include="Facturacion\Electronica\Reportes\FacturaWebForm.aspx" />
     <Content Include="ExploradorAutorizacion.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="Imagenes\CajaBrownPeru.ico" />
-    <Content Include="Imagenes\calendar.gif" />
-    <Content Include="Imagenes\CedAPC.jpg" />
-    <Content Include="Imagenes\CedCCT.jpg" />
-    <Content Include="Imagenes\Cedeira.ico" />
-    <Content Include="Imagenes\CedeiraSF-icono-animado.gif" />
-    <Content Include="Imagenes\CedeiraSF-Logo.gif" />
-    <Content Include="Imagenes\CedeiraSF_v1.jpg" />
-    <Content Include="Imagenes\CedFCI-EsquemaProceso.jpg" />
-    <Content Include="Imagenes\CedFCI-Tablero_ch.jpg" />
-    <Content Include="Imagenes\CedJU.jpg" />
-    <Content Include="Imagenes\CedST-EsquemaMEP.jpg" />
-    <Content Include="Imagenes\CedST-Tablero_ch.jpg" />
-    <Content Include="Imagenes\eFact-R-XL.jpg" />
-    <Content Include="Imagenes\eFact-R.jpg" />
-    <Content Include="Imagenes\eFact-vertical.jpg" />
-    <Content Include="Imagenes\Factura-UsuarioDemo.png" />
-    <Content Include="Imagenes\Interrogacion.jpg" />
-    <Content Include="Imagenes\SiluetaHombre.jpg" />
+    <Content Include="Imagenes\CajaBrownPeru.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\calendar.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\CedAPC.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\CedCCT.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Cedeira.ico">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\CedeiraSF-icono-animado.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\CedeiraSF-Logo.gif">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\CedeiraSF_v1.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\CedFCI-EsquemaProceso.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\CedFCI-Tablero_ch.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\CedJU.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\CedST-EsquemaMEP.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\CedST-Tablero_ch.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\eFact-R-XL.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\eFact-R.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\eFact-vertical.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Factura-UsuarioDemo.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\Interrogacion.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Imagenes\SiluetaHombre.jpg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="InstitucionalContacto.aspx" />
     <Content Include="InstitucionalEmpresa.aspx" />
     <Content Include="InstitucionalRefeCom.aspx" />
@@ -353,20 +584,48 @@
     <Content Include="UsuarioOlvidoId.aspx" />
     <Content Include="UsuarioOlvidoPassword.aspx" />
     <Content Include="CedServiciosAyuda.master" />
-    <None Include="assets\fonts\fontawesome-webfont.eot" />
-    <None Include="assets\fonts\fontawesome-webfont.ttf" />
-    <None Include="assets\fonts\fontawesome-webfont.woff" />
-    <None Include="assets\fonts\fontawesome-webfont.woff2" />
-    <None Include="assets\fonts\FontAwesome.otf" />
-    <None Include="assets\fonts\glyphicons-halflings-regular.eot" />
-    <None Include="assets\fonts\glyphicons-halflings-regular.ttf" />
-    <None Include="assets\fonts\glyphicons-halflings-regular.woff" />
-    <None Include="assets\fonts\Roboto-Light-webfont.eot" />
-    <None Include="assets\fonts\Roboto-Light-webfont.ttf" />
-    <None Include="assets\fonts\Roboto-Light-webfont.woff" />
-    <None Include="assets\fonts\Roboto-Regular-webfont.eot" />
-    <None Include="assets\fonts\Roboto-Regular-webfont.ttf" />
-    <None Include="assets\fonts\Roboto-Regular-webfont.woff" />
+    <None Include="assets\fonts\fontawesome-webfont.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\fontawesome-webfont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\fontawesome-webfont.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\fontawesome-webfont.woff2">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\FontAwesome.otf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\glyphicons-halflings-regular.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\glyphicons-halflings-regular.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\glyphicons-halflings-regular.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\Roboto-Light-webfont.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\Roboto-Light-webfont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\Roboto-Light-webfont.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\Roboto-Regular-webfont.eot">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\Roboto-Regular-webfont.ttf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="assets\fonts\Roboto-Regular-webfont.woff">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="css\bootstrap-theme.css.map" />
     <None Include="css\bootstrap.css.map" />
     <None Include="Descargas\Cedeira-SistAdminFCIs.pdf" />
@@ -394,6 +653,39 @@
     <None Include="Facturacion\Electronica\Reportes\Stock_XArticulo.xsd">
       <SubType>Designer</SubType>
     </None>
+    <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.eot" />
+    <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.ttf" />
+    <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
+    <None Include="font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <None Include="font-awesome-4.7.0\fonts\FontAwesome.otf" />
+    <None Include="font-awesome-4.7.0\less\animated.less" />
+    <None Include="font-awesome-4.7.0\less\bordered-pulled.less" />
+    <None Include="font-awesome-4.7.0\less\core.less" />
+    <None Include="font-awesome-4.7.0\less\fixed-width.less" />
+    <None Include="font-awesome-4.7.0\less\font-awesome.less" />
+    <None Include="font-awesome-4.7.0\less\icons.less" />
+    <None Include="font-awesome-4.7.0\less\larger.less" />
+    <None Include="font-awesome-4.7.0\less\list.less" />
+    <None Include="font-awesome-4.7.0\less\mixins.less" />
+    <None Include="font-awesome-4.7.0\less\path.less" />
+    <None Include="font-awesome-4.7.0\less\rotated-flipped.less" />
+    <None Include="font-awesome-4.7.0\less\screen-reader.less" />
+    <None Include="font-awesome-4.7.0\less\stacked.less" />
+    <None Include="font-awesome-4.7.0\less\variables.less" />
+    <None Include="font-awesome-4.7.0\scss\font-awesome.scss" />
+    <None Include="font-awesome-4.7.0\scss\_animated.scss" />
+    <None Include="font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <None Include="font-awesome-4.7.0\scss\_core.scss" />
+    <None Include="font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <None Include="font-awesome-4.7.0\scss\_icons.scss" />
+    <None Include="font-awesome-4.7.0\scss\_larger.scss" />
+    <None Include="font-awesome-4.7.0\scss\_list.scss" />
+    <None Include="font-awesome-4.7.0\scss\_mixins.scss" />
+    <None Include="font-awesome-4.7.0\scss\_path.scss" />
+    <None Include="font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <None Include="font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <None Include="font-awesome-4.7.0\scss\_stacked.scss" />
+    <None Include="font-awesome-4.7.0\scss\_variables.scss" />
     <None Include="fonts\glyphicons-halflings-regular.eot" />
     <None Include="fonts\glyphicons-halflings-regular.ttf" />
     <None Include="fonts\glyphicons-halflings-regular.woff" />
@@ -652,6 +944,20 @@
     <Compile Include="ComprobanteConsultaTurismo.aspx.designer.cs">
       <DependentUpon>ComprobanteConsultaTurismo.aspx</DependentUpon>
     </Compile>
+    <Compile Include="InicioEmpresa.aspx.cs">
+      <DependentUpon>InicioEmpresa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InicioEmpresa.aspx.designer.cs">
+      <DependentUpon>InicioEmpresa.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InicioFEA.aspx.cs">
+      <DependentUpon>InicioFEA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InicioFEA.aspx.designer.cs">
+      <DependentUpon>InicioFEA.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ExploradorPDFComprobante.aspx.cs">
       <DependentUpon>ExploradorPDFComprobante.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -856,6 +1162,27 @@
     <Compile Include="Facturacion\Electronica\Reportes\IvaVentasFiltros.aspx.designer.cs">
       <DependentUpon>IvaVentasFiltros.aspx</DependentUpon>
     </Compile>
+    <Compile Include="InicioBusquedas.aspx.cs">
+      <DependentUpon>InicioBusquedas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InicioBusquedas.aspx.designer.cs">
+      <DependentUpon>InicioBusquedas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InicioDesarrolloAMedida.aspx.cs">
+      <DependentUpon>InicioDesarrolloAMedida.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InicioDesarrolloAMedida.aspx.designer.cs">
+      <DependentUpon>InicioDesarrolloAMedida.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InicioFEAPrecios.aspx.cs">
+      <DependentUpon>InicioFEAPrecios.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InicioFEAPrecios.aspx.designer.cs">
+      <DependentUpon>InicioFEAPrecios.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Inicio.aspx.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -863,12 +1190,33 @@
     <Compile Include="Inicio.aspx.designer.cs">
       <DependentUpon>Inicio.aspx</DependentUpon>
     </Compile>
-    <Compile Include="InstitucionalSoftwareAMedida.aspx.cs">
-      <DependentUpon>InstitucionalSoftwareAMedida.aspx</DependentUpon>
+    <Compile Include="InicioInformacion.aspx.cs">
+      <DependentUpon>InicioInformacion.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="InstitucionalSoftwareAMedida.aspx.designer.cs">
-      <DependentUpon>InstitucionalSoftwareAMedida.aspx</DependentUpon>
+    <Compile Include="InicioInformacion.aspx.designer.cs">
+      <DependentUpon>InicioInformacion.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InicioProductos.aspx.cs">
+      <DependentUpon>InicioProductos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InicioProductos.aspx.designer.cs">
+      <DependentUpon>InicioProductos.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InicioServicioSF.aspx.cs">
+      <DependentUpon>InicioServicioSF.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InicioServicioSF.aspx.designer.cs">
+      <DependentUpon>InicioServicioSF.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InicioTYC.aspx.cs">
+      <DependentUpon>InicioTYC.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InicioTYC.aspx.designer.cs">
+      <DependentUpon>InicioTYC.aspx</DependentUpon>
     </Compile>
     <Compile Include="ListaPrecioBaja.aspx.cs">
       <DependentUpon>ListaPrecioBaja.aspx</DependentUpon>
@@ -1830,6 +2178,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="CertificadosAFIP\" />
+    <Folder Include="CVs\" />
     <Folder Include="ImagenesSubidas\" />
     <Folder Include="PDFs\" />
     <Folder Include="TempExcel\" />

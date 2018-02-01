@@ -84,4 +84,5 @@
                 <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="http://www.afip.gov.ar/efactura/" Target="_blank">AFIP-Factura Electrónica / Comprobantes en Línea</asp:HyperLink>
             </td>
         </tr>
+    </table>
 </asp:Content>

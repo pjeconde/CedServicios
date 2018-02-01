@@ -14,6 +14,7 @@
     <!--For Plugins external css-->
     <link rel="stylesheet" href="assets/css/plugins.css" />
     <link rel="stylesheet" href="assets/css/roboto-webfont.css" />
+    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
     <!--Theme custom css -->
     <link rel="stylesheet" href="assets/css/style.css">
@@ -23,7 +24,7 @@
     <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
     <!--<link href="/css/bootstrap.min.css" rel="stylesheet">-->
-    <link href="data:text/css;charset=utf-8," data-href="/css/bootstrap-theme.min.css" rel="stylesheet" id="bsthemestylesheet">
+    <!--<link href="data:text/css;charset=utf-8," data-href="/css/bootstrap-theme.min.css" rel="stylesheet" id="bsthemestylesheet">-->
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
@@ -92,6 +93,27 @@
              setInterval(KeepSession, 30000);
          }
     </script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(document).on('change', '.btn-file :file', function () {
+                var input = $(this),
+                numFiles = input.get(0).files ? input.get(0).files.length : 1,
+                label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+                input.trigger('fileselect', [numFiles, label]);
+            });
+
+            $('.btn-file :file').on('fileselect', function (event, numFiles, label) {
+                console.log(numFiles);
+                console.log(label);
+                $("#valdfil").val(label);
+            });
+        });
+    </script>
+    <script type="text/javascript" language="javascript">
+        function callClick() {
+            $("#Button1").click();
+        }
+    </script>
 </head>
 <body onload="mp_onload();" id="mainBody">
     <form id="form1" runat="server" visible="true">
@@ -108,11 +130,12 @@
                                 <a href="#"><i class="fa fa-twitter"></i></a>
                                 <a href="#"><i class="fa fa-google-plus"></i></a>
                                 <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="#"><asp:label ID="AmbienteLabel" runat="server" ForeColor="White" Text="" SkinID="TextoDesa"></asp:label></a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="social-contact">
-                                <a href="InstitucionalContacto.aspx"><i class="fa fa-phone"></i>+5411 4778-1744</a>
+                                <a href="Inicio.aspx#contact"><i class="fa fa-phone"></i>+5411 4778-1744</a>
                                 <a href="mailto:info@cedeira.com.ar"><i class="fa fa-envelope"></i>info@cedeira.com.ar</a>
                             </div>
                         </div>
@@ -131,7 +154,6 @@
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="InstitucionalEmpresa.aspx"><img src="Imagenes/CedeiraSF-Logo.gif" alt="Logo" /></a>
-                    <asp:label ID="AmbienteLabel" runat="server" ForeColor="Gray" Text=""></asp:label>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
@@ -139,14 +161,12 @@
 
                     <ul class="nav navbar-nav navbar-right">
                         <li class="active"><a href="Inicio.aspx">INICIO</a></li>
-                        <li><a href="index_prueba.html">INDEX</a></li>
-                        <li><a href="#features">PRODUCTOS</a></li>
-                        <li><a href="#service">SERVICIOS</a></li>
-                        <li><a href="#clientes">CLIENTES</a></li>
-                        <li><a href="#price">PRECIOS</a></li>
-                        <li><a href="#business">business</a></li>
-                        <li><a href="#contact">CONTACTO</a></li>
-                        <li class="login"><a href="UsuarioLogin.aspx">INGRESAR</a></li>
+                        <li><a href="inicio.aspx#features">PRODUCTOS</a></li>
+                        <li><a href="inicio.aspx#service">SERVICIOS</a></li>
+                        <li><a href="inicio.aspx#clientes">CLIENTES</a></li>
+                        <li><a href="Inicio.aspx#contact">CONTACTO</a></li>
+                        <li class="login"><a runat="server" id="btnUsuarioLogin" href="UsuarioLogin.aspx">INGRESAR</a></li>
+                        <li class="login"><a runat="server" id="btnCerrarLogin" href="UsuarioLogin.aspx?CERRAR">SALIR</a></li>
                     </ul>
 
                 </div><!-- /.navbar-collapse -->
@@ -247,10 +267,91 @@
             </td>
         </tr>
     </table>
-    <div id="DivContent" class="container-fluid" style="text-align: center; padding: 10px">
+    <div id="DivContent" class="container-fluid" style="text-align: center; padding: 0px">
         <asp:ContentPlaceHolder ID="ContentPlaceDefault" runat="server" Visible="true">
         </asp:ContentPlaceHolder>
     </div>
+
+    <div id="footerNoLogin" runat="server">
+    <section id="footer-menu" class="sections footer-menu">
+        <div class="container">
+            <div class="row">
+                <div class="footer-menu-wrapper">
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="menu-item">
+                            <h5>Factura Electrónica</h5>
+                            <ul>
+                                <li><a id="linkIngresar" target="_self" href="UsuarioLogin.aspx">Ingresar</a></li>
+                                <li><a id="linkFEAInfo" target="_self" href="InicioFEA.aspx?valor=panFEA">Información</a></li>
+                                <li><a id="linkFEAPrecios" target="_self" href="InicioFEAPrecios.aspx">Servicios / Precios</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="menu-item">
+                            <h5>Legal</h5>
+                            <ul>
+                                <li><a id="linktyc" target="_self" href="InicioTYC.aspx?valor=pan1">TERMINOS Y CONDICIONES</a></li>
+                                <li><a id="inkpoliticas" target="_self" href="InicioTYC.aspx?valor=pan2">POLITICAS DE PRIVACIDAD</a></li>
+                            </ul>
+                            <br />
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="menu-item">
+                            <h5>Información</h5>
+                            <ul>
+                                <li><a id="linkProductos" target="_self" href="Inicio.aspx#features">Productos</a></li>
+                                <li><a id="linkServicios" target="_self" href="Inicio.aspx#service">Servicios</a></li>
+                                <li><a id="linkTecno" target="_self" href="InicioInformacion.aspx?valor=pan1">Tecnologías</a></li>
+                                <li><a id="linkClientes" target="_self" href="Inicio.aspx#clientes">Clientes</a></li>
+                                <li><a id="linkContacto" target="_self" href="Inicio.aspx#contact">Contacto</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-sm-6 col-xs-12">
+                        <div class="menu-item">
+                            <h5>Búsquedas Laborales</h5>
+                            <p>Si desea recibir infomación sobre novedades de busquedas laborales puede dejarnos su email. </p>
+                            <div class="input-group">
+                                <input type="text" class="form-control" placeholder="Ingrese su dirección de email">
+                                <input type="submit" class="form-control" value="Enviar">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Footer-->
+    <footer id="footer" class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-wrapper">
+
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="footer-brand">
+                            <img src="Imagenes/CedeiraSF-Logo.gif" alt="Logo" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6 col-sm-6 col-xs-12">
+                        <div class="copyright">
+                            <p>Desarrollado por <b><a target="" href="" style="color: Red"> Cedeira </a></b>2018. All rights reserved.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </footer>
+		
+	<div class="scrollup">
+		<a href="#"><i class="fa fa-chevron-up"></i></a>
+	</div>
+    </div>
+
     <script src="assets/js/vendor/jquery-1.11.2.min.js"></script>
     <script src="assets/js/vendor/bootstrap.min.js"></script>
 

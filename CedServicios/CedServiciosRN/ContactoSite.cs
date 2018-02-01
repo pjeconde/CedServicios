@@ -57,6 +57,34 @@ namespace CedServicios.RN
                 }
             }
         }
+        public static void ValidarSimple(Entidades.ContactoSite ContactoSite)
+        {
+            if (ContactoSite.Nombre == String.Empty)
+            {
+                throw new EX.Validaciones.ValorNoInfo("Nombre");
+            }
+            else
+            {
+                if (ContactoSite.Email == String.Empty)
+                {
+                    throw new EX.Validaciones.ValorNoInfo("Email");
+                }
+                else
+                {
+                    if (!Funciones.EsEmail(ContactoSite.Email))
+                    {
+                        throw new EX.Validaciones.ValorInvalido("Email");
+                    }
+                    else
+                    {
+                        if (ContactoSite.Mensaje == String.Empty)
+                        {
+                            throw new EX.Validaciones.ValorNoInfo("Mensaje");
+                        }
+                    }
+                }
+            }
+        }
         public static void Registrar(Entidades.ContactoSite ContactoSite)
         {
             string cuentaMailCedeira;
@@ -66,7 +94,7 @@ namespace CedServicios.RN
             }
             else
             {
-                cuentaMailCedeira = "info@cedeira.com.ar";
+                cuentaMailCedeira = "contacto@cedeira.com.ar";
             }
             RN.EnvioCorreo.ContactoSite(ContactoSite, cuentaMailCedeira);
         }

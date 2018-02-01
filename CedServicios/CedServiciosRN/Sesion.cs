@@ -216,7 +216,7 @@ namespace CedServicios.RN
             }
             else
             {
-                opcionesHabilitadas.Add("Iniciar sesión");
+                //opcionesHabilitadas.Add("Iniciar sesión");
             }
             return opcionesHabilitadas;
         }

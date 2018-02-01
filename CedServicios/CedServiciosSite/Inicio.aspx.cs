@@ -13,5 +13,33 @@ namespace CedServicios.Site
         {
 
         }
+
+        protected void Button1_Click(object sender, EventArgs e)
+        {
+            Entidades.ContactoSite contacto = new Entidades.ContactoSite();
+            contacto.Nombre = Request.Form["NombreContacto"];
+            contacto.Email = Request.Form["EmailContacto"];
+            contacto.Mensaje = Request.Form["MensajeContacto"];
+            if (optFea.Checked)
+            {
+                contacto.Motivo = "FactElectronica";
+            }
+            else
+            {
+                contacto.Motivo = "Otro";
+            }
+            try
+            {
+                RN.ContactoSite.ValidarSimple(contacto);
+                RN.ContactoSite.Registrar(contacto);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('Formulario enviado satisfactoriamente');", true);
+            }
+            catch (Exception ex)
+            {
+                string MensajeLabel = EX.Funciones.Detalle(ex);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.ToString().Replace("'", "") + "');", true);
+            }
+        }
+
     }
 }

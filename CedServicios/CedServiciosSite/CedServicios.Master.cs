@@ -10,11 +10,65 @@ namespace CedServicios.Site
 {
     public partial class CedServicios : System.Web.UI.MasterPage
     {
+        protected void Page_Init(object sender, EventArgs e)
+        {
+            if (!IsPostBack)
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                string[] segmentosURL = HttpContext.Current.Request.Url.Segments;
+                string pagina = segmentosURL[segmentosURL.Length - 1].ToUpper();
+                if (pagina != null)
+                {
+                    Control c;
+                    switch (pagina)
+                    {
+                        case "DEFAULT.ASPX":
+                            //c = (Control)this.FindControl("secHeader");
+                            //c.Visible = true;
+                            //c = (Control)this.FindControl("secAcerca");
+                            //c.Visible = true;
+                            //c = (Control)this.FindControl("secServicios");
+                            //c.Visible = true;
+                            break;
+                        case "USUARIOLOGIN.ASPX":
+                            if (HttpContext.Current.Request.Url.Query.ToUpper() == "?CERRAR")
+                            {
+                                if (sesion != null && sesion.Usuario.Id != null)
+                                {
+                                    RN.Sesion.Cerrar(sesion);
+                                }
+                            }
+                            //c = (Control)this.FindControl("secAcerca");
+                            //c.Visible = false;
+                            //c = (Control)this.FindControl("secServicios");
+                            //c.Visible = false;
+                            break;
+                        default:
+                            //c = (Control)this.FindControl("secHeader");
+                            //c.Visible = false;
+                            //c = (Control)this.FindControl("secAcerca");
+                            //c.Visible = false;
+                            //c = (Control)this.FindControl("secServicios");
+                            //c.Visible = false;
+                            break;
+                    }
+                }
+                Funciones.PersonalizarControlesMaster(this, true, sesion);
+            }
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.Usuario.Id == null)
+                {
+                    footerNoLogin.Visible = true;
+                }
+                else
+                {
+                    footerNoLogin.Visible = false;
+                }
                 if (Session["ComprobanteATratar"] == null)
                 {
                     Funciones.PersonalizarControlesMaster(this, true, sesion);

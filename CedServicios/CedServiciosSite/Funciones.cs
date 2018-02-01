@@ -278,6 +278,12 @@ namespace CedServicios.Site
             cUITDropDownList.Visible = false;
             uNLabel.Visible = false;
             uNDropDownList.Visible = false;
+
+            Control btnUsuarioLogin = (Control)Master.FindControl("btnUsuarioLogin");
+            btnUsuarioLogin.Visible = false;
+            Control btnCerrarLogin = (Control)Master.FindControl("btnCerrarLogin");
+            btnCerrarLogin.Visible = false;
+
             if (Sesion != null)
             {
                 foreach (string s in Sesion.OpcionesHabilitadas)
@@ -344,6 +350,11 @@ namespace CedServicios.Site
                         uNLabel.Visible = true;
                         uNDropDownList.Visible = true;
                     }
+                    Control c = (Control)Master.FindControl("btnCerrarLogin");
+                    if (c != null)
+                    {
+                        c.Visible = true;
+                    }
                 }
             }
             if (Sesion.Usuario.Id == null)
@@ -351,6 +362,11 @@ namespace CedServicios.Site
                 for (int i = menu.Items.Count - 1; i > 0; i--)
                 {
                     RemoverMenuItem(menu, menu.Items[i]);
+                }
+                Control c = (Control)Master.FindControl("btnUsuarioLogin");
+                if (c != null)
+                {
+                    c.Visible = true;
                 }
             }
             MenuItem menuItem = menu.FindItem("Iniciar sesión");

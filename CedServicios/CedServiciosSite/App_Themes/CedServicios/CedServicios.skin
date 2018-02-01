@@ -1,6 +1,7 @@
 <asp:Label SkinID="TextoGrande" runat="server" Font-Size="14px" ForeColor="black"></asp:Label>
 <asp:Label SkinID="TextoMediano" runat="server" Font-Size="12px" ForeColor="black" Font-Bold="False"></asp:Label>
 <asp:Label SkinID="TextoChico" runat="server" Font-Size="10px" ForeColor="black" Font-Bold="False" Width="100%"></asp:Label>
+<asp:Label SkinID="TextoDesa" runat="server" Font-Size="10px" ForeColor="white" Font-Bold="False"></asp:Label>
 
 <asp:Label SkinID="TextoInicioMediano" runat="server" Font-Size="12px" ForeColor="black" Font-Bold="False" Width="100%"></asp:Label>
 <asp:Label SkinID="TextoInicioChico" runat="server" Font-Size="10px" ForeColor="black" Font-Bold="False" Width="100%"></asp:Label>

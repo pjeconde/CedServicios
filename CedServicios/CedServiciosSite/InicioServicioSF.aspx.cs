@@ -7,7 +7,7 @@ using System.Web.UI.WebControls;
 
 namespace CedServicios.Site
 {
-    public partial class InstitucionalSoftwareAMedida : System.Web.UI.Page
+    public partial class InicioServicioSF : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
