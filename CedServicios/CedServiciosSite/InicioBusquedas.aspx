@@ -26,7 +26,6 @@
                         REQUISITOS
                         <ul class="list-unstyled">
                             <li> <span class="glyphicon glyphicon-ok"></span> Indicar remuneracion bruta pretendida. </li>
-                            <li> <span class="glyphicon glyphicon-ok"></span> Edad: Hasta 40 años.<br/> </li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Lugar de residencia: Capital Federal, GBA.</li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Educación: Universitario, Graduado, En curso.</li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Idioma: Inglés Intermedio.</li>
