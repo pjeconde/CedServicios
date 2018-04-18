@@ -20,13 +20,12 @@
                         <h3>WEB DEVELOPERS SENIOR </h3>
                         <p>DESCRIPCIÓN:<br /> 
                         Para importante entidad bancaria seleccionaremos desarrolladores web con conocimientos y experiencia mayor a 5 años con las herramientas de Microsoft: Visual Studio 2010 o superior, C#.NET, ASP.NET, Frameworks 4.0 o superior, Javascript y T-SQL.<br/>
-                        Otros conocientos como Crystal Reports, AJAX, Aplicaciones de consola y Servicios de Windows seran teniedos en cuenta.<br/><br/> 
+                        Otros conocimientos como Crystal Reports, AJAX, MVC, Angular, Aplicaciones de consola y Servicios de Windows seran teniedos en cuenta.<br/><br/> 
                         Valoraremos aquellas personas que demuestren responsabilidad y compromiso como así también las que estén dispuestas al aprendizaje continuo. <br/>La empresa ofrece muy buenas condiciones de contratación, excelente clima laboral y grandes posibilidades de desarrollo dentro del grupo. 
                         </p>
                         REQUISITOS
                         <ul class="list-unstyled">
-                            <li> <span class="glyphicon glyphicon-ok"></span> Indicar remuneracion bruta pretendida. </li>
-                            <li> <span class="glyphicon glyphicon-ok"></span> Edad: Hasta 40 años.<br/> </li>
+                            <li> <span class="glyphicon glyphicon-ok"></span> Indicar remuneración bruta pretendida. </li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Lugar de residencia: Capital Federal, GBA.</li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Educación: Universitario, Graduado, En curso.</li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Idioma: Inglés Intermedio.</li>
@@ -51,8 +50,7 @@
                         </p>
                         REQUISITOS
                         <ul class="list-unstyled">
-                            <li> <span class="glyphicon glyphicon-ok"></span> Indicar remuneracion bruta pretendida. </li>
-                            <li> <span class="glyphicon glyphicon-ok"></span> Edad: Hasta 40 años.<br/> </li>
+                            <li> <span class="glyphicon glyphicon-ok"></span> Indicar remuneración bruta pretendida. </li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Lugar de residencia: Capital Federal, GBA.</li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Educación: Universitario, Graduado, En curso.</li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Idioma: Inglés Basico.</li>
