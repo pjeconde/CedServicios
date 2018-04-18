@@ -4,6 +4,7 @@
 <asp:Content ID="Content2" Visible="true" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
 		<div class='preloader'><div class='loaded'>&nbsp;</div></div>
 
+        </head>
         <!--Home page style-->
         <header id="home" class="home">
             <div class="overlay-fluid-block">
