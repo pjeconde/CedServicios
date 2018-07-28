@@ -43,6 +43,8 @@
     <Compile Include="Accion.cs" />
     <Compile Include="Archivo.cs" />
     <Compile Include="Articulo.cs" />
+    <Compile Include="BusquedaLaboral.cs" />
+    <Compile Include="BusquedaPerfil.cs" />
     <Compile Include="ComprobanteATratar.cs" />
     <Compile Include="ComprobanteDetalle.cs" />
     <Compile Include="Const.cs" />
