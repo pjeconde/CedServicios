@@ -36,13 +36,6 @@ namespace CedServicios.Site
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
 
-                    //referencias = new System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>();
-                    //FeaEntidades.InterFacturas.informacion_comprobanteReferencias referencia = new FeaEntidades.InterFacturas.informacion_comprobanteReferencias();
-                    //referencias.Add(referencia);
-                    //referenciasGridView.DataSource = referencias;
-                    //referenciasGridView.DataBind();
-                    //ViewState["referencias"] = referencias;
-
                     //VENDEDOR
                     Condicion_IVA_VendedorDropDownList.DataValueField = "Codigo";
                     Condicion_IVA_VendedorDropDownList.DataTextField = "Descr";
@@ -72,20 +65,11 @@ namespace CedServicios.Site
                     Provincia_CompradorDropDownList.DataBind();
 
                     //COMPROBANTE
-                    if (IdNaturalezaComprobanteTextBox.Text.IndexOf("Venta") != -1)
-                    {
-                        Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                        Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                        Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
-                        Tipo_De_ComprobanteDropDownList.DataBind();
-                    }
-                    else
-                    {
-                        Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                        Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
-                        Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPCompras();
-                        Tipo_De_ComprobanteDropDownList.DataBind();
-                    }
+                    Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
+                    Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                    Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPCompras();
+                    Tipo_De_ComprobanteDropDownList.DataBind();
+
                     CodigoOperacionDropDownList.DataValueField = "Codigo";
                     CodigoOperacionDropDownList.DataTextField = "Descr";
                     CodigoOperacionDropDownList.DataSource = FeaEntidades.CodigosOperacion.CodigoOperacion.Lista();
@@ -179,6 +163,9 @@ namespace CedServicios.Site
                             break;
                         case "Baja_AnulBaja":
                             Baja_AnulBaPanel.Visible = true;
+                            Baja_AnulBajaButton.Visible = true;
+                            Baja_FisicaButton.Visible = false;
+                            RN.Comprobante.Leer(comprobanteATratar.Comprobante, sesion);
                             if (comprobanteATratar.Comprobante.Estado == "DeBaja")
                             {
                                 descrTratamiento = "Anulación de baja";
@@ -189,6 +176,12 @@ namespace CedServicios.Site
                                 descrTratamiento = "Baja";
                                 Baja_AnulBajaButton.Text = "Registrar la baja";
                             }
+                            break;
+                        case "Baja_Fisica":
+                            Baja_AnulBaPanel.Visible = true;
+                            Baja_AnulBajaButton.Visible = false;
+                            Baja_FisicaButton.Visible = true;
+                            descrTratamiento = "Baja Física";
                             break;
                         case "Envio":
                             AFIPpanel.Visible = true;
@@ -2575,10 +2568,19 @@ namespace CedServicios.Site
                     try
                     {
                         Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                        comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobanteTextBox.Text;
                         comprobante.Cuit = sesion.Cuit.Nro;
                         comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue);
-                        comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);  //OJO con comprobates de compra
-                        comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobanteTextBox.Text;
+                        if (comprobante.NaturalezaComprobante.Id != "Compra")
+                        {
+                            comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                        }
+                        else
+                        {
+                            comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaTextBox.Text);
+                            comprobante.Documento.Tipo.Id = "80";
+                            comprobante.Documento.Nro = Cuit_VendedorTextBox.Text;
+                        }
                         comprobante.Nro = Math.Abs(Convert.ToInt64(Numero_ComprobanteTextBox.Text));
                         RN.Comprobante.Leer(comprobante, sesion);
                         if (comprobante.Estado != "DeBaja")
@@ -2604,6 +2606,63 @@ namespace CedServicios.Site
                 }
             }
         }
+        protected void AccionBaja_FisicaButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.Usuario.Id == null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
+                }
+                else
+                {
+                    string mensaje = String.Empty;
+                    try
+                    {
+                        Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                        comprobante.Cuit = sesion.Cuit.Nro;
+                        comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobanteTextBox.Text;
+                        comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue);
+                        if (comprobante.NaturalezaComprobante.Id != "Compra")
+                        {
+                            comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                        }
+                        else
+                        {
+                            comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaTextBox.Text);
+                            comprobante.Documento.Tipo.Id = "80"; 
+                            comprobante.Documento.Nro = Cuit_VendedorTextBox.Text;
+                        }
+                        comprobante.Nro = Math.Abs(Convert.ToInt64(Numero_ComprobanteTextBox.Text));
+                        RN.Comprobante.Leer(comprobante, sesion);
+                        if (comprobante.Estado == "DeBaja")
+                        {
+                            RN.Comprobante.DarDeBajaFisica(comprobante, sesion);
+                            mensaje = "Baja Fisica de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + " registrada satisfactoriamente";
+                        }
+                        else
+                        {
+                            mensaje = "No es posible realizar la Baja Fisica, ya que el " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + " se encuentra en estado: " + comprobante.Estado;
+                        }
+                        AccionesPanel.Visible = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        mensaje = "Problemas en la baja/anul.baja del " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + ".  " + ex.Message;
+                    }
+                    finally
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript(mensaje));
+                    }
+                }
+            }
+        }
+        
         private void ActualizarTipoDeCambio()
         {
             if (!MonedaComprobanteDropDownList.SelectedValue.Equals(FeaEntidades.CodigosMoneda.CodigoMoneda.Local))

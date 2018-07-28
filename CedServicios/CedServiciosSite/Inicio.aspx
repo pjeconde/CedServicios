@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-sm-6 margin-bottom-20">
                             <div class="single_features_left text-center">
-                                <img src="Imagenes/CedST-EsquemaMEP.jpg" alt="" style="height:300px" />
+                                <img src="Imagenes/CedST-EsquemaMEP.jpg" alt="" style="height:300px;" />
                             </div>
                         </div>
                         <div class="col-sm-6 margin-bottom-20">
@@ -425,17 +425,16 @@
                                         <input type="radio" runat="server" name="optradio" id="optOtro" checked>&nbsp;Otro motivo
                                     </div>
                                     <div class="form-group">
-                                        <input type="text" class="form-control" name="NombreContacto" placeholder="Nombre" required="">
-                                    </div>
-
-                                    <div class="form-group">
-                                        <input type="email" class="form-control" name="EmailContacto" placeholder="Email" required="">
+                                        <input type="text" id="NombreContacto" class="form-control" runat="server" name="NombreContacto" placeholder="Nombre">
                                     </div>
                                     <div class="form-group">
-                                        <textarea class="form-control" name="MensajeContacto" rows="8" placeholder="Mensaje"></textarea>
+                                        <input type="email" class="form-control" name="EmailContacto" placeholder="Email"  value='<%=EmailContactoValue %>'>
+                                    </div>
+                                    <div class="form-group">
+                                        <textarea id="MensajeContacto" class="form-control" runat="server" name="MensajeContacto" rows="8" placeholder="Mensaje"></textarea>
                                     </div>
                                     <div class="center-content">
-                                        <input type="button" id="Button1" value="Enviar" runat="server" onserverclick="Button1_Click" class="btn btn-default">
+                                        <input type="button" id="ContactoButton" value="Enviar" runat="server" onserverclick="ContactoButton_Click" class="btn btn-default">
                                     </div>
                                     
                                 </div>
@@ -449,23 +448,22 @@
                                     <p style="text-align:left">Administración: <br />
                                     <span><a href="mailto:administracion@cedeira.com.ar"><i class="fa fa-envelope"></i> administracion@cedeira.com.ar</a></span><br/>
                                     </p>
-                                    <p style="text-align:left">Recuersos Humanos: <br />
+                                    <p style="text-align:left">Recursos Humanos: <br />
                                     <span><a href="mailto:rrhh@cedeira.com.ar"><i class="fa fa-envelope"></i> rrhh@cedeira.com.ar</a></span><br/>
                                     </p>
                                     <p style="text-align:left">Oficina Comercial: <br />
                                         <span><a href="#Contact"><i class="glyphicon glyphicon-earphone"></i> +5411 4778-1744</a></span><br/>
-                                        <span><a href="mailto:info@cedeira.com.ar"><i class="fa fa-envelope"></i> info@cedeira.com.ar</a></span>
+                                        <span><a href="mailto:comercial@cedeira.com.ar"><i class="fa fa-envelope"></i> comercial@cedeira.com.ar</a></span>
                                     </p>
                                     <p style="text-align:left">
                                         Horarios de Atención: <br />
                                         <span><a href="#Contact"><i class="fa fa-clock-o"></i> lunes a viernes de 10 a 18 hs.</a></span><br/>
                                     </p>
                                     <div class="contact_socail_bookmark text-left">
-                                        <a href=""><i class="fa fa-facebook"></i></a>
-                                        <a href=""><i class="fa fa-twitter"></i></a>
-                                        <a href=""><i class="fa fa-google"></i></a>
+                                        <a href="https://www.facebook.com/CedeiraSF" target="_blank"><i class="fa fa-facebook"></i></a>
+                                        <a href="https://twitter.com/cedeirasf" target="_blank"><i class="fa fa-twitter"></i></a>
+                                        <a href="https://www.linkedin.com/company/cedeirasf/" target="_blank"><i class="fa fa-linkedin"></i></a>
                                     </div>
-
                                 </div>
                             </div>
                         </div>

@@ -13,13 +13,15 @@ namespace CedServicios.Site
         {
 
         }
+        public string EmailContactoValue = "";
 
-        protected void Button1_Click(object sender, EventArgs e)
+        protected void ContactoButton_Click(object sender, EventArgs e)
         {
+            EmailContactoValue = Request.Form["EmailContacto"];
             Entidades.ContactoSite contacto = new Entidades.ContactoSite();
-            contacto.Nombre = Request.Form["NombreContacto"];
+            contacto.Nombre = NombreContacto.Value;
             contacto.Email = Request.Form["EmailContacto"];
-            contacto.Mensaje = Request.Form["MensajeContacto"];
+            contacto.Mensaje = MensajeContacto.Value;
             if (optFea.Checked)
             {
                 contacto.Motivo = "FactElectronica";
@@ -33,6 +35,9 @@ namespace CedServicios.Site
                 RN.ContactoSite.ValidarSimple(contacto);
                 RN.ContactoSite.Registrar(contacto);
                 ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('Formulario enviado satisfactoriamente');", true);
+                NombreContacto.Value = "";
+                MensajeContacto.Value = "";
+                EmailContactoValue = "";
             }
             catch (Exception ex)
             {

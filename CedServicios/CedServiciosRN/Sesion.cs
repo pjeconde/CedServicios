@@ -52,6 +52,8 @@ namespace CedServicios.RN
                     opcionesHabilitadas.Add("Administración Site|Configuraciones");
                     opcionesHabilitadas.Add("Administración Site|Logs");
                     opcionesHabilitadas.Add("Administración Site|Administración");
+                    opcionesHabilitadas.Add("Administración Site|CVs");
+                    opcionesHabilitadas.Add("Administración Site|Búsqueda Laboral");
                     opcionesHabilitadas.Add("Administración Site|Migración de Cuentas (desde CedWeb)");
                 }
                 if (Sesion.Cuit.Nro != null)

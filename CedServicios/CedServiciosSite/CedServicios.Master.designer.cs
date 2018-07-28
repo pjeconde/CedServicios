@@ -191,5 +191,23 @@ namespace CedServicios.Site {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl footerNoLogin;
+        
+        /// <summary>
+        /// IdBusquedaPerfilDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList IdBusquedaPerfilDropDownList;
+        
+        /// <summary>
+        /// ButtonEnviarEmailBL control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputSubmit ButtonEnviarEmailBL;
     }
 }

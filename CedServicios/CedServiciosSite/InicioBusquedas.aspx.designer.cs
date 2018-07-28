@@ -13,6 +13,15 @@ namespace CedServicios.Site {
     public partial class InicioBusquedas {
         
         /// <summary>
+        /// IdBusquedaPerfilDropDownList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList IdBusquedaPerfilDropDownList;
+        
+        /// <summary>
         /// FileUpload1 control.
         /// </summary>
         /// <remarks>

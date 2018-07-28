@@ -93,16 +93,16 @@
                             <table>
                                 <tr>
                                     <td style="padding-left: 10px">
-                                        <asp:HyperLink ID="EmpresaHyperLink" runat="server" NavigateUrl="~/InstitucionalEmpresa.aspx"
+                                        <asp:HyperLink ID="EmpresaHyperLink" runat="server" NavigateUrl="~/InicioEmpresa.aspx"
                                             SkinID="LinkChicoClaro">Empresa</asp:HyperLink>
                                         |
-                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/InstitucionalSoluciones.aspx"
-                                            SkinID="LinkChicoClaro">Soluciones</asp:HyperLink>
+                                        <asp:HyperLink ID="HyperLink1" runat="server" NavigateUrl="~/Inicio.aspx#service"
+                                            SkinID="LinkChicoClaro">Servivios</asp:HyperLink>
                                         |
-                                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/InstitucionalRefeCom.aspx"
+                                        <asp:HyperLink ID="HyperLink3" runat="server" NavigateUrl="~/Inicio.aspx#clientes"
                                             SkinID="LinkChicoClaro">Referencias Comerciales</asp:HyperLink>
                                         |
-                                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/InstitucionalContacto.aspx"
+                                        <asp:HyperLink ID="HyperLink4" runat="server" NavigateUrl="~/Inicio.aspx#contact"
                                             SkinID="LinkChicoClaro">Contacto</asp:HyperLink>
                                     </td>
                                 </tr>

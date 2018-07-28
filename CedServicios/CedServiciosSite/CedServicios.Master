@@ -126,17 +126,16 @@
                     <div class="social-wrapper">
                         <div class="col-md-6">
                             <div class="social-icon">
-                                <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="#"><i class="fa fa-twitter"></i></a>
-                                <a href="#"><i class="fa fa-google-plus"></i></a>
-                                <a href="#"><i class="fa fa-linkedin"></i></a>
+                                <a href="https://www.facebook.com/CedeiraSF" target="_blank"><i class="fa fa-facebook"></i></a>
+                                <a href="https://twitter.com/cedeirasf" target="_blank"><i class="fa fa-twitter"></i></a>
+                                <a href="https://www.linkedin.com/company/cedeirasf/" target="_blank"><i class="fa fa-linkedin"></i></a>
                                 <a href="#"><asp:label ID="AmbienteLabel" runat="server" ForeColor="White" Text="" SkinID="TextoDesa"></asp:label></a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="social-contact">
                                 <a href="Inicio.aspx#contact"><i class="fa fa-phone"></i>+5411 4778-1744</a>
-                                <a href="mailto:info@cedeira.com.ar"><i class="fa fa-envelope"></i>info@cedeira.com.ar</a>
+                                <a href="mailto:contacto@cedeira.com.ar"><i class="fa fa-envelope"></i>contacto@cedeira.com.ar</a>
                             </div>
                         </div>
                     </div>
@@ -277,7 +276,7 @@
         <div class="container">
             <div class="row">
                 <div class="footer-menu-wrapper">
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="menu-item">
                             <h5>Factura Electrónica</h5>
                             <ul>
@@ -287,7 +286,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="menu-item">
                             <h5>Legal</h5>
                             <ul>
@@ -297,7 +296,7 @@
                             <br />
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-lg-3 ol-md-6 col-sm-6 col-xs-12">
                         <div class="menu-item">
                             <h5>Información</h5>
                             <ul>
@@ -309,13 +308,25 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="col-md-3 col-sm-6 col-xs-12">
+                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="menu-item">
                             <h5>Búsquedas Laborales</h5>
+                            <p>
+                                <ul>
+                                    <li><a id="A1" target="_self" href="InicioBusquedas.aspx">Busquedas</a></li>
+                                </ul>
+                            </p>
                             <p>Si desea recibir infomación sobre novedades de busquedas laborales puede dejarnos su email. </p>
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Ingrese su dirección de email">
-                                <input type="submit" class="form-control" value="Enviar">
+                        </div>
+                        <div class="single_left_contact">
+                            <div class="form-group">
+                                <asp:DropDownList ID="IdBusquedaPerfilDropDownList" class="form-control" runat="server" TabIndex="1" name="IdBusquedaPerfil" placeholder="Perfil" DataValueField="IdBusquedaPerfil" DataTextField="DescrBusquedaPerfil" Visible="true" style="height:30px"></asp:DropDownList>
+                            </div>
+                            <div class="form-group">
+                                <input type="email" id="EmailBL" class="form-control" name="EmailBL" placeholder="Ingrese su email." style="min-width: 250px; height:30px;" value='<%= EmailValue %>'>
+                            </div>
+                            <div class="form-group text-left">
+                                <input type="submit" id="ButtonEnviarEmailBL" class="btn btn-default" value="Enviar" runat="server" onserverclick="ButtonEnviarEmailBL_Click" style="padding:0px">
                             </div>
                         </div>
                     </div>

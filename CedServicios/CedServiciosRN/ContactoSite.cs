@@ -71,7 +71,7 @@ namespace CedServicios.RN
                 }
                 else
                 {
-                    if (!Funciones.EsEmail(ContactoSite.Email))
+                    if (!RN.Funciones.IsValidEmail(ContactoSite.Email))
                     {
                         throw new EX.Validaciones.ValorInvalido("Email");
                     }

@@ -247,6 +247,10 @@ namespace CedServicios.Site
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
                 mItem = new MenuItem("Administración", "Administración"); mItem.Selectable = false;
                 menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("CVs", "CVs"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+                mItem = new MenuItem("Búsqueda Laboral", "Búsqueda Laboral"); mItem.Selectable = false;
+                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
             mItem = new MenuItem("Ayuda", "Ayuda"); mItem.Selectable = false;
             menu.Items.Add(mItem);

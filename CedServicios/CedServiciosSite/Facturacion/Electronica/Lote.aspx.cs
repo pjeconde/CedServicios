@@ -41,6 +41,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     Session.Remove("FaltaCalcularTotales");
                     Entidades.ComprobanteATratar comprobanteATratar = (Entidades.ComprobanteATratar)Session["ComprobanteATratar"];
+                    ViewState["ComprobanteATratarOrig"] = (Entidades.ComprobanteATratar)Session["ComprobanteATratar"];
                     TratamientoTextBox.Text = comprobanteATratar.Tratamiento.ToString();
                     string descrTratamiento = String.Empty;
                     switch (TratamientoTextBox.Text)
@@ -266,7 +267,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                             System.Collections.Generic.List<Entidades.Persona> personalist = new System.Collections.Generic.List<Entidades.Persona>();
                             persona.RazonSocial = "";
                             personalist.Add(persona);
-                            personalist.AddRange(listacompradores);
+                            System.Collections.Generic.List<Entidades.Persona> listacompradoresVig = listacompradores.FindAll(delegate(Entidades.Persona per)
+                            {
+                                return per.Estado == "Vigente";
+                            });
+                            if (listacompradoresVig.Count != 0)
+                            {
+                                personalist.AddRange(listacompradoresVig);
+                            }
                             CompradorDropDownList.DataSource = personalist;
                             CompradorDropDownList.DataBind();
                         }
@@ -1862,10 +1870,22 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar el CUIT del vendedor"), false);
                 return false;
             }
-            if (Id_LoteTextbox.Text.Equals(string.Empty))
+            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
             {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar el nro de lote"), false);
-                return false;
+                if (Id_LoteTextbox.Text.Equals(string.Empty))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar el nro de lote"), false);
+                    return false;
+                }
+                if (!Id_LoteTextbox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumeric(Id_LoteTextbox.Text))
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un dato numérico en el número de lote"), false);
+                    return false;
+                }
+            }
+            else
+            {
+                Id_LoteTextbox.Text = "0";
             }
             if (Numero_ComprobanteTextBox.Text.Equals(string.Empty))
             {
@@ -1898,38 +1918,41 @@ namespace CedServicios.Site.Facturacion.Electronica
                     return false;
                 }
             }
-            if (TratamientoTextBox.Text == "Alta")
-            {
-                try
-                {
-                    Entidades.Comprobante comprobante = new Entidades.Comprobante();
-                    comprobante.Cuit = Cuit_VendedorTextBox.Text;
-                    comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue.ToString());
-                    if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-                    {
-                        comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue.ToString());
-                    }
-                    else
-                    {
-                        comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaTextBox.Text.ToString());
-                    }
-                    comprobante.Nro = IdNaturalezaComprobanteTextBox.Text == "VentaContrato" ? -Convert.ToInt64(Numero_ComprobanteTextBox.Text) : Convert.ToInt64(Numero_ComprobanteTextBox.Text);
-                    RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
-                    if (comprobante.Estado == "Vigente")
-                    {
-                        if (Accion != "ObtenerXML")
-                        {
-                            ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Este Nro. de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante") + " ya se encuentra vigente."), false);
-                            return false;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Error al comprobar la numeración del " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante") + ". " + ex.Message.ToString()), false);
-                    return false;
-                }
-            }
+            //if (TratamientoTextBox.Text == "Alta")
+            //{
+            //    try
+            //    {
+            //        Entidades.Comprobante comprobante = new Entidades.Comprobante();
+            //        comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobanteTextBox.Text;
+            //        comprobante.Cuit = Cuit_VendedorTextBox.Text;
+            //        comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue.ToString());
+            //        if (IdNaturalezaComprobanteTextBox.Text != "Compra")
+            //        {
+            //            comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue.ToString());
+            //        }
+            //        else
+            //        {
+            //            comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaTextBox.Text.ToString());
+            //            comprobante.Documento.Tipo.Id = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
+            //            comprobante.Documento.Nro = Cuit_VendedorTextBox.Text;
+            //        }
+            //        comprobante.Nro = IdNaturalezaComprobanteTextBox.Text == "VentaContrato" ? -Convert.ToInt64(Numero_ComprobanteTextBox.Text) : Convert.ToInt64(Numero_ComprobanteTextBox.Text);
+            //        RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
+            //        if (comprobante.Estado == "Vigente")
+            //        {
+            //            if (Accion != "ObtenerXML")
+            //            {
+            //                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Este Nro. de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante") + " ya se encuentra vigente."), false);
+            //                return false;
+            //            }
+            //        }
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Error al comprobar la numeración del " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante") + ". " + ex.Message.ToString()), false);
+            //        return false;
+            //    }
+            //}
             if (Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue == "70")
             {
                 if (Nro_Doc_Identificatorio_CompradorDropDownList.SelectedValue.Equals(string.Empty))
@@ -1978,11 +2001,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                     ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un email válido para el vendedor"), false);
                     return false;
                 }
-            }
-            if (!Id_LoteTextbox.Text.Equals(string.Empty) && !RN.Funciones.IsValidNumeric(Id_LoteTextbox.Text))
-            {
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Ingresar un dato numérico en el número de lote"), false);
-                return false;
             }
             if (Denominacion_CompradorTextBox.Text.Length > 50)
             {
@@ -2479,10 +2497,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                             {
                                 return pv.Nro == auxPV;
                             }).IdTipoPuntoVta;
-                            //if (idtipo != "Comun")
                             if (idtipo != "Comun" && idtipo != "Exportacion")
                             {
-                                //ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485."), false);
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Esta opción solo está habilitada para puntos de venta Comun RG.2485 y Exportación."), false);
                                 return;
                             }
@@ -2494,7 +2510,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 //Grabar en base de datos
                                 lcFea.cabecera_lote.DestinoComprobante = "AFIP";
                                 lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
-                                RN.Comprobante.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteEnvio", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), string.Empty, false, string.Empty, string.Empty, string.Empty, ((Entidades.Sesion)Session["Sesion"]));
+                                string tratamiento = TratamientoTextBox.Text;
+                                if (tratamiento == "Clonado") { tratamiento = "Alta"; }
+                                Entidades.ComprobanteATratar comprobanteATratar = (Entidades.ComprobanteATratar)ViewState["ComprobanteATratarOrig"];
+                                RN.Comprobante.Registrar(lcFea, tratamiento, comprobanteATratar.Comprobante, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteEnvio", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), string.Empty, false, string.Empty, string.Empty, string.Empty, ((Entidades.Sesion)Session["Sesion"]));
 
                                 string caeNro = "";
                                 string caeFecVto = "";
@@ -2788,7 +2807,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais = Convert.ToInt32(DesambiguacionCuitPaisVendedorTextBox.Text);
                                 }
                                 Entidades.DatosEmailAvisoComprobanteContrato datosEmailAvisoComprobanteContrato = DatosEmailAvisoComprobanteContrato1.Datos;
-                                RN.Comprobante.Registrar(lote, null, IdNaturalezaComprobanteTextBox.Text, ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? IdDestinoComprobanteDropDownList.SelectedValue : lote.cabecera_lote.DestinoComprobante), "Vigente", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), string.Empty, datosEmailAvisoComprobanteContrato.Activo, datosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id, datosEmailAvisoComprobanteContrato.Asunto, datosEmailAvisoComprobanteContrato.Cuerpo, ((Entidades.Sesion)Session["Sesion"]));
+                                string tratamiento = TratamientoTextBox.Text;
+                                if (tratamiento == "Clonado") { tratamiento = "Alta"; }
+                                Entidades.ComprobanteATratar comprobanteATratar = (Entidades.ComprobanteATratar)ViewState["ComprobanteATratarOrig"];
+                                RN.Comprobante.Registrar(lote, tratamiento, comprobanteATratar.Comprobante, null, IdNaturalezaComprobanteTextBox.Text, ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? IdDestinoComprobanteDropDownList.SelectedValue : lote.cabecera_lote.DestinoComprobante), "Vigente", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), string.Empty, datosEmailAvisoComprobanteContrato.Activo, datosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id, datosEmailAvisoComprobanteContrato.Asunto, datosEmailAvisoComprobanteContrato.Cuerpo, ((Entidades.Sesion)Session["Sesion"]));
+
                                 AccionesPanel.Visible = false;
                                 MensajeLabel.Text = ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + " guardado satisfactoriamente";
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(MensajeLabel.Text), false);
@@ -2817,8 +2840,34 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     catch (Exception ex)
                     {
-                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), ex.Message);
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al guardar el " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante") + ".  " + ex.Message), false);
+                        string mensaje = ex.Message;
+                        if (ex.InnerException != null)
+                        {
+                            if (ex.InnerException.ToString().IndexOf("PRIMARY KEY 'PK_Table_Comprobante'") != -1)
+                            {
+                                mensaje = "Ya existe el comprobante. ";
+                                try
+                                {
+                                    FeaEntidades.Turismo.comprobante comprobante = (FeaEntidades.Turismo.comprobante)ViewState["ComprobanteParaRegistrar"];
+                                    Entidades.Comprobante comprobanteVerifEstado = new Entidades.Comprobante();
+                                    comprobanteVerifEstado.Cuit = comprobante.cabecera.informacion_vendedor.cuit.ToString();
+                                    comprobanteVerifEstado.TipoComprobante.Id = comprobante.cabecera.informacion_comprobante.tipo_de_comprobante;
+                                    comprobanteVerifEstado.NroPuntoVta = comprobante.cabecera.informacion_comprobante.punto_de_venta;
+                                    comprobanteVerifEstado.Nro = comprobante.cabecera.informacion_comprobante.numero_comprobante;
+                                    RN.Comprobante.Leer(comprobanteVerifEstado, (Entidades.Sesion)Session["Sesion"]);
+                                    mensaje += "Se encuentra en estado: " + comprobanteVerifEstado.Estado;
+                                }
+                                catch
+                                {
+                                }
+                            }
+                            else
+                            {
+                                mensaje += ex.InnerException.ToString();
+                            }
+                        }
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), mensaje);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al guardar el " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante") + ".  " + mensaje), false);
                     }
                 }
             }

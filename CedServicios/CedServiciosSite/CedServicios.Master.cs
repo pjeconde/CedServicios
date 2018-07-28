@@ -54,6 +54,8 @@ namespace CedServicios.Site
                     }
                 }
                 Funciones.PersonalizarControlesMaster(this, true, sesion);
+                IdBusquedaPerfilDropDownList.DataSource = RN.BusquedaPerfil.Lista(sesion);
+                IdBusquedaPerfilDropDownList.DataBind();
             }
         }
         protected void Page_Load(object sender, EventArgs e)
@@ -369,6 +371,12 @@ namespace CedServicios.Site
                 case "Administración Site|Administración":
                     Response.Redirect("~/ExploradorAdministracion.aspx");
                     break;
+                case "Administración Site|CVs":
+                    Response.Redirect("~/ExploradorCV.aspx");
+                    break;
+                case "Administración Site|Búsqueda Laboral":
+                    Response.Redirect("~/ExploradorBusquedaLaboral.aspx");
+                    break;
                 case "Administración|Usuario|Cambio de Contraseña":
                     Response.Redirect("~/UsuarioCambiarPassword.aspx");
                     break;
@@ -439,6 +447,79 @@ namespace CedServicios.Site
                     //Funciones.PersonalizarControlesMaster(this, true, sesion);
                     Response.Redirect(sesion.Usuario.PaginaDefault(sesion));
                 }
+            }
+        }
+        public string EmailValue = "";
+
+        private bool ValidarDatos()
+        {
+            bool resp = true;
+            Entidades.BusquedaLaboral bl = new Entidades.BusquedaLaboral();
+            bl.Email = Request.Form["EmailBL"];
+            bl.BusquedaPerfil.IdBusquedaPerfil = IdBusquedaPerfilDropDownList.SelectedValue;
+            if (bl.Email.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar su Email"), false);
+                return false;
+            }
+            if (!RN.Funciones.IsValidEmail(bl.Email))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Formato de Email inválido"), false);
+                return false;
+            }
+            if (bl.BusquedaPerfil.IdBusquedaPerfil.Equals(string.Empty))
+            {
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar su Perfil"), false);
+                return false;
+            }
+            return resp;
+        }
+        protected void ButtonEnviarEmailBL_Click(object sender, EventArgs e)
+        {
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            //Armo email para enviar al contacto.
+            Entidades.ContactoSite contacto = new Entidades.ContactoSite();
+            contacto.Nombre = "Sr/Sra.";
+            contacto.Email = Request.Form["EmailBL"];
+            contacto.Mensaje = "Busquedas Laborales";
+            contacto.Motivo = "Otro";
+            EmailValue = Request.Form["EmailBL"];
+            try
+            {
+                if (ValidarDatos())
+                {
+                    Entidades.BusquedaLaboral bl = new Entidades.BusquedaLaboral();
+                    bl.Email = Request.Form["EmailBL"];
+                    bl.BusquedaPerfil.IdBusquedaPerfil = IdBusquedaPerfilDropDownList.SelectedValue;
+                    bl.Suscribe = true;
+                    Entidades.BusquedaLaboral blAux = new Entidades.BusquedaLaboral();
+                    blAux.Email = bl.Email;
+                    try
+                    {
+                        RN.BusquedaLaboral.Leer(blAux, sesion);
+                    }
+                    catch (EX.Validaciones.ElementoInexistente)
+                    {
+                    }
+                    if (blAux.BusquedaPerfil.IdBusquedaPerfil == null)
+                    {
+                        bl.Estado = "Vigente";
+                        RN.BusquedaLaboral.Crear(bl, sesion);
+                    }
+                    else
+                    {
+                        RN.BusquedaLaboral.ModificarCV(blAux, bl, sesion);
+                    }
+                    RN.ContactoSite.Registrar(contacto);
+                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('Email enviado satisfactoriamente');", true);
+                    IdBusquedaPerfilDropDownList.SelectedValue = "";
+                    EmailValue = "";
+                }
+            }
+            catch (Exception ex)
+            {
+                string MensajeLabel = EX.Funciones.Detalle(ex);
+                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.ToString().Replace("'", "") + "');", true);
             }
         }
     }

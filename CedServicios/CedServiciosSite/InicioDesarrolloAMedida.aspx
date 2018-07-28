@@ -91,7 +91,7 @@
                     <div class="col-lg-12 text-left">
                         <h4 style="color:#e83b4d"><i style="text-align:right">1.</i> Escuchamos sus ideas<br>
                             <small>
-                                <span>Porque tu empresa es única</span>
+                                <span>Porque su empresa es única</span>
                             </small>
                         </h4>
                         <p>Sabemos que su empresa es única. ¡Y también lo son sus ideas! Es por eso, que nuestro equipo de profesionales se reunirá con ustedes para conocer sus necesidades e inquietudes, brindanles un completo asesoramiento y de esta forma poder ofrecerles una solución acorde a su organización.</p>
@@ -111,7 +111,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-12 text-left">
-                        <h4 style="color:#e83b4d"><i style="text-align:right">3.</i> Te presentamos el proyecto<br>
+                        <h4 style="color:#e83b4d"><i style="text-align:right">3.</i> Presentamos el proyecto<br>
                             <small>
                                 <span>Queremos que usted aporte su opinión</span>
                             </small>

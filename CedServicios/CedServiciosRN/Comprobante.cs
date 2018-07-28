@@ -26,7 +26,7 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaFiltrada(Estados, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos, Detalle);
         }
-        public static void Registrar(FeaEntidades.Turismo.comprobante Comprobante, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle, bool EmailAvisoComprobanteActivo, string IdDestinatarioFrecuente, string EmailAvisoComprobanteAsunto, string EmailAvisoComprobanteCuerpo, Entidades.Sesion Sesion)
+        public static void Registrar(FeaEntidades.Turismo.comprobante Comprobante, string Tratamiento, Entidades.Comprobante ComprobanteOrig, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle, bool EmailAvisoComprobanteActivo, string IdDestinatarioFrecuente, string EmailAvisoComprobanteAsunto, string EmailAvisoComprobanteCuerpo, Entidades.Sesion Sesion)
         {
             //Generar comprobante a partir de Comprobante Turismo
             Entidades.Comprobante comprobante = new Entidades.Comprobante();
@@ -192,7 +192,259 @@ namespace CedServicios.RN
             }
             #endregion
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            db.Registrar(comprobante);
+            if (Tratamiento == "Alta")
+            {
+                int CantReg = db.Crear(comprobante);
+                if (CantReg <= 0)
+                {
+                    Entidades.Comprobante comprobanteVerifEstado = new Entidades.Comprobante();
+                    comprobanteVerifEstado.Cuit = Comprobante.cabecera.informacion_vendedor.cuit.ToString();
+                    comprobanteVerifEstado.TipoComprobante.Id = Comprobante.cabecera.informacion_comprobante.tipo_de_comprobante;
+                    comprobanteVerifEstado.NroPuntoVta = Comprobante.cabecera.informacion_comprobante.punto_de_venta;
+                    comprobanteVerifEstado.Nro = Comprobante.cabecera.informacion_comprobante.numero_comprobante;
+                    RN.Comprobante.Leer(comprobanteVerifEstado, Sesion);
+                    throw new Exception("El comprobante ya existe. Se encuentra en estado: " + comprobanteVerifEstado.Estado);
+                }
+            }
+            else
+            {
+                int CantReg = db.Modificar(comprobante, ComprobanteOrig);
+                if (CantReg <= 0)
+                {
+                    throw new Exception("El comprobante no existe o fue modificado por otro usuario.");
+                }
+            }
+        }
+        public static void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, string Tratamiento, Entidades.Comprobante ComprobanteOrig, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle, bool EmailAvisoComprobanteActivo, string IdDestinatarioFrecuente, string EmailAvisoComprobanteAsunto, string EmailAvisoComprobanteCuerpo, Entidades.Sesion Sesion)
+        {
+            //Generar Comprobante a partir de Lote
+            Entidades.Comprobante comprobante = new Entidades.Comprobante();
+            if (IdNaturalezaComprobante != "Compra")
+            {
+                comprobante.Cuit = Lote.cabecera_lote.cuit_vendedor.ToString();
+                comprobante.Documento.Tipo.Id = Lote.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio.ToString();
+                FeaEntidades.Documentos.Documento tipoDocumento = FeaEntidades.Documentos.Documento.Lista().Find(delegate(FeaEntidades.Documentos.Documento d) { return comprobante.Documento.Tipo.Id == d.Codigo.ToString(); });
+                if (tipoDocumento != null)
+                {
+                    comprobante.Documento.Tipo.Descr = tipoDocumento.Descr;
+                }
+                else
+                {
+                    comprobante.Documento.Tipo.Descr = "Desconocido";
+                }
+                comprobante.Documento.Nro = Lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
+                comprobante.IdPersona = Lote.comprobante[0].cabecera.informacion_comprador.id;
+                comprobante.DesambiguacionCuitPais = Lote.comprobante[0].cabecera.informacion_comprador.desambiguacionCuitPais;
+                comprobante.RazonSocial = Lote.comprobante[0].cabecera.informacion_comprador.denominacion;
+            }
+            else
+            {
+                comprobante.Cuit = Lote.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio.ToString();
+                comprobante.Documento.Tipo.Id = new FeaEntidades.Documentos.CUIT().Codigo.ToString();
+                comprobante.Documento.Nro = Lote.cabecera_lote.cuit_vendedor.ToString();
+                comprobante.IdPersona = Lote.comprobante[0].cabecera.informacion_vendedor.id;
+                comprobante.DesambiguacionCuitPais = Lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais;
+                comprobante.RazonSocial = Lote.comprobante[0].cabecera.informacion_vendedor.razon_social;
+            }
+            comprobante.WF.Estado = IdEstado;
+            comprobante.NroPuntoVta = Lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+            comprobante.TipoComprobante.Id = Lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+            FeaEntidades.TiposDeComprobantes.TipoComprobante tipoComprobante;
+            if (IdNaturalezaComprobante != "Compra")
+            {
+                tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
+            }
+            else
+            {
+                tipoComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPCompras().Find(delegate(FeaEntidades.TiposDeComprobantes.TipoComprobante d) { return comprobante.TipoComprobante.Id.ToString() == d.Codigo.ToString(); });
+            }
+            if (tipoComprobante != null)
+            {
+                comprobante.TipoComprobante.Descr = tipoComprobante.Descr;
+            }
+            else
+            {
+                comprobante.TipoComprobante.Descr = "Desconocido";
+            }
+
+            comprobante.Nro = Lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+            comprobante.NroLote = Lote.cabecera_lote.id_lote;
+            comprobante.Detalle = Detalle;
+            comprobante.Fecha = DB.Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_emision);
+            if (Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == null || Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento == String.Empty)
+            {
+                comprobante.FechaVto = Convert.ToDateTime("31/12/9999");
+            }
+            else
+            {
+                comprobante.FechaVto = DB.Funciones.ConvertirFechaStringAAAAMMDDaDatetime(Lote.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento);
+            }
+            comprobante.Moneda = Lote.comprobante[0].resumen.codigo_moneda;
+            if (Lote.comprobante[0].resumen.importes_moneda_origen != null)
+            {
+                comprobante.ImporteMoneda = Lote.comprobante[0].resumen.importes_moneda_origen.importe_total_factura;
+            }
+            comprobante.TipoCambio = Lote.comprobante[0].resumen.tipo_de_cambio;
+            comprobante.Importe = Lote.comprobante[0].resumen.importe_total_factura;
+            comprobante.Request = DB.Funciones.ObjetoSerializado(Lote);
+            if (Response != null)
+            {
+                comprobante.Response = DB.Funciones.ObjetoSerializado(Response);
+            }
+            comprobante.IdDestinoComprobante = IdDestinoComprobante;
+            comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobante;
+            comprobante.PeriodicidadEmision = PeriodicidadEmision;
+            comprobante.FechaProximaEmision = FechaProximaEmision;
+            comprobante.CantidadComprobantesAEmitir = CantidadComprobantesAEmitir;
+            comprobante.CantidadComprobantesEmitidos = CantidadComprobantesEmitidos;
+            comprobante.CantidadDiasFechaVto = CantidadDiasFechaVto;
+            comprobante.DatosEmailAvisoComprobanteContrato.Activo = EmailAvisoComprobanteActivo;
+            comprobante.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id = IdDestinatarioFrecuente;
+            comprobante.DatosEmailAvisoComprobanteContrato.Asunto = EmailAvisoComprobanteAsunto;
+            comprobante.DatosEmailAvisoComprobanteContrato.Cuerpo = EmailAvisoComprobanteCuerpo;
+
+            #region ARMADO DE MINUTAS DE STOCK Y CONTABILIDAD
+            Entidades.EsquemaContable esquemaContable;
+            Entidades.ComprobanteDetalle minuta;
+            //Total
+            esquemaContable = new Entidades.EsquemaContable(comprobante.TipoComprobante, comprobante.NaturalezaComprobante, "T");
+            RN.Rubro.LeerEsquemaContable(esquemaContable, Sesion);
+            minuta = new Entidades.ComprobanteDetalle();
+            minuta.Item.IdTipo = esquemaContable.Concepto;
+            minuta.Item.Nro = 0;
+            minuta.Articulo.Id = string.Empty;
+            minuta.Rubro.Id = esquemaContable.Rubro.Id;
+            minuta.Cantidad = 0;
+            minuta.PrecioUnitario = 0;
+            minuta.Importe = comprobante.Importe * esquemaContable.Signo;
+            minuta.IdUbicacion = string.Empty;
+            minuta.IndicadorExentoGravado = string.Empty;
+            comprobante.Minutas.Add(minuta);
+            //Articulos
+            for (int i = 0; i < Lote.comprobante[0].detalle.linea.Length; i++)
+            {
+                if (Lote.comprobante[0].detalle.linea[i] != null)
+                {
+                    esquemaContable = new Entidades.EsquemaContable(comprobante.TipoComprobante, comprobante.NaturalezaComprobante, "A");
+                    RN.Rubro.LeerEsquemaContable(esquemaContable, Sesion);
+                    minuta = new Entidades.ComprobanteDetalle();
+                    minuta.Item.IdTipo = esquemaContable.Concepto;
+                    minuta.Item.Nro = i;
+                    if (Lote.comprobante[0].detalle.linea[i].codigo_producto_vendedor != string.Empty)
+                    {
+                        minuta.Articulo.Id = Lote.comprobante[0].detalle.linea[i].codigo_producto_vendedor;
+                        minuta.Detalle = string.Empty;
+                    }
+                    else
+                    {
+                        minuta.Articulo.Id = string.Empty;
+                        if (Lote.comprobante[0].detalle.linea[i].descripcion.Substring(0, 1) == "%")
+                        {
+                            minuta.Detalle = RN.Funciones.HexToString(Lote.comprobante[0].detalle.linea[i].descripcion);
+                        }
+                        else
+                        {
+                            minuta.Detalle = Lote.comprobante[0].detalle.linea[i].descripcion.Trim();
+                        }
+                    }
+                    minuta.Rubro.Id = esquemaContable.Rubro.Id;
+                    if (Lote.comprobante[0].detalle.linea[i].cantidadSpecified)
+                        minuta.Cantidad = Lote.comprobante[0].detalle.linea[i].cantidad * esquemaContable.Signo;
+                    else
+                        minuta.Cantidad = 0;
+                    if (Lote.comprobante[0].detalle.linea[i].precio_unitarioSpecified)
+                        minuta.PrecioUnitario = Lote.comprobante[0].detalle.linea[i].precio_unitario;
+                    else
+                        minuta.PrecioUnitario = 0;
+                    minuta.Importe = Lote.comprobante[0].detalle.linea[i].importe_total_articulo * esquemaContable.Signo;
+                    minuta.IdUbicacion = string.Empty;
+                    minuta.IndicadorExentoGravado = Lote.comprobante[0].detalle.linea[i].indicacion_exento_gravado;
+                    comprobante.Minutas.Add(minuta);
+                }
+            }
+            //Descuentos
+            if (Lote.comprobante[0].resumen.descuentos != null)
+            {
+                for (int i = 0; i < Lote.comprobante[0].resumen.descuentos.Length; i++)
+                {
+                    if (Lote.comprobante[0].resumen.descuentos[i] != null)
+                    {
+                        esquemaContable = new Entidades.EsquemaContable(comprobante.TipoComprobante, comprobante.NaturalezaComprobante, "D");
+                        RN.Rubro.LeerEsquemaContable(esquemaContable, Sesion);
+                        minuta = new Entidades.ComprobanteDetalle();
+                        minuta.Item.IdTipo = esquemaContable.Concepto;
+                        minuta.Item.Nro = i;
+                        minuta.Articulo.Id = string.Empty;
+                        minuta.Rubro.Id = esquemaContable.Rubro.Id;
+                        minuta.Cantidad = 0;
+                        minuta.PrecioUnitario = 0;
+                        minuta.Importe = Lote.comprobante[0].resumen.descuentos[i].importe_descuento * esquemaContable.Signo;
+                        minuta.IdUbicacion = string.Empty;
+                        minuta.IndicadorExentoGravado = Lote.comprobante[0].resumen.descuentos[i].indicacion_exento_gravado_descuento;
+                        minuta.Detalle = "Desc." + Lote.comprobante[0].resumen.descuentos[i].descripcion_descuento.ToLower();
+                        if (Lote.comprobante[0].resumen.descuentos[i].porcentaje_descuentoSpecified)
+                            minuta.Detalle += " " + Lote.comprobante[0].resumen.descuentos[i].porcentaje_descuento.ToString() + "%";
+                        comprobante.Minutas.Add(minuta);
+                    }
+                }
+            }
+            //Impuestos
+            if (Lote.comprobante[0].resumen.impuestos != null)
+            {
+                for (int i = 0; i < Lote.comprobante[0].resumen.impuestos.Length; i++)
+                {
+                    if (Lote.comprobante[0].resumen.impuestos[i] != null)
+                    {
+                        string concepto = "I-" + Lote.comprobante[0].resumen.impuestos[i].codigo_impuesto;
+                        if (Lote.comprobante[0].resumen.impuestos[i].porcentaje_impuestoSpecified && Lote.comprobante[0].resumen.impuestos[i].codigo_impuesto == 1)
+                            concepto += "-" + Lote.comprobante[0].resumen.impuestos[i].porcentaje_impuesto;
+                        esquemaContable = new Entidades.EsquemaContable(comprobante.TipoComprobante, comprobante.NaturalezaComprobante, concepto);
+                        RN.Rubro.LeerEsquemaContable(esquemaContable, Sesion);
+                        minuta = new Entidades.ComprobanteDetalle();
+                        minuta.Item.IdTipo = "I";
+                        minuta.Item.Nro = i;
+                        minuta.Articulo.Id = string.Empty;
+                        minuta.Rubro.Id = esquemaContable.Rubro.Id;
+                        minuta.Cantidad = 0;
+                        minuta.PrecioUnitario = 0;
+                        minuta.Importe = Lote.comprobante[0].resumen.impuestos[i].importe_impuesto * esquemaContable.Signo;
+                        minuta.IdUbicacion = string.Empty;
+                        minuta.IndicadorExentoGravado = string.Empty;
+                        minuta.Detalle = string.Empty;
+                        comprobante.Minutas.Add(minuta);
+                    }
+                }
+            }
+            #endregion
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            if (Tratamiento == "Alta")
+            {
+                int CantReg = db.Crear(comprobante);
+                if (CantReg <= 0)
+                {
+                    Entidades.Comprobante comprobanteVerifEstado = new Entidades.Comprobante();
+                    comprobanteVerifEstado.NaturalezaComprobante.Id = IdNaturalezaComprobante;
+                    comprobanteVerifEstado.Cuit = Lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                    comprobanteVerifEstado.TipoComprobante.Id = Lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                    comprobanteVerifEstado.NroPuntoVta = Lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                    comprobanteVerifEstado.Nro = Lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                    if (IdNaturalezaComprobante == "Compra")
+                    {
+                        comprobanteVerifEstado.Documento.Tipo.Id = "80";
+                        comprobanteVerifEstado.Documento.Nro = Lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                    }
+                    RN.Comprobante.Leer(comprobanteVerifEstado, Sesion);
+                    throw new Exception("El comprobante ya existe. Se encuentra en estado: " + comprobanteVerifEstado.Estado);
+                }
+            }
+            else
+            {
+                int CantReg = db.Modificar(comprobante, ComprobanteOrig);
+                if (CantReg <= 0)
+                {
+                    throw new Exception("El comprobante no existe o fue modificado por otro usuario.");
+                }
+            }
         }
         public static void Registrar(FeaEntidades.InterFacturas.lote_comprobantes Lote, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle, bool EmailAvisoComprobanteActivo, string IdDestinatarioFrecuente, string EmailAvisoComprobanteAsunto, string EmailAvisoComprobanteCuerpo, Entidades.Sesion Sesion)
         {
@@ -401,12 +653,62 @@ namespace CedServicios.RN
         public static void DarDeBaja(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            db.DarDeBaja(Comprobante);
+            int CantReg = db.DarDeBaja(Comprobante);
+            if (CantReg <= 0)
+            {
+                throw new Exception("El comprobante no existe o fue modificado por otro usuario.");
+            }
+        }
+        public static void DarDeBajaFisica(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
+        {
+            //Serializar ( pasar de FeaEntidades.InterFacturas.consulta_emisor_comprobante_listado a String XML )
+            MemoryStream ms = new MemoryStream();
+            XmlTextWriter writer = new XmlTextWriter(ms, System.Text.Encoding.GetEncoding("iso-8859-1"));
+            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(Comprobante.GetType());
+            x.Serialize(writer, Comprobante);
+            ms = (MemoryStream)writer.BaseStream;
+            string InputTexto = ByteArrayToString(ms.ToArray());
+            ms.Close();
+            ms = null;
+            //Crear nombre de archivo default sin extensión
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(Comprobante.Cuit);
+            sb.Append("-");
+            sb.Append(Comprobante.NroPuntoVta.ToString("0000"));
+            sb.Append("-");
+            sb.Append(Comprobante.TipoComprobante.Id.ToString("00"));
+            sb.Append("-");
+            sb.Append(Comprobante.Nro.ToString("00000000"));
+            //Crear nombre de archivo XML
+            System.Text.StringBuilder sbXML = new System.Text.StringBuilder();
+            sbXML.Append(sb.ToString() + ".xml");
+            string dirTemp = @"~/TempBajas/";
+            //Crear archivo comprobante XML
+            System.IO.MemoryStream m = new System.IO.MemoryStream();
+            System.IO.FileStream fs = new System.IO.FileStream(System.Web.HttpContext.Current.Server.MapPath(dirTemp + sbXML.ToString()), System.IO.FileMode.Create);
+            m.WriteTo(fs);
+            fs.Close();
+            //Grabar información comprobante XML
+            using (StreamWriter outfile = new StreamWriter(System.Web.HttpContext.Current.Server.MapPath(dirTemp + sbXML.ToString())))
+            {
+                outfile.Write(InputTexto);
+            }
+
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            int CantReg = db.DarDeBajaFisica(Comprobante);
+            if (CantReg <= 0)
+            {
+                throw new Exception("El comprobante no existe o fue modificado por otro usuario.");
+            }
         }
         public static void AnularBaja(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            db.AnularBaja(Comprobante);
+            int CantReg = db.AnularBaja(Comprobante);
+            if (CantReg <= 0)
+            {
+                throw new Exception("El comprobante no existe o fue modificado por otro usuario.");
+            }
         }
         public static void ActualizarFechaProximaEmision(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {
@@ -417,6 +719,11 @@ namespace CedServicios.RN
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
             db.Leer(Comprobante);
+        }
+        public static string LeerEstado(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            return db.LeerEstado(Comprobante);
         }
         public static void LeerMinutas(Entidades.Comprobante Comprobante, Entidades.Sesion Sesion)
         {

@@ -41,6 +41,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     Session.Remove("FaltaCalcularTotales");
                     Entidades.ComprobanteATratar comprobanteATratar = (Entidades.ComprobanteATratar)Session["ComprobanteATratar"];
+                    ViewState["ComprobanteATratarOrig"] = (Entidades.ComprobanteATratar)Session["ComprobanteATratar"];
                     TratamientoTextBox.Text = comprobanteATratar.Tratamiento.ToString();
                     string descrTratamiento = String.Empty;
                     switch (TratamientoTextBox.Text)
@@ -1103,28 +1104,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Falta ingresar el punto de venta"), false);
                 return false;
             }
-            if (TratamientoTextBox.Text == "Alta")
-            {
-                try
-                {
-                    Entidades.Comprobante comprobante = new Entidades.Comprobante();
-                    comprobante.Cuit = Cuit_VendedorTextBox.Text;
-                    comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue.ToString());
-                    comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue.ToString());
-                    comprobante.Nro = Convert.ToInt64(Numero_ComprobanteTextBox.Text);
-                    RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
-                    if (comprobante.Estado == "Vigente")
-                    {
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Este Nro. de comprobante ya se encuentra vigente."), false);
-                        return false;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Error al comprobar la numeración del " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "contrato" : "comprobante") + ". " + ex.Message.ToString()), false);
-                    return false;
-                }
-            }
             if (Codigo_Doc_Identificatorio_CompradorDropDownList.SelectedValue == "70")
             {
                 if (Nro_Doc_Identificatorio_CompradorDropDownList.SelectedValue.Equals(string.Empty))
@@ -1400,7 +1379,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 //Grabar en base de datos
                                 //lcFea.cabecera_lote.DestinoComprobante = "AFIP";
                                 Comprobante.cabecera.informacion_comprobante.Observacion = "";
-                                RN.Comprobante.Registrar(Comprobante, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteEnvio", "No Aplica", Convert.ToDateTime("31/12/9999"), 0, 0, 0, string.Empty, false, string.Empty, string.Empty, string.Empty, ((Entidades.Sesion)Session["Sesion"]));
+                                string tratamiento = TratamientoTextBox.Text;
+                                if (tratamiento == "Clonado") { tratamiento = "Alta"; }
+                                Entidades.ComprobanteATratar comprobanteATratar = (Entidades.ComprobanteATratar)ViewState["ComprobanteATratarOrig"];
+                                ViewState["ComprobanteParaRegistrar"] = Comprobante;
+                                RN.Comprobante.Registrar(Comprobante, tratamiento, comprobanteATratar.Comprobante, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteEnvio", "No Aplica", Convert.ToDateTime("31/12/9999"), 0, 0, 0, string.Empty, false, string.Empty, string.Empty, string.Empty, ((Entidades.Sesion)Session["Sesion"]));
 
                                 string caeNro = "";
                                 string caeFecVto = "";
@@ -1472,8 +1455,34 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     catch (Exception ex)
                     {
-                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), ex.Message);
-                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a AFIP.  " + ex.Message), false);
+                        string mensaje = ex.Message;
+                        if (ex.InnerException != null)
+                        {
+                            if (ex.InnerException.ToString().IndexOf("PRIMARY KEY 'PK_Table_Comprobante'") != -1)
+                            {
+                                mensaje = "Ya existe el comprobante. ";
+                                try
+                                {
+                                    FeaEntidades.Turismo.comprobante comprobante = (FeaEntidades.Turismo.comprobante)ViewState["ComprobanteParaRegistrar"];
+                                    Entidades.Comprobante comprobanteVerifEstado = new Entidades.Comprobante();
+                                    comprobanteVerifEstado.Cuit = comprobante.cabecera.informacion_vendedor.cuit.ToString();
+                                    comprobanteVerifEstado.TipoComprobante.Id = comprobante.cabecera.informacion_comprobante.tipo_de_comprobante;
+                                    comprobanteVerifEstado.NroPuntoVta = comprobante.cabecera.informacion_comprobante.punto_de_venta;
+                                    comprobanteVerifEstado.Nro = comprobante.cabecera.informacion_comprobante.numero_comprobante;
+                                    RN.Comprobante.Leer(comprobanteVerifEstado, (Entidades.Sesion)Session["Sesion"]);
+                                    mensaje += "Se encuentra en estado: " + comprobanteVerifEstado.Estado;
+                                }
+                                catch
+                                {
+                                }
+                            }
+                            else
+                            {
+                                mensaje += ex.InnerException.ToString();
+                            }
+                        }
+                        RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), mensaje);
+                        ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Problemas al enviar el comprobante a AFIP.  " + mensaje), false);
                     }
                 }
             }
@@ -1572,7 +1581,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 comprobante.cabecera.informacion_comprobante.Observacion = "";
                                 comprobante.cabecera.informacion_comprador.id = IdPersonaCompradorTextBox.Text;
                                 comprobante.cabecera.informacion_comprador.desambiguacionCuitPais = Convert.ToInt32(DesambiguacionCuitPaisCompradorTextBox.Text);
-                                RN.Comprobante.Registrar(comprobante, null, IdNaturalezaComprobanteTextBox.Text, string.Empty, "Vigente", "No Aplica", DateTime.ParseExact("31/12/9999", "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), 0, 0, 0, string.Empty, false, string.Empty, string.Empty, string.Empty, ((Entidades.Sesion)Session["Sesion"]));
+
+                                string tratamiento = TratamientoTextBox.Text;
+                                if (tratamiento == "Clonado") { tratamiento = "Alta"; }
+                                Entidades.ComprobanteATratar comprobanteATratar = (Entidades.ComprobanteATratar)ViewState["ComprobanteATratarOrig"];
+                                RN.Comprobante.Registrar(comprobante, tratamiento, comprobanteATratar.Comprobante, null, IdNaturalezaComprobanteTextBox.Text, string.Empty, "Vigente", "No Aplica", DateTime.ParseExact("31/12/9999", "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), 0, 0, 0, string.Empty, false, string.Empty, string.Empty, string.Empty, ((Entidades.Sesion)Session["Sesion"]));
                                 AccionesPanel.Visible = false;
                                 MensajeLabel.Text = "Comprobante guardado satisfactoriamente";
                                 ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(MensajeLabel.Text), false);

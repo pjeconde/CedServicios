@@ -29,7 +29,7 @@
                             Desde nuestro origen, nos hemos mantenido a la vanguardia de las nuevas tecnologías, a través de la innovación constante, un eficiente desempeño y un sólido crecimiento. <br />
                         </p>
                         <p>
-                            Esta es la forma en que nuestra empresa ha logrado convertirse en líder en la prestación de servicios de tecnología, siendo agente de apoyo a empresas y personas diversas, convirtiéndonos en aliados estratégicos de nuestros clientes y proporcionado soluciones a medida de sus necesidades.
+                            Esta es la forma en que nuestra empresa ha logrado brindar una excelente prestación de servicios informáticos, convirtiéndonos en aliados estratégicos de nuestros clientes y proporcionado soluciones a la medida de sus necesidades.
                         </p>
                         <br />
                         <br />

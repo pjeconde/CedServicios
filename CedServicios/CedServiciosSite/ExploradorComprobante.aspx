@@ -357,6 +357,11 @@
                             </asp:TemplateField>
                             <asp:TemplateField Visible="false">
                                 <ItemTemplate>
+                                    <asp:LinkButton ID="BajaFisicaLinkButton" runat="server" CommandName="BajaFisica" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Baja Fisica</asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
+                            <asp:TemplateField Visible="false">
+                                <ItemTemplate>
                                     <asp:LinkButton ID="EnvioLinkButton" runat="server" CommandName="Envio" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Envio</asp:LinkButton>
                                 </ItemTemplate>
                             </asp:TemplateField>

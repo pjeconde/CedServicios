@@ -51,7 +51,6 @@
                         REQUISITOS
                         <ul class="list-unstyled">
                             <li> <span class="glyphicon glyphicon-ok"></span> Indicar remuneracion bruta pretendida. </li>
-                            <li> <span class="glyphicon glyphicon-ok"></span> Edad: Hasta 40 años.<br/> </li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Lugar de residencia: Capital Federal, GBA.</li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Educación: Universitario, Graduado, En curso.</li>
                             <li> <span class="glyphicon glyphicon-ok"></span> Idioma: Inglés Basico.</li>
@@ -73,8 +72,14 @@
                     <div class="panel panel-default">
                         <div class="panel-body">
                             <p>
-                                <asp:FileUpload ID="FileUpload1" runat="server" ToolTip="Seleccionar archivo CV" Width="100%" TabIndex="1" />
-                                <asp:Button ID="SubirCVButton" runat="server" TabIndex="2" Text="Subir el CV" Width="100%" OnClick="SubirCVButton_Click" class="btn btn-default" />
+                                <input type="email"  class="form-control" name="EmailCV" placeholder="Email" value='<%= EmailValue %>' style="height:30px">
+                            </p>
+                            <p>
+                                <asp:DropDownList ID="IdBusquedaPerfilDropDownList" class="form-control" runat="server" TabIndex="1" name="IdBusquedaPerfil" placeholder="Perfil" DataValueField="IdBusquedaPerfil" DataTextField="DescrBusquedaPerfil" Visible="true" style="height:30px"></asp:DropDownList>
+                            </p>
+                            <p>
+                                <asp:FileUpload ID="FileUpload1" runat="server" ToolTip="Seleccionar archivo CV" Width="100%" TabIndex="2" />
+                                <asp:Button ID="SubirCVButton" runat="server" TabIndex="3" Text="Subir el CV" Width="100%" OnClick="SubirCVButton_Click" class="btn btn-default" />
                             </p>
                         </div>
                     </div>

@@ -127,6 +127,9 @@ namespace CedServicios.Site
                             break;
                         case "Baja_AnulBaja":
                             Baja_AnulBaPanel.Visible = true;
+                            Baja_AnulBajaButton.Visible = true;
+                            Baja_FisicaButton.Visible = false;
+                            RN.Comprobante.Leer(comprobanteATratar.Comprobante, sesion);
                             if (comprobanteATratar.Comprobante.Estado == "DeBaja")
                             {
                                 descrTratamiento = "Anulación de baja";
@@ -137,6 +140,12 @@ namespace CedServicios.Site
                                 descrTratamiento = "Baja";
                                 Baja_AnulBajaButton.Text = "Registrar la baja";
                             }
+                            break;
+                        case "Baja_Fisica":
+                            Baja_AnulBaPanel.Visible = true;
+                            Baja_AnulBajaButton.Visible = false;
+                            Baja_FisicaButton.Visible = true;
+                            descrTratamiento = "Baja Física";
                             break;
                         default:
                             WebForms.Excepciones.Redireccionar(new EX.Validaciones.ValorInvalido("Tratamiento del Comprobante"), "~/NotificacionDeExcepcion.aspx");
@@ -1083,6 +1092,68 @@ namespace CedServicios.Site
                 }
             }
         }
+        protected void AccionBaja_FisicaButton_Click(object sender, EventArgs e)
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                if (sesion.Usuario.Id == null)
+                {
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Su sesión ha caducado por inactividad. Por favor vuelva a loguearse."), false);
+                }
+                else
+                {
+                    string mensaje = String.Empty;
+                    try
+                    {
+                        Entidades.Comprobante comprobante = new Entidades.Comprobante();
+                        comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobanteTextBox.Text;
+                        comprobante.Cuit = sesion.Cuit.Nro;
+                        comprobante.TipoComprobante.Id = Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue);
+                        if (comprobante.NaturalezaComprobante.Id != "Compra")
+                        {
+                            comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
+                        }
+                        else
+                        {
+                            comprobante.NroPuntoVta = Convert.ToInt32(PuntoVtaTextBox.Text);
+                            comprobante.Documento.Tipo.Id = "80";
+                            comprobante.Documento.Nro = Cuit_VendedorTextBox.Text;
+                        }
+                        comprobante.NaturalezaComprobante.Id = IdNaturalezaComprobanteTextBox.Text;
+                        comprobante.Nro = Math.Abs(Convert.ToInt64(Numero_ComprobanteTextBox.Text));
+                        RN.Comprobante.Leer(comprobante, sesion);
+                        if (comprobante.Estado == "DeBaja")
+                        {
+                            RN.Comprobante.DarDeBajaFisica(comprobante, sesion);
+                            mensaje = "Baja Fisica de " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + " registrada satisfactoriamente";
+                        }
+                        else if (comprobante.Estado == null || comprobante.Estado == "")
+                        {
+                            mensaje = "No es posible realizar la Baja Fisica, ya que el comprobante es inexistente.";
+                        }
+                        else
+                        {
+                            mensaje = "No es posible realizar la Baja Fisica, ya que el " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + " se encuentra en estado: " + comprobante.Estado;
+                        }
+                        AccionesPanel.Visible = false;
+                    }
+                    catch (Exception ex)
+                    {
+                        mensaje = "Problemas en la baja/anul.baja del " + ((IdNaturalezaComprobanteTextBox.Text == "VentaContrato") ? "Contrato" : "Comprobante") + ".  " + ex.Message;
+                    }
+                    finally
+                    {
+                        ClientScript.RegisterStartupScript(GetType(), "Message", Funciones.TextoScript(mensaje));
+                    }
+                }
+            }
+        }
+
         protected void SalirButton_Click(object sender, EventArgs e)
         {
         }

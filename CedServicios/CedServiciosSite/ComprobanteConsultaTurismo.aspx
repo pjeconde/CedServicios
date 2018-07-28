@@ -1215,6 +1215,9 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                                                 <td align="left" style="padding-left:5px">
                                                                     <asp:Button ID="Baja_AnulBajaButton" runat="server" CausesValidation="true" OnClick="AccionBaja_AnulBajaButton_Click" Text="Baja o AnulBaja" />
                                                                 </td>
+                                                                <td align="left" style="padding-left:5px">
+                                                                    <asp:Button ID="Baja_FisicaButton" runat="server" CausesValidation="true" OnClick="AccionBaja_FisicaButton_Click" Text="Baja Fisica" />
+                                                                </td>
                                                             </tr>
                                                         </table>
                                                     </asp:Panel>

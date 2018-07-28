@@ -17,6 +17,7 @@ namespace CedServicios.Entidades
         {
             Alta,
             Baja_AnulBaja,
+			Baja_Fisica,
             Modificacion,
             Envio,
             Clonado,

@@ -31,12 +31,30 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.HtmlControls.HtmlInputRadioButton optOtro;
         
         /// <summary>
-        /// Button1 control.
+        /// NombreContacto control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputButton Button1;
+        protected global::System.Web.UI.HtmlControls.HtmlInputText NombreContacto;
+        
+        /// <summary>
+        /// MensajeContacto control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea MensajeContacto;
+        
+        /// <summary>
+        /// ContactoButton control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlInputButton ContactoButton;
     }
 }

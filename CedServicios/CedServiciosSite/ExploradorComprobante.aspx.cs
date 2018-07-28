@@ -88,6 +88,7 @@ namespace CedServicios.Site
                             EstadoPteAutorizCheckBox.Checked = true;
                             EstadoRechCheckBox.Checked = true;
                             ComprobantesGridView.Columns[1].Visible = true;
+                            ComprobantesGridView.Columns[2].Visible = true;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
                             EstadosPanel.Enabled = false;
                             break;
@@ -98,7 +99,7 @@ namespace CedServicios.Site
                             EstadoDeBajaCheckBox.Checked = false;
                             EstadoPteAutorizCheckBox.Checked = false;
                             EstadoRechCheckBox.Checked = false;
-                            ComprobantesGridView.Columns[2].Visible = true;
+                            ComprobantesGridView.Columns[3].Visible = true;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
                             EstadosPanel.Enabled = false;
                             descrTratamiento += " (AFIP/ITF)";
@@ -110,7 +111,7 @@ namespace CedServicios.Site
                             EstadoDeBajaCheckBox.Checked = false;
                             EstadoPteAutorizCheckBox.Checked = true;
                             EstadoRechCheckBox.Checked = false;
-                            ComprobantesGridView.Columns[3].Visible = true;
+                            ComprobantesGridView.Columns[4].Visible = true;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
                             EstadosPanel.Enabled = false;
                             descrTratamiento = "Modificación";
@@ -148,59 +149,105 @@ namespace CedServicios.Site
                 case "Consulta":
                     RN.Comprobante.LeerMinutas(comprobante, sesion);
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, comprobante);
-                    auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                    idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                    {
-                        return pv.Nro == auxPV;
-                    }).IdTipoPuntoVta;
-                    if (idtipo != "Turismo")
+                    if (comprobante.NaturalezaComprobante.Id == "Compra")
                     {
                         script = "window.open('/ComprobanteConsulta.aspx', '');";
                     }
                     else
                     {
-                        script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                        auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo != "Turismo")
+                        {
+                            script = "window.open('/ComprobanteConsulta.aspx', '');";
+                        }
+                        else
+                        {
+                            script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                        }
                     }
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
                 case "Baja/Anul.baja":
                     RN.Comprobante.LeerMinutas(comprobante, sesion);
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Baja_AnulBaja, comprobante);
-                    auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                    idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                    {
-                        return pv.Nro == auxPV;
-                    }).IdTipoPuntoVta;
-                    if (idtipo != "Turismo")
+                    if (comprobante.NaturalezaComprobante.Id == "Compra")
                     {
                         script = "window.open('/ComprobanteConsulta.aspx', '');";
                     }
                     else
                     {
-                        script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                        auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo != "Turismo")
+                        {
+                            script = "window.open('/ComprobanteConsulta.aspx', '');";
+                        }
+                        else
+                        {
+                            script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                        }
+                    }
+                    ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                    break;
+                case "BajaFisica":
+                    RN.Comprobante.LeerMinutas(comprobante, sesion);
+                    Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Baja_Fisica, comprobante);
+                    if (comprobante.NaturalezaComprobante.Id == "Compra")
+                    {
+                        script = "window.open('/ComprobanteConsulta.aspx', '');";
+                    }
+                    else
+                    {
+                        auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo != "Turismo")
+                        {
+                            script = "window.open('/ComprobanteConsulta.aspx', '');";
+                        }
+                        else
+                        {
+                            script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                        }
                     }
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
                 case "Envio":
                     RN.Comprobante.LeerMinutas(comprobante, sesion);
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Envio, comprobante);
-                    auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                    idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                    {
-                        return pv.Nro == auxPV;
-                    }).IdTipoPuntoVta;
-                    if (idtipo != "Turismo")
+                    if (comprobante.NaturalezaComprobante.Id == "Compra")
                     {
                         script = "window.open('/ComprobanteConsulta.aspx', '');";
                     }
                     else
                     {
-                        script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                        auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo != "Turismo")
+                        {
+                            script = "window.open('/ComprobanteConsulta.aspx', '');";
+                        }
+                        else
+                        {
+                            script = "window.open('/ComprobanteConsultaTurismo.aspx', '');";
+                        }
                     }
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
                 case "Modificacion":
-                    if (comprobante.NaturalezaComprobante.Id =="VentaContrato") 
+                    if (comprobante.NaturalezaComprobante.Id == "VentaContrato") 
                     {
                         Entidades.Persona persona = new Entidades.Persona();
                         persona.Cuit = comprobante.Cuit;
@@ -212,18 +259,25 @@ namespace CedServicios.Site
                         comprobante.DatosEmailAvisoComprobanteContrato.DestinatariosFrecuentes = persona.DatosEmailAvisoComprobantePersona.DestinatariosFrecuentes;
                     }
                     Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Modificacion, comprobante);
-                    auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                    idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                    {
-                        return pv.Nro == auxPV;
-                    }).IdTipoPuntoVta;
-                    if (idtipo != "Turismo")
+                    if (comprobante.NaturalezaComprobante.Id == "Compra")
                     {
                         script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
                     }
                     else
                     {
-                        script = "window.open('/Facturacion/Electronica/LoteCT.aspx', '');";
+                        auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
+                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        if (idtipo != "Turismo")
+                        {
+                            script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
+                        }
+                        else
+                        {
+                            script = "window.open('/Facturacion/Electronica/LoteCT.aspx', '');";
+                        }
                     }
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
@@ -719,7 +773,7 @@ namespace CedServicios.Site
                     break;
                 case "XML-ClonarAlta":
                     #region XML-ClonarAlta
-                    if (comprobante.NaturalezaComprobante.Id == "Venta" || comprobante.NaturalezaComprobante.Id == "Compra")
+                    if (comprobante.NaturalezaComprobante.Id == "Venta")
                     {
                         Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Clonado, comprobante);
                         int auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
@@ -737,9 +791,15 @@ namespace CedServicios.Site
                         }
                         ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     }
+                    else if (comprobante.NaturalezaComprobante.Id == "Compra")
+                    {
+                        Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Clonado, comprobante);
+                        script = "window.open('/Facturacion/Electronica/Lote.aspx', '');";
+                        ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
+                    }
                     else
                     {
-                        MensajeLabel.Text = "Esta opción está disponible sólo para comprobantes de venta electrónica o compras.";
+                        MensajeLabel.Text = "Esta opción está disponible sólo para comprobantes de venta electrónica o compra.";
                     }                    
                     #endregion
                     break;
