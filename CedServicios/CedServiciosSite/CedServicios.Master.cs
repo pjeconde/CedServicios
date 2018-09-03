@@ -69,7 +69,23 @@ namespace CedServicios.Site
                 }
                 else
                 {
-                    footerNoLogin.Visible = false;
+                    switch (HttpContext.Current.Request.Url.AbsolutePath.ToString())
+                    {
+                        case "/Inicio.aspx":
+                        case "/InicioBusquedas.aspx":
+                        case "/InicioDesarrolloAMedida.aspx":
+                        case "/InicioEmpresa.aspx":
+                        case "/InicioFEA.aspx":
+                        case "/InicioFEAPrecios.aspx":
+                        case "/InicioInformacion.aspx":
+                        case "/InicioProductos.aspx":
+                        case "/InicioServicioSF.aspx":
+                            footerNoLogin.Visible = true;
+                            break;
+                        default:
+                            footerNoLogin.Visible = false;
+                            break;
+                    }
                 }
                 if (Session["ComprobanteATratar"] == null)
                 {

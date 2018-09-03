@@ -1,6 +1,9 @@
 ﻿<%@ Page Language="C#" Theme="CedServicios" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="FacturaElectronicaTYC.aspx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.FacturaElectronicaTYC"  %>
 
 <asp:Content ID="Content2" runat="Server" ContentPlaceHolderID="ContentPlaceDefault">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
     <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px; width:900px">
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
@@ -110,4 +113,7 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
 </asp:Content>

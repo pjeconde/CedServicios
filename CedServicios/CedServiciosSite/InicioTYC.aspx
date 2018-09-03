@@ -2,6 +2,9 @@
 
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <asp:Content ID="Content2" Visible="true" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
     <div id="pan1" runat="server">
         <div class="service2 sections2 lightbg" id="tyc">
             <div class="container">
@@ -10,6 +13,8 @@
                         <h1 class="entry-title main_title">Términos y condiciones</h1>
                     </div>
                     <div class="service_content text-left">
+                        <p><asp:Label ID="Label1" runat="server" SkinID="TituloPagina" Text="Generales del Sitio Web"></asp:Label>
+                        </p>
 		                <p>Este contrato describe los términos y condiciones generales (los &#8220;Términos y Condiciones Generales&#8221;) aplicables al uso de los servicios y productos ofrecidos por Cedeira Software Factory S.R.L., de ahora en adelante denominada nuestra empresa. Cualquier persona que desee acceder y/o usar el sitio o los servicios podrá hacerlo sujetándose a los Términos y Condiciones, junto con todas las demás políticas y principios que rigen a nuestra empresa y que son incorporados al presente por referencia.</p>
                         <p>CUALQUIER PERSONA QUE NO ACEPTE ESTOS TÉRMINOS Y CONDICIONES GENERALES, LOS CUALES TIENEN UN CARÁCTER OBLIGATORIO Y VINCULANTE, DEBERÁ ABSTENERSE DE UTILIZAR EL SITIO Y/O LOS SERVICIOS.</p>
                         <p>El Usuario debe leer, entender y aceptar todas las condiciones establecidas en los Términos y Condiciones y en las Políticas de Privacidad así como en los demás documentos incorporados a los mismos por referencia, previo a su registración como Usuario de nuestro sitio Web.</p>
@@ -31,8 +36,31 @@
                         <p><strong>08 &#8211; Domicilio</strong></p>
                         <p>Se fija como domicilio de Cedeira Software Factory S.R.L, la calle Av. Federico Lacroze xxxx, piso x, Capital Federal, código postal xxxx, República Argentina.</p>
                         <p>&nbsp;</p>
-                        <p>
-                        Los siguientes términos y condiciones generales regularán expresamente las relaciones surgidas entre este Portal www.cedeira.com.ar de Cedeira Software Factory S.R.L ( en adelante 'NUESTRA EMPRESA' ) y Usted (en adelante el 'USUARIO o USUARIOS') en virtud de las cuales NUESTRA EMPRESA le brinda servicios de gratuito de generación de comprobantes electrónicos en un archivo de formato XML, ya sea que se trate de nuevos USUARIOS o aquellos vinculados a través de cualquier acuerdo previo que pudiera existir entre las partes. Este acuerdo sustituye cualquier otra comunicación previa oral o de otro tipo, que haya habido entre las partes.<br />La utilización del Portal www.cedeira.com.ar atribuye la condición de USUARIO del Portal, sea persona física o jurídica, e implica la aceptación plena y sin reservas de todas y cada una de las disposiciones incluidas en estos terminos y condiciones que se detallan a contituación.<br /><br />NUESTRA EMPRESA:<br /><br />1.No asume ninguna responsabilidad por la utilización de los presentes modelos de carga de comprobantes, ya que sólo los ofrece en forma gratuita a modo de simplificar las tareas en la carga de la información del comprobante electrónico que solicita InterFacturas.<br /><br />2.No asume responsabilidad alguna sobre los datos de los comprobantes que usted envíe a Interfacturas. La información generada desde este sitio web, puede ser modificada por usted.<br /><br />3.Se reserva el derecho unilateral de suspender temporalmente o de terminar definitivamente la prestación del servicios a través del Portal.<br /><br />4.Se reserva el derecho de modificar unilateralmente y en cualquier momento el sistema de acceso al servicio.<br /><br />5.No garantiza que el sitio web vaya a funcionar en forma constante, fiable y correctamente, sin retrasos o interrupciones, por lo que no se hace responsable de los daños y prejuicios que puedan derivarse de los posibles fallos en disponibilidad y continuidad técnica del sitio web.<br /><br />6.No presenta ninguna garantía, explicita o implícitamente, acerca de la utilización de este servicio gratuito.<br /><br />7.No será responsable por cualquier daño y/o perjuicio y/o beneficio dejado de obtener por el usuario o cualquier otro tercero causados directa o indirectamente por la conexión y/o utilización y/o acceso al sitio web www.cedeira.com.ar o a páginas enlazadas a él.<br /><br />Ley aplicable y jurisdicción competente<br />El USUARIO acepta que la legislación aplicable al funcionamiento de este servicio es la Argentina y se somete a la jurisdicción de los juzgados y tribunales de la Ciudad Autónoma de Buenos Aires para la resolución de las devergencias que se deriven de la interpretación o aplicación de este clausulado.
+                        <p>&nbsp;</p>
+                        <p><asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Específicos para Factura Electrónica"></asp:Label>
+                        </p>
+                        <asp:Label ID="Label2" runat="server" SkinID="TituloColor1Grande" Text="Términos y Condiciones"></asp:Label>
+                        <p>Los siguientes términos y condiciones generales regularán expresamente las relaciones surgidas entre este Portal www.cedeira.com.ar de Cedeira Software Factory S.R.L ( en adelante "NUESTRA EMPRESA" ) y Usted (en adelante el "USUARIO o USUARIOS") en virtud de las cuales NUESTRA EMPRESA le brinda servicios de generación de comprobantes electrónicos en un archivo de formato XML, ya sea que se trate de nuevos USUARIOS o aquellos vinculados a través de cualquier acuerdo previo que pudiera existir entre las partes. Este acuerdo sustituye cualquier otra comunicación previa oral o de otro tipo, que haya habido entre las partes. '></asp:Label>
+                        </p>
+                        <p>La utilización del Portal www.cedeira.com.ar atribuye la condición de USUARIO del Portal, sea persona física o jurídica, e implica la aceptación plena y sin reservas de todas y cada una de las disposiciones incluídas en estos términos y condiciones que se detallan a continuación.
+                        </p>
+                        <asp:Label ID="Label6" runat="server" SkinID="TituloColor1Grande" Text="Nuestra empresa:"></asp:Label>
+                        <p><strong>01 &#8211; </strong>No asume ninguna responsabilidad por la utilización de los presentes modelos de carga de comprobantes, ya que sólo los ofrece a modo de simplificar las tareas en la carga de la información del comprobante electrónico que solicita Interfacturas.
+                        </p>
+                        <p><strong>02 &#8211; </strong>No asume responsabilidad alguna sobre los datos de los comprobantes que usted envíe a Interfacturas. La información generada desde este sitio web, puede ser modificada por usted.
+                        </p>
+                        <p><strong>03 &#8211; </strong>Se reserva el derecho unilateral de suspender temporalmente o de terminar definitivamente la prestación del servicio a través del Portal.
+                        </p>
+                        <p><strong>04 &#8211; </strong>Se reserva el derecho de modificar unilateralmente y en cualquier momento el sistema de acceso al servicio.
+                        </p>
+                        <p><strong>05 &#8211; </strong>No garantiza que el sitio web vaya a funcionar en forma constante, fiable y correctamente, sin retrasos o interrupciones, por lo que no se hace responsable de los daños y prejuicios que puedan derivarse de los posibles fallos en disponibilidad y continuidad técnica del sitio web.
+                        </p>
+                        <p><strong>06 &#8211; </strong>No presenta ninguna garantía, explicita o implícitamente, acerca de la utilización de este servicio.
+                        </p>
+                        <p><strong>07 &#8211; </strong>No será responsable por cualquier daño y/o perjuicio y/o beneficio dejado de obtener por el usuario o cualquier otro tercero causados directa o indirectamente por la conexión y/o utilización y/o acceso al sitio web www.cedeira.com.ar o a páginas enlazadas a él.
+                        </p>
+                        <asp:Label ID="Label20" runat="server" SkinID="TituloColor1Grande" Text="Ley aplicable y jurisdicción competente"></asp:Label>
+                        <p>El USUARIO acepta que la legislación aplicable al funcionamiento de este servicio es la argentina y se somete a la jurisdicción de los juzgados y tribunales de la Ciudad Autónoma de Buenos Aires para la resolución de las divergencias que se deriven de la interpretación o aplicación de este clausulado.
                         </p>
                     </div>
                 </div>
@@ -86,5 +114,8 @@
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
     </div>
 </asp:Content>

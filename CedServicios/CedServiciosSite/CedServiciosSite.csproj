@@ -515,9 +515,9 @@
     <None Include="Web References\org.dyndns.cedweb.listado\ListadoIBK.disco" />
     <None Include="Web References\org.dyndns.cedweb.detalle\DetalleIBK.disco" />
     <None Include="Web References\org.dyndns.cedweb.generoPDF\GeneroPDF.disco" />
-    <Content Include="Web.config">
+    <None Include="Web.config">
       <SubType>Designer</SubType>
-    </Content>
+    </None>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>

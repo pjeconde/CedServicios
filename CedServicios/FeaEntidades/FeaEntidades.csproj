@@ -1499,6 +1499,7 @@
     <Compile Include="TiposDeComprobantes\NotasDeVentaAlContado\B.cs" />
     <Compile Include="TiposDeComprobantes\NotasDeVentaAlContado\NotaDeVentaAlContado.cs" />
     <Compile Include="TiposDeComprobantes\OtrosCompras\BienesUsados.cs" />
+    <Compile Include="TiposDeComprobantes\OtrosCompras\OtrosExceptuadosNDyResumen.cs" />
     <Compile Include="TiposDeComprobantes\OtrosCompras\OtrosNoCumplenRG3419.cs" />
     <Compile Include="TiposDeComprobantes\OtrosCompras\NDServiciosPublicos.cs" />
     <Compile Include="TiposDeComprobantes\OtrosCompras\NCServiciosPublicos.cs" />

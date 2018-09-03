@@ -21,6 +21,9 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
     <form id="form1" runat="server">
         <asp:ScriptManager ID="ScriptManagerConsulta" runat="server">
         </asp:ScriptManager>
+        <div class="container">
+        <div class="row">
+        <div class="col-lg-12 col-md-12">
             <table style="width: 1300px; text-align:left; padding-left:10px">
                 <tr>
                     <td style="padding-top:20px; width:1282px; vertical-align:top; text-align:center;">
@@ -1553,6 +1556,9 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                     </td>
                 </tr>
             </table>
+        </div>
+        </div>
+        </div>
     </form>
 </body>
 </html>

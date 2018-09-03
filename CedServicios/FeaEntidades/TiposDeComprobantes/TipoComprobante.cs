@@ -225,6 +225,7 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new OtrosCompras.Tique());
             lista.Add(new OtrosCompras.NCServiciosPublicos());
             lista.Add(new OtrosCompras.NDServiciosPublicos());
+            lista.Add(new OtrosCompras.OtrosExceptuadosNDyResumen());
             lista.Add(new OtrosCompras.OtrosNoCumplenRG3419());
             return lista;
         }

@@ -2,6 +2,9 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
     <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton">
         <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
             <tr>
@@ -168,4 +171,7 @@
             </tr>
         </table>
     </asp:Panel>
+    </div>
+    </div>
+    </div>
 </asp:Content>
