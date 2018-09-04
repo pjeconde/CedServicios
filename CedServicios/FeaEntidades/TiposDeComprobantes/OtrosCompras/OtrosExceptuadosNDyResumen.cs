@@ -9,7 +9,7 @@ namespace FeaEntidades.TiposDeComprobantes.OtrosCompras
         public OtrosExceptuadosNDyResumen()
 		{
 			codigo = 89;
-            descr = "Otros Comprobantes exceptuados ND y Resumen de datos";
+            descr = "Otros Comprobantes exceptuados ND y Resumen";
 		}
 	}
 }
