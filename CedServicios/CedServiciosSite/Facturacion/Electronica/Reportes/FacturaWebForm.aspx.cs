@@ -58,15 +58,27 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     string imagen = Server.MapPath("~/Facturacion/Electronica/Reportes/Imagen.xsd");
                     System.IO.File.Copy(imagen, @System.IO.Path.GetTempPath() + "Imagen.xsd", true);
 
-                    facturaRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-                    string reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Factura.rpt");
-                    facturaRpt.Load(reportPath);
-
                     FeaEntidades.InterFacturas.lote_comprobantes lc = (FeaEntidades.InterFacturas.lote_comprobantes)Session["lote"];
                     AsignarCamposOpcionales(lc);
 					ReemplarResumenImportesMonedaExtranjera(lc);
-					DataSet ds = new DataSet();
 
+                    facturaRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
+                    string reportPath;
+                    if (lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma == "EN")
+                    {
+                        reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/FacturaEN.rpt");
+                    }
+                    else if (lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma == "PT")
+                    {
+                        reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/FacturaPT.rpt");
+                    }
+                    else
+                    {
+                        reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Factura.rpt");
+                    }
+                    facturaRpt.Load(reportPath);
+
+					DataSet ds = new DataSet();
                     XmlSerializer objXS = new XmlSerializer(lc.GetType());
                     StringWriter objSW = new StringWriter();
                     objXS.Serialize(objSW, lc);
