@@ -1876,14 +1876,14 @@
       <LastGenOutput>FacturaT.cs</LastGenOutput>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <EmbeddedResource Include="Facturacion\Electronica\Reportes\FacturaEN.rpt">
+    <Content Include="Facturacion\Electronica\Reportes\FacturaEN.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FacturaEN.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Facturacion\Electronica\Reportes\FacturaPT.rpt">
+    </Content>
+    <Content Include="Facturacion\Electronica\Reportes\FacturaPT.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>FacturaPT.cs</LastGenOutput>
-    </EmbeddedResource>
+    </Content>
     <EmbeddedResource Include="Facturacion\Electronica\Reportes\Imagen.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>Imagen.cs</LastGenOutput>
@@ -1898,7 +1898,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
+    <Content Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
     <None Include="Facturacion\Electronica\Reportes\Imagen.xsc">
       <DependentUpon>Imagen.xsd</DependentUpon>
     </None>

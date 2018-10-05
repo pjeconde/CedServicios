@@ -63,18 +63,39 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
 					ReemplarResumenImportesMonedaExtranjera(lc);
 
                     facturaRpt = new CrystalDecisions.CrystalReports.Engine.ReportDocument();
-                    string reportPath;
-                    if (lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma == "EN")
+                    string reportPath = "";
+                    
+                    string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                     {
-                        reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/FacturaEN.rpt");
-                    }
-                    else if (lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma == "PT")
+                        return pv.Nro == lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                    }).IdTipoPuntoVta;
+
+                    if (!idtipo.Equals("Exportacion"))
                     {
-                        reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/FacturaPT.rpt");
+                        reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Factura.rpt");
                     }
                     else
                     {
-                        reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Factura.rpt");
+                        if (lc.comprobante[0].extensiones.extensiones_camara_facturas != null && lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma != null)
+                        {
+                            if (lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma == "2")
+                            {
+                                reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/FacturaEN.rpt");
+                            }
+                            else if (lc.comprobante[0].extensiones.extensiones_camara_facturas.id_idioma == "3")
+                            {
+                                reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/FacturaPT.rpt");
+                            }
+                            else
+                            {
+                                //Español = 1
+                                reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Factura.rpt");
+                            }
+                        }
+                        else
+                        {
+                            reportPath = Server.MapPath("~/Facturacion/Electronica/Reportes/Factura.rpt");
+                        }
                     }
                     facturaRpt.Load(reportPath);
 
@@ -109,7 +130,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
 						cae = "99999999999999";
 					}
 					GenerarCodigoBarras(lc.cabecera_lote.cuit_vendedor + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00") + lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString("0000") + cae +System.DateTime.Now.ToString("yyyyMMdd"));
-					AsignarParametros(lc.comprobante[0].resumen.importe_total_factura);
+                    AsignarParametros(lc.comprobante[0].resumen.importe_total_factura, idtipo);
 
                     facturaRpt.Subreports["impuestos"].DataDefinition.FormulaFields["TipoDeComprobante"].Text = "'" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "'"; 
                     facturaRpt.Subreports["resumen"].DataDefinition.FormulaFields["TipoDeComprobante"].Text = "'" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "'"; 
@@ -146,7 +167,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
             }
         }
 
-		private void AsignarParametros(double p)
+		private void AsignarParametros(double p, string idtipoPV)
 		{
 			CrystalDecisions.Shared.ParameterValues myVals = new CrystalDecisions.Shared.ParameterValues();
 			CrystalDecisions.Shared.ParameterDiscreteValue myDiscrete = new CrystalDecisions.Shared.ParameterDiscreteValue();
@@ -154,7 +175,14 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
 			myVals.Add(myDiscrete);
 			facturaRpt.DataDefinition.ParameterFields[0].ApplyCurrentValues(myVals);
             
-            facturaRpt.Subreports["resumen"].DataDefinition.FormulaFields["ImpTotTexto"].Text = "'" + NumALet.ToCardinal(Convert.ToDecimal(p)) + "'";
+            if (!idtipoPV.Equals("Exportacion"))
+            {
+                facturaRpt.Subreports["resumen"].DataDefinition.FormulaFields["ImpTotTexto"].Text = "'" + NumALet.ToCardinal(Convert.ToDecimal(p)) + "'";
+            }
+            else
+            {
+                facturaRpt.Subreports["resumen"].DataDefinition.FormulaFields["ImpTotTexto"].Text = "''";
+            }
  	    }
 
         private void AsignarCamposOpcionales(FeaEntidades.InterFacturas.lote_comprobantes lc)
