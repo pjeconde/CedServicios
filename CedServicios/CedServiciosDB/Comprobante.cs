@@ -144,7 +144,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle)
+        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle, bool Ajuste)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)
@@ -191,6 +191,10 @@ namespace CedServicios.DB
                 if (Detalle != string.Empty)
                 {
                     a.Append("and Comprobante.Detalle like '%" + Detalle + "%' ");
+                }
+                if (!Ajuste)
+                {
+                    a.Append("and (Comprobante.IdNaturalezaComprobante<>'Compra' or (Comprobante.IdNaturalezaComprobante='Compra' and Comprobante.NroDoc <> '" + sesion.Cuit.Nro + "')) ");
                 }
                 a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);

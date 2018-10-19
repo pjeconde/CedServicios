@@ -9,19 +9,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
 
     <!--For Plugins external css-->
-    <link rel="stylesheet" href="assets/css/plugins.css" />
-    <link rel="stylesheet" href="assets/css/roboto-webfont.css" />
-    <link href="font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="/assets/css/plugins.css" />
+    <link rel="stylesheet" href="/assets/css/roboto-webfont.css" />
+    <link href="/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
     <!--Theme custom css -->
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="/assets/css/style.css">
 
     <!--Theme Responsive css-->
-    <link rel="stylesheet" href="assets/css/responsive.css" />
-    <script src="assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="/assets/css/responsive.css" />
+    <script src="/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
     <!--<link href="/css/bootstrap.min.css" rel="stylesheet">-->
     <!--<link href="data:text/css;charset=utf-8," data-href="/css/bootstrap-theme.min.css" rel="stylesheet" id="bsthemestylesheet">-->
@@ -320,13 +320,13 @@
                         </div>
                         <div class="single_left_contact">
                             <div class="form-group">
-                                <asp:DropDownList ID="IdBusquedaPerfilDropDownList" class="form-control" runat="server" TabIndex="1" name="IdBusquedaPerfil" placeholder="Perfil" DataValueField="IdBusquedaPerfil" DataTextField="DescrBusquedaPerfil" Visible="true" style="height:30px"></asp:DropDownList>
+                                <asp:DropDownList ID="IdBusquedaPerfilDropDownList" class="form-control" runat="server" TabIndex="100" name="IdBusquedaPerfil" placeholder="Perfil" DataValueField="IdBusquedaPerfil" DataTextField="DescrBusquedaPerfil" Visible="true" style="height:30px"></asp:DropDownList>
                             </div>
                             <div class="form-group">
-                                <input type="email" id="EmailBL" class="form-control" name="EmailBL" placeholder="Ingrese su email." style="min-width: 250px; height:30px;" value='<%= EmailValue %>'>
+                                <input type="email" id="EmailBL" class="form-control" name="EmailBL" placeholder="Ingrese su email." TabIndex="101" style="min-width: 250px; height:30px;" value='<%= EmailValue %>'>
                             </div>
                             <div class="form-group text-left">
-                                <input type="submit" id="ButtonEnviarEmailBL" class="btn btn-default" value="Enviar" runat="server" onserverclick="ButtonEnviarEmailBL_Click" style="padding:0px">
+                                <input type="submit" id="ButtonEnviarEmailBL" class="btn btn-default" value="Enviar" runat="server" TabIndex="102" onserverclick="ButtonEnviarEmailBL_Click" style="padding:0px">
                             </div>
                         </div>
                     </div>
@@ -363,12 +363,12 @@
 	</div>
     </div>
 
-    <script src="assets/js/vendor/jquery-1.11.2.min.js"></script>
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
+    <script src="/assets/js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="/assets/js/vendor/bootstrap.min.js"></script>
 
-    <script src="assets/js/plugins.js"></script>
-    <script src="assets/js/modernizr.js"></script>
-    <script src="assets/js/main.js"></script>
+    <script src="/assets/js/plugins.js"></script>
+    <script src="/assets/js/modernizr.js"></script>
+    <script src="/assets/js/main.js"></script>
     </form>
     
     <script type="text/javascript">
