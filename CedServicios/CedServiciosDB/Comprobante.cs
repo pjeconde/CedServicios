@@ -237,7 +237,7 @@ namespace CedServicios.DB
                 a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto, Comprobante.EmailAvisoComprobanteActivo, Comprobante.IdDestinatarioFrecuente, Comprobante.EmailAvisoComprobanteAsunto, Comprobante.EmailAvisoComprobanteCuerpo ");
                 a.Append("from Comprobante, NaturalezaComprobante  ");
                 a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Comprobante.NroComprobante=" + Comprobante.Nro.ToString() + " and Comprobante.IdTipoDoc=" + Comprobante.Documento.Tipo.Id + " and Comprobante.NroDoc='" + Comprobante.Documento.Nro + "' ");
-                a.Append("and Comprobante.IdNaturalezaComprobante=NaturalezaComprobante.IdNaturalezaComprobante ");
+                a.Append("and Comprobante.IdNaturalezaComprobante=NaturalezaComprobante.IdNaturalezaComprobante and Comprobante.IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "'");
             }
             else
             {
@@ -245,6 +245,7 @@ namespace CedServicios.DB
                 a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto, Comprobante.EmailAvisoComprobanteActivo, Comprobante.IdDestinatarioFrecuente, Comprobante.EmailAvisoComprobanteAsunto, Comprobante.EmailAvisoComprobanteCuerpo ");
                 a.Append("from Comprobante, NaturalezaComprobante  ");
                 a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Comprobante.NroComprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " ");
+                a.Append("and Comprobante.IdNaturalezaComprobante=NaturalezaComprobante.IdNaturalezaComprobante and Comprobante.IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "'");
             }
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count != 0)
@@ -299,7 +300,7 @@ namespace CedServicios.DB
             StringBuilder a = new StringBuilder(string.Empty);
             if (Comprobante.NaturalezaComprobante.Id != "Compra")
             {
-                a.AppendLine("if not exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + ")");
+                a.AppendLine("if not exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "')");
                 a.AppendLine("BEGIN ");
                 a.AppendLine(CrearScript(Comprobante));
                 a.AppendLine("END ");
@@ -392,9 +393,9 @@ namespace CedServicios.DB
             StringBuilder a = new StringBuilder(string.Empty);
             if (Comprobante.NaturalezaComprobante.Id != "Compra")
             {
-                a.AppendLine("if exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and UltActualiz = " + ComprobanteOrig.UltActualiz + ") ");
-                a.AppendLine("or (not exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + ") ");
-                a.AppendLine("and exists (select * from Comprobante where Cuit='" + ComprobanteOrig.Cuit + "' and IdTipoComprobante=" + ComprobanteOrig.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + ComprobanteOrig.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -ComprobanteOrig.Nro : ComprobanteOrig.Nro).ToString() + " and UltActualiz = " + ComprobanteOrig.UltActualiz + ")) ");
+                a.AppendLine("if exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + ComprobanteOrig.UltActualiz + ") ");
+                a.AppendLine("or (not exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "') ");
+                a.AppendLine("and exists (select * from Comprobante where Cuit='" + ComprobanteOrig.Cuit + "' and IdTipoComprobante=" + ComprobanteOrig.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + ComprobanteOrig.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -ComprobanteOrig.Nro : ComprobanteOrig.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + ComprobanteOrig.UltActualiz + ")) ");
                 a.AppendLine("BEGIN ");
                 a.AppendLine(ModificarScript(Comprobante, ComprobanteOrig));
                 a.AppendLine("END ");
@@ -470,7 +471,7 @@ namespace CedServicios.DB
             a.Append("Comprobante.IdDestinatarioFrecuente='" + Comprobante.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id + "', ");
             a.Append("Comprobante.EmailAvisoComprobanteAsunto='" + Comprobante.DatosEmailAvisoComprobanteContrato.Asunto + "', ");
             a.Append("Comprobante.EmailAvisoComprobanteCuerpo='" + Comprobante.DatosEmailAvisoComprobanteContrato.Cuerpo + "' ");
-            a.AppendLine("where Cuit='" + ComprobanteOrig.Cuit + "' and IdTipoComprobante=" + ComprobanteOrig.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + ComprobanteOrig.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -ComprobanteOrig.Nro : ComprobanteOrig.Nro).ToString() + " and UltActualiz = " + ComprobanteOrig.UltActualiz + " ");
+            a.AppendLine("where Cuit='" + ComprobanteOrig.Cuit + "' and IdTipoComprobante=" + ComprobanteOrig.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + ComprobanteOrig.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -ComprobanteOrig.Nro : ComprobanteOrig.Nro).ToString() + " and IdNaturalezaComprobante = '" + ComprobanteOrig.NaturalezaComprobante.Id + "' and UltActualiz = " + ComprobanteOrig.UltActualiz + " ");
             a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'Comprobante', 'Modif', '" + Comprobante.WF.Estado + "', '') ");
             a.AppendLine("declare @idLog int ");
             a.AppendLine("select @idLog=@@Identity ");
@@ -611,7 +612,7 @@ namespace CedServicios.DB
                 a.Append("Comprobante.IdDestinatarioFrecuente='" + Comprobante.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id + "', ");
                 a.Append("Comprobante.EmailAvisoComprobanteAsunto='" + Comprobante.DatosEmailAvisoComprobanteContrato.Asunto + "', ");
                 a.Append("Comprobante.EmailAvisoComprobanteCuerpo='" + Comprobante.DatosEmailAvisoComprobanteContrato.Cuerpo + "' ");
-                a.AppendLine("where Cuit='" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " ");
+                a.AppendLine("where Cuit='" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString()  + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' ");
                 a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'Comprobante', 'Modif', '" + Comprobante.WF.Estado + "', '') ");
                 a.AppendLine("declare @idLog int ");
                 a.AppendLine("select @idLog=@@Identity ");
@@ -631,14 +632,14 @@ namespace CedServicios.DB
         public int DarDeBaja(Entidades.Comprobante Comprobante)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("if exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and UltActualiz = " + Comprobante.UltActualiz + ") ");
+            a.AppendLine("if exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString()  + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + Comprobante.UltActualiz + ") ");
             a.AppendLine("BEGIN ");
             a.AppendLine("declare @idWF varchar(256) ");
             a.AppendLine("set @IdWF=" + Comprobante.WF.Id.ToString() + " ");
             a.Append("update Comprobante set ");
             Comprobante.WF.Estado = "DeBaja";
             a.Append("Comprobante.Estado='" + Comprobante.WF.Estado + "' ");
-            a.AppendLine("where Cuit='" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and UltActualiz = " + Comprobante.UltActualiz + " ");
+            a.AppendLine("where Cuit='" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + Comprobante.UltActualiz + " ");
             a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'Comprobante', 'Baja', '" + Comprobante.WF.Estado + "', '') ");
             a.AppendLine("END ");
             a.AppendLine("else ");
@@ -650,12 +651,12 @@ namespace CedServicios.DB
         public int DarDeBajaFisica(Entidades.Comprobante Comprobante)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("if exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and UltActualiz = " + Comprobante.UltActualiz + ") ");
+            a.AppendLine("if exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + Comprobante.UltActualiz + ") ");
             a.AppendLine("BEGIN ");
-            a.AppendLine("delete LogDetalle where IdLog in (select IdLog from Log where IdWF in (select IdWF from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and UltActualiz = " + Comprobante.UltActualiz + ")) ");
-            a.AppendLine("delete Log where IdWF in (select IdWF from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and UltActualiz = " + Comprobante.UltActualiz + ") ");
-            a.AppendLine("delete ComprobanteDetalle where IdWF in (select IdWF from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and UltActualiz = " + Comprobante.UltActualiz + ") ");
-            a.AppendLine("delete Comprobante where IdWF in (select IdWF from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and UltActualiz = " + Comprobante.UltActualiz + ") ");
+            a.AppendLine("delete LogDetalle where IdLog in (select IdLog from Log where IdWF in (select IdWF from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + Comprobante.UltActualiz + ")) ");
+            a.AppendLine("delete Log where IdWF in (select IdWF from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + Comprobante.UltActualiz + ") ");
+            a.AppendLine("delete ComprobanteDetalle where IdWF in (select IdWF from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + Comprobante.UltActualiz + ") ");
+            a.AppendLine("delete Comprobante where IdWF in (select IdWF from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString()  + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + Comprobante.UltActualiz + ") ");
             a.AppendLine("END ");
             a.AppendLine("else ");
             a.AppendLine("BEGIN ");
@@ -666,7 +667,7 @@ namespace CedServicios.DB
         public int AnularBaja(Entidades.Comprobante Comprobante)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("if exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and UltActualiz = " + Comprobante.UltActualiz + ") ");
+            a.AppendLine("if exists (select * from Comprobante where Cuit = '" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante = " + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + Comprobante.UltActualiz + ") ");
             a.AppendLine("BEGIN ");
             a.AppendLine("declare @idWF varchar(256) ");
             a.AppendLine("set @IdWF=" + Comprobante.WF.Id.ToString() + " ");
@@ -674,7 +675,7 @@ namespace CedServicios.DB
             a.AppendLine("select top 1 @EstadoAnterior=Estado from Log where IdWF=@IdWF and Estado<>'DeBaja' order by IdLog desc ");
             a.Append("update Comprobante set ");
             a.Append("Comprobante.Estado=@EstadoAnterior ");
-            a.AppendLine("where Cuit='" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and UltActualiz = " + Comprobante.UltActualiz + " ");
+            a.AppendLine("where Cuit='" + Comprobante.Cuit + "' and IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Nrocomprobante=" + (Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro).ToString() + " and IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "' and UltActualiz = " + Comprobante.UltActualiz + " ");
             a.AppendLine("insert Log values (@idWF, getdate(), '" + sesion.Usuario.Id + "', 'Comprobante', 'AnulBaja', @EstadoAnterior, '') ");
             a.AppendLine("select @@rowcount as CantReg, @EstadoAnterior as Estado ");
             a.AppendLine("END ");

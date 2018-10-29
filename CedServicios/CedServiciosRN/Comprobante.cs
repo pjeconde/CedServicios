@@ -202,6 +202,7 @@ namespace CedServicios.RN
                     comprobanteVerifEstado.TipoComprobante.Id = Comprobante.cabecera.informacion_comprobante.tipo_de_comprobante;
                     comprobanteVerifEstado.NroPuntoVta = Comprobante.cabecera.informacion_comprobante.punto_de_venta;
                     comprobanteVerifEstado.Nro = Comprobante.cabecera.informacion_comprobante.numero_comprobante;
+                    comprobanteVerifEstado.NaturalezaComprobante.Id = IdNaturalezaComprobante;
                     RN.Comprobante.Leer(comprobanteVerifEstado, Sesion);
                     throw new Exception("El comprobante ya existe. Se encuentra en estado: " + comprobanteVerifEstado.Estado);
                 }
@@ -428,6 +429,7 @@ namespace CedServicios.RN
                     comprobanteVerifEstado.TipoComprobante.Id = Lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                     comprobanteVerifEstado.NroPuntoVta = Lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                     comprobanteVerifEstado.Nro = Lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                    comprobanteVerifEstado.NaturalezaComprobante.Id = IdNaturalezaComprobante;                 
                     if (IdNaturalezaComprobante == "Compra")
                     {
                         comprobanteVerifEstado.Documento.Tipo.Id = "80";
