@@ -1,7 +1,17 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="UsuarioConsulta.aspx.cs" Inherits="CedServicios.Site.UsuarioConsulta" Theme="CedServicios" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12 center-block text-center">
+    <%--<div class="container">
+        <div class="row">
+        <div class="col-lg-12 col-md-12 center-block text-center ">
+            
+        </div>
+        </div>
+        </div>--%>
+    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px;">
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Permisos del usuario"></asp:Label>
@@ -54,4 +64,7 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
 </asp:Content>

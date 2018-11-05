@@ -828,7 +828,7 @@ namespace CedServicios.DB
             a.Append("Comprobante.ImporteMoneda=" + Comprobante.ImporteMoneda.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + ", ");
             a.Append("Comprobante.TipoCambio=" + Comprobante.TipoCambio.ToString("0000.000000", System.Globalization.CultureInfo.InvariantCulture) + ", ");
             a.Append("Comprobante.Importe=" + Comprobante.Importe.ToString("0000000000000.00", System.Globalization.CultureInfo.InvariantCulture) + " ");
-            a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + "and Comprobante.NroComprobante=" + Comprobante.Nro.ToString() + " ");
+            a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' and Comprobante.IdTipoComprobante=" + Comprobante.TipoComprobante.Id.ToString() + " and Comprobante.NroPuntoVta=" + Comprobante.NroPuntoVta.ToString() + " and Comprobante.NroComprobante=" + Comprobante.Nro.ToString() + " and Comprobante.IdNaturalezaComprobante = '" + Comprobante.NaturalezaComprobante.Id + "'");
             int Cantidad = (int)Ejecutar(a.ToString(), TipoRetorno.CantReg, Transaccion.NoAcepta, sesion.CnnStr);
         }
         public void LeerDestinatarioFrecuente(Entidades.Persona Persona, Entidades.Comprobante Contrato)

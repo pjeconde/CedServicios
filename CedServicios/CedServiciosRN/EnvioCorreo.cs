@@ -293,6 +293,10 @@ namespace CedServicios.RN
             {
                 if (cc[i].Trim() != string.Empty) mail.CC.Add(new MailAddress(cc[i].Trim()));
             }
+            if (Persona.DatosEmailAvisoComprobantePersona.Cco.Trim() != string.Empty)
+            {
+                mail.Bcc.Add(new MailAddress(Persona.DatosEmailAvisoComprobantePersona.Cco)); 
+            }
             if (Sesion.Ambiente != "PROD")
             {
                 mail.Subject = TratamientoPalabrasReservadas(Contrato.DatosEmailAvisoComprobanteContrato.Asunto, Comprobante, Lote, LogoPath, false) + " (" + Sesion.Ambiente + ")";

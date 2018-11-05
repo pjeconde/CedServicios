@@ -782,6 +782,9 @@ namespace CedServicios.Site.Facturacion.Electronica
             CantidadComprobantesEmitidosTextBox.Text = ComprobanteATratar.Comprobante.CantidadComprobantesEmitidos.ToString();
             CantidadDiasFechaVtoTextBox.Text = ComprobanteATratar.Comprobante.CantidadDiasFechaVto.ToString();
             DatosEmailAvisoComprobanteContrato1.Datos = ComprobanteATratar.Comprobante.DatosEmailAvisoComprobanteContrato;
+
+            IdPersonaCompradorTextBox.Text = ComprobanteATratar.Comprobante.IdPersona;
+            DesambiguacionCuitPaisCompradorTextBox.Text = ComprobanteATratar.Comprobante.DesambiguacionCuitPais.ToString();
         }
 		private void LlenarCampos(FeaEntidades.InterFacturas.lote_comprobantes lote)
         {
@@ -2322,6 +2325,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     comprobante.TipoComprobante.Id = lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                                     comprobante.NroPuntoVta = lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                                     comprobante.Nro = lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                                    comprobante.NaturalezaComprobante.Id = "Venta";
                                     RN.Comprobante.Leer(comprobante, sesion);
                                     comprobante.WF.Estado = "PteConf";
                                     RN.Comprobante.Actualizar(comprobante, sesion);
@@ -2556,6 +2560,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     comprobante.TipoComprobante.Id = lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                                     comprobante.NroPuntoVta = lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                                     comprobante.Nro = lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                                    comprobante.NaturalezaComprobante.Id = "Venta";
                                     RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                                     comprobante.Response = XML;
                                     comprobante.WF.Estado = "Vigente";
