@@ -2804,7 +2804,14 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 else
                                 {
                                     lote.comprobante[0].cabecera.informacion_vendedor.id = IdPersonaVendedorTextBox.Text;
-                                    lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais = Convert.ToInt32(DesambiguacionCuitPaisVendedorTextBox.Text);
+                                    if (DesambiguacionCuitPaisVendedorTextBox.Text != string.Empty)
+                                    {
+                                        lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais = Convert.ToInt32(DesambiguacionCuitPaisVendedorTextBox.Text);
+                                    }
+                                    else
+                                    {
+                                        lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais = 0;
+                                    }
                                 }
                                 Entidades.DatosEmailAvisoComprobanteContrato datosEmailAvisoComprobanteContrato = DatosEmailAvisoComprobanteContrato1.Datos;
                                 string tratamiento = TratamientoTextBox.Text;
