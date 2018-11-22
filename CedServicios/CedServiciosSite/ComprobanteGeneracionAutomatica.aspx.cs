@@ -102,39 +102,49 @@ namespace CedServicios.Site
         }
         protected void GenerarComprobantesButton_Click(object sender, EventArgs e)
         {
-            if (MonedaDropDownList.SelectedValue != "PES" && (!RN.Funciones.IsValidNumericDecimals(Tipo_de_cambioTextBox.Text) || Convert.ToDouble(Tipo_de_cambioTextBox.Text) <= 0))
+            try
             {
-                MensajeLabel.Text = "En moneda extranjera es obligatorio el ingreso del tipo de cambio.";
-            }
-            else
-            {
-                int cantidadContratosSeleccionados = 0;
-                int cantidadComprobantesGenerados = 0;
-                int cantidadComprobantesEnviados = 0;
-                int cantidadComprobantesConfirmados = 0;
-                int cantidadComprobantesRechazados = 0;
-                List<string> listaErrores = new List<string>();
-                List<string> listaComprobantesGenerados = new List<string>();
-                for (int i = 0; i < ComprobantesGridView.Rows.Count; i++)
+                MensajeLabel.Text = "";
+                if (MonedaDropDownList.SelectedValue != "PES" && (!RN.Funciones.IsValidNumericDecimals(Tipo_de_cambioTextBox.Text) || Convert.ToDouble(Tipo_de_cambioTextBox.Text) <= 0))
                 {
-                    if (((CheckBox)ComprobantesGridView.Rows[i].FindControl("SeleccionContratoCheckBox")).Checked)
-                    {
-                        EmitirComprobantesContrato(i, ref cantidadContratosSeleccionados, ref cantidadComprobantesGenerados, ref cantidadComprobantesEnviados, ref cantidadComprobantesConfirmados, ref cantidadComprobantesRechazados, ref listaErrores, ref listaComprobantesGenerados);
-                    }
-                }
-                if (cantidadContratosSeleccionados == 0)
-                {
-                    MensajeLabel.Text = "Para la generación automática de comprobantes se debe seleccionar al menos un contrato.";
+                    MensajeLabel.Text = "En moneda extranjera es obligatorio el ingreso del tipo de cambio.";
                 }
                 else
                 {
-                    MostrarResultadoEmision(cantidadContratosSeleccionados, cantidadComprobantesGenerados, cantidadComprobantesEnviados, cantidadComprobantesConfirmados, cantidadComprobantesRechazados, listaErrores, listaComprobantesGenerados);
-                    BuscarContratos(false);
-                    GenerarComprobantesButton.Visible = false;
+                    int cantidadContratosSeleccionados = 0;
+                    int cantidadComprobantesGenerados = 0;
+                    int cantidadComprobantesEnviados = 0;
+                    int cantidadComprobantesConfirmados = 0;
+                    int cantidadComprobantesRechazados = 0;
+                    List<string> listaErrores = new List<string>();
+                    List<string> listaComprobantesGenerados = new List<string>();
+                    List<string> listaComprobantesEnviadosXEmail = new List<string>();
+                    for (int i = 0; i < ComprobantesGridView.Rows.Count; i++)
+                    {
+                        if (((CheckBox)ComprobantesGridView.Rows[i].FindControl("SeleccionContratoCheckBox")).Checked)
+                        {
+                            EmitirComprobantesContrato(i, ref cantidadContratosSeleccionados, ref cantidadComprobantesGenerados, ref cantidadComprobantesEnviados, ref cantidadComprobantesConfirmados, ref cantidadComprobantesRechazados, ref listaErrores, ref listaComprobantesGenerados, ref listaComprobantesEnviadosXEmail);
+                        }
+                    }
+                    if (cantidadContratosSeleccionados == 0)
+                    {
+                        MensajeLabel.Text = "Para la generación automática de comprobantes se debe seleccionar al menos un contrato.";
+                    }
+                    else
+                    {
+                        MostrarResultadoEmision(cantidadContratosSeleccionados, cantidadComprobantesGenerados, cantidadComprobantesEnviados, cantidadComprobantesConfirmados, cantidadComprobantesRechazados, listaErrores, listaComprobantesGenerados, listaComprobantesEnviadosXEmail);
+                        BuscarContratos(false);
+                        GenerarComprobantesButton.Visible = false;
+                    }
                 }
             }
+            catch (Exception ex)
+            {
+                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Reporte: " + ex.Message + " " + ex.StackTrace);
+                MensajeLabel.Text = ex.Message;
+            }
         }
-        private void EmitirComprobantesContrato(int NroItemContrato, ref int CantidadContratosSeleccionados, ref int CantidadComprobantesGenerados, ref int CantidadComprobantesEnviados, ref int CantidadComprobantesConfirmados, ref int CantidadComprobantesRechazados, ref List<string> ListaErrores, ref List<string> ListaComprobantesGenerados)
+        private void EmitirComprobantesContrato(int NroItemContrato, ref int CantidadContratosSeleccionados, ref int CantidadComprobantesGenerados, ref int CantidadComprobantesEnviados, ref int CantidadComprobantesConfirmados, ref int CantidadComprobantesRechazados, ref List<string> ListaErrores, ref List<string> ListaComprobantesGenerados, ref List<string> listaComprobantesEnviadosXEmail)
         {
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             CantidadContratosSeleccionados++;
@@ -305,6 +315,7 @@ namespace CedServicios.Site
                                     comprobante.TipoComprobante.Id = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                                     comprobante.NroPuntoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                                     comprobante.Nro = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                                    comprobante.NaturalezaComprobante.Id = "Venta";
                                     RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                                     comprobante.Response = XML;
                                     comprobante.WF.Estado = "Vigente";
@@ -347,6 +358,7 @@ namespace CedServicios.Site
                                         comprobante.TipoComprobante.Id = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                                         comprobante.NroPuntoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                                         comprobante.Nro = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                                        comprobante.NaturalezaComprobante.Id = "Venta";
                                         RN.Comprobante.Leer(comprobante, sesion);
                                         comprobante.WF.Estado = "PteConf";
                                         RN.Comprobante.Actualizar(comprobante, sesion);
@@ -494,7 +506,7 @@ namespace CedServicios.Site
                             sb.Append("-");
                             sb.Append(lote.cabecera_lote.punto_de_venta.ToString("0000"));
                             sb.Append("-");
-                            sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
+                            sb.Append(lote .comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("00"));
                             sb.Append("-");
                             sb.Append(lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000"));
                             if (original == false)
@@ -507,23 +519,33 @@ namespace CedServicios.Site
                         }
                         catch (Exception ex)
                         {
-                            ListaErrores.Add("Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): Problemas para generar el PDF.  " + ex.Message);
+                            ListaErrores.Add("Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): " + contrato.NroPuntoVta.ToString("0000") + "-" + lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000") + " Problemas para generar el PDF.  " + ex.Message);
                         }
                         #endregion
                         if (GeneracionPDFok)
                         {
-                            #region Envio de mail
-                            Entidades.Persona persona = new Entidades.Persona();
-                            persona.Cuit = contrato.Cuit;
-                            persona.Documento.Tipo.Id = contrato.Documento.Tipo.Id;
-                            persona.Documento.Nro = contrato.Documento.Nro;
-                            persona.IdPersona = contrato.IdPersona;
-                            persona.DesambiguacionCuitPais = contrato.DesambiguacionCuitPais;
-                            RN.Persona.LeerPorClavePrimaria(persona, sesion);
-                            RN.Comprobante.LeerDestinatarioFrecuente(persona, contrato, sesion);
-                            if (persona.DatosEmailAvisoComprobantePersona.Activo && contrato.DatosEmailAvisoComprobanteContrato.Activo && persona.DatosEmailAvisoComprobantePersona.De != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Para != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.Asunto != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.Cuerpo != string.Empty)
+                            try
                             {
-                                RN.EnvioCorreo.AvisoGeneracionComprobante(persona, contrato, comprobante, lote, filenamePDF, Server.MapPath("~/Imagenes/CedeiraSF_v1.jpg"), sesion);
+                                #region Envio de mail
+                                Entidades.Persona persona = new Entidades.Persona();
+                                persona.Cuit = contrato.Cuit;
+                                persona.Documento.Tipo.Id = contrato.Documento.Tipo.Id;
+                                persona.Documento.Nro = contrato.Documento.Nro;
+                                persona.IdPersona = contrato.IdPersona;
+                                persona.DesambiguacionCuitPais = contrato.DesambiguacionCuitPais;
+                                RN.Persona.LeerPorClavePrimaria(persona, sesion);
+                                RN.Comprobante.LeerDestinatarioFrecuente(persona, contrato, sesion);
+                                if (persona.DatosEmailAvisoComprobantePersona.Activo && contrato.DatosEmailAvisoComprobanteContrato.Activo && persona.DatosEmailAvisoComprobantePersona.De != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Para != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.Asunto != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.Cuerpo != string.Empty)
+                                {
+                                    RN.EnvioCorreo.AvisoGeneracionComprobante(persona, contrato, comprobante, lote, filenamePDF, Server.MapPath("~/Imagenes/CedeiraSF_v1.jpg"), sesion);
+                                    string a = "Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): " + contrato.NroPuntoVta.ToString("0000") + "-" + lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000") + " Envío de PDF por Email OK.";
+                                    listaComprobantesEnviadosXEmail.Add(a);
+                                }
+                            }
+                            catch (Exception ex)
+                            {
+                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Envio PDF por Email: " + ex.Message);
+                                ListaErrores.Add("Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): " + contrato.NroPuntoVta.ToString("0000") + "-" + lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000") + " Problemas para enviar el PDF por Email.  " + ex.Message);
                             }
                             #endregion
                         }
@@ -660,11 +682,11 @@ namespace CedServicios.Site
         }
         protected void ComprobantesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
+            int item = Convert.ToInt32(e.CommandArgument);
             switch (e.CommandName)
             {
                 case "Emision":
                     MensajeLabel.Text = "";
-                    int item = Convert.ToInt32(e.CommandArgument);
                     int cantidadContratosSeleccionados = 0;
                     int cantidadComprobantesGenerados = 0;
                     int cantidadComprobantesEnviados = 0;
@@ -672,13 +694,64 @@ namespace CedServicios.Site
                     int cantidadComprobantesRechazados = 0;
                     List<string> listaErrores = new List<string>();
                     List<string> listaComprobantesGenerados = new List<string>();
-                    EmitirComprobantesContrato(item, ref cantidadContratosSeleccionados, ref cantidadComprobantesGenerados, ref cantidadComprobantesEnviados, ref cantidadComprobantesConfirmados, ref cantidadComprobantesRechazados, ref listaErrores, ref listaComprobantesGenerados);
-                    MostrarResultadoEmision(cantidadContratosSeleccionados, cantidadComprobantesGenerados, cantidadComprobantesEnviados, cantidadComprobantesConfirmados, cantidadComprobantesRechazados, listaErrores, listaComprobantesGenerados);
+                    List<string> listaComprobantesEnviadosXEmail = new List<string>();
+                    EmitirComprobantesContrato(item, ref cantidadContratosSeleccionados, ref cantidadComprobantesGenerados, ref cantidadComprobantesEnviados, ref cantidadComprobantesConfirmados, ref cantidadComprobantesRechazados, ref listaErrores, ref listaComprobantesGenerados, ref listaComprobantesEnviadosXEmail);
+                    MostrarResultadoEmision(cantidadContratosSeleccionados, cantidadComprobantesGenerados, cantidadComprobantesEnviados, cantidadComprobantesConfirmados, cantidadComprobantesRechazados, listaErrores, listaComprobantesGenerados, listaComprobantesEnviadosXEmail);
                     BuscarContratos(false);
+                    break;
+                case "VerifEnvioEmail":
+                    MensajeLabel.Text = "";
+                    Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                    Entidades.Comprobante contrato = ((List<Entidades.Comprobante>)ViewState["Comprobantes"])[item];
+                    try
+                    {
+                        #region Verificar que se pueda enviar PDF por email
+                        Entidades.Persona persona = new Entidades.Persona();
+                        persona.Cuit = contrato.Cuit;
+                        persona.Documento.Tipo.Id = contrato.Documento.Tipo.Id;
+                        persona.Documento.Nro = contrato.Documento.Nro;
+                        persona.IdPersona = contrato.IdPersona;
+                        persona.DesambiguacionCuitPais = contrato.DesambiguacionCuitPais;
+                        RN.Persona.LeerPorClavePrimaria(persona, sesion);
+                        RN.Comprobante.LeerDestinatarioFrecuente(persona, contrato, sesion);
+                        if (!persona.DatosEmailAvisoComprobantePersona.Activo)
+                        {
+                            MensajeLabel.Text += "No esta habilitado el envío de PDF por Email a nivel Persona.<br />";
+                        }
+                        if (persona.DatosEmailAvisoComprobantePersona.De == string.Empty)
+                        {
+                            MensajeLabel.Text += "No esta informado para el envío de PDF por Email a nivel Persona el campo 'De'.<br />";
+                        }
+                        if (!contrato.DatosEmailAvisoComprobanteContrato.Activo)
+                        {
+                            MensajeLabel.Text += "No esta habilitado el envío de PDF por Email a nivel Contrato.<br />";
+                        }
+                        if (contrato.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Para == string.Empty)
+                        {
+                            MensajeLabel.Text += "No esta informado para el envío de PDF por Email a nivel Contrato el campo 'Destinatario'.<br />";
+                        }
+                        if (contrato.DatosEmailAvisoComprobanteContrato.Asunto == string.Empty)
+                        {
+                            MensajeLabel.Text += "No esta informado para el envío de PDF por Email a nivel Contrato el campo 'Asunto'.<br />";
+                        }
+                        if (contrato.DatosEmailAvisoComprobanteContrato.Cuerpo == string.Empty)
+                        {
+                            MensajeLabel.Text += "No esta informado para el envío de PDF por Email a nivel Contrato el campo 'Cuerpo'.<br />";
+                        }
+                        if (MensajeLabel.Text == string.Empty)
+                        {
+                            MensajeLabel.Text += "Verificación OK.";
+                        }
+                        #endregion
+                    }
+                    catch (Exception ex)
+                    {
+                        MensajeLabel.Text = "Error al verificar el envío de PDF por email. " + ex.Message;
+                    }
                     break;
             }
         }
-        private void MostrarResultadoEmision(int CantidadContratosSeleccionados, int CantidadComprobantesGenerados, int CantidadComprobantesEnviados, int CantidadComprobantesConfirmados, int CantidadComprobantesRechazados, List<string> ListaErrores, List<string> ListaComprobantesGenerados)
+        private void MostrarResultadoEmision(int CantidadContratosSeleccionados, int CantidadComprobantesGenerados, int CantidadComprobantesEnviados, int CantidadComprobantesConfirmados, int CantidadComprobantesRechazados, List<string> ListaErrores, List<string> ListaComprobantesGenerados, List<string> listaComprobantesEnviadosXEmail)
         {
             MensajeLabel.Text = "Cantidad de comprobantes--> Generados:" + CantidadComprobantesGenerados + ", Enviados:" + CantidadComprobantesEnviados + ", Confirmados:" + CantidadComprobantesConfirmados + ", Rechazados:" + CantidadComprobantesRechazados + ".";
             if (ListaErrores.Count > 0)
@@ -695,6 +768,14 @@ namespace CedServicios.Site
                 for (int i = 0; i < ListaComprobantesGenerados.Count; i++)
                 {
                     MensajeLabel.Text += "<br />&nbsp;&nbsp;&nbsp;&nbsp;" + ListaComprobantesGenerados[i];
+                }
+            }
+            if (listaComprobantesEnviadosXEmail.Count > 0)
+            {
+                MensajeLabel.Text += "<br />COMPROBANTES ENVIADOS POR EMAIL:";
+                for (int i = 0; i < listaComprobantesEnviadosXEmail.Count; i++)
+                {
+                    MensajeLabel.Text += "<br />&nbsp;&nbsp;&nbsp;&nbsp;" + listaComprobantesEnviadosXEmail[i];
                 }
             }
         }

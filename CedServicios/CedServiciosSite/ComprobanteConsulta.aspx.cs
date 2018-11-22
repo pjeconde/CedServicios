@@ -2897,6 +2897,7 @@ namespace CedServicios.Site
                                 comprobante.TipoComprobante.Id = lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
                                 comprobante.NroPuntoVta = lote.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
                                 comprobante.Nro = lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                                comprobante.NaturalezaComprobante.Id = "Venta";
                                 RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                                 comprobante.Response = XML;
                                 comprobante.WF.Estado = "Vigente";

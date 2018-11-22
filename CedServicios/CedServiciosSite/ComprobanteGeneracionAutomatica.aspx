@@ -165,6 +165,14 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
+                            <asp:TemplateField Visible="true">
+                                <HeaderTemplate>
+                                    Verificar Envío<br /> PDF por Email
+                                </HeaderTemplate>
+                                <ItemTemplate>
+                                    <asp:LinkButton ID="VerifEnvioEmailLinkButton" runat="server" CommandName="VerifEnvioEmail" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>">Verificar</asp:LinkButton>
+                                </ItemTemplate>
+                            </asp:TemplateField>
                         </Columns>
                     </asp:GridView>
                 </td>

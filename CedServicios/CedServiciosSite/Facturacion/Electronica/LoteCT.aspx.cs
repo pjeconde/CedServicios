@@ -1412,6 +1412,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     comprobante.TipoComprobante.Id = Comprobante.cabecera.informacion_comprobante.tipo_de_comprobante;
                                     comprobante.NroPuntoVta = Comprobante.cabecera.informacion_comprobante.punto_de_venta;
                                     comprobante.Nro = Comprobante.cabecera.informacion_comprobante.numero_comprobante;
+                                    comprobante.NaturalezaComprobante.Id = "Venta";
                                     RN.Comprobante.Leer(comprobante, ((Entidades.Sesion)Session["Sesion"]));
                                     comprobante.Response = XML;
                                     comprobante.WF.Estado = "Vigente";
