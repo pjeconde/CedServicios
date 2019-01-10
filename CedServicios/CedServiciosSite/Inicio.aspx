@@ -452,6 +452,7 @@
                                     <span><a href="mailto:rrhh@cedeira.com.ar"><i class="fa fa-envelope"></i> rrhh@cedeira.com.ar</a></span><br/>
                                     </p>
                                     <p style="text-align:left">Oficina Comercial: <br />
+                                        <span><a href="https://www.google.com/maps/dir//Esmeralda+950,+C1007ABL+CABA"><i class="glyphicon glyphicon-map-marker"></i> Esmeralda 950, Piso 19, Of. 105</a></span><br/>
                                         <span><a href="#Contact"><i class="glyphicon glyphicon-earphone"></i> +5411 4778-1744</a></span><br/>
                                         <span><a href="mailto:comercial@cedeira.com.ar"><i class="fa fa-envelope"></i> comercial@cedeira.com.ar</a></span>
                                     </p>

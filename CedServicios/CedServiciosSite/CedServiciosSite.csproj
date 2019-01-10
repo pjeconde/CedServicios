@@ -155,7 +155,13 @@
     <Content Include="ExploradorBusquedaLaboral.aspx" />
     <Content Include="ExploradorCV.aspx" />
     <Content Include="Imagenes\Clientes\Logo_Opdea.png" />
+    <Content Include="Imagenes\iso256x256.png" />
+    <Content Include="Imagenes\logo_h_100x310.png" />
     <Content Include="Imagenes\Servicios\SF1.png" />
+    <Content Include="Imagenes\Tecnologias\Angular.png" />
+    <Content Include="Imagenes\Tecnologias\aspnetcore-logo.png" />
+    <Content Include="Imagenes\Tecnologias\HTML5.png" />
+    <Content Include="Imagenes\Tecnologias\Java.jpg" />
     <Content Include="InicioEmpresa.aspx" />
     <Content Include="InicioFEA.aspx" />
     <Content Include="ExploradorPDFComprobante.aspx" />

@@ -152,14 +152,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="../../../InicioEmpresa.aspx"><img src="../../../Imagenes/CedeiraSF-Logo.gif" alt="Logo" /></a>
+                    <a class="navbar-brand" href="../../../InicioEmpresa.aspx"><img src="../../../Imagenes/logo_h_100x310.png" alt="Logo" style="height:40px; width: 124px" /></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="../../../Inicio.aspx">INICIO</a></li>
+                        <li><a href="../../../Inicio.aspx">INICIO</a></li>
                         <li><a href="../../../inicio.aspx#features">PRODUCTOS</a></li>
                         <li><a href="../../../inicio.aspx#service">SERVICIOS</a></li>
                         <li><a href="../../../inicio.aspx#clientes">CLIENTES</a></li>
@@ -282,7 +282,7 @@
                             <ul>
                                 <li><a id="linkIngresar" target="_self" href="UsuarioLogin.aspx">Ingresar</a></li>
                                 <li><a id="linkFEAInfo" target="_self" href="InicioFEA.aspx?valor=panFEA">Información</a></li>
-                                <li><a id="linkFEAPrecios" target="_self" href="InicioFEAPrecios.aspx">Servicios / Precios</a></li>
+                                <li style="visibility:hidden"><a id="linkFEAPrecios" target="_self" href="InicioFEAPrecios.aspx">Servicios / Precios</a></li>
                             </ul>
                         </div>
                     </div>
@@ -343,13 +343,13 @@
 
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="footer-brand">
-                            <img src="Imagenes/CedeiraSF-Logo.gif" alt="Logo" />
+                            <img src="../../../Imagenes/logo_h_100x310.png" alt="Logo" style="height:40px; width: 124px" />
                         </div>
                     </div>
 
                     <div class="col-md-6 col-sm-6 col-xs-12">
                         <div class="copyright">
-                            <p>Desarrollado por <b><a target="" href="" style="color: Red"> Cedeira </a></b>2018. All rights reserved.</p>
+                            <p>Desarrollado por <b><a target="" href="" style="color:#E14A2C"> Cedeira </a></b>2018. All rights reserved.</p>
                         </div>
                     </div>
 

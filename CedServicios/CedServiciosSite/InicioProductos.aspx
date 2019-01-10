@@ -186,7 +186,7 @@
             <div class="row">
                 <div class="footer-menu-wrapper">
                     <div class="col-sm-12">
-                        <p>Para obtener un mayor detalle del funcionamiento de la aplicación, pueden descargar la presentación completa del producto en formato PDF...<br />
+                        <p>Para obtener un mayor detalle del funcionamiento de la aplicación, pueden descargar la presentación completa del producto en formato PDF.<br />
                         <a href="Descarga.aspx?archivo=Cedeira-SistTransfMEP.pdf" class="btn btn-default"> Descargar</a>
                         </p>
                     </div>

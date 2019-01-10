@@ -53,7 +53,7 @@
         <div class="row">
             <div class="col-lg-3 col-sm-6 padding-bottom-20">
                 <i class="fa fa-money fa-2x"></i>
-                <h4>Desarrollos Económicos</h4>
+                <h4>Desarrollos Económicos a Medida</h4>
                 <p class="text-justify">Un desarrollo a medida no tiene porqué ser caro. Desarrollamos por etapas para que rápidamente puedan ver los resultados. Siempre ofreceremos la mejor solución al menor costo posible.</p>
             </div>
             <div class="col-lg-3 col-sm-6 padding-bottom-20">
@@ -78,7 +78,8 @@
             <div class="col-lg-12">
                 <br />
                 <br />
-                <h2 class="section-header alt-font text-center">¿Cómo lo hacemos? <br/><span class="em"><small>¡Su equipo también formará parte del proyecto! Su empresa aportas las ideas y Cedeira las hace realidad<br/></small></span></h2>
+                <h2 class="section-header alt-font text-center">¿Cómo lo hacemos? <br/><span class="em"><small>¡Su equipo también formará parte del proyecto! Su empresa aporta las ideas y Cedeira las hace realidad<br/></small></span></h2>
+                <br />
             </div>
         </div>
     </div>
@@ -91,7 +92,7 @@
                     <div class="col-lg-12 text-left">
                         <h4 style="color:#e83b4d"><i style="text-align:right">1.</i> Escuchamos sus ideas<br>
                             <small>
-                                <span>Porque su empresa es única</span>
+                                <span><br />Porque su empresa es única</span>
                             </small>
                         </h4>
                         <p>Sabemos que su empresa es única. ¡Y también lo son sus ideas! Es por eso, que nuestro equipo de profesionales se reunirá con ustedes para conocer sus necesidades e inquietudes, brindanles un completo asesoramiento y de esta forma poder ofrecerles una solución acorde a su organización.</p>
@@ -102,7 +103,7 @@
                     <div class="col-lg-12 text-left">
                         <h4 style="color:#e83b4d"><i style="text-align:right">2.</i> Mostramos los avances del trabajo<br>
                             <small>
-                                <span>Su empresa podrá contemplar paso a paso los avances del proyecto</span>
+                                <span><br />Su empresa podrá contemplar paso a paso los avances del proyecto</span>
                             </small>
                         </h4>
                         <p>Estaremos en permanente contacto con su empresa desde el inicio y le mostraremos en tiempo real el estado actual del proyecto. La transparencia y la comunicación permanente es lo que nos diferencia de los demás. Lo más importante es agregar valor a su empresa y que el producto final cumpla con las expectativas.</p>
@@ -113,7 +114,7 @@
                     <div class="col-lg-12 text-left">
                         <h4 style="color:#e83b4d"><i style="text-align:right">3.</i> Presentamos el proyecto<br>
                             <small>
-                                <span>Queremos que usted aporte su opinión</span>
+                                <span><br />Queremos que usted aporte su opinión</span>
                             </small>
                         </h4>
                         <p>Una vez que conocemos sus ideas, presentamos el proyecto y escuchamos su opinión para ajustarlo a lo que realmente necesitan. ¡Su empresa también formará parte del mismo! El trabajo en equipo es la base del éxito.</p>

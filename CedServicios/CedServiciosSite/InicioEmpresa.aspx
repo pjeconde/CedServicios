@@ -32,8 +32,10 @@
                             Esta es la forma en que nuestra empresa ha logrado brindar una excelente prestación de servicios informáticos, convirtiéndonos en aliados estratégicos de nuestros clientes y proporcionado soluciones a la medida de sus necesidades.
                         </p>
                         <br />
-                        <br />
                     </div>
+                </div>
+                <div class="col-sm-12">
+                    <img src="../../../Imagenes/iso256x256.png" alt="Logo" />
                 </div>
             </div>
         </div>

@@ -34,7 +34,7 @@
                         <p><strong>07 &#8211; Jurisdicción y Ley Aplicable</strong></p>
                         <p>Este acuerdo estará regido en todos sus puntos por las leyes vigentes en la República Argentina. Cualquier controversia derivada del presente acuerdo, su existencia, validez, interpretación, alcance o cumplimiento, será sometida al arbitraje del Centro Empresarial de Mediación y Arbitraje, de acuerdo con la reglamentación vigente de dicho tribunal. La sede de dicho arbitraje será la Ciudad Autónoma de Buenos Aires y los procedimientos se llevarán a cabo en idioma castellano.</p>
                         <p><strong>08 &#8211; Domicilio</strong></p>
-                        <p>Se fija como domicilio de Cedeira Software Factory S.R.L, la calle Av. Federico Lacroze xxxx, piso x, Capital Federal, código postal xxxx, República Argentina.</p>
+                        <p>Se fija como domicilio de Cedeira Software Factory S.R.L, la calle Esmeralda 950, CABA, código postal 1007, República Argentina.</p>
                         <p>&nbsp;</p>
                         <p>&nbsp;</p>
                         <p><asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Específicos para Factura Electrónica"></asp:Label>

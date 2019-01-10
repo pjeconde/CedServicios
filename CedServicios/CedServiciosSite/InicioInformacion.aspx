@@ -92,7 +92,36 @@
                         </div>
                     </div>
                 </div>
-
+                <div class="row">
+                    <div class="col-sm-3 col-md-3 padding-bottom-20">
+                        <div class="grid_1_4">
+                            <div class="picture">
+                                <img src="Imagenes/Tecnologias/java.jpg" class="img-responsive center-block"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 padding-bottom-20">
+                        <div class="grid_1_4">
+                            <div class="picture">
+                                <img src="Imagenes/Tecnologias/HTML5.png" class="img-responsive center-block" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 padding-bottom-20">
+                        <div class="grid_1_4">
+                            <div class="picture">
+                                <img src="Imagenes/Tecnologias/Angular.png" class="img-responsive center-block"/>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-3 col-md-3 padding-bottom-20">
+                        <div class="grid_1_4">
+                            <div class="picture" style="vertical-align:middle">
+                                <img src="Imagenes/Tecnologias/aspnet-core.jpg" class="img-responsive center-block"/>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

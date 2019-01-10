@@ -177,8 +177,8 @@ namespace CedServicios.DB
                 {
                     a.Append("and Comprobante.IdTipoDoc=" + Persona.Documento.Tipo.Id + " ");
                     a.Append("and Comprobante.NroDoc='" + Persona.Documento.Nro.ToString() + "' ");
-                    a.Append("and Comprobante.IdPersona='" + Persona.IdPersona + "' ");
-                    a.Append("and Comprobante.DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
+                    //a.Append("and Comprobante.IdPersona='" + Persona.IdPersona + "' ");
+                    //a.Append("and Comprobante.DesambiguacionCuitPais=" + Persona.DesambiguacionCuitPais.ToString() + " ");
                 }
                 if (NaturalezaComprobante.Id != String.Empty)
                 {
