@@ -9,19 +9,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/assetsAnt/css/bootstrap.min.css">
 
     <!--For Plugins external css-->
-    <link rel="stylesheet" href="/assets/css/plugins.css" />
-    <link rel="stylesheet" href="/assets/css/roboto-webfont.css" />
+    <link rel="stylesheet" href="/assetsAnt/css/plugins.css" />
+    <link rel="stylesheet" href="/assetsAnt/css/roboto-webfont.css" />
     <link href="/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
     <!--Theme custom css -->
-    <link rel="stylesheet" href="/assets/css/style.css">
+    <link rel="stylesheet" href="/assetsAnt/css/style.css">
 
     <!--Theme Responsive css-->
-    <link rel="stylesheet" href="/assets/css/responsive.css" />
-    <script src="/assets/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
+    <link rel="stylesheet" href="/assetsAnt/css/responsive.css" />
+    <script src="/assetsAnt/js/vendor/modernizr-2.8.3-respond-1.4.2.min.js"></script>
 
     <!--<link href="/css/bootstrap.min.css" rel="stylesheet">-->
     <!--<link href="data:text/css;charset=utf-8," data-href="/css/bootstrap-theme.min.css" rel="stylesheet" id="bsthemestylesheet">-->
@@ -152,20 +152,14 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="../../../InicioEmpresa.aspx"><img src="../../../Imagenes/logo_h_100x310.png" alt="Logo" style="height:40px; width: 124px" /></a>
+                    <a class="navbar-brand" href="../../../Index.html"><img src="../../../Imagenes/logo_h_100x310.png" alt="Logo" style="height:40px; width: 124px" /></a>
                 </div>
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
                     <ul class="nav navbar-nav navbar-right">
-                        <li><a href="../../../Inicio.aspx">INICIO</a></li>
-                        <li><a href="../../../inicio.aspx#features">PRODUCTOS</a></li>
-                        <li><a href="../../../inicio.aspx#service">SERVICIOS</a></li>
-                        <li><a href="../../../inicio.aspx#clientes">CLIENTES</a></li>
-                        <li><a href="../../../Inicio.aspx#contact">CONTACTO</a></li>
-                        <li class="login"><a runat="server" id="btnUsuarioLogin" href="UsuarioLogin.aspx">INGRESAR</a></li>
-                        <li class="login"><a runat="server" id="btnCerrarLogin" href="UsuarioLogin.aspx?CERRAR">SALIR</a></li>
+                        <li class="login"><a runat="server" id="btnCerrarLogin" href="factura.aspx">SALIR</a></li>
                     </ul>
 
                 </div><!-- /.navbar-collapse -->
@@ -363,12 +357,12 @@
 	</div>
     </div>
 
-    <script src="/assets/js/vendor/jquery-1.11.2.min.js"></script>
-    <script src="/assets/js/vendor/bootstrap.min.js"></script>
+    <script src="/assetsAnt/js/vendor/jquery-1.11.2.min.js"></script>
+    <script src="/assetsAnt/js/vendor/bootstrap.min.js"></script>
 
-    <script src="/assets/js/plugins.js"></script>
-    <script src="/assets/js/modernizr.js"></script>
-    <script src="/assets/js/main.js"></script>
+    <script src="/assetsAnt/js/plugins.js"></script>
+    <script src="/assetsAnt/js/modernizr.js"></script>
+    <script src="/assetsAnt/js/main.js"></script>
     </form>
     
     <script type="text/javascript">

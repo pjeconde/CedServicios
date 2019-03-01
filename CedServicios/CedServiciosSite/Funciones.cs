@@ -283,8 +283,6 @@ namespace CedServicios.Site
             uNLabel.Visible = false;
             uNDropDownList.Visible = false;
 
-            Control btnUsuarioLogin = (Control)Master.FindControl("btnUsuarioLogin");
-            btnUsuarioLogin.Visible = false;
             Control btnCerrarLogin = (Control)Master.FindControl("btnCerrarLogin");
             btnCerrarLogin.Visible = false;
 

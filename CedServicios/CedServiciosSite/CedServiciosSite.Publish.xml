@@ -5,31 +5,32 @@
     <file relUrl="Imagenes/Iconos/ActualizarOnLine.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ExploradorCuit.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Controles/DomicilioConsulta.ascx" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Imagenes/CedST-EsquemaMEP.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="InstitucionalRefeCom.aspx" publishTime="11/04/2015 21:13:59" />
     <file relUrl="CedServicios.Master" publishTime="05/24/2016 11:24:13" />
     <file relUrl="ComprobanteGeneracionAutomatica.aspx" publishTime="03/30/2016 11:33:46" />
+    <file relUrl="UsuarioConfirmacion.aspx" publishTime="02/24/2016 18:06:42" />
     <file relUrl="bin/CedServiciosSite.pdb" publishTime="06/20/2017 17:12:46" />
     <file relUrl="PuntoVtaSeleccionar.aspx" publishTime="02/23/2016 14:21:59" />
     <file relUrl="UsuarioCrear.aspx" publishTime="02/24/2016 18:02:50" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica010.aspx" publishTime="09/15/2015 16:03:23" />
     <file relUrl="Imagenes/calendar.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica011.aspx" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Imagenes/Iconos/Consultar.png" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="InstitucionalSolucionesCedST.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/Iconos/icon_collapse.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica007.aspx" publishTime="09/15/2015 16:03:23" />
     <file relUrl="PuntoVtaCrear.aspx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="Imagenes/CedFCI-Tablero_ch.jpg" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Controles/ContactoConsulta.ascx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="UNBaja.aspx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="InstitucionalSolucionesCedFCI.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image21.png" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="UsuarioLogin.aspx" publishTime="02/23/2016 13:19:08" />
     <file relUrl="ListaPrecioReemplazar.aspx" publishTime="05/26/2016 10:22:20" />
     <file relUrl="Imagenes/Ayuda/AltaLote-Acciones.png" publishTime="11/13/2015 20:20:10" />
     <file relUrl="bin/Ionic.Zip.dll" publishTime="09/15/2015 16:03:27" />
     <file relUrl="Controles/DatosEmailAvisoComprobanteContrato.ascx" publishTime="04/17/2016 19:49:52" />
     <file relUrl="Controles/Contacto.ascx" publishTime="05/10/2016 10:33:39" />
-    <file relUrl="Ayuda/Novedades/images20130906/image12.png" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="PersonaModificar.aspx" publishTime="05/26/2016 10:22:20" />
+    <file relUrl="bin/CedServiciosEX.dll" publishTime="05/30/2017 12:55:12" />
     <file relUrl="bin/FileHelpers.ExcelNPOIStorage.xml" publishTime="06/09/2016 15:56:44" />
     <file relUrl="bin/CedServiciosDB.dll" publishTime="06/20/2017 16:20:26" />
     <file relUrl="Ayuda/Novedades/images20130906/image16.png" publishTime="09/15/2015 16:03:24" />
@@ -39,7 +40,7 @@
     <file relUrl="CuitCambiarLogotipo.aspx" publishTime="02/11/2016 17:10:14" />
     <file relUrl="Facturacion/Electronica/Reportes/Iva_Compras.xsd" publishTime="11/21/2016 14:46:00" />
     <file relUrl="ComprobanteConsulta.aspx" publishTime="10/07/2016 11:03:00" />
-    <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica004.aspx" publishTime="09/15/2015 16:03:23" />
+    <file relUrl="Imagenes/CedeiraSF-Logo.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image08.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Extensiones/Marketing.ascx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/CedST-Tablero_ch.jpg" publishTime="09/15/2015 16:03:24" />
@@ -66,33 +67,32 @@
     <file relUrl="Facturacion/Electronica/Reportes/IvaVentasFiltros.aspx" publishTime="06/16/2016 15:08:40" />
     <file relUrl="Facturacion/Electronica/Reportes/Compras_XArticulo.xsd" publishTime="12/20/2016 11:39:35" />
     <file relUrl="Facturacion/Electronica/Extensiones/Comerciales.ascx" publishTime="10/22/2015 12:56:22" />
-    <file relUrl="CedeiraSF-Logo.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica008.aspx" publishTime="09/15/2015 16:03:23" />
     <file relUrl="Facturacion/Electronica/FacturaElectronicaFecha.ascx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/CedAPC.jpg" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Reportes/VentasXArticuloWebForm.aspx" publishTime="06/07/2016 13:57:48" />
     <file relUrl="CuitModificar.aspx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="PersonaBaja.aspx" publishTime="05/26/2016 10:22:20" />
     <file relUrl="Facturacion/Electronica/ImpuestosConsulta.ascx" publishTime="10/23/2015 09:54:40" />
     <file relUrl="Ayuda/Novedades/images20130906/image09.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/PermisosConsulta.ascx" publishTime="10/23/2015 09:47:33" />
-    <file relUrl="Facturacion/Electronica/Reportes/VentasXArticuloWebForm.aspx" publishTime="06/07/2016 13:57:48" />
+    <file relUrl="CedeiraSF-Logo.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="js/bootstrap.min.js" publishTime="09/17/2015 21:04:02" />
     <file relUrl="InstitucionalContacto.aspx" publishTime="11/04/2015 21:21:39" />
     <file relUrl="Admin/SettingsRulesConfiguration.aspx" publishTime="09/15/2015 16:03:23" />
-    <file relUrl="Imagenes/SiluetaHombre.jpg" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="css/bootstrap.min.css" publishTime="09/17/2015 21:04:03" />
     <file relUrl="ExploradorArticulo.aspx" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Facturacion/Electronica/DetalleConsulta.ascx" publishTime="10/22/2015 16:32:01" />
     <file relUrl="fonts/glyphicons-halflings-regular.svg" publishTime="09/17/2015 21:04:02" />
+    <file relUrl="Controles/Domicilio.ascx" publishTime="11/12/2015 16:25:06" />
     <file relUrl="ExploradorConfiguracion.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/ReferenciasAFIP.ascx" publishTime="06/21/2016 14:02:02" />
-    <file relUrl="Facturacion/Electronica/Reportes/StockXArticulo.rpt" publishTime="12/30/2016 11:55:03" />
     <file relUrl="Facturacion/Electronica/Reportes/IvaComprasCR.rpt" publishTime="11/21/2016 18:27:12" />
     <file relUrl="Global.asax" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/IvaComprasWebForm.aspx" publishTime="11/21/2016 13:01:51" />
     <file relUrl="App_Themes/CedServicios/CedServicios.css" publishTime="05/24/2016 11:30:51" />
     <file relUrl="LogDetalleConsultaXIdLog.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Reportes/VentasXArticulo.rpt" publishTime="02/22/2017 02:26:37" />
     <file relUrl="LogoService.aspx" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="ListaPrecioSeleccionar.aspx" publishTime="07/02/2016 13:30:19" />
     <file relUrl="Ayuda/Novedades/images20130906/image03.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="InstitucionalSoftwareAMedida.aspx" publishTime="09/21/2015 15:04:17" />
     <file relUrl="CedServiciosAyuda.master" publishTime="09/15/2015 16:03:24" />
@@ -134,6 +134,7 @@
     <file relUrl="Imagenes/Iconos/ClonarAlta.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image17.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/Interrogacion.jpg" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica012.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/AjaxControlToolkit.pdb" publishTime="06/20/2017 17:12:40" />
     <file relUrl="ExploradorPDFComprobante.aspx" publishTime="03/30/2016 18:38:44" />
     <file relUrl="bin/FeaEntidades.dll" publishTime="05/30/2017 12:55:07" />
@@ -141,17 +142,15 @@
     <file relUrl="UsuarioConsulta.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Default.aspx" publishTime="06/14/2016 14:36:00" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica005.aspx" publishTime="09/15/2015 16:03:23" />
-    <file relUrl="ExploradorComprobanteOnLineInterfacturas.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/FacturaWebForm.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/FacturaElectronicaTYC.aspx" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Facturacion/Electronica/Descuentos.ascx" publishTime="10/22/2015 22:43:40" />
     <file relUrl="ArticuloCrear.aspx" publishTime="06/09/2016 13:40:52" />
     <file relUrl="ComprobanteSeleccionOnlineInterfacturas.aspx" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="ExploradorComprobanteGlobal.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/CajaBrownPeru.ico" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image00.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/CedCCT.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="UsuarioOlvidoId.aspx" publishTime="02/24/2016 18:01:58" />
+    <file relUrl="Imagenes/eFact-vertical.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image07.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/Imagen.xsd" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Controles/DatosIdentificatorios.ascx" publishTime="11/11/2015 14:14:32" />
@@ -164,11 +163,15 @@
     <file relUrl="css/bootstrap.css" publishTime="09/17/2015 21:04:03" />
     <file relUrl="Facturacion/Electronica/ReferenciasConsulta.ascx" publishTime="03/31/2016 15:14:29" />
     <file relUrl="Imagenes/CedJU.jpg" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Ayuda/Novedades/eFactWebBoletinElectronico20130906.html" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica009.aspx" publishTime="09/15/2015 16:03:23" />
     <file relUrl="Controles/ListaPrecioDefaultPersona.ascx" publishTime="07/02/2016 13:30:19" />
-    <file relUrl="ExploradorAutorizacionLog.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Reportes/ComprasXArticuloWebForm.aspx" publishTime="12/20/2016 11:37:45" />
+    <file relUrl="SolicPermisoAdminUN.aspx" publishTime="05/11/2016 18:29:34" />
     <file relUrl="Facturacion/Electronica/Impuestos.ascx" publishTime="10/07/2016 11:03:00" />
+    <file relUrl="ConfiguracionModificar.aspx" publishTime="02/24/2016 18:26:22" />
     <file relUrl="Ayuda/Novedades/images20130906/image02.png" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Referencias.ascx" publishTime="05/20/2016 15:32:19" />
     <file relUrl="ExploradorComprobanteRG.aspx" publishTime="05/30/2016 18:53:23" />
     <file relUrl="NotificacionDeExcepcion.aspx" publishTime="04/30/2016 12:37:53" />
     <file relUrl="CuitTreeView.aspx" publishTime="03/01/2016 15:15:39" />
@@ -176,50 +179,48 @@
     <file relUrl="Facturacion/Electronica/Reportes/Ventas_XArticulo.xsd" publishTime="06/08/2016 21:47:34" />
     <file relUrl="PreguntasFrecuentes.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/Captcha.dll" publishTime="05/30/2017 12:55:21" />
-    <file relUrl="UsuarioConfirmacion.aspx" publishTime="02/24/2016 18:06:42" />
+    <file relUrl="Imagenes/Iconos/Consultar.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Controles/DatosImpositivos.ascx" publishTime="11/20/2015 11:03:47" />
     <file relUrl="Autorizacion.aspx" publishTime="09/15/2015 16:03:23" />
-    <file relUrl="InstitucionalSolucionesCedST.aspx" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Facturacion/Electronica/Reportes/VentasXArticuloFiltros.aspx" publishTime="10/07/2016 12:36:20" />
+    <file relUrl="Controles/ContactoConsulta.ascx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/CedServiciosEntidades.dll" publishTime="05/30/2017 12:55:17" />
     <file relUrl="Controles/DatosImpositivosConsulta.ascx" publishTime="11/12/2015 16:29:39" />
-    <file relUrl="PruebasBS.aspx" publishTime="02/16/2016 15:43:37" />
+    <file relUrl="Ayuda/Novedades/images20130906/image05.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="InstitucionalEmpresa.aspx" publishTime="11/04/2015 20:47:54" />
     <file relUrl="Imagenes/eFact-R.jpg" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Ayuda/Novedades/eFactWebBoletinElectronico20130906.html" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Imagenes/CedST-EsquemaMEP.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Captcha.ashx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/Iva_Ventas.xsd" publishTime="05/06/2016 10:47:01" />
     <file relUrl="Ayuda/ExploradorNovedad.aspx" publishTime="09/15/2015 16:03:23" />
     <file relUrl="jquery/docs.min.js" publishTime="02/16/2016 17:58:41" />
     <file relUrl="Imagenes/Iconos/ConsultarOnLine.png" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="PuntoVtaBaja.aspx" publishTime="03/01/2016 14:56:58" />
-    <file relUrl="Controles/DatosEmailAvisoComprobantePersona.ascx" publishTime="04/17/2016 19:59:56" />
+    <file relUrl="ExploradorUN.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ExploradorAdministracion.aspx" publishTime="05/24/2016 11:08:21" />
-    <file relUrl="Facturacion/Electronica/Reportes/VentasXArticulo.rpt" publishTime="02/22/2017 02:26:37" />
+    <file relUrl="ListaPrecioSeleccionar.aspx" publishTime="07/02/2016 13:30:19" />
     <file relUrl="UsuarioOlvidoPassword.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ListaPrecioCrear.aspx" publishTime="07/02/2016 13:30:19" />
     <file relUrl="Facturacion/Electronica/Reportes/ComprasXArticuloFiltros.aspx" publishTime="12/20/2016 13:04:29" />
-    <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica012.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Descuentos.ascx" publishTime="10/22/2015 22:43:40" />
     <file relUrl="bin/FileHelpers.xml" publishTime="06/09/2016 15:56:43" />
-    <file relUrl="ExploradorUN.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Reportes/IvaVentasWebForm.aspx" publishTime="05/19/2016 14:30:59" />
     <file relUrl="ComprobanteSeleccionArchivoXML.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image04.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/EsquemaContableConsulta.ascx" publishTime="10/07/2016 11:03:00" />
     <file relUrl="Ayuda/Novedades/images20130906/image18.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/IvaComprasFiltros.aspx" publishTime="11/21/2016 12:53:27" />
-    <file relUrl="PersonaModificar.aspx" publishTime="05/26/2016 10:22:20" />
+    <file relUrl="Imagenes/SiluetaHombre.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/CedFCI-EsquemaProceso.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/IvaVentasCR.rpt" publishTime="06/23/2016 15:11:25" />
-    <file relUrl="SolicPermisoAdminUN.aspx" publishTime="05/11/2016 18:29:34" />
-    <file relUrl="Facturacion/Electronica/Reportes/IvaVentasWebForm.aspx" publishTime="05/19/2016 14:30:59" />
+    <file relUrl="ExploradorComprobanteOnLineInterfacturas.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="ArticuloConsulta.aspx" publishTime="10/31/2016 13:35:12" />
     <file relUrl="Controles/DatosEmailAvisoComprobanteContratoConsulta.ascx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="SolicPermisoAdminCUIT.aspx" publishTime="02/11/2016 17:17:44" />
     <file relUrl="Facturacion/Electronica/Reportes/StockXArticuloFiltros.aspx" publishTime="12/30/2016 11:06:13" />
     <file relUrl="ExploradorPermiso.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="App_Offline/App_Offline.htm" publishTime="09/15/2015 16:03:23" />
-    <file relUrl="Facturacion/Electronica/Permisos.ascx" publishTime="11/14/2015 18:04:57" />
-    <file relUrl="ConfiguracionModificar.aspx" publishTime="02/24/2016 18:26:22" />
-    <file relUrl="Controles/Domicilio.ascx" publishTime="11/12/2015 16:25:06" />
+    <file relUrl="ComprobanteSeleccionOnlineAFIP.aspx" publishTime="06/30/2016 17:05:03" />
+    <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica004.aspx" publishTime="09/15/2015 16:03:23" />
+    <file relUrl="Facturacion/Electronica/Reportes/StockXArticulo.rpt" publishTime="12/30/2016 11:55:03" />
     <file relUrl="Facturacion/Electronica/Lote.aspx" publishTime="06/21/2016 13:29:00" />
     <file relUrl="Facturacion/Electronica/DescuentosConsulta.ascx" publishTime="10/22/2015 16:17:06" />
     <file relUrl="Imagenes/CedeiraSF_v1.jpg" publishTime="09/15/2015 16:03:24" />
@@ -230,37 +231,36 @@
     <file relUrl="js/bootstrap.js" publishTime="09/17/2015 21:04:02" />
     <file relUrl="Imagenes/Ayuda/PeriodoEmision.png" publishTime="11/12/2015 16:09:29" />
     <file relUrl="jquery/jquery-1.11.3.js" publishTime="02/16/2016 17:48:56" />
-    <file relUrl="Facturacion/Electronica/Reportes/ComprasXArticuloWebForm.aspx" publishTime="12/20/2016 11:37:45" />
+    <file relUrl="ExploradorAutorizacionLog.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image06.png" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="ArticuloConsulta.aspx" publishTime="10/31/2016 13:35:12" />
+    <file relUrl="Facturacion/Electronica/DetalleConsulta.ascx" publishTime="10/22/2015 16:32:01" />
     <file relUrl="DescargaTemporarios.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/Ayuda/Cabecera_Factura-DatosVendedor.png" publishTime="11/12/2015 14:40:54" />
     <file relUrl="Imagenes/Cedeira.ico" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/StockXArticuloWebForm.aspx" publishTime="12/22/2016 15:52:49" />
-    <file relUrl="Ayuda/Novedades/images20130906/image05.png" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Ayuda/Novedades/images20130906/image12.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ListaPrecioModificar.aspx" publishTime="07/02/2016 13:30:19" />
     <file relUrl="App_Themes/CedServicios/CedServicios.skin" publishTime="03/29/2016 14:32:42" />
-    <file relUrl="Imagenes/CedeiraSF-Logo.gif" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Permisos.ascx" publishTime="11/14/2015 18:04:57" />
     <file relUrl="Imagenes/Iconos/PdfLupa.png" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Imagenes/eFact-vertical.jpg" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="css/bootstrap.min.css" publishTime="09/17/2015 21:04:03" />
+    <file relUrl="ExploradorComprobanteGlobal.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="PruebasBS.aspx" publishTime="02/16/2016 15:43:37" />
     <file relUrl="CuitCrear.aspx" publishTime="03/01/2016 14:56:58" />
-    <file relUrl="UsuarioLogin.aspx" publishTime="02/23/2016 13:19:08" />
-    <file relUrl="Web.Release.config" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="PuntoVtaBaja.aspx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="PrecioImportacionExcel.aspx" publishTime="06/10/2016 13:46:25" />
-    <file relUrl="Facturacion/Electronica/Referencias.ascx" publishTime="05/20/2016 15:32:19" />
+    <file relUrl="Facturacion/Electronica/Reportes/VentasXArticuloFiltros.aspx" publishTime="10/07/2016 12:36:20" />
     <file relUrl="Ayuda/Novedades/images20130906/image01.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image15.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/FileHelpers.dll" publishTime="06/09/2016 15:56:43" />
     <file relUrl="js/npm.js" publishTime="09/17/2015 21:04:03" />
-    <file relUrl="ComprobanteSeleccionOnlineAFIP.aspx" publishTime="06/30/2016 17:05:03" />
+    <file relUrl="Controles/DatosEmailAvisoComprobantePersona.ascx" publishTime="04/17/2016 19:59:56" />
     <file relUrl="Imagenes/DiapositivaAll.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ArticuloModificar.aspx" publishTime="06/09/2016 13:08:51" />
     <file relUrl="Imagenes/Factura-UsuarioDemo.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/lote_comprobantes.xsd" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/Captcha.pdb" publishTime="05/30/2017 12:55:19" />
     <file relUrl="ListaPrecioClonar.aspx" publishTime="05/26/2016 10:22:20" />
-    <file relUrl="bin/CedServiciosEX.dll" publishTime="05/30/2017 12:55:12" />
+    <file relUrl="Web.Release.config" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ExploradorUsuario.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="css/bootstrap-theme.css" publishTime="09/17/2015 21:04:03" />
   </publishProfile>
@@ -269,36 +269,39 @@
     <file relUrl="Imagenes/Iconos/ActualizarOnLine.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ExploradorCuit.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Controles/DomicilioConsulta.ascx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Imagenes/CedST-EsquemaMEP.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="InstitucionalRefeCom.aspx" publishTime="11/04/2015 21:13:59" />
     <file relUrl="CedServicios.Master" publishTime="05/24/2016 11:24:13" />
     <file relUrl="ComprobanteGeneracionAutomatica.aspx" publishTime="03/30/2016 11:33:46" />
+    <file relUrl="UsuarioConfirmacion.aspx" publishTime="02/24/2016 18:06:42" />
     <file relUrl="bin/CedServiciosSite.pdb" publishTime="06/20/2017 17:12:46" />
     <file relUrl="PuntoVtaSeleccionar.aspx" publishTime="02/23/2016 14:21:59" />
     <file relUrl="UsuarioCrear.aspx" publishTime="02/24/2016 18:02:50" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica010.aspx" publishTime="09/15/2015 16:03:23" />
     <file relUrl="Imagenes/calendar.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica011.aspx" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Imagenes/Iconos/Consultar.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/Iconos/icon_collapse.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica007.aspx" publishTime="09/15/2015 16:03:23" />
     <file relUrl="PuntoVtaCrear.aspx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="Imagenes/CedFCI-Tablero_ch.jpg" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Controles/ContactoConsulta.ascx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="UNBaja.aspx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="InstitucionalSolucionesCedFCI.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image21.png" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="UsuarioLogin.aspx" publishTime="02/23/2016 13:19:08" />
     <file relUrl="ListaPrecioReemplazar.aspx" publishTime="05/26/2016 10:22:20" />
     <file relUrl="Imagenes/Ayuda/AltaLote-Acciones.png" publishTime="11/13/2015 20:20:10" />
     <file relUrl="bin/Ionic.Zip.dll" publishTime="09/15/2015 16:03:27" />
     <file relUrl="Controles/DatosEmailAvisoComprobanteContrato.ascx" publishTime="04/17/2016 19:49:52" />
     <file relUrl="Controles/Contacto.ascx" publishTime="05/10/2016 10:33:39" />
-    <file relUrl="PersonaModificar.aspx" publishTime="05/26/2016 10:22:20" />
+    <file relUrl="Ayuda/Novedades/images20130906/image12.png" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="bin/CedServiciosEX.dll" publishTime="05/30/2017 12:55:12" />
     <file relUrl="bin/FileHelpers.ExcelNPOIStorage.xml" publishTime="06/09/2016 15:56:44" />
     <file relUrl="bin/CedServiciosDB.dll" publishTime="06/20/2017 16:20:26" />
     <file relUrl="Ayuda/Novedades/images20130906/image16.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Excepciones/Excepciones.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ExploradorComprobante.aspx" publishTime="06/20/2017 17:12:27" />
     <file relUrl="ActividadesAlcanzadas.aspx" publishTime="09/15/2015 16:03:23" />
+    <file relUrl="Controles/DatosEmailAvisoComprobantePersona.ascx" publishTime="04/17/2016 19:59:56" />
     <file relUrl="CuitCambiarLogotipo.aspx" publishTime="02/11/2016 17:10:14" />
     <file relUrl="Facturacion/Electronica/Reportes/Iva_Compras.xsd" publishTime="11/21/2016 14:46:00" />
     <file relUrl="ComprobanteConsulta.aspx" publishTime="10/07/2016 11:03:00" />
@@ -321,8 +324,10 @@
     <file relUrl="Facturacion/Electronica/Reportes/Factura.rpt" publishTime="07/21/2016 13:31:15" />
     <file relUrl="Ayuda/Novedades/images20130906/image10.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/FeaEntidades.pdb" publishTime="05/30/2017 12:55:05" />
+    <file relUrl="Ayuda/Novedades/images20130906/image00.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="css/bootstrap-theme.min.css" publishTime="09/17/2015 21:04:03" />
     <file relUrl="PrecioIngresoManual.aspx" publishTime="06/08/2016 12:24:07" />
+    <file relUrl="PuntoVtaModificar.aspx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="SessionTimeout.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/Empresa/SoftwareAMedida.jpg" publishTime="09/21/2015 13:25:19" />
     <file relUrl="Facturacion/Electronica/Reportes/IvaVentasFiltros.aspx" publishTime="06/16/2016 15:08:40" />
@@ -341,13 +346,13 @@
     <file relUrl="js/bootstrap.min.js" publishTime="09/17/2015 21:04:02" />
     <file relUrl="InstitucionalContacto.aspx" publishTime="11/04/2015 21:21:39" />
     <file relUrl="Admin/SettingsRulesConfiguration.aspx" publishTime="09/15/2015 16:03:23" />
-    <file relUrl="css/bootstrap.min.css" publishTime="09/17/2015 21:04:03" />
+    <file relUrl="Imagenes/SiluetaHombre.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ExploradorArticulo.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/DetalleConsulta.ascx" publishTime="10/22/2015 16:32:01" />
     <file relUrl="fonts/glyphicons-halflings-regular.svg" publishTime="09/17/2015 21:04:02" />
-    <file relUrl="Controles/Domicilio.ascx" publishTime="11/12/2015 16:25:06" />
+    <file relUrl="ListaPrecioClonar.aspx" publishTime="05/26/2016 10:22:20" />
     <file relUrl="ExploradorConfiguracion.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/ReferenciasAFIP.ascx" publishTime="06/21/2016 14:02:02" />
-    <file relUrl="Facturacion/Electronica/Reportes/StockXArticulo.rpt" publishTime="12/30/2016 11:55:03" />
     <file relUrl="Facturacion/Electronica/Reportes/IvaComprasCR.rpt" publishTime="11/21/2016 18:27:12" />
     <file relUrl="Global.asax" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/IvaComprasWebForm.aspx" publishTime="11/21/2016 13:01:51" />
@@ -357,7 +362,6 @@
     <file relUrl="Ayuda/Novedades/images20130906/image03.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="InstitucionalSoftwareAMedida.aspx" publishTime="09/21/2015 15:04:17" />
     <file relUrl="CedServiciosAyuda.master" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Imagenes/Factura-UsuarioDemo.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/FileHelpers.ExcelNPOIStorage.dll" publishTime="06/09/2016 15:56:44" />
     <file relUrl="Facturacion/Electronica/Detalle.ascx" publishTime="11/02/2016 12:07:22" />
     <file relUrl="Imagenes/CedeiraSF-icono-animado.gif" publishTime="09/15/2015 16:03:24" />
@@ -396,7 +400,6 @@
     <file relUrl="Imagenes/Iconos/ClonarAlta.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image17.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/Interrogacion.jpg" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica012.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/AjaxControlToolkit.pdb" publishTime="06/20/2017 17:12:40" />
     <file relUrl="ExploradorPDFComprobante.aspx" publishTime="03/30/2016 18:38:44" />
     <file relUrl="bin/FeaEntidades.dll" publishTime="05/30/2017 12:55:07" />
@@ -404,16 +407,16 @@
     <file relUrl="UsuarioConsulta.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Default.aspx" publishTime="06/14/2016 14:36:00" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica005.aspx" publishTime="09/15/2015 16:03:23" />
-    <file relUrl="ExploradorComprobanteOnLineInterfacturas.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/FacturaWebForm.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/FacturaElectronicaTYC.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Descuentos.ascx" publishTime="10/22/2015 22:43:40" />
     <file relUrl="ArticuloCrear.aspx" publishTime="06/09/2016 13:40:52" />
     <file relUrl="ComprobanteSeleccionOnlineInterfacturas.aspx" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="ExploradorComprobanteGlobal.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/CajaBrownPeru.ico" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Ayuda/Novedades/images20130906/image00.png" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Controles/Domicilio.ascx" publishTime="11/12/2015 16:25:06" />
     <file relUrl="Imagenes/CedCCT.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="UsuarioOlvidoId.aspx" publishTime="02/24/2016 18:01:58" />
+    <file relUrl="Imagenes/eFact-vertical.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image07.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/Imagen.xsd" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Controles/DatosIdentificatorios.ascx" publishTime="11/11/2015 14:14:32" />
@@ -426,13 +429,13 @@
     <file relUrl="css/bootstrap.css" publishTime="09/17/2015 21:04:03" />
     <file relUrl="Facturacion/Electronica/ReferenciasConsulta.ascx" publishTime="03/31/2016 15:14:29" />
     <file relUrl="Imagenes/CedJU.jpg" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Ayuda/Novedades/eFactWebBoletinElectronico20130906.html" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica009.aspx" publishTime="09/15/2015 16:03:23" />
-    <file relUrl="ListaPrecioClonar.aspx" publishTime="05/26/2016 10:22:20" />
     <file relUrl="Controles/ListaPrecioDefaultPersona.ascx" publishTime="07/02/2016 13:30:19" />
-    <file relUrl="ExploradorAutorizacionLog.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Reportes/ComprasXArticuloWebForm.aspx" publishTime="12/20/2016 11:37:45" />
+    <file relUrl="SolicPermisoAdminUN.aspx" publishTime="05/11/2016 18:29:34" />
     <file relUrl="Facturacion/Electronica/Impuestos.ascx" publishTime="10/07/2016 11:03:00" />
     <file relUrl="Ayuda/Novedades/images20130906/image02.png" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Referencias.ascx" publishTime="05/20/2016 15:32:19" />
     <file relUrl="ExploradorComprobanteRG.aspx" publishTime="05/30/2016 18:53:23" />
     <file relUrl="NotificacionDeExcepcion.aspx" publishTime="04/30/2016 12:37:53" />
     <file relUrl="CuitTreeView.aspx" publishTime="03/01/2016 15:15:39" />
@@ -440,30 +443,28 @@
     <file relUrl="Facturacion/Electronica/Reportes/Ventas_XArticulo.xsd" publishTime="06/08/2016 21:47:34" />
     <file relUrl="PreguntasFrecuentes.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/Captcha.dll" publishTime="05/30/2017 12:55:21" />
-    <file relUrl="UsuarioConfirmacion.aspx" publishTime="02/24/2016 18:06:42" />
-    <file relUrl="InstitucionalSolucionesCedST.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Imagenes/Iconos/Consultar.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Controles/DatosImpositivos.ascx" publishTime="11/20/2015 11:03:47" />
     <file relUrl="Autorizacion.aspx" publishTime="09/15/2015 16:03:23" />
-    <file relUrl="Controles/ContactoConsulta.ascx" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Facturacion/Electronica/Reportes/VentasXArticuloFiltros.aspx" publishTime="10/07/2016 12:36:20" />
+    <file relUrl="InstitucionalSolucionesCedST.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/CedServiciosEntidades.dll" publishTime="05/30/2017 12:55:17" />
     <file relUrl="Controles/DatosImpositivosConsulta.ascx" publishTime="11/12/2015 16:29:39" />
-    <file relUrl="Ayuda/Novedades/images20130906/image05.png" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="PruebasBS.aspx" publishTime="02/16/2016 15:43:37" />
     <file relUrl="InstitucionalEmpresa.aspx" publishTime="11/04/2015 20:47:54" />
     <file relUrl="Imagenes/eFact-R.jpg" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Imagenes/CedST-EsquemaMEP.jpg" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Ayuda/Novedades/eFactWebBoletinElectronico20130906.html" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Captcha.ashx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/Iva_Ventas.xsd" publishTime="05/06/2016 10:47:01" />
     <file relUrl="Ayuda/ExploradorNovedad.aspx" publishTime="09/15/2015 16:03:23" />
     <file relUrl="jquery/docs.min.js" publishTime="02/16/2016 17:58:41" />
     <file relUrl="Imagenes/Iconos/ConsultarOnLine.png" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="ExploradorUN.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Facturacion/Electronica/Permisos.ascx" publishTime="11/14/2015 18:04:57" />
     <file relUrl="ExploradorAdministracion.aspx" publishTime="05/24/2016 11:08:21" />
-    <file relUrl="Facturacion/Electronica/Reportes/VentasXArticulo.rpt" publishTime="02/22/2017 02:26:37" />
+    <file relUrl="ListaPrecioSeleccionar.aspx" publishTime="07/02/2016 13:30:19" />
     <file relUrl="UsuarioOlvidoPassword.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ListaPrecioCrear.aspx" publishTime="07/02/2016 13:30:19" />
     <file relUrl="Facturacion/Electronica/Reportes/ComprasXArticuloFiltros.aspx" publishTime="12/20/2016 13:04:29" />
-    <file relUrl="Facturacion/Electronica/Descuentos.ascx" publishTime="10/22/2015 22:43:40" />
+    <file relUrl="Ayuda/Instructivas/OperarFacturaElectronica012.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/FileHelpers.xml" publishTime="06/09/2016 15:56:43" />
     <file relUrl="Facturacion/Electronica/Reportes/IvaVentasWebForm.aspx" publishTime="05/19/2016 14:30:59" />
     <file relUrl="ComprobanteSeleccionArchivoXML.aspx" publishTime="09/15/2015 16:03:24" />
@@ -471,11 +472,10 @@
     <file relUrl="Facturacion/Electronica/EsquemaContableConsulta.ascx" publishTime="10/07/2016 11:03:00" />
     <file relUrl="Ayuda/Novedades/images20130906/image18.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/IvaComprasFiltros.aspx" publishTime="11/21/2016 12:53:27" />
-    <file relUrl="Imagenes/SiluetaHombre.jpg" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="PersonaModificar.aspx" publishTime="05/26/2016 10:22:20" />
     <file relUrl="Imagenes/CedFCI-EsquemaProceso.jpg" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/IvaVentasCR.rpt" publishTime="06/23/2016 15:11:25" />
-    <file relUrl="SolicPermisoAdminUN.aspx" publishTime="05/11/2016 18:29:34" />
-    <file relUrl="ArticuloConsulta.aspx" publishTime="10/31/2016 13:35:12" />
+    <file relUrl="ExploradorComprobanteOnLineInterfacturas.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Controles/DatosEmailAvisoComprobanteContratoConsulta.ascx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="SolicPermisoAdminCUIT.aspx" publishTime="02/11/2016 17:17:44" />
     <file relUrl="Facturacion/Electronica/Reportes/StockXArticuloFiltros.aspx" publishTime="12/30/2016 11:06:13" />
@@ -483,7 +483,7 @@
     <file relUrl="App_Offline/App_Offline.htm" publishTime="09/15/2015 16:03:23" />
     <file relUrl="ComprobanteSeleccionOnlineAFIP.aspx" publishTime="06/30/2016 17:05:03" />
     <file relUrl="ConfiguracionModificar.aspx" publishTime="02/24/2016 18:26:22" />
-    <file relUrl="PuntoVtaModificar.aspx" publishTime="03/01/2016 14:56:58" />
+    <file relUrl="Facturacion/Electronica/Reportes/StockXArticulo.rpt" publishTime="12/30/2016 11:55:03" />
     <file relUrl="Facturacion/Electronica/Lote.aspx" publishTime="06/21/2016 13:29:00" />
     <file relUrl="Facturacion/Electronica/DescuentosConsulta.ascx" publishTime="10/22/2015 16:17:06" />
     <file relUrl="Imagenes/CedeiraSF_v1.jpg" publishTime="09/15/2015 16:03:24" />
@@ -494,37 +494,37 @@
     <file relUrl="js/bootstrap.js" publishTime="09/17/2015 21:04:02" />
     <file relUrl="Imagenes/Ayuda/PeriodoEmision.png" publishTime="11/12/2015 16:09:29" />
     <file relUrl="jquery/jquery-1.11.3.js" publishTime="02/16/2016 17:48:56" />
-    <file relUrl="Facturacion/Electronica/Reportes/ComprasXArticuloWebForm.aspx" publishTime="12/20/2016 11:37:45" />
+    <file relUrl="ExploradorAutorizacionLog.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image06.png" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Facturacion/Electronica/DetalleConsulta.ascx" publishTime="10/22/2015 16:32:01" />
+    <file relUrl="ArticuloConsulta.aspx" publishTime="10/31/2016 13:35:12" />
     <file relUrl="DescargaTemporarios.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/Ayuda/Cabecera_Factura-DatosVendedor.png" publishTime="11/12/2015 14:40:54" />
     <file relUrl="Imagenes/Cedeira.ico" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/StockXArticuloWebForm.aspx" publishTime="12/22/2016 15:52:49" />
-    <file relUrl="Ayuda/Novedades/images20130906/image12.png" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="Ayuda/Novedades/images20130906/image05.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ListaPrecioModificar.aspx" publishTime="07/02/2016 13:30:19" />
     <file relUrl="App_Themes/CedServicios/CedServicios.skin" publishTime="03/29/2016 14:32:42" />
     <file relUrl="Imagenes/CedeiraSF-Logo.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Imagenes/Iconos/PdfLupa.png" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="Imagenes/eFact-vertical.jpg" publishTime="09/15/2015 16:03:24" />
-    <file relUrl="PruebasBS.aspx" publishTime="02/16/2016 15:43:37" />
+    <file relUrl="ExploradorComprobanteGlobal.aspx" publishTime="09/15/2015 16:03:24" />
+    <file relUrl="css/bootstrap.min.css" publishTime="09/17/2015 21:04:03" />
     <file relUrl="CuitCrear.aspx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="PuntoVtaBaja.aspx" publishTime="03/01/2016 14:56:58" />
     <file relUrl="Web.Release.config" publishTime="09/15/2015 16:03:24" />
     <file relUrl="PrecioImportacionExcel.aspx" publishTime="06/10/2016 13:46:25" />
-    <file relUrl="Facturacion/Electronica/Referencias.ascx" publishTime="05/20/2016 15:32:19" />
+    <file relUrl="Facturacion/Electronica/Reportes/VentasXArticuloFiltros.aspx" publishTime="10/07/2016 12:36:20" />
     <file relUrl="Ayuda/Novedades/images20130906/image01.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Ayuda/Novedades/images20130906/image15.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/FileHelpers.dll" publishTime="06/09/2016 15:56:43" />
     <file relUrl="js/npm.js" publishTime="09/17/2015 21:04:03" />
-    <file relUrl="Controles/DatosEmailAvisoComprobantePersona.ascx" publishTime="04/17/2016 19:59:56" />
+    <file relUrl="Facturacion/Electronica/Reportes/VentasXArticulo.rpt" publishTime="02/22/2017 02:26:37" />
     <file relUrl="Imagenes/DiapositivaAll.gif" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ArticuloModificar.aspx" publishTime="06/09/2016 13:08:51" />
-    <file relUrl="ListaPrecioSeleccionar.aspx" publishTime="07/02/2016 13:30:19" />
+    <file relUrl="Imagenes/Factura-UsuarioDemo.png" publishTime="09/15/2015 16:03:24" />
     <file relUrl="Facturacion/Electronica/Reportes/lote_comprobantes.xsd" publishTime="09/15/2015 16:03:24" />
     <file relUrl="bin/Captcha.pdb" publishTime="05/30/2017 12:55:19" />
-    <file relUrl="Facturacion/Electronica/Permisos.ascx" publishTime="11/14/2015 18:04:57" />
-    <file relUrl="bin/CedServiciosEX.dll" publishTime="05/30/2017 12:55:12" />
+    <file relUrl="UsuarioLogin.aspx" publishTime="02/23/2016 13:19:08" />
+    <file relUrl="ExploradorUN.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="ExploradorUsuario.aspx" publishTime="09/15/2015 16:03:24" />
     <file relUrl="css/bootstrap-theme.css" publishTime="09/17/2015 21:04:03" />
   </publishProfile>

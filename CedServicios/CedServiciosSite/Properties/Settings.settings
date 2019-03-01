@@ -9,7 +9,7 @@
       <Value Profile="(Default)">http://localhost:20587/EnvioIBK.asmx</Value>
     </Setting>
     <Setting Name="CedServiciosSite_org_dyndns_cedweb_consulta_ConsultaIBK" Type="(Web Service URL)" Scope="Application">
-      <Value Profile="(Default)">http://localhost:20587/ConsultaIBK.asmx</Value>
+      <Value Profile="(Default)">http://localhost:4167/ConsultaIBK.asmx</Value>
     </Setting>
     <Setting Name="CedServiciosSite_org_dyndns_cedweb_listado_ListadoIBK" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">http://localhost:20587/ListadoIBK.asmx</Value>
