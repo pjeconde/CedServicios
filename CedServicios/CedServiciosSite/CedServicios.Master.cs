@@ -30,8 +30,8 @@ namespace CedServicios.Site
                             //c = (Control)this.FindControl("secServicios");
                             //c.Visible = true;
                             break;
-                        case "USUARIOLOGIN.ASPX":
-                            if (HttpContext.Current.Request.Url.Query.ToUpper() == "?CERRAR")
+                        case "FACTURA.ASPX":
+                            if (HttpContext.Current.Request.Url.Query.ToUpper() == "?SALIR")
                             {
                                 if (sesion != null && sesion.Usuario.Id != null)
                                 {
@@ -72,14 +72,8 @@ namespace CedServicios.Site
                     switch (HttpContext.Current.Request.Url.AbsolutePath.ToString())
                     {
                         case "/Inicio.aspx":
-                        case "/InicioBusquedas.aspx":
-                        case "/InicioDesarrolloAMedida.aspx":
-                        case "/InicioEmpresa.aspx":
                         case "/InicioFEA.aspx":
                         case "/InicioFEAPrecios.aspx":
-                        case "/InicioInformacion.aspx":
-                        case "/InicioProductos.aspx":
-                        case "/InicioServicioSF.aspx":
                             footerNoLogin.Visible = true;
                             break;
                         default:
@@ -134,57 +128,61 @@ namespace CedServicios.Site
             Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             switch (Menu.SelectedItem.ValuePath)
             {
-                case "Iniciar sesión":
-                    Response.Redirect("~/UsuarioLogin.aspx");
-                    break;
-                case "Administración|CUIT|Alta":
-                    Response.Redirect("~/CuitCrear.aspx");
-                    break;
-                case "Administración|CUIT|Solicitud permiso de administrador de CUIT":
-                    Response.Redirect("~/SolicPermisoAdminCUIT.aspx");
-                    break;
-                case "Administración|CUIT|Baja/Anul.baja":
-                    Response.Redirect("~/CuitBaja.aspx");
-                    break;
-                case "Administración|CUIT|Modificación":
-                    Response.Redirect("~/CuitModificar.aspx");
-                    break;
-                case "Administración|CUIT|Cambio logotipo":
-                    Response.Redirect("~/CuitCambiarLogotipo.aspx");
-                    break;
-                case "Administración|CUIT|Consulta":
-                    Response.Redirect("~/CuitTreeView.aspx?Cuit");
-                    break;
-                case "Administración|Unidad de Negocio|Alta":
-                    Response.Redirect("~/UNCrear.aspx");
-                    break;
-                case "Administración|Unidad de Negocio|Solicitud permiso de administrador de UN":
-                    Response.Redirect("~/SolicPermisoAdminUN.aspx");
-                    break;
-                case "Administración|Unidad de Negocio|Solicitud permiso de operador de servicio de una UN existente":
-                    Response.Redirect("~/SolicPermisoOperServUN.aspx");
-                    break;
-                case "Administración|Unidad de Negocio|Baja/Anul.baja":
-                    Response.Redirect("~/UNBaja.aspx");
-                    break;
-                case "Administración|Unidad de Negocio|Modificación":
-                    Response.Redirect("~/UNModificar.aspx");
-                    break;
-                case "Administración|Unidad de Negocio|Consulta":
-                    Response.Redirect("~/CuitTreeView.aspx?UN");
-                    break;
-                case "Administración|Puntos de Venta|Alta":
-                    Response.Redirect("~/PuntoVtaCrear.aspx");
-                    break;
-                case "Administración|Puntos de Venta|Baja/Anul.baja":
-                    Response.Redirect("~/PuntoVtaSeleccionar.aspx?Baja");
-                    break;
-                case "Administración|Puntos de Venta|Modificación":
-                    Response.Redirect("~/PuntoVtaSeleccionar.aspx?Modificar");
-                    break;
-                case "Administración|Puntos de Venta|Consulta":
-                    Response.Redirect("~/CuitTreeView.aspx?PuntoVta");
-                    break;
+                //case "Administración|CUIT|Alta":
+                //    Response.Redirect("~/CuitCrear.aspx");
+                //    break;
+                //case "Administración|CUIT|Solicitud permiso de administrador de CUIT":
+                //    Response.Redirect("~/SolicPermisoAdminCUIT.aspx");
+                //    break;
+                //case "Administración|CUIT|Baja/Anul.baja":
+                //    Response.Redirect("~/CuitBaja.aspx");
+                //    break;
+                //case "Administración|CUIT|Modificación":
+                //    Response.Redirect("~/CuitModificar.aspx");
+                //    break;
+                //case "Administración|CUIT|Cambio logotipo":
+                //    Response.Redirect("~/CuitCambiarLogotipo.aspx");
+                //    break;
+                //case "Administración|CUIT|Consulta":
+                //    Response.Redirect("~/CuitTreeView.aspx?Cuit");
+                //    break;
+                //case "Administración|Unidad de Negocio|Alta":
+                //    Response.Redirect("~/UNCrear.aspx");
+                //    break;
+                //case "Administración|Unidad de Negocio|Solicitud permiso de administrador de UN":
+                //    Response.Redirect("~/SolicPermisoAdminUN.aspx");
+                //    break;
+                //case "Administración|Unidad de Negocio|Solicitud permiso de operador de servicio de una UN existente":
+                //    Response.Redirect("~/SolicPermisoOperServUN.aspx");
+                //    break;
+                //case "Administración|Unidad de Negocio|Baja/Anul.baja":
+                //    Response.Redirect("~/UNBaja.aspx");
+                //    break;
+                //case "Administración|Unidad de Negocio|Modificación":
+                //    Response.Redirect("~/UNModificar.aspx");
+                //    break;
+                //case "Administración|Unidad de Negocio|Consulta":
+                //    Response.Redirect("~/CuitTreeView.aspx?UN");
+                //    break;
+                //case "Administración|Puntos de Venta|Alta":
+                //    Response.Redirect("~/PuntoVtaCrear.aspx");
+                //    break;
+                //case "Administración|Puntos de Venta|Baja/Anul.baja":
+                //    Response.Redirect("~/PuntoVtaSeleccionar.aspx?Baja");
+                //    break;
+                //case "Administración|Puntos de Venta|Modificación":
+                //    Response.Redirect("~/PuntoVtaSeleccionar.aspx?Modificar");
+                //    break;
+                //case "Administración|Puntos de Venta|Consulta":
+                //    Response.Redirect("~/CuitTreeView.aspx?PuntoVta");
+                //    break;
+                //case "Administración|Usuario|Cambio de Contraseña":
+                //    Response.Redirect("~/UsuarioCambiarPassword.aspx");
+                //    break;
+                //case "Administración|Usuario|Modificación datos de Configuración":
+                //    Response.Redirect("~/ConfiguracionModificar.aspx");
+                //    break;
+
                 case "Personas|Alta":
                     Response.Redirect("~/PersonaCrear.aspx");
                     break;
@@ -241,7 +239,7 @@ namespace CedServicios.Site
                     }
                     else
                     {
-                        Response.Redirect("~/Facturacion/Electronica/Lote.aspx");
+                        Response.Redirect("~/Facturacion/Electronica/Lote.aspx?ComprobanteATratar=VentaContrato");
                     }
                     break;
                 case "Contratos|Baja/Anul.baja":
@@ -348,70 +346,66 @@ namespace CedServicios.Site
                 case "Comprobantes|Otras Consultas|Términos y condiciones":
                     Response.Redirect("~/Facturacion/Electronica/FacturaElectronicaTYC.aspx");
                     break;
-                case "Administración|Autorizaciones|Explorador de Autorizaciones pendientes":
-                    Response.Redirect("~/ExploradorAutorizacion.aspx");
-                    break;
-                case "Administración|Autorizaciones|Explorador de Autorizaciones (histórico)":
-                    Response.Redirect("~/ExploradorAutorizacionLog.aspx");
-                    break;
-                case "Administración Site|Comprobantes":
-                    Response.Redirect("~/ExploradorComprobanteGlobal.aspx");
-                    break;
-                case "Administración Site|Usuarios":
-                    Response.Redirect("~/ExploradorUsuario.aspx");
-                    break;
-                case "Administración Site|CUITs":
-                    Response.Redirect("~/ExploradorCuit.aspx");
-                    break;
-                case "Administración Site|UNs":
-                    Response.Redirect("~/ExploradorUN.aspx");
-                    break;
-                case "Administración Site|Puntos de Venta":
-                    Response.Redirect("~/ExploradorPuntoVta.aspx");
-                    break;
-                case "Administración Site|Personas":
-                    Response.Redirect("~/ExploradorPersona.aspx");
-                    break;
-                case "Administración Site|Artículos":
-                    Response.Redirect("~/ExploradorArticulo.aspx");
-                    break;
-                case "Administración Site|Permisos":
-                    Response.Redirect("~/ExploradorPermiso.aspx");
-                    break;
-                case "Administración Site|Configuraciones":
-                    Response.Redirect("~/ExploradorConfiguracion.aspx");
-                    break;
-                case "Administración Site|Logs":
-                    Response.Redirect("~/ExploradorLog.aspx");
-                    break;
-                case "Administración Site|Administración":
-                    Response.Redirect("~/ExploradorAdministracion.aspx");
-                    break;
-                case "Administración Site|CVs":
-                    Response.Redirect("~/ExploradorCV.aspx");
-                    break;
-                case "Administración Site|Búsqueda Laboral":
-                    Response.Redirect("~/ExploradorBusquedaLaboral.aspx");
-                    break;
-                case "Administración|Usuario|Cambio de Contraseña":
-                    Response.Redirect("~/UsuarioCambiarPassword.aspx");
-                    break;
-                case "Administración|Usuario|Modificación datos de Configuración":
-                    Response.Redirect("~/ConfiguracionModificar.aspx");
-                    break;
-                case "Ayuda|Manual|¿Cómo empiezo a operar con facturas electrónicas?":
-                    sesion.EstoyEnAyuda = true;
-                    Response.Redirect("~/Ayuda/Instructivas/OperarFacturaElectronica001.aspx");
-                    break;
-                case "Ayuda|Novedades":
-                    Response.Redirect("~/Ayuda/ExploradorNovedad.aspx");
-                    break;
-                case "Ayuda|Documentación técnica":
-                    Response.Redirect("~/default.aspx");
-                    break;
-                case "Cerrar sesión":
+                //case "Administración|Autorizaciones|Explorador de Autorizaciones pendientes":
+                //    Response.Redirect("~/ExploradorAutorizacion.aspx");
+                //    break;
+                //case "Administración|Autorizaciones|Explorador de Autorizaciones (histórico)":
+                //    Response.Redirect("~/ExploradorAutorizacionLog.aspx");
+                //    break;
+
+                //case "Administración Site|Comprobantes":
+                //    Response.Redirect("~/ExploradorComprobanteGlobal.aspx");
+                //    break;
+                //case "Administración Site|Usuarios":
+                //    Response.Redirect("~/ExploradorUsuario.aspx");
+                //    break;
+                //case "Administración Site|CUITs":
+                //    Response.Redirect("~/ExploradorCuit.aspx");
+                //    break;
+                //case "Administración Site|UNs":
+                //    Response.Redirect("~/ExploradorUN.aspx");
+                //    break;
+                //case "Administración Site|Puntos de Venta":
+                //    Response.Redirect("~/ExploradorPuntoVta.aspx");
+                //    break;
+                //case "Administración Site|Personas":
+                //    Response.Redirect("~/ExploradorPersona.aspx");
+                //    break;
+                //case "Administración Site|Artículos":
+                //    Response.Redirect("~/ExploradorArticulo.aspx");
+                //    break;
+                //case "Administración Site|Permisos":
+                //    Response.Redirect("~/ExploradorPermiso.aspx");
+                //    break;
+                //case "Administración Site|Configuraciones":
+                //    Response.Redirect("~/ExploradorConfiguracion.aspx");
+                //    break;
+                //case "Administración Site|Logs":
+                //    Response.Redirect("~/ExploradorLog.aspx");
+                //    break;
+                //case "Administración Site|Administración":
+                //    Response.Redirect("~/ExploradorAdministracion.aspx");
+                //    break;
+                //case "Administración Site|CVs":
+                //    Response.Redirect("~/ExploradorCV.aspx");
+                //    break;
+                //case "Administración Site|Búsqueda Laboral":
+                //    Response.Redirect("~/ExploradorBusquedaLaboral.aspx");
+                //    break;
+
+                //case "Ayuda|Manual|¿Cómo empiezo a operar con facturas electrónicas?":
+                //    sesion.EstoyEnAyuda = true;
+                //    Response.Redirect("~/Ayuda/Instructivas/OperarFacturaElectronica001.aspx");
+                //    break;
+                //case "Ayuda|Novedades":
+                //    Response.Redirect("~/Ayuda/ExploradorNovedad.aspx");
+                //    break;
+                //case "Ayuda|Documentación técnica":
+                //    Response.Redirect("~/default.aspx");
+                //    break;
+                case "Salir":
                     RN.Sesion.Cerrar(sesion);
-                    Response.Redirect("~/UsuarioLogin.aspx");
+                    Response.Redirect("~/factura.aspx");
                     break;
             }
         }

@@ -4347,6 +4347,13 @@ xkeyframes
 	padding-top:50px;
 }
 
+.blog-big-wrapper2 {
+    position: relative;
+    width: 95%;
+    padding: 30px;
+    margin-bottom: 20px;
+}
+
 .blog-big-wrapper{ 
 	position:relative;
 	width:100%;
@@ -6096,7 +6103,7 @@ a.quote-big-post-single h5:hover{
 }
 #ajaxsuccess {
 	
-	color:#101010;
+	color:#fff;
 	font: 20px/60px 'Open Sans', sans-serif;
 	height:60px;
 	display: none;
@@ -7762,6 +7769,39 @@ Main components
 	z-index: -1;
 	width:100%;  
 }
+.parallax-recru {
+	background: url('../images/parallax/recru.jpg') repeat fixed;
+	background-size: cover;
+	position: absolute;
+	top: 0; 
+	left: 0; 
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	width:100%;  
+}
+.parallax-personal {
+	background: url('../images/parallax/personal.jpg') repeat fixed;
+	background-size: cover;
+	position: absolute;
+	top: 0; 
+	left: 0; 
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	width:100%;  
+}
+.parallax-out {
+	background: url('../images/parallax/out.jpg') repeat fixed;
+	background-size: cover;
+	position: absolute;
+	top: 0; 
+	left: 0; 
+	right: 0;
+	bottom: 0;
+	z-index: -1;
+	width:100%;  
+}
 .parallax-factura {
 	background: url('../images/parallax/factura.jpg') repeat fixed;
 	background-size: cover;
@@ -7865,6 +7905,9 @@ Main components
 
 .parallax-about-me { background-size: cover; }
 .parallax-sf { background-size: cover; }
+.parallax-recru { background-size: cover; }
+.parallax-out { background-size: cover; }
+.parallax-personal { background-size: cover; }
 .parallax-factura { background-size: cover; }
 .parallax-tech { background-size: cover; }
 .parallax-transferencias { background-size: cover; }
@@ -7878,6 +7921,9 @@ Main components
  @media only screen and (min-device-width : 768px) and (max-device-width : 1200px) and (orientation : landscape) {
 	.parallax-about-me { background-size: cover; background-attachment: scroll; background-position: top center!important; }
 	.parallax-sf { background-size: cover; background-attachment: scroll; background-position: top center!important; }
+	.parallax-recru { background-size: cover; background-attachment: scroll; background-position: top center!important; }
+	.parallax-out { background-size: cover; background-attachment: scroll; background-position: top center!important; }
+	.parallax-personal { background-size: cover; background-attachment: scroll; background-position: top center!important; }
 	.parallax-factura { background-size: cover; background-attachment: scroll; background-position: top center!important; }
 	.parallax-tech { background-size: cover; background-attachment: scroll; background-position: top center!important; }
 	.parallax-transferencias { background-size: cover; background-attachment: scroll; background-position: top center!important; }
@@ -7891,6 +7937,9 @@ Main components
 @media only screen and (max-width: 1400px) {
 	.parallax-about-me { background-size: cover; background-attachment: scroll; background-position: top center!important; }
 	.parallax-sf { background-size: cover; background-attachment: scroll; background-position: top center!important; }
+	.parallax-recru { background-size: cover; background-attachment: scroll; background-position: top center!important; }
+	.parallax-out { background-size: cover; background-attachment: scroll; background-position: top center!important; }
+.parallax-personal { background-size: cover; background-attachment: scroll; background-position: top center!important; }
 	.parallax-factura { background-size: cover; background-attachment: scroll; background-position: top center!important; }
 	.parallax-tech { background-size: cover; background-attachment: scroll; background-position: top center!important; }
 	.parallax-transferencias { background-size: cover; background-attachment: scroll; background-position: top center!important; }

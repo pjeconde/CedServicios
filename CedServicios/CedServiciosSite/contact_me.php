@@ -22,15 +22,15 @@ $email_address = $_POST['email'];
 $message = $_POST['message'];
 
 include("Mail.php"); # Archivo interno del servidor
-$recipients = "contacto@cedeira.com"; # $_POST["para"]; # "contacto@emiral.com.ar"; # Mail del receptor del correo
-$headers["From"] = "contacto@cedeira.com"; # Cuenta de correo valida del dominio
-$headers["To"] = "contacto@cedeira.com"; # $_POST["para"]; # "contacto@emiral.com.ar"; # Destinatario del correo
+$recipients = "contacto@cedeira.com.ar"; # $_POST["para"]; # "contacto@emiral.com.ar"; # Mail del receptor del correo
+$headers["From"] = "contacto@cedeira.com.ar"; # Cuenta de correo valida del dominio
+$headers["To"] = "contacto@cedeira.com.ar"; # $_POST["para"]; # "contacto@emiral.com.ar"; # Destinatario del correo
 $headers["Subject"] = "Formulario de contacto:  $name"; # Asunto de mail
 $mailbody = "Recibiste un mensaje desde el formulario de contacto de cedeira.com.\n\n"."Detalles del mensaje:\n\nName: $name\n\nEmail: $email_address\n\nMessage:\n$message"; # Cuerpo del mail
-$smtpinfo["host"] = "mail.cedeira.com"; # Servidor SMTP
+$smtpinfo["host"] = "mail.cedeira.com.ar"; # Servidor SMTP
 $smtpinfo["port"] = "25";
 $smtpinfo["auth"] = true;
-$smtpinfo["username"] = "contacto@cedeira.com"; # Cuenta de correo para autentificar
+$smtpinfo["username"] = "contacto@cedeira.com.ar"; # Cuenta de correo para autentificar
 $smtpinfo["password"] = "123QWEasdZXC"; # Clave de la cuenta de correo
 $mail_object =& Mail::factory("smtp", $smtpinfo);
 $mail_object->send($recipients, $headers, $mailbody);

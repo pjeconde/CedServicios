@@ -762,6 +762,7 @@
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
                                     <asp:AsyncPostBackTrigger ControlID="PaisDestinoExpDropDownList"></asp:AsyncPostBackTrigger>
+                                    <asp:AsyncPostBackTrigger ControlID="CompradorDropDownList" EventName="SelectedIndexChanged"/>
                                 </Triggers>
                                 <ContentTemplate>
                                     <table style="width:1282px">

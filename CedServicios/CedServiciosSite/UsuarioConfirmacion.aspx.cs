@@ -28,7 +28,7 @@ namespace CedServicios.Site
                     Entidades.Usuario usuario = new Entidades.Usuario();
                     usuario.Id = idUsuario;
                     RN.Usuario.Confirmar(usuario, true, true, (Entidades.Sesion)Session["Sesion"]);
-                    MensajeLabel.Text = "Felicitaciones !!!.<br /><br />Su nueva cuenta '" + usuario.Id + "' ya está disponible.<br />Para ingresar a la aplicación, haga click en 'Iniciar sesión'";
+                    MensajeLabel.Text = "Felicitaciones !!!.<br /><br />Su nueva cuenta '" + usuario.Id + "' ya está disponible.<br />Para ingresar a la aplicación, haga click en 'Ingresar'";
                 }
             }
             catch (System.Security.Cryptography.CryptographicException)

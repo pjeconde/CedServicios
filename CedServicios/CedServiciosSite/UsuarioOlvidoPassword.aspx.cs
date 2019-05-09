@@ -126,7 +126,7 @@ namespace CedServicios.Site
                 ConfirmacionPasswordNuevaTextBox.Enabled = false;
                 AceptarButton.Visible = false;
                 CancelarButton.Visible = false;
-                MensajeLabel.Text = "La Contraseña fue registrada satisfactoriamente.<br />Para iniciar una sesión de trabajo, deberá identificarse en la página de inicio.";
+                MensajeLabel.Text = "La Contraseña fue registrada satisfactoriamente.<br />Para iniciar una sesión de trabajo, deberá identificarse en la página de ingreso.";
             }
             catch (System.Threading.ThreadAbortException)
             {

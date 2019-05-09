@@ -1,0 +1,58 @@
+﻿<!-- FOOTER ================================================== -->
+
+    <div class="container">
+
+        <div class="five columns" data-scroll-reveal="enter left move 200px over 0.5s after 0.3s">
+            <a href="index.html" class="animsition-link"><div class="logo-footer"></div></a>
+            <h6><i class="icon-footer">&#xf041;</i>Argentina</h6>
+            <p style="color: #fff">
+                Torre Bellini, Esmeralda 950, Piso 19, Of. 105, CABA<br />
+                +5411 4778-1744
+            </p>
+            <p><i class="icon-footer"></i><a href="mailto:contacto@cedeira.com" title="">contacto@cedeira.com</a></p>
+            <p><a href="https://www.facebook.com/CedeiraSF" title="" target="_new"><i class="icon-social">&#xf082;</i></a><a href="https://twitter.com/cedeirasf" title="" target="_new"><i class="icon-social">&#xf081;</i></a><a href="https://www.linkedin.com/company/cedeirasf/" title="" target="_new"><i class="icon-social">&#xf08c;</i></a></p>
+        </div>
+        <div class="eleven columns" data-scroll-reveal="enter right move 200px over 0.5s after 0.3s">
+            <div class="container" style="width: 100%">
+                <div class="sixteen columns">
+                    <div class="section-title">
+                        <h3>En contacto</h3>
+                    </div>
+                </div>
+                <div class="clear"></div>
+                <form name="ajax-form" id="ajax-form" action="contact_me.php" method="post">
+                    <div class="eight columns">
+                        <input name="name" id="name" type="text" placeholder="Nombre: *" />
+                        <label for="name">
+                            <span class="error" id="err-name">Por favor escriba su nombre</span>
+                        </label>
+                    </div>
+                    <div class="eight columns">
+                        <input name="email" id="email" type="text" placeholder="E-Mail: *" />
+                        <label for="email">
+                            <span class="error" id="err-email">Por favor escriba su email</span>
+                            <span class="error" id="err-emailvld">Formato de email inválido</span>
+                        </label>
+
+                    </div>
+                    <div class="sixteen columns">
+
+                        <textarea name="message" id="message" placeholder="Su mensaje"></textarea>
+                        <label for="message"></label>
+                    </div>
+                    <div class="sixteen columns">
+                        <div id="button-con"><button class="send_message" id="send">ENVIAR</button></div>
+                    </div>
+                    <div class="clear"></div>
+                    <div class="error text-align-center" id="err-form">Hubo un problema con los datos del formulario, por favor verifique!</div>
+                    <div class="error text-align-center" id="err-timedout">No se puede conectar al servidor. Intente nuevamente en unos momentos.</div>
+                    <div class="error" id="err-state"></div>
+                </form>
+
+                <div class="clear"></div>
+
+                <div id="ajaxsuccess">Enviado con éxito!</div>
+            </div>
+        </div>
+    </div>
+

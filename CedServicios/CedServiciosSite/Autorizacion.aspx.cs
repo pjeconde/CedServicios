@@ -140,7 +140,7 @@ namespace CedServicios.Site
         }
         private string TextoIniciarSesion()
         {
-            return "<br />Para ingresar a la aplicación, haga click en 'Iniciar sesión'";
+            return "<br />Para ingresar a la aplicación, haga click en 'Ingresar'";
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {

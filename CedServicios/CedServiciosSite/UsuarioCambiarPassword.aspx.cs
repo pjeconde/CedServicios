@@ -48,7 +48,7 @@ namespace CedServicios.Site
                     CancelarButton.Visible = false;
                     RN.Sesion.Cerrar(sesion);
                     Funciones.PersonalizarControlesMaster(Master, false, sesion);
-                    MensajeLabel.Text = "La Contraseña fue cambiada satisfactoriamente.<br />Para seguir trabajando, haga click en 'Iniciar sesión'.";
+                    MensajeLabel.Text = "La Contraseña fue cambiada satisfactoriamente.<br />Para seguir trabajando, haga click en 'Ingresar'.";
                 }
             }
             catch (System.Threading.ThreadAbortException)

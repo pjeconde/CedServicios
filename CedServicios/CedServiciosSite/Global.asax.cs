@@ -21,6 +21,7 @@ namespace CedServicios.Site
             s.CnnStr = System.Configuration.ConfigurationManager.AppSettings["CnnStr"];
             s.AdministradoresSiteEmail = System.Configuration.ConfigurationManager.AppSettings["Mantenedores"];
             s.Ambiente = System.Configuration.ConfigurationManager.AppSettings["Ambiente"];
+            s.Opciones = RN.Sesion.Opciones(s);
             s.OpcionesHabilitadas = RN.Sesion.OpcionesHabilitadas(s);
             Session["Sesion"] = s;
             Session["User"] = "User " + DateTime.Now;

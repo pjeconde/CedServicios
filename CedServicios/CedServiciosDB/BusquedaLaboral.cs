@@ -101,6 +101,7 @@ namespace CedServicios.DB
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("update BusquedaLaboral set ");
+            a.Append("Nombre='" + Hasta.Nombre + "', ");
             a.Append("NombreArchCV='" + Hasta.NombreArchCV + "', ");
             a.Append("IdBusquedaPerfil='" + Hasta.BusquedaPerfil.IdBusquedaPerfil + "' ");
             a.AppendLine("where BusquedaLaboral.Email='" + Hasta.Email + "' ");
@@ -198,7 +199,7 @@ namespace CedServicios.DB
             a.AppendLine("where 1=1 ");
             if (Email != String.Empty) a.AppendLine("and Email like '%" + Email + "%' ");
             if (Nombre != String.Empty) a.AppendLine("and Nombre like '%" + Nombre + "%' ");
-            if (IdBusquedaPerfil != String.Empty) a.AppendLine("and IdBusquedaPerfil like '%" + IdBusquedaPerfil + "%' ");
+            if (IdBusquedaPerfil != String.Empty) a.AppendLine("and BusquedaLaboral.IdBusquedaPerfil like '%" + IdBusquedaPerfil + "%' ");
             if (Estado != String.Empty) a.AppendLine("and Estado = '" + Estado + "' ");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             List<Entidades.BusquedaLaboral> lista = new List<Entidades.BusquedaLaboral>();

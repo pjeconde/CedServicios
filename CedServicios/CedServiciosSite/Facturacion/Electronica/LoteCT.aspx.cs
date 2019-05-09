@@ -40,6 +40,13 @@ namespace CedServicios.Site.Facturacion.Electronica
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     Session.Remove("FaltaCalcularTotales");
+                    if (Request.QueryString.Count > 0)
+                    {
+                        if (Request.QueryString["CaT"] == "Venta")
+                        {
+                            Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Venta");
+                        }
+                    }
                     Entidades.ComprobanteATratar comprobanteATratar = (Entidades.ComprobanteATratar)Session["ComprobanteATratar"];
                     ViewState["ComprobanteATratarOrig"] = (Entidades.ComprobanteATratar)Session["ComprobanteATratar"];
                     TratamientoTextBox.Text = comprobanteATratar.Tratamiento.ToString();

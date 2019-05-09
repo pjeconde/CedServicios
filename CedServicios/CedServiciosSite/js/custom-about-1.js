@@ -1,12 +1,37 @@
 (function($) { "use strict";
 
-
+	//Home Sections fit screen	
+				
+		/*global $:false */
+		$(function(){"use strict";
+			$('.home').css({'height':($(window).height())+'px'});
+			$(window).resize(function(){
+			$('.home').css({'height':($(window).height())+'px'});
+			});
+		});
+		
+		
+	//Page Scroll
 	
+	$(document).ready(function(){"use strict";
+		$(".scroll").click(function(event){
+
+			event.preventDefault();
+
+			var full_url = this.href;
+			var parts = full_url.split("#");
+			var trgt = parts[1];
+			var target_offset = $("#"+trgt).offset();
+			var target_top = target_offset.top;
+
+			$('html, body').animate({scrollTop:target_top}, 1000);
+		});
+
 
 	
 	//Navigation
 	
-	jQuery(document).ready(function($){
+
 		//if you change this breakpoint in the style.css file (or _layout.scss if you use SASS), don't forget to update this value as well
 		var MqL = 1170;
 		//move nav element position according to window width
@@ -139,46 +164,112 @@
 		}
 
 
+	
+			//Slider Revolution
+			
+
+								
+					jQuery('.tp-banner').show().revolution(
+					{
+						dottedOverlay:"none",
+						delay:6000,
+						startwidth:1460,
+						startheight:700,
+						hideThumbs:false,
+						hideTimerBar:"on",
+						
+						navigationType:"bullet",
+						navigationArrows:"none",
+						
+						touchenabled:"on",
+						onHoverStop:"off",
+						
+						swipe_velocity: 0.7,
+						swipe_min_touches: 1,
+						swipe_max_touches: 1,
+						drag_block_vertical: false,
+												
+						keyboardNavigation:"off",
+						
+						navigationHAlign:"center",
+						navigationVAlign:"bottom",
+						navigationHOffset:0,
+						navigationVOffset:30,
+								
+						shadow:0,
+						fullWidth:"off",
+						fullScreen:"on",
+
+						spinner:"spinner4",
+						
+						stopLoop:"off",
+						stopAfterLoops:-1,
+						stopAtSlide:-1,
+
+						shuffle:"off",
+						
+						autoHeight:"off",						
+						forceFullWidth:"off",		
+					});
+														
+
+ 
+ 
+	//Timeline	
+ 
+
+		var $timeline_block = $('.cd-timeline-block');
+
+		//hide timeline blocks which are outside the viewport
+		$timeline_block.each(function(){
+			if($(this).offset().top > $(window).scrollTop()+$(window).height()*0.75) {
+				$(this).find('.cd-timeline-img, .cd-timeline-content').addClass('is-hidden');
+			}
+		});
+
+		//on scolling, show/animate timeline blocks when enter the viewport
+		$(window).on('scroll', function(){
+			$timeline_block.each(function(){
+				if( $(this).offset().top <= $(window).scrollTop()+$(window).height()*0.75 && $(this).find('.cd-timeline-img').hasClass('is-hidden') ) {
+					$(this).find('.cd-timeline-img, .cd-timeline-content').removeClass('is-hidden').addClass('bounce-in');
+				}
+			});
+		});
 
 	
 	//Parallax
 	
 
-			$('.parallax-about').parallax("50%", 0.4);
+			$('.parallax-1').parallax("50%", 0.4);
 
   
-
-	//Top Page Slider
+  
+	//Counter 
 	
 
-	 
-	  $("#owl-top-page-slider").owlCarousel({
-		 
-		navigation: false, 
-		slideSpeed : 300,
-		autoPlay : 3000,
-		singleItem:true
-	 
-	  });
-	 
-
-
-
-
-	//Skills Counter 
-	
-
-        $('.counter-skills').counterUp({
+        $('.counter').counterUp({
             delay: 100,
-            time: 3000
+            time: 2000
         });
 
 
+	
+	//Interest Point 
+	
 
-	//accordion	
-
-		$(".accordion").smk_Accordion({
-			closeAble: true, //boolean
+		//open interest point description
+		$('.cd-single-point').children('a').on('click', function(){
+			var selectedPoint = $(this).parent('li');
+			if( selectedPoint.hasClass('is-open') ) {
+				selectedPoint.removeClass('is-open').addClass('visited');
+			} else {
+				selectedPoint.addClass('is-open').siblings('.cd-single-point.is-open').removeClass('is-open').addClass('visited');
+			}
+		});
+		//close interest point description
+		$('.cd-close-info').on('click', function(event){
+			event.preventDefault();
+			$(this).parents('.cd-single-point').eq(0).removeClass('is-open').addClass('visited');
 		});
 
 
@@ -208,6 +299,18 @@
 	  });
 	 
 
+	//Top Page Slider
+	
+
+	 
+	  $("#owl-top-page-slider").owlCarousel({
+		 
+		navigation: false, 
+		slideSpeed : 300,
+		autoPlay : 3000,
+		singleItem:true
+	 
+	  });
 
 
 	//Blockquote
@@ -225,11 +328,45 @@
 	  });
 	 
 	});
-	
-	
-	
+
 	
   })(jQuery); 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+
+
+
+
+	
+  
+
  
  
  

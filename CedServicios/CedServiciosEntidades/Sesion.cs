@@ -15,6 +15,7 @@ namespace CedServicios.Entidades
         private List<Cuit> cuitsDelUsuario;
         private List<Persona> clientesDelCuit;
         private List<Persona> proveedoresDelCuit;
+        private List<Opcion> opciones;
         private List<string> opcionesHabilitadas;
         private DateTime fechaInicio;
         private string uRLsite;
@@ -32,6 +33,7 @@ namespace CedServicios.Entidades
             cuitsDelUsuario = new List<Cuit>();
             clientesDelCuit = new List<Persona>();
             proveedoresDelCuit = new List<Persona>();
+            opciones = new List<Opcion>();
             opcionesHabilitadas = new List<string>();
             fechaInicio = DateTime.Now;
             usuarioDemo = false;
@@ -119,6 +121,18 @@ namespace CedServicios.Entidades
                 proveedoresDelCuit = value;
             }
         }
+        public List<Opcion> Opciones
+        {
+            get
+            {
+                return opciones;
+            }
+            set
+            {
+                opciones = value;
+            }
+        }
+
         public List<string> OpcionesHabilitadas
         {
             get

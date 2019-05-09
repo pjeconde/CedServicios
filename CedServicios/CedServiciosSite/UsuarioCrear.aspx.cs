@@ -42,6 +42,29 @@ namespace CedServicios.Site
             usuario.Respuesta = RespuestaTextBox.Text;
             try
             {
+                //Recaptcha.Web.RecaptchaVerificationResult rvr = Recaptcha1.Verify();
+                //string respcaptcha = rvr.ToString();
+                //if (String.IsNullOrEmpty(respcaptcha) || respcaptcha == "False")
+                //{
+                //    throw new EX.Validaciones.ValorNoInfo("Captcha");
+                //}
+                //else
+                //{
+                //    //RecaptchaVerificationResult result = await Recaptcha1.VerifyTaskAsync();
+
+                //    //if (result == RecaptchaVerificationResult.Success)
+                //    //{
+                //    //    Response.Redirect("Welcome.aspx");
+                //    //}
+                //    //if (result == RecaptchaVerificationResult.IncorrectCaptchaSolution)
+                //    //{
+                //    //    lblMessage.Text = "Incorrect captcha response.";
+                //    //}
+                //    //else
+                //    //{
+                //    //    lblMessage.Text = "Some other problem with captcha.";
+                //    //}
+                //}
                 RN.Usuario.Validar(usuario, ConfirmacionPasswordTextBox.Text, Session["captcha"].ToString(), CaptchaTextBox.Text, (Entidades.Sesion)Session["Sesion"]);
                 RN.Usuario.Registrar(usuario, true, (Entidades.Sesion)Session["Sesion"]);
                 ComprobarDisponibilidadButton.Visible = false;

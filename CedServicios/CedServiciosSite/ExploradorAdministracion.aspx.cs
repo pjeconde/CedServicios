@@ -74,7 +74,7 @@ namespace CedServicios.Site
                 }
                 catch (Exception ex)
                 {
-                    SesionesActivasLabel.Text += "Error en la consulta: " + ex.Message;
+                    SesionesActivasLabel.Text += "error en la consulta - " + ex.Message;
                 }
             }
         }

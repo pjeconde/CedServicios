@@ -24,8 +24,10 @@ namespace CedServicios.Site
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     EstadoDropDownList.DataSource = RN.Estado.Lista(true, sesion);
+                    PerfilDropDownList.DataSource = RN.BusquedaPerfil.Lista(sesion);
                     DataBind();
                     EstadoDropDownList.SelectedValue = String.Empty;
+                    PerfilDropDownList.SelectedValue = String.Empty;
                 }
             }
         }
@@ -38,7 +40,7 @@ namespace CedServicios.Site
                 BLPagingGridView.PageIndex = e.NewPageIndex;
                 List<Entidades.BusquedaLaboral> lista;
                 int CantidadFilas = 0;
-                lista = RN.BusquedaLaboral.ListaPaging(out CantidadFilas, BLPagingGridView.PageIndex, BLPagingGridView.OrderBy, NroTextBox.Text, RazonSocialTextBox.Text, LocalidadTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.BusquedaLaboral.ListaPaging(out CantidadFilas, BLPagingGridView.PageIndex, BLPagingGridView.OrderBy, EmailTextBox.Text, NombreTextBox.Text, PerfilDropDownList.SelectedValue, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 BLPagingGridView.VirtualItemCount = CantidadFilas;
                 BLPagingGridView.PageSize = ((Entidades.Sesion)Session["Sesion"]).Usuario.CantidadFilasXPagina;
                 ViewState["lista"] = lista;
@@ -62,7 +64,7 @@ namespace CedServicios.Site
                 DesSeleccionarFilas();
                 List<Entidades.BusquedaLaboral> lista = new List<Entidades.BusquedaLaboral>();
                 int CantidadFilas = 0;
-                lista = RN.BusquedaLaboral.ListaPaging(out CantidadFilas, BLPagingGridView.PageIndex, BLPagingGridView.OrderBy, NroTextBox.Text, RazonSocialTextBox.Text, LocalidadTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.BusquedaLaboral.ListaPaging(out CantidadFilas, BLPagingGridView.PageIndex, BLPagingGridView.OrderBy, EmailTextBox.Text, NombreTextBox.Text, PerfilDropDownList.SelectedValue, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ViewState["lista"] = lista;
                 BLPagingGridView.DataSource = (List<Entidades.BusquedaLaboral>)ViewState["lista"];
                 BLPagingGridView.DataBind();
@@ -84,7 +86,7 @@ namespace CedServicios.Site
                 e.Row.Attributes["onmouseout"] = "this.style.textDecoration='none';";
 
                 //Color por estado distinto a Vigente
-                if (e.Row.Cells[5].Text != "Vigente")
+                if (e.Row.Cells[6].Text != "Vigente")
                 {
                     e.Row.ForeColor = Color.Red;
                 }
@@ -118,12 +120,10 @@ namespace CedServicios.Site
             switch (e.CommandName)
             {
                 case "Detalle":
-                    //Session["Cuit"] = cuit;
-                    //Response.Redirect("~/CuitConsultaDetallada.aspx");
                     TituloConfirmacionLabel.Text = "Consulta detallada";
                     CancelarButton.Text = "Salir";
                     EmailLabel.Text = bl.Email;
-                    NombreLabel.Text = bl.NombreArchCV;
+                    NombreLabel.Text = bl.Nombre;
                     NombreArchCVLabel.Text = bl.NombreArchCV;
                     IdBusquedaPerfil.Text = bl.BusquedaPerfil.IdBusquedaPerfil;
                     ModalPopupExtender1.Show();
@@ -143,14 +143,14 @@ namespace CedServicios.Site
                 List<Entidades.BusquedaLaboral> lista = new List<Entidades.BusquedaLaboral>();
                 MensajeLabel.Text = String.Empty;
                 int CantidadFilas = 0;
-                lista = RN.BusquedaLaboral.ListaPaging(out CantidadFilas, BLPagingGridView.PageIndex, BLPagingGridView.OrderBy, NroTextBox.Text, RazonSocialTextBox.Text, LocalidadTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.BusquedaLaboral.ListaPaging(out CantidadFilas, BLPagingGridView.PageIndex, BLPagingGridView.OrderBy, EmailTextBox.Text, NombreTextBox.Text, PerfilDropDownList.SelectedValue, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 BLPagingGridView.VirtualItemCount = CantidadFilas;
                 BLPagingGridView.PageSize = sesion.Usuario.CantidadFilasXPagina;
                 if (lista.Count == 0)
                 {
                     BLPagingGridView.DataSource = null;
                     BLPagingGridView.DataBind();
-                    MensajeLabel.Text = "No se han encontrado Cuits que satisfagan la busqueda";
+                    MensajeLabel.Text = "No se han encontrado datos que satisfagan la busqueda";
                 }
                 else
                 {

@@ -17,7 +17,8 @@
     <link href="/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
     <!--Theme custom css -->
-    <link rel="stylesheet" href="/assetsAnt/css/style.css">
+    <link rel="stylesheet" href="/assetsAnt/css/style.css" />
+    <link rel="stylesheet" href="/css/menu.css" />
 
     <!--Theme Responsive css-->
     <link rel="stylesheet" href="/assetsAnt/css/responsive.css" />
@@ -55,6 +56,11 @@
         textarea
         {
             /*resize: none;*/
+        }
+        
+        .linkMenu a
+        {
+            color:lightgray;
         }
     </style>
     <script type="text/javascript">
@@ -129,12 +135,12 @@
                                 <a href="https://www.facebook.com/CedeiraSF" target="_blank"><i class="fa fa-facebook"></i></a>
                                 <a href="https://twitter.com/cedeirasf" target="_blank"><i class="fa fa-twitter"></i></a>
                                 <a href="https://www.linkedin.com/company/cedeirasf/" target="_blank"><i class="fa fa-linkedin"></i></a>
-                                <a href="#"><asp:label ID="AmbienteLabel" runat="server" ForeColor="White" Text="" SkinID="TextoDesa"></asp:label></a>
+                                <a href="#" onmouseover=""><asp:label ID="AmbienteLabel" runat="server" ForeColor="White" Text="" SkinID="TextoDesa"></asp:label></a>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="social-contact">
-                                <a href="Inicio.aspx#contact"><i class="fa fa-phone"></i>+5411 4778-1744</a>
+                                <a href="#"><i class="fa fa-phone"></i>+5411 4778-1744</a>
                                 <a href="mailto:contacto@cedeira.com.ar"><i class="fa fa-envelope"></i>contacto@cedeira.com.ar</a>
                             </div>
                         </div>
@@ -157,12 +163,163 @@
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="login"><a runat="server" id="btnCerrarLogin" href="factura.aspx">SALIR</a></li>
+                        <asp:Literal runat="server" ID="MenuPpal"></asp:Literal>
+                        <li runat="server" id="PersonasControl" class="dropdown dropdown-submenu"><a runat="server" id="Personas" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Personas</a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" id="PersonasAlta" visible="false" style="color:lightgray" href="#">Alta</a></li>
+                                <li><a runat="server" id="PersonasBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                <li><a runat="server" id="PersonasModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                <li><a runat="server" id="PersonasConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                            </ul>
+                        </li>
+                        <li runat="server" id="ArticulosControl" class="dropdown dropdown-submenu"><a runat="server" id="Articulos" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Artículos</a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" id="ArticulosAlta" visible="false" style="color:lightgray" href="#">Alta</a></li>
+                                <li><a runat="server" id="ArticulosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                <li><a runat="server" id="ArticulosModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                <li><a runat="server" id="ArticulosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                                <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Listas de Precios</a>
+                                    <ul class="dropdown-menu" style="width:200px;">
+                                        <li><a runat="server" id="ArticulosListaPreciosAlta" visible="false" style="color:lightgray" href="#">Alta</a></li>
+                                        <li><a runat="server" id="ArticulosListaPreciosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                        <li><a runat="server" id="ArticulosListaPreciosModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                        <li><a runat="server" id="ArticulosListaPreciosClonado" visible="false" style="color:lightgray" href="#">Clonado</a></li>
+                                        <li><a runat="server" id="ArticulosListaPreciosReemplazo" visible="false" style="color:lightgray" href="#">Reemplazo</a></li>
+                                        <li><a runat="server" id="ArticulosListaPreciosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Precios</a>
+                                    <ul class="dropdown-menu" style="">
+                                        <li><a runat="server" id="ArticulosPreciosIngresoManual" visible="false" style="color:lightgray" href="#">Ingreso Manual</a></li>
+                                        <li><a runat="server" id="ArticulosPreciosImportExcel" visible="false" style="color:lightgray" href="#">Importar de Excel</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li runat="server" id="ComprobantesControl" class="dropdown dropdown-submenu"><a runat="server" id="Comprobantes" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Comprobantes</a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" id="ComprobantesBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                <li><a runat="server" id="ComprobantesModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                <li><a runat="server" id="ComprobantesEnvioAFIPyITF" visible="false" style="color:lightgray" href="#">Envio (AFIP/ITF)</a></li>
+                                <li><a runat="server" id="ComprobantesConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                                <li><a runat="server" id="ComprobantesConsultaPDFs" visible="false" style="color:lightgray" href="#">Consulta PDFs</a></li>
+                                <li class="divider"></li>
+                                <li runat="server" id="Li2" class="dropdown dropdown-submenu"><a runat="server" id="A6" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Otras Consultas</a>
+                                    <ul class="dropdown-menu" style="width:300px;">
+                                        <li><a runat="server" id="ComprobantesOtrasConsIVAVentas" visible="false" style="color:lightgray" href="#">IVA Ventas</a></li>
+                                        <li><a runat="server" id="ComprobantesOtrasConsIVACompras" visible="false" style="color:lightgray" href="#">IVA Compras</a></li>
+                                        <li><a runat="server" id="ComprobantesOtrasConsInterfazCITI" visible="false" style="color:lightgray" href="#">Interfaz CITI Ventas/Compras</a></li>
+                                        <li><a runat="server" id="ComprobantesOtrasConsVentasXArticulo" visible="false" style="color:lightgray" href="#">Ventas por Artículo</a></li>
+                                        <li><a runat="server" id="ComprobantesOtrasConsComprasXArticulo" visible="false" style="color:lightgray" href="#">Compras por Artículo</a></li>
+                                        <li><a runat="server" id="ComprobantesOtrasConsStockXArticulo" visible="false" style="color:lightgray" href="#">Stock por Artículo</a></li>
+                                        <li><a runat="server" id="ComprobantesOtrasConsOnlineITFComprobantes" visible="false" style="color:lightgray" href="#">Online Interfacturas Comprobantes</a></li>
+                                        <li><a runat="server" id="ComprobantesOtrasConsOnlineITFComprobante" visible="false" style="color:lightgray" href="#">Online Interfacturas Comprobante</a></li>
+                                        <li><a runat="server" id="ComprobantesOtrasConsOnlineAFIP" visible="false" style="color:lightgray" href="#">Online AFIP</a></li>
+                                        <li><a runat="server" id="ComprobantesOtrasConsultasArchivoXML" visible="false" style="color:lightgray" href="#">Archivo XML</a></li>
+                                        <li><a runat="server" id="ComprobantesOtrasConsTYC" visible="false" style="color:lightgray" href="#">Términos y condiciones</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li runat="server" id="FacturacionControl" class="dropdown dropdown-submenu"><a runat="server" id="Facturacion" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Facturacion</a>
+                            <ul class="dropdown-menu" style="width:300px;">
+                                <li><a runat="server" id="FactComun" visible="false" style="color:lightgray" href="#">Común / RG.2904 / BonoFiscal / Expo</a></li>
+                                <li><a runat="server" id="FactTurismo" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                <li><a runat="server" id="FactAutContratosServicios" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                <li class="divider"></li>
+                                <li runat="server" id="RegistroFacturasControl" class="dropdown dropdown-submenu"><a runat="server" id="RegistroFacturas" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Registro de Facturas</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a runat="server" id="RegistroFacturasVenta" visible="false" style="color:lightgray" href="#">Venta Resguardo</a></li>
+                                        <li><a runat="server" id="RegistroFacturasCompra" visible="false" style="color:lightgray" href="#">Compra</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li runat="server" id="AdminControl" class="dropdown dropdown-submenu"><a runat="server" id="Admin" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Admin</a>
+                            <ul class="dropdown-menu">
+                                <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">CUIT</a>
+                                    <ul class="dropdown-menu" style="">
+                                        <li><a runat="server" id="AdminCUITAlta" visible="false" style="color:lightgray" href="#">Alta</a></li>
+                                        <li><a runat="server" id="AdminCUITSolPermisoAdmCUIT" visible="false" style="color:lightgray" href="#">Permiso Admin CUIT</a></li>
+                                        <li><a runat="server" id="AdminCUITBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                        <li><a runat="server" id="AdminCUITModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                        <li><a runat="server" id="AdminCUITCambioLogo" visible="false" style="color:lightgray" href="#">Cambio logotipo</a></li>
+                                        <li><a runat="server" id="AdminCUITConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">UNs</a>
+                                    <ul class="dropdown-menu" style="width:200px;">
+                                        <li><a runat="server" id="AdminUNAlta" visible="false" style="color:lightgray" href="#">Alta</a></li>
+                                        <li><a runat="server" id="AdminUNSolPermisoAdmUN" visible="false" style="color:lightgray" href="#">Permiso Admin UN</a></li>
+                                        <li><a runat="server" id="AdminUNSolPermisoOpeUN" visible="false" style="color:lightgray" href="#">Permiso Operador UN</a></li>
+                                        <li><a runat="server" id="UNBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                        <li><a runat="server" id="UNModificar" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                        <li><a runat="server" id="AdminUNConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Puntos de Venta</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a runat="server" id="AdminPtoVentaAlta" visible="false" style="color:lightgray" href="#">Alta</a></li>
+                                        <li><a runat="server" id="AdminPtoVentaBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                        <li><a runat="server" id="AdminPtoVentaModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                        <li><a runat="server" id="AdminPtoVentaConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Autorizaciones</a>
+                                    <ul class="dropdown-menu" style="width:200px;">
+                                        <li><a runat="server" id="AdminAutorizHis" visible="false" style="color:lightgray" href="#">Autorizaciones pendientes</a></li>
+                                        <li><a runat="server" id="AdminAutorizPtes" visible="false" style="color:lightgray" href="#">Autorizaciones históricas</a></li>
+                                    </ul>
+                                </li>
+                                <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Usuarios</a>
+                                    <ul class="dropdown-menu" style="width:250px;">
+                                        <li><a runat="server" id="AdminUserCambioClave" visible="false" style="color:lightgray" href="#">Cambio de Contraseña</a></li>
+                                        <li><a runat="server" id="AdminUserModifDatosConfig" visible="false" style="color:lightgray" href="#">Modificación de Configuración</a></li>
+                                    </ul>
+                                </li>
+                                <li runat="server" id="ContratosControl" class="dropdown dropdown-submenu"><a runat="server" id="Contratos" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Contratos</a>
+                                    <ul class="dropdown-menu">
+                                        <li><a runat="server" id="ContratosAlta" visible="false" style="color:lightgray" href="#">Alta</a></li>
+                                        <li><a runat="server" id="ContratosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                        <li><a runat="server" id="ContratosModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                        <li><a runat="server" id="ContratosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li runat="server" id="AdminSiteControl" class="dropdown dropdown-submenu"><a runat="server" id="AdminSite" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="false">Admin.Site</a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" id="AdminSiteComprobantes" visible="false" style="color:lightgray" href="#">Comprobantes</a></li>
+                                <li><a runat="server" id="AdminSiteUsuarios" visible="false" style="color:lightgray" href="#">Usuarios</a></li>
+                                <li><a runat="server" id="AdminSiteCUITs" visible="false" style="color:lightgray" href="#">CUITs</a></li>
+                                <li><a runat="server" id="AdminSiteUNs" visible="false" style="color:lightgray" href="#">UNs</a></li>
+                                <li><a runat="server" id="AdminSitePtoVenta" visible="false" style="color:lightgray" href="#">Puntos de Venta</a></li>
+                                <li><a runat="server" id="AdminSitePersonas" visible="false" style="color:lightgray" href="#">Personas</a></li>
+                                <li><a runat="server" id="AdminSiteArtículos" visible="false" style="color:lightgray" href="#">Artículos</a></li>
+                                <li><a runat="server" id="AdminSitePermisos" visible="false" style="color:lightgray" href="#">Permisos</a></li>
+                                <li><a runat="server" id="AdminSiteConfiguraciones" visible="false" style="color:lightgray" href="#" >Configuraciones</a></li>
+                                <li><a runat="server" id="AdminSiteLogs" visible="false" style="color:lightgray" href="#">Logs</a></li>
+                                <li><a runat="server" id="AdminSiteAdmin" visible="false" style="color:lightgray" href="#" >Administración</a></li>
+                                <li class="divider"></li>
+                                <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Búsqueda Laboral</a>
+                                <ul class="dropdown-menu">
+                                    <li><a runat="server" id="AdminSiteCVs" visible="false" style="color:lightgray" href="#">Explorador</a></li>
+                                    <li><a runat="server" id="AdminSiteBusquedaLaboral" visible="false" style="color:lightgray" href="#">Archivos CVs</a></li>
+                                </ul>
+                              </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Ayuda</a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" id="AyudaManual" visible="false" class="linkMenu" href="#">Manual</a></li>
+                                <li><a runat="server" id="AyudaNovedades" visible="false" class="linkMenu" href="#">Novedades</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/factura.aspx?login=salir">Salir</a></li>
                     </ul>
-
-                </div><!-- /.navbar-collapse -->
+                </div> 
+                <!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
      <div id="DivUsuario" style="text-align:center">   
@@ -363,6 +520,8 @@
     <script src="/assetsAnt/js/plugins.js"></script>
     <script src="/assetsAnt/js/modernizr.js"></script>
     <script src="/assetsAnt/js/main.js"></script>
+
+    <script src="/jsAnt/menu.js"></script>
     </form>
     
     <script type="text/javascript">

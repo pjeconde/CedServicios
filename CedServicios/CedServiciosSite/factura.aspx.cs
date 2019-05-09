@@ -15,11 +15,35 @@ namespace CedServicios.Site
             {
                 //UsuarioTextBox.Focus();
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                sesion.URLsite = HttpContext.Current.Request.Url.AbsoluteUri.Replace("factura.aspx", string.Empty);
+                sesion.URLsite = HttpContext.Current.Request.Url.AbsoluteUri.Replace("factura.aspx", string.Empty).Replace("?login=salir", string.Empty).Replace("?login=ingresar", string.Empty);
+                if (sesion.Usuario.Id != null)
+                {
+                    formlogin.Visible = false;
+                    if (Request.QueryString["login"] == "ingresar")
+                    {
+                        Response.Redirect("/Default.aspx");
+                    }
+                    formLoginActivo.Visible = true;
+                    if (Request.QueryString["login"] == "salir")
+                    {
+                        Salir();
+                        formlogin.Visible = true;
+                        formLoginActivo.Visible = false;
+                    }
+                }
+                else
+                {
+                    formlogin.Visible = true;
+                    formLoginActivo.Visible = false;
+                }
             }
             if (Page.Request["LoginButton"] == "LoginButton")
             {
                 LoginButton_Click(Page.Request["UsuarioTextBox"].ToString(), Page.Request["PasswordTextBox"].ToString());
+            }
+            if (Page.Request["SuscribirButton"] == "SuscribirButton")
+            {
+                SuscribirButton_Click(Page.Request["EmailTextBox"].ToString());
             }
         }
 
@@ -62,6 +86,12 @@ namespace CedServicios.Site
         //    }
         //}
 
+        private void Salir()
+        {
+            MensajeLabel.Text = String.Empty;
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            RN.Sesion.Cerrar(sesion);
+        }
         private void LoginButton_Click(string user, string clave)
         {
             try
@@ -133,13 +163,34 @@ namespace CedServicios.Site
         //        UsuarioTextBox.Focus();
         //    }
         //}
-        protected void UsuarioTextBox_TextChanged(object sender, EventArgs e)
+        private void SuscribirButton_Click(string email)
         {
-            MensajeLabel.Text = String.Empty;
+            try
+            {
+                MensajeLabel.Text = String.Empty;
+                Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+                Entidades.BusquedaLaboral busquedaLaboral = new Entidades.BusquedaLaboral();
+                busquedaLaboral.Email = email;
+                busquedaLaboral.Estado = "Vigente";
+                RN.BusquedaLaboral.Crear(busquedaLaboral, sesion);
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Exception ex)
+            {
+                MensajeLabel.Text = EX.Funciones.Detalle(ex);
+            }
         }
-        protected void PasswordTextBox_TextChanged(object sender, EventArgs e)
-        {
-            MensajeLabel.Text = String.Empty;
-        }
+
+        //protected void UsuarioTextBox_TextChanged(object sender, EventArgs e)
+        //{
+        //    MensajeLabel.Text = String.Empty;
+        //}
+        //protected void PasswordTextBox_TextChanged(object sender, EventArgs e)
+        //{
+        //    MensajeLabel.Text = String.Empty;
+        //}
     }
 }

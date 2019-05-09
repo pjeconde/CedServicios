@@ -17,14 +17,17 @@ namespace CedServicios.Site
             if (RefrescaDatosUsuario) RN.Sesion.RefrescarDatosUsuario(Sesion.Usuario, Sesion);
             if (Sesion.Ambiente != "PROD")
             {
-                //ContentPlaceHolder cedeiraContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("CedeiraContentPlaceHolder"));
-                //Label ambienteLabel = ((Label)cedeiraContentPlaceHolder.FindControl("AmbienteLabel"));
                 Label ambienteLabel = ((Label)Master.FindControl("AmbienteLabel"));
                 ambienteLabel.Text = Sesion.Ambiente;
             }
 
             ContentPlaceHolder menuContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("MenuContentPlaceHolder"));
             Menu menu = ((Menu)menuContentPlaceHolder.FindControl("Menu"));
+
+            Literal menuPpal = ((Literal)Master.FindControl("MenuPpal"));
+
+            Control AdminSiteControl = (Control)Master.FindControl("AdminSiteControl");
+            AdminSiteControl.Visible = true;
 
             ContentPlaceHolder usuarioContentPlaceHolder = ((ContentPlaceHolder)Master.FindControl("UsuarioContentPlaceHolder"));
             ImageButton usuarioImageButton = ((ImageButton)usuarioContentPlaceHolder.FindControl("UsuarioImageButton"));
@@ -42,9 +45,6 @@ namespace CedServicios.Site
             menu.Visible = true;
             MenuItem mItem;
             MenuItem mItemNivel3;
-
-            mItem = new MenuItem("Iniciar sesión", "Iniciar sesión"); mItem.Selectable = false;
-            menu.Items.Add(mItem);
 
             mItem = new MenuItem("Personas", "Personas"); mItem.Selectable = false; mItem.ToolTip = "Clientes / Proveedores";
             menu.Items.Add(mItem);
@@ -159,109 +159,109 @@ namespace CedServicios.Site
                     menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
 
 
-            mItem = new MenuItem("Administración", "Administración"); mItem.Selectable = false;
-            menu.Items.Add(mItem);
+            //mItem = new MenuItem("Administración", "Administración"); mItem.Selectable = false;
+            //menu.Items.Add(mItem);
 
-                mItem = new MenuItem("CUIT", "CUIT"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("CUIT", "CUIT"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
-                    mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Cambio logotipo", "Cambio logotipo"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Solicitud permiso de administrador de CUIT", "Solicitud permiso de administrador de CUIT"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Cambio logotipo", "Cambio logotipo"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Solicitud permiso de administrador de CUIT", "Solicitud permiso de administrador de CUIT"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
 
-                mItem = new MenuItem("Unidad de Negocio", "Unidad de Negocio"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Unidad de Negocio", "Unidad de Negocio"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
-                    mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Solicitud permiso de administrador de UN", "Solicitud permiso de administrador de UN"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Solicitud permiso de operador de servicio de una UN existente", "Solicitud permiso de operador de servicio de una UN existente"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Solicitud permiso de administrador de UN", "Solicitud permiso de administrador de UN"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Solicitud permiso de operador de servicio de una UN existente", "Solicitud permiso de operador de servicio de una UN existente"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
 
-                mItem = new MenuItem("Puntos de Venta", "Puntos de Venta"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Puntos de Venta", "Puntos de Venta"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
-                    mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Alta", "Alta"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Baja/Anul.baja", "Baja/Anul.baja"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Modificación", "Modificación"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Consulta", "Consulta"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
 
-                mItem = new MenuItem("Autorizaciones", "Autorizaciones"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Autorizaciones", "Autorizaciones"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
-                    mItem = new MenuItem("Explorador de Autorizaciones pendientes", "Explorador de Autorizaciones pendientes"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Explorador de Autorizaciones (histórico)", "Explorador de Autorizaciones (histórico)"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Explorador de Autorizaciones pendientes", "Explorador de Autorizaciones pendientes"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Explorador de Autorizaciones (histórico)", "Explorador de Autorizaciones (histórico)"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
 
-                mItem = new MenuItem("Usuario", "Usuario"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Usuario", "Usuario"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
-                    mItem = new MenuItem("Cambio de Contraseña", "Cambio de Contraseña"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                    mItem = new MenuItem("Modificación datos de Configuración", "Modificación datos de Configuración"); mItem.Selectable = false;
-                    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Cambio de Contraseña", "Cambio de Contraseña"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //        mItem = new MenuItem("Modificación datos de Configuración", "Modificación datos de Configuración"); mItem.Selectable = false;
+            //        menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
 
-            mItem = new MenuItem("Administración Site", "Administración Site"); mItem.Selectable = false;
-            menu.Items.Add(mItem);
-            menu.Items[menu.Items.Count - 1].Selectable = false;
-                mItem = new MenuItem("Comprobantes", "Comprobantes"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Usuarios", "Usuarios"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("CUITs", "CUITs"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("UNs", "UNs"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Puntos de Venta", "Puntos de Venta"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Personas", "Personas"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Articulos", "Artículos"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Permisos", "Permisos"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Configuraciones", "Configuraciones"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Logs", "Logs"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Administración", "Administración"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("CVs", "CVs"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Búsqueda Laboral", "Búsqueda Laboral"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //mItem = new MenuItem("Administración Site", "Administración Site"); mItem.Selectable = false;
+            //menu.Items.Add(mItem);
+            //menu.Items[menu.Items.Count - 1].Selectable = false;
+            //    mItem = new MenuItem("Comprobantes", "Comprobantes"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Usuarios", "Usuarios"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("CUITs", "CUITs"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("UNs", "UNs"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Puntos de Venta", "Puntos de Venta"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Personas", "Personas"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Articulos", "Artículos"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Permisos", "Permisos"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Configuraciones", "Configuraciones"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Logs", "Logs"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Administración", "Administración"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("CVs", "CVs"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Búsqueda Laboral", "Búsqueda Laboral"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
-            mItem = new MenuItem("Ayuda", "Ayuda"); mItem.Selectable = false;
-            menu.Items.Add(mItem);
-                mItem = new MenuItem("Manual", "Manual"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("¿Cómo empiezo a operar con facturas electrónicas?", "¿Cómo empiezo a operar con facturas electrónicas?"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Novedades", "Novedades"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
-                mItem = new MenuItem("Documentación técnica", "Documentación técnica"); mItem.Selectable = false;
-                menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //mItem = new MenuItem("Ayuda", "Ayuda"); mItem.Selectable = false;
+            //menu.Items.Add(mItem);
+            //    mItem = new MenuItem("Manual", "Manual"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("¿Cómo empiezo a operar con facturas electrónicas?", "¿Cómo empiezo a operar con facturas electrónicas?"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems[menu.Items[menu.Items.Count - 1].ChildItems.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Novedades", "Novedades"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
+            //    mItem = new MenuItem("Documentación técnica", "Documentación técnica"); mItem.Selectable = false;
+            //    menu.Items[menu.Items.Count - 1].ChildItems.Add(mItem);
 
             mItem = new MenuItem("Cerrar sesión", "Cerrar sesión"); mItem.Selectable = false;
             menu.Items.Add(mItem);
@@ -283,8 +283,8 @@ namespace CedServicios.Site
             uNLabel.Visible = false;
             uNDropDownList.Visible = false;
 
-            Control btnCerrarLogin = (Control)Master.FindControl("btnCerrarLogin");
-            btnCerrarLogin.Visible = false;
+            Control salir = (Control)Master.FindControl("Salir");
+            //salir.Visible = false;
 
             if (Sesion != null)
             {
@@ -294,6 +294,20 @@ namespace CedServicios.Site
                     if (mItemFind != null)
                     {
                         mItemFind.Selectable = true;
+                    }
+                }
+                //Nuevo Menu
+                foreach (Entidades.Opcion o in Sesion.Opciones)
+                {
+                    System.Web.UI.HtmlControls.HtmlAnchor mItemFind = (System.Web.UI.HtmlControls.HtmlAnchor)Master.FindControl(o.Nombre);
+                    if (mItemFind != null)
+                    {
+                        mItemFind.Visible = true;
+                        if (o.Habilitada)
+                        { 
+                            mItemFind.Style.Add("Color", "#111111");
+                            mItemFind.HRef = o.Vinculo;
+                        }
                     }
                 }
                 menuContentPlaceHolder.Visible = true;
@@ -352,7 +366,7 @@ namespace CedServicios.Site
                         uNLabel.Visible = true;
                         uNDropDownList.Visible = true;
                     }
-                    Control c = (Control)Master.FindControl("btnCerrarLogin");
+                    Control c = (Control)Master.FindControl("Salir");
                     if (c != null)
                     {
                         c.Visible = true;
@@ -371,10 +385,10 @@ namespace CedServicios.Site
                     c.Visible = true;
                 }
             }
-            MenuItem menuItem = menu.FindItem("Iniciar sesión");
-            if (menuItem != null && !menuItem.Selectable) RemoverMenuItem(menu, menuItem);
+            //MenuItem menuItem = menu.FindItem("Iniciar sesión");
+            //if (menuItem != null && !menuItem.Selectable) RemoverMenuItem(menu, menuItem);
             MenuItem menuItemRef = menu.FindItem("Administración Site|Comprobantes");
-            menuItem = menu.FindItem("Administración Site");
+            MenuItem menuItem = menu.FindItem("Administración Site");
             if (menuItem != null && !menuItemRef.Selectable) RemoverMenuItem(menu, menuItem);
             Master.DataBind();
         }

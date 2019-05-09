@@ -658,7 +658,8 @@ section.section.footer-bottom a:visited {
 }
 
 .smk_accordion .accordion_in.acc_active > .acc_head {
-    color: #414141;
+    color: #fff;
+	background: #4e4d4d
 }
 .cd-main-header {
     height: 60px;
@@ -739,6 +740,12 @@ h1 {
 
 @media only screen and (min-width: 800px)
 {
+.servicios .container .six.columns {
+
+	width: 44%;
+	margin-bottom: 30px
+
+}	
 	
 .container .six.columns {
 
@@ -845,6 +852,16 @@ float: none;
     display: inline-block;
     width: 30%;
 	margin: 2% 3% 0 0;
+}
+ul.cd-nav-gallery.servicios {
+    padding: 0px 5px 0 180px;
+}
+
+.servicios li {
+
+    width: 21% !important;
+	
+
 }
 
 .cd-primary-nav .cd-nav-gallery li:nth-child(1)

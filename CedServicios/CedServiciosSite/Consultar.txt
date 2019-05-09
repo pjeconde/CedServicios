@@ -201,3 +201,9 @@
    at System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access)
    at CedServicios.RN.CertificadosX509Lib.FileToByteArray(String fileName) in C:\GitHub\CedServicios\CedServicios\CedServiciosRN\LoginTicket.cs:line 371
    at CedServicios.RN.CertificadosX509Lib.ObtieneCertificadoDesdeArchivo(String argArchivo) in C:\GitHub\CedServicios\CedServicios\CedServiciosRN\LoginTicket.cs:line 350
+20190322 02:57:59  Consulta de Tipos de Comprobante CUIT: 20225018805
+20190322 03:00:01  Consulta de Tipos de Comprobante CUIT: 20225018805
+20190322 03:02:39  Consulta de Tipos de Comprobante CUIT: 20225018805
+20190322 03:04:34  Consulta de Tipos de Comprobante CUIT: 20225018805
+20190322 03:05:31  Consulta de Tipos de Comprobante CUIT: 20225018805
+20190322 03:13:32  Consulta de Tipos de Comprobante CUIT: 20225018805
