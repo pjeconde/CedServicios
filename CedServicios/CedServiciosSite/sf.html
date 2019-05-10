@@ -45,23 +45,17 @@
          </script>
      </head>
      <body>
-         <!-- Primary Page Layout
-    ================================================== -->
+         <!-- Primary Page Layout ================================================== -->
          <div class="animsition">
 
-             <!-- MENU
-        ================================================== -->
-
+             <!-- MENU ================================================== -->
              <div class="header-top">
-
                  <header class="cd-main-header">
                      <a class="cd-logo animsition-link" href="index.html"><img src="images/logo.svg" alt="Cedeira"></a>
                      <ul class="cd-header-buttons">
-
                          <li><a class="cd-nav-trigger" href="#cd-primary-nav"><span></span></a></li>
                      </ul> <!-- cd-header-buttons -->
                  </header>
-
                  <nav class="cd-nav">
                      <ul id="cd-primary-nav" class="cd-primary-nav is-fixed">
                          <li>
@@ -84,14 +78,21 @@
                                  </li>
                                  <li>
                                      <div class="services-boxes-1">
-                                         <div class="icon-box">&#xf0c0;</div>
-                                         <h6><a href="personalit.html">PERSONAL IT</a></h6>
+                                         <div class="icon-box">&#xf0ed;</div>
+                                         <h6><a href="factura.aspx">FACTURA ELECTRONICA</a></h6>
                                      </div>
                                  </li>
                                  <li>
                                      <div class="services-boxes-1">
-                                         <div class="icon-box">&#xf0ed;</div>
-                                         <h6><a href="factura.aspx">FACTURA ELECTRONICA</a></h6>
+                                         <div class="icon-box">&#xf0c0;</div>
+                                         <h6>
+                                             <a href="personalit.html">PERSONAL IT</a>
+                                             <ul class="menumini">
+                                                 <li><a href="personalitR.html">Recruiting</a></li>
+                                                 <li><a href="personalitO.html">Outsourcing</a></li>
+                                             </ul>
+                                         </h6>
+
                                      </div>
                                  </li>
                              </ul>
@@ -121,7 +122,7 @@
                                      </a>
                                  </li>
                                  <li>
-                                     <a class="cd-nav-item animsition-link" href="emiral.html">
+                                     <a class="cd-nav-item animsition-link" href="fondos.html">
                                          <img src="images/portfolio/4.jpg" alt="Product Image">
                                          <h3>Sistema de Administración de Fondos Comunes de Inversión</h3>
                                      </a>
@@ -232,9 +233,9 @@
                              </div> <!-- .cd-product -->
                              <br />
                              <br />
-                             <div class="blog-big-wrapper quote-big-post grey-section" style="width:95%">
-                                 <a href="Cedeira-Brochure-SF.pdf" class="animsition-link" target="_blank"><h5>Para obtener un mayor detalle, pueden descargar la presentación completa del servicio en formato PDF</h5></a>
-                                 <a href="Cedeira-Brochure-SF.pdf" class="animsition-link" target="_blank"><div class="link-to-post">Descargar<span></span></div></a>
+                             <div class="blog-big-wrapper quote-big-post grey-section pdf">
+                                 <a href="Cedeira-Brochure-SF.pdf" class="" target="_blank"><h5>Para obtener un mayor detalle, pueden descargar la presentación completa del servicio en formato PDF</h5></a>
+                                 <a href="Cedeira-Brochure-SF.pdf" class="" target="_blank"><div class="link-to-post">Descargar<span></span></div></a>
                              </div>
                          </div>
                          <div class="six columns">
@@ -403,14 +404,16 @@
                          </div>
                      </div>
                  </section>
-
                  <div id="indexpie"></div>
              </main>
              <div class="scroll-to-top">&#xf106;</div>
          </div>
-         <!-- JAVASCRIPT
-    ================================================== -->
-
+         <!-- JAVASCRIPT ================================================== -->
+         <script type="text/javascript">
+             $(function () {
+                 $("#menuppal").load("indexMenu.html");
+             });
+         </script>
          <script type="text/javascript" src="js/modernizr.custom.js"></script>
          <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
          <script type="text/javascript" src="js/retina-1.1.0.min.js"></script>
@@ -492,10 +495,9 @@
          <script type="text/javascript" src="js/smk-accordion.js"></script>
          <script type="text/javascript" src="js/jquery.fitvids.js"></script>
          <script type="text/javascript" src="js/custom-about-2.js"></script>
-
          <script>
              $(function () {
-                 $("#indexpie").load("IndexPie.html");
+                 $("#indexpie").load("indexPie.html");
              });
          </script>
          <!-- End Document

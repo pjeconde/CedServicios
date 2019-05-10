@@ -893,7 +893,7 @@ namespace CedServicios.Site
             {
                 response = (HttpWebResponse)request.GetResponse();
             }
-            catch (WebException ex)
+            catch (WebException)
             {
                 existe = false;
             }

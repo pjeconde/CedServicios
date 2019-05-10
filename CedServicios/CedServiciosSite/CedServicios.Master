@@ -379,34 +379,6 @@
     </div>
     <asp:ContentPlaceHolder ID="MenuContentPlaceHolder" runat="server" Visible="true">
     <div id="DivMenu" style="text-align:center">
-        <table>
-            <tr>
-                <td align="left" style="text-align: left">
-                    <asp:Menu ID="Menu" runat="server" BackColor="white"  
-                        DynamicHorizontalOffset="0" CssClass="MainMenu" 
-                        Font-Names="Verdana" Font-Size="12px" ForeColor="#284E98" PathSeparator="|" 
-                        StaticSubMenuIndent="30px" onmenuitemclick="Menu_MenuItemClick" 
-                        Orientation="Horizontal" StaticEnableDefaultPopOutImage="false" DynamicEnableDefaultPopOutImage="false">
-                        <DynamicHoverStyle Font-Underline="true" BackColor="Cornsilk"/>
-                        <DynamicMenuItemStyle BackColor="#ededed" VerticalPadding="2px"/>
-                        <DynamicSelectedStyle Font-Underline="true"/>
-                        <StaticHoverStyle Font-Underline="true" BackColor="Cornsilk"/>
-                        <StaticMenuItemStyle HorizontalPadding="10px"/>
-                        <StaticSelectedStyle BackColor="#ededed"/>
-	                    <StaticItemTemplate>
-		                    <asp:Panel ID="Panel1" runat="server" ForeColor='<%# GetItemColor(Container) %>'>
-			                    <%# Eval("Text") %>
-		                    </asp:Panel>
-	                    </StaticItemTemplate>
-	                    <DynamicItemTemplate>
-		                    <asp:Panel ID="Panel1" runat="server" ForeColor='<%# GetItemColor(Container) %>'>
-			                    <%# Eval("Text") %>
-		                    </asp:Panel>
-	                    </DynamicItemTemplate>
-                    </asp:Menu>
-                </td>
-            </tr>
-        </table>
     </div>
     </asp:ContentPlaceHolder>
     <table>
@@ -429,56 +401,12 @@
                 <div class="footer-menu-wrapper">
                     <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                         <div class="menu-item">
-                            <h5>Factura Electrónica</h5>
-                            <ul>
-                                <li><a id="linkIngresar" target="_self" href="UsuarioLogin.aspx">Ingresar</a></li>
-                                <li><a id="linkFEAInfo" target="_self" href="InicioFEA.aspx?valor=panFEA">Información</a></li>
-                                <li style="visibility:hidden"><a id="linkFEAPrecios" target="_self" href="InicioFEAPrecios.aspx">Servicios / Precios</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="menu-item">
                             <h5>Legal</h5>
                             <ul>
                                 <li><a id="linktyc" target="_self" href="InicioTYC.aspx?valor=pan1">TERMINOS Y CONDICIONES</a></li>
                                 <li><a id="inkpoliticas" target="_self" href="InicioTYC.aspx?valor=pan2">POLITICAS DE PRIVACIDAD</a></li>
                             </ul>
                             <br />
-                        </div>
-                    </div>
-                    <div class="col-lg-3 ol-md-6 col-sm-6 col-xs-12">
-                        <div class="menu-item">
-                            <h5>Información</h5>
-                            <ul>
-                                <li><a id="linkProductos" target="_self" href="Inicio.aspx#features">Productos</a></li>
-                                <li><a id="linkServicios" target="_self" href="Inicio.aspx#service">Servicios</a></li>
-                                <li><a id="linkTecno" target="_self" href="InicioInformacion.aspx?valor=pan1">Tecnologías</a></li>
-                                <li><a id="linkClientes" target="_self" href="Inicio.aspx#clientes">Clientes</a></li>
-                                <li><a id="linkContacto" target="_self" href="Inicio.aspx#contact">Contacto</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="menu-item">
-                            <h5>Búsquedas Laborales</h5>
-                            <p>
-                                <ul>
-                                    <li><a id="A1" target="_self" href="InicioBusquedas.aspx">Busquedas</a></li>
-                                </ul>
-                            </p>
-                            <p>Si desea recibir infomación sobre novedades de busquedas laborales puede dejarnos su email. </p>
-                        </div>
-                        <div class="single_left_contact">
-                            <div class="form-group">
-                                <asp:DropDownList ID="IdBusquedaPerfilDropDownList" class="form-control" runat="server" TabIndex="100" name="IdBusquedaPerfil" placeholder="Perfil" DataValueField="IdBusquedaPerfil" DataTextField="DescrBusquedaPerfil" Visible="true" style="height:30px"></asp:DropDownList>
-                            </div>
-                            <div class="form-group">
-                                <input type="email" id="EmailBL" class="form-control" name="EmailBL" placeholder="Ingrese su email." TabIndex="101" style="min-width: 250px; height:30px;" value='<%= EmailValue %>'>
-                            </div>
-                            <div class="form-group text-left">
-                                <input type="submit" id="ButtonEnviarEmailBL" class="btn btn-default" value="Enviar" runat="server" TabIndex="102" onserverclick="ButtonEnviarEmailBL_Click" style="padding:0px">
-                            </div>
                         </div>
                     </div>
                 </div>

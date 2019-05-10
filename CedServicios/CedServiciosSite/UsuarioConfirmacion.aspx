@@ -78,14 +78,20 @@
                         </li>
                         <li>
                             <div class="services-boxes-1">
-                                <div class="icon-box">&#xf0c0;</div>
-                                <h6><a href="personalit.html">PERSONAL IT</a></h6>
+                                <div class="icon-box">&#xf0ed;</div>
+                                <h6><a href="factura.aspx">FACTURA ELECTRONICA</a></h6>
                             </div>
                         </li>
                         <li>
                             <div class="services-boxes-1">
-                                <div class="icon-box">&#xf0ed;</div>
-                                <h6><a href="factura.aspx">FACTURA ELECTRONICA</a></h6>
+                                <div class="icon-box">&#xf0c0;</div>
+                                <h6>
+                                    <a href="personalit.html">PERSONAL IT</a>
+                                    <ul class="menumini">
+                                        <li><a href="personalitR.html">Recruiting</a></li>
+                                        <li><a href="personalitO.html">Outsourcing</a></li>
+                                    </ul>
+                                </h6>
                             </div>
                         </li>
                     </ul>
@@ -112,7 +118,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="cd-nav-item animsition-link" href="emiral.html">
+                            <a class="cd-nav-item animsition-link" href="fondos.html">
                                 <img src="images/portfolio/4.jpg" alt="Product Image">
                                 <h3>Sistema de Administración de Fondos Comunes de Inversión</h3>
                             </a>
@@ -273,7 +279,7 @@
                         </li>
                         <li><a href="contenidos.html" class="animsition-link">Sistema de Administración y Presentación de Contenidos</a></li>
                         <li><a href="tasas.html" class="animsition-link">Sistema de Carga Centralizada de Tasas</a></p>
-                        <li><a href="emiral.html" class="animsition-link">Sistema de Administración de Fondos Comunes de Inversión</a></li>
+                        <li><a href="fondos.html" class="animsition-link">Sistema de Administración de Fondos Comunes de Inversión</a></li>
                         <li><a href="inversiones.html" class="animsition-link">Plataforma de Inversiones</a></li>
                         <li><a href="stock.html" class="animsition-link">Gestión de Stock de Servicios y Tarjetas	</a></li>
                     </ul>

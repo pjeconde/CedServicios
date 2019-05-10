@@ -263,7 +263,7 @@
                         </li>
                         <li><a href="contenidos.html" class="animsition-link">Sistema de Administración y Presentación de Contenidos</a></li>
                         <li><a href="tasas.html" class="animsition-link">Sistema de Carga Centralizada de Tasas</a></p>
-                        <li><a href="emiral.html" class="animsition-link">Sistema de Administración de Fondos Comunes de Inversión</a></li>
+                        <li><a href="fondos.html" class="animsition-link">Sistema de Administración de Fondos Comunes de Inversión</a></li>
                         <li><a href="inversiones.html" class="animsition-link">Plataforma de Inversiones</a></li>
                         <li><a href="stock.html" class="animsition-link">Gestión de Stock de Servicios y Tarjetas	</a></li>
                     </ul>

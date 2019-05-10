@@ -1003,15 +1003,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MenuContentPlaceHolder;
         
         /// <summary>
-        /// Control Menu.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Menu Menu;
-        
-        /// <summary>
         /// Control ContentPlaceDefault.
         /// </summary>
         /// <remarks>
@@ -1028,23 +1019,5 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl footerNoLogin;
-        
-        /// <summary>
-        /// Control IdBusquedaPerfilDropDownList.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList IdBusquedaPerfilDropDownList;
-        
-        /// <summary>
-        /// Control ButtonEnviarEmailBL.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputSubmit ButtonEnviarEmailBL;
     }
 }

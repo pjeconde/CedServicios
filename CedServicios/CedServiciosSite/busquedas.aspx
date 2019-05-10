@@ -55,26 +55,38 @@
 				</li>
 				<li class="has-children">
 					<a href="#">Servicios</a>
-		            <ul class="cd-nav-gallery is-hidden">						
-						<li>
-							<div class="services-boxes-1">
-						<div class="icon-box">&#xf1b3;</div>
-						    <h6><a href="desarrollos.html">DESARROLLOS A MEDIDA</a></h6>						
-					    </div>
-						</li>
-						<li>
-							<div class="services-boxes-1">
-						<div class="icon-box">&#xf085;</div>
-						<h6><a href="sf.html">SOFTWARE FACTORY</a></h6>
-						</div>
-						</li>
-						<li>
-							<div class="services-boxes-1">
-						<div class="icon-box">&#xf0ed;</div>
-						    <h6><a href="factura.aspx">FACTURA ELECTRONICA</a></h6>						
-					    </div>
-						</li>						
-					</ul>			
+                        <ul class="cd-nav-gallery servicios is-hidden">
+                            <li>
+                                <div class="services-boxes-1">
+                                    <div class="icon-box">&#xf1b3;</div>
+                                    <h6><a href="desarrollos.html">DESARROLLOS A MEDIDA</a></h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="services-boxes-1">
+                                    <div class="icon-box">&#xf085;</div>
+                                    <h6><a href="sf.html">SOFTWARE FACTORY</a></h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="services-boxes-1">
+                                    <div class="icon-box">&#xf0ed;</div>
+                                    <h6><a href="factura.aspx">FACTURA ELECTRONICA</a></h6>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="services-boxes-1">
+                                    <div class="icon-box">&#xf0c0;</div>
+                                    <h6>
+                                        <a href="personalit.html">PERSONAL IT</a>
+                                        <ul class="menumini">
+                                            <li><a href="personalitR.html">Recruiting</a></li>
+                                            <li><a href="personalitO.html">Outsourcing</a></li>
+                                        </ul>
+                                    </h6>
+                                </div>
+                            </li>
+                        </ul>
 				</li>
 
 				<li class="has-children">
@@ -247,7 +259,7 @@
 				<div class="clear"></div>
 			</div>
 	    </section>		
-	    <div id="pie"></div>
+	    <div id="indexpie"></div>
 	</main>		
 
 	<div class="scroll-to-top">&#xf106;</div>
@@ -255,11 +267,6 @@
 	<!-- JAVASCRIPT
     ================================================== -->
     <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
-    <script>
-        $(function () {
-            $("#pie").load("IndexPie.html");
-        });
-    </script>
     <script type="text/javascript" src="js/modernizr.custom.js"></script> 
     <script type="text/javascript" src="js/jquery.mobile.custom.min.js"></script>
     <script type="text/javascript" src="js/retina-1.1.0.min.js"></script>	
@@ -336,7 +343,11 @@
 
     <script type="text/javascript" src="js/custom-index.js"></script> 
     <script type="text/javascript" src="js/contact.js"></script>
-	  
+    <script>
+        $(function () {
+            $("#indexpie").load("indexPie.html");
+        });
+    </script>	  
 <!-- End Document
 ================================================== -->
 </body>

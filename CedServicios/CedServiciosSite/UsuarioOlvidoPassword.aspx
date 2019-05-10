@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="" AutoEventWireup="true" CodeBehind="UsuarioOlvidoPassword.aspx.cs" Inherits="CedServicios.Site.UsuarioOlvidoPassword" Theme="CedServiciosNew" %>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="UsuarioOlvidoPassword.aspx.cs" Inherits="CedServicios.Site.UsuarioOlvidoPassword" Theme="CedServiciosNew" %>
 
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
@@ -112,7 +112,7 @@
                             </a>
                         </li>
                         <li>
-                            <a class="cd-nav-item animsition-link" href="emiral.html">
+                            <a class="cd-nav-item animsition-link" href="fondos.html">
                                 <img src="images/portfolio/4.jpg" alt="Product Image">
                                 <h3>Sistema de Administración de Fondos Comunes de Inversión</h3>
                             </a>
@@ -410,7 +410,7 @@
                         </li>
                         <li><a href="contenidos.html" class="animsition-link">Sistema de Administración y Presentación de Contenidos</a></li>
                         <li><a href="tasas.html" class="animsition-link">Sistema de Carga Centralizada de Tasas</a></p>
-                        <li><a href="emiral.html" class="animsition-link">Sistema de Administración de Fondos Comunes de Inversión</a></li>
+                        <li><a href="fondos.html" class="animsition-link">Sistema de Administración de Fondos Comunes de Inversión</a></li>
                         <li><a href="inversiones.html" class="animsition-link">Plataforma de Inversiones</a></li>
                         <li><a href="stock.html" class="animsition-link">Gestión de Stock de Servicios y Tarjetas	</a></li>
                     </ul>

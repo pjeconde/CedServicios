@@ -71,6 +71,9 @@
       <HintPath>..\packages\FileHelpers.ExcelNPOIStorage.3.1.5\lib\net40\FileHelpers.ExcelNPOIStorage.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=1.1.0.145, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.1.1.0\lib\net45\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>..\..\..\DocsU\Utilitarios\.NET 2010\DotNetZipLib-DevKit-v1.9\zip-v1.9\Release\Ionic.Zip.dll</HintPath>
     </Reference>
@@ -141,6 +144,9 @@
     <Content Include="assetsAnt\images\homebg3.jpg" />
     <Content Include="assetsAnt\images\logo.png" />
     <Content Include="assetsAnt\images\preloading.gif" />
+    <Content Include="busquedas.aspx" />
+    <Content Include="css\layout-contact.css" />
+    <Content Include="indexMenu.html" />
     <Content Include="IndexPie.html" />
     <Content Include="jsAnt\bootstrap.js" />
     <Content Include="jsAnt\bootstrap.min.js" />
@@ -235,7 +241,7 @@
     <Content Include="css\settings.css" />
     <Content Include="css\skeleton.css" />
     <Content Include="desarrollos.html" />
-    <Content Include="emiral.html" />
+    <Content Include="fondos.html" />
     <Content Include="ExploradorBusquedaLaboral.aspx" />
     <Content Include="ExploradorCV.aspx" />
     <Content Include="factura.aspx" />
@@ -1109,6 +1115,13 @@
     </Compile>
     <Compile Include="Ayuda\Instructivas\OperarFacturaElectronica012.aspx.designer.cs">
       <DependentUpon>OperarFacturaElectronica012.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="busquedas.aspx.cs">
+      <DependentUpon>busquedas.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="busquedas.aspx.designer.cs">
+      <DependentUpon>busquedas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Captcha.ashx.cs">
       <DependentUpon>Captcha.ashx</DependentUpon>

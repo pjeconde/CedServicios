@@ -2460,7 +2460,32 @@ video#video_background {
 }
 
 
+ul.menumini {
+    width: 100%;
+   
+    position: absolute !important;
+    top: 20px;
+    left: 70px;
+}
 
+ul.menumini li {
+    width: 100% !important;
+    display: block !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #696868;
+    font-weight: normal;
+}
+ul.menumini li a:link {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    color: #696868;
+    font-weight: normal;
+    line-height: 18px;   
+    display: inline;
+	font-size: 10px;
+}
 
 
 /* #Pricing Tables
@@ -4347,19 +4372,23 @@ xkeyframes
 	padding-top:50px;
 }
 
-.blog-big-wrapper2 {
-    position: relative;
-    width: 95%;
-    padding: 30px;
-    margin-bottom: 20px;
-}
-
 .blog-big-wrapper{ 
 	position:relative;
 	width:100%;
 	padding:30px;
 	margin-bottom:20px;
 }
+.blog-big-wrapper.pdf{ 
+	
+	width:88%;
+	margin-top: 80px
+	
+}
+
+.hidden
+{display: none}
+
+
 .blog-big-wrapper img{ 
 	width:100%;
 	height:auto;
