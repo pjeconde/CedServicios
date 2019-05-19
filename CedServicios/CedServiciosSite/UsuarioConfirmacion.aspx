@@ -37,7 +37,6 @@
 	<link rel="apple-touch-icon" href="apple-touch-icon.png">
 	<link rel="apple-touch-icon" sizes="72x72" href="apple-touch-icon-72x72.png">
 	<link rel="apple-touch-icon" sizes="114x114" href="apple-touch-icon-114x114.png">
-	
 </head>
 <body>
 	
@@ -207,7 +206,7 @@
                         Torre Bellini, Esmeralda 950, Piso 19, Of. 105, CABA<br />
                         +5411 4778-1744
                     </p>
-                    <p><i class="icon-footer"></i><a href="mailto:contacto@cedeira.com" title="">contacto@cedeira.com</a></p>
+                    <p><i class="icon-footer"></i><a href="mailto:contacto@cedeira.com.ar" title="">contacto@cedeira.com.ar</a></p>
                     <p><a href="https://www.facebook.com/CedeiraSF" title="" target="_new"><i class="icon-social">&#xf082;</i></a><a href="https://twitter.com/cedeirasf" title="" target="_new"><i class="icon-social">&#xf081;</i></a><a href="https://www.linkedin.com/company/cedeirasf/" title="" target="_new"><i class="icon-social">&#xf08c;</i></a></p>
                 </div>
                 <div class="eleven columns" data-scroll-reveal="enter right move 200px over 0.5s after 0.3s">
@@ -254,57 +253,8 @@
                 </div>
             </div>
         </section>
-
-        <!-- FATFOOTER ================================================== -->
-        <section class="section darkgrey-section section-padding-top-bottom" id="fatfooter">
-            <div class="container">
-                <div class="four columns" data-scroll-reveal="enter left move 200px over 0.5s after 0.8s" data-scroll-reveal-id="1" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
-                    <h6><a href="about-1.html" class="animsition-link">QUIENES SOMOS</a></h6>
-                    <h6><a href="tech.html" class="animsition-link">TECNOLOGIA</a></h6>
-                    <h6><a href="index.html#scroll-link-4" class="animsition-link">CLIENTES</a></h6>
-                    <h6><a href="contact.html" class="animsition-link">CONTACTO</a></h6>
-                </div>
-                <div class="four columns" data-scroll-reveal="enter left move 200px over 0.5s after 0.3s" data-scroll-reveal-id="2" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
-                    <h6>SERVICIOS</h6>
-                    <ul class="circle"><li><a href="desarrollos.html" class="animsition-link">DESARROLLOS A MEDIDA</a></li><li><a href="sf.html" class="animsition-link">SOFTWARE FACTORY</a></li><li><a href="factura.aspx" class="animsition-link">FACTURA ELECTRONICA</a></li></ul>
-                </div>
-                <div class="four columns" data-scroll-reveal="enter right move 200px over 0.5s after 0.3s" data-scroll-reveal-id="3" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
-                    <h6>PRODUCTOS</h6>
-                    <ul class="circle">
-                        <li>
-                            <a href="transferencias.html" class="animsition-link">
-                                Sistema de Transferencias
-                                "implementación BCRA"
-                            </a>
-                        </li>
-                        <li><a href="contenidos.html" class="animsition-link">Sistema de Administración y Presentación de Contenidos</a></li>
-                        <li><a href="tasas.html" class="animsition-link">Sistema de Carga Centralizada de Tasas</a></p>
-                        <li><a href="fondos.html" class="animsition-link">Sistema de Administración de Fondos Comunes de Inversión</a></li>
-                        <li><a href="inversiones.html" class="animsition-link">Plataforma de Inversiones</a></li>
-                        <li><a href="stock.html" class="animsition-link">Gestión de Stock de Servicios y Tarjetas	</a></li>
-                    </ul>
-                </div>
-                <div class="four columns" data-scroll-reveal="enter right move 200px over 0.5s after 0.8s" data-scroll-reveal-id="4" data-scroll-reveal-initialized="true" data-scroll-reveal-complete="true">
-                    <h6><a href="busquedas.aspx" class="animsition-link">BUSQUEDAS LABORALES</a></h6>
-                    <p style="text-transform: none">Si desea recibir infomación sobre novedades de busquedas laborales puede dejarnos su email.</p>
-                    <div class="sixteen columns">
-                        <div id=""><button class="send_message" id="" onclick="window.open('busquedas.aspx', '_self');">SUSCRIBIRSE</button></div>
-                    </div>
-                    <div class="clear"></div>
-                </div>
-            </div>
-        </section>
-
-        <!-- TERMINOS ================================================== -->
-        <section class="section footer-bottom">
-            <div class="container" style="text-align: center">
-                <div class="sixteen columns">
-                    <p><a href="terminos.html">Términos y condiciones </a> - <a href="politicas.html">Políticas de privacidad</a></p>
-                </div>
-            </div>
-        </section>
-    
-	</main>		
+        <div id="indexpie"></div>
+    </main>		
 
 	<div class="scroll-to-top">&#xf106;</div>
 	</div>
@@ -401,8 +351,11 @@
     <script type="text/javascript" src="js/contact.js"></script>
     <script type="text/javascript" src="js/smk-accordion.js"></script>
     <script type="text/javascript" src="js/custom-tabs.js"></script> 
- 	  
-    <!-- End Document
-    ================================================== -->
+    <script>
+        $(function () {
+            $("#indexpie").load("indexPie.html");
+        });
+    </script>
+    <!-- End Document ================================================== -->
 </body>
 </html>

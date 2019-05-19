@@ -142,7 +142,7 @@ namespace CedServicios.DB
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado ");
             a.AppendLine("from Permiso where 1=1 ");
-            if (IdUsuario != String.Empty) a.AppendLine("and IdUsuario='" + IdUsuario + "' ");
+            if (IdUsuario != String.Empty) a.AppendLine("and IdUsuario like '%" + IdUsuario + "%' ");
             if (CUIT != String.Empty) a.AppendLine("and CUIT='" + CUIT + "' ");
             if (IdTipoPermiso != String.Empty) a.AppendLine("and IdTipoPermiso='" + IdTipoPermiso + "' ");
             if (Estado != String.Empty) a.AppendLine("and Estado='" + Estado + "' ");

@@ -434,7 +434,7 @@ namespace CedServicios.DB
             a.Append("CREATE TABLE #Persona" + SessionID + "( ");
             a.Append("[Cuit] [varchar](11) NOT NULL, ");
             a.Append("[IdTipoDoc] [numeric](2,0) NOT NULL, ");
-            a.Append("[NroDoc] [numeric](11,0) NOT NULL, ");
+            a.Append("[NroDoc] [varchar](11) NOT NULL, ");
             a.Append("[IdPersona] [varchar](50) NOT NULL, ");
             a.Append("[DesambiguacionCuitPais] [int] NOT NULL, ");
             a.Append("[RazonSocial] [varchar](50) NOT NULL, ");

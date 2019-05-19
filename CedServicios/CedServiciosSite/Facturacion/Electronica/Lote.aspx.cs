@@ -50,6 +50,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Venta");
                         }
+                        else if (Request.QueryString["CaT"] == "Compra")
+                        {
+                            Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Compra");
+                        }
                     }
                     Entidades.ComprobanteATratar comprobanteATratar = (Entidades.ComprobanteATratar)Session["ComprobanteATratar"];
                     ViewState["ComprobanteATratarOrig"] = (Entidades.ComprobanteATratar)Session["ComprobanteATratar"];

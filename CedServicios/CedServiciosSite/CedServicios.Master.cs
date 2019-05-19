@@ -63,23 +63,9 @@ namespace CedServicios.Site
             if (!IsPostBack)
             {
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                if (sesion.Usuario.Id == null)
+                if (Funciones.SessionTimeOut(Session))
                 {
-                    footerNoLogin.Visible = true;
-                }
-                else
-                {
-                    switch (HttpContext.Current.Request.Url.AbsolutePath.ToString())
-                    {
-                        case "/Inicio.aspx":
-                        case "/InicioFEA.aspx":
-                        case "/InicioFEAPrecios.aspx":
-                            footerNoLogin.Visible = true;
-                            break;
-                        default:
-                            footerNoLogin.Visible = false;
-                            break;
-                    }
+                    Response.Redirect("~/SessionTimeout.aspx");
                 }
                 if (Session["ComprobanteATratar"] == null)
                 {
@@ -90,12 +76,10 @@ namespace CedServicios.Site
                     if (Request.RawUrl == "/Facturacion/Electronica/Lote.aspx" && ((Entidades.ComprobanteATratar)Session["ComprobanteATratar"]).Tratamiento != Entidades.Enum.TratamientoComprobante.Alta)
                     {
                         UsuarioContentPlaceHolder.Visible = false;
-                        CedeiraContentPlaceHolder.Visible = false;
                     }
                     else if (Request.RawUrl == "/Facturacion/Electronica/LoteCT.aspx" && ((Entidades.ComprobanteATratar)Session["ComprobanteATratar"]).Tratamiento != Entidades.Enum.TratamientoComprobante.Alta)
                     {
                         UsuarioContentPlaceHolder.Visible = false;
-                        CedeiraContentPlaceHolder.Visible = false;
                     }
                     else
                     {

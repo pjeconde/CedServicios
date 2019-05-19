@@ -3,64 +3,50 @@
 <%@ Register Assembly="CedServiciosWebForms" Namespace="CedServicios.WebForms" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
-        <tr>
-            <td align="center" colspan="3" style="padding-top:20px">
-                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Articulos"></asp:Label>
-                <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="padding-right:5px; padding-top:20px">
-                Cuit:
-            </td>
-            <td align="left" style="padding-top:20px">
-                <asp:TextBox ID="CuitTextBox" runat="server" MaxLength="50" TabIndex="2" ToolTip="" Width="114px"></asp:TextBox>
-            </td>        
-        </tr>
-        <tr>
-	        <td align="left" style="padding-right:5px; padding-top:5px">
-                Id.Artículo:
-	        </td>
-			<td align="left" style="padding-top:5px">
-				<asp:TextBox ID="IdArticuloTextBox" runat="server" MaxLength="50" TabIndex="1" Width="114px"></asp:TextBox>
-			</td>
-            <td style="width:500px">
-            </td>
-        </tr>
-        <tr>
-            <td align="left" style="padding-right:5px; padding-top:5px">
-                Descr.Artículo:
-            </td>
-            <td align="left" style="padding-top:5px">
-                <asp:TextBox ID="DescrArticuloTextBox" runat="server" MaxLength="128" TabIndex="2" ToolTip="" Width="480px"></asp:TextBox>
-            </td>        
-        </tr>
-        <tr>
-            <td align="left" style="padding-right:5px; padding-top:5px">
-                Estado:
-            </td>
-            <td align="left" style="padding-top:5px">
-                <asp:DropDownList ID="EstadoDropDownList" runat="server" TabIndex="3" Width="200px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" ></asp:DropDownList>
-            </td>        
-        </tr>
-        <tr>
-            <td>
-            </td>
-            <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
-            </td>
-        </tr>
-        <tr>
-            <td colspan="3" style="padding-top:20px">
-                <asp:Panel ID="Panel1" runat="server" BorderStyle="None"
-                        BorderWidth="1px" ScrollBars="Auto" BackImageUrl="" BackColor="White">
+    <section id="features" class="features sections2">
+        <div class="container">
+            <div class="row">
+                <div class="main_features_content2">
+                    <div class="head_title">
+                        <div class="head_title text-center">
+                            <h2><asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Artículos"></asp:Label>
+                            </h2>
+                            <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 padding-top-20">
+                    <asp:TextBox ID="CuitTextBox" runat="server" MaxLength="50" TabIndex="2" ToolTip="" Width="100%" placeholder="CUIT"></asp:TextBox>
+                </div>
+                <div class="col-lg-6 col-md-6 padding-top-20 text-left">
+                    <asp:TextBox ID="IdArticuloTextBox" runat="server" MaxLength="50" TabIndex="1" Width="100%" placeholder="Id.Artículo"></asp:TextBox>
+                </div>
+	        </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 padding-top-20">
+                    <asp:TextBox ID="DescrArticuloTextBox" runat="server" MaxLength="128" TabIndex="2" ToolTip="" Width="100%" placeholder="Descr.Artículo"></asp:TextBox>
+                </div>
+                <div class="col-lg-6 col-md-6 padding-top-20 text-left">
+                    Estado:<asp:DropDownList ID="EstadoDropDownList" runat="server" TabIndex="3" Width="200px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true"></asp:DropDownList>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 text-center">
+                    <asp:Button ID="BuscarButton" runat="server" class="btn btn-default btn-sm" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                    <asp:Button ID="SalirButton" runat="server" class="btn btn-default btn-sm" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 padding-top-20 text-center">
+                    <asp:Panel ID="Panel1" runat="server" BorderStyle="None"
+                        BorderWidth="1px" ScrollBars="Auto" BackColor="White">
                         <cc1:PagingGridView ID="ArticuloPagingGridView" runat="server" OnPageIndexChanging="ArticuloPagingGridView_PageIndexChanging"
                             OnRowDataBound="ArticuloPagingGridView_RowDataBound" 
                             FooterStyle-ForeColor="Brown"
                             OnSorting="ArticuloPagingGridView_Sorting" AllowPaging="True" 
-                            AllowSorting="True" 
+                            AllowSorting="True" CssClass="grilla" 
                             AutoGenerateColumns="false" OnRowCommand="ArticuloPagingGridView_RowCommand"
                             DataKeyNames="" BorderStyle="None">
                             <Columns>
@@ -110,16 +96,18 @@
                                 </asp:BoundField>
                             </Columns>
                             <PagerSettings Mode="NumericFirstLast" />
+                            <PagerStyle HorizontalAlign = "Center" CssClass="GridPager" />
                         </cc1:PagingGridView>
                     </asp:Panel>
-            </td>
-        </tr>
-        <tr>
-            <td align="center" colspan="3" style="padding-top:20px">
-                <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
-            </td>
-        </tr>
-    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 text-center">
+                    <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
     TargetControlID="TargetControlIDdelModalPopupExtender1"

@@ -76,6 +76,9 @@ a span {
 .btn.extra-width {
     padding: 13px 40px;
 }
+.custombig {
+    width: 100% !important;
+}
 .btn:focus,
 .btn:active {
     outline: inherit;
@@ -357,6 +360,7 @@ Button
     max-width:160px;
     margin-top: 20px;
 }
+
 .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
     color: #fff;
     background-color: rgba(0, 173, 62, 0.75);

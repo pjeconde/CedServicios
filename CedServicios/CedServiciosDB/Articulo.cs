@@ -195,7 +195,7 @@ namespace CedServicios.DB
             a.Append("CREATE TABLE #Articulo" + SessionID + "( ");
             a.Append("[Cuit] [varchar](11) NOT NULL, ");
             a.Append("[IdArticulo] [varchar](20) NOT NULL, ");
-            a.Append("[DescrArticulo] [varchar](100) NOT NULL, ");
+            a.Append("[DescrArticulo] [varchar](512) NOT NULL, ");
             a.Append("[GTIN] [varchar](20) NOT NULL, ");
             a.Append("[IdUnidad] [varchar](3) NOT NULL, ");
 	        a.Append("[DescrUnidad] [varchar](50) NOT NULL, ");
@@ -219,7 +219,7 @@ namespace CedServicios.DB
                 a.Append(Articulo.Unidad.Id + "', '");
                 a.Append(Articulo.Unidad.Descr + "', '");
                 a.Append(Articulo.IndicacionExentoGravado + "', ");
-                a.Append(Articulo.AlicuotaIVA + ", ");
+                a.Append(Articulo.AlicuotaIVA.ToString("####0.00", System.Globalization.CultureInfo.CreateSpecificCulture("en-GB")) + ", ");
                 a.Append(Articulo.WF.Id + ", '");
                 a.Append(Articulo.Estado + "', ");
                 a.Append(Articulo.UltActualiz + ")");

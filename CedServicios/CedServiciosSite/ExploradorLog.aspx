@@ -38,145 +38,106 @@
                                 <asp:Image runat="server" ID="FechaHastaImage" ImageUrl="~/Imagenes/Calendar.gif" />&nbsp;&nbsp;(formato: "DD/MM/YYYY")
                             </td>       
                         </tr>
-                        <tr>
-                            <td align="left" style="padding-right:5px; padding-top:5px">
-                                IdLog:
-                            </td>
-                            <td align="left" style="padding-top:5px">
-                                <asp:TextBox ID="IdLogTextBox" runat="server" MaxLength="10" TabIndex="2" ToolTip="" Width="114px"></asp:TextBox>
-                            </td>        
-                        </tr>
-                        <tr>
-                            <td align="left" style="padding-right:5px; padding-top:5px">
-                                IdWF:
-                            </td>
-                            <td align="left" style="padding-top:5px">
-                                <asp:TextBox ID="IdWFTextBox" runat="server" MaxLength="10" TabIndex="2" ToolTip="" Width="114px"></asp:TextBox>
-                            </td>        
-                        </tr>
-                        <tr>
-                            <td align="left" style="padding-right:5px; padding-top:5px">
-                                IdUsuario:
-                            </td>
-                            <td align="left" style="padding-top:5px">
-                                <asp:TextBox ID="IdUsuarioTextBox" runat="server" MaxLength="50" TabIndex="2" ToolTip="Usa LIKE" Width="114px"></asp:TextBox>
-                            </td>        
-                        </tr>
-                        <tr>
-	                        <td align="left" style="padding-right:5px; padding-top:5px">
-                                Entidad:
-	                        </td>
-			                <td align="left" style="padding-top:5px">
-				                <asp:TextBox ID="EntidadTextBox" runat="server" MaxLength="15" TabIndex="1" ToolTip="Usa LIKE" Width="114px"></asp:TextBox>
-			                </td>
-                            <td style="width:500px">
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="left" style="padding-right:5px; padding-top:5px">
-                                Evento:
-                            </td>
-                            <td align="left" style="padding-top:5px">
-                                <asp:TextBox ID="EventoTextBox" runat="server" MaxLength="15" TabIndex="2" ToolTip="Usa LIKE" Width="114px"></asp:TextBox>
-                            </td>        
-                        </tr>
-                        <tr>
-                            <td align="left" style="padding-right:5px; padding-top:5px">
-                                Estado:
-                            </td>
-                            <td align="left" style="padding-top:5px">
-                                <asp:DropDownList ID="EstadoDropDownList" runat="server" TabIndex="3" Width="200px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" ></asp:DropDownList>
-                            </td>        
-                        </tr>
-                        <tr>
-                            <td>
-                            </td>
-                            <td align="left" style="height: 24px; padding-top:20px">
-                                <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="3" style="padding-top:20px">
-                                <asp:Panel ID="Panel1" runat="server" BorderStyle="None"
-                                        BorderWidth="1px" ScrollBars="Auto" BackImageUrl="" BackColor="White">
-                                        <cc1:PagingGridView ID="LogPagingGridView" runat="server" OnPageIndexChanging="LogPagingGridView_PageIndexChanging"
-                                            OnRowDataBound="LogPagingGridView_RowDataBound" 
-                                            FooterStyle-ForeColor="Brown"
-                                            OnSorting="LogPagingGridView_Sorting" AllowPaging="True" 
-                                            AllowSorting="True" 
-                                            AutoGenerateColumns="false" OnRowCommand="LogPagingGridView_RowCommand"
-                                            DataKeyNames="" BorderStyle="None">
-                                            <Columns>
-                                                <asp:TemplateField ItemStyle-VerticalAlign="Top" ItemStyle-BorderStyle="None">
-                                                    <HeaderStyle Wrap="False" />
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="Ver" runat="server" CausesValidation="false" CommandName="Detalle" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ToolTip="<%# ((GridViewRow) Container).RowIndex %>" Text="Detalle" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField ItemStyle-VerticalAlign="Top" ItemStyle-BorderStyle="None">
-                                                    <HeaderStyle Wrap="False" />
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="LogDetalle" runat="server" CausesValidation="false" CommandName="LogDetalle" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ToolTip="<%# ((GridViewRow) Container).RowIndex %>" Text="LogDetalle" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:TemplateField ItemStyle-VerticalAlign="Top" ItemStyle-BorderStyle="None">
-                                                    <HeaderStyle Wrap="False" />
-                                                    <ItemTemplate>
-                                                        <asp:LinkButton ID="VerEntidad" runat="server" CausesValidation="false" CommandName="VerEntidad" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ToolTip="<%# ((GridViewRow) Container).RowIndex %>" Text="VerEntidad" />
-                                                    </ItemTemplate>
-                                                </asp:TemplateField>
-                                                <asp:BoundField DataField="Id" HeaderText="IdLog" SortExpression="Id" HeaderStyle-Width="80px" ReadOnly="true">
-                                                    <HeaderStyle Wrap="False" />
-                                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="IdWF" HeaderText="IdWF" SortExpression="IdWF" HeaderStyle-Width="80px" ReadOnly="true">
-                                                    <HeaderStyle Wrap="False" />
-                                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="Fecha"  DataFormatString="{0:dd/MM/yyyy HH:mm:ss}" ReadOnly="true" HeaderStyle-Width="120px">
-                                                    <HeaderStyle Wrap="False" />
-                                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="IdUsuario" HeaderText="IdUsuario" SortExpression="IdUsuario" HeaderStyle-Width="120px" ReadOnly="true">
-                                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" />
-                                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="Entidad" HeaderText="Entidad" SortExpression="Entidad" HeaderStyle-Width="100px" ReadOnly="true">
-                                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" />
-                                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="Evento" HeaderText="Evento" SortExpression="Evento" HeaderStyle-Width="100px" ReadOnly="true">
-                                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" />
-                                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" ReadOnly="true" 
-                                                    HeaderStyle-Width="100px">
-                                                    <HeaderStyle Wrap="False" />
-                                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="CantRegLogDetalle" HeaderText="CantRegLogDetalle" SortExpression="" ReadOnly="true" 
-                                                    HeaderStyle-Width="100px">
-                                                    <HeaderStyle Wrap="False" />
-                                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
-                                                </asp:BoundField>
-                                                <asp:BoundField DataField="Comentario" HeaderText="Comentario" SortExpression="" HeaderStyle-Width="300px" ReadOnly="true">
-                                                    <HeaderStyle HorizontalAlign="Center" Wrap="false" />
-                                                    <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
-                                                </asp:BoundField>
-                                            </Columns>
-                                            <PagerSettings Mode="NumericFirstLast" />
-                                        </cc1:PagingGridView>
-                                    </asp:Panel>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="center" colspan="3" style="padding-top:20px">
-                                <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
-                            </td>
-                        </tr>
-                    </table>
+                    </table> 
                 </div>
+                <div class="col-lg-6 col-md-6 padding-top-20">
+                    <asp:TextBox ID="IdLogTextBox" runat="server" MaxLength="10" TabIndex="2" ToolTip="" Width="100%" placeholder="Id.Log"></asp:TextBox>
+                </div>
+                <div class="col-lg-6 col-md-6 padding-top-20">
+                    <asp:TextBox ID="IdWFTextBox" runat="server" MaxLength="10" TabIndex="2" ToolTip="" Width="100%" placeholder="Id.WF"></asp:TextBox>
+                </div>
+                <div class="col-lg-6 col-md-6 padding-top-20">
+                    <asp:TextBox ID="IdUsuarioTextBox" runat="server" MaxLength="50" TabIndex="2" ToolTip="Usa LIKE" Width="100%" placeholder="Id.Usuario"></asp:TextBox>
+                </div>
+                <div class="col-lg-6 col-md-6 padding-top-20">
+                    <asp:TextBox ID="EntidadTextBox" runat="server" MaxLength="15" TabIndex="1" ToolTip="Usa LIKE" Width="100%" placeholder="Entidad"></asp:TextBox>
+                </div>
+                <div class="col-lg-6 col-md-6 padding-top-20">
+                    <asp:TextBox ID="EventoTextBox" runat="server" MaxLength="15" TabIndex="2" ToolTip="Usa LIKE" Width="100%" placeholder="Evento"></asp:TextBox>
+                </div>
+                <div class="col-lg-6 col-md-6 text-left padding-top-20">
+                    Estado:<asp:DropDownList ID="EstadoDropDownList" runat="server" TabIndex="3" Width="" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" ></asp:DropDownList>
+                </div>
+                <div class="col-lg-12 col-md-12">
+                    <asp:Button ID="BuscarButton" runat="server" class="btn btn-default btn-sm" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                    <asp:Button ID="SalirButton" runat="server" class="btn btn-default btn-sm" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                </div>
+                <div class="col-lg-12 col-md-12 padding-top-20">
+                    <asp:Panel ID="Panel1" runat="server" BorderStyle="None"
+                            BorderWidth="1px" ScrollBars="Auto" BackImageUrl="" BackColor="White">
+                            <cc1:PagingGridView ID="LogPagingGridView" runat="server" OnPageIndexChanging="LogPagingGridView_PageIndexChanging"
+                                OnRowDataBound="LogPagingGridView_RowDataBound" 
+                                FooterStyle-ForeColor="Brown" HorizontalAlign="Center"
+                                OnSorting="LogPagingGridView_Sorting" AllowPaging="True" 
+                                AllowSorting="True" CssClass="grilla" 
+                                AutoGenerateColumns="false" OnRowCommand="LogPagingGridView_RowCommand"
+                                DataKeyNames="" BorderStyle="None">
+                                <Columns>
+                                    <asp:TemplateField ItemStyle-VerticalAlign="Top" ItemStyle-BorderStyle="None">
+                                        <HeaderStyle Wrap="False" />
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="Ver" runat="server" CausesValidation="false" CommandName="Detalle" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ToolTip="<%# ((GridViewRow) Container).RowIndex %>" Text="Detalle" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-VerticalAlign="Top" ItemStyle-BorderStyle="None">
+                                        <HeaderStyle Wrap="False" />
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="LogDetalle" runat="server" CausesValidation="false" CommandName="LogDetalle" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ToolTip="<%# ((GridViewRow) Container).RowIndex %>" Text="LogDetalle" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:TemplateField ItemStyle-VerticalAlign="Top" ItemStyle-BorderStyle="None">
+                                        <HeaderStyle Wrap="False" />
+                                        <ItemTemplate>
+                                            <asp:LinkButton ID="VerEntidad" runat="server" CausesValidation="false" CommandName="VerEntidad" CommandArgument="<%# ((GridViewRow) Container).RowIndex %>" ToolTip="<%# ((GridViewRow) Container).RowIndex %>" Text="VerEntidad" />
+                                        </ItemTemplate>
+                                    </asp:TemplateField>
+                                    <asp:BoundField DataField="Id" HeaderText="IdLog" SortExpression="Id" HeaderStyle-Width="80px" ReadOnly="true">
+                                        <HeaderStyle Wrap="False" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="IdWF" HeaderText="IdWF" SortExpression="IdWF" HeaderStyle-Width="80px" ReadOnly="true">
+                                        <HeaderStyle Wrap="False" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Fecha" HeaderText="Fecha" SortExpression="Fecha"  DataFormatString="{0:dd/MM/yyyy HH:mm:ss}" ReadOnly="true" HeaderStyle-Width="160px">
+                                        <HeaderStyle Wrap="False" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="IdUsuario" HeaderText="IdUsuario" SortExpression="IdUsuario" HeaderStyle-Width="120px" ReadOnly="true">
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="false" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Entidad" HeaderText="Entidad" SortExpression="Entidad" HeaderStyle-Width="100px" ReadOnly="true">
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="false" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Evento" HeaderText="Evento" SortExpression="Evento" HeaderStyle-Width="100px" ReadOnly="true">
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="false" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado" ReadOnly="true" 
+                                        HeaderStyle-Width="100px">
+                                        <HeaderStyle Wrap="False" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="CantRegLogDetalle" HeaderText="CantRegLogDetalle" SortExpression="" ReadOnly="true" 
+                                        HeaderStyle-Width="100px">
+                                        <HeaderStyle Wrap="False" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="True" BorderStyle="None" />
+                                    </asp:BoundField>
+                                    <asp:BoundField DataField="Comentario" HeaderText="Comentario" SortExpression="" HeaderStyle-Width="300px" ReadOnly="true">
+                                        <HeaderStyle HorizontalAlign="Center" Wrap="false" />
+                                        <ItemStyle HorizontalAlign="Left" VerticalAlign="Top" Wrap="true" BorderStyle="None" />
+                                    </asp:BoundField>
+                                </Columns>
+                                <PagerSettings Mode="NumericFirstLast" />
+                                <PagerStyle HorizontalAlign = "Center" CssClass="GridPager" />
+                            </cc1:PagingGridView>
+                        </asp:Panel>
+                    </div>
+                <div class="col-lg-12 col-md-12 padding-top-20">
+                    <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                </div>                        
             </div>
         </div>
     </section>

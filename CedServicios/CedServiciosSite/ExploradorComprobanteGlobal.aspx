@@ -2,9 +2,12 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <div class="container">
+    <div class="row">
+    <div class="col-lg-12 col-md-12">
+    <table border="0" cellpadding="0" cellspacing="0" align="center" >
         <tr>
-            <td align="center" colspan="3" style="padding-top:20px">
+            <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes"></asp:Label>
             </td>
         </tr>
@@ -44,8 +47,6 @@
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
                     ControlToValidate="CUITTextBox" ErrorMessage="CUIT" SetFocusOnError="True" ValidationExpression="^\d+$"> <asp:Label ID="Label1" runat="server" SkinID="IndicadorValidacion"></asp:Label></asp:RegularExpressionValidator>
             </td>        
-            <td style="width:550px">
-            </td>
         </tr>
         <tr>
             <td align="left" style="padding-right:5px; padding-top:5px">
@@ -54,8 +55,6 @@
             <td align="left" style="padding-top:5px">
                 <asp:TextBox ID="CUITRazonSocialTextBox" runat="server" TabIndex="3" Width="400px" MaxLength="50"></asp:TextBox>
             </td>        
-            <td style="width:550px">
-            </td>
         </tr>
         <tr>
             <td align="left" style="padding-right:5px; padding-top:5px">
@@ -66,30 +65,29 @@
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"
                     ControlToValidate="NroComprobanteTextBox" ErrorMessage="Nro.Comprobante" SetFocusOnError="True" ValidationExpression="^\d+$"> <asp:Label ID="Label2" runat="server" SkinID="IndicadorValidacion"></asp:Label></asp:RegularExpressionValidator>
             </td>        
-            <td style="width:550px">
-            </td>
         </tr>
         <tr>
             <td align="left" style="padding-right:5px; padding-top:5px">
                 Sólo comprobantes vigentes:
             </td>
             <td align="left" style="padding-top:5px">
-                <asp:CheckBox ID="SoloVigentesCheckBox" runat="server" Checked="false" AutoPostBack="true" TextAlign="Left" />
+                <asp:CheckBox ID="SoloVigentesCheckBox" runat="server" Checked="false" AutoPostBack="false" TextAlign="Left" />
             </td>        
         </tr>
         <tr>
             <td>
             </td>
-            <td align="left" style="height: 24px; padding-top:5px">
-                <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+            <td align="left" style="">
+                <asp:Button ID="BuscarButton" runat="server" class="btn btn-default btn-sm" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" class="btn btn-default btn-sm" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>
             <td colspan="3" style="padding-top:20px">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
                     <asp:GridView ID="ComprobantesGridView" runat="server" 
-                        AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None">
+                        AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" 
+                        CssClass="grilla" GridLines="None">
                         <Columns>
                             <asp:ButtonField HeaderText="" Text="Seleccionar" CommandName="Seleccionar" ButtonType="Link" ItemStyle-ForeColor="Blue">
                             </asp:ButtonField>
@@ -178,4 +176,7 @@
             </td>
         </tr>
     </table>
+    </div>
+    </div>
+    </div>
 </asp:Content>

@@ -126,7 +126,7 @@
     <asp:ScriptManager ID="MasterScriptManager" runat="server" EnableScriptGlobalization="True">
     </asp:ScriptManager>
         <section id="social" class="social">
-            <div class="container">
+            <div class="container" style="">
                 <!-- Example row of columns -->
                 <div class="row">
                     <div class="social-wrapper">
@@ -138,7 +138,7 @@
                                 <a href="#" onmouseover=""><asp:label ID="AmbienteLabel" runat="server" ForeColor="White" Text="" SkinID="TextoDesa"></asp:label></a>
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="">
                             <div class="social-contact">
                                 <a href="#"><i class="fa fa-phone"></i>+5411 4778-1744</a>
                                 <a href="mailto:contacto@cedeira.com.ar"><i class="fa fa-envelope"></i>contacto@cedeira.com.ar</a>
@@ -154,8 +154,6 @@
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
                     <a class="navbar-brand" href="../../../Index.html"><img src="../../../Imagenes/logo_h_100x310.png" alt="Logo" style="height:40px; width: 124px" /></a>
@@ -323,69 +321,57 @@
             </div><!-- /.container-fluid -->
         </nav>
      <div id="DivUsuario" style="text-align:center">   
-        <table>
-            <tr>
-                <asp:ContentPlaceHolder ID="CedeiraContentPlaceHolder" runat="server" Visible="true">
-                    <td style="text-align:left" class="Fuente">
-                        <table>
-                            <tr>
-                                <td class="Fuente" align="right">
-                                </td>
-                                <td class="Fuente" align="right" valign="top">
-                                </td>
-                                <td class="Fuente" align="right" valign="top">
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </asp:ContentPlaceHolder>
-                <asp:ContentPlaceHolder ID="UsuarioContentPlaceHolder" runat="server" Visible="true">
-                    <td align="right" style="width:100%">
-                        <asp:ImageButton ID="UsuarioImageButton" runat="server" ImageUrl="~/Imagenes/SiluetaHombre.jpg" onclick="UsuarioImageButton_Click" AlternateText="" Height="35px" Visible="false" />
-                    </td>
-                    <td>
-                        <table>
-                            <tr>
-                                <td class="Fuente" style="text-align: right">
-                                    <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario:"></asp:Label>
-                                </td>
-                                <td class="Fuente" colspan="3" style="text-align: left">
-                                    <asp:HyperLink ID="UsuarioHyperLink" runat="server" Text="" NavigateUrl="~/UsuarioConsulta.aspx"></asp:HyperLink>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="Fuente" style="text-align: right">
-                                    <asp:Label ID="CUITLabel" runat="server" Text="CUIT:" ToolTip="Clave Única de Identificación Tributaria"></asp:Label>
-                                </td>
-                                <td class="Fuente" style="text-align: left">
-                                    <asp:DropDownList ID="CUITDropDownList" runat="server" AutoPostBack="true"
-                                        onselectedindexchanged="CUITDropDownList_SelectedIndexChanged">
-                                    </asp:DropDownList>
-                                </td>
-                                <td class="Fuente" style="text-align: right">
-                                    <asp:Label ID="UNLabel" runat="server" Text="UN:" ToolTip="Unidad de Negocio"></asp:Label>
-                                </td>
-                                <td class="Fuente" style="text-align: left">
-                                    <asp:DropDownList ID="UNDropDownList" runat="server" AutoPostBack="true" 
-                                        onselectedindexchanged="UNDropDownList_SelectedIndexChanged">
-                                    </asp:DropDownList>
-                                </td>
-                            </tr>
-                        </table>
-                    </td>
-                </asp:ContentPlaceHolder>
-            </tr>
-        </table>
+        <asp:ContentPlaceHolder ID="UsuarioContentPlaceHolder" runat="server" Visible="true">
+            <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <table>
+                        <tr>
+                            <td rowspan="3">
+                                <asp:ImageButton ID="UsuarioImageButton" runat="server" ImageUrl="~/Imagenes/SiluetaHombre.jpg" onclick="UsuarioImageButton_Click" AlternateText="" Height="35px" Visible="false" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Fuente" style="text-align: right">
+                                <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario:"></asp:Label>
+                            </td>
+                            <td class="Fuente" colspan="3" style="text-align: left">
+                                <asp:HyperLink ID="UsuarioHyperLink" runat="server" Text="" NavigateUrl="~/UsuarioConsulta.aspx"></asp:HyperLink>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Fuente" style="text-align: right">
+                                <asp:Label ID="CUITLabel" runat="server" Text="CUIT:" ToolTip="Clave Única de Identificación Tributaria"></asp:Label>
+                            </td>
+                            <td class="Fuente" style="text-align: left">
+                                <asp:DropDownList ID="CUITDropDownList" runat="server" AutoPostBack="true"
+                                    onselectedindexchanged="CUITDropDownList_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                            <td class="Fuente" style="text-align: right">
+                                <asp:Label ID="UNLabel" runat="server" Text="UN:" ToolTip="Unidad de Negocio"></asp:Label>
+                            </td>
+                            <td class="Fuente" style="text-align: left">
+                                <asp:DropDownList ID="UNDropDownList" runat="server" AutoPostBack="true" 
+                                    onselectedindexchanged="UNDropDownList_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </asp:ContentPlaceHolder>
     </div>
     <asp:ContentPlaceHolder ID="MenuContentPlaceHolder" runat="server" Visible="true">
-    <div id="DivMenu" style="text-align:center">
-    </div>
+        <div id="DivMenu" style="text-align:center">
+        </div>
     </asp:ContentPlaceHolder>
     <table>
         <tr>
             <td style="height:1px; background-color:#cccccc; min-width: 10px; width: 10px">
             </td>
-            <td style="height:1px; background-color:#cccccc; width: 100%">
+            <td style="height:1px; background-color:#cccccc; width: 100%;">
             </td>
         </tr>
     </table>
@@ -394,52 +380,43 @@
         </asp:ContentPlaceHolder>
     </div>
 
-    <div id="footerNoLogin" runat="server">
-    <section id="footer-menu" class="sections footer-menu">
-        <div class="container">
-            <div class="row">
-                <div class="footer-menu-wrapper">
-                    <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
-                        <div class="menu-item">
-                            <h5>Legal</h5>
-                            <ul>
-                                <li><a id="linktyc" target="_self" href="InicioTYC.aspx?valor=pan1">TERMINOS Y CONDICIONES</a></li>
-                                <li><a id="inkpoliticas" target="_self" href="InicioTYC.aspx?valor=pan2">POLITICAS DE PRIVACIDAD</a></li>
-                            </ul>
-                            <br />
+    <div id="footerNoLogin" runat="server" visible="false">
+        <section id="footer-menu" class="sections footer-menu">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-menu-wrapper">
+                        <div class="col-lg-12">
+                            <div class="menu-item">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+        <!--Footer-->
+        <footer id="footer" class="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-wrapper">
 
-    <!--Footer-->
-    <footer id="footer" class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-wrapper">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="footer-brand">
+                                <img src="../../../Imagenes/logo_h_100x310.png" alt="Logo" style="height:40px; width: 124px" />
+                            </div>
+                        </div>
 
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="footer-brand">
-                            <img src="../../../Imagenes/logo_h_100x310.png" alt="Logo" style="height:40px; width: 124px" />
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                            <div class="copyright">
+                                <p>Desarrollado por <b><a target="" href="" style="color:#E14A2C"> Cedeira </a></b>2018. All rights reserved.</p>
+                            </div>
                         </div>
                     </div>
-
-                    <div class="col-md-6 col-sm-6 col-xs-12">
-                        <div class="copyright">
-                            <p>Desarrollado por <b><a target="" href="" style="color:#E14A2C"> Cedeira </a></b>2018. All rights reserved.</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
-        </div>
-    </footer>
-		
-	<div class="scrollup">
-		<a href="#"><i class="fa fa-chevron-up"></i></a>
-	</div>
+        </footer>
+	    <div class="scrollup">
+		    <a href="#"><i class="fa fa-chevron-up"></i></a>
+	    </div>
     </div>
 
     <script src="/assetsAnt/js/vendor/jquery-1.11.2.min.js"></script>
