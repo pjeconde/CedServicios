@@ -7,6 +7,7 @@
             $('#Tabs a[href="#' + tabName + '"]').tab('show');
             $("#Tabs a").click(function () {
                 $("[id*=TabName]").val($(this).attr("href").replace("#", ""));
+                //alert("VAR:" + tabName);
             });
         });
     </script>
@@ -39,23 +40,23 @@
          <asp:HiddenField ID="TabName" runat="server" />
         <div id="Tabs">
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li id="tab1" role="presentation" class="active"><a href="#Comprobantes" aria-controls="Comprobantes" role="tab" data-toggle="tab">
+            <ul class="nav nav-tabs">
+                <li id="tab1" class="nav-item active"><a href="#Comprob" data-toggle="tab">
                     <h4>Comprobantes</h4>
                 </a></li>
-                <li id="tab2" role="presentation"><a href="#ConsultaCAE" aria-controls="ConsultaCAE" role="tab" data-toggle="tab">
+                <li id="tab2" class="nav-item"><a href="#ConsultaCAE" data-toggle="tab">
                     <h4>Consultar CAE</h4>
                 </a></li>
-                <li id="tab3" role="presentation"><a href="#Parametros" aria-controls="Parametros" role="tab" data-toggle="tab">
+                <li id="tab3" class="nav-item"><a href="#Parametros" data-toggle="tab">
                     <h4>Tablas o Parametros</h4>
                 </a></li>
-                <li id="tab4" role="presentation"><a href="#DatosFiscales" aria-controls="DatosFiscales" role="tab" data-toggle="tab">
+                <li id="tab4" class="nav-item"><a href="#DatosFiscales" data-toggle="tab">
                     <h4>Datos Fiscales</h4>
                 </a></li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-                <div id="Comprobantes" role="tabpanel" class="tab-pane fade in active text-left">
+                <div id="Comprob" role="tabpanel" class="tab-pane fade in active text-left">
                     <table class="">
                         <tbody>
                             <tr>

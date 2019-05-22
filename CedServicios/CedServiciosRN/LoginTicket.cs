@@ -23,6 +23,7 @@ namespace CedServicios.RN
         public const string FacturaEX = "wsfex";
         public const string FacturaCT = "wsct";
         public const string ConsultaPadronN3 = "padron-puc-ws-consulta-nivel3";
+        public const string ConsultaPadronA13 = "ws_sr_padron_a13";
     }
 
 	public class LoginTicket

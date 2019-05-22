@@ -6,6 +6,7 @@ using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Xml;
 using System.IO;
+using CedServicios.Entidades;
 
 namespace CedServicios.Site
 {
@@ -1326,26 +1327,41 @@ namespace CedServicios.Site
                     MensajeLabel.Text = "El CUIT a consultar deberá tener 11 dígitos.";
                     return;
                 }
-                string respuesta = RN.ServiciosAFIP.DatosFiscales(CuitAConsultarTextBox.Text, ((Entidades.Sesion)Session["Sesion"]));
+                Entidades.PadronA13.persona respuesta = RN.ServiciosAFIP.DatosFiscales(CuitAConsultarTextBox.Text, ((Entidades.Sesion)Session["Sesion"]));
                 TicketCompletarInfo();
-                respuesta = respuesta.Replace("\n", "\\n");
-                respuesta = respuesta.Replace("<?xml version=\"1.0\" encoding=\"UTF-8\"?>", "");
-                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+
+                string xmlrespuesta = respuesta.DesSerializerClassToXmlString<Entidades.PadronA13.persona>();
+                //respuesta = respuesta.Replace("\n", "\\n");
+                xmlrespuesta = xmlrespuesta.Replace("<?xml version=\"1.0\" encoding=\"utf-16\"?>\r\n", "");
+                xmlrespuesta = xmlrespuesta.Replace("<persona xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">", "<persona>");
+                xmlrespuesta = xmlrespuesta.Replace("\r\n", "\\n");
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(xmlrespuesta), false);
             }
             catch (Exception ex)
             {
-                string errormsg = ex.Message.Replace("\n", "");
+                string errormsg = "";
+                if (ex.Message.IndexOf("<html>") >= 0)
+                {
+                    errormsg = "Ver LOG. ";
+                    errormsg = errormsg + ex.Message.Substring(0, ex.Message.IndexOf("<html>"));
+                    errormsg = ex.Message.Replace("\n", "");
+                    Funciones.GrabarLogTexto("~/Consultar.txt", "Consulta de Datos Fiscales: " + CuitAConsultarTextBox.Text + " " + ex.Message);
+                }
+                else
+                {
+                    errormsg = ex.Message.Replace("\n", "");
+                }
                 if (ex.InnerException != null)
                 {
                     try
                     {
-                        errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        errormsg = errormsg + " " + ex.InnerException.Message;
+                        Funciones.GrabarLogTexto("~/Consultar.txt", "Consulta de Datos Fiscales: " + CuitAConsultarTextBox.Text + " InnerException: " + ex.InnerException.Message);
                     }
                     catch
                     {
                     }
                     errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
-
                 }
                 errormsg = errormsg.Replace("'", "").Replace("\r", " ");
                 MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;

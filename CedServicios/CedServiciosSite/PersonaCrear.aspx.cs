@@ -177,24 +177,45 @@ namespace CedServicios.Site
                     sesionConsultaAFIP.CnnStr = sesion.CnnStr;
                     if (sesionConsultaAFIP.Cuit.Nro != string.Empty)
                     {
-                        string xmlString = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesionConsultaAFIP);
-                        System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Entidades.AFIP.Contribuyente));
-                        StringReader rdr = new StringReader(xmlString);
-                        Entidades.AFIP.Contribuyente contribuyente = (Entidades.AFIP.Contribuyente)serializer.Deserialize(rdr);
-                        RazonSocialTextBox.Text = contribuyente.Persona.DescripcionCorta;
-                        if (contribuyente.Domicilios.Length > 0)
+                        Entidades.PadronA13.persona persona = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesionConsultaAFIP);
+                        RazonSocialTextBox.Text = persona.razonSocial;
+                        if (persona.domicilio.Length > 0)
                         {
-                            Domicilio.Calle = contribuyente.Domicilios[0].Calle;
-                            Domicilio.Nro = contribuyente.Domicilios[0].Numero;
-                            Domicilio.Piso = contribuyente.Domicilios[0].Piso;
-                            Domicilio.Depto = contribuyente.Domicilios[0].OficinaDeptoLocal;
-                            Domicilio.Sector = string.Empty;
-                            Domicilio.Torre = string.Empty;
-                            Domicilio.Manzana = string.Empty;
-                            Domicilio.Localidad = contribuyente.Domicilios[0].Localidad;
-                            Domicilio.IdProvincia = RN.ServiciosAFIP.IdProvincia(contribuyente.Domicilios[0].IdProvincia);
-                            Domicilio.CodPost = contribuyente.Domicilios[0].CodigoPostal;
+                            for (int i = 0; i < persona.domicilio.Length; i++)
+                            {
+                                if (persona.domicilio[i].tipoDomicilio.IndexOf("LEGAL") != -1)
+                                {
+                                    Domicilio.Calle = persona.domicilio[i].calle;
+                                    Domicilio.Nro = persona.domicilio[i].numero.ToString();
+                                    Domicilio.Piso = persona.domicilio[i].piso;
+                                    Domicilio.Depto = persona.domicilio[i].oficinaDptoLocal;
+                                    Domicilio.Sector = persona.domicilio[i].sector;
+                                    Domicilio.Torre = persona.domicilio[i].torre;
+                                    Domicilio.Manzana = persona.domicilio[i].manzana;
+                                    Domicilio.Localidad = persona.domicilio[i].localidad;
+                                    Domicilio.IdProvincia = RN.ServiciosAFIP.IdProvincia(persona.domicilio[i].idProvincia.ToString());
+                                    Domicilio.CodPost = persona.domicilio[i].codigoPostal;
+                                }
+                            }
                         }
+                        //string xmlString = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesionConsultaAFIP);
+                        //System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Entidades.AFIP.Contribuyente));
+                        //StringReader rdr = new StringReader(xmlString);
+                        //Entidades.AFIP.Contribuyente contribuyente = (Entidades.AFIP.Contribuyente)serializer.Deserialize(rdr);
+                        //RazonSocialTextBox.Text = contribuyente.Persona.DescripcionCorta;
+                        //if (contribuyente.Domicilios.Length > 0)
+                        //{
+                        //    Domicilio.Calle = contribuyente.Domicilios[0].Calle;
+                        //    Domicilio.Nro = contribuyente.Domicilios[0].Numero;
+                        //    Domicilio.Piso = contribuyente.Domicilios[0].Piso;
+                        //    Domicilio.Depto = contribuyente.Domicilios[0].OficinaDeptoLocal;
+                        //    Domicilio.Sector = string.Empty;
+                        //    Domicilio.Torre = string.Empty;
+                        //    Domicilio.Manzana = string.Empty;
+                        //    Domicilio.Localidad = contribuyente.Domicilios[0].Localidad;
+                        //    Domicilio.IdProvincia = RN.ServiciosAFIP.IdProvincia(contribuyente.Domicilios[0].IdProvincia);
+                        //    Domicilio.CodPost = contribuyente.Domicilios[0].CodigoPostal;
+                        //}
                     }
                     else
                     {
