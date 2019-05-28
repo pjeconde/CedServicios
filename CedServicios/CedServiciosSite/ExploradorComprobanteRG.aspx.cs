@@ -170,7 +170,7 @@ namespace CedServicios.Site
                 if (EstadoDeBajaCheckBox.Checked) estados.Add(new Entidades.EstadoDeBaja());
                 if (EstadoPteAutorizCheckBox.Checked) estados.Add(new Entidades.EstadoPteAutoriz());
                 if (EstadoRechCheckBox.Checked) estados.Add(new Entidades.EstadoRech());
-                lista = RN.Comprobante.ListaFiltrada(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, DetalleTextBox.Text, sesion, false);
+                lista = RN.Comprobante.ListaFiltrada(estados, "", FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, DetalleTextBox.Text, sesion, false);
                 if (lista.Count == 0)
                 {
                     //DescargarButton.Enabled = false;

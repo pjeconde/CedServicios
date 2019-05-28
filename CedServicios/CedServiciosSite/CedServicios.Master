@@ -30,12 +30,6 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
     <style type="text/css">
-        .MainMenu
-        {
-            position:relative;
-            vertical-align:middle;
-            text-align:left;
-        }
         .Fuente
         {
         	font-family: Verdana;
@@ -126,7 +120,7 @@
     <asp:ScriptManager ID="MasterScriptManager" runat="server" EnableScriptGlobalization="True">
     </asp:ScriptManager>
         <section id="social" class="social">
-            <div class="container" style="">
+            <div class="container">
                 <!-- Example row of columns -->
                 <div class="row">
                     <div class="social-wrapper">
@@ -425,8 +419,8 @@
     <script src="/assetsAnt/js/plugins.js"></script>
     <script src="/assetsAnt/js/modernizr.js"></script>
     <script src="/assetsAnt/js/main.js"></script>
+    <script src="/assetsAnt/js/menu.js"></script>
 
-    <script src="/jsAnt/menu.js"></script>
     </form>
     
     <script type="text/javascript">

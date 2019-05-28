@@ -72,15 +72,22 @@ namespace CedServicios.Site
                     String path = Master.Server.MapPath("~/PDFs/");
                     string[] archivos = System.IO.Directory.GetFiles(path, sesion.Cuit.Nro + "*.pdf", System.IO.SearchOption.TopDirectoryOnly);
                     List<Entidades.PDF> pDFs = new List<Entidades.PDF>();
-                    for (int i = 0; i < archivos.Length; i++)
+                    if (archivos.Length > 0)
                     {
-                        DateTime fechaCreacion = System.IO.Directory.GetCreationTime(archivos[i]);
-                        if (Convert.ToInt32(fechaCreacion.ToString("yyyyMMdd")) >= Convert.ToInt32(FechaDesdeTextBox.Text) && Convert.ToInt32(fechaCreacion.ToString("yyyyMMdd")) <= Convert.ToInt32(FechaHastaTextBox.Text))
+                        for (int i = 0; i < archivos.Length; i++)
                         {
-                            char[] separadorArchivo = { '\\' };
-                            string[] nombreArchivo = archivos[i].Split(separadorArchivo);
-                            pDFs.Add(new Entidades.PDF(archivos[i], DescrPDF(archivos[i].Replace(path, string.Empty).Replace(".pdf", string.Empty).Replace(".PDF", string.Empty)), fechaCreacion.ToString("dd/MM/yyyy"), nombreArchivo[nombreArchivo.Length - 1]));
+                            DateTime fechaCreacion = System.IO.Directory.GetCreationTime(archivos[i]);
+                            if (Convert.ToInt32(fechaCreacion.ToString("yyyyMMdd")) >= Convert.ToInt32(FechaDesdeTextBox.Text) && Convert.ToInt32(fechaCreacion.ToString("yyyyMMdd")) <= Convert.ToInt32(FechaHastaTextBox.Text))
+                            {
+                                char[] separadorArchivo = { '\\' };
+                                string[] nombreArchivo = archivos[i].Split(separadorArchivo);
+                                pDFs.Add(new Entidades.PDF(archivos[i], DescrPDF(archivos[i].Replace(path, string.Empty).Replace(".pdf", string.Empty).Replace(".PDF", string.Empty)), fechaCreacion.ToString("dd/MM/yyyy"), nombreArchivo[nombreArchivo.Length - 1]));
+                            }
                         }
+                    }
+                    else
+                    {
+                        MensajeLabel.Text = "No hay archivos PDFs descargados previamente.";
                     }
                     ViewState["PDFs"] = pDFs;
                     PDFsGridView.DataSource = pDFs;

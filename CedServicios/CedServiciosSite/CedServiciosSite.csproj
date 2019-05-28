@@ -79,6 +79,7 @@
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -141,18 +142,14 @@
     <Content Include="assetsAnt\images\flaticon4.png" />
     <Content Include="assetsAnt\images\homebg.jpg" />
     <Content Include="assetsAnt\images\homebg2.jpg" />
-    <Content Include="assetsAnt\images\homebg3.jpg" />
-    <Content Include="assetsAnt\images\logo.png" />
     <Content Include="assetsAnt\images\preloading.gif" />
     <Content Include="busquedas.aspx" />
     <Content Include="css\layout-contact.css" />
     <Content Include="indexMenu.html" />
     <Content Include="IndexPie.html" />
-    <Content Include="jsAnt\bootstrap.js" />
-    <Content Include="jsAnt\bootstrap.min.js" />
     <Content Include="assetsAnt\js\main.js" />
     <Content Include="assetsAnt\js\modernizr.js" />
-    <Content Include="jsAnt\npm.js" />
+    <Content Include="assetsAnt\js\Menu.js" />
     <Content Include="assetsAnt\js\plugins.js" />
     <Content Include="assetsAnt\js\vendor\bootstrap.min.js" />
     <Content Include="assetsAnt\js\vendor\jquery-1.11.2.min.js" />
@@ -862,8 +859,6 @@
     <Content Include="assetsAnt\fonts\Roboto-Regular-webfont.eot" />
     <Content Include="assetsAnt\fonts\Roboto-Regular-webfont.ttf" />
     <Content Include="assetsAnt\fonts\Roboto-Regular-webfont.woff" />
-    <None Include="Cedeira-SistAdminFCIs.pdf" />
-    <None Include="Cedeira-SistTransfMEP.pdf" />
     <None Include="contact_me.php" />
     <Content Include="css\font\fontawesome-webfont.eot" />
     <Content Include="css\font\fontawesome-webfont.ttf" />
@@ -922,6 +917,9 @@
     <None Include="images\Thumbs.db" />
     <None Include="mail-it.php" />
     <None Include="mail\contact_me.php" />
+    <None Include="Properties\PublishProfiles\CedServicios-PROD.pubxml" />
+    <None Include="Properties\PublishProfiles\CedServicios-WW-DESA.pubxml" />
+    <None Include="Properties\PublishProfiles\CedServicios-WW-PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

@@ -31,6 +31,7 @@ namespace CedServicios.Site
                     string[] itemsParametros = parametros.Split(delimitador);
                     TratamientoTextBox.Text = itemsParametros[0];
                     ElementoTextBox.Text = itemsParametros[1];
+                    OrderByDropDownList.Visible = false;
                     switch (ElementoTextBox.Text)
                     {
                         case "Comprobante":
@@ -44,6 +45,12 @@ namespace CedServicios.Site
                             }
                             NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
                             NaturalezaComprobanteDropDownList.SelectedIndex = 0;
+                            EstadoDropDownList.DataSource = RN.Multiseleccion.ListaComboMultiseleccion();
+                            ViewState["Estados"] = RN.Estado.Lista(false, sesion);
+                            EstadoGridView.DataSource = ViewState["Estados"];
+                            OrderByDropDownList.Visible = true;
+                            OrderByDropDownList.DataSource = RN.Comprobante.LiastaOrderByExplorador();
+                            
                             if (sesion.UsuarioDemo == true)
                             {
                                 FechaDesdeTextBox.Text = "20130101";
@@ -365,7 +372,8 @@ namespace CedServicios.Site
                     if (EstadoDeBajaCheckBox.Checked) estados.Add(new Entidades.EstadoDeBaja());
                     if (EstadoPteAutorizCheckBox.Checked) estados.Add(new Entidades.EstadoPteAutoriz());
                     if (EstadoRechCheckBox.Checked) estados.Add(new Entidades.EstadoRech());
-                    lista = RN.Comprobante.ListaFiltrada(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, DetalleTextBox.Text, sesion, true);
+                    string orderBy = OrderByDropDownList.SelectedValue;
+                    lista = RN.Comprobante.ListaFiltrada(estados, orderBy, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, DetalleTextBox.Text, sesion, true);
 
                     ContentPlaceHolder contentPlaceDefault = ((ContentPlaceHolder)Master.FindControl("ContentPlaceDefault"));
                     System.Web.UI.HtmlControls.HtmlAnchor control = ((System.Web.UI.HtmlControls.HtmlAnchor)contentPlaceDefault.FindControl("AyudaGrilla"));
@@ -902,7 +910,7 @@ namespace CedServicios.Site
                                 {
                                     script = ex.InnerException.Message;
                                 }
-                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), script);
+                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "[ComprobanteConsulta] " + script);
                                 MensajeLabel.Text = script;
                             }
                             #endregion
@@ -1491,6 +1499,18 @@ namespace CedServicios.Site
             {
                 //EstadoVigenteCheckBox.Checked = false;
             }
+        }
+        protected void AbrirFiltroEstadoLinkButton_Click(object sender, EventArgs e)
+        {
+            EstadoGridView.DataSource = ViewState["Estados"];
+            EstadoGridView.DataBind();
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#filtroEstadoModal').modal('show');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "FiltroEstadoModalScript", sb.ToString(), false);
+            EstadoDropDownList.SelectedValue = "VARIOS";
         }
     }
 }

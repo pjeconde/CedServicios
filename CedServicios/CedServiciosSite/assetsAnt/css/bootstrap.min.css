@@ -1593,9 +1593,9 @@ pre {
     }
 }
 
-@media (min-width:1200px) {
+@media (min-width:1200px) and (max-width: 2199px) {
     .container {
-        width: 1170px
+        width: 95%
     }
 }
 
@@ -4075,7 +4075,7 @@ textarea.input-group-sm > .form-control, textarea.input-group-sm > .input-group-
 .navbar {
     position: relative;
     min-height: 50px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     border: 1px solid transparent
 }
 

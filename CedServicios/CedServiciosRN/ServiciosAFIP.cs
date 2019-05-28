@@ -154,35 +154,49 @@ namespace CedServicios.RN
 
                 persona.razonSocial = respPersona.persona.razonSocial;
                 persona.apellido = respPersona.persona.apellido;
-                persona.nombre = respPersona.persona.apellido;
+                persona.nombre = respPersona.persona.nombre;
                 persona.claveInactivaAsociada = respPersona.persona.claveInactivaAsociada;
                 persona.descripcionActividadPrincipal = respPersona.persona.descripcionActividadPrincipal;
-                if (respPersona.persona.fechaContratoSocialSpecified)
-                { 
-                    persona.fechaContratoSocial = respPersona.persona.fechaContratoSocial;
-                }
+                persona.estadoClave = respPersona.persona.estadoClave;
+                persona.fechaContratoSocialSpecified = respPersona.persona.fechaContratoSocialSpecified;
+                persona.fechaContratoSocial = respPersona.persona.fechaContratoSocial;
+                persona.formaJuridica = respPersona.persona.formaJuridica;
+                persona.idActividadPrincipal = respPersona.persona.idActividadPrincipal;
+                persona.idActividadPrincipalSpecified = respPersona.persona.idActividadPrincipalSpecified;
+                persona.idPersona = respPersona.persona.idPersona;
+                persona.idPersonaSpecified = respPersona.persona.idPersonaSpecified;
+                persona.mesCierre = respPersona.persona.mesCierre;
+                persona.mesCierreSpecified = respPersona.persona.mesCierreSpecified;
+                persona.numeroDocumento = respPersona.persona.numeroDocumento;
+                persona.periodoActividadPrincipal = respPersona.persona.periodoActividadPrincipal;
+                persona.periodoActividadPrincipalSpecified = respPersona.persona.periodoActividadPrincipalSpecified;
+                persona.tipoClave = respPersona.persona.tipoClave;
+                persona.tipoDocumento = respPersona.persona.tipoDocumento;
+                persona.tipoPersona = respPersona.persona.tipoPersona;
                 if (respPersona.persona.domicilio.Length > 0)
                 {
                     persona.domicilio = new Entidades.PadronA13.domicilio[respPersona.persona.domicilio.Length];
-                    for (int i =0; i < respPersona.persona.domicilio.Length; i++)
+                    for (int i = 0; i < respPersona.persona.domicilio.Length; i++)
                     {
                         persona.domicilio[i] = new Entidades.PadronA13.domicilio();
-                        persona.domicilio[i].calle = respPersona.persona.domicilio[0].calle;
-                        persona.domicilio[i].codigoPostal = respPersona.persona.domicilio[0].codigoPostal;
-                        if (respPersona.persona.domicilio[0].numeroSpecified)
-                        { 
-                            persona.domicilio[i].numero = respPersona.persona.domicilio[0].numero;
-                        }
-                        persona.domicilio[i].oficinaDptoLocal = respPersona.persona.domicilio[0].oficinaDptoLocal;
-                        persona.domicilio[i].sector = respPersona.persona.domicilio[0].sector;
-                        persona.domicilio[i].torre = respPersona.persona.domicilio[0].torre;
-                        persona.domicilio[i].manzana = respPersona.persona.domicilio[0].manzana;
-                        persona.domicilio[i].localidad = respPersona.persona.domicilio[0].localidad;
-                        if (respPersona.persona.domicilio[0].idProvinciaSpecified)
-                        { 
-                            persona.domicilio[i].idProvincia = persona.domicilio[i].idProvincia;
-                        }
-                        persona.domicilio[i].codigoPostal = persona.domicilio[i].codigoPostal;
+                        persona.domicilio[i].calle = respPersona.persona.domicilio[i].calle;
+                        persona.domicilio[i].codigoPostal = respPersona.persona.domicilio[i].codigoPostal;
+                        persona.domicilio[i].datoAdicional = respPersona.persona.domicilio[i].datoAdicional;
+                        persona.domicilio[i].descripcionProvincia = respPersona.persona.domicilio[i].descripcionProvincia;
+                        persona.domicilio[i].direccion = respPersona.persona.domicilio[i].direccion;
+                        persona.domicilio[i].estadoDomicilio = respPersona.persona.domicilio[i].estadoDomicilio;
+                        persona.domicilio[i].idProvincia = respPersona.persona.domicilio[i].idProvincia;
+                        persona.domicilio[i].idProvinciaSpecified = respPersona.persona.domicilio[i].idProvinciaSpecified;
+                        persona.domicilio[i].localidad = respPersona.persona.domicilio[i].localidad;
+                        persona.domicilio[i].manzana = respPersona.persona.domicilio[i].manzana;
+                        persona.domicilio[i].numero = respPersona.persona.domicilio[i].numero;
+                        persona.domicilio[i].numeroSpecified = respPersona.persona.domicilio[i].numeroSpecified;
+                        persona.domicilio[i].oficinaDptoLocal = respPersona.persona.domicilio[i].oficinaDptoLocal;
+                        persona.domicilio[i].piso = respPersona.persona.domicilio[i].piso;
+                        persona.domicilio[i].sector = respPersona.persona.domicilio[i].sector;
+                        persona.domicilio[i].tipoDatoAdicional = respPersona.persona.domicilio[i].tipoDatoAdicional;
+                        persona.domicilio[i].tipoDomicilio = respPersona.persona.domicilio[i].tipoDomicilio;
+                        persona.domicilio[i].torre = respPersona.persona.domicilio[i].torre;
                     }
                 }
             }

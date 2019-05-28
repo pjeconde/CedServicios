@@ -63,6 +63,7 @@
     <Compile Include="FormatosRptExportar\FormatoRptExportar.cs" />
     <Compile Include="FormatosRptExportar\SinInformar.cs" />
     <Compile Include="FormatosRptExportar\Excel.cs" />
+    <Compile Include="Multiseleccion.cs" />
     <Compile Include="NaturalezaComprobante.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Opcion.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="TipoPermiso.cs" />
     <Compile Include="TipoPuntoVta.cs" />
     <Compile Include="UN.cs" />
+    <Compile Include="OrderBy.cs" />
     <Compile Include="Unidad.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="WF.cs" />

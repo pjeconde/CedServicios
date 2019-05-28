@@ -207,7 +207,6 @@ namespace CedServicios.Site
                 NroDocTextBox.Visible = true;
                 DestinosCuitDropDownList.Visible = false;
             }
-            TraerDatosDeAFIPLinkButton.Visible = TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUIT().Codigo.ToString()) || TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUIL().Codigo.ToString());
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
@@ -216,59 +215,6 @@ namespace CedServicios.Site
         protected void TipoPersona_CheckedChanged(object sender, EventArgs e)
         {
             Contacto.Required = ClienteRadioButton.Checked || AmbosRadioButton.Checked;
-        }
-        protected void TraerDatosDeAFIPLinkButton_Click(object sender, EventArgs e)
-        {
-            if (TipoDocDropDownList.SelectedValue == "80" || TipoDocDropDownList.SelectedValue == "86") //CUIT o CUIL
-            {
-                try
-                {
-                    Entidades.Sesion sesion = ((Entidades.Sesion)Session["Sesion"]);
-                    Entidades.Sesion sesionConsultaAFIP = new Entidades.Sesion();
-                    sesionConsultaAFIP.Cuit.UsaCertificadoAFIPPropio = true;
-                    sesionConsultaAFIP.Cuit.Nro = RN.Configuracion.CuitConsultaAFIP(sesion);
-                    sesionConsultaAFIP.CnnStr = sesion.CnnStr; 
-                    if (sesionConsultaAFIP.Cuit.Nro != string.Empty)
-                    {
-                        Entidades.PadronA13.persona persona = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesionConsultaAFIP);
-                        RazonSocialTextBox.Text = persona.razonSocial;
-                        if (persona.domicilio.Length > 0)
-                        {
-                            for (int i = 0; i < persona.domicilio.Length; i++)
-                            {
-                                if (persona.domicilio[i].tipoDomicilio.IndexOf("LEGAL") != -1)
-                                {
-                                    Domicilio.Calle = persona.domicilio[i].calle;
-                                    Domicilio.Nro = persona.domicilio[i].numero.ToString();
-                                    Domicilio.Piso = persona.domicilio[i].piso;
-                                    Domicilio.Depto = persona.domicilio[i].oficinaDptoLocal;
-                                    Domicilio.Sector = persona.domicilio[i].sector;
-                                    Domicilio.Torre = persona.domicilio[i].torre;
-                                    Domicilio.Manzana = persona.domicilio[i].manzana;
-                                    Domicilio.Localidad = persona.domicilio[i].localidad;
-                                    Domicilio.IdProvincia = RN.ServiciosAFIP.IdProvincia(persona.domicilio[i].idProvincia.ToString());
-                                    Domicilio.CodPost = persona.domicilio[i].codigoPostal;
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        MensajeLabel.Text = "Servicio de consulta no disponible en estos momentos";
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MensajeLabel.Text = ex.Message;
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
-                }
-            }
-            else
-            {
-                MensajeLabel.Text = "Para obtener los datos de la AFIP hay que ingresar CUIT/CUIL";
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
-            }
         }
     }
 }

@@ -53,8 +53,6 @@
                     onselectedindexchanged="TipoDocDropDownList_SelectedIndexChanged" ></asp:DropDownList>
                 <asp:TextBox ID="NroDocTextBox" runat="server" MaxLength="11" TabIndex="3" ToolTip="Debe ingresar sólo números." Width="90px" ></asp:TextBox>
                 <asp:DropDownList ID="DestinosCuitDropDownList" runat="server" TabIndex="3" Width="306px" DataValueField="Codigo" DataTextField="Descr" Visible="false" ></asp:DropDownList>
-                <asp:LinkButton ID="TraerDatosDeAFIPLinkButton" runat="server" SkinID="LinkButtonMediano" Text="Traer datos de AFIP" OnClick="TraerDatosDeAFIPLinkButton_Click" CausesValidation="false"></asp:LinkButton>
-                &nbsp;<a href="#" role="button" class="popover-test" data-html="true" title="OBTENER DATOS FISCALES" data-content="Permite obtener datos del Padrón de la AFIP, a partir del ingreso del CUIT.<br /><br />En breve estará habilitado."><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit"></span></a>
 			</td>
         </tr>
         <tr>
@@ -149,8 +147,8 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="504" Text="Aceptar" onclick="AceptarButton_Click" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="505" Text="Cancelar" onclick="SalirButton_Click" />
+                <asp:Button ID="AceptarButton" runat="server" class="btn btn-default btn-sm" TabIndex="504" Text="Aceptar" onclick="AceptarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" class="btn btn-default btn-sm" CausesValidation="false" TabIndex="505" Text="Cancelar" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

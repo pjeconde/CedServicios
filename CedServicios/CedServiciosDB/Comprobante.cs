@@ -144,7 +144,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle, bool Ajuste)
+        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string OrderBy, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle, bool Ajuste)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)
@@ -196,7 +196,24 @@ namespace CedServicios.DB
                 {
                     a.Append("and (Comprobante.IdNaturalezaComprobante<>'Compra' or (Comprobante.IdNaturalezaComprobante='Compra' and Comprobante.NroDoc <> '" + sesion.Cuit.Nro + "')) ");
                 }
-                a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
+                switch (OrderBy)
+                {
+                    case "RazSoc-FecEmi-PtoVta-TipoComp-NroComp":
+                        a.Append("order by Comprobante.RazonSocial asc, Comprobante.Fecha desc, Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
+                        break;
+                    case "FecEmi-RazSoc-PtoVta-TipoComp-NroComp":
+                        a.Append("order by Comprobante.Fecha desc, Comprobante.RazonSocial asc, Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
+                        break;
+                    case "FecEmi-PtoVta-TipoComp-NroComp":
+                        a.Append("order by Comprobante.Fecha desc, Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
+                        break;
+                    case "PtoVta-TipoComp-NroComp":
+                        a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
+                        break;
+                    default:
+                        a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
+                        break;
+                }
                 DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
                 if (dt.Rows.Count != 0)
                 {
@@ -805,6 +822,21 @@ namespace CedServicios.DB
             Hasta.UltActualiz = ByteArray2TimeStamp((byte[])Desde["UltActualiz"]);
             Hasta.NaturalezaComprobante.Id = Convert.ToString(Desde["IdNaturalezaComprobante"]);
             Hasta.NaturalezaComprobante.Descr = Convert.ToString(Desde["DescrNaturalezaComprobante"]);
+            switch (Hasta.NaturalezaComprobante.Id)
+            {
+                case "Compra":
+                    Hasta.NaturalezaComprobante.Descr = "Compra";
+                    break;
+                case "Venta":
+                    Hasta.NaturalezaComprobante.Descr = "Venta";
+                    break;
+                case "VentaTradic":
+                    Hasta.NaturalezaComprobante.Descr = "Vta.Tradic ";
+                    break;
+                case "VentaContrato":
+                    Hasta.NaturalezaComprobante.Descr = "Contrato";
+                    break;
+            }
             Hasta.PeriodicidadEmision = Convert.ToString(Desde["PeriodicidadEmision"]);
             Hasta.FechaProximaEmision = Convert.ToDateTime(Desde["FechaProximaEmision"]);
             Hasta.CantidadComprobantesAEmitir = Convert.ToInt32(Desde["CantidadComprobantesAEmitir"]);

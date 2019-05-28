@@ -3680,6 +3680,8 @@ namespace CedServicios.Site.Facturacion.Electronica
                     throw new Exception("Nro documento del comprador para exportación no informado");
                 }
             }
+            infcompra.id = IdPersonaCompradorTextBox.Text;
+            infcompra.desambiguacionCuitPais = Convert.ToInt32(DesambiguacionCuitPaisCompradorTextBox.Text);
             infcompra.denominacion = Denominacion_CompradorTextBox.Text;
             int auxCondIVACompra = Convert.ToInt32(Condicion_IVA_CompradorDropDownList.SelectedValue);
             if (!auxCondIVACompra.Equals(0))

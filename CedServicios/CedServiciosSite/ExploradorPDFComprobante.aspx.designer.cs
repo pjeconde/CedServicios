@@ -13,15 +13,6 @@ namespace CedServicios.Site {
     public partial class ExploradorPDFComprobante {
         
         /// <summary>
-        /// Control Panel0.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel Panel0;
-        
-        /// <summary>
         /// Control TituloPaginaLabel.
         /// </summary>
         /// <remarks>
@@ -92,6 +83,15 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Image FechaHastaImage;
+        
+        /// <summary>
+        /// Control Panel0.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel Panel0;
         
         /// <summary>
         /// Control BuscarButton.

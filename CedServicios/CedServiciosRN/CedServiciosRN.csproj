@@ -55,6 +55,7 @@
     <Compile Include="BusquedaLaboral.cs" />
     <Compile Include="BusquedaPerfil.cs" />
     <Compile Include="ListaPrecio.cs" />
+    <Compile Include="Multiseleccion.cs" />
     <Compile Include="NaturalezaComprobante.cs" />
     <Compile Include="PeriodicidadEmision.cs" />
     <Compile Include="Persona.cs" />

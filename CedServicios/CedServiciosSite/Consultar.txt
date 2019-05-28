@@ -207,3 +207,8 @@
 20190322 03:04:34  Consulta de Tipos de Comprobante CUIT: 20225018805
 20190322 03:05:31  Consulta de Tipos de Comprobante CUIT: 20225018805
 20190322 03:13:32  Consulta de Tipos de Comprobante CUIT: 20225018805
+20190524 11:49:30  10016-El numero o fecha del comprobante no se corresponde con el proximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 62.\n
+20190524 11:50:35  GenerarNroLote - Thread was being aborted.
+20190524 12:49:33  10016-El numero o fecha del comprobante no se corresponde con el proximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 62.\n
+20190527 12:50:47  Reporte: Imagen OK
+20190527 12:51:10  Reporte: Imagen OK

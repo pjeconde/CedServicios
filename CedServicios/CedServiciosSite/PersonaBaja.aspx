@@ -121,8 +121,8 @@
             <td>
             </td>
             <td align="left" style="height: 24px; padding-top:20px">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="503" Text="Aceptar" onclick="AceptarButton_Click" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="504" Text="Cancelar" onclick="SalirButton_Click" />
+                <asp:Button ID="AceptarButton" runat="server" class="btn btn-default btn-sm" TabIndex="503" Text="Aceptar" onclick="AceptarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" class="btn btn-default btn-sm" CausesValidation="false" TabIndex="504" Text="Cancelar" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

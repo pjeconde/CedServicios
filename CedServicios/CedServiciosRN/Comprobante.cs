@@ -21,10 +21,10 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaFiltradaIvaVentas(Estados, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos, Detalle);
         }
-        public static List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle, Entidades.Sesion Sesion, bool Ajuste)
+        public static List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string OrderBy, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle, Entidades.Sesion Sesion, bool Ajuste)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            return db.ListaFiltrada(Estados, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos, Detalle, Ajuste);
+            return db.ListaFiltrada(Estados, OrderBy, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos, Detalle, Ajuste);
         }
         public static void Registrar(FeaEntidades.Turismo.comprobante Comprobante, string Tratamiento, Entidades.Comprobante ComprobanteOrig, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle, bool EmailAvisoComprobanteActivo, string IdDestinatarioFrecuente, string EmailAvisoComprobanteAsunto, string EmailAvisoComprobanteCuerpo, Entidades.Sesion Sesion)
         {
@@ -2679,6 +2679,27 @@ namespace CedServicios.RN
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaStock(Sesion.Cuit.Nro.ToString(), FechaHasta);
+        }
+        public static List<Entidades.OrderBy> LiastaOrderByExplorador()
+        {
+            List<Entidades.OrderBy> listaOrderBy = new List<Entidades.OrderBy>();
+            Entidades.OrderBy orderBy = new Entidades.OrderBy();
+            orderBy.Id = "FecEmi-PtoVta-TipoComp-NroComp";
+            orderBy.Descr = "Fecha Emision / Punto de Venta / Tipo de Comprobante / Número de Comprobante";
+            listaOrderBy.Add(orderBy);
+            orderBy = new Entidades.OrderBy();
+            orderBy.Id = "PtoVta-TipoComp-NroComp";
+            orderBy.Descr = "Punto de Venta / Tipo de Comprobante / Número de Comprobante";
+            listaOrderBy.Add(orderBy);
+            orderBy = new Entidades.OrderBy();
+            orderBy.Id = "FecEmi-RazSoc-PtoVta-TipoComp-NroComp";
+            orderBy.Descr = "Fecha Emision / Razón Social /Punto de Venta / Tipo de Comprobante / Número de Comprobante";
+            listaOrderBy.Add(orderBy);
+            orderBy = new Entidades.OrderBy();
+            orderBy.Id = "RazSoc-FecEmi-PtoVta-TipoComp-NroComp";
+            orderBy.Descr = "Razón Social / Fecha Emision / Punto de Venta / Tipo de Comprobante / Número de Comprobante";
+            listaOrderBy.Add(orderBy);
+            return listaOrderBy;
         }
     }
 }
