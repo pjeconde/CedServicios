@@ -43,12 +43,6 @@ namespace CedServicios.Site
                     }
                     ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Fecha emi.")].Visible = false;
 
-                    EstadoVigenteCheckBox.Checked = true;
-                    EstadoPteEnvioCheckBox.Checked = false;
-                    EstadoPteConfCheckBox.Checked = false;
-                    EstadoDeBajaCheckBox.Checked = false;
-                    EstadoPteAutorizCheckBox.Checked = false;
-                    EstadoRechCheckBox.Checked = false;
                     ComprobantesGridView.Columns[0].Visible = true;
                     
                     ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
@@ -164,17 +158,15 @@ namespace CedServicios.Site
                     naturalezaComprobante = new Entidades.NaturalezaComprobante();
                 }
                 List<Entidades.Estado> estados = new List<Entidades.Estado>();
-                if (EstadoVigenteCheckBox.Checked) estados.Add(new Entidades.EstadoVigente());
-                if (EstadoPteEnvioCheckBox.Checked) estados.Add(new Entidades.EstadoPteEnvio());
-                if (EstadoPteConfCheckBox.Checked) estados.Add(new Entidades.EstadoPteConf());
-                if (EstadoDeBajaCheckBox.Checked) estados.Add(new Entidades.EstadoDeBaja());
-                if (EstadoPteAutorizCheckBox.Checked) estados.Add(new Entidades.EstadoPteAutoriz());
-                if (EstadoRechCheckBox.Checked) estados.Add(new Entidades.EstadoRech());
-                lista = RN.Comprobante.ListaFiltrada(estados, "", FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, DetalleTextBox.Text, sesion, false);
+                estados.Add(new Entidades.EstadoVigente());
+                List<Entidades.Estado> estadosCompras = new List<Entidades.Estado>();
+                estadosCompras.Add(new Entidades.EstadoVigente());
+                List<FeaEntidades.TiposDeComprobantes.TipoComprobante> tiposComprobantes = new List<FeaEntidades.TiposDeComprobantes.TipoComprobante>();
+                lista = RN.Comprobante.ListaFiltrada(estados, estadosCompras, tiposComprobantes, "", FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, true, DetalleTextBox.Text, sesion, false);
                 if (lista.Count == 0)
                 {
                     //DescargarButton.Enabled = false;
-                    DescargarButton.Attributes.Add("Disabled", "Disabled");
+                    //DescargarButton.Attributes.Add("Disabled", "Disabled");
                     ComprobantesGridView.DataSource = null;
                     ComprobantesGridView.DataBind();
                     MensajeLabel.Text = "No se han encontrado Comprobantes que satisfagan la busqueda";
@@ -182,11 +174,11 @@ namespace CedServicios.Site
                 else
                 {
                     //DescargarButton.Enabled = true;
-                    DescargarButton.Attributes.Remove("Disabled");
+                    //DescargarButton.Attributes.Remove("Disabled");
                     ComprobantesGridView.DataSource = lista;
-                    ViewState["Comprobantes"] = lista;
                     ComprobantesGridView.DataBind();
                 }
+                ViewState["Comprobantes"] = lista;
             }
         }
         protected void SalirButton_Click(object sender, EventArgs e)
@@ -219,14 +211,22 @@ namespace CedServicios.Site
         protected void DescargarButton_Click(object sender, EventArgs e)
         {
             List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
-            foreach (Entidades.Comprobante comprobante in lista)
+            if (lista == null || lista.Count == 0)
             {
-                if (comprobante.Estado != "Vigente")
+                MensajeLabel.Text = "No hay comprobantes para descargar la Interfaz RG3586. Presione 'Buscar'";
+                //DescargarButton.Enabled = false;
+                return;
+            }
+            else
+            {
+                foreach (Entidades.Comprobante comprobante in lista)
                 {
-
-                    MensajeLabel.Text = "No es posible descargar la Interfaz RG3586. Hay comprobantes que no están vigentes.";
-                    DescargarButton.Enabled = false;
-                    return;
+                    if (comprobante.Estado != "Vigente")
+                    {
+                        MensajeLabel.Text = "No es posible descargar la Interfaz RG3586. Hay comprobantes que no están vigentes.";
+                        //DescargarButton.Enabled = false;
+                        return;
+                    }
                 }
             }
             GenerarInterfazRG3685(lista);
@@ -384,6 +384,11 @@ namespace CedServicios.Site
                             {
                                 CantAlicuotas = lote.comprobante[cl].resumen.cant_alicuotas_iva;
                             }
+                            //Verifica si hay información exenta.
+                            if (lote.comprobante[cl].resumen.importe_operaciones_exentas > 0)
+                            { 
+                                CantAlicuotas += 1;
+                            }
                             string Campo19 = String.Format("{0,1}", CantAlicuotas);
                             string Campo20 = String.Format("{0,1}", lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion);
                             string Campo21 = new string(Convert.ToChar("0"), 15);  //Otros Tributos
@@ -461,6 +466,18 @@ namespace CedServicios.Site
 
                                         sbDataVENTASAlic.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6);
                                     }
+                                }
+                                //Genera registro de alicuotas en cero si hay informacón exenta
+                                if (lote.comprobante[cl].resumen.importe_operaciones_exentas > 0)
+                                {
+                                    Campo1 = lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("000");
+                                    Campo2 = lote.comprobante[cl].cabecera.informacion_comprobante.punto_de_venta.ToString("00000");
+                                    Campo3 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
+                                    Campo4 = new string(Convert.ToChar("0"), 15);
+                                    Campo5 = "0003";
+                                    Campo6 = new string(Convert.ToChar("0"), 15);
+
+                                    sbDataVENTASAlic.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6);
                                 }
                             }
                             #endregion
@@ -634,6 +651,11 @@ namespace CedServicios.Site
                             {
                                 CantAlicuotas = lote.comprobante[cl].resumen.cant_alicuotas_iva;
                             }
+                            //Verifica si hay información exenta.
+                            if (lote.comprobante[cl].resumen.importe_operaciones_exentas > 0)
+                            {
+                                CantAlicuotas += 1;
+                            }
                             string Campo19 = String.Format("{0,1}", CantAlicuotas);
                             string Campo20 = "";
                             if (lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion == null || lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion.Trim() == "")
@@ -644,7 +666,8 @@ namespace CedServicios.Site
                             {
                                 Campo20 = String.Format("{0,1}", lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion);
                             }
-                            string Campo21 = new string(Convert.ToChar("0"), 15);           //Crédito Fiscal Computable
+                            //Crédito Fiscal Computable
+                            string Campo21 = String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(0, 13) + String.Format("{0,16}", lote.comprobante[cl].resumen.impuesto_liq.ToString(new string(Convert.ToChar("0"), 13) + ".00")).Substring(14, 2); 
                             string Campo22 = new string(Convert.ToChar("0"), 15);           //Otros Tributos
                             string Campo23 = new string(Convert.ToChar("0"), 11);           //CUIT emisor / corredor
                             string Campo24 = Truncate(String.Format("{0,-30}", ""), 30);    //Denominación del emisor / corredor
@@ -753,6 +776,20 @@ namespace CedServicios.Site
                                         sbDataCOMPRASAlic.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8);
                                     }
                                 }
+                                //Genera registro de alicuotas en cero si hay informacón exenta
+                                if (lote.comprobante[cl].resumen.importe_operaciones_exentas > 0)
+                                {
+                                    Campo1 = lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString("000");
+                                    Campo2 = lote.comprobante[cl].cabecera.informacion_comprobante.punto_de_venta.ToString("00000");
+                                    Campo3 = lote.comprobante[cl].cabecera.informacion_comprobante.numero_comprobante.ToString(new string(Convert.ToChar("0"), 20));
+                                    Campo4 = "80";
+                                    Campo5 = lote.comprobante[cl].cabecera.informacion_vendedor.cuit.ToString(new string(Convert.ToChar("0"), 20));
+                                    Campo6 = new string(Convert.ToChar("0"), 15);
+                                    Campo7 = "0003";
+                                    Campo8 = new string(Convert.ToChar("0"), 15);
+
+                                    sbDataCOMPRASAlic.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8);
+                                }
                             }
                             #endregion
                         }
@@ -831,7 +868,6 @@ namespace CedServicios.Site
                         outfile.Write(sbDataCOMPRASAlic.ToString());
                     }
                 }
-                
 
                 //Descargar ZIP ( Ventas y Alicuotas )
                 string filename = sbZIP.ToString();
@@ -905,6 +941,28 @@ namespace CedServicios.Site
                 }
             }
             return existe;
+        }
+
+        protected void VerificarEstadosPosibles_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+        }
+        protected void FechasPredefinidasLinkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string linkSelect = ((LinkButton)sender).ID;
+                string FechaDsd = "";
+                string FechaHst = "";
+                Funciones.FechasPredefinidas(linkSelect, out FechaDsd, out FechaHst);
+                FechaDesdeTextBox.Text = FechaDsd;
+                FechaHastaTextBox.Text = FechaHst;
+            }
+            catch (Exception ex)
+            {
+                string script = "Problemas con las fechas predefinidas: " + ex.Message;
+                MensajeLabel.Text = script;
+            }
         }
     }
 }

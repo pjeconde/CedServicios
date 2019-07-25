@@ -214,11 +214,19 @@
                                 </li>
                             </ul>
                         </li>
+                        <li runat="server" id="ContratosControl" class="dropdown dropdown-submenu"><a runat="server" id="Contratos" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Contratos</a>
+                            <ul class="dropdown-menu">
+                                <li><a runat="server" id="ContratosAlta" visible="false" style="color:lightgray" href="#">Alta</a></li>
+                                <li><a runat="server" id="ContratosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
+                                <li><a runat="server" id="ContratosModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                <li><a runat="server" id="ContratosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
+                            </ul>
+                        </li>
                         <li runat="server" id="FacturacionControl" class="dropdown dropdown-submenu"><a runat="server" id="Facturacion" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Facturacion</a>
                             <ul class="dropdown-menu" style="width:300px;">
                                 <li><a runat="server" id="FactComun" visible="false" style="color:lightgray" href="#">Común / RG.2904 / BonoFiscal / Expo</a></li>
-                                <li><a runat="server" id="FactTurismo" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
-                                <li><a runat="server" id="FactAutContratosServicios" visible="false" style="color:lightgray" href="#">Modificación</a></li>
+                                <li><a runat="server" id="FactTurismo" visible="false" style="color:lightgray" href="#">Turismo</a></li>
+                                <li><a runat="server" id="FactAutContratosServicios" visible="false" style="color:lightgray" href="#">Automática de Contratos/Servicios</a></li>
                                 <li class="divider"></li>
                                 <li runat="server" id="RegistroFacturasControl" class="dropdown dropdown-submenu"><a runat="server" id="RegistroFacturas" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Registro de Facturas</a>
                                     <ul class="dropdown-menu">
@@ -268,14 +276,6 @@
                                     <ul class="dropdown-menu" style="width:250px;">
                                         <li><a runat="server" id="AdminUserCambioClave" visible="false" style="color:lightgray" href="#">Cambio de Contraseña</a></li>
                                         <li><a runat="server" id="AdminUserModifDatosConfig" visible="false" style="color:lightgray" href="#">Modificación de Configuración</a></li>
-                                    </ul>
-                                </li>
-                                <li runat="server" id="ContratosControl" class="dropdown dropdown-submenu"><a runat="server" id="Contratos" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Contratos</a>
-                                    <ul class="dropdown-menu">
-                                        <li><a runat="server" id="ContratosAlta" visible="false" style="color:lightgray" href="#">Alta</a></li>
-                                        <li><a runat="server" id="ContratosBajaYAnulBaja" visible="false" style="color:lightgray" href="#">Baja/Anul.baja</a></li>
-                                        <li><a runat="server" id="ContratosModif" visible="false" style="color:lightgray" href="#">Modificación</a></li>
-                                        <li><a runat="server" id="ContratosConsulta" visible="false" style="color:lightgray" href="#">Consulta</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -431,11 +431,9 @@
             catch (e) {
             }
         }
-
         $(document).on("ready", function () {
             var cuantos = 0;
             cuantos = $('#DivMenu').length;
-            //alert("hola jquery. Cant controles: " + cuantos + ".");
         });
     </script>
 </body>

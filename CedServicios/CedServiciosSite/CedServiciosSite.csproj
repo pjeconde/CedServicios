@@ -59,10 +59,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\AjaxControlToolkit.Binary.NET4\AjaxControlToolkit.dll</HintPath>
     </Reference>
-    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Shared, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
-    <Reference Include="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.CrystalReports.Engine, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.ReportSource, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Shared, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
+    <Reference Include="CrystalDecisions.Web, Version=13.0.3500.0, Culture=neutral, PublicKeyToken=692fbea5521e1304, processorArchitecture=MSIL" />
     <Reference Include="FileHelpers, Version=3.1.5.0, Culture=neutral, PublicKeyToken=3e0c08d59cc3d657, processorArchitecture=MSIL">
       <HintPath>..\packages\FileHelpers.3.1.5\lib\net40\FileHelpers.dll</HintPath>
       <Private>True</Private>
@@ -145,6 +145,9 @@
     <Content Include="assetsAnt\images\preloading.gif" />
     <Content Include="busquedas.aspx" />
     <Content Include="css\layout-contact.css" />
+    <Content Include="ArticuloConsultaConFiltros.aspx" />
+    <Content Include="ComprobanteConsultaConFiltros.aspx" />
+    <Content Include="PersonaConsultaConFiltros.aspx" />
     <Content Include="indexMenu.html" />
     <Content Include="IndexPie.html" />
     <Content Include="assetsAnt\js\main.js" />
@@ -1187,12 +1190,33 @@
     <Compile Include="ExploradorBusquedaLaboral.aspx.designer.cs">
       <DependentUpon>ExploradorBusquedaLaboral.aspx</DependentUpon>
     </Compile>
+    <Compile Include="ComprobanteConsultaConFiltros.aspx.cs">
+      <DependentUpon>ComprobanteConsultaConFiltros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ComprobanteConsultaConFiltros.aspx.designer.cs">
+      <DependentUpon>ComprobanteConsultaConFiltros.aspx</DependentUpon>
+    </Compile>
     <Compile Include="ExploradorCV.aspx.cs">
       <DependentUpon>ExploradorCV.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ExploradorCV.aspx.designer.cs">
       <DependentUpon>ExploradorCV.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="ArticuloConsultaConFiltros.aspx.cs">
+      <DependentUpon>ArticuloConsultaConFiltros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="ArticuloConsultaConFiltros.aspx.designer.cs">
+      <DependentUpon>ArticuloConsultaConFiltros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="PersonaConsultaConFiltros.aspx.cs">
+      <DependentUpon>PersonaConsultaConFiltros.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="PersonaConsultaConFiltros.aspx.designer.cs">
+      <DependentUpon>PersonaConsultaConFiltros.aspx</DependentUpon>
     </Compile>
     <Compile Include="factura.aspx.cs">
       <DependentUpon>factura.aspx</DependentUpon>
@@ -2235,7 +2259,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
+    <None Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
     <None Include="Facturacion\Electronica\Reportes\Imagen.xsc">
       <DependentUpon>Imagen.xsd</DependentUpon>
     </None>

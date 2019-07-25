@@ -75,7 +75,7 @@ namespace CedServicios.Site
                     {
                         mItemFind.Visible = true;
                         if (o.Habilitada)
-                        { 
+                        {
                             mItemFind.Style.Add("Color", "#111111");
                             mItemFind.HRef = o.Vinculo;
                         }
@@ -643,6 +643,40 @@ namespace CedServicios.Site
             }
 
             return -1;
+        }
+        public static void FechasPredefinidas(string Elegida, out string FechaDsd, out string FechaHst)
+        {
+            FechaDsd = "";
+            FechaHst = "";
+            switch (Elegida)
+            {
+                case "MesActual":
+                    FechaDsd = DateTime.Now.ToString("yyyyMM01");
+                    FechaHst = DateTime.Now.ToString("yyyyMMdd");
+                    break;
+                case "MesAnterior":
+                    FechaDsd = DateTime.Now.AddMonths(-1).ToString("yyyyMM01");
+                    FechaHst = Convert.ToDateTime(DateTime.Now.ToString("01/MM/yyyy")).AddDays(-1).ToString("yyyyMMdd");
+                    break;
+                case "TresMesesUltimos":
+                    FechaDsd = DateTime.Now.AddMonths(-2).ToString("yyyyMM01");
+                    FechaHst = DateTime.Now.ToString("yyyyMMdd");
+                    break;
+                case "TresMesesAnteriores":
+                    FechaDsd = DateTime.Now.AddMonths(-3).ToString("yyyyMM01");
+                    FechaHst = Convert.ToDateTime(DateTime.Now.ToString("01/MM/yyyy")).AddDays(-1).ToString("yyyyMMdd");
+                    break;
+                case "AnualActual":
+                    FechaDsd = DateTime.Now.ToString("yyyy") + "0101";
+                    FechaHst = DateTime.Now.ToString("yyyyMMdd");
+                    break;
+                case "AnualAnterior":
+                    FechaDsd = DateTime.Now.AddYears(-1).ToString("yyyy") + "0101";
+                    FechaHst = DateTime.Now.AddYears(-1).ToString("yyyy") + "1231";
+                    break;
+                default:
+                    throw new EX.Validaciones.ValorInvalido("FechaPredefinida");
+            }
         }
     }
 }

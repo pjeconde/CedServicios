@@ -11,7 +11,7 @@
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">
-    <table style="padding-left:10px">
+    <table style="padding-left:10px" align="center">
         <tr>
             <td colspan="2" style="padding-top:20px; text-align: center">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Modificación de Persona"></asp:Label>
@@ -146,7 +146,7 @@
         <tr>
             <td>
             </td>
-            <td align="left" style="height: 24px; padding-top:20px">
+            <td align="left" style="height: 24px;">
                 <asp:Button ID="AceptarButton" runat="server" class="btn btn-default btn-sm" TabIndex="504" Text="Aceptar" onclick="AceptarButton_Click" />
                 <asp:Button ID="SalirButton" runat="server" class="btn btn-default btn-sm" CausesValidation="false" TabIndex="505" Text="Cancelar" onclick="SalirButton_Click" />
             </td>

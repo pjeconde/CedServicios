@@ -10,15 +10,17 @@ namespace CedServicios.Entidades
     {
         protected string id;
         protected string descr;
+        protected bool incluir;
 
         public Estado()
         {
         }
 
-        public Estado(string IdEstado, string DescrEstado)
+        public Estado(string IdEstado, string DescrEstado, bool Incluir)
         {
             id = IdEstado;
             descr = DescrEstado;
+            incluir = Incluir;
         }
 
         public string Id
@@ -43,7 +45,20 @@ namespace CedServicios.Entidades
                 return descr;
             }
         }
+        public bool Incluir
+        {
+            set
+            {
+                incluir = value;
+            }
+            get
+            {
+                return incluir;
+            }
+        }
     }
+
+    
     [Serializable]
     public class EstadoVigente : Estado
     {
@@ -51,6 +66,7 @@ namespace CedServicios.Entidades
         {
             id = "Vigente";
             descr = "Vigente";
+            incluir = true;
         }
     }
     [Serializable]
@@ -60,8 +76,10 @@ namespace CedServicios.Entidades
         {
             id = "PteAutoriz";
             descr = "Pendiente de autorización";
+            incluir = true;
         }
     }
+
     [Serializable]
     public class EstadoPteEnvio : Estado
     {
@@ -69,6 +87,7 @@ namespace CedServicios.Entidades
         {
             id = "PteEnvio";
             descr = "Pendiente de envio (AFIP/ITF)";
+            incluir = true;
         }
     }
     [Serializable]
@@ -78,6 +97,7 @@ namespace CedServicios.Entidades
         {
             id = "PteConf";
             descr = "Pendiente de confirmación";
+            incluir = true;
         }
     }
     [Serializable]
@@ -87,6 +107,7 @@ namespace CedServicios.Entidades
         {
             id = "DeBaja";
             descr = "De baja";
+            incluir = true;
         }
     }
     [Serializable]
@@ -96,6 +117,7 @@ namespace CedServicios.Entidades
         {
             id = "Rechazado";
             descr = "Rechazado";
+            incluir = true;
         }
     }
 }

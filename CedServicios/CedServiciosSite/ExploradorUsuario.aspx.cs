@@ -36,6 +36,7 @@ namespace CedServicios.Site
             {
                 DesSeleccionarFilas();
                 UsuarioPagingGridView.PageIndex = e.NewPageIndex;
+                ViewState["GridPageIndex"] = e.NewPageIndex;
                 List<Entidades.Usuario> lista;
                 int CantidadFilas = 0;
                 lista = RN.Usuario.ListaPaging(out CantidadFilas, UsuarioPagingGridView.PageIndex, UsuarioPagingGridView.OrderBy, IdUsuarioTextBox.Text, NombreTextBox.Text, EmailTextBox.Text, EstadoDropDownList.SelectedValue, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
@@ -115,6 +116,7 @@ namespace CedServicios.Site
             {
                 //Selecciono algo del Header. No hago nada con el CommandArgument.
             }
+            System.Text.StringBuilder sb;
             switch (e.CommandName)
             {
                 case "Detalle":
@@ -122,7 +124,7 @@ namespace CedServicios.Site
                     //Response.Redirect("~/UsuarioConsultaDetallada.aspx");
                     TituloConfirmacionLabel.Text = "Consulta detallada";
                     CambiarEstadoButton.Visible = false;
-                    CancelarButton.Text = "Salir";
+                    ReenviarEmailButton.Visible = false;
                     IdUsuarioLabel.Text = usuario.Id;
                     NombreLabel.Text = usuario.Nombre;
                     TelefonoLabel.Text = usuario.Telefono;
@@ -131,14 +133,16 @@ namespace CedServicios.Site
                     RespuestaLabel.Text = usuario.Respuesta;
                     PasswordLabel.Text = usuario.Password;
                     EstadoLabel.Text = usuario.Estado;
-                    ModalPopupExtender1.Show();
+                    sb = new System.Text.StringBuilder();
+                    sb.Append(@"<script type='text/javascript'>");
+                    sb.Append("$('#DetalleModal').modal('show');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "DetalleScript", sb.ToString(), false);
                     break;
                 case "CambiarEstado":
                     TituloConfirmacionLabel.Text = "Confirmar " + (usuario.WF.Estado == "Vigente" ? "Baja" : "Anulación Baja");
                     CambiarEstadoButton.Visible = true;
                     ReenviarEmailButton.Visible = false;
-                    CancelarButton.Text = "Cancelar";
-
                     IdUsuarioLabel.Text = usuario.Id;
                     NombreLabel.Text = usuario.Nombre;
                     TelefonoLabel.Text = usuario.Telefono;
@@ -147,14 +151,16 @@ namespace CedServicios.Site
                     RespuestaLabel.Text = usuario.Respuesta;
                     EstadoLabel.Text = usuario.Estado;
                     ViewState["Usuario"] = usuario;
-                    ModalPopupExtender1.Show();
+                    sb = new System.Text.StringBuilder();
+                    sb.Append(@"<script type='text/javascript'>");
+                    sb.Append("$('#DetalleModal').modal('show');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "DetalleScript", sb.ToString(), false);
                     break;
                 case "ReenviarEmail":
                     TituloConfirmacionLabel.Text = "Confirmar el reenvio de email";
                     CambiarEstadoButton.Visible = false;
                     ReenviarEmailButton.Visible = true;
-                    CancelarButton.Text = "Cancelar";
-
                     IdUsuarioLabel.Text = usuario.Id;
                     NombreLabel.Text = usuario.Nombre;
                     TelefonoLabel.Text = usuario.Telefono;
@@ -163,9 +169,14 @@ namespace CedServicios.Site
                     RespuestaLabel.Text = usuario.Respuesta;
                     EstadoLabel.Text = usuario.Estado;
                     ViewState["Usuario"] = usuario;
-                    ModalPopupExtender1.Show();
+                    sb = new System.Text.StringBuilder();
+                    sb.Append(@"<script type='text/javascript'>");
+                    sb.Append("$('#DetalleModal').modal('show');");
+                    sb.Append(@"</script>");
+                    ScriptManager.RegisterStartupScript(this, this.GetType(), "DetalleScript", sb.ToString(), false);
                     break;
             }
+            bindGrillaUsuario();
         }
         protected void UsuarioPagingGridView_RowEditing(object sender, GridViewEditEventArgs e)
         {
@@ -286,6 +297,12 @@ namespace CedServicios.Site
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        private void bindGrillaUsuario()
+        {
+            UsuarioPagingGridView.PageIndex = Convert.ToInt32(ViewState["GridPageIndex"]);
+            UsuarioPagingGridView.DataSource = ViewState["lista"];
+            UsuarioPagingGridView.DataBind();
         }
     }
 }

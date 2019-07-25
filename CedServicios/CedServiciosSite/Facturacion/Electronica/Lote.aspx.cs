@@ -54,6 +54,10 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("Compra");
                         }
+                        else if (Request.QueryString["CaT"] == "VentaTradic")
+                        {
+                            Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("VentaTradic");
+                        }
                     }
                     Entidades.ComprobanteATratar comprobanteATratar = (Entidades.ComprobanteATratar)Session["ComprobanteATratar"];
                     ViewState["ComprobanteATratarOrig"] = (Entidades.ComprobanteATratar)Session["ComprobanteATratar"];
@@ -3272,6 +3276,34 @@ namespace CedServicios.Site.Facturacion.Electronica
                 infcomprob.fecha_vencimiento_cae = null;
                 infcomprob.fecha_vencimiento_caeSpecified = true;
             }
+            if (("*201*202*203*").IndexOf("*" + infcomprob.tipo_de_comprobante.ToString() + "*") >= 0)
+            {
+                if (DatosComerciales.Texto != string.Empty)
+                {
+                    string textoComercial = DatosComerciales.Texto.Replace(System.Environment.NewLine, "<br>");
+                    if (textoComercial.IndexOf("CBU:") >= 0)
+                    {
+                        string restante = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 4);
+                        if (restante.Length < 22)
+                        {
+                            throw new Exception("El CBU debe tener 22 dígitos. [" + restante + "]");
+                        }
+                        FeaEntidades.InterFacturas.informacion_adicional_comprobante infoAdic = new FeaEntidades.InterFacturas.informacion_adicional_comprobante();
+                        infoAdic.tipo = "2101";
+                        infoAdic.valor = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 4, 22);       //Para probar "0170326740000000387343"
+                        infcomprob.informacion_adicional_comprobante[0] = infoAdic;
+                    }
+                    else
+                    {
+                        throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puedo estar por cualquier parte del texto.");
+                    }
+                }
+                else
+                {
+                    throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puedo estar por cualquier parte del texto.");
+                }
+            }
+            //infcomprob.informacion_adicional_comprobante[0] = new FeaEntidades.InterFacturas.informacion_adicional_comprobante();
             //if (!ResultadoTextBox.Text.Equals(string.Empty))
             //{
             //    infcomprob.resultado = ResultadoTextBox.Text;

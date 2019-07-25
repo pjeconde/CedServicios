@@ -11,18 +11,16 @@
     <section id="features" class="features sections2">
         <div class="container">
             <div class="row">
-                <div class="main_features_content2">
-                    <div class="head_title text-center">
-                        <h2><asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Alta de Persona"></asp:Label>
-                        </h2>
-                    </div>
+                <div class="head_title text-center">
+                    <h2><asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Alta de Persona"></asp:Label>
+                    </h2>
                 </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12">
-                    <table style="padding-left:10px">
+                    <table style="padding-left:10px" align="center">
                         <tr>
-                            <td style="padding-right:5px; padding-top: 20px; text-align: right">
+                            <td style="padding-right:5px; text-align: right">
                                 <asp:RegularExpressionValidator ID="RegularExpressionValidator1" runat="server"
                                     ControlToValidate="CUITTextBox" ErrorMessage="CUIT" SetFocusOnError="True" ValidationExpression="[0-9]{11}">
                                     <asp:Label ID="Label1" runat="server" SkinID="IndicadorValidacion"></asp:Label>
@@ -33,7 +31,7 @@
                                 </asp:RequiredFieldValidator>
                                 <asp:Label ID="Label3" runat="server" Text="Persona perteneciente al CUIT"></asp:Label>
                             </td>
-                            <td style="padding-top:20px; text-align: left">
+                            <td style="text-align: left">
                                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
                                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                                 <asp:Label ID="Label10" runat="server" Text="Tipo de Persona:"></asp:Label>

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="UsuarioConfirmacion.aspx.cs" Inherits="CedServicios.Site.UsuarioConfirmacion" Theme="CedServiciosNew" %>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="UsuarioConfirmacion.aspx.cs" Inherits="CedServicios.Site.UsuarioConfirmacion" Theme="CedServicios" %>
 
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->

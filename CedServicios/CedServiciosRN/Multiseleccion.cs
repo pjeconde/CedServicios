@@ -12,7 +12,6 @@ namespace CedServicios.RN
             List<Entidades.Multiseleccion> lista = new List<Entidades.Multiseleccion>();
             lista.Add(new Entidades.Multiseleccion.TODOS());
             lista.Add(new Entidades.Multiseleccion.VARIOS());
-            lista.Add(new Entidades.Multiseleccion.UNICO());
             return lista;
         }
     }

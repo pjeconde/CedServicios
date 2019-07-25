@@ -144,14 +144,21 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, string OrderBy, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, string Detalle, bool Ajuste)
+        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, List<Entidades.Estado> EstadosCompras, List<FeaEntidades.TiposDeComprobantes.TipoComprobante> TiposComprobante, string OrderBy, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, bool IncluirRequestResponse, string Detalle, bool Ajuste)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)
             {
                 System.Text.StringBuilder a = new StringBuilder();
                 a.Append("select ");
-                a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto, Comprobante.EmailAvisoComprobanteActivo, Comprobante.IdDestinatarioFrecuente, Comprobante.EmailAvisoComprobanteAsunto, Comprobante.EmailAvisoComprobanteCuerpo ");
+                if (IncluirRequestResponse)
+                {
+                    a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto, Comprobante.EmailAvisoComprobanteActivo, Comprobante.IdDestinatarioFrecuente, Comprobante.EmailAvisoComprobanteAsunto, Comprobante.EmailAvisoComprobanteCuerpo ");
+                }
+                else
+                {
+                    a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, '' as Request, '' as Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto, Comprobante.EmailAvisoComprobanteActivo, Comprobante.IdDestinatarioFrecuente, Comprobante.EmailAvisoComprobanteAsunto, Comprobante.EmailAvisoComprobanteCuerpo ");
+                }
                 a.Append("from Comprobante, NaturalezaComprobante ");
                 a.Append("where Comprobante.Cuit='" + sesion.Cuit.Nro + "' ");
                 a.Append("and Comprobante.IdNaturalezaComprobante=NaturalezaComprobante.IdNaturalezaComprobante ");
@@ -161,9 +168,33 @@ namespace CedServicios.DB
                     estados += "'" + Estados[i].Id + "'";
                     if (i != (Estados.Count - 1)) estados += ", ";
                 }
-                if (estados != String.Empty)
+                string estadosCompras = String.Empty;
+                for (int i = 0; i < EstadosCompras.Count; i++)
                 {
-                    a.Append("and (Comprobante.Estado in (" + estados + ") or (Comprobante.Estado = 'Vigente' and Comprobante.IdNaturalezaComprobante='Compra')) ");
+                    estadosCompras += "'" + EstadosCompras[i].Id + "'";
+                    if (i != (EstadosCompras.Count - 1)) estadosCompras += ", ";
+                }
+                if (estados != String.Empty && estadosCompras != String.Empty)
+                {
+                    a.Append("and ((Comprobante.Estado in (" + estados + ") and Comprobante.IdNaturalezaComprobante='Venta') or (Comprobante.Estado in (" + estadosCompras + ") and Comprobante.IdNaturalezaComprobante<>'Venta')) ");
+                }
+                else if (estados != String.Empty)
+                {
+                    a.Append("and (Comprobante.Estado in (" + estados + ") and Comprobante.IdNaturalezaComprobante='Venta') ");
+                }
+                else if (estadosCompras != String.Empty)
+                {
+                    a.Append("and (Comprobante.Estado in (" + estadosCompras + ") and Comprobante.IdNaturalezaComprobante<>'Venta') ");
+                }
+                string tiposComprobante = String.Empty;
+                for (int i = 0; i < TiposComprobante.Count; i++)
+                {
+                    tiposComprobante += "'" + TiposComprobante[i].Codigo + "'";
+                    if (i != (TiposComprobante.Count - 1)) tiposComprobante += ", ";
+                }
+                if (tiposComprobante != String.Empty)
+                {
+                    a.Append("and Comprobante.IdTipoComprobante in (" + tiposComprobante + ") ");
                 }
                 if (FechaDesde != String.Empty)
                 {
@@ -208,8 +239,9 @@ namespace CedServicios.DB
                         a.Append("order by Comprobante.Fecha desc, Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
                         break;
                     case "PtoVta-TipoComp-NroComp":
-                        a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
+                        a.Append("order by Comprobante.NroPuntoVta desc, Comprobante.DescrTipoComprobante asc, ABS(Comprobante.NroComprobante) desc ");
                         break;
+                    case "TipoComp-PtoVta-NroComp":
                     default:
                         a.Append("order by Comprobante.DescrTipoComprobante desc, Comprobante.NroPuntoVta desc, ABS(Comprobante.NroComprobante) desc ");
                         break;
@@ -511,6 +543,7 @@ namespace CedServicios.DB
             comprobanteDesde.TipoComprobante = Comprobante.TipoComprobante;
             comprobanteDesde.NroPuntoVta = Comprobante.NroPuntoVta;
             comprobanteDesde.Nro = Comprobante.NaturalezaComprobante.Id == "VentaContrato" ? -Comprobante.Nro : Comprobante.Nro;
+            comprobanteDesde.NaturalezaComprobante.Id = Comprobante.NaturalezaComprobante.Id;
             Leer(comprobanteDesde);
             StringBuilder a = new StringBuilder(string.Empty);
             a.AppendLine("declare @idWF varchar(256) ");
@@ -950,6 +983,232 @@ namespace CedServicios.DB
             Hasta.Cantidad = Convert.ToDouble(Desde["Cantidad"]);
             Hasta.PrecioUnitario = Convert.ToDouble(Desde["PrecioUnitario"]);
             Hasta.ImporteTotal = Convert.ToDouble(Desde["Importe"]);
+        }
+        public List<Entidades.Comprobante> ListaPaging(int IndicePagina, string OrderBy, string SessionID, List<Entidades.Comprobante> ComprobanteLista)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("CREATE TABLE #Comprobante" + SessionID + "( ");
+            a.Append("[Cuit] [varchar](11) NOT NULL, ");
+            a.Append("[IdTipoComprobante] [decimal](3, 0) NOT NULL, ");
+            a.Append("[DescrTipoComprobante] [varchar] (50) NOT NULL, ");
+            a.Append("[NroPuntoVta] [numeric] (4, 0) NOT NULL, ");
+            a.Append("[NroComprobante] [numeric] (8, 0) NOT NULL, ");
+            
+            a.Append("[NroLote] [numeric] (14, 0) NOT NULL, ");
+            a.Append("[IdTipoDoc] [numeric] (2, 0) NOT NULL, ");
+            a.Append("[NroDoc] [varchar] (11) NOT NULL, ");
+            a.Append("[IdPersona] [varchar] (50) NOT NULL, ");
+
+            a.Append("[DesambiguacionCuitPais] [int] NOT NULL, ");
+            a.Append("[RazonSocial] [varchar] (50) NOT NULL, ");
+            a.Append("[Detalle] [varchar] (256) NOT NULL, ");
+            a.Append("[Fecha] [datetime] NOT NULL, ");
+
+            a.Append("[FechaVto] [datetime] NOT NULL, ");
+            a.Append("[Moneda] [varchar] (3) NOT NULL, ");
+            a.Append("[ImporteMoneda] [numeric] (15, 2) NOT NULL, ");
+            a.Append("[TipoCambio] [numeric] (10, 6) NOT NULL, ");
+            
+            a.Append("[Importe] [numeric] (15, 2) NOT NULL, ");
+            a.Append("[Request] [text] NOT NULL, ");
+            a.Append("[Response] [text] NOT NULL, ");
+            a.Append("[IdDestinoComprobante] [varchar] (15) NOT NULL, ");
+
+            a.Append("[IdWF] [int] NOT NULL, ");
+            a.Append("[Estado] [varchar](15) NOT NULL, ");
+            a.Append("[UltActualiz] [varchar](18) NOT NULL, ");
+            a.Append("[IdNaturalezaComprobante] [varchar] (15) NOT NULL, ");
+            a.Append("[DescrNaturalezaComprobante] [varchar] (50) NOT NULL, ");
+
+            a.Append("[PeriodicidadEmision] [varchar] (15) NOT NULL, ");
+            a.Append("[FechaProximaEmision] [datetime] NOT NULL, ");
+            a.Append("[CantidadComprobantesAEmitir] [int] NOT NULL, ");
+            a.Append("[CantidadComprobantesEmitidos] [int] NOT NULL, ");
+
+            a.Append("[CantidadDiasFechaVto] [int] NOT NULL, ");
+            a.Append("[EmailAvisoComprobanteActivo] [bit] NOT NULL, ");
+            a.Append("[IdDestinatarioFrecuente] [varchar] (15) NOT NULL, ");
+            a.Append("[EmailAvisoComprobanteAsunto] [varchar] (256) NOT NULL, ");
+            a.Append("[EmailAvisoComprobanteCuerpo] [varchar] (2048) NOT NULL, ");
+
+            a.Append("CONSTRAINT [PK_Comprobante" + SessionID + "] PRIMARY KEY CLUSTERED ");
+            a.Append("( ");
+            a.Append("[Cuit] ASC, ");
+            a.Append("[IdNaturalezaComprobante] ASC, ");
+            a.Append("[IdTipoComprobante] ASC, ");
+            a.Append("[NroPuntoVta] ASC, ");
+            a.Append("[NroComprobante] ASC, ");
+            a.Append("[IdTipoDoc] ASC, ");
+            a.Append("[NroDoc] ASC, ");
+            a.Append("[IdPersona] ASC, ");
+            a.Append("[DesambiguacionCuitPais] ASC ");
+            a.Append(")WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY] ");
+            a.Append(") ON [PRIMARY] ");
+            foreach (Entidades.Comprobante Comprobante in ComprobanteLista)
+            {
+                a.Append("Insert #Comprobante" + SessionID + " values ('" + Comprobante.Cuit + "', ");
+                a.Append(Comprobante.TipoComprobante.Id + ", '");
+                a.Append(Comprobante.DescrTipoComprobante + "', ");
+                a.Append(Comprobante.NroPuntoVta + ", ");
+                a.Append(Comprobante.Nro + ", ");
+                a.Append(Comprobante.NroLote + ", ");
+                a.Append(Comprobante.Documento.Tipo.Id + ", '");
+                a.Append(Comprobante.Documento.Nro + "', '");
+                a.Append(Comprobante.IdPersona + "', ");
+                a.Append(Comprobante.DesambiguacionCuitPais + ", '");
+                a.Append(Comprobante.RazonSocial + "', '");
+                a.Append(Comprobante.Detalle + "', '");
+                a.Append(Comprobante.Fecha.ToString("yyyyMMdd") + "', '");
+                a.Append(Comprobante.FechaVto.ToString("yyyyMMdd") + "', '");
+                a.Append(Comprobante.Moneda + "', ");
+                a.Append(Comprobante.ImporteMoneda + ", ");
+                a.Append(Comprobante.TipoCambio + ", ");
+                a.Append(Comprobante.Importe + ", '");
+                a.Append("', '");
+                a.Append("', '");
+                //a.Append(Comprobante.Request + "', '");
+                //a.Append(Comprobante.Response + "', '");
+                a.Append(Comprobante.IdDestinoComprobante + "', ");
+                a.Append(Comprobante.WF.Id + ", '");
+                a.Append(Comprobante.Estado + "', ");
+                a.Append(Comprobante.UltActualiz + ", '");
+                a.Append(Comprobante.NaturalezaComprobante.Id + "', '");
+                a.Append(Comprobante.NaturalezaComprobante.Descr + "', '");
+                a.Append(Comprobante.PeriodicidadEmision + "', '");
+                a.Append(Comprobante.FechaProximaEmision.ToString("yyyyMMdd") + "', ");
+                a.Append(Comprobante.CantidadComprobantesAEmitir + ", ");
+                a.Append(Comprobante.CantidadComprobantesEmitidos + ", ");
+                a.Append(Comprobante.CantidadDiasFechaVto + ", ");
+                if (Comprobante.DatosEmailAvisoComprobanteContrato.Activo)
+                { a.Append("1, '"); }
+                else
+                { a.Append("0, '"); }
+                a.Append(Comprobante.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id + "', '");
+                a.Append(Comprobante.DatosEmailAvisoComprobanteContrato.Asunto + "', '");
+                a.Append(Comprobante.DatosEmailAvisoComprobanteContrato.Cuerpo + "')");
+            }
+            a.Append("select * ");
+            a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
+            a.Append("Cuit, IdTipoComprobante, DescrTipoComprobante, NroPuntoVta, NroComprobante, NroLote, IdTipoDoc, NroDoc, IdPersona, DesambiguacionCuitPais, RazonSocial, Detalle, Fecha, FechaVto, Moneda, ImporteMoneda, TipoCambio, Importe, Request, Response, IdDestinoComprobante, IdWF, Estado, UltActualiz, IdNaturalezaComprobante, DescrNaturalezaComprobante, PeriodicidadEmision, FechaProximaEmision, CantidadComprobantesAEmitir, CantidadComprobantesEmitidos, CantidadDiasFechaVto, EmailAvisoComprobanteActivo, IdDestinatarioFrecuente, EmailAvisoComprobanteAsunto, EmailAvisoComprobanteCuerpo ");
+            a.Append("from #Comprobante" + SessionID + " ");
+            a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
+            a.Append("DROP TABLE #Comprobante" + SessionID);
+            if (OrderBy.Trim().ToUpper() == "DESCRNATURALEZACOMPROBANTE" || OrderBy.Trim().ToUpper() == "DESCRNATURALEZACOMPROBANTE DESC" || OrderBy.Trim().ToUpper() == "DESCRNATURALEZACOMPROBANTE ASC")
+            {
+                OrderBy = "#Comprobante" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "NROCOMPROBANTE" || OrderBy.Trim().ToUpper() == "NROCOMPROBANTE DESC" || OrderBy.Trim().ToUpper() == "NROCOMPROBANTE ASC")
+            {
+                OrderBy = "#Comprobante" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "NROPUNTOVTA" || OrderBy.Trim().ToUpper() == "NROPUNTOVTA DESC" || OrderBy.Trim().ToUpper() == "NROPUNTOVTA ASC")
+            {
+                OrderBy = "#Comprobante" + SessionID + "." + OrderBy + ", #Comprobante" + SessionID + ".IdTipoDoc" + ", #Comprobante" + SessionID + ".NroComprobante";
+            }
+            if (OrderBy.Trim().ToUpper() == "DESCRTIPOCOMPROBANTE" || OrderBy.Trim().ToUpper() == "DESCRTIPOCOMPROBANTE DESC" || OrderBy.Trim().ToUpper() == "DESCRTIPOCOMPROBANTE ASC")
+            {
+                OrderBy = "#Comprobante" + SessionID + "." + OrderBy + ", #Comprobante" + SessionID + ".IdTipoDoc" + ", #Comprobante" + SessionID + ".NroComprobante";
+            }
+            if (OrderBy.Trim().ToUpper() == "RAZONSOCIAL" || OrderBy.Trim().ToUpper() == "RAZONSOCIAL DESC" || OrderBy.Trim().ToUpper() == "RAZONSOCIAL ASC")
+            {
+                OrderBy = "#Comprobante" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "IDPERSONA" || OrderBy.Trim().ToUpper() == "IDPERSONA DESC" || OrderBy.Trim().ToUpper() == "IDPERSONA ASC")
+            {
+                OrderBy = "#Comprobante" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "FECHA" || OrderBy.Trim().ToUpper() == "FECHA DESC" || OrderBy.Trim().ToUpper() == "FECHA ASC")
+            {
+                OrderBy = "#Comprobante" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "FECHAVTO" || OrderBy.Trim().ToUpper() == "FECHAVTO DESC" || OrderBy.Trim().ToUpper() == "FECHAVTO ASC")
+            {
+                OrderBy = "#Comprobante" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
+            {
+                OrderBy = "#Comprobante" + SessionID + "." + OrderBy;
+            }
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * sesion.Usuario.CantidadFilasXPagina), OrderBy, (IndicePagina * sesion.Usuario.CantidadFilasXPagina));
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Comprobante Comprobante = new Entidades.Comprobante();
+                    Copiar_ListaPaging(dt.Rows[i], Comprobante);
+                    lista.Add(Comprobante);
+                }
+            }
+            return lista;
+        }
+
+        private void Copiar_ListaPaging(DataRow Desde, Entidades.Comprobante Hasta)
+        {
+            Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
+            Hasta.TipoComprobante.Id = Convert.ToInt32(Desde["IdTipoComprobante"]);
+            Hasta.TipoComprobante.Descr = Convert.ToString(Desde["DescrTipoComprobante"]);
+            Hasta.NroPuntoVta = Convert.ToInt32(Desde["NroPuntoVta"]);
+            Hasta.Nro = Math.Abs(Convert.ToInt64(Desde["NroComprobante"]));
+            Hasta.NroLote = Convert.ToInt64(Desde["NroLote"]);
+            Hasta.Documento.Tipo.Id = Convert.ToString(Desde["IdTipoDoc"]);
+            FeaEntidades.Documentos.Documento tipoDocumento = FeaEntidades.Documentos.Documento.Lista().Find(delegate (FeaEntidades.Documentos.Documento d)
+            {
+                return Hasta.Documento.Tipo.Id == d.Codigo.ToString();
+            });
+            if (tipoDocumento != null)
+            {
+                Hasta.Documento.Tipo.Descr = tipoDocumento.Descr;
+            }
+            else
+            {
+                Hasta.Documento.Tipo.Descr = "Desconocido";
+            }
+            Hasta.Documento.Nro = Convert.ToString(Desde["NroDoc"]);
+            Hasta.IdPersona = Convert.ToString(Desde["IdPersona"]);
+            Hasta.DesambiguacionCuitPais = Convert.ToInt32(Desde["DesambiguacionCuitPais"]);
+            Hasta.RazonSocial = Convert.ToString(Desde["RazonSocial"]);
+            Hasta.Detalle = Convert.ToString(Desde["Detalle"]);
+            Hasta.Fecha = Convert.ToDateTime(Desde["Fecha"]);
+            Hasta.FechaVto = Convert.ToDateTime(Desde["FechaVto"]);
+            Hasta.Moneda = Convert.ToString(Desde["Moneda"]);
+            Hasta.ImporteMoneda = Convert.ToDouble(Desde["ImporteMoneda"]);
+            Hasta.TipoCambio = Convert.ToDouble(Desde["TipoCambio"]);
+            Hasta.Importe = Convert.ToDouble(Desde["Importe"]);
+            Hasta.Request = Convert.ToString(Desde["Request"]);
+            Hasta.Response = Convert.ToString(Desde["Response"]);
+            Hasta.IdDestinoComprobante = Convert.ToString(Desde["IdDestinoComprobante"]);
+            Hasta.WF.Id = Convert.ToInt32(Desde["IdWF"]);
+            Hasta.WF.Estado = Convert.ToString(Desde["Estado"]);
+            Hasta.UltActualiz = Convert.ToString(Desde["UltActualiz"]);
+            Hasta.NaturalezaComprobante.Id = Convert.ToString(Desde["IdNaturalezaComprobante"]);
+            Hasta.NaturalezaComprobante.Descr = Convert.ToString(Desde["DescrNaturalezaComprobante"]);
+            switch (Hasta.NaturalezaComprobante.Id)
+            {
+                case "Compra":
+                    Hasta.NaturalezaComprobante.Descr = "Compra";
+                    break;
+                case "Venta":
+                    Hasta.NaturalezaComprobante.Descr = "Venta";
+                    break;
+                case "VentaTradic":
+                    Hasta.NaturalezaComprobante.Descr = "Vta.Tradic ";
+                    break;
+                case "VentaContrato":
+                    Hasta.NaturalezaComprobante.Descr = "Contrato";
+                    break;
+            }
+            Hasta.PeriodicidadEmision = Convert.ToString(Desde["PeriodicidadEmision"]);
+            Hasta.FechaProximaEmision = Convert.ToDateTime(Desde["FechaProximaEmision"]);
+            Hasta.CantidadComprobantesAEmitir = Convert.ToInt32(Desde["CantidadComprobantesAEmitir"]);
+            Hasta.CantidadComprobantesEmitidos = Convert.ToInt32(Desde["CantidadComprobantesEmitidos"]);
+            Hasta.CantidadDiasFechaVto = Convert.ToInt32(Desde["CantidadDiasFechaVto"]);
+            Hasta.DatosEmailAvisoComprobanteContrato.Activo = Convert.ToBoolean(Desde["EmailAvisoComprobanteActivo"]);
+            Hasta.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id = Convert.ToString(Desde["IdDestinatarioFrecuente"]);
+            Hasta.DatosEmailAvisoComprobanteContrato.Asunto = Convert.ToString(Desde["EmailAvisoComprobanteAsunto"]);
+            Hasta.DatosEmailAvisoComprobanteContrato.Cuerpo = Convert.ToString(Desde["EmailAvisoComprobanteCuerpo"]);
         }
     }
 }

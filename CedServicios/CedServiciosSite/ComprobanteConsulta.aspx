@@ -24,7 +24,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
         <div class="container">
         <div class="row">
         <div class="col-lg-12 col-md-12">
-            <table style="width: 1300px; text-align:left; padding-left:10px">
+            <table style="width: 1300px; text-align:left; padding-left:10px" align="center">
                 <tr>
                     <td style="padding-top:20px; width:1282px; vertical-align:top; text-align:center;">
                         <table>

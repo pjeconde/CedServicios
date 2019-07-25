@@ -117,6 +117,18 @@
 {
 	font-size: 10px; font-family: Arial; font-style: normal;
 }
+.TextoRegular {
+    font-size: 12px;
+    font-family: Arial;
+    font-style: normal;
+}
+.TextoMediano {
+    font-size: 14px;
+    font-family: Arial;
+    font-style: normal;
+    padding: 0px 0px 0px 0px;
+}
+
 .izquierda
 {
     text-align: left;
@@ -169,10 +181,17 @@
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
 	width: 40px; padding-top:5px;
 }
-.TextoLabelFEADescrLarga
-{
-	position: relative; border: 0px; text-align: right;
-	width: 590px;	
+
+.RBespacios input[type="radio"] {
+    margin-left: 10px; /* Or any other value */
+    margin-right: 2px; /* Or any other value */
+}
+
+.TextoLabelFEADescrLarga {
+    position: relative;
+    border: 0px;
+    text-align: right;
+    width: 590px;
 }
 
 .modalBackground

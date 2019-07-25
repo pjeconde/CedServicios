@@ -4,7 +4,8 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.NotasCredito
 {
-	public class C : NotaCredito
+    [Serializable]
+    public class C : NotaCredito
 	{
 		public C()
 		{

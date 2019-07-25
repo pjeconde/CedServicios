@@ -4,7 +4,8 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.Otros
 {
-	public abstract class Otro : TipoComprobante
+    [Serializable]
+    public abstract class Otro : TipoComprobante
 	{
 	}
 }

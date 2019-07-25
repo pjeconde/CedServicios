@@ -72,20 +72,38 @@ namespace CedServicios.RN
         {
             string RutaCertificado = "";
             ticket = new LoginTicket();
-            string cuitServicioAFIP = RN.Configuracion.CuitConsultaAFIP(Sesion);
+            string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
+            string Ambiente = System.Configuration.ConfigurationManager.AppSettings["Ambiente"];
 
             DB.Ticket ticketDB = new DB.Ticket(Sesion);
             bool SolicitarTicket = false;
 
             if (Sesion.Ticket == null)
             {
-                Sesion.Ticket = ticketDB.Leer(cuitServicioAFIP, TipoServicios.ConsultaPadronA13);
+                if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                {
+                    Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro, TipoServicios.ConsultaPadronA13);
+                }
+                else
+                {
+                    Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.ConsultaPadronA13);
+                }
             }
             else
             {
-                if (Sesion.Ticket.Cuit != cuitServicioAFIP || Sesion.Ticket.Service != TipoServicios.ConsultaPadronA13)
+                if (Sesion.Ticket.Cuit != Sesion.Cuit.Nro || Sesion.Ticket.Service != TipoServicios.ConsultaPadronA13)
                 {
-                    Sesion.Ticket = ticketDB.Leer(cuitServicioAFIP, TipoServicios.ConsultaPadronA13);
+                    if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                    {
+                        Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro, TipoServicios.ConsultaPadronA13);
+                    }
+                    else
+                    {
+                        if (Sesion.Ticket.Cuit != CuitCanalAFIP || Sesion.Ticket.Service != TipoServicios.ConsultaPadronA13)
+                        {
+                            Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.ConsultaPadronA13);
+                        }
+                    }
                 }
             }
             if (Sesion.Ticket.Cuit == null)
@@ -110,8 +128,14 @@ namespace CedServicios.RN
             if (SolicitarTicket)
             {
                 ticket = new LoginTicket();
-                RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + cuitServicioAFIP + ".p12");
-
+                if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                {
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + "-" + Ambiente + ".p12");
+                }
+                else
+                {
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + CuitCanalAFIP + "-" + Ambiente + ".p12");
+                }
                 ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro), TipoServicios.ConsultaPadronA13);
 
                 //Guardar Ticket de AFIP
@@ -150,7 +174,19 @@ namespace CedServicios.RN
                 string cuit = Cuit;
                 string token = ticket.Token;
                 string sign = ticket.Sign;
-                ar.gov.afip.personaServiceA13.personaReturn respPersona = c.getPersona(token, sign, Convert.ToInt64(Sesion.Cuit.Nro), Convert.ToInt64(cuit));
+
+                string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
+                ar.gov.afip.personaServiceA13.personaReturn respPersona;
+                if (Sesion.Cuit.UsaCertificadoAFIPPropio && Sesion.Cuit.Nro != CuitCanalAFIP)
+                {
+                    respPersona = c.getPersona(token, sign, Convert.ToInt64(Sesion.Cuit.Nro), Convert.ToInt64(cuit));
+                }
+                else
+                {
+                    //Busco representante del CuitCanalAFIP
+                    string cuitServicioAFIP = RN.Configuracion.CuitConsultaAFIP(Sesion);
+                    respPersona = c.getPersona(token, sign, Convert.ToInt64(cuitServicioAFIP), Convert.ToInt64(cuit));
+                }
 
                 persona.razonSocial = respPersona.persona.razonSocial;
                 persona.apellido = respPersona.persona.apellido;

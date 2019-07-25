@@ -395,7 +395,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Persona> ListaSegunFiltros(string Cuit, string RazSoc, string NroDoc, string Estado, CedServicios.Entidades.Enum.TipoPersona TipoPersona)
+        public List<Entidades.Persona> ListaSegunFiltros(string Cuit, string NroDoc, string RazSoc, string Estado, CedServicios.Entidades.Enum.TipoPersona TipoPersona)
         {
             StringBuilder a = new StringBuilder(string.Empty);
             a.Append("Select Persona.Cuit, Persona.IdTipoDoc, Persona.NroDoc, Persona.IdPersona, Persona.DesambiguacionCuitPais, Persona.RazonSocial, Persona.DescrTipoDoc, Persona.Calle, Persona.Nro, Persona.Piso, Persona.Depto, Persona.Sector, Persona.Torre, Persona.Manzana, Persona.Localidad, Persona.IdProvincia, Persona.DescrProvincia, Persona.CodPost, Persona.NombreContacto, Persona.EmailContacto, Persona.TelefonoContacto, Persona.IdCondIVA, Persona.DescrCondIVA, Persona.NroIngBrutos, Persona.IdCondIngBrutos, Persona.DescrCondIngBrutos, Persona.GLN, Persona.FechaInicioActividades, Persona.CodigoInterno, Persona.EmailAvisoVisualizacion, Persona.PasswordAvisoVisualizacion, Persona.IdWF, Persona.Estado, Persona.UltActualiz, Persona.EsCliente, Persona.EsProveedor, Persona.EmailAvisoComprobanteActivo, Persona.EmailAvisoComprobanteDe, Persona.EmailAvisoComprobanteCco, Persona.EmailAvisoComprobanteAsunto, Persona.EmailAvisoComprobanteCuerpo, Persona.IdListaPrecioVenta, Persona.IdListaPrecioCompra ");
@@ -471,7 +471,7 @@ namespace CedServicios.DB
                 a.Append(Persona.DocumentoNro + "', '");
                 a.Append(Persona.IdPersona + "', ");
                 a.Append(Persona.DesambiguacionCuitPais + ", '");
-                a.Append(Persona.RazonSocial + "', '");
+                a.Append(Persona.RazonSocial.Replace("'", " ") + "', '");
                 a.Append(Persona.DocumentoTipoDescr + "', '");
                 a.Append(Persona.Domicilio.Calle + "', '");
                 a.Append(Persona.Domicilio.Nro + "', '");

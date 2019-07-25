@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="StockXArticuloWebForm.aspx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Reportes.StockXArticuloWebForm" Theme="CedServicios" %>
 
-<%@ Register Assembly="CrystalDecisions.Web, Version=13.0.2000.0, Culture=neutral, PublicKeyToken=692FBEA5521E1304"
+<%@ Register Assembly="CrystalDecisions.Web, Culture=neutral, PublicKeyToken=692FBEA5521E1304"
     Namespace="CrystalDecisions.Web" TagPrefix="CR" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">

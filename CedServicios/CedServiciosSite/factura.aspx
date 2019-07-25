@@ -277,7 +277,7 @@ Soporta los siguientes tipos de Factura Electrónica:
                         <p>Cargue de manera rápida, fácil y segura su Factura Electrónica con nuestro Servicio Web. Facilitamos el cumplimiento del régimen normativo de la AFIP.</p>
 
                         <p>Para mas detalles sugerimos que se comuniquen desde Contacto o bien escribiendonos a contacto@cedeira.com.ar </p>
-                        <p>ctividades alcanzadas por el Régimen de Factura Electrónica | Preguntas frecuentes</p>
+                        <p>Actividades alcanzadas por el Régimen de Factura Electrónica | Preguntas frecuentes</p>
 
 
                     </div>

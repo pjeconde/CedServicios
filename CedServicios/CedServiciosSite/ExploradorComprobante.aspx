@@ -2,6 +2,12 @@
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
+    <style type="text/css">
+    .popover
+    {
+    	min-width: 500px;
+    }
+    </style>
     <section id="features" class="features sections2">
         <div class="container">
             <div class="row">
@@ -15,79 +21,137 @@
                 </div>
              </div>
         </div>
+        <asp:UpdatePanel ID="ExploradorUpdatePanel" runat="server" UpdateMode="Conditional">
+        <ContentTemplate>
         <div class="container">
             <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton" align="left">
             <div class="row">
-                <div class="col-lg-6 col-md-6 padding-top-20">
-                    Persona (cliente/proveedor):&nbsp;<asp:DropDownList ID="ClienteDropDownList" runat="server" Width="400px" DataValueField="Orden" DataTextField="RazonSocial"></asp:DropDownList>
+                <div class="col-lg-6 col-md-6 padding-top-20 text-left">
+                        <div class="input-group text-left" style="background-color:white; height:25px">
+                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white;">&nbsp;Persona (cliente/proveedor):&nbsp;</span>
+                        <asp:DropDownList ID="ClienteDropDownList" runat="server" CssClass="form-control TextoChico" Height="25px" DataValueField="Orden" DataTextField="RazonSocial" AutoPostBack="true" OnSelectedIndexChanged="Personas_SelectedIndexChanged"></asp:DropDownList>
+                    </div>
                 </div>                      
-                <div class="col-lg-6 col-md-6 padding-top-20">    
-                    Naturaleza del comprobante:&nbsp;<asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" Width="400px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" OnSelectedIndexChanged="VerificarEstadosPosibles_SelectedIndexChanged"></asp:DropDownList>
+                <div class="col-lg-6 col-md-6 padding-top-20">
+                    <div class="input-group text-left" style="background-color:white; height:25px">
+                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white;">&nbsp;Naturaleza del comprobante:&nbsp;</span>
+                        <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" CssClass="form-control TextoChico" Height="25px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" OnSelectedIndexChanged="VerificarEstadosPosibles_SelectedIndexChanged"></asp:DropDownList>
+                    </div>
                 </div>
             </div>
+            <asp:Panel ID="DetalleYFechasPanel" runat="server">
             <div class="row">
                 <div class="col-lg-6 col-md-6 padding-top-20">  
                     <asp:Panel ID="DetallePanel" runat="server">
-				        Detalle:&nbsp;<asp:TextBox ID="DetalleTextBox" runat="server" MaxLength="50"></asp:TextBox>
-                        (ej.: "autom" para seleccionar sólo comprobantes generados automaticamente)
+                        <div class="input-group text-left" style="background-color:white; height:25px">
+                            <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white;">&nbsp;Detalle:&nbsp;</span>
+                            <asp:TextBox ID="DetalleTextBox" runat="server" MaxLength="50" CssClass="form-control TextoChico" Height="25px"></asp:TextBox>
+                            <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white; width:40px">
+                                <a href="javascript:void(0)" role="button" class="popover-test" data-html="true" title="FILTRO DE BUSQUEDA (DETALLE)" data-content="(ej.: 'autom' para seleccionar sólo comprobantes generados automaticamente)"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>
+                            </span>
+                        </div>
                     </asp:Panel>
                 </div>
                 <div class="col-lg-6 col-md-6 padding-top-20">  
+                    <asp:UpdatePanel ID="fechasUpdatePanel" runat="server" UpdateMode="Conditional">
+                    <ContentTemplate>
                     <asp:Panel ID="PeriodoEmisionPanel" runat="server">
-                    Período de emisión:&nbsp;desde&nbsp;
-                            <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
-                            <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
-                                TargetControlID="FechaDesdeTextBox" Format="yyyyMMdd" PopupButtonID="FechaDesdeImage" >
+                        <div class="input-group" style="background-color:white; height:25px; float:left">
+                            <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white;">&nbsp;Emisión:&nbsp;desde&nbsp;</span>
+                            <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" CssClass="form-control TextoRegular" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="80px" Height="25px" TabIndex="304"></asp:TextBox>
+                            <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server" CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
+                                TargetControlID="FechaDesdeTextBox" Format="yyyyMMdd" PopupButtonID="FechaDesdeLinkButton" >
                             </ajaxToolkit:CalendarExtender>
-                            <asp:Image runat="server" ID="FechaDesdeImage" ImageUrl="~/Imagenes/Calendar.gif" />
-                            &nbsp;&nbsp;hasta&nbsp;
-                            <asp:TextBox ID="FechaHastaTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
-                            <ajaxToolkit:CalendarExtender ID="FechaHastaCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
-                                TargetControlID="FechaHastaTextBox" Format="yyyyMMdd" PopupButtonID="FechaHastaImage" >
+                            <asp:LinkButton ID="FechaDesdeLinkButton" runat="server" CssClass="form-control no-padding" Width="25px" Height="25px"  
+                                AutoPostBack="true" ToolTip="Multiselección de Estados">
+                                <span class="glyphicon glyphicon-calendar gi-1x" style="padding: 3px;"></span>
+                            </asp:LinkButton></span>
+                            <asp:Label runat="server" ID="hastaLabel" CssClass="form-control TextoMediano text-center" Width="80px" Height="25px" Text="&nbsp;&nbsp;hasta&nbsp;&nbsp;"></asp:Label>
+                            <asp:TextBox ID="FechaHastaTextBox" runat="server" CausesValidation="true" CssClass="form-control TextoRegular" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="80px" Height="25px" TabIndex="304"></asp:TextBox>
+                            <ajaxToolkit:CalendarExtender ID="FechaHastaCalendarExtender" runat="server" CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
+                                TargetControlID="FechaHastaTextBox" Format="yyyyMMdd" PopupButtonID="FechaHastaLinkButton" >
                             </ajaxToolkit:CalendarExtender>
-                            <asp:Image runat="server" ID="FechaHastaImage" ImageUrl="~/Imagenes/Calendar.gif" />
+                            <asp:LinkButton ID="FechaHastaLinkButton" runat="server" CssClass="form-control no-padding" Width="25px" Height="25px"  
+                                AutoPostBack="true" ToolTip="Multiselección de Estados">
+                                <span class="glyphicon glyphicon-calendar" style="padding: 3px"></span>
+                            </asp:LinkButton></span>
+                            <span class="dropdown" style="padding: 5px 0px 0px 10px">
+                                <a class="dropdown-toggle" data-toggle="dropdown">Predefinidas
+                                    <span class="caret"></span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><asp:LinkButton class="dropdown-item" id="MesActual" runat="server" OnClick="FechasPredefinidasLinkButton_Click" Text="Mes Actual"></asp:LinkButton></li>
+                                    <li><asp:LinkButton class="dropdown-item" id="MesAnterior" runat="server" OnClick="FechasPredefinidasLinkButton_Click" Text="Mes Anterior"></asp:LinkButton></li>
+                                    <li><asp:LinkButton class="dropdown-item" id="TresMesesUltimos" runat="server" OnClick="FechasPredefinidasLinkButton_Click" Text="Ultimos Tres Meses"></asp:LinkButton></li>
+                                    <li><asp:LinkButton class="dropdown-item" id="TresMesesAnteriores" runat="server" OnClick="FechasPredefinidasLinkButton_Click" Text="Tres Meses Anteriores"></asp:LinkButton></li>
+                                    <li class="divider"></li>
+                                    <li><asp:LinkButton class="dropdown-item" id="AnualActual" runat="server" OnClick="FechasPredefinidasLinkButton_Click" Text="Año Actual"></asp:LinkButton></li>
+                                    <li><asp:LinkButton class="dropdown-item" id="AnualAnterior" runat="server" OnClick="FechasPredefinidasLinkButton_Click" Text="Año Anterior"></asp:LinkButton></li>
+                                </ul>
+                            </span>
+                        </div>
                     </asp:Panel>
+                    </ContentTemplate>
+                    </asp:UpdatePanel>
                 </div>
             </div>
+            </asp:Panel>
+            <asp:Panel ID="EstadosTipoCompYOrdeByPanel" runat="server">
             <div class="row">
-                <div class="col-xs-4 col-lg-4 col-md-4 text-left padding-top-20">
+                <div runat="server" Id="EstadosVenta" class="col-lg-6 col-md-6 col-sm-6 text-left padding-top-20">
                     <div class="input-group text-left" style="background-color:white; height:25px">
-                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white">&nbsp;Estado(s):&nbsp;</span>
-                        <asp:DropDownList ID="EstadoDropDownList" CssClass="form-control TextoChico" runat="server" Height="30px"
-                            DataValueField="Id" DataTextField="Descr">
+                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white;">&nbsp;Estado(s) Ventas:&nbsp;</span>
+                        <asp:DropDownList ID="EstadoDropDownList" CssClass="form-control TextoChico" runat="server" Height="25px"
+                            DataValueField="Id" DataTextField="Descr" AutoPostBack="true" OnSelectedIndexChanged="AbrirFiltroEstadoLinkButton_Click">
                         </asp:DropDownList>
-                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white"><asp:LinkButton ID="AbrirFiltroEstadoLinkButton" runat="server" CssClass="" Width="50px" Height="25px"  
+                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white; width:60px">
+                            <asp:LinkButton ID="AbrirFiltroEstadoLinkButton" runat="server" CssClass="" Width="40px" Height="20px"  
                             AutoPostBack="true" OnClick="AbrirFiltroEstadoLinkButton_Click" ToolTip="Multiselección de Estados">
+                            <span class="glyphicon glyphicon-filter" style="padding: 2px"></span>
+                            </asp:LinkButton>
+                            <a href="javascript:void(0)" id="popoverButton" style="padding-right:10px" role="button" style="width:200px" placement="bottom" class="popover-test" data-html="true" title="FILTRO DE BUSQUEDA</br>(ESTADOS COMPROBANTES de VENTA)" data-content="Esta multiselección de estados de los comprobantes de VENTA, estará disponible según la selección realizada en el combo de Naturaleza del Comprobante.">
+                            <span class="glyphicon glyphicon-info-sign" style="padding: 2px"></span>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+                <div runat="server" Id="EstadosCompra" class="col-lg-6 col-md-6 col-sm-6 text-left padding-top-20">
+                    <div class="input-group text-left" style="background-color:white; height:20px">
+                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white">&nbsp;Estado(s) Compras / Ventas(tradic.):&nbsp;</span>
+                        <asp:DropDownList ID="EstadoComprasDropDownList" CssClass="form-control TextoChico" runat="server" Height="25px"
+                            DataValueField="Id" DataTextField="Descr" AutoPostBack="true" OnSelectedIndexChanged="AbrirFiltroEstadoComprasLinkButton_Click">
+                        </asp:DropDownList>
+                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white"><asp:LinkButton ID="LinkButton1" runat="server" CssClass="" Width="40px" Height="20px"  
+                            AutoPostBack="true" OnClick="AbrirFiltroEstadoComprasLinkButton_Click" ToolTip="Multiselección de Estados">
                             <span class="glyphicon glyphicon-filter" style="padding: 2px"></span>
                         </asp:LinkButton></span>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 padding-top-20">  
-                    <asp:Panel ID="EstadosPanel" runat="server">
-                        Estado(s):&nbsp; <asp:CheckBox ID="EstadoVigenteCheckBox" CssClass="checkbox-inline" runat="server" Text="Vigente" AutoPostBack="false"/> 
-                                  &nbsp;&nbsp; <asp:CheckBox ID="EstadoPteEnvioCheckBox" CssClass="checkbox-inline" runat="server" Text="Pendiente de envio (AFIP/ITF)" AutoPostBack="false"/>
-                                  &nbsp;&nbsp; <asp:CheckBox ID="EstadoDeBajaCheckBox" CssClass="checkbox-inline" runat="server" Text="De baja" AutoPostBack="false"/>
-                                  &nbsp;&nbsp; <asp:CheckBox ID="EstadoPteConfCheckBox" CssClass="checkbox-inline" runat="server" Text="Pendiente de confirmación" AutoPostBack="false"/>
-                                  &nbsp;&nbsp; <asp:CheckBox ID="EstadoRechCheckBox" CssClass="checkbox-inline" runat="server" Text="Rechazado" AutoPostBack="false"/>
-                                  &nbsp;&nbsp; <asp:CheckBox ID="EstadoPteAutorizCheckBox" CssClass="checkbox-inline" runat="server" Text="Pendiente de autorización" AutoPostBack="false"/>
-                        </asp:Panel>
+                <div class="col-lg-6 col-md-6 col-sm-6 padding-top-20">
+                    <div class="input-group text-left" style="background-color:white; height:20px">
+                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white">&nbsp;Tipos Comprobante:&nbsp;</span>
+                        <asp:DropDownList ID="TiposComprobanteDropDownList" CssClass="form-control TextoChico" runat="server" Height="25px"
+                            DataValueField="Id" DataTextField="Descr" AutoPostBack="true" OnSelectedIndexChanged="AbrirFiltroTiposComprobanteLinkButton_Click">
+                        </asp:DropDownList>
+                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white"><asp:LinkButton ID="LinkButton2" runat="server" CssClass="" Width="40px" Height="20px"  
+                            AutoPostBack="true" OnClick="AbrirFiltroTiposComprobanteLinkButton_Click" ToolTip="Multiselección de Estados">
+                            <span class="glyphicon glyphicon-filter" style="padding: 2px"></span>
+                        </asp:LinkButton></span>
+                    </div>
                 </div>
-                <div class="col-lg-12 col-md-12">  
-                    <asp:Label ID="Label1" runat="server" Text="<font style='color:maroon'>Para la Naturaleza del Comprobante <b>'Compra'</b> solo obtiene los comprobantes en estado <b>'Vigente'</b>.</font>"></asp:Label>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-12 col-md-12 padding-top-20">  
-                    Ordenar por:&nbsp; <asp:DropDownList ID="OrderByDropDownList" runat="server" Width="80%" DataValueField="Id" DataTextField="Descr" AutoPostBack="false"></asp:DropDownList>
+                <div class="col-lg-6 col-md-6 col-sm-6 padding-top-20">
+                    <div class="input-group text-left" style="background-color:white; height:20px">
+                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white">&nbsp;Ordenar por: &nbsp;</span>
+                        <asp:DropDownList ID="OrderByDropDownList" runat="server" Height="25px" CssClass="form-control TextoChico" DataValueField="Id" DataTextField="Descr" AutoPostBack="false"></asp:DropDownList>
+                    </div>
                 </div>
             </div>
+            </asp:Panel>
             <div class="row">
-                <div class="col-lg-12 col-md-12 text-center padding-top-20">  
+                <div class="col-lg-12 col-md-12 text-center">
                     <asp:Button ID="BuscarButton" class="btn btn-default btn-sm" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
                     <asp:Button ID="SalirButton" class="btn btn-default btn-sm" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
-                    <a href="javascript:void(0)" role="button" class="popover-test" data-html="true" title="FILTROS DE BUSQUEDA" data-content="Si no selecciona ningún filtro, buscará todos los comprobantes que estén dentro del rango de fechas del período de emisión.<br><a href='Imagenes/Ayuda/PeriodoEmision.png' target='_blank'><br/><img src='Imagenes/Ayuda/PeriodoEmision.png' style='width:100%'/></a>"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>
+                    <a href="javascript:void(0)" id="BuscarAyudaLink" runat="server" role="button" class="popover-test" data-html="true" data-placement="right" data-trigger="hover" title="FILTROS DE BUSQUEDA" data-content="Si no selecciona ningún filtro, buscará todos los comprobantes que estén dentro del rango de fechas del período de emisión, con los filtros por defecto.<br><a href='Imagenes/Ayuda/PeriodoEmision.png' target='_blank'><br/><img src='Imagenes/Ayuda/PeriodoEmision.png' style='width:100%'/></a>" style="padding-top:30px"><span class="glyphicon glyphicon-info-sign gi-1x"></span></a>
                 </div>
             </div>
             <div class="row">
@@ -97,158 +161,251 @@
             </div>
             </asp:Panel>
             <div class="row">
-                <div class="col-lg-12 col-md-12 text-center padding-top-20">  
-                    <asp:Panel ID="GrillaComprobantes" runat="server" Width="100%" ScrollBars="Horizontal">
-                        <div style="text-align: left; padding: 5px;">
-                            <a href="#" role="button" runat="server" class="" data-toggle="modal" data-target="#myModalLarge" id="AyudaGrilla" visible="false"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>&nbsp;
-                        </div>
-                        <div id="myModalLarge" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                            <div class="modal-dialog" role="document">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                        <h4 class="modal-title" id="H1">GRILLA CONSULTA DE COMPROBANTES</h4>
-                                    </div>
-                                    <div class="modal-body">
-                                        <h4>Dispone de una columna "Acción" que permite realizar las siguientes tareas:</h4>
-                                        <a href="Imagenes/Ayuda/ConsultaComprobante-Acciones.png" target="_blank">
-                                        <img src="Imagenes/Ayuda/ConsultaComprobante-Acciones.png" alt="Acciones" style="width: auto" />
-                                        </a>
-                                        <hr />
+                <div class="col-lg-12 col-md-12 text-center">
+                    <asp:UpdateProgress ID="ExploradorUpdatePanelProgress" runat="server" AssociatedUpdatePanelID="ExploradorUpdatePanel" DisplayAfter="0">
+                        <ProgressTemplate>
+                            <asp:Image ID="ExploradorComprobanteImage" runat="server" Height="18px" ImageUrl="~/Imagenes/301.gif">
+                            </asp:Image>
+                        </ProgressTemplate>
+                    </asp:UpdateProgress>
+                    <asp:Panel ID="GrillaComprobantesPanel" runat="server" Width="100%" ScrollBars="Auto">
+                        <asp:Panel ID="AyudaConsultaComprobantesPanel" runat="server" Width="100%" ScrollBars="Auto">
+                            <div style="text-align: left; padding: 5px;">
+                                <a href="#" role="button" runat="server" class="" data-toggle="modal" data-target="#myModalLarge" id="AyudaGrilla" visible="false"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>&nbsp;
+                            </div>
+                            <div id="myModalLarge" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="H1">GRILLA CONSULTA DE COMPROBANTES</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Dispone de una columna "Acción" que permite realizar las siguientes tareas:</h4>
+                                            <a href="Imagenes/Ayuda/ConsultaComprobante-Acciones.png" target="_blank">
+                                            <img src="Imagenes/Ayuda/ConsultaComprobante-Acciones.png" alt="Acciones" style="width: auto" />
+                                            </a>
+                                            <hr />
 
-                                        <h4>Actualizar estado (Interfacturas/AFIP)</h4>
-                                        Actualiza un comprobante en estado &quot;Pendiente de Confirmación&quot; o &quot;Pendiente de 
-                                        envío (AFIP/ITF)&quot; o “Pendiente de confirmación” a estado &quot;Vigente&quot;, para los 
-                                        siguientes casos:<br />
-                                        <br />
-                                        1) Gestión del CAE ONLINE aprobado por la AFIP.<br /> 2) Gestión del CAE ONLINE 
-                                        aprobado por Interfacturas.<br />
-                                        <br />
-                                        <p>
-                                        Una vez cambiado el estado, se completan en el comprobante los siguientes datos:<br />
-                                        <a class="tooltip-test" data-placement="bottom" href="#" 
-                                            title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">
-                                        CAE</a>, Fecha de Obtención y Vencimiento del CAE, y el Resultado.<br /><br /> 
-                                        Si el comprobante fue rechazado por la AFIP / Interfacturas, no se actualizará 
-                                        el estado. En dicho caso deberá corregir la información necesaria hasta que 
-                                        luego del envío, se acepte el comprobante.
-                                        </p>
-                                        Requisitos:
-                                        <ul>
-                                            <li>Estar utilizando los servicios OnLine.</li>
-                                            <li>El comprobante no debe estar en estado “Vigente” o “De baja” o “Rechazado”.</li>
-                                            <li>Solo para comprobantes de Venta electrónica.</li>
-                                        </ul>
-                                        <hr />
-
-                                        <h4>Consultar (Interfacturas)</h4>
-                                        <p>
-                                        Visualiza el comprobante obteniendo toda la información en línea directamente de 
-                                        Interfacturas. Se puede utilizar para consultar el <a class="tooltip-test" 
-                                            data-placement="bottom" href="#" 
-                                            title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">
-                                        CAE</a> o el motivo del rechazo de la AFIP.
-                                        </p>
-                                        Requisitos:
-                                        <ul>
-                                            <li>Estar utilizando los servicios OnLine.</li>
-                                            <li>El comprobante debe haberse creado con el Canal Interfacturas. Si la gestión del 
-                                                CAE la realizó contra los servicios de la AFIP, no podrà consultar con esta 
-                                                opción.</li>
-                                            <li>Solo para comprobantes de Venta electrónica.</li>
-                                        </ul>
-                                        <hr />
-
-                                        <h4>Viewer PDF (Interfacturas)</h4>
-                                        <p>
-                                        Permite visualizar el comprobante en formato <kbd>PDF</kbd> en otra solapa de su 
-                                        navegador ( Browser ), utilizando el servicio OnLine de Interfacturas.
-                                        </p>
-                                        Requisitos:
-                                        <ul>
-                                            <li>Estar utilizando los servicios OnLine de Interfacturas.</li>
-                                            <li>El comprobante debe haberse creado con el Canal Interfacturas.</li>
-                                            <li>Solo para comprobantes de Venta electrónica.</li>
-                                        </ul>
-                                        <hr />
-
-                                        <h4>Descargar XML (Interfacturas)</h4>
-                                        <p>
-                                        Descarga un archivo XML, similar al obtenido en el sitio de Interfacturas, con 
-                                        el CAE incluído.
-                                        </p>
-                                        Requisitos:
-                                        <ul>
-                                            <li>El comprobante debe estar con estado Vigente.</li>
-                                            <li>utilizando los servicios OnLine de Interfacturas.</li>
-                                            <li>Solo para comprobantes de Venta electrónica.</li>
-                                        </ul>
-                                        <hr />
-
-                                        <h4>Descargar XML</h4>
-                                        <p>
-                                            Descarga un archivo XML ( sin el <a class="tooltip-test" data-placement="bottom" 
-                                                href="#" 
+                                            <h4>Actualizar estado (Interfacturas/AFIP)</h4>
+                                            Actualiza un comprobante en estado &quot;Pendiente de Confirmación&quot; o &quot;Pendiente de 
+                                            envío (AFIP/ITF)&quot; o “Pendiente de confirmación” a estado &quot;Vigente&quot;, para los 
+                                            siguientes casos:<br />
+                                            <br />
+                                            1) Gestión del CAE ONLINE aprobado por la AFIP.<br /> 2) Gestión del CAE ONLINE 
+                                            aprobado por Interfacturas.<br />
+                                            <br />
+                                            <p>
+                                            Una vez cambiado el estado, se completan en el comprobante los siguientes datos:<br />
+                                            <a class="tooltip-test" data-placement="bottom" href="#" 
                                                 title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">
-                                            CAE</a> ), similar al que descarga luego del ingreso de una factura,
-                                            <a href="Imagenes/Ayuda/AltaLote-Acciones.png" target="_blank">
-                                            <img alt="Acciones" 
-                                            src="Imagenes/Ayuda/AltaLote-Acciones.png" style="width: auto" />
-                                            </a>para ser subido (UpLoad) en forma manual en en el sitio de Interfacturas, 
-                                            para obtener el CAE.
-                                        </p>
-                                        Requisitos:
-                                        <ul>
-                                            <li>El comprobante debe estar con estado “Pendiente de envío (AFIP/ITF)”.</li>
-                                            <li>Solo para comprobantes de Venta electrónica.</li>
-                                        </ul>
-                                        <hr />
+                                            CAE</a>, Fecha de Obtención y Vencimiento del CAE, y el Resultado.<br /><br /> 
+                                            Si el comprobante fue rechazado por la AFIP / Interfacturas, no se actualizará 
+                                            el estado. En dicho caso deberá corregir la información necesaria hasta que 
+                                            luego del envío, se acepte el comprobante.
+                                            </p>
+                                            Requisitos:
+                                            <ul>
+                                                <li>Estar utilizando los servicios OnLine.</li>
+                                                <li>El comprobante no debe estar en estado “Vigente” o “De baja” o “Rechazado”.</li>
+                                                <li>Solo para comprobantes de Venta electrónica.</li>
+                                            </ul>
+                                            <hr />
 
-                                        <h4>Descargar PDF</h4>
-                                        <p>
-                                            Descarga el comprobante en formato <kbd>PDF</kbd>, listo para enviar a su 
-                                            cliente.
-                                        </p>
-                                        Requisito:
-                                        <ul>
-                                            <li>El comprobante debe estar con estado Vigente ( con el <a class="tooltip-test" 
-                                                    data-placement="top" href="#" 
+                                            <h4>Consultar (Interfacturas)</h4>
+                                            <p>
+                                            Visualiza el comprobante obteniendo toda la información en línea directamente de 
+                                            Interfacturas. Se puede utilizar para consultar el <a class="tooltip-test" 
+                                                data-placement="bottom" href="#" 
+                                                title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">
+                                            CAE</a> o el motivo del rechazo de la AFIP.
+                                            </p>
+                                            Requisitos:
+                                            <ul>
+                                                <li>Estar utilizando los servicios OnLine.</li>
+                                                <li>El comprobante debe haberse creado con el Canal Interfacturas. Si la gestión del 
+                                                    CAE la realizó contra los servicios de la AFIP, no podrà consultar con esta 
+                                                    opción.</li>
+                                                <li>Solo para comprobantes de Venta electrónica.</li>
+                                            </ul>
+                                            <hr />
+
+                                            <h4>Viewer PDF (Interfacturas)</h4>
+                                            <p>
+                                            Permite visualizar el comprobante en formato <kbd>PDF</kbd> en otra solapa de su 
+                                            navegador ( Browser ), utilizando el servicio OnLine de Interfacturas.
+                                            </p>
+                                            Requisitos:
+                                            <ul>
+                                                <li>Estar utilizando los servicios OnLine de Interfacturas.</li>
+                                                <li>El comprobante debe haberse creado con el Canal Interfacturas.</li>
+                                                <li>Solo para comprobantes de Venta electrónica.</li>
+                                            </ul>
+                                            <hr />
+
+                                            <h4>Descargar XML (Interfacturas)</h4>
+                                            <p>
+                                            Descarga un archivo XML, similar al obtenido en el sitio de Interfacturas, con 
+                                            el CAE incluído.
+                                            </p>
+                                            Requisitos:
+                                            <ul>
+                                                <li>El comprobante debe estar con estado Vigente.</li>
+                                                <li>utilizando los servicios OnLine de Interfacturas.</li>
+                                                <li>Solo para comprobantes de Venta electrónica.</li>
+                                            </ul>
+                                            <hr />
+
+                                            <h4>Descargar XML</h4>
+                                            <p>
+                                                Descarga un archivo XML ( sin el <a class="tooltip-test" data-placement="bottom" 
+                                                    href="#" 
                                                     title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">
-                                                CAE</a> generado ).</li>
-                                        </ul>
-                                        <hr />
+                                                CAE</a> ), similar al que descarga luego del ingreso de una factura,
+                                                <a href="Imagenes/Ayuda/AltaLote-Acciones.png" target="_blank">
+                                                <img alt="Acciones" 
+                                                src="Imagenes/Ayuda/AltaLote-Acciones.png" style="width: auto" />
+                                                </a>para ser subido (UpLoad) en forma manual en en el sitio de Interfacturas, 
+                                                para obtener el CAE.
+                                            </p>
+                                            Requisitos:
+                                            <ul>
+                                                <li>El comprobante debe estar con estado “Pendiente de envío (AFIP/ITF)”.</li>
+                                                <li>Solo para comprobantes de Venta electrónica.</li>
+                                            </ul>
+                                            <hr />
 
-                                        <h4>Clonar comprobante</h4>
-                                        <p>
-                                        La clonación de comprobante obtiene todos los datos del comprobante original, 
-                                        pero descarta los siguientes campos que usted deberá ingresar para generar un 
-                                        nuevo comprobante.
-                                        </p>
-                                        <ul>
-                                            <li>Número de comprobante</li>
-                                            <li>Fecha de emisión</li>
-                                            <li>Fecha de servicio inicio y fin</li>
-                                            <li>Fecha de vencimiento</li>
-                                            <li>Nro de lote</li>
-                                            <li>Nº de CAE</li>
-                                            <li>Fecha obtencion de CAE</li>
-                                            <li>Fecha vencimiento de CAE</li>
-                                        </ul>
-                                        <br />    
-                                        Además, serán actualizados los datos del vendedor según corresponda. En primer 
-                                        medida, se tomaran los datos del vendedor registrados para el punto de venta que 
-                                        figura en el comprobante que usted ha seleccionado para clonar, siempre y 
-                                        cuando, en la definición del punto de venta, figure desmarcada la casilla de 
-                                        &quot;Usa datos CUIT&quot;. De lo contrario, se tomaran los datos del vendedor que se 
-                                        encuentran registrados a nivel de CUIT.
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-                                    </div>
-                                </div><!-- /.modal-content -->
-                            </div><!-- /.modal-dialog -->
-                        </div>
-                        <asp:GridView ID="ComprobantesGridView" runat="server" AlternatingRowStyle-BackColor="#d3d3d3" AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None" Width="100%">
+                                            <h4>Descargar PDF</h4>
+                                            <p>
+                                                Descarga el comprobante en formato <kbd>PDF</kbd>, listo para enviar a su 
+                                                cliente.
+                                            </p>
+                                            Requisito:
+                                            <ul>
+                                                <li>El comprobante debe estar con estado Vigente ( con el <a class="tooltip-test" 
+                                                        data-placement="top" href="#" 
+                                                        title="El C.A.E. (Código de Autorización Electrónico) es un número (formato similar al C.A.I.) que otorga la AFIP al autorizar la emisión de un comprobante por web service, aplicativo RECE o por el servicio por clave fiscal 'Comprobantes en linea' ('facturas electrónicas'). Sin CAE, la factura no tiene validez fiscal.">
+                                                    CAE</a> generado ).</li>
+                                            </ul>
+                                            <hr />
+
+                                            <h4>Clonar comprobante</h4>
+                                            <p>
+                                            La clonación de comprobante obtiene todos los datos del comprobante original, 
+                                            pero descarta los siguientes campos que usted deberá ingresar para generar un 
+                                            nuevo comprobante.
+                                            </p>
+                                            <ul>
+                                                <li>Número de comprobante</li>
+                                                <li>Fecha de emisión</li>
+                                                <li>Fecha de servicio inicio y fin</li>
+                                                <li>Fecha de vencimiento</li>
+                                                <li>Nro de lote</li>
+                                                <li>Nº de CAE</li>
+                                                <li>Fecha obtencion de CAE</li>
+                                                <li>Fecha vencimiento de CAE</li>
+                                            </ul>
+                                            <br />    
+                                            Además, serán actualizados los datos del vendedor según corresponda. En primer 
+                                            medida, se tomaran los datos del vendedor registrados para el punto de venta que 
+                                            figura en el comprobante que usted ha seleccionado para clonar, siempre y 
+                                            cuando, en la definición del punto de venta, figure desmarcada la casilla de 
+                                            &quot;Usa datos CUIT&quot;. De lo contrario, se tomaran los datos del vendedor que se 
+                                            encuentran registrados a nivel de CUIT.
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                        </asp:Panel>
+                        <asp:Panel ID="AyudaModifComprobantesPanel" runat="server" Width="100%" ScrollBars="Auto">
+                            <div style="text-align: left; padding: 5px;">
+                                <a href="#" role="button" runat="server" class="" data-toggle="modal" data-target="#myModalLargeModif" id="AyudaGrillaModif" visible="false"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>&nbsp;
+                            </div>
+                            <div id="myModalLargeModif" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="H1">GRILLA MODIFICACIÓN DE COMPROBANTES</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Dispone de una columna para seleccionar y modificar los datos de los comprobantes.</h4>
+                                            <p style="text-align:left">
+                                            Los comprobantes habilitados para realizar una modificación son los siguientes:
+                                            </p>
+                                            <p style="text-align:left">
+                                                <b>Ventas tradicionales</b> &quot;Vigentes&quot;<br />
+                                                <b>Ventas electrónicas</b> &quot;No Vigentes&quot; por ejemplo "Ptes de Envío (AFIP/ITF)" o “Pendiente de confirmación”<br />
+                                                <b>Compras</b> &quot;Vigentes&quot;<br />
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                        </asp:Panel>
+                        <asp:Panel ID="AyudaBajaYAnulBajaPanel" runat="server" Width="100%" ScrollBars="Auto">
+                            <div style="text-align: left; padding: 5px;">
+                                <a href="#" role="button" runat="server" class="" data-toggle="modal" data-target="#myModalLargeBaja" id="AyudaGrillaBaja" visible="false"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>&nbsp;
+                            </div>
+                            <div id="myModalLargeBaja" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="H1">GRILLA BAJA/ANUL.BAJA DE COMPROBANTES</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p style="text-align:left">
+                                                <h4 style="text-align:left">Dispone de dos columnas para seleccionar alguno de los comprobantes de la lista y realizar las siguientes tareas:</h4>
+                                            </p>
+                                            <p style="text-align:left">
+                                            La primera columna permite realizar la <b>Baja o la Anulación de la Baja</b> según el estado actual del comprobante. No se permitirá la Baja de comprobantes que hayan sido enviados y aceptados por la AFIP/ITF.
+                                            </p>
+                                            <p style="text-align:left">
+                                            La segunda columna permite realizar la <b>Baja Física</b> del comprobante siempre y cuando este en un estado de Baja. No se permitirá la Baja Física de comprobantes que hayan sido enviados y aceptados por la AFIP/ITF.
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                        </asp:Panel>
+                        <asp:Panel ID="AyudaModifContratoPanel" runat="server" Width="100%" ScrollBars="Auto">
+                            <div style="text-align: left; padding: 5px;">
+                                <a href="#" role="button" runat="server" class="" data-toggle="modal" data-target="#myModalLargeModifContrato" id="A1" visible="false"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>&nbsp;
+                            </div>
+                            <div id="myModalLargeModifContrato" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                            <h4 class="modal-title" id="H1">GRILLA MODIFICACIÓN DE CONTRATOS</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4>Dispone de una columna para seleccionar y modificar los datos de los contratos.</h4>
+                                            <p style="text-align:left">
+                                            Los contratos habilitados para realizar una modificación son los siguientes:
+                                            </p>
+                                            <p style="text-align:left">
+                                                <b>Contratos</b> &quot;Vigentes&quot;<br />
+                                            </p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </div><!-- /.modal-content -->
+                                </div><!-- /.modal-dialog -->
+                            </div>
+                        </asp:Panel>
+                        <asp:GridView ID="ComprobantesGridView" runat="server" AlternatingRowStyle-BackColor="#d3d3d3" AutoGenerateColumns="false" OnRowCommand="ComprobantesGridView_RowCommand" OnRowDataBound="ComprobantesGridView_RowDataBound" CssClass="grilla" GridLines="None" Width="100%" HorizontalAlign="Center">
                             <Columns>
                                 <asp:TemplateField Visible="false">
                                     <ItemTemplate>
@@ -364,54 +521,167 @@
                             </Columns>
                         </asp:GridView>
                     </asp:Panel>
-                </div>
-            </div>
-        </div>
-    </section>
 
-    <div id="filtroEstadoModal" class="modal fade" tabindex="-1" role="dialog">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        ×</button>
-                    <h3 id="H3">
-                        Multiselección de Estados</h3>
-                </div>
-                <div class="modal-body">
-                    <div class="panel">
-                        <div class="panel-body" style="max-height: 400px; overflow-y: scroll;">
-                            <asp:GridView AutoGenerateColumns="false" ID="EstadoGridView" runat="server" Visible="true"
-                                ShowHeader="false" HorizontalAlign="Left">
-                                <Columns>
-                                    <asp:TemplateField HeaderText="">
-                                        <ItemTemplate>
-                                            <asp:CheckBox ID="IncluirCheckBox" runat="server" ViewStateMode="Enabled" />
-                                        </ItemTemplate>
-                                        <ItemStyle />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField Visible="false">
-                                        <ItemTemplate>
-                                            <%#DataBinder.Eval(Container.DataItem, "Id")%>
-                                        </ItemTemplate>
-                                        <ItemStyle />
-                                    </asp:TemplateField>
-                                    <asp:TemplateField>
-                                        <ItemTemplate>
-                                            <%#DataBinder.Eval(Container.DataItem, "Descr")%>
-                                        </ItemTemplate>
-                                        <ItemStyle CssClass="izquierda" Wrap="false" />
-                                    </asp:TemplateField>
-                                </Columns>
-                            </asp:GridView>
+                    <div id="filtroEstadoModal" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×</button>
+                                    <h3 id="H3">
+                                        Multiselección de Estados</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="panel">
+                                        <div class="panel-body" style="max-height: 400px; overflow-y: scroll;">
+                                            <asp:GridView AutoGenerateColumns="false" ID="EstadoGridView" runat="server" Visible="true"
+                                                ShowHeader="false" HorizontalAlign="Left">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="">
+                                                        <ItemTemplate>
+                                                            <asp:CheckBox ID="IncluirCheckBox" runat="server" Checked='<%#DataBinder.Eval(Container.DataItem, "Incluir")%>' />
+                                                        </ItemTemplate>
+                                                        <ItemStyle />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField Visible="false">
+                                                        <ItemTemplate>
+                                                            <%#DataBinder.Eval(Container.DataItem, "Id")%>
+                                                        </ItemTemplate>
+                                                        <ItemStyle />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+                                                            <%#DataBinder.Eval(Container.DataItem, "Descr")%>
+                                                        </ItemTemplate>
+                                                        <ItemStyle CssClass="izquierda" Wrap="false" />
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" id="AceptarFiltroEstadoButton" runat="server" class="btn btn-default" onserverclick="ValidaryAsignarCamposFiltroLinkButton_Click">
+                                        Aceptar</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button data-dismiss="modal" id="AceptarFiltroEstadoButton" runat="server" class="btn btn-default">
-                        Aceptar</button>
+
+                    <div id="filtroEstadoComprasModal" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×</button>
+                                    <h3 id="H3">
+                                        Multiselección de Estados</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="panel">
+                                        <div class="panel-body" style="max-height: 400px; overflow-y: scroll;">
+                                            <asp:GridView AutoGenerateColumns="false" ID="EstadoComprasGridView" runat="server" Visible="true"
+                                                ShowHeader="false" HorizontalAlign="Left">
+                                                <Columns>
+                                                    <asp:TemplateField HeaderText="">
+                                                        <ItemTemplate>
+                                                            <asp:CheckBox ID="IncluirCheckBox" runat="server" Checked='<%#DataBinder.Eval(Container.DataItem, "Incluir")%>' />
+                                                        </ItemTemplate>
+                                                        <ItemStyle />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField Visible="false">
+                                                        <ItemTemplate>
+                                                            <%#DataBinder.Eval(Container.DataItem, "Id")%>
+                                                        </ItemTemplate>
+                                                        <ItemStyle />
+                                                    </asp:TemplateField>
+                                                    <asp:TemplateField>
+                                                        <ItemTemplate>
+                                                            <%#DataBinder.Eval(Container.DataItem, "Descr")%>
+                                                        </ItemTemplate>
+                                                        <ItemStyle CssClass="izquierda" Wrap="false" />
+                                                    </asp:TemplateField>
+                                                </Columns>
+                                            </asp:GridView>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" id="Button1" runat="server" class="btn btn-default" onserverclick="ValidaryAsignarCamposFiltroLinkButton_Click">
+                                        Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="filtroTiposComprobanteModal" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal">
+                                        ×</button>
+                                    <h3 id="H3">
+                                        Multiselección de Tipos de Comprobante</h3>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="panel">
+                                        <div class="panel-body" style="max-height: 50px; text-align: left">
+                                            <div class="row">
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <asp:LinkButton ID="MarcarTodoTipoComprobanteLinkButton" runat="server" CssClass="" Width="25px" Height="25px"  
+                                                        AutoPostBack="true" ToolTip="Marcar todos los tipos de comprobantes" OnClick="MarcarTodoTipoComprobanteLinkButton_Click">
+                                                        <span class="glyphicon glyphicon-check" style="padding: 3px;"><asp:Label runat="server" ID="Label1" CssClass="TextoMediano" Width="120px" Text="&nbsp;&nbsp;Marcar Todo&nbsp;&nbsp;"></asp:Label></span> 
+                                                    </asp:LinkButton></span>
+                                                </div>
+                                                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                    <asp:LinkButton ID="DesMarcarTodoTipoComprobanteLinkButton" runat="server" CssClass="" Width="25px" Height="25px"  
+                                                        AutoPostBack="true" ToolTip="Marcar todos los tipos de comprobantes" OnClick="DesMarcarTodoTipoComprobanteLinkButton_Click">
+                                                        <span class="glyphicon glyphicon-unchecked" style="padding: 3px;"><asp:Label runat="server" ID="Label2" CssClass="TextoMediano" Width="120px" Text="&nbsp;&nbsp;Desmarcar Todo&nbsp;&nbsp;"></asp:Label></span> 
+                                                    </asp:LinkButton></span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="panel-body" style="max-height: 400px; overflow-y: scroll;">
+                                            <div class="row">
+                                                <asp:GridView AutoGenerateColumns="false" ID="TiposComprobanteGridView" runat="server" Visible="true"
+                                                    ShowHeader="false" HorizontalAlign="Left">
+                                                    <Columns>
+                                                        <asp:TemplateField HeaderText="">
+                                                            <ItemTemplate>
+                                                                <asp:CheckBox ID="IncluirCheckBox" runat="server" Checked='<%#DataBinder.Eval(Container.DataItem, "Incluir")%>' />
+                                                            </ItemTemplate>
+                                                            <ItemStyle />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField Visible="false">
+                                                            <ItemTemplate>
+                                                                <%#DataBinder.Eval(Container.DataItem, "Codigo")%>
+                                                            </ItemTemplate>
+                                                            <ItemStyle />
+                                                        </asp:TemplateField>
+                                                        <asp:TemplateField>
+                                                            <ItemTemplate>
+                                                                <%#DataBinder.Eval(Container.DataItem, "Descr")%>
+                                                            </ItemTemplate>
+                                                            <ItemStyle CssClass="izquierda" Wrap="false" />
+                                                        </asp:TemplateField>
+                                                    </Columns>
+                                                </asp:GridView>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="modal-footer">
+                                    <button data-dismiss="modal" id="Button2" runat="server" class="btn btn-default" onserverclick="ValidaryAsignarCamposFiltroTipoCompLinkButton_Click">
+                                        Aceptar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
-    </div>
+       </ContentTemplate>
+       </asp:UpdatePanel>
+    </section>
 </asp:Content>

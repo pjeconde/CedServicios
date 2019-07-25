@@ -183,6 +183,57 @@ namespace CedServicios.Site
             }
         }
 
+        protected void ConsultarTiposOpcionalesAFIPButton_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consultar los Tipos de Opcionales válidos en AFIP (FEv1) para el CUIT: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarAFIPTiposOpcional((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/\"", "");
+                    //TituloConfirmacionLabel.Text = "Tipos de Opcionales";
+                    //CancelarButton.Text = "Salir";
+                    //DetalleLabel.Text = respuesta.Replace("'", "").Replace("\r\n", "  ");
+                    //var value = new System.Web.Script.Serialization.JavaScriptSerializer().Serialize(respuesta.Replace("'", "").Replace("\r\n", "  "));
+                    //var script = string.Format("alert({0});", value);
+                    //DetalleTextBox.Text = respuesta.Replace("'", "").Replace("\r\n", "  ");
+                    //ModalPopupExtender1.Show();
+                    //Page.ClientScript.RegisterStartupScript(this.GetType(), "Message", "<SCRIPT LANGUAGE='javascript'>" + script + "</SCRIPT>", false);
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
+
         protected void ConsultarDocTipoAFIPButton_Click(object sender, EventArgs e)
         {
             MensajeLabel.Text = "";

@@ -132,114 +132,123 @@
         </div>
     </section>
 
-    <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
-    TargetControlID="TargetControlIDdelModalPopupExtender1"
-    PopupControlID="ConfirmacionPanel"
-    BackgroundCssClass="modalBackground"
-    PopupDragHandleControlID="ConfirmacionPanel"
-    BehaviorID="mdlPopup" />
-    <asp:Panel ID="ConfirmacionPanel" runat="server" CssClass="ModalWindow">
-        <table width="100%">
-            <tr>
-                <td colspan="2">
-                    <asp:Label ID="TituloConfirmacionLabel" runat="server" SkinID="TituloPagina"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-top:20px; padding-right:5px; padding-left:5px">
-                    CUIT:
-                </td>
-                <td align="left" style="padding-top:20px;">
-                    <asp:Label ID="CUITLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Razón Social:
-                </td>
-                <td align="left">
-                    <asp:Label ID="RazSocLabel" runat="server"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Tipo.Doc:
-                </td>
-                <td align="left">
-                    <asp:Label ID="TipoDocLabel" runat="server"></asp:Label>
-                </td>
-            </tr>             
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Nro.Doc:
-                </td>
-                <td align="left">
-                    <asp:Label ID="NroDocLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Calle:
-                </td>
-                <td align="left">
-                    <asp:Label ID="CalleLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Nro:
-                </td>
-                <td align="left">
-                    <asp:Label ID="NroLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Piso:
-                </td>
-                <td align="left">
-                    <asp:Label ID="PisoLabel" runat="server"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Depto:
-                </td>
-                <td align="left">
-                    <asp:Label ID="DeptoLabel" runat="server"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Localidad:
-                </td>
-                <td align="left">
-                    <asp:Label ID="LocalidadLabel" runat="server"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Cod.Post:
-                </td>
-                <td align="left">
-                    <asp:Label ID="CodPostLabel" runat="server"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Estado Actual:
-                </td>
-                <td align="left">
-                    <asp:Label ID="EstadoLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-top:20px">
-                    <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" />
-                </td>
-            </tr>
-        </table>
-    </asp:Panel>
+    <div id="DetalleModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        ×</button>
+                    <h3 id="H3">
+                        <asp:Label ID="Label1" runat="server" SkinID="TituloPagina"></asp:Label></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="panel">
+                        <div class="panel-body" style="max-height: 400px; overflow-y: scroll;">
+                            <table width="100%">
+                                <tr>
+                                    <td colspan="2">
+                                        <asp:Label ID="TituloConfirmacionLabel" runat="server" SkinID="TituloPagina"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-top:20px; padding-right:5px; padding-left:5px">
+                                        CUIT:
+                                    </td>
+                                    <td align="left" style="padding-top:20px;">
+                                        <asp:Label ID="CUITLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Razón Social:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="RazSocLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Tipo.Doc:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="TipoDocLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>             
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Nro.Doc:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="NroDocLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Calle:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="CalleLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Nro:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="NroLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Piso:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="PisoLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Depto:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="DeptoLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Localidad:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="LocalidadLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Cod.Post:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="CodPostLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Estado Actual:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="EstadoLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button ID="Button1"  data-dismiss="modal" class="btn btn-default" runat="server" title="Salir">Salir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script type="text/javascript">
         function BorrarMensaje() {
             {

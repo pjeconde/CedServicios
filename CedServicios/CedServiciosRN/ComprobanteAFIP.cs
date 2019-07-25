@@ -156,6 +156,36 @@ namespace CedServicios.RN
                     objFEDetalleRequest.FchServHasta = lc.comprobante[0].cabecera.informacion_comprobante.fecha_serv_hasta;     // Comprobante.Fecha_serv_hasta.ToString("yyyyMMdd");
                     objFEDetalleRequest.FchVtoPago = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento;      // Comprobante.Fecha_venc_pago.ToString("yyyyMMdd");
                 }
+                if (("*201*202*203*").IndexOf("*" +lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
+                {
+                    objFEDetalleRequest.FchVtoPago = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento;      // Comprobante.Fecha_venc_pago.ToString("yyyyMMdd");
+                    ar.gov.afip.wsfev1.Opcional[] opcionales = new ar.gov.afip.wsfev1.Opcional[1];
+                    ar.gov.afip.wsfev1.Opcional opc = new ar.gov.afip.wsfev1.Opcional();
+                    opc.Id = "2101"; //CBU
+                    if (lc.comprobante[0].extensiones != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != string.Empty)
+                    { 
+                        string textoComercial = Funciones.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales.ToString());
+                        if (textoComercial.IndexOf("CBU:") >= 0)
+                        {
+                            string restante = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 4);
+                            if (restante.Length < 22)
+                            {
+                                throw new Exception("El CBU debe tener 22 dígitos. [" + restante + "]");
+                            }
+                            opc.Valor = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 4, 22);       //Para probar "0170326740000000387343"
+                        }
+                        else
+                        {
+                            throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puedo estar por cualquier parte del texto.");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puedo estar por cualquier parte del texto.");
+                    }
+                    opcionales[0] = opc;
+                    objFEDetalleRequest.Opcionales = opcionales;
+                }
                 if (lc.comprobante[0].resumen.codigo_moneda == "PES")
                 {
                     objFEDetalleRequest.ImpNeto = lc.comprobante[0].resumen.importe_total_neto_gravado;                         // Comprobante.Imp_neto;
@@ -1538,6 +1568,36 @@ namespace CedServicios.RN
                 throw new Exception(ex.Message);
             }
         }
+        public static string ConsultarAFIPTiposOpcional(Entidades.Sesion Sesion)
+        {
+            try
+            {
+                string respuesta = "";
+                LoginTicket ticket;
+                ar.gov.afip.wsw.Service objWS;
+                ar.gov.afip.wsfev1.Service objWSFEV1;
+                CrearTicket(Sesion, out ticket, out objWS, out objWSFEV1);
+
+                ar.gov.afip.wsfev1.OpcionalTipoResponse FEOpcionalTipoResponse = new ar.gov.afip.wsfev1.OpcionalTipoResponse();
+                FEOpcionalTipoResponse = objWSFEV1.FEParamGetTiposOpcional(ticket.ObjAutorizacionfev1);
+                System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                if (FEOpcionalTipoResponse.Errors != null)
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(FEOpcionalTipoResponse.Errors);
+                }
+                else
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(FEOpcionalTipoResponse.ResultGet);
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public static string ConsultarAFIPTiposDoc(Entidades.Sesion Sesion)
         {
             try

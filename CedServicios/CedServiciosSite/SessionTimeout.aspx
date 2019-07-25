@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="SessionTimeout.aspx.cs" Inherits="CedServicios.Site.SessionTimeout" Theme="CedServiciosNew" %>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="SessionTimeout.aspx.cs" Inherits="CedServicios.Site.SessionTimeout" Theme="CedServicios" %>
 
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->

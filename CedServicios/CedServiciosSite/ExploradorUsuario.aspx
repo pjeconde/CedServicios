@@ -6,12 +6,10 @@
      <section id="features" class="features sections2">
         <div class="container">
             <div class="row">
-                <div class="main_features_content2">
-                    <div class="head_title text-center">
-                        <h2><asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Usuarios"></asp:Label>
-                        </h2>
-                        <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
-                    </div>
+                <div class="head_title text-center">
+                    <h2><asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Usuarios"></asp:Label>
+                    </h2>
+                    <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
                 </div>
             </div>
             <div class="row">
@@ -121,96 +119,106 @@
         </div>
     </section>
     
-    <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
-    TargetControlID="TargetControlIDdelModalPopupExtender1"
-    PopupControlID="ConfirmacionPanel"
-    BackgroundCssClass="modalBackground"
-    PopupDragHandleControlID="ConfirmacionPanel"
-    BehaviorID="mdlPopup" />
-    <asp:Panel ID="ConfirmacionPanel" runat="server" CssClass="ModalWindow">
-        <table width="100%">
-            <tr>
-                <td colspan="2">
-                    <asp:Label ID="TituloConfirmacionLabel" runat="server" SkinID="TituloPagina"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-top:20px; padding-right:5px; padding-left:5px">
-                    Id.Usuario:
-                </td>
-                <td align="left" style="padding-top:20px;">
-                    <asp:Label ID="IdUsuarioLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Nombre:
-                </td>
-                <td align="left">
-                    <asp:Label ID="NombreLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Telefono:
-                </td>
-                <td align="left">
-                    <asp:Label ID="TelefonoLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Email:
-                </td>
-                <td align="left">
-                    <asp:Label ID="EmailLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Pregunta de Seguridad:
-                </td>
-                <td align="left">
-                    <asp:Label ID="PreguntaLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Respuesta de Seguridad:
-                </td>
-                <td align="left">
-                    <asp:Label ID="RespuestaLabel" runat="server"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Clave:
-                </td>
-                <td align="left">
-                    <asp:Label ID="PasswordLabel" runat="server"></asp:Label>
-                </td>
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-left:5px">
-                    Estado Actual:
-                </td>
-                <td align="left">
-                    <asp:Label ID="EstadoLabel" runat="server"></asp:Label>
-                </td>
-            </tr>           
-            <tr>
-                <td align="left" style="padding-top:20px">
-                    <asp:Button ID="ReenviarEmailButton" runat="server" Text="Confirmar" onclick="ReenviarEmailButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                </td>
-                <td align="left" style="padding-top:20px">
-                    <asp:Button ID="CambiarEstadoButton" runat="server" Text="Confirmar" onclick="CambiarEstadoButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                </td>
-                <td align="left" style="padding-top:20px">
-                    <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" />
-                </td>
-            </tr>
-        </table>
-    </asp:Panel>
+    <div id="DetalleModal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        ×</button>
+                    <h3 id="H3">
+                        <asp:Label ID="Label1" runat="server" SkinID="TituloPagina"></asp:Label></h3>
+                </div>
+                <div class="modal-body">
+                    <div class="panel">
+                        <div class="panel-body" style="max-height: 400px; overflow-y: scroll;">
+                            <table width="100%">
+                                <tr>
+                                    <td colspan="2">
+                                        <asp:Label ID="TituloConfirmacionLabel" runat="server" SkinID="TituloPagina"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-top:20px; padding-right:5px; padding-left:5px">
+                                        Id.Usuario:
+                                    </td>
+                                    <td align="left" style="padding-top:20px;">
+                                        <asp:Label ID="IdUsuarioLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Nombre:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="NombreLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Telefono:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="TelefonoLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Email:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="EmailLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Pregunta de Seguridad:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="PreguntaLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Respuesta de Seguridad:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="RespuestaLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Clave:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="PasswordLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td align="left" style="padding-right:5px; padding-left:5px">
+                                        Estado Actual:
+                                    </td>
+                                    <td align="left">
+                                        <asp:Label ID="EstadoLabel" runat="server"></asp:Label>
+                                    </td>
+                                </tr>           
+                                <tr>
+                                    <td align="left" style="padding-top:20px">
+                                        <asp:Button ID="ReenviarEmailButton" runat="server" Text="Confirmar" onclick="ReenviarEmailButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                                    </td>
+                                    <td align="left" style="padding-top:20px">
+                                        <asp:Button ID="CambiarEstadoButton" runat="server" Text="Confirmar" onclick="CambiarEstadoButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button ID="Button1"  data-dismiss="modal" class="btn btn-default" runat="server" title="Salir">Salir</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <script type="text/javascript">
         function BorrarMensaje() {
             {

@@ -1,5 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorPermiso.aspx.cs" Inherits="CedServicios.Site.ExploradorPermiso" Theme="CedServicios" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<%@ Register Assembly="CedServiciosWebForms" Namespace="CedServicios.WebForms" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <section id="features" class="features sections2">
@@ -31,11 +32,11 @@
                     Tipo de Permiso:<asp:DropDownList ID="IdTipoPermisoDropDownList" runat="server" TabIndex="3" Width="" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" ></asp:DropDownList>
                 </div>        
                 <div class="col-lg-12 col-md-12 text-left padding-top-20" >
-                    <asp:RadioButtonList ID="VerPermisosDeRadioButtonList" runat="server">
-                        <asp:ListItem Text="Cuits" Selected="True"></asp:ListItem>
+                    <asp:RadioButtonList ID="VerPermisosDeRadioButtonList" runat="server" RepeatDirection="Horizontal" CssClass="RBespacios">
+                        <asp:ListItem Text="Cuits" ></asp:ListItem>
                         <asp:ListItem Text="UNs"></asp:ListItem>
                         <asp:ListItem Text="Usuarios"></asp:ListItem>
-                        <asp:ListItem Text="Todos"></asp:ListItem>
+                        <asp:ListItem Text="Todos" Selected="True"></asp:ListItem>
                     </asp:RadioButtonList>
                 </div>
                 <div class="col-lg-12 col-md-12">
@@ -46,9 +47,15 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 padding-top-20">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
-                    <asp:GridView ID="PermisosGridView" runat="server" HorizontalAlign="Center" 
-                        AutoGenerateColumns="false" OnRowCommand="PermisosGridView_RowCommand" OnRowDataBound="PermisosGridView_RowDataBound" 
-                        CssClass="grilla" GridLines="None">
+                    <cc1:PagingGridView ID="PermisoPagingGridView" runat="server" OnPageIndexChanging="PermisoPagingGridView_PageIndexChanging"
+                            OnRowDataBound="PermisoPagingGridView_RowDataBound" HorizontalAlign="Center" 
+                            FooterStyle-ForeColor="Brown" OnRowEditing="PermisoPagingGridView_RowEditing" OnRowCancelingEdit="PermisoPagingGridView_RowCancelingEdit"
+                            OnRowUpdating="PermisoPagingGridView_RowUpdating" 
+                            OnSorting="PermisoPagingGridView_Sorting" AllowPaging="True" 
+                            AllowSorting="True" CssClass="grilla"  
+                            AutoGenerateColumns="false" OnRowCommand="PermisoPagingGridView_RowCommand"
+                            OnSelectedIndexChanged="PermisoPagingGridView_SelectedIndexChanged" OnSelectedIndexChanging="PermisoPagingGridView_SelectedIndexChanging"
+                            DataKeyNames="" BorderStyle="None">
                         <Columns>
                             <asp:ButtonField HeaderText="" Text="Cambiar estado" CommandName="CambiarEstado" ButtonType="Link" ItemStyle-ForeColor="Blue">
                             </asp:ButtonField>
@@ -68,6 +75,10 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
+                            <asp:BoundField DataField="DescrTipoPermiso" HeaderText="DescrTipoPermiso" SortExpression="">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
@@ -81,7 +92,9 @@
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
                         </Columns>
-                    </asp:GridView>
+                        <PagerSettings Mode="NumericFirstLast" />
+                        <PagerStyle HorizontalAlign = "Center" CssClass="GridPager" />
+                    </cc1:PagingGridView>
                 </asp:Panel>
                 </div>
             </div>

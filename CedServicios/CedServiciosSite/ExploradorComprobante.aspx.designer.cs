@@ -40,6 +40,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox TratamientoTextBox;
         
         /// <summary>
+        /// Control ExploradorUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel ExploradorUpdatePanel;
+        
+        /// <summary>
         /// Control Panel0.
         /// </summary>
         /// <remarks>
@@ -67,6 +76,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.DropDownList NaturalezaComprobanteDropDownList;
         
         /// <summary>
+        /// Control DetalleYFechasPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel DetalleYFechasPanel;
+        
+        /// <summary>
         /// Control DetallePanel.
         /// </summary>
         /// <remarks>
@@ -83,6 +101,15 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox DetalleTextBox;
+        
+        /// <summary>
+        /// Control fechasUpdatePanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.UpdatePanel fechasUpdatePanel;
         
         /// <summary>
         /// Control PeriodoEmisionPanel.
@@ -112,13 +139,22 @@ namespace CedServicios.Site {
         protected global::AjaxControlToolkit.CalendarExtender FechaDesdeCalendarExtender;
         
         /// <summary>
-        /// Control FechaDesdeImage.
+        /// Control FechaDesdeLinkButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image FechaDesdeImage;
+        protected global::System.Web.UI.WebControls.LinkButton FechaDesdeLinkButton;
+        
+        /// <summary>
+        /// Control hastaLabel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label hastaLabel;
         
         /// <summary>
         /// Control FechaHastaTextBox.
@@ -139,13 +175,85 @@ namespace CedServicios.Site {
         protected global::AjaxControlToolkit.CalendarExtender FechaHastaCalendarExtender;
         
         /// <summary>
-        /// Control FechaHastaImage.
+        /// Control FechaHastaLinkButton.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image FechaHastaImage;
+        protected global::System.Web.UI.WebControls.LinkButton FechaHastaLinkButton;
+        
+        /// <summary>
+        /// Control MesActual.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton MesActual;
+        
+        /// <summary>
+        /// Control MesAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton MesAnterior;
+        
+        /// <summary>
+        /// Control TresMesesUltimos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton TresMesesUltimos;
+        
+        /// <summary>
+        /// Control TresMesesAnteriores.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton TresMesesAnteriores;
+        
+        /// <summary>
+        /// Control AnualActual.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton AnualActual;
+        
+        /// <summary>
+        /// Control AnualAnterior.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton AnualAnterior;
+        
+        /// <summary>
+        /// Control EstadosTipoCompYOrdeByPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel EstadosTipoCompYOrdeByPanel;
+        
+        /// <summary>
+        /// Control EstadosVenta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl EstadosVenta;
         
         /// <summary>
         /// Control EstadoDropDownList.
@@ -166,76 +274,49 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.LinkButton AbrirFiltroEstadoLinkButton;
         
         /// <summary>
-        /// Control EstadosPanel.
+        /// Control EstadosCompra.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel EstadosPanel;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl EstadosCompra;
         
         /// <summary>
-        /// Control EstadoVigenteCheckBox.
+        /// Control EstadoComprasDropDownList.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox EstadoVigenteCheckBox;
+        protected global::System.Web.UI.WebControls.DropDownList EstadoComprasDropDownList;
         
         /// <summary>
-        /// Control EstadoPteEnvioCheckBox.
+        /// Control LinkButton1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox EstadoPteEnvioCheckBox;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
         
         /// <summary>
-        /// Control EstadoDeBajaCheckBox.
+        /// Control TiposComprobanteDropDownList.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox EstadoDeBajaCheckBox;
+        protected global::System.Web.UI.WebControls.DropDownList TiposComprobanteDropDownList;
         
         /// <summary>
-        /// Control EstadoPteConfCheckBox.
+        /// Control LinkButton2.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox EstadoPteConfCheckBox;
-        
-        /// <summary>
-        /// Control EstadoRechCheckBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox EstadoRechCheckBox;
-        
-        /// <summary>
-        /// Control EstadoPteAutorizCheckBox.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox EstadoPteAutorizCheckBox;
-        
-        /// <summary>
-        /// Control Label1.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
         
         /// <summary>
         /// Control OrderByDropDownList.
@@ -265,6 +346,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Button SalirButton;
         
         /// <summary>
+        /// Control BuscarAyudaLink.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor BuscarAyudaLink;
+        
+        /// <summary>
         /// Control MensajeLabel.
         /// </summary>
         /// <remarks>
@@ -274,13 +364,31 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label MensajeLabel;
         
         /// <summary>
-        /// Control GrillaComprobantes.
+        /// Control ExploradorUpdatePanelProgress.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel GrillaComprobantes;
+        protected global::System.Web.UI.UpdateProgress ExploradorUpdatePanelProgress;
+        
+        /// <summary>
+        /// Control GrillaComprobantesPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel GrillaComprobantesPanel;
+        
+        /// <summary>
+        /// Control AyudaConsultaComprobantesPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel AyudaConsultaComprobantesPanel;
         
         /// <summary>
         /// Control AyudaGrilla.
@@ -290,6 +398,60 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor AyudaGrilla;
+        
+        /// <summary>
+        /// Control AyudaModifComprobantesPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel AyudaModifComprobantesPanel;
+        
+        /// <summary>
+        /// Control AyudaGrillaModif.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor AyudaGrillaModif;
+        
+        /// <summary>
+        /// Control AyudaBajaYAnulBajaPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel AyudaBajaYAnulBajaPanel;
+        
+        /// <summary>
+        /// Control AyudaGrillaBaja.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor AyudaGrillaBaja;
+        
+        /// <summary>
+        /// Control AyudaModifContratoPanel.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel AyudaModifContratoPanel;
+        
+        /// <summary>
+        /// Control A1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor A1;
         
         /// <summary>
         /// Control ComprobantesGridView.
@@ -317,5 +479,77 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlButton AceptarFiltroEstadoButton;
+        
+        /// <summary>
+        /// Control EstadoComprasGridView.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView EstadoComprasGridView;
+        
+        /// <summary>
+        /// Control Button1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button1;
+        
+        /// <summary>
+        /// Control MarcarTodoTipoComprobanteLinkButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton MarcarTodoTipoComprobanteLinkButton;
+        
+        /// <summary>
+        /// Control Label1.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// Control DesMarcarTodoTipoComprobanteLinkButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton DesMarcarTodoTipoComprobanteLinkButton;
+        
+        /// <summary>
+        /// Control Label2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label2;
+        
+        /// <summary>
+        /// Control TiposComprobanteGridView.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView TiposComprobanteGridView;
+        
+        /// <summary>
+        /// Control Button2.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button2;
     }
 }

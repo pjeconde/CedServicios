@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="UsuarioOlvidoPassword.aspx.cs" Inherits="CedServicios.Site.UsuarioOlvidoPassword" Theme="CedServiciosNew" %>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="UsuarioOlvidoPassword.aspx.cs" Inherits="CedServicios.Site.UsuarioOlvidoPassword" Theme="CedServicios" %>
 
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->

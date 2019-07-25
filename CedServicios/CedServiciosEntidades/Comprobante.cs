@@ -6,7 +6,7 @@ using System.Text;
 namespace CedServicios.Entidades
 {
     [Serializable]
-    public class Comprobante
+    public class Comprobante : ICloneable
     {
         private string cuit;
         //identificación comprobante
@@ -54,6 +54,12 @@ namespace CedServicios.Entidades
             datosEmailAvisoComprobanteContrato = new DatosEmailAvisoComprobanteContrato();
             minutas = new List<ComprobanteDetalle>();
         }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
+
         public string Cuit
         {
             set

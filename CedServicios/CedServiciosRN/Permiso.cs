@@ -301,5 +301,19 @@ namespace CedServicios.RN
             CedServicios.DB.Permiso db = new DB.Permiso(Sesion);
             return db.AltaHandler(permiso, false, false, false);
         }
+
+        public static List<Entidades.Permiso> ListaPaging(out int CantidadFilas, int IndicePagina, string OrderBy, string IdUsuario, string Cuit, string TipoPermiso, string Estado, string VerPermisosDe, string SessionID, Entidades.Sesion Sesion)
+        {
+            List<Entidades.Permiso> listaPermiso = new List<Entidades.Permiso>();
+            DB.Permiso db = new DB.Permiso(Sesion);
+            if (OrderBy.Equals(String.Empty))
+            {
+                OrderBy = "Cuit desc, IdUsuario asc ";
+            }
+            listaPermiso = db.LeerListaPermisosFiltrados(IdUsuario, Cuit, TipoPermiso, Estado, VerPermisosDe);
+            int cantidadFilas = listaPermiso.Count;
+            CantidadFilas = cantidadFilas;
+            return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaPermiso);
+        }
     }
 }

@@ -112,22 +112,13 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label MensajeLabel;
         
         /// <summary>
-        /// Control ModalPopupExtender1.
+        /// Control Label1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
-        
-        /// <summary>
-        /// Control ConfirmacionPanel.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel ConfirmacionPanel;
+        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// Control TituloConfirmacionLabel.
@@ -238,12 +229,12 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Label EstadoLabel;
         
         /// <summary>
-        /// Control CancelarButton.
+        /// Control Button1.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button CancelarButton;
+        protected global::System.Web.UI.HtmlControls.HtmlButton Button1;
     }
 }

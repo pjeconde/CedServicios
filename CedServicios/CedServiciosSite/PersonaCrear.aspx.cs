@@ -178,8 +178,9 @@ namespace CedServicios.Site
                     //sesionConsultaAFIP.CnnStr = sesion.CnnStr;
                     if (NroDocTextBox.Text != string.Empty)
                     {
-                        Entidades.PadronA13.persona persona = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesion);
-                        if (persona.razonSocial != null && persona.razonSocial != string.Empty)
+                        Entidades.PadronA13.persona persona = new Entidades.PadronA13.persona();
+                        persona = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesion);
+                        if (persona.razonSocial != null && persona.razonSocial != string.Empty || persona.apellido != null && persona.apellido != string.Empty)
                         {
                             //Vaciar datos de persona a completar
                             RazonSocialTextBox.Text = "";
@@ -194,7 +195,18 @@ namespace CedServicios.Site
                             Domicilio.IdProvincia = "0";
                             Domicilio.CodPost = "";
                             //Completar datos de persona con info del padron AFIP
-                            RazonSocialTextBox.Text = persona.razonSocial;
+                            if (persona.razonSocial != null && persona.razonSocial != string.Empty)
+                            {
+                                RazonSocialTextBox.Text = persona.razonSocial;
+                            }
+                            else
+                            { 
+                                RazonSocialTextBox.Text = persona.apellido;
+                                if (persona.nombre != null && persona.nombre != string.Empty)
+                                {
+                                    RazonSocialTextBox.Text += " " + persona.nombre;
+                                }
+                            }
                             if (persona.fechaContratoSocialSpecified == true)
                             {
                                 DatosImpositivos.FechaInicioActividades = persona.fechaContratoSocial;

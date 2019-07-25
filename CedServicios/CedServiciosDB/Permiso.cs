@@ -140,10 +140,12 @@ namespace CedServicios.DB
         public List<Entidades.Permiso> LeerListaPermisosFiltrados(string IdUsuario, string CUIT, string IdTipoPermiso, string Estado, string VerPermisosDe)
         {
             StringBuilder a = new StringBuilder(string.Empty);
-            a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado ");
-            a.AppendLine("from Permiso where 1=1 ");
+            a.AppendLine("select Permiso.IdUsuario, Permiso.Cuit, Permiso.IdUN, Permiso.IdTipoPermiso, TipoPermiso.DescrTipoPermiso, Permiso.FechaFinVigencia, Permiso.IdUsuarioSolicitante, Permiso.AccionTipo, Permiso.AccionNro, Permiso.IdWF, Permiso.Estado ");
+            a.AppendLine("from Permiso ");
+            a.Append("left outer join TipoPermiso on Permiso.IdTipoPermiso=TipoPermiso.IdTipoPermiso ");
+            a.Append("where 1=1 ");
             if (IdUsuario != String.Empty) a.AppendLine("and IdUsuario like '%" + IdUsuario + "%' ");
-            if (CUIT != String.Empty) a.AppendLine("and CUIT='" + CUIT + "' ");
+            if (CUIT != String.Empty) a.AppendLine("and CUIT like '%" + CUIT + "%' ");
             if (IdTipoPermiso != String.Empty) a.AppendLine("and IdTipoPermiso='" + IdTipoPermiso + "' ");
             if (Estado != String.Empty) a.AppendLine("and Estado='" + Estado + "' ");
             switch (VerPermisosDe)
@@ -179,6 +181,7 @@ namespace CedServicios.DB
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);
             Hasta.UN.Id = Convert.ToInt32(Desde["IdUN"]);
             Hasta.TipoPermiso.Id = Convert.ToString(Desde["IdTipoPermiso"]);
+            Hasta.TipoPermiso.Descr = Convert.ToString(Desde["DescrTipoPermiso"]);
             Hasta.FechaFinVigencia = Convert.ToDateTime(Desde["FechaFinVigencia"]);
             Hasta.UsuarioSolicitante.Id = Convert.ToString(Desde["IdUsuarioSolicitante"]);
             Hasta.Accion.Tipo = Convert.ToString(Desde["AccionTipo"]);
@@ -295,6 +298,103 @@ namespace CedServicios.DB
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.Usa, sesion.CnnStr);
             Permiso.WF.Estado = EstadoHst;
             return Convert.ToInt32(dt.Rows[0]["CantidadFilas"]) == 1;
+        }
+
+        public List<Entidades.Permiso> ListaPaging(int IndicePagina, string OrderBy, string SessionID, List<Entidades.Permiso> PermisoLista)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            a.Append("CREATE TABLE #Permiso" + SessionID + "( ");
+            a.Append("[IdUsuario] [varchar](50) NOT NULL, ");
+            a.Append("[Cuit] [varchar] (11) NOT NULL, ");
+            a.Append("[IdUN] [int] NOT NULL, ");
+            a.Append("[IdTipoPermiso] [varchar] (15) NOT NULL, ");
+            a.Append("[DescrTipoPermiso] [varchar] (50) NOT NULL, ");
+            a.Append("[FechaFinVigencia] [datetime] NOT NULL, ");
+            a.Append("[IdUsuarioSolicitante] [varchar] (50) NOT NULL, ");
+            a.Append("[AccionTipo] [varchar] (15) NOT NULL, ");
+            a.Append("[AccionNro] [int] NOT NULL, ");
+            a.Append("[IdWF] [int] NOT NULL, ");
+            a.Append("[Estado] [varchar](15) NOT NULL, ");
+            a.Append("CONSTRAINT [PK_Permiso" + SessionID + "] PRIMARY KEY CLUSTERED ");
+            a.Append("( ");
+            a.Append("[IdUsuario] ASC, ");
+            a.Append("[Cuit] ASC, ");
+            a.Append("[IdUN] ASC, ");
+            a.Append("[IdTipoPermiso] ASC ");
+            a.Append(")WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY] ");
+            a.Append(") ON [PRIMARY] ");
+            foreach (Entidades.Permiso Permiso in PermisoLista)
+            {
+                a.Append("Insert #Permiso" + SessionID + " values ('" + Permiso.IdUsuario + "', '");
+                a.Append(Permiso.Cuit + "', ");
+                a.Append(Permiso.IdUN + ", '");
+                a.Append(Permiso.IdTipoPermiso + "', '");
+                a.Append(Permiso.DescrTipoPermiso + "', '");
+                a.Append(Permiso.FechaFinVigencia.ToString("yyyyMMdd") + "', '");
+                a.Append(Permiso.IdUsuarioSolicitante + "', '");
+                a.Append(Permiso.Accion.Tipo + "', ");
+                a.Append(Permiso.Accion.Nro + ", ");
+                a.Append(Permiso.WF.Id + ", '");
+                a.Append(Permiso.Estado + "') ");
+            }
+            a.Append("select * ");
+            a.Append("from (select top {0} ROW_NUMBER() OVER (ORDER BY {1}) as ROW_NUM, ");
+            a.Append("IdUsuario, Cuit, IdUN, IdTipoPermiso, DescrTipoPermiso, FechaFinVigencia, IdUsuarioSolicitante, AccionTipo, AccionNro, IdWF, Estado ");
+            a.Append("from #Permiso" + SessionID + " ");
+            a.Append("ORDER BY ROW_NUM) innerSelect WHERE ROW_NUM > {2} ");
+            a.Append("DROP TABLE #Permiso" + SessionID);
+            if (OrderBy.Trim().ToUpper() == "CUIT" || OrderBy.Trim().ToUpper() == "CUIT DESC" || OrderBy.Trim().ToUpper() == "CUIT ASC")
+            {
+                OrderBy = "#Permiso" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "IDUN" || OrderBy.Trim().ToUpper() == "IDUN DESC" || OrderBy.Trim().ToUpper() == "IDUN ASC")
+            {
+                OrderBy = "#Permiso" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "IDUSUARIO" || OrderBy.Trim().ToUpper() == "IDUSUARIO DESC" || OrderBy.Trim().ToUpper() == "IDUSUARIO ASC")
+            {
+                OrderBy = "#Permiso" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "IDUSUARIOSOLICITANTE" || OrderBy.Trim().ToUpper() == "IDUSUARIOSOLICITANTE DESC" || OrderBy.Trim().ToUpper() == "IDUSUARIOSOLICITANTE ASC")
+            {
+                OrderBy = "#Permiso" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "IDTIPOPERMISO" || OrderBy.Trim().ToUpper() == "IDTIPOPERMISO DESC" || OrderBy.Trim().ToUpper() == "IDTIPOPERMISO ASC")
+            {
+                OrderBy = "#Permiso" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "FECHAFINVIGENCIA" || OrderBy.Trim().ToUpper() == "FECHAFINVIGENCIA DESC" || OrderBy.Trim().ToUpper() == "FECHAFINVIGENCIA ASC")
+            {
+                OrderBy = "#Permiso" + SessionID + "." + OrderBy;
+            }
+            if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
+            {
+                OrderBy = "#Permiso" + SessionID + "." + OrderBy;
+            }
+            string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * sesion.Usuario.CantidadFilasXPagina), OrderBy, (IndicePagina * sesion.Usuario.CantidadFilasXPagina));
+            DataTable dt = new DataTable();
+            dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            List<Entidades.Permiso> lista = new List<Entidades.Permiso>();
+            if (dt.Rows.Count != 0)
+            {
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    Entidades.Permiso permiso = new Entidades.Permiso();
+                    permiso.Usuario.Id = dt.Rows[i]["IdUsuario"].ToString();
+                    permiso.Cuit = dt.Rows[i]["Cuit"].ToString();
+                    permiso.UN.Id = Convert.ToInt32(dt.Rows[i]["IdUN"].ToString());
+                    permiso.TipoPermiso.Id = dt.Rows[i]["IdTipoPermiso"].ToString();
+                    permiso.TipoPermiso.Descr = dt.Rows[i]["DescrTipoPermiso"].ToString();
+                    permiso.FechaFinVigencia = Convert.ToDateTime(dt.Rows[i]["FechaFinVigencia"]);
+                    permiso.UsuarioSolicitante.Id = dt.Rows[i]["IdUsuarioSolicitante"].ToString();
+                    permiso.Accion.Tipo = dt.Rows[i]["AccionTipo"].ToString();
+                    permiso.Accion.Nro = Convert.ToInt32(dt.Rows[i]["AccionNro"].ToString());
+                    permiso.WF.Id = Convert.ToInt32(dt.Rows[i]["IdWF"].ToString());
+                    permiso.WF.Estado = dt.Rows[i]["Estado"].ToString();
+                    lista.Add(permiso);
+                }
+            }
+            return lista;
         }
     }
 }

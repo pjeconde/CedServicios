@@ -4,7 +4,8 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.CuentaDeVentaYLiquido
 {
-	public class B : CuentaDeVentaYLiquido
+    [Serializable]
+    public class B : CuentaDeVentaYLiquido
 	{
 		public B()
 		{

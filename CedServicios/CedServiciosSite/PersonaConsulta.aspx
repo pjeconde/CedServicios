@@ -11,11 +11,9 @@
     <section id="features" class="features sections2">
         <div class="container">
             <div class="row">
-                <div class="main_features_content2">
-                    <div class="head_title text-center">
-                        <h2><asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Personas"></asp:Label>
-                        </h2>
-                    </div>
+                <div class="head_title text-center">
+                    <h2><asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Personas"></asp:Label>
+                    </h2>
                 </div>
              </div>
              <div class="row">

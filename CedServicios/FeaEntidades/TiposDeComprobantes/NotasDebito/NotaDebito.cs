@@ -4,7 +4,8 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.NotasDebito
 {
-	public abstract class NotaDebito : TipoComprobante
+    [Serializable]
+    public abstract class NotaDebito : TipoComprobante
 	{
 	}
 }

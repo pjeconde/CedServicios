@@ -165,10 +165,10 @@ namespace CedServicios.RN
             hasta.WF.Estado = Desde.WF.Estado;
             return hasta;
         }
-        public static List<Entidades.Persona> ListaSegunFiltros(string Cuit, string RazSoc, string NroDoc, string Estado, CedServicios.Entidades.Enum.TipoPersona TipoPersona, Entidades.Sesion Sesion)
+        public static List<Entidades.Persona> ListaSegunFiltros(string Cuit, string NroDoc, string RazSoc, string Estado, CedServicios.Entidades.Enum.TipoPersona TipoPersona, Entidades.Sesion Sesion)
         {
             DB.Persona cliente = new DB.Persona(Sesion);
-            return cliente.ListaSegunFiltros(Cuit, RazSoc, NroDoc, Estado, TipoPersona);
+            return cliente.ListaSegunFiltros(Cuit, NroDoc, RazSoc, Estado, TipoPersona);
         }
         public static List<Entidades.Persona> ListaPaging(out int CantidadFilas, int IndicePagina, string OrderBy, string Cuit, string NroDoc, string RazSoc, string Estado, string SessionID, Entidades.Sesion Sesion)
         {
