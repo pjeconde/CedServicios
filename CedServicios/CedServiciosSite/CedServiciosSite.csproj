@@ -147,6 +147,10 @@
     <Content Include="css\layout-contact.css" />
     <Content Include="ArticuloConsultaConFiltros.aspx" />
     <Content Include="ComprobanteConsultaConFiltros.aspx" />
+    <Content Include="images\parallax\out.jpg" />
+    <Content Include="images\parallax\p.jpg" />
+    <Content Include="images\parallax\personal.jpg" />
+    <Content Include="images\parallax\recru.jpg" />
     <Content Include="PersonaConsultaConFiltros.aspx" />
     <Content Include="indexMenu.html" />
     <Content Include="IndexPie.html" />

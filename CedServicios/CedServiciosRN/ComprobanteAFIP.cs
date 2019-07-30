@@ -176,12 +176,42 @@ namespace CedServicios.RN
                         }
                         else
                         {
-                            throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puedo estar por cualquier parte del texto.");
+                            throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puede estar por cualquier parte del texto.");
                         }
                     }
                     else
                     {
-                        throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puedo estar por cualquier parte del texto.");
+                        throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puede estar por cualquier parte del texto.");
+                    }
+                    opcionales[0] = opc;
+                    objFEDetalleRequest.Opcionales = opcionales;
+                }
+                if (("*203*208*213*").IndexOf("*" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
+                {
+                    objFEDetalleRequest.FchVtoPago = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento;      // Comprobante.Fecha_venc_pago.ToString("yyyyMMdd");
+                    ar.gov.afip.wsfev1.Opcional[] opcionales = new ar.gov.afip.wsfev1.Opcional[1];
+                    ar.gov.afip.wsfev1.Opcional opc = new ar.gov.afip.wsfev1.Opcional();
+                    opc.Id = "22"; //ANULACION
+                    if (lc.comprobante[0].extensiones != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != string.Empty)
+                    {
+                        string textoComercial = Funciones.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales.ToString());
+                        if (textoComercial.IndexOf("ANUL:") >= 0)
+                        {
+                            string restante = textoComercial.Substring(textoComercial.IndexOf("ANUL:") + 5);
+                            if (restante.Length < 1)
+                            {
+                                throw new Exception("El código de anulación debe ser 'S' o 'N'.");
+                            }
+                            opc.Valor = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 5, 1);       //Para probar "N" o "S"
+                        }
+                        else
+                        {
+                            throw new Exception("El código de anulación no está informado en los datos comerciales. El formato debe ser el siguiente 'ANUL:x' donde x debe ser 'S' o 'N' y puede estar por cualquier parte del texto.");
+                        }
+                    }
+                    else
+                    {
+                        throw new Exception("El código de anulación no está informado en los datos comerciales.El formato debe ser el siguiente 'ANUL:x' donde x debe ser 'S' o 'N' y puede estar por cualquier parte del texto.");
                     }
                     opcionales[0] = opc;
                     objFEDetalleRequest.Opcionales = opcionales;
