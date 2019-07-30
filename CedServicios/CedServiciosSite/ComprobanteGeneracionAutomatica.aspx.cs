@@ -150,7 +150,7 @@ namespace CedServicios.Site
             CantidadContratosSeleccionados++;
             Entidades.Comprobante contrato = ((List<Entidades.Comprobante>)ViewState["Comprobantes"])[NroItemContrato];
 
-            while (Convert.ToInt32(contrato.FechaProximaEmision.ToString("yyyyMMdd")) <= Convert.ToInt32(DateTime.Today.ToString("yyyyMMdd")))
+            while (Convert.ToInt32(contrato.FechaProximaEmision.ToString("yyyyMMdd")) <= Convert.ToInt32(FechaTextBox.Text))
             {
                 #region Obtención del lote desde el contrato
                 FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
