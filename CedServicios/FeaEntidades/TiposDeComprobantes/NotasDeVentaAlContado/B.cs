@@ -4,7 +4,8 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.NotasDeVentaAlContado
 {
-	public class B : NotaDeVentaAlContado
+    [Serializable]
+    public class B : NotaDeVentaAlContado
 	{
 		public B()
 		{

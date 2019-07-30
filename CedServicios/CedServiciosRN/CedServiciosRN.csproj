@@ -55,6 +55,7 @@
     <Compile Include="BusquedaLaboral.cs" />
     <Compile Include="BusquedaPerfil.cs" />
     <Compile Include="ListaPrecio.cs" />
+    <Compile Include="Multiseleccion.cs" />
     <Compile Include="NaturalezaComprobante.cs" />
     <Compile Include="PeriodicidadEmision.cs" />
     <Compile Include="Persona.cs" />
@@ -92,6 +93,11 @@
     <Compile Include="UN.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Web References\ar.gov.afip.padron-puc-ws\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.map</DependentUpon>
+    </Compile>
+    <Compile Include="Web References\ar.gov.afip.personaServiceA13\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.map</DependentUpon>
@@ -170,6 +176,20 @@
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
     <None Include="Web References\ar.gov.afip.padron-puc-ws\select.wsdl" />
+    <None Include="Web References\ar.gov.afip.personaServiceA13\dummyReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.personaServiceA13\idPersonaListReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.personaServiceA13\personaReturn.datasource">
+      <DependentUpon>Reference.map</DependentUpon>
+    </None>
+    <None Include="Web References\ar.gov.afip.personaServiceA13\PersonaServiceA13.wsdl" />
+    <None Include="Web References\ar.gov.afip.personaServiceA13\Reference.map">
+      <Generator>MSDiscoCodeGenerator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
     <None Include="Web References\ar.gov.afip.wsaa\LoginCms.wsdl" />
     <None Include="Web References\ar.gov.afip.wsaa\Reference.map">
       <Generator>MSDiscoCodeGenerator</Generator>
@@ -479,6 +499,17 @@
       </CachedDynamicPropName>
       <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
       <CachedSettingsPropName>CedServiciosRN_ar_gov_afip_awshomo_ContribuyenteNivel3SelectServiceImplService</CachedSettingsPropName>
+    </WebReferenceUrl>
+    <WebReferenceUrl Include="https://awshomo.afip.gov.ar/sr-padron/webservices/personaServiceA13%3fWSDL">
+      <UrlBehavior>Dynamic</UrlBehavior>
+      <RelPath>Web References\ar.gov.afip.personaServiceA13\</RelPath>
+      <UpdateFromURL>https://awshomo.afip.gov.ar/sr-padron/webservices/personaServiceA13%3fWSDL</UpdateFromURL>
+      <ServiceLocationURL>
+      </ServiceLocationURL>
+      <CachedDynamicPropName>
+      </CachedDynamicPropName>
+      <CachedAppSettingsObjectName>Settings</CachedAppSettingsObjectName>
+      <CachedSettingsPropName>CedServiciosRN_ar_gov_afip_personaServiceA13_PersonaServiceA13</CachedSettingsPropName>
     </WebReferenceUrl>
     <WebReferenceUrl Include="https://fwshomo.afip.gov.ar/wsct/CTService%3fwsdl">
       <UrlBehavior>Dynamic</UrlBehavior>

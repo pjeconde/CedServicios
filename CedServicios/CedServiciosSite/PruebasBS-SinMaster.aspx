@@ -13,12 +13,6 @@
     <link href="data:text/css;charset=utf-8," data-href="css/bootstrap-theme.min.css" rel="stylesheet" id="bsthemestylesheet">
 
     <style type="text/css">
-        .MainMenu
-        {
-            position:relative;
-            vertical-align:middle;
-            text-align:left;
-        }
         .Fuente
         {
         	font-family: Verdana;

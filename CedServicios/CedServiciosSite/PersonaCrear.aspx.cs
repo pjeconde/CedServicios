@@ -126,6 +126,7 @@ namespace CedServicios.Site
                     ListaPrecioDefaultPersona.Enabled = false;
                     EmailAvisoVisualizacionTextBox.Enabled = false;
                     PasswordAvisoVisualizacionTextBox.Enabled = false;
+                    TraerDatosDeAFIPLinkButton.Enabled = false;
                     AceptarButton.Enabled = false;
                     SalirButton.Text = "Salir";
 
@@ -171,40 +172,99 @@ namespace CedServicios.Site
                 try
                 {
                     Entidades.Sesion sesion = ((Entidades.Sesion)Session["Sesion"]);
-                    Entidades.Sesion sesionConsultaAFIP = new Entidades.Sesion();
-                    sesionConsultaAFIP.Cuit.UsaCertificadoAFIPPropio = true;
-                    sesionConsultaAFIP.Cuit.Nro = RN.Configuracion.CuitConsultaAFIP(sesion);
-                    sesionConsultaAFIP.CnnStr = sesion.CnnStr;
-                    if (sesionConsultaAFIP.Cuit.Nro != string.Empty)
+                    //Entidades.Sesion sesionConsultaAFIP = new Entidades.Sesion();
+                    //sesionConsultaAFIP.Cuit.UsaCertificadoAFIPPropio = true;
+                    //sesionConsultaAFIP.Cuit.Nro = RN.Configuracion.CuitConsultaAFIP(sesion);
+                    //sesionConsultaAFIP.CnnStr = sesion.CnnStr;
+                    if (NroDocTextBox.Text != string.Empty)
                     {
-                        string xmlString = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesionConsultaAFIP);
-                        System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Entidades.AFIP.Contribuyente));
-                        StringReader rdr = new StringReader(xmlString);
-                        Entidades.AFIP.Contribuyente contribuyente = (Entidades.AFIP.Contribuyente)serializer.Deserialize(rdr);
-                        RazonSocialTextBox.Text = contribuyente.Persona.DescripcionCorta;
-                        if (contribuyente.Domicilios.Length > 0)
+                        Entidades.PadronA13.persona persona = new Entidades.PadronA13.persona();
+                        persona = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesion);
+                        if (persona.razonSocial != null && persona.razonSocial != string.Empty || persona.apellido != null && persona.apellido != string.Empty)
                         {
-                            Domicilio.Calle = contribuyente.Domicilios[0].Calle;
-                            Domicilio.Nro = contribuyente.Domicilios[0].Numero;
-                            Domicilio.Piso = contribuyente.Domicilios[0].Piso;
-                            Domicilio.Depto = contribuyente.Domicilios[0].OficinaDeptoLocal;
-                            Domicilio.Sector = string.Empty;
-                            Domicilio.Torre = string.Empty;
-                            Domicilio.Manzana = string.Empty;
-                            Domicilio.Localidad = contribuyente.Domicilios[0].Localidad;
-                            Domicilio.IdProvincia = RN.ServiciosAFIP.IdProvincia(contribuyente.Domicilios[0].IdProvincia);
-                            Domicilio.CodPost = contribuyente.Domicilios[0].CodigoPostal;
+                            //Vaciar datos de persona a completar
+                            RazonSocialTextBox.Text = "";
+                            Domicilio.Calle = "";
+                            Domicilio.Nro = "";
+                            Domicilio.Piso = "";
+                            Domicilio.Depto = "";
+                            Domicilio.Sector = "";
+                            Domicilio.Torre = "";
+                            Domicilio.Manzana = "";
+                            Domicilio.Localidad = "";
+                            Domicilio.IdProvincia = "0";
+                            Domicilio.CodPost = "";
+                            //Completar datos de persona con info del padron AFIP
+                            if (persona.razonSocial != null && persona.razonSocial != string.Empty)
+                            {
+                                RazonSocialTextBox.Text = persona.razonSocial;
+                            }
+                            else
+                            { 
+                                RazonSocialTextBox.Text = persona.apellido;
+                                if (persona.nombre != null && persona.nombre != string.Empty)
+                                {
+                                    RazonSocialTextBox.Text += " " + persona.nombre;
+                                }
+                            }
+                            if (persona.fechaContratoSocialSpecified == true)
+                            {
+                                DatosImpositivos.FechaInicioActividades = persona.fechaContratoSocial;
+                            }
+                            if (persona.domicilio.Length > 0)
+                            {
+                                for (int i = 0; i < persona.domicilio.Length; i++)
+                                {
+                                    if (persona.domicilio[i].tipoDomicilio.IndexOf("LEGAL") != -1 || i == (persona.domicilio.Length - 1))
+                                    {
+                                        Domicilio.Calle = persona.domicilio[i].calle;
+                                        Domicilio.Nro = persona.domicilio[i].numero.ToString();
+                                        Domicilio.Piso = persona.domicilio[i].piso;
+                                        Domicilio.Depto = persona.domicilio[i].oficinaDptoLocal;
+                                        Domicilio.Sector = persona.domicilio[i].sector;
+                                        Domicilio.Torre = persona.domicilio[i].torre;
+                                        Domicilio.Manzana = persona.domicilio[i].manzana;
+                                        Domicilio.Localidad = persona.domicilio[i].localidad;
+                                        Domicilio.IdProvincia = RN.ServiciosAFIP.IdProvincia(persona.domicilio[i].idProvincia.ToString());
+                                        Domicilio.CodPost = persona.domicilio[i].codigoPostal;
+                                        break;
+                                    }
+                                }
+                            }
                         }
+                        else
+                        {
+                            MensajeLabel.Text = "No se encontraron datos para completar.";
+                            ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
+                        }
+                        //string xmlString = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesionConsultaAFIP);
+                        //System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Entidades.AFIP.Contribuyente));
+                        //StringReader rdr = new StringReader(xmlString);
+                        //Entidades.AFIP.Contribuyente contribuyente = (Entidades.AFIP.Contribuyente)serializer.Deserialize(rdr);
+                        //RazonSocialTextBox.Text = contribuyente.Persona.DescripcionCorta;
+                        //if (contribuyente.Domicilios.Length > 0)
+                        //{
+                        //    Domicilio.Calle = contribuyente.Domicilios[0].Calle;
+                        //    Domicilio.Nro = contribuyente.Domicilios[0].Numero;
+                        //    Domicilio.Piso = contribuyente.Domicilios[0].Piso;
+                        //    Domicilio.Depto = contribuyente.Domicilios[0].OficinaDeptoLocal;
+                        //    Domicilio.Sector = string.Empty;
+                        //    Domicilio.Torre = string.Empty;
+                        //    Domicilio.Manzana = string.Empty;
+                        //    Domicilio.Localidad = contribuyente.Domicilios[0].Localidad;
+                        //    Domicilio.IdProvincia = RN.ServiciosAFIP.IdProvincia(contribuyente.Domicilios[0].IdProvincia);
+                        //    Domicilio.CodPost = contribuyente.Domicilios[0].CodigoPostal;
+                        //}
                     }
                     else
                     {
-                        MensajeLabel.Text = "Servicio de consulta no disponible en estos momentos";
+                        MensajeLabel.Text = "Ingrese un número de documento.";
                         ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
                     }
                 }
                 catch (Exception ex)
                 {
-                    MensajeLabel.Text = ex.Message;
+                    MensajeLabel.Text = ex.Message.Replace("\r\n", "\\n");
                     ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
                 }
             }

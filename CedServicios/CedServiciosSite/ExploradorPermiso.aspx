@@ -1,71 +1,61 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ExploradorPermiso.aspx.cs" Inherits="CedServicios.Site.ExploradorPermiso" Theme="CedServicios" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
+<%@ Register Assembly="CedServiciosWebForms" Namespace="CedServicios.WebForms" TagPrefix="cc1" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
-        <tr>
-            <td align="center" colspan="4" style="padding-top:20px">
-                <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Permisos"></asp:Label>
-                <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
-            </td>
-        </tr>
-            <tr>
-	            <td align="left" style="padding-right:5px; padding-top:20px">
-                    Id.Usuario:
-	            </td>
-			    <td align="left" style="padding-top:20px">
-				    <asp:TextBox ID="IdUsuarioTextBox" runat="server" MaxLength="50" TabIndex="1" Width="114px"></asp:TextBox>
-			    </td>
-                <td align="left" style="padding-left:30px; padding-top:20px">
-                    Ver permisos de:
-                </td>
-                <td align="left" valign="top" style="width:300px; padding-left:5px; padding-top:20px" rowspan="4">
-                    <asp:RadioButtonList ID="VerPermisosDeRadioButtonList" runat="server" >
-                        <asp:ListItem Text="Cuits" Selected="True"></asp:ListItem>
+    <section id="features" class="features sections2">
+        <div class="container">
+            <div class="row">
+                <div class="main_features_content2">
+                    <div class="head_title">
+                        <div class="head_title text-center">
+                            <h2><asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Explorador de Permisos"></asp:Label>
+                            </h2>
+                            <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 padding-top-20">
+				    <asp:TextBox ID="IdUsuarioTextBox" runat="server" MaxLength="50" TabIndex="1" Width="100%" placeholder="Id.Usuario"></asp:TextBox>
+                </div>
+                <div class="col-lg-6 col-md-6 padding-top-20 text-left">
+                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="2" ToolTip="Debe ingresar sólo números." Width="100%" placeholder="CUIT"></asp:TextBox>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 padding-top-20 text-left">
+                    Estado:<asp:DropDownList ID="EstadoDropDownList" runat="server" TabIndex="3" Width="" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" ></asp:DropDownList>
+                </div>
+                <div class="col-lg-6 col-md-6  padding-top-20 text-left">
+                    Tipo de Permiso:<asp:DropDownList ID="IdTipoPermisoDropDownList" runat="server" TabIndex="3" Width="" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" ></asp:DropDownList>
+                </div>        
+                <div class="col-lg-12 col-md-12 text-left padding-top-20" >
+                    <asp:RadioButtonList ID="VerPermisosDeRadioButtonList" runat="server" RepeatDirection="Horizontal" CssClass="RBespacios">
+                        <asp:ListItem Text="Cuits" ></asp:ListItem>
                         <asp:ListItem Text="UNs"></asp:ListItem>
                         <asp:ListItem Text="Usuarios"></asp:ListItem>
-                        <asp:ListItem Text="Todos"></asp:ListItem>
+                        <asp:ListItem Text="Todos" Selected="True"></asp:ListItem>
                     </asp:RadioButtonList>
-                </td>
-
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    CUIT:
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="2" ToolTip="Debe ingresar sólo números." Width="80px"></asp:TextBox>
-                </td>        
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    Tipo de Permiso:
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:DropDownList ID="IdTipoPermisoDropDownList" runat="server" TabIndex="3" Width="200px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" ></asp:DropDownList>
-                </td>        
-            </tr>
-            <tr>
-                <td align="left" style="padding-right:5px; padding-top:5px">
-                    Estado:
-                </td>
-                <td align="left" style="padding-top:5px">
-                    <asp:DropDownList ID="EstadoDropDownList" runat="server" TabIndex="3" Width="200px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" ></asp:DropDownList>
-                </td>        
-            </tr>
-            <tr>
-                <td>
-                </td>
-                <td align="left" style="height: 24px; padding-top:20px">
-                    <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
-                </td>
-            </tr>
-        <tr>
-            <td colspan="4" style="padding-top:20px">
+                </div>
+                <div class="col-lg-12 col-md-12">
+                    <asp:Button ID="BuscarButton" runat="server" class="btn btn-default btn-sm" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                    <asp:Button ID="SalirButton" runat="server" class="btn btn-default btn-sm" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 padding-top-20">
                 <asp:Panel ID="Panel1" runat="server" ScrollBars="Auto">
-                    <asp:GridView ID="PermisosGridView" runat="server" 
-                        AutoGenerateColumns="false" OnRowCommand="PermisosGridView_RowCommand" OnRowDataBound="PermisosGridView_RowDataBound" CssClass="grilla" GridLines="None">
+                    <cc1:PagingGridView ID="PermisoPagingGridView" runat="server" OnPageIndexChanging="PermisoPagingGridView_PageIndexChanging"
+                            OnRowDataBound="PermisoPagingGridView_RowDataBound" HorizontalAlign="Center" 
+                            FooterStyle-ForeColor="Brown" OnRowEditing="PermisoPagingGridView_RowEditing" OnRowCancelingEdit="PermisoPagingGridView_RowCancelingEdit"
+                            OnRowUpdating="PermisoPagingGridView_RowUpdating" 
+                            OnSorting="PermisoPagingGridView_Sorting" AllowPaging="True" 
+                            AllowSorting="True" CssClass="grilla"  
+                            AutoGenerateColumns="false" OnRowCommand="PermisoPagingGridView_RowCommand"
+                            OnSelectedIndexChanged="PermisoPagingGridView_SelectedIndexChanged" OnSelectedIndexChanging="PermisoPagingGridView_SelectedIndexChanging"
+                            DataKeyNames="" BorderStyle="None">
                         <Columns>
                             <asp:ButtonField HeaderText="" Text="Cambiar estado" CommandName="CambiarEstado" ButtonType="Link" ItemStyle-ForeColor="Blue">
                             </asp:ButtonField>
@@ -85,6 +75,10 @@
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
+                            <asp:BoundField DataField="DescrTipoPermiso" HeaderText="DescrTipoPermiso" SortExpression="">
+                                <headerstyle horizontalalign="center" wrap="False" />
+                                <itemstyle horizontalalign="left" wrap="False" />
+                            </asp:BoundField>
                             <asp:BoundField DataField="Estado" HeaderText="Estado" SortExpression="Estado">
                                 <headerstyle horizontalalign="center" wrap="False" />
                                 <itemstyle horizontalalign="left" wrap="False" />
@@ -98,16 +92,19 @@
                                 <itemstyle horizontalalign="left" wrap="False" />
                             </asp:BoundField>
                         </Columns>
-                    </asp:GridView>
+                        <PagerSettings Mode="NumericFirstLast" />
+                        <PagerStyle HorizontalAlign = "Center" CssClass="GridPager" />
+                    </cc1:PagingGridView>
                 </asp:Panel>
-            </td>
-        </tr>
-        <tr>
-            <td align="center" colspan="4" style="padding-top:20px">
-                <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
-            </td>
-        </tr>
-    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12">
+                    <asp:Label ID="MensajeLabel" runat="server" SkinID="MensajePagina" Text=""></asp:Label>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
     TargetControlID="TargetControlIDdelModalPopupExtender1"

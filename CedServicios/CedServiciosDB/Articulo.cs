@@ -195,7 +195,7 @@ namespace CedServicios.DB
             a.Append("CREATE TABLE #Articulo" + SessionID + "( ");
             a.Append("[Cuit] [varchar](11) NOT NULL, ");
             a.Append("[IdArticulo] [varchar](20) NOT NULL, ");
-            a.Append("[DescrArticulo] [varchar](100) NOT NULL, ");
+            a.Append("[DescrArticulo] [varchar](512) NOT NULL, ");
             a.Append("[GTIN] [varchar](20) NOT NULL, ");
             a.Append("[IdUnidad] [varchar](3) NOT NULL, ");
 	        a.Append("[DescrUnidad] [varchar](50) NOT NULL, ");
@@ -219,7 +219,7 @@ namespace CedServicios.DB
                 a.Append(Articulo.Unidad.Id + "', '");
                 a.Append(Articulo.Unidad.Descr + "', '");
                 a.Append(Articulo.IndicacionExentoGravado + "', ");
-                a.Append(Articulo.AlicuotaIVA + ", ");
+                a.Append(Articulo.AlicuotaIVA.ToString("####0.00", System.Globalization.CultureInfo.CreateSpecificCulture("en-GB")) + ", ");
                 a.Append(Articulo.WF.Id + ", '");
                 a.Append(Articulo.Estado + "', ");
                 a.Append(Articulo.UltActualiz + ")");
@@ -240,12 +240,25 @@ namespace CedServicios.DB
             }
             if (OrderBy.Trim().ToUpper() == "DESCR" || OrderBy.Trim().ToUpper() == "DESCR DESC" || OrderBy.Trim().ToUpper() == "DESCR ASC")
             {
-                OrderBy = "#Articulo" + SessionID + "." + OrderBy.Replace("Descr", "DescrArticulo"); ;
+                OrderBy = "#Articulo" + SessionID + "." + OrderBy.Replace("Descr", "DescrArticulo");
             }
             if (OrderBy.Trim().ToUpper() == "ESTADO" || OrderBy.Trim().ToUpper() == "ESTADO DESC" || OrderBy.Trim().ToUpper() == "ESTADO ASC")
             {
-                OrderBy = "#Articulo" + SessionID + "." + OrderBy;
+                OrderBy = "#Articulo" + SessionID + "." + OrderBy + ", " + "#Articulo" + SessionID + ".DescrArticulo ASC";
             }
+            if (OrderBy.Trim().ToUpper() == "ALICUOTAIVA" || OrderBy.Trim().ToUpper() == "ALICUOTAIVA DESC" || OrderBy.Trim().ToUpper() == "ALICUOTAIVA ASC")
+            {
+                OrderBy = "#Articulo" + SessionID + "." + OrderBy + ", " + "#Articulo" + SessionID + ".DescrArticulo ASC";
+            }
+            if (OrderBy.Trim().ToUpper() == "INDICACIONEXENTOGRAVADO" || OrderBy.Trim().ToUpper() == "INDICACIONEXENTOGRAVADO DESC" || OrderBy.Trim().ToUpper() == "INDICACIONEXENTOGRAVADO ASC")
+            {
+                OrderBy = "#Articulo" + SessionID + "." + OrderBy + ", " + "#Articulo" + SessionID + ".DescrArticulo ASC";
+            }
+            if (OrderBy.Trim().ToUpper() == "UNIDADDESCR" || OrderBy.Trim().ToUpper() == "UNIDADDESCR DESC" || OrderBy.Trim().ToUpper() == "UNIDADDESCR ASC")
+            {
+                OrderBy = "#Articulo" + SessionID + "." + OrderBy + ", " + "#Articulo" + SessionID + ".DescrArticulo ASC";
+            }
+
             string commandText = string.Format(a.ToString(), ((IndicePagina + 1) * sesion.Usuario.CantidadFilasXPagina), OrderBy, (IndicePagina * sesion.Usuario.CantidadFilasXPagina));
             DataTable dt = new DataTable();
             dt = (DataTable)Ejecutar(commandText.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);

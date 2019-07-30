@@ -176,9 +176,7 @@
 			<div class="call-to-action-2">
 				<div class="container">
 					<div class="sixteen columns">
-						<h6>Este sitio le permite generar Facturas Electrónicas propias para gestionar el CAE a través de InterFacturas.
-(la red de facturas electrónicas de InterBanking)</h6>
-						
+						<h6>Este sitio le permite generar Facturas Electrónicas propias para gestionar el CAE a través de AFIP o InterFacturas (la red de facturas electrónicas de InterBanking).</h6>
 					</div>
 				</div>
 			</div>
@@ -279,7 +277,7 @@ Soporta los siguientes tipos de Factura Electrónica:
                         <p>Cargue de manera rápida, fácil y segura su Factura Electrónica con nuestro Servicio Web. Facilitamos el cumplimiento del régimen normativo de la AFIP.</p>
 
                         <p>Para mas detalles sugerimos que se comuniquen desde Contacto o bien escribiendonos a contacto@cedeira.com.ar </p>
-                        <p>ctividades alcanzadas por el Régimen de Factura Electrónica | Preguntas frecuentes</p>
+                        <p>Actividades alcanzadas por el Régimen de Factura Electrónica | Preguntas frecuentes</p>
 
 
                     </div>

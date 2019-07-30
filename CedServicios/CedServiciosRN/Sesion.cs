@@ -111,12 +111,12 @@ namespace CedServicios.RN
                         opciones.Add(new Entidades.Opcion("PersonasAlta", true, "/PersonaCrear.aspx"));
                         opciones.Add(new Entidades.Opcion("PersonasBajaYAnulBaja", true, "/PersonaSeleccionar.aspx?Baja"));
                         opciones.Add(new Entidades.Opcion("PersonasModif", true, "/PersonaSeleccionar.aspx?Modificar"));
-                        opciones.Add(new Entidades.Opcion("PersonasConsulta", true, "/PersonaConsulta.aspx"));
+                        opciones.Add(new Entidades.Opcion("PersonasConsulta", true, "/PersonaConsultaConFiltros.aspx"));
 
                         opciones.Add(new Entidades.Opcion("ArticulosAlta", true, "/ArticuloCrear.aspx"));
                         opciones.Add(new Entidades.Opcion("ArticulosBajaYAnulBaja", true, "/ArticuloSeleccionar.aspx?Baja"));
                         opciones.Add(new Entidades.Opcion("ArticulosModif", true, "/ArticuloSeleccionar.aspx?Modificar"));
-                        opciones.Add(new Entidades.Opcion("ArticulosConsulta", true, "/ArticuloConsulta.aspx"));
+                        opciones.Add(new Entidades.Opcion("ArticulosConsulta", true, "/ArticuloConsultaConFiltros.aspx"));
 
                         opciones.Add(new Entidades.Opcion("ArticulosListaPreciosAlta", true, "/ListaPrecioCrear.aspx"));
                         opciones.Add(new Entidades.Opcion("ArticulosListaPreciosBajaYAnulBaja", true, "/ListaPrecioSeleccionar.aspx?Baja"));
@@ -128,7 +128,6 @@ namespace CedServicios.RN
                         opciones.Add(new Entidades.Opcion("ArticulosPreciosIngresoManual", true, "/PrecioIngresoManual.aspx"));
                         opciones.Add(new Entidades.Opcion("ArticulosPreciosImportExcel", true, "/PrecioImportacionExcel.aspx"));
 
-                        //Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar("VentaContrato");
                         if (Sesion.Usuario.FechaOKeFactTyC == "00000000")
                         {
                             opciones.Add(new Entidades.Opcion("ContratosAlta", true, "/Facturacion/Electronica/FacturaElectronicaTYC.aspx"));
@@ -137,7 +136,6 @@ namespace CedServicios.RN
                         {
                             opciones.Add(new Entidades.Opcion("ContratosAlta", true, "/Facturacion/Electronica/Lote.aspx?CaT=VentaContrato"));
                         }
-
                         opciones.Add(new Entidades.Opcion("ContratosBajaYAnulBaja", true, "/ExploradorComprobante.aspx?Baja/Anul.baja-Contrato"));
                         opciones.Add(new Entidades.Opcion("ContratosModif", true, "/ExploradorComprobante.aspx?Modificacion-Contrato"));
                         opciones.Add(new Entidades.Opcion("ContratosConsulta", true, "/ExploradorComprobante.aspx?Consulta-Contrato"));
@@ -165,7 +163,6 @@ namespace CedServicios.RN
                                 opciones.Add(new Entidades.Opcion("FactTurismo", true, "/Facturacion/Electronica/LoteCT.aspx?CaT=Venta"));
                             }
                         }
-                        opciones.Add(new Entidades.Opcion("FactAutContratosServicios", true, "/Facturacion/ComprobanteGeneracionAutomatica.aspx"));
                         if (Sesion.Usuario.FechaOKeFactTyC == "00000000")
                         {
                             opciones.Add(new Entidades.Opcion("RegistroFacturasVenta", true, "/Facturacion/Electronica/FacturaElectronicaTYC.aspx"));
@@ -182,11 +179,12 @@ namespace CedServicios.RN
                         {
                             opciones.Add(new Entidades.Opcion("RegistroFacturasCompra", true, "/Facturacion/Electronica/Lote.aspx?CaT=Compra"));
                         }
+                        opciones.Add(new Entidades.Opcion("FactAutContratosServicios", true, "/ComprobanteGeneracionAutomatica.aspx"));
 
                         opciones.Add(new Entidades.Opcion("ComprobantesBajaYAnulBaja", true, "/ExploradorComprobante.aspx?Baja/Anul.baja-Comprobante"));
                         opciones.Add(new Entidades.Opcion("ComprobantesModif", true, "/ExploradorComprobante.aspx?Modificacion-Comprobante"));
                         opciones.Add(new Entidades.Opcion("ComprobantesEnvioAFIPyITF", true, "/ExploradorComprobante.aspx?Envio-Comprobante"));
-                        opciones.Add(new Entidades.Opcion("ComprobantesConsulta", true, "/ExploradorComprobante.aspx?Consulta-Comprobante"));
+                        opciones.Add(new Entidades.Opcion("ComprobantesConsulta", true, "/ComprobanteConsultaConFiltros.aspx?Consulta-Comprobante"));
                         opciones.Add(new Entidades.Opcion("ComprobantesConsultaPDFs", true, "/ExploradorPDFComprobante.aspx"));
 
                         opciones.Add(new Entidades.Opcion("ComprobantesOtrasConsIVAVentas", true, "/Facturacion/Electronica/Reportes/IvaVentasFiltros.aspx"));
@@ -221,7 +219,7 @@ namespace CedServicios.RN
 
                         opciones.Add(new Entidades.Opcion("ContratosConsulta", true, "/ExploradorComprobante.aspx?Consulta-Contrato"));
 
-                        opciones.Add(new Entidades.Opcion("ComprobantesConsulta", true, "/ExploradorComprobante.aspx?Consulta-Comprobante"));
+                        opciones.Add(new Entidades.Opcion("ComprobantesConsulta", true, "/ComprobanteConsultaConFiltros.aspx?Consulta-Comprobante"));
                         opciones.Add(new Entidades.Opcion("ComprobantesConsultaPDFs", true, "/ExploradorPDFComprobante.aspx"));
 
                         opciones.Add(new Entidades.Opcion("ComprobantesOtrasConsIVAVentas", true, "/Facturacion/Electronica/Reportes/IvaVentasFiltros.aspx"));

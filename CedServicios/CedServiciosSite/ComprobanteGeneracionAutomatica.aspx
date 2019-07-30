@@ -5,8 +5,8 @@
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">
-    <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton">
-        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <asp:Panel ID="Panel0" runat="server" DefaultButton="BuscarButton" HorizontalAlign="Center">
+        <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px" align="center">
             <tr>
                 <td align="center" colspan="3" style="padding-top:20px; padding-bottom:20px">
                     <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Generación automática de Comprobantes (contratos)"></asp:Label>

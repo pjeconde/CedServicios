@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/CedServicios.Master" AutoEventWireup="true" CodeBehind="ComprobanteSeleccionOnlineAFIP.aspx.cs" Inherits="CedServicios.Site.ComprobanteSeleccionOnlineAFIP" Theme="CedServicios" %>
+<%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <script type="text/javascript">
@@ -7,6 +8,7 @@
             $('#Tabs a[href="#' + tabName + '"]').tab('show');
             $("#Tabs a").click(function () {
                 $("[id*=TabName]").val($(this).attr("href").replace("#", ""));
+                //alert("VAR:" + tabName);
             });
         });
     </script>
@@ -17,6 +19,7 @@
             <tr>
                 <td colspan="2" style="padding-top:20px; text-align: center">
                     <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes (online AFIP)"></asp:Label>
+                    <asp:Label ID="TargetControlIDdelModalPopupExtender1" runat="server" Text=""></asp:Label>
                 </td>
             </tr>
             <tr>
@@ -39,23 +42,23 @@
          <asp:HiddenField ID="TabName" runat="server" />
         <div id="Tabs">
             <!-- Nav tabs -->
-            <ul class="nav nav-tabs" role="tablist">
-                <li id="tab1" role="presentation" class="active"><a href="#Comprobantes" aria-controls="Comprobantes" role="tab" data-toggle="tab">
+            <ul class="nav nav-tabs">
+                <li id="tab1" class="nav-item active"><a href="#Comprob" data-toggle="tab">
                     <h4>Comprobantes</h4>
                 </a></li>
-                <li id="tab2" role="presentation"><a href="#ConsultaCAE" aria-controls="ConsultaCAE" role="tab" data-toggle="tab">
+                <li id="tab2" class="nav-item"><a href="#ConsultaCAE" data-toggle="tab">
                     <h4>Consultar CAE</h4>
                 </a></li>
-                <li id="tab3" role="presentation"><a href="#Parametros" aria-controls="Parametros" role="tab" data-toggle="tab">
+                <li id="tab3" class="nav-item"><a href="#Parametros" data-toggle="tab">
                     <h4>Tablas o Parametros</h4>
                 </a></li>
-                <li id="tab4" role="presentation"><a href="#DatosFiscales" aria-controls="DatosFiscales" role="tab" data-toggle="tab">
+                <li id="tab4" class="nav-item"><a href="#DatosFiscales" data-toggle="tab">
                     <h4>Datos Fiscales</h4>
                 </a></li>
             </ul>
             <!-- Tab panes -->
             <div class="tab-content">
-                <div id="Comprobantes" role="tabpanel" class="tab-pane fade in active text-left">
+                <div id="Comprob" role="tabpanel" class="tab-pane fade in active text-left">
                     <table class="">
                         <tbody>
                             <tr>
@@ -261,6 +264,13 @@
                                             </td>
                                         </tr>
                                         <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarTiposOpcionalesButton" runat="server" OnClick="ConsultarTiposOpcionalesAFIPButton_Click"
+                                                    Text="Consultar los Tipos de opcionales válidos en AFIP (FEv1)" ToolTip="Consultar los Tipos de Opcionales válidos en AFIP (FEv1)."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <tr>
                                             <td colspan="2" style="padding-top: 20px">
                                                 Exportación
                                             </td>
@@ -439,4 +449,36 @@
     </div>
     </div>
     </div>
+    
+    <ajaxToolkit:ModalPopupExtender ID="ModalPopupExtender1" runat="server"
+    TargetControlID="TargetControlIDdelModalPopupExtender1"
+    PopupControlID="ConfirmacionPanel"
+    BackgroundCssClass="modalBackground"
+    PopupDragHandleControlID="ConfirmacionPanel"
+    BehaviorID="mdlPopup" />
+    <asp:Panel ID="ConfirmacionPanel" runat="server" CssClass="ModalWindow">
+        <table width="100%">
+            <tr>
+                <td colspan="2">
+                    <asp:Label ID="TituloConfirmacionLabel" runat="server" SkinID="TituloPagina" Text=""></asp:Label>
+                </td>
+            </tr>
+            <tr>
+                <td align="left" style="padding-top:20px;">
+                    <asp:Label ID="DetalleLabel" runat="server"></asp:Label>
+                </td>
+            </tr>  
+            <tr>
+                <td align="left" style="padding-top:20px;">
+                    <asp:TextBox ID="DetalleTextBox" runat="server" TextMode="MultiLine"></asp:TextBox>
+                </td>
+            </tr>  
+            <tr>
+                <td align="left" style="padding-top:20px">
+                    <asp:Button ID="CancelarButton" runat="server" Text="Cancelar" />
+                </td>
+            </tr>
+        </table>
+    </asp:Panel>
+
 </asp:Content>

@@ -4,6 +4,7 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.Exportaciones
 {
+    [Serializable]
     public class NotaDeDebitoPorOperacionesConElExterior : Exportacion
     {
         public NotaDeDebitoPorOperacionesConElExterior()

@@ -76,6 +76,15 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.RadioButton AmbosRadioButton;
         
         /// <summary>
+        /// Control TodosRadioButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton TodosRadioButton;
+        
+        /// <summary>
         /// Control FiltradosRadioButton.
         /// </summary>
         /// <remarks>
@@ -146,15 +155,6 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox IdPersonaTextBox;
-        
-        /// <summary>
-        /// Control TodosRadioButton.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton TodosRadioButton;
         
         /// <summary>
         /// Control Panel2.

@@ -29,5 +29,8 @@
     <Setting Name="CedServiciosRN_ar_gov_afip_WSCT_CTService" Type="(Web Service URL)" Scope="Application">
       <Value Profile="(Default)">https://fwshomo.afip.gov.ar:443/wsct/CTService</Value>
     </Setting>
+    <Setting Name="CedServiciosRN_ar_gov_afip_personaServiceA13_PersonaServiceA13" Type="(Web Service URL)" Scope="Application">
+      <Value Profile="(Default)">https://awshomo.afip.gov.ar/sr-padron/webservices/personaServiceA13</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

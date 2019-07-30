@@ -31,6 +31,7 @@ namespace CedServicios.Site
                     string[] itemsParametros = parametros.Split(delimitador);
                     TratamientoTextBox.Text = itemsParametros[0];
                     ElementoTextBox.Text = itemsParametros[1];
+                    OrderByDropDownList.Visible = false;
                     switch (ElementoTextBox.Text)
                     {
                         case "Comprobante":
@@ -44,6 +45,22 @@ namespace CedServicios.Site
                             }
                             NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
                             NaturalezaComprobanteDropDownList.SelectedIndex = 0;
+                            EstadoDropDownList.DataSource = RN.Multiseleccion.ListaComboMultiseleccion();
+                            EstadoComprasDropDownList.DataSource = RN.Multiseleccion.ListaComboMultiseleccion();
+                            TiposComprobanteDropDownList.DataSource = RN.Multiseleccion.ListaComboMultiseleccion();
+
+                            ViewState["Estados"] = RN.Estado.ListaComprobantesVenta();
+                            EstadoGridView.DataSource = ViewState["Estados"];
+
+                            ViewState["EstadosCompras"] = RN.Estado.ListaComprobantesCompras();
+                            EstadoComprasGridView.DataSource = ViewState["EstadosCompras"];
+
+                            ViewState["TiposComprobante"] = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaBasicaFiltrosCombo();
+                            TiposComprobanteGridView.DataSource = ViewState["TiposComprobante"];
+
+                            OrderByDropDownList.Visible = true;
+                            OrderByDropDownList.DataSource = RN.Comprobante.ListaOrderByExploradorComprobante();
+
                             if (sesion.UsuarioDemo == true)
                             {
                                 FechaDesdeTextBox.Text = "20130101";
@@ -59,61 +76,87 @@ namespace CedServicios.Site
                         case "Contrato":
                             ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Contrato, sesion);
                             NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
-                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Naturaleza")].Visible = false;
+                            ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Natur.")].Visible = false;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Fecha")].Visible = false;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Fecha Vto")].Visible = false;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Nro.Lote")].Visible = false;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
+
+                            EstadoDropDownList.DataSource = RN.Multiseleccion.ListaComboMultiseleccion();
+                            EstadoComprasDropDownList.DataSource = RN.Multiseleccion.ListaComboMultiseleccion();
+                            TiposComprobanteDropDownList.DataSource = RN.Multiseleccion.ListaComboMultiseleccion();
+
+                            ViewState["Estados"] = RN.Estado.ListaComprobantesVenta();
+                            EstadoGridView.DataSource = ViewState["Estados"];
+
+                            ViewState["EstadosCompras"] = RN.Estado.ListaComprobantesCompras();
+                            EstadoGridView.DataSource = ViewState["EstadosCompras"];
+
+                            ViewState["TiposComprobante"] = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaBasicaFiltrosCombo();
+                            TiposComprobanteGridView.DataSource = ViewState["TiposComprobante"];
+
+                            OrderByDropDownList.Visible = true;
+                            OrderByDropDownList.DataSource = RN.Comprobante.ListaOrderByExploradorComprobante();
+
                             DetallePanel.Visible = false;
                             PeriodoEmisionPanel.Visible = false;
+                            DetalleYFechasPanel.Visible = false;
+                            EstadosTipoCompYOrdeByPanel.Visible = false;
+                            BuscarAyudaLink.Visible = false;
                             break;
                     }
                     string descrTratamiento = TratamientoTextBox.Text;
+                    AyudaConsultaComprobantesPanel.Visible = false;
+                    AyudaModifComprobantesPanel.Visible = false;
+                    AyudaModifContratoPanel.Visible = false;
+                    AyudaBajaYAnulBajaPanel.Visible = false;
                     switch (TratamientoTextBox.Text)
                     {
                         case "Consulta":
-                            EstadoVigenteCheckBox.Checked = true;
-                            EstadoPteEnvioCheckBox.Checked = true;
-                            EstadoPteConfCheckBox.Checked = true;
-                            EstadoDeBajaCheckBox.Checked = false;
-                            EstadoPteAutorizCheckBox.Checked = true;
-                            EstadoRechCheckBox.Checked = false;
+                            if (ElementoTextBox.Text != "Contrato")
+                            {
+                                AyudaConsultaComprobantesPanel.Visible = true;
+                            }
                             ComprobantesGridView.Columns[0].Visible = true;
                             break;
                         case "Baja/Anul.baja":
-                            EstadoVigenteCheckBox.Checked = ElementoTextBox.Text == "Contrato";
-                            EstadoPteEnvioCheckBox.Checked = true;
-                            EstadoPteConfCheckBox.Checked = true;
-                            EstadoDeBajaCheckBox.Checked = true;
-                            EstadoPteAutorizCheckBox.Checked = true;
-                            EstadoRechCheckBox.Checked = true;
+                            AyudaBajaYAnulBajaPanel.Visible = true;
+                            if (ElementoTextBox.Text == "Contrato")
+                            {
+                                ViewState["Estados"] = RN.Estado.ListaComprobantesTodos();
+                                EstadoGridView.DataSource = ViewState["Estados"];
+                            }
+                            else
+                            {
+                                ViewState["Estados"] = RN.Estado.ListaComprobantesTodosMenosVig();
+                                EstadoGridView.DataSource = ViewState["Estados"];
+                            }
                             ComprobantesGridView.Columns[1].Visible = true;
                             ComprobantesGridView.Columns[2].Visible = true;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
-                            EstadosPanel.Enabled = false;
                             break;
                         case "Envio":
-                            EstadoVigenteCheckBox.Checked = false;
-                            EstadoPteEnvioCheckBox.Checked = true;
-                            EstadoPteConfCheckBox.Checked = false;
-                            EstadoDeBajaCheckBox.Checked = false;
-                            EstadoPteAutorizCheckBox.Checked = false;
-                            EstadoRechCheckBox.Checked = false;
+                            ViewState["Estados"] = RN.Estado.ListaComprobantesSoloPteEnvio();
+                            EstadoGridView.DataSource = ViewState["Estados"];
                             ComprobantesGridView.Columns[3].Visible = true;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
-                            EstadosPanel.Enabled = false;
                             descrTratamiento += " (AFIP/ITF)";
                             break;
                         case "Modificacion":
-                            EstadoVigenteCheckBox.Checked = ElementoTextBox.Text == "Contrato";
-                            EstadoPteEnvioCheckBox.Checked = true;
-                            EstadoPteConfCheckBox.Checked = true;
-                            EstadoDeBajaCheckBox.Checked = false;
-                            EstadoPteAutorizCheckBox.Checked = true;
-                            EstadoRechCheckBox.Checked = false;
+                            if (ElementoTextBox.Text == "Contrato")
+                            {
+                                AyudaModifContratoPanel.Visible = true;
+                                ViewState["Estados"] = RN.Estado.ListaComprobantesVenta();
+                                EstadoGridView.DataSource = ViewState["Estados"];
+                            }
+                            else
+                            {
+                                AyudaModifComprobantesPanel.Visible = true;
+                                ViewState["Estados"] = RN.Estado.ListaComprobantesVentaSoloPtes();
+                                EstadoGridView.DataSource = ViewState["Estados"];
+                            }
                             ComprobantesGridView.Columns[4].Visible = true;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Acción")].Visible = false;
-                            EstadosPanel.Enabled = false;
                             descrTratamiento = "Modificación";
                             break;
                     }
@@ -125,18 +168,26 @@ namespace CedServicios.Site
                     {
                         ClienteDropDownList.SelectedValue = "0";
                     }
+                    ValidaryAsignarCamposFiltro(TratamientoTextBox.Text);
+                    if (TratamientoTextBox.Text == "Envio")
+                    {
+                        VerificarEstadosPosibles_SelectedIndexChanged(NaturalezaComprobanteDropDownList, new EventArgs());
+                    }
+                    GrillaComprobantesPanel.Visible = false;
                 }
             }
         }
+
         protected void ComprobantesGridView_RowCommand(object sender, GridViewCommandEventArgs e)
         {
             MensajeLabel.Text = "";
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             int item = Convert.ToInt32(e.CommandArgument);
             List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
-            Entidades.Comprobante comprobante = lista[item];
-            string script;
+            Entidades.Comprobante comprobante = (Entidades.Comprobante)lista[item].Clone();
+            RN.Comprobante.Leer(comprobante, sesion);
 
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
+            string script;
             string DetalleIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKUtilizarServidorExterno"];
             org.dyndns.cedweb.detalle.DetalleIBK clcdyndns = new org.dyndns.cedweb.detalle.DetalleIBK();
             org.dyndns.cedweb.detalle.cecd cecd = new org.dyndns.cedweb.detalle.cecd();
@@ -156,7 +207,7 @@ namespace CedServicios.Site
                     else
                     {
                         auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -181,7 +232,7 @@ namespace CedServicios.Site
                     else
                     {
                         auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -206,7 +257,7 @@ namespace CedServicios.Site
                     else
                     {
                         auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -231,7 +282,7 @@ namespace CedServicios.Site
                     else
                     {
                         auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -247,7 +298,7 @@ namespace CedServicios.Site
                     ScriptManager.RegisterStartupScript(this, typeof(Page), "popup", script, true);
                     break;
                 case "Modificacion":
-                    if (comprobante.NaturalezaComprobante.Id == "VentaContrato") 
+                    if (comprobante.NaturalezaComprobante.Id == "VentaContrato")
                     {
                         Entidades.Persona persona = new Entidades.Persona();
                         persona.Cuit = comprobante.Cuit;
@@ -266,7 +317,7 @@ namespace CedServicios.Site
                     else
                     {
                         auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -325,6 +376,53 @@ namespace CedServicios.Site
                 MensajeLabel.Text = "Fecha Hasta inválida. Formato correcto de 8 dígitos (YYYYMMDD).";
                 return false;
             }
+            bool hayRegSelect = false;
+            List<FeaEntidades.TiposDeComprobantes.TipoComprobante> listaTiposComprobante = (List<FeaEntidades.TiposDeComprobantes.TipoComprobante>)ViewState["TiposComprobante"];
+            foreach (FeaEntidades.TiposDeComprobantes.TipoComprobante tc in listaTiposComprobante)
+            {
+                if (tc.Incluir == true)
+                {
+                    hayRegSelect = true;
+                    break;
+                }
+            }
+            if (!hayRegSelect)
+            {
+                MensajeLabel.Text = "Seleccione por lo menos un tipo de comprobante.";
+                return false;
+            }
+
+            hayRegSelect = false;
+            List<Entidades.Estado> listaEstados = (List<Entidades.Estado>)ViewState["Estados"];
+            foreach (Entidades.Estado es in listaEstados)
+            {
+                if (es.Incluir == true)
+                {
+                    hayRegSelect = true;
+                    break;
+                }
+            }
+            if (!hayRegSelect)
+            {
+                MensajeLabel.Text = "Seleccione por lo menos un estado (Venta).";
+                return false;
+            }
+
+            hayRegSelect = false;
+            List<Entidades.Estado> listaEstadosCompra = (List<Entidades.Estado>)ViewState["Estados"];
+            foreach (Entidades.Estado es in listaEstadosCompra)
+            {
+                if (es.Incluir == true)
+                {
+                    hayRegSelect = true;
+                    break;
+                }
+            }
+            if (!hayRegSelect)
+            {
+                MensajeLabel.Text = "Seleccione por lo menos un estado (Compra / Venta Tradicional).";
+                return false;
+            }
             return true;
         }
         protected void BuscarButton_Click(object sender, EventArgs e)
@@ -335,7 +433,7 @@ namespace CedServicios.Site
             }
             else
             {
-                if (ElementoTextBox.Text == "Contrato" || ValidacionFiltrosOK()) 
+                if (ElementoTextBox.Text == "Contrato" || ValidacionFiltrosOK())
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
@@ -359,17 +457,44 @@ namespace CedServicios.Site
                         naturalezaComprobante = new Entidades.NaturalezaComprobante();
                     }
                     List<Entidades.Estado> estados = new List<Entidades.Estado>();
-                    if (EstadoVigenteCheckBox.Checked) estados.Add(new Entidades.EstadoVigente());
-                    if (EstadoPteEnvioCheckBox.Checked) estados.Add(new Entidades.EstadoPteEnvio());
-                    if (EstadoPteConfCheckBox.Checked) estados.Add(new Entidades.EstadoPteConf());
-                    if (EstadoDeBajaCheckBox.Checked) estados.Add(new Entidades.EstadoDeBaja());
-                    if (EstadoPteAutorizCheckBox.Checked) estados.Add(new Entidades.EstadoPteAutoriz());
-                    if (EstadoRechCheckBox.Checked) estados.Add(new Entidades.EstadoRech());
-                    lista = RN.Comprobante.ListaFiltrada(estados, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, DetalleTextBox.Text, sesion, true);
+                    List<Entidades.Estado> listaEstados = (List<Entidades.Estado>)ViewState["Estados"];
+                    estados = listaEstados.FindAll(delegate (Entidades.Estado es)
+                    {
+                        return es.Incluir == true;
+                    });
+                    List<Entidades.Estado> estadosCompras = new List<Entidades.Estado>();
+                    List<Entidades.Estado> listaEstadosCompras = (List<Entidades.Estado>)ViewState["EstadosCompras"];
+                    estadosCompras = listaEstadosCompras.FindAll(delegate (Entidades.Estado es)
+                    {
+                        return es.Incluir == true;
+                    });
+                    List<FeaEntidades.TiposDeComprobantes.TipoComprobante> tiposComprobante = new List<FeaEntidades.TiposDeComprobantes.TipoComprobante>();
+                    List<FeaEntidades.TiposDeComprobantes.TipoComprobante> listaTiposComprobante = (List<FeaEntidades.TiposDeComprobantes.TipoComprobante>)ViewState["TiposComprobante"];
+                    tiposComprobante = listaTiposComprobante.FindAll(delegate (FeaEntidades.TiposDeComprobantes.TipoComprobante tc)
+                    {
+                        return tc.Incluir == true;
+                    });
+                    string orderBy = OrderByDropDownList.SelectedValue;
+                    lista = RN.Comprobante.ListaFiltrada(estados, estadosCompras, tiposComprobante, orderBy, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, false, DetalleTextBox.Text, sesion, true);
 
                     ContentPlaceHolder contentPlaceDefault = ((ContentPlaceHolder)Master.FindControl("ContentPlaceDefault"));
-                    System.Web.UI.HtmlControls.HtmlAnchor control = ((System.Web.UI.HtmlControls.HtmlAnchor)contentPlaceDefault.FindControl("AyudaGrilla"));
-                    control.Visible = false;
+                    System.Web.UI.HtmlControls.HtmlAnchor control = new System.Web.UI.HtmlControls.HtmlAnchor();
+                    switch (TratamientoTextBox.Text)
+                    {
+                        case "Consulta":
+                            control = ((System.Web.UI.HtmlControls.HtmlAnchor)contentPlaceDefault.FindControl("AyudaGrilla"));
+                            control.Visible = false;
+                            break;
+                        case "Modificacion":
+                            control = ((System.Web.UI.HtmlControls.HtmlAnchor)contentPlaceDefault.FindControl("AyudaGrillaModif"));
+                            control.Visible = false;
+                            break;
+                        case "Baja/Anul.baja":
+                            control = ((System.Web.UI.HtmlControls.HtmlAnchor)contentPlaceDefault.FindControl("AyudaGrillaBaja"));
+                            control.Visible = false;
+                            break;
+                    }
+                    GrillaComprobantesPanel.Visible = false;
                     if (lista.Count == 0)
                     {
                         ComprobantesGridView.DataSource = null;
@@ -378,6 +503,7 @@ namespace CedServicios.Site
                     }
                     else
                     {
+                        GrillaComprobantesPanel.Visible = true;
                         ComprobantesGridView.DataSource = lista;
                         ViewState["Comprobantes"] = lista;
                         ComprobantesGridView.DataBind();
@@ -393,16 +519,18 @@ namespace CedServicios.Site
         protected void AccionDropDownList_SelectedIndexChanged(object sender, EventArgs e)
         {
             MensajeLabel.Text = String.Empty;
+            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             DropDownList ddl = (DropDownList)sender;
             GridViewRow row = (GridViewRow)ddl.Parent.Parent;
             int item = row.RowIndex;
             List<Entidades.Comprobante> lista = (List<Entidades.Comprobante>)ViewState["Comprobantes"];
-            Entidades.Comprobante comprobante = lista[item];
+            Entidades.Comprobante comprobante = (Entidades.Comprobante)lista[item].Clone();
+            RN.Comprobante.Leer(comprobante, sesion);
+
             string comando = ddl.SelectedValue;
             ddl.ClearSelection();
             FeaEntidades.InterFacturas.lote_comprobantes lote;
             FeaEntidades.Turismo.lote_comprobantes loteT;
-            Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
             string certificado;
             string DetalleIBKUtilizarServidorExterno = System.Configuration.ConfigurationManager.AppSettings["DetalleIBKUtilizarServidorExterno"];
             org.dyndns.cedweb.detalle.DetalleIBK clcdyndns = new org.dyndns.cedweb.detalle.DetalleIBK();
@@ -561,7 +689,7 @@ namespace CedServicios.Site
                             {
                                 string respuesta = "";
                                 int auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
                                 {
                                     return pv.Nro == auxPV;
                                 }).IdTipoPuntoVta;
@@ -777,7 +905,7 @@ namespace CedServicios.Site
                     {
                         Session["ComprobanteATratar"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Clonado, comprobante);
                         int auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
                         {
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
@@ -800,7 +928,7 @@ namespace CedServicios.Site
                     else
                     {
                         MensajeLabel.Text = "Esta opción está disponible sólo para comprobantes de venta electrónica o compra.";
-                    }                    
+                    }
                     #endregion
                     break;
                 case "PDF":
@@ -902,7 +1030,7 @@ namespace CedServicios.Site
                                 {
                                     script = ex.InnerException.Message;
                                 }
-                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), script);
+                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "[ComprobanteConsulta] " + script);
                                 MensajeLabel.Text = script;
                             }
                             #endregion
@@ -919,7 +1047,7 @@ namespace CedServicios.Site
                             try
                             {
                                 int auxPV = Convert.ToInt32(comprobante.NroPuntoVta);
-                                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                                string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
                                 {
                                     return pv.Nro == auxPV;
                                 }).IdTipoPuntoVta;
@@ -927,7 +1055,7 @@ namespace CedServicios.Site
                                 {
                                     lote = new FeaEntidades.InterFacturas.lote_comprobantes();
                                     x = new System.Xml.Serialization.XmlSerializer(lote.GetType());
-                            
+
                                     comprobante.Response = comprobante.Response.Replace("iso-8859-1", "utf-16");
                                     bytes = new byte[comprobante.Response.Length * sizeof(char)];
                                     System.Buffer.BlockCopy(comprobante.Response.ToCharArray(), 0, bytes, 0, bytes.Length);
@@ -953,7 +1081,7 @@ namespace CedServicios.Site
                                     RN.Comprobante.AjustarLoteTParaImprimirPDF(loteT);
                                     Session["lote"] = loteT;
                                 }
-                                
+
                                 //Response.Redirect("~\\Facturacion\\Electronica\\Reportes\\FacturaWebForm.aspx", true);
                                 if (idtipo != "Turismo")
                                 {
@@ -1185,7 +1313,7 @@ namespace CedServicios.Site
                             string Campo6 = String.Format("{0,-30}", "");
                             try
                             {
-                                string RespAux6 = FeaEntidades.CondicionesIVA.CondicionIVA.Lista().Find(delegate(FeaEntidades.CondicionesIVA.CondicionIVA ci)
+                                string RespAux6 = FeaEntidades.CondicionesIVA.CondicionIVA.Lista().Find(delegate (FeaEntidades.CondicionesIVA.CondicionIVA ci)
                                 {
                                     return (ci.Codigo == sesion.Cuit.DatosImpositivos.IdCondIVA);
                                 }).Descr;
@@ -1483,14 +1611,281 @@ namespace CedServicios.Site
         }
         protected void VerificarEstadosPosibles_SelectedIndexChanged(object sender, EventArgs e)
         {
+            MensajeLabel.Text = "";
             if (((DropDownList)sender).SelectedValue == "Compra")
             {
-                //EstadoVigenteCheckBox.Checked = true;
+                OrderByDropDownList.DataSource = RN.Comprobante.ListaOrderByExploradorComprobanteCompras();
+                OrderByDropDownList.DataBind();
+                EstadosCompra.Visible = true;
+                EstadosVenta.Visible = false;
+            }
+            else if (((DropDownList)sender).SelectedValue == "VentaTradic")
+            {
+                OrderByDropDownList.DataSource = RN.Comprobante.ListaOrderByExploradorComprobante();
+                OrderByDropDownList.DataBind();
+                EstadosCompra.Visible = true;
+                EstadosVenta.Visible = false;
+            }
+            else if (((DropDownList)sender).SelectedValue == "Venta")
+            {
+                OrderByDropDownList.DataSource = RN.Comprobante.ListaOrderByExploradorComprobante();
+                OrderByDropDownList.DataBind();
+                EstadosCompra.Visible = false;
+                EstadosVenta.Visible = true;
             }
             else
             {
-                //EstadoVigenteCheckBox.Checked = false;
+                OrderByDropDownList.DataSource = RN.Comprobante.ListaOrderByExploradorComprobante();
+                OrderByDropDownList.DataBind();
+                EstadosCompra.Visible = true;
+                EstadosVenta.Visible = true;
             }
+            BorraGrilla();
+        }
+        protected void Personas_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            BorraGrilla();
+        }
+        protected void AbrirFiltroEstadoLinkButton_Click(object sender, EventArgs e)
+        {
+            EstadoGridView.DataSource = ViewState["Estados"];
+            EstadoGridView.DataBind();
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#filtroEstadoModal').modal('show');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "FiltroEstadoModalScript", sb.ToString(), false);
+        }
+
+        protected void AbrirFiltroEstadoComprasLinkButton_Click(object sender, EventArgs e)
+        {
+            EstadoComprasGridView.DataSource = ViewState["EstadosCompras"];
+            EstadoComprasGridView.DataBind();
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#filtroEstadoComprasModal').modal('show');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "FiltroEstadoModalScript", sb.ToString(), false);
+        }
+
+        protected void AbrirFiltroTiposComprobanteLinkButton_Click(object sender, EventArgs e)
+        {
+            TiposComprobanteGridView.DataSource = ViewState["TiposComprobante"];
+            TiposComprobanteGridView.DataBind();
+
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#filtroTiposComprobanteModal').modal('show');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "FiltroTiposComprobanteModalScript", sb.ToString(), false);
+        }
+
+        protected void ValidaryAsignarCamposFiltroLinkButton_Click(object sender, EventArgs e)
+        {
+            ValidaryAsignarCamposFiltro(TratamientoTextBox.Text);
+        }
+        
+        protected void ValidaryAsignarCamposFiltro(string Tratamiento)
+        {
+            try
+            {
+                MensajeLabel.Text = "";
+                List<Entidades.Estado> ListaEstados = new List<Entidades.Estado>();
+                if (Tratamiento == "Envio")
+                {
+                    ListaEstados = RN.Estado.ListaComprobantesSoloPteEnvio();
+                }
+                else
+                { 
+                    ListaEstados = RN.Estado.ListaComprobantesVenta();
+                }
+                for (int i = 0; i < EstadoGridView.Rows.Count; i++)
+                {
+                    if (((CheckBox)EstadoGridView.Rows[i].FindControl("IncluirCheckBox")).Checked)
+                    {
+                        ListaEstados[i].Incluir = true;
+                    }
+                    else
+                    {
+                        ListaEstados[i].Incluir = false;
+                    }
+                }
+                System.Collections.Generic.List<Entidades.Estado> listaEstadoSelect = ListaEstados.FindAll(delegate (Entidades.Estado estado)
+                {
+                    return estado.Incluir == true;
+                });
+                ViewState["Estados"] = ListaEstados;
+                if (listaEstadoSelect.Count == ((List<Entidades.Estado>)ViewState["Estados"]).Count)
+                {
+                    EstadoDropDownList.SelectedValue = "TODOS";
+                }
+                else
+                {
+                    EstadoDropDownList.SelectedValue = "VARIOS";
+                }
+                if (listaEstadoSelect.Count == 0)
+                {
+                    throw new EX.Validaciones.ValorNoInfo("Multiselección de Estados", "");
+                }
+
+                List<Entidades.Estado> ListaEstadosCompras = new List<Entidades.Estado>();
+                ListaEstadosCompras = RN.Estado.ListaComprobantesCompras();
+                for (int i = 0; i < EstadoComprasGridView.Rows.Count; i++)
+                {
+                    if (((CheckBox)EstadoComprasGridView.Rows[i].FindControl("IncluirCheckBox")).Checked)
+                    {
+                        ListaEstadosCompras[i].Incluir = true;
+                    }
+                    else
+                    {
+                        ListaEstadosCompras[i].Incluir = false;
+                    }
+                }
+                ViewState["EstadosCompras"] = ListaEstadosCompras;
+                System.Collections.Generic.List<Entidades.Estado> listaEstadoComprasSelect = ListaEstadosCompras.FindAll(delegate (Entidades.Estado estado)
+                {
+                    return estado.Incluir == true;
+                });
+                if (listaEstadoComprasSelect.Count == 0)
+                {
+                    throw new EX.Validaciones.ValorNoInfo("Multiselección de Estados Compra / Venta(Tradic.)", "");
+                }
+                else if (listaEstadoComprasSelect.Count == ((List<Entidades.Estado>)ViewState["EstadosCompras"]).Count)
+                {
+                    EstadoComprasDropDownList.SelectedValue = "TODOS";
+                }
+                else
+                {
+                    EstadoComprasDropDownList.SelectedValue = "VARIOS";
+                }
+            }
+            catch (Exception ex)
+            {
+                string script = "Validación de filtros: " + ex.Message;
+                //script += ex.StackTrace;
+                if (ex.InnerException != null)
+                {
+                    script = ex.InnerException.Message;
+                }
+                //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "[ExploraConsulta] " + script);
+                MensajeLabel.Text = script;
+            }
+        }
+
+        protected void ValidaryAsignarCamposFiltroTipoCompLinkButton_Click(object sender, EventArgs e)
+        {
+            ValidaryAsignarCamposFiltroTipoComp();
+        }
+        protected void ValidaryAsignarCamposFiltroTipoComp()
+        {
+            try
+            {
+                MensajeLabel.Text = "";
+                List<FeaEntidades.TiposDeComprobantes.TipoComprobante> ListaTiposComprobante = new List<FeaEntidades.TiposDeComprobantes.TipoComprobante>();
+                ListaTiposComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaBasicaFiltrosCombo();
+                for (int i = 0; i < TiposComprobanteGridView.Rows.Count; i++)
+                {
+                    if (((CheckBox)TiposComprobanteGridView.Rows[i].FindControl("IncluirCheckBox")).Checked)
+                    {
+                        ListaTiposComprobante[i].Incluir = true;
+                    }
+                    else
+                    {
+                        ListaTiposComprobante[i].Incluir = false;
+                    }
+                }
+                System.Collections.Generic.List<FeaEntidades.TiposDeComprobantes.TipoComprobante> listaTiposComprobanteSelect = ListaTiposComprobante.FindAll(delegate (FeaEntidades.TiposDeComprobantes.TipoComprobante tc)
+                {
+                    return tc.Incluir == true;
+                });
+                ViewState["TiposComprobante"] = ListaTiposComprobante;
+                if (listaTiposComprobanteSelect.Count == 0)
+                {
+                    throw new EX.Validaciones.ValorNoInfo("Multiselección de Tipos de Comprobante", "");
+                }
+                else if (listaTiposComprobanteSelect.Count == ((List<FeaEntidades.TiposDeComprobantes.TipoComprobante>)ViewState["TiposComprobante"]).Count)
+                {
+                    TiposComprobanteDropDownList.SelectedValue = "TODOS";
+                }
+                else
+                {
+                    TiposComprobanteDropDownList.SelectedValue = "VARIOS";
+                }
+            }
+            catch (Exception ex)
+            {
+                string script = "Validación de filtros: " + ex.Message;
+                //script += ex.StackTrace;
+                if (ex.InnerException != null)
+                {
+                    script = ex.InnerException.Message;
+                }
+                //RN.Sesion.GrabarLogTexto(Server.MapPath("~/Detallar.txt"), "[ExploraConsulta] " + script);
+                MensajeLabel.Text = script;
+            }
+        }
+
+
+        protected void FechasPredefinidasLinkButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string linkSelect = ((LinkButton)sender).ID;
+                string FechaDsd = "";
+                string FechaHst = "";
+                Funciones.FechasPredefinidas(linkSelect, out FechaDsd, out FechaHst);
+                FechaDesdeTextBox.Text = FechaDsd;
+                FechaHastaTextBox.Text = FechaHst;
+            }
+            catch (Exception ex)
+            {
+                string script = "Problemas con las fechas predefinidas: " + ex.Message;
+                MensajeLabel.Text = script;
+            }
+        }
+
+        protected void MarcarTodoTipoComprobanteLinkButton_Click(object sender, EventArgs e)
+        {
+            List<FeaEntidades.TiposDeComprobantes.TipoComprobante> listaTiposComprobante = (List<FeaEntidades.TiposDeComprobantes.TipoComprobante>)ViewState["TiposComprobante"];
+            foreach (FeaEntidades.TiposDeComprobantes.TipoComprobante tc in listaTiposComprobante)
+            {
+                tc.Incluir = true;
+            }
+            ViewState["TiposComprobante"] = listaTiposComprobante;
+            TiposComprobanteGridView.DataSource = ViewState["TiposComprobante"];
+            TiposComprobanteGridView.DataBind();
+            TiposComprobanteDropDownList.SelectedValue = "TODOS";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#filtroTiposComprobanteModal').modal('show');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "FiltroTiposComprobanteModalScript", sb.ToString(), false);
+        }
+        protected void DesMarcarTodoTipoComprobanteLinkButton_Click(object sender, EventArgs e)
+        {
+            List<FeaEntidades.TiposDeComprobantes.TipoComprobante> listaTiposComprobante = (List<FeaEntidades.TiposDeComprobantes.TipoComprobante>)ViewState["TiposComprobante"];
+            foreach (FeaEntidades.TiposDeComprobantes.TipoComprobante tc in listaTiposComprobante)
+            {
+                tc.Incluir = false;
+            }
+            ViewState["TiposComprobante"] = listaTiposComprobante;
+            TiposComprobanteGridView.DataSource = ViewState["TiposComprobante"];
+            TiposComprobanteGridView.DataBind();
+            TiposComprobanteDropDownList.SelectedValue = "VARIOS";
+            System.Text.StringBuilder sb = new System.Text.StringBuilder();
+            sb.Append(@"<script type='text/javascript'>");
+            sb.Append("$('#filtroTiposComprobanteModal').modal('show');");
+            sb.Append(@"</script>");
+            ScriptManager.RegisterStartupScript(this, this.GetType(), "FiltroTiposComprobanteModalScript", sb.ToString(), false);
+        }
+        protected void BorraGrilla()
+        {
+            ComprobantesGridView.DataSource = null;
+            ComprobantesGridView.DataBind();
+            GrillaComprobantesPanel.Visible = false;
         }
     }
 }

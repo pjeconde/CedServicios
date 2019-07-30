@@ -28,6 +28,10 @@ namespace CedServicios.EX
         public class ValorNoInfo : CedServicios.EX.Validaciones.BaseApplicationException
         {
             static string TextoError = "sin informar";
+            public ValorNoInfo(string descrProp, string infoAdicional)
+                : base(descrProp + " " + TextoError + ". " + infoAdicional)
+            {
+            }
             public ValorNoInfo(string descrProp)
                 : base(descrProp + " " + TextoError)
             {

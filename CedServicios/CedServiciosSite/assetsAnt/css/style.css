@@ -76,6 +76,9 @@ a span {
 .btn.extra-width {
     padding: 13px 40px;
 }
+.custombig {
+    width: 100% !important;
+}
 .btn:focus,
 .btn:active {
     outline: inherit;
@@ -228,8 +231,8 @@ Section
     overflow: hidden;
 }
 .sections2 {
-    padding-top:40px;
-    padding-bottom:40px;
+    padding-top:20px;
+    padding-bottom:20px;
     position: relative;
     overflow: hidden;
 }
@@ -354,9 +357,10 @@ Button
     color: #ededed;
     border: 0;
     padding: 12px 15px;
-    max-width:160px;
+    max-width:800px;
     margin-top: 20px;
 }
+
 .btn-default:hover, .btn-default:focus, .btn-default.focus, .btn-default:active, .btn-default.active, .open>.dropdown-toggle.btn-default {
     color: #fff;
     background-color: rgba(0, 173, 62, 0.75);
@@ -548,7 +552,7 @@ textarea::-ms-input-placeholder
     background-color: transparent;
     border-color: transparent;
     border-radius:0;
-    padding-top:20px;
+    padding-top:10px;
 }
 .navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:hover, .navbar-default .navbar-nav>.active>a:focus {
     color: #82ca9c;
@@ -655,7 +659,7 @@ textarea::-ms-input-placeholder
     margin-right: -3px;
 }
 .head_title {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 .head_title p {
     max-width: 55%;
@@ -1828,3 +1832,7 @@ xkeyframes
 }
 /* Fin grid_1_4 */
 
+.list-centered {
+    text-align: left;
+    list-style-position: inside;
+}

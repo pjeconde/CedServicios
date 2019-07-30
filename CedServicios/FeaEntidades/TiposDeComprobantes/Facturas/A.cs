@@ -4,7 +4,8 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.Facturas
 {
-	public class A : Factura
+    [Serializable]
+    public class A : Factura
 	{
 		public A()
 		{

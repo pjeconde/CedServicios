@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceDefault" runat="server">
     <div class="container">
     <div class="row">
-    <div class="col-lg-12 col-md-12">
+    <div class="col-lg-12 col-md-12 text-center">
     <table align="center">
         <tr>
             <td colspan="2" style="padding-top:20px; text-align: center">

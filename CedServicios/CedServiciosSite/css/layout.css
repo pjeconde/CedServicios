@@ -2464,7 +2464,7 @@ ul.menumini {
     width: 100%;
    
     position: absolute !important;
-    top: 20px;
+    top: 25px;
     left: 70px;
 }
 
@@ -5861,7 +5861,7 @@ a.quote-big-post-single h5:hover{
 }
 .services-boxes-1 h6{
 	text-align:left;
-	margin-left:70px;
+	margin-left:46px;
 	padding-bottom:20px;
 }
 .services-boxes-1 p{

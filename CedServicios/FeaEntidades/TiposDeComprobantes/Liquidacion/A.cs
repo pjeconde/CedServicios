@@ -4,9 +4,10 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.Liquidacion
 {
-	public class A : Liquidacion
+    [Serializable]
+    public class A : Liquidacion
 	{
-		public A()
+        public A()
 		{
 			codigo = 63;
 			descr = "Liquidación A";

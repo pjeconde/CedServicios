@@ -91,7 +91,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                 if (lc.comprobante[i].cabecera.informacion_comprobante.referencias != null)
                 {
                     cIBK.cabecera.informacion_comprobante.referencias = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobanteReferencias[lc.comprobante[i].cabecera.informacion_comprobante.referencias.Length];
-
                     for (int j = 0; j < lc.comprobante[i].cabecera.informacion_comprobante.referencias.Length; j++)
                     {
                         if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
@@ -105,6 +104,20 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                 cIBK.cabecera.informacion_comprobante.resultado = lc.comprobante[i].cabecera.informacion_comprobante.resultado;
                 cIBK.cabecera.informacion_comprobante.tipo_de_comprobante = lc.comprobante[i].cabecera.informacion_comprobante.tipo_de_comprobante;
+
+                if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante != null)
+                {
+                    cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobanteInformacion_adicional_comprobante[lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante.Length];
+                    for (int j = 0; j < lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante.Length; j++)
+                    {
+                        if (lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j] != null)
+                        {
+                            cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j] = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobanteInformacion_adicional_comprobante();
+                            cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j].tipo = lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j].tipo;
+                            cIBK.cabecera.informacion_comprobante.informacion_adicional_comprobante[j].valor = lc.comprobante[i].cabecera.informacion_comprobante.informacion_adicional_comprobante[j].valor;
+                        }
+                    }
+                }
 
                 cIBK.cabecera.informacion_vendedor = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_vendedor();
                 cIBK.cabecera.informacion_vendedor.razon_social = lc.comprobante[i].cabecera.informacion_vendedor.razon_social;

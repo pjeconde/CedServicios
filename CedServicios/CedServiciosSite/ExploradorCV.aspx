@@ -18,9 +18,9 @@
                     <div class="text-center">
                         <asp:TextBox ID="RazonSocialTextBox" runat="server" MaxLength="50" TabIndex="2" ToolTip="" Width="50%" placeholder="Nombre"></asp:TextBox>
                     </div>
-                    <div class="text-center padding-top-20">
-                        <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                        <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                    <div class="text-center">
+                        <asp:Button ID="BuscarButton" runat="server" class="btn btn-default btn-sm" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                        <asp:Button ID="SalirButton" runat="server" class="btn btn-default btn-sm" CausesValidation ="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
                     </div>
                     <div class="text-center padding-top-20">
                         <asp:Panel ID="Panel1" runat="server" BorderStyle="None"
@@ -30,7 +30,7 @@
                                 OnSorting="CVPagingGridView_Sorting"
                                 FooterStyle-ForeColor="Brown"
                                 AllowPaging="True" 
-                                AllowSorting="True" 
+                                AllowSorting="True" CssClass="grilla" 
                                 AutoGenerateColumns="false" OnRowCommand="CVPagingGridView_RowCommand"
                                 DataKeyNames="" BorderStyle="None">
                                 <Columns>

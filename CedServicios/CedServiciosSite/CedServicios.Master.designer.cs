@@ -427,6 +427,60 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor ComprobantesOtrasConsTYC;
         
         /// <summary>
+        /// Control ContratosControl.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ContratosControl;
+        
+        /// <summary>
+        /// Control Contratos.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor Contratos;
+        
+        /// <summary>
+        /// Control ContratosAlta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor ContratosAlta;
+        
+        /// <summary>
+        /// Control ContratosBajaYAnulBaja.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor ContratosBajaYAnulBaja;
+        
+        /// <summary>
+        /// Control ContratosModif.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor ContratosModif;
+        
+        /// <summary>
+        /// Control ContratosConsulta.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor ContratosConsulta;
+        
+        /// <summary>
         /// Control FacturacionControl.
         /// </summary>
         /// <remarks>
@@ -706,60 +760,6 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.HtmlControls.HtmlAnchor AdminUserModifDatosConfig;
         
         /// <summary>
-        /// Control ContratosControl.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ContratosControl;
-        
-        /// <summary>
-        /// Control Contratos.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor Contratos;
-        
-        /// <summary>
-        /// Control ContratosAlta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor ContratosAlta;
-        
-        /// <summary>
-        /// Control ContratosBajaYAnulBaja.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor ContratosBajaYAnulBaja;
-        
-        /// <summary>
-        /// Control ContratosModif.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor ContratosModif;
-        
-        /// <summary>
-        /// Control ContratosConsulta.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlAnchor ContratosConsulta;
-        
-        /// <summary>
         /// Control AdminSiteControl.
         /// </summary>
         /// <remarks>
@@ -911,15 +911,6 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlAnchor AyudaNovedades;
-        
-        /// <summary>
-        /// Control CedeiraContentPlaceHolder.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder CedeiraContentPlaceHolder;
         
         /// <summary>
         /// Control UsuarioContentPlaceHolder.

@@ -22,7 +22,7 @@
     	width: 400px;
     }
     </style>
-    <table style="border:0; width: 1300px; text-align:left; padding-left:10px">
+    <table style="border:0; width: 1300px; text-align:left; padding-left:10px" align="center">
         <tr>
             <td style="padding-top:20px; width:1282px; vertical-align:middle; text-align:center; vertical-align:top">
                 

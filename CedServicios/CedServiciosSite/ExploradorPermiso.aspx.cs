@@ -31,11 +31,70 @@ namespace CedServicios.Site
                 }
             }
         }
-        protected void PermisosGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        protected void PermisoPagingGridView_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            int item = Convert.ToInt32(e.CommandArgument);
-            List<Entidades.Permiso> lista = (List<Entidades.Permiso>)ViewState["Permisos"];
-            Entidades.Permiso permiso = lista[item];
+            try
+            {
+                DesSeleccionarFilas();
+                PermisoPagingGridView.PageIndex = e.NewPageIndex;
+                ViewState["GridPageIndex"] = e.NewPageIndex;
+                List<Entidades.Permiso> lista;
+                int CantidadFilas = 0;
+                lista = RN.Permiso.ListaPaging(out CantidadFilas, PermisoPagingGridView.PageIndex, PermisoPagingGridView.OrderBy, IdUsuarioTextBox.Text, CUITTextBox.Text, IdTipoPermisoDropDownList.SelectedValue, EstadoDropDownList.SelectedValue, VerPermisosDeRadioButtonList.SelectedItem.Text, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                PermisoPagingGridView.VirtualItemCount = CantidadFilas;
+                PermisoPagingGridView.PageSize = ((Entidades.Sesion)Session["Sesion"]).Usuario.CantidadFilasXPagina;
+                ViewState["lista"] = lista;
+                PermisoPagingGridView.DataSource = lista;
+                PermisoPagingGridView.DataBind();
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Exception ex)
+            {
+                //CedeiraUIWebForms.Excepciones.Redireccionar(ex, "~/Excepcion.aspx");
+                MensajeLabel.Text = ex.Message;
+            }
+        }
+        protected void PermisoPagingGridView_Sorting(object sender, GridViewSortEventArgs e)
+        {
+            try
+            {
+                DesSeleccionarFilas();
+                List<Entidades.Permiso> lista = new List<Entidades.Permiso>();
+                int CantidadFilas = 0;
+                lista = RN.Permiso.ListaPaging(out CantidadFilas, PermisoPagingGridView.PageIndex, PermisoPagingGridView.OrderBy, IdUsuarioTextBox.Text, CUITTextBox.Text, IdTipoPermisoDropDownList.SelectedValue, EstadoDropDownList.SelectedValue, VerPermisosDeRadioButtonList.SelectedItem.Text, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                ViewState["lista"] = lista;
+                PermisoPagingGridView.DataSource = (List<Entidades.Permiso>)ViewState["lista"];
+                PermisoPagingGridView.DataBind();
+            }
+            catch (System.Threading.ThreadAbortException)
+            {
+                Trace.Warn("Thread abortado");
+            }
+            catch (Exception ex)
+            {
+                MensajeLabel.Text = ex.Message;
+            }
+        }
+        private void DesSeleccionarFilas()
+        {
+            PermisoPagingGridView.SelectedIndex = -1;
+        }
+        protected void PermisoPagingGridView_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            Entidades.Permiso permiso = new Entidades.Permiso();
+            try
+            {
+                int item = Convert.ToInt32(e.CommandArgument);
+                List<Entidades.Permiso> lista = (List<Entidades.Permiso>)ViewState["lista"];
+                permiso = lista[item];
+            }
+            catch
+            {
+                //Selecciono algo del Header. No hago nada con el CommandArgument.
+            }
             switch (e.CommandName)
             {
                 case "CambiarEstado":
@@ -59,12 +118,13 @@ namespace CedServicios.Site
                     }
                     break;
             }
+            bindGrillaPermiso();
         }
-        protected void PermisosGridView_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void PermisoPagingGridView_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                if (e.Row.Cells[5].Text != "Vigente")
+                if (e.Row.Cells[6].Text != "Vigente")
                 {
                     e.Row.ForeColor = Color.Red;
                 }
@@ -90,6 +150,37 @@ namespace CedServicios.Site
                 Funciones.PersonalizarControlesMaster(Master, true, sesion);
             }
         }
+        protected void PermisoPagingGridView_RowEditing(object sender, GridViewEditEventArgs e)
+        {
+            PermisoPagingGridView.EditIndex = e.NewEditIndex;
+            PermisoPagingGridView.DataSource = ViewState["lista"];
+            PermisoPagingGridView.DataBind();
+        }
+        protected void PermisoPagingGridView_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        {
+            PermisoPagingGridView.EditIndex = -1;
+            PermisoPagingGridView.DataSource = ViewState["lista"];
+            PermisoPagingGridView.DataBind();
+        }
+        protected void PermisoPagingGridView_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        {
+            try
+            {
+                PermisoPagingGridView.EditIndex = -1;
+                PermisoPagingGridView.DataSource = ViewState["lista"];
+                PermisoPagingGridView.DataBind();
+            }
+            catch (Exception ex)
+            {
+                ScriptManager.RegisterStartupScript(this, GetType(), "Message", Funciones.TextoScript(ex.Message), false);
+            }
+        }
+        protected void PermisoPagingGridView_SelectedIndexChanged(object sender, EventArgs e)
+        {
+        }
+        protected void PermisoPagingGridView_SelectedIndexChanging(object sender, GridViewSelectEventArgs e)
+        {
+        }
         protected void BuscarButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
@@ -101,24 +192,33 @@ namespace CedServicios.Site
                 Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                 List<Entidades.Permiso> lista = new List<Entidades.Permiso>();
                 MensajeLabel.Text = String.Empty;
-                lista = RN.Permiso.LeerListaPermisosFiltrados(IdUsuarioTextBox.Text, CUITTextBox.Text, IdTipoPermisoDropDownList.SelectedValue, EstadoDropDownList.SelectedValue, sesion, VerPermisosDeRadioButtonList.SelectedItem.Text);
+                int CantidadFilas = 0;
+                lista = RN.Permiso.ListaPaging(out CantidadFilas, PermisoPagingGridView.PageIndex, PermisoPagingGridView.OrderBy, IdUsuarioTextBox.Text, CUITTextBox.Text, IdTipoPermisoDropDownList.SelectedValue, EstadoDropDownList.SelectedValue, VerPermisosDeRadioButtonList.SelectedItem.Text, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                PermisoPagingGridView.VirtualItemCount = CantidadFilas;
+                PermisoPagingGridView.PageSize = sesion.Usuario.CantidadFilasXPagina;
                 if (lista.Count == 0)
                 {
-                    PermisosGridView.DataSource = null;
-                    PermisosGridView.DataBind();
+                    PermisoPagingGridView.DataSource = null;
+                    PermisoPagingGridView.DataBind();
                     MensajeLabel.Text = "No se han encontrado Permisos que satisfagan la busqueda";
                 }
                 else
                 {
-                    PermisosGridView.DataSource = lista;
-                    ViewState["Permisos"] = lista;
-                    PermisosGridView.DataBind();
+                    PermisoPagingGridView.DataSource = lista;
+                    ViewState["lista"] = lista;
+                    PermisoPagingGridView.DataBind();
                 }
             }
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
             Response.Redirect(((Entidades.Sesion)Session["Sesion"]).Usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
+        }
+        private void bindGrillaPermiso()
+        {
+            PermisoPagingGridView.PageIndex = Convert.ToInt32(ViewState["GridPageIndex"]);
+            PermisoPagingGridView.DataSource = ViewState["lista"];
+            PermisoPagingGridView.DataBind();
         }
     }
 }

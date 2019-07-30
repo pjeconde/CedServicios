@@ -17,36 +17,36 @@
                  </div>
             </div>
             <div class="row" style="background-color:white;">
-                <div class="col-lg-6 col-md-6 padding-bottom-20">
+                <div class="col-lg-6 col-md-6 padding-top-20">
                     <asp:TextBox ID="NombreTextBox" runat="server" MaxLength="50" TabIndex="2" ToolTip="" Width="100%" placeholder="Nombre"></asp:TextBox>
                 </div>
-                <div class="col-lg-6 col-md-6 padding-bottom-20">
+                <div class="col-lg-6 col-md-6 padding-top-20">
                     <asp:TextBox ID="EmailTextBox" runat="server" MaxLength="128" TabIndex="2" ToolTip="" Width="100%" placeholder="Email"></asp:TextBox>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-6 col-md-6 padding-bottom-20">
-                    Perfil:<asp:DropDownList ID="PerfilDropDownList" runat="server" TabIndex="3" DataValueField="IdBusquedaPerfil" DataTextField="DescrBusquedaPerfil" AutoPostBack="false" placeholder="Perfil" Width="100%"></asp:DropDownList>
+                <div class="col-lg-6 col-md-6 text-left padding-top-20">
+                    Perfil:<asp:DropDownList ID="PerfilDropDownList" runat="server" TabIndex="3" DataValueField="IdBusquedaPerfil" DataTextField="DescrBusquedaPerfil" AutoPostBack="false" placeholder="Perfil" Width="300px"></asp:DropDownList>
                 </div>
-                <div class="col-lg-6 col-md-6 padding-bottom-20">
-                    Estado:<asp:DropDownList ID="EstadoDropDownList" runat="server" TabIndex="3" DataValueField="Id" DataTextField="Descr" AutoPostBack="false" placeholder="Estado" Width="100%"></asp:DropDownList>
-                </div>
-            </div>
-            <div class="row">
-                <div class="text-center padding-bottom-20">
-                <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                <div class="col-lg-6 col-md-6 text-left padding-top-20">
+                    Estado:<asp:DropDownList ID="EstadoDropDownList" runat="server" TabIndex="3" DataValueField="Id" DataTextField="Descr" AutoPostBack="false" placeholder="Estado" Width="300px"></asp:DropDownList>
                 </div>
             </div>
             <div class="row">
-                <div class="col-lg-12 col-md-12 padding-bottom-20">
+                <div class="text-center">
+                <asp:Button ID="BuscarButton" runat="server" class="btn btn-default btn-sm" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                <asp:Button ID="SalirButton" runat="server" class="btn btn-default btn-sm" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 col-md-12 padding-top-20">
                     <asp:Panel ID="Panel1" runat="server" BorderStyle="None"
-                        BorderWidth="1px" ScrollBars="Auto" BackImageUrl="" BackColor="White">
+                        BorderWidth="1px" ScrollBars="Auto" BackColor="White">
                         <cc1:PagingGridView ID="BLPagingGridView" runat="server" OnPageIndexChanging="BLPagingGridView_PageIndexChanging"
                             OnRowDataBound="BLPagingGridView_RowDataBound" 
-                            FooterStyle-ForeColor="Brown"
+                            FooterStyle-ForeColor="Brown" HorizontalAlign="Center"
                             OnSorting="BLPagingGridView_Sorting" AllowPaging="True"  
-                            AllowSorting="True" EnableTheming="false" 
+                            AllowSorting="True" EnableTheming="false" CssClass="grilla"
                             AutoGenerateColumns="false" OnRowCommand="BLPagingGridView_RowCommand"
                             DataKeyNames="" BorderStyle="None">
                             <Columns>

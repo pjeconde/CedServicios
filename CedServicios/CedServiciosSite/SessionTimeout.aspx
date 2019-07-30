@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="SessionTimeout.aspx.cs" Inherits="CedServicios.Site.SessionTimeout" Theme="CedServiciosNew" %>
+﻿<%@ Page Title="" Language="C#" AutoEventWireup="true" CodeBehind="SessionTimeout.aspx.cs" Inherits="CedServicios.Site.SessionTimeout" Theme="CedServicios" %>
 
 <!DOCTYPE html>
 <!--[if IE 8]><html class="no-js lt-ie9" lang="en"> <![endif]-->
@@ -191,7 +191,7 @@
                         Torre Bellini, Esmeralda 950, Piso 19, Of. 105, CABA<br />
                         +5411 4778-1744
                     </p>
-                    <p><i class="icon-footer"></i><a href="mailto:contacto@cedeira.com" title="">contacto@cedeira.com</a></p>
+                    <p><i class="icon-footer"></i><a href="mailto:contacto@cedeira.com.ar" title="">contacto@cedeira.com.ar</a></p>
                     <p><a href="https://www.facebook.com/CedeiraSF" title="" target="_new"><i class="icon-social">&#xf082;</i></a><a href="https://twitter.com/cedeirasf" title="" target="_new"><i class="icon-social">&#xf081;</i></a><a href="https://www.linkedin.com/company/cedeirasf/" title="" target="_new"><i class="icon-social">&#xf08c;</i></a></p>
                 </div>
                 <div class="eleven columns" data-scroll-reveal="enter right move 200px over 0.5s after 0.3s">

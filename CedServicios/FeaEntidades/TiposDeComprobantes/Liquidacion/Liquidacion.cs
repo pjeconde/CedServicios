@@ -4,7 +4,8 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.Liquidacion
 {
-	public abstract class Liquidacion : TipoComprobante
+    [Serializable]
+    public abstract class Liquidacion : TipoComprobante
 	{
 	}
 }

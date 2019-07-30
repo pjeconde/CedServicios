@@ -13,6 +13,7 @@ using System.Diagnostics;
 using System.Net;
 using System.Xml.Serialization;
 using CedServicios.Site.Facturacion.Electronica.Reportes;
+using CedServicios.Entidades;
 
 namespace CedServicios.Site
 {
@@ -520,6 +521,7 @@ namespace CedServicios.Site
                         catch (Exception ex)
                         {
                             ListaErrores.Add("Contrato " + contrato.Nro.ToString() + "(pv" + contrato.NroPuntoVta + "): " + contrato.NroPuntoVta.ToString("0000") + "-" + lote.comprobante[0].cabecera.informacion_comprobante.numero_comprobante.ToString("00000000") + " Problemas para generar el PDF.  " + ex.Message);
+                            RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Generacion de Envio PDF por Email: " + ex.Message);
                         }
                         #endregion
                         if (GeneracionPDFok)
@@ -533,6 +535,7 @@ namespace CedServicios.Site
                                 persona.Documento.Nro = contrato.Documento.Nro;
                                 persona.IdPersona = contrato.IdPersona;
                                 persona.DesambiguacionCuitPais = contrato.DesambiguacionCuitPais;
+                                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Envio PDF por Email (persona): " + persona.DesSerializerClassToXmlString<Entidades.Persona>()); 
                                 RN.Persona.LeerPorClavePrimaria(persona, sesion);
                                 RN.Comprobante.LeerDestinatarioFrecuente(persona, contrato, sesion);
                                 if (persona.DatosEmailAvisoComprobantePersona.Activo && contrato.DatosEmailAvisoComprobanteContrato.Activo && persona.DatosEmailAvisoComprobantePersona.De != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Para != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.Asunto != string.Empty && contrato.DatosEmailAvisoComprobanteContrato.Cuerpo != string.Empty)

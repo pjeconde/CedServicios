@@ -30,7 +30,6 @@ namespace CedServicios.Site.Excepciones
                 string auxEx = "Excepción tratando de mostrar o publicar la excepción original";
                 EX.ExceptionManager.Publish(new Exception(auxEx));
                 ExLabel.Text = auxEx;
-                
             }
         }
     }

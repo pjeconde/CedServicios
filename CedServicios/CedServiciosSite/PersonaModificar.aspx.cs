@@ -207,7 +207,6 @@ namespace CedServicios.Site
                 NroDocTextBox.Visible = true;
                 DestinosCuitDropDownList.Visible = false;
             }
-            TraerDatosDeAFIPLinkButton.Visible = TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUIT().Codigo.ToString()) || TipoDocDropDownList.SelectedValue.Equals(new FeaEntidades.Documentos.CUIL().Codigo.ToString());
         }
         protected void SalirButton_Click(object sender, EventArgs e)
         {
@@ -216,56 +215,6 @@ namespace CedServicios.Site
         protected void TipoPersona_CheckedChanged(object sender, EventArgs e)
         {
             Contacto.Required = ClienteRadioButton.Checked || AmbosRadioButton.Checked;
-        }
-        protected void TraerDatosDeAFIPLinkButton_Click(object sender, EventArgs e)
-        {
-            if (TipoDocDropDownList.SelectedValue == "80" || TipoDocDropDownList.SelectedValue == "86") //CUIT o CUIL
-            {
-                try
-                {
-                    Entidades.Sesion sesion = ((Entidades.Sesion)Session["Sesion"]);
-                    Entidades.Sesion sesionConsultaAFIP = new Entidades.Sesion();
-                    sesionConsultaAFIP.Cuit.UsaCertificadoAFIPPropio = true;
-                    sesionConsultaAFIP.Cuit.Nro = RN.Configuracion.CuitConsultaAFIP(sesion);
-                    sesionConsultaAFIP.CnnStr = sesion.CnnStr; 
-                    if (sesionConsultaAFIP.Cuit.Nro != string.Empty)
-                    {
-                        string xmlString = RN.ServiciosAFIP.DatosFiscales(NroDocTextBox.Text, sesionConsultaAFIP);
-                        System.Xml.Serialization.XmlSerializer serializer = new System.Xml.Serialization.XmlSerializer(typeof(Entidades.AFIP.Contribuyente));
-                        StringReader rdr = new StringReader(xmlString);
-                        Entidades.AFIP.Contribuyente contribuyente = (Entidades.AFIP.Contribuyente)serializer.Deserialize(rdr);
-                        RazonSocialTextBox.Text = contribuyente.Persona.DescripcionCorta;
-                        if (contribuyente.Domicilios.Length > 0)
-                        {
-                            Domicilio.Calle = contribuyente.Domicilios[0].Calle;
-                            Domicilio.Nro = contribuyente.Domicilios[0].Numero;
-                            Domicilio.Piso = contribuyente.Domicilios[0].Piso;
-                            Domicilio.Depto = contribuyente.Domicilios[0].OficinaDeptoLocal;
-                            Domicilio.Sector = string.Empty;
-                            Domicilio.Torre = string.Empty;
-                            Domicilio.Manzana = string.Empty;
-                            Domicilio.Localidad = contribuyente.Domicilios[0].Localidad;
-                            Domicilio.IdProvincia = RN.ServiciosAFIP.IdProvincia(contribuyente.Domicilios[0].IdProvincia);
-                            Domicilio.CodPost = contribuyente.Domicilios[0].CodigoPostal;
-                        }
-                    }
-                    else
-                    {
-                        MensajeLabel.Text = "Servicio de consulta no disponible en estos momentos";
-                        ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MensajeLabel.Text = ex.Message;
-                    ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
-                }
-            }
-            else
-            {
-                MensajeLabel.Text = "Para obtener los datos de la AFIP hay que ingresar CUIT/CUIL";
-                ScriptManager.RegisterClientScriptBlock(this, this.GetType(), "Message", "alert('" + MensajeLabel.Text.ToString().Replace("'", "") + "');", true);
-            }
         }
     }
 }

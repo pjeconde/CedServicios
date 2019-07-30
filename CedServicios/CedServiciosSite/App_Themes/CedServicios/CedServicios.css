@@ -113,6 +113,26 @@
 	position: relative; border: 0px; color: black;
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
 }
+.TextoChico
+{
+	font-size: 10px; font-family: Arial; font-style: normal;
+}
+.TextoRegular {
+    font-size: 12px;
+    font-family: Arial;
+    font-style: normal;
+}
+.TextoMediano {
+    font-size: 14px;
+    font-family: Arial;
+    font-style: normal;
+    padding: 0px 0px 0px 0px;
+}
+
+.izquierda
+{
+    text-align: left;
+}
 .TC50B
 {
 	position: relative; border: 0px; text-align: right;
@@ -161,104 +181,19 @@
 	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal; 
 	width: 40px; padding-top:5px;
 }
-.TextoLabelFEADescrLarga
-{
-	position: relative; border: 0px; text-align: right;
-	width: 590px;	
+
+.RBespacios input[type="radio"] {
+    margin-left: 10px; /* Or any other value */
+    margin-right: 2px; /* Or any other value */
 }
-.TextComunSinPosicion
-{
-	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
-	color: black;
-}
-.linkBullet
-{
-	color:Red;	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
-}
-.linkOpcion1
-{
-	font-weight: normal; font-size: 12px; font-family: Arial; font-style: normal;
-	color: blue; 
-}
-.DatePickerFecha
-{
-	text-align: left;
-}
-.Ajuste1
-{
-	width: 10px;
-}
-.TextoFEASYP_EncaRow1
-{
-	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
-	font-size: 12px; font-weight: bold; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
-}
-.TextoFEASYP_EncaRow2
-{
-	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
-	font-size: 11px; font-weight: bold; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
-}
-.TextoFEASYP_EncaRow3
-{
-	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
-	font-size: 11px; font-weight: 400; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
-}
-.TextoFEASYP_DetCol1
-{
-	width:300px; text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
-	font-size: 10px; font-weight: 400; font-style: normal; font-family: Arial; text-align: left; padding: 5px; 
-}
-.TextoFEASYP_DeteFactweb
-{
-	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
-	font-size: 10px; font-weight: 400; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
-}
-.TextoFEASYP_DeteFactcp
-{
-	text-decoration: none; vertical-align: middle; white-space: normal; color: Black; 
-	font-size: 10px; font-weight: 400; font-style: normal; font-family: Arial; text-align: center; padding: 5px; 
-}
-.DataWebControlStylePagingGridView
-{
-    font-size: 100%;
+
+.TextoLabelFEADescrLarga {
+    position: relative;
+    border: 0px;
     text-align: right;
+    width: 590px;
 }
-.PagerStylePagingGridView
-{
-	background-color:#FFDAB9;
-	text-align:left;
-	height:10px;
-}
-.PagerStylePagingGridView span
-{
-    font-weight: bold;
-    color:White;
-} 
-.PagerStylePagingGridView a
-{
-	color:Blue;
-}
-.AlternatingRowStylePagingGridView
-{
-    background-color:#FFF8DC;  
-}
-.HeaderStylePagingGridView
-{
-    background-color:#FFDAB9;
-    font-weight:normal;
-    text-align:center;
-    color:Black;
-    padding:5px;
-}
-.FooterStylePagingGridView
-{
-    background-color: White;
-}
-.SelectedRowStylePagingGridView
-{
-    background-color:#A52A2A;
-    color:White;
-}
+
 .modalBackground
 {
     background-color:Gray;
@@ -313,15 +248,15 @@
     BORDER-LEFT: 1px solid black;
     BORDER-RIGHT: 1px solid black;
     BORDER-TOP: 1px solid black;       
-    padding-left: 4px;
-    padding-right: 4px;
-    font-size: 10px; font-style: normal; font-family: Arial;
+    padding: 4px 4px 4px 4px;
+    font-size: 12px; font-style: normal; font-family: Arial;
+    text-align: center;
 }
 .grilla td /* for the header */
 {
     padding-left: 4px;
     padding-right: 4px;
-    font-size: 10px; font-style: normal; font-family: Arial;
+    font-size: 12px; font-style: normal; font-family: Arial;
 }
 .gridview th
 {
@@ -355,7 +290,7 @@
 .GridPager span {
     display: inline-block;
     padding: 0px 9px;
-    margin-right: 4px;
+    margin-right: 2px;
     border-radius: 3px;
     border: solid 1px #c0c0c0;
     background: #e9e9e9;

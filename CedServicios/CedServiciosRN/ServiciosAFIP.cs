@@ -67,37 +67,180 @@ namespace CedServicios.RN
                 SolicitarTicket = false;
             }
         }
-        public static string DatosFiscales(string Cuit, Entidades.Sesion Sesion)
+
+        private static void CrearTicketPadronA13(Entidades.Sesion Sesion, out LoginTicket ticket)
         {
-            string resp = "";
+            string RutaCertificado = "";
+            ticket = new LoginTicket();
+            string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
+            string Ambiente = System.Configuration.ConfigurationManager.AppSettings["Ambiente"];
+
+            DB.Ticket ticketDB = new DB.Ticket(Sesion);
+            bool SolicitarTicket = false;
+
+            if (Sesion.Ticket == null)
+            {
+                if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                {
+                    Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro, TipoServicios.ConsultaPadronA13);
+                }
+                else
+                {
+                    Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.ConsultaPadronA13);
+                }
+            }
+            else
+            {
+                if (Sesion.Ticket.Cuit != Sesion.Cuit.Nro || Sesion.Ticket.Service != TipoServicios.ConsultaPadronA13)
+                {
+                    if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                    {
+                        Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro, TipoServicios.ConsultaPadronA13);
+                    }
+                    else
+                    {
+                        if (Sesion.Ticket.Cuit != CuitCanalAFIP || Sesion.Ticket.Service != TipoServicios.ConsultaPadronA13)
+                        {
+                            Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.ConsultaPadronA13);
+                        }
+                    }
+                }
+            }
+            if (Sesion.Ticket.Cuit == null)
+            {
+                SolicitarTicket = true;
+            }
+            else if (Convert.ToInt64(Sesion.Ticket.ExpirationTime.ToString("yyyyMMddHHmmss")) <= Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss")))
+            {
+                SolicitarTicket = true;
+            }
+            else
+            {
+                ticket.Service = TipoServicios.ConsultaPadronA13;
+                ticket.Cuit = Sesion.Ticket.Cuit;
+                ticket.Sign = Sesion.Ticket.Sign;
+                ticket.Token = Sesion.Ticket.Token;
+                ticket.UniqueId = Convert.ToUInt32(Sesion.Ticket.UniqueId);
+                ticket.GenerationTime = Sesion.Ticket.GenerationTime;
+                ticket.ExpirationTime = Sesion.Ticket.ExpirationTime;
+            }
+
+            if (SolicitarTicket)
+            {
+                ticket = new LoginTicket();
+                if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                {
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + "-" + Ambiente + ".p12");
+                }
+                else
+                {
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + CuitCanalAFIP + "-" + Ambiente + ".p12");
+                }
+                ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro), TipoServicios.ConsultaPadronA13);
+
+                //Guardar Ticket de AFIP
+                Sesion.Ticket = new Entidades.Ticket();
+                Sesion.Ticket.Cuit = ticket.ObjAutorizacionfev1.Cuit.ToString().Trim();
+                Sesion.Ticket.Service = ticket.Service;
+                Sesion.Ticket.UniqueId = ticket.UniqueId.ToString().Trim();
+                Sesion.Ticket.GenerationTime = ticket.GenerationTime;
+                Sesion.Ticket.ExpirationTime = ticket.ExpirationTime;
+                Sesion.Ticket.Sign = ticket.Sign;
+                Sesion.Ticket.Token = ticket.Token;
+                ticketDB.Modificar(Sesion.Ticket);
+
+                SolicitarTicket = false;
+            }
+        }
+        public static Entidades.PadronA13.persona DatosFiscales(string Cuit, Entidades.Sesion Sesion)
+        {
+            //string resp = "";
+            Entidades.PadronA13.persona persona = new Entidades.PadronA13.persona();
             try
             {
-                //string RutaCertificado = "";
-                //if (Sesion.Cuit.UsaCertificadoAFIPPropio)
-                //{
-                //    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + ".p12");
-                //}
-                //else
-                //{
-                //    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Convert.ToInt64("30710015062") + ".p12");
-                //}
                 //LoginTicket ticket = new LoginTicket();
-                //ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro.ToString()), "padron-puc-ws-consulta-nivel3");
+                //CrearTicket(Sesion, out ticket);
+                //ar.gov.afip.padron_puc_ws.ContribuyenteNivel3SelectServiceImplService c = new ar.gov.afip.padron_puc_ws.ContribuyenteNivel3SelectServiceImplService();
+                //c.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_padron-puc-ws_Service"];
+                //string cuit = "<contribuyentePK><id>" + Cuit + "</id></contribuyentePK>";
+                //string token = "-----BEGIN SSOTOKENBASE64-----\n" + ticket.Token + " -----END SSOTOKENBASE64-----";
+                //string sign = "-----BEGIN SSOSIGNBASE64-----\n" + ticket.Sign + " -----END SSOSIGNBASE64-----";
+                //resp = c.get(cuit, token, sign);
 
                 LoginTicket ticket = new LoginTicket();
-                CrearTicket(Sesion, out ticket);
-                ar.gov.afip.padron_puc_ws.ContribuyenteNivel3SelectServiceImplService c = new ar.gov.afip.padron_puc_ws.ContribuyenteNivel3SelectServiceImplService();
-                c.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_padron-puc-ws_Service"];
-                string cuit = "<contribuyentePK><id>" + Cuit + "</id></contribuyentePK>";
-                string token = "-----BEGIN SSOTOKENBASE64-----\n" + ticket.Token + " -----END SSOTOKENBASE64-----";
-                string sign = "-----BEGIN SSOSIGNBASE64-----\n" + ticket.Sign + " -----END SSOSIGNBASE64-----";
-                resp = c.get(cuit, token, sign);
+                CrearTicketPadronA13(Sesion, out ticket);
+                ar.gov.afip.personaServiceA13.PersonaServiceA13 c = new ar.gov.afip.personaServiceA13.PersonaServiceA13();
+                c.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_personaServiceA13"];
+                string cuit = Cuit;
+                string token = ticket.Token;
+                string sign = ticket.Sign;
+
+                string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
+                ar.gov.afip.personaServiceA13.personaReturn respPersona;
+                if (Sesion.Cuit.UsaCertificadoAFIPPropio && Sesion.Cuit.Nro != CuitCanalAFIP)
+                {
+                    respPersona = c.getPersona(token, sign, Convert.ToInt64(Sesion.Cuit.Nro), Convert.ToInt64(cuit));
+                }
+                else
+                {
+                    //Busco representante del CuitCanalAFIP
+                    string cuitServicioAFIP = RN.Configuracion.CuitConsultaAFIP(Sesion);
+                    respPersona = c.getPersona(token, sign, Convert.ToInt64(cuitServicioAFIP), Convert.ToInt64(cuit));
+                }
+
+                persona.razonSocial = respPersona.persona.razonSocial;
+                persona.apellido = respPersona.persona.apellido;
+                persona.nombre = respPersona.persona.nombre;
+                persona.claveInactivaAsociada = respPersona.persona.claveInactivaAsociada;
+                persona.descripcionActividadPrincipal = respPersona.persona.descripcionActividadPrincipal;
+                persona.estadoClave = respPersona.persona.estadoClave;
+                persona.fechaContratoSocialSpecified = respPersona.persona.fechaContratoSocialSpecified;
+                persona.fechaContratoSocial = respPersona.persona.fechaContratoSocial;
+                persona.formaJuridica = respPersona.persona.formaJuridica;
+                persona.idActividadPrincipal = respPersona.persona.idActividadPrincipal;
+                persona.idActividadPrincipalSpecified = respPersona.persona.idActividadPrincipalSpecified;
+                persona.idPersona = respPersona.persona.idPersona;
+                persona.idPersonaSpecified = respPersona.persona.idPersonaSpecified;
+                persona.mesCierre = respPersona.persona.mesCierre;
+                persona.mesCierreSpecified = respPersona.persona.mesCierreSpecified;
+                persona.numeroDocumento = respPersona.persona.numeroDocumento;
+                persona.periodoActividadPrincipal = respPersona.persona.periodoActividadPrincipal;
+                persona.periodoActividadPrincipalSpecified = respPersona.persona.periodoActividadPrincipalSpecified;
+                persona.tipoClave = respPersona.persona.tipoClave;
+                persona.tipoDocumento = respPersona.persona.tipoDocumento;
+                persona.tipoPersona = respPersona.persona.tipoPersona;
+                if (respPersona.persona.domicilio.Length > 0)
+                {
+                    persona.domicilio = new Entidades.PadronA13.domicilio[respPersona.persona.domicilio.Length];
+                    for (int i = 0; i < respPersona.persona.domicilio.Length; i++)
+                    {
+                        persona.domicilio[i] = new Entidades.PadronA13.domicilio();
+                        persona.domicilio[i].calle = respPersona.persona.domicilio[i].calle;
+                        persona.domicilio[i].codigoPostal = respPersona.persona.domicilio[i].codigoPostal;
+                        persona.domicilio[i].datoAdicional = respPersona.persona.domicilio[i].datoAdicional;
+                        persona.domicilio[i].descripcionProvincia = respPersona.persona.domicilio[i].descripcionProvincia;
+                        persona.domicilio[i].direccion = respPersona.persona.domicilio[i].direccion;
+                        persona.domicilio[i].estadoDomicilio = respPersona.persona.domicilio[i].estadoDomicilio;
+                        persona.domicilio[i].idProvincia = respPersona.persona.domicilio[i].idProvincia;
+                        persona.domicilio[i].idProvinciaSpecified = respPersona.persona.domicilio[i].idProvinciaSpecified;
+                        persona.domicilio[i].localidad = respPersona.persona.domicilio[i].localidad;
+                        persona.domicilio[i].manzana = respPersona.persona.domicilio[i].manzana;
+                        persona.domicilio[i].numero = respPersona.persona.domicilio[i].numero;
+                        persona.domicilio[i].numeroSpecified = respPersona.persona.domicilio[i].numeroSpecified;
+                        persona.domicilio[i].oficinaDptoLocal = respPersona.persona.domicilio[i].oficinaDptoLocal;
+                        persona.domicilio[i].piso = respPersona.persona.domicilio[i].piso;
+                        persona.domicilio[i].sector = respPersona.persona.domicilio[i].sector;
+                        persona.domicilio[i].tipoDatoAdicional = respPersona.persona.domicilio[i].tipoDatoAdicional;
+                        persona.domicilio[i].tipoDomicilio = respPersona.persona.domicilio[i].tipoDomicilio;
+                        persona.domicilio[i].torre = respPersona.persona.domicilio[i].torre;
+                    }
+                }
             }
             catch (Exception ex)
             {
                 throw ex;
             }
-            return resp;
+            return persona;
         }
         public static string IdProvincia(string IdProvinciaAFIP)
         {

@@ -4,7 +4,8 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.Recibos
 {
-	public class B : Recibo
+    [Serializable]
+    public class B : Recibo
 	{
 		public B()
 		{
