@@ -110,53 +110,44 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
             else
             {
-                if (((Entidades.Sesion)Session["Sesion"]).Usuario != null)
+                if (((Entidades.Sesion)Session["Sesion"]).Usuario != null && !puntoDeVenta.ToString().Equals(string.Empty))
                 {
-                    if (!puntoDeVenta.ToString().Equals(string.Empty))
+                    int auxPV;
+                    try
                     {
-                        int auxPV;
-                        try
+                        auxPV = Convert.ToInt32(puntoDeVenta.ToString());
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
                         {
-                            auxPV = Convert.ToInt32(puntoDeVenta.ToString());
-                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                            {
-                                return pv.Nro == auxPV;
-                            }).IdTipoPuntoVta;
-                            switch (idtipo)
-                            {
-                                case "Comun":
-                                case "RG2904":
-                                case "BonoFiscal":
-                                    if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).SelectedValue.ToString() == "S")
-                                    {
-                                        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPSinInf();
-                                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
-                                        ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
-                                    }
-                                    else
-                                    {
-                                        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-                                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-                                        ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
-                                    }
-                                    break;
-                                case "Exportacion":
-                                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
-                                    ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        switch (idtipo)
+                        {
+                            case "Comun":
+                            case "RG2904":
+                            case "BonoFiscal":
+                                if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).SelectedValue.ToString() == "S")
+                                {
+                                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPSinInf();
+                                    ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
                                     ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
-                                    break;
-                                default:
-                                    throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
-                            }
-                        }
-                        catch
-                        {
-                            ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
-                            ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
-                            ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+                                }
+                                else
+                                {
+                                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                                    ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+                                    ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+                                }
+                                break;
+                            case "Exportacion":
+                                ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.Exportaciones.Exportacion.Lista();
+                                ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
+                                ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
+                                break;
+                            default:
+                                throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
                         }
                     }
-                    else
+                    catch
                     {
                         ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
                         ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
@@ -233,7 +224,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     string auxDatoRef = ((TextBox)referenciasGridView.FooterRow.FindControl("txtdato_de_referencia")).Text;
                     if (auxDatoRef.Contains("?"))
                     {
-                        throw new Exception("Referencia no agregada porque el número de referencia no respeta el formato para exportación");
+                        throw new Exception("Referencia no agregada porque el número de referencia no respeta el formato");
                     }
                     else
                     {
@@ -296,12 +287,24 @@ namespace CedServicios.Site.Facturacion.Electronica
 			{
                 ListItem li = ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).Items.FindByValue(((System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias>)ViewState["referencias"])[e.NewEditIndex].codigo_de_referencia.ToString());
 				li.Selected = true;
-			}
-			catch
+                if (li.Value == "203")
+                {
+                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditMiPyMEsMaskedEditExtender")).Enabled = true;
+                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+                    ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
+                }
+                else
+                {
+                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditMiPyMEsMaskedEditExtender")).Enabled = false;
+                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = true;
+                    ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
+                }
+            }
+            catch
 			{
 			}
             
-		}
+        }
         private void AjustarTipoComprobanteAFIPEnEdicion(object sender, GridViewEditEventArgs e)
         {
             ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_comprobante_afipEdit")).DataValueField = "Codigo";
@@ -384,7 +387,16 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 {
                                     ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPSinInf();
                                     ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
-                                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = true;
+                                    if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "203")
+                                    {
+                                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender")).Enabled = true;
+                                        ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+                                    }
+                                    else
+                                    {
+                                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender")).Enabled = false;
+                                        ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = true;
+                                    }
                                     ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
                                 }
                                 else
@@ -577,6 +589,165 @@ namespace CedServicios.Site.Facturacion.Electronica
             AjustarCodigoReferenciaEnEdicion(griview, ev);
             
             referenciasUpdatePanel.Update();
+        }
+
+        private void AjustarDatoDeReferenciaEnFooter()
+        {
+            if (Funciones.SessionTimeOut(Session))
+            {
+                Response.Redirect("~/SessionTimeout.aspx");
+            }
+            else
+            {
+                if (((Entidades.Sesion)Session["Sesion"]).Usuario != null && !puntoDeVenta.ToString().Equals(string.Empty))
+                {
+                    int auxPV;
+                    try
+                    {
+                        auxPV = Convert.ToInt32(puntoDeVenta.ToString());
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        switch (idtipo)
+                        {
+                            case "Comun":
+                            case "RG2904":
+                            case "BonoFiscal":
+                                if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).SelectedValue.ToString() == "S")
+                                {
+                                    if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "203")
+                                    {
+                                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender")).Enabled = true;
+                                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+                                        ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
+                                    }
+                                    else
+                                    {
+                                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender")).Enabled = false;
+                                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
+                                        ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
+                                    }
+                                }
+                                else
+                                {
+                                    ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender")).Enabled = false;
+                                    ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+                                    ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+                                }
+                                break;
+                            case "Exportacion":
+                                ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender")).Enabled = false;
+                                ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = true;
+                                ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = false;
+                                break;
+                            default:
+                                throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
+                        }
+                    }
+                    catch
+                    {
+                        ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender")).Enabled = false;
+                        ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+                        ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+                    }
+                }
+                else
+                {
+                    ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).DataSource = FeaEntidades.CodigosReferencia.CodigoReferencia.Lista();
+                    ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender")).Enabled = false;
+                    ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoMaskedEditExtender")).Enabled = false;
+                    ((AjaxControlToolkit.FilteredTextBoxExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterExpoFilteredTextBoxExtender")).Enabled = true;
+                }
+            }
+        }
+
+        protected void ddlcodigo_de_referencia_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            AjustarDatoDeReferenciaEnFooter();
+            referenciasUpdatePanel.Update();
+        }
+
+        protected void ddlcodigo_de_referenciaEdit_SelectedIndexChanged(object sender, System.EventArgs e)
+        {
+            DropDownList ddlcodigoRef = (DropDownList)sender;
+            GridViewRow row = (GridViewRow)ddlcodigoRef.NamingContainer;
+            GridView griview = (GridView)row.NamingContainer;
+            GridViewEditEventArgs ev = new GridViewEditEventArgs(row.RowIndex);
+            AjustarDatoDeReferenciaEnEdicion(griview, ev);
+
+            referenciasUpdatePanel.Update();
+        }
+
+        private void AjustarDatoDeReferenciaEnEdicion(object sender, GridViewEditEventArgs e)
+        {
+            if (!puntoDeVenta.ToString().Equals(string.Empty))
+            {
+                int auxPV;
+                try
+                {
+                    auxPV = Convert.ToInt32(puntoDeVenta.ToString());
+                    if (Funciones.SessionTimeOut(Session))
+                    {
+                        Response.Redirect("~/SessionTimeout.aspx");
+                    }
+                    else
+                    {
+                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
+                        {
+                            return pv.Nro == auxPV;
+                        }).IdTipoPuntoVta;
+                        switch (idtipo)
+                        {
+                            case "Comun":
+                            case "RG2904":
+                            case "BonoFiscal":
+                                if (((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_comprobante_afipEdit")).SelectedValue.ToString() == "S")
+                                {
+                                    if (((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).SelectedValue.ToString() == "203")
+                                    {
+                                        ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditMiPyMEsMaskedEditExtender")).Enabled = true;
+                                        ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+                                        ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
+                                    }
+                                    else
+                                    {
+                                        ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditMiPyMEsMaskedEditExtender")).Enabled = false;
+                                        ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = true;
+                                        ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
+                                    }
+                                }
+                                else
+                                {
+                                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditMiPyMEsMaskedEditExtender")).Enabled = false;
+                                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+                                    ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
+                                }
+                                break;
+                            case "Exportacion":
+                                ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditMiPyMEsMaskedEditExtender")).Enabled = false;
+                                ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = true;
+                                ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = false;
+                                break;
+                            default:
+                                throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
+                        }
+                    }
+                }
+                catch
+                {
+                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditMiPyMEsMaskedEditExtender")).Enabled = false;
+                    ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+                    ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
+                }
+            }
+            else
+            {
+                ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditMiPyMEsMaskedEditExtender")).Enabled = false;
+                ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
+                ((AjaxControlToolkit.FilteredTextBoxExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoFilteredTextBoxExtender")).Enabled = true;
+            }
         }
 
         protected void referenciasGridView_RowDataBound(object sender, GridViewRowEventArgs e)

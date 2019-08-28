@@ -674,6 +674,10 @@ namespace CedServicios.Site
                     FechaDsd = DateTime.Now.AddYears(-1).ToString("yyyy") + "0101";
                     FechaHst = DateTime.Now.AddYears(-1).ToString("yyyy") + "1231";
                     break;
+                case "DesdeSiempre":
+                    FechaDsd = "19800101";
+                    FechaHst = FechaHst = DateTime.Now.ToString("yyyyMMdd");
+                    break;
                 default:
                     throw new EX.Validaciones.ValorInvalido("FechaPredefinida");
             }
