@@ -5,6 +5,7 @@ using System.Text;
 
 namespace CedServicios.Entidades
 {
+    [Serializable]
     public class Opcion
     {
         private string nombre;

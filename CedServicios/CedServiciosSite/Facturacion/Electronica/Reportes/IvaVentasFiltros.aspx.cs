@@ -93,7 +93,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                         }
                         
                         double signo = 1;
-                        if (("/3/8/13/").IndexOf("/" + ivc.TipoCompCodigo + "/") != -1)
+                        if (("/3/8/13/203/").IndexOf("/" + ivc.TipoCompCodigo + "/") != -1)
                         {
                             signo = -1;
                         }

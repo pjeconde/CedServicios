@@ -159,7 +159,7 @@ namespace CedServicios.RN
                         objFEDetalleRequest.FchVtoPago = lc.comprobante[0].cabecera.informacion_comprobante.fecha_vencimiento;      // Comprobante.Fecha_venc_pago.ToString("yyyyMMdd");
                     }
                 }
-                if (("*201*202*").IndexOf("*" +lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
+                if (("*201*").IndexOf("*" +lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
                 {
                     ar.gov.afip.wsfev1.Opcional[] opcionales = new ar.gov.afip.wsfev1.Opcional[1];
                     ar.gov.afip.wsfev1.Opcional opc = new ar.gov.afip.wsfev1.Opcional();
@@ -188,7 +188,7 @@ namespace CedServicios.RN
                     opcionales[0] = opc;
                     objFEDetalleRequest.Opcionales = opcionales;
                 }
-                if (("*203*208*213*").IndexOf("*" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
+                if (("*202*203*208*213*").IndexOf("*" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
                 {
                     ar.gov.afip.wsfev1.Opcional[] opcionales = new ar.gov.afip.wsfev1.Opcional[1];
                     ar.gov.afip.wsfev1.Opcional opc = new ar.gov.afip.wsfev1.Opcional();
@@ -284,7 +284,7 @@ namespace CedServicios.RN
                                 objFEDetalleRequest.CbtesAsoc[CantReferenciasAFIP].Tipo = lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
                                 objFEDetalleRequest.CbtesAsoc[CantReferenciasAFIP].PtoVta = Convert.ToInt32(lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Substring(0, 5));
                                 objFEDetalleRequest.CbtesAsoc[CantReferenciasAFIP].Nro = Convert.ToInt32(lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Substring(6, 8));
-                                if (("*203*").IndexOf("*" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
+                                if (("*202*203*").IndexOf("*" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
                                 {
                                     objFEDetalleRequest.CbtesAsoc[CantReferenciasAFIP].Cuit = lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Substring(15, 11);
                                     objFEDetalleRequest.CbtesAsoc[CantReferenciasAFIP].CbteFch = lc.comprobante[0].cabecera.informacion_comprobante.referencias[j].dato_de_referencia.Substring(27, 8);
