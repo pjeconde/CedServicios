@@ -59,7 +59,7 @@
         <tr>
             <td align="left" style="padding-right:5px; padding-top:5px">
                 Nro. Comprobante:
-            </td>
+            </td> 
             <td align="left" style="padding-top:5px">
                 <asp:TextBox ID="NroComprobanteTextBox" runat="server" TabIndex="3" Width="80px" MaxLength="8"></asp:TextBox>
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator2" runat="server"
