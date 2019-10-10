@@ -39,7 +39,7 @@ namespace CedServicios.Site
 
             usuarioLabel.Visible = false;
             cUITDropDownList.DataValueField = "Nro";
-            cUITDropDownList.DataTextField = "Nro";
+            cUITDropDownList.DataTextField = "NroYRazSoc";
             cUITDropDownList.DataSource = new List<Entidades.Cuit>();
             cUITDropDownList.DataBind();
 

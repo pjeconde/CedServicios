@@ -83,7 +83,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                             for (int z = 0; z < lote.comprobante[0].detalle.linea.Length; z++)
                             {
                                 double signo = 1;
-                                if (("/3/8/13/").IndexOf("/" + Convert.ToInt32(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante).ToString().Trim() + "/") != -1)
+                                if (("/3/8/13/203/").IndexOf("/" + Convert.ToInt32(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante).ToString().Trim() + "/") != -1)
                                 {
                                     signo = -1;
                                 }

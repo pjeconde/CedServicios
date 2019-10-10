@@ -1698,6 +1698,10 @@ namespace CedServicios.Site
                 {
                     ListaEstados = RN.Estado.ListaComprobantesSoloPteEnvio();
                 }
+                else if (Tratamiento == "Modificacion")
+                {
+                    ListaEstados = RN.Estado.ListaComprobantesVentaSoloPtes();
+                }
                 else
                 { 
                     ListaEstados = RN.Estado.ListaComprobantesVenta();

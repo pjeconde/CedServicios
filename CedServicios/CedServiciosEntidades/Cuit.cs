@@ -270,6 +270,15 @@ namespace CedServicios.Entidades
                 return datosImpositivos.DescrCondIngBrutos;
             }
         }
+
+        public string NroYRazSoc
+        {
+            get
+            {
+                return nro + "-" + razonSocial;
+            }
+        }
         #endregion
+
     }
 }
