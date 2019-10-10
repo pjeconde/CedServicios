@@ -152,10 +152,52 @@
                     </button>
                     <a class="navbar-brand" href="../../../Index.html"><img src="../../../Imagenes/logo_h_100x310.png" alt="Logo" style="height:40px; width: 124px" /></a>
                 </div>
-
+                <div class="nav navbar-nav navbar-right" id="DivUsuario" style="text-align:center">   
+        <asp:ContentPlaceHolder ID="UsuarioContentPlaceHolder" runat="server" Visible="true">
+            <div class="container">
+            <div class="row">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <table>
+                        <tr>
+                            <td rowspan="3">
+                                <asp:ImageButton ID="UsuarioImageButton" runat="server" ImageUrl="~/Imagenes/SiluetaHombre.jpg" onclick="UsuarioImageButton_Click" AlternateText="" Height="35px" Visible="false" />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Fuente" style="text-align: right">
+                                <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario:"></asp:Label>
+                            </td>
+                            <td class="Fuente" colspan="3" style="text-align: left">
+                                <asp:HyperLink ID="UsuarioHyperLink" runat="server" Text="" NavigateUrl="~/UsuarioConsulta.aspx"></asp:HyperLink>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="Fuente" style="text-align: right">
+                                <asp:Label ID="CUITLabel" runat="server" Text="CUIT:" ToolTip="Clave Única de Identificación Tributaria"></asp:Label>
+                            </td>
+                            <td class="Fuente" style="text-align: left">
+                                <asp:DropDownList ID="CUITDropDownList" runat="server" AutoPostBack="true"
+                                    onselectedindexchanged="CUITDropDownList_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                            <td class="Fuente" style="text-align: right">
+                                <asp:Label ID="UNLabel" runat="server" Text="UN:" ToolTip="Unidad de Negocio"></asp:Label>
+                            </td>
+                            <td class="Fuente" style="text-align: left">
+                                <asp:DropDownList ID="UNDropDownList" runat="server" AutoPostBack="true" 
+                                    onselectedindexchanged="UNDropDownList_SelectedIndexChanged">
+                                </asp:DropDownList>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            </div>
+        </asp:ContentPlaceHolder>
+    </div> 
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right">
+                    <ul class="nav navbar-nav">
                         <asp:Literal runat="server" ID="MenuPpal"></asp:Literal>
                         <li runat="server" id="PersonasControl" class="dropdown dropdown-submenu"><a runat="server" id="Personas" href="#" class="dropdown-toggle" data-toggle="dropdown" visible="true">Personas</a>
                             <ul class="dropdown-menu">
@@ -314,49 +356,7 @@
                 <!-- /.navbar-collapse -->
             </div><!-- /.container-fluid -->
         </nav>
-     <div id="DivUsuario" style="text-align:center">   
-        <asp:ContentPlaceHolder ID="UsuarioContentPlaceHolder" runat="server" Visible="true">
-            <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                    <table>
-                        <tr>
-                            <td rowspan="3">
-                                <asp:ImageButton ID="UsuarioImageButton" runat="server" ImageUrl="~/Imagenes/SiluetaHombre.jpg" onclick="UsuarioImageButton_Click" AlternateText="" Height="35px" Visible="false" />
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="Fuente" style="text-align: right">
-                                <asp:Label ID="UsuarioLabel" runat="server" Text="Usuario:"></asp:Label>
-                            </td>
-                            <td class="Fuente" colspan="3" style="text-align: left">
-                                <asp:HyperLink ID="UsuarioHyperLink" runat="server" Text="" NavigateUrl="~/UsuarioConsulta.aspx"></asp:HyperLink>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="Fuente" style="text-align: right">
-                                <asp:Label ID="CUITLabel" runat="server" Text="CUIT:" ToolTip="Clave Única de Identificación Tributaria"></asp:Label>
-                            </td>
-                            <td class="Fuente" style="text-align: left">
-                                <asp:DropDownList ID="CUITDropDownList" runat="server" AutoPostBack="true"
-                                    onselectedindexchanged="CUITDropDownList_SelectedIndexChanged">
-                                </asp:DropDownList>
-                            </td>
-                            <td class="Fuente" style="text-align: right">
-                                <asp:Label ID="UNLabel" runat="server" Text="UN:" ToolTip="Unidad de Negocio"></asp:Label>
-                            </td>
-                            <td class="Fuente" style="text-align: left">
-                                <asp:DropDownList ID="UNDropDownList" runat="server" AutoPostBack="true" 
-                                    onselectedindexchanged="UNDropDownList_SelectedIndexChanged">
-                                </asp:DropDownList>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-            </div>
-        </asp:ContentPlaceHolder>
-    </div>
+
     <asp:ContentPlaceHolder ID="MenuContentPlaceHolder" runat="server" Visible="true">
         <div id="DivMenu" style="text-align:center">
         </div>
