@@ -96,6 +96,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         if (lc.comprobante[i].cabecera.informacion_comprobante.referencias[j] != null)
                         {
                             cIBK.cabecera.informacion_comprobante.referencias[j] = new global::CedServicios.Site.org.dyndns.cedweb.envio.lcComprobanteCabeceraInformacion_comprobanteReferencias();
+                            cIBK.cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].tipo_comprobante_afip;
                             cIBK.cabecera.informacion_comprobante.referencias[j].codigo_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].codigo_de_referencia;
                             cIBK.cabecera.informacion_comprobante.referencias[j].dato_de_referencia = lc.comprobante[i].cabecera.informacion_comprobante.referencias[j].dato_de_referencia;
                         }
