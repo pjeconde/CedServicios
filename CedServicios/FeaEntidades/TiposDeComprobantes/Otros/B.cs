@@ -10,7 +10,8 @@ namespace FeaEntidades.TiposDeComprobantes.Otros
 		public B()
 		{
 			codigo = 40;
-            descr = "Otros comprobantes B que cumplan con la R.G. N° 1415";
-		}
-	}
+            descr = "Otros comprobantes B que cumplan con la R.G. 1415";
+            // Otros comprobantes B que cumplan con la R.G. N° 1415
+        }
+    }
 }

@@ -295,7 +295,12 @@ namespace CedServicios.RN
             }
             if (Persona.DatosEmailAvisoComprobantePersona.Cco.Trim() != string.Empty)
             {
-                mail.Bcc.Add(new MailAddress(Persona.DatosEmailAvisoComprobantePersona.Cco)); 
+                string[] cco = Persona.DatosEmailAvisoComprobantePersona.Cco.Split(',');
+                for (int i = 0; i < cco.Length; i++)
+                {
+                    if (cco[i].Trim() != string.Empty) mail.Bcc.Add(new MailAddress(cco[i].Trim()));
+                }
+                //mail.Bcc.Add(new MailAddress(Persona.DatosEmailAvisoComprobantePersona.Cco)); 
             }
             if (Sesion.Ambiente != "PROD")
             {
