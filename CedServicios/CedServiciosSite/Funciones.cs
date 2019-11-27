@@ -39,7 +39,7 @@ namespace CedServicios.Site
 
             usuarioLabel.Visible = false;
             cUITDropDownList.DataValueField = "Nro";
-            cUITDropDownList.DataTextField = "Nro";
+            cUITDropDownList.DataTextField = "NroYRazSoc";
             cUITDropDownList.DataSource = new List<Entidades.Cuit>();
             cUITDropDownList.DataBind();
 
@@ -673,6 +673,10 @@ namespace CedServicios.Site
                 case "AnualAnterior":
                     FechaDsd = DateTime.Now.AddYears(-1).ToString("yyyy") + "0101";
                     FechaHst = DateTime.Now.AddYears(-1).ToString("yyyy") + "1231";
+                    break;
+                case "DesdeSiempre":
+                    FechaDsd = "19800101";
+                    FechaHst = FechaHst = DateTime.Now.ToString("yyyyMMdd");
                     break;
                 default:
                     throw new EX.Validaciones.ValorInvalido("FechaPredefinida");

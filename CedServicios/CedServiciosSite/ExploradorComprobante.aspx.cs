@@ -143,10 +143,10 @@ namespace CedServicios.Site
                             descrTratamiento += " (AFIP/ITF)";
                             break;
                         case "Modificacion":
-                            if (ElementoTextBox.Text == "Contrato")
+                             if (ElementoTextBox.Text == "Contrato")
                             {
                                 AyudaModifContratoPanel.Visible = true;
-                                ViewState["Estados"] = RN.Estado.ListaComprobantesVenta();
+                                ViewState["Estados"] = RN.Estado.ListaContratos(false);
                                 EstadoGridView.DataSource = ViewState["Estados"];
                             }
                             else
@@ -1697,6 +1697,17 @@ namespace CedServicios.Site
                 if (Tratamiento == "Envio")
                 {
                     ListaEstados = RN.Estado.ListaComprobantesSoloPteEnvio();
+                }
+                else if (Tratamiento == "Modificacion")
+                {
+                    if (ElementoTextBox.Text == "Contrato")
+                    { 
+                        ListaEstados = RN.Estado.ListaContratos(false);
+                    }
+                    else
+                    {
+                        ListaEstados = RN.Estado.ListaComprobantesVentaSoloPtes();
+                    }
                 }
                 else
                 { 

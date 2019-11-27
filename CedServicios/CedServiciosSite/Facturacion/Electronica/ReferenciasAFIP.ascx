@@ -61,14 +61,14 @@
                                         Width="620px"></asp:Label>
                                 </ItemTemplate>
                                 <EditItemTemplate>
-                                    <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="600px">
+                                    <asp:DropDownList ID="ddlcodigo_de_referenciaEdit" runat="server" Width="600px" OnSelectedIndexChanged="ddlcodigo_de_referenciaEdit_SelectedIndexChanged" AutoPostBack="true">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="ddlcodigo_de_referenciaEditItemRequiredFieldValidator"
                                         runat="server" ControlToValidate="ddlcodigo_de_referenciaEdit" ErrorMessage="Codigo de referencia en edición no informado"
                                         SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
                                 </EditItemTemplate>
                                 <FooterTemplate>
-                                    <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="600px">
+                                    <asp:DropDownList ID="ddlcodigo_de_referencia" runat="server" Width="600px" OnSelectedIndexChanged="ddlcodigo_de_referencia_SelectedIndexChanged" AutoPostBack="true">
                                     </asp:DropDownList>
                                     <asp:RequiredFieldValidator ID="ddldescripcionFooterRequiredFieldValidator" runat="server"
                                         ControlToValidate="ddlcodigo_de_referencia" ErrorMessage="Codigo de referencia a agregar no informado"
@@ -85,7 +85,11 @@
                                     <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='<%# Eval("dato_de_referencia") %>'
                                         Width="400px"></asp:TextBox>
                                     <cc1:MaskedEditExtender ID="txtdato_de_referenciaEditExpoMaskedEditExtender" runat="server"
-                                        ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
+                                        ClearMaskOnLostFocus="false" Enabled="false" Mask="99999-99999999" MaskType="Number"
+                                        PromptCharacter="?" TargetControlID="txtdato_de_referencia">
+                                    </cc1:MaskedEditExtender>
+                                    <cc1:MaskedEditExtender ID="txtdato_de_referenciaEditMiPyMEsMaskedEditExtender" runat="server"
+                                        ClearMaskOnLostFocus="false" Enabled="false" Mask="99999-99999999-99999999999-99999999" MaskType="Number"
                                         PromptCharacter="?" TargetControlID="txtdato_de_referencia">
                                     </cc1:MaskedEditExtender>
                                     <cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaEditExpoFilteredTextBoxExtender"
@@ -96,9 +100,17 @@
                                         SetFocusOnError="True" ValidationGroup="ReferenciasEditItem">*</asp:RequiredFieldValidator>
                                 </EditItemTemplate>
                                 <FooterTemplate>
-                                    <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="75%"></asp:TextBox>
+                                    <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="250px"></asp:TextBox> 
+                                    <a href="javascript:void(0)" id="A2" role="button" class="popover-test" data-html="true" title="Código de operación" style="width: 280px"
+                                                        data-content="Los formatos permitidos según las opciones seleccionadas son dos.<br/><br/>Uno es <b>?????-????????</b>(5 dígitos para el punto de venta y 8 dígitos para el nro. de comprobante).<br/><br/> Otro para Notas de Crédito MiPyMEs es <b>?????-????????-???????????-????????</b> (se le agrega 11 dígitos para el CUIT del vendedor y 8 dígitos formato AAAAMMDD para la fecha de emisión del comprobante referenciado).<br><br>Si la nota de crédito MiPyMEs anula una Factura de crédito MiPyMEs y ésta, no fué rechazada por el cliente, debe agregar en <b>DATOS COMERCIALES</b> el siguiente texto: <b> ANUL:N</b>
+Si el comprobante fué rechazado por su proveedor, debe ingresar el texto: <b>ANUL:S</b><br><br>También puede ser libre, sin formato.">
+                                                        <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;">
                                     <cc1:MaskedEditExtender ID="txtdato_de_referenciaFooterExpoMaskedEditExtender" runat="server"
-                                        ClearMaskOnLostFocus="false" Enabled="false" Mask="9999-99999999" MaskType="Number"
+                                        ClearMaskOnLostFocus="false" Enabled="false" Mask="99999-99999999" MaskType="Number"
+                                        PromptCharacter="?" TargetControlID="txtdato_de_referencia">
+                                    </cc1:MaskedEditExtender>
+                                    <cc1:MaskedEditExtender ID="txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender" runat="server"
+                                        ClearMaskOnLostFocus="false" Enabled="false" Mask="99999-99999999-99999999999-99999999" MaskType="Number"
                                         PromptCharacter="?" TargetControlID="txtdato_de_referencia">
                                     </cc1:MaskedEditExtender>
                                     <cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaFooterExpoFilteredTextBoxExtender"

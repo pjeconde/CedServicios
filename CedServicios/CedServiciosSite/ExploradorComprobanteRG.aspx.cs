@@ -392,7 +392,12 @@ namespace CedServicios.Site
                             string Campo19 = String.Format("{0,1}", CantAlicuotas);
                             string Campo20 = String.Format("{0,1}", lote.comprobante[cl].cabecera.informacion_comprobante.codigo_operacion);
                             string Campo21 = new string(Convert.ToChar("0"), 15);  //Otros Tributos
-                            string Campo22 = String.Format("{0,-8}", lote.comprobante[cl].cabecera.informacion_comprobante.fecha_vencimiento);
+                            string Campo22 = "00000000";
+                            if (("/201/202/203/").IndexOf("/" + lote.comprobante[cl].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "/") == -1)
+                            {
+                                Campo22 = String.Format("{0,-8}", lote.comprobante[cl].cabecera.informacion_comprobante.fecha_vencimiento);
+                            }
+                            
 
                             sbDataVENTASCab.AppendLine(Campo1 + Campo2 + Campo3 + Campo4 + Campo5 + Campo6 + Campo7 + Campo8 + Campo9 + Campo10 + Campo11 + Campo12 + Campo13 + Campo14 + Campo15 + Campo16 + Campo17 + Campo18 + Campo19 + Campo20 + Campo21 + Campo22);
 

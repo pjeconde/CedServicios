@@ -96,5 +96,14 @@ namespace CedServicios.RN
             lista.Add(new Entidades.EstadoRech());
             return lista;
         }
+        public static List<Entidades.Estado> ListaContratos(bool IncluirOpcionTodos)
+        {
+            List<Entidades.Estado> lista = new List<Entidades.Estado>();
+            lista.Add(new Entidades.EstadoVigente());
+            lista.Add(new Entidades.EstadoDeBaja());
+            if (IncluirOpcionTodos) lista.Add(new Entidades.Estado(String.Empty, "Todos", false));
+            return lista;
+        }
     }
+
 }

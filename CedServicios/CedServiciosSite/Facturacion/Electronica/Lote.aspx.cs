@@ -3276,7 +3276,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 infcomprob.fecha_vencimiento_cae = null;
                 infcomprob.fecha_vencimiento_caeSpecified = true;
             }
-            if (("*201*202*203*").IndexOf("*" + infcomprob.tipo_de_comprobante.ToString() + "*") >= 0)
+            if (("*201*").IndexOf("*" + infcomprob.tipo_de_comprobante.ToString() + "*") >= 0)
             {
                 if (DatosComerciales.Texto != string.Empty)
                 {

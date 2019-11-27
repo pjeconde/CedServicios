@@ -85,6 +85,7 @@
                                     <li class="divider"></li>
                                     <li><asp:LinkButton class="dropdown-item" id="AnualActual" runat="server" OnClick="FechasPredefinidasLinkButton_Click" Text="Año Actual"></asp:LinkButton></li>
                                     <li><asp:LinkButton class="dropdown-item" id="AnualAnterior" runat="server" OnClick="FechasPredefinidasLinkButton_Click" Text="Año Anterior"></asp:LinkButton></li>
+                                    <li><asp:LinkButton class="dropdown-item" id="DesdeSiempre" runat="server" OnClick="FechasPredefinidasLinkButton_Click" Text="Desde Siempre"></asp:LinkButton></li>
                                 </ul>
                             </span>
                         </div>

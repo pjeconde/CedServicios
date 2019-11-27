@@ -18,7 +18,11 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			if (!this.IsPostBack)
 			{
-				ResetearGrillas();
+                Object o = Session["ComprobanteATratar"];
+                if (o == null || ((Entidades.ComprobanteATratar)o).Tratamiento == Entidades.Enum.TratamientoComprobante.Alta)
+                {
+                    ResetearGrillas();
+                }
 			}
 		}
 
