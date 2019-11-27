@@ -2263,7 +2263,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
+    <Content Include="Facturacion\Electronica\Reportes\FREE3OF9.TTF" />
     <None Include="Facturacion\Electronica\Reportes\Imagen.xsc">
       <DependentUpon>Imagen.xsd</DependentUpon>
     </None>
