@@ -2538,6 +2538,17 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 Entidades.ComprobanteATratar comprobanteATratar = (Entidades.ComprobanteATratar)ViewState["ComprobanteATratarOrig"];
                                 RN.Comprobante.Registrar(lcFea, tratamiento, comprobanteATratar.Comprobante, null, IdNaturalezaComprobanteTextBox.Text, "AFIP", "PteEnvio", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), string.Empty, false, string.Empty, string.Empty, string.Empty, ((Entidades.Sesion)Session["Sesion"]));
 
+                                // ----- Volver a leer el comprobante a tratar para poder reintentar el envio ante un error.
+                                Entidades.Comprobante compRegistrado = new Entidades.Comprobante();
+                                compRegistrado.Cuit = lcFea.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                                compRegistrado.NroPuntoVta = lcFea.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                                compRegistrado.TipoComprobante.Id = lcFea.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                                compRegistrado.Nro = lcFea.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                                compRegistrado.NaturalezaComprobante.Id = comprobanteATratar.Comprobante.NaturalezaComprobante.Id;
+                                RN.Comprobante.Leer(compRegistrado, (Entidades.Sesion)Session["Sesion"]);
+                                ViewState["ComprobanteATratarOrig"] = new Entidades.ComprobanteATratar(Entidades.Enum.TratamientoComprobante.Consulta, compRegistrado);
+                                // -----
+
                                 string caeNro = "";
                                 string caeFecVto = "";
                                 if (idtipo == "Exportacion")

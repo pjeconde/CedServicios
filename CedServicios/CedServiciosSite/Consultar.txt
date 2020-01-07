@@ -212,3 +212,26 @@
 20190524 12:49:33  10016-El numero o fecha del comprobante no se corresponde con el proximo a autorizar. Consultar metodo FECompUltimoAutorizado..\n Ultimo nro. de comprobante enviado: 62.\n
 20190527 12:50:47  Reporte: Imagen OK
 20190527 12:51:10  Reporte: Imagen OK
+20200106 07:40:43  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200106 07:41:25  El comprobante ya existe. Se encuentra en estado: PteEnvio
+20200106 07:42:41  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200106 07:42:59  Problema en ejecución de script de SQL ( Se deshizo la operacion )
+20200106 07:43:32  Problema en ejecución de script de SQL ( Se deshizo la operacion )
+20200106 07:56:14  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200106 08:02:23  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200106 08:04:33  El comprobante no existe o fue modificado por otro usuario.
+20200106 08:05:02  El comprobante no existe o fue modificado por otro usuario.
+20200107 03:29:15  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200107 03:29:34  El comprobante no existe o fue modificado por otro usuario.
+20200107 04:02:11  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200107 04:06:57  Problema en ejecución de script de SQL ( Se deshizo la operacion )
+20200107 04:07:45  Problema en ejecución de script de SQL ( Se deshizo la operacion )
+20200107 04:07:56  Problema en ejecución de script de SQL ( Se deshizo la operacion )
+20200107 04:20:18  Problema en ejecución de script de SQL ( Se deshizo la operacion )
+20200107 04:20:51  Problema en ejecución de script de SQL ( Se deshizo la operacion )
+20200107 04:23:53  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200107 04:24:56  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200107 04:36:53  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200107 04:44:57  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200107 04:48:00  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 
+20200107 05:33:22  Resultado: R\n10013-Campo  DocTipo  Para comprobantes clase A y M el campo  DocTipo debe ser igual a 80 (CUIT)\n10015-El campo  DocNro es invalido.\nCAE: 

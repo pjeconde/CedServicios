@@ -303,6 +303,10 @@ namespace CedServicios.RN
             comprobante.DatosEmailAvisoComprobanteContrato.DestinatarioFrecuente.Id = IdDestinatarioFrecuente;
             comprobante.DatosEmailAvisoComprobanteContrato.Asunto = EmailAvisoComprobanteAsunto;
             comprobante.DatosEmailAvisoComprobanteContrato.Cuerpo = EmailAvisoComprobanteCuerpo;
+            comprobante.NaturalezaComprobante = ComprobanteOrig.NaturalezaComprobante;
+            comprobante.Response = ComprobanteOrig.Response;
+            comprobante.WF = ComprobanteOrig.WF;
+            comprobante.UltActualiz = ComprobanteOrig.UltActualiz;
 
             #region ARMADO DE MINUTAS DE STOCK Y CONTABILIDAD
             Entidades.EsquemaContable esquemaContable;
