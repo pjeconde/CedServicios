@@ -1663,6 +1663,7 @@ namespace CedServicios.RN
                 throw new Exception(ex.Message);
             }
         }
+
         public static string ConsultarAFIPUltNroComprobante(FeaEntidades.InterFacturas.lote_comprobantes lc, Entidades.Sesion Sesion)
         {
             try
@@ -1716,6 +1717,131 @@ namespace CedServicios.RN
                 else
                 {
                     respuesta += DB.Funciones.ObjetoSerializado(CbteTipoResponse.ResultGet);
+                }
+                return respuesta;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        // Agregado por mi para consultar emisor de MiPyme
+        private static void CrearTicketMiPyme(Entidades.Sesion Sesion, out LoginTicket ticket, out ar.gov.afip.wsw.Service objWS, out ar.gov.afip.wsfev1.Service objWSFEV1, out ar.gov.afip.wsfecred.FECredService objWSfecred)
+        {
+            string RutaCertificado = "";
+            ticket = new LoginTicket();
+            string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
+            string Ambiente = System.Configuration.ConfigurationManager.AppSettings["Ambiente"];
+
+            DB.Ticket ticketDB = new DB.Ticket(Sesion);
+            bool SolicitarTicket = false;
+
+            if (Sesion.Ticket == null)
+            {
+                if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                {
+                    Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro, TipoServicios.FECredMiPyme);
+                }
+                else
+                {
+                    Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.FECredMiPyme);
+                }
+            }
+            else
+            {
+                if (Sesion.Ticket.Cuit != Sesion.Cuit.Nro || Sesion.Ticket.Service != TipoServicios.FECredMiPyme)
+                {
+                    if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                    {
+                        Sesion.Ticket = ticketDB.Leer(Sesion.Cuit.Nro, TipoServicios.FECredMiPyme);
+                    }
+                    else
+                    {
+                        if (Sesion.Ticket.Cuit != CuitCanalAFIP)
+                        {
+                            Sesion.Ticket = ticketDB.Leer(CuitCanalAFIP, TipoServicios.FECredMiPyme);
+                        }
+                    }
+                }
+            }
+            if (Sesion.Ticket.Cuit == null)
+            {
+                SolicitarTicket = true;
+            }
+            else if (Convert.ToInt64(Sesion.Ticket.ExpirationTime.ToString("yyyyMMddHHmmss")) <= Convert.ToInt64(DateTime.Now.ToString("yyyyMMddHHmmss")))
+            {
+                SolicitarTicket = true;
+            }
+            else
+            {
+                ticket.ObjAutorizacionfecred = new ar.gov.afip.wsfecred.AuthRequestType();
+                ticket.ObjAutorizacionfecred.cuitRepresentada = Convert.ToInt64(Sesion.Cuit.Nro);
+                ticket.ObjAutorizacionfecred.sign = Sesion.Ticket.Sign;
+                ticket.ObjAutorizacionfecred.token = Sesion.Ticket.Token;
+            }
+
+            if (SolicitarTicket)
+            {
+                ticket = new LoginTicket();
+                if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                {
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + "-" + Ambiente + ".p12");
+                }
+                else
+                {
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + CuitCanalAFIP + "-" + Ambiente + ".p12");
+                }
+                ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro), "wsfecred");
+
+                //Guardar Ticket de AFIP
+                Sesion.Ticket = new Entidades.Ticket();
+                Sesion.Ticket.Cuit = ticket.ObjAutorizacionfecred.cuitRepresentada.ToString().Trim();
+                Sesion.Ticket.Service = ticket.Service;
+                Sesion.Ticket.UniqueId = ticket.UniqueId.ToString().Trim();
+                Sesion.Ticket.GenerationTime = ticket.GenerationTime;
+                Sesion.Ticket.ExpirationTime = ticket.ExpirationTime;
+                Sesion.Ticket.Sign = ticket.Sign;
+                Sesion.Ticket.Token = ticket.Token;
+                ticketDB.Modificar(Sesion.Ticket);
+
+                SolicitarTicket = false;
+            }
+            objWS = new ar.gov.afip.wsw.Service();
+            objWS.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_wsw_Service"];
+            objWS.Proxy = ticket.Wp;
+            objWSFEV1 = new ar.gov.afip.wsfev1.Service();
+            objWSFEV1.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_wsfev1_Service"];
+            objWSFEV1.Proxy = ticket.Wp;
+            objWSfecred = new ar.gov.afip.wsfecred.FECredService();
+            objWSfecred.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_wsfecred_Service"];
+            objWSfecred.Proxy = ticket.Wp;
+        }
+
+        // Agregado por mi para consultar emisor de MiPyme
+        public static string ConsultarFacturaMiPymeEmisor(Entidades.Sesion Sesion)
+        {
+            try
+            {
+                string respuesta = "";
+                LoginTicket ticket;
+                ar.gov.afip.wsw.Service objWS;
+                ar.gov.afip.wsfev1.Service objWSFEV1;
+                ar.gov.afip.wsfecred.FECredService objWSfecred;
+                CrearTicketMiPyme(Sesion, out ticket, out objWS, out objWSFEV1, out objWSfecred);
+                
+
+                ar.gov.afip.wsfecred.ConsultarTiposRetencionesReturnType TipoResponse = new ar.gov.afip.wsfecred.ConsultarTiposRetencionesReturnType();
+                TipoResponse = objWSfecred.consultarTiposRetenciones(ticket.ObjAutorizacionfecred);
+                System.Globalization.CultureInfo cedeiraCultura = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["Cultura"], false);
+                cedeiraCultura.DateTimeFormat = new System.Globalization.CultureInfo(System.Configuration.ConfigurationManager.AppSettings["CulturaDateTimeFormat"], false).DateTimeFormat;
+                if (TipoResponse.arrayErroresFormato != null)
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(TipoResponse.arrayErroresFormato);
+                }
+                else
+                {
+                    respuesta += DB.Funciones.ObjetoSerializado(TipoResponse.arrayErroresFormato);
                 }
                 return respuesta;
             }

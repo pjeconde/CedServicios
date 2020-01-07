@@ -330,6 +330,8 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new NotasDebito.C());
             lista.Add(new NotasCredito.C());
             lista.Add(new Recibos.C());
+            lista.Add(new OtrosCompras.OtrosExceptuadosNDyResumen());
+            lista.Add(new OtrosCompras.OtrosNoCumplenRG3419());
             lista.Add(new Facturas.T());
             lista.Add(new NotasDebito.T());
             lista.Add(new NotasCredito.T());

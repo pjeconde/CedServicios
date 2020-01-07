@@ -121,8 +121,8 @@ namespace CedServicios.RN
                         opciones.Add(new Entidades.Opcion("ArticulosListaPreciosAlta", true, "/ListaPrecioCrear.aspx"));
                         opciones.Add(new Entidades.Opcion("ArticulosListaPreciosBajaYAnulBaja", true, "/ListaPrecioSeleccionar.aspx?Baja"));
                         opciones.Add(new Entidades.Opcion("ArticulosListaPreciosModif", true, "/ListaPrecioSeleccionar.aspx?Modificar"));
-                        opciones.Add(new Entidades.Opcion("ArticulosListaPreciosClonado", true, "/ListaPrecioSeleccionar.aspx?Clonar"));
-                        opciones.Add(new Entidades.Opcion("ArticulosListaPreciosReemplazo", true, "/ListaPrecioSeleccionar.aspx?Reemplazar"));
+                        opciones.Add(new Entidades.Opcion("ArticulosListaPreciosClonado", false, "/ListaPrecioSeleccionar.aspx?Clonar"));
+                        opciones.Add(new Entidades.Opcion("ArticulosListaPreciosReemplazo", false, "/ListaPrecioSeleccionar.aspx?Reemplazar"));
                         opciones.Add(new Entidades.Opcion("ArticulosListaPreciosConsulta", true, "/ListaPrecioConsulta.aspx"));
 
                         opciones.Add(new Entidades.Opcion("ArticulosPreciosIngresoManual", true, "/PrecioIngresoManual.aspx"));

@@ -4,7 +4,7 @@
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <table align="center" border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobante (online Interfacturas)"></asp:Label>
@@ -40,7 +40,7 @@
         <tr>
             <td colspan="2" style="padding-top:20px">
                 <asp:Button ID="ConsultarLoteIBKButton" runat="server"
-                    OnClick="ConsultarLoteIBKButton_Click" Text="Consultar lote en Interfacturas"
+                    OnClick="ConsultarLoteIBKButton_Click" Text="Consultar lote en Interfacturas" class="btn btn-default btn-sm"
                     ToolTip="Consultar el comprobante en Interfacturas. Es un servicio On-Line para el cual se requiere un certificado de autenticación."
                     Width="100%" />
             </td>

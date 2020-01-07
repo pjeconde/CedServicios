@@ -381,6 +381,50 @@ namespace CedServicios.Site
                 }
             }
         }
+        // Agregado por mi para consultar emisor de MiPyme
+        protected void ConsultarFacturaMiPymeEmisor_Click(object sender, EventArgs e)
+        {
+            MensajeLabel.Text = "";
+            if (((Entidades.Sesion)Session["Sesion"]).Usuario.Id == null)
+            {
+                MensajeLabel.Text = "Su sesión ha caducado por inactividad. Por favor vuelva a loguearse";
+            }
+            else
+            {
+                try
+                {
+                    GrabarLogTexto("~/Consultar.txt", "Consulta de Facturas Emitidas MiPyME: " + ((Entidades.Sesion)Session["Sesion"]).Cuit.Nro);
+
+                    string respuesta;
+                    respuesta = RN.ComprobanteAFIP.ConsultarFacturaMiPymeEmisor((Entidades.Sesion)Session["Sesion"]);
+                    respuesta = respuesta.Replace("\r\n", "\\n");
+                    respuesta = respuesta.Replace(" xmlns=\"http://ar.gov.afip.dif.FEV1/\"", "");
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(respuesta), false);
+                    //MensajeLabel.Text = Funciones.TextoScript(respuesta);
+                }
+                catch (Exception ex)
+                {
+                    string errormsg = ex.Message.Replace("\n", "");
+                    if (ex.InnerException != null)
+                    {
+                        try
+                        {
+                            errormsg = errormsg + " " + ((System.Net.Sockets.SocketException)ex.InnerException).ErrorCode;
+                        }
+                        catch
+                        {
+                        }
+                        errormsg = errormsg + " " + ex.InnerException.Message.Replace("\n", "");
+                    }
+                    errormsg = errormsg.Replace("'", "").Replace("\r", " ");
+                    MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
+                }
+                finally
+                {
+                    TicketCompletarInfo();
+                }
+            }
+        }
 
         protected void ConsultarTipoComprobantesAFIPEXPOButton_Click(object sender, EventArgs e)
         {

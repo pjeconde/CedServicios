@@ -24,6 +24,7 @@ namespace CedServicios.RN
         public const string FacturaCT = "wsct";
         public const string ConsultaPadronN3 = "padron-puc-ws-consulta-nivel3";
         public const string ConsultaPadronA13 = "ws_sr_padron_a13";
+        public const string FECredMiPyme = "wsfecred";
     }
 
 	public class LoginTicket
@@ -58,7 +59,9 @@ namespace CedServicios.RN
         ar.gov.afip.wsfev1.FEAuthRequest objAutorizacionfev1;
         ar.gov.afip.wsfexv1.ClsFEXAuthRequest objAutorizacionfexv1;
         ar.gov.afip.WSCT.AuthRequestType objAutorizacionWSCT;
-        
+        ar.gov.afip.wsfecred.AuthRequestType objAutorizacionfecred;
+
+
         System.Net.WebProxy wp;
 
         public void ObtenerTicket(string RutaCertificado, long Cuit, string Servicio)
@@ -111,6 +114,10 @@ namespace CedServicios.RN
                 objAutorizacionWSCT.token = Token;
                 objAutorizacionWSCT.sign = Sign;
                 objAutorizacionWSCT.cuitRepresentada = Cuit;
+                objAutorizacionfecred = new ar.gov.afip.wsfecred.AuthRequestType();
+                objAutorizacionfecred.token = Token;
+                objAutorizacionfecred.sign = Sign;
+                objAutorizacionfecred.cuitRepresentada = Cuit;
             }
             catch (Exception ex)
             {
@@ -141,6 +148,13 @@ namespace CedServicios.RN
             get { return objAutorizacionWSCT; }
             set { objAutorizacionWSCT = value; }
         }
+
+        public ar.gov.afip.wsfecred.AuthRequestType ObjAutorizacionfecred
+        {
+            get { return objAutorizacionfecred; }
+            set { objAutorizacionfecred = value; }
+        }
+
 
         public System.Net.WebProxy Wp
         {

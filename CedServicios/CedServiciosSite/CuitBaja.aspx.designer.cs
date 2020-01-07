@@ -193,7 +193,7 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.TextBox NroSerieCertifITFTextBox;
         
         /// <summary>
-        /// AyudaNroSerieCertif control.
+        /// Control AyudaNroSerieCertif.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
@@ -202,7 +202,7 @@ namespace CedServicios.Site {
         protected global::System.Web.UI.WebControls.Literal AyudaNroSerieCertif;
         
         /// <summary>
-        /// DestinoComprobanteAFIPCheckBox control.
+        /// Control DestinoComprobanteAFIPCheckBox.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.

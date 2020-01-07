@@ -5,17 +5,17 @@
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <table align="center">
         <tr>
-            <td align="center" colspan="3" style="padding-top:20px">
+            <td colspan="3" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes (online Interfacturas)"></asp:Label>
             </td>
         </tr>
         <tr>
-	        <td align="left" style="padding-right:5px; padding-top:20px">
+	        <td colspan="3" style="padding-top:20px">
                 Período de emisión:
-	        </td>
-			<td align="left" style="padding-top:20px">
+	        <%--</td>
+			<td align="center" colspan="3" style="padding-top:20px">--%>
                 Desde
                 <asp:TextBox ID="FechaDesdeTextBox" runat="server" CausesValidation="true" ToolTip="Ingresar fecha en formato: año, mes, día (AAAAMMDD).  Ej: 20040324" Width="90px" TabIndex="304"></asp:TextBox>
                 <ajaxToolkit:CalendarExtender ID="FechaDesdeCalendarExtender" runat="server"  CssClass="MyCalendar" OnClientShown="onCalendar1Shown"
@@ -28,31 +28,38 @@
                     TargetControlID="FechaHastaTextBox" Format="yyyyMMdd" PopupButtonID="FechaHastaImage" >
                 </ajaxToolkit:CalendarExtender>
                 <asp:Image runat="server" ID="FechaHastaImage" ImageUrl="~/Imagenes/Calendar.gif" />
+             </td>
+            <tr>
+             <td colspan="3" style="padding-top:20px">
+                Persona (cliente/proveedor): <asp:DropDownList ID="ClienteDropDownList" runat="server" TabIndex="3" Width="400px" DataValueField="Orden" DataTextField="RazonSocial" AutoPostBack="true" ></asp:DropDownList>
             </td>
-        </tr>
-        <tr>
-            <td align="left" style="padding-right:5px; padding-top:5px">
-                Persona (cliente/proveedor):
-            </td>
-            <td align="left" style="padding-top:5px">
-                <asp:DropDownList ID="ClienteDropDownList" runat="server" TabIndex="3" Width="400px" DataValueField="Orden" DataTextField="RazonSocial" AutoPostBack="true" ></asp:DropDownList>
-            </td>        
-            <td style="width:550px">
-            </td>
-        </tr>
-        <tr>
+            </tr>
+            </tr>
+            <%--</td>--%>
+            
+<%--        </tr>
+        <tr>--%>
+            <%--<td style="padding-top:20px">--%>
+                
+            
+        
+           <%-- <td style="width:550px">
+            </td>--%>
+
+        
+<%--        <tr>
             <td align="left" style="padding-right:5px; padding-top:5px">
                 &nbsp;</td>
             <td align="left" style="padding-top:5px">
                 
             </td>        
-        </tr>
+        </tr>--%>
         <tr>
             <td>
             </td>
-            <td align="left" style="height: 24px; padding-top:5px">
-                <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+            <td>
+                <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" class="btn btn-default btn-sm" onclick="BuscarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" class="btn btn-default btn-sm" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

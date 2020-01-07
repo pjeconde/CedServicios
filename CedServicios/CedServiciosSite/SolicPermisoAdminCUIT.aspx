@@ -11,7 +11,7 @@
             </td>
         </tr>
         <tr>
-            <td style="padding-right: 5px; padding-top: 20px; text-align: right">
+            <td align="left" style="padding-top: 20px;">
                 <asp:RegularExpressionValidator ID="RegularExpressionValidator14" runat="server"
                     ControlToValidate="CUITTextBox" ErrorMessage="CUIT" SetFocusOnError="True" ValidationExpression="[0-9]{11}">
                     <asp:Label ID="Label45" runat="server" SkinID="IndicadorValidacion"></asp:Label>
@@ -21,17 +21,16 @@
                     <asp:Label ID="Label46" runat="server" SkinID="IndicadorValidacion"></asp:Label>
                 </asp:RequiredFieldValidator>
                 <asp:Label ID="Label19" runat="server" Text="CUIT"></asp:Label>
-            </td>
-            <td style="padding-top: 20px; text-align: left">
+            <%--</td>
+            <td align="left" style="padding-top: 20px;">--%>
                 <asp:TextBox ID="CUITTextBox" runat="server" MaxLength="11" TabIndex="1" ToolTip="Debe ingresar sólo números." Width="90px"></asp:TextBox>
             </td>
         </tr>
         <tr>
-            <td>
-            </td>
-            <td style="height: 24px; padding-top: 20px; text-align: left">
-                <asp:Button ID="SolicitarButton" runat="server" OnClick="SolicitarButton_Click" TabIndex="2" Text="Solicitar" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="3" Text="Cancelar" onclick="SalirButton_Click" />
+
+            <td align="left" style="padding-top: 20px;">
+                <asp:Button ID="SolicitarButton" runat="server" class="btn btn-default btn-sm" OnClick="SolicitarButton_Click" TabIndex="2" Text="Solicitar" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="3" Text="Cancelar" class="btn btn-default btn-sm" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

@@ -120,8 +120,8 @@
             <td>
             </td>
             <td style="height: 24px; padding-top:20px; text-align: left">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="508" Text="Aceptar" onclick="AceptarButton_Click" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="509" Text="Cancelar" onclick="SalirButton_Click" />
+                <asp:Button ID="AceptarButton" runat="server" TabIndex="508" Text="Aceptar" class="btn btn-default btn-sm" onclick="AceptarButton_Click" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="509" Text="Cancelar" class="btn btn-default btn-sm" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

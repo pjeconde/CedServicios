@@ -82,17 +82,19 @@
             <tr>
                 <td>
                 </td>
-                <td align="left" style="height: 24px; padding-top:10px" valign="top">
-                    <asp:Button ID="BuscarButton" runat="server" Text="Leer contratos para seleccionar" onclick="BuscarButton_Click" />
-                    <asp:Button ID="SalirButton" runat="server" Text="Salir" onclick="SalirButton_Click" />
+                <td align="right" style="height: 24px; padding-top:10px" valign="top">
+                    <asp:Button ID="BuscarButton" runat="server" Text="Leer contratos para seleccionar" class="btn btn-default btn-sm" Width="75%" onclick="BuscarButton_Click" />
+                </td>
+                <td align="left" style="height: 24px; padding-top:10px; padding-left:5px;" valign="top" > 
+                    <asp:Button ID="SalirButton" runat="server" Text="Salir" class="btn btn-default btn-sm" Width="25%" onclick="SalirButton_Click" />
                 </td>
             </tr>
             <asp:Panel ID="GenerarComprobantesPanel" runat="server">
             <tr>
                 <td>
                 </td>
-                <td align="left" style="height:24px; padding-top:10px" valign="top">
-                    <asp:Button ID="GenerarComprobantesButton" runat="server" Text="Generar Comprobantes para los Contratos seleccionados" onclick="GenerarComprobantesButton_Click" />
+                <td align="right" style="height:24px;" valign="top">
+                    <asp:Button ID="GenerarComprobantesButton" runat="server" Text="Generar Comprobantes para los Contratos seleccionados" class="btn btn-default btn-sm" Width="75%" onclick="GenerarComprobantesButton_Click" />
                 </td>
             </tr>
             </asp:Panel>

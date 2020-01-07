@@ -98,8 +98,8 @@
             <td>
             </td>
             <td style="height: 24px; padding-top:20px; text-align: left">
-                <asp:Button ID="AceptarButton" runat="server" TabIndex="505" Text="Aceptar" onclick="AceptarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="506" Text="Cancelar" onclick="SalirButton_Click" />
+                <asp:Button ID="AceptarButton" runat="server" TabIndex="505" Text="Aceptar" class="btn btn-default btn-sm" onclick="AceptarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="506" Text="Cancelar" class="btn btn-default btn-sm" onclick="SalirButton_Click" />
             </td>
         </tr>
         <tr>

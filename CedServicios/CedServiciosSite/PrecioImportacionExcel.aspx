@@ -37,7 +37,7 @@
                     </tr>
                     <tr>
                         <td style="padding-top: 5px">
-                            <asp:Button ID="FileUploadButton" runat="server" CausesValidation="false" OnClick="FileUploadButton_Click" Text="Importar precios desde el archivo seleccionado" Width="100%" />
+                            <asp:Button ID="FileUploadButton" runat="server" CausesValidation="false" OnClick="FileUploadButton_Click" class="btn btn-default btn-sm" Text="Importar precios desde el archivo seleccionado" Width="100%" />
                         </td>
                     </tr>
                     <tr>

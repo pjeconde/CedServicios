@@ -123,5 +123,24 @@ namespace CedServicios.RN.Properties {
                 return ((string)(this["CedServiciosRN_ar_gov_afip_personaServiceA13_PersonaServiceA13"]));
             }
         }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://fwshomo.afip.gov.ar/wsfecred/FECredService")]
+        public string CedServiciosRN_ar_gov_afip_wsfecred {
+            get {
+                return ((string)(this["CedServiciosRN_ar_gov_afip_wsfecred"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://fwshomo.afip.gov.ar:443/wsfecred/FECredService")]
+        public string CedServiciosRN_ar_gov_afip_wsfecred_FECredService {
+            get {
+                return ((string)(this["CedServiciosRN_ar_gov_afip_wsfecred_FECredService"]));
+            }
+        }
     }
 }

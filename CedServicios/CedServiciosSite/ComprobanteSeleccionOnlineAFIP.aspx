@@ -237,6 +237,20 @@
                             <tr>
                                 <td style="padding: 10px">
                                     <table>
+                                        <%--Agregado por mi para consultar emisor de MiPyme--%>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                Factura Electronica de Credito MiPyme - Emisor
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="ConsultarFacturaMiPymeEmisor" runat="server" OnClick="ConsultarFacturaMiPymeEmisor_Click"
+                                                    Text="Consultar las Facturas Electronica de Credito MyPime" ToolTip="PRUEBA"
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                        <%--Agregado por mi para consultar emisor de MiPyme--%>
                                         <tr>
                                             <td colspan="2" style="padding-top: 10px">
                                                 RG.2485 (Común)

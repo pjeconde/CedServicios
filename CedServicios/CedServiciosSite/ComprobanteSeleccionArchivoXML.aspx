@@ -4,7 +4,7 @@
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px">
+    <table align="center">
         <tr>
             <td align="center" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Consulta de Comprobantes (archivo XML)"></asp:Label>
@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td style="padding-top:20px">
-                <asp:Button ID="FileUploadButton" runat="server" OnClick="FileUploadButton_Click" Text="Completar datos automáticamente desde archivo xml seleccionado" />
+                <asp:Button ID="FileUploadButton" class="btn btn-default btn-sm" runat="server" OnClick="FileUploadButton_Click" Text="Completar datos automáticamente desde archivo xml seleccionado" Width="75%"/>
             </td>
         </tr>
         <tr>

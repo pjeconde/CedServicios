@@ -147,6 +147,7 @@
     <Content Include="css\layout-contact.css" />
     <Content Include="ArticuloConsultaConFiltros.aspx" />
     <Content Include="ComprobanteConsultaConFiltros.aspx" />
+    <Content Include="Facturacion\Electronica\LoteM.aspx" />
     <Content Include="images\parallax\out.jpg" />
     <Content Include="images\parallax\p.jpg" />
     <Content Include="images\parallax\personal.jpg" />
@@ -1214,6 +1215,13 @@
     </Compile>
     <Compile Include="ArticuloConsultaConFiltros.aspx.designer.cs">
       <DependentUpon>ArticuloConsultaConFiltros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\LoteM.aspx.cs">
+      <DependentUpon>LoteM.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\LoteM.aspx.designer.cs">
+      <DependentUpon>LoteM.aspx</DependentUpon>
     </Compile>
     <Compile Include="PersonaConsultaConFiltros.aspx.cs">
       <DependentUpon>PersonaConsultaConFiltros.aspx</DependentUpon>

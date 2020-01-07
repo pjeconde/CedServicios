@@ -48,8 +48,8 @@
             </tr>
             <tr>
                 <td align="center" style="height: 24px; padding-top:20px" colspan="3">
-                    <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
-                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" onclick="SalirButton_Click" />
+                    <asp:Button ID="BuscarButton" runat="server" TabIndex="8" Text="Buscar" class="btn btn-default btn-sm" onclick="BuscarButton_Click" OnClientClick="this.disabled = true; BorrarMensaje()" UseSubmitBehavior="false" />
+                    <asp:Button ID="SalirButton" runat="server" CausesValidation="false" TabIndex="9" Text="Cancelar" class="btn btn-default btn-sm" onclick="SalirButton_Click" />
                 </td>
             </tr>
             <tr>

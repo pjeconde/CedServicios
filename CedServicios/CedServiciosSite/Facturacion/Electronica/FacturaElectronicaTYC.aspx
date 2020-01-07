@@ -4,7 +4,7 @@
     <div class="container">
     <div class="row">
     <div class="col-lg-12 col-md-12">
-    <table border="0" cellpadding="0" cellspacing="0" style="padding-left:10px; width:900px">
+    <table align="center" style="padding-left:10px; width:900px">
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
                 <asp:Label ID="TituloPaginaLabel" runat="server" SkinID="TituloPagina" Text="Factura Electrónica"></asp:Label>
@@ -103,8 +103,8 @@
         </tr>
         <tr>
             <td align="center" colspan="2" style="padding-top:20px">
-                <asp:Button ID="ButtonAceptar" runat="server" OnClick="ButtonAceptar_Click" Text="Confirmar" />
-                <asp:Button ID="ButtonRechazar" runat="server" onclick="ButtonRechazar_Click" Text="Rechazar" />
+                <asp:Button ID="ButtonAceptar" runat="server" OnClick="ButtonAceptar_Click" class="btn btn-default btn-sm" Text="Confirmar" />
+                <asp:Button ID="ButtonRechazar" runat="server" onclick="ButtonRechazar_Click" class="btn btn-default btn-sm" Text="Rechazar" />
             </td>
         </tr>
         <tr>
