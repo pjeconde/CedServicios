@@ -395,7 +395,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 {
                                     ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIPSinInf();
                                     ((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).DataBind();
-                                    if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "201")
+                                    if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "201"|| ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "202" || ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "203")
                                     {
                                         ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender")).Enabled = true;
                                     }
@@ -627,7 +627,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             case "BonoFiscal":
                                 if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddltipo_comprobante_afip")).SelectedValue.ToString() == "S")
                                 {
-                                    if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "201")
+                                    if (((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "201"|| ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "202"||((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "203")
                                     {
                                         ((AjaxControlToolkit.MaskedEditExtender)referenciasGridView.FooterRow.FindControl("txtdato_de_referenciaFooterMiPyMEsMaskedEditExtender")).Enabled = true;
                                     }
@@ -704,7 +704,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             case "BonoFiscal":
                                 if (((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddltipo_comprobante_afipEdit")).SelectedValue.ToString() == "S")
                                 {
-                                    if (((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).SelectedValue.ToString() == "201")
+                                    if (((DropDownList)((GridView)sender).Rows[e.NewEditIndex].FindControl("ddlcodigo_de_referenciaEdit")).SelectedValue.ToString() == "201" || ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "202" || ((DropDownList)referenciasGridView.FooterRow.FindControl("ddlcodigo_de_referencia")).SelectedValue.ToString() == "203")
                                     {
                                         ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditMiPyMEsMaskedEditExtender")).Enabled = true;
                                         ((AjaxControlToolkit.MaskedEditExtender)((GridView)sender).Rows[e.NewEditIndex].FindControl("txtdato_de_referenciaEditExpoMaskedEditExtender")).Enabled = false;
