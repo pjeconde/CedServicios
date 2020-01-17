@@ -424,6 +424,7 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             if (Tratamiento == "Alta")
             {
+                comprobante.WF.Estado = IdEstado;
                 int CantReg = db.Crear(comprobante);
                 if (CantReg <= 0)
                 {
@@ -438,6 +439,8 @@ namespace CedServicios.RN
                     {
                         comprobanteVerifEstado.Documento.Tipo.Id = "80";
                         comprobanteVerifEstado.Documento.Nro = Lote.comprobante[0].cabecera.informacion_vendedor.cuit.ToString();
+                        
+
                     }
                     RN.Comprobante.Leer(comprobanteVerifEstado, Sesion);
                     throw new Exception("El comprobante ya existe. Se encuentra en estado: " + comprobanteVerifEstado.Estado);
