@@ -475,7 +475,7 @@ namespace CedServicios.Site
                         return tc.Incluir == true;
                     });
                     string orderBy = OrderByDropDownList.SelectedValue;
-                    lista = RN.Comprobante.ListaFiltrada(estados, estadosCompras, tiposComprobante, orderBy, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, false, DetalleTextBox.Text, sesion, true);
+                    lista = RN.Comprobante.ListaFiltrada(estados, estadosCompras, tiposComprobante, orderBy, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, string.Empty, string.Empty, false, false, DetalleTextBox.Text, sesion, true);
 
                     ContentPlaceHolder contentPlaceDefault = ((ContentPlaceHolder)Master.FindControl("ContentPlaceDefault"));
                     System.Web.UI.HtmlControls.HtmlAnchor control = new System.Web.UI.HtmlControls.HtmlAnchor();

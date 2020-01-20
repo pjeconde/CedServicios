@@ -201,7 +201,7 @@ namespace CedServicios.Site
                     return tc.Incluir == true;
                 });
                 string orderBy = OrderByDropDownList.SelectedValue;
-                lista = RN.Comprobante.ListaPaging(out CantidadFilas, ComprobantePagingGridView.PageIndex, ComprobantePagingGridView.OrderBy, estados, estadosCompras, tiposComprobante, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, DetalleTextBox.Text, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.Comprobante.ListaPaging(out CantidadFilas, ComprobantePagingGridView.PageIndex, ComprobantePagingGridView.OrderBy, estados, estadosCompras, tiposComprobante, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, PuntoDeVentaTextBox.Text, NumeroDeComprobanteTextBox.Text, DetalleTextBox.Text, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ComprobantePagingGridView.VirtualItemCount = CantidadFilas;
                 ComprobantePagingGridView.PageSize = sesion.Usuario.CantidadFilasXPagina;
                 ViewState["lista"] = lista;
@@ -264,7 +264,7 @@ namespace CedServicios.Site
                     return tc.Incluir == true;
                 });
                 string orderBy = OrderByDropDownList.SelectedValue;
-                lista = RN.Comprobante.ListaPaging(out CantidadFilas, ComprobantePagingGridView.PageIndex, ComprobantePagingGridView.OrderBy, estados, estadosCompras, tiposComprobante, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, DetalleTextBox.Text, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                lista = RN.Comprobante.ListaPaging(out CantidadFilas, ComprobantePagingGridView.PageIndex, ComprobantePagingGridView.OrderBy, estados, estadosCompras, tiposComprobante, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, PuntoDeVentaTextBox.Text, NumeroDeComprobanteTextBox.Text, DetalleTextBox.Text, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                 ViewState["lista"] = lista;
                 ComprobantePagingGridView.DataSource = (List<Entidades.Comprobante>)ViewState["lista"];
                 ComprobantePagingGridView.DataBind();
@@ -574,6 +574,30 @@ namespace CedServicios.Site
                 MensajeLabel.Text = "Seleccione por lo menos un estado (Compra / Venta Tradicional).";
                 return false;
             }
+            if (!PuntoDeVentaTextBox.Text.Equals(string.Empty))
+            {
+                try
+                {
+                    int aux = Convert.ToInt32(PuntoDeVentaTextBox.Text);
+                }
+                catch
+                {
+                    MensajeLabel.Text = "Ingrese un dato numérico en el punto de venta, como máximo de 5 dígitos.";
+                    return false;
+                }
+            }
+            if (!NumeroDeComprobanteTextBox.Text.Equals(string.Empty))
+            {
+                try
+                {
+                    int aux = Convert.ToInt32(NumeroDeComprobanteTextBox.Text);
+                }
+                catch
+                {
+                    MensajeLabel.Text = "Ingrese un dato numérico en el número de comprobante, como máximo de 9 dígitos.";
+                    return false;
+                }
+            }
             return true;
         }
         protected void BuscarButton_Click(object sender, EventArgs e)
@@ -628,7 +652,7 @@ namespace CedServicios.Site
                         return tc.Incluir == true;
                     });
                     string orderBy = OrderByDropDownList.SelectedValue;
-                    lista = RN.Comprobante.ListaPaging(out CantidadFilas, ComprobantePagingGridView.PageIndex, ComprobantePagingGridView.OrderBy, estados, estadosCompras, tiposComprobante, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, DetalleTextBox.Text, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
+                    lista = RN.Comprobante.ListaPaging(out CantidadFilas, ComprobantePagingGridView.PageIndex, ComprobantePagingGridView.OrderBy, estados, estadosCompras, tiposComprobante, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, PuntoDeVentaTextBox.Text, NumeroDeComprobanteTextBox.Text, DetalleTextBox.Text, Session.SessionID, (Entidades.Sesion)Session["Sesion"]);
                     ComprobantePagingGridView.VirtualItemCount = CantidadFilas;
                     ComprobantePagingGridView.PageSize = sesion.Usuario.CantidadFilasXPagina;
                     ContentPlaceHolder contentPlaceDefault = ((ContentPlaceHolder)Master.FindControl("ContentPlaceDefault"));

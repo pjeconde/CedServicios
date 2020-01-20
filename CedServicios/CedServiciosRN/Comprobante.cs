@@ -21,10 +21,10 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaFiltradaIvaVentas(Estados, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos, Detalle);
         }
-        public static List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, List<Entidades.Estado> EstadosCompras, List<FeaEntidades.TiposDeComprobantes.TipoComprobante> TiposComprobante, string OrderBy, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, bool IncluirRequestResponse, string Detalle, Entidades.Sesion Sesion, bool Ajuste)
+        public static List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, List<Entidades.Estado> EstadosCompras, List<FeaEntidades.TiposDeComprobantes.TipoComprobante> TiposComprobante, string OrderBy, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, string PuntoDeVenta, string NumeroDeComprobante, bool IncluirContratos, bool IncluirRequestResponse, string Detalle, Entidades.Sesion Sesion, bool Ajuste)
         {
             DB.Comprobante db = new DB.Comprobante(Sesion);
-            return db.ListaFiltrada(Estados, EstadosCompras, TiposComprobante, OrderBy, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, IncluirContratos, IncluirRequestResponse, Detalle, Ajuste);
+            return db.ListaFiltrada(Estados, EstadosCompras, TiposComprobante, OrderBy, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, PuntoDeVenta, NumeroDeComprobante, IncluirContratos, IncluirRequestResponse, Detalle, Ajuste);
         }
         public static void Registrar(FeaEntidades.Turismo.comprobante Comprobante, string Tratamiento, Entidades.Comprobante ComprobanteOrig, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle, bool EmailAvisoComprobanteActivo, string IdDestinatarioFrecuente, string EmailAvisoComprobanteAsunto, string EmailAvisoComprobanteCuerpo, Entidades.Sesion Sesion)
         {
@@ -2735,7 +2735,7 @@ namespace CedServicios.RN
             return listaOrderBy;
         }
 
-        public static List<Entidades.Comprobante> ListaPaging(out int CantidadFilas, int IndicePagina, string OrderBy, List<Entidades.Estado> Estados, List<Entidades.Estado> EstadosCompra, List<FeaEntidades.TiposDeComprobantes.TipoComprobante> TiposComprobante, string FechaDsd, string FechaHst, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, string Detalle, string SessionID, Entidades.Sesion Sesion)
+        public static List<Entidades.Comprobante> ListaPaging(out int CantidadFilas, int IndicePagina, string OrderBy, List<Entidades.Estado> Estados, List<Entidades.Estado> EstadosCompra, List<FeaEntidades.TiposDeComprobantes.TipoComprobante> TiposComprobante, string FechaDsd, string FechaHst, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, string PuntoDeVenta, string NumeroDeComprobante, string Detalle, string SessionID, Entidades.Sesion Sesion)
         {
             List<Entidades.Comprobante> listaPersona = new List<Entidades.Comprobante>();
             DB.Comprobante db = new DB.Comprobante(Sesion);
@@ -2743,7 +2743,7 @@ namespace CedServicios.RN
             {
                 OrderBy = "Cuit desc, NroPuntoVta asc, IdTipoComprobante asc, NroComprobante asc ";
             }
-            listaPersona = db.ListaFiltrada(Estados, EstadosCompra, TiposComprobante, OrderBy, FechaDsd, FechaHst, Persona, NaturalezaComprobante, false, false, Detalle, false);
+            listaPersona = db.ListaFiltrada(Estados, EstadosCompra, TiposComprobante, OrderBy, FechaDsd, FechaHst, Persona, NaturalezaComprobante, PuntoDeVenta, NumeroDeComprobante, false, false, Detalle, false);
             int cantidadFilas = listaPersona.Count;
             CantidadFilas = cantidadFilas;
             return db.ListaPaging(IndicePagina, OrderBy, SessionID, listaPersona);

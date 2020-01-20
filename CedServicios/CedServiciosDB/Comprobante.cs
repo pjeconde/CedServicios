@@ -144,7 +144,7 @@ namespace CedServicios.DB
             }
             return lista;
         }
-        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, List<Entidades.Estado> EstadosCompras, List<FeaEntidades.TiposDeComprobantes.TipoComprobante> TiposComprobante, string OrderBy, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, bool IncluirContratos, bool IncluirRequestResponse, string Detalle, bool Ajuste)
+        public List<Entidades.Comprobante> ListaFiltrada(List<Entidades.Estado> Estados, List<Entidades.Estado> EstadosCompras, List<FeaEntidades.TiposDeComprobantes.TipoComprobante> TiposComprobante, string OrderBy, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, string PuntoDeVenta, string NumeroDeComprobante, bool IncluirContratos, bool IncluirRequestResponse, string Detalle, bool Ajuste)
         {
             List<Entidades.Comprobante> lista = new List<Entidades.Comprobante>();
             if (sesion.Cuit.Nro != null)
@@ -203,6 +203,14 @@ namespace CedServicios.DB
                 if (FechaHasta != String.Empty)
                 {
                     a.Append("and Comprobante.Fecha<='" + FechaHasta + "' ");
+                }
+                if (PuntoDeVenta != String.Empty)
+                {
+                    a.Append("and Comprobante.NroPuntoVta='" + PuntoDeVenta + "' ");
+                }
+                if (NumeroDeComprobante != String.Empty)
+                {
+                    a.Append("and Comprobante.NroComprobante='" + NumeroDeComprobante + "' ");
                 }
                 if (Persona.Orden != 0)
                 {

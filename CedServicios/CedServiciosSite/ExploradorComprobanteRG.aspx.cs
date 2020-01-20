@@ -162,7 +162,7 @@ namespace CedServicios.Site
                 List<Entidades.Estado> estadosCompras = new List<Entidades.Estado>();
                 estadosCompras.Add(new Entidades.EstadoVigente());
                 List<FeaEntidades.TiposDeComprobantes.TipoComprobante> tiposComprobantes = new List<FeaEntidades.TiposDeComprobantes.TipoComprobante>();
-                lista = RN.Comprobante.ListaFiltrada(estados, estadosCompras, tiposComprobantes, "", FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, false, true, DetalleTextBox.Text, sesion, false);
+                lista = RN.Comprobante.ListaFiltrada(estados, estadosCompras, tiposComprobantes, "", FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, string.Empty, string.Empty, false, true, DetalleTextBox.Text, sesion, false);
                 if (lista.Count == 0)
                 {
                     //DescargarButton.Enabled = false;

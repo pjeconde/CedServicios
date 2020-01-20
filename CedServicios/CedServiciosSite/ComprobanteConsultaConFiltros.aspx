@@ -140,6 +140,24 @@
                         <asp:DropDownList ID="OrderByDropDownList" runat="server" Height="25px" style="z-index:0;" CssClass="form-control TextoChico" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" OnSelectedIndexChanged="Ordenar_SelectedIndexChanged"></asp:DropDownList>
                     </div>
                 </div>
+                <div class="col-lg-6 col-md-6 padding-top-20">  
+                    <asp:Panel ID="Panel1" runat="server">
+                        <div class="input-group text-left" style="background-color:white; height:25px">
+                            <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white;">&nbsp;Pto.Vta:&nbsp;</span>
+                            <asp:TextBox ID="PuntoDeVentaTextBox" runat="server" MaxLength="50" CssClass="form-control TextoChico" Height="25px"></asp:TextBox>
+                            <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white; width:40px;">
+                                <a href="javascript:void(0)" role="button" class="popover-test" data-html="true" title="FILTRO DE BUSQUEDA (PUNTO DE VENTA)" data-content="(debe ser un número que no supere los 5 dígitos)"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>
+                            </span>
+                            <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white; border-bottom-color: white; border-top-color: white; width:40px;">
+                            </span>
+                            <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white;">&nbsp;NºComp.:&nbsp;</span>
+                            <asp:TextBox ID="NumeroDeComprobanteTextBox" runat="server" MaxLength="50" CssClass="form-control TextoChico" Height="25px"></asp:TextBox>
+                            <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white; width:40px;">
+                                <a href="javascript:void(0)" role="button" class="popover-test" data-html="true" title="FILTRO DE BUSQUEDA (NÚMERO DE COMPROBANTE)" data-content="(debe ser un número que no supere los 9 dígitos)"><span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align:middle"></span></a>
+                            </span>
+                        </div>
+                    </asp:Panel>
+                </div>
             </div>
             <div class="row">
                 <div class="col-lg-12 col-md-12 text-center">
