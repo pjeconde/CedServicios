@@ -7,12 +7,12 @@
 	</tr>
 	<tr>
 		<td class="TextoResaltado" style="text-align: center;">
-			DATOS COMERCIALES <a href="javascript:void(0)" id="A2" role="button" class="popover-test" data-html="true" title="Código de operación" style="width: 280px"
-                                                        data-content="Los formatos permitidos según las opciones seleccionadas son dos.<br/><br/>Uno es <b>?????-????????</b>(5 dígitos para el punto de venta y 8 dígitos para el nro. de comprobante).<br/><br/> Otro para Notas de Crédito MiPyMEs es <b>?????-????????-???????????-????????</b> (se le agrega 11 dígitos para el CUIT del vendedor y 8 dígitos formato AAAAMMDD para la fecha de emisión del comprobante referenciado).<br><br>Si la nota de crédito MiPyMEs anula una Factura de crédito MiPyMEs y ésta, no fué rechazada por el cliente, debe agregar en <b>DATOS COMERCIALES</b> el siguiente texto: <b> ANUL:N</b>
-Si el comprobante fué rechazado por su proveedor, debe ingresar el texto: <b>ANUL:S</b><br><br>También puede ser libre, sin formato.">
-                                                        <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;">
+			DATOS COMERCIALES <a href="javascript:void(0)" id="ADC" role="button" class="popover-test" data-html="true" title="Datos Comerciales" style="width: 480px"
+                              data-content="Si el tipo de comprobante que está autorizando es Factura de crédito electrónica del tipo MiPyMEs (FCE), agregar en REFERENCIAS el texto:<br>* 'CBU:???????????????', incluyendo el CBU donde le van a acreditar el pago de su factura.<br><br>Si el tipo de comprobante que está ingresando es MiPyMEs (FCE) y corresponde a un comprobante de débito o crédito. Tener en cuenta que:<br>* sí el comprobante detallado en REFERENCIAS se encuentra rechazado por el comprador hay que informar agregar el texto 'ANUL:S' en DATOS COMERCIALES.<br>* sí el comprobante asociado en REFERENCIAS está aceptado por el comprador hay que informar el texto 'ANUL:N' en DATOS COMERCIALES<br><br>Aclaración, las comillas no debe ingresarse en DATOS COMERCIALES. Dejar un espacio entre 'CBU:??????????????????????' y 'ANUL:?'" />
+                              <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;"/>
 		</td>
 	</tr>
+    
 	<tr>
 		<td style="text-align: center; height: 10px;">
 		</td>

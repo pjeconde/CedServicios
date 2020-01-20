@@ -93,6 +93,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new Facturas.MiPyMEsA());
             lista.Add(new NotasDebito.MiPyMEsA());
             lista.Add(new NotasCredito.MiPyMEsA());
+            lista.Add(new Facturas.M());
+            lista.Add(new NotasDebito.M());
+            lista.Add(new NotasCredito.M());
             return lista;
         }
         public static List<TipoComprobante> ListaParaBienesDeCapital()
@@ -141,6 +144,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new Facturas.MiPyMEsA());
             lista.Add(new NotasDebito.MiPyMEsA());
             lista.Add(new NotasCredito.MiPyMEsA());
+            lista.Add(new Facturas.M());
+            lista.Add(new NotasDebito.M());
+            lista.Add(new NotasCredito.M());
             return lista;
         }
 
@@ -183,6 +189,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new Facturas.MiPyMEsA());
             lista.Add(new NotasDebito.MiPyMEsA());
             lista.Add(new NotasCredito.MiPyMEsA());
+            lista.Add(new Facturas.M());
+            lista.Add(new NotasDebito.M());
+            lista.Add(new NotasCredito.M());
             return lista;
         }
 
@@ -216,6 +225,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new Facturas.MiPyMEsA());
             lista.Add(new NotasDebito.MiPyMEsA());
             lista.Add(new NotasCredito.MiPyMEsA());
+            lista.Add(new Facturas.M());
+            lista.Add(new NotasDebito.M());
+            lista.Add(new NotasCredito.M());
             return lista;
         }
 
@@ -258,6 +270,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new Facturas.MiPyMEsA());
             lista.Add(new NotasDebito.MiPyMEsA());
             lista.Add(new NotasCredito.MiPyMEsA());
+            lista.Add(new Facturas.M());
+            lista.Add(new NotasDebito.M());
+            lista.Add(new NotasCredito.M());
             return lista;
         }
 
@@ -302,6 +317,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new Facturas.MiPyMEsA());
             lista.Add(new NotasDebito.MiPyMEsA());
             lista.Add(new NotasCredito.MiPyMEsA());
+            lista.Add(new Facturas.M());
+            lista.Add(new NotasDebito.M());
+            lista.Add(new NotasCredito.M());
             return lista;
         }
 
@@ -338,6 +356,9 @@ namespace FeaEntidades.TiposDeComprobantes
             lista.Add(new Facturas.MiPyMEsA());
             lista.Add(new NotasDebito.MiPyMEsA());
             lista.Add(new NotasCredito.MiPyMEsA());
+            lista.Add(new Facturas.M());
+            lista.Add(new NotasDebito.M());
+            lista.Add(new NotasCredito.M());
             return lista;
         }
     }
