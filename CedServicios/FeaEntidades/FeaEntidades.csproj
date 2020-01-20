@@ -1479,6 +1479,7 @@
     <Compile Include="TiposDeComprobantes\Exportaciones\FacturasDeExportacion.cs" />
     <Compile Include="TiposDeComprobantes\Exportaciones\NotaDeCreditoPorOperacionesConElExterior.cs" />
     <Compile Include="TiposDeComprobantes\Exportaciones\NotaDeDebitoPorOperacionesConElExterior.cs" />
+    <Compile Include="TiposDeComprobantes\Facturas\M.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\A.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\B.cs" />
     <Compile Include="TiposDeComprobantes\Facturas\C.cs" />
@@ -1488,12 +1489,14 @@
     <Compile Include="TiposDeComprobantes\Liquidacion\A.cs" />
     <Compile Include="TiposDeComprobantes\Liquidacion\B.cs" />
     <Compile Include="TiposDeComprobantes\Liquidacion\Liquidacion.cs" />
+    <Compile Include="TiposDeComprobantes\NotasCredito\M.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\MiPyMEsA.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\A.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\B.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\C.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\T.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\NotaCredito.cs" />
+    <Compile Include="TiposDeComprobantes\NotasDebito\M.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\MiPyMEsA.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\A.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\B.cs" />

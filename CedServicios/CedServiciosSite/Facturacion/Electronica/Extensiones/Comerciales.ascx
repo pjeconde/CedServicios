@@ -7,9 +7,12 @@
 	</tr>
 	<tr>
 		<td class="TextoResaltado" style="text-align: center;">
-			DATOS COMERCIALES
+			DATOS COMERCIALES <a href="javascript:void(0)" id="ADC" role="button" class="popover-test" data-html="true" title="Datos Comerciales" style="width: 480px"
+                              data-content="Si el tipo de comprobante que está autorizando es Factura de crédito electrónica del tipo MiPyMEs (FCE), agregar en REFERENCIAS el texto:<br>* 'CBU:???????????????', incluyendo el CBU donde le van a acreditar el pago de su factura.<br><br>Si el tipo de comprobante que está ingresando es MiPyMEs (FCE) y corresponde a un comprobante de débito o crédito. Tener en cuenta que:<br>* sí el comprobante detallado en REFERENCIAS se encuentra rechazado por el comprador hay que informar agregar el texto 'ANUL:S' en DATOS COMERCIALES.<br>* sí el comprobante asociado en REFERENCIAS está aceptado por el comprador hay que informar el texto 'ANUL:N' en DATOS COMERCIALES<br><br>Aclaración, las comillas no debe ingresarse en DATOS COMERCIALES. Dejar un espacio entre 'CBU:??????????????????????' y 'ANUL:?'" />
+                              <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;"/>
 		</td>
 	</tr>
+    
 	<tr>
 		<td style="text-align: center; height: 10px;">
 		</td>

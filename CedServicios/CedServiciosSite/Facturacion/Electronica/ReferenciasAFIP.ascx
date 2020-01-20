@@ -13,10 +13,10 @@
 	<tr>
 		<td style="height:10px">
         <a href="javascript:void(0)" id="A2" role="button" class="popover-test" data-html="true" title="Código de operación" style="width: 200px"
-                                                        data-content="Usted podrá ingresar Referencias con un tipo de compronte AFIP igual a 'SI', solo si el tipo de comprobante que usted esta realizando es alguno de los siguientes: 2-NDA, 3-NCA, 7-NDB, 8-NCB, 12-NDC, 13-NCC, 52 o 53.">
+                                                        data-content="Usted podrá ingresar Referencias con un tipo de compronte AFIP igual a 'SI', solo si el tipo de comprobante que usted esta realizando es alguno de los siguientes: 2-NDA, 3-NCA, 7-NDB, 8-NCB, 12-NDC, 13-NCC, 52-NDM o 53-NCM.">
                                                         <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;">
         <!-- 		
-        objFEResponse.FeDetResp[i].Observaciones[j].Msg	"Debera informar Referencias AFIP solo si el tipo de comprobante que se informa es igual a 2-NDA, 3-NCA, 7-NDB, 8-NCB, 12-NDC, 13-NCC, 52 o 53"
+        objFEResponse.FeDetResp[i].Observaciones[j].Msg	"Debera informar Referencias AFIP solo si el tipo de comprobante que se informa es igual a 2-NDA, 3-NCA, 7-NDB, 8-NCB, 12-NDC, 13-NCC, 52-NDM o 53-NCM"
         -->
 		</td>
 	</tr>
@@ -102,7 +102,7 @@
                                 <FooterTemplate>
                                     <asp:TextBox ID="txtdato_de_referencia" runat="server" Text='' Width="250px"></asp:TextBox> 
                                     <a href="javascript:void(0)" id="A2" role="button" class="popover-test" data-html="true" title="Código de operación" style="width: 280px"
-                                                        data-content="Los formatos permitidos según las opciones seleccionadas son dos.<br/><br/>Uno es <b>?????-????????</b>(5 dígitos para el punto de venta y 8 dígitos para el nro. de comprobante).<br/><br/> Otro para Notas de Crédito MiPyMEs es <b>?????-????????-???????????-????????</b> (se le agrega 11 dígitos para el CUIT del vendedor y 8 dígitos formato AAAAMMDD para la fecha de emisión del comprobante referenciado).<br><br>Si la nota de crédito MiPyMEs anula una Factura de crédito MiPyMEs y ésta, no fué rechazada por el cliente, debe agregar en <b>DATOS COMERCIALES</b> el siguiente texto: <b> ANUL:N</b>
+                                                        data-content="Los formatos permitidos según las opciones seleccionadas son dos.<br/><br/>Uno es <b>?????-????????</b>(5 dígitos para el punto de venta y 8 dígitos para el nro. de comprobante).<br/><br/> Otro para Notas de Crédito MiPyMEs es <b>?????-????????-???????????-????????</b> (se le agrega 11 dígitos para el CUIT del vendedor y 8 dígitos formato AAAAMMDD para la fecha de emisión del comprobante referenciado).<br>IMPORTANTE: Si esta fecha no coincide con la del comprobante que está anulando, la afip rechazará la NC con el mensaje 'La fecha informada no coincide con la registrada en nuestras bases'.<br><br>Si la nota de crédito MiPyMEs anula una Factura de crédito MiPyMEs y ésta, no fué rechazada por el cliente, debe agregar en <b>DATOS COMERCIALES</b> el siguiente texto: <b> ANUL:N</b>
 Si el comprobante fué rechazado por su proveedor, debe ingresar el texto: <b>ANUL:S</b><br><br>También puede ser libre, sin formato.">
                                                         <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;">
                                     <cc1:MaskedEditExtender ID="txtdato_de_referenciaFooterExpoMaskedEditExtender" runat="server"
@@ -113,7 +113,7 @@ Si el comprobante fué rechazado por su proveedor, debe ingresar el texto: <b>ANU
                                         ClearMaskOnLostFocus="false" Enabled="false" Mask="99999-99999999-99999999999-99999999" MaskType="Number"
                                         PromptCharacter="?" TargetControlID="txtdato_de_referencia">
                                     </cc1:MaskedEditExtender>
-                                    <cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaFooterExpoFilteredTextBoxExtender"
+                                    <cc1:FilteredTextBoxExtender ID="txtdato_de_referenciaFooterExpoFilteredTextBoxExtender" 
                                         runat="server" FilterMode="ValidChars" FilterType="Numbers" TargetControlID="txtdato_de_referencia">
                                     </cc1:FilteredTextBoxExtender>
                                     <asp:RequiredFieldValidator ID="txtdato_de_referenciaFooterRequiredFieldValidator"
