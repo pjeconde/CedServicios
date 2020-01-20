@@ -138,7 +138,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     if (IdNaturalezaComprobanteTextBox.Text.IndexOf("Venta") != -1)
                     {
                         Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                        Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                        Tipo_De_ComprobanteDropDownList.DataTextField = "DescrCompleta";
                         Tipo_De_ComprobanteDropDownList.DataSource = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaAFIP();
                         Tipo_De_ComprobanteDropDownList.DataBind();
                     }
@@ -1668,7 +1668,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             return pv.Nro == auxPV;
                         }).IdTipoPuntoVta;
                         Tipo_De_ComprobanteDropDownList.DataValueField = "Codigo";
-                        Tipo_De_ComprobanteDropDownList.DataTextField = "Descr";
+                        Tipo_De_ComprobanteDropDownList.DataTextField = "DescrCompleta";
                         Codigo_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
                         Codigo_Doc_Identificatorio_CompradorDropDownList.DataTextField = "Descr";
                         Nro_Doc_Identificatorio_CompradorDropDownList.DataValueField = "Codigo";
@@ -3363,31 +3363,38 @@ namespace CedServicios.Site.Facturacion.Electronica
             //No se tiene que informar para exportación
             if (!IVAcomputableDropDownList.SelectedValue.Equals(string.Empty))
             {
-                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                try
+                if (!IdNaturalezaComprobanteTextBox.Equals("Compra"))
                 {
-                    if (Funciones.SessionTimeOut(Session))
+                    int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
+                    try
                     {
-                        Response.Redirect("~/SessionTimeout.aspx");
-                    }
-                    else
-                    {
-                        string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
+                        if (Funciones.SessionTimeOut(Session))
                         {
-                            return pv.Nro == auxPV;
-                        }).IdTipoPuntoVta;
-                        if (idtipo.Equals("Exportacion"))
-                        {
-                            IVAcomputableDropDownList.Focus();
-                            throw new Exception("El IVA computable no se debe informar para exportación");
+                            Response.Redirect("~/SessionTimeout.aspx");
                         }
                         else
                         {
-                            infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
+                            string idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate (Entidades.PuntoVta pv)
+                            {
+                                return pv.Nro == auxPV;
+                            }).IdTipoPuntoVta;
+                            if (idtipo.Equals("Exportacion"))
+                            {
+                                IVAcomputableDropDownList.Focus();
+                                throw new Exception("El IVA computable no se debe informar para exportación");
+                            }
+                            else
+                            {
+                                infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
+                            }
                         }
                     }
+                    catch (System.NullReferenceException)
+                    {
+                        infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
+                    }
                 }
-                catch (System.NullReferenceException)
+                else
                 {
                     infcomprob.iva_computable = IVAcomputableDropDownList.SelectedValue;
                 }
