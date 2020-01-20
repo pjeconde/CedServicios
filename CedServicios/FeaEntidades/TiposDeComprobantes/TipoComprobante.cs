@@ -43,7 +43,7 @@ namespace FeaEntidades.TiposDeComprobantes
 
         public string DescrCompleta
         {
-            get { return Codigo.ToString("00") + "-" + descr; }
+            get { return Codigo.ToString("000") + "-" + descr; }
         }
 
 		public static List<TipoComprobante> Lista()
