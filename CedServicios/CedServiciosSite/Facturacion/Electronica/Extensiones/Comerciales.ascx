@@ -1,4 +1,4 @@
-<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Comerciales.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Extensiones.Comerciales" %>
+Ôªø<%@ Control Language="C#" AutoEventWireup="true" CodeBehind="Comerciales.ascx.cs" Inherits="CedServicios.Site.Facturacion.Electronica.Extensiones.Comerciales" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
 <table border="0" cellpadding="0" cellspacing="0" style="width:1282px">
 	<tr>
@@ -7,8 +7,8 @@
 	</tr>
 	<tr>
 		<td class="TextoResaltado" style="text-align: center;">
-			DATOS COMERCIALES <a href="javascript:void(0)" id="ADC" role="button" class="popover-test" data-html="true" title="Datos Comerciales" style="width: 480px"
-                              data-content="Si el tipo de comprobante que est· autorizando es Factura de crÈdito electrÛnica del tipo MiPyMEs (FCE), agregar en REFERENCIAS el texto:<br>* 'CBU:???????????????', incluyendo el CBU donde le van a acreditar el pago de su factura.<br><br>Si el tipo de comprobante que est· ingresando es MiPyMEs (FCE) y corresponde a un comprobante de dÈbito o crÈdito. Tener en cuenta que:<br>* sÌ el comprobante detallado en REFERENCIAS se encuentra rechazado por el comprador hay que informar agregar el texto 'ANUL:S' en DATOS COMERCIALES.<br>* sÌ el comprobante asociado en REFERENCIAS est· aceptado por el comprador hay que informar el texto 'ANUL:N' en DATOS COMERCIALES<br><br>AclaraciÛn, las comillas no debe ingresarse en DATOS COMERCIALES. Dejar un espacio entre 'CBU:??????????????????????' y 'ANUL:?'" />
+			DATOS COMERCIALES <a href="javascript:void(0)" id="ADC" role="button" class="popover-test" data-html="true" title="DATOS COMERCIALES" style="width: 75%"
+                              data-content="Si el tipo de comprobante que est√° autorizando es Factura de cr√©dito electr√≥nica del tipo MiPyMEs (FCE), agregar en DATOS COMERCIALES el texto:<br> ‚óè 'CBU:??????????????????????', incluyendo el CBU donde le van a acreditar el pago de su factura.<br><br>Si el tipo de comprobante que est√° ingresando es MiPyMEs (FCE) y corresponde a un comprobante de d√©bito o cr√©dito. Tener en cuenta que:<br> ‚óè s√≠ el comprobante detallado en REFERENCIAS se encuentra rechazado por el comprador hay que informar agregar el texto 'ANUL:S' en DATOS COMERCIALES.<br> ‚óè s√≠ el comprobante asociado en REFERENCIAS est√° aceptado por el comprador hay que informar el texto 'ANUL:N' en DATOS COMERCIALES<br><br>Aclaraci√≥n, las comillas no debe ingresarse en DATOS COMERCIALES. Dejar un espacio entre 'CBU:??????????????????????' y 'ANUL:?'" />
                               <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;"/>
 		</td>
 	</tr>
