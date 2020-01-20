@@ -7,14 +7,14 @@
 	</tr>
 	<tr>
 		<td class="TextoResaltado" style="text-align: center;">
-			REFERENCIAS
+			REFERENCIAS <a href="javascript:void(0)" id="A2" role="button" class="popover-test" data-html="true" title="Código de operación" style="width: 200px"
+                                                        data-content="Usted podrá ingresar Referencias con un tipo de compronte AFIP igual a 'SI', solo si el tipo de comprobante que usted esta realizando es alguno de los siguientes: 2-NDA, 3-NCA, 7-NDB, 8-NCB, 12-NDC, 13-NCC, 52 o 53.">
+                                                        <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;">
 		</td>
 	</tr>
 	<tr>
 		<td style="height:10px">
-        <a href="javascript:void(0)" id="A2" role="button" class="popover-test" data-html="true" title="Código de operación" style="width: 200px"
-                                                        data-content="Usted podrá ingresar Referencias con un tipo de compronte AFIP igual a 'SI', solo si el tipo de comprobante que usted esta realizando es alguno de los siguientes: 2-NDA, 3-NCA, 7-NDB, 8-NCB, 12-NDC, 13-NCC, 52 o 53.">
-                                                        <span class="glyphicon glyphicon-info-sign gi-1x" style="vertical-align: inherit;">
+
         <!-- 		
         objFEResponse.FeDetResp[i].Observaciones[j].Msg	"Debera informar Referencias AFIP solo si el tipo de comprobante que se informa es igual a 2-NDA, 3-NCA, 7-NDB, 8-NCB, 12-NDC, 13-NCC, 52 o 53"
         -->
