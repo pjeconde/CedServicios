@@ -17,6 +17,11 @@ namespace CedServicios.RN
             DB.Persona db = new DB.Persona(Sesion);
             return db.ListaPorCuit(SoloVigentes, ParaCombo, TipoPersona);
         }
+        public static List<Entidades.Persona> ListaPorCuitContrato(bool DeBaja, bool ParaCombo, CedServicios.Entidades.Enum.TipoPersona TipoPersona, Entidades.Sesion Sesion)
+        {
+            DB.Persona db = new DB.Persona(Sesion);
+            return db.ListaPorCuitContrato(DeBaja, ParaCombo, TipoPersona);
+        }
         public static List<Entidades.Persona> ListaExportacion(Entidades.Usuario Cuenta, Entidades.Sesion Sesion, bool ConSeleccionarComprador)
         {
             DB.Persona comprador = new DB.Persona(Sesion);

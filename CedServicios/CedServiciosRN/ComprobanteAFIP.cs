@@ -297,162 +297,167 @@ namespace CedServicios.RN
 
                 //Impuestos
                 double impTrib = 0;
-                if (lc.comprobante[0].resumen.impuestos.Length > 0)
+                if (Sesion.Cuit.DatosImpositivosDescrCondIVA == "Responsable Monotributo")
+                { }
+                else
                 {
-                    if (lc.comprobante[0].resumen.impuestos[0] != null)
+                    if (lc.comprobante[0].resumen.impuestos.Length > 0)
                     {
-                        int CantTrib = 0;
-                        int CantAlicIVA = 0;
-                        for (int j = 0; j < lc.comprobante[0].resumen.impuestos.Length; j++)
+                        if (lc.comprobante[0].resumen.impuestos[0] != null)
                         {
-                            if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto != 1)
+                            int CantTrib = 0;
+                            int CantAlicIVA = 0;
+                            for (int j = 0; j < lc.comprobante[0].resumen.impuestos.Length; j++)
                             {
-                                CantTrib += 1;
-                            }
-                            else
-                            {
-                                CantAlicIVA += 1;
-                            }
-                        }
-                        if (CantTrib != 0)
-                        {
-                            objFEDetalleRequest.Tributos = new ar.gov.afip.wsfev1.Tributo[CantTrib];
-                        }
-                        CantTrib = 0;
-                        
-                        ar.gov.afip.wsfev1.AlicIva[] ivas = new ar.gov.afip.wsfev1.AlicIva[CantAlicIVA];
-                        CantAlicIVA = 0;
-                        for (int j = 0; j < lc.comprobante[0].resumen.impuestos.Length; j++)
-                        {
-
-                            switch (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto)
-                            {
-                                case 1:
-                                    double baseImponible = 0;
-                                    ivas[CantAlicIVA] = new ar.gov.afip.wsfev1.AlicIva();
-                                    //No funciona por el redondeo.
-                                    //"PES"
-                                    //baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                    //"DOL"
-                                    //baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-
-                                    //Obtener o Calcular la base imponible
-                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
-                                    {
-                                        baseImponible = lc.comprobante[0].resumen.impuestos[j].base_imponible;
-                                    }
-                                    else
-                                    {
-                                        baseImponible = lc.comprobante[0].resumen.impuestos[j].base_imponible_moneda_origen;
-                                    }
-                                    if (baseImponible == 0)
-                                    {
-                                        baseImponible = CalcularBaseImponible(lc, lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto);
-                                    }
-                                    //Informar la base imponible y el código de impuesto según la alícuota.
-                                    if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 0)
-                                    {
-                                        ivas[CantAlicIVA].BaseImp = baseImponible;
-                                        ivas[CantAlicIVA].Id = 3;
-                                    }
-                                    if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 10.5)
-                                    {
-                                        ivas[CantAlicIVA].BaseImp = baseImponible;
-                                        ivas[CantAlicIVA].Id = 4;
-                                    }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 21)
-                                    {
-                                        ivas[CantAlicIVA].BaseImp = baseImponible;
-                                        ivas[CantAlicIVA].Id = 5;
-                                    }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 27)
-                                    {
-                                        ivas[CantAlicIVA].BaseImp = baseImponible;
-                                        ivas[CantAlicIVA].Id = 6;
-                                    }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 5)
-                                    {
-                                        ivas[CantAlicIVA].BaseImp = baseImponible;
-                                        ivas[CantAlicIVA].Id = 8;
-                                    }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 2.5)
-                                    {
-                                        
-                                        ivas[CantAlicIVA].BaseImp = baseImponible;
-                                        ivas[CantAlicIVA].Id = 9;
-                                    }
-                                    else
-                                    {
-                                        throw new Exception("Problemas para encontrar el código de la alícuota cuyo porcentaje es: " + lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto.ToString());
-                                    }
-
-                                    //Importe del impuesto
-                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
-                                    {
-                                        ivas[CantAlicIVA].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
-                                    }
-                                    else
-                                    {
-                                        ivas[CantAlicIVA].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
-                                    }
-                                    CantAlicIVA += 1;
-                                    break;
-                                case 2:  //Internos
-                                case 3:  //Otros
-                                case 4:  //Nacionales
-                                case 5:  //IB - Provinciales
-                                case 6:  //Municipales
-                                    objFEDetalleRequest.Tributos[CantTrib] = new ar.gov.afip.wsfev1.Tributo();
-                                    objFEDetalleRequest.Tributos[CantTrib].Alic = lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto;
-                                    objFEDetalleRequest.Tributos[CantTrib].BaseImp = 0;  //Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
-                                    if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 2)
-                                    {
-                                        objFEDetalleRequest.Tributos[CantTrib].Id = 4;  //"AFIP - Impuestos Internos"
-                                    }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 3)
-                                    {
-                                        objFEDetalleRequest.Tributos[CantTrib].Id = 99; //"AFIP - Otro"
-                                    }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 4)
-                                    {
-                                        objFEDetalleRequest.Tributos[CantTrib].Id = 1;  //"AFIP - Impuestos nacionales"
-                                    }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 5)
-                                    {
-                                        objFEDetalleRequest.Tributos[CantTrib].Id = 2;  //"AFIP - Impuestos provinciales"
-                                    }
-                                    else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 6)
-                                    {
-                                        objFEDetalleRequest.Tributos[CantTrib].Id = 3;  //"AFIP - Impuestos municipales"
-                                    }
-                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
-                                    {
-                                        objFEDetalleRequest.Tributos[CantTrib].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
-                                    }
-                                    else
-                                    {
-                                        objFEDetalleRequest.Tributos[CantTrib].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
-                                    }
-                                    objFEDetalleRequest.Tributos[CantTrib].Desc = lc.comprobante[0].resumen.impuestos[j].descripcion;
-                                    if (lc.comprobante[0].resumen.codigo_moneda == "PES")
-                                    {
-                                        impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
-                                    }
-                                    else
-                                    {
-                                        impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
-                                    }
+                                if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto != 1)
+                                {
                                     CantTrib += 1;
-                                    break;
-                                default:
-                                    throw new Exception("Problemas para enviar el comprobante, código de impuesto incorrecto o inexistente. Código: " + lc.comprobante[0].resumen.impuestos[j].codigo_impuesto.ToString());
+                                }
+                                else
+                                {
+                                    CantAlicIVA += 1;
+                                }
+                            }
+                            if (CantTrib != 0)
+                            {
+                                objFEDetalleRequest.Tributos = new ar.gov.afip.wsfev1.Tributo[CantTrib];
+                            }
+                            CantTrib = 0;
+
+                            ar.gov.afip.wsfev1.AlicIva[] ivas = new ar.gov.afip.wsfev1.AlicIva[CantAlicIVA];
+                            CantAlicIVA = 0;
+                            for (int j = 0; j < lc.comprobante[0].resumen.impuestos.Length; j++)
+                            {
+
+                                switch (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto)
+                                {
+                                    case 1:
+                                        double baseImponible = 0;
+                                        ivas[CantAlicIVA] = new ar.gov.afip.wsfev1.AlicIva();
+                                        //No funciona por el redondeo.
+                                        //"PES"
+                                        //baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                        //"DOL"
+                                        //baseImponible += Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+
+                                        //Obtener o Calcular la base imponible
+                                        if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                        {
+                                            baseImponible = lc.comprobante[0].resumen.impuestos[j].base_imponible;
+                                        }
+                                        else
+                                        {
+                                            baseImponible = lc.comprobante[0].resumen.impuestos[j].base_imponible_moneda_origen;
+                                        }
+                                        if (baseImponible == 0)
+                                        {
+                                            baseImponible = CalcularBaseImponible(lc, lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto);
+                                        }
+                                        //Informar la base imponible y el código de impuesto según la alícuota.
+                                        if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 0)
+                                        {
+                                            ivas[CantAlicIVA].BaseImp = baseImponible;
+                                            ivas[CantAlicIVA].Id = 3;
+                                        }
+                                        if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 10.5)
+                                        {
+                                            ivas[CantAlicIVA].BaseImp = baseImponible;
+                                            ivas[CantAlicIVA].Id = 4;
+                                        }
+                                        else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 21)
+                                        {
+                                            ivas[CantAlicIVA].BaseImp = baseImponible;
+                                            ivas[CantAlicIVA].Id = 5;
+                                        }
+                                        else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 27)
+                                        {
+                                            ivas[CantAlicIVA].BaseImp = baseImponible;
+                                            ivas[CantAlicIVA].Id = 6;
+                                        }
+                                        else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 5)
+                                        {
+                                            ivas[CantAlicIVA].BaseImp = baseImponible;
+                                            ivas[CantAlicIVA].Id = 8;
+                                        }
+                                        else if (lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto == 2.5)
+                                        {
+
+                                            ivas[CantAlicIVA].BaseImp = baseImponible;
+                                            ivas[CantAlicIVA].Id = 9;
+                                        }
+                                        else
+                                        {
+                                            throw new Exception("Problemas para encontrar el código de la alícuota cuyo porcentaje es: " + lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto.ToString());
+                                        }
+
+                                        //Importe del impuesto
+                                        if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                        {
+                                            ivas[CantAlicIVA].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                        }
+                                        else
+                                        {
+                                            ivas[CantAlicIVA].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
+                                        }
+                                        CantAlicIVA += 1;
+                                        break;
+                                    case 2:  //Internos
+                                    case 3:  //Otros
+                                    case 4:  //Nacionales
+                                    case 5:  //IB - Provinciales
+                                    case 6:  //Municipales
+                                        objFEDetalleRequest.Tributos[CantTrib] = new ar.gov.afip.wsfev1.Tributo();
+                                        objFEDetalleRequest.Tributos[CantTrib].Alic = lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto;
+                                        objFEDetalleRequest.Tributos[CantTrib].BaseImp = 0;  //Math.Round((lc.comprobante[0].resumen.impuestos[j].importe_impuesto * 100) / lc.comprobante[0].resumen.impuestos[j].porcentaje_impuesto, 2);
+                                        if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 2)
+                                        {
+                                            objFEDetalleRequest.Tributos[CantTrib].Id = 4;  //"AFIP - Impuestos Internos"
+                                        }
+                                        else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 3)
+                                        {
+                                            objFEDetalleRequest.Tributos[CantTrib].Id = 99; //"AFIP - Otro"
+                                        }
+                                        else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 4)
+                                        {
+                                            objFEDetalleRequest.Tributos[CantTrib].Id = 1;  //"AFIP - Impuestos nacionales"
+                                        }
+                                        else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 5)
+                                        {
+                                            objFEDetalleRequest.Tributos[CantTrib].Id = 2;  //"AFIP - Impuestos provinciales"
+                                        }
+                                        else if (lc.comprobante[0].resumen.impuestos[j].codigo_impuesto == 6)
+                                        {
+                                            objFEDetalleRequest.Tributos[CantTrib].Id = 3;  //"AFIP - Impuestos municipales"
+                                        }
+                                        if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                        {
+                                            objFEDetalleRequest.Tributos[CantTrib].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                        }
+                                        else
+                                        {
+                                            objFEDetalleRequest.Tributos[CantTrib].Importe = Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
+                                        }
+                                        objFEDetalleRequest.Tributos[CantTrib].Desc = lc.comprobante[0].resumen.impuestos[j].descripcion;
+                                        if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                                        {
+                                            impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto, 2);
+                                        }
+                                        else
+                                        {
+                                            impTrib += Math.Round(lc.comprobante[0].resumen.impuestos[j].importe_impuesto_moneda_origen, 2);
+                                        }
+                                        CantTrib += 1;
+                                        break;
+                                    default:
+                                        throw new Exception("Problemas para enviar el comprobante, código de impuesto incorrecto o inexistente. Código: " + lc.comprobante[0].resumen.impuestos[j].codigo_impuesto.ToString());
+                                }
+                            }
+                            if (ivas != null && ivas.Length > 0)
+                            {
+                                objFEDetalleRequest.Iva = ivas;
                             }
                         }
-                        if (ivas != null && ivas.Length > 0)
-                        {
-                            objFEDetalleRequest.Iva = ivas;
-                        }
-                    }
+                    }    
                 }
                 objFEDetalleRequest.ImpTrib = impTrib; //Total de tributos;
                 

@@ -30,7 +30,7 @@
                 <div class="col-lg-6 col-md-6 padding-top-20 text-left">
                         <div class="input-group text-left" style="background-color:white; height:25px">
                         <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white;">&nbsp;Persona (cliente/proveedor):&nbsp;</span>
-                        <asp:DropDownList ID="ClienteDropDownList" runat="server" CssClass="form-control TextoChico" Height="25px" DataValueField="Orden" DataTextField="RazonSocial" AutoPostBack="true" OnSelectedIndexChanged="Personas_SelectedIndexChanged"></asp:DropDownList>
+                        <asp:DropDownList ID="ClienteDropDownList" runat="server" CssClass="form-control TextoChico" Height="25px" DataValueField="Orden" DataTextField="RazonSocialCuitIdPersona" AutoPostBack="true" OnSelectedIndexChanged="Personas_SelectedIndexChanged"></asp:DropDownList>
                     </div>
                 </div>                      
                 <div class="col-lg-6 col-md-6 padding-top-20">
@@ -73,8 +73,8 @@
                                 AutoPostBack="true" ToolTip="Multiselección de Estados">
                                 <span class="glyphicon glyphicon-calendar" style="padding: 3px"></span>
                             </asp:LinkButton>
-                            <span class="dropdown" style="padding: 5px 0px 0px 10px; height:25px; z-index:1;">
-                                <a class="dropdown-toggle" data-toggle="dropdown" style="text-align:left;"><span style="font-size: 10pt">Predefinidas</span>
+                            <span class=" dropdown" style="padding-left: 2%; height:25px; z-index:1;">
+                                <a class="dropdown" data-toggle="dropdown" style="text-align:left;"><span style="font-size: 10pt">Predefinidas</span>
                                     <span class="caret"></span>
                                 </a>
                                 <ul class="dropdown-menu" style="z-index:1;">

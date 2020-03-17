@@ -519,14 +519,29 @@ namespace CedServicios.Site.Facturacion.Electronica
                         }
                         else
                         {
-                            textoConcepto1 = "Para Código de concepto igual a \"1-Productos\" la fecha de emisión permitida es del " + (fecha.AddDays(-5)).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(5)).ToString("dd/MM/yyyy");
+                            if (Tipo_De_ComprobanteDropDownList.SelectedValue == "201" || Tipo_De_ComprobanteDropDownList.SelectedValue == "202" || Tipo_De_ComprobanteDropDownList.SelectedValue == "203")
+                            {
+                                textoConcepto1 = "Para Código de concepto igual a \"1-Productos\" la fecha de emisión permitida es del " + (fecha.AddDays(-5)).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(1)).ToString("dd/MM/yyyy");
+                            }
+                            else
+                            {
+                                textoConcepto1 = "Para Código de concepto igual a \"1-Productos\" la fecha de emisión permitida es del " + (fecha.AddDays(-5)).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(5)).ToString("dd/MM/yyyy");
+                            }
                         }
                         texto = textoConcepto1;
                     }
                     else if (CodigoConceptoDropDownList.SelectedValue == "2" || CodigoConceptoDropDownList.SelectedValue == "3")
                     {
-                        textoConcepto2y3 = "Para Código de concepto igual a \"2-Servicios\" ó \"3-Productos y Servicios\" la fecha de emisión permitida es del " + (fecha.AddDays(-10)).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(10)).ToString("dd/MM/yyyy");
-                        texto = textoConcepto2y3;
+                        if (Tipo_De_ComprobanteDropDownList.SelectedValue == "201" || Tipo_De_ComprobanteDropDownList.SelectedValue == "202" || Tipo_De_ComprobanteDropDownList.SelectedValue == "203")
+                        {
+                            textoConcepto2y3 = "Para Código de concepto igual a \"2-Servicios\" ó \"3-Productos y Servicios\" la fecha de emisión permitida es del " + (fecha.AddDays(-5)).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(1)).ToString("dd/MM/yyyy");
+                            texto = textoConcepto2y3;
+                        }
+                        else
+                        {
+                            textoConcepto2y3 = "Para Código de concepto igual a \"2-Servicios\" ó \"3-Productos y Servicios\" la fecha de emisión permitida es del " + (fecha.AddDays(-10)).ToString("dd/MM/yyyy") + " al " + (fecha.AddDays(10)).ToString("dd/MM/yyyy");
+                            texto = textoConcepto2y3;
+                        }
                     }
                     else
                     {
@@ -5122,6 +5137,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                     }
                     if (ProximoNroComprobanteLinkButton.Visible) ProximoNroComprobanteLinkButton_Click(ProximoNroComprobanteLinkButton, EventArgs.Empty);
                 }
+                AyudaFechaEmisionCalcular();
             }
             catch
             {

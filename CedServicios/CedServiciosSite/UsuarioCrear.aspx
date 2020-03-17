@@ -342,7 +342,7 @@
                                     <tr>
                                         <td align="center" style="padding-top:5px" valign="top">
                                             <asp:Button ID="NuevaClaveCaptchaButton" runat="server" CausesValidation="false"
-                                                OnClick="NuevaClaveCaptchaButton_Click" Text="Nueva Clave" />
+                                                OnClick="NuevaClaveCaptchaButton_Click" Text="Nuevo Captcha" />
                                         </td>
                                         <td align="right" style="padding-top:5px; padding-right: 5px; width: 150px">
                                             <asp:RegularExpressionValidator ID="RegularExpressionValidator9" runat="server" ControlToValidate="CaptchaTextBox"
@@ -420,7 +420,7 @@
                     <a href="index.html" class="animsition-link"><div class="logo-footer"></div></a>
                     <h6><i class="icon-footer">&#xf041;</i>Argentina</h6>
                     <p style="color: #fff">
-                        Torre Bellini, Esmeralda 950, Piso 19, Of. 105, CABA<br />
+                        Virrey Arredondo 3447, Piso 1, Of. A, CABA<br />
                         +5411 4778-1744
                     </p>
                     <p><i class="icon-footer"></i><a href="mailto:contacto@cedeira.com.ar" title="">contacto@cedeira.com.ar</a></p>

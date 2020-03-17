@@ -761,7 +761,7 @@ Culture="en-GB" UICulture="en-GB" MaintainScrollPositionOnPostback="true" Title=
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="TC00SL" style="padding-left:10px">
+                                            <td class="TC00SL" style="padding-left:10px; resize:none">
                                                 Comentarios:
                                             </td>
                                         </tr>

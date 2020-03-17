@@ -1081,25 +1081,7 @@ namespace CedServicios.Site.Facturacion.Electronica {
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::CedServicios.Site.Facturacion.Electronica.Detalle DetalleLinea;
-        
-        /// <summary>
-        /// Control DescuentosGlobales.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::CedServicios.Site.Facturacion.Electronica.Descuentos DescuentosGlobales;
-        
-        /// <summary>
-        /// Control ImpuestosGlobales.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::CedServicios.Site.Facturacion.Electronica.Impuestos ImpuestosGlobales;
+        protected global::CedServicios.Site.Facturacion.Electronica.DetalleM DetalleLinea;
         
         /// <summary>
         /// Control DatosEmisionPanel.

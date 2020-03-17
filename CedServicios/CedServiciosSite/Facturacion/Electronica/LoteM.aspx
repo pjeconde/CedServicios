@@ -3,13 +3,13 @@
     MaintainScrollPositionOnPostback="true" MasterPageFile="~/CedServicios.Master"
     Title="Factura Electrónica Gratis(Interfacturas - AFIP)" EnableEventValidation="false" ValidateRequest="false"%>
 
-<%@ Register Src="Detalle.ascx" TagName="Detalle" TagPrefix="uc4" %>
+<%@ Register Src="DetalleM.ascx" TagName="DetalleM" TagPrefix="uc4" %>
 <%@ Register Src="Extensiones/Comerciales.ascx" TagName="Comerciales" TagPrefix="uc3" %>
 <%@ Register Src="Permisos.ascx" TagName="Permisos" TagPrefix="uc2" %>
 <%@ Register Src="ReferenciasAFIP.ascx" TagName="ReferenciasAFIP" TagPrefix="uc9" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="cc1" %>
-<%@ Register Src="~/Facturacion/Electronica/Impuestos.ascx" TagName="ImpuestosGlobales" TagPrefix="uc8" %>
-<%@ Register Src="~/Facturacion/Electronica/Descuentos.ascx" TagName="DescuentosGlobales" TagPrefix="DescUC" %>
+<%--<%@ Register Src="~/Facturacion/Electronica/Impuestos.ascx" TagName="ImpuestosGlobales" TagPrefix="uc8" %>--%>
+<%--<%@ Register Src="~/Facturacion/Electronica/Descuentos.ascx" TagName="DescuentosGlobales" TagPrefix="DescUC" %>--%>
 <%@ Register Src="FacturaElectronicaFecha.ascx" TagName="FacturaElectronicaFecha" TagPrefix="uc1" %>
 <%@ Register Src="~/Controles/DatosEmailAvisoComprobanteContrato.ascx" TagName="DatosEmailAvisoComprobanteContrato" TagPrefix="uc5" %>
 
@@ -622,7 +622,6 @@
                                 UpdateMode="Conditional">
                                 <Triggers>
                                     <asp:AsyncPostBackTrigger ControlID="PuntoVtaDropDownList"></asp:AsyncPostBackTrigger>
-                                    <asp:AsyncPostBackTrigger ControlID="PaisDestinoExpDropDownList"></asp:AsyncPostBackTrigger>
                                     <asp:AsyncPostBackTrigger ControlID="CompradorDropDownList" EventName="SelectedIndexChanged"/>
                                 </Triggers>
                                 <ContentTemplate>
@@ -979,7 +978,7 @@
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <uc4:Detalle ID="DetalleLinea" runat="server"></uc4:Detalle>
+                                                    <uc4:DetalleM ID="DetalleLinea" runat="server"></uc4:DetalleM>
                                                 </td>
                                             </tr>
                                         </table>
@@ -994,39 +993,9 @@
                         </td>
                     </tr>
                     <!-- DESCUENTOS GLOBALES -->
-                    <tr>
-                        <td style="text-align:center">
-                            <table style="width: 1282px">
-                                <tr>
-                                    <td>
-                                        <DescUC:DescuentosGlobales ID="DescuentosGlobales" runat="server"></DescUC:DescuentosGlobales>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <hr noshade="noshade" size="1" color="#cccccc" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+
                     <!-- IMPUESTOS GLOBALES -->
-                    <tr>
-                        <td style="text-align:center">
-                            <table style="width: 1282px">
-                                <tr>
-                                    <td>
-                                        <uc8:ImpuestosGlobales ID="ImpuestosGlobales" runat="server"></uc8:ImpuestosGlobales>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <hr noshade="noshade" size="1" color="#cccccc" />
-                                    </td>
-                                </tr>
-                            </table>
-                        </td>
-                    </tr>
+
                     <!-- RESUMEN FINAL -->
                     <tr>
                         <td style="text-align: center">

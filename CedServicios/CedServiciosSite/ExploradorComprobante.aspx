@@ -38,6 +38,14 @@
                         <asp:DropDownList ID="NaturalezaComprobanteDropDownList" runat="server" CssClass="form-control TextoChico" Height="25px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" OnSelectedIndexChanged="VerificarEstadosPosibles_SelectedIndexChanged"></asp:DropDownList>
                     </div>
                 </div>
+                <asp:Panel ID="EstadoContrato" runat="server">
+                <div class="col-lg-6 col-md-6 padding-top-20">
+                    <div class="input-group text-left" style="background-color:white; height:25px">
+                        <span class="input-group-addon" style="padding: 0px 0px 0px 0px; background-color: white;">&nbsp;Estado:&nbsp;</span>
+                        <asp:DropDownList ID="EstadoContratoDropDownList" runat="server" CssClass="form-control TextoChico" Height="25px" DataValueField="Id" DataTextField="Descr" AutoPostBack="true" OnSelectedIndexChanged="VerificarEstadosContratos_SelectedIndexChanged"></asp:DropDownList>
+                    </div>
+                </div>
+                </asp:Panel>
             </div>
             <asp:Panel ID="DetalleYFechasPanel" runat="server">
             <div class="row">

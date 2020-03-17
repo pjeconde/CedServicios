@@ -393,7 +393,7 @@ La incorporación del contribuyente será publicada en la página web de AFIP (w
                     <a href="index.html" class="animsition-link"><div class="logo-footer"></div></a>
                     <h6><i class="icon-footer">&#xf041;</i>Argentina</h6>
                     <p style="color: #fff">
-                        Torre Bellini, Esmeralda 950, Piso 19, Of. 105, CABA<br />
+                        Virrey Arredondo 3447, Piso 1, Of. A, CABA<br />
                         +5411 4778-1744
                     </p>
                     <p><i class="icon-footer"></i><a href="mailto:contacto@cedeira.com.ar" title="">contacto@cedeira.com.ar</a></p>

@@ -32,6 +32,7 @@ namespace CedServicios.Site
                     TratamientoTextBox.Text = itemsParametros[0];
                     ElementoTextBox.Text = itemsParametros[1];
                     OrderByDropDownList.Visible = false;
+                    EstadoContrato.Visible = false;
                     switch (ElementoTextBox.Text)
                     {
                         case "Comprobante":
@@ -48,6 +49,7 @@ namespace CedServicios.Site
                             EstadoDropDownList.DataSource = RN.Multiseleccion.ListaComboMultiseleccion();
                             EstadoComprasDropDownList.DataSource = RN.Multiseleccion.ListaComboMultiseleccion();
                             TiposComprobanteDropDownList.DataSource = RN.Multiseleccion.ListaComboMultiseleccion();
+                           
 
                             ViewState["Estados"] = RN.Estado.ListaComprobantesVenta();
                             EstadoGridView.DataSource = ViewState["Estados"];
@@ -57,6 +59,8 @@ namespace CedServicios.Site
 
                             ViewState["TiposComprobante"] = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaBasicaFiltrosCombo();
                             TiposComprobanteGridView.DataSource = ViewState["TiposComprobante"];
+
+
 
                             OrderByDropDownList.Visible = true;
                             OrderByDropDownList.DataSource = RN.Comprobante.ListaOrderByExploradorComprobante();
@@ -76,6 +80,7 @@ namespace CedServicios.Site
                         case "Contrato":
                             ViewState["NaturalezaComprobante"] = RN.NaturalezaComprobante.Lista(Entidades.Enum.Elemento.Contrato, sesion);
                             NaturalezaComprobanteDropDownList.DataSource = (List<Entidades.NaturalezaComprobante>)ViewState["NaturalezaComprobante"];
+                            EstadoContratoDropDownList.DataSource = (List<Entidades.Estado>)ViewState["EstadosContrato"];
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Natur.")].Visible = false;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Fecha")].Visible = false;
                             ComprobantesGridView.Columns[Funciones.IndiceColumnaXNombre(ComprobantesGridView, "Fecha Vto")].Visible = false;
@@ -95,6 +100,10 @@ namespace CedServicios.Site
                             ViewState["TiposComprobante"] = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaBasicaFiltrosCombo();
                             TiposComprobanteGridView.DataSource = ViewState["TiposComprobante"];
 
+                            ViewState["EstadosContrato"] = RN.Estado.ListaContratos(true);
+                            EstadoContratoDropDownList.DataSource = ViewState["EstadosContrato"];
+
+                            
                             OrderByDropDownList.Visible = true;
                             OrderByDropDownList.DataSource = RN.Comprobante.ListaOrderByExploradorComprobante();
 
@@ -103,6 +112,7 @@ namespace CedServicios.Site
                             DetalleYFechasPanel.Visible = false;
                             EstadosTipoCompYOrdeByPanel.Visible = false;
                             BuscarAyudaLink.Visible = false;
+                            EstadoContrato.Visible = true;
                             break;
                     }
                     string descrTratamiento = TratamientoTextBox.Text;
@@ -148,6 +158,7 @@ namespace CedServicios.Site
                                 AyudaModifContratoPanel.Visible = true;
                                 ViewState["Estados"] = RN.Estado.ListaContratos(false);
                                 EstadoGridView.DataSource = ViewState["Estados"];
+                                EstadoContrato.Visible = false;
                             }
                             else
                             {
@@ -161,7 +172,14 @@ namespace CedServicios.Site
                             break;
                     }
                     TituloPaginaLabel.Text = descrTratamiento + " de " + ElementoTextBox.Text + "s";
-                    ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
+                    if (ElementoTextBox.Text == "Contrato" && TratamientoTextBox.Text == "Modificacion")
+                    {
+                        ViewState["Personas"] = RN.Persona.ListaPorCuitContrato(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
+                    }
+                    else
+                    { 
+                        ViewState["Personas"] = RN.Persona.ListaPorCuit(false, true, Entidades.Enum.TipoPersona.Ambos, sesion);
+                    }
                     ClienteDropDownList.DataSource = (List<Entidades.Persona>)ViewState["Personas"];
                     DataBind();
                     if (ClienteDropDownList.Items.Count > 0)
@@ -475,7 +493,25 @@ namespace CedServicios.Site
                         return tc.Incluir == true;
                     });
                     string orderBy = OrderByDropDownList.SelectedValue;
-                    lista = RN.Comprobante.ListaFiltrada(estados, estadosCompras, tiposComprobante, orderBy, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, string.Empty, string.Empty, false, false, DetalleTextBox.Text, sesion, true);
+                    if (TratamientoTextBox.Text == "Modificacion")
+                    {
+                        lista = RN.Comprobante.ListaFiltrada(estados, estadosCompras, tiposComprobante, orderBy, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, string.Empty, string.Empty, false, false, DetalleTextBox.Text, sesion, true);
+                    }
+                    else
+                    {
+                        switch (EstadoContratoDropDownList.SelectedIndex)
+                        {
+                            case 0: // Vigentes
+                                lista = RN.Comprobante.ListaFiltrada(estados, estadosCompras, tiposComprobante, orderBy, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, string.Empty, string.Empty, false, false, DetalleTextBox.Text, sesion, true);
+                                break;
+                            case 1: // DeBaja
+                                lista = RN.Comprobante.ListaFiltradaContrato(estados, true, tiposComprobante, orderBy, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, string.Empty, string.Empty, false, false, DetalleTextBox.Text, sesion, true);
+                                break;
+                            case 2: // Todos
+                                lista = RN.Comprobante.ListaFiltradaContrato(estados, false, tiposComprobante, orderBy, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, string.Empty, string.Empty, false, false, DetalleTextBox.Text, sesion, true);                    
+                                break;
+                        }
+                    }
 
                     ContentPlaceHolder contentPlaceDefault = ((ContentPlaceHolder)Master.FindControl("ContentPlaceDefault"));
                     System.Web.UI.HtmlControls.HtmlAnchor control = new System.Web.UI.HtmlControls.HtmlAnchor();
@@ -1682,6 +1718,10 @@ namespace CedServicios.Site
             sb.Append(@"</script>");
             ScriptManager.RegisterStartupScript(this, this.GetType(), "FiltroTiposComprobanteModalScript", sb.ToString(), false);
         }
+        protected void VerificarEstadosContratos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ValidaryAsignarCamposFiltro(TratamientoTextBox.Text);
+        }
 
         protected void ValidaryAsignarCamposFiltroLinkButton_Click(object sender, EventArgs e)
         {
@@ -1710,8 +1750,15 @@ namespace CedServicios.Site
                     }
                 }
                 else
-                { 
-                    ListaEstados = RN.Estado.ListaComprobantesVenta();
+                {
+                    if (ElementoTextBox.Text == "Contrato")
+                    {
+                        ListaEstados = RN.Estado.ListaContratos(false);
+                    }
+                    else
+                    {
+                        ListaEstados = RN.Estado.ListaComprobantesVenta();
+                    }
                 }
                 for (int i = 0; i < EstadoGridView.Rows.Count; i++)
                 {

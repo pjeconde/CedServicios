@@ -21,7 +21,7 @@ namespace CedServicios.RN
         }
 
         public static List<Entidades.Opcion> Opciones(Entidades.Sesion Sesion)
-        {
+         {
             List<CedServicios.Entidades.Opcion> opciones = new List<CedServicios.Entidades.Opcion>();
             if (Sesion.Usuario.Id != null)
             {
@@ -146,7 +146,15 @@ namespace CedServicios.RN
                         }
                         else
                         {
-                            opciones.Add(new Entidades.Opcion("FactComun", true, "/Facturacion/Electronica/Lote.aspx?CaT=Venta"));
+                            if (Sesion.Cuit.DatosImpositivosDescrCondIVA == "Responsable Monotributo")
+                            {
+                                opciones.Add(new Entidades.Opcion("FactComun", true, "/Facturacion/Electronica/LoteM.aspx?CaT=Venta"));
+                            }
+                            else
+                            {
+                                opciones.Add(new Entidades.Opcion("FactComun", true, "/Facturacion/Electronica/Lote.aspx?CaT=Venta"));
+                            }
+                             
                         }
                         List<Entidades.PuntoVta> lpv = Sesion.UN.PuntosVtaVigentes.FindAll(delegate (Entidades.PuntoVta pv)
                         {

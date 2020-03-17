@@ -63,6 +63,44 @@ namespace CedServicios.DB
             }
             return lista;
         }
+        public List<Entidades.Persona> ListaPorCuitContrato(bool DeBaja, bool ParaCombo, CedServicios.Entidades.Enum.TipoPersona TipoPersona)
+        {
+            List<Entidades.Persona> lista = new List<Entidades.Persona>();
+            if (sesion.Cuit.Nro != null)
+            {
+                System.Text.StringBuilder a = new StringBuilder();
+                a.Append("select ");
+                a.Append("Persona.Cuit, Persona.IdTipoDoc, Persona.NroDoc, Persona.IdPersona, Persona.DesambiguacionCuitPais, Persona.RazonSocial, Persona.DescrTipoDoc, Persona.Calle, Persona.Nro, Persona.Piso, Persona.Depto, Persona.Sector, Persona.Torre, Persona.Manzana, Persona.Localidad, Persona.IdProvincia, Persona.DescrProvincia, Persona.CodPost, Persona.NombreContacto, Persona.EmailContacto, Persona.TelefonoContacto, Persona.IdCondIVA, Persona.DescrCondIVA, Persona.NroIngBrutos, Persona.IdCondIngBrutos, Persona.DescrCondIngBrutos, Persona.GLN, Persona.FechaInicioActividades, Persona.CodigoInterno, Persona.EmailAvisoVisualizacion, Persona.PasswordAvisoVisualizacion, Persona.IdWF, Persona.Estado, Persona.UltActualiz, Persona.EsCliente, Persona.EsProveedor, Persona.EmailAvisoComprobanteActivo, Persona.EmailAvisoComprobanteDe, Persona.EmailAvisoComprobanteCco, Persona.EmailAvisoComprobanteAsunto, Persona.EmailAvisoComprobanteCuerpo, Persona.IdListaPrecioVenta, Persona.IdListaPrecioCompra ");
+                a.Append("from Persona ");
+                a.Append("where Persona.Cuit='" + sesion.Cuit.Nro + "' ");
+                a.Append("and Persona.Estado='Vigente' ");
+                a.Append("and Persona.EsCliente=1 ");
+                if (DeBaja)
+                {
+                    a.Append("and Persona.Estado='DeBaja' ");
+                }
+                a.Append("order by Persona.RazonSocial ");
+                DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+                if (dt.Rows.Count != 0)
+                {
+                    if (ParaCombo)
+                    {
+                        Entidades.Persona todos = new Entidades.Persona();
+                        todos.Orden = 0;
+                        todos.RazonSocial = "--- Todas ---";
+                        lista.Add(todos);
+                    }
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        Entidades.Persona elem = new Entidades.Persona();
+                        Copiar(dt.Rows[i], elem);
+                        if (ParaCombo) elem.Orden = i + 1;
+                        lista.Add(elem);
+                    }
+                }
+            }
+            return lista;
+        }
         private void Copiar(DataRow Desde, Entidades.Persona Hasta)
         {
             Hasta.Cuit = Convert.ToString(Desde["Cuit"]);

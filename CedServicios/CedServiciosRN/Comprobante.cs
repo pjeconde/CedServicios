@@ -26,6 +26,11 @@ namespace CedServicios.RN
             DB.Comprobante db = new DB.Comprobante(Sesion);
             return db.ListaFiltrada(Estados, EstadosCompras, TiposComprobante, OrderBy, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, PuntoDeVenta, NumeroDeComprobante, IncluirContratos, IncluirRequestResponse, Detalle, Ajuste);
         }
+        public static List<Entidades.Comprobante> ListaFiltradaContrato(List<Entidades.Estado> Estados, bool SoloDeBaja, List<FeaEntidades.TiposDeComprobantes.TipoComprobante> TiposComprobante, string OrderBy, string FechaDesde, string FechaHasta, Entidades.Persona Persona, Entidades.NaturalezaComprobante NaturalezaComprobante, string PuntoDeVenta, string NumeroDeComprobante, bool IncluirContratos, bool IncluirRequestResponse, string Detalle, Entidades.Sesion Sesion, bool Ajuste)
+        {
+            DB.Comprobante db = new DB.Comprobante(Sesion);
+            return db.ListaFiltradaContrato(Estados, SoloDeBaja, TiposComprobante, OrderBy, FechaDesde, FechaHasta, Persona, NaturalezaComprobante, PuntoDeVenta, NumeroDeComprobante, IncluirContratos, IncluirRequestResponse, Detalle, Ajuste);
+        }
         public static void Registrar(FeaEntidades.Turismo.comprobante Comprobante, string Tratamiento, Entidades.Comprobante ComprobanteOrig, Object Response, string IdNaturalezaComprobante, string IdDestinoComprobante, string IdEstado, string PeriodicidadEmision, DateTime FechaProximaEmision, int CantidadComprobantesAEmitir, int CantidadComprobantesEmitidos, int CantidadDiasFechaVto, string Detalle, bool EmailAvisoComprobanteActivo, string IdDestinatarioFrecuente, string EmailAvisoComprobanteAsunto, string EmailAvisoComprobanteCuerpo, Entidades.Sesion Sesion)
         {
             //Generar comprobante a partir de Comprobante Turismo

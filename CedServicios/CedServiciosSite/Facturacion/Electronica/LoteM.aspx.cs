@@ -531,7 +531,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 		private void BindearDropDownLists()
 		{
             InfoReferencias.BindearDropDownLists();
-			ImpuestosGlobales.BindearDropDownLists();
 			DetalleLinea.BindearDropDownLists();
 		}
         protected void AccionObtenerXMLButton_Click(object sender, EventArgs e)
@@ -830,13 +829,11 @@ namespace CedServicios.Site.Facturacion.Electronica
                 int auxPV = Convert.ToInt32(PuntoVtaDropDownList.SelectedValue);
                 ViewState["PuntoVenta"] = auxPV;
                 DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
-                ImpuestosGlobales.PuntoDeVenta = Convert.ToString(auxPV);
                 InfoReferencias.PuntoDeVenta = Convert.ToString(auxPV);
             }
             else
             {
                 DetalleLinea.PuntoDeVenta = "";
-                ImpuestosGlobales.PuntoDeVenta = "";
                 InfoReferencias.PuntoDeVenta = "";
             }
             Tipo_De_ComprobanteDropDownList.SelectedIndex = Tipo_De_ComprobanteDropDownList.Items.IndexOf(Tipo_De_ComprobanteDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante)));
@@ -926,9 +923,7 @@ namespace CedServicios.Site.Facturacion.Electronica
             DesambiguacionCuitPaisVendedorTextBox.Text = Convert.ToString(lote.comprobante[0].cabecera.informacion_vendedor.desambiguacionCuitPais);
             #endregion
             DetalleLinea.CompletarDetalles(lote);
-			DescuentosGlobales.Completar(lote);
             InfoReferencias.CompletarReferencias(lote);
-			ImpuestosGlobales.Completar(lote);
 			ComentariosTextBox.Text = lote.comprobante[0].detalle.comentarios;
             #region CompletarResumen
             MonedaComprobanteDropDownList.SelectedIndex = MonedaComprobanteDropDownList.Items.IndexOf(MonedaComprobanteDropDownList.Items.FindByValue(Convert.ToString(lote.comprobante[0].resumen.codigo_moneda)));
@@ -1366,25 +1361,15 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                         DetalleLinea.CalcularTotalesLineas(ref totalGravado, ref totalNoGravado, ref totalIVA, ref total_Operaciones_Exentas);
                         //Proceso IMPUESTOS GLOBALES
-                        double total_Impuestos_Nacionales;
-                        double total_Impuestos_Internos;
-                        double total_Ingresos_Brutos;
-                        double total_Impuestos_Municipales;
+                        //double total_Impuestos_Nacionales;
+                        //double total_Impuestos_Internos;
+                        //double total_Ingresos_Brutos;
+                        //double total_Impuestos_Municipales;
 
-                        CalcularImpuestos(out total_Impuestos_Nacionales, out total_Impuestos_Internos, out total_Ingresos_Brutos, out total_Impuestos_Municipales);
 
                         //Asigno totales
                         if (IdNaturalezaComprobanteTextBox.Text == "Compra")
                         {
-                            CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales, total_Operaciones_Exentas);
-                            //if (CodigoConceptoDropDownList.Visible)
-                            //{
-                                ImpuestosGlobales.EliminarImpuestosIVA();
-                                ImpuestosGlobales.AgregarImpuestosIVA(IdNaturalezaComprobanteTextBox.Text, DetalleLinea.Lineas);
-                                //Descontar descuentos a impuestos
-                                DescuentosGlobales.RestarDescuentosAImpuestosGlobales(ImpuestosGlobales.Lista);
-                                ImpuestosGlobales.Actualizar(ImpuestosGlobales.Lista);
-                            //}
                         }
                         else
                         {
@@ -1402,20 +1387,12 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     switch (idtipo)
                                     {
                                         case "Comun":
+                                            total = totalGravado + totalNoGravado + totalIVA + total_Operaciones_Exentas;
+                                            Importe_Total_Factura_ResumenTextBox.Text = total.ToString();
+                                            Importe_Total_Neto_Gravado_ResumenTextBox.Text = total.ToString();
+                                           break;
                                         case "RG2904":
-                                            CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales, total_Operaciones_Exentas);
-                                            if (CodigoConceptoDropDownList.Visible)
-                                            {
-                                                ImpuestosGlobales.EliminarImpuestosIVA();
-                                                ImpuestosGlobales.AgregarImpuestosIVA(IdNaturalezaComprobanteTextBox.Text, DetalleLinea.Lineas);
-                                                //Descontar descuentos a impuestos
-                                                DescuentosGlobales.RestarDescuentosAImpuestosGlobales(ImpuestosGlobales.Lista);
-                                                ImpuestosGlobales.Actualizar(ImpuestosGlobales.Lista);
-                                            }
-                                            break;
                                         case "BonoFiscal":
-                                            CalcularTotalesExceptoExportacion(ref totalGravado, ref totalNoGravado, totalIVA, total_Impuestos_Nacionales, total_Impuestos_Internos, total_Ingresos_Brutos, total_Impuestos_Municipales, total_Operaciones_Exentas);
-                                            break;
                                         default:
                                             throw new Exception("Tipo de punto de venta no contemplado en la lógica de la aplicación (" + idtipo + ")");
                                     }
@@ -1452,7 +1429,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 		private void CalcularTotalesExceptoExportacion(ref double totalGravado, ref double totalNoGravado, double totalIVA, double total_Impuestos_Nacionales, double total_Impuestos_Internos, double total_Ingresos_Brutos, double total_Impuestos_Municipales, double total_Operaciones_Exentas)
 		{
 			double total;
-			DescuentosGlobales.AplicarDtosATotales(ref totalGravado, ref totalNoGravado, ref total_Operaciones_Exentas, ref totalIVA);
 			Importe_Total_Neto_Gravado_ResumenTextBox.Text = totalGravado.ToString();
 			Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = totalNoGravado.ToString();
 			Importe_Operaciones_Exentas_ResumenTextBox.Text = total_Operaciones_Exentas.ToString();
@@ -1475,49 +1451,6 @@ namespace CedServicios.Site.Facturacion.Electronica
                 Importe_Total_Neto_Gravado_ResumenTextBox.Text = totalNoGravado.ToString(); 
                 Importe_Total_Concepto_No_Gravado_ResumenTextBox.Text = "0";
             }
-		}
-		private void CalcularImpuestos(out double total_Impuestos_Nacionales, out double total_Impuestos_Internos, out double total_Ingresos_Brutos, out double total_Impuestos_Municipales)
-		{
-			total_Impuestos_Nacionales = 0;
-			total_Impuestos_Internos = 0;
-			total_Ingresos_Brutos = 0;
-			total_Impuestos_Municipales = 0;
-			System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = ImpuestosGlobales.Lista;
-			for (int i = 0; i < listadeimpuestos.Count; i++)
-			{
-				if (!listadeimpuestos[i].codigo_impuesto.Equals(0))
-				{
-					switch (listadeimpuestos[i].codigo_impuesto)
-					{
-						case 1://IVA
-							if (!CodigoConceptoDropDownList.Visible)
-							{
-                                if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-                                {
-                                    total_Impuestos_Nacionales += listadeimpuestos[i].importe_impuesto;
-                                }
-							}
-							break;
-						case 3://Otros
-							total_Impuestos_Nacionales += listadeimpuestos[i].importe_impuesto;
-							break;
-						case 4://Nacionales
-							total_Impuestos_Nacionales += listadeimpuestos[i].importe_impuesto;
-							break;
-						case 2://Internos
-							total_Impuestos_Internos += listadeimpuestos[i].importe_impuesto;
-							break;
-						case 5://IB
-							total_Ingresos_Brutos += listadeimpuestos[i].importe_impuesto;
-							break;
-						case 6://Municipales
-							total_Impuestos_Municipales += listadeimpuestos[i].importe_impuesto;
-							break;
-						default:
-							throw new Exception("Código del impuesto inválido");
-					}
-				}
-			}
 		}
 		private void ResetearGrillas()
 		{
@@ -2865,37 +2798,6 @@ namespace CedServicios.Site.Facturacion.Electronica
 
             r.observaciones = Observaciones_ResumenTextBox.Text;
             comp.resumen = r;
-            System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = ImpuestosGlobales.Lista;
-            if (IdNaturalezaComprobanteTextBox.Text != "Compra")
-            {
-                int auxPV = Convert.ToInt32(((DropDownList)PuntoVtaDropDownList).SelectedValue);
-                try
-                {
-                    if (Funciones.SessionTimeOut(Session))
-                    {
-                        Response.Redirect("~/SessionTimeout.aspx");
-                    }
-                    else
-                    {
-                        idtipo = ((Entidades.Sesion)Session["Sesion"]).UN.PuntosVta.Find(delegate(Entidades.PuntoVta pv)
-                        {
-                            return pv.Nro == auxPV;
-                        }).IdTipoPuntoVta;
-                        
-                        ImpuestosGlobales.GenerarImpuestos(comp, MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text);
-                        
-                    }
-                }
-                catch (System.NullReferenceException)
-                {
-                    ImpuestosGlobales.GenerarImpuestos(comp, MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text);
-                }
-            }
-            else
-            {
-                ImpuestosGlobales.GenerarImpuestos(comp, MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text);
-            }
-            DescuentosGlobales.GenerarResumen(comp, MonedaComprobanteDropDownList.SelectedValue, Tipo_de_cambioTextBox.Text);
             lote.comprobante[0] = comp;
             return lote;
         }
@@ -4330,8 +4232,8 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			ActualizarTipoDeCambio();
 		}
-        
-		public Detalle Articulos
+         
+		public DetalleM Articulos
 		{
 			get
 			{
@@ -4345,7 +4247,6 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 AjustarCamposXPtaVentaChanged(((DropDownList)sender).SelectedValue);
                 DetalleLinea.PuntoDeVenta = Convert.ToString(auxPV);
-                ImpuestosGlobales.PuntoDeVenta = Convert.ToString(auxPV);
                 InfoReferencias.PuntoDeVenta = Convert.ToString(auxPV);
                 if (ViewState["PuntoVenta"] != null)
                 {

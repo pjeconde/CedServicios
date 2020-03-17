@@ -15,7 +15,7 @@
 						<Columns>
 							<asp:TemplateField HeaderStyle-Width="200px" HeaderText="Descripción del artículo">
 								<ItemTemplate>
-									<asp:TextBox ID="lbldescripcion" runat="server" ReadOnly="true" Text='<%# Eval("descripcion") %>' Style="width: 170px; resize: none; text-align:left"
+									<asp:TextBox ID="lbldescripcion" runat="server" ReadOnly="true" Text='<%# Eval("descripcion") %>' Style="width: 170px;  text-align:left"
 										TextMode="multiLine" Width="200px">
 									</asp:TextBox>
 								</ItemTemplate>

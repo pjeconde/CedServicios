@@ -25,12 +25,28 @@ namespace CedServicios.Site
                 else
                 {
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
-                    CUITTextBox.Text = sesion.Cuit.Nro;
-                    CUITTextBox.Enabled = false;
-                    UnidadDropDownList.SelectedValue = new FeaEntidades.CodigosUnidad.Unidad().Codigo.ToString();
-                    IndicacionExentoGravadoDropDownList.SelectedValue = new FeaEntidades.Indicacion.Gravado().Codigo.ToString();
-                    AlicuotaIVADropDownList.SelectedValue = new FeaEntidades.IVA.Veintiuno().Codigo.ToString();
-                    IdTextBox.Focus();
+
+                    if (sesion.Cuit.DatosImpositivosDescrCondIVA == "Responsable Monotributo")
+                    {
+                        CUITTextBox.Text = sesion.Cuit.Nro;
+                        CUITTextBox.Enabled = false;
+                        UnidadDropDownList.SelectedValue = new FeaEntidades.CodigosUnidad.Unidad().Codigo.ToString();
+                        IndicacionExentoGravadoDropDownList.SelectedValue = new FeaEntidades.Indicacion.Gravado().Codigo.ToString();
+                        IndicacionExentoGravadoDropDownList.Enabled = false;
+                        AlicuotaIVADropDownList.SelectedValue = new FeaEntidades.IVA.Cero().Codigo.ToString();
+                        AlicuotaIVADropDownList.Enabled = false;
+                        IdTextBox.Focus();
+                    }
+                    else
+                    { 
+                        
+                        CUITTextBox.Text = sesion.Cuit.Nro;
+                        CUITTextBox.Enabled = false;
+                        UnidadDropDownList.SelectedValue = new FeaEntidades.CodigosUnidad.Unidad().Codigo.ToString();
+                        IndicacionExentoGravadoDropDownList.SelectedValue = new FeaEntidades.Indicacion.Gravado().Codigo.ToString();
+                        AlicuotaIVADropDownList.SelectedValue = new FeaEntidades.IVA.Veintiuno().Codigo.ToString();
+                        IdTextBox.Focus();
+                    }
                 }
             }
         }

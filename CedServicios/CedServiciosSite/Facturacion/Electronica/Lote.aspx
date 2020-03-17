@@ -1074,7 +1074,7 @@
                     <!-- DATOS COMERCIALES-->
                     <tr>
                         <td>
-                            <asp:Panel ID="DatosComerialesPanel" runat="server">
+                             <asp:Panel ID="DatosComerialesPanel" runat="server">
                                 <table style="width:1282px">
                                     <tr>
                                         <td style="height:19px; text-align:center">
@@ -1113,12 +1113,12 @@
                                         <table style="width: 1282px; text-align:center">
                                             <tr>
                                                 <td class="TextoLabelFEADescrLarga" style="text-align:center">
-                                                    <asp:TextBox ID="ComentariosTextBox" runat="server" Style="width:1260px; resize:none" TextMode="MultiLine"></asp:TextBox>
+                                                    <asp:TextBox ID="ComentariosTextBox" runat="server" Style="min-width:1260px; max-width:1260px; width:1260px;" display="Dynamic" TextMode="MultiLine"></asp:TextBox>
                                                 </td>
                                             </tr>
                                             <tr>
                                                 <td>
-                                                    <uc4:Detalle ID="DetalleLinea" runat="server"></uc4:Detalle>
+                                                    <uc4:Detalle ID="DetalleLinea" display="Dynamic" runat="server"></uc4:Detalle>
                                                 </td>
                                             </tr>
                                         </table>
