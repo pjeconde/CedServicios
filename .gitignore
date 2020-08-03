@@ -34,3 +34,7 @@ bin
 obj
 CedServicios/CedServiciosSite/CedServiciosSite.csproj.user
 .gitignore
+/CedServicios/CedServiciosSite/ValuesController1.cs
+/CedServicios/CedServiciosSite/ViewPage1.cshtml
+/CedServicios/CedServiciosSite/ViewPage2.cshtml
+/CedServicios/WebApplication1
