@@ -2239,9 +2239,9 @@
       <Project>{F973EFE8-2A29-411A-8AD9-AD2C5BBDF42C}</Project>
       <Name>FeaEntidades</Name>
     </ProjectReference>
-    <ProjectReference Include="..\WooCommerce.NET\WooCommerce.NET.csproj">
-      <Project>{5192d26b-967d-4351-a72f-fdb8294ca34d}</Project>
-      <Name>WooCommerce.NET</Name>
+    <ProjectReference Include="..\WooCommerce\WooCommerce.csproj">
+      <Project>{785d64de-8dee-48eb-8c7b-73aee8a27e0f}</Project>
+      <Name>WooCommerce</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
