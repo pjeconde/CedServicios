@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Microsoft.AspNet.WebHooks.Receivers.Generic</name>
+    </assembly>
+    <members>
+        <member name="T:System.Web.Http.HttpConfigurationExtensions">
+            <summary>
+            Extension methods for <see cref="T:System.Web.Http.HttpConfiguration"/>.
+            </summary>
+        </member>
+        <member name="M:System.Web.Http.HttpConfigurationExtensions.InitializeReceiveGenericJsonWebHooks(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Initializes support for receiving generic WebHooks containing valid JSON
+            with no special validation logic or security requirements. This can for example be used 
+            to receive WebHooks from IFTTT's Maker Channel or a Zapier WebHooks Action.
+            A sample WebHook URI is '<c>https://&lt;host&gt;/api/webhooks/incoming/genericjson/{id}?code=83699ec7c1d794c0c780e49a5c72972590571fd8</c>'.
+            For security reasons the WebHook URI must be an <c>https</c> URI and contain a 'code' query parameter with the
+            same value as configured in the '<c>MS_WebHookReceiverSecret_GenericJson</c>' application setting, optionally using IDs
+            to differentiate between multiple WebHooks, for example '<c>secret0, id1=secret1, id2=secret2</c>'.
+            The 'code' parameter must be between 32 and 128 characters long.
+            The URI may optionally include an '<c>action</c>' query parameter which will serve as the WebHook action.
+            </summary>
+            <param name="config">The current <see cref="T:System.Web.Http.HttpConfiguration"/>config.</param>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.Properties.GenericReceiverResources">
+            <summary>
+              A strongly-typed resource class, for looking up localized strings, etc.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.GenericReceiverResources.ResourceManager">
+            <summary>
+              Returns the cached ResourceManager instance used by this class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.GenericReceiverResources.Culture">
+            <summary>
+              Overrides the current thread's CurrentUICulture property for all
+              resource lookups using this strongly typed resource class.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.Properties.GenericReceiverResources.Receiver_BadBody">
+            <summary>
+              Looks up a localized string similar to The HTTP request body did not contain a required &apos;{0}&apos; property..
+            </summary>
+        </member>
+        <member name="T:Microsoft.AspNet.WebHooks.GenericJsonWebHookReceiver">
+            <summary>
+            Provides an <see cref="T:Microsoft.AspNet.WebHooks.IWebHookReceiver"/> implementation which supports generic WebHooks 
+            containing valid JSON with no special validation logic or security requirements. This can for 
+            example be used to receive WebHooks from IFTTT's Maker Channel or a Zapier WebHooks Action.
+            A sample WebHook URI is '<c>https://&lt;host&gt;/api/webhooks/incoming/genericjson/{id}?code=83699ec7c1d794c0c780e49a5c72972590571fd8</c>'.
+            For security reasons the WebHook URI must be an <c>https</c> URI and contain a 'code' query parameter with the
+            same value as configured in the '<c>MS_WebHookReceiverSecret_GenericJson</c>' application setting, optionally using IDs
+            to differentiate between multiple WebHooks, for example '<c>secret0, id1=secret1, id2=secret2</c>'.
+            The 'code' parameter must be between 32 and 128 characters long.
+            The URI may optionally include a '<c>action</c>' query parameter which will serve as the WebHook action.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.GenericJsonWebHookReceiver.ReceiverName">
+            <summary>
+            Gets the receiver name for this receiver.
+            </summary>
+        </member>
+        <member name="P:Microsoft.AspNet.WebHooks.GenericJsonWebHookReceiver.Name">
+            <inheritdoc />
+        </member>
+        <member name="M:Microsoft.AspNet.WebHooks.GenericJsonWebHookReceiver.ReceiveAsync(System.String,System.Web.Http.Controllers.HttpRequestContext,System.Net.Http.HttpRequestMessage)">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,26 @@
+
+----------31/7/2020 1:06:31 p. m.---------------- Estado:on-hold
+SKU:7791017000451
+Cantidad:8
+Precio:101
+Descripcion:Aceite Oliva Virgen Extra Yancanello, 12 Botella de Vidrio de 250 ml......
+Estado:on-hold
+SKU:7792340000309
+Cantidad:7
+Precio:150
+Descripcion:Aceituna verde S/C meridiano 330
+Estado:on-hold
+SKU:7791017000314
+Cantidad:6
+Precio:200
+Descripcion:Aceto Balsámico estilo modena, Domenico Ranieri, 12 unidades de medio litro.
+Estado:on-hold
+SKU:7792340004277
+Cantidad:5
+Precio:300
+Descripcion:Ajíes Dulces Meridiano
+Estado:on-hold
+SKU:117020
+Cantidad:4
+Precio:100
+Descripcion:Chocolate sin azúcar negro 55% de cacao
