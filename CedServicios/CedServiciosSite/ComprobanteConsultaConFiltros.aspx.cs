@@ -55,7 +55,7 @@ namespace CedServicios.Site
                             ViewState["EstadosCompras"] = RN.Estado.ListaComprobantesCompras();
                             EstadoComprasGridView.DataSource = ViewState["EstadosCompras"];
 
-                            ViewState["TiposComprobante"] = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaBasicaFiltrosCombo();
+                            ViewState["TiposComprobante"] = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaFiltrosCombo();
                             TiposComprobanteGridView.DataSource = ViewState["TiposComprobante"];
 
                             OrderByDropDownList.Visible = true;
@@ -1973,7 +1973,7 @@ namespace CedServicios.Site
             {
                 MensajeLabel.Text = "";
                 List<FeaEntidades.TiposDeComprobantes.TipoComprobante> ListaTiposComprobante = new List<FeaEntidades.TiposDeComprobantes.TipoComprobante>();
-                ListaTiposComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaBasicaFiltrosCombo();
+                ListaTiposComprobante = FeaEntidades.TiposDeComprobantes.TipoComprobante.ListaCompletaFiltrosCombo();
                 for (int i = 0; i < TiposComprobanteGridView.Rows.Count; i++)
                 {
                     if (((CheckBox)TiposComprobanteGridView.Rows[i].FindControl("IncluirCheckBox")).Checked)

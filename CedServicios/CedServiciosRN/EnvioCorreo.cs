@@ -13,6 +13,8 @@ namespace CedServicios.RN
 {
     public class EnvioCorreo
     {
+        public static string UserSmtp, PsSmtp;
+
         public static void ConfirmacionAltaUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
             SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
@@ -43,7 +45,8 @@ namespace CedServicios.RN
             a.Append("<br />");
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             mail.Body = a.ToString();
-            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+            ObtenerCredencialesSmtp(Sesion);
+            smtpClient.Credentials = new NetworkCredential(UserSmtp, PsSmtp);
             smtpClient.Send(mail);
         }
         public static void ReporteIdUsuarios(string Email, Entidades.Sesion Sesion)
@@ -75,7 +78,8 @@ namespace CedServicios.RN
             a.Append("<br />");
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             mail.Body = a.ToString();
-            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+            ObtenerCredencialesSmtp(Sesion);
+            smtpClient.Credentials = new NetworkCredential(UserSmtp, PsSmtp);
             smtpClient.Send(mail);
         }
         public static void SolicitudAutorizacion(Entidades.Permiso Permiso, Entidades.Usuario UsuarioSolicitante, List<Entidades.Usuario> Autorizadores, Entidades.Sesion Sesion)
@@ -116,11 +120,12 @@ namespace CedServicios.RN
                 a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
                 a.Append("<br />");
                 mail.Body = a.ToString();
-                smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+                ObtenerCredencialesSmtp(Sesion);
+                smtpClient.Credentials = new NetworkCredential(UserSmtp, PsSmtp);
                 smtpClient.Send(mail);
             }
         }
-        public static void RespuestaAutorizacion(Entidades.Permiso Permiso, Entidades.Usuario UsuarioAutorizador)
+        public static void RespuestaAutorizacion(Entidades.Permiso Permiso, Entidades.Usuario UsuarioAutorizador, Entidades.Sesion Sesion)
         {
             SmtpClient smtpClient = new SmtpClient("mail.cedeira.com.ar");
             MailMessage mail = new MailMessage();
@@ -154,7 +159,8 @@ namespace CedServicios.RN
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             a.Append("<br />");
             mail.Body = a.ToString();
-            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+            ObtenerCredencialesSmtp(Sesion);
+            smtpClient.Credentials = new NetworkCredential(UserSmtp, PsSmtp);
             smtpClient.Send(mail);
         }
         public static void ContactoSite(Entidades.ContactoSite ContactoSite, string CuentaMailCedeira)
@@ -275,7 +281,8 @@ namespace CedServicios.RN
             a.Append("<b>Cedeira Software Factory</b><br />");
             a.Append("<br />");
             mail.Body = a.ToString();
-            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+            ObtenerCredencialesSmtp(Sesion);
+            smtpClient.Credentials = new NetworkCredential(UserSmtp, PsSmtp);
             smtpClient.Send(mail);
         }
         public static void AvisoGeneracionComprobante(Entidades.Persona Persona, Entidades.Comprobante Contrato, Entidades.Comprobante Comprobante, FeaEntidades.InterFacturas.lote_comprobantes Lote, string ArchivoPDF, string LogoPath, Entidades.Sesion Sesion)
@@ -326,7 +333,8 @@ namespace CedServicios.RN
             
             mail.Body = a.ToString();
             mail.Attachments.Add(new Attachment(ArchivoPDF));
-            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+            ObtenerCredencialesSmtp(Sesion);
+            smtpClient.Credentials = new NetworkCredential(UserSmtp,PsSmtp);
             smtpClient.Send(mail);
         }
         private static string TratamientoPalabrasReservadas(string Cuerpo, Entidades.Comprobante Comprobante, FeaEntidades.InterFacturas.lote_comprobantes Lote, string LogoPath, bool Negritas)
@@ -364,8 +372,17 @@ namespace CedServicios.RN
             mail.Subject = "Prueba de envio de mail";
             mail.IsBodyHtml = true;
             mail.Body = "Prueba de envio de mail";
-            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+            smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "q7]?9X_IpuJb");
             smtpClient.Send(mail);
         }
+
+        public static void ObtenerCredencialesSmtp(Entidades.Sesion Sesion)
+        {
+            DB.Parametro credenciales = new DB.Parametro(Sesion);
+
+            UserSmtp = credenciales.ObtenerUsuarioSmtp();
+            PsSmtp = credenciales.ObtenerContraseñaSmtp();
+        }
+
     }
 }

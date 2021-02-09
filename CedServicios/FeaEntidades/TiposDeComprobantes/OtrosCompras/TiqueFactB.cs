@@ -4,6 +4,7 @@ using System.Text;
 
 namespace FeaEntidades.TiposDeComprobantes.OtrosCompras
 {
+    [Serializable]
     public class TiqueFactB : OtrosCompra
 	{
         public TiqueFactB()

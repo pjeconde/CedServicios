@@ -202,14 +202,14 @@ namespace CedServicios.RN
         {
             DB.Permiso db = new DB.Permiso(Sesion);
             bool resultado = db.CambioEstado(Permiso, "Autoriz", "Vigente");
-            if (resultado) RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario);
+            if (resultado) RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario, Sesion);
             return resultado;
         }
         public static bool Rechazar(Entidades.Permiso Permiso, Entidades.Sesion Sesion)
         {
             DB.Permiso db = new DB.Permiso(Sesion);
             bool resultado = db.CambioEstado(Permiso, "Rech", "Rechazado");
-            if (resultado) RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario);
+            if (resultado) RN.EnvioCorreo.RespuestaAutorizacion(Permiso, Sesion.Usuario, Sesion);
             return resultado;
         }
         public static bool CambiarEstado(Entidades.Permiso Permiso, string Evento, string IdEstado, Entidades.Sesion Sesion)

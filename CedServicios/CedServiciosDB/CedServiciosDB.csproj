@@ -47,6 +47,7 @@
     <Compile Include="Articulo.cs" />
     <Compile Include="BusquedaLaboral.cs" />
     <Compile Include="BusquedaPerfil.cs" />
+    <Compile Include="Parametro.cs" />
     <Compile Include="ListaPrecio.cs" />
     <Compile Include="Precio.cs" />
     <Compile Include="Rubro.cs" />

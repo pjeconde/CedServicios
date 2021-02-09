@@ -147,6 +147,8 @@
     <Content Include="css\layout-contact.css" />
     <Content Include="ArticuloConsultaConFiltros.aspx" />
     <Content Include="ComprobanteConsultaConFiltros.aspx" />
+    <Content Include="Facturacion\Electronica\DetalleMConsulta.ascx" />
+    <Content Include="Facturacion\Electronica\DetalleM.ascx" />
     <Content Include="Facturacion\Electronica\LoteM.aspx" />
     <Content Include="images\parallax\out.jpg" />
     <Content Include="images\parallax\p.jpg" />
@@ -342,7 +344,6 @@
     <Content Include="images\clientes\23.jpg" />
     <Content Include="images\clientes\3.png" />
     <Content Include="images\clientes\4.png" />
-    <Content Include="images\clientes\5.bmp" />
     <Content Include="images\clientes\5.png" />
     <Content Include="images\clientes\6.png" />
     <Content Include="images\clientes\7.jpg" />
@@ -925,9 +926,11 @@
     <None Include="images\Thumbs.db" />
     <None Include="mail-it.php" />
     <None Include="mail\contact_me.php" />
+    <None Include="Properties\PublishProfiles\ARREDONDO-PRODTEST.pubxml" />
+    <None Include="Properties\PublishProfiles\CedServicios-ARREDONDO-PROD.pubxml" />
+    <None Include="Properties\PublishProfiles\CedServicios-DESA.pubxml" />
     <None Include="Properties\PublishProfiles\CedServicios-PROD.pubxml" />
     <None Include="Properties\PublishProfiles\CedServicios-WW-DESA.pubxml" />
-    <None Include="Properties\PublishProfiles\CedServicios-WW-PROD.pubxml" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -975,9 +978,11 @@
     </None>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
+      <SubType>Designer</SubType>
     </Content>
     <None Include="Web References\org.dyndns.cedweb.valido\ValidoIBK.wsdl" />
   </ItemGroup>
@@ -1215,6 +1220,20 @@
     </Compile>
     <Compile Include="ArticuloConsultaConFiltros.aspx.designer.cs">
       <DependentUpon>ArticuloConsultaConFiltros.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DetalleMConsulta.ascx.cs">
+      <DependentUpon>DetalleMConsulta.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DetalleMConsulta.ascx.designer.cs">
+      <DependentUpon>DetalleMConsulta.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DetalleM.ascx.cs">
+      <DependentUpon>DetalleM.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Facturacion\Electronica\DetalleM.ascx.designer.cs">
+      <DependentUpon>DetalleM.ascx</DependentUpon>
     </Compile>
     <Compile Include="Facturacion\Electronica\LoteM.aspx.cs">
       <DependentUpon>LoteM.aspx</DependentUpon>

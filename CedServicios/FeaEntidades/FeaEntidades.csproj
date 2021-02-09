@@ -1489,6 +1489,7 @@
     <Compile Include="TiposDeComprobantes\Liquidacion\A.cs" />
     <Compile Include="TiposDeComprobantes\Liquidacion\B.cs" />
     <Compile Include="TiposDeComprobantes\Liquidacion\Liquidacion.cs" />
+    <Compile Include="TiposDeComprobantes\NotasCredito\TiqueA.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\M.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\MiPyMEsA.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\A.cs" />
@@ -1496,6 +1497,7 @@
     <Compile Include="TiposDeComprobantes\NotasCredito\C.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\T.cs" />
     <Compile Include="TiposDeComprobantes\NotasCredito\NotaCredito.cs" />
+    <Compile Include="TiposDeComprobantes\NotasCredito\TiqueC.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\M.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\MiPyMEsA.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\A.cs" />
@@ -1503,6 +1505,8 @@
     <Compile Include="TiposDeComprobantes\NotasDebito\C.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\T.cs" />
     <Compile Include="TiposDeComprobantes\NotasDebito\NotaDebito.cs" />
+    <Compile Include="TiposDeComprobantes\NotasDebito\TiqueA.cs" />
+    <Compile Include="TiposDeComprobantes\NotasDebito\TiqueC.cs" />
     <Compile Include="TiposDeComprobantes\NotasDeVentaAlContado\A.cs" />
     <Compile Include="TiposDeComprobantes\NotasDeVentaAlContado\B.cs" />
     <Compile Include="TiposDeComprobantes\NotasDeVentaAlContado\NotaDeVentaAlContado.cs" />

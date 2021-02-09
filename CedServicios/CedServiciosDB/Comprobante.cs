@@ -1088,7 +1088,7 @@ namespace CedServicios.DB
             a.Append("Moneda, ImporteMoneda, Fecha, TipoCambio, Comprobante.Importe as ImporteTotalComprabante, Comprobante.IdWF, Comprobante.Estado, ");
             a.Append("IdTipoItem, NroItem, ComprobanteDetalle.IdArticulo, Articulo.DescrArticulo, IdRubro, Cantidad, PrecioUnitario, ComprobanteDetalle.Importe, IdUbicacion, IndicadorExentoGravado ");
             a.Append("from Comprobante, ComprobanteDetalle, Articulo where Comprobante.IdWF = ComprobanteDetalle.IdWF and ComprobanteDetalle.IdArticulo = Articulo.IdArticulo and Articulo.Cuit = Comprobante.Cuit ");
-            a.Append("and Comprobante.Fecha <= '" + FechaHasta + "' and Comprobante.Cuit = '" + Cuit + "'");
+            a.Append("and Comprobante.Estado ='vigente' and Comprobante.Fecha <= '" + FechaHasta + "' and Comprobante.Cuit = '" + Cuit + "'");
             DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
             if (dt.Rows.Count != 0)
             {
