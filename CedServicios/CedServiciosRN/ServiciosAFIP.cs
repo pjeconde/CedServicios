@@ -11,6 +11,7 @@ namespace CedServicios.RN
         {
             string RutaCertificado = "";
             ticket = new LoginTicket();
+            string Ambiente = System.Configuration.ConfigurationManager.AppSettings["Ambiente"];
             string cuitServicioAFIP = RN.Configuracion.CuitConsultaAFIP(Sesion);
                 
             DB.Ticket ticketDB = new DB.Ticket(Sesion);
@@ -49,7 +50,7 @@ namespace CedServicios.RN
             if (SolicitarTicket)
             {
                 ticket = new LoginTicket();
-                RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + cuitServicioAFIP + ".p12");
+                RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + cuitServicioAFIP + "-" + Ambiente + ".p12");
 
                 ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro), TipoServicios.ConsultaPadronN3);
 
@@ -152,30 +153,75 @@ namespace CedServicios.RN
                 SolicitarTicket = false;
             }
         }
+
+        private static void CrearTicketPadronA5(Entidades.Sesion Sesion, out LoginTicket ticket)
+        {
+            string RutaCertificado = "";
+            ticket = new LoginTicket();
+            string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
+            string Ambiente = System.Configuration.ConfigurationManager.AppSettings["Ambiente"];
+
+            DB.Ticket ticketDB = new DB.Ticket(Sesion);
+            bool SolicitarTicket = false;
+
+            
+            SolicitarTicket = true;
+            if (SolicitarTicket)
+            {
+                ticket = new LoginTicket();
+                //if (Sesion.Cuit.UsaCertificadoAFIPPropio)
+                //{
+                    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + Sesion.Cuit.Nro + "-" + Ambiente + ".p12");
+                //}
+                //else
+                //{
+                //    RutaCertificado = System.Web.HttpContext.Current.Server.MapPath(System.Configuration.ConfigurationManager.AppSettings["RutaCertificadoAFIP"] + CuitCanalAFIP + "-" + Ambiente + ".p12");
+                //}
+                ticket.ObtenerTicket(RutaCertificado, Convert.ToInt64(Sesion.Cuit.Nro), "ws_sr_padron_a5");
+
+                //Guardar Ticket de AFIP
+                Sesion.Ticket = new Entidades.Ticket();
+                Sesion.Ticket.Cuit = ticket.ObjAutorizacionfev1.Cuit.ToString().Trim();
+                Sesion.Ticket.Service = ticket.Service;
+                Sesion.Ticket.UniqueId = ticket.UniqueId.ToString().Trim();
+                Sesion.Ticket.GenerationTime = ticket.GenerationTime;
+                Sesion.Ticket.ExpirationTime = ticket.ExpirationTime;
+                Sesion.Ticket.Sign = ticket.Sign;
+                Sesion.Ticket.Token = ticket.Token;
+                ticketDB.Modificar(Sesion.Ticket);
+
+                SolicitarTicket = false;
+            }
+        }
+
         public static Entidades.PadronA13.persona DatosFiscales(string Cuit, Entidades.Sesion Sesion)
         {
             //string resp = "";
             Entidades.PadronA13.persona persona = new Entidades.PadronA13.persona();
             try
             {
-                //LoginTicket ticket = new LoginTicket();
-                //CrearTicket(Sesion, out ticket);
-                //ar.gov.afip.padron_puc_ws.ContribuyenteNivel3SelectServiceImplService c = new ar.gov.afip.padron_puc_ws.ContribuyenteNivel3SelectServiceImplService();
-                //c.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_padron-puc-ws_Service"];
-                //string cuit = "<contribuyentePK><id>" + Cuit + "</id></contribuyentePK>";
-                //string token = "-----BEGIN SSOTOKENBASE64-----\n" + ticket.Token + " -----END SSOTOKENBASE64-----";
-                //string sign = "-----BEGIN SSOSIGNBASE64-----\n" + ticket.Sign + " -----END SSOSIGNBASE64-----";
-                //resp = c.get(cuit, token, sign);
-
                 LoginTicket ticket = new LoginTicket();
-                CrearTicketPadronA13(Sesion, out ticket);
-                ar.gov.afip.personaServiceA13.PersonaServiceA13 c = new ar.gov.afip.personaServiceA13.PersonaServiceA13();
-                c.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_personaServiceA13"];
+                
+                CrearTicketPadronA5(Sesion, out ticket);
+                ar.gov.afip.personaServiceA5.PersonaServiceA5 cA4 = new ar.gov.afip.personaServiceA5.PersonaServiceA5();
+                cA4.Url = "https://aws.afip.gov.ar/sr-padron/webservices/personaServiceA5?WSDL";
                 string cuit = Cuit;
                 string token = ticket.Token;
                 string sign = ticket.Sign;
-
                 string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
+                ar.gov.afip.personaServiceA5.personaReturn respPersonaA5;
+                string cuitServicioAFIP = RN.Configuracion.CuitConsultaAFIP(Sesion);
+                respPersonaA5 = cA4.getPersona(token, sign, Convert.ToInt64("20225018805"), Convert.ToInt64("20464105159"));
+
+                
+                CrearTicketPadronA13(Sesion, out ticket);
+                ar.gov.afip.personaServiceA13.PersonaServiceA13 c = new ar.gov.afip.personaServiceA13.PersonaServiceA13();
+                c.Url = System.Configuration.ConfigurationManager.AppSettings["ar_gov_afip_personaServiceA13"];
+                //string cuit = Cuit;
+                //string token = ticket.Token;
+                //string sign = ticket.Sign;
+
+                //string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
                 ar.gov.afip.personaServiceA13.personaReturn respPersona;
                 if (Sesion.Cuit.UsaCertificadoAFIPPropio && Sesion.Cuit.Nro != CuitCanalAFIP)
                 {
@@ -184,7 +230,7 @@ namespace CedServicios.RN
                 else
                 {
                     //Busco representante del CuitCanalAFIP
-                    string cuitServicioAFIP = RN.Configuracion.CuitConsultaAFIP(Sesion);
+                    //string cuitServicioAFIP = RN.Configuracion.CuitConsultaAFIP(Sesion);
                     respPersona = c.getPersona(token, sign, Convert.ToInt64(cuitServicioAFIP), Convert.ToInt64(cuit));
                 }
 

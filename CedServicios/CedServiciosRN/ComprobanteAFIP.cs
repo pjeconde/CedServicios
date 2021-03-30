@@ -14,7 +14,7 @@ namespace CedServicios.RN
         //static ar.gov.afip.wsfev1.Service objWSFEV1;
 
         private static void CrearTicket(Entidades.Sesion Sesion, out LoginTicket ticket, out ar.gov.afip.wsw.Service objWS, out ar.gov.afip.wsfev1.Service objWSFEV1)
-        {
+         {
             string RutaCertificado = "";
             ticket = new LoginTicket();
             string CuitCanalAFIP = System.Configuration.ConfigurationManager.AppSettings["CuitCanalAFIP"];
@@ -161,9 +161,9 @@ namespace CedServicios.RN
                 }
                 if (("*201*").IndexOf("*" +lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
                 {
-                    ar.gov.afip.wsfev1.Opcional[] opcionales = new ar.gov.afip.wsfev1.Opcional[1];
-                    ar.gov.afip.wsfev1.Opcional opc = new ar.gov.afip.wsfev1.Opcional();
-                    opc.Id = "2101"; //CBU
+                    List<Opcional> opcionalList = new List<Opcional>();
+                    Opcional opcional = new Opcional();
+                    opcional.Id = "2101"; //CBU
                     if (lc.comprobante[0].extensiones != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != string.Empty)
                     { 
                         string textoComercial = Funciones.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales.ToString());
@@ -174,18 +174,60 @@ namespace CedServicios.RN
                             {
                                 throw new Exception("El CBU debe tener 22 dígitos. [" + restante + "]");
                             }
-                            opc.Valor = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 4, 22);       //Para probar "0170326740000000387343"
+                            opcional.Valor = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 4, 22);       //Para probar "0170326740000000387343"
                         }
                         else
                         {
-                            throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puede estar por cualquier parte del texto.");
+                            opcional.ErrorDescr = "El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puede estar por cualquier parte del texto.";
                         }
                     }
                     else
                     {
-                        throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puede estar por cualquier parte del texto.");
+                        opcional.ErrorDescr = "El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puede estar por cualquier parte del texto.";
                     }
-                    opcionales[0] = opc;
+                    opcionalList.Add(opcional);
+
+                    opcional = new Opcional();
+                    opcional.Id = "27"; //OPCIONTRANSF:
+                    if (lc.comprobante[0].extensiones != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != string.Empty)
+                    {
+                        string textoComercial = Funciones.HexToString(lc.comprobante[0].extensiones.extensiones_datos_comerciales.ToString());
+                        if (textoComercial.IndexOf("OPCIONTRANSF:") >= 0)
+                        {
+                            string restante = textoComercial.Substring(textoComercial.IndexOf("OPCIONTRANSF:") + 13);
+                            if (restante.Length < 3)
+                            {
+                                throw new Exception("La opcion de transferencia debe tener 3 dígitos. [" + restante + "]");
+                            }
+                            opcional.Valor = textoComercial.Substring(textoComercial.IndexOf("OPCIONTRANSF:") + 13, 3);
+                        }
+                        else
+                        {
+                            opcional.ErrorDescr = "La opcion de transferencia OPCIONTRANSF: no está informado en los datos comerciales. El formato debe ser el siguiente 'OPCIONTRANSF:xxx' y puede estar por cualquier parte del texto. Valores posibles ADC o SCA";
+                        }
+                    }
+                    else
+                    {
+                        opcional.ErrorDescr = "La opcion de transferencia OPCIONTRANSF: no está informado en los datos comerciales. El formato debe ser el siguiente 'OPCIONTRANSF:xxx' y puede estar por cualquier parte del texto. Valores posibles ADC o SCA";
+                    }
+                    opcionalList.Add(opcional);
+
+                    List<Opcional> opcionalListFilter = opcionalList.FindAll(delegate (Opcional o)
+                    {
+                        return o.Valor != string.Empty;
+                    });
+                    if (opcionalListFilter == null)
+                    {
+                        throw new Exception("El CBU: y/o OPCIONTRANSF: no está informado en los datos comerciales. Es necesario para las facturas MiPyme.");
+                    }
+                    ar.gov.afip.wsfev1.Opcional[] opcionales = new ar.gov.afip.wsfev1.Opcional[opcionalListFilter.Count];
+                    ar.gov.afip.wsfev1.Opcional opc = new ar.gov.afip.wsfev1.Opcional();
+                    for (int i = 0; i < opcionalListFilter.Count; i++)
+                    {
+                        opc.Id = opcionalListFilter[i].Id;
+                        opc.Valor = opcionalListFilter[i].Valor;
+                        opcionales[i] = opc;
+                    }
                     objFEDetalleRequest.Opcionales = opcionales;
                 }
                 if (("*202*203*208*213*").IndexOf("*" + lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
@@ -529,6 +571,48 @@ namespace CedServicios.RN
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
+            }
+        }
+
+        private partial class Opcional
+        {
+            private string idField;
+            private string valorField;
+            private string errorDescrField;
+
+            public string Id
+            {
+                get
+                {
+                    return this.idField;
+                }
+                set
+                {
+                    this.idField = value;
+                }
+            }
+            /// <remarks/>
+            public string Valor
+            {
+                get
+                {
+                    return this.valorField;
+                }
+                set
+                {
+                    this.valorField = value;
+                }
+            }
+            public string ErrorDescr
+            {
+                get
+                {
+                    return this.errorDescrField;
+                }
+                set
+                {
+                    this.errorDescrField = value;
+                }
             }
         }
         private static double CalcularBaseImponible(FeaEntidades.InterFacturas.lote_comprobantes lc, double Alicuota)
