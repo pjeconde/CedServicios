@@ -12,7 +12,7 @@ namespace CedServicios.RN.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.9.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -97,7 +97,7 @@ namespace CedServicios.RN.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
-        [global::System.Configuration.DefaultSettingValueAttribute("https://wswhomo.afip.gov.ar/wsfexv1/service.asmx")]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://servicios1.afip.gov.ar/wsfexv1/service.asmx")]
         public string CedServiciosRN_ar_gov_afip_wsfexv1_Service {
             get {
                 return ((string)(this["CedServiciosRN_ar_gov_afip_wsfexv1_Service"]));
@@ -140,6 +140,16 @@ namespace CedServicios.RN.Properties {
         public string CedServiciosRN_ar_gov_afip_wsfecred_FECredService {
             get {
                 return ((string)(this["CedServiciosRN_ar_gov_afip_wsfecred_FECredService"]));
+            }
+        }
+        
+        [global::System.Configuration.ApplicationScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.WebServiceUrl)]
+        [global::System.Configuration.DefaultSettingValueAttribute("https://aws.afip.gov.ar/sr-padron/webservices/personaServiceA5")]
+        public string CedServiciosRN_ar_gov_afip_personaServiceA5_PersonaServiceA5 {
+            get {
+                return ((string)(this["CedServiciosRN_ar_gov_afip_personaServiceA5_PersonaServiceA5"]));
             }
         }
     }

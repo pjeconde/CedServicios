@@ -104,7 +104,7 @@ namespace CedServicios.Site
                 sesion.UsuarioDemo = false;
                 RN.Usuario.Login(usuario, sesion);
                 RN.Sesion.AsignarUsuario(usuario, sesion, Request.UserHostAddress);
-                RN.ReporteActividad.EnviarSiCorresponde(sesion);
+                //RN.ReporteActividad.EnviarSiCorresponde(sesion);
                 Response.Redirect(usuario.PaginaDefault((Entidades.Sesion)Session["Sesion"]));
             }
             catch (System.Threading.ThreadAbortException)

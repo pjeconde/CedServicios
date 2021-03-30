@@ -7,6 +7,8 @@ using System.Web.UI.WebControls;
 using System.Xml;
 using System.IO;
 using CedServicios.Entidades;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace CedServicios.Site
 {
@@ -1462,5 +1464,113 @@ namespace CedServicios.Site
                 MensajeLabel.Text = "Problemas al consultar en AFIP.\r\n " + errormsg;
             }
         }
+
+        protected void GenerarQRButton_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                QRdatosAFIP qrdatos = new QRdatosAFIP();
+                qrdatos.ver = 1;
+                qrdatos.fecha = "2020-10-13";
+                qrdatos.cuit = 30000000007;
+                qrdatos.ptoVta = 10;
+                qrdatos.tipoCmp = 1;
+                qrdatos.nroCmp = 94;
+                qrdatos.importe = 12100;
+                qrdatos.moneda = "DOL";
+                qrdatos.ctz = 65;
+                qrdatos.tipoDocRec = 80;
+                qrdatos.nroDocRec = 20000000001;
+                qrdatos.tipoCodAut = "E";
+                qrdatos.codAut = 70417054367476;
+
+                //"ver":1,"fecha":"2020-10-13","cuit":30000000007,"ptoVta":10,"tipoCmp":1,"nroCmp":94,"importe":12100,"moneda":"DOL","ctz":65,"tipoDocRec":80,"nroDocRec":20000000001,"tipoCodAut":"E","codAut":70417054367476-- >
+                MensajeLabel.Text = "";
+                //if (NombreQRTextBox.Text == "")
+                //{
+                //    MensajeLabel.Text = "Ingrese el nombre para generar el código QR";
+                //    return;
+                //}
+                Bitmap bm = RN.QRdatosAFIP.RenderQrCodeAFIP(qrdatos);
+                string xmlrespuesta = "No se ha generado la imagen de Código QR";
+                if (bm != null)
+                {
+                    bm.Save(Server.MapPath(@"ImagenesSubidas\QRimagenPrueba.png"), ImageFormat.Png);
+                    xmlrespuesta = "Código QR generado satisfactoriamente.";
+                }
+                ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript(xmlrespuesta), false);
+            }
+            catch (Exception ex)
+            {
+                string errormsg = "";
+                errormsg = ex.Message.Replace("\n", "");
+                MensajeLabel.Text = "Problemas al generar el Código QR.\r\n " + errormsg;
+            }
+        }
+
+        //private void selectIconBtn_Click(object sender, EventArgs e)
+        //{
+        //    OpenFileDialog openFileDlg = new OpenFileDialog();
+        //    openFileDlg.Title = "Select icon";
+        //    openFileDlg.Multiselect = false;
+        //    openFileDlg.CheckFileExists = true;
+        //    if (openFileDlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+        //    {
+        //        iconPath.Text = openFileDlg.FileName;
+        //        if (iconSize.Value == 0)
+        //        {
+        //            iconSize.Value = 15;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        iconPath.Text = "";
+        //    }
+        //}
+
+        //private void SaveQRbutton_save_Click(object sender, EventArgs e)
+        //{
+
+        //    // Displays a SaveFileDialog so the user can save the Image
+        //    SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+        //    saveFileDialog1.Filter = "Bitmap Image|*.bmp|PNG Image|*.png|JPeg Image|*.jpg|Gif Image|*.gif";
+        //    saveFileDialog1.Title = "Save an Image File";
+        //    saveFileDialog1.ShowDialog();
+
+        //    // If the file name is not an empty string open it for saving.
+        //    if (saveFileDialog1.FileName != "")
+        //    {
+        //        // Saves the Image via a FileStream created by the OpenFile method.
+        //        using (FileStream fs = (System.IO.FileStream)saveFileDialog1.OpenFile())
+        //        {
+        //            // Saves the Image in the appropriate ImageFormat based upon the
+        //            // File type selected in the dialog box.
+        //            // NOTE that the FilterIndex property is one-based.
+
+        //            ImageFormat imageFormat = null;
+        //            switch (saveFileDialog1.FilterIndex)
+        //            {
+        //                case 1:
+        //                    imageFormat = ImageFormat.Bmp;
+        //                    break;
+        //                case 2:
+        //                    imageFormat = ImageFormat.Png;
+        //                    break;
+        //                case 3:
+        //                    imageFormat = ImageFormat.Jpeg;
+        //                    break;
+        //                case 4:
+        //                    imageFormat = ImageFormat.Gif;
+        //                    break;
+        //                default:
+        //                    throw new NotSupportedException("File extension is not supported");
+        //            }
+
+        //            pictureBoxQRCode.BackgroundImage.Save(fs, imageFormat);
+        //            fs.Close();
+        //        }
+        //    }
+        //}
+
     }
 }

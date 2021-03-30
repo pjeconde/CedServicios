@@ -7,11 +7,13 @@
 // </generado automáticamente>
 //------------------------------------------------------------------------------
 
-namespace CedServicios.Site {
-    
-    
-    public partial class ComprobanteSeleccionOnlineAFIP {
-        
+namespace CedServicios.Site
+{
+
+
+    public partial class ComprobanteSeleccionOnlineAFIP
+    {
+
         /// <summary>
         /// Control TituloPaginaLabel.
         /// </summary>
@@ -20,7 +22,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label TituloPaginaLabel;
-        
+
         /// <summary>
         /// Control TargetControlIDdelModalPopupExtender1.
         /// </summary>
@@ -29,7 +31,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label TargetControlIDdelModalPopupExtender1;
-        
+
         /// <summary>
         /// Control TicketInfoTextBox.
         /// </summary>
@@ -38,7 +40,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox TicketInfoTextBox;
-        
+
         /// <summary>
         /// Control MensajeLabel.
         /// </summary>
@@ -47,7 +49,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label MensajeLabel;
-        
+
         /// <summary>
         /// Control TabName.
         /// </summary>
@@ -56,7 +58,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField TabName;
-        
+
         /// <summary>
         /// Control TipoComprobanteUltNroCompDropDownList.
         /// </summary>
@@ -65,7 +67,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList TipoComprobanteUltNroCompDropDownList;
-        
+
         /// <summary>
         /// Control PtoVtaConsultaUltNroCompDropDownList.
         /// </summary>
@@ -74,7 +76,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList PtoVtaConsultaUltNroCompDropDownList;
-        
+
         /// <summary>
         /// Control ConsultarUltNroComprobanteAFIPButton.
         /// </summary>
@@ -83,7 +85,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarUltNroComprobanteAFIPButton;
-        
+
         /// <summary>
         /// Control TipoComprobanteDropDownList.
         /// </summary>
@@ -92,7 +94,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList TipoComprobanteDropDownList;
-        
+
         /// <summary>
         /// Control NroComprobanteTextBox.
         /// </summary>
@@ -101,7 +103,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NroComprobanteTextBox;
-        
+
         /// <summary>
         /// Control PtoVtaConsultaDropDownList.
         /// </summary>
@@ -110,7 +112,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList PtoVtaConsultaDropDownList;
-        
+
         /// <summary>
         /// Control ConsultarLoteAFIPButton.
         /// </summary>
@@ -119,7 +121,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarLoteAFIPButton;
-        
+
         /// <summary>
         /// Control TipoComprobanteValidarCAEDropDownList.
         /// </summary>
@@ -128,7 +130,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList TipoComprobanteValidarCAEDropDownList;
-        
+
         /// <summary>
         /// Control NroComprobanteValidarCAETextBox.
         /// </summary>
@@ -137,7 +139,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NroComprobanteValidarCAETextBox;
-        
+
         /// <summary>
         /// Control PtoVtaConsultaValidarCAEDropDownList.
         /// </summary>
@@ -146,7 +148,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList PtoVtaConsultaValidarCAEDropDownList;
-        
+
         /// <summary>
         /// Control CuitEmisorTextBox.
         /// </summary>
@@ -155,7 +157,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CuitEmisorTextBox;
-        
+
         /// <summary>
         /// Control FecEmisionTextBox.
         /// </summary>
@@ -164,7 +166,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox FecEmisionTextBox;
-        
+
         /// <summary>
         /// Control NroCAETextBox.
         /// </summary>
@@ -173,7 +175,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox NroCAETextBox;
-        
+
         /// <summary>
         /// Control ImporteTotalTextBox.
         /// </summary>
@@ -182,7 +184,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ImporteTotalTextBox;
-        
+
         /// <summary>
         /// Control ConsultarCAEAFIPButton.
         /// </summary>
@@ -191,7 +193,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarCAEAFIPButton;
-        
+
         /// <summary>
         /// Control ConsultarFacturaMiPymeEmisor.
         /// </summary>
@@ -200,7 +202,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarFacturaMiPymeEmisor;
-        
+
         /// <summary>
         /// Control ConsultarTipoComprobantesButton.
         /// </summary>
@@ -209,7 +211,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarTipoComprobantesButton;
-        
+
         /// <summary>
         /// Control ConsultarUltNroLoteAFIPButton.
         /// </summary>
@@ -218,7 +220,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarUltNroLoteAFIPButton;
-        
+
         /// <summary>
         /// Control ConsultarDocTipoButton.
         /// </summary>
@@ -227,7 +229,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarDocTipoButton;
-        
+
         /// <summary>
         /// Control ConsultarTiposOpcionalesButton.
         /// </summary>
@@ -236,7 +238,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarTiposOpcionalesButton;
-        
+
         /// <summary>
         /// Control Button1.
         /// </summary>
@@ -245,7 +247,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button1;
-        
+
         /// <summary>
         /// Control Button2.
         /// </summary>
@@ -254,7 +256,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button2;
-        
+
         /// <summary>
         /// Control Button5.
         /// </summary>
@@ -263,7 +265,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button5;
-        
+
         /// <summary>
         /// Control Button6.
         /// </summary>
@@ -272,7 +274,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button6;
-        
+
         /// <summary>
         /// Control Button3.
         /// </summary>
@@ -281,7 +283,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button3;
-        
+
         /// <summary>
         /// Control Button4.
         /// </summary>
@@ -290,7 +292,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button4;
-        
+
         /// <summary>
         /// Control ConsultarFormasDePagoCTButton.
         /// </summary>
@@ -299,7 +301,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarFormasDePagoCTButton;
-        
+
         /// <summary>
         /// Control ConsultarTiposComprobantesCTButton.
         /// </summary>
@@ -308,7 +310,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarTiposComprobantesCTButton;
-        
+
         /// <summary>
         /// Control ConsultarTiposDocumentoCTButton.
         /// </summary>
@@ -317,7 +319,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarTiposDocumentoCTButton;
-        
+
         /// <summary>
         /// Control ConsultarTiposDeIVACTButton.
         /// </summary>
@@ -326,7 +328,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarTiposDeIVACTButton;
-        
+
         /// <summary>
         /// Control ConsultarTiposTributoCTButton.
         /// </summary>
@@ -335,7 +337,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarTiposTributoCTButton;
-        
+
         /// <summary>
         /// Control ConsultarRelacionEmisorReceptorCTButton.
         /// </summary>
@@ -344,7 +346,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarRelacionEmisorReceptorCTButton;
-        
+
         /// <summary>
         /// Control ConsultarPaisesCTButton.
         /// </summary>
@@ -353,7 +355,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarPaisesCTButton;
-        
+
         /// <summary>
         /// Control ConsultarMonedasCTButton.
         /// </summary>
@@ -362,7 +364,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarMonedasCTButton;
-        
+
         /// <summary>
         /// Control ConsultarCondicionesIVACTAButton.
         /// </summary>
@@ -371,7 +373,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarCondicionesIVACTAButton;
-        
+
         /// <summary>
         /// Control ConsultarTiposDeTarjetasCTButton.
         /// </summary>
@@ -380,7 +382,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarTiposDeTarjetasCTButton;
-        
+
         /// <summary>
         /// Control ConsultarNovedadesCTButton.
         /// </summary>
@@ -389,7 +391,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarNovedadesCTButton;
-        
+
         /// <summary>
         /// Control ConsultarTiposDeCuentasCTButton.
         /// </summary>
@@ -398,7 +400,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarTiposDeCuentasCTButton;
-        
+
         /// <summary>
         /// Control ConsultarAFIPTiposItemCTButton.
         /// </summary>
@@ -407,7 +409,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarAFIPTiposItemCTButton;
-        
+
         /// <summary>
         /// Control ConsultarAFIPCodigosItemTurismoCTButton.
         /// </summary>
@@ -416,7 +418,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarAFIPCodigosItemTurismoCTButton;
-        
+
         /// <summary>
         /// Control Button7.
         /// </summary>
@@ -425,7 +427,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button Button7;
-        
+
         /// <summary>
         /// Control CuitAConsultarTextBox.
         /// </summary>
@@ -434,7 +436,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox CuitAConsultarTextBox;
-        
+
         /// <summary>
         /// Control ConsultarDatosFiscalesButton.
         /// </summary>
@@ -443,7 +445,25 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button ConsultarDatosFiscalesButton;
-        
+
+        /// <summary>
+        /// Control NombreQRTextBox.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox NombreQRTextBox;
+
+        /// <summary>
+        /// Control GenerarQRButton.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button GenerarQRButton;
+
         /// <summary>
         /// Control InfoRespuestaTextBox.
         /// </summary>
@@ -452,7 +472,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox InfoRespuestaTextBox;
-        
+
         /// <summary>
         /// Control ModalPopupExtender1.
         /// </summary>
@@ -461,7 +481,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::AjaxControlToolkit.ModalPopupExtender ModalPopupExtender1;
-        
+
         /// <summary>
         /// Control ConfirmacionPanel.
         /// </summary>
@@ -470,7 +490,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel ConfirmacionPanel;
-        
+
         /// <summary>
         /// Control TituloConfirmacionLabel.
         /// </summary>
@@ -479,7 +499,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label TituloConfirmacionLabel;
-        
+
         /// <summary>
         /// Control DetalleLabel.
         /// </summary>
@@ -488,7 +508,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label DetalleLabel;
-        
+
         /// <summary>
         /// Control DetalleTextBox.
         /// </summary>
@@ -497,7 +517,7 @@ namespace CedServicios.Site {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox DetalleTextBox;
-        
+
         /// <summary>
         /// Control CancelarButton.
         /// </summary>

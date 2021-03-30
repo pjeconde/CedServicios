@@ -456,6 +456,33 @@
                             </tr>
                         </tbody>
                     </table>
+                    <table class="">
+                        <tbody>
+                            <tr>
+                                <td style="padding: 10px">
+                                    <h4>Generar codigo QR</h4>
+                                    <table>
+                                        <tr>
+                                            <td style="padding-top: 10px; text-align: right">
+                                                Nombre:
+                                            </td>
+                                            <td style="padding-top: 10px; padding-left: 5px; text-align: left">
+                                                <asp:TextBox ID="NombreQRTextBox" runat="server" ToolTip="" Text="" Enabled="false">
+                                                </asp:TextBox>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="2" style="padding-top: 10px">
+                                                <asp:Button ID="GenerarQRButton" runat="server" OnClick="GenerarQRButton_Click"
+                                                    Text="Generar QR" ToolTip="Generar el código QR."
+                                                    Width="100%" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
