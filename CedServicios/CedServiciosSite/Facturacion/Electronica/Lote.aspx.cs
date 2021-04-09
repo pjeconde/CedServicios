@@ -3306,27 +3306,65 @@ namespace CedServicios.Site.Facturacion.Electronica
             {
                 if (DatosComerciales.Texto != string.Empty)
                 {
+                    List<Entidades.Opcional> opcionalList = new List<Entidades.Opcional>();
+                    Entidades.Opcional opcional = new Entidades.Opcional();
+                    opcional.Id = "2101"; //CBU
                     string textoComercial = DatosComerciales.Texto.Replace(System.Environment.NewLine, "<br>");
                     if (textoComercial.IndexOf("CBU:") >= 0)
                     {
                         string restante = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 4);
                         if (restante.Length < 22)
                         {
-                            throw new Exception("El CBU debe tener 22 dígitos. [" + restante + "]");
+                            opcional.ErrorDescr = "El CBU debe tener 22 dígitos. [" + restante + "]";
                         }
-                        FeaEntidades.InterFacturas.informacion_adicional_comprobante infoAdic = new FeaEntidades.InterFacturas.informacion_adicional_comprobante();
-                        infoAdic.tipo = "2101";
-                        infoAdic.valor = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 4, 22);       //Para probar "0170326740000000387343"
-                        infcomprob.informacion_adicional_comprobante[0] = infoAdic;
+                        //FeaEntidades.InterFacturas.informacion_adicional_comprobante infoAdic = new FeaEntidades.InterFacturas.informacion_adicional_comprobante();
+                        opcional.Valor = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 4, 22);       //Para probar "0170326740000000387343"
+                        //infoAdic.tipo = "2101";
+                        //infoAdic.valor = textoComercial.Substring(textoComercial.IndexOf("CBU:") + 4, 22);       //Para probar "0170326740000000387343"
+                        //infcomprob.informacion_adicional_comprobante[0] = infoAdic;
                     }
                     else
                     {
-                        throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puedo estar por cualquier parte del texto.");
+                        opcional.ErrorDescr = "El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puede estar por cualquier parte del texto.";
+                    }
+                    opcionalList.Add(opcional);
+
+                    opcional = new Entidades.Opcional();
+                    opcional.Id = "27"; //OPCIONTRANSF:
+                    if (textoComercial.IndexOf("OPCIONTRANSF:") >= 0)
+                    {
+                        string restante = textoComercial.Substring(textoComercial.IndexOf("OPCIONTRANSF:") + 13);
+                        if (restante.Length < 3)
+                        {
+                            opcional.ErrorDescr = "La valor de la OPCIONTRANSF: debe tener 3 dígitos. [" + restante + "]";
+                        }
+                        opcional.Valor = textoComercial.Substring(textoComercial.IndexOf("OPCIONTRANSF:") + 13, 3);
+                    }
+                    else
+                    {
+                        opcional.ErrorDescr = "El Opción de Transferencia no está informada en los datos comerciales. El formato debe ser el siguiente 'OPCIONTRANSF:xxx' y puede estar por cualquier parte del texto.";
+                    }
+                    opcionalList.Add(opcional);
+
+                    List<Entidades.Opcional> opcionalListFilter = opcionalList.FindAll(delegate (Entidades.Opcional o)
+                    {
+                        return o.Valor != string.Empty;
+                    });
+                    if (opcionalListFilter.Count == 0)
+                    {
+                        throw new Exception("El CBU: y/o OPCIONTRANSF: no está informado en los datos comerciales. Es necesario para las facturas MiPyme.");
+                    }
+                    for (int i = 0; i < opcionalListFilter.Count; i++)
+                    {
+                        FeaEntidades.InterFacturas.informacion_adicional_comprobante infoAdic = new FeaEntidades.InterFacturas.informacion_adicional_comprobante();
+                        infoAdic.tipo = opcionalListFilter[i].Id;
+                        infoAdic.valor = opcionalListFilter[i].Valor;
+                        infcomprob.informacion_adicional_comprobante[i] = infoAdic;
                     }
                 }
                 else
                 {
-                    throw new Exception("El CBU no está informado en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' y puedo estar por cualquier parte del texto.");
+                    throw new Exception("El CBU y/o la Opción de Transferencia no están informados en los datos comerciales. El formato debe ser el siguiente 'CBU:xxxxxxxxxxxxxxxxxxxxxx' 'OPCIONTRANSF:xxx' y puede estar por cualquier parte del texto.");
                 }
             }
             //infcomprob.informacion_adicional_comprobante[0] = new FeaEntidades.InterFacturas.informacion_adicional_comprobante();
