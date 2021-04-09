@@ -161,8 +161,8 @@ namespace CedServicios.RN
                 }
                 if (("*201*").IndexOf("*" +lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante.ToString() + "*") >= 0)
                 {
-                    List<Opcional> opcionalList = new List<Opcional>();
-                    Opcional opcional = new Opcional();
+                    List<Entidades.Opcional> opcionalList = new List<Entidades.Opcional>();
+                    Entidades.Opcional opcional = new Entidades.Opcional();
                     opcional.Id = "2101"; //CBU
                     if (lc.comprobante[0].extensiones != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != string.Empty)
                     { 
@@ -187,7 +187,7 @@ namespace CedServicios.RN
                     }
                     opcionalList.Add(opcional);
 
-                    opcional = new Opcional();
+                    opcional = new Entidades.Opcional();
                     opcional.Id = "27"; //OPCIONTRANSF:
                     if (lc.comprobante[0].extensiones != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != null && lc.comprobante[0].extensiones.extensiones_datos_comerciales != string.Empty)
                     {
@@ -212,18 +212,18 @@ namespace CedServicios.RN
                     }
                     opcionalList.Add(opcional);
 
-                    List<Opcional> opcionalListFilter = opcionalList.FindAll(delegate (Opcional o)
+                    List<Entidades.Opcional> opcionalListFilter = opcionalList.FindAll(delegate (Entidades.Opcional o)
                     {
                         return o.Valor != string.Empty;
                     });
-                    if (opcionalListFilter == null)
+                    if (opcionalListFilter.Count == 0)
                     {
                         throw new Exception("El CBU: y/o OPCIONTRANSF: no está informado en los datos comerciales. Es necesario para las facturas MiPyme.");
                     }
                     ar.gov.afip.wsfev1.Opcional[] opcionales = new ar.gov.afip.wsfev1.Opcional[opcionalListFilter.Count];
-                    ar.gov.afip.wsfev1.Opcional opc = new ar.gov.afip.wsfev1.Opcional();
                     for (int i = 0; i < opcionalListFilter.Count; i++)
                     {
+                        ar.gov.afip.wsfev1.Opcional opc = new ar.gov.afip.wsfev1.Opcional();
                         opc.Id = opcionalListFilter[i].Id;
                         opc.Valor = opcionalListFilter[i].Valor;
                         opcionales[i] = opc;
@@ -571,48 +571,6 @@ namespace CedServicios.RN
             catch (Exception ex)
             {
                 throw new Exception(ex.Message);
-            }
-        }
-
-        private partial class Opcional
-        {
-            private string idField;
-            private string valorField;
-            private string errorDescrField;
-
-            public string Id
-            {
-                get
-                {
-                    return this.idField;
-                }
-                set
-                {
-                    this.idField = value;
-                }
-            }
-            /// <remarks/>
-            public string Valor
-            {
-                get
-                {
-                    return this.valorField;
-                }
-                set
-                {
-                    this.valorField = value;
-                }
-            }
-            public string ErrorDescr
-            {
-                get
-                {
-                    return this.errorDescrField;
-                }
-                set
-                {
-                    this.errorDescrField = value;
-                }
             }
         }
         private static double CalcularBaseImponible(FeaEntidades.InterFacturas.lote_comprobantes lc, double Alicuota)

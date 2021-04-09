@@ -366,7 +366,7 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 qrdatos.nroCmp = lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
                 if (lc.comprobante[0].resumen.codigo_moneda == "PES")
                 {
-                    qrdatos.importe = Convert.ToDecimal(Math.Round(lc.comprobante[0].resumen.importe_total_factura, 3));
+                    qrdatos.importe = Convert.ToDecimal(Math.Round(lc.comprobante[0].resumen.importe_total_factura, 2));
                     qrdatos.moneda = "PES";
                     qrdatos.ctz = 1;
                 }

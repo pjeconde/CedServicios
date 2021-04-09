@@ -67,6 +67,7 @@
     <Compile Include="NaturalezaComprobante.cs" />
     <Compile Include="ObjectExtensions.cs" />
     <Compile Include="Opcion.cs" />
+    <Compile Include="Opcional.cs" />
     <Compile Include="PadronA13.cs" />
     <Compile Include="PDF.cs" />
     <Compile Include="PeriodicidadEmision.cs" />
