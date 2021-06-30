@@ -13,7 +13,7 @@ namespace CedServicios.RN
 {
     public class EnvioCorreo
     {
-        public static string UserSmtp, PsSmtp;
+        public static string UserSmtp, PsSmtp, SmtpPsContacto, SmtpUserContacto;
 
         public static void ConfirmacionAltaUsuario(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
@@ -163,7 +163,7 @@ namespace CedServicios.RN
             smtpClient.Credentials = new NetworkCredential(UserSmtp, PsSmtp);
             smtpClient.Send(mail);
         }
-        public static void ContactoSite(Entidades.ContactoSite ContactoSite, string CuentaMailCedeira)
+        public static void ContactoSite(Entidades.ContactoSite ContactoSite, string CuentaMailCedeira, Entidades.Sesion Sesion)
         {
             StringBuilder a;
             //Mail para Cedeira
@@ -186,7 +186,8 @@ namespace CedServicios.RN
             a.Append(ContactoSite.Mensaje + "<br />");
             a.Append("------------------------------------------------<br />");
             mail2Cedeira.Body = a.ToString();
-            smtpClient2Cedeira.Credentials = new NetworkCredential("contacto@cedeira.com.ar", "123QWEasdZXC");
+            ObtenerCredencialesContactoSmtp(Sesion);
+            smtpClient2Cedeira.Credentials = new NetworkCredential(SmtpUserContacto, SmtpPsContacto);
             smtpClient2Cedeira.Send(mail2Cedeira);
 
             //Mail para el Contacto
@@ -215,7 +216,8 @@ namespace CedServicios.RN
             a.Append("<br />");
             a.Append("Este es sólo un servicio de envío de mensajes. Las respuestas no se supervisan ni se responden.<br />");
             mail2Contacto.Body = a.ToString();
-            smtpClient2Contacto.Credentials = new NetworkCredential("contacto@cedeira.com.ar", "123QWEasdZXC");
+            ObtenerCredencialesContactoSmtp(Sesion);
+            smtpClient2Contacto.Credentials = new NetworkCredential(SmtpUserContacto, SmtpPsContacto);
             smtpClient2Contacto.Send(mail2Contacto);
         }
         public static void ReporteActividad(DateTime FechaDsd, DateTime FechaHst, Entidades.Sesion Sesion)
@@ -383,6 +385,12 @@ namespace CedServicios.RN
             UserSmtp = credenciales.ObtenerUsuarioSmtp();
             PsSmtp = credenciales.ObtenerContraseñaSmtp();
         }
+        public static void ObtenerCredencialesContactoSmtp(Entidades.Sesion Sesion)
+        {
+            DB.Parametro credenciales = new DB.Parametro(Sesion);
 
+            SmtpPsContacto = credenciales.ObtenerContraseñaContactoSmtp();
+            SmtpUserContacto = credenciales.ObtenerUsuarioContactoSmtp();
+        }
     }
 }

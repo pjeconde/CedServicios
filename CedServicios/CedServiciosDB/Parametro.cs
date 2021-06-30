@@ -31,5 +31,24 @@ namespace CedServicios.DB
             contraseña = dv.Table.Rows[0].ItemArray[0].ToString();
             return contraseña;
         }
+        public string ObtenerUsuarioContactoSmtp()
+        {
+            string usuario = null;
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("select ValorStr from Parametro where IdParm='SmtpUserContacto'");
+            DataView dv = (DataView)Ejecutar(a.ToString(), TipoRetorno.DV, Transaccion.Usa, sesion.CnnStr);
+            usuario = dv.Table.Rows[0].ItemArray[0].ToString();
+            return usuario;
+        }
+
+        public string ObtenerContraseñaContactoSmtp()
+        {
+            string contraseña = null;
+            StringBuilder a = new StringBuilder(string.Empty);
+            a.AppendLine("select ValorStr from Parametro where IdParm='SmtpPsContacto'");
+            DataView dv = (DataView)Ejecutar(a.ToString(), TipoRetorno.DV, Transaccion.Usa, sesion.CnnStr);
+            contraseña = dv.Table.Rows[0].ItemArray[0].ToString();
+            return contraseña;
+        }
     }
 }

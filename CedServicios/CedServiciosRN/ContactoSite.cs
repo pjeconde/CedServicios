@@ -96,7 +96,9 @@ namespace CedServicios.RN
             {
                 cuentaMailCedeira = "contacto@cedeira.com.ar";
             }
-            RN.EnvioCorreo.ContactoSite(ContactoSite, cuentaMailCedeira);
+
+            Entidades.Sesion sesion = new Entidades.Sesion();
+            RN.EnvioCorreo.ContactoSite(ContactoSite, cuentaMailCedeira, sesion);
         }
     }
 }

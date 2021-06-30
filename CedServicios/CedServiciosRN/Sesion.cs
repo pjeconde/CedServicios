@@ -213,8 +213,8 @@ namespace CedServicios.RN
                         if (elUsuarioEsAdministradorDeLaUNSeleccionada.Count != 0)
                         {
                             opciones.Add(new Entidades.Opcion("AdminPtoVentaAlta", true, "/PuntoVtaCrear.aspx"));
-                            opciones.Add(new Entidades.Opcion("AdminPtoVentaBajaYAnulBaja", true, "/PuntoVtaSeleccionar.aspx"));
-                            opciones.Add(new Entidades.Opcion("AdminPtoVentaModif", true, "/PuntoVtaSeleccionar.aspx"));
+                            opciones.Add(new Entidades.Opcion("AdminPtoVentaBajaYAnulBaja", true, "/PuntoVtaSeleccionar.aspx?Baja"));
+                            opciones.Add(new Entidades.Opcion("AdminPtoVentaModif", true, "/PuntoVtaSeleccionar.aspx?Modificar"));
                         }
                         opciones.Add(new Entidades.Opcion("AdminPtoVentaConsulta", true, "/CuitTreeView.aspx?PuntoVta.aspx"));
                     }
