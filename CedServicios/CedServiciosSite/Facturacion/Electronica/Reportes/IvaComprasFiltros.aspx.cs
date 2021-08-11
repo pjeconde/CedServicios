@@ -200,11 +200,11 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                                     {
                                         TotalesXImpuestos("Impuestos Nacionales", importe);
                                     }
-                                    else if (lote.comprobante[0].resumen.impuestos[z].codigo_impuesto == 5)
+                                    else if (lote.comprobante[0].resumen.impuestos[z].codigo_impuesto == 6)
                                     {
                                         TotalesXImpuestos("Impuestos Municipales", importe);
                                     }
-                                    else if (lote.comprobante[0].resumen.impuestos[z].codigo_impuesto == 6)
+                                    else if (lote.comprobante[0].resumen.impuestos[z].codigo_impuesto == 5)
                                     {
                                         TotalesXImpuestos("Ingresos Brutos", importe);
                                     }
