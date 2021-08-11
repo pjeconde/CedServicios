@@ -9,7 +9,8 @@ namespace CedServicios.RN
 {
     public class EnvioSMS
     {
-        public static void Enviar(string Asunto, string Mensaje, List<Entidades.Usuario> Destinatarios)
+        public static string UserSmtp, PsSmtp;
+        public static void Enviar(string Asunto, string Mensaje, List<Entidades.Usuario> Destinatarios, Entidades.Sesion Sesion)
         {
             if (Destinatarios.Count > 0)
             {
@@ -22,7 +23,8 @@ namespace CedServicios.RN
                 }
                 mail.Subject = Asunto;
                 mail.Body = Mensaje;
-                smtpClient.Credentials = new NetworkCredential("registrousuarios@cedeira.com.ar", "cedeira123");
+                EnvioCorreo.ObtenerCredencialesSmtp(Sesion);
+                smtpClient.Credentials = new NetworkCredential(UserSmtp, PsSmtp);
                 smtpClient.Send(mail);
             }
         }

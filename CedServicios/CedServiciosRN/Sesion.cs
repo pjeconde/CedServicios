@@ -21,7 +21,7 @@ namespace CedServicios.RN
         }
 
         public static List<Entidades.Opcion> Opciones(Entidades.Sesion Sesion)
-         {
+        {
             List<CedServicios.Entidades.Opcion> opciones = new List<CedServicios.Entidades.Opcion>();
             if (Sesion.Usuario.Id != null)
             {

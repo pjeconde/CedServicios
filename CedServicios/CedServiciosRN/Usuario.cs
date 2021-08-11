@@ -138,7 +138,7 @@ namespace CedServicios.RN
             DB.Usuario usuario = new DB.Usuario((Entidades.Sesion)Sesion);
             usuario.Confirmar(Usuario);
             Leer(Usuario, (Entidades.Sesion)Sesion);
-            if (EnviarCorreo) RN.EnvioSMS.Enviar("Alta cuenta " + CantidadDeFilas((Entidades.Sesion)Sesion).ToString(), Usuario.Nombre + " (" + Usuario.Email + ") - IdUsuario: " + Usuario.Id, usuario.DestinatariosAvisoAltaUsuario());
+            if (EnviarCorreo) RN.EnvioSMS.Enviar("Alta cuenta " + CantidadDeFilas((Entidades.Sesion)Sesion).ToString(), Usuario.Nombre + " (" + Usuario.Email + ") - IdUsuario: " + Usuario.Id, usuario.DestinatariosAvisoAltaUsuario(), (Entidades.Sesion)Sesion);
         }
         public static bool IdCuentaDisponible(Entidades.Usuario Usuario, Entidades.Sesion Sesion)
         {
