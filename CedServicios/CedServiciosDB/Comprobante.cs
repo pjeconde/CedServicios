@@ -425,6 +425,35 @@ namespace CedServicios.DB
             }
             return lista;
         }
+        public Entidades.Comprobante Leer(string NaturalezaComprobante, string Cuit, int ComprobanteTipo, int NroPuntoVta, int ComprobanteNro, int DocumentoTipo, string DocumentoNro)
+        {
+            System.Text.StringBuilder a = new StringBuilder();
+            Entidades.Comprobante comprobante = null; 
+            if (NaturalezaComprobante == "Compra")
+            {
+                a.Append("select ");
+                a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto, Comprobante.EmailAvisoComprobanteActivo, Comprobante.IdDestinatarioFrecuente, Comprobante.EmailAvisoComprobanteAsunto, Comprobante.EmailAvisoComprobanteCuerpo ");
+                a.Append("from Comprobante, NaturalezaComprobante  ");
+                a.Append("where Comprobante.Cuit='" + Cuit + "' and Comprobante.IdTipoComprobante=" + ComprobanteTipo + " and Comprobante.NroPuntoVta=" + NroPuntoVta + " and Comprobante.NroComprobante=" + ComprobanteNro + " and Comprobante.IdTipoDoc=" + DocumentoTipo + " and Comprobante.NroDoc='" + DocumentoNro + "' ");
+                a.Append("and Comprobante.IdNaturalezaComprobante=NaturalezaComprobante.IdNaturalezaComprobante and Comprobante.IdNaturalezaComprobante = '" + NaturalezaComprobante + "'");
+            }
+            else
+            {
+                a.Append("select ");
+                a.Append("Comprobante.Cuit, Comprobante.IdTipoComprobante, Comprobante.DescrTipoComprobante, Comprobante.NroPuntoVta, Comprobante.NroComprobante, Comprobante.NroLote, Comprobante.IdTipoDoc, Comprobante.NroDoc, Comprobante.IdPersona, Comprobante.DesambiguacionCuitPais, Comprobante.RazonSocial, Comprobante.Detalle, Comprobante.Fecha, Comprobante.FechaVto, Comprobante.Moneda, Comprobante.ImporteMoneda, Comprobante.TipoCambio, Comprobante.Importe, Comprobante.Request, Comprobante.Response, Comprobante.IdDestinoComprobante, Comprobante.IdWF, Comprobante.Estado, Comprobante.UltActualiz, Comprobante.IdNaturalezaComprobante, NaturalezaComprobante.DescrNaturalezaComprobante, Comprobante.PeriodicidadEmision, Comprobante.FechaProximaEmision, Comprobante.CantidadComprobantesAEmitir, Comprobante.CantidadComprobantesEmitidos, Comprobante.CantidadDiasFechaVto, Comprobante.EmailAvisoComprobanteActivo, Comprobante.IdDestinatarioFrecuente, Comprobante.EmailAvisoComprobanteAsunto, Comprobante.EmailAvisoComprobanteCuerpo ");
+                a.Append("from Comprobante, NaturalezaComprobante  ");
+                a.Append("where Comprobante.Cuit='" + Cuit + "' and Comprobante.IdTipoComprobante=" + ComprobanteTipo + " and Comprobante.NroPuntoVta=" + NroPuntoVta + " and Comprobante.NroComprobante=" + (NaturalezaComprobante == "VentaContrato" ? -ComprobanteNro : ComprobanteNro).ToString() + " ");
+                a.Append("and Comprobante.IdNaturalezaComprobante=NaturalezaComprobante.IdNaturalezaComprobante and Comprobante.IdNaturalezaComprobante = '" + NaturalezaComprobante + "'");
+            }
+            DataTable dt = (DataTable)Ejecutar(a.ToString(), TipoRetorno.TB, Transaccion.NoAcepta, sesion.CnnStr);
+            if (dt.Rows.Count != 0)
+            {
+                comprobante = new Entidades.Comprobante();
+                Copiar(dt.Rows[0], comprobante);
+            }
+            return comprobante;
+        }
+
         public void Leer(Entidades.Comprobante Comprobante)
         {
             System.Text.StringBuilder a = new StringBuilder();
