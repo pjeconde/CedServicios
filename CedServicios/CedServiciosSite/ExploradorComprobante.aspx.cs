@@ -493,7 +493,7 @@ namespace CedServicios.Site
                         return tc.Incluir == true;
                     });
                     string orderBy = OrderByDropDownList.SelectedValue;
-                    if (TratamientoTextBox.Text == "Modificacion")
+                    if (TratamientoTextBox.Text == "Modificacion" || TratamientoTextBox.Text == "Baja/Anul.baja")
                     {
                         lista = RN.Comprobante.ListaFiltrada(estados, estadosCompras, tiposComprobante, orderBy, FechaDesdeTextBox.Text, FechaHastaTextBox.Text, persona, naturalezaComprobante, string.Empty, string.Empty, false, false, DetalleTextBox.Text, sesion, true);
                     }
