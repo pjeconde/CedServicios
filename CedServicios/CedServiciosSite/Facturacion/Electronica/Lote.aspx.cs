@@ -22,7 +22,8 @@ namespace CedServicios.Site.Facturacion.Electronica
 		#region Variables
 		string gvUniqueID = String.Empty;
 		System.Collections.Generic.List<FeaEntidades.InterFacturas.informacion_comprobanteReferencias> referencias;
-		#endregion
+        bool mostrarTxtMonotributistaITF = false;
+        #endregion
         protected void Page_LoadComplete(object sender, EventArgs e)
         {
             Session.Remove("ComprobanteATratar");
@@ -38,6 +39,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 else
                 {
+                    
                     Entidades.Sesion sesion = (Entidades.Sesion)Session["Sesion"];
                     Session.Remove("FaltaCalcularTotales");
                     if (Request.QueryString.Count > 0)
@@ -594,7 +596,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
 
                             //Grabar en base de datos
-                            lote.cabecera_lote.DestinoComprobante = "ITF";
+                            lote.cabecera_lote.DestinoComprobante = "ITF"; 
                             lote.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
 
                             //Registrar comprobante si no es el usuario de DEMO.
@@ -2188,9 +2190,26 @@ namespace CedServicios.Site.Facturacion.Electronica
                     return false;
                 }
             }
+            if (Convert.ToInt32(Condicion_IVA_CompradorDropDownList.SelectedValue) == 6 && Convert.ToInt32(Condicion_IVA_VendedorDropDownList.SelectedValue) == 1)
+            {
+                switch(Convert.ToInt32(Tipo_De_ComprobanteDropDownList.SelectedValue))
+                {
+                    case 1:
+                    case 2:
+                    case 3:
+                        mostrarTxtMonotributistaITF = true;
+                        break;
+                    default:
+                    ScriptManager.RegisterClientScriptBlock(this, GetType(), "Message", Funciones.TextoScript("Si el comprador es Monotributista debe emitir Factura A / Nota de credito o debito A"), false);
+                    return false;
+                        break;
+                }
+            }
             //DATOSEMAIL
             return true;
         }
+
+
         protected void AccionValidarEnInterfacturasButton_Click(object sender, EventArgs e)
         {
             if (Funciones.SessionTimeOut(Session))
@@ -2334,7 +2353,8 @@ namespace CedServicios.Site.Facturacion.Electronica
 
                                 //Grabar en base de datos
                                 lcFea.cabecera_lote.DestinoComprobante = "ITF";
-                                lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
+                                lcFea.comprobante[0].cabecera.informacion_comprobante.Observacion = ""; 
+
                                 RN.Comprobante.Registrar(lcFea, null, IdNaturalezaComprobanteTextBox.Text, "ITF", "PteEnvio", PeriodicidadEmisionDropDownList.SelectedValue, DateTime.ParseExact(FechaProximaEmisionDatePickerWebUserControl.Text, "yyyyMMdd", System.Globalization.CultureInfo.InvariantCulture), Convert.ToInt32(CantidadComprobantesAEmitirTextBox.Text), Convert.ToInt32(CantidadComprobantesEmitidosTextBox.Text), Convert.ToInt32(CantidadDiasFechaVtoTextBox.Text), string.Empty, false, string.Empty, string.Empty, string.Empty, sesion);
 
                                 AjustarLoteParaITF(lcFea); 
@@ -3079,6 +3099,15 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
 
             r.observaciones = Observaciones_ResumenTextBox.Text;
+            if(mostrarTxtMonotributistaITF)
+            {
+                if(r.observaciones != "")
+                {
+                    r.observaciones += " %3Cbr%3E ";
+                }
+                r.observaciones += "Receptor del comprobante – Responsable Monotributo. El monto de IVA discriminado no puede computarse como crédito fiscal.";
+            }
+
             comp.resumen = r;
             System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = ImpuestosGlobales.Lista;
             if (IdNaturalezaComprobanteTextBox.Text != "Compra")
