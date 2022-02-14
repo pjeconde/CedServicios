@@ -593,7 +593,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         if (ValidarCamposObligatorios("ObtenerXML"))
                         {
                             //Generar Lote
-                            FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
+                            FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false, true);
 
                             //Grabar en base de datos
                             lote.cabecera_lote.DestinoComprobante = "ITF"; 
@@ -2250,7 +2250,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                 {
                                     edyndns.Url = System.Configuration.ConfigurationManager.AppSettings["ValidarIBKurl"];
                                 }
-                                FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
+                                FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false, true);
                                 AjustarLoteParaITF(lcFea); 
 
                                 string xmlTexto = "";
@@ -2349,7 +2349,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                                     edyndns.Url = System.Configuration.ConfigurationManager.AppSettings["EnvioIBKurl"];
                                 }
                                 org.dyndns.cedweb.envio.lc lcIBK = new org.dyndns.cedweb.envio.lc();
-                                FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
+                                FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false, true);
 
                                 //Grabar en base de datos
                                 lcFea.cabecera_lote.DestinoComprobante = "ITF";
@@ -2563,7 +2563,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                             if (ValidarCamposObligatorios("SubirAAFIP"))
                             {
                                 string respuesta = "";
-                                FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false);
+                                FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(false, false);
 
                                 //Grabar en base de datos
                                 lcFea.cabecera_lote.DestinoComprobante = "AFIP";
@@ -2862,7 +2862,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                         {
                             if (ValidarCamposObligatorios("GuardarComprobante"))
                             {
-                                FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false);
+                                FeaEntidades.InterFacturas.lote_comprobantes lote = GenerarLote(false, false);
                                 //Grabar en base de datos
                                 lote.cabecera_lote.DestinoComprobante = "Ninguno";
                                 lote.comprobante[0].cabecera.informacion_comprobante.Observacion = "";
@@ -3000,7 +3000,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "GenerarNroLote - " + ex.Message);
             }
         }
-        private FeaEntidades.InterFacturas.lote_comprobantes GenerarLote(bool EsParaImprimirPDF)
+        private FeaEntidades.InterFacturas.lote_comprobantes GenerarLote(bool EsParaImprimirPDF, bool EsInterfacturas)
         {
             FeaEntidades.InterFacturas.lote_comprobantes lote = new FeaEntidades.InterFacturas.lote_comprobantes();
             FeaEntidades.InterFacturas.comprobante comp = new FeaEntidades.InterFacturas.comprobante();
@@ -3099,7 +3099,9 @@ namespace CedServicios.Site.Facturacion.Electronica
             }
 
             r.observaciones = Observaciones_ResumenTextBox.Text;
-            if(mostrarTxtMonotributistaITF)
+            if(EsInterfacturas)
+            {
+                if (mostrarTxtMonotributistaITF)
             {
                 if(r.observaciones != "")
                 {
@@ -3107,7 +3109,7 @@ namespace CedServicios.Site.Facturacion.Electronica
                 }
                 r.observaciones += "Receptor del comprobante – Responsable Monotributo. El monto de IVA discriminado no puede computarse como crédito fiscal.";
             }
-
+            }
             comp.resumen = r;
             System.Collections.Generic.List<FeaEntidades.InterFacturas.resumenImpuestos> listadeimpuestos = ImpuestosGlobales.Lista;
             if (IdNaturalezaComprobanteTextBox.Text != "Compra")
@@ -4921,7 +4923,7 @@ namespace CedServicios.Site.Facturacion.Electronica
 		{
 			try
 			{
-				FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(true);
+				FeaEntidades.InterFacturas.lote_comprobantes lcFea = GenerarLote(true, false);
                 RN.Comprobante.AjustarLoteParaImprimirPDF(lcFea);
 				Session["lote"] = lcFea;
                 Session["EsComprobanteOriginal"] = false;

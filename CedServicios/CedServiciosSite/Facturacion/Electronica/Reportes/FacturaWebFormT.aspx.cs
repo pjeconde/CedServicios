@@ -11,6 +11,8 @@ using System.Web.UI.HtmlControls;
 using System.Xml.Serialization;
 using System.Text;
 using System.IO;
+using System.Drawing;
+using System.Drawing.Imaging;
 
 namespace CedServicios.Site.Facturacion.Electronica.Reportes
 {
@@ -91,7 +93,8 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                     facturaRpt.PrintOptions.PaperOrientation = CrystalDecisions.Shared.PaperOrientation.Portrait;
 
                     IncrustarLogo(lc.comprobante[0].cabecera.informacion_vendedor.cuit.ToString(), lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta.ToString());
-					string cae = lc.comprobante[0].cabecera.informacion_comprobante.cae;
+                    IncrustarQR(lc);
+                    string cae = lc.comprobante[0].cabecera.informacion_comprobante.cae;
 					if (cae.Replace(" ",string.Empty).Equals(string.Empty))
 					{
 						cae = "99999999999999";
@@ -133,8 +136,93 @@ namespace CedServicios.Site.Facturacion.Electronica.Reportes
                 }
             }
         }
+        private void IncrustarQR(FeaEntidades.Turismo.lote_comprobantes lc)
+        {
+            try
+            {
+                Entidades.QRdatosAFIP qrdatos = new Entidades.QRdatosAFIP();
+                //Ejemplo de AFIP
+                //qrdatos.ver = 1;                  //OBLIGATORIO – versión del formato de los datos del comprobante
+                //qrdatos.fecha = "2020-10-13";     //full-date (RFC3339) OBLIGATORIO – Fecha de emisión del comprobante
+                //qrdatos.cuit = 30000000007;       //Numérico 11 dígitos	OBLIGATORIO – Cuit del Emisor del comprobante
+                //qrdatos.ptoVta = 10;              //Numérico hasta 5 digitos OBLIGATORIO
+                //qrdatos.tipoCmp = 1;              //Numérico hasta 3 dígitos OBLIGATORIO
+                //qrdatos.nroCmp = 94;              //Numérico hasta 8 dígitos OBLIGATORIO  
+                //qrdatos.importe = 12100;          //Decimal hasta 13 enteros y 2 decimales OBLIGATORIO
+                //qrdatos.moneda = "DOL";           //3 caracteres OBLIGATORIO
+                //qrdatos.ctz = 65;                 //Decimal hasta 13 enteros y 6 decimales OBLIGATORIO
+                //qrdatos.tipoDocRec = 80;          //Numérico hasta 2 dígitos DE CORRESPONDER
+                //qrdatos.nroDocRec = 20000000001;  //Numérico hasta 20 dígitos DE CORRESPONDER
+                //qrdatos.tipoCodAut = "E";         //string OBLIGATORIO – “A” para comprobante autorizado por CAEA, “E” para comprobante autorizado por CAE "E"
+                //qrdatos.codAut = 70417054367476;  //Numérico 14 dígitos	OBLIGATORIO – Código de autorización otorgado por AFIP para el comprobante
 
-		private void AsignarParametros(double p)
+                qrdatos.ver = 1;
+                qrdatos.fecha = lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(0, 4) + "-" + lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(4, 2) + "-" + lc.comprobante[0].cabecera.informacion_comprobante.fecha_emision.Substring(6, 2);
+                qrdatos.cuit = lc.comprobante[0].cabecera.informacion_vendedor.cuit;
+                qrdatos.ptoVta = lc.comprobante[0].cabecera.informacion_comprobante.punto_de_venta;
+                qrdatos.tipoCmp = lc.comprobante[0].cabecera.informacion_comprobante.tipo_de_comprobante;
+                qrdatos.nroCmp = lc.comprobante[0].cabecera.informacion_comprobante.numero_comprobante;
+                if (lc.comprobante[0].resumen.codigo_moneda == "PES")
+                {
+                    qrdatos.importe = Convert.ToDecimal(Math.Round(lc.comprobante[0].resumen.importe_total_factura, 2));
+                    qrdatos.moneda = "PES";
+                    qrdatos.ctz = 1;
+                }
+                else if (lc.comprobante[0].resumen.codigo_moneda == "DOL")
+                {
+                    qrdatos.importe = Convert.ToDecimal(Math.Round(lc.comprobante[0].resumen.importes_moneda_origen.importe_total_factura, 2));
+                    qrdatos.moneda = "DOL";
+                    qrdatos.ctz = Convert.ToDecimal(Math.Round(lc.comprobante[0].resumen.tipo_de_cambio, 6));
+                }
+                else
+                {
+                    throw new Exception("Moneda no permitida: " + lc.comprobante[0].resumen.codigo_moneda.ToString());
+                }
+                qrdatos.tipoDocRec = lc.comprobante[0].cabecera.informacion_comprador.codigo_doc_identificatorio;   //80
+                qrdatos.nroDocRec = lc.comprobante[0].cabecera.informacion_comprador.nro_doc_identificatorio;
+                qrdatos.tipoCodAut = "E";
+                qrdatos.codAut = Convert.ToInt64(lc.comprobante[0].cabecera.informacion_comprobante.cae);
+
+                Bitmap bm = RN.QRdatosAFIP.RenderQrCodeAFIP(qrdatos);
+                bm.Save(Server.MapPath(@"~\Temp\" + "QRcodigoAFIP-" + qrdatos.cuit + "-" + qrdatos.ptoVta + "-" + qrdatos.tipoCmp + "-" + qrdatos.nroCmp + ".png").ToString(), ImageFormat.Png);
+                String path = Server.MapPath(@"~\Temp\");
+
+                string[] archivos = System.IO.Directory.GetFiles(path, "QRcodigoAFIP-" + qrdatos.cuit + "-" + qrdatos.ptoVta + "-" + qrdatos.tipoCmp + "-" + qrdatos.nroCmp + ".*", System.IO.SearchOption.TopDirectoryOnly);
+                string imagenCUIT = "";
+                if (archivos.Length > 0)
+                {
+                    imagenCUIT = archivos[0].Replace(path, String.Empty);
+                }
+
+                if (imagenCUIT != "")
+                {
+                    FileStream FilStr = new FileStream(path + imagenCUIT, FileMode.Open);
+                    CrearTabla();
+                    BinaryReader BinRed = new BinaryReader(FilStr);
+                    DataRow dr = this.dsImages.Tables["images"].NewRow();
+                    dr["path"] = Server.MapPath(imagenCUIT);
+                    dr["image"] = BinRed.ReadBytes((int)BinRed.BaseStream.Length);
+                    this.dsImages.Tables["images"].Rows.Add(dr);
+                    FilStr.Close();
+                    BinRed.Close();
+
+                    imagenRpt = facturaRpt.OpenSubreport("codigoQR.rpt");
+                    imagenRpt.SetDataSource(this.dsImages);
+                    RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Reporte: Imagen OK");
+                }
+            }
+            catch (Exception ex)
+            {
+                string a = ex.Message.ToString().Replace("'", " ");
+                a = a.Replace("<", " ");
+                a = a.Replace(">", " ");
+                a = a.Replace("/", " ");
+                a = a.Replace(@"\", " ");
+                RN.Sesion.GrabarLogTexto(Server.MapPath("~/Consultar.txt"), "Reporte: Imagen NOT OK " + a);
+            }
+        }
+
+        private void AsignarParametros(double p)
 		{
 			CrystalDecisions.Shared.ParameterValues myVals = new CrystalDecisions.Shared.ParameterValues();
 			CrystalDecisions.Shared.ParameterDiscreteValue myDiscrete = new CrystalDecisions.Shared.ParameterDiscreteValue();
